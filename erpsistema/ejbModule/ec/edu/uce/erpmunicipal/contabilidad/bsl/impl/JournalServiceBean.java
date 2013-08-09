@@ -32,6 +32,7 @@ public class JournalServiceBean implements JournalService{
 	
 	private ConCuenta findCuenta()
 	{
+		//asds
 		return null;
 	}
 	
