@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaQuery;
 
 import ec.edu.uce.erpmunicipal.sistema.bsl.RolOptionService;
 import ec.edu.uce.erpmunicipal.sistema.orm.SisModulo;

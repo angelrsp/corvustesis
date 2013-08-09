@@ -25,27 +25,38 @@ public class JournalServiceBean implements JournalService {
 
 	@Override
 	public void create(List<ConMovimientoDetalle> details) {
-		BigDecimal saldo;
+		Double debe, haber, saldo;
 		ConSaldo objSaldo;
 		ConCuenta objCuenta;
 		for (ConMovimientoDetalle detail : details) {
-			objCuenta = findAccountByNum(detail.getConCuenta().getCueNumero())
-					.get(0);
+			objCuenta = findAccountByNum(detail.getConCuenta().getCueNumero());
 			objSaldo = readSaldo(objCuenta);
 			if (objSaldo != null) {
-				saldo= objSaldo.getSalDebe();
-			}
-			else
-			{
+				debe = objSaldo.getSalDebe().doubleValue()
+						+ detail.getMdeDebe().doubleValue();
+				haber = objSaldo.getSalHaber().doubleValue()
+						+ detail.getMdeHaber().doubleValue();
+				saldo=debe-haber;
+				objSaldo.setSalDebe(BigDecimal.valueOf(debe));
+				objSaldo.setSalHaber(BigDecimal.valueOf(haber));
+				objSaldo.setSalSaldo(BigDecimal.valueOf(saldo));
+				entityManager.merge(objSaldo);
+				
+			} else {
+				saldo = detail.getMdeDebe().doubleValue()
+						- detail.getMdeHaber().doubleValue();
+				objSaldo=new ConSaldo();
 				objSaldo.setConCuenta(objCuenta);
 				objSaldo.setSalDebe(detail.getMdeDebe());
 				objSaldo.setSalDebe(detail.getMdeHaber());
+				objSaldo.setSalSaldo(BigDecimal.valueOf(saldo));
+				entityManager.persist(objSaldo);
 			}
-			entityManager.persist(objSaldo);
+			
 		}
 	}
 
-	private List<ConCuenta> findAccountByNum(String num) {
+	private ConCuenta findAccountByNum(String num) {
 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<ConCuenta> cq = cb.createQuery(ConCuenta.class);
@@ -53,7 +64,12 @@ public class JournalServiceBean implements JournalService {
 		Root<ConCuenta> root = cq.from(ConCuenta.class);
 		cq.where(cb.equal(root.get("cueNumero"), num));
 
-		return entityManager.createQuery(cq).getResultList();
+		List<ConCuenta> list = entityManager.createQuery(cq).getResultList();
+		if (list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+
 	}
 
 	private ConSaldo readSaldo(ConCuenta cuenta) {
