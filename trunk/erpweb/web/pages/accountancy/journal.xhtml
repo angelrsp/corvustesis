@@ -85,7 +85,7 @@
 								styleClass="comButton">
 							</p:commandButton>
 							<p:commandButton value="Guardar" icon="ui-icon-disk"
-								styleClass="comButton" />
+								styleClass="comButton" actionListener="#{journalPage.create}" process="@this"/>
 							<p:commandButton value="Editar" icon="ui-icon-pencil"
 								styleClass="comButton" />
 						</p:column>
