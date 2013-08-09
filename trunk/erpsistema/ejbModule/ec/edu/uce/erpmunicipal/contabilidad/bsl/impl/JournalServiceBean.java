@@ -13,9 +13,13 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 import ec.edu.uce.erpmunicipal.contabilidad.bsl.JournalService;
+import ec.edu.uce.erpmunicipal.contabilidad.orm.ConClase;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConCuenta;
+import ec.edu.uce.erpmunicipal.contabilidad.orm.ConMovimiento;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConMovimientoDetalle;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConSaldo;
+import ec.edu.uce.erpmunicipal.contabilidad.orm.ConTipoMovimiento;
+import ec.edu.uce.erpmunicipal.util.orm.SessionObject;
 
 @Stateless(name = "journalService")
 public class JournalServiceBean implements JournalService {
@@ -24,14 +28,34 @@ public class JournalServiceBean implements JournalService {
 	private EntityManager entityManager;
 
 	@Override
-	public void create(List<ConMovimientoDetalle> details) {
+	public void create(SessionObject sessionObject,int claseCode, int tipoMovimientoCode, ConMovimiento movimiento,List<ConMovimientoDetalle> details) {
+		
 		Double debe, haber, saldo;
 		ConSaldo objSaldo;
 		ConCuenta objCuenta;
+		
+		ConClase clase= entityManager.find(ConClase.class, claseCode);
+		ConTipoMovimiento tipoMovimiento= entityManager.find(ConTipoMovimiento.class, tipoMovimientoCode);
+		
+		movimiento.setConClase(clase);
+		movimiento.setConTipoMovimiento(tipoMovimiento);
+		
+		entityManager.persist(movimiento);
+		entityManager.flush();
+		entityManager.refresh(movimiento);
+		
+		
 		for (ConMovimientoDetalle detail : details) {
 			objCuenta = findAccountByNum(detail.getConCuenta().getCueNumero());
 			objSaldo = readSaldo(objCuenta);
 			if (objSaldo != null) {
+				
+				detail.setConCuenta(objCuenta);
+				detail.setConMovimiento(movimiento);
+				detail.setConPeriodo(sessionObject.getPeriodo());
+				detail.setMdeEntidad(sessionObject.getUser().getSisInstitucion().getInsCodigo());
+				
+				
 				debe = objSaldo.getSalDebe().doubleValue()
 						+ detail.getMdeDebe().doubleValue();
 				haber = objSaldo.getSalHaber().doubleValue()
@@ -89,5 +113,7 @@ public class JournalServiceBean implements JournalService {
 		else
 			return list.get(0);
 	}
+	
+	
 
 }

@@ -2,6 +2,7 @@ package ec.edu.uce.erpmunicipal.util.orm;
 
 import java.io.Serializable;
 
+import ec.edu.uce.erpmunicipal.contabilidad.orm.ConPeriodo;
 import ec.edu.uce.erpmunicipal.sistema.orm.SisUsuario;
 import ec.edu.uce.erpmunicipal.sistema.orm.SisUsuarioRol;
 
@@ -15,9 +16,10 @@ public class SessionObject implements Serializable {
 	private SisUsuario user;
 	private SisUsuarioRol userRol;
 
-	private int periodo;
+	private ConPeriodo periodo;
 
 	public SessionObject() {
+		
 	}
 
 	public SisUsuario getUser() {
@@ -36,11 +38,11 @@ public class SessionObject implements Serializable {
 		this.userRol = userRol;
 	}
 
-	public int getPeriodo() {
+	public ConPeriodo getPeriodo() {
 		return periodo;
 	}
 
-	public void setPeriodo(int periodo) {
+	public void setPeriodo(ConPeriodo periodo) {
 		this.periodo = periodo;
 	}
 

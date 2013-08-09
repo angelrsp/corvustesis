@@ -23,8 +23,8 @@ public class ConPeriodo implements Serializable {
 	@Column(name="per_anio")
 	private Integer perAnio;
 
-	@Column(name="per_fecha_fin")
-	private Integer perFechaFin;
+	@Column(name="per_mes")
+	private Integer perMes;
 
 	//bi-directional many-to-one association to ConMovimientoDetalle
 	@OneToMany(mappedBy="conPeriodo")
@@ -49,12 +49,12 @@ public class ConPeriodo implements Serializable {
 		this.perAnio = perAnio;
 	}
 
-	public Integer getPerFechaFin() {
-		return this.perFechaFin;
+	public Integer getPerMes() {
+		return this.perMes;
 	}
 
-	public void setPerFechaFin(Integer perFechaFin) {
-		this.perFechaFin = perFechaFin;
+	public void setPerMes(Integer perMes) {
+		this.perMes = perMes;
 	}
 
 	public List<ConMovimientoDetalle> getConMovimientoDetalles() {
