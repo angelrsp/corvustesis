@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="erpmunicipalPU" transaction-type="JTA">
+	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+	<jta-data-source>java:jboss/datasources/ejemploDS</jta-data-source>
+	<class>ec.edu.uce.erpmunicipal.sistema.orm.SisAuditoriaMenu</class>
+	<class>ec.edu.uce.erpmunicipal.sistema.orm.SisHistorialPass</class>
+	<class>ec.edu.uce.erpmunicipal.sistema.orm.SisInstitucion</class>
+	<class>ec.edu.uce.erpmunicipal.sistema.orm.SisModulo</class>
+	<class>ec.edu.uce.erpmunicipal.sistema.orm.SisPantalla</class>
+	<class>ec.edu.uce.erpmunicipal.sistema.orm.SisRolPermiso</class>
+	<class>ec.edu.uce.erpmunicipal.sistema.orm.SisRole</class>
+	<class>ec.edu.uce.erpmunicipal.sistema.orm.SisUsuario</class>
+	<class>ec.edu.uce.erpmunicipal.sistema.orm.SisUsuarioRol</class>
+	<class>ec.edu.uce.erpmunicipal.contabilidad.orm.ConClase</class>
+	<class>ec.edu.uce.erpmunicipal.contabilidad.orm.ConCuenta</class>
+	<class>ec.edu.uce.erpmunicipal.contabilidad.orm.ConMovimiento</class>
+	<class>ec.edu.uce.erpmunicipal.contabilidad.orm.ConMovimientoDetalle</class>
+	<class>ec.edu.uce.erpmunicipal.contabilidad.orm.ConPeriodo</class>
+	<class>ec.edu.uce.erpmunicipal.contabilidad.orm.ConSaldo</class>
+	<class>ec.edu.uce.erpmunicipal.contabilidad.orm.ConTipoCuenta</class>
+	<class>ec.edu.uce.erpmunicipal.contabilidad.orm.ConTipoMovimiento</class>		
+		<properties>
+			<property name="hibernate.id.new_generator_mappings" value="false"/>
+			<property name="hibernate.show_sql" value="true"/>
+		</properties> 	
+	</persistence-unit>
+</persistence>
