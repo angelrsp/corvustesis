@@ -70,6 +70,7 @@ public class IndexPage implements Serializable{
             setSysUser(userService.getUserInformation(user));
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", getSysUser());
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("rol", userService.readUserRol(user));
+       
             try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("pages/system/home.jsf");
 			} catch (IOException e) {
