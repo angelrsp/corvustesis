@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
 import ec.edu.uce.erpmunicipal.contabilidad.bsl.JournalService;
+import ec.edu.uce.erpmunicipal.contabilidad.orm.ConCuenta;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConMovimientoDetalle;
 
 @Stateless(name = "journalService")
@@ -27,6 +28,11 @@ public class JournalServiceBean implements JournalService{
 		{
 			saldo= detail.getMdeDebe();
 		}
+	}
+	
+	private ConCuenta findCuenta()
+	{
+		return null;
 	}
 	
 }
