@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/template/pages.xhtml">
+		<ui:define name="contenido">
+
+			<h:form id="formAccounting">
+
+				<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
+
+					<p:column>
+						<h:outputText value="Tipo de Cuenta:" />
+					</p:column>
+					<p:column>
+						<p:selectOneMenu id="accountType" required="true"
+							value="#{accountingPage.accTypeCode}" requiredMessage="Seleccione Cuenta" style="width:180px;">
+							<f:selectItem itemLabel="--Seleccione--" itemValue="" />
+							<f:selectItems value="#{accountingPage.accTypes}" var="act"
+								itemLabel="#{act.tcuDescripcion}" itemValue="#{act.tcuCodigo}"></f:selectItems>
+						</p:selectOneMenu>
+
+					</p:column>
+
+
+					<p:column>
+						<h:outputText value="Codigo:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="codePather" value="#{accountingPage.code1}"
+							onkeypress="return isNumberKey(event);" readonly="true"></p:inputText>
+						<p:inputText id="code" value="#{accountingPage.code2}"
+							required="true" onkeypress="return isNumberKey(event);"
+							requiredMessage="Ingrese Codigo de Cuenta"></p:inputText>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="Descripcion:" />
+					</p:column>
+
+					<p:column>
+						<p:inputTextarea id="description" required="true"
+							value="#{accountingPage.description}"
+							requiredMessage="Ingrese Descripcion de Cuenta"/>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="Permite Movimientos" />
+					</p:column>
+					<p:column>
+						<p:selectBooleanButton onLabel="Si" offLabel="No" id="vigente"
+							offIcon="ui-icon-close" onIcon="ui-icon-check"
+							widgetVar="vigente" value="#{accountingPage.move}" />
+					</p:column>
+
+				</p:panelGrid>
+
+				<h:panelGrid id="buttons">
+					<p:column>
+						<p:commandButton value="Nuevo" icon="ui-icon-document"
+							styleClass="comButton"
+							actionListener="#{accountingPage.newClick}" update="controls"
+							process="@this">
+							<p:resetInput target="controls"></p:resetInput>
+						</p:commandButton>
+						<p:commandButton value="Guardar" icon="ui-icon-disk"
+							styleClass="comButton"
+							actionListener="#{accountingPage.saveClick}"
+							update="controls,message,treeMenu" />
+						<p:commandButton value="Editar" icon="ui-icon-pencil"
+							styleClass="comButton" update="controls,message"
+							actionListener="#{accountingPage.changeClick}" process="@this" />
+					</p:column>
+
+				</h:panelGrid>
+
+				<h:panelGrid>
+					<p:tree id="treeMenu" value="#{accountingPage.root}" var="node"
+						selection="#{accountingPage.selectedNode}" selectionMode="single"
+						style="width:100%" animate="true">
+
+						<p:ajax event="select" update=":formAccounting:controls"
+							listener="#{accountingPage.onNodeSelect}" />
+
+						<p:treeNode>
+							<h:outputText value="#{node.cueNumero}" />
+							<h:outputText value=". " />
+							<h:outputText value="#{node.cueDescripcion}" />
+						</p:treeNode>
+					</p:tree>
+				</h:panelGrid>
+
+
+				<h:panelGrid id="message">
+					<p:growl showDetail="true" widgetVar="msg"></p:growl>
+				</h:panelGrid>
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+
+</body>
+</html>

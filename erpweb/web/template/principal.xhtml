@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<h:head>
+
+	<title>Erp Municipal</title>
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/style.css" />
+
+	<script type="text/javascript" src="#{request.contextPath}/js/time.js"></script>
+	<script type="text/javascript" src="#{request.contextPath}/js/print.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/js/validator.js"></script>
+-  	<script type="text/javascript"
+		src="#{request.contextPath}/js/jquery-1.8.3.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/js/jquery-ui.js"></script>
+
+</h:head>
+<body background="../../images/body1.png">
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="91" resizable="true">
+			<table width="100%">
+				<tr>
+					<td>
+						<table>
+							<tr>
+								<td><h:graphicImage
+										value="/images/universidad-central-ecuador-uce.jpg" width="80"
+										height="65" /></td>
+								<td><h3>
+										<h:outputText value="UNIVERSIDAD CENTRAL DEL ECUADOR" />
+									</h3></td>
+							</tr>
+						</table>
+					</td>
+					<td align="right">
+						<table style="height: 60px;">
+							<tr class="header-time" align="right">
+								<td>
+									<table>
+										<tr>
+											<td><div id="spanfecha"></div></td>
+											<td style="width: 20px;">&nbsp;</td>
+											<td><div id="spanreloj"></div></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+							</tr>
+							<tr class="header-welcome">
+								<td>
+									<table>
+										<tr>
+											<td><h:outputText
+													value="Bienvenido:   #{indexPage.sysUser.usuApellidos} #{indexPage.sysUser.usuNombres}" /></td>
+
+											<td style="width: 50px;">&nbsp;</td>
+
+											<td><h:outputLink value="#{request.contextPath}">
+													<h:outputText value="Salir" />
+												</h:outputLink></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</p:layoutUnit>
+
+
+		<!--Panel izp (oeste) menu  -->
+		<p:layoutUnit position="west" size="210" header="Menu"
+			resizable="true" collapsible="true">
+
+			<h:form id="form">
+				<p:panelMenu style="width:100%;font-size:8pt;" id="menu"
+					model="#{principalPage.menuModel}">
+				</p:panelMenu>
+
+			</h:form>
+		</p:layoutUnit>
+
+		<!--Panel derecho  -->
+		<p:layoutUnit position="east" size="210" header="Temas"
+			 collapsible="true" resizable="true" collapsed="true">
+			  
+		</p:layoutUnit>
+
+
+		<!--Panel Central  -->
+		<p:layoutUnit position="center">
+
+			<div id="tabs" style="height: 99%">
+				<ul>
+					<li><a href="#tabs-1">Inicio</a> <!--  <span
+						class="ui-icon ui-icon-close">Remove Tab</span>--></li>
+				</ul>
+				<iframe id="tabs-1"
+					src="#{request.contextPath}/pages/system/start.xhtml" width="97%"
+					height="91%"> </iframe>
+			</div>
+
+		</p:layoutUnit>
+
+	</p:layout>
+
+	<script type="text/javascript">
+    jq = jQuery.noConflict();
+
+    var tabs = jq('#tabs').tabs();
+    
+	var tabCounter = 0;
+	var index=0;
+
+    // actual addTab function: adds new tab using the input from the form above
+    function addTab(title,url) {
+    	var tabNameExists = false;
+    	jq('#tabs ul li a').each(function(i) {
+            if (this.text.replace(/\s/g,'') == title.replace(/\s/g,'')) {       
+                tabNameExists=true;
+                index=i;
+            }
+        });
+        if(!tabNameExists)
+        {
+	        var li='<li><a href="#'+title.replace(/\s/g,'')+'">'+title+'</a><span class="ui-icon ui-icon-close">Remove Tab</span></li>'; 
+	        tabs.find( '.ui-tabs-nav' ).append( li );
+	        tabs.append( '<iframe id="'+title.replace(/\s/g,'')+'" src="http:#{request.contextPath}'+url+'" width="97%" height="91%"></iframe>' );
+	        tabs.tabs( 'refresh' );
+	        tabCounter++;
+	        tabs.tabs('select',tabCounter);   
+        }
+        else
+        {    
+            tabs.tabs('select',index);
+        }
+        return;
+    }
+    
+    $(function() {
+ 
+        // addTab button: just opens the dialog
+        jq('#add_tab')
+            .button()
+	  		.click(function() {
+                addTab();
+            });
+        
+        // close icon: removing the tab on click
+        jq( '#tabs span.ui-icon-close' ).live( 'click', function() {
+            var panelId = $( this ).closest( 'li' ).remove().attr( 'aria-controls' );
+            $( '#' + panelId ).remove();
+            tabs.tabs( 'refresh' );
+            tabCounter--;
+        });
+    });
+    </script>
+
+</body>
+
+</html>

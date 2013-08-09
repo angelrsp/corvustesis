@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template/pages.xhtml">
+		<ui:define name="contenido">
+
+			<h:form id="formJournal">
+
+				<fieldset>
+					<legend
+						style="font-family: Arial, sans-serif; font-size: 1em; color: #4f4f4f;">Encabezado</legend>
+					<p:panelGrid styleClass="panelGrid" columns="9">
+						<p:column>
+							<p:commandButton icon="ui-icon-seek-first">
+							</p:commandButton>
+							<p:commandButton icon="ui-icon-seek-prev">
+							</p:commandButton>
+							<p:commandButton icon="ui-icon-seek-next">
+							</p:commandButton>
+							<p:commandButton icon="ui-icon-seek-end">
+							</p:commandButton>
+						</p:column>
+						<p:column>
+							<h:outputText value="Transaccion:" />
+						</p:column>
+						<p:column>
+							<p:inputText></p:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputText value="Clase:" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu>
+								<f:selectItem itemLabel="--Seleccione--" itemValue="" />
+								<f:selectItems value="#{journalPage.clas}" var="cla"
+									itemLabel="#{cla.claDescripcion}" itemValue="#{cla.claCodigo}"></f:selectItems>
+							</p:selectOneMenu>
+						</p:column>
+
+						<p:column>
+							<h:outputText value="Fecha:" />
+						</p:column>
+						<p:column>
+							<p:inputText></p:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputText value="Tipo:" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu>
+								<f:selectItem itemLabel="--Seleccione--" itemValue="" />
+								<f:selectItems value="#{journalPage.typeMove}" var="tmo"
+									itemLabel="#{tmo.tmoDescripcion}" itemValue="#{tmo.tmoCodigo}"></f:selectItems>
+							</p:selectOneMenu>
+						</p:column>
+
+					</p:panelGrid>
+
+					<p:panelGrid styleClass="panelGrid" columns="4">
+						<p:column>
+							<h:outputText value="Detalle:" />
+						</p:column>
+						<p:column>
+							<p:inputTextarea id="detail"></p:inputTextarea>
+						</p:column>
+						<p:column>
+							<h:outputText value="Documentacion:" />
+						</p:column>
+						<p:column>
+							<p:inputTextarea id="document"></p:inputTextarea>
+						</p:column>
+					</p:panelGrid>
+
+					<h:panelGrid id="buttons">
+						<p:column>
+							<p:commandButton value="Nuevo" icon="ui-icon-document"
+								styleClass="comButton">
+							</p:commandButton>
+							<p:commandButton value="Guardar" icon="ui-icon-disk"
+								styleClass="comButton" />
+							<p:commandButton value="Editar" icon="ui-icon-pencil"
+								styleClass="comButton" />
+						</p:column>
+
+					</h:panelGrid>
+
+
+				</fieldset>
+
+				<fieldset>
+					<legend
+						style="font-family: Arial, sans-serif; font-size: 1em; color: #4f4f4f;">Detalle</legend>
+
+					<p:panelGrid styleClass="panelGrid" columns="9">
+						<p:column>
+							<h:outputText value="Cuenta:" />
+						</p:column>
+						<p:column>
+							<p:inputText id="codigoCuenta" value="#{journalPage.searchCode}"
+								required="true" requiredMessage="Ingrese Cuenta">
+								<p:ajax event="blur" listener="#{journalPage.searchCuentaCode}"
+									update="nombreCuenta"></p:ajax>
+							</p:inputText>
+						</p:column>
+						<p:column>
+							<p:inputText id="nombreCuenta" readonly="true"
+								value="#{journalPage.descripcionCuenta}"></p:inputText>
+						</p:column>
+						<p:column>
+							<p:commandButton value="Buscar Cuenta" icon="ui-icon-search"
+								styleClass="comButton" type="button"
+								onclick="cuentaDialog.show();"></p:commandButton>
+						</p:column>
+
+						<p:column>
+							<h:outputText value="Debe:" />
+						</p:column>
+						<p:column>
+							<p:inputText id="debe" value="#{journalPage.debe}"
+								onkeypress="return isNumberKey(event);"></p:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputText value="Haber:" />
+						</p:column>
+						<p:column>
+							<p:inputText id="haber" value="#{journalPage.haber}"
+								onkeypress="return isNumberKey(event);"></p:inputText>
+						</p:column>
+
+						<p:column>
+							<p:commandButton value="Añadir" icon="ui-icon-arrow-1-s"
+								styleClass="comButton" actionListener="#{journalPage.addClick}"
+								update="message,list,debe,haber,codigoCuenta,nombreCuenta"
+								process="@this,codigoCuenta,debe,haber">
+							</p:commandButton>
+						</p:column>
+					</p:panelGrid>
+
+					<h:panelGrid id="list">
+
+						<p:dataTable id="details" value="#{journalPage.detalles}"
+							var="det">
+
+							<p:column headerText="Cuenta">
+								#{det.conCuenta.cueNumero} #{det.conCuenta.cueDescripcion}
+							</p:column>
+
+							<p:column headerText="Debe">
+								#{det.mdeDebe}
+							</p:column>
+
+							<p:column headerText="Haber">
+								#{det.mdeHaber}
+							</p:column>
+
+							<p:column>
+								<p:commandButton icon="ui-icon-close" title="Eliminar" styleClass="tablButton"
+									onclick="if(!confirm('Eliminar?')) return false;" update="details" immediate="true" actionListener="#{journalPage.onRowDeleting(det)}">
+								</p:commandButton>
+							</p:column>
+
+						</p:dataTable>
+
+					</h:panelGrid>
+				</fieldset>
+
+				<h:panelGrid id="message">
+					<p:growl showDetail="true" widgetVar="msg"></p:growl>
+				</h:panelGrid>
+
+			</h:form>
+
+
+
+
+			<p:dialog header="Buscar Cuenta" widgetVar="cuentaDialog"
+				resizable="false" appendToBody="true" modal="true">
+
+				<h:form id="dialogSarch">
+
+					<div align="center">
+						<p:panelGrid styleClass="panelGrid" columns="2">
+
+							<p:inputText id="search" value="#{journalPage.search}"></p:inputText>
+
+							<p:commandButton value="Buscar" icon="ui-icon-search"
+								styleClass="comButton"
+								actionListener="#{journalPage.searchCuenta}" update="result">
+							</p:commandButton>
+
+						</p:panelGrid>
+					</div>
+
+					<p:dataTable id="result" value="#{journalPage.cuentas}" var="cue"
+						rowKey="#{cue.cueCodigo}" selectionMode="single" paginator="true"
+						rows="10">
+
+						<p:ajax
+							update=":formJournal:codigoCuenta,:formJournal:nombreCuenta,result,:dialogSarch:search"
+							event="rowSelect" listener="#{journalPage.onRowSelect}"
+							oncomplete="cuentaDialog.hide();" />
+
+						<p:column headerText="Codigo">
+								#{cue.cueNumero}
+							</p:column>
+
+						<p:column headerText="Descripcion">
+								#{cue.cueDescripcion}
+							</p:column>
+
+					</p:dataTable>
+
+				</h:form>
+
+			</p:dialog>
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
