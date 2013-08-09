@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
 import ec.edu.uce.erpmunicipal.contabilidad.bsl.AccoutingService;
+import ec.edu.uce.erpmunicipal.contabilidad.bsl.JournalService;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConClase;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConCuenta;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConMovimientoDetalle;
@@ -33,7 +34,11 @@ public class JournalPage implements Serializable {
 	private CrudService crudService;
 	@EJB(name = "accoutingService/local")
 	private AccoutingService accoutingService;
+	@EJB(name = "journalService/local")
+	private JournalService journalService;
 
+	
+	
 	@SuppressWarnings("unused")
 	private List<ConTipoMovimiento> typeMove;
 	@SuppressWarnings("unused")
@@ -219,7 +224,7 @@ public class JournalPage implements Serializable {
 				haber = cuadre.toString();
 				debe = "";
 				det.setConCuenta(new ConCuenta(null, null, descripcionCuenta,
-						null, searchCode, null, null, null, null));
+						null, searchCode, null, null, null, null,null));
 				det.setMdeDebe(BigDecimal.valueOf(deb));
 				detalles.add(det);
 				searchCode = "";
@@ -233,7 +238,7 @@ public class JournalPage implements Serializable {
 					
 				debe = "";
 				det.setConCuenta(new ConCuenta(null, null, descripcionCuenta,
-						null, searchCode, null, null, null, null));
+						null, searchCode, null, null, null, null,null));
 				det.setMdeHaber(BigDecimal.valueOf(hab));
 				detalles.add(det);
 				searchCode = "";
@@ -248,6 +253,6 @@ public class JournalPage implements Serializable {
 
 	public void create()
 	{
-		
+		journalService.create(detalles);
 	}
 }
