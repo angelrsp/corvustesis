@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<body>
+
+	<ui:composition template="/template/pages.xhtml">
+		<ui:define name="contenido">
+
+
+			<h:form id="formEntity">
+
+				<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
+					<p:column>
+						<h:outputText value="Nombre:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="name" tabindex="1" required="true"
+							requiredMessage="Ingrese Nombre" style="font-weight:normal;"
+							value="#{entityPage.entity.insNombre}">
+						</p:inputText>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="Direccion:" />
+					</p:column>
+					<p:column>
+						<p:inputTextarea id="address" counter="counter" maxlength="255"
+							counterTemplate="{0}" tabindex="2" required="true"
+							requiredMessage="Ingrese Direccion" style="font-weight:normal;"
+							value="#{entityPage.entity.insDireccion}" />
+						<h:outputText id="counter" />
+					</p:column>
+
+					<p:column>
+						<h:outputText value="Telefono:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="phone" tabindex="3" required="true"
+							requiredMessage="Ingrese Telefono" style="font-weight:normal;"
+							value="#{entityPage.entity.insTelefono}" maxlength="10">
+						</p:inputText>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="Vigente" />
+					</p:column>
+					<p:column>
+						<p:selectBooleanButton onLabel="Si" offLabel="No" id="active"
+							offIcon="ui-icon-close" onIcon="ui-icon-check"
+							value="#{entityPage.entity.insActivo}" />
+					</p:column>
+				</p:panelGrid>
+
+				<h:panelGrid id="buttons">
+					<p:column>
+						<p:commandButton value="Nuevo" icon="ui-icon-document"
+							styleClass="comButton" actionListener="#{entityPage.clean}"
+							update="controls" process="@this">
+							<p:resetInput target="controls"></p:resetInput>
+						</p:commandButton>
+						<p:commandButton value="Guardar" icon="ui-icon-disk"
+							styleClass="comButton" actionListener="#{entityPage.create}" process="@this,active,phone,address,name"
+							update="controls,entities" />
+					</p:column>
+
+
+				</h:panelGrid>
+
+				<h:panelGrid id="data">
+					<p:dataTable id="entities" value="#{entityPage.entities}"
+						paginator="true" rows="10" var="ent"
+						selection="#{entityPage.entityTable}" selectionMode="single"
+						rowKey="#{ent.insCodigo}">
+
+						<p:ajax update=":formEntity:controls" event="rowSelect"
+							listener="#{entityPage.onRowSelect}" />
+
+						<p:column headerText="Nombre">
+								#{ent.insNombre}
+								</p:column>
+						<p:column headerText="Direccion">
+								#{ent.insDireccion}
+								</p:column>
+						<p:column headerText="Telefono">
+								#{ent.insTelefono}
+								</p:column>
+						<p:column headerText="Habilitado">
+								#{ent.insActivo?'Si':'No'}
+								</p:column>
+						<p:column>
+							<p:commandButton icon="ui-icon-close" title="Eliminar"
+								styleClass="tablButton"
+								actionListener="#{entityPage.onRowDeleting(ent)}"
+								update="entities" onclick="if(!confirm('Eliminar?')) return false;" immediate="true">
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</h:panelGrid>
+
+				<h:panelGrid id="message">
+					<p:growl showDetail="true" widgetVar="msg"></p:growl>
+				</h:panelGrid>
+
+				<p:confirmDialog id="confirmDialog2"
+					message="La entidad que esta tratando de eliminar tiene dependencias. ¿Desea desactivar la institucion?"
+					header="Pregunta" widgetVar="confirmation2">
+					<p:commandButton id="confirm2" value="Si" update="message,data"
+						actionListener="#{entityPage.update}"
+						oncomplete="confirmation2.hide()" process="@this" />
+					<p:commandButton id="decline2" value="No"
+						actionListener="#{entityPage.clean}" update="message"
+						oncomplete="confirmation2.hide()" process="@this" />
+				</p:confirmDialog>
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+
+</body>
+
+</html>

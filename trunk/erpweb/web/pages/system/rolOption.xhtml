@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/template/pages.xhtml">
+		<ui:define name="contenido">
+
+			<h:form id="formRolOption">
+
+				<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
+					<h:outputText value="Roles:" />
+					<p:selectOneMenu id="rol" required="true" style="width:150px"
+						tabindex="1" value="#{rolOptionPage.rolCode}">
+						<f:selectItem itemLabel="--Seleccione--" itemValue="0" />
+						<f:selectItems value="#{rolOptionPage.rols}" var="ro"
+							itemLabel="#{ro.rolDescripcion}" itemValue="#{ro.rolCodigo}"></f:selectItems>
+						<p:ajax event="change" listener="#{rolOptionPage.rolChange}"
+							update="treeMenu" process="@this"></p:ajax>							
+					</p:selectOneMenu>
+				</p:panelGrid>
+
+				<h:panelGrid id="buttons">
+					<p:column>
+						<p:commandButton value="Actualizar" icon="ui-icon-disk"
+							styleClass="comButton" actionListener="#{rolOptionPage.updateClick}" update="treeMenu" />
+					</p:column>
+				</h:panelGrid>
+
+				<h:panelGrid>
+					<p:tree id="treeMenu" selectionMode="checkbox" value="#{rolOptionPage.root}" var="node" selection="#{rolOptionPage.selectedNodes}">
+				       <p:treeNode>  
+				            <h:outputText value="#{node.panDescripcion}" />  
+				        </p:treeNode> 
+					</p:tree>
+				</h:panelGrid>
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+
+</body>
+</html>

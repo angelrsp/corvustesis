@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/style.css" />
+	<script type="text/javascript"
+		src="#{request.contextPath}/js/validator.js"></script>
+</h:head>
+<body>
+
+
+
+	<p:ajaxStatus onstart="statusDialog.show();"
+		onsuccess="statusDialog.hide();" />
+
+	<p:dialog modal="true" widgetVar="statusDialog" header="Cargando..."
+		draggable="false" closable="false" resizable="false">
+		<p:graphicImage value="/images/ajaxloadingbar.gif" />
+	</p:dialog>
+
+	<ui:insert name="contenido"></ui:insert>
+
+
+</body>
+
+</html>

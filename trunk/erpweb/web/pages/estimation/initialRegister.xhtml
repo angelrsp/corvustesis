@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/template/pages.xhtml">
+		<ui:define name="contenido">
+
+			<h:form id="formInitialRegister">
+
+				<fieldset>
+
+					<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
+
+						<p:panelGrid columns="1" styleClass="panelGrid">
+
+							<p:selectOneRadio id="options" layout="pageDirection">
+								<f:selectItem itemLabel="Ingreso" itemValue="1" />
+								<f:selectItem itemLabel="Gasto" itemValue="0" />
+							</p:selectOneRadio>
+
+						</p:panelGrid>
+
+						<p:selectOneMenu>
+							<f:selectItem itemValue="" itemLabel="--Seleccione--" />
+						</p:selectOneMenu>
+
+					</p:panelGrid>
+
+
+					<p:panelGrid columns="4" styleClass="panelGrid"
+						style="align:center;">
+						<h:outputText value="Total Ingresos:" />
+						<p:inputText></p:inputText>
+						<h:outputText value="Total Gastos:" />
+						<p:inputText></p:inputText>
+					</p:panelGrid>
+
+				</fieldset>
+
+				<p:spacer height="10" />
+
+				<h:panelGrid id="buttons">
+					<p:column>
+						<p:commandButton value="Nuevo" icon="ui-icon-document"
+							styleClass="comButton">
+						</p:commandButton>
+						<p:commandButton value="Guardar" icon="ui-icon-disk"
+							styleClass="comButton" />
+					</p:column>
+				</h:panelGrid>
+
+				<p:panelGrid id="data" columns="2" styleClass="panelGrid">
+					<p:dataTable>
+
+						<p:column headerText="Cta Presupuestaria">
+
+						</p:column>
+
+						<p:column headerText="Descripcion">
+
+						</p:column>
+
+						<p:column headerText="Valor Inicial">
+
+						</p:column>
+
+					</p:dataTable>
+				</p:panelGrid>
+
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<body>
+
+	<ui:composition template="/template/pages.xhtml">
+		<ui:define name="contenido">
+
+
+			<h:form id="formUser">
+
+				<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
+
+					<p:column>
+						<h:outputText value="Institucion:" />
+					</p:column>
+					<p:column>
+						<p:selectOneMenu id="entity" value="#{userPage.entityCode}"
+							required="true">
+							<f:selectItem itemLabel="--Seleccione--" itemValue="0" />
+							<f:selectItems value="#{userPage.entities}" var="ent"
+								itemLabel="#{ent.insNombre}" itemValue="#{ent.insCodigo}"></f:selectItems>
+							<p:ajax listener="#{userPage.readUsers}" event="change"
+								update="list"></p:ajax>
+						</p:selectOneMenu>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="Usuario:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="login" value="#{userPage.user.usuLogin}"
+							widgetVar="login" required="true"
+							requiredMessage="Ingrese Usuario"
+							onkeypress="return isSpace(event)"></p:inputText>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="Contraseña:" />
+					</p:column>
+					<p:column>
+						<p:password id="pass1" feedback="true"
+							promptLabel="Por favor ingrese contraseña" weakLabel="Debil"
+							goodLabel="Bueno" strongLabel="Fuerte"
+							value="#{userPage.user.usuClave}" required="true" match="pass2"
+							requiredMessage="Ingrese Contraseña"></p:password>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="Confirmar Contraseña:" />
+					</p:column>
+					<p:column>
+						<p:password id="pass2" feedback="true"
+							promptLabel="Por favor ingrese contraseña" weakLabel="Debil"
+							goodLabel="Bueno" strongLabel="Fuerte"
+							value="#{userPage.user.usuClave}" required="true"
+							requiredMessage="Ingrese Contraseña"></p:password>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="Identificacion:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="identification"
+							onkeypress="return isNumberKey(event);" maxlength="10"
+							value="#{userPage.user.usuIdentifiacion}" onblur="numerId();"
+							required="true" requiredMessage="Ingrese Identificación">
+						</p:inputText>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="Nombres:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="name" value="#{userPage.user.usuNombres}"
+							required="true" requiredMessage="Ingrese Nombres"></p:inputText>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="Apellidos:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="lastName" value="#{userPage.user.usuApellidos}"
+							required="true" requiredMessage="Ingrese Apellidos">
+						</p:inputText>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="Direccion:" />
+					</p:column>
+					<p:column>
+						<p:inputTextarea id="address"
+							value="#{userPage.user.usuDireccion}" counter="counter"
+							maxlength="255" counterTemplate="{0}" required="true"
+							requiredMessage="Ingrese Dirección" />
+						<h:outputText id="counter" />
+					</p:column>
+
+					<p:column>
+						<h:outputText value="E-mail:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="mail" value="#{userPage.user.usuMail}"
+							required="false">
+							<f:validator validatorId="mail"></f:validator>
+						</p:inputText>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="Telefono:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="phone" onkeypress="return isNumberKey(event);"
+							maxlength="10" value="#{userPage.user.usuTelefono}">
+						</p:inputText>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="Celular:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="cellPhone"
+							onkeypress="return isNumberKey(event);" maxlength="10"
+							value="#{userPage.user.usuCelular}">
+
+						</p:inputText>
+					</p:column>
+
+					<p:column>
+						<h:outputText value="Vigente" />
+					</p:column>
+					<p:column>
+						<p:selectBooleanButton onLabel="Si" offLabel="No" id="vigente"
+							offIcon="ui-icon-close" onIcon="ui-icon-check"
+							value="#{userPage.user.usuActivo}" widgetVar="vigente" />
+					</p:column>
+					<p:column>
+						<h:outputText value="Perfil:" />
+					</p:column>
+					<p:column>
+						<p:selectOneMenu id="rol" required="true"
+							value="#{userPage.rolCode}">
+							<f:selectItem itemLabel="--Seleccione--" itemValue="0" />
+							<f:selectItems value="#{userPage.rols}" var="ro"
+								itemValue="#{ro.rolCodigo}" itemLabel="#{ro.rolDescripcion}"></f:selectItems>
+						</p:selectOneMenu>
+					</p:column>
+
+				</p:panelGrid>
+
+				<h:panelGrid id="buttons">
+					<p:column>
+						<p:commandButton value="Nuevo" icon="ui-icon-disk"
+							styleClass="comButton" actionListener="#{userPage.clean}"
+							update="controls" process="@this">
+							<p:resetInput target="controls"></p:resetInput>
+						</p:commandButton>
+						<p:commandButton value="Guardar" icon="ui-icon-document"
+							styleClass="comButton" actionListener="#{userPage.create}"
+							update="controls,list,message" />
+					</p:column>
+				</h:panelGrid>
+
+				<h:panelGrid id="list">
+
+					<p:dataTable id="users" value="#{userPage.users}" paginator="true"
+						rows="10" var="use" rowKey="#{use.usuCodigo}"
+						selectionMode="single" rowsPerPageTemplate="5,10,15,20">
+
+						<p:ajax update=":formUser:controls" event="rowSelect"
+							listener="#{userPage.onRowSelect}" />
+
+						<p:column headerText="Usuario">
+								#{use.usuLogin}
+							</p:column>
+
+						<p:column headerText="Identificacion">
+								#{use.usuIdentifiacion}
+							</p:column>
+
+						<p:column headerText="Apellidos">
+								#{use.usuApellidos}
+							</p:column>
+
+						<p:column headerText="Nombres">
+								#{use.usuNombres}
+							</p:column>
+
+						<p:column headerText="Correo">
+								#{use.usuMail}
+							</p:column>
+
+						<p:column headerText="Telefono">
+								#{use.usuTelefono}
+							</p:column>
+
+						<p:column headerText="Celular">
+								#{use.usuCelular}
+							</p:column>
+
+						<p:column headerText="Habilitado">
+								#{use.usuActivo?'Si':'No'}
+							</p:column>
+
+						<p:column>
+							<p:commandButton icon="ui-icon-close" title="Eliminar"
+								styleClass="tablButton"></p:commandButton>
+						</p:column>
+					</p:dataTable>
+
+				</h:panelGrid>
+
+				<h:panelGrid id="message">
+					<p:growl showDetail="true" widgetVar="msg"></p:growl>
+				</h:panelGrid>
+
+			</h:form>
+
+			<script type="text/javascript">
+			function cleanForm()
+			{
+				vigente.check();
+				document.getElementById('formUser:login').value='';
+				document.getElementById('formUser:pass1').value='';
+				document.getElementById('formUser:pass2').value='';
+				document.getElementById('formUser:identification').value='';
+				document.getElementById('formUser:name').value='';
+				document.getElementById('formUser:lastName').value='';
+				document.getElementById('formUser:mail').value='';
+				document.getElementById('formUser:phone').value='';
+				document.getElementById('formUser:cellPhone').value='';
+				document.getElementById('formUser:address').value='';
+				document.getElementById('formUser:counter').innerHTML='255';
+				return false;
+			}
+			function numerId()
+			{
+				var a=document.getElementById('formUser:identification').value;
+				if(a.length==10)
+				{
+					if(isCedula(document.getElementById('formUser:identification')))
+					{return true;}
+					else
+					{
+						msg.show([{summary:'Numero de Cédula no Valida', detail: 'Revise nuevamente el numero de identificacion ingresado', severity: 'warn'}]);
+						document.getElementById('formUser:identification').focus();
+						return false;														
+					}
+				}
+				else
+				{
+					if(a.length==0)
+					{}
+					else
+					{
+						msg.show([{summary:'Numero de Cédula no Valida', detail: 'Número de dígitos de identifiacion incompletos', severity: 'warn'}]);
+						document.getElementById('formUser:identification').focus();
+						return false;
+					}	
+				}	
+			}				
+			</script>
+
+
+		</ui:define>
+	</ui:composition>
+
+</body>
+
+</html>
