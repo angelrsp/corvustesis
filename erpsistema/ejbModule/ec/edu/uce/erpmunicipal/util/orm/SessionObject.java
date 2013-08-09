@@ -1,0 +1,47 @@
+package ec.edu.uce.erpmunicipal.util.orm;
+
+import java.io.Serializable;
+
+import ec.edu.uce.erpmunicipal.sistema.orm.SisUsuario;
+import ec.edu.uce.erpmunicipal.sistema.orm.SisUsuarioRol;
+
+public class SessionObject implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private SisUsuario user;
+	private SisUsuarioRol userRol;
+
+	private int periodo;
+
+	public SessionObject() {
+	}
+
+	public SisUsuario getUser() {
+		return user;
+	}
+
+	public void setUser(SisUsuario user) {
+		this.user = user;
+	}
+
+	public SisUsuarioRol getUserRol() {
+		return userRol;
+	}
+
+	public void setUserRol(SisUsuarioRol userRol) {
+		this.userRol = userRol;
+	}
+
+	public int getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(int periodo) {
+		this.periodo = periodo;
+	}
+
+}
