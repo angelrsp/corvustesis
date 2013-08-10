@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="inventarioPU" transaction-type="JTA">
+	<jta-data-source>java:jboss/datasources/inventarioDS</jta-data-source>
+	<class>ec.edu.uce.inventario.entidades.SisModulo</class>
+	<class>ec.edu.uce.inventario.entidades.SisOpcion</class>
+	<class>ec.edu.uce.inventario.entidades.SisPerfil</class>
+	<class>ec.edu.uce.inventario.entidades.SisPerfilOpcion</class>
+	<class>ec.edu.uce.inventario.entidades.SisUsuario</class>
+	<class>ec.edu.uce.inventario.entidades.FacCliente</class>
+	<class>ec.edu.uce.inventario.entidades.FacDato</class>
+	<class>ec.edu.uce.inventario.entidades.FacDetalleVenta</class>
+	<class>ec.edu.uce.inventario.entidades.FacVenta</class>
+	<class>ec.edu.uce.inventario.entidades.InvArticulo</class>
+	<class>ec.edu.uce.inventario.entidades.InvClase</class>
+	<class>ec.edu.uce.inventario.entidades.InvCompra</class>
+	<class>ec.edu.uce.inventario.entidades.InvDetalleCompra</class>
+	<class>ec.edu.uce.inventario.entidades.InvKardex</class>
+	<class>ec.edu.uce.inventario.entidades.InvSaldo</class>
+	<class>ec.edu.uce.inventario.entidades.InvUnidad</class>
+		<properties>
+            <property name="hibernate.id.new_generator_mappings" value="false"/>
+            <property name="hibernate.show_sql" value="true"/>
+        </properties>     
+<!-- 		<properties>
+			<property name="hibernate.connection.username" value="postgres"/>
+			<property name="hibernate.connection.password" value="desarrollo"/>
+			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/uce_inventario"/>
+			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+		</properties> -->
+	</persistence-unit>
+</persistence>
