@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<body>
+
+	<ui:composition template="/templates/pages.xhtml">
+
+		<ui:define name="tituloFormulario">Perfiles</ui:define>
+		<ui:define name="contenido">
+
+			<h:form id="formRol">
+
+				<p:panelGrid id="controls" columns="2">
+					<p:column>
+						<h:outputText value="Descripción:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="descripcion" required="true"
+							value="#{perfilPage.perfil.prlDescripcion}"
+							requiredMessage="Ingrese Descripción"></p:inputText>
+					</p:column>
+				</p:panelGrid>
+
+				<h:panelGrid id="buttons">
+					<p:column>
+						<p:commandButton value="Nuevo" icon="ui-icon-disk"
+							styleClass="comButton" actionListener="#{perfilPage.clean}"
+							update="controls" process="@this">
+							<p:resetInput target="controls"></p:resetInput>
+						</p:commandButton>
+						<p:commandButton value="Guardar" icon="ui-icon-document"
+							styleClass="comButton" update="message,rols,descripcion"
+							actionListener="#{perfilPage.create}" />
+					</p:column>
+				</h:panelGrid>
+
+				<h:panelGrid id="list">
+					<p:dataTable id="rols" paginator="true" rows="10"
+						rowsPerPageTemplate="5,10,15,20" value="#{perfilPage.perfiles}"
+						var="rol" rowKey="#{rol.prlCodigo}" selectionMode="single">
+
+						<p:ajax update=":formRol:controls" event="rowSelect"
+							listener="#{perfilPage.onRowSelect}" />
+
+						<p:column headerText="Descripcion">
+                                #{rol.prlDescripcion}
+                            </p:column>
+						<p:column>
+							<p:commandButton icon="ui-icon-close" title="Eliminar"
+								styleClass="tablButton"></p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+				</h:panelGrid>
+
+
+				<h:panelGrid id="message">
+					<p:growl showDetail="true" widgetVar="msg"></p:growl>
+				</h:panelGrid>
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+
+</body>
+</html>

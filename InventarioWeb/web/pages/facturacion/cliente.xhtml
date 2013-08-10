@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<body>
+
+	<ui:composition template="/templates/pages.xhtml">
+
+		<ui:define name="tituloFormulario">Clientes</ui:define>
+
+		<ui:define name="contenido">
+
+			<h:form id="formCliente">
+
+				<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
+
+					<h:outputText value="Nombres:" />
+					<p:inputText id="nombres" tabindex="1" required="true"
+						value="#{clientePage.cliente.cliNombres}"
+						requiredMessage="Ingrese Nombre">
+					</p:inputText>
+
+					<h:outputText value="Apellidos:" />
+					<p:inputText id="apellidos" tabindex="2" required="true"
+						value="#{clientePage.cliente.cliApellidos}"
+						requiredMessage="Ingrese Precio">
+					</p:inputText>
+
+					<h:outputText value="Direccion:" />
+					<p:inputText id="actual" tabindex="3" required="true"
+						value="#{clientePage.cliente.cliDireccion}"
+						requiredMessage="Ingrese Direccion">
+					</p:inputText>
+
+					<h:outputText value="Telefono:" />
+					<p:inputText id="telefono" tabindex="4" required="true"
+						value="#{clientePage.cliente.cliTelefono}"
+						requiredMessage="Ingrese Telefono" onkeypress="return isNumberKey(event);">
+					</p:inputText>
+
+				</p:panelGrid>
+
+				<h:panelGrid id="buttons">
+					<p:column>
+						<p:commandButton value="Nuevo" icon="ui-icon-document"
+							styleClass="comButton" update="controls" process="@this" actionListener="#{clientePage.clean}">
+							<p:resetInput target="controls"></p:resetInput>
+						</p:commandButton>
+						<p:commandButton value="Guardar" icon="ui-icon-disk" actionListener="#{clientePage.create}"
+							styleClass="comButton" update="message,controls,data" />
+					</p:column>
+				</h:panelGrid>
+
+				<h:panelGrid>
+					<p:dataTable id="data" value="#{clientePage.clientes}" var="cli"
+						paginator="true" rows="10" selectionMode="single"
+						rowKey="#{cli.cliCodigo}" rowsPerPageTemplate="5,10,15,20">
+
+						<p:ajax update=":formCliente:controls" event="rowSelect"
+							listener="#{clientePage.onRowSelect}" />
+
+						<p:column headerText="Nombre">
+                        #{cli.cliNombres}
+                        </p:column>
+
+						<p:column headerText="Apellidos">
+                        #{cli.cliApellidos}
+                        </p:column>
+
+						<p:column headerText="Direccion">
+                        #{cli.cliDireccion}
+                        </p:column>
+
+						<p:column headerText="Telefono">
+                        #{cli.cliTelefono}
+                        </p:column>
+
+						<p:column>
+							<p:commandButton icon="ui-icon-close"
+								actionListener="#{articuloPage.onRowDeleting(art)}"
+								process="@this">
+							</p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+				</h:panelGrid>
+
+				<h:panelGrid id="message">
+					<p:growl showDetail="true" widgetVar="msg"></p:growl>
+				</h:panelGrid>
+
+			</h:form>
+
+		</ui:define>
+
+	</ui:composition>
+</body>
+
+</html>

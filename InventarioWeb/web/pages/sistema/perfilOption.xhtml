@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<body>
+
+	<ui:composition template="/templates/pages.xhtml">
+
+		<ui:define name="tituloFormulario">Perfil Opcion</ui:define>
+		
+		<ui:define name="contenido">
+
+			<h:form id="formRolOption">
+
+				<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
+					<h:outputText value="Roles:" />
+					<p:selectOneMenu id="rol" required="true" style="width:150px"
+						tabindex="1" value="#{perfilOpctionPage.perfilCode}">
+						<f:selectItem itemLabel="--Seleccione--" itemValue="0" />
+						<f:selectItems value="#{perfilOpctionPage.perfiles}" var="ro"
+							itemLabel="#{ro.prlDescripcion}" itemValue="#{ro.prlCodigo}"></f:selectItems>
+						<p:ajax event="change" listener="#{perfilOpctionPage.rolChange}"
+							update="treeMenu" process="@this"></p:ajax>
+					</p:selectOneMenu>
+				</p:panelGrid>
+
+				<h:panelGrid id="buttons">
+					<p:column>
+						<p:commandButton value="Actualizar" icon="ui-icon-disk"
+							styleClass="comButton"
+							actionListener="#{perfilOpctionPage.updateClick}" update="treeMenu" />
+					</p:column>
+				</h:panelGrid>
+
+				<h:panelGrid>
+					<p:tree id="treeMenu" selectionMode="checkbox"
+						value="#{perfilOpctionPage.root}" var="node"
+						selection="#{perfilOpctionPage.selectedNodes}">
+						<p:treeNode>
+							<h:outputText value="#{node.opcNombre}" />
+						</p:treeNode>
+					</p:tree>
+				</h:panelGrid>
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

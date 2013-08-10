@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<body>
+
+	<ui:composition template="/templates/pages.xhtml">
+
+		<ui:define name="tituloFormulario">Unidades</ui:define>
+
+		<ui:define name="contenido">
+
+			<h:form id="formUnidad">
+
+				<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
+
+					<h:outputText value="Nombre:" />
+					<p:inputText id="name" tabindex="1" required="true"
+						value="#{unidadPage.unidad.uniDescripcion}"
+						requiredMessage="Ingrese Nombre">
+					</p:inputText>
+
+				</p:panelGrid>
+
+				<h:panelGrid id="buttons">
+					<p:column>
+						<p:commandButton value="Nuevo" icon="ui-icon-document"
+							styleClass="comButton" update="controls" process="@this" actionListener="#{unidadPage.clear}">
+							<p:resetInput target="controls"></p:resetInput>
+						</p:commandButton>
+						<p:commandButton value="Guardar" icon="ui-icon-disk"
+							styleClass="comButton" update="message,controls,unidades" actionListener="#{unidadPage.create}"/>
+					</p:column>
+				</h:panelGrid>
+
+				<h:panelGrid>
+					<p:dataTable id="unidades" value="#{unidadPage.unidades}" var="uni"
+						paginator="true" rows="10" selectionMode="single"
+						rowKey="#{uni.uniCodigo}" rowsPerPageTemplate="5,10,15,20">
+
+						<p:ajax update=":formUnidad:controls" event="rowSelect"
+							listener="#{unidadPage.onRowSelect}" />
+
+						<p:column headerText="Nombre">
+                        #{uni.uniDescripcion}
+                        </p:column>
+					</p:dataTable>
+				</h:panelGrid>
+
+
+				<h:panelGrid id="message">
+					<p:growl showDetail="true" widgetVar="msg"></p:growl>
+				</h:panelGrid>
+
+			</h:form>
+
+
+		</ui:define>
+
+	</ui:composition>
+
+</body>
+</html>

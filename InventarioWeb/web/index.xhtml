@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<script type="text/javascript">
+    window.onload = function() {
+        document.getElementById('index:username').focus();
+    }
+    </script>
+</h:head>
+
+<h:body>
+
+	<h:form id="index">
+		<div align="center">
+			<p:panel id="grid" header="Inicio"
+				style="width:350px; font-size:14px;">
+				<h:panelGrid columns="2" cellpadding="3">
+					<h:outputText value="Usuario:" />
+					<p:inputText id="username" value="#{indexPage.user}"
+						required="true" requiredMessage="Ingrese Usuario" tabindex="1"></p:inputText>
+					<h:outputText value="Contraseña:" />
+					<p:password id="password" required="true" feedback="false"
+						requiredMessage="Ingrese Contraseña" value="#{indexPage.password}"></p:password>
+					<p:spacer></p:spacer>
+					<p:commandButton value="Entrar" style="width:90px;height:30px;"
+						update="grid" action="#{indexPage.authenticate}"></p:commandButton>
+					<p:growl></p:growl>
+				</h:panelGrid>
+			</p:panel>
+		</div>
+
+		<h:panelGrid id="message">
+			<p:growl showDetail="true" widgetVar="msg"></p:growl>
+		</h:panelGrid>
+	</h:form>
+
+</h:body>
+</html>

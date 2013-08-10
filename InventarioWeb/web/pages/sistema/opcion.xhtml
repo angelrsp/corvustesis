@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+<body>
+
+	<ui:composition template="/templates/pages.xhtml">
+	
+	<ui:define name="tituloFormulario">Opciones</ui:define>
+	
+		<ui:define name="contenido">
+
+			<h:form id="formOption">
+
+				<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
+
+					<h:outputText value="Modulo:" />
+					<p:selectOneMenu id="module" required="true" style="width:150px"
+						tabindex="1" value="#{optionPage.moduleCode}">
+						<f:selectItem itemLabel="--Seleccione--" itemValue="0" />
+						<f:selectItems value="#{optionPage.modules}" var="mo"
+							itemLabel="#{mo.modDescripcion}" itemValue="#{mo.modCodigo}"></f:selectItems>
+						<p:ajax event="change" listener="#{optionPage.moduleChange}"
+							update="options,father" process="@this"></p:ajax>
+					</p:selectOneMenu>
+
+					<h:outputText value="Descripcion:" />
+					<p:inputText id="name" tabindex="2" required="true"
+						value="#{optionPage.option.opcNombre}"
+						requiredMessage="Ingrese Descripcion">
+					</p:inputText>
+
+					<h:outputText value="Ruta (URL):" />
+					<p:inputText id="url" tabindex="3" required="true"
+						requiredMessage="Ingrese la Ruta (URL)"
+						readonly="#{optionPage.readOnlyUrl}"
+						value="#{optionPage.option.opcUrl}">
+					</p:inputText>
+
+					<h:outputText value="Orden Numerico:" />
+					<p:inputText id="order" tabindex="4" required="true"
+						requiredMessage="Ingrese el Orden Numerico"
+						onkeypress="return isNumberKey(event);"
+						value="#{optionPage.option.opcOrden}">
+					</p:inputText>
+
+					<h:outputText value="Padre de la opcion:" />
+					<p:selectOneMenu id="father" required="true" style="width:150px"
+						tabindex="5" value="#{optionPage.patherCode}">
+						<f:selectItem itemLabel="--Seleccione--" itemValue="0" />
+						<f:selectItems value="#{optionPage.optionsPather}" var="op"
+							itemLabel="#{op.opcNombre}" itemValue="#{op.opcCodigo}"></f:selectItems>
+					</p:selectOneMenu>
+
+					<h:outputText value="Es nudo:" />
+					<p:selectBooleanButton onLabel="Si" offLabel="No" id="isNode"
+						offIcon="ui-icon-close" onIcon="ui-icon-check"
+						value="#{optionPage.isNode}">
+						<p:ajax listener="#{optionPage.isNodeClick}" update="url"></p:ajax>
+					</p:selectBooleanButton>
+
+				</p:panelGrid>
+
+				<br />
+
+				<h:panelGrid id="buttons">
+					<p:column>
+						<p:commandButton value="Nuevo" icon="ui-icon-document"
+							styleClass="comButton" actionListener="#{optionPage.newClick}"
+							update="controls" process="@this">
+							<p:resetInput target="controls"></p:resetInput>
+						</p:commandButton>
+						<p:commandButton value="Guardar" icon="ui-icon-disk"
+							styleClass="comButton" actionListener="#{optionPage.saveClick}"
+							update="options,message,controls" />
+					</p:column>
+				</h:panelGrid>
+
+				<h:panelGrid>
+					<p:dataTable id="options" value="#{optionPage.options}" var="opt"
+						paginator="true" rows="10" selectionMode="single"
+						rowKey="#{opt.opcCodigo}" rowsPerPageTemplate="5,10,15,20">
+
+						<p:ajax update=":formOption:controls" event="rowSelect"
+							listener="#{optionPage.optionsOnRowSelect}" />
+
+
+						<p:column headerText="Nombre">
+                        #{opt.opcNombre}
+                        </p:column>
+
+						<p:column headerText="Ruta (Url)">
+                        #{opt.opcUrl}
+                        </p:column>
+
+						<p:column headerText="Orden">
+                        #{opt.opcOrden}
+                        </p:column>
+
+					</p:dataTable>
+				</h:panelGrid>
+
+				<h:panelGrid id="message">
+					<p:growl showDetail="true" widgetVar="msg"></p:growl>
+				</h:panelGrid>
+
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</body>
+
+</html>
