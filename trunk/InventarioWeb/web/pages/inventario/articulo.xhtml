@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<body>
+
+	<ui:composition template="/templates/pages.xhtml">
+
+		<ui:define name="tituloFormulario">Articulos</ui:define>
+
+		<ui:define name="contenido">
+
+			<h:form id="formArtitulo">
+
+				<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
+
+					<h:outputText value="Nombre:" />
+					<p:inputText id="name" tabindex="1" required="true"
+						value="#{articuloPage.articulo.artNombre}"
+						requiredMessage="Ingrese Nombre">
+					</p:inputText>
+
+					<h:outputText value="Precio:" />
+					<p:inputText id="precio" tabindex="2" required="true"
+						value="#{articuloPage.articulo.artPrecio}"
+						requiredMessage="Ingrese Precio">
+					</p:inputText>
+
+					<h:outputText value="Cantidad Actual:" />
+					<p:inputText id="actual" tabindex="3" required="true"
+						value="#{articuloPage.articulo.artCantidadActual}"
+						requiredMessage="Ingrese Precio">
+					</p:inputText>
+
+					<h:outputText value="Cantidad Máxima:" />
+					<p:inputText id="maxima" tabindex="4" required="true"
+						value="#{articuloPage.articulo.artCantidadMaxima}"
+						requiredMessage="Ingrese Precio">
+					</p:inputText>
+
+					<h:outputText value="Cantidad Mínima:" />
+					<p:inputText id="minima" tabindex="5" required="true"
+						value="#{articuloPage.articulo.artCantidadMinima}"
+						requiredMessage="Ingrese Precio">
+					</p:inputText>
+
+					<h:outputText value="Unidad:" />
+					<p:selectOneMenu required="true"
+						requiredMessage="Seleccione Unidad" tabindex="6"
+						value="#{articuloPage.unidadCode}">
+						<f:selectItem itemLabel="--Seleccione--" itemValue="" />
+						<f:selectItems value="#{articuloPage.unidades}" var="uni"
+							itemLabel="#{uni.uniDescripcion}" itemValue="#{uni.uniCodigo}"></f:selectItems>
+					</p:selectOneMenu>
+
+				</p:panelGrid>
+
+				<h:panelGrid id="buttons">
+					<p:column>
+						<p:commandButton value="Nuevo" icon="ui-icon-document"
+							styleClass="comButton" update="controls" process="@this" actionListener="#{articuloPage.clean}">
+							<p:resetInput target="controls"></p:resetInput>
+						</p:commandButton>
+						<p:commandButton value="Guardar" icon="ui-icon-disk"
+							styleClass="comButton" update="message,controls,articulos"
+							actionListener="#{articuloPage.create()}" />
+					</p:column>
+				</h:panelGrid>
+
+				<h:panelGrid>
+					<p:dataTable id="articulos" value="#{articuloPage.articulos}"
+						var="art" paginator="true" rows="10" selectionMode="single"
+						rowKey="#{art.artCodigo}" rowsPerPageTemplate="5,10,15,20">
+
+						<p:ajax update=":formArtitulo:controls" event="rowSelect"
+							listener="#{articuloPage.onRowSelect}" />
+
+						<p:column headerText="Codigo">
+                        #{art.artCodigo}
+                        </p:column>
+
+						<p:column headerText="Nombre">
+                        #{art.artNombre}
+                        </p:column>
+
+						<p:column headerText="Precio">
+                        #{art.artPrecio}
+                        </p:column>
+
+						<p:column headerText="Cantidad Actual">
+                        #{art.artCantidadActual}
+                        </p:column>
+
+						<p:column headerText="Cantidad Maxima">
+                        #{art.artCantidadMaxima}
+                        </p:column>
+
+						<p:column headerText="Cantidad Minima">
+                        #{art.artCantidadMinima}
+                        </p:column>
+
+						<p:column headerText="Unidad">
+                        #{art.invUnidad.uniDescripcion}
+                        </p:column>
+
+						<p:column>
+							<p:commandButton icon="ui-icon-close"
+								actionListener="#{articuloPage.onRowDeleting(art)}" process="@this">
+							</p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+				</h:panelGrid>
+
+
+				<h:panelGrid id="message">
+					<p:growl showDetail="true" widgetVar="msg"></p:growl>
+				</h:panelGrid>
+
+				<p:confirmDialog id="confirmDialog1"
+					message="¿Esta seguro que desea eliminar?" header="Pregunta"
+					widgetVar="confirmation1">
+					<p:commandButton id="confirm1" value="Si" update="message,articulos"
+						actionListener="#{articuloPage.delete}" oncomplete="confirmation1.hide()"
+						process="@this" />
+					<p:commandButton id="decline1" value="No" update="message"
+						actionListener="#{articuloPage.clean}"
+						oncomplete="confirmation1.hide()" process="@this" />
+				</p:confirmDialog>
+
+   				<p:confirmDialog id="confirmDialog2"
+                    message="El articulo que esta tratando de eliminar tiene dependencias. ¿Desea desactivar?"
+                    header="Pregunta" widgetVar="confirmation2">
+                    <p:commandButton id="confirm2" value="Si" update="message,articulos"
+                        actionListener="#{articuloPage.updateEstado}"
+                        oncomplete="confirmation2.hide()" process="@this" />
+                    <p:commandButton id="decline2" value="No"
+                        actionListener="#{articuloPage.clean}" update="message"
+                        oncomplete="confirmation2.hide()" process="@this" />
+                </p:confirmDialog>
+			</h:form>
+
+		</ui:define>
+
+	</ui:composition>
+</body>
+</html>

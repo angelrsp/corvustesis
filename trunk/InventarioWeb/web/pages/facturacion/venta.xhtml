@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<body>
+
+	<ui:composition template="/templates/pages.xhtml">
+
+		<ui:define name="tituloFormulario">Ventas</ui:define>
+
+		<ui:define name="contenido">
+
+			<h:form id="formVenta">
+
+				<fieldset>
+					<legend>Encabezado</legend>
+
+					<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
+
+						<h:outputText value="Fecha:" />
+						<p:calendar id="popupButtonCal" showOn="button"
+							pattern="dd/MM/yyyy" />
+
+
+
+					</p:panelGrid>
+
+				</fieldset>
+
+				<fieldset>
+					<legend>Detalle</legend>
+
+
+				</fieldset>
+
+
+			</h:form>
+
+		</ui:define>
+
+	</ui:composition>
+</body>
+
+</html>
