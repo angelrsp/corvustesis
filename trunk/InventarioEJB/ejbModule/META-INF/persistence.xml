@@ -13,8 +13,6 @@
 	<class>ec.edu.uce.inventario.entidades.FacVenta</class>
 	<class>ec.edu.uce.inventario.entidades.InvArticulo</class>
 	<class>ec.edu.uce.inventario.entidades.InvClase</class>
-	<class>ec.edu.uce.inventario.entidades.InvCompra</class>
-	<class>ec.edu.uce.inventario.entidades.InvDetalleCompra</class>
 	<class>ec.edu.uce.inventario.entidades.InvKardex</class>
 	<class>ec.edu.uce.inventario.entidades.InvSaldo</class>
 	<class>ec.edu.uce.inventario.entidades.InvUnidad</class>
