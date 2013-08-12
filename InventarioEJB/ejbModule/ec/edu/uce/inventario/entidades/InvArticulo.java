@@ -39,6 +39,10 @@ public class InvArticulo implements Serializable {
 	@Column(name="art_precio")
 	private BigDecimal artPrecio;
 
+	//bi-directional many-to-one association to FacDetalleVenta
+	@OneToMany(mappedBy="invArticulo")
+	private List<FacDetalleVenta> facDetalleVentas;
+
 	//bi-directional many-to-one association to InvUnidad
 	@ManyToOne
 	@JoinColumn(name="art_unidad_codigo")
@@ -48,16 +52,8 @@ public class InvArticulo implements Serializable {
 	@OneToMany(mappedBy="invArticulo")
 	private List<InvKardex> invKardexs;
 
-	//bi-directional many-to-one association to FacDetalleVenta
-	@OneToMany(mappedBy="invArticulo")
-	private List<FacDetalleVenta> facDetalleVentas;
-
-	//bi-directional many-to-one association to InvDetalleCompra
-	@OneToMany(mappedBy="invArticulo")
-	private List<InvDetalleCompra> invDetalleCompras;
-
 	//bi-directional many-to-one association to InvSaldo
-	@OneToMany(mappedBy="invArticulo")
+	@OneToMany(mappedBy="invArticuloBean")
 	private List<InvSaldo> invSaldos;
 
 	public InvArticulo() {
@@ -119,6 +115,28 @@ public class InvArticulo implements Serializable {
 		this.artPrecio = artPrecio;
 	}
 
+	public List<FacDetalleVenta> getFacDetalleVentas() {
+		return this.facDetalleVentas;
+	}
+
+	public void setFacDetalleVentas(List<FacDetalleVenta> facDetalleVentas) {
+		this.facDetalleVentas = facDetalleVentas;
+	}
+
+	public FacDetalleVenta addFacDetalleVenta(FacDetalleVenta facDetalleVenta) {
+		getFacDetalleVentas().add(facDetalleVenta);
+		facDetalleVenta.setInvArticulo(this);
+
+		return facDetalleVenta;
+	}
+
+	public FacDetalleVenta removeFacDetalleVenta(FacDetalleVenta facDetalleVenta) {
+		getFacDetalleVentas().remove(facDetalleVenta);
+		facDetalleVenta.setInvArticulo(null);
+
+		return facDetalleVenta;
+	}
+
 	public InvUnidad getInvUnidad() {
 		return this.invUnidad;
 	}
@@ -149,50 +167,6 @@ public class InvArticulo implements Serializable {
 		return invKardex;
 	}
 
-	public List<FacDetalleVenta> getFacDetalleVentas() {
-		return this.facDetalleVentas;
-	}
-
-	public void setFacDetalleVentas(List<FacDetalleVenta> facDetalleVentas) {
-		this.facDetalleVentas = facDetalleVentas;
-	}
-
-	public FacDetalleVenta addFacDetalleVenta(FacDetalleVenta facDetalleVenta) {
-		getFacDetalleVentas().add(facDetalleVenta);
-		facDetalleVenta.setInvArticulo(this);
-
-		return facDetalleVenta;
-	}
-
-	public FacDetalleVenta removeFacDetalleVenta(FacDetalleVenta facDetalleVenta) {
-		getFacDetalleVentas().remove(facDetalleVenta);
-		facDetalleVenta.setInvArticulo(null);
-
-		return facDetalleVenta;
-	}
-
-	public List<InvDetalleCompra> getInvDetalleCompras() {
-		return this.invDetalleCompras;
-	}
-
-	public void setInvDetalleCompras(List<InvDetalleCompra> invDetalleCompras) {
-		this.invDetalleCompras = invDetalleCompras;
-	}
-
-	public InvDetalleCompra addInvDetalleCompra(InvDetalleCompra invDetalleCompra) {
-		getInvDetalleCompras().add(invDetalleCompra);
-		invDetalleCompra.setInvArticulo(this);
-
-		return invDetalleCompra;
-	}
-
-	public InvDetalleCompra removeInvDetalleCompra(InvDetalleCompra invDetalleCompra) {
-		getInvDetalleCompras().remove(invDetalleCompra);
-		invDetalleCompra.setInvArticulo(null);
-
-		return invDetalleCompra;
-	}
-
 	public List<InvSaldo> getInvSaldos() {
 		return this.invSaldos;
 	}
@@ -203,14 +177,14 @@ public class InvArticulo implements Serializable {
 
 	public InvSaldo addInvSaldo(InvSaldo invSaldo) {
 		getInvSaldos().add(invSaldo);
-		invSaldo.setInvArticulo(this);
+		invSaldo.setInvArticuloBean(this);
 
 		return invSaldo;
 	}
 
 	public InvSaldo removeInvSaldo(InvSaldo invSaldo) {
 		getInvSaldos().remove(invSaldo);
-		invSaldo.setInvArticulo(null);
+		invSaldo.setInvArticuloBean(null);
 
 		return invSaldo;
 	}

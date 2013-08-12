@@ -15,7 +15,7 @@ public class FacCliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="FAC_CLIENTE_CLICODIGO_GENERATOR", sequenceName="FAC_CLIENTE_CLI_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="FAC_CLIENTE_CLICODIGO_GENERATOR", sequenceName="FAC_CLIENTE_CLI_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="FAC_CLIENTE_CLICODIGO_GENERATOR")
 	@Column(name="cli_codigo")
 	private Integer cliCodigo;
