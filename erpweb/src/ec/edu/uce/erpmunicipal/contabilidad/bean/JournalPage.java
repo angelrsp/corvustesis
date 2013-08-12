@@ -17,9 +17,11 @@ import ec.edu.uce.erpmunicipal.contabilidad.bsl.AccoutingService;
 import ec.edu.uce.erpmunicipal.contabilidad.bsl.JournalService;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConClase;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConCuenta;
+import ec.edu.uce.erpmunicipal.contabilidad.orm.ConMovimiento;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConMovimientoDetalle;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConTipoMovimiento;
 import ec.edu.uce.erpmunicipal.sistema.bsl.CrudService;
+import ec.edu.uce.erpmunicipal.util.orm.SessionObject;
 
 @ManagedBean(name = "journalPage")
 @ViewScoped
@@ -36,8 +38,6 @@ public class JournalPage implements Serializable {
 	private AccoutingService accoutingService;
 	@EJB(name = "journalService/local")
 	private JournalService journalService;
-
-	
 	
 	@SuppressWarnings("unused")
 	private List<ConTipoMovimiento> typeMove;
@@ -49,6 +49,8 @@ public class JournalPage implements Serializable {
 	private List<ConMovimientoDetalle> detalles;
 
 	private ConMovimientoDetalle detalle;
+	
+	private ConMovimiento movimiento;
 
 	private String search;
 	private String searchCode;
@@ -57,7 +59,10 @@ public class JournalPage implements Serializable {
 	private String debe;
 	private String haber;
 	private Double cuadre;
-
+	
+	private int claseCode;
+	private int tipoMovimientoCode;
+	
 	public JournalPage() {
 		clas = new ArrayList<ConClase>();
 		typeMove = new ArrayList<ConTipoMovimiento>();
@@ -65,6 +70,7 @@ public class JournalPage implements Serializable {
 		cuadre = 0.0;
 		detalles = new ArrayList<ConMovimientoDetalle>();
 		detalle = new ConMovimientoDetalle();
+		movimiento=new ConMovimiento();
 	}
 
 	/**
@@ -192,6 +198,30 @@ public class JournalPage implements Serializable {
 		this.detalle = detalle;
 	}
 
+	public ConMovimiento getMovimiento() {
+		return movimiento;
+	}
+
+	public void setMovimiento(ConMovimiento movimiento) {
+		this.movimiento = movimiento;
+	}
+
+	public int getClaseCode() {
+		return claseCode;
+	}
+
+	public void setClaseCode(int claseCode) {
+		this.claseCode = claseCode;
+	}
+
+	public int getTipoMovimientoCode() {
+		return tipoMovimientoCode;
+	}
+
+	public void setTipoMovimientoCode(int tipoMovimientoCode) {
+		this.tipoMovimientoCode = tipoMovimientoCode;
+	}
+
 	public void searchCuenta() {
 		this.cuentas = accoutingService.dynamicSearch(search);
 	}
@@ -253,6 +283,17 @@ public class JournalPage implements Serializable {
 
 	public void create()
 	{
-		journalService.create(detalles);
+		SessionObject sessionObject=new SessionObject();
+		if(detalles.size()<=0)
+		{
+			
+			return;	
+		}
+		journalService.create(sessionObject, claseCode, tipoMovimientoCode, movimiento, detalles);
+	}
+	
+	public void clear()
+	{
+		detalles=new ArrayList<ConMovimientoDetalle>();
 	}
 }
