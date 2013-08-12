@@ -24,11 +24,20 @@
 
 					<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
 
+						<h:outputText value="Cliente:" />
+						<p:column>
+							<p:inputText></p:inputText>
+							<p:inputText></p:inputText>
+							<p:commandButton value="Buscar Cliente" icon="ui-icon-search"
+								styleClass="comButton" />
+						</p:column>
+
 						<h:outputText value="Fecha:" />
 						<p:calendar id="popupButtonCal" showOn="button"
 							pattern="dd/MM/yyyy" />
 
-
+						<h:outputText value="Pedido:" />
+						<p:inputText></p:inputText>
 
 					</p:panelGrid>
 
