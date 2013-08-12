@@ -30,7 +30,7 @@
 							<h:outputText value="Transaccion:" />
 						</p:column>
 						<p:column>
-							<p:inputText></p:inputText>
+							<p:inputText readonly="true" style="width:50px;"></p:inputText>
 						</p:column>
 
 						<p:column>
@@ -48,7 +48,7 @@
 							<h:outputText value="Fecha:" />
 						</p:column>
 						<p:column>
-							<p:inputText></p:inputText>
+							<p:calendar id="calFecha" showOn="button" pattern="dd/MM/yyyy" style="width:20px;"></p:calendar>
 						</p:column>
 
 						<p:column>
@@ -69,13 +69,13 @@
 							<h:outputText value="Detalle:" />
 						</p:column>
 						<p:column>
-							<p:inputTextarea id="detail"></p:inputTextarea>
+							<p:inputTextarea id="detail" autoResize="false"></p:inputTextarea>
 						</p:column>
 						<p:column>
 							<h:outputText value="Documentacion:" />
 						</p:column>
 						<p:column>
-							<p:inputTextarea id="document"></p:inputTextarea>
+							<p:inputTextarea id="document" autoResize="false"></p:inputTextarea>
 						</p:column>
 					</p:panelGrid>
 
@@ -83,6 +83,7 @@
 						<p:column>
 							<p:commandButton value="Nuevo" icon="ui-icon-document"
 								styleClass="comButton">
+								
 							</p:commandButton>
 							<p:commandButton value="Guardar" icon="ui-icon-disk"
 								styleClass="comButton" actionListener="#{journalPage.create}" process="@this"/>
@@ -91,7 +92,6 @@
 						</p:column>
 
 					</h:panelGrid>
-
 
 				</fieldset>
 
