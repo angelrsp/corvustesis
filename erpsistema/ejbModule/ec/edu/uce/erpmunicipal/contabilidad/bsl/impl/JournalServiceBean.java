@@ -1,6 +1,8 @@
 package ec.edu.uce.erpmunicipal.contabilidad.bsl.impl;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -28,17 +30,24 @@ public class JournalServiceBean implements JournalService {
 	private EntityManager entityManager;
 
 	@Override
-	public void create(SessionObject sessionObject,int claseCode, int tipoMovimientoCode, ConMovimiento movimiento,List<ConMovimientoDetalle> details) {
+	public void create(SessionObject sessionObject, int claseCode, int tipoMovimientoCode, ConMovimiento movimiento,List<ConMovimientoDetalle> details) {
 		
 		Double debe, haber, saldo;
 		ConSaldo objSaldo;
 		ConCuenta objCuenta;
+	
+		Date date=new Date();
 		
 		ConClase clase= entityManager.find(ConClase.class, claseCode);
+		
 		ConTipoMovimiento tipoMovimiento= entityManager.find(ConTipoMovimiento.class, tipoMovimientoCode);
 		
 		movimiento.setConClase(clase);
 		movimiento.setConTipoMovimiento(tipoMovimiento);
+		movimiento.setMovEntidad(sessionObject.getUser().getSisInstitucion().getInsCodigo());
+		movimiento.setMovEstado(true);
+		movimiento.setMovFecha(new Timestamp(date.getTime()));
+		
 		
 		entityManager.persist(movimiento);
 		entityManager.flush();
@@ -54,7 +63,6 @@ public class JournalServiceBean implements JournalService {
 				detail.setConMovimiento(movimiento);
 				detail.setConPeriodo(sessionObject.getPeriodo());
 				detail.setMdeEntidad(sessionObject.getUser().getSisInstitucion().getInsCodigo());
-				
 				
 				debe = objSaldo.getSalDebe().doubleValue()
 						+ detail.getMdeDebe().doubleValue();
