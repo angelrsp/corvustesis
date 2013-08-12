@@ -15,7 +15,7 @@ public class ConClase implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="CON_CLASE_CLACODIGO_GENERATOR", sequenceName="CON_CLASE_CLA_CODIGO_SEQ")
+	@SequenceGenerator(name="CON_CLASE_CLACODIGO_GENERATOR", sequenceName="CON_CLASE_CLA_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CON_CLASE_CLACODIGO_GENERATOR")
 	@Column(name="cla_codigo")
 	private Integer claCodigo;

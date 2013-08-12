@@ -16,7 +16,7 @@ public class ConMovimientoDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="CON_MOVIMIENTO_DETALLE_MDECODIGO_GENERATOR", sequenceName="CON_MOVIMIENTO_DETALLE_MDE_CODIGO_SEQ")
+	@SequenceGenerator(name="CON_MOVIMIENTO_DETALLE_MDECODIGO_GENERATOR", sequenceName="CON_MOVIMIENTO_DETALLE_MDE_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CON_MOVIMIENTO_DETALLE_MDECODIGO_GENERATOR")
 	@Column(name="mde_codigo")
 	private Integer mdeCodigo;

@@ -15,7 +15,7 @@ public class ConSaldo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="CON_SALDO_SALCODIGO_GENERATOR", sequenceName="CON_SALDO_SAL_CODIGO_SEQ")
+	@SequenceGenerator(name="CON_SALDO_SALCODIGO_GENERATOR", sequenceName="CON_SALDO_SAL_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CON_SALDO_SALCODIGO_GENERATOR")
 	@Column(name="sal_codigo")
 	private Integer salCodigo;

@@ -15,7 +15,7 @@ public class ConPeriodo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="CON_PERIODO_PERCODIGO_GENERATOR", sequenceName="CON_PERIODO_PER_CODIGO_SEQ")
+	@SequenceGenerator(name="CON_PERIODO_PERCODIGO_GENERATOR", sequenceName="CON_PERIODO_PER_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CON_PERIODO_PERCODIGO_GENERATOR")
 	@Column(name="per_codigo")
 	private Integer perCodigo;

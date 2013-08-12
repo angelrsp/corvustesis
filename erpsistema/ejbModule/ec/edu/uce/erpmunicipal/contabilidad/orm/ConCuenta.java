@@ -15,7 +15,7 @@ public class ConCuenta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="CON_CUENTA_CUECODIGO_GENERATOR", sequenceName="CON_CUENTA_CUE_CODIGO_SEQ")
+	@SequenceGenerator(name="CON_CUENTA_CUECODIGO_GENERATOR", sequenceName="CON_CUENTA_CUE_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CON_CUENTA_CUECODIGO_GENERATOR")
 	@Column(name="cue_codigo")
 	private Integer cueCodigo;
