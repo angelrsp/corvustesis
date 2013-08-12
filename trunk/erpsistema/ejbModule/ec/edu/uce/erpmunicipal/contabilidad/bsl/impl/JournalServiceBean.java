@@ -32,7 +32,7 @@ public class JournalServiceBean implements JournalService {
 	private EntityManager entityManager;
 
 	@Override
-	public void create(SessionObject sessionObject, int claseCode, int tipoMovimientoCode, ConMovimiento movimiento,List<ConMovimientoDetalle> details) {
+	public void create(SessionObject sessionObject, int claseCode, int tipoMovimientoCode, ConMovimiento movimiento, List<ConMovimientoDetalle> details) {
 		
 		Double debe, haber, saldo;
 		ConSaldo objSaldo;
@@ -45,6 +45,7 @@ public class JournalServiceBean implements JournalService {
 		
 		ConTipoMovimiento tipoMovimiento= entityManager.find(ConTipoMovimiento.class, tipoMovimientoCode);
 		
+		//Movimiento
 		movimiento.setConClase(clase);
 		movimiento.setConTipoMovimiento(tipoMovimiento);
 		movimiento.setMovEntidad(sessionObject.getUser().getSisInstitucion().getInsCodigo());
@@ -54,20 +55,31 @@ public class JournalServiceBean implements JournalService {
 		entityManager.persist(movimiento);
 		entityManager.flush();
 		entityManager.refresh(movimiento);
+		//
 		
+		//Periodo
 		Calendar calendar=Calendar.getInstance();
 		calendar.setTime(movimiento.getMovFechaContable());
 		
 		periodo=findPeriodo(sessionObject.getAnio(), Calendar.MONTH);
 		
+		if(periodo==null)
+		{
+			periodo=new ConPeriodo();
+			periodo.setPerAnio(sessionObject.getAnio());
+			periodo.setPerMes(Calendar.MONTH);
+			entityManager.persist(periodo);
+		}
+		//
 		
+		//Detalle
 		for (ConMovimientoDetalle detail : details) {
 			objCuenta = findAccountByNum(detail.getConCuenta().getCueNumero());
 			objSaldo = readSaldo(objCuenta);
 			
 			detail.setConCuenta(objCuenta);
 			detail.setConMovimiento(movimiento);
-			detail.setConPeriodo(sessionObject.getPeriodo());
+			detail.setConPeriodo(periodo);
 			detail.setMdeEntidad(sessionObject.getUser().getSisInstitucion().getInsCodigo());
 			detail.setMdeDebe(BigDecimal.valueOf(detail.getMdeDebe().doubleValue()));
 			detail.setMdeHaber(BigDecimal.valueOf(detail.getMdeHaber().doubleValue()));
@@ -104,6 +116,7 @@ public class JournalServiceBean implements JournalService {
 			}
 			entityManager.persist(detail);
 		}
+		//
 	}
 
 	private ConCuenta findAccountByNum(String num) {
@@ -153,8 +166,6 @@ public class JournalServiceBean implements JournalService {
 			return null;
 		else
 			return list.get(0);
-
 	}
-
 
 }
