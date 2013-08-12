@@ -23,11 +23,11 @@ public class FacDetalleVenta implements Serializable {
 	@Column(name="dve_cantidad")
 	private BigDecimal dveCantidad;
 
-	@Column(name="dve_precio_total")
-	private BigDecimal dvePrecioTotal;
+	@Column(name="dve_iva")
+	private BigDecimal dveIva;
 
-	@Column(name="dve_precio_unitario")
-	private BigDecimal dvePrecioUnitario;
+	@Column(name="dve_precio")
+	private BigDecimal dvePrecio;
 
 	//bi-directional many-to-one association to FacVenta
 	@ManyToOne
@@ -58,20 +58,20 @@ public class FacDetalleVenta implements Serializable {
 		this.dveCantidad = dveCantidad;
 	}
 
-	public BigDecimal getDvePrecioTotal() {
-		return this.dvePrecioTotal;
+	public BigDecimal getDveIva() {
+		return this.dveIva;
 	}
 
-	public void setDvePrecioTotal(BigDecimal dvePrecioTotal) {
-		this.dvePrecioTotal = dvePrecioTotal;
+	public void setDveIva(BigDecimal dveIva) {
+		this.dveIva = dveIva;
 	}
 
-	public BigDecimal getDvePrecioUnitario() {
-		return this.dvePrecioUnitario;
+	public BigDecimal getDvePrecio() {
+		return this.dvePrecio;
 	}
 
-	public void setDvePrecioUnitario(BigDecimal dvePrecioUnitario) {
-		this.dvePrecioUnitario = dvePrecioUnitario;
+	public void setDvePrecio(BigDecimal dvePrecio) {
+		this.dvePrecio = dvePrecio;
 	}
 
 	public FacVenta getFacVenta() {

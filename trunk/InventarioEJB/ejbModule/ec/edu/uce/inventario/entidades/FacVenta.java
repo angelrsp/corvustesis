@@ -22,17 +22,11 @@ public class FacVenta implements Serializable {
 	@Column(name="ven_codigo")
 	private Integer venCodigo;
 
-	@Column(name="ven_descuento")
-	private BigDecimal venDescuento;
-
 	@Column(name="ven_fecha")
 	private Timestamp venFecha;
 
-	@Column(name="ven_iva")
-	private BigDecimal venIva;
-
-	@Column(name="ven_subtotal")
-	private BigDecimal venSubtotal;
+	@Column(name="ven_pedido")
+	private String venPedido;
 
 	@Column(name="ven_total")
 	private BigDecimal venTotal;
@@ -57,14 +51,6 @@ public class FacVenta implements Serializable {
 		this.venCodigo = venCodigo;
 	}
 
-	public BigDecimal getVenDescuento() {
-		return this.venDescuento;
-	}
-
-	public void setVenDescuento(BigDecimal venDescuento) {
-		this.venDescuento = venDescuento;
-	}
-
 	public Timestamp getVenFecha() {
 		return this.venFecha;
 	}
@@ -73,20 +59,12 @@ public class FacVenta implements Serializable {
 		this.venFecha = venFecha;
 	}
 
-	public BigDecimal getVenIva() {
-		return this.venIva;
+	public String getVenPedido() {
+		return this.venPedido;
 	}
 
-	public void setVenIva(BigDecimal venIva) {
-		this.venIva = venIva;
-	}
-
-	public BigDecimal getVenSubtotal() {
-		return this.venSubtotal;
-	}
-
-	public void setVenSubtotal(BigDecimal venSubtotal) {
-		this.venSubtotal = venSubtotal;
+	public void setVenPedido(String venPedido) {
+		this.venPedido = venPedido;
 	}
 
 	public BigDecimal getVenTotal() {

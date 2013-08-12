@@ -15,44 +15,44 @@ public class InvSaldo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="INV_SALDOS_SALCODIGO_GENERATOR", sequenceName="INV_SALDOS_SAL_CODIGO_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="INV_SALDOS_SALCODIGO_GENERATOR")
-	@Column(name="sal_codigo")
-	private Integer salCodigo;
+	@SequenceGenerator(name="INV_SALDOS_INVCODIGO_GENERATOR", sequenceName="INV_SALDOS_SAL_CODIGO_SEQ")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="INV_SALDOS_INVCODIGO_GENERATOR")
+	@Column(name="inv_codigo")
+	private Integer invCodigo;
 
-	@Column(name="sal_cantidad")
-	private BigDecimal salCantidad;
+	@Column(name="inv_cantidad")
+	private BigDecimal invCantidad;
 
 	//bi-directional many-to-one association to InvArticulo
 	@ManyToOne
-	@JoinColumn(name="sal_articulo")
-	private InvArticulo invArticulo;
+	@JoinColumn(name="inv_articulo")
+	private InvArticulo invArticuloBean;
 
 	public InvSaldo() {
 	}
 
-	public Integer getSalCodigo() {
-		return this.salCodigo;
+	public Integer getInvCodigo() {
+		return this.invCodigo;
 	}
 
-	public void setSalCodigo(Integer salCodigo) {
-		this.salCodigo = salCodigo;
+	public void setInvCodigo(Integer invCodigo) {
+		this.invCodigo = invCodigo;
 	}
 
-	public BigDecimal getSalCantidad() {
-		return this.salCantidad;
+	public BigDecimal getInvCantidad() {
+		return this.invCantidad;
 	}
 
-	public void setSalCantidad(BigDecimal salCantidad) {
-		this.salCantidad = salCantidad;
+	public void setInvCantidad(BigDecimal invCantidad) {
+		this.invCantidad = invCantidad;
 	}
 
-	public InvArticulo getInvArticulo() {
-		return this.invArticulo;
+	public InvArticulo getInvArticuloBean() {
+		return this.invArticuloBean;
 	}
 
-	public void setInvArticulo(InvArticulo invArticulo) {
-		this.invArticulo = invArticulo;
+	public void setInvArticuloBean(InvArticulo invArticuloBean) {
+		this.invArticuloBean = invArticuloBean;
 	}
 
 }
