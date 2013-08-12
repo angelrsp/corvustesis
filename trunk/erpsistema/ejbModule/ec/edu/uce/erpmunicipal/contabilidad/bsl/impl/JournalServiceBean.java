@@ -58,7 +58,7 @@ public class JournalServiceBean implements JournalService {
 		Calendar calendar=Calendar.getInstance();
 		calendar.setTime(movimiento.getMovFechaContable());
 		
-		periodo=findPeriodo(sessionObject.getAnio(), calendar.MONTH);
+		periodo=findPeriodo(sessionObject.getAnio(), Calendar.MONTH);
 		
 		
 		for (ConMovimientoDetalle detail : details) {
