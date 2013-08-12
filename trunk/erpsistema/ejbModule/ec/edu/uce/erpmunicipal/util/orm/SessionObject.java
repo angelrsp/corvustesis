@@ -17,6 +17,8 @@ public class SessionObject implements Serializable {
 	private SisUsuarioRol userRol;
 
 	private ConPeriodo periodo;
+	
+	private int anio;
 
 	public SessionObject() {
 		
@@ -44,6 +46,14 @@ public class SessionObject implements Serializable {
 
 	public void setPeriodo(ConPeriodo periodo) {
 		this.periodo = periodo;
+	}
+
+	public int getAnio() {
+		return anio;
+	}
+
+	public void setAnio(int anio) {
+		this.anio = anio;
 	}
 
 }
