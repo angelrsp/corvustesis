@@ -37,7 +37,7 @@
 							<h:outputText value="Clase:" />
 						</p:column>
 						<p:column>
-							<p:selectOneMenu>
+							<p:selectOneMenu required="true" requiredMessage="Seleccione Clase">
 								<f:selectItem itemLabel="--Seleccione--" itemValue="" />
 								<f:selectItems value="#{journalPage.clas}" var="cla"
 									itemLabel="#{cla.claDescripcion}" itemValue="#{cla.claCodigo}"></f:selectItems>
@@ -55,7 +55,7 @@
 							<h:outputText value="Tipo:" />
 						</p:column>
 						<p:column>
-							<p:selectOneMenu>
+							<p:selectOneMenu required="true" requiredMessage="Seleccione Tipo">
 								<f:selectItem itemLabel="--Seleccione--" itemValue="" />
 								<f:selectItems value="#{journalPage.typeMove}" var="tmo"
 									itemLabel="#{tmo.tmoDescripcion}" itemValue="#{tmo.tmoCodigo}"></f:selectItems>
@@ -69,13 +69,13 @@
 							<h:outputText value="Detalle:" />
 						</p:column>
 						<p:column>
-							<p:inputTextarea id="detail" autoResize="false"></p:inputTextarea>
+							<p:inputTextarea id="detail" autoResize="false" required="true" requiredMessage="Ingrese Detalle"></p:inputTextarea>
 						</p:column>
 						<p:column>
 							<h:outputText value="Documentacion:" />
 						</p:column>
 						<p:column>
-							<p:inputTextarea id="document" autoResize="false"></p:inputTextarea>
+							<p:inputTextarea id="document" autoResize="false" required="true" requiredMessage="Ingrese Documentacion"></p:inputTextarea>
 						</p:column>
 					</p:panelGrid>
 
@@ -83,10 +83,9 @@
 						<p:column>
 							<p:commandButton value="Nuevo" icon="ui-icon-document"
 								styleClass="comButton">
-								
 							</p:commandButton>
 							<p:commandButton value="Guardar" icon="ui-icon-disk"
-								styleClass="comButton" actionListener="#{journalPage.create}" process="@this"/>
+								styleClass="comButton" actionListener="#{journalPage.create}" update="message"/>
 							<p:commandButton value="Editar" icon="ui-icon-pencil"
 								styleClass="comButton" />
 						</p:column>
