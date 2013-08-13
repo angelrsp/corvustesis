@@ -11,6 +11,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="fac_datos")
+@NamedQuery(name="FacDato.findAll", query="SELECT f FROM FacDato f")
 public class FacDato implements Serializable {
 	private static final long serialVersionUID = 1L;
 

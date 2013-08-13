@@ -12,6 +12,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="inv_kardex")
+@NamedQuery(name="InvKardex.findAll", query="SELECT i FROM InvKardex i")
 public class InvKardex implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -26,9 +27,6 @@ public class InvKardex implements Serializable {
 
 	@Column(name="kar_fecha")
 	private Timestamp karFecha;
-
-	@Column(name="kar_transaccion")
-	private Integer karTransaccion;
 
 	@Column(name="kar_valor_total")
 	private BigDecimal karValorTotal;
@@ -71,14 +69,6 @@ public class InvKardex implements Serializable {
 
 	public void setKarFecha(Timestamp karFecha) {
 		this.karFecha = karFecha;
-	}
-
-	public Integer getKarTransaccion() {
-		return this.karTransaccion;
-	}
-
-	public void setKarTransaccion(Integer karTransaccion) {
-		this.karTransaccion = karTransaccion;
 	}
 
 	public BigDecimal getKarValorTotal() {

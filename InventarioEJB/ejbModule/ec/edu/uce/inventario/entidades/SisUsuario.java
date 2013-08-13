@@ -10,11 +10,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="sis_usuario")
+@NamedQuery(name="SisUsuario.findAll", query="SELECT s FROM SisUsuario s")
 public class SisUsuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SIS_USUARIO_USRCODIGO_GENERATOR", sequenceName="SIS_USUARIO_USR_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="SIS_USUARIO_USRCODIGO_GENERATOR", sequenceName="SIS_USUARIO_USR_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SIS_USUARIO_USRCODIGO_GENERATOR")
 	@Column(name="usr_codigo")
 	private Integer usrCodigo;
