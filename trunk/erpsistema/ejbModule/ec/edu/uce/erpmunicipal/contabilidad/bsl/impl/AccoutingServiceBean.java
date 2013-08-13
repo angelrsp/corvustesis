@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -98,7 +99,8 @@ public class AccoutingServiceBean implements AccoutingService {
 		CriteriaQuery<ConCuenta> q = cb.createQuery(ConCuenta.class);
 		Root<ConCuenta> c = q.from(ConCuenta.class);
 		q.select(c);
-
+		
+		
 		Logger.getLogger(this.getClass()).info(par);
 
 		Predicate lik1 = cb.like(
@@ -111,7 +113,11 @@ public class AccoutingServiceBean implements AccoutingService {
 		q.where(cb.or(lik1, lik2), cb.and(cb.equal(c
 				.get("cuePermiteMovimiento").as(Boolean.class), true)));
 
-		return entityManager.createQuery(q).getResultList();
+		TypedQuery<ConCuenta> typedQuery=entityManager.createQuery(q);
+		
+		typedQuery.setMaxResults(100);
+				
+		return typedQuery.getResultList();
 	}
 
 	@Override
