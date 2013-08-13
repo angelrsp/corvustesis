@@ -286,8 +286,11 @@ public class JournalPage implements Serializable {
 		SessionObject sessionObject=new SessionObject();
 		if(detalles.size()<=0)
 		{
-			
-			return;	
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+							"Ingrese detalles"));
+			return;
 		}
 		journalService.create(sessionObject, claseCode, tipoMovimientoCode, movimiento, detalles);
 	}
