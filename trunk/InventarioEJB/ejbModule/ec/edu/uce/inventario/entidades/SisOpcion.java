@@ -11,11 +11,12 @@ import java.util.List;
  */
 @Entity
 @Table(name="sis_opcion")
+@NamedQuery(name="SisOpcion.findAll", query="SELECT s FROM SisOpcion s")
 public class SisOpcion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SIS_OPCION_OPCCODIGO_GENERATOR", sequenceName="SIS_OPCION_OPC_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="SIS_OPCION_OPCCODIGO_GENERATOR", sequenceName="SIS_OPCION_OPC_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SIS_OPCION_OPCCODIGO_GENERATOR")
 	@Column(name="opc_codigo")
 	private Integer opcCodigo;
@@ -23,24 +24,23 @@ public class SisOpcion implements Serializable {
 	@Column(name="opc_nombre")
 	private String opcNombre;
 
+	@Column(name="opc_orden")
+	private Integer opcOrden;
+
 	@Column(name="opc_padre")
 	private Integer opcPadre;
 
 	@Column(name="opc_url")
 	private String opcUrl;
 
-	@Column(name="opc_orden")
-	private Integer opcOrden;
-
-	
-	//bi-directional many-to-one association to SisPerfilOpcion
-	@OneToMany(mappedBy="sisOpcion")
-	private List<SisPerfilOpcion> sisPerfilOpcions;
-
 	//bi-directional many-to-one association to SisModulo
 	@ManyToOne
 	@JoinColumn(name="opc_modulo")
 	private SisModulo sisModulo;
+
+	//bi-directional many-to-one association to SisPerfilOpcion
+	@OneToMany(mappedBy="sisOpcion")
+	private List<SisPerfilOpcion> sisPerfilOpcions;
 
 	public SisOpcion() {
 	}
@@ -61,6 +61,14 @@ public class SisOpcion implements Serializable {
 		this.opcNombre = opcNombre;
 	}
 
+	public Integer getOpcOrden() {
+		return this.opcOrden;
+	}
+
+	public void setOpcOrden(Integer opcOrden) {
+		this.opcOrden = opcOrden;
+	}
+
 	public Integer getOpcPadre() {
 		return this.opcPadre;
 	}
@@ -77,12 +85,12 @@ public class SisOpcion implements Serializable {
 		this.opcUrl = opcUrl;
 	}
 
-	public Integer getOpcOrden() {
-		return opcOrden;
+	public SisModulo getSisModulo() {
+		return this.sisModulo;
 	}
 
-	public void setOpcOrden(Integer opcOrden) {
-		this.opcOrden = opcOrden;
+	public void setSisModulo(SisModulo sisModulo) {
+		this.sisModulo = sisModulo;
 	}
 
 	public List<SisPerfilOpcion> getSisPerfilOpcions() {
@@ -105,14 +113,6 @@ public class SisOpcion implements Serializable {
 		sisPerfilOpcion.setSisOpcion(null);
 
 		return sisPerfilOpcion;
-	}
-
-	public SisModulo getSisModulo() {
-		return this.sisModulo;
-	}
-
-	public void setSisModulo(SisModulo sisModulo) {
-		this.sisModulo = sisModulo;
 	}
 
 }

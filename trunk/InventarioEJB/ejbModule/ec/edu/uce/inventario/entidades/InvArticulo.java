@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="inv_articulo")
+@NamedQuery(name="InvArticulo.findAll", query="SELECT i FROM InvArticulo i")
 public class InvArticulo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -21,23 +22,41 @@ public class InvArticulo implements Serializable {
 	@Column(name="art_codigo")
 	private Integer artCodigo;
 
-	@Column(name="art_cantidad_actual")
-	private BigDecimal artCantidadActual;
-
-	@Column(name="art_cantidad_maxima")
-	private BigDecimal artCantidadMaxima;
-
 	@Column(name="art_cantidad_minima")
 	private BigDecimal artCantidadMinima;
+
+	@Column(name="art_catalogo")
+	private String artCatalogo;
+
+	@Column(name="art_codigo_manual")
+	private Integer artCodigoManual;
+
+	@Column(name="art_enlace")
+	private String artEnlace;
 
 	@Column(name="art_estado")
 	private Boolean artEstado;
 
-	@Column(name="art_nombre")
-	private String artNombre;
+	@Column(name="art_imagen")
+	private String artImagen;
 
-	@Column(name="art_precio")
-	private BigDecimal artPrecio;
+	@Column(name="art_nombre_corto")
+	private String artNombreCorto;
+
+	@Column(name="art_nombre_largo")
+	private String artNombreLargo;
+
+	@Column(name="art_pagina")
+	private BigDecimal artPagina;
+
+	@Column(name="art_paquete")
+	private String artPaquete;
+
+	@Column(name="art_peso")
+	private BigDecimal artPeso;
+
+	@Column(name="art_tipo")
+	private String artTipo;
 
 	//bi-directional many-to-one association to FacDetalleVenta
 	@OneToMany(mappedBy="invArticulo")
@@ -45,7 +64,7 @@ public class InvArticulo implements Serializable {
 
 	//bi-directional many-to-one association to InvUnidad
 	@ManyToOne
-	@JoinColumn(name="art_unidad_codigo")
+	@JoinColumn(name="art_unidad")
 	private InvUnidad invUnidad;
 
 	//bi-directional many-to-one association to InvKardex
@@ -67,28 +86,36 @@ public class InvArticulo implements Serializable {
 		this.artCodigo = artCodigo;
 	}
 
-	public BigDecimal getArtCantidadActual() {
-		return this.artCantidadActual;
-	}
-
-	public void setArtCantidadActual(BigDecimal artCantidadActual) {
-		this.artCantidadActual = artCantidadActual;
-	}
-
-	public BigDecimal getArtCantidadMaxima() {
-		return this.artCantidadMaxima;
-	}
-
-	public void setArtCantidadMaxima(BigDecimal artCantidadMaxima) {
-		this.artCantidadMaxima = artCantidadMaxima;
-	}
-
 	public BigDecimal getArtCantidadMinima() {
 		return this.artCantidadMinima;
 	}
 
 	public void setArtCantidadMinima(BigDecimal artCantidadMinima) {
 		this.artCantidadMinima = artCantidadMinima;
+	}
+
+	public String getArtCatalogo() {
+		return this.artCatalogo;
+	}
+
+	public void setArtCatalogo(String artCatalogo) {
+		this.artCatalogo = artCatalogo;
+	}
+
+	public Integer getArtCodigoManual() {
+		return this.artCodigoManual;
+	}
+
+	public void setArtCodigoManual(Integer artCodigoManual) {
+		this.artCodigoManual = artCodigoManual;
+	}
+
+	public String getArtEnlace() {
+		return this.artEnlace;
+	}
+
+	public void setArtEnlace(String artEnlace) {
+		this.artEnlace = artEnlace;
 	}
 
 	public Boolean getArtEstado() {
@@ -99,20 +126,60 @@ public class InvArticulo implements Serializable {
 		this.artEstado = artEstado;
 	}
 
-	public String getArtNombre() {
-		return this.artNombre;
+	public String getArtImagen() {
+		return this.artImagen;
 	}
 
-	public void setArtNombre(String artNombre) {
-		this.artNombre = artNombre;
+	public void setArtImagen(String artImagen) {
+		this.artImagen = artImagen;
 	}
 
-	public BigDecimal getArtPrecio() {
-		return this.artPrecio;
+	public String getArtNombreCorto() {
+		return this.artNombreCorto;
 	}
 
-	public void setArtPrecio(BigDecimal artPrecio) {
-		this.artPrecio = artPrecio;
+	public void setArtNombreCorto(String artNombreCorto) {
+		this.artNombreCorto = artNombreCorto;
+	}
+
+	public String getArtNombreLargo() {
+		return this.artNombreLargo;
+	}
+
+	public void setArtNombreLargo(String artNombreLargo) {
+		this.artNombreLargo = artNombreLargo;
+	}
+
+	public BigDecimal getArtPagina() {
+		return this.artPagina;
+	}
+
+	public void setArtPagina(BigDecimal artPagina) {
+		this.artPagina = artPagina;
+	}
+
+	public String getArtPaquete() {
+		return this.artPaquete;
+	}
+
+	public void setArtPaquete(String artPaquete) {
+		this.artPaquete = artPaquete;
+	}
+
+	public BigDecimal getArtPeso() {
+		return this.artPeso;
+	}
+
+	public void setArtPeso(BigDecimal artPeso) {
+		this.artPeso = artPeso;
+	}
+
+	public String getArtTipo() {
+		return this.artTipo;
+	}
+
+	public void setArtTipo(String artTipo) {
+		this.artTipo = artTipo;
 	}
 
 	public List<FacDetalleVenta> getFacDetalleVentas() {

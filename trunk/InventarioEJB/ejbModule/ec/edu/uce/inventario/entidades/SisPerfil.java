@@ -11,11 +11,12 @@ import java.util.List;
  */
 @Entity
 @Table(name="sis_perfil")
+@NamedQuery(name="SisPerfil.findAll", query="SELECT s FROM SisPerfil s")
 public class SisPerfil implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SIS_PERFIL_PRLCODIGO_GENERATOR", sequenceName="SIS_PERFIL_PRL_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="SIS_PERFIL_PRLCODIGO_GENERATOR", sequenceName="SIS_PERFIL_PRL_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SIS_PERFIL_PRLCODIGO_GENERATOR")
 	@Column(name="prl_codigo")
 	private Integer prlCodigo;
