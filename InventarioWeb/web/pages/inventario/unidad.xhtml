@@ -32,11 +32,13 @@
 				<h:panelGrid id="buttons">
 					<p:column>
 						<p:commandButton value="Nuevo" icon="ui-icon-document"
-							styleClass="comButton" update="controls" process="@this" actionListener="#{unidadPage.clear}">
+							styleClass="comButton" update="controls" process="@this"
+							actionListener="#{unidadPage.clear}">
 							<p:resetInput target="controls"></p:resetInput>
 						</p:commandButton>
 						<p:commandButton value="Guardar" icon="ui-icon-disk"
-							styleClass="comButton" update="message,controls,unidades" actionListener="#{unidadPage.create}"/>
+							styleClass="comButton" update="message,controls,unidades"
+							actionListener="#{unidadPage.create}" />
 					</p:column>
 				</h:panelGrid>
 
@@ -51,16 +53,24 @@
 						<p:column headerText="Nombre">
                         #{uni.uniDescripcion}
                         </p:column>
+
+						<p:column>
+							<p:commandButton icon="ui-icon-close"
+								onclick="if(!confirm('Eliminar?')) return false;"
+								actionListener="#{unidadPage.onRowDeleting(uni)}"
+								update="unidades,:formUnidad:message,:formUnidad:controls" immediate="true">
+							</p:commandButton>
+						</p:column>
+
+
 					</p:dataTable>
 				</h:panelGrid>
-
 
 				<h:panelGrid id="message">
 					<p:growl showDetail="true" widgetVar="msg"></p:growl>
 				</h:panelGrid>
 
 			</h:form>
-
 
 		</ui:define>
 

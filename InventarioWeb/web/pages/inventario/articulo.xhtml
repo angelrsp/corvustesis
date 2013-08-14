@@ -17,43 +17,84 @@
 
 		<ui:define name="contenido">
 
-			<h:form id="formArtitulo">
+			<h:form id="formArticulo">
 
-				<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
+				<p:panelGrid id="controls" columns="4" styleClass="panelGrid">
 
-					<h:outputText value="Nombre:" />
-					<p:inputText id="name" tabindex="1" required="true"
-						value="#{articuloPage.articulo.artNombre}"
-						requiredMessage="Ingrese Nombre">
+					<h:outputText value="Codigo:" />
+					<p:inputText id="codigo" tabindex="1" required="true"
+						value="#{articuloPage.articulo.artCodigoManual}"
+						requiredMessage="Ingrese Codigo"
+						onkeypress="return isNumberKey(event);">
 					</p:inputText>
+
+					<h:outputText value="Tipo:" />
+					<p:inputText id="tipo" tabindex="2" required="true"
+						value="#{articuloPage.articulo.artTipo}"
+						requiredMessage="Ingrese Tipo">
+					</p:inputText>
+
+					<h:outputText value="Nombre Corto:" />
+					<p:inputText id="nombreCorto" tabindex="3" required="true"
+						value="#{articuloPage.articulo.artNombreCorto}"
+						requiredMessage="Ingrese Tipo">
+					</p:inputText>
+
+					<h:outputText value="Nombre Largo:" />
+					<p:inputTextarea id="nombreLargo" tabindex="4" required="true"
+						value="#{articuloPage.articulo.artNombreLargo}"
+						requiredMessage="Ingrese Tipo" autoResize="false">
+					</p:inputTextarea>
 
 					<h:outputText value="Precio:" />
-					<p:inputText id="precio" tabindex="2" required="true"
+					<p:inputText id="precio" tabindex="5" required="true"
 						value="#{articuloPage.articulo.artPrecio}"
-						requiredMessage="Ingrese Precio">
+						requiredMessage="Ingrese Precio"
+						onkeypress="return isDecimalKey(event);">
 					</p:inputText>
 
-					<h:outputText value="Cantidad Actual:" />
-					<p:inputText id="actual" tabindex="3" required="true"
-						value="#{articuloPage.articulo.artCantidadActual}"
-						requiredMessage="Ingrese Precio">
-					</p:inputText>
-
-					<h:outputText value="Cantidad Máxima:" />
-					<p:inputText id="maxima" tabindex="4" required="true"
-						value="#{articuloPage.articulo.artCantidadMaxima}"
-						requiredMessage="Ingrese Precio">
+					<h:outputText value="Paquete (Cantidad Actual):" />
+					<p:inputText id="paquete" tabindex="6" required="true"
+						value="#{articuloPage.articulo.artPaquete}"
+						requiredMessage="Ingrese Paquete">
 					</p:inputText>
 
 					<h:outputText value="Cantidad Mínima:" />
-					<p:inputText id="minima" tabindex="5" required="true"
+					<p:inputText id="minima" tabindex="7" required="true"
 						value="#{articuloPage.articulo.artCantidadMinima}"
 						requiredMessage="Ingrese Precio">
 					</p:inputText>
 
+					<h:outputText value="Peso:" />
+					<p:inputText id="peso" tabindex="8" required="true"
+						value="#{articuloPage.articulo.artPrecio}"
+						requiredMessage="Ingrese Precio"
+						onkeypress="return isDecimalKey(event);">
+					</p:inputText>
+
+					<h:outputText value="Catalogo:" />
+					<p:inputText id="catalogo" tabindex="9"
+						value="#{articuloPage.articulo.artCatalogo}">
+					</p:inputText>
+
+					<h:outputText value="Pagina:" />
+					<p:inputText id="pagina" tabindex="10"
+						value="#{articuloPage.articulo.artPagina}">
+					</p:inputText>
+
+					<h:outputText value="Enlace:" />
+					<p:inputText id="enlace" tabindex="11"
+						value="#{articuloPage.articulo.artEnlace}">
+					</p:inputText>
+
+					<h:outputText value="Imagen:" />
+					<p:inputText id="imagen" tabindex="12"
+						value="#{articuloPage.articulo.artImagen}">
+					</p:inputText>
+
 					<h:outputText value="Unidad:" />
 					<p:selectOneMenu required="true"
-						requiredMessage="Seleccione Unidad" tabindex="6"
+						requiredMessage="Seleccione Unidad" tabindex="13"
 						value="#{articuloPage.unidadCode}">
 						<f:selectItem itemLabel="--Seleccione--" itemValue="" />
 						<f:selectItems value="#{articuloPage.unidades}" var="uni"
@@ -65,7 +106,8 @@
 				<h:panelGrid id="buttons">
 					<p:column>
 						<p:commandButton value="Nuevo" icon="ui-icon-document"
-							styleClass="comButton" update="controls" process="@this" actionListener="#{articuloPage.clean}">
+							styleClass="comButton" update="controls" process="@this"
+							actionListener="#{articuloPage.clean}">
 							<p:resetInput target="controls"></p:resetInput>
 						</p:commandButton>
 						<p:commandButton value="Guardar" icon="ui-icon-disk"
@@ -79,31 +121,55 @@
 						var="art" paginator="true" rows="10" selectionMode="single"
 						rowKey="#{art.artCodigo}" rowsPerPageTemplate="5,10,15,20">
 
-						<p:ajax update=":formArtitulo:controls" event="rowSelect"
+						<p:ajax update=":formArticulo:controls" event="rowSelect"
 							listener="#{articuloPage.onRowSelect}" />
 
 						<p:column headerText="Codigo">
-                        #{art.artCodigo}
+                        #{art.artCodigoManual}
                         </p:column>
 
-						<p:column headerText="Nombre">
-                        #{art.artNombre}
+						<p:column headerText="Tipo">
+                        #{art.artTipo}
+                        </p:column>
+
+						<p:column headerText="Nombre Corto">
+                        #{art.artNombreCorto}
+                        </p:column>
+
+						<p:column headerText="Nombre Largo">
+                        #{art.artNombreLargo}
                         </p:column>
 
 						<p:column headerText="Precio">
                         #{art.artPrecio}
                         </p:column>
 
-						<p:column headerText="Cantidad Actual">
-                        #{art.artCantidadActual}
-                        </p:column>
-
-						<p:column headerText="Cantidad Maxima">
-                        #{art.artCantidadMaxima}
+						<p:column headerText="Paquete (Cantidad Actual)">
+                        #{art.artPaquete}
                         </p:column>
 
 						<p:column headerText="Cantidad Minima">
                         #{art.artCantidadMinima}
+                        </p:column>
+
+						<p:column headerText="Peso">
+                        #{art.artPeso}
+                        </p:column>
+
+						<p:column headerText="Catalogo">
+                        #{art.artCatalogo}
+                        </p:column>
+
+						<p:column headerText="Pagina">
+                        #{art.artPagina}
+                        </p:column>
+
+						<p:column headerText="Enlace">
+                        #{art.artEnlace}
+                        </p:column>
+
+						<p:column headerText="Imagen">
+                        #{art.artImagen}
                         </p:column>
 
 						<p:column headerText="Unidad">
@@ -111,8 +177,8 @@
                         </p:column>
 
 						<p:column>
-							<p:commandButton icon="ui-icon-close"
-								actionListener="#{articuloPage.onRowDeleting(art)}" process="@this">
+							<p:commandButton icon="ui-icon-close" onclick="if(!confirm('Eliminar?')) return false;"
+								actionListener="#{articuloPage.onRowDeleting(art)}" immediate="true" update="articulos,:formArticulo:message">
 							</p:commandButton>
 						</p:column>
 
@@ -124,27 +190,17 @@
 					<p:growl showDetail="true" widgetVar="msg"></p:growl>
 				</h:panelGrid>
 
-				<p:confirmDialog id="confirmDialog1"
-					message="¿Esta seguro que desea eliminar?" header="Pregunta"
-					widgetVar="confirmation1">
-					<p:commandButton id="confirm1" value="Si" update="message,articulos"
-						actionListener="#{articuloPage.delete}" oncomplete="confirmation1.hide()"
-						process="@this" />
-					<p:commandButton id="decline1" value="No" update="message"
-						actionListener="#{articuloPage.clean}"
-						oncomplete="confirmation1.hide()" process="@this" />
+				<p:confirmDialog id="confirmDialog2"
+					message="El articulo que esta tratando de eliminar tiene dependencias. ¿Desea desactivar?"
+					header="Pregunta" widgetVar="confirmation2">
+					<p:commandButton id="confirm2" value="Si"
+						update="message,articulos"
+						actionListener="#{articuloPage.updateEstado}"
+						oncomplete="confirmation2.hide()" process="@this" />
+					<p:commandButton id="decline2" value="No"
+						actionListener="#{articuloPage.clean}" update="message"
+						oncomplete="confirmation2.hide()" process="@this" />
 				</p:confirmDialog>
-
-   				<p:confirmDialog id="confirmDialog2"
-                    message="El articulo que esta tratando de eliminar tiene dependencias. ¿Desea desactivar?"
-                    header="Pregunta" widgetVar="confirmation2">
-                    <p:commandButton id="confirm2" value="Si" update="message,articulos"
-                        actionListener="#{articuloPage.updateEstado}"
-                        oncomplete="confirmation2.hide()" process="@this" />
-                    <p:commandButton id="decline2" value="No"
-                        actionListener="#{articuloPage.clean}" update="message"
-                        oncomplete="confirmation2.hide()" process="@this" />
-                </p:confirmDialog>
 			</h:form>
 
 		</ui:define>
