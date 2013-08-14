@@ -14,7 +14,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
 import ec.edu.uce.inventario.entidades.InvUnidad;
-import ec.edu.uce.inventario.sistema.servicio.CrudService;
+import ec.edu.uce.inventario.inventario.servicio.UnidadService;
 
 @ManagedBean(name = "unidadPage")
 @ViewScoped
@@ -25,8 +25,8 @@ public class UnidadPage implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@EJB(name = "crudService/local")
-	private CrudService crudService;
+	@EJB(name = "unidadService/local")
+	private UnidadService unidadService;
 
 	private List<InvUnidad> unidades;
 
@@ -55,7 +55,10 @@ public class UnidadPage implements Serializable {
 
 	public void create() {
 		try {
-			crudService.create(unidad);
+			if(unidad.getUniCodigo()==null)
+				unidadService.create(unidad);
+			else
+				unidadService.update(unidad);
 			readAll();
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(
@@ -74,9 +77,26 @@ public class UnidadPage implements Serializable {
 		this.unidad = (InvUnidad) event.getObject();
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void readAll() {
-		this.unidades = (List<InvUnidad>) (List) crudService.find("InvUnidad");
+		this.unidades = unidadService.readAll();
+	}
+	
+	public void onRowDeleting(InvUnidad unidad)
+	{
+		if(unidadService.delete(unidad))
+		{
+			readAll();
+			clear();
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Eliminado Exitosamente"));			
+		}
+		else
+		{
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se pudo eliminar revise dependencias"));			
+		}
 	}
 
 	@PostConstruct

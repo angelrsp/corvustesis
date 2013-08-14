@@ -107,21 +107,16 @@ public class ArticuloPage implements Serializable {
 	}
 
 	public void onRowDeleting(InvArticulo art) {
-		RequestContext.getCurrentInstance().execute("confirmation1.show();");
-		articulo = new InvArticulo();
-		articulo = art;
-	}
-
-	public void delete() {
-		if (articuloService.delete(articulo)) {
+		if (articuloService.delete(art)) {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion",
 							"Articulo Eliminado"));
 			readAll();
 		} else {
-			RequestContext.getCurrentInstance()
-					.execute("confirmation2.show();");
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se pudo eliminar revise dependencias"));	
 		}
 	}
 
