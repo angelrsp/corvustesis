@@ -17,7 +17,7 @@ public class InvArticulo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="INV_ARTICULO_ARTCODIGO_GENERATOR", sequenceName="INV_ARTICULO_ART_CODIGO_SEQ")
+	@SequenceGenerator(name="INV_ARTICULO_ARTCODIGO_GENERATOR", sequenceName="INV_ARTICULO_ART_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="INV_ARTICULO_ARTCODIGO_GENERATOR")
 	@Column(name="art_codigo")
 	private Integer artCodigo;
@@ -58,6 +58,9 @@ public class InvArticulo implements Serializable {
 	@Column(name="art_tipo")
 	private String artTipo;
 
+	@Column(name="art_precio")
+	private BigDecimal artPrecio;
+	
 	//bi-directional many-to-one association to FacDetalleVenta
 	@OneToMany(mappedBy="invArticulo")
 	private List<FacDetalleVenta> facDetalleVentas;
@@ -180,6 +183,14 @@ public class InvArticulo implements Serializable {
 
 	public void setArtTipo(String artTipo) {
 		this.artTipo = artTipo;
+	}
+
+	public BigDecimal getArtPrecio() {
+		return artPrecio;
+	}
+
+	public void setArtPrecio(BigDecimal artPrecio) {
+		this.artPrecio = artPrecio;
 	}
 
 	public List<FacDetalleVenta> getFacDetalleVentas() {
