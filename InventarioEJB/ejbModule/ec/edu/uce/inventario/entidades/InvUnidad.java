@@ -16,7 +16,7 @@ public class InvUnidad implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="INV_UNIDAD_UNICODIGO_GENERATOR", sequenceName="INV_UNIDAD_UNI_CODIGO_SEQ")
+	@SequenceGenerator(name="INV_UNIDAD_UNICODIGO_GENERATOR", sequenceName="INV_UNIDAD_UNI_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="INV_UNIDAD_UNICODIGO_GENERATOR")
 	@Column(name="uni_codigo")
 	private Integer uniCodigo;
@@ -25,7 +25,7 @@ public class InvUnidad implements Serializable {
 	private String uniDescripcion;
 
 	//bi-directional many-to-one association to InvArticulo
-	@OneToMany(mappedBy="invUnidad")
+	@OneToMany(mappedBy="invUnidad",fetch=FetchType.EAGER)
 	private List<InvArticulo> invArticulos;
 
 	public InvUnidad() {
