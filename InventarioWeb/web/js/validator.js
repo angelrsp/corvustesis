@@ -1,5 +1,4 @@
 function isNumberKey(evt) {
-	
 	var charCode = (evt.which) ? evt.which : evt.keyCode;
 	//37  39
 	if (charCode > 31 && (charCode < 48 || charCode > 57))
@@ -8,6 +7,18 @@ function isNumberKey(evt) {
 			return true;
 		return false;
 	}	
+	return true;
+}
+
+function isDecimalKey(evt) {
+	var charCode = (evt.which) ? evt.which : evt.keyCode;
+	//37  39
+	if (charCode > 31 && (charCode < 48 || charCode > 57))
+	{
+		if(charCode==37||charCode==39||charCode==46||charCode==44)
+			return true;
+		return false;
+	}
 	return true;
 }
 
