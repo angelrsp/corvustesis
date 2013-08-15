@@ -13,7 +13,6 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
-import ec.edu.uce.erpmunicipal.contabilidad.bsl.AccoutingService;
 import ec.edu.uce.erpmunicipal.contabilidad.bsl.JournalService;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConClase;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConCuenta;
@@ -34,8 +33,6 @@ public class JournalPage implements Serializable {
 
 	@EJB(name = "crudService/local")
 	private CrudService crudService;
-	@EJB(name = "accoutingService/local")
-	private AccoutingService accoutingService;
 	@EJB(name = "journalService/local")
 	private JournalService journalService;
 	
@@ -223,11 +220,11 @@ public class JournalPage implements Serializable {
 	}
 
 	public void searchCuenta() {
-		this.cuentas = accoutingService.dynamicSearch(search);
+		this.cuentas = journalService.getAccoutingService().dynamicSearch(search);
 	}
 
 	public void searchCuentaCode() {
-		this.descripcionCuenta = ((ConCuenta) accoutingService
+		this.descripcionCuenta = ((ConCuenta) journalService.getAccoutingService()
 				.search(searchCode)).getCueDescripcion();
 	}
 
