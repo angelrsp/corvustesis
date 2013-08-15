@@ -15,5 +15,7 @@ public interface JournalService {
 			int tipoMovimientoCode, ConMovimiento movimiento,
 			List<ConMovimientoDetalle> details);
 
+	AccoutingService getAccoutingService();
+	
 
 }
