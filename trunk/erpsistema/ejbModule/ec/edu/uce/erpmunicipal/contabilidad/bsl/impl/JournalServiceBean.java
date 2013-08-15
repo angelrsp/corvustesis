@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,6 +16,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
+import ec.edu.uce.erpmunicipal.contabilidad.bsl.AccoutingService;
 import ec.edu.uce.erpmunicipal.contabilidad.bsl.JournalService;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConClase;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConCuenta;
@@ -31,6 +33,9 @@ public class JournalServiceBean implements JournalService {
 	@PersistenceContext(name = "erpmunicipalPU", type = PersistenceContextType.TRANSACTION)
 	private EntityManager entityManager;
 
+	@EJB(name = "accoutingService/local")
+	public AccoutingService accoutingService;
+	
 	@Override
 	public void create(SessionObject sessionObject, int claseCode, int tipoMovimientoCode, ConMovimiento movimiento, List<ConMovimientoDetalle> details) {
 		
@@ -166,6 +171,11 @@ public class JournalServiceBean implements JournalService {
 			return null;
 		else
 			return list.get(0);
+	}
+
+	@Override
+	public AccoutingService getAccoutingService() {
+		return accoutingService;
 	}
 
 }
