@@ -34,15 +34,27 @@
 					</p:inputText>
 
 					<h:outputText value="Direccion:" />
-					<p:inputText id="actual" tabindex="3" required="true"
+					<p:inputTextarea id="actual" tabindex="3" required="true"
 						value="#{clientePage.cliente.cliDireccion}"
-						requiredMessage="Ingrese Direccion">
-					</p:inputText>
+						requiredMessage="Ingrese Direccion" autoResize="false">
+					</p:inputTextarea>
 
 					<h:outputText value="Telefono:" />
 					<p:inputText id="telefono" tabindex="4" required="true"
 						value="#{clientePage.cliente.cliTelefono}"
-						requiredMessage="Ingrese Telefono" onkeypress="return isNumberKey(event);">
+						requiredMessage="Ingrese Telefono"
+						onkeypress="return isNumberKey(event);">
+					</p:inputText>
+
+					<h:outputText value="Celular:" />
+					<p:inputText id="celular" tabindex="4"
+						value="#{clientePage.cliente.cliCelular}"
+						onkeypress="return isNumberKey(event);">
+					</p:inputText>
+
+					<h:outputText value="Mail:" />
+					<p:inputText id="mail" tabindex="4"
+						value="#{clientePage.cliente.cliMail}">
 					</p:inputText>
 
 				</p:panelGrid>
@@ -50,11 +62,13 @@
 				<h:panelGrid id="buttons">
 					<p:column>
 						<p:commandButton value="Nuevo" icon="ui-icon-document"
-							styleClass="comButton" update="controls" process="@this" actionListener="#{clientePage.clean}">
+							styleClass="comButton" update="controls" process="@this"
+							actionListener="#{clientePage.clean}">
 							<p:resetInput target="controls"></p:resetInput>
 						</p:commandButton>
-						<p:commandButton value="Guardar" icon="ui-icon-disk" actionListener="#{clientePage.create}"
-							styleClass="comButton" update="message,controls,data" />
+						<p:commandButton value="Guardar" icon="ui-icon-disk"
+							actionListener="#{clientePage.create}" styleClass="comButton"
+							update="message,controls,data" />
 					</p:column>
 				</h:panelGrid>
 
@@ -80,6 +94,14 @@
 
 						<p:column headerText="Telefono">
                         #{cli.cliTelefono}
+                        </p:column>
+
+						<p:column headerText="Celular">
+                        #{cli.cliCelular}
+                        </p:column>
+
+						<p:column headerText="Mail">
+                        #{cli.cliMail}
                         </p:column>
 
 						<p:column>
