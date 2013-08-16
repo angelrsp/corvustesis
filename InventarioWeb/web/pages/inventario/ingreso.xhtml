@@ -27,8 +27,11 @@
 							requiredMessage="Ingrese Codigo"
 							value="#{ingresoPage.codigoManual}">
 						</p:inputText>
+						<p:inputText id="nombreArticulo" tabindex="1" required="true"
+							requiredMessage="Ingrese Codigo">
+						</p:inputText>
 						<p:commandButton value="Buscar Articulo"
-							onclick="buscarArticulo.show();"></p:commandButton>
+							onclick="buscarArticulo.show();" type="button"></p:commandButton>
 					</p:column>
 
 					<h:outputText value="Cantidad:" />
@@ -76,14 +79,14 @@
 				<h:form>
 
 					<p:panelGrid columns="2" styleClass="panelGrid">
-						<p:inputText></p:inputText>
-						<p:commandButton value="Buscar"></p:commandButton>
+						<p:inputText value="#{ingresoPage.searchText}"></p:inputText>
+						<p:commandButton value="Buscar" actionListener="#{ingresoPage.search}"></p:commandButton>
 					</p:panelGrid>
 
 					<p:dataTable id="result">
 
 					</p:dataTable>
-					
+
 				</h:form>
 			</p:dialog>
 
