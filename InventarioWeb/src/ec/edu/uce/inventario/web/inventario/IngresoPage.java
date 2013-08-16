@@ -18,6 +18,10 @@ public class IngresoPage implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private InvKardex kardex;
+	
+	private String codigoManual;
+	
+	private String searchText;
 
 	public IngresoPage() {
 		kardex = new InvKardex();
@@ -31,6 +35,22 @@ public class IngresoPage implements Serializable {
 		this.kardex = kardex;
 	}
 
+	public String getCodigoManual() {
+		return codigoManual;
+	}
+
+	public void setCodigoManual(String codigoManual) {
+		this.codigoManual = codigoManual;
+	}
+
+	public String getSearchText() {
+		return searchText;
+	}
+
+	public void setSearchText(String searchText) {
+		this.searchText = searchText;
+	}
+
 	public void calcularTotal() {
 		if (this.kardex.getKarCantidad() != null
 				&& this.kardex.getKarValorUnitario() != null)
@@ -40,6 +60,16 @@ public class IngresoPage implements Serializable {
 	}
 	
 	public void clean()
+	{
+		
+	}
+	
+	public void create()
+	{
+		
+	}
+	
+	public void search()
 	{
 		
 	}
