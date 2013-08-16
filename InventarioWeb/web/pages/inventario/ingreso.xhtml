@@ -22,9 +22,14 @@
 				<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
 
 					<h:outputText value="Articulo:" />
-					<p:inputText id="codigoArticulo" tabindex="1" required="true"
-						requiredMessage="Ingrese Codigo">
-					</p:inputText>
+					<p:column>
+						<p:inputText id="codigoArticulo" tabindex="1" required="true"
+							requiredMessage="Ingrese Codigo"
+							value="#{ingresoPage.codigoManual}">
+						</p:inputText>
+						<p:commandButton value="Buscar Articulo"
+							onclick="buscarArticulo.show();"></p:commandButton>
+					</p:column>
 
 					<h:outputText value="Cantidad:" />
 					<p:inputText id="cantidad" tabindex="2" required="true"
@@ -55,15 +60,32 @@
 					<p:column>
 						<p:commandButton value="Nuevo" icon="ui-icon-document"
 							styleClass="comButton" update="controls" process="@this"
-							actionListener="#{articuloPage.clean}">
+							actionListener="#{ingresoPage.clean}">
 							<p:resetInput target="controls"></p:resetInput>
 						</p:commandButton>
 						<p:commandButton value="Guardar" icon="ui-icon-disk"
-							styleClass="comButton" />
+							styleClass="comButton" actionListener="#{ingresoPage.create}" />
 					</p:column>
 				</h:panelGrid>
 
 			</h:form>
+
+			<p:dialog header="Buscar Articulo" widgetVar="buscarArticulo"
+				modal="true" resizable="false">
+
+				<h:form>
+
+					<p:panelGrid columns="2" styleClass="panelGrid">
+						<p:inputText></p:inputText>
+						<p:commandButton value="Buscar"></p:commandButton>
+					</p:panelGrid>
+
+					<p:dataTable id="result">
+
+					</p:dataTable>
+					
+				</h:form>
+			</p:dialog>
 
 		</ui:define>
 	</ui:composition>
