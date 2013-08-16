@@ -38,4 +38,9 @@ public class IngresoPage implements Serializable {
 					.getKarCantidad().doubleValue()
 					* this.kardex.getKarCantidad().doubleValue()));
 	}
+	
+	public void clean()
+	{
+		
+	}
 }
