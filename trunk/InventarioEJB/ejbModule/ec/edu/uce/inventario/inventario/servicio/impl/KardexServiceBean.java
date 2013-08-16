@@ -1,5 +1,8 @@
 package ec.edu.uce.inventario.inventario.servicio.impl;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,11 +18,14 @@ public class KardexServiceBean implements KardexService{
 	@PersistenceContext(name = "inventarioPU", type = PersistenceContextType.TRANSACTION)
 	private EntityManager entityManager;
 
-	public void create(int claseCode,InvKardex kardek)
+	@Override
+	public void create(int claseCode,InvKardex kardex)
 	{
 		InvClase clase=entityManager.find(InvClase.class, claseCode);
-		kardek.setInvClase(clase);
-		entityManager.persist(kardek);
+		Calendar cal=Calendar.getInstance();
+		kardex.setInvClase(clase);
+		kardex.setKarFecha(new Timestamp(cal.getTimeInMillis()));
+		entityManager.persist(kardex);
 	}
 	
 	
