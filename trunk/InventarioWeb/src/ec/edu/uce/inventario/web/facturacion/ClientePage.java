@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
 import ec.edu.uce.inventario.entidades.FacCliente;
+import ec.edu.uce.inventario.entidades.InvArticulo;
 import ec.uce.edu.inventario.facturacion.servicio.ClienteService;
 
 @ManagedBean(name = "clientePage")
@@ -80,6 +81,9 @@ public class ClientePage implements Serializable {
 		this.cliente=(FacCliente)event.getObject();
 	}
 	
+	public void onRowDeleting(FacCliente cliente) {
+	
+	}
 	
 	public void readAll() {
 		clientes = clienteService.readAll();
