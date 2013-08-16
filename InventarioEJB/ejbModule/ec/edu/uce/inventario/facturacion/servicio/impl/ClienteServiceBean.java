@@ -34,5 +34,6 @@ public class ClienteServiceBean implements ClienteService{
 	{
 		return entityManager.createQuery("from FacCliente").getResultList();
 		
-	}
+	} 
+	 
 }
