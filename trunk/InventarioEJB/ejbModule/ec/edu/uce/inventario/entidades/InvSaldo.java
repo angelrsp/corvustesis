@@ -16,7 +16,7 @@ public class InvSaldo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="INV_SALDOS_INVCODIGO_GENERATOR", sequenceName="INV_SALDOS_SAL_CODIGO_SEQ")
+	@SequenceGenerator(name="INV_SALDOS_INVCODIGO_GENERATOR", sequenceName="INV_SALDOS_SAL_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="INV_SALDOS_INVCODIGO_GENERATOR")
 	@Column(name="inv_codigo")
 	private Integer invCodigo;

@@ -16,7 +16,7 @@ public class FacDetalleVenta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="FAC_DETALLE_VENTAS_DVECODIGO_GENERATOR", sequenceName="FAC_DETALLE_VENTAS_DVE_CODIGO_SEQ")
+	@SequenceGenerator(name="FAC_DETALLE_VENTAS_DVECODIGO_GENERATOR", sequenceName="FAC_DETALLE_VENTAS_DVE_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="FAC_DETALLE_VENTAS_DVECODIGO_GENERATOR")
 	@Column(name="dve_codigo")
 	private Integer dveCodigo;
