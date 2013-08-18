@@ -10,12 +10,11 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="sis_perfil_opcion")
-@NamedQuery(name="SisPerfilOpcion.findAll", query="SELECT s FROM SisPerfilOpcion s")
 public class SisPerfilOpcion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SIS_PERFIL_OPCION_POPCODIGO_GENERATOR", sequenceName="SIS_PERFIL_OPCION_POP_CODIGO_SEQ")
+	@SequenceGenerator(name="SIS_PERFIL_OPCION_POPCODIGO_GENERATOR", sequenceName="SIS_PERFIL_OPCION_POP_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SIS_PERFIL_OPCION_POPCODIGO_GENERATOR")
 	@Column(name="pop_codigo")
 	private Integer popCodigo;

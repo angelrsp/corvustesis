@@ -11,12 +11,11 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="fac_datos")
-@NamedQuery(name="FacDato.findAll", query="SELECT f FROM FacDato f")
 public class FacDato implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="FAC_DATOS_DATCODIGO_GENERATOR", sequenceName="FAC_DATOS_DAT_CODIGO_SEQ")
+	@SequenceGenerator(name="FAC_DATOS_DATCODIGO_GENERATOR", sequenceName="FAC_DATOS_DAT_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="FAC_DATOS_DATCODIGO_GENERATOR")
 	@Column(name="dat_codigo")
 	private Integer datCodigo;

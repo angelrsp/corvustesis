@@ -12,7 +12,6 @@ import java.util.List;
  */
 @Entity
 @Table(name="inv_articulo")
-@NamedQuery(name="InvArticulo.findAll", query="SELECT i FROM InvArticulo i")
 public class InvArticulo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -55,12 +54,12 @@ public class InvArticulo implements Serializable {
 	@Column(name="art_peso")
 	private BigDecimal artPeso;
 
+	@Column(name="art_precio")
+	private BigDecimal artPrecio;
+
 	@Column(name="art_tipo")
 	private String artTipo;
 
-	@Column(name="art_precio")
-	private BigDecimal artPrecio;
-	
 	//bi-directional many-to-one association to FacDetalleVenta
 	@OneToMany(mappedBy="invArticulo")
 	private List<FacDetalleVenta> facDetalleVentas;
@@ -177,20 +176,20 @@ public class InvArticulo implements Serializable {
 		this.artPeso = artPeso;
 	}
 
+	public BigDecimal getArtPrecio() {
+		return this.artPrecio;
+	}
+
+	public void setArtPrecio(BigDecimal artPrecio) {
+		this.artPrecio = artPrecio;
+	}
+
 	public String getArtTipo() {
 		return this.artTipo;
 	}
 
 	public void setArtTipo(String artTipo) {
 		this.artTipo = artTipo;
-	}
-
-	public BigDecimal getArtPrecio() {
-		return artPrecio;
-	}
-
-	public void setArtPrecio(BigDecimal artPrecio) {
-		this.artPrecio = artPrecio;
 	}
 
 	public List<FacDetalleVenta> getFacDetalleVentas() {

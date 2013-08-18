@@ -11,7 +11,6 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="fac_detalle_ventas")
-@NamedQuery(name="FacDetalleVenta.findAll", query="SELECT f FROM FacDetalleVenta f")
 public class FacDetalleVenta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -24,11 +23,20 @@ public class FacDetalleVenta implements Serializable {
 	@Column(name="dve_cantidad")
 	private BigDecimal dveCantidad;
 
+	@Column(name="dve_descuento")
+	private BigDecimal dveDescuento;
+
+	@Column(name="dve_descuento_porcentaje")
+	private BigDecimal dveDescuentoPorcentaje;
+
 	@Column(name="dve_iva")
 	private BigDecimal dveIva;
 
 	@Column(name="dve_precio")
 	private BigDecimal dvePrecio;
+
+	@Column(name="dve_total")
+	private BigDecimal dveTotal;
 
 	//bi-directional many-to-one association to FacVenta
 	@ManyToOne
@@ -37,7 +45,7 @@ public class FacDetalleVenta implements Serializable {
 
 	//bi-directional many-to-one association to InvArticulo
 	@ManyToOne
-	@JoinColumn(name="dve_aritulo")
+	@JoinColumn(name="dve_articulo")
 	private InvArticulo invArticulo;
 
 	public FacDetalleVenta() {
@@ -59,6 +67,22 @@ public class FacDetalleVenta implements Serializable {
 		this.dveCantidad = dveCantidad;
 	}
 
+	public BigDecimal getDveDescuento() {
+		return this.dveDescuento;
+	}
+
+	public void setDveDescuento(BigDecimal dveDescuento) {
+		this.dveDescuento = dveDescuento;
+	}
+
+	public BigDecimal getDveDescuentoPorcentaje() {
+		return this.dveDescuentoPorcentaje;
+	}
+
+	public void setDveDescuentoPorcentaje(BigDecimal dveDescuentoPorcentaje) {
+		this.dveDescuentoPorcentaje = dveDescuentoPorcentaje;
+	}
+
 	public BigDecimal getDveIva() {
 		return this.dveIva;
 	}
@@ -73,6 +97,14 @@ public class FacDetalleVenta implements Serializable {
 
 	public void setDvePrecio(BigDecimal dvePrecio) {
 		this.dvePrecio = dvePrecio;
+	}
+
+	public BigDecimal getDveTotal() {
+		return this.dveTotal;
+	}
+
+	public void setDveTotal(BigDecimal dveTotal) {
+		this.dveTotal = dveTotal;
 	}
 
 	public FacVenta getFacVenta() {
