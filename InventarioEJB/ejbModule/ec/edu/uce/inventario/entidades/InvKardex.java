@@ -17,7 +17,7 @@ public class InvKardex implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="INV_KARDEX_KARCODIGO_GENERATOR", sequenceName="INV_KARDEX_KAR_CODIGO_SEQ")
+	@SequenceGenerator(name="INV_KARDEX_KARCODIGO_GENERATOR", sequenceName="INV_KARDEX_KAR_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="INV_KARDEX_KARCODIGO_GENERATOR")
 	@Column(name="kar_codigo")
 	private Integer karCodigo;

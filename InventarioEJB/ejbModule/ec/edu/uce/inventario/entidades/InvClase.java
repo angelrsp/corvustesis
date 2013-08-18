@@ -16,7 +16,7 @@ public class InvClase implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="INV_CLASE_CLACODIGO_GENERATOR", sequenceName="INV_CLASE_CLA_CODIGO_SEQ")
+	@SequenceGenerator(name="INV_CLASE_CLACODIGO_GENERATOR", sequenceName="INV_CLASE_CLA_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="INV_CLASE_CLACODIGO_GENERATOR")
 	@Column(name="cla_codigo")
 	private Integer claCodigo;

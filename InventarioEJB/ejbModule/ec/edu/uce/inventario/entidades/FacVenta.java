@@ -18,7 +18,7 @@ public class FacVenta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="FAC_VENTAS_VENCODIGO_GENERATOR", sequenceName="FAC_VENTAS_VEN_CODIGO_SEQ")
+	@SequenceGenerator(name="FAC_VENTAS_VENCODIGO_GENERATOR", sequenceName="FAC_VENTAS_VEN_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="FAC_VENTAS_VENCODIGO_GENERATOR")
 	@Column(name="ven_codigo")
 	private Integer venCodigo;
