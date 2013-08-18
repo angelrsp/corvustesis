@@ -13,7 +13,6 @@ import java.util.List;
  */
 @Entity
 @Table(name="fac_ventas")
-@NamedQuery(name="FacVenta.findAll", query="SELECT f FROM FacVenta f")
 public class FacVenta implements Serializable {
 	private static final long serialVersionUID = 1L;
 

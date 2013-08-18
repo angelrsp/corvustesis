@@ -12,7 +12,6 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="inv_kardex")
-@NamedQuery(name="InvKardex.findAll", query="SELECT i FROM InvKardex i")
 public class InvKardex implements Serializable {
 	private static final long serialVersionUID = 1L;
 

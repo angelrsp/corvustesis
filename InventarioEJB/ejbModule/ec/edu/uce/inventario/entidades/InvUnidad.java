@@ -11,7 +11,6 @@ import java.util.List;
  */
 @Entity
 @Table(name="inv_unidad")
-@NamedQuery(name="InvUnidad.findAll", query="SELECT i FROM InvUnidad i")
 public class InvUnidad implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -25,7 +24,7 @@ public class InvUnidad implements Serializable {
 	private String uniDescripcion;
 
 	//bi-directional many-to-one association to InvArticulo
-	@OneToMany(mappedBy="invUnidad",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="invUnidad")
 	private List<InvArticulo> invArticulos;
 
 	public InvUnidad() {

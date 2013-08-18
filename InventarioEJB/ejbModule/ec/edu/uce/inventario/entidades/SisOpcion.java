@@ -11,12 +11,11 @@ import java.util.List;
  */
 @Entity
 @Table(name="sis_opcion")
-@NamedQuery(name="SisOpcion.findAll", query="SELECT s FROM SisOpcion s")
 public class SisOpcion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SIS_OPCION_OPCCODIGO_GENERATOR", sequenceName="SIS_OPCION_OPC_CODIGO_SEQ")
+	@SequenceGenerator(name="SIS_OPCION_OPCCODIGO_GENERATOR", sequenceName="SIS_OPCION_OPC_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SIS_OPCION_OPCCODIGO_GENERATOR")
 	@Column(name="opc_codigo")
 	private Integer opcCodigo;
