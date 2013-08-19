@@ -14,8 +14,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
 import ec.edu.uce.inventario.entidades.FacCliente;
-import ec.edu.uce.inventario.entidades.InvArticulo;
-import ec.uce.edu.inventario.facturacion.servicio.ClienteService;
+import ec.edu.uce.inventario.facturacion.servicio.ClienteService;
 
 @ManagedBean(name = "clientePage")
 @ViewScoped
