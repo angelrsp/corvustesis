@@ -1,5 +1,8 @@
 package ec.edu.uce.inventario.inventario.servicio.impl;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -32,17 +35,19 @@ public class ArticuloServiceBean implements ArticuloService {
 	
 	@Override
 	public void create(InvArticulo art, int unidad) {
+		Calendar cal=Calendar.getInstance();
 		InvUnidad uni = new InvUnidad();
 		uni.setUniCodigo(unidad);
 
 		art.setInvUnidad(uni);
 
 		InvKardex kardex=new InvKardex();
-		kardex.setInvArticulo(art);
 		kardex.setKarCantidad(art.getArtPaquete());
 		kardex.setKarValorUnitario(art.getArtPrecio());
+		kardex.setKarValorTotal(BigDecimal.valueOf(art.getArtPaquete().doubleValue()*art.getArtPrecio().doubleValue()));
+		kardex.setKarFecha(new Timestamp(cal.getTimeInMillis()));
 		
-		kardexService.create(1, kardex, art);
+		kardexService.create2(1, kardex, art);
 		
 		entityManager.persist(art);
 	}
@@ -110,5 +115,12 @@ public class ArticuloServiceBean implements ArticuloService {
 		TypedQuery<InvArticulo> typed=entityManager.createQuery(cq);
 		typed.setMaxResults(100);
 		return typed.getResultList();
+	}
+	
+	@Override
+	public InvArticulo readArticulo(InvArticulo articulo)
+	{
+		InvArticulo art= entityManager.find(InvArticulo.class, articulo.getArtCodigo());
+		return art;
 	}
 }

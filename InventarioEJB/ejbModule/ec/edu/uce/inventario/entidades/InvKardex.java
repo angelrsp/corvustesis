@@ -33,6 +33,9 @@ public class InvKardex implements Serializable {
 	@Column(name="kar_valor_unitario")
 	private BigDecimal karValorUnitario;
 
+	@Column(name="kar_saldo")
+	private BigDecimal karSaldo;
+
 	//bi-directional many-to-one association to InvArticulo
 	@ManyToOne
 	@JoinColumn(name="kar_articulo")
@@ -84,6 +87,14 @@ public class InvKardex implements Serializable {
 
 	public void setKarValorUnitario(BigDecimal karValorUnitario) {
 		this.karValorUnitario = karValorUnitario;
+	}
+
+	public BigDecimal getKarSaldo() {
+		return karSaldo;
+	}
+
+	public void setKarSaldo(BigDecimal karSaldo) {
+		this.karSaldo = karSaldo;
 	}
 
 	public InvArticulo getInvArticulo() {
