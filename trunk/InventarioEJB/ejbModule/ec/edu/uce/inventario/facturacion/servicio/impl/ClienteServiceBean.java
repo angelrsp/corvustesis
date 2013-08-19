@@ -6,6 +6,11 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import ec.edu.uce.inventario.entidades.FacCliente;
 import ec.uce.edu.inventario.facturacion.servicio.ClienteService;
@@ -35,5 +40,24 @@ public class ClienteServiceBean implements ClienteService{
 		return entityManager.createQuery("from FacCliente").getResultList();
 		
 	} 
+	
+	@Override
+	public List<FacCliente> dynamicSearch(String text)
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<FacCliente> cq=cb.createQuery(FacCliente.class);
+		Root<FacCliente> from=cq.from(FacCliente.class);
+		
+		cq.select(from);
+		
+		Predicate like1=cb.like(cb.lower(from.get("cliApellidos").as(String.class)), "%"+text.toLowerCase()+"%");
+		Predicate like2=cb.like(cb.lower(from.get("cliNombres").as(String.class)), "%"+text.toLowerCase()+"%");
+		
+		cq.where(cb.or(like1,like2));
+		
+		TypedQuery<FacCliente> typed=entityManager.createQuery(cq);
+		typed.setMaxResults(100);
+		return typed.getResultList();
+	}
 	 
 }

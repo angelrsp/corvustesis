@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
+import ec.edu.uce.inventario.entidades.InvArticulo;
 import ec.edu.uce.inventario.entidades.InvClase;
 import ec.edu.uce.inventario.entidades.InvKardex;
 import ec.edu.uce.inventario.inventario.servicio.KardexService;
@@ -19,12 +20,13 @@ public class KardexServiceBean implements KardexService{
 	private EntityManager entityManager;
 
 	@Override
-	public void create(int claseCode,InvKardex kardex)
+	public void create(int claseCode,InvKardex kardex,InvArticulo articulo)
 	{
 		InvClase clase=entityManager.find(InvClase.class, claseCode);
 		Calendar cal=Calendar.getInstance();
 		kardex.setInvClase(clase);
 		kardex.setKarFecha(new Timestamp(cal.getTimeInMillis()));
+		kardex.setInvArticulo(articulo);
 		entityManager.persist(kardex);
 	}
 	

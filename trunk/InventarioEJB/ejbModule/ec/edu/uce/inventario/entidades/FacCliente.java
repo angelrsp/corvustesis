@@ -32,6 +32,12 @@ public class FacCliente implements Serializable {
 	@Column(name="cli_telefono")
 	private String cliTelefono;
 
+	@Column(name="cli_celular")
+	private String cliCelular;
+
+	@Column(name="cli_mail")
+	private String cliMail;	
+	
 	//bi-directional many-to-one association to FacVenta
 	@OneToMany(mappedBy="facCliente")
 	private List<FacVenta> facVentas;
@@ -77,6 +83,22 @@ public class FacCliente implements Serializable {
 
 	public void setCliTelefono(String cliTelefono) {
 		this.cliTelefono = cliTelefono;
+	}
+	
+	public String getCliCelular() {
+		return cliCelular;
+	}
+
+	public void setCliCelular(String cliCelular) {
+		this.cliCelular = cliCelular;
+	}
+
+	public String getCliMail() {
+		return cliMail;
+	}
+
+	public void setCliMail(String cliMail) {
+		this.cliMail = cliMail;
 	}
 
 	public List<FacVenta> getFacVentas() {
