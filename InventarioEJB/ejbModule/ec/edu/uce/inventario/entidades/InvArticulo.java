@@ -49,7 +49,7 @@ public class InvArticulo implements Serializable {
 	private BigDecimal artPagina;
 
 	@Column(name="art_paquete")
-	private String artPaquete;
+	private BigDecimal artPaquete;
 
 	@Column(name="art_peso")
 	private BigDecimal artPeso;
@@ -160,11 +160,11 @@ public class InvArticulo implements Serializable {
 		this.artPagina = artPagina;
 	}
 
-	public String getArtPaquete() {
+	public BigDecimal getArtPaquete() {
 		return this.artPaquete;
 	}
 
-	public void setArtPaquete(String artPaquete) {
+	public void setArtPaquete(BigDecimal artPaquete) {
 		this.artPaquete = artPaquete;
 	}
 

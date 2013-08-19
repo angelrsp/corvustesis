@@ -2,6 +2,7 @@ package ec.edu.uce.inventario.inventario.servicio.impl;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,8 +15,10 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import ec.edu.uce.inventario.entidades.InvArticulo;
+import ec.edu.uce.inventario.entidades.InvKardex;
 import ec.edu.uce.inventario.entidades.InvUnidad;
 import ec.edu.uce.inventario.inventario.servicio.ArticuloService;
+import ec.edu.uce.inventario.inventario.servicio.KardexService;
 
 @Stateless(name = "articuloService")
 public class ArticuloServiceBean implements ArticuloService {
@@ -23,6 +26,10 @@ public class ArticuloServiceBean implements ArticuloService {
 	@PersistenceContext(name = "inventarioPU", type = PersistenceContextType.TRANSACTION)
 	private EntityManager entityManager;
 
+	@EJB(name = "kardexService/local")
+	private KardexService kardexService;
+
+	
 	@Override
 	public void create(InvArticulo art, int unidad) {
 		InvUnidad uni = new InvUnidad();
@@ -30,6 +37,13 @@ public class ArticuloServiceBean implements ArticuloService {
 
 		art.setInvUnidad(uni);
 
+		InvKardex kardex=new InvKardex();
+		kardex.setInvArticulo(art);
+		kardex.setKarCantidad(art.getArtPaquete());
+		kardex.setKarValorUnitario(art.getArtPrecio());
+		
+		kardexService.create(1, kardex, art);
+		
 		entityManager.persist(art);
 	}
 
@@ -88,8 +102,8 @@ public class ArticuloServiceBean implements ArticuloService {
 		
 		cq.select(from);
 		
-		Predicate like1=cb.like(from.get("artTipo").as(String.class), "%"+par+"%");
-		Predicate like2=cb.like(from.get("artNombreLargo").as(String.class), "%"+par+"%");
+		Predicate like1=cb.like(cb.lower(from.get("artTipo").as(String.class)), "%"+par.toLowerCase()+"%");
+		Predicate like2=cb.like(cb.lower(from.get("artNombreLargo").as(String.class)), "%"+par.toLowerCase()+"%");
 		
 		cq.where(cb.or(like1,like2));
 		

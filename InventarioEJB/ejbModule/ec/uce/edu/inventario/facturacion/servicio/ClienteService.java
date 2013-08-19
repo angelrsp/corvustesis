@@ -15,5 +15,7 @@ public interface ClienteService {
 
 	void update(FacCliente cliente);
 
+	List<FacCliente> dynamicSearch(String text);
+
 	
 }
