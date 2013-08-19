@@ -89,7 +89,7 @@ public class IngresoPage implements Serializable {
 
 	public void create() {
 		// 1 . Ingreso
-		kardexService.create(1, kardex, articulo);
+		kardexService.create(1, kardex, articulo,true);
 	}
 
 	private double redondear(double valor, int decimales) {
