@@ -13,7 +13,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import ec.edu.uce.inventario.entidades.FacCliente;
-import ec.uce.edu.inventario.facturacion.servicio.ClienteService;
+import ec.edu.uce.inventario.facturacion.servicio.ClienteService;
 
 @Stateless(name = "clienteService")
 public class ClienteServiceBean implements ClienteService{

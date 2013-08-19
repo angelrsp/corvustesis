@@ -8,6 +8,9 @@ import ec.edu.uce.inventario.entidades.InvKardex;
 @Local
 public interface KardexService {
 
-	void create(int claseCode, InvKardex kardex, InvArticulo articulo);
+	void create2(int claseCode, InvKardex kardex, InvArticulo articulo);
+
+	void create(int claseCode, InvKardex kardex, InvArticulo articulo,
+			Boolean incrementa);
 
 }

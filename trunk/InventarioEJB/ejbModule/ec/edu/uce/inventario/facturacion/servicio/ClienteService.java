@@ -1,4 +1,4 @@
-package ec.uce.edu.inventario.facturacion.servicio;
+package ec.edu.uce.inventario.facturacion.servicio;
 
 import java.util.List;
 

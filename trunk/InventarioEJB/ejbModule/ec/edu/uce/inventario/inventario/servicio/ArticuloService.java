@@ -23,4 +23,6 @@ public interface ArticuloService {
 	void update(InvArticulo art, int unidad);
 
 	List<InvArticulo> dynamicSearch(String par);
+
+	InvArticulo readArticulo(InvArticulo articulo);
 }
