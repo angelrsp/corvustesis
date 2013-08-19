@@ -22,24 +22,39 @@
 				<fieldset>
 					<legend>Encabezado</legend>
 
-					<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
+					<p:panelGrid id="controls" columns="4" styleClass="panelGrid">
 
 						<h:outputText value="Cliente:" />
 						<p:column>
-							<p:inputText></p:inputText>
-							<p:inputText></p:inputText>
+							<p:inputText
+								value="#{ventaPage.cliente.cliNombres} #{ventaPage.cliente.cliApellidos}"></p:inputText>
 							<p:commandButton value="Buscar Cliente" icon="ui-icon-search"
-								styleClass="comButton" />
+								styleClass="comButton" type="button"
+								onclick="buscarCliente.show();" />
 						</p:column>
 
 						<h:outputText value="Fecha:" />
-						<p:calendar id="popupButtonCal" showOn="button"
-							pattern="dd/MM/yyyy" />
+						<p:calendar id="popupButtonCal" showButtonPanel="true"
+							pattern="dd/MM/yyyy" navigator="true" locale="es" />
 
 						<h:outputText value="Pedido:" />
-						<p:inputText></p:inputText>
+						<p:inputText value="#{ventaPage.venta.venPedido}"></p:inputText>
+
+						<h:outputText value="Total:" />
+						<p:inputText value="#{ventaPage.venta.venPedido}"></p:inputText>
 
 					</p:panelGrid>
+
+					<h:panelGrid id="buttons">
+						<p:column>
+							<p:commandButton value="Nuevo" icon="ui-icon-document"
+								styleClass="comButton" update="controls,controlsArticulo,controlsDetalle,detalles" process="@this" actionListener="#{ventaPage.clear}">
+								<p:resetInput target="controls"></p:resetInput>
+							</p:commandButton>
+							<p:commandButton value="Guardar" icon="ui-icon-disk"
+								styleClass="comButton" />
+						</p:column>
+					</h:panelGrid>
 
 				</fieldset>
 
@@ -47,10 +62,174 @@
 					<legend>Detalle</legend>
 
 
+					<p:panelGrid id="controlsArticulo" columns="4"
+						styleClass="panelGrid">
+						<h:outputText value="Articulo:" />
+						<p:column>
+							<p:inputText value="#{ventaPage.articulo.artTipo}"></p:inputText>
+							<p:commandButton value="Buscar Articulo" icon="ui-icon-search"
+								styleClass="comButton" type="button"
+								onclick="buscarArticulo.show();" />
+						</p:column>
+						<h:outputText value="Paquete:" />
+						<p:inputText value="#{ventaPage.articulo.artPaquete}"
+							readonly="true"></p:inputText>
+					</p:panelGrid>
+
+					<p:panelGrid id="controlsDetalle" columns="8"
+						styleClass="panelGrid">
+						<h:outputText value="Cantidad:" />
+						<p:inputText id="cantidad"
+							value="#{ventaPage.detalle.dveCantidad}"
+							onkeypress="return isDecimalKey(event);"></p:inputText>
+
+						<h:outputText value="Precio Unitario:" />
+						<p:inputText value="#{ventaPage.detalle.dvePrecio}"></p:inputText>
+
+						<h:outputText value="Descuento:" />
+						<p:inputText value="#{ventaPage.detalle.dveDescuentoPorcentaje}"
+							style="width:60px;"></p:inputText>
+						<h:outputText value="%" />
+
+						<p:commandButton value="Añadir" icon="ui-icon-arrow-1-s"
+							styleClass="comButton" actionListener="#{ventaPage.add}"
+							process="@this,controlsDetalle" update="detalles,message,controlsArticulo,controlsDetalle" />
+
+
+					</p:panelGrid>
+
+					<h:panelGrid>
+
+						<p:dataTable id="detalles" value="#{ventaPage.detalles}" var="det">
+
+							<p:column headerText="Articulo">
+							#{det.invArticulo.artTipo}
+							</p:column>
+
+							<p:column headerText="Precio Unitario">
+							#{det.dvePrecio}
+							</p:column>
+
+							<p:column headerText="Cantidad">
+							#{det.dveCantidad}
+							</p:column>
+
+							<p:column headerText="Total">
+							#{det.dveTotal}
+							</p:column>
+
+						</p:dataTable>
+
+					</h:panelGrid>
+
 				</fieldset>
 
 
+
+				<script type="text/javascript">
+				PrimeFaces.locales['es'] = {
+				                closeText: 'Cerrar',
+				                prevText: 'Anterior',
+				                nextText: 'Siguiente',
+				                currentText: 'Inicio',
+				                monthNames: ['Enero','Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+				                monthNamesShort: ['Enero','Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+				                dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+				                dayNamesShort: ['Dom','Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+				                dayNamesMin: ['D','L','M','M','J','V','S'],
+				                weekHeader: 'Semana',
+				                firstDay: 1,
+				                isRTL: false,
+				                showMonthAfterYear: false,
+				                yearSuffix: '',
+				                timeOnlyTitle: 'Sólo hora',
+				                timeText: 'Tempo',
+				                hourText: 'Hora',
+				                minuteText: 'Minuto',
+				                secondText: 'Segundo',
+				                currentText: 'Fecha actual',
+				                ampm: false,
+				                month: 'Mes',
+				                week: 'Semana',
+				                day: 'Día',
+				                allDayText : 'Todo el día'
+				            };
+				</script>
+
+				<h:panelGrid id="message">
+					<p:growl showDetail="true"></p:growl>
+				</h:panelGrid>
 			</h:form>
+
+
+			<p:dialog header="Buscar Cliente" widgetVar="buscarCliente"
+				modal="true" resizable="false">
+
+				<h:form id="dialogCliente">
+
+					<p:panelGrid columns="2" styleClass="panelGrid">
+						<p:inputText id="searchText" value="#{ventaPage.textCliente}"></p:inputText>
+						<p:commandButton value="Buscar" update="result"
+							actionListener="#{ventaPage.searchCliente}"></p:commandButton>
+					</p:panelGrid>
+
+					<p:dataTable id="result" value="#{ventaPage.listCliente}" var="cli"
+						rowKey="#{cli.cliCodigo}" selectionMode="single" paginator="true"
+						rows="10">
+
+						<p:ajax listener="#{ventaPage.onRowSelectCliente}"
+							oncomplete="buscarCliente.hide();" event="rowSelect"
+							update=":formVenta:controls,result,:dialogCliente:searchText"></p:ajax>
+
+						<p:column headerText="Nombres">
+						#{cli.cliNombres}
+						</p:column>
+
+						<p:column headerText="Apellidos">
+						#{cli.cliApellidos}
+						</p:column>
+
+					</p:dataTable>
+
+
+
+				</h:form>
+
+			</p:dialog>
+
+
+			<p:dialog header="Buscar Articulo" widgetVar="buscarArticulo"
+				modal="true" resizable="false">
+
+				<h:form id="dialogArticulo">
+
+					<p:panelGrid columns="2" styleClass="panelGrid">
+						<p:inputText id="searchText" value="#{ventaPage.textArticulo}"></p:inputText>
+						<p:commandButton value="Buscar"
+							actionListener="#{ventaPage.searchArticulo}" update="result"></p:commandButton>
+					</p:panelGrid>
+
+					<p:dataTable id="result" value="#{ventaPage.listArticulos}"
+						var="art" rowKey="#{art.artCodigo}" selectionMode="single"
+						paginator="true" rows="10">
+
+						<p:ajax listener="#{ventaPage.onRowSelectArticulo}"
+							oncomplete="buscarArticulo.hide();" event="rowSelect"
+							update=":formVenta:controlsArticulo,,:formVenta:controlsDetalle,result,:dialogArticulo:searchText"></p:ajax>
+
+						<p:column headerText="Tipo">
+						#{art.artTipo}
+						</p:column>
+
+						<p:column headerText="Nombre Largo">
+						#{art.artNombreLargo}
+						</p:column>
+
+
+					</p:dataTable>
+
+				</h:form>
+			</p:dialog>
 
 		</ui:define>
 

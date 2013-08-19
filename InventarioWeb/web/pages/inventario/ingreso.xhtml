@@ -23,15 +23,18 @@
 
 					<h:outputText value="Articulo:" />
 					<p:column>
-						<p:inputText id="codigoArticulo" tabindex="1" required="true"
-							requiredMessage="Ingrese Codigo"
-							value="#{ingresoPage.codigoManual}">
-						</p:inputText>
-						<p:inputText id="nombreArticulo" tabindex="1" required="true"
-							requiredMessage="Ingrese Codigo">
-						</p:inputText>
-						<p:commandButton value="Buscar Articulo"
-							onclick="buscarArticulo.show();" type="button"></p:commandButton>
+						<p:panelGrid columns="3" styleClass="panelGrid">
+							<p:inputText id="tipoArticulo" tabindex="1" required="true"
+								requiredMessage="Ingrese Codigo"
+								value="#{ingresoPage.articulo.artTipo}">
+							</p:inputText>
+							<p:inputTextarea id="nombreArticulo" tabindex="1"
+								value="#{ingresoPage.articulo.artNombreLargo}"
+								autoResize="false">
+							</p:inputTextarea>
+							<p:commandButton value="Buscar Articulo"
+								onclick="buscarArticulo.show();" type="button"></p:commandButton>
+						</p:panelGrid>
 					</p:column>
 
 					<h:outputText value="Cantidad:" />
@@ -76,14 +79,30 @@
 			<p:dialog header="Buscar Articulo" widgetVar="buscarArticulo"
 				modal="true" resizable="false">
 
-				<h:form>
+				<h:form id="dialogSearch">
 
 					<p:panelGrid columns="2" styleClass="panelGrid">
-						<p:inputText value="#{ingresoPage.searchText}"></p:inputText>
-						<p:commandButton value="Buscar" actionListener="#{ingresoPage.search}"></p:commandButton>
+						<p:inputText id="searchText" value="#{ingresoPage.searchText}"></p:inputText>
+						<p:commandButton value="Buscar"
+							actionListener="#{ingresoPage.search}" update="result"></p:commandButton>
 					</p:panelGrid>
 
-					<p:dataTable id="result">
+					<p:dataTable id="result" value="#{ingresoPage.listArticulos}"
+						var="art" rowKey="#{art.artCodigo}" selectionMode="single"
+						paginator="true" rows="10">
+
+						<p:ajax listener="#{ingresoPage.onRowSelect}"
+							oncomplete="buscarArticulo.hide();" event="rowSelect"
+							update=":formIngreso:controls,result,:dialogSearch:searchText"></p:ajax>
+
+						<p:column headerText="Tipo">
+						#{art.artTipo}
+						</p:column>
+
+						<p:column headerText="Nombre Largo">
+						#{art.artNombreLargo}
+						</p:column>
+
 
 					</p:dataTable>
 
