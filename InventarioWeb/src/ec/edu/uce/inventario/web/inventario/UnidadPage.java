@@ -60,6 +60,7 @@ public class UnidadPage implements Serializable {
 			else
 				unidadService.update(unidad);
 			readAll();
+			clear();
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
