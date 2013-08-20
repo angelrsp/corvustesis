@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<script type="text/javascript">
+	window.onload = function() {
+	    document.getElementById('index:username').focus();
+	}
+	</script>
+
+	<title>Erp Municipal</title>
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/style.css" />
+</h:head>
+
+<h:body>
+
+	<p:ajaxStatus onstart="statusDialog.show();"
+		onsuccess="statusDialog.hide();" />
+
+	<p:dialog modal="true" widgetVar="statusDialog" header="Cargando..."
+		draggable="false" closable="false" resizable="false">
+		<p:graphicImage value="/images/ajaxloadingbar.gif" />
+	</p:dialog>
+
+	<h:form id="formSelect">
+<div align="center">
+		<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
+
+			<h:outputText value="Periodo:" />
+
+			<p:selectOneMenu required="true" requiredMessage="Seleccione Clase">
+				<f:selectItem itemLabel="--Seleccione--" itemValue="" />
+				<f:selectItems value="#{selectOptionsPage.listPeriodo}" var="per"
+					itemLabel="#{per.perAnio}" itemValue="#{per.perAnio}"></f:selectItems>
+			</p:selectOneMenu>
+
+
+
+		</p:panelGrid>
+</div>
+
+	</h:form>
+
+
+
+</h:body>
+
+</html>
