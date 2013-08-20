@@ -68,6 +68,7 @@ public class IndexPage implements Serializable{
         if(userService.authenticate(user, password)) {
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome 2", user);
             setSysUser(userService.getUserInformation(user));
+            
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", getSysUser());
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("rol", userService.readUserRol(user));
        
