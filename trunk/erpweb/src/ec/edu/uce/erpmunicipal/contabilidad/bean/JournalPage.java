@@ -3,6 +3,8 @@ package ec.edu.uce.erpmunicipal.contabilidad.bean;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -60,6 +62,8 @@ public class JournalPage implements Serializable {
 	private int claseCode;
 	private int tipoMovimientoCode;
 	
+	private Date fecha;
+	
 	public JournalPage() {
 		clas = new ArrayList<ConClase>();
 		typeMove = new ArrayList<ConTipoMovimiento>();
@@ -68,6 +72,8 @@ public class JournalPage implements Serializable {
 		detalles = new ArrayList<ConMovimientoDetalle>();
 		detalle = new ConMovimientoDetalle();
 		movimiento=new ConMovimiento();
+		Calendar cal=Calendar.getInstance();
+		fecha=cal.getTime();
 	}
 
 	/**
@@ -217,6 +223,14 @@ public class JournalPage implements Serializable {
 
 	public void setTipoMovimientoCode(int tipoMovimientoCode) {
 		this.tipoMovimientoCode = tipoMovimientoCode;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 	public void searchCuenta() {
