@@ -25,6 +25,12 @@ public class ConPeriodo implements Serializable {
 
 	@Column(name="per_mes")
 	private Integer perMes;
+	
+	@Column(name="per_estado")
+	private Boolean perEstado;
+	
+	@Column(name="per_activo")
+	private Boolean perActivo;
 
 	//bi-directional many-to-one association to ConMovimientoDetalle
 	@OneToMany(mappedBy="conPeriodo")
@@ -55,6 +61,22 @@ public class ConPeriodo implements Serializable {
 
 	public void setPerMes(Integer perMes) {
 		this.perMes = perMes;
+	}
+
+	public Boolean getPerEstado() {
+		return perEstado;
+	}
+
+	public void setPerEstado(Boolean perEstado) {
+		this.perEstado = perEstado;
+	}
+
+	public Boolean getPerActivo() {
+		return perActivo;
+	}
+
+	public void setPerActivo(Boolean perActivo) {
+		this.perActivo = perActivo;
 	}
 
 	public List<ConMovimientoDetalle> getConMovimientoDetalles() {

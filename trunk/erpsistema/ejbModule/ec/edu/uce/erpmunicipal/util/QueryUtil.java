@@ -1,11 +1,5 @@
 package ec.edu.uce.erpmunicipal.util;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
-import javax.persistence.criteria.CriteriaQuery;
 
 public class QueryUtil {
 
