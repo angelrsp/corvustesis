@@ -37,7 +37,8 @@
 							<h:outputText value="Clase:" />
 						</p:column>
 						<p:column>
-							<p:selectOneMenu required="true" requiredMessage="Seleccione Clase">
+							<p:selectOneMenu required="true"
+								requiredMessage="Seleccione Clase">
 								<f:selectItem itemLabel="--Seleccione--" itemValue="" />
 								<f:selectItems value="#{journalPage.clas}" var="cla"
 									itemLabel="#{cla.claDescripcion}" itemValue="#{cla.claCodigo}"></f:selectItems>
@@ -48,20 +49,22 @@
 							<h:outputText value="Fecha:" />
 						</p:column>
 						<p:column>
-							<p:calendar id="calFecha" showOn="button" pattern="dd/MM/yyyy" style="width:20px;"></p:calendar>
+							<p:calendar id="calFecha" pattern="dd/MM/yyyy"
+								style="width:20px;" value="#{journalPage.fecha}"
+								showButtonPanel="true" navigator="true" locale="es"></p:calendar>
 						</p:column>
 
 						<p:column>
 							<h:outputText value="Tipo:" />
 						</p:column>
 						<p:column>
-							<p:selectOneMenu required="true" requiredMessage="Seleccione Tipo">
+							<p:selectOneMenu required="true"
+								requiredMessage="Seleccione Tipo">
 								<f:selectItem itemLabel="--Seleccione--" itemValue="" />
 								<f:selectItems value="#{journalPage.typeMove}" var="tmo"
 									itemLabel="#{tmo.tmoDescripcion}" itemValue="#{tmo.tmoCodigo}"></f:selectItems>
 							</p:selectOneMenu>
 						</p:column>
-
 					</p:panelGrid>
 
 					<p:panelGrid styleClass="panelGrid" columns="4">
@@ -69,13 +72,15 @@
 							<h:outputText value="Detalle:" />
 						</p:column>
 						<p:column>
-							<p:inputTextarea id="detail" autoResize="false" required="true" requiredMessage="Ingrese Detalle"></p:inputTextarea>
+							<p:inputTextarea id="detail" autoResize="false" required="true"
+								requiredMessage="Ingrese Detalle"></p:inputTextarea>
 						</p:column>
 						<p:column>
 							<h:outputText value="Documentacion:" />
 						</p:column>
 						<p:column>
-							<p:inputTextarea id="document" autoResize="false" required="true" requiredMessage="Ingrese Documentacion"></p:inputTextarea>
+							<p:inputTextarea id="document" autoResize="false" required="true"
+								requiredMessage="Ingrese Documentacion"></p:inputTextarea>
 						</p:column>
 					</p:panelGrid>
 
@@ -85,7 +90,8 @@
 								styleClass="comButton">
 							</p:commandButton>
 							<p:commandButton value="Guardar" icon="ui-icon-disk"
-								styleClass="comButton" actionListener="#{journalPage.create}" update="message"/>
+								styleClass="comButton" actionListener="#{journalPage.create}"
+								update="message" />
 							<p:commandButton value="Editar" icon="ui-icon-pencil"
 								styleClass="comButton" />
 						</p:column>
@@ -162,8 +168,11 @@
 							</p:column>
 
 							<p:column>
-								<p:commandButton icon="ui-icon-close" title="Eliminar" styleClass="tablButton"
-									onclick="if(!confirm('Eliminar?')) return false;" update="details" immediate="true" actionListener="#{journalPage.onRowDeleting(det)}">
+								<p:commandButton icon="ui-icon-close" title="Eliminar"
+									styleClass="tablButton"
+									onclick="if(!confirm('Eliminar?')) return false;"
+									update="details" immediate="true"
+									actionListener="#{journalPage.onRowDeleting(det)}">
 								</p:commandButton>
 							</p:column>
 
@@ -177,8 +186,6 @@
 				</h:panelGrid>
 
 			</h:form>
-
-
 
 
 			<p:dialog header="Buscar Cuenta" widgetVar="cuentaDialog"
