@@ -94,8 +94,17 @@
 
 		<!--Panel derecho  -->
 		<p:layoutUnit position="east" size="210" header="Temas"
-			 collapsible="true" resizable="true" collapsed="true">
-			  
+			collapsible="true" resizable="true" collapsed="true">
+			
+			<h:form id="formTheme">
+				<p:themeSwitcher value="#{themeSwitcherBean.theme}"
+					style="width:165px" effect="fade" id="statefulSwitcher">
+					<f:selectItem itemLabel="Choose Theme" itemValue="" />
+					<f:selectItems value="#{themeSwitcherBean.themes}" />
+					<p:ajax listener="#{themeSwitcherBean.saveTheme}" />
+				</p:themeSwitcher>
+			</h:form>
+			
 		</p:layoutUnit>
 
 
