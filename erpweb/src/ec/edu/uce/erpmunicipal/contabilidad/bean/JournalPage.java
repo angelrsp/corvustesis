@@ -2,6 +2,7 @@ package ec.edu.uce.erpmunicipal.contabilidad.bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,6 +23,7 @@ import ec.edu.uce.erpmunicipal.contabilidad.orm.ConMovimiento;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConMovimientoDetalle;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConTipoMovimiento;
 import ec.edu.uce.erpmunicipal.sistema.bsl.CrudService;
+import ec.edu.uce.erpmunicipal.util.CalendarUtil;
 import ec.edu.uce.erpmunicipal.util.orm.SessionObject;
 
 @ManagedBean(name = "journalPage")
@@ -37,7 +39,7 @@ public class JournalPage implements Serializable {
 	private CrudService crudService;
 	@EJB(name = "journalService/local")
 	private JournalService journalService;
-	
+
 	@SuppressWarnings("unused")
 	private List<ConTipoMovimiento> typeMove;
 	@SuppressWarnings("unused")
@@ -48,7 +50,7 @@ public class JournalPage implements Serializable {
 	private List<ConMovimientoDetalle> detalles;
 
 	private ConMovimientoDetalle detalle;
-	
+
 	private ConMovimiento movimiento;
 
 	private String search;
@@ -58,12 +60,17 @@ public class JournalPage implements Serializable {
 	private String debe;
 	private String haber;
 	private Double cuadre;
-	
+
 	private int claseCode;
 	private int tipoMovimientoCode;
-	
+
 	private Date fecha;
+	private Date fechaMax;
+	private Date fechaMin;
 	
+
+	private String transaccion;
+
 	public JournalPage() {
 		clas = new ArrayList<ConClase>();
 		typeMove = new ArrayList<ConTipoMovimiento>();
@@ -71,9 +78,16 @@ public class JournalPage implements Serializable {
 		cuadre = 0.0;
 		detalles = new ArrayList<ConMovimientoDetalle>();
 		detalle = new ConMovimientoDetalle();
-		movimiento=new ConMovimiento();
-		Calendar cal=Calendar.getInstance();
-		fecha=cal.getTime();
+		movimiento = new ConMovimiento();
+		Calendar cal = Calendar.getInstance();
+		fecha = cal.getTime();
+		fechaMin=CalendarUtil.getCalendar(((SessionObject)FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap()
+				.get("sessionObject")).getAnio(), 01, 01).getTime();
+		fechaMax=CalendarUtil.getCalendar(((SessionObject)FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap()
+				.get("sessionObject")).getAnio(), 12, 31).getTime();
+		
 	}
 
 	/**
@@ -233,13 +247,38 @@ public class JournalPage implements Serializable {
 		this.fecha = fecha;
 	}
 
+	public Date getFechaMax() {
+		return fechaMax;
+	}
+
+	public void setFechaMax(Date fechaMax) {
+		this.fechaMax = fechaMax;
+	}
+
+	public Date getFechaMin() {
+		return fechaMin;
+	}
+
+	public void setFechaMin(Date fechaMin) {
+		this.fechaMin = fechaMin;
+	}
+
+	public String getTransaccion() {
+		return transaccion;
+	}
+
+	public void setTransaccion(String transaccion) {
+		this.transaccion = transaccion;
+	}
+
 	public void searchCuenta() {
-		this.cuentas = journalService.getAccoutingService().dynamicSearch(search);
+		this.cuentas = journalService.getAccoutingService().dynamicSearch(
+				search);
 	}
 
 	public void searchCuentaCode() {
-		this.descripcionCuenta = ((ConCuenta) journalService.getAccoutingService()
-				.search(searchCode)).getCueDescripcion();
+		this.descripcionCuenta = ((ConCuenta) journalService
+				.getAccoutingService().search(searchCode)).getCueDescripcion();
 	}
 
 	public void onRowSelect(SelectEvent event) {
@@ -259,55 +298,82 @@ public class JournalPage implements Serializable {
 
 		} else {
 			ConMovimientoDetalle det = new ConMovimientoDetalle();
-			if (!debe.equals("")) {
+			if (!debe.equals("")&&haber.trim().equals("")) {
 				Double deb = Double.valueOf(debe.replace(',', '.'));
 				cuadre = cuadre + deb;
-				haber = cuadre.toString();
+				//haber = cuadre.toString();
 				debe = "";
+				haber="";
 				det.setConCuenta(new ConCuenta(null, null, descripcionCuenta,
-						null, searchCode, null, null, null, null,null));
+						null, searchCode, null, null, null, null, null));
 				det.setMdeDebe(BigDecimal.valueOf(deb));
 				detalles.add(det);
 				searchCode = "";
 				descripcionCuenta = "";
-			} else if (!haber.equals("")) {
+			} else if (!haber.equals("")&&debe.trim().equals("")) {
 				Double hab = Double.valueOf(haber.replace(',', '.'));
 				cuadre = cuadre - hab;
-				
-				haber = cuadre.toString();
-				
-					
+
+				//haber = cuadre.toString();
+
 				debe = "";
+				haber="";
 				det.setConCuenta(new ConCuenta(null, null, descripcionCuenta,
-						null, searchCode, null, null, null, null,null));
+						null, searchCode, null, null, null, null, null));
 				det.setMdeHaber(BigDecimal.valueOf(hab));
 				detalles.add(det);
 				searchCode = "";
 				descripcionCuenta = "";
 			}
+			else
+			{
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+								"Ingrese un solo valor"));
+			}
 		}
 	}
-	
+
 	public void onRowDeleting(ConMovimientoDetalle de) {
 		detalles.remove(de);
 	}
 
-	public void create()
-	{
-		SessionObject sessionObject=new SessionObject();
-		if(detalles.size()<=0)
-		{
+	public void create() {
+		try {
+			if (detalles.size() <= 0) {
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+								"Ingrese detalles"));
+				return;
+			}
+			if (cuadre != 0) {
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+								"El asiento no esta cuadrado"));
+				return;
+			}
+			movimiento.setMovFechaContable(new Timestamp(fecha.getTime()));
+			transaccion = String.valueOf(journalService.create(
+					(SessionObject) FacesContext.getCurrentInstance()
+							.getExternalContext().getSessionMap()
+							.get("sessionObject"), claseCode,
+					tipoMovimientoCode, movimiento, detalles));
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Guardado",
+							"Exitosamente"));			
+		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
-							"Ingrese detalles"));
-			return;
+							e.getMessage()));
 		}
-		journalService.create(sessionObject, claseCode, tipoMovimientoCode, movimiento, detalles);
 	}
-	
-	public void clear()
-	{
-		detalles=new ArrayList<ConMovimientoDetalle>();
+
+	public void clear() {
+		detalles = new ArrayList<ConMovimientoDetalle>();
 	}
 }

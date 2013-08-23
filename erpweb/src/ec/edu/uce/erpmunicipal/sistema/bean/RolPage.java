@@ -15,7 +15,7 @@ import org.primefaces.event.SelectEvent;
 import ec.edu.uce.erpmunicipal.sistema.bsl.CrudService;
 import ec.edu.uce.erpmunicipal.sistema.bsl.RolService;
 import ec.edu.uce.erpmunicipal.sistema.orm.SisRole;
-import ec.edu.uce.erpmunicipal.sistema.orm.SisUsuarioRol;
+import ec.edu.uce.erpmunicipal.util.orm.SessionObject;
 
 @ManagedBean(name = "rolPage")
 @ViewScoped
@@ -50,8 +50,8 @@ public class RolPage implements Serializable {
 	}
 
 	public List<SisRole> getRols() {
-		int rol = ((SisUsuarioRol) FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap().get("rol")).getSisRole()
+		int rol = ((SessionObject) FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap().get("sessionObject")).getUserRol().getSisRole()
 				.getRolCodigo();
 		rols = rolService.readAll(rol);
 		return rols;

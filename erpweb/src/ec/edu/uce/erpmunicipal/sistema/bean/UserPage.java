@@ -23,7 +23,7 @@ import ec.edu.uce.erpmunicipal.sistema.orm.SisAuditoriaMenu;
 import ec.edu.uce.erpmunicipal.sistema.orm.SisInstitucion;
 import ec.edu.uce.erpmunicipal.sistema.orm.SisRole;
 import ec.edu.uce.erpmunicipal.sistema.orm.SisUsuario;
-import ec.edu.uce.erpmunicipal.sistema.orm.SisUsuarioRol;
+import ec.edu.uce.erpmunicipal.util.orm.SessionObject;
 import ec.edu.uce.erpmunicipal.util.web.Identification;
 
 @ManagedBean(name = "userPage")
@@ -84,10 +84,10 @@ public class UserPage implements Serializable {
 	}
 
 	public List<SisInstitucion> getEntities() {
-		SisUsuario user = (SisUsuario) FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap().get("user");
-		int rol = ((SisUsuarioRol) FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap().get("rol")).getSisRole()
+		SisUsuario user = ((SessionObject) FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap().get("sessionObject")).getUser();
+		int rol = ((SessionObject) FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap().get("sessionObject")).getUserRol().getSisRole()
 				.getRolCodigo();
 		entities = entityService.readAll(user, rol);
 		return entities;
@@ -144,8 +144,8 @@ public class UserPage implements Serializable {
 	}
 
 	private void readRols() {
-		int rol = ((SisUsuarioRol) FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap().get("rol")).getSisRole()
+		int rol = ((SessionObject) FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap().get("sessionObject")).getUserRol().getSisRole()
 				.getRolCodigo();
 		rols = rolService.readAll(rol);
 	}
@@ -254,8 +254,8 @@ public class UserPage implements Serializable {
 
 			audit.setAmeDipositivo(request.getRemoteHost());
 			audit.setAmeOpcion(2);
-			audit.setSisUsuario((SisUsuario) FacesContext.getCurrentInstance()
-					.getExternalContext().getSessionMap().get("user"));
+			audit.setSisUsuario(((SessionObject) FacesContext.getCurrentInstance()
+					.getExternalContext().getSessionMap().get("sessionObject")).getUser());
 
 			auditService.create(audit);
 		} catch (Exception e) {
