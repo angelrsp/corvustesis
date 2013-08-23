@@ -1,7 +1,9 @@
 package ec.edu.uce.erpmunicipal.contabilidad.orm;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -38,6 +40,13 @@ public class ConPeriodo implements Serializable {
 
 	public ConPeriodo() {
 	}
+
+	public ConPeriodo(Integer perAnio) {
+		super();
+		this.perAnio = perAnio;
+	}
+
+
 
 	public Integer getPerCodigo() {
 		return this.perCodigo;

@@ -11,7 +11,7 @@ import ec.edu.uce.erpmunicipal.util.orm.SessionObject;
 @Local
 public interface JournalService {
 
-	void create(SessionObject sessionObject, int claseCode,
+	int create(SessionObject sessionObject, int claseCode,
 			int tipoMovimientoCode, ConMovimiento movimiento,
 			List<ConMovimientoDetalle> details);
 
