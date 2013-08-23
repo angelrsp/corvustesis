@@ -26,26 +26,36 @@
 		draggable="false" closable="false" resizable="false">
 		<p:graphicImage value="/images/ajaxloadingbar.gif" />
 	</p:dialog>
+	<div align="center">
+		<h:form id="formSelect">
 
-	<h:form id="formSelect">
-<div align="center">
-		<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
+			<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
 
-			<h:outputText value="Periodo:" />
+				<h:outputText value="Periodo:" />
 
-			<p:selectOneMenu required="true" requiredMessage="Seleccione Clase">
-				<f:selectItem itemLabel="--Seleccione--" itemValue="" />
-				<f:selectItems value="#{selectOptionsPage.listPeriodo}" var="per"
-					itemLabel="#{per.perAnio}" itemValue="#{per.perAnio}"></f:selectItems>
-			</p:selectOneMenu>
+				<p:selectOneMenu required="true"
+					requiredMessage="Seleccione Periodo"
+					value="#{selectOptionsPage.anio}">
+					<f:selectItem itemLabel="--Seleccione--" itemValue="" />
+					<f:selectItems value="#{selectOptionsPage.listPeriodo}" var="per"
+						itemLabel="#{per.perAnio}" itemValue="#{per.perAnio}"></f:selectItems>
+				</p:selectOneMenu>
 
 
+			</p:panelGrid>
 
-		</p:panelGrid>
-</div>
+			<p:panelGrid id="buttons" columns="1" styleClass="panelGrid">
+				<p:commandButton value="Continuar" style="width:90px;height:30px;"
+					actionListener="#{selectOptionsPage.next}"
+					update="controls,message"></p:commandButton>
+			</p:panelGrid>
 
-	</h:form>
+			<h:panelGrid id="message">
+				<p:growl></p:growl>
+			</h:panelGrid>
 
+		</h:form>
+	</div>
 
 
 </h:body>
