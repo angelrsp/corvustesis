@@ -19,7 +19,7 @@ import ec.edu.uce.erpmunicipal.sistema.bsl.RolService;
 import ec.edu.uce.erpmunicipal.sistema.orm.SisModulo;
 import ec.edu.uce.erpmunicipal.sistema.orm.SisPantalla;
 import ec.edu.uce.erpmunicipal.sistema.orm.SisRole;
-import ec.edu.uce.erpmunicipal.sistema.orm.SisUsuarioRol;
+import ec.edu.uce.erpmunicipal.util.orm.SessionObject;
 
 @ManagedBean(name = "rolOptionPage")
 @ViewScoped
@@ -110,8 +110,8 @@ public class RolOptionPage implements Serializable {
 	}
 
 	private void readRols() {
-		int rol = ((SisUsuarioRol) FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap().get("rol")).getSisRole()
+		int rol = ((SessionObject) FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap().get("sessionObject")).getUserRol().getSisRole()
 				.getRolCodigo();
 		rols = rolService.readAll(rol);
 	}
