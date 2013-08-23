@@ -35,13 +35,13 @@
 
 						<h:outputText value="Fecha:" />
 						<p:calendar id="popupButtonCal" showButtonPanel="true"
-							pattern="dd/MM/yyyy" navigator="true" locale="es" />
+							pattern="dd/MM/yyyy" navigator="true" locale="es" value="#{ventaPage.fecha}"/>
 
 						<h:outputText value="Pedido:" />
-						<p:inputText value="#{ventaPage.venta.venPedido}"></p:inputText>
+						<p:inputText id="pedido" value="#{ventaPage.venta.venPedido}"></p:inputText>
 
 						<h:outputText value="Total:" />
-						<p:inputText value="#{ventaPage.venta.venPedido}"></p:inputText>
+						<p:inputText id="totalFac" value="#{ventaPage.venta.venTotal}" readonly="true"></p:inputText>
 
 					</p:panelGrid>
 
@@ -52,7 +52,7 @@
 								<p:resetInput target="controls"></p:resetInput>
 							</p:commandButton>
 							<p:commandButton value="Guardar" icon="ui-icon-disk"
-								styleClass="comButton" />
+								styleClass="comButton" actionListener="#{ventaPage.create}" update="message" process="@this,pedido"/>
 						</p:column>
 					</h:panelGrid>
 
@@ -93,7 +93,7 @@
 
 						<p:commandButton value="Añadir" icon="ui-icon-arrow-1-s"
 							styleClass="comButton" actionListener="#{ventaPage.add}"
-							process="@this,controlsDetalle" update="detalles,message,controlsArticulo,controlsDetalle" />
+							process="@this,controlsDetalle" update="detalles,message,controlsArticulo,controlsDetalle,totalFac" />
 
 
 					</p:panelGrid>
