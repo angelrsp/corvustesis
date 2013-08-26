@@ -87,11 +87,6 @@
 						value="#{articuloPage.articulo.artEnlace}">
 					</p:inputText>
 
-					<h:outputText value="Imagen:" />
-					<p:inputText id="imagen" tabindex="12"
-						value="#{articuloPage.articulo.artImagen}">
-					</p:inputText>
-
 					<h:outputText value="Unidad:" />
 					<p:selectOneMenu required="true"
 						requiredMessage="Seleccione Unidad" tabindex="13"
@@ -164,23 +159,23 @@
                         #{art.artPagina}
                         </p:column>
 
-						<p:column headerText="Enlace">
-                        #{art.artEnlace}
-                        </p:column>
+<!-- 						<p:column headerText="Enlace"> -->
+<!--                         #{art.artEnlace} -->
+<!--                         </p:column> -->
 
-						<p:column headerText="Imagen">
-                        #{art.artImagen}
-                        </p:column>
+<!-- 						<p:column headerText="Imagen"> -->
+<!--                         #{art.artImagen} -->
+<!--                         </p:column> -->
 
 						<p:column headerText="Unidad">
                         #{art.invUnidad.uniDescripcion}
                         </p:column>
 
-						<p:column>
-							<p:commandButton icon="ui-icon-close" onclick="if(!confirm('Eliminar?')) return false;"
-								actionListener="#{articuloPage.onRowDeleting(art)}" immediate="true" update="articulos,:formArticulo:message">
-							</p:commandButton>
-						</p:column>
+<!-- 						<p:column> -->
+<!-- 							<p:commandButton icon="ui-icon-close" onclick="if(!confirm('Eliminar?')) return false;" -->
+<!-- 								actionListener="#{articuloPage.onRowDeleting(art)}" immediate="true" update="articulos,:formArticulo:message"> -->
+<!-- 							</p:commandButton> -->
+<!-- 						</p:column> -->
 
 					</p:dataTable>
 				</h:panelGrid>
