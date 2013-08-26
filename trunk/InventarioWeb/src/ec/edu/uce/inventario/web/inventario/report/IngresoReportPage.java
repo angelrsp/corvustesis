@@ -10,13 +10,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import net.sf.jasperreports.engine.JasperPrint;
-
 import ec.edu.uce.inventario.entidades.InvKardex;
 import ec.edu.uce.inventario.inventario.servicio.ReportService;
 
-@ManagedBean(name = "kardexReportPage")
+@ManagedBean(name = "ingresoReportPage")
 @ViewScoped
-public class KardexReportPage implements Serializable {
+public class IngresoReportPage implements Serializable {
 
 	/**
 	 * 
@@ -27,27 +26,27 @@ public class KardexReportPage implements Serializable {
 	@EJB(name = "reportService/local")
 	private ReportService reportService;
 
-	private List<InvKardex> listKardek;
+	private List<InvKardex> listReport;
 
-	public KardexReportPage() {
-		listKardek = new ArrayList<InvKardex>();
+	public IngresoReportPage() {
+		listReport = new ArrayList<InvKardex>();
 
 	}
 
-	public List<InvKardex> getListKardek() {
-		return listKardek;
+	public List<InvKardex> getlistReport() {
+		return listReport;
 	}
 
-	public void setListKardek(List<InvKardex> listKardek) {
-		this.listKardek = listKardek;
+	public void setlistReport(List<InvKardex> listReport) {
+		this.listReport = listReport;
 	}
 
 	JasperPrint jasperPrint;  
 	public void read() {
-		listKardek=new ArrayList<InvKardex>();
-		listKardek=reportService.reportKardex();
+		listReport=new ArrayList<InvKardex>();
+		listReport=reportService.reportIngreso();
 //		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(
-//				listKardek);
+//				listReport);
 //		String path = FacesContext.getCurrentInstance()
 //				.getExternalContext().getRealPath("/jasper/kardex.jasper");
 //		try {
@@ -63,4 +62,6 @@ public class KardexReportPage implements Serializable {
 	public void init() {
 		read();
 	}
+
+
 }
