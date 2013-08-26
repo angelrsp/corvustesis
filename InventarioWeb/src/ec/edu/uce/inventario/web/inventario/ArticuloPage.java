@@ -91,8 +91,7 @@ public class ArticuloPage implements Serializable {
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e
-							.toString()));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage().toString()));
 		}
 	}
 
