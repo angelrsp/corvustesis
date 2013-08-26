@@ -85,6 +85,7 @@ public class IngresoPage implements Serializable {
 
 	public void clean() {
 		kardex = new InvKardex();
+		articulo=new InvArticulo();
 	}
 
 	public void create() {
