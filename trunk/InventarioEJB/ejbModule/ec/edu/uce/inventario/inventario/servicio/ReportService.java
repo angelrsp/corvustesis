@@ -11,4 +11,8 @@ public interface ReportService {
 
 	List<InvKardex> reportKardex();
 
+	List<InvKardex> reportIngreso();
+
+	List<InvKardex> reportEgreso();
+
 }

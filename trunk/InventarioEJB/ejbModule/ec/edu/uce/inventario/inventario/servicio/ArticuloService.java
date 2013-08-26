@@ -10,7 +10,7 @@ import ec.edu.uce.inventario.entidades.InvUnidad;
 @Local
 public interface ArticuloService {
 
-	void create(InvArticulo art, int unidad);
+	void create(InvArticulo art, int unidad) throws Exception;
 
 	List<InvUnidad> readUnidades();
 
