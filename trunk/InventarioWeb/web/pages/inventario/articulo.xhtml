@@ -3,7 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <h:head>
 
@@ -160,7 +161,7 @@
                         </p:column>
 
 						<p:column headerText="Enlace">
-						<a href="#{art.artEnlace}" target="_blanck">#{art.artEnlace}</a>
+						<a href="#{art.artEnlace}" target="_blanck">#{fn:substring(art.artEnlace,0,20)}...</a>
                         
                         </p:column>
 
