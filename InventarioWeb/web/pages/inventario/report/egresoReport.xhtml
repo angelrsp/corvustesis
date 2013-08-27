@@ -2,10 +2,56 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
 
 <h:head></h:head> 
-<body> 
+<body>
 
-</body> 
+
+	<ui:composition template="/templates/pages.xhtml">
+
+		<ui:define name="tituloFormulario">Reporte Egresos</ui:define>
+
+		<ui:define name="contenido">
+
+			<h:form id="formReportEgreso">
+
+				<!-- 				<jr:reportFrame id="visor" value="/jasper/kardex.jasper" -->
+				<!-- 					width="100%" height="400" format="html"> -->
+				<!-- 					<jr:source type="bean" value="#{kardexReportPage.listKardek}" /> -->
+				<!-- 				</jr:reportFrame> -->
+
+				<h:panelGrid>
+					<p:dataTable value="#{egresoReportPage.listReport}" var="kar">
+
+						<p:column headerText="Articulo">
+							#{kar.invArticulo.artTipo}
+						</p:column>
+
+						<p:column headerText="Clase">
+							#{kar.invClase.claDescripcion}
+						</p:column>
+
+						<p:column headerText="Fecha">
+							#{kar.karFecha}
+						</p:column>
+
+						<p:column headerText="Cantidad">
+							#{kar.karCantidad}
+						</p:column>
+
+
+					</p:dataTable>
+
+				</h:panelGrid>
+
+
+			</h:form>
+
+		</ui:define>
+
+	</ui:composition>
+
+</body>
 </html>
