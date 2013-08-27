@@ -1,0 +1,86 @@
+package ec.edu.uce.inventario.web.facturacion.report;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+import net.sf.jasperreports.engine.JasperPrint;
+import ec.edu.uce.inventario.entidades.FacDetalleVenta;
+import ec.edu.uce.inventario.inventario.servicio.ReportService;
+
+@ManagedBean(name = "facturaReportPage")
+@ViewScoped
+public class FacturaReportPage implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@EJB(name = "reportService/local")
+	private ReportService reportService;
+
+	private List<FacDetalleVenta> listReport;
+	private Date desde;
+	private Date hasta;
+
+	public FacturaReportPage() {
+		listReport = new ArrayList<FacDetalleVenta>();
+
+	}
+
+	public List<FacDetalleVenta> getlistReport() {
+		return listReport;
+	}
+
+	public void setlistReport(List<FacDetalleVenta> listReport) {
+		this.listReport = listReport;
+	}
+
+	public Date getDesde() {
+		return desde;
+	}
+
+	public void setDesde(Date desde) {
+		this.desde = desde;
+	}
+
+	public Date getHasta() {
+		return hasta;
+	}
+
+	public void setHasta(Date hasta) {
+		this.hasta = hasta;
+	}
+
+	JasperPrint jasperPrint;  
+	public void read() {
+		listReport=new ArrayList<FacDetalleVenta>();
+		listReport=reportService.reportFactura1(desde, hasta);
+//		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(
+//				listReport);
+//		String path = FacesContext.getCurrentInstance()
+//				.getExternalContext().getRealPath("/jasper/kardex.jasper");
+//		try {
+//			jasperPrint = JasperFillManager.fillReport(path, new HashMap(),
+//					beanCollectionDataSource);
+//		} catch (JRException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+	}
+
+	@PostConstruct
+	public void init() {
+		read();
+	}
+
+	
+	
+}
