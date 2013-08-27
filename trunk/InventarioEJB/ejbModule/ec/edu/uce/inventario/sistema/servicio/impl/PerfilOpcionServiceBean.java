@@ -83,7 +83,7 @@ public class PerfilOpcionServiceBean implements PerfilOpcionService {
     public List<SisOpcion> readChildren(int perfilCode, int moduleCode, int father) {
         Query query = entityManager.createNativeQuery("select * "
                 + "from sis_opcion a " + "left join sis_perfil_opcion b "
-                + "on a.opc_codigo=b.pop_opcion and b.opc_perfil=" + perfilCode
+                + "on a.opc_codigo=b.pop_opcion and b.pop_perfil=" + perfilCode
                 + " where a.opc_padre="+father+" and a.opc_modulo=" + moduleCode
                 + " order by a.opc_padre");
 
