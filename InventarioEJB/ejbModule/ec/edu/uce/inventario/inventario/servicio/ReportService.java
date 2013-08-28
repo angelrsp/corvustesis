@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import ec.edu.uce.inventario.entidades.FacDetalleVenta;
 import ec.edu.uce.inventario.entidades.InvKardex;
+import ec.edu.uce.inventario.entidades.RepFactura;
 
 @Local
 public interface ReportService {
@@ -17,6 +17,6 @@ public interface ReportService {
 
 	List<InvKardex> reportEgreso();
 
-	List<FacDetalleVenta> reportFactura1(Date desde, Date hasta);
+	List<RepFactura> reportFactura(Date desde, Date hasta);
 
 }

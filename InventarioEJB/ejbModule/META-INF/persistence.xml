@@ -16,6 +16,7 @@
 	<class>ec.edu.uce.inventario.entidades.SisPerfil</class>
 	<class>ec.edu.uce.inventario.entidades.SisPerfilOpcion</class>
 	<class>ec.edu.uce.inventario.entidades.SisUsuario</class>
+	<class>ec.edu.uce.inventario.entidades.RepFactura</class>
 		<properties>
             <property name="hibernate.id.new_generator_mappings" value="false"/>
             <property name="hibernate.show_sql" value="true"/>
