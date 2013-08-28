@@ -2,6 +2,8 @@ package ec.edu.uce.inventario.web.inventario.report;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,7 +12,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import net.sf.jasperreports.engine.JasperPrint;
-
 import ec.edu.uce.inventario.entidades.InvKardex;
 import ec.edu.uce.inventario.inventario.servicio.ReportService;
 
