@@ -199,6 +199,7 @@ public class OptionPage implements Serializable {
 	}
 
 	private void readOptionsPather() {
+		optionsPather=new ArrayList<SisPantalla>();
 		optionsPather = optionService.readIsPather(moduleCode);
 	}
 
@@ -254,6 +255,7 @@ public class OptionPage implements Serializable {
 			
 			clean();
 			readOptions();
+			readOptionsPather();
 		} catch (Exception e) {
 			msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
 					e.toString());
