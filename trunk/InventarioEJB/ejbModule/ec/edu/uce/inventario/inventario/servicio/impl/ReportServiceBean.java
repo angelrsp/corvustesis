@@ -1,5 +1,6 @@
 package ec.edu.uce.inventario.inventario.servicio.impl;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -12,9 +13,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
-import ec.edu.uce.inventario.entidades.FacDetalleVenta;
 import ec.edu.uce.inventario.entidades.InvClase;
 import ec.edu.uce.inventario.entidades.InvKardex;
+import ec.edu.uce.inventario.entidades.RepFactura;
 import ec.edu.uce.inventario.inventario.servicio.ReportService;
 
 @Stateless(name = "reportService")
@@ -74,31 +75,20 @@ public class ReportServiceBean implements ReportService{
 
 	
 	@Override
-	public List<FacDetalleVenta> reportFactura1(Date desde,Date hasta) {
+	public List<RepFactura> reportFactura(Date desde,Date hasta) {
 		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-		CriteriaQuery<FacDetalleVenta> cq=cb.createQuery(FacDetalleVenta.class);
-		Root<FacDetalleVenta> from = cq.from(FacDetalleVenta.class);
+		CriteriaQuery<RepFactura> cq=cb.createQuery(RepFactura.class);
+		//Root<RepFactura> from = cq.from(RepFactura.class);
 		
-		//cq.where("");
+		//cq.where(cb.between(from.get("").as(Timestamp.class), new Timestamp(desde.getTime()),new Timestamp(hasta.getTime())));
+		cq.select(cq.from(RepFactura.class));
 		
-		cq.select(cq.from(FacDetalleVenta.class));
-		
-		List<FacDetalleVenta> list= entityManager.createQuery(cq).getResultList();
+		List<RepFactura> list= entityManager.createQuery(cq).getResultList();
 		
 		return list;
 	}
 
 	
-	public List<Object> reportFactura2() {
-		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-		CriteriaQuery<FacDetalleVenta> cq=cb.createQuery(FacDetalleVenta.class);
-		Root<FacDetalleVenta> from = cq.from(FacDetalleVenta.class);
-		cq.select(cq.from(FacDetalleVenta.class));
-		
-		
-		
-		return null;
-	}
 
 	
 }
