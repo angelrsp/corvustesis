@@ -254,6 +254,7 @@ public class OptionPage implements Serializable{
            
             clean();
             readOptions();
+            readOptionsPather();
         } catch (Exception e) {
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
                     e.toString());
