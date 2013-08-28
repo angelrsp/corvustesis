@@ -12,6 +12,7 @@ import javax.faces.bean.ViewScoped;
 
 import net.sf.jasperreports.engine.JasperPrint;
 import ec.edu.uce.inventario.entidades.FacDetalleVenta;
+import ec.edu.uce.inventario.entidades.RepFactura;
 import ec.edu.uce.inventario.inventario.servicio.ReportService;
 
 @ManagedBean(name = "facturaReportPage")
@@ -26,20 +27,20 @@ public class FacturaReportPage implements Serializable{
 	@EJB(name = "reportService/local")
 	private ReportService reportService;
 
-	private List<FacDetalleVenta> listReport;
+	private List<RepFactura> listReport;
 	private Date desde;
 	private Date hasta;
 
 	public FacturaReportPage() {
-		listReport = new ArrayList<FacDetalleVenta>();
+		listReport = new ArrayList<RepFactura>();
 
 	}
 
-	public List<FacDetalleVenta> getlistReport() {
+	public List<RepFactura> getlistReport() {
 		return listReport;
 	}
 
-	public void setlistReport(List<FacDetalleVenta> listReport) {
+	public void setlistReport(List<RepFactura> listReport) {
 		this.listReport = listReport;
 	}
 
@@ -61,8 +62,8 @@ public class FacturaReportPage implements Serializable{
 
 	JasperPrint jasperPrint;  
 	public void read() {
-		listReport=new ArrayList<FacDetalleVenta>();
-		listReport=reportService.reportFactura1(desde, hasta);
+		listReport=new ArrayList<RepFactura>();
+		listReport=reportService.reportFactura(desde, hasta);
 //		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(
 //				listReport);
 //		String path = FacesContext.getCurrentInstance()
