@@ -19,7 +19,9 @@
 	<class>ec.edu.uce.erpmunicipal.contabilidad.orm.ConPeriodo</class>
 	<class>ec.edu.uce.erpmunicipal.contabilidad.orm.ConSaldo</class>
 	<class>ec.edu.uce.erpmunicipal.contabilidad.orm.ConTipoCuenta</class>
-	<class>ec.edu.uce.erpmunicipal.contabilidad.orm.ConTipoMovimiento</class>		
+	<class>ec.edu.uce.erpmunicipal.contabilidad.orm.ConTipoMovimiento</class>
+	<class>ec.edu.uce.erpmunicipal.contabilidad.orm.RepDiarioGeneralIntegrado</class>
+	<class>ec.edu.uce.erpmunicipal.contabilidad.orm.RepMayorGeneral</class>		
 		<properties>
 			<property name="hibernate.id.new_generator_mappings" value="false"/>
 			<property name="hibernate.show_sql" value="true"/>
