@@ -1,23 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="diarioGeneralIntegrado" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ab0cd54-696f-46b7-979d-08c72a04ee25">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="43"/>
-	<field name="field1" class="java.lang.String"/>
+	<property name="ireport.y" value="144"/>
+	<field name="movCodigo" class="java.lang.String"/>
+	<field name="movConcepto" class="java.lang.String"/>
+	<field name="movFechaContable" class="java.lang.String"/>
+	<field name="cueNumero" class="java.lang.String"/>
+	<field name="cueDescripcion" class="java.lang.String"/>
+	<field name="mdeDebe" class="java.lang.String"/>
+	<field name="mdeHaber" class="java.lang.String"/>
+	<group name="Transaccion">
+		<groupExpression><![CDATA[$F{movCodigo}]]></groupExpression>
+		<groupHeader>
+			<band height="83">
+				<staticText>
+					<reportElement uuid="45f75f2f-d5d0-41b7-8a41-6c69242ab890" x="1" y="63" width="63" height="20"/>
+					<textElement/>
+					<text><![CDATA[Fecha]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="49ca0af8-186d-43b3-97b2-67c22ec9e762" x="101" y="33" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{movCodigo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="e6d13ed7-fddf-4e92-ac24-14a4acfd57ab" x="1" y="33" width="100" height="20"/>
+					<textElement/>
+					<text><![CDATA[Transaccion:]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="67f9f7f9-2260-44f4-8a28-bea6b2e875fa" x="212" y="33" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{movConcepto}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="158abfd2-3a73-4757-a03c-b4e22cd4d166" x="64" y="63" width="100" height="20"/>
+					<textElement/>
+					<text><![CDATA[Codigo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="bfed3e02-0254-4d94-bd11-68d82ac85afb" x="164" y="63" width="110" height="20"/>
+					<textElement/>
+					<text><![CDATA[Cuenta]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="f154fa9f-840c-4aec-aa6d-2ca181eee6b3" x="374" y="63" width="100" height="20"/>
+					<textElement/>
+					<text><![CDATA[Haber]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="4c98f13b-9264-4e4b-bad9-ddf13259f459" x="274" y="63" width="100" height="20"/>
+					<textElement/>
+					<text><![CDATA[Debe]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="71" splitType="Stretch"/>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d0455d2f-e9b1-4279-9183-1a5111c8d035" x="1" y="3" width="128" height="20"/>
+				<textElement/>
+				<text><![CDATA[Diario General Integrado]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="18" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement uuid="cca2061c-c407-4c40-9475-213e7dc263d2" x="1" y="0" width="63" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{movFechaContable}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ce7f15a6-45f0-4007-a65f-282fea297bf1" x="64" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cueNumero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b55fb6d0-108a-402b-af42-76c0c3238e65" x="164" y="0" width="110" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cueDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b942b67d-f2dc-4a36-9a1a-216a1d679790" x="374" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{mdeHaber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3e1798df-1a0f-487a-968a-516ea2c2fe7f" x="274" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{mdeDebe}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>

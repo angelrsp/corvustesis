@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="mayorGeneral" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bdfd9716-787b-4f24-a4e6-4e4a6a7aac94">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="cueCodigo" class="java.lang.String"/>
+	<field name="cueNumero" class="java.lang.String"/>
+	<field name="cueDescripcion" class="java.lang.String"/>
+	<field name="movFechaContable" class="java.lang.String"/>
+	<field name="mdeDebe" class="java.math.BigDecimal"/>
+	<field name="mdeHaber" class="java.math.BigDecimal"/>
+	<field name="mdeSaldo" class="java.math.BigDecimal"/>
+	<field name="movCodigo" class="java.lang.String"/>
+	<field name="movConcepto" class="java.lang.String"/>
+	<group name="Cuenta Codigo">
+		<groupExpression><![CDATA[$F{cueCodigo}]]></groupExpression>
+		<groupHeader>
+			<band height="104">
+				<textField>
+					<reportElement uuid="b2bcaa72-0a6d-4d66-98ac-1f774108d21d" x="131" y="15" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cueNumero}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="a88b41d1-feac-4379-92c1-993ca8999655" x="20" y="15" width="100" height="20"/>
+					<textElement/>
+					<text><![CDATA[Codigo:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="6eb92f62-11bd-4303-b623-da39a1360baf" x="20" y="40" width="100" height="20"/>
+					<textElement/>
+					<text><![CDATA[Nombre:]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="c7e2c5bc-9add-4676-a025-6a716405f3ed" x="131" y="40" width="113" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cueDescripcion}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="07249d58-f3eb-4790-9f33-32e888be9ef9" x="0" y="84" width="66" height="20"/>
+					<textElement/>
+					<text><![CDATA[Fecha]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="e6f0d2b0-70d9-4686-91cc-b3a3266f92c0" x="66" y="84" width="65" height="20"/>
+					<textElement/>
+					<text><![CDATA[Referencia]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="c9b6276a-cb23-4811-be73-fe64e9a5e4d2" x="131" y="84" width="123" height="20"/>
+					<textElement/>
+					<text><![CDATA[Descripcion]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="916d879c-fab9-44fd-9262-a73be5141681" x="254" y="84" width="100" height="20"/>
+					<textElement/>
+					<text><![CDATA[Debe]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="bffbb0fb-4bdf-427e-b7a8-5ef09241b5c9" x="355" y="84" width="100" height="20"/>
+					<textElement/>
+					<text><![CDATA[Haber]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="20a6b9a9-daea-4639-beaa-21e129e99fff" x="455" y="84" width="100" height="20"/>
+					<textElement/>
+					<text><![CDATA[Saldo]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="23" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="aeffb21c-5c61-4d9d-ad2b-08712c2c2719" x="10" y="6" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Mayor General]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement uuid="579be4c0-402f-41f2-8084-69a9880da503" x="0" y="0" width="66" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{movFechaContable}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bbc38fc7-821b-437c-98b0-33f49954bc53" x="66" y="0" width="65" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{movCodigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c4935aa8-ac2f-426a-8525-a9fdf90fdadd" x="131" y="0" width="123" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{movConcepto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b4942bdd-102a-4ac0-8edf-c6b6d53ceb1f" x="255" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{mdeDebe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="21dcf3f8-0b0e-4d07-a38f-0aa1cdf51bfa" x="354" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{mdeHaber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f72c95c2-b168-45a1-b4f3-001c24f4a50d" x="454" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{mdeSaldo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,11 +1,29 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:jr="http://jasperreportjsf.sf.net/tld/jasperreports-jsf-1_2.tld">
 
-<h:head></h:head> 
-<body> 
+<h:head></h:head>
+<body>
 
-</body> 
+	<ui:composition template="/template/pages.xhtml">
+		<ui:define name="contenido">
+
+			<h:form id="formDiarioGeneralIntegrado">
+
+				<jr:reportFrame id="visor"
+					value="/jasper/mayorGeneral.jasper" width="100%"
+					height="470" format="pdf">
+					<jr:source type="bean"
+						value="#{mayorGeneralPage.listReport}" />
+				</jr:reportFrame>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+
+</body>
 </html>
