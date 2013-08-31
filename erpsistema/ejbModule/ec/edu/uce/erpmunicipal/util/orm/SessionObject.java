@@ -8,9 +8,7 @@ import ec.edu.uce.erpmunicipal.sistema.orm.SisUsuarioRol;
 
 public class SessionObject implements Serializable {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	private SisUsuario user;
