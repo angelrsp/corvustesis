@@ -2,6 +2,7 @@ package ec.edu.uce.inventario.web.facturacion.report;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import net.sf.jasperreports.engine.JasperPrint;
 import ec.edu.uce.inventario.entidades.RepFactura;
@@ -32,7 +34,9 @@ public class FacturaReportPage implements Serializable{
 
 	public FacturaReportPage() {
 		listReport = new ArrayList<RepFactura>();
-
+		Calendar cal=Calendar.getInstance();
+		desde=cal.getTime();
+		hasta=cal.getTime();
 	}
 
 	public List<RepFactura> getlistReport() {
@@ -63,6 +67,11 @@ public class FacturaReportPage implements Serializable{
 	public void read() {
 		listReport=new ArrayList<RepFactura>();
 		listReport=reportService.reportFactura(desde, hasta);
+		
+		FacesContext.getCurrentInstance().getExternalContext()
+		.getSessionMap().put("listRepFactura", listReport);
+
+		
 //		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(
 //				listReport);
 //		String path = FacesContext.getCurrentInstance()
