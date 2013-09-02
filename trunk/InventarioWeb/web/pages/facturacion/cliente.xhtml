@@ -21,39 +21,46 @@
 
 				<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
 
+					<h:outputText value="Identificacion:" />
+					<p:inputText id="identificacion" tabindex="1" required="true"
+						value="#{clientePage.cliente.cliIdentificacion}"
+						requiredMessage="Ingrese Nombre" onkeypress="return isNumberKey(event);" maxlength="15">
+					</p:inputText>
+
+
 					<h:outputText value="Nombres:" />
-					<p:inputText id="nombres" tabindex="1" required="true"
+					<p:inputText id="nombres" tabindex="2" required="true"
 						value="#{clientePage.cliente.cliNombres}"
 						requiredMessage="Ingrese Nombre">
 					</p:inputText>
 
 					<h:outputText value="Apellidos:" />
-					<p:inputText id="apellidos" tabindex="2" required="true"
+					<p:inputText id="apellidos" tabindex="3" required="true"
 						value="#{clientePage.cliente.cliApellidos}"
 						requiredMessage="Ingrese Precio">
 					</p:inputText>
 
 					<h:outputText value="Direccion:" />
-					<p:inputTextarea id="actual" tabindex="3" required="true"
+					<p:inputTextarea id="actual" tabindex="4" required="true"
 						value="#{clientePage.cliente.cliDireccion}"
 						requiredMessage="Ingrese Direccion" autoResize="false">
 					</p:inputTextarea>
 
 					<h:outputText value="Telefono:" />
-					<p:inputText id="telefono" tabindex="4" required="true"
+					<p:inputText id="telefono" tabindex="5" required="true"
 						value="#{clientePage.cliente.cliTelefono}"
 						requiredMessage="Ingrese Telefono"
 						onkeypress="return isNumberKey(event);">
 					</p:inputText>
 
 					<h:outputText value="Celular:" />
-					<p:inputText id="celular" tabindex="4"
+					<p:inputText id="celular" tabindex="6"
 						value="#{clientePage.cliente.cliCelular}"
 						onkeypress="return isNumberKey(event);">
 					</p:inputText>
 
 					<h:outputText value="Mail:" />
-					<p:inputText id="mail" tabindex="5"
+					<p:inputText id="mail" tabindex="7"
 						value="#{clientePage.cliente.cliMail}">
 					</p:inputText>
 
@@ -80,6 +87,10 @@
 						<p:ajax update=":formCliente:controls" event="rowSelect"
 							listener="#{clientePage.onRowSelect}" />
 
+						<p:column headerText="Identificacion">
+                        #{cli.cliIdentificacion}
+                        </p:column>
+
 						<p:column headerText="Nombre">
                         #{cli.cliNombres}
                         </p:column>
@@ -104,12 +115,12 @@
                         #{cli.cliMail}
                         </p:column>
 
-						<p:column>
-							<p:commandButton icon="ui-icon-close"
-								actionListener="#{articuloPage.onRowDeleting(art)}"
-								process="@this">
-							</p:commandButton>
-						</p:column>
+<!-- 						<p:column> -->
+<!-- 							<p:commandButton icon="ui-icon-close" -->
+<!-- 								actionListener="#{articuloPage.onRowDeleting(art)}" -->
+<!-- 								process="@this"> -->
+<!-- 							</p:commandButton> -->
+<!-- 						</p:column> -->
 
 					</p:dataTable>
 				</h:panelGrid>
