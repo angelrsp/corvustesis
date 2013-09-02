@@ -17,12 +17,29 @@
 
 			<h:form id="formReportKardex">
 
-				<!-- 				<jr:reportFrame id="visor" value="/jasper/kardex.jasper" -->
-				<!-- 					width="100%" height="400" format="html"> -->
-				<!-- 					<jr:source type="bean" value="#{kardexReportPage.listKardek}" /> -->
-				<!-- 				</jr:reportFrame> -->
+				<p:panelGrid id="controls" columns="5" styleClass="panelGrid">
 
-				<h:panelGrid>
+					<h:outputText value="Desde:" />
+					<p:calendar id="calDesde" showButtonPanel="true"
+						pattern="dd/MM/yyyy" navigator="true" locale="es"
+						value="#{kardexReportPage.desde}">
+					</p:calendar>
+
+					<h:outputText value="Hasta:" />
+					<p:calendar id="calHasta" showButtonPanel="true"
+						pattern="dd/MM/yyyy" navigator="true" locale="es"
+						value="#{kardexReportPage.hasta}">
+					</p:calendar>
+
+					<p:commandButton value="Ver" icon="ui-icon-search"
+						styleClass="comButton" actionListener="#{kardexReportPage.read}" update="result">
+					</p:commandButton>
+
+				</p:panelGrid>
+
+
+
+				<h:panelGrid id="result">
 					<p:dataTable value="#{kardexReportPage.listKardek}" var="kar">
 
 						<p:column headerText="Articulo">
