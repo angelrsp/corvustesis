@@ -25,4 +25,6 @@ public interface ArticuloService {
 	List<InvArticulo> dynamicSearch(String par);
 
 	InvArticulo readArticulo(InvArticulo articulo);
+
+	void actualizarPrecios(Double porcentaje);
 }

@@ -149,4 +149,14 @@ public class ArticuloServiceBean implements ArticuloService {
 		else
 			return list;
 	}
+	
+	
+	@Override
+	public void actualizarPrecios(Double porcentaje)
+	{	
+		Double porc=porcentaje/100;
+		Query query=entityManager.createQuery("update InvArticulo set artPrecio=(artPrecio*:porcentaje)+artPrecio");
+		query.setParameter("porcentaje", BigDecimal.valueOf(porc));
+		query.executeUpdate();
+	}
 }
