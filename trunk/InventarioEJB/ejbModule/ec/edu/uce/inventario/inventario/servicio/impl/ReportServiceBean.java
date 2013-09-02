@@ -78,17 +78,13 @@ public class ReportServiceBean implements ReportService{
 	public List<RepFactura> reportFactura(Date desde,Date hasta) {
 		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
 		CriteriaQuery<RepFactura> cq=cb.createQuery(RepFactura.class);
-		//Root<RepFactura> from = cq.from(RepFactura.class);
+		Root<RepFactura> from = cq.from(RepFactura.class);
 		
-		//cq.where(cb.between(from.get("").as(Timestamp.class), new Timestamp(desde.getTime()),new Timestamp(hasta.getTime())));
-		cq.select(cq.from(RepFactura.class));
+		cq.where(cb.between(from.get("venFecha").as(Timestamp.class), new Timestamp(desde.getTime()),new Timestamp(hasta.getTime())));
 		
 		List<RepFactura> list= entityManager.createQuery(cq).getResultList();
 		
 		return list;
 	}
-
-	
-
 	
 }
