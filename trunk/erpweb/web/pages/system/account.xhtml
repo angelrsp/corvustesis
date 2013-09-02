@@ -15,7 +15,32 @@
 
 	<h:form id="formAccount">
 		<p:panelGrid styleClass="panelGrid" columns="2">
-			<h:outputText value="Descripción:" />
+		
+			<h:outputText value="Usuario:"/>
+			<p:inputText readonly="true" value="#{accountPage.user.usuLogin}"></p:inputText>
+
+			<h:outputText value="Identificacion:"/>
+			<p:inputText readonly="true" value="#{accountPage.user.usuIdentifiacion}"></p:inputText>
+		
+			<h:outputText value="Apellidos:"/>
+			<p:inputText readonly="true" value="#{accountPage.user.usuApellidos}"></p:inputText>
+
+			<h:outputText value="Nombres:" />
+			<p:inputText readonly="true" value="#{accountPage.user.usuNombres}"></p:inputText>			
+
+			<h:outputText value="Direccion:" />			
+			<p:inputTextarea readonly="true" autoResize="false" value="#{accountPage.user.usuDireccion}"></p:inputTextarea>
+
+			<h:outputText value="Telefono:" />
+			<p:inputText readonly="true" value="#{accountPage.user.usuTelefono}"></p:inputText>
+
+			<h:outputText value="Celular:" />
+			<p:inputText readonly="true" value="#{accountPage.user.usuCelular}"></p:inputText>
+
+			<h:outputText value="E-Mail:" />
+			<p:inputText readonly="true" value="#{accountPage.user.usuMail}"></p:inputText>
+
+
 		</p:panelGrid>
 	</h:form>
 
