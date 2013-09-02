@@ -25,10 +25,13 @@ public class ReportServiceBean implements ReportService{
 	private EntityManager entityManager;
 
 	@Override
-	public List<InvKardex> reportKardex() {
+	public List<InvKardex> reportKardex(Date desde,Date hasta) {
 		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
 		CriteriaQuery<InvKardex> cq=cb.createQuery(InvKardex.class);
-		cq.select(cq.from(InvKardex.class));
+		Root<InvKardex> from = cq.from(InvKardex.class);
+		
+		cq.where(cb.between(from.get("karFecha").as(Timestamp.class), new Timestamp(desde.getTime()), new Timestamp(hasta.getTime())));
+
 		//entityManager.createQuery(cq).setMaxResults(1000).getResultList();
 		List<InvKardex> list= entityManager.createQuery(cq).getResultList();
 		if(list.isEmpty())
@@ -39,13 +42,13 @@ public class ReportServiceBean implements ReportService{
 
 	
 	@Override
-	public List<InvKardex> reportIngreso() {
+	public List<InvKardex> reportIngreso(Date desde,Date hasta) {
 		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
 		CriteriaQuery<InvKardex> cq=cb.createQuery(InvKardex.class);
 		Root<InvKardex> from = cq.from(InvKardex.class);
 		Path<InvClase> join=from.join("invClase").get("claCodigo");
 		
-		cq.where(cb.equal(join,1));
+		cq.where(cb.and(cb.equal(join,1),cb.between(from.get("karFecha").as(Timestamp.class), new Timestamp(desde.getTime()), new Timestamp(hasta.getTime()))));
 		
 		//entityManager.createQuery(cq).setMaxResults(1000).getResultList();
 		List<InvKardex> list= entityManager.createQuery(cq).getResultList();
@@ -57,13 +60,13 @@ public class ReportServiceBean implements ReportService{
 
 	
 	@Override
-	public List<InvKardex> reportEgreso() {
+	public List<InvKardex> reportEgreso(Date desde,Date hasta) {
 		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
 		CriteriaQuery<InvKardex> cq=cb.createQuery(InvKardex.class);
 		Root<InvKardex> from = cq.from(InvKardex.class);
 		Path<InvClase> join=from.join("invClase").get("claCodigo");
 		
-		cq.where(cb.equal(join,2));
+		cq.where(cb.and(cb.equal(join,2),cb.between(from.get("karFecha").as(Timestamp.class), new Timestamp(desde.getTime()), new Timestamp(hasta.getTime()))));
 		
 		//entityManager.createQuery(cq).setMaxResults(1000).getResultList();
 		List<InvKardex> list= entityManager.createQuery(cq).getResultList();
