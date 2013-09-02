@@ -181,6 +181,10 @@
 							oncomplete="buscarCliente.hide();" event="rowSelect"
 							update=":formVenta:controls,result,:dialogCliente:searchText"></p:ajax>
 
+						<p:column headerText="Identificacion">
+						#{cli.cliIdentificacion}
+						</p:column>
+
 						<p:column headerText="Nombres">
 						#{cli.cliNombres}
 						</p:column>
