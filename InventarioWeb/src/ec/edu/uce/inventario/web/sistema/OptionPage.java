@@ -60,137 +60,74 @@ public class OptionPage implements Serializable{
         patherCode = 0;
     }
 
-    /**
-     * @return the options
-     */
     public List<SisOpcion> getOptions() {
         return options;
     }
 
-    /**
-     * @param options
-     *            the options to set
-     */
     public void setOptions(List<SisOpcion> options) {
         this.options = options;
     }
 
-    /**
-     * @return the optionsPather
-     */
     public List<SisOpcion> getOptionsPather() {
         return optionsPather;
     }
 
-    /**
-     * @param optionsPather
-     *            the optionsPather to set
-     */
     public void setOptionsPather(List<SisOpcion> optionsPather) {
         this.optionsPather = optionsPather;
     }
 
-    /**
-     * @return the modules
-     */
     public List<SisModulo> getModules() {
         return modules;
     }
 
-    /**
-     * @param modules
-     *            the modules to set
-     */
     public void setModules(List<SisModulo> modules) {
         this.modules = modules;
     }
 
-    /**
-     * @return the optionTable
-     */
     public SisOpcion getOptionTable() {
         return optionTable;
     }
 
-    /**
-     * @param optionTable
-     *            the optionTable to set
-     */
     public void setOptionTable(SisOpcion optionTable) {
         this.optionTable = optionTable;
     }
 
-    /**
-     * @return the isNode
-     */
     public Boolean getIsNode() {
         return isNode;
     }
 
-    /**
-     * @param isNode
-     *            the isNode to set
-     */
     public void setIsNode(Boolean isNode) {
         this.isNode = isNode;
     }
 
-    /**
-     * @return the moduleCode
-     */
     public int getModuleCode() {
         return moduleCode;
     }
 
-    /**
-     * @param moduleCode
-     *            the moduleCode to set
-     */
     public void setModuleCode(int moduleCode) {
         this.moduleCode = moduleCode;
     }
 
-    /**
-     * @return the patherCode
-     */
     public int getPatherCode() {
         return patherCode;
     }
 
-    /**
-     * @param patherCode
-     *            the patherCode to set
-     */
     public void setPatherCode(int patherCode) {
         this.patherCode = patherCode;
     }
 
-    /**
-     * @return the enabledUrl
-     */
     public Boolean getReadOnlyUrl() {
         return readOnlyUrl;
     }
 
-    /**
-     * @param enabledUrl
-     *            the enabledUrl to set
-     */
     public void setReadOnlyUrl(Boolean readOnlyUrl) {
         this.readOnlyUrl = readOnlyUrl;
     }
 
-    /**
-     * @return the option
-     */
     public SisOpcion getOption() {
         return option;
     }
 
-    /**
-     * @param option
-     *            the option to set
-     */
     public void setOption(SisOpcion option) {
         this.option = option;
     }
