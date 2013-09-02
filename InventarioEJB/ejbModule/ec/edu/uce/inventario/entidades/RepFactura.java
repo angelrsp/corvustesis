@@ -76,6 +76,9 @@ public class RepFactura implements Serializable {
 	@Column(name="cli_mail")
 	private String cliMail;
 
+	@Column(name="cli_identificacion")
+	private String cliIdentificacion;
+	
 	@Column(name="cli_nombres")
 	private String cliNombres;
 
@@ -286,6 +289,14 @@ public class RepFactura implements Serializable {
 
 	public void setCliMail(String cliMail) {
 		this.cliMail = cliMail;
+	}
+
+	public String getCliIdentificacion() {
+		return cliIdentificacion;
+	}
+
+	public void setCliIdentificacion(String cliIdentificacion) {
+		this.cliIdentificacion = cliIdentificacion;
 	}
 
 	public String getCliNombres() {
