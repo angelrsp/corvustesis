@@ -2,6 +2,8 @@ package ec.edu.uce.inventario.web.inventario.report;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 import java.util.List;
@@ -30,9 +32,14 @@ public class KardexReportPage implements Serializable {
 
 	private List<InvKardex> listKardek;
 
+	private Date desde;
+	private Date hasta;
+	
 	public KardexReportPage() {
 		listKardek = new ArrayList<InvKardex>();
-
+		Calendar cal=Calendar.getInstance();
+		desde=cal.getTime();
+		hasta=cal.getTime();
 	}
 
 	public List<InvKardex> getListKardek() {
@@ -43,10 +50,26 @@ public class KardexReportPage implements Serializable {
 		this.listKardek = listKardek;
 	}
 
+	public Date getDesde() {
+		return desde;
+	}
+
+	public void setDesde(Date desde) {
+		this.desde = desde;
+	}
+
+	public Date getHasta() {
+		return hasta;
+	}
+
+	public void setHasta(Date hasta) {
+		this.hasta = hasta;
+	}
+
 	JasperPrint jasperPrint;  
 	public void read() {
 		listKardek=new ArrayList<InvKardex>();
-		listKardek=reportService.reportKardex();
+		listKardek=reportService.reportKardex(desde,hasta);
 //		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(
 //				listKardek);
 //		String path = FacesContext.getCurrentInstance()
