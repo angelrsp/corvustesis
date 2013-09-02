@@ -52,8 +52,9 @@ public class ClienteServiceBean implements ClienteService{
 		
 		Predicate like1=cb.like(cb.lower(from.get("cliApellidos").as(String.class)), "%"+text.toLowerCase()+"%");
 		Predicate like2=cb.like(cb.lower(from.get("cliNombres").as(String.class)), "%"+text.toLowerCase()+"%");
+		Predicate like3=cb.like(cb.lower(from.get("cliIdentificacion").as(String.class)), "%"+text.toLowerCase()+"%");
 		
-		cq.where(cb.or(like1,like2));
+		cq.where(cb.or(like1,like2,like3));
 		
 		TypedQuery<FacCliente> typed=entityManager.createQuery(cq);
 		typed.setMaxResults(100);
