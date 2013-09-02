@@ -15,6 +15,24 @@
 
 <h:body>
 
+			<tr>
+				<td>
+					<table width="100%">
+						<tr>
+							<td align="left"><h:graphicImage value="/images/contamatic.png"
+									height="80" /></td>
+							<td align="right"><h:graphicImage value="/images/sello.png" height="80" />
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td height="90" align="left" valign="middle" width="100%"><h:graphicImage
+						value="/images/borde.png" height="40" /></td>
+			</tr>
+			
+
 	<h:form id="index">
 		<div align="center">
 			<p:panel id="grid" header="Inicio"
@@ -23,9 +41,9 @@
 					<h:outputText value="Usuario:" />
 					<p:inputText id="username" value="#{indexPage.user}"
 						required="true" requiredMessage="Ingrese Usuario" tabindex="1"></p:inputText>
-					<h:outputText value="ContraseÃ±a:" />
+					<h:outputText value="Contraseña:" />
 					<p:password id="password" required="true" feedback="false"
-						requiredMessage="Ingrese ContraseÃ±a" value="#{indexPage.password}"></p:password>
+						requiredMessage="Ingrese Contraseña" value="#{indexPage.password}"></p:password>
 					<p:spacer></p:spacer>
 					<p:commandButton value="Entrar" style="width:90px;height:30px;"
 						update="grid" action="#{indexPage.authenticate}"></p:commandButton>

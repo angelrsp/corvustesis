@@ -15,12 +15,13 @@
 	<field name="venCodigo" class="java.lang.String"/>
 	<field name="artTipo" class="java.lang.String"/>
 	<field name="dveTotal" class="java.lang.String"/>
+	<field name="cliIdentificacion" class="java.lang.String"/>
 	<group name="Codigo">
 		<groupExpression><![CDATA[$F{venCodigo}]]></groupExpression>
 		<groupHeader>
-			<band height="156">
+			<band height="185">
 				<staticText>
-					<reportElement uuid="813d859a-1773-4f53-8a30-9626a83209a7" x="0" y="136" width="87" height="20"/>
+					<reportElement uuid="813d859a-1773-4f53-8a30-9626a83209a7" x="0" y="165" width="87" height="20"/>
 					<box>
 						<pen lineWidth="1.0"/>
 						<topPen lineWidth="1.0"/>
@@ -32,7 +33,7 @@
 					<text><![CDATA[Cantidad]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="bcc8aa57-eff8-45f1-8f13-d4f4bd82dd29" x="87" y="136" width="268" height="20"/>
+					<reportElement uuid="bcc8aa57-eff8-45f1-8f13-d4f4bd82dd29" x="87" y="165" width="268" height="20"/>
 					<box>
 						<pen lineWidth="1.0"/>
 						<topPen lineWidth="1.0"/>
@@ -44,47 +45,42 @@
 					<text><![CDATA[Articulo]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="aa8ef9ea-518b-4228-9705-3b72a4f018a8" x="36" y="45" width="100" height="20"/>
+					<reportElement uuid="aa8ef9ea-518b-4228-9705-3b72a4f018a8" x="36" y="78" width="100" height="20"/>
 					<textElement/>
 					<text><![CDATA[Cliente:]]></text>
 				</staticText>
 				<textField>
-					<reportElement uuid="71aa5c4a-1579-45be-b6f2-ca1449882f04" x="147" y="45" width="100" height="20"/>
+					<reportElement uuid="71aa5c4a-1579-45be-b6f2-ca1449882f04" x="147" y="78" width="100" height="20"/>
 					<textElement/>
 					<textFieldExpression><![CDATA[$F{cliApellidos}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement uuid="af857066-01a5-41d8-ad1d-19add832c9f8" x="277" y="45" width="100" height="20"/>
+					<reportElement uuid="af857066-01a5-41d8-ad1d-19add832c9f8" x="277" y="78" width="100" height="20"/>
 					<textElement/>
 					<textFieldExpression><![CDATA[$F{cliNombres}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement uuid="dff5d55b-ef58-43d5-b7c8-3e2508a047f3" x="36" y="97" width="100" height="20"/>
+					<reportElement uuid="dff5d55b-ef58-43d5-b7c8-3e2508a047f3" x="36" y="130" width="100" height="20"/>
 					<textElement/>
 					<text><![CDATA[Telefono:]]></text>
 				</staticText>
 				<textField>
-					<reportElement uuid="f113da33-9574-4938-a2b7-2fcc1703cb4e" x="147" y="97" width="100" height="20"/>
+					<reportElement uuid="f113da33-9574-4938-a2b7-2fcc1703cb4e" x="147" y="130" width="100" height="20"/>
 					<textElement/>
 					<textFieldExpression><![CDATA[$F{cliTelefono}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement uuid="8dcb5979-0250-4e8a-a0a5-a3aec516942b" x="36" y="72" width="100" height="20"/>
+					<reportElement uuid="8dcb5979-0250-4e8a-a0a5-a3aec516942b" x="36" y="105" width="100" height="20"/>
 					<textElement/>
 					<text><![CDATA[Direccion:]]></text>
 				</staticText>
 				<textField>
-					<reportElement uuid="db5668cf-2509-453b-bfea-fc89fc81d9e6" x="147" y="72" width="100" height="20"/>
+					<reportElement uuid="db5668cf-2509-453b-bfea-fc89fc81d9e6" x="147" y="105" width="100" height="20"/>
 					<textElement/>
 					<textFieldExpression><![CDATA[$F{cliDireccion}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement uuid="ea0ff77a-e135-4ba9-933c-089440b53844" x="87" y="12" width="100" height="20"/>
-					<textElement/>
-					<text><![CDATA[Contamatic]]></text>
-				</staticText>
-				<staticText>
-					<reportElement uuid="66d00f41-df7c-4729-bbf7-6c459c6387e8" x="355" y="136" width="100" height="20"/>
+					<reportElement uuid="66d00f41-df7c-4729-bbf7-6c459c6387e8" x="355" y="165" width="100" height="20"/>
 					<box>
 						<pen lineWidth="1.0"/>
 						<topPen lineWidth="1.0"/>
@@ -96,7 +92,7 @@
 					<text><![CDATA[Valor Unitario]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="f5825dc4-1dfa-4a8b-bfd0-879cf02f27ed" x="455" y="136" width="100" height="20"/>
+					<reportElement uuid="f5825dc4-1dfa-4a8b-bfd0-879cf02f27ed" x="455" y="165" width="100" height="20"/>
 					<box>
 						<pen lineWidth="1.0"/>
 						<topPen lineWidth="1.0"/>
@@ -107,6 +103,20 @@
 					<textElement/>
 					<text><![CDATA[Valor Total]]></text>
 				</staticText>
+				<staticText>
+					<reportElement uuid="4ee7fc10-db94-486c-aa64-5592e30d2408" x="277" y="105" width="100" height="20"/>
+					<textElement/>
+					<text><![CDATA[RUC:]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="66cae3be-639e-415a-a964-e6da468fe200" x="377" y="105" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cliIdentificacion}]]></textFieldExpression>
+				</textField>
+				<image>
+					<reportElement uuid="68fd66c2-50dc-4a12-a952-66a76b128dc1" x="0" y="0" width="700" height="68"/>
+					<imageExpression><![CDATA["C:\\_javaee\\InventarioWeb\\web\\jasper\\Cabecera.jpg"]]></imageExpression>
+				</image>
 			</band>
 		</groupHeader>
 		<groupFooter>
@@ -130,14 +140,11 @@
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
-		<band height="17" splitType="Stretch"/>
-	</title>
 	<pageHeader>
 		<band height="22" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="18" splitType="Stretch"/>
+		<band height="9" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
 		<band height="33" splitType="Stretch">
