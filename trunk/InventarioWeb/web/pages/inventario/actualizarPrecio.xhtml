@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/templates/pages.xhtml">
+
+		<ui:define name="tituloFormulario">Actualizar Precios</ui:define>
+
+		<ui:define name="contenido">
+
+			<h:form id="formPrecios">
+
+				<p:panelGrid id="controls" columns="3" styleClass="panelGrid">
+
+					<h:outputText value="Porcentaje:" />
+					<p:inputText id="codigo" tabindex="1" required="true"
+						requiredMessage="Ingrese Porcentaje"
+						onkeypress="return isDecimalKey(event);"
+						value="#{actualizarPrecioPage.porcentaje}">
+					</p:inputText>
+					<h:outputText value="%" />
+					
+				</p:panelGrid>
+
+				<h:panelGrid id="buttons">
+					<p:column>
+						<p:commandButton value="Actualizar" icon="ui-icon-disk"
+							styleClass="comButton"
+							onclick="if(!confirm('Esta seguro que desea Actualizar todos los precios?')) return false;"
+							update="controls,message"
+							actionListener="#{actualizarPrecioPage.actualizar}" />
+					</p:column>
+				</h:panelGrid>
+
+				<h:panelGrid id="message">
+					<p:growl showDetail="true" widgetVar="msg"></p:growl>
+				</h:panelGrid>
+
+			</h:form>
+
+		</ui:define>
+
+	</ui:composition>
+</body>
+</html>
