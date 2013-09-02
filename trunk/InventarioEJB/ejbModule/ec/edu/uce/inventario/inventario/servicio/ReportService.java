@@ -11,12 +11,12 @@ import ec.edu.uce.inventario.entidades.RepFactura;
 @Local
 public interface ReportService {
 
-	List<InvKardex> reportKardex();
-
-	List<InvKardex> reportIngreso();
-
-	List<InvKardex> reportEgreso();
-
 	List<RepFactura> reportFactura(Date desde, Date hasta);
+
+	List<InvKardex> reportKardex(Date desde, Date hasta);
+
+	List<InvKardex> reportIngreso(Date desde, Date hasta);
+
+	List<InvKardex> reportEgreso(Date desde, Date hasta);
 
 }
