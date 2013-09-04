@@ -36,6 +36,11 @@
 							update="controls,message"
 							actionListener="#{actualizarPrecioPage.actualizar}" />
 					</p:column>
+					<p:column>
+						<h:commandButton value="Xlsx" 
+							styleClass="comButton"
+							actionListener="#{actualizarPrecioPage.XLSX}" />
+					</p:column>					
 				</h:panelGrid>
 
 				<h:panelGrid id="message">
