@@ -8,8 +8,10 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import net.sf.jasperreports.engine.JasperPrint;
 import ec.edu.uce.inventario.entidades.InvKardex;
@@ -66,6 +68,16 @@ public class EgresoReportPage implements Serializable {
 
 	JasperPrint jasperPrint;  
 	public void read() {
+		
+		if(desde.after(hasta))
+		{
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+							"La fecha desde no puede ser mayor a la fecha hasta"));
+			return;
+		}
+		
 		listReport=new ArrayList<InvKardex>();
 		listReport=reportService.reportEgreso(desde,hasta);
 //		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(
