@@ -35,24 +35,38 @@
 
 						<h:outputText value="Fecha:" />
 						<p:calendar id="popupButtonCal" showButtonPanel="true"
-							pattern="dd/MM/yyyy" navigator="true" locale="es" value="#{ventaPage.fecha}"/>
+							pattern="dd/MM/yyyy" navigator="true" locale="es"
+							value="#{ventaPage.fecha}" />
 
 						<h:outputText value="Pedido:" />
 						<p:inputText id="pedido" value="#{ventaPage.venta.venPedido}"></p:inputText>
 
 						<h:outputText value="Total:" />
-						<p:inputText id="totalFac" value="#{ventaPage.venta.venTotal}" readonly="true"></p:inputText>
+						<p:inputText id="totalFac" value="#{ventaPage.venta.venTotal}"
+							readonly="true"></p:inputText>
+
+						<h:outputText value="Descuento:" />
+						<p:column>
+							<p:inputText value="#{ventaPage.venta.venDescuentoPorcentaje}"
+								style="width:60px;">
+							<p:ajax event="blur" listener=""></p:ajax>	
+							</p:inputText>
+							<h:outputText value="%" />
+						</p:column>
 
 					</p:panelGrid>
 
 					<h:panelGrid id="buttons">
 						<p:column>
 							<p:commandButton value="Nuevo" icon="ui-icon-document"
-								styleClass="comButton" update="controls,controlsArticulo,controlsDetalle,detalles" process="@this" actionListener="#{ventaPage.clear}">
+								styleClass="comButton"
+								update="controls,controlsArticulo,controlsDetalle,detalles"
+								process="@this" actionListener="#{ventaPage.clear}">
 								<p:resetInput target="controls"></p:resetInput>
 							</p:commandButton>
 							<p:commandButton value="Guardar" icon="ui-icon-disk"
-								styleClass="comButton" actionListener="#{ventaPage.create}" update="message" process="@this,pedido"/>
+								styleClass="comButton" actionListener="#{ventaPage.create}"
+								update="message" process="@this,pedido" />
 						</p:column>
 					</h:panelGrid>
 
@@ -86,14 +100,11 @@
 						<h:outputText value="Precio Unitario:" />
 						<p:inputText value="#{ventaPage.detalle.dvePrecio}"></p:inputText>
 
-						<h:outputText value="Descuento:" />
-						<p:inputText value="#{ventaPage.detalle.dveDescuentoPorcentaje}"
-							style="width:60px;"></p:inputText>
-						<h:outputText value="%" />
 
 						<p:commandButton value="Añadir" icon="ui-icon-arrow-1-s"
 							styleClass="comButton" actionListener="#{ventaPage.add}"
-							process="@this,controlsDetalle" update="detalles,message,controlsArticulo,controlsDetalle,totalFac" />
+							process="@this,controlsDetalle"
+							update="detalles,message,controlsArticulo,controlsDetalle,totalFac" />
 
 
 					</p:panelGrid>

@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"> 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head> 
+<h:head></h:head>
 <body>
 
 
@@ -32,40 +32,57 @@
 					</p:calendar>
 
 					<p:commandButton value="Ver" icon="ui-icon-search"
-						styleClass="comButton" actionListener="#{egresoReportPage.read}" update="result">
+						styleClass="comButton" actionListener="#{egresoReportPage.read}"
+						update="result,message">
 					</p:commandButton>
 
 				</p:panelGrid>
 
-
-
-				<!-- 				<jr:reportFrame id="visor" value="/jasper/kardex.jasper" -->
-				<!-- 					width="100%" height="400" format="html"> -->
-				<!-- 					<jr:source type="bean" value="#{kardexReportPage.listKardek}" /> -->
-				<!-- 				</jr:reportFrame> -->
+				<h:panelGrid>
+					<h:commandLink value="Excel">
+						<p:dataExporter type="xls" target="tbl" fileName="egreso" />
+					</h:commandLink>
+				</h:panelGrid>
 
 				<h:panelGrid id="result">
-					<p:dataTable value="#{egresoReportPage.listReport}" var="kar">
+					<p:dataTable id="tbl" value="#{egresoReportPage.listReport}"
+						var="kar">
 
-						<p:column headerText="Articulo">
-							#{kar.invArticulo.artTipo}
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Articulo" />
+							</f:facet>
+							<h:outputText value="#{kar.invArticulo.artTipo}" />
 						</p:column>
 
-						<p:column headerText="Clase">
-							#{kar.invClase.claDescripcion}
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Clase" />
+							</f:facet>
+							<h:outputText value="#{kar.invClase.claDescripcion}" />
 						</p:column>
 
-						<p:column headerText="Fecha">
-							#{kar.karFecha}
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Fecha" />
+							</f:facet>
+							<h:outputText value="#{kar.karFecha}" />
 						</p:column>
 
-						<p:column headerText="Cantidad">
-							#{kar.karCantidad}
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Cantidad" />
+							</f:facet>
+							<h:outputText value="#{kar.karCantidad}" />
 						</p:column>
-
 
 					</p:dataTable>
 
+				</h:panelGrid>
+
+				<h:panelGrid id="message">
+					<p:growl showDetail="true"></p:growl>
 				</h:panelGrid>
 
 
