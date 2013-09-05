@@ -30,6 +30,13 @@ public class FacVenta implements Serializable {
 
 	@Column(name="ven_total")
 	private BigDecimal venTotal;
+	
+	@Column(name="ven_descuento")
+	private BigDecimal venDescuento;
+
+	@Column(name="ven_descuento_porcentaje")
+	private BigDecimal venDescuentoPorcentaje;
+
 
 	//bi-directional many-to-one association to FacDetalleVenta
 	@OneToMany(mappedBy="facVenta")
@@ -73,6 +80,22 @@ public class FacVenta implements Serializable {
 
 	public void setVenTotal(BigDecimal venTotal) {
 		this.venTotal = venTotal;
+	}
+
+	public BigDecimal getVenDescuento() {
+		return venDescuento;
+	}
+
+	public void setVenDescuento(BigDecimal venDescuento) {
+		this.venDescuento = venDescuento;
+	}
+
+	public BigDecimal getVenDescuentoPorcentaje() {
+		return venDescuentoPorcentaje;
+	}
+
+	public void setVenDescuentoPorcentaje(BigDecimal venDescuentoPorcentaje) {
+		this.venDescuentoPorcentaje = venDescuentoPorcentaje;
 	}
 
 	public List<FacDetalleVenta> getFacDetalleVentas() {
