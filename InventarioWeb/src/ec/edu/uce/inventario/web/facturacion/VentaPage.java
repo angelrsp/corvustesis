@@ -68,6 +68,7 @@ public class VentaPage implements Serializable{
 		articulo=new InvArticulo();
 		Calendar cal=Calendar.getInstance();
 		fecha=cal.getTime();
+		venta.setVenDescuentoPorcentaje(BigDecimal.valueOf(0.0));
 	}
 
 	public FacCliente getCliente() {
@@ -160,23 +161,38 @@ public class VentaPage implements Serializable{
 
 	public void create()
 	{
-		if(cliente.getCliCodigo()==null)
-		{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","Ingrese Cliente"));
-			return;				
+		try{
+			if(cliente.getCliCodigo()==null)
+			{
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","Ingrese Cliente"));
+				return;				
+			}
+			if(venta.getVenPedido()==null||venta.getVenPedido().trim().equals(""))
+			{
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","Ingrese Fecha"));
+				return;							
+			}
+			if(venta.getVenDescuentoPorcentaje()==null)
+			{
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","Ingrese Descuento"));
+				return;										
+			}
+			if(detalles.size()<=0)
+			{
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","Agregue Detalles"));
+				return;	
+			}
+			venta.setVenFecha(new Timestamp(fecha.getTime()));
+			facturaService.create(venta, detalles, cliente);
+			
+			Double descuento=venta.getVenTotal().doubleValue()*(venta.getVenDescuentoPorcentaje().doubleValue()/100);
+			Double tot=venta.getVenTotal().doubleValue()-descuento;
+			venta.setVenTotal(BigDecimal.valueOf(tot));
 		}
-		if(venta.getVenPedido()==null||venta.getVenPedido().trim().equals(""))
+		catch(Exception e)
 		{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","Ingrese Fecha"));
-			return;							
-		}		
-		if(detalles.size()<=0)
-		{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","Agregue Detalles"));
-			return;	
+			
 		}
-		venta.setVenFecha(new Timestamp(fecha.getTime()));
-		facturaService.create(venta, detalles, cliente);
 	}
 	
 	public void add()
@@ -196,11 +212,6 @@ public class VentaPage implements Serializable{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","Ingrese Cantidad"));
 			return;
 		}
-		if(this.detalle.getDveDescuentoPorcentaje()==null)
-		{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","Ingrese Descuento"));
-			return;
-		}				
 
 		Double total=detalle.getDveCantidad().doubleValue()*detalle.getDvePrecio().doubleValue();
 		
@@ -222,6 +233,7 @@ public class VentaPage implements Serializable{
 		detalles=new ArrayList<FacDetalleVenta>();
 		venta=new FacVenta();
 		venta.setVenTotal(BigDecimal.valueOf(0.0));
+		venta.setVenDescuentoPorcentaje(BigDecimal.valueOf(0.0));
 	}
 	
 	public void onRowSelect(SelectEvent event)
