@@ -1,5 +1,6 @@
 package ec.edu.uce.inventario.facturacion.servicio.impl;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.List;
@@ -30,6 +31,10 @@ public class FacturaServiceBean implements FacturaService{
 	public void create(FacVenta venta,List<FacDetalleVenta> detalles,FacCliente cliente)
 	{
 		venta.setFacCliente(cliente);
+		
+		Double descuento=venta.getVenTotal().doubleValue()*(venta.getVenDescuentoPorcentaje().doubleValue()/100);
+		Double tot=venta.getVenTotal().doubleValue()-descuento;
+		venta.setVenTotal(BigDecimal.valueOf(tot));
 		
 		entityManager.persist(venta);
 		entityManager.flush();
