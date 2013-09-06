@@ -37,6 +37,13 @@ public class PrePresupuesto implements Serializable {
 	@Column(name="pre_saldo")
 	private BigDecimal preSaldo;
 
+	@Column(name="pre_ultimo")
+	private Boolean preUltimo;
+
+	@Column(name="pre_inicial")
+	private Boolean preInicial;
+
+	
 	public PrePresupuesto() {
 	}
 
@@ -86,6 +93,22 @@ public class PrePresupuesto implements Serializable {
 
 	public void setPreSaldo(BigDecimal preSaldo) {
 		this.preSaldo = preSaldo;
+	}
+
+	public Boolean getPreUltimo() {
+		return preUltimo;
+	}
+
+	public void setPreUltimo(Boolean preUltimo) {
+		this.preUltimo = preUltimo;
+	}
+
+	public Boolean getPreInicial() {
+		return preInicial;
+	}
+
+	public void setPreInicial(Boolean preInicial) {
+		this.preInicial = preInicial;
 	}
 
 }

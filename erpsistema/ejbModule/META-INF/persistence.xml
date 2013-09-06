@@ -30,7 +30,9 @@
 	<class>ec.edu.uce.erpmunicipal.presupuesto.orm.PreReforma</class>
 	<class>ec.edu.uce.erpmunicipal.presupuesto.orm.PreReformaDetalle</class>
 	<class>ec.edu.uce.erpmunicipal.presupuesto.orm.PreTipoCertificacion</class>
-	<class>ec.edu.uce.erpmunicipal.presupuesto.orm.PreTipoReforma</class>		
+	<class>ec.edu.uce.erpmunicipal.presupuesto.orm.PreTipoReforma</class>
+	<class>ec.edu.uce.erpmunicipal.presupuesto.orm.PrePrograma</class>
+	<class>ec.edu.uce.erpmunicipal.presupuesto.orm.PreProgramaCuenta</class>		
 		<properties>
 			<property name="hibernate.id.new_generator_mappings" value="false"/>
 			<property name="hibernate.show_sql" value="true"/>
