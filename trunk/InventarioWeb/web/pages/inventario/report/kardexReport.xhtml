@@ -3,7 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <h:head></h:head>
 <body>
@@ -46,7 +47,8 @@
 
 
 				<h:panelGrid id="result">
-					<p:dataTable id="tbl" value="#{kardexReportPage.listKardek}" var="kar">
+					<p:dataTable id="tbl" value="#{kardexReportPage.listKardek}"
+						var="kar">
 
 						<p:column>
 							<f:facet name="header">
@@ -66,7 +68,7 @@
 							<f:facet name="header">
 								<h:outputText value="Fecha" />
 							</f:facet>
-							<h:outputText value="#{kar.karFecha}" />
+							<h:outputText value="#{fn:substring(kar.karFecha,0,19)}" />
 						</p:column>
 
 						<p:column>
