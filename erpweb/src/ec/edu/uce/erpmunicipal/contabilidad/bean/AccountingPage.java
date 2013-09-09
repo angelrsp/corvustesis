@@ -332,7 +332,6 @@ public class AccountingPage implements Serializable {
 		accTypeCode=cuenta.getConTipoCuenta().getTcuCodigo();
 	}
 
-
 	@PostConstruct
 	public void init() {
 		readAccType();
