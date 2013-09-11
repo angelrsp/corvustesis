@@ -1,11 +1,96 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head> 
-<body> 
+<h:head></h:head>
+<body>
 
-</body> 
+	<ui:composition template="/template/pages.xhtml">
+		<ui:define name="contenido">
+
+
+			<h:form id="formReform">
+
+				<fieldset>
+					<legend
+						style="font-family: Arial, sans-serif; font-size: 1em; color: #4f4f4f;">Encabezado</legend>
+					<p:panelGrid id="enc1" styleClass="panelGrid" columns="9">
+						<p:column>
+							<p:commandButton icon="ui-icon-seek-first">
+							</p:commandButton>
+							<p:commandButton icon="ui-icon-seek-prev">
+							</p:commandButton>
+							<p:commandButton icon="ui-icon-seek-next">
+							</p:commandButton>
+							<p:commandButton icon="ui-icon-seek-end">
+							</p:commandButton>
+						</p:column>
+						<p:column>
+							<h:outputText value="Reforma:" />
+						</p:column>
+						<p:column>
+							<p:inputText id="reform" readonly="true" style="width:50px;"></p:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputText value="Fecha:" />
+						</p:column>
+						<p:column>
+							<p:calendar id="calFecha" pattern="dd/MM/yyyy"
+								style="width:20px;" value="#{journalPage.fecha}"
+								showButtonPanel="true" navigator="true" locale="es"></p:calendar>
+						</p:column>
+
+					</p:panelGrid>
+
+					<p:panelGrid id="enc2" styleClass="panelGrid" columns="4">
+						<p:column>
+							<h:outputText value="Detalle:" />
+						</p:column>
+						<p:column>
+							<p:inputTextarea id="detail" autoResize="false" required="true"
+								requiredMessage="Ingrese Detalle"></p:inputTextarea>
+						</p:column>
+					</p:panelGrid>
+
+					<h:panelGrid id="buttons">
+						<p:column>
+							<p:commandButton value="Nuevo" icon="ui-icon-document"
+								styleClass="comButton">
+							</p:commandButton>
+							<p:commandButton value="Guardar" icon="ui-icon-disk"
+								styleClass="comButton" actionListener="#{journalPage.create}"
+								update="message,enc1,enc2" process="@this,calFecha" />
+							<p:commandButton value="Editar" icon="ui-icon-pencil"
+								styleClass="comButton" />
+						</p:column>
+
+					</h:panelGrid>
+
+				</fieldset>
+
+				<fieldset>
+					<legend
+						style="font-family: Arial, sans-serif; font-size: 1em; color: #4f4f4f;">Detalle</legend>
+						
+						
+						
+				</fieldset>
+
+
+
+
+				<h:panelGrid id="message">
+					<p:growl showDetail="true" widgetVar="msg"></p:growl>
+				</h:panelGrid>
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+
+</body>
 </html>
