@@ -15,7 +15,7 @@
 
 				<fieldset>
 
-					<p:panelGrid id="controls" columns="2" styleClass="panelGrid">
+					<p:panelGrid id="controls" columns="8" styleClass="panelGrid">
 
 						<p:panelGrid columns="1" styleClass="panelGrid">
 
@@ -26,34 +26,50 @@
 
 						</p:panelGrid>
 
+						<h:outputText value="Cuenta:" />
 						<p:selectOneMenu>
 							<f:selectItem itemValue="" itemLabel="--Seleccione--" />
 						</p:selectOneMenu>
 
+
+						<h:outputText value="Programa:" />
+						<p:selectOneMenu>
+							<f:selectItem itemValue="" itemLabel="--Seleccione--" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Valor:" />
+						<p:inputText></p:inputText>
+						<p:commandButton value="Agregar" icon="ui-icon-arrow-1-s"
+							styleClass="comButton" />
+
 					</p:panelGrid>
 
-
-					<p:panelGrid columns="4" styleClass="panelGrid"
-						style="align:center;">
-						<h:outputText value="Total Ingresos:" />
-						<p:inputText></p:inputText>
-						<h:outputText value="Total Gastos:" />
-						<p:inputText></p:inputText>
-					</p:panelGrid>
 
 				</fieldset>
 
 				<p:spacer height="10" />
 
-				<h:panelGrid id="buttons">
-					<p:column>
+				<h:panelGrid id="buttons" columns="3">
+					
 						<p:commandButton value="Nuevo" icon="ui-icon-document"
 							styleClass="comButton">
 						</p:commandButton>
 						<p:commandButton value="Guardar" icon="ui-icon-disk"
 							styleClass="comButton" />
-					</p:column>
+					
 				</h:panelGrid>
+
+
+				<fieldset>
+
+					<p:panelGrid columns="4" styleClass="panelGrid"
+						style="align:center;">
+						<h:outputText value="Total Ingresos:" />
+						<p:inputText readonly="true"></p:inputText>
+						<h:outputText value="Total Gastos:" />
+						<p:inputText readonly="true"></p:inputText>
+					</p:panelGrid>
+
 
 				<p:panelGrid id="data" columns="2" styleClass="panelGrid">
 					<p:dataTable>
@@ -72,6 +88,8 @@
 
 					</p:dataTable>
 				</p:panelGrid>
+						
+				</fieldset>
 
 
 			</h:form>
