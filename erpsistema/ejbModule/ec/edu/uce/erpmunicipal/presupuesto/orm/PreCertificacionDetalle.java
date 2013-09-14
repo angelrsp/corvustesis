@@ -11,12 +11,11 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="pre_certificacion_detalle")
-@NamedQuery(name="PreCertificacionDetalle.findAll", query="SELECT p FROM PreCertificacionDetalle p")
 public class PreCertificacionDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PRE_CERTIFICACION_DETALLE_CDECODIGO_GENERATOR", sequenceName="PRE_CERTIFICACION_DETALLE_CDE_CODIGO_SEQ")
+	@SequenceGenerator(name="PRE_CERTIFICACION_DETALLE_CDECODIGO_GENERATOR", sequenceName="PRE_CERTIFICACION_DETALLE_CDE_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRE_CERTIFICACION_DETALLE_CDECODIGO_GENERATOR")
 	@Column(name="cde_codigo")
 	private Integer cdeCodigo;

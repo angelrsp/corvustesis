@@ -12,7 +12,6 @@ import java.util.List;
  */
 @Entity
 @Table(name="pre_reforma")
-@NamedQuery(name="PreReforma.findAll", query="SELECT p FROM PreReforma p")
 public class PreReforma implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -65,20 +64,6 @@ public class PreReforma implements Serializable {
 
 	public void setPreReformaDetalles(List<PreReformaDetalle> preReformaDetalles) {
 		this.preReformaDetalles = preReformaDetalles;
-	}
-
-	public PreReformaDetalle addPreReformaDetalle(PreReformaDetalle preReformaDetalle) {
-		getPreReformaDetalles().add(preReformaDetalle);
-		preReformaDetalle.setPreReforma(this);
-
-		return preReformaDetalle;
-	}
-
-	public PreReformaDetalle removePreReformaDetalle(PreReformaDetalle preReformaDetalle) {
-		getPreReformaDetalles().remove(preReformaDetalle);
-		preReformaDetalle.setPreReforma(null);
-
-		return preReformaDetalle;
 	}
 
 }
