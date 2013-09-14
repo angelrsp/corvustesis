@@ -12,7 +12,6 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="pre_presupuesto")
-@NamedQuery(name="PrePresupuesto.findAll", query="SELECT p FROM PrePresupuesto p")
 public class PrePresupuesto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -34,16 +33,15 @@ public class PrePresupuesto implements Serializable {
 	@Column(name="pre_ingreso")
 	private BigDecimal preIngreso;
 
+	@Column(name="pre_inicial")
+	private Boolean preInicial;
+
 	@Column(name="pre_saldo")
 	private BigDecimal preSaldo;
 
 	@Column(name="pre_ultimo")
 	private Boolean preUltimo;
 
-	@Column(name="pre_inicial")
-	private Boolean preInicial;
-
-	
 	public PrePresupuesto() {
 	}
 
@@ -87,6 +85,14 @@ public class PrePresupuesto implements Serializable {
 		this.preIngreso = preIngreso;
 	}
 
+	public Boolean getPreInicial() {
+		return this.preInicial;
+	}
+
+	public void setPreInicial(Boolean preInicial) {
+		this.preInicial = preInicial;
+	}
+
 	public BigDecimal getPreSaldo() {
 		return this.preSaldo;
 	}
@@ -96,19 +102,11 @@ public class PrePresupuesto implements Serializable {
 	}
 
 	public Boolean getPreUltimo() {
-		return preUltimo;
+		return this.preUltimo;
 	}
 
 	public void setPreUltimo(Boolean preUltimo) {
 		this.preUltimo = preUltimo;
-	}
-
-	public Boolean getPreInicial() {
-		return preInicial;
-	}
-
-	public void setPreInicial(Boolean preInicial) {
-		this.preInicial = preInicial;
 	}
 
 }

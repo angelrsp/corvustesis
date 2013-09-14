@@ -11,7 +11,6 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="pre_reforma_detalle")
-@NamedQuery(name="PreReformaDetalle.findAll", query="SELECT p FROM PreReformaDetalle p")
 public class PreReformaDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
 

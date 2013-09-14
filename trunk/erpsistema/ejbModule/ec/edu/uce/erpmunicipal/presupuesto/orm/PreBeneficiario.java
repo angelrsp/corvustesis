@@ -11,7 +11,6 @@ import java.util.List;
  */
 @Entity
 @Table(name="pre_beneficiario")
-@NamedQuery(name="PreBeneficiario.findAll", query="SELECT p FROM PreBeneficiario p")
 public class PreBeneficiario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -75,20 +74,6 @@ public class PreBeneficiario implements Serializable {
 
 	public void setPreCertificacions(List<PreCertificacion> preCertificacions) {
 		this.preCertificacions = preCertificacions;
-	}
-
-	public PreCertificacion addPreCertificacion(PreCertificacion preCertificacion) {
-		getPreCertificacions().add(preCertificacion);
-		preCertificacion.setPreBeneficiario(this);
-
-		return preCertificacion;
-	}
-
-	public PreCertificacion removePreCertificacion(PreCertificacion preCertificacion) {
-		getPreCertificacions().remove(preCertificacion);
-		preCertificacion.setPreBeneficiario(null);
-
-		return preCertificacion;
 	}
 
 }

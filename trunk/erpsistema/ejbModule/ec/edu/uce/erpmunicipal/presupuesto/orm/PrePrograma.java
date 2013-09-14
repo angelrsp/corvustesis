@@ -11,12 +11,11 @@ import java.util.List;
  */
 @Entity
 @Table(name="pre_programa")
-@NamedQuery(name="PrePrograma.findAll", query="SELECT p FROM PrePrograma p")
 public class PrePrograma implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PRE_PROGRAMA_PROCODIGO_GENERATOR", sequenceName="PRE_PROGRAMA_PRO_CODIGO_SEQ")
+	@SequenceGenerator(name="PRE_PROGRAMA_PROCODIGO_GENERATOR", sequenceName="PRE_PROGRAMA_PRO_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRE_PROGRAMA_PROCODIGO_GENERATOR")
 	@Column(name="pro_codigo")
 	private Integer proCodigo;
@@ -53,20 +52,6 @@ public class PrePrograma implements Serializable {
 
 	public void setPreProgramaCuentas(List<PreProgramaCuenta> preProgramaCuentas) {
 		this.preProgramaCuentas = preProgramaCuentas;
-	}
-
-	public PreProgramaCuenta addPreProgramaCuenta(PreProgramaCuenta preProgramaCuenta) {
-		getPreProgramaCuentas().add(preProgramaCuenta);
-		preProgramaCuenta.setPrePrograma(this);
-
-		return preProgramaCuenta;
-	}
-
-	public PreProgramaCuenta removePreProgramaCuenta(PreProgramaCuenta preProgramaCuenta) {
-		getPreProgramaCuentas().remove(preProgramaCuenta);
-		preProgramaCuenta.setPrePrograma(null);
-
-		return preProgramaCuenta;
 	}
 
 }

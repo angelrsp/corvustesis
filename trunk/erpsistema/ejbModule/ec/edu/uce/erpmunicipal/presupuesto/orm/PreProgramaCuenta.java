@@ -11,12 +11,11 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="pre_programa_cuenta")
-@NamedQuery(name="PreProgramaCuenta.findAll", query="SELECT p FROM PreProgramaCuenta p")
 public class PreProgramaCuenta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PRE_PROGRAMA_CUENTA_PCUCODIGO_GENERATOR", sequenceName="PRE_PROGRAMA_CUENTA_PCU_CODIGO_SEQ")
+	@SequenceGenerator(name="PRE_PROGRAMA_CUENTA_PCUCODIGO_GENERATOR", sequenceName="PRE_PROGRAMA_CUENTA_PCU_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRE_PROGRAMA_CUENTA_PCUCODIGO_GENERATOR")
 	@Column(name="pcu_codigo")
 	private Integer pcuCodigo;
@@ -31,6 +30,11 @@ public class PreProgramaCuenta implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="pcu_programa")
 	private PrePrograma prePrograma;
+
+	//bi-directional many-to-one association to PreTipoProgramaCuenta
+	@ManyToOne
+	@JoinColumn(name="tpc_codigo")
+	private PreTipoProgramaCuenta preTipoProgramaCuenta;
 
 	public PreProgramaCuenta() {
 	}
@@ -65,6 +69,14 @@ public class PreProgramaCuenta implements Serializable {
 
 	public void setPrePrograma(PrePrograma prePrograma) {
 		this.prePrograma = prePrograma;
+	}
+
+	public PreTipoProgramaCuenta getPreTipoProgramaCuenta() {
+		return this.preTipoProgramaCuenta;
+	}
+
+	public void setPreTipoProgramaCuenta(PreTipoProgramaCuenta preTipoProgramaCuenta) {
+		this.preTipoProgramaCuenta = preTipoProgramaCuenta;
 	}
 
 }
