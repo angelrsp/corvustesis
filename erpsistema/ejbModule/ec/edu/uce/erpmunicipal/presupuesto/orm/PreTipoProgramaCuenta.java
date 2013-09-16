@@ -15,7 +15,7 @@ public class PreTipoProgramaCuenta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PRE_TIPO_PROGRAMA_CUENTA_TPCCODIGO_GENERATOR", sequenceName="PRE_TIPO_PROGRAMA_CUENTA_TPC_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="PRE_TIPO_PROGRAMA_CUENTA_TPCCODIGO_GENERATOR", sequenceName="PRE_TIPO_PROGRAMA_CUENTA_TPC_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRE_TIPO_PROGRAMA_CUENTA_TPCCODIGO_GENERATOR")
 	@Column(name="tpc_codigo")
 	private Integer tpcCodigo;

@@ -15,7 +15,7 @@ public class PreReformaDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PRE_REFORMA_DETALLE_RDECODIGO_GENERATOR", sequenceName="PRE_REFORMA_DETALLE_RDE_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="PRE_REFORMA_DETALLE_RDECODIGO_GENERATOR", sequenceName="PRE_REFORMA_DETALLE_RDE_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRE_REFORMA_DETALLE_RDECODIGO_GENERATOR")
 	@Column(name="rde_codigo")
 	private Integer rdeCodigo;

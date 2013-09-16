@@ -16,7 +16,7 @@ public class PreReforma implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PRE_REFORMA_REFCODIGO_GENERATOR", sequenceName="PRE_REFORMA_REF_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="PRE_REFORMA_REFCODIGO_GENERATOR", sequenceName="PRE_REFORMA_REF_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRE_REFORMA_REFCODIGO_GENERATOR")
 	@Column(name="ref_codigo")
 	private Integer refCodigo;

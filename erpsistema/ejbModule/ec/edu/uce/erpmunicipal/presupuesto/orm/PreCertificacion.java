@@ -16,7 +16,7 @@ public class PreCertificacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PRE_CERTIFICACION_CERCODIGO_GENERATOR", sequenceName="PRE_CERTIFICACION_CER_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="PRE_CERTIFICACION_CERCODIGO_GENERATOR", sequenceName="PRE_CERTIFICACION_CER_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRE_CERTIFICACION_CERCODIGO_GENERATOR")
 	@Column(name="cer_codigo")
 	private Integer cerCodigo;
