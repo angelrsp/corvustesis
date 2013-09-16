@@ -33,5 +33,11 @@ public class CalendarUtil {
 		cal.set(Calendar.DAY_OF_MONTH, day);
 		return cal;
 	}
+	
+	public static Timestamp getTimeNowTimestamp()
+	{
+		Calendar calendar = Calendar.getInstance();
+		return new Timestamp(calendar.getTimeInMillis());
+	}
 
 }

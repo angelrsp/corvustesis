@@ -3,7 +3,7 @@ package ec.edu.uce.erpmunicipal.contabilidad.orm;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import ec.edu.uce.erpmunicipal.presupuesto.orm.PrePrograma;
+import ec.edu.uce.erpmunicipal.presupuesto.orm.PrePresupuesto;
 import ec.edu.uce.erpmunicipal.presupuesto.orm.PreProgramaCuenta;
 
 import java.util.List;
@@ -59,7 +59,7 @@ public class ConCuenta implements Serializable {
 	private List<PreProgramaCuenta> preProgramaCuenta;
 
 	@OneToMany(mappedBy="conCuenta")
-	private List<PrePrograma> prePrograma;
+	private List<PrePresupuesto> prePresupuesto;
 
 
 	public ConCuenta() {
@@ -181,12 +181,12 @@ public class ConCuenta implements Serializable {
 		this.preProgramaCuenta = preProgramaCuenta;
 	}
 
-	public List<PrePrograma> getPrePrograma() {
-		return prePrograma;
+	public List<PrePresupuesto> getPrePresupuesto() {
+		return prePresupuesto;
 	}
 
-	public void setPrePrograma(List<PrePrograma> prePrograma) {
-		this.prePrograma = prePrograma;
+	public void setPrePresupuesto(List<PrePresupuesto> prePresupuesto) {
+		this.prePresupuesto = prePresupuesto;
 	}
 
 }
