@@ -24,6 +24,7 @@
 							<f:selectItem itemLabel="--Seleccione--" itemValue="" />
 							<f:selectItems value="#{accountingPage.accTypes}" var="act"
 								itemLabel="#{act.tcuDescripcion}" itemValue="#{act.tcuCodigo}"></f:selectItems>
+							<p:ajax update="treeMenu" listener="#{accountingPage.readAccounts}"></p:ajax>	
 						</p:selectOneMenu>
 
 					</p:column>
