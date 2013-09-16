@@ -18,10 +18,10 @@ public interface AccoutingService {
 
 	List<ConCuenta> readChildren(int fatherCode);
 
-	List<ConCuenta> readFirstAccountings();
+	List<ConCuenta> readFirstAccountings(int tipo);
 
-	List<ConCuenta> dynamicSearch(String par);
+	List<ConCuenta> dynamicSearch(String par, int tipo);
 
-	ConCuenta search(String code);
+	ConCuenta search(String code, int typeCode);
 
 }

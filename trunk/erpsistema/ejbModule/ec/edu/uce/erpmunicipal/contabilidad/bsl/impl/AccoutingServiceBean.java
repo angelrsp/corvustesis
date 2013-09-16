@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -40,11 +41,12 @@ public class AccoutingServiceBean implements AccoutingService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ConCuenta> readFirstAccountings() {
+	public List<ConCuenta> readFirstAccountings(int tipo) {
 		List<ConCuenta> objects;
 		try {
 			Query query = entityManager
-					.createQuery("from ConCuenta cue where cue.cueCodigoPadre=0 order by cue.cueCodigo");
+					.createQuery("select cue from ConCuenta cue inner join cue.conTipoCuenta tip where cue.cueCodigoPadre=0 and tip.tcuCodigo=:tipo order by cue.cueCodigo");
+			query.setParameter("tipo", tipo);
 			objects = query.getResultList();
 		} catch (Exception e) {
 			objects = null;
@@ -94,12 +96,11 @@ public class AccoutingServiceBean implements AccoutingService {
 	}
 
 	@Override
-	public List<ConCuenta> dynamicSearch(String par) {
+	public List<ConCuenta> dynamicSearch(String par,int tipo) {
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<ConCuenta> q = cb.createQuery(ConCuenta.class);
 		Root<ConCuenta> c = q.from(ConCuenta.class);
-		q.select(c);
-		
+		Path<ConCuenta> path = c.join("conTipoCuenta").get("tcuCodigo");
 		
 		Logger.getLogger(this.getClass()).info(par);
 
@@ -111,7 +112,7 @@ public class AccoutingServiceBean implements AccoutingService {
 				+ "%");
 
 		q.where(cb.or(lik1, lik2), cb.and(cb.equal(c
-				.get("cuePermiteMovimiento").as(Boolean.class), true)));
+				.get("cuePermiteMovimiento").as(Boolean.class), true)),cb.and(cb.equal(path, tipo)));
 
 		TypedQuery<ConCuenta> typedQuery=entityManager.createQuery(q);
 		
@@ -121,16 +122,15 @@ public class AccoutingServiceBean implements AccoutingService {
 	}
 
 	@Override
-	public ConCuenta search(String code) {
+	public ConCuenta search(String code,int typeCode) {
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<ConCuenta> q = cb.createQuery(ConCuenta.class);
 		Root<ConCuenta> c = q.from(ConCuenta.class);
+		Path<ConCuenta> path = c.join("conTipoCuenta").get("tcuCodigo");
 		
-		q.select(c);
-
 		Logger.getLogger(this.getClass()).info(code);
 		
-		q.where(cb.and(cb.equal(c.get("cueNumero"), code),cb.equal(c.get("cuePermiteMovimiento").as(Boolean.class), true)));
+		q.where(cb.and(cb.equal(c.get("cueNumero"), code),cb.equal(c.get("cuePermiteMovimiento").as(Boolean.class), true)),cb.and(cb.equal(path, typeCode)));
 		
 		List<ConCuenta> list=entityManager.createQuery(q).getResultList();
 		

@@ -2,6 +2,9 @@ package ec.edu.uce.erpmunicipal.presupuesto.orm;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import ec.edu.uce.erpmunicipal.contabilidad.orm.ConCuenta;
+
 import java.sql.Timestamp;
 import java.math.BigDecimal;
 
@@ -21,9 +24,6 @@ public class PrePresupuesto implements Serializable {
 	@Column(name="pre_codigo")
 	private Integer preCodigo;
 
-	@Column(name="pre_cuenta")
-	private Integer preCuenta;
-
 	@Column(name="pre_egreso")
 	private BigDecimal preEgreso;
 
@@ -41,7 +41,12 @@ public class PrePresupuesto implements Serializable {
 
 	@Column(name="pre_ultimo")
 	private Boolean preUltimo;
-
+	
+	@ManyToOne
+	@JoinColumn(name="pre_cuenta")
+	private ConCuenta conCuenta;
+	
+	
 	public PrePresupuesto() {
 	}
 
@@ -53,12 +58,12 @@ public class PrePresupuesto implements Serializable {
 		this.preCodigo = preCodigo;
 	}
 
-	public Integer getPreCuenta() {
-		return this.preCuenta;
+	public ConCuenta getConCuenta() {
+		return this.conCuenta;
 	}
 
-	public void setPreCuenta(Integer preCuenta) {
-		this.preCuenta = preCuenta;
+	public void setConCuenta(ConCuenta conCuenta) {
+		this.conCuenta = conCuenta;
 	}
 
 	public BigDecimal getPreEgreso() {
