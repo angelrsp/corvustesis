@@ -2,6 +2,9 @@ package ec.edu.uce.erpmunicipal.presupuesto.orm;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import ec.edu.uce.erpmunicipal.contabilidad.orm.ConCuenta;
+
 import java.math.BigDecimal;
 
 
@@ -20,12 +23,13 @@ public class PreProgramaCuenta implements Serializable {
 	@Column(name="pcu_codigo")
 	private Integer pcuCodigo;
 
-	@Column(name="pcu_cuenta")
-	private Integer pcuCuenta;
-
 	@Column(name="pcu_valor")
 	private BigDecimal pcuValor;
 
+	@ManyToOne
+	@JoinColumn(name="pcu_cuenta")
+	private ConCuenta conCuenta;
+	
 	//bi-directional many-to-one association to PrePrograma
 	@ManyToOne
 	@JoinColumn(name="pcu_programa")
@@ -33,9 +37,10 @@ public class PreProgramaCuenta implements Serializable {
 
 	//bi-directional many-to-one association to PreTipoProgramaCuenta
 	@ManyToOne
-	@JoinColumn(name="tpc_codigo")
+	@JoinColumn(name="pcu_tipo")
 	private PreTipoProgramaCuenta preTipoProgramaCuenta;
 
+	
 	public PreProgramaCuenta() {
 	}
 
@@ -47,12 +52,12 @@ public class PreProgramaCuenta implements Serializable {
 		this.pcuCodigo = pcuCodigo;
 	}
 
-	public Integer getPcuCuenta() {
-		return this.pcuCuenta;
+	public ConCuenta getConCuenta() {
+		return this.conCuenta;
 	}
 
-	public void setPcuCuenta(Integer pcuCuenta) {
-		this.pcuCuenta = pcuCuenta;
+	public void setConCuenta(ConCuenta conCuenta) {
+		this.conCuenta = conCuenta;
 	}
 
 	public BigDecimal getPcuValor() {

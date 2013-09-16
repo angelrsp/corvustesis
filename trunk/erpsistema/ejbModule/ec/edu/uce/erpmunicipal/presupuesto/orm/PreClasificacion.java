@@ -15,7 +15,7 @@ public class PreClasificacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PRE_CLASIFICACION_CLACODIGO_GENERATOR", sequenceName="PRE_CLASIFICACION_CLA_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="PRE_CLASIFICACION_CLACODIGO_GENERATOR", sequenceName="PRE_CLASIFICACION_CLA_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRE_CLASIFICACION_CLACODIGO_GENERATOR")
 	@Column(name="cla_codigo")
 	private Integer claCodigo;

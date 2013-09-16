@@ -15,7 +15,7 @@ public class PreTipoReforma implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PRE_TIPO_REFORMA_TRECODIGO_GENERATOR", sequenceName="PRE_TIPO_REFORMA_TRE_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="PRE_TIPO_REFORMA_TRECODIGO_GENERATOR", sequenceName="PRE_TIPO_REFORMA_TRE_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRE_TIPO_REFORMA_TRECODIGO_GENERATOR")
 	@Column(name="tre_codigo")
 	private Integer treCodigo;

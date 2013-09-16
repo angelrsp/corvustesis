@@ -15,7 +15,7 @@ public class PrePrograma implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PRE_PROGRAMA_PROCODIGO_GENERATOR", sequenceName="PRE_PROGRAMA_PRO_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="PRE_PROGRAMA_PROCODIGO_GENERATOR", sequenceName="PRE_PROGRAMA_PRO_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRE_PROGRAMA_PROCODIGO_GENERATOR")
 	@Column(name="pro_codigo")
 	private Integer proCodigo;

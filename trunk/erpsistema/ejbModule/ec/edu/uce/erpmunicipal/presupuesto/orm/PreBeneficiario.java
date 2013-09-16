@@ -15,7 +15,7 @@ public class PreBeneficiario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PRE_BENEFICIARIO_BENCODIGO_GENERATOR", sequenceName="PRE_BENEFICIARIO_BEN_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="PRE_BENEFICIARIO_BENCODIGO_GENERATOR", sequenceName="PRE_BENEFICIARIO_BEN_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRE_BENEFICIARIO_BENCODIGO_GENERATOR")
 	@Column(name="ben_codigo")
 	private Integer benCodigo;

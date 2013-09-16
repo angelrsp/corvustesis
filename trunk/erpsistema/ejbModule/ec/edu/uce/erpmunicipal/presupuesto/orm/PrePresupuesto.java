@@ -16,7 +16,7 @@ public class PrePresupuesto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="PRE_PRESUPUESTO_PRECODIGO_GENERATOR", sequenceName="PRE_PRESUPUESTO_PRE_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="PRE_PRESUPUESTO_PRECODIGO_GENERATOR", sequenceName="PRE_PRESUPUESTO_PRE_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRE_PRESUPUESTO_PRECODIGO_GENERATOR")
 	@Column(name="pre_codigo")
 	private Integer preCodigo;
