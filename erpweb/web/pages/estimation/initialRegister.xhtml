@@ -17,82 +17,154 @@
 
 					<p:panelGrid id="controls" columns="8" styleClass="panelGrid">
 
-						<p:panelGrid columns="1" styleClass="panelGrid">
-
-							<p:selectOneRadio id="options" layout="pageDirection">
-								<f:selectItem itemLabel="Ingreso" itemValue="1" />
-								<f:selectItem itemLabel="Gasto" itemValue="0" />
-							</p:selectOneRadio>
-
-						</p:panelGrid>
-
-						<h:outputText value="Cuenta:" />
-						<p:selectOneMenu>
-							<f:selectItem itemValue="" itemLabel="--Seleccione--" />
-						</p:selectOneMenu>
-
-
 						<h:outputText value="Programa:" />
-						<p:selectOneMenu>
+						<p:selectOneMenu value="#{initialRegisterPage.programCode}">
 							<f:selectItem itemValue="" itemLabel="--Seleccione--" />
+							<f:selectItems value="#{initialRegisterPage.programList}"
+								var="pro" itemValue="#{pro.proCodigo}"
+								itemLabel="#{pro.proDescripcion}" />
 						</p:selectOneMenu>
 
-						<h:outputText value="Valor:" />
-						<p:inputText></p:inputText>
-						<p:commandButton value="Agregar" icon="ui-icon-arrow-1-s"
-							styleClass="comButton" />
+
+						<h:outputText value="Total Ingresos:" />
+						<p:inputText id="totalIngreso" readonly="true" value="#{initialRegisterPage.totalIngresos}"></p:inputText>
+						<h:outputText  value="Total Gastos:" />
+						<p:inputText id="totalGasto" readonly="true" value="#{initialRegisterPage.totalGastos}"></p:inputText>
 
 					</p:panelGrid>
 
+					<p:spacer height="10" />
+
+					<h:panelGrid id="buttons" columns="3">
+
+						<p:commandButton value="Nuevo" icon="ui-icon-document"
+							styleClass="comButton" actionListener="#{initialRegisterPage.clear}">
+						</p:commandButton>
+						<p:commandButton value="Guardar" icon="ui-icon-disk"
+							styleClass="comButton" actionListener="#{initialRegisterPage.create}" />
+
+					</h:panelGrid>
 
 				</fieldset>
 
 				<p:spacer height="10" />
 
-				<h:panelGrid id="buttons" columns="3">
-					
-						<p:commandButton value="Nuevo" icon="ui-icon-document"
-							styleClass="comButton">
-						</p:commandButton>
-						<p:commandButton value="Guardar" icon="ui-icon-disk"
-							styleClass="comButton" />
-					
-				</h:panelGrid>
-
-
 				<fieldset>
 
 					<p:panelGrid columns="4" styleClass="panelGrid"
 						style="align:center;">
-						<h:outputText value="Total Ingresos:" />
-						<p:inputText readonly="true"></p:inputText>
-						<h:outputText value="Total Gastos:" />
-						<p:inputText readonly="true"></p:inputText>
+
+						<p:column>
+							<h:outputText value="Cuenta:" />
+						</p:column>
+						<p:column>
+							<p:inputText id="codigoCuenta"
+								value="#{initialRegisterPage.cuentaCode}">
+								<p:ajax event="blur"
+									listener="#{initialRegisterPage.searchCuentaCode}"
+									update="nombreCuenta"></p:ajax>
+							</p:inputText>
+						</p:column>
+						<p:column>
+							<p:inputText id="nombreCuenta" readonly="true"
+								value="#{initialRegisterPage.cuentaDescription}"></p:inputText>
+						</p:column>
+						<p:column>
+							<p:commandButton value="Buscar Cuenta" icon="ui-icon-search"
+								styleClass="comButton" type="button"
+								onclick="cuentaDialog.show();"></p:commandButton>
+						</p:column>
+
+						<h:outputText value="Valor:" />
+						<p:inputText id="value" value="#{initialRegisterPage.valor}" onkeypress="return isDecimalKey(event);"></p:inputText>
+						<p:commandButton value="Agregar" icon="ui-icon-arrow-1-s"
+							styleClass="comButton" actionListener="#{initialRegisterPage.add}" update="datail,message,nombreCuenta,codigoCuenta,value,totalIngreso,totalGasto" />
+
+						<p:panelGrid columns="1" styleClass="panelGrid">
+
+							<p:selectOneRadio id="options" value="#{initialRegisterPage.type}">
+								<f:selectItem itemLabel="Ingreso" itemValue="1" />
+								<f:selectItem itemLabel="Gasto" itemValue="2" />
+							</p:selectOneRadio>
+
+						</p:panelGrid>
+
 					</p:panelGrid>
 
 
-				<p:panelGrid id="data" columns="2" styleClass="panelGrid">
-					<p:dataTable>
+					<p:panelGrid id="data" columns="2" styleClass="panelGrid">
+						<p:dataTable id="datail" value="#{initialRegisterPage.programaCuentas}" var="pcu">
 
-						<p:column headerText="Cta Presupuestaria">
+							<p:column headerText="Cta Presupuestaria">
+							#{pcu.conCuenta.cueNumero}
+							</p:column>
 
-						</p:column>
+							<p:column headerText="Descripcion">
+							#{pcu.conCuenta.cueDescripcion}
+							</p:column>
 
-						<p:column headerText="Descripcion">
+							<p:column headerText="Valor Inicial">
+							#{pcu.pcuValor}
+							</p:column>
 
-						</p:column>
+							<p:column headerText="Tipo">
+							#{pcu.preTipoProgramaCuenta.tpcDescripcion}
+							</p:column>
 
-						<p:column headerText="Valor Inicial">
+						</p:dataTable>
+					</p:panelGrid>
 
-						</p:column>
-
-					</p:dataTable>
-				</p:panelGrid>
-						
 				</fieldset>
 
+				<h:panelGrid id="message">
+					<p:growl showDetail="true" widgetVar="msg"></p:growl>
+				</h:panelGrid>
 
 			</h:form>
+
+			<p:dialog header="Buscar Cuenta" widgetVar="cuentaDialog"
+				resizable="false" appendToBody="true" modal="true">
+
+				<h:form id="dialogSarch">
+
+					<div align="center">
+						<p:panelGrid styleClass="panelGrid" columns="2">
+
+							<p:inputText id="search"
+								value="#{initialRegisterPage.searchText}"></p:inputText>
+
+							<p:commandButton value="Buscar" icon="ui-icon-search"
+								styleClass="comButton"
+								actionListener="#{initialRegisterPage.searchCuenta}"
+								update="result">
+							</p:commandButton>
+
+						</p:panelGrid>
+					</div>
+
+					<p:dataTable id="result" value="#{initialRegisterPage.accountList}"
+						var="cue" rowKey="#{cue.cueCodigo}" selectionMode="single"
+						paginator="true" rows="10">
+
+						<p:ajax
+							update=":formInitialRegister:codigoCuenta,:formInitialRegister:nombreCuenta,result,:dialogSarch:search"
+							event="rowSelect" listener="#{initialRegisterPage.onRowSelect}"
+							oncomplete="cuentaDialog.hide();" />
+
+						<p:column headerText="Codigo">
+								#{cue.cueNumero}
+							</p:column>
+
+						<p:column headerText="Descripcion">
+								#{cue.cueDescripcion}
+							</p:column>
+
+					</p:dataTable>
+
+				</h:form>
+
+			</p:dialog>
+
 
 		</ui:define>
 	</ui:composition>
