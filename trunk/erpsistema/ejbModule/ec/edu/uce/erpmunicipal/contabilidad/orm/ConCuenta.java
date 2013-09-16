@@ -2,6 +2,10 @@ package ec.edu.uce.erpmunicipal.contabilidad.orm;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import ec.edu.uce.erpmunicipal.presupuesto.orm.PrePrograma;
+import ec.edu.uce.erpmunicipal.presupuesto.orm.PreProgramaCuenta;
+
 import java.util.List;
 
 
@@ -50,6 +54,13 @@ public class ConCuenta implements Serializable {
 	//bi-directional many-to-one association to ConSaldo
 	@OneToMany(mappedBy="conCuenta")
 	private List<ConSaldo> conSaldos;
+	
+	@OneToMany(mappedBy="conCuenta")
+	private List<PreProgramaCuenta> preProgramaCuenta;
+
+	@OneToMany(mappedBy="conCuenta")
+	private List<PrePrograma> prePrograma;
+
 
 	public ConCuenta() {
 	}
@@ -59,7 +70,7 @@ public class ConCuenta implements Serializable {
 			Boolean cuePermiteMovimiento, Integer cueSubcuenta,
 			ConTipoCuenta conTipoCuenta,
 			List<ConMovimientoDetalle> conMovimientoDetalles,
-			List<ConSaldo> conSaldos) {
+			List<ConSaldo> conSaldos,List<PreProgramaCuenta> preProgramaCuenta) {
 		super();
 		this.cueCodigo = cueCodigo;
 		this.cueCodigoPadre = cueCodigoPadre;
@@ -71,6 +82,15 @@ public class ConCuenta implements Serializable {
 		this.conTipoCuenta = conTipoCuenta;
 		this.conMovimientoDetalles = conMovimientoDetalles;
 		this.conSaldos = conSaldos;
+		this.preProgramaCuenta=preProgramaCuenta;
+	}
+	
+	
+
+	public ConCuenta(String cueDescripcion, String cueNumero) {
+		super();
+		this.cueDescripcion = cueDescripcion;
+		this.cueNumero = cueNumero;
 	}
 
 	public Integer getCueCodigo() {
@@ -151,6 +171,22 @@ public class ConCuenta implements Serializable {
 
 	public void setConSaldos(List<ConSaldo> conSaldos) {
 		this.conSaldos = conSaldos;
+	}
+
+	public List<PreProgramaCuenta> getPreProgramaCuenta() {
+		return preProgramaCuenta;
+	}
+
+	public void setPreProgramaCuenta(List<PreProgramaCuenta> preProgramaCuenta) {
+		this.preProgramaCuenta = preProgramaCuenta;
+	}
+
+	public List<PrePrograma> getPrePrograma() {
+		return prePrograma;
+	}
+
+	public void setPrePrograma(List<PrePrograma> prePrograma) {
+		this.prePrograma = prePrograma;
 	}
 
 }
