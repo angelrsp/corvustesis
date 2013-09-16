@@ -90,35 +90,21 @@ public class JournalPage implements Serializable {
 		
 	}
 
-	/**
-	 * @return the typeMove
-	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<ConTipoMovimiento> getTypeMove() {
 		return typeMove = (List<ConTipoMovimiento>) (List) crudService
 				.find("ConTipoMovimiento");
 	}
 
-	/**
-	 * @param typeMove
-	 *            the typeMove to set
-	 */
 	public void setTypeMove(List<ConTipoMovimiento> typeMove) {
 		this.typeMove = typeMove;
 	}
 
-	/**
-	 * @return the clas
-	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<ConClase> getClas() {
 		return clas = (List<ConClase>) (List) crudService.find("ConClase");
 	}
 
-	/**
-	 * @param clas
-	 *            the clas to set
-	 */
 	public void setClas(List<ConClase> clas) {
 		this.clas = clas;
 	}
@@ -155,62 +141,34 @@ public class JournalPage implements Serializable {
 		this.descripcionCuenta = descripcionCuenta;
 	}
 
-	/**
-	 * @return the debe
-	 */
 	public String getDebe() {
 		return debe;
 	}
 
-	/**
-	 * @param debe
-	 *            the debe to set
-	 */
 	public void setDebe(String debe) {
 		this.debe = debe;
 	}
 
-	/**
-	 * @return the haber
-	 */
 	public String getHaber() {
 		return haber;
 	}
 
-	/**
-	 * @param haber
-	 *            the haber to set
-	 */
 	public void setHaber(String haber) {
 		this.haber = haber;
 	}
 
-	/**
-	 * @return the detalle
-	 */
 	public List<ConMovimientoDetalle> getDetalles() {
 		return detalles;
 	}
 
-	/**
-	 * @param detalle
-	 *            the detalle to set
-	 */
 	public void setDetalle(List<ConMovimientoDetalle> detalles) {
 		this.detalles = detalles;
 	}
 
-	/**
-	 * @return the detalle
-	 */
 	public ConMovimientoDetalle getDetalle() {
 		return detalle;
 	}
 
-	/**
-	 * @param detalle
-	 *            the detalle to set
-	 */
 	public void setDetalle(ConMovimientoDetalle detalle) {
 		this.detalle = detalle;
 	}
@@ -273,12 +231,12 @@ public class JournalPage implements Serializable {
 
 	public void searchCuenta() {
 		this.cuentas = journalService.getAccoutingService().dynamicSearch(
-				search);
+				search,1);
 	}
 
 	public void searchCuentaCode() {
 		this.descripcionCuenta = ((ConCuenta) journalService
-				.getAccoutingService().search(searchCode)).getCueDescripcion();
+				.getAccoutingService().search(searchCode,1)).getCueDescripcion();
 	}
 
 	public void onRowSelect(SelectEvent event) {
@@ -305,7 +263,7 @@ public class JournalPage implements Serializable {
 				debe = "";
 				haber="";
 				det.setConCuenta(new ConCuenta(null, null, descripcionCuenta,
-						null, searchCode, null, null, null, null, null));
+						null, searchCode, null, null, null, null, null, null));
 				det.setMdeDebe(BigDecimal.valueOf(deb));
 				detalles.add(det);
 				searchCode = "";
@@ -319,7 +277,7 @@ public class JournalPage implements Serializable {
 				debe = "";
 				haber="";
 				det.setConCuenta(new ConCuenta(null, null, descripcionCuenta,
-						null, searchCode, null, null, null, null, null));
+						null, searchCode, null, null, null, null, null, null));
 				det.setMdeHaber(BigDecimal.valueOf(hab));
 				detalles.add(det);
 				searchCode = "";

@@ -62,132 +62,76 @@ public class AccountingPage implements Serializable {
 		accTypeCode = 0;
 	}
 
-	/**
-	 * @return the move
-	 */
 	public Boolean getMove() {
 		return move;
 	}
 
-	/**
-	 * @param move
-	 *            the move to set
-	 */
 	public void setMove(Boolean move) {
 		this.move = move;
 	}
 
-	/**
-	 * @return the description
-	 */
 	public String getDescription() {
 		return description;
 	}
 
-	/**
-	 * @param description
-	 *            the description to set
-	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	/**
-	 * @return the code1
-	 */
 	public String getCode1() {
 		return code1;
 	}
 
-	/**
-	 * @param code1
-	 *            the code1 to set
-	 */
 	public void setCode1(String code1) {
 		this.code1 = code1;
 	}
 
-	/**
-	 * @return the code2
-	 */
 	public String getCode2() {
 		return code2;
 	}
 
-	/**
-	 * @param code2
-	 *            the code2 to set
-	 */
 	public void setCode2(String code2) {
 		this.code2 = code2;
 	}
 
-	/**
-	 * @return the accTypeCode
-	 */
 	public int getAccTypeCode() {
 		return accTypeCode;
 	}
 
-	/**
-	 * @param accTypeCode
-	 *            the accTypeCode to set
-	 */
 	public void setAccTypeCode(int accTypeCode) {
 		this.accTypeCode = accTypeCode;
 	}
 
-	/**
-	 * @return the accTypes
-	 */
 	public List<ConTipoCuenta> getAccTypes() {
 		return accTypes;
 	}
 
-	/**
-	 * @param accTypes
-	 *            the accTypes to set
-	 */
 	public void setAccTypes(List<ConTipoCuenta> accTypes) {
 		this.accTypes = accTypes;
 	}
 
-	/**
-	 * @return the root
-	 */
 	public TreeNode getRoot() {
 		return root;
 	}
 
-	/**
-	 * @param root
-	 *            the root to set
-	 */
 	public void setRoot(TreeNode root) {
 		this.root = root;
 	}
 
-	/**
-	 * @return the selectedNode
-	 */
 	public TreeNode getSelectedNode() {
 		return selectedNode;
 	}
 
-	/**
-	 * @param selectedNode
-	 *            the selectedNode to set
-	 */
 	public void setSelectedNode(TreeNode selectedNode) {
 		this.selectedNode = selectedNode;
 	}
 
-	private void readAccounts() {
+	public void readAccounts() {
 		root = new DefaultTreeNode(new ConCuenta(), null);
 		root.setExpanded(true);
 		accounts = new ArrayList<ConCuenta>();
 		List<ConCuenta> accAux = new ArrayList<ConCuenta>();
-		accAux = accoutingService.readFirstAccountings();
+		accAux = accoutingService.readFirstAccountings(accTypeCode);
 
 		if (accAux.size() > 0) {
 			for (ConCuenta ac : accAux) {
@@ -335,6 +279,5 @@ public class AccountingPage implements Serializable {
 	@PostConstruct
 	public void init() {
 		readAccType();
-		readAccounts();
 	}
 }
