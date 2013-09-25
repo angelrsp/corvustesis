@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="balanceComprobacion" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="82e9b72a-31fc-49a5-a2e1-54e9989a8d2d">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="21"/>
+	<field name="cueNumero" class="java.lang.String"/>
+	<field name="cueDescripcion" class="java.lang.String"/>
+	<field name="salDebe" class="java.lang.String"/>
+	<field name="salHaber" class="java.lang.String"/>
+	<field name="salAcreedor" class="java.lang.String"/>
+	<field name="salDeudor" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="39" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="f2691924-aeec-4f12-95e6-c17843d6ef2d" x="217" y="11" width="121" height="20"/>
+				<textElement/>
+				<text><![CDATA[Balance Comprobacion]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="192ae44b-7b12-41c3-8579-d4ad3b96143e" x="1" y="41" width="82" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="69129328-0bd1-4d6e-9c32-eede59688332" x="83" y="41" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9844e26e-77f4-46f5-8bd1-8713abb0327b" x="1" y="21" width="182" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Cuenta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3dedd754-8ae1-4a6a-ae3e-63560b3b0c22" x="183" y="41" width="73" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[Saldo Debe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a5209cac-c0ce-4968-b529-a8c94e76fa80" x="256" y="41" width="81" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[Saldo Haber]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5fa475e9-7f76-422c-8d22-8cb41bec0cad" x="183" y="21" width="154" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Movimientos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d4a63d63-c26f-41e6-bed5-868f5858d7df" x="337" y="41" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[Saldo Deudor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7aba487d-3586-4936-9e29-a566949cca65" x="437" y="41" width="100" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[Saldo Acreedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dbfc1e50-4e7c-4677-a723-c2b07ecf5c9f" x="337" y="21" width="200" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Saldos]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement uuid="141f92a3-175c-4f6f-b52c-52129e7143e4" x="1" y="0" width="82" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cueNumero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b5b69556-3d63-4fce-b222-7e2fd0852025" x="83" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cueDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c7404df1-9d45-46b0-85e6-0138138ce0a3" x="183" y="0" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{salDebe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c5fe01df-1b42-4b7c-9bd5-5608aec3d0c6" x="256" y="0" width="81" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{salHaber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a7e63eb3-1576-4556-8ef0-0867ac00f1bf" x="337" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{salDeudor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="28321b7a-95fe-445c-acbb-c3d30d332964" x="437" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{salAcreedor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
