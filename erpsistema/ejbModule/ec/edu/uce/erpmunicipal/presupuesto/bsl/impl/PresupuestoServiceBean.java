@@ -15,10 +15,15 @@ import javax.persistence.criteria.Root;
 import ec.edu.uce.erpmunicipal.contabilidad.bsl.AccoutingService;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.ConCuenta;
 import ec.edu.uce.erpmunicipal.presupuesto.bsl.PresupuestoService;
+import ec.edu.uce.erpmunicipal.presupuesto.orm.PreEstado;
 import ec.edu.uce.erpmunicipal.presupuesto.orm.PrePresupuesto;
 import ec.edu.uce.erpmunicipal.presupuesto.orm.PrePrograma;
 import ec.edu.uce.erpmunicipal.presupuesto.orm.PreProgramaCuenta;
+import ec.edu.uce.erpmunicipal.presupuesto.orm.PreReforma;
+import ec.edu.uce.erpmunicipal.presupuesto.orm.PreReformaDetalle;
 import ec.edu.uce.erpmunicipal.presupuesto.orm.PreTipoProgramaCuenta;
+import ec.edu.uce.erpmunicipal.presupuesto.orm.PreTipoReforma;
+import ec.edu.uce.erpmunicipal.presupuesto.orm.PreVerificacion;
 import ec.edu.uce.erpmunicipal.util.CalendarUtil;
 
 @Stateless(name="presupuestoService")
@@ -47,6 +52,19 @@ public class PresupuestoServiceBean implements PresupuestoService{
 		List<PrePrograma> list = entityManager.createQuery(cq).getResultList();
 
 		return list;
+	}
+	
+	@Override
+	public List<PreVerificacion> readVerification()
+	{
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<PreVerificacion> cq = cb.createQuery(PreVerificacion.class);
+
+		cq.select(cq.from(PreVerificacion.class));
+		
+		List<PreVerificacion> list = entityManager.createQuery(cq).getResultList();
+
+		return list;		
 	}
 	
 	@Override
@@ -115,5 +133,20 @@ public class PresupuestoServiceBean implements PresupuestoService{
 
 	}
 	
+	@Override
+	public void reform(PreReforma reform, List<PreReformaDetalle> detail)
+	{
+		reform.setPreEstado(entityManager.find(PreEstado.class, 1));
+		reform.setPreVerificacion(entityManager.find(PreVerificacion.class, 1));
+		entityManager.persist(reform);
+		entityManager.refresh(reform);
+		entityManager.flush();
+		for(PreReformaDetalle refDet:detail)
+		{
+			refDet.setPreReforma(reform);
+			refDet.setPreTipoReforma(entityManager.find(PreTipoReforma.class, 1));
+			refDet.setConCuenta(entityManager.find(ConCuenta.class,refDet.getConCuenta().getCueCodigo()));
+		}
+	}
 
 }

@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import ec.edu.uce.erpmunicipal.contabilidad.bsl.ReportService;
+import ec.edu.uce.erpmunicipal.contabilidad.orm.RepBalanceComprobacion;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.RepDiarioGeneralIntegrado;
 import ec.edu.uce.erpmunicipal.contabilidad.orm.RepMayorGeneral;
 
@@ -51,4 +52,22 @@ public class ReportServiceBean implements ReportService {
 		else
 			return list;
 	}
+	
+	@Override
+	public List<RepBalanceComprobacion> readBalanceComprobacion() {
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<RepBalanceComprobacion> cq = cb.createQuery(RepBalanceComprobacion.class);
+		//Root<RepDiarioGeneralIntegrado> from = cq.from(RepDiarioGeneralIntegrado.class);
+
+		cq.select(cq.from(RepBalanceComprobacion.class));
+
+		List<RepBalanceComprobacion> list = entityManager.createQuery(cq).getResultList();
+
+		if (list.isEmpty())
+			return null;
+		else
+			return list;
+	}
+	
+	
 }
