@@ -16,7 +16,7 @@
 
 				<fieldset>
 					<legend
-						style="font-family: Arial, sans-serif; font-size: 1em; color: #4f4f4f;">Encabezado</legend>
+						style="font-family: Arial, sans-serif; font-size: 1em; color: #4f4f4f;">Reforma</legend>
 					<p:panelGrid id="enc1" styleClass="panelGrid" columns="9">
 						<p:column>
 							<p:commandButton icon="ui-icon-seek-first">
@@ -44,9 +44,20 @@
 								showButtonPanel="true" navigator="true" locale="es"></p:calendar>
 						</p:column>
 
+						<p:column>
+							<h:outputText value="Verificacion:" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu value="#{reformPage.verificacionCode}" disabled="true">
+								<f:selectItem itemValue="" itemLabel="--Seleccione--" />
+								<f:selectItems value="#{reformPage.verificacionList}" var="ver" itemValue="#{ver.verCodigo}" itemLabel="#{ver.verDescripcion}" />
+							</p:selectOneMenu>
+						</p:column>
+
+
 					</p:panelGrid>
 
-					<p:panelGrid id="enc2" styleClass="panelGrid" columns="4">
+					<p:panelGrid id="enc2" styleClass="panelGrid" columns="2">
 						<p:column>
 							<h:outputText value="Detalle:" />
 						</p:column>
@@ -56,16 +67,22 @@
 						</p:column>
 					</p:panelGrid>
 
+					<p:panelGrid columns="4" styleClass="panelGrid">
+						<h:outputText value="Total Ingresos:" />
+						<p:inputText readonly="true" style="width:50px;"></p:inputText>
+						<h:outputText value="Total Gastos:" />
+						<p:inputText readonly="true" style="width:50px;"></p:inputText>
+					</p:panelGrid>
+
+
 					<h:panelGrid id="buttons">
 						<p:column>
 							<p:commandButton value="Nuevo" icon="ui-icon-document"
 								styleClass="comButton">
 							</p:commandButton>
 							<p:commandButton value="Guardar" icon="ui-icon-disk"
-								styleClass="comButton" actionListener="#{journalPage.create}"
-								update="message,enc1,enc2" process="@this,calFecha" />
-							<p:commandButton value="Editar" icon="ui-icon-pencil"
-								styleClass="comButton" />
+								styleClass="comButton"
+								/>
 						</p:column>
 
 					</h:panelGrid>
@@ -75,12 +92,72 @@
 				<fieldset>
 					<legend
 						style="font-family: Arial, sans-serif; font-size: 1em; color: #4f4f4f;">Detalle</legend>
-						
-						
-						
+
+
+					<p:panelGrid columns="4" styleClass="panelGrid"
+						style="align:center;">
+
+						<p:column>
+							<h:outputText value="Cuenta:" />
+						</p:column>
+						<p:column>
+							<p:inputText id="codigoCuenta"
+								value="#{initialRegisterPage.cuentaCode}">
+								<p:ajax event="blur"
+									listener="#{initialRegisterPage.searchCuentaCode}"
+									update="nombreCuenta"></p:ajax>
+							</p:inputText>
+						</p:column>
+						<p:column>
+							<p:inputText id="nombreCuenta" readonly="true"
+								value="#{initialRegisterPage.cuentaDescription}"></p:inputText>
+						</p:column>
+						<p:column>
+							<p:commandButton value="Buscar Cuenta" icon="ui-icon-search"
+								styleClass="comButton" type="button"
+								onclick="cuentaDialog.show();"></p:commandButton>
+						</p:column>
+
+						<h:outputText value="Valor:" />
+						<p:inputText id="value" value="#{initialRegisterPage.valor}" onkeypress="return isDecimalKey(event);"></p:inputText>
+						<p:commandButton value="Agregar" icon="ui-icon-arrow-1-s"
+							styleClass="comButton" />
+
+						<p:panelGrid columns="1" styleClass="panelGrid">
+
+							<p:selectOneRadio id="options" value="#{initialRegisterPage.type}">
+								<f:selectItem itemLabel="Aumento" itemValue="1" />
+								<f:selectItem itemLabel="Disminicion" itemValue="2" />
+							</p:selectOneRadio>
+
+						</p:panelGrid>
+
+					</p:panelGrid>
+
+
+					<p:panelGrid id="data" columns="2" styleClass="panelGrid">
+						<p:dataTable id="datail">
+
+							<p:column headerText="Cta Presupuestaria">
+
+							</p:column>
+
+							<p:column headerText="Disponible">
+
+							</p:column>
+
+							<p:column headerText="Traspaso Aumento">
+
+							</p:column>
+
+							<p:column headerText="Traspaso Disminucion">
+
+							</p:column>
+
+						</p:dataTable>
+					</p:panelGrid>
+
 				</fieldset>
-
-
 
 
 				<h:panelGrid id="message">
