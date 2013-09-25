@@ -2,6 +2,9 @@ package ec.edu.uce.erpmunicipal.presupuesto.orm;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import ec.edu.uce.erpmunicipal.contabilidad.orm.ConCuenta;
+
 import java.math.BigDecimal;
 
 
@@ -20,9 +23,6 @@ public class PreReformaDetalle implements Serializable {
 	@Column(name="rde_codigo")
 	private Integer rdeCodigo;
 
-	@Column(name="rde_cuenta")
-	private Integer rdeCuenta;
-
 	@Column(name="rde_valor")
 	private BigDecimal rdeValor;
 
@@ -35,6 +35,11 @@ public class PreReformaDetalle implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="rde_tipo_reforma")
 	private PreTipoReforma preTipoReforma;
+	
+	@ManyToOne
+	@JoinColumn(name="rde_cuenta")
+	private ConCuenta conCuenta;
+
 
 	public PreReformaDetalle() {
 	}
@@ -45,14 +50,6 @@ public class PreReformaDetalle implements Serializable {
 
 	public void setRdeCodigo(Integer rdeCodigo) {
 		this.rdeCodigo = rdeCodigo;
-	}
-
-	public Integer getRdeCuenta() {
-		return this.rdeCuenta;
-	}
-
-	public void setRdeCuenta(Integer rdeCuenta) {
-		this.rdeCuenta = rdeCuenta;
 	}
 
 	public BigDecimal getRdeValor() {
@@ -77,6 +74,14 @@ public class PreReformaDetalle implements Serializable {
 
 	public void setPreTipoReforma(PreTipoReforma preTipoReforma) {
 		this.preTipoReforma = preTipoReforma;
+	}
+
+	public ConCuenta getConCuenta() {
+		return conCuenta;
+	}
+
+	public void setConCuenta(ConCuenta conCuenta) {
+		this.conCuenta = conCuenta;
 	}
 
 }

@@ -31,6 +31,16 @@ public class PreReforma implements Serializable {
 	@OneToMany(mappedBy="preReforma")
 	private List<PreReformaDetalle> preReformaDetalles;
 
+	//bi-directional many-to-one association to PreEstado
+	@ManyToOne
+	@JoinColumn(name="ref_estado")
+	private PreEstado preEstado;
+
+	//bi-directional many-to-one association to PreVerificacion
+	@ManyToOne
+	@JoinColumn(name="ref_verificacion")
+	private PreVerificacion preVerificacion;
+
 	public PreReforma() {
 	}
 
@@ -64,6 +74,22 @@ public class PreReforma implements Serializable {
 
 	public void setPreReformaDetalles(List<PreReformaDetalle> preReformaDetalles) {
 		this.preReformaDetalles = preReformaDetalles;
+	}
+
+	public PreEstado getPreEstado() {
+		return this.preEstado;
+	}
+
+	public void setPreEstado(PreEstado preEstado) {
+		this.preEstado = preEstado;
+	}
+
+	public PreVerificacion getPreVerificacion() {
+		return this.preVerificacion;
+	}
+
+	public void setPreVerificacion(PreVerificacion preVerificacion) {
+		this.preVerificacion = preVerificacion;
 	}
 
 }
