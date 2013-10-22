@@ -13,7 +13,7 @@
 	<div align="center">
 		<div style="width: 990px; box-shadow: 0 0 20px #2E2D32;">
 			<div id="cabecera">
-				<table>
+				<table width="99%">
 					<tr>
 						<td align="left" width="5%"><h:graphicImage value="/images/uce_logo.jpg" height="90" /></td>
 						<td>Universidad Central del Ecuador</td>
@@ -21,7 +21,7 @@
 						<td align="right" width="5%"><h:graphicImage value="/images/odontologia_uce.jpg" height="90" /></td>
 					</tr>
 				</table>
-				<table>
+				<table  bgcolor="#6eac2c" width="100%">
 						<tr>
 							<td align="center" colspan="4">SILSAE</td>
 						</tr>
@@ -30,35 +30,52 @@
 						</tr>
 				</table>
 			</div>
+			
 			<div id="menu">
-			
-			<p:menubar>  
-		        <p:submenu label="File" icon="ui-icon-document">  
-		            <p:submenu label="New" icon="ui-icon-contact">  
-		                <p:menuitem value="Project" url="#" />  
-		                <p:menuitem value="Other" url="#" />  
-		            </p:submenu>  
-		            <p:menuitem value="Open" url="#" />  
-		            <p:separator />  
-		            <p:menuitem value="Quit" url="#" />  
-		        </p:submenu>  
+			<p:menubar style="margin-left:auto; margin-right:auto;text-align: center; width:96%">   
+				<p:menuitem value="Inicio" url="#" />
+		        <p:submenu label="Seguimiento">
+			        <p:menuitem value="Pregrado" url="#" />
+			        <p:menuitem value="Postgrado" url="#" />
+				</p:submenu>
+				<p:menuitem value="Bolsa de Empleo" url="#" />
 	        </p:menubar>
-			
+			<p:spacer height="10"></p:spacer>
 			</div>
 			<div id="content" align="left" style="width: 800px;">
 			
 			<p:panel header="MISION">
 				<p style="text-align: justify;">Formar Profesrionales odontologos de nivel superior de manera integra, atendiendolas areas 
-				cientificas - tecnologicas y de investigacvion. Fortaleziendo de esta manera su capacidad creativa, critica, solidaria y humanistica: participando en equipos de salud</p>
-			</p:panel>	
-
+				cientificas - tecnologicas y de investigacion. Fortaleziendo de esta manera su capacidad 
+				creativa, critica, solidaria y humanistica: participando en equipos de salud con liderazgo y 
+				gestion, asi como analizando y solucionanado los problemas del aparato estomagtognatico, 
+				presentes en la sociedad.</p>
+			</p:panel>
+				
+			<p:spacer height="10"></p:spacer>
+			
 			<p:panel header="VISION">
-				<p style="text-align: justify;">Formar Profesrionales odontologos de nivel superior de manera integra, atendiendolas areas 
-				cientificas - tecnologicas y de investigacvion. Fortaleziendo de esta manera su capacidad creativa, critica, solidaria y humanistica: participando en equipos de salud</p>
-			</p:panel>	
-						
+				<p style="text-align: justify;">Liderar la formacion de odontologos de calidad, con preparacion de excelencia academica, 
+				cientifica, tecnica y de investigacion, con altos valores humanos y solidos principios eticos, 
+				que les permita desenvolverse con exito, en la solucion de problemas de salud bucal, para el 
+				desarrollo del pais      
+				</p>
+			</p:panel>
+				
+			<p:spacer height="10"></p:spacer>
+			
 			</div>
 		</div>
+		<p:spacer height="10"></p:spacer>
+		<footer id="footer" role="contentinfo" style="background-color:#C0CCDA;width: 990px;">
+			<small>
+			Copyright © 2013 Universidad Central del Ecuador. Todos los derechos reservados.
+			<br/>
+			Ciudadela Universitaria Av. América (593)252-1500 /290-4799 Quito-Ecuador
+			<br/>
+			</small>
+		</footer>
+		
 	</div>
 </h:body>
 </html>
