@@ -126,8 +126,6 @@ create table bem_usuario (
    usu_perfil           int4                 null,
    usu_login            varchar(255)         null,
    usu_password         varchar(255)         null,
-   usu_nombres          varchar(255)         null,
-   usu_apellidos        varchar(255)         null,
    usu_mail             varchar(255)         null,
    usu_celular          varchar(255)         null,
    usu_telefono         varchar(255)         null,
