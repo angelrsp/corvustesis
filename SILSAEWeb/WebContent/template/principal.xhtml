@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Universidad Central del Ecuador - Silsae</title>
+</h:head>
+
+<h:body>
+
+	<div align="center">
+		<div style="width: 990px; box-shadow: 0 0 20px #2E2D32;">
+			<div id="cabecera">
+				<table width="99%">
+					<tr>
+						<td align="left" width="5%"><h:graphicImage value="/images/uce_logo.jpg" height="90" /></td>
+						<td>Universidad Central del Ecuador</td>
+						<td width="22%">Facultad de Odontologia</td>
+						<td align="right" width="5%"><h:graphicImage value="/images/odontologia_uce.jpg" height="90" /></td>
+					</tr>
+				</table>
+				<table  bgcolor="#6eac2c" width="100%">
+						<tr>
+							<td align="center" colspan="4">SILSAE</td>
+						</tr>
+						<tr>
+							<td align="center" colspan="4">Sistema para la Inserccion Laboral y Seguimiento de Egresados</td>
+						</tr>
+				</table>
+			</div>
+			
+			<div id="menu">
+			<p:menubar style="margin-left:auto; margin-right:auto;text-align: center; width:96%">   
+				<p:menuitem value="Inicio" url="#" />
+		        <p:submenu label="Seguimiento">
+			        <p:menuitem value="Pregrado" url="#" />
+			        <p:menuitem value="Postgrado" url="#" />
+				</p:submenu>
+				<p:menuitem value="Bolsa de Empleo" url="#" />
+	        </p:menubar>
+			<p:spacer height="10"></p:spacer>
+			</div>
+			
+			<div id="content" align="left" style="width: 800px;">
+			
+			<ui:insert name="contenido"></ui:insert>
+			
+			<p:spacer height="10"></p:spacer>
+			</div>
+		</div>
+		<p:spacer height="10"></p:spacer>
+		<footer id="footer" role="contentinfo" style="background-color:#C0CCDA;width: 990px;">
+			<small>
+			Copyright © 2013 Universidad Central del Ecuador. Todos los derechos reservados.
+			<br/>
+			Ciudadela Universitaria Av. América (593)252-1500 /290-4799 Quito-Ecuador
+			<br/>
+			</small>
+		</footer>
+		
+	</div>
+</h:body></html>
