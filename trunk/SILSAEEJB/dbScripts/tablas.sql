@@ -2,6 +2,8 @@ drop table bem_aviso;
 
 drop table bem_candidato;
 
+drop table bem_catalogo;
+
 drop table bem_empresa;
 
 drop table bem_modulo;
@@ -24,11 +26,11 @@ drop table bem_usuario;
 create table bem_aviso (
    avi_nombre           serial               not null,
    avi_empresa          int4                 null,
-   avi_puesto           char(10)             null,
-   avi_remuneracion_neta char(10)             null,
-   avi_remuneracion_bruto char(10)             null,
-   avi_requisito        char(10)             null,
-   avi_fecha_caducidad  char(10)             null,
+   avi_puesto           int4                 null,
+   avi_remuneracion_neta decimal              null,
+   avi_remuneracion_bruto decimal              null,
+   avi_requisito        varchar(1000)        null,
+   avi_fecha_caducidad  timestamp            null,
    constraint pk_bem_aviso primary key (avi_nombre)
 );
 
@@ -42,6 +44,17 @@ create table bem_candidato (
    can_apellidos        varchar(255)         null,
    can_identificacion   varchar(10)          null,
    constraint pk_bem_candidato primary key (can_codigo)
+);
+
+/*==============================================================*/
+/* table: bem_catalogo                                          */
+/*==============================================================*/
+create table bem_catalogo (
+   cat_codigo           serial               not null,
+   cat_padre            int4                 null,
+   cat_nombre           varchar(255)         null,
+   cat_descripcion      varchar(255)         null,
+   constraint pk_bem_catalogo primary key (cat_codigo)
 );
 
 /*==============================================================*/
@@ -140,6 +153,11 @@ alter table bem_aviso
 alter table bem_candidato
    add constraint fk_bem_cand_reference_bem_usua foreign key (can_usuario)
       references bem_usuario (usu_codigo)
+      on delete restrict on update restrict;
+
+alter table bem_catalogo
+   add constraint fk_bem_cata_reference_bem_cata foreign key (cat_padre)
+      references bem_catalogo (cat_codigo)
       on delete restrict on update restrict;
 
 alter table bem_empresa
