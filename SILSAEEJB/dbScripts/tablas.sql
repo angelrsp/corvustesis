@@ -1,24 +1,3 @@
-drop table bem_aviso;
-
-drop table bem_candidato;
-
-drop table bem_catalogo;
-
-drop table bem_empresa;
-
-drop table bem_modulo;
-
-drop table bem_pantalla;
-
-drop table bem_parametro;
-
-drop table bem_perfil;
-
-drop table bem_perfil_permiso;
-
-drop table bem_postulacion;
-
-drop table bem_usuario;
 
 /*==============================================================*/
 /* table: bem_aviso                                             */
