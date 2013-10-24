@@ -25,10 +25,9 @@
 
 					<p:inputText></p:inputText>
 
-
 					<h:outputText value="Identificacion" />
 
-					<p:inputText></p:inputText>
+					<p:inputText onkeypress="return isNumberKey(event);" maxlength="10"></p:inputText>
 
 					<h:outputText value="Direccion" />
 
@@ -39,7 +38,7 @@
 					<p:inputText></p:inputText>
 
 
-					<p:commandButton value="Iniciar"></p:commandButton>
+					<p:commandButton value="Guardar"></p:commandButton>
 
 				</p:panelGrid>
 
