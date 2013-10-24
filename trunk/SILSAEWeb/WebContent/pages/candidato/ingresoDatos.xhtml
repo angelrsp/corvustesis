@@ -1,14 +1,56 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head> 
-<body> 
+<h:head></h:head>
+<body>
+
+
+	<ui:composition template="/template/principal.xhtml">
+
+		<ui:define name="contenido">
+
+			<fieldset>
+
+				<p:panelGrid columns="2" styleClass="panelGrid">
+
+					<h:outputText value="Nombres:" />
+
+					<p:inputText></p:inputText>
+
+					<h:outputText value="Apellidos" />
+
+					<p:inputText></p:inputText>
+
+
+					<h:outputText value="Identificacion" />
+
+					<p:inputText></p:inputText>
+
+					<h:outputText value="Direccion" />
+
+					<p:inputText></p:inputText>
+
+					<h:outputText value="Telefono" />
+
+					<p:inputText></p:inputText>
+
+
+					<p:commandButton value="Iniciar"></p:commandButton>
+
+				</p:panelGrid>
 
 
 
+			</fieldset>
+		</ui:define>
 
-</body> 
+	</ui:composition>
+
+
+
+</body>
 </html>
