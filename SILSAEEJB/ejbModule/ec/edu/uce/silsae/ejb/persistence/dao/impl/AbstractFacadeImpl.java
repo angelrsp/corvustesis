@@ -3,9 +3,7 @@ package ec.edu.uce.silsae.ejb.persistence.dao.impl;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import ec.edu.uce.silsae.ejb.persistence.dao.AbstractFacade;
-
-public abstract class AbstractFacadeImpl<T> implements AbstractFacade<T>{
+public abstract class AbstractFacadeImpl<T>{
 	
 	@PersistenceContext(unitName = "silsaePU")
 	private EntityManager entityManager;
