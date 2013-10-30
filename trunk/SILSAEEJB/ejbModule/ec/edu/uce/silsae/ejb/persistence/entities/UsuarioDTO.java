@@ -47,6 +47,9 @@ public class UsuarioDTO implements Serializable {
     @ManyToOne
 	@JoinColumn(name="usu_perfil")
 	private PerfilDTO bemPerfil;
+    
+    @Transient
+    private String npUsuPassword;
 
     public UsuarioDTO() {
     }
@@ -121,6 +124,14 @@ public class UsuarioDTO implements Serializable {
 
 	public void setBemPerfil(PerfilDTO bemPerfil) {
 		this.bemPerfil = bemPerfil;
+	}
+
+	public String getNpUsuPassword() {
+		return npUsuPassword;
+	}
+
+	public void setNpUsuPassword(String npUsuPassword) {
+		this.npUsuPassword = npUsuPassword;
 	}
 	
 }

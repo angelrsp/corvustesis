@@ -1,39 +1,46 @@
 package ec.edu.uce.silsae.ejb.persistence.dao.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import java.lang.reflect.ParameterizedType;
 
-public abstract class AbstractFacadeImpl<T>{
+import javax.persistence.EntityManager;
+
+import ec.edu.uce.silsae.ejb.persistence.dao.AbstractFacade;
+
+public abstract class AbstractFacadeImpl<T> implements AbstractFacade<T>{
 	
-	@PersistenceContext(unitName = "silsaePU")
-	private EntityManager entityManager;
+//	@PersistenceContext(unitName = "silsaePU")
+	protected EntityManager entityManager;
 
 	private Class<T> entityClass;
+	
+	public AbstractFacadeImpl(){}
 
-	public AbstractFacadeImpl(Class<T> entityClass) {
-		this.entityClass = entityClass;
+	@SuppressWarnings("unchecked")
+	public AbstractFacadeImpl(EntityManager entityManager) {
+		this.entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+		this.entityManager = entityManager;
 	}
-
-	protected EntityManager getEntityManager(){
-		return entityManager;
-	}
+	
+//	protected EntityManager getEntityManager(){
+//		return this.entityManager;
+//	}
 
 	public T create(T entity) {
-		getEntityManager().persist(entity);
+		entityManager.persist(entity);
 		return entity;
 	}
 
 	public T edit(T entity) {
-		getEntityManager().merge(entity);
+		entityManager.merge(entity);
 		return entity;
 	}
 
 	public void remove(T entity) {
-		getEntityManager().remove(getEntityManager().merge(entity));
+		entityManager.remove(entityManager.merge(entity));
 	}
 
 	public T find(Object id) {
-		return getEntityManager().find(entityClass, id);
+		return entityManager.find(entityClass, id);
 	}
 
 //	public List<T> findAll() {
