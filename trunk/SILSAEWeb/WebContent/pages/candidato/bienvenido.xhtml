@@ -11,28 +11,33 @@
 <body>
 
 	<ui:composition template="/template/principal.xhtml">
-
 		<ui:define name="contenido">
-
-<fieldset>
-
-			<table>
-				<tr>
-					<td>
-						<p style="text-align: justify;">Acceso al sistema.</p>
-							<p style="text-align: justify;">Si eres egresado de la facultad de odontologia y aun NO has registrado tus datos en el sistema.</p>
-							<p style="text-align: justify;">Te invitamos a que lo hagas con ello podremos contactarte y conocer tu situacion como egresado.</p>
-					</td>
-					<td align="center">
-					<p:commandButton value="Registrate Aqui"></p:commandButton>
-					<p:commandButton value="Ingresar"></p:commandButton>
-					</td>
-				</tr>
-			</table>
-</fieldset>
+			<fieldset>
+				<table>
+					<tr>
+						<td>
+							<p style="text-align: justify;">Acceso al sistema.</p>
+							<p style="text-align: justify;">Si eres egresado de la
+								facultad de odontologia y aun NO has registrado tus datos en el
+								sistema.</p>
+							<p style="text-align: justify;">Te invitamos a que lo hagas
+								con ello podremos contactarte y conocer tu situacion como
+								egresado.</p>
+						</td>
+						<td align="center">
+							<h:form>
+							<h:commandButton action="/pages/candidato/ingresoDatos" 
+								value="#{i18n['boton.registrarse']}" immediate="true"/>
+							<p:commandButton
+								value="#{i18n['boton.registrarse']}" 
+								action ="/pages/candidato/ingresoDatos" update="@none"/>
+							<p:commandButton value="Ingresar"/>
+							</h:form>
+						</td>
+					</tr>
+				</table>
+			</fieldset>
 		</ui:define>
-
 	</ui:composition>
-
 </body>
 </html>
