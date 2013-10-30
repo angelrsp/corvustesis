@@ -15,7 +15,7 @@ public class UsuarioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_USUARIO_USUCODIGO_GENERATOR", sequenceName="BEM_USUARIO_USU_CODIGO_SEQ", allocationSize=1)
+	@SequenceGenerator(name="BEM_USUARIO_USUCODIGO_GENERATOR", sequenceName="BEM_USUARIO_USU_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_USUARIO_USUCODIGO_GENERATOR")
 	@Column(name="usu_codigo")
 	private Integer usuCodigo;
@@ -47,9 +47,6 @@ public class UsuarioDTO implements Serializable {
     @ManyToOne
 	@JoinColumn(name="usu_perfil")
 	private PerfilDTO bemPerfil;
-    
-    @Transient
-    private String npUsuPassword;
 
     public UsuarioDTO() {
     }
@@ -124,14 +121,6 @@ public class UsuarioDTO implements Serializable {
 
 	public void setBemPerfil(PerfilDTO bemPerfil) {
 		this.bemPerfil = bemPerfil;
-	}
-
-	public String getNpUsuPassword() {
-		return npUsuPassword;
-	}
-
-	public void setNpUsuPassword(String npUsuPassword) {
-		this.npUsuPassword = npUsuPassword;
 	}
 	
 }

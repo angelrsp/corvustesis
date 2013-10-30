@@ -15,7 +15,7 @@ public class EmpresaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_EMPRESA_EMPCODIGO_GENERATOR", sequenceName="BEM_EMPRESA_EMP_CODIGO_SEQ", allocationSize=1)
+	@SequenceGenerator(name="BEM_EMPRESA_EMPCODIGO_GENERATOR", sequenceName="BEM_EMPRESA_EMP_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_EMPRESA_EMPCODIGO_GENERATOR")
 	@Column(name="emp_codigo")
 	private Integer empCodigo;
@@ -29,6 +29,15 @@ public class EmpresaDTO implements Serializable {
 	@Column(name="emp_ruc")
 	private String empRuc;
 
+	@Column(name="emp_sector")
+	private Integer empSector;
+
+	@Column(name="emp_ubicacion")
+	private Integer empUbicacion;
+
+	@Column(name="emp_web")
+	private String empWeb;
+
 	//bi-directional many-to-one association to AvisoDTO
 	@OneToMany(mappedBy="bemEmpresa")
 	private List<AvisoDTO> bemAvisos;
@@ -37,6 +46,11 @@ public class EmpresaDTO implements Serializable {
     @ManyToOne
 	@JoinColumn(name="emp_usuario")
 	private UsuarioDTO bemUsuario;
+
+	//bi-directional many-to-one association to ContactoDTO
+    @ManyToOne
+	@JoinColumn(name="emp_contacto")
+	private ContactoDTO bemContacto;
 
     public EmpresaDTO() {
     }
@@ -73,6 +87,30 @@ public class EmpresaDTO implements Serializable {
 		this.empRuc = empRuc;
 	}
 
+	public Integer getEmpSector() {
+		return this.empSector;
+	}
+
+	public void setEmpSector(Integer empSector) {
+		this.empSector = empSector;
+	}
+
+	public Integer getEmpUbicacion() {
+		return this.empUbicacion;
+	}
+
+	public void setEmpUbicacion(Integer empUbicacion) {
+		this.empUbicacion = empUbicacion;
+	}
+
+	public String getEmpWeb() {
+		return this.empWeb;
+	}
+
+	public void setEmpWeb(String empWeb) {
+		this.empWeb = empWeb;
+	}
+
 	public List<AvisoDTO> getBemAvisos() {
 		return this.bemAvisos;
 	}
@@ -87,6 +125,14 @@ public class EmpresaDTO implements Serializable {
 
 	public void setBemUsuario(UsuarioDTO bemUsuario) {
 		this.bemUsuario = bemUsuario;
+	}
+	
+	public ContactoDTO getBemContacto() {
+		return this.bemContacto;
+	}
+
+	public void setBemContacto(ContactoDTO bemContacto) {
+		this.bemContacto = bemContacto;
 	}
 	
 }

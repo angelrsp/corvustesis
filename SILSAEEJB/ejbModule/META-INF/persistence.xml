@@ -13,6 +13,12 @@
 		<class>ec.edu.uce.silsae.ejb.persistence.entities.PerfilPermisoDTO</class>
 		<class>ec.edu.uce.silsae.ejb.persistence.entities.PostulacionDTO</class>
 		<class>ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO</class>
+		<class>ec.edu.uce.silsae.ejb.persistence.entities.ContactoDTO</class>
+		<class>ec.edu.uce.silsae.ejb.persistence.entities.EstudioDTO</class>
+		<class>ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaDTO</class>
+		<class>ec.edu.uce.silsae.ejb.persistence.entities.IdiomaDTO</class>
+		<class>ec.edu.uce.silsae.ejb.persistence.entities.ReferenciaDTO</class>
+		<class>ec.edu.uce.silsae.ejb.persistence.entities.SoftwareDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>

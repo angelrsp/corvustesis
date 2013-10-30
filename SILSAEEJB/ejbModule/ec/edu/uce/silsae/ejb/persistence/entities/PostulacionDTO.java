@@ -14,7 +14,7 @@ public class PostulacionDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_POSTULACION_POSCODIGO_GENERATOR", sequenceName="BEM_POSTULACION_POS_CODIGO_SEQ", allocationSize=1)
+	@SequenceGenerator(name="BEM_POSTULACION_POSCODIGO_GENERATOR", sequenceName="BEM_POSTULACION_POS_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_POSTULACION_POSCODIGO_GENERATOR")
 	@Column(name="pos_codigo")
 	private Integer posCodigo;
