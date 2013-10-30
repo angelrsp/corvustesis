@@ -4,18 +4,57 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-
 <h:head></h:head>
 <body>
 	<ui:composition template="/template/principal.xhtml">
 		<ui:define name="contenido">
 			<fieldset>
-				<table id="tblRegistroCandidato">
-					<tr>
-						<td><h:outputLabel value="#{i18n['label.tipo.documento']}" /> </td>
-						<td><p:inputText value="#{registroCandidatoController.candidatoRegistro.canCodigo}"/></td>
-					</tr>
-				</table>
+				<p:growl id="growl" showDetail="true" sticky="true" />
+				<p:panel id="pnlRegistroCandidato" styleClass="tabla"
+					header="#{i18n['label.titulo.pantalla.registro.candidato']}">
+					<table id="tblRegistroCandidato" class="tabla">
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.tipo.documento']}:&#160;" /> </td>
+							<td><p:inputText /></td>
+							<td><h:outputLabel value="#{i18n['label.ci.pasaporte']}:&#160;" /> </td>
+							<td><p:inputText required="true" 
+									value="#{registroCandidatoController.candidatoRegistro.canIdentificacion}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.apellido.paterno']}:&#160;" /> </td>
+							<td><p:inputText required="true"
+									value="#{registroCandidatoController.candidatoRegistro.canApellidos}"/></td>
+							<td><h:outputLabel value="#{i18n['label.apellido.materno']}:&#160;" /> </td>
+							<td><p:inputText /></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.nombre.primero']}:&#160;" /> </td>
+							<td><p:inputText required="true"
+									value="#{registroCandidatoController.candidatoRegistro.canNombres}"/></td>
+							<td><h:outputLabel value="#{i18n['label.nombre.Segundo']}:&#160;" /> </td>
+							<td><p:inputText /></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.email']}:&#160;" /> </td>
+							<td colspan="3"><p:inputText style="width : 90%;" 
+									value="#{registroCandidatoController.usuarioRegistro.usuMail}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.contrasenia']}:&#160;" /> </td>
+							<td><p:password required="true"
+									value="#{registroCandidatoController.usuarioRegistro.usuPassword}"/></td>
+							<td><h:outputLabel value="#{i18n['label.contrasenia.confirmar']}:&#160;" /> </td>
+							<td><p:password required="true"
+									value="#{registroCandidatoController.usuarioRegistro.npUsuPassword}"/></td>
+						</tr>
+						<tr>
+							<td colspan="4" align="center">
+								<p:commandButton value="#{i18n['boton.registrarse']}" 
+									process="pnlRegistroCandidato" update="pnlRegistroCandidato, growl"
+									actionListener="#{registroCandidatoController.registroCandidato}"/> </td>
+						</tr>
+					</table>
+				</p:panel>
 			</fieldset>
 		</ui:define>
 	</ui:composition>

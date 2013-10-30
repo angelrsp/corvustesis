@@ -1,12 +1,16 @@
 package ec.edu.uce.silsae.web.controller;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ec.edu.uce.silsae.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
 @ViewScoped
 @ManagedBean (name = "registroCandidatoController")
@@ -14,14 +18,24 @@ public class RegistroCandidatoController extends BaseController{
 	
 	private static final Logger log = LoggerFactory.getLogger(RegistroCandidatoController.class);
 	
-	private CandidatoDTO candidatoRegistro; 
+	private CandidatoDTO candidatoRegistro;
+	private UsuarioDTO usuarioRegistro;
 	
-	public RegistroCandidatoController () {
-		
+	@EJB
+	private CandidatosService candidatosService;
+	
+	public RegistroCandidatoController () {}
+	
+	@PostConstruct
+	public void inicializar () {
+		this.candidatoRegistro = new CandidatoDTO();
+		this.usuarioRegistro = new UsuarioDTO();
 	}
 	
-	public void registrarse () {
-		log.info("metodo registrarse");
+	public void registroCandidato () {
+		log.info("metodo registroCandidato");
+		getCandidatoRegistro().setBemUsuario(getUsuarioRegistro());
+		candidatosService.registrarCandidato(getCandidatoRegistro());
 	}
 
 	public CandidatoDTO getCandidatoRegistro() {
@@ -30,6 +44,14 @@ public class RegistroCandidatoController extends BaseController{
 
 	public void setCandidatoRegistro(CandidatoDTO candidatoRegistro) {
 		this.candidatoRegistro = candidatoRegistro;
+	}
+
+	public UsuarioDTO getUsuarioRegistro() {
+		return usuarioRegistro;
+	}
+
+	public void setUsuarioRegistro(UsuarioDTO usuarioRegistro) {
+		this.usuarioRegistro = usuarioRegistro;
 	}
 	
 
