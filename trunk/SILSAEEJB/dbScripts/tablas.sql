@@ -6,10 +6,10 @@ create table bem_aviso (
    avi_nombre           serial               not null,
    avi_empresa          int4                 null,
    avi_puesto           int4                 null,
-   avi_remuneracion_neta decimal              null,
-   avi_remuneracion_bruto decimal              null,
-   avi_requisito        varchar(1000)        null,
+   avi_remuneracion     numeric              null,
+   avi_descripcion      varchar(1000)        null,
    avi_fecha_caducidad  timestamp            null,
+   avi_vacantes         int4                 null,
    constraint pk_bem_aviso primary key (avi_nombre)
 );
 
@@ -20,8 +20,11 @@ create table bem_candidato (
    can_codigo           serial               not null,
    can_usuario          int4                 null,
    can_nombres          varchar(255)         null,
-   can_apellidos        varchar(255)         null,
-   can_identificacion   varchar(10)          null,
+   can_apellido_paterno varchar(255)         null,
+   can_apellido_materno varchar(255)         null,
+   can_identificacion   varchar(15)          null,
+   can_tipo_identificacion int4                 null,
+   can_foto             bytea                null,
    constraint pk_bem_candidato primary key (can_codigo)
 );
 
@@ -31,9 +34,21 @@ create table bem_candidato (
 create table bem_catalogo (
    cat_codigo           serial               not null,
    cat_padre            int4                 null,
-   cat_nombre           varchar(255)         null,
    cat_descripcion      varchar(255)         null,
    constraint pk_bem_catalogo primary key (cat_codigo)
+);
+
+/*==============================================================*/
+/* table: bem_contacto                                          */
+/*==============================================================*/
+create table bem_contacto (
+   con_codigo           serial               not null,
+   con_nombres          varchar(255)         null,
+   con_apellidos        varchar(255)         null,
+   con_mail             varchar(255)         null,
+   con_telefono         varchar(10)          null,
+   con_cargo            int4                 null,
+   constraint pk_bem_contacto primary key (con_codigo)
 );
 
 /*==============================================================*/
@@ -42,10 +57,58 @@ create table bem_catalogo (
 create table bem_empresa (
    emp_codigo           serial               not null,
    emp_usuario          int4                 null,
+   emp_contacto         int4                 null,
    emp_razon_social     varchar(255)         null,
    emp_nombre_comercial varchar(255)         null,
    emp_ruc              varchar(13)          null,
+   emp_web              varchar(255)         null,
+   emp_ubicacion        int4                 null,
+   emp_sector           int4                 null,
    constraint pk_bem_empresa primary key (emp_codigo)
+);
+
+/*==============================================================*/
+/* table: bem_estudio                                           */
+/*==============================================================*/
+create table bem_estudio (
+   est_codigo           serial               not null,
+   est_candidato        int4                 null,
+   est_nivel            int4                 null,
+   est_establecimiento  int4                 null,
+   est_pais             int4                 null,
+   est_carrera          varchar(255)         null,
+   est_mes_inicio       int4                 null,
+   est_anio_inicio      int4                 null,
+   est_mes_fin          int4                 null,
+   est_anio_fin         int4                 null,
+   constraint pk_bem_estudio primary key (est_codigo)
+);
+
+/*==============================================================*/
+/* table: bem_experiencia                                       */
+/*==============================================================*/
+create table bem_experiencia (
+   exp_codigo           serial               not null,
+   exp_candidato        int4                 null,
+   exp_entidad          varchar(100)         null,
+   exp_fecha_inicio     timestamp            null,
+   exp_fecha_fin        timestamp            null,
+   exp_tareas           varchar(255)         null,
+   exp_puesto           varchar(255)         null,
+   exp_rubro            numeric              null,
+   exp_tipo_experiencia int4                 null,
+   constraint pk_bem_experiencia primary key (exp_codigo)
+);
+
+/*==============================================================*/
+/* table: bem_idioma                                            */
+/*==============================================================*/
+create table bem_idioma (
+   idi_codigo           serial               not null,
+   idi_candidato        int4                 null,
+   idi_idioma           int4                 null,
+   idi_nivel            int4                 null,
+   constraint pk_bem_idioma primary key (idi_codigo)
 );
 
 /*==============================================================*/
@@ -111,6 +174,28 @@ create table bem_postulacion (
 );
 
 /*==============================================================*/
+/* table: bem_referencia                                        */
+/*==============================================================*/
+create table bem_referencia (
+   ref_codigo           serial               not null,
+   ref_nombre           varchar(255)         null,
+   ref_telefono         varchar(10)          null,
+   ref_mail             varchar(255)         null,
+   constraint pk_bem_referencia primary key (ref_codigo)
+);
+
+/*==============================================================*/
+/* table: bem_software                                          */
+/*==============================================================*/
+create table bem_software (
+   pro_codigo           serial               not null,
+   pro_candidato        int4                 null,
+   pro_programa         int4                 null,
+   pro_nivel            int4                 null,
+   constraint pk_bem_software primary key (pro_codigo)
+);
+
+/*==============================================================*/
 /* table: bem_usuario                                           */
 /*==============================================================*/
 create table bem_usuario (
@@ -140,8 +225,28 @@ alter table bem_catalogo
       on delete restrict on update restrict;
 
 alter table bem_empresa
+   add constraint fk_bem_empr_reference_bem_cont foreign key (emp_contacto)
+      references bem_contacto (con_codigo)
+      on delete restrict on update restrict;
+
+alter table bem_empresa
    add constraint fk_bem_empr_reference_bem_usua foreign key (emp_usuario)
       references bem_usuario (usu_codigo)
+      on delete restrict on update restrict;
+
+alter table bem_estudio
+   add constraint fk_bem_estu_reference_bem_cand foreign key (est_candidato)
+      references bem_candidato (can_codigo)
+      on delete restrict on update restrict;
+
+alter table bem_experiencia
+   add constraint fk_bem_expe_reference_bem_cand foreign key (exp_candidato)
+      references bem_candidato (can_codigo)
+      on delete restrict on update restrict;
+
+alter table bem_idioma
+   add constraint fk_bem_idio_reference_bem_cand foreign key (idi_candidato)
+      references bem_candidato (can_codigo)
       on delete restrict on update restrict;
 
 alter table bem_pantalla
@@ -167,6 +272,11 @@ alter table bem_postulacion
 alter table bem_postulacion
    add constraint fk_bem_post_reference_bem_avis foreign key (pos_aviso)
       references bem_aviso (avi_nombre)
+      on delete restrict on update restrict;
+
+alter table bem_software
+   add constraint fk_bem_soft_reference_bem_cand foreign key (pro_candidato)
+      references bem_candidato (can_codigo)
       on delete restrict on update restrict;
 
 alter table bem_usuario
