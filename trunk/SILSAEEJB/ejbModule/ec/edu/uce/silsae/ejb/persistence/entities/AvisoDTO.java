@@ -17,10 +17,13 @@ public class AvisoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_AVISO_AVINOMBRE_GENERATOR", sequenceName="BEM_AVISO_AVI_NOMBRE_SEQ", allocationSize=1)
+	@SequenceGenerator(name="BEM_AVISO_AVINOMBRE_GENERATOR", sequenceName="BEM_AVISO_AVI_NOMBRE_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_AVISO_AVINOMBRE_GENERATOR")
 	@Column(name="avi_nombre")
 	private Integer aviNombre;
+
+	@Column(name="avi_descripcion")
+	private String aviDescripcion;
 
 	@Column(name="avi_fecha_caducidad")
 	private Timestamp aviFechaCaducidad;
@@ -28,14 +31,11 @@ public class AvisoDTO implements Serializable {
 	@Column(name="avi_puesto")
 	private Integer aviPuesto;
 
-	@Column(name="avi_remuneracion_bruto")
-	private BigDecimal aviRemuneracionBruto;
+	@Column(name="avi_remuneracion")
+	private BigDecimal aviRemuneracion;
 
-	@Column(name="avi_remuneracion_neta")
-	private BigDecimal aviRemuneracionNeta;
-
-	@Column(name="avi_requisito")
-	private String aviRequisito;
+	@Column(name="avi_vacantes")
+	private Integer aviVacantes;
 
 	//bi-directional many-to-one association to EmpresaDTO
     @ManyToOne
@@ -57,6 +57,14 @@ public class AvisoDTO implements Serializable {
 		this.aviNombre = aviNombre;
 	}
 
+	public String getAviDescripcion() {
+		return this.aviDescripcion;
+	}
+
+	public void setAviDescripcion(String aviDescripcion) {
+		this.aviDescripcion = aviDescripcion;
+	}
+
 	public Timestamp getAviFechaCaducidad() {
 		return this.aviFechaCaducidad;
 	}
@@ -73,28 +81,20 @@ public class AvisoDTO implements Serializable {
 		this.aviPuesto = aviPuesto;
 	}
 
-	public BigDecimal getAviRemuneracionBruto() {
-		return this.aviRemuneracionBruto;
+	public BigDecimal getAviRemuneracion() {
+		return this.aviRemuneracion;
 	}
 
-	public void setAviRemuneracionBruto(BigDecimal aviRemuneracionBruto) {
-		this.aviRemuneracionBruto = aviRemuneracionBruto;
+	public void setAviRemuneracion(BigDecimal aviRemuneracion) {
+		this.aviRemuneracion = aviRemuneracion;
 	}
 
-	public BigDecimal getAviRemuneracionNeta() {
-		return this.aviRemuneracionNeta;
+	public Integer getAviVacantes() {
+		return this.aviVacantes;
 	}
 
-	public void setAviRemuneracionNeta(BigDecimal aviRemuneracionNeta) {
-		this.aviRemuneracionNeta = aviRemuneracionNeta;
-	}
-
-	public String getAviRequisito() {
-		return this.aviRequisito;
-	}
-
-	public void setAviRequisito(String aviRequisito) {
-		this.aviRequisito = aviRequisito;
+	public void setAviVacantes(Integer aviVacantes) {
+		this.aviVacantes = aviVacantes;
 	}
 
 	public EmpresaDTO getBemEmpresa() {
