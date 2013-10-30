@@ -7,48 +7,17 @@
 
 <h:head></h:head>
 <body>
-
-
 	<ui:composition template="/template/principal.xhtml">
-
 		<ui:define name="contenido">
-
 			<fieldset>
-
-				<p:panelGrid columns="2" styleClass="panelGrid">
-
-					<h:outputText value="Nombres:" />
-
-					<p:inputText></p:inputText>
-
-					<h:outputText value="Apellidos" />
-
-					<p:inputText></p:inputText>
-
-					<h:outputText value="Identificacion" />
-
-					<p:inputText onkeypress="return isNumberKey(event);" maxlength="10"></p:inputText>
-
-					<h:outputText value="Direccion" />
-
-					<p:inputText></p:inputText>
-
-					<h:outputText value="Telefono" />
-
-					<p:inputText></p:inputText>
-
-
-					<p:commandButton value="Guardar"></p:commandButton>
-
-				</p:panelGrid>
-
-
+				<table id="tblRegistroCandidato">
+					<tr>
+						<td><h:outputLabel value="#{i18n['label.tipo.documento']}" /> </td>
+						<td><p:inputText value="#{registroCandidatoController.candidatoRegistro.canCodigo}"/></td>
+					</tr>
+				</table>
 			</fieldset>
 		</ui:define>
-
 	</ui:composition>
-
-
-
 </body>
 </html>
