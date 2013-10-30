@@ -1,3 +1,36 @@
+drop table bem_aviso;
+
+drop table bem_candidato;
+
+drop table bem_catalogo;
+
+drop table bem_contacto;
+
+drop table bem_empresa;
+
+drop table bem_estudio;
+
+drop table bem_experiencia;
+
+drop table bem_idioma;
+
+drop table bem_modulo;
+
+drop table bem_pantalla;
+
+drop table bem_parametro;
+
+drop table bem_perfil;
+
+drop table bem_perfil_permiso;
+
+drop table bem_postulacion;
+
+drop table bem_referencia;
+
+drop table bem_software;
+
+drop table bem_usuario;
 
 /*==============================================================*/
 /* table: bem_aviso                                             */
@@ -178,6 +211,7 @@ create table bem_postulacion (
 /*==============================================================*/
 create table bem_referencia (
    ref_codigo           serial               not null,
+   ref_candidato        int4                 null,
    ref_nombre           varchar(255)         null,
    ref_telefono         varchar(10)          null,
    ref_mail             varchar(255)         null,
@@ -272,6 +306,11 @@ alter table bem_postulacion
 alter table bem_postulacion
    add constraint fk_bem_post_reference_bem_avis foreign key (pos_aviso)
       references bem_aviso (avi_nombre)
+      on delete restrict on update restrict;
+
+alter table bem_referencia
+   add constraint fk_bem_refe_reference_bem_cand foreign key (ref_candidato)
+      references bem_candidato (can_codigo)
       on delete restrict on update restrict;
 
 alter table bem_software
