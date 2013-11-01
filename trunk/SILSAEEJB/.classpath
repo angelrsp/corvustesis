@@ -12,5 +12,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="/SILSAEWeb/WebContent/WEB-INF/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="/SILSAEWeb/WebContent/WEB-INF/lib/slf4j-api-1.7.2.jar"/>
+	<classpathentry kind="lib" path="/SILSAEWeb/WebContent/WEB-INF/lib/slf4j-log4j12-1.7.2.jar"/>
+	<classpathentry kind="lib" path="D:/externalJars/commons/commons-codec-1.8.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
