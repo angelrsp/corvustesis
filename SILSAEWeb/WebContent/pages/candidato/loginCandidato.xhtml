@@ -15,17 +15,26 @@
 					<table>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.usuario']}" /></td>
-							<td><p:inputText value="#{loginController.credencialesDTO.username}" placeholder="#{i18n['label.ci.pasaporte']}"/> </td>
+							<td><p:inputText
+									required="true"
+									value="#{loginController.credencialesDTO.username}"
+									placeholder="#{i18n['label.ci.pasaporte']}" /></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.contrasenia']}" /></td>
-							<td><p:inputText value="#{loginController.credencialesDTO.password}"/> </td>
+							<td><p:inputText
+									required="true"
+									value="#{loginController.credencialesDTO.password}" /></td>
 						</tr>
 						<tr>
-							<td colspan="1"><p:commandButton value="ingresar" actionListener=""/></td>
+							<td><p:commandButton value="ingresar"
+									process="pnlLoginCandidato" update="@none"
+									actionListener="#{loginController.iniciarSesionUsuario}" /></td>
+							<td><h:commandButton value="ingresar"
+									action="#{loginController.iniciarSesionUsuario}" /></td>
 						</tr>
 					</table>
-					
+
 				</p:panel>
 			</fieldset>
 		</ui:define>
