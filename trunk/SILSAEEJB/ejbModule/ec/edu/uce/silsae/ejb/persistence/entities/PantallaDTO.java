@@ -15,7 +15,7 @@ public class PantallaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_PANTALLA_PANCODIGO_GENERATOR", sequenceName="BEM_PANTALLA_PAN_CODIGO_SEQ")
+	@SequenceGenerator(name="BEM_PANTALLA_PANCODIGO_GENERATOR", sequenceName="BEM_PANTALLA_PAN_CODIGO_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_PANTALLA_PANCODIGO_GENERATOR")
 	@Column(name="pan_codigo")
 	private Integer panCodigo;

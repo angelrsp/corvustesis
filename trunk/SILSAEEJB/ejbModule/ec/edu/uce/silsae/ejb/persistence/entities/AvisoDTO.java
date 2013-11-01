@@ -17,7 +17,7 @@ public class AvisoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_AVISO_AVINOMBRE_GENERATOR", sequenceName="BEM_AVISO_AVI_NOMBRE_SEQ")
+	@SequenceGenerator(name="BEM_AVISO_AVINOMBRE_GENERATOR", sequenceName="BEM_AVISO_AVI_NOMBRE_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_AVISO_AVINOMBRE_GENERATOR")
 	@Column(name="avi_nombre")
 	private Integer aviNombre;

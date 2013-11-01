@@ -14,7 +14,7 @@ public class IdiomaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_IDIOMA_IDICODIGO_GENERATOR", sequenceName="BEM_IDIOMA_IDI_CODIGO_SEQ")
+	@SequenceGenerator(name="BEM_IDIOMA_IDICODIGO_GENERATOR", sequenceName="BEM_IDIOMA_IDI_CODIGO_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_IDIOMA_IDICODIGO_GENERATOR")
 	@Column(name="idi_codigo")
 	private Integer idiCodigo;

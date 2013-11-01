@@ -14,7 +14,7 @@ public class SoftwareDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_SOFTWARE_PROCODIGO_GENERATOR", sequenceName="BEM_SOFTWARE_PRO_CODIGO_SEQ")
+	@SequenceGenerator(name="BEM_SOFTWARE_PROCODIGO_GENERATOR", sequenceName="BEM_SOFTWARE_PRO_CODIGO_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_SOFTWARE_PROCODIGO_GENERATOR")
 	@Column(name="pro_codigo")
 	private Integer proCodigo;

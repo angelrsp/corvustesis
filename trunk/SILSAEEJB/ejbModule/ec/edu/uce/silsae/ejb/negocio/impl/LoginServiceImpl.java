@@ -1,20 +1,22 @@
-package ec.edu.uce.silsae.ejb.negocio.impl;
+ package ec.edu.uce.silsae.ejb.negocio.impl;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
+import ec.edu.uce.silsae.commons.dto.util.CredencialesDTO;
+import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.negocio.LoginService;
-import ec.edu.uce.silsae.ejb.persistence.dao.UsuarioDAO;
+import ec.edu.uce.silsae.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
 @Stateless
 public class LoginServiceImpl implements LoginService{
 	
-	@Inject
-	UsuarioDAO usuarioDAO;
+	@EJB
+	private FactoryDAO factoryDAO;
 	
 	@Override
-	public UsuarioDTO autenticarUsuario(String usuario, String clave) {
+	public UsuarioDTO autenticarUsuario(CredencialesDTO credencialesDTO) throws SilsaeException{
 		return null;
 	}
 

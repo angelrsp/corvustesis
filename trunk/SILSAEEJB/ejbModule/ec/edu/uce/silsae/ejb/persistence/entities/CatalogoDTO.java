@@ -15,7 +15,7 @@ public class CatalogoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_CATALOGO_CATCODIGO_GENERATOR", sequenceName="BEM_CATALOGO_CAT_CODIGO_SEQ")
+	@SequenceGenerator(name="BEM_CATALOGO_CATCODIGO_GENERATOR", sequenceName="BEM_CATALOGO_CAT_CODIGO_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_CATALOGO_CATCODIGO_GENERATOR")
 	@Column(name="cat_codigo")
 	private Integer catCodigo;
