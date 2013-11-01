@@ -39,7 +39,7 @@ public class CandidatoDTO implements Serializable {
 	private Integer canTipoIdentificacion;
 
 	//bi-directional many-to-one association to UsuarioDTO
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
 	@JoinColumn(name="can_usuario")
 	private UsuarioDTO bemUsuario;
 
