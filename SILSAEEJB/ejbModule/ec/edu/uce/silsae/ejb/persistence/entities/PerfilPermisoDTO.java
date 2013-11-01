@@ -14,7 +14,7 @@ public class PerfilPermisoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_PERFIL_PERMISO_PPECODIGO_GENERATOR", sequenceName="BEM_PERFIL_PERMISO_PPE_CODIGO_SEQ")
+	@SequenceGenerator(name="BEM_PERFIL_PERMISO_PPECODIGO_GENERATOR", sequenceName="BEM_PERFIL_PERMISO_PPE_CODIGO_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_PERFIL_PERMISO_PPECODIGO_GENERATOR")
 	@Column(name="ppe_codigo")
 	private Integer ppeCodigo;

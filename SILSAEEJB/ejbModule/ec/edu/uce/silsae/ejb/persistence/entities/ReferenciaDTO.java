@@ -14,7 +14,7 @@ public class ReferenciaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_REFERENCIA_REFCODIGO_GENERATOR", sequenceName="BEM_REFERENCIA_REF_CODIGO_SEQ")
+	@SequenceGenerator(name="BEM_REFERENCIA_REFCODIGO_GENERATOR", sequenceName="BEM_REFERENCIA_REF_CODIGO_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_REFERENCIA_REFCODIGO_GENERATOR")
 	@Column(name="ref_codigo")
 	private Integer refCodigo;

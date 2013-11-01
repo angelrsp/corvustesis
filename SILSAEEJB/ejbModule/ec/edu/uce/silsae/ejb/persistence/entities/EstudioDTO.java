@@ -14,7 +14,7 @@ public class EstudioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_ESTUDIO_ESTCODIGO_GENERATOR", sequenceName="BEM_ESTUDIO_EST_CODIGO_SEQ")
+	@SequenceGenerator(name="BEM_ESTUDIO_ESTCODIGO_GENERATOR", sequenceName="BEM_ESTUDIO_EST_CODIGO_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_ESTUDIO_ESTCODIGO_GENERATOR")
 	@Column(name="est_codigo")
 	private Integer estCodigo;

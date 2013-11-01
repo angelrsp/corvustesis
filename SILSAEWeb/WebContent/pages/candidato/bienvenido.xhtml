@@ -29,10 +29,14 @@
 							<h:commandButton value="#{i18n['boton.registrarse']}" 
 								immediate="true"
 								action ="/pages/candidato/ingresoDatos" />
-							<p:commandButton
+							<p:commandButton id="btnRegistro"
+								ajax="false"
 								value="#{i18n['boton.registrarse']}"
 								action ="/pages/candidato/ingresoDatos"/>
-							<p:commandButton value="Ingresar"/>
+							<p:commandButton id="btnIngresar"
+								ajax="false"
+								value="#{i18n['label.ingresar']}"
+								action ="/pages/candidato/loginCandidato"/>
 						</td>
 					</tr>
 				</table>

@@ -16,7 +16,7 @@ public class ExperienciaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_EXPERIENCIA_EXPCODIGO_GENERATOR", sequenceName="BEM_EXPERIENCIA_EXP_CODIGO_SEQ")
+	@SequenceGenerator(name="BEM_EXPERIENCIA_EXPCODIGO_GENERATOR", sequenceName="BEM_EXPERIENCIA_EXP_CODIGO_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_EXPERIENCIA_EXPCODIGO_GENERATOR")
 	@Column(name="exp_codigo")
 	private Integer expCodigo;
