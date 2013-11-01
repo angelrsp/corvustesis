@@ -15,7 +15,9 @@
 					<table id="tblRegistroCandidato" class="tabla">
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.tipo.documento']}:&#160;" /> </td>
-							<td><p:inputText /></td>
+								<td>
+									<p:inputText />
+								</td>
 							<td><h:outputLabel value="#{i18n['label.ci.pasaporte']}:&#160;" /> </td>
 							<td><p:inputText required="true" 
 									value="#{registroCandidatoController.candidatoRegistro.canIdentificacion}"/></td>
@@ -23,9 +25,10 @@
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.apellido.paterno']}:&#160;" /> </td>
 							<td><p:inputText required="true"
-									value="#{registroCandidatoController.candidatoRegistro.canApellidos}"/></td>
+									value="#{registroCandidatoController.candidatoRegistro.canApellidoPaterno}"/></td>
 							<td><h:outputLabel value="#{i18n['label.apellido.materno']}:&#160;" /> </td>
-							<td><p:inputText /></td>
+							<td><p:inputText required="true"
+									value="#{registroCandidatoController.candidatoRegistro.canApellidoMaterno}"/></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.nombre.primero']}:&#160;" /> </td>
