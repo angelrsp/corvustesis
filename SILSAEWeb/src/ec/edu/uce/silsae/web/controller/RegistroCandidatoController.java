@@ -8,13 +8,14 @@ import javax.faces.bean.ViewScoped;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
 @ViewScoped
 @ManagedBean (name = "registroCandidatoController")
-public class RegistroCandidatoController extends BaseController{
+public class RegistroCandidatoController {
 	
 	private static final Logger log = LoggerFactory.getLogger(RegistroCandidatoController.class);
 	
@@ -35,7 +36,12 @@ public class RegistroCandidatoController extends BaseController{
 	public void registroCandidato () {
 		log.info("metodo registroCandidato");
 		getCandidatoRegistro().setBemUsuario(getUsuarioRegistro());
-		candidatosService.registrarCandidato(getCandidatoRegistro());
+		try {
+			candidatosService.registrarCandidato(getCandidatoRegistro());
+		} catch (SilsaeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public CandidatoDTO getCandidatoRegistro() {
