@@ -1,5 +1,7 @@
 package ec.edu.uce.silsae.web.controller;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -15,8 +17,13 @@ import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
 @ViewScoped
 @ManagedBean (name = "registroCandidatoController")
-public class RegistroCandidatoController {
+public class RegistroCandidatoController implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final Logger log = LoggerFactory.getLogger(RegistroCandidatoController.class);
 	
 	private CandidatoDTO candidatoRegistro;
@@ -35,8 +42,11 @@ public class RegistroCandidatoController {
 	
 	public void registroCandidato () {
 		log.info("metodo registroCandidato");
-		getCandidatoRegistro().setBemUsuario(getUsuarioRegistro());
 		try {
+			
+			log.info("Contrasenia {}", getUsuarioRegistro().getUsuPassword() );
+			
+			getCandidatoRegistro().setBemUsuario(getUsuarioRegistro());
 			candidatosService.registrarCandidato(getCandidatoRegistro());
 		} catch (SilsaeException e) {
 			// TODO Auto-generated catch block
