@@ -5,6 +5,7 @@ package ec.edu.uce.silsae.web.controller;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -34,6 +35,7 @@ public class LoginController implements Serializable {
 	
 	public LoginController () {}
 	
+	@PostConstruct
 	public void inicializarObjetos () {
 		this.credencialesDTO = new CredencialesDTO();
 	}

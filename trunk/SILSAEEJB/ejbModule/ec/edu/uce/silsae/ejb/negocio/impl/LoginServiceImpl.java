@@ -17,7 +17,17 @@ public class LoginServiceImpl implements LoginService{
 	
 	@Override
 	public UsuarioDTO autenticarUsuario(CredencialesDTO credencialesDTO) throws SilsaeException{
-		return null;
+		
+		try {
+			
+			return factoryDAO.getUsuarioDAOImpl().buscarUsuarioLogin(credencialesDTO);
+			
+		} catch (SilsaeException e) {
+			throw new SilsaeException(e);
+		} catch (Exception e) {
+			throw new SilsaeException(e);
+		}
+		
 	}
 
 }
