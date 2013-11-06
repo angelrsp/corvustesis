@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guiaRemision>
+	<infoTributaria>
+		<atributos>
+			<atributo nombre = "razonSocial" descripcion = "Razon social del emisor como consta en el SRI">
+				<obligatorio>Y</obligatorio>
+				<tipo>String</tipo>
+			</atributo>
+			<atributo nombre = "nombreComercial" descripcion = "Nombre comercial del emisor">
+				<obligatorio>Y</obligatorio>
+				<tipo>String</tipo>
+			</atributo>
+			<atributo nombre = "ruc" descripcion = "Numero de Ruc del emisor">
+				<obligatorio>Y</obligatorio>
+				<tipo>String</tipo>
+			</atributo>
+			<atributo nombre = "codDoc" descripcion = "Tipo de comprobante homologado del SRI. Poner el valor 01 para factura">
+				<obligatorio>Y</obligatorio>
+				<tipo>String</tipo>
+			</atributo>
+			<atributo nombre = "estab">
+				<obligatorio>Y</obligatorio>
+				<tipo>String</tipo>
+			</atributo>
+			<atributo nombre = "ptoEmi" descripcion = "Codigo de establecimiento del emisor proporcionado por el SRI">
+				<obligatorio>Y</obligatorio>
+				<tipo>String</tipo>
+			</atributo>
+			<atributo nombre = "secuencial" descripcion = "Numero que se va incrementado de acuerdo al numero de facturas emitidas">
+				<obligatorio>Y</obligatorio>
+				<tipo>String</tipo>
+			</atributo>
+			<atributo nombre = "dirMatriz">
+				<obligatorio>Y</obligatorio>
+				<tipo>String</tipo>
+			</atributo>
+		</atributos>
+	</infoTributaria>
+	<infoGuiaRemision>
+		<atributos>
+			<atributo nombre = "dirEstablecimiento" descripcion = "Codigo del impuesto de acuerdo a la tabla 15">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "dirPartida" descripcion = "Codigo de porcentaje de acuerdo a la tabla 16 o 17">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "razonSocialTransportista" descripcion = "Es el precio que pagan los usuarios o consumidores de un servicio publico al Estado  o  al concesionario">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "tipoIdentificacionTransportista" descripcion = "Monto a partir del cual se calcula un impuesto determinado">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "rucTransportista" descripcion = "La cantidad del impuesto">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "rise" descripcion = "La cantidad del impuesto">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "obligadoContabilidad" descripcion = "La cantidad del impuesto">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "contribuyenteEspecial" descripcion = "La cantidad del impuesto">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "fechaIniTransporteDate" descripcion = "La cantidad del impuesto">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "fechaFinTransporte" descripcion = "fecha i">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "placa" descripcion = "placa del vehiculo">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+		</atributos>
+	</infoGuiaRemision>
+	<destinatarios>
+		<atributos>
+			<atributo nombre = "identificacionDestinatario" descripcion = "Codigo del impuesto de acuerdo a la tabla 15">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "razonSocialDestinatario" descripcion = "Codigo de porcentaje de acuerdo a la tabla 16 o 17">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "dirDestinatario" descripcion = "Es el precio que pagan los usuarios o consumidores de un servicio publico al Estado  o  al concesionario">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "motivoTraslado" descripcion = "Monto a partir del cual se calcula un impuesto determinado">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "docAduaneroUnico" descripcion = "La cantidad del impuesto">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "codEstabDestino" descripcion = "La cantidad del impuesto">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "ruta" descripcion = "La cantidad del impuesto">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "codDocSustento" descripcion = "La cantidad del impuesto">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "numDocSustento" descripcion = "La cantidad del impuesto">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "numAutDocSustento" descripcion = "fecha i">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "fechaEmisionDocSustento" descripcion = "placa del vehiculo">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+		</atributos>
+	</destinatarios>
+	<detalles>
+		<atributos>
+			<atributo nombre = "codigoInterno" descripcion = "Codigo del impuesto de acuerdo a la tabla 15">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "codigoAdicional" descripcion = "Codigo de porcentaje de acuerdo a la tabla 16 o 17">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "descripcion" descripcion = "Es el precio que pagan los usuarios o consumidores de un servicio publico al Estado  o  al concesionario">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "cantidad" descripcion = "Monto a partir del cual se calcula un impuesto determinado">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+		</atributos>
+	</detalles>
+	<infoAdicional>
+		<atributos>
+			<atributo nombre = "mail" descripcion = "correo electronico  del comprador">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "telefono" descripcion = "telefono del comprador">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+		</atributos>
+	</infoAdicional>
+</guiaRemision>
