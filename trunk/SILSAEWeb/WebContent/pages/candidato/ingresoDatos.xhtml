@@ -16,12 +16,14 @@
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.tipo.documento']}:&#160;" /> </td>
 								<td>
-									<p:inputText />
+									<p:selectOneMenu>
+										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+									</p:selectOneMenu>
 								</td>
 							<td><h:outputLabel value="#{i18n['label.ci.pasaporte']}:&#160;" /> </td>
 							<td><p:inputText required="true"
 									requiredMessage="#{i18n['label.ci.pasaporte']}&#160;#{i18n['label.requerido']}"
-									value="#{registroCandidatoController.candidatoRegistro.canIdentificacion}"/></td>
+									value="#{registroCandidatoController.candidatoRegistro.canIdentificacion}" onkeypress="return isNumberKey(event);"/></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.apellido.paterno']}:&#160;" /> </td>
