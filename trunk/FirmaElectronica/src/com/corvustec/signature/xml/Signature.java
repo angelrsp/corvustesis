@@ -49,6 +49,7 @@ public class Signature {
     private static final String KEYSTORE_TYPE=MessagesApplication.getInstancia().getString("com.sifuturo.signature.xml.key.file");
    
     public static Boolean Xml(File file, String pathSignature,String pass) throws SignatureException{
+    	
         String alias;
         Boolean firmo;
         try {
