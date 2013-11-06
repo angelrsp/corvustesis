@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura>
+	<infoTributaria>
+		<atributos>
+			<atributo nombre = "razonSocial" descripcion = "Razon social del emisor como consta en el SRI">
+				<obligatorio>Y</obligatorio>
+				<tipo>String</tipo>
+			</atributo>
+			<atributo nombre = "nombreComercial" descripcion = "Nombre comercial del emisor">
+				<obligatorio>Y</obligatorio>
+				<tipo>String</tipo>
+			</atributo>
+			<atributo nombre = "ruc" descripcion = "Numero de Ruc del emisor">
+				<obligatorio>Y</obligatorio>
+				<tipo>String</tipo>
+			</atributo>
+			<atributo nombre = "codDoc" descripcion = "Tipo de comprobante homologado del SRI. Poner el valor 01 para factura">
+				<obligatorio>Y</obligatorio>
+				<tipo>String</tipo>
+			</atributo>
+			<atributo nombre = "estab">
+				<obligatorio>Y</obligatorio>
+				<tipo>String</tipo>
+			</atributo>
+			<atributo nombre = "ptoEmi" descripcion = "Codigo de establecimiento del emisor proporcionado por el SRI">
+				<obligatorio>Y</obligatorio>
+				<tipo>String</tipo>
+			</atributo>
+			<atributo nombre = "secuencial" descripcion = "Numero que se va incrementado de acuerdo al numero de facturas emitidas">
+				<obligatorio>Y</obligatorio>
+				<tipo>String</tipo>
+			</atributo>
+			<atributo nombre = "dirMatriz">
+				<obligatorio>Y</obligatorio>
+				<tipo>String</tipo>
+			</atributo>
+		</atributos>
+	</infoTributaria>
+	<infoFactura>
+		<atributos>
+			<atributo nombre = "fechaEmisionDate" descripcion = "Fecha emision de la factura">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "dirEstablecimiento" descripcion = "Direccion del establecimiento de la sucursal">
+				<obligatorio>N</obligatorio>
+			</atributo>
+			<atributo nombre = "contribuyenteEspecial" descripcion = "contribuyenteEspecial">
+				<obligatorio>N</obligatorio>
+			</atributo>
+			<atributo nombre = "obligadoContabilidad" descripcion = "si  la persona natural o juridica esta obligado a llevar la contabilidad">
+				<obligatorio>N</obligatorio>
+			</atributo>
+			<atributo nombre = "tipoIdentificacionComprador" descripcion = "Conforme al tipo de transaccion efectuada debera señalar el tipo de cliente o sujeto retenido. Tabla 7.">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre="guiaRemision" descripcion="guiaRemision">
+				<obligatorio>N</obligatorio>
+			</atributo>
+			<atributo nombre = "razonSocialComprador" descripcion = "Es el atributo legal que se encuentra en el documento de constitucion de la compañia  del comprador">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "identificacionComprador" descripcion = "Ruc o cedula de la persona natural o juridica">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre="totalSinImpuestos" descripcion="totalSinImpuestos">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre="totalDescuento" descripcion="totalDescuento">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre="propina" descripcion="propina">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre="importeTotal" descripcion="importeTotal">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+		</atributos>
+	</infoFactura>
+	<totalConImpuestos>
+		<atributos>
+			<atributo nombre = "codigo" descripcion = "Codigo del impuesto de acuerdo a la tabla 15">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "codigoPorcentaje" descripcion = "Codigo de porcentaje de acuerdo a la tabla 16 o 17">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "baseImponible" descripcion = "Monto a partir del cual se calcula un impuesto determinado">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "valor" descripcion = "La cantidad del impuesto">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+		</atributos>
+	</totalConImpuestos>
+	<detalle>
+		<atributos>
+			<atributo nombre = "codigoPrincipal" descripcion = "Es el codigo identificador del articulo">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "codigoAuxiliar" descripcion = "codigoAuxiliar">
+				<obligatorio>N</obligatorio>
+			</atributo>
+			<atributo nombre = "descripcion" descripcion = "Nombre del articulo">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "cantidad" descripcion = "Cantidad  que se vende de los articulos">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "precioUnitario" descripcion = "Precio unitario de cada articulo">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "descuento" descripcion = "Descuento del articulo si aplica">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "precioTotalSinImpuesto" descripcion = "Precio  del articulo mas los  impuestos">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "detalleAdicional" descripcion = "Informacion adicional del articulo">
+				<noobligatorio>Y</noobligatorio>
+			</atributo>
+		</atributos>
+	</detalle>
+	<impuestos>
+		<atributos>
+			<atributo nombre = "codigo" descripcion = "Codigo del impuesto de acuerdo a la tabla 15">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "codigoPorcentaje" descripcion = "Codigo de porcentaje de acuerdo a la tabla 16 o 17">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "tarifa" descripcion = "Es el precio que pagan los usuarios o consumidores de un servicio publico al Estado  o  al concesionario">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "baseImponible" descripcion = "Monto a partir del cual se calcula un impuesto determinado">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "valor" descripcion = "La cantidad del impuesto">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+		</atributos>
+	</impuestos>
+	<retenciones>
+		<atributos>
+			<atributo nombre="codigo" descripcion="codigo retencion">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre="codigoPorcentaje" descripcion="codigoPorcentaje retencion">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre="tarifa" descripcion="tarifa retencion">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre="valor" descripcion="valor retencion">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+		</atributos>
+	</retenciones>
+	<infoAdicional>
+		<atributos>
+			<atributo nombre = "mail" descripcion = "correo electronico  del comprador">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+			<atributo nombre = "telefono" descripcion = "telefono del comprador">
+				<obligatorio>Y</obligatorio>
+			</atributo>
+		</atributos>
+	</infoAdicional>
+</factura>
