@@ -207,6 +207,7 @@ create table bem_usuario (
    usu_celular          varchar(255)         null,
    usu_telefono         varchar(255)         null,
    usu_direccion        varchar(255)         null,
+   usu_login            varchar(255)         null,
    constraint pk_bem_usuario primary key (usu_codigo)
 );
 
