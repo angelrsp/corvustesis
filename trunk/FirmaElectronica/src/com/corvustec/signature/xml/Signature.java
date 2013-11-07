@@ -39,6 +39,15 @@ import com.corvustec.signature.xml.commons.util.MessagesApplication;
 import com.corvustec.signature.xml.exception.SignatureException;
 import com.corvustec.util.EncryptedUtil;
 
+/**
+ * 
+ * @author corvustec
+ * 
+ * Firma Electronica Banco Central del Ecuador
+ * Firma archivos Xml con el estandar pkcs12
+ *
+ */
+
 
 public class Signature {
 
@@ -46,7 +55,7 @@ public class Signature {
 
     private final static Logger logger = LoggerFactory.getLogger(Signature.class);
    
-    private static final String KEYSTORE_TYPE=MessagesApplication.getInstancia().getString("com.sifuturo.signature.xml.key.file");
+    private static final String KEYSTORE_TYPE=MessagesApplication.getInstancia().getString("com.corvustec.signature.xml.key.file");
    
     public static Boolean Xml(File file, String pathSignature,String pass) throws SignatureException{
     	
@@ -76,7 +85,7 @@ public class Signature {
                 // Obtenemos la clave privada, pues la necesitaremos para encriptar. 
                 PrivateKey privateKey = (PrivateKey) keyStore.getKey(alias, EncryptedUtil.getInstancia().desencriptar(pass).toCharArray()); 
                
-                // Instanciamos un objeto XMLSignature desde el Document. El algoritmo de firma será DSA 
+                // Instanciamos un objeto XMLSignature desde el Document. El algoritmo de firma serï¿½ DSA 
                 XMLSignature xmlSignature = new XMLSignature(doc, null, XMLSignature.ALGO_ID_SIGNATURE_RSA_SHA1); 
                
                 String idSignature=newID("Signature");
@@ -85,7 +94,7 @@ public class Signature {
                 xmlSignature.setId(idSignature);
                 xmlSignature.getSignedInfo().setId(newID("Signature-SignedInfo"));
                
-                // Añadimos el nodo de la firma a la raiz antes de firmar. 
+                // Aï¿½adimos el nodo de la firma a la raiz antes de firmar. 
                 // Observe que ambos elementos pueden ser mezclados en una forma con referencias separadas
                 doc.getDocumentElement().appendChild(xmlSignature.getElement()); 
                
@@ -93,11 +102,11 @@ public class Signature {
                 Transforms transforms = new Transforms(doc); 
                 transforms.addTransform(Transforms.TRANSFORM_ENVELOPED_SIGNATURE); 
                
-                // Añadimos lo anterior Documento / Referencia 
+                // Aï¿½adimos lo anterior Documento / Referencia 
                 // ALGO_ID_DIGEST_SHA1 = "http://www.w3.org/2000/09/xmldsig#sha1"; 
                 xmlSignature.addDocument("", transforms, Constants.ALGO_ID_DIGEST_SHA1); 
                
-                // Añadimos el KeyInfo del certificado cuya clave privada usamos 
+                // Aï¿½adimos el KeyInfo del certificado cuya clave privada usamos 
                 X509Certificate cert = (X509Certificate) keyStore.getCertificate(alias); 
                 xmlSignature.addKeyInfo(cert); 
                 xmlSignature.addKeyInfo(cert.getPublicKey()); 
