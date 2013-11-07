@@ -16,13 +16,13 @@
 <h:body>
 
 	<div align="center">
-		<div style="width: 990px; box-shadow: 0 0 20px #2E2D32;">
+		<div style="width: 995px; box-shadow: 0 0 20px #2E2D32;">
 			<div id="cabecera">
 				<table width="99%">
 					<tr>
 						<td align="left" width="5%"><h:graphicImage value="/images/uce_logo.jpg" height="90" /></td>
-						<td width="41%" style="font-size: 20px">Universidad Central del Ecuador</td>
-						<td width="15%" style="font-size: 20px">Facultad de Odontologia</td>
+						<td width="250px" style="font-size: 20px">Universidad Central del Ecuador</td>
+						<td width="10px" style="font-size: 20px">Facultad de Odontologia</td>
 						<td align="right" width="5%"><h:graphicImage value="/images/odontologia_uce.jpg" height="90" /></td>
 					</tr>
 				</table>
@@ -37,19 +37,21 @@
 				</table>
 			</div>
 			
+			<p:spacer height="3"/>
+			
 			<div id="menu">
 			<p:menubar style="margin-left:auto; margin-right:auto;text-align: center; width:96%">   
 				<p:menuitem value="Inicio" url="#" />
 				<p:menuitem value="Seguimiento" url="#" />				
 		        <p:submenu label="Bolsa de Empleo">
 			        <p:menuitem value="Egresados" url="/pages/candidato/bienvenido.jsf" />
-			        <p:menuitem value="Empresas" url="#" />
+			        <p:menuitem value="Empresas" url="/pages/empresa/bienvenido.jsf" />
 				</p:submenu>
 	        </p:menubar>
 			<p:spacer height="10"></p:spacer>
 			</div>
 			
-			<div id="content" align="left" style="width: 880px;">
+			<div id="content" align="left" style="width: 900px;">
 				<h:form>
 					<ui:insert name="contenido"></ui:insert>
 					<p:spacer height="10"></p:spacer>
