@@ -9,5 +9,5 @@ public interface FactoryDAO {
 	CandidatoDAO getCandidatoDAOImpl();
 	AvisoDAO getAvisoDAOImpl();
 	PerfilDAO getPerfilDAOImpl();
-	
+	CatalogoDAO getCatalogoImpl();
 }
