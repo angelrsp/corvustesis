@@ -4,8 +4,11 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import ec.edu.uce.silsae.ejb.persistence.dao.AvisoDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.CandidatoDAO;
+import ec.edu.uce.silsae.ejb.persistence.dao.CatalogoDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.FactoryDAO;
+import ec.edu.uce.silsae.ejb.persistence.dao.PerfilDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.UsuarioDAO;
 
 @Stateless
@@ -17,6 +20,12 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private UsuarioDAO usuarioDAO;
 	
 	private CandidatoDAO candidatoDAO;
+	
+	private AvisoDAO avisoDAO;
+	
+	private PerfilDAO perfilDAO;
+	
+	private CatalogoDAO catalogoDAO; 
 	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -33,5 +42,29 @@ public class FactoryDAOImpl implements FactoryDAO{
 		}
 		return candidatoDAO;
 	}
-	
+
+	@Override
+	public AvisoDAO getAvisoDAOImpl() {
+		if (avisoDAO == null) {
+			avisoDAO = new AvisoDAOImpl(entityManager);
+		}
+		return avisoDAO;
+	}
+
+	@Override
+	public PerfilDAO getPerfilDAOImpl() {
+		if (perfilDAO == null) {
+			perfilDAO = new PerfilDAOImpl(entityManager);
+		}
+		return perfilDAO;	
+	}
+
+	@Override
+	public CatalogoDAO getCatalogoImpl() {
+		if (catalogoDAO == null) {
+			catalogoDAO = new CatalogoDAOImpl(entityManager);
+		}
+		return catalogoDAO;	
+	}
+
 }
