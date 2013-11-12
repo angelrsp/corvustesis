@@ -7,5 +7,7 @@ public interface FactoryDAO {
 	
 	UsuarioDAO getUsuarioDAOImpl();
 	CandidatoDAO getCandidatoDAOImpl();
-
+	AvisoDAO getAvisoDAOImpl();
+	PerfilDAO getPerfilDAOImpl();
+	
 }
