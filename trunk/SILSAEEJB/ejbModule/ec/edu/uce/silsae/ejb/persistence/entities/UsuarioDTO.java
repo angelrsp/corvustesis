@@ -35,6 +35,9 @@ public class UsuarioDTO implements Serializable {
 	@Column(name="usu_telefono")
 	private String usuTelefono;
 
+	@Column(name="usu_login")
+	private String usuLogin;
+
 	//bi-directional many-to-one association to CandidatoDTO
 	@OneToMany(mappedBy="bemUsuario")
 	private List<CandidatoDTO> bemCandidatos;
@@ -101,6 +104,14 @@ public class UsuarioDTO implements Serializable {
 
 	public void setUsuTelefono(String usuTelefono) {
 		this.usuTelefono = usuTelefono;
+	}
+
+	public String getUsuLogin() {
+		return usuLogin;
+	}
+
+	public void setUsuLogin(String usuLogin) {
+		this.usuLogin = usuLogin;
 	}
 
 	public List<CandidatoDTO> getBemCandidatos() {

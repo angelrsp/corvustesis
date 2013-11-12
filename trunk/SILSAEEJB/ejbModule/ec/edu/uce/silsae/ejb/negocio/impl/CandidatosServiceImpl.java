@@ -10,6 +10,8 @@ import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsae.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.PerfilDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
 @Stateless
 public class CandidatosServiceImpl implements CandidatosService{
@@ -25,6 +27,10 @@ public class CandidatosServiceImpl implements CandidatosService{
 		log.info("registrarCandidato");
 		
 		try {
+		
+			UsuarioDTO user=new UsuarioDTO();
+			user.setBemPerfil(factoryDAO.getPerfilDAOImpl().find(1));
+			
 			
 			return factoryDAO.getCandidatoDAOImpl().create(candidatoDTO);
 		} catch (Exception e) {
