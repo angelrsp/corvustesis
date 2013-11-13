@@ -30,8 +30,6 @@ public class CandidatosServiceImpl implements CandidatosService{
 		
 			UsuarioDTO user=new UsuarioDTO();
 			user.setBemPerfil(factoryDAO.getPerfilDAOImpl().find(1));
-			
-			
 			return factoryDAO.getCandidatoDAOImpl().create(candidatoDTO);
 		} catch (Exception e) {
 			log.info("Error al registrar el Candidato {}", e.toString());
