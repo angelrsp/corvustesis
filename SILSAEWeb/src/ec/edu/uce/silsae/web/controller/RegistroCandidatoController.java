@@ -17,7 +17,7 @@ import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
 @ViewScoped
 @ManagedBean (name = "registroCandidatoController")
-public class RegistroCandidatoController implements Serializable {
+public class RegistroCandidatoController extends SelectItemController implements Serializable{
 	
 	/**
 	 * 
@@ -69,6 +69,6 @@ public class RegistroCandidatoController implements Serializable {
 	public void setUsuarioRegistro(UsuarioDTO usuarioRegistro) {
 		this.usuarioRegistro = usuarioRegistro;
 	}
-	
+
 
 }
