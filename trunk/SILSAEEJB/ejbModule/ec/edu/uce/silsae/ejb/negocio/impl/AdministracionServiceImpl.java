@@ -3,6 +3,7 @@ package ec.edu.uce.silsae.ejb.negocio.impl;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import ec.edu.uce.silsae.ejb.negocio.AdministracionService;
 import ec.edu.uce.silsae.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CatalogoDTO;
 
+@Stateless
 public class AdministracionServiceImpl implements AdministracionService{
 	
 	
@@ -20,6 +22,7 @@ public class AdministracionServiceImpl implements AdministracionService{
 	@EJB
 	private FactoryDAO factoryDAO;
 
+	@Override
 	public List<CatalogoDTO> getCatalogo(CatalogoDTO catalogo) throws SilsaeException
 	{
 		log.info("registrarCandidato");
@@ -29,10 +32,9 @@ public class AdministracionServiceImpl implements AdministracionService{
 		}
 		catch(Exception e)
 		{
-			log.info(" " +e.toString());
+			log.info("Error al obtener catalogo" +e.toString());
 			throw new SilsaeException("Error al obtener catalogo");
 		}
-		
 	}
 
 }
