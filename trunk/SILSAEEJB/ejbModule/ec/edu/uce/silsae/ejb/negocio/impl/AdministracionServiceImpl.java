@@ -20,7 +20,7 @@ public class AdministracionServiceImpl implements AdministracionService{
 	@EJB
 	private FactoryDAO factoryDAO;
 
-	public List<CatalogoDTO> getCatalogo(CatalogoDTO catalogo)
+	public List<CatalogoDTO> getCatalogo(CatalogoDTO catalogo) throws SilsaeException
 	{
 		log.info("registrarCandidato");
 		try{
@@ -30,7 +30,7 @@ public class AdministracionServiceImpl implements AdministracionService{
 		catch(Exception e)
 		{
 			log.info(" " +e.toString());
-			throw new SilsaeException("Error al obtener catalogo")
+			throw new SilsaeException("Error al obtener catalogo");
 		}
 		
 	}
