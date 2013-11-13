@@ -15,6 +15,7 @@ import ec.edu.uce.silsae.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
+
 @ViewScoped
 @ManagedBean (name = "registroCandidatoController")
 public class RegistroCandidatoController extends SelectItemController implements Serializable{

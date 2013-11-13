@@ -39,7 +39,7 @@ public abstract class SelectItemController {
 		{
 			CatalogoDTO catalogo=new CatalogoDTO();
 			catalogo.setCatCodigo(1);
-			catalogoTipoDocumento=(List<SelectItem>)CollectionUtils.transformedCollection(administracionService.getCatalogo(catalogo), new Transformer() {
+			catalogoTipoDocumento=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
 				
 				@Override
 				public Object transform(Object arg0) {
