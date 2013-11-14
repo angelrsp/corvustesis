@@ -15,15 +15,16 @@
 				<fieldset>
 					<legend
 						style="font-family: Arial, sans-serif; font-size: 1em; color: #4f4f4f;">Encabezado</legend>
+						
 					<p:panelGrid id="enc1" styleClass="panelGrid" columns="9">
 						<p:column>
-							<p:commandButton icon="ui-icon-seek-first">
+							<p:commandButton icon="ui-icon-seek-first" actionListener="#{journalPage.changeMin}" immediate="true" process="@this" update="enc1,enc2,buttons,details">
 							</p:commandButton>
-							<p:commandButton icon="ui-icon-seek-prev">
+							<p:commandButton icon="ui-icon-seek-prev" actionListener="#{journalPage.changeIz}" immediate="true" process="@this" update="enc1,enc2,buttons,details">
 							</p:commandButton>
-							<p:commandButton icon="ui-icon-seek-next">
+							<p:commandButton icon="ui-icon-seek-next" actionListener="#{journalPage.changeDer}" immediate="true" process="@this" update="enc1,enc2,buttons,details">
 							</p:commandButton>
-							<p:commandButton icon="ui-icon-seek-end">
+							<p:commandButton icon="ui-icon-seek-end" actionListener="#{journalPage.changeMax}" immediate="true" process="@this" update="enc1,enc2,buttons,details">
 							</p:commandButton>
 						</p:column>
 						<p:column>
@@ -87,13 +88,12 @@
 					<h:panelGrid id="buttons">
 						<p:column>
 							<p:commandButton value="Nuevo" icon="ui-icon-document"
-								styleClass="comButton">
+								styleClass="comButton" immediate="true" actionListener="#{journalPage.clear}" update="enc1,enc2,buttons,details,calFecha">
+								<p:resetInput target="enc1,enc2"></p:resetInput>							
 							</p:commandButton>
 							<p:commandButton value="Guardar" icon="ui-icon-disk"
 								styleClass="comButton" actionListener="#{journalPage.create}"
-								update="message,enc1,enc2" process="@this,document,detail,tipo,clase,calFecha,details,tran"/>
-							<p:commandButton value="Editar" icon="ui-icon-pencil"
-								styleClass="comButton" />
+								update="message,enc1,enc2" process="@this,document,detail,tipo,clase,calFecha,details,tran" disabled="#{journalPage.disabledSave}"/>
 						</p:column>
 
 					</h:panelGrid>

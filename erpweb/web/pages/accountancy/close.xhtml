@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head></h:head>
 <body>
@@ -10,8 +11,22 @@
 		<ui:define name="contenido">
 
 			<h:form id="formClose">
-			
-			
+
+				<p:dataGrid var="per" value="#{closePage.listPeriodo}" columns="3"
+					rows="12">
+
+					<p:panel style="text-align:center">
+						<h:panelGrid columns="1" style="width:100%">
+
+							<h:outputText value="#{per.perNombreMes}" />
+
+							<p:commandButton icon="ui-icon-search">
+							</p:commandButton>
+
+						</h:panelGrid>
+					</p:panel>
+				</p:dataGrid>
+
 			</h:form>
 		</ui:define>
 	</ui:composition>
