@@ -43,7 +43,6 @@ public class SelectOptionServiceBean implements SelectOptionService{
 	@Override
 	public List<ConPeriodo> readYear()
 	{
-		
 		if(readYears()!=null)
 			return readYears();
 		else
