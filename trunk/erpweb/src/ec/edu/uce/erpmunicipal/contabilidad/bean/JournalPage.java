@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -49,6 +50,8 @@ public class JournalPage implements Serializable {
 
 	private List<ConMovimientoDetalle> detalles;
 
+	private List<ConMovimiento> listMov;
+	
 	private ConMovimientoDetalle detalle;
 
 	private ConMovimiento movimiento;
@@ -67,9 +70,15 @@ public class JournalPage implements Serializable {
 	private Date fecha;
 	private Date fechaMax;
 	private Date fechaMin;
-	
+
+	private int maxDir;
+	private int nowDir;
 
 	private String transaccion;
+
+	
+	private Boolean disabledSave;
+	
 
 	public JournalPage() {
 		clas = new ArrayList<ConClase>();
@@ -81,13 +90,15 @@ public class JournalPage implements Serializable {
 		movimiento = new ConMovimiento();
 		Calendar cal = Calendar.getInstance();
 		fecha = cal.getTime();
-		fechaMin=CalendarUtil.getCalendar(((SessionObject)FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap()
-				.get("sessionObject")).getAnio(), 01, 01).getTime();
-		fechaMax=CalendarUtil.getCalendar(((SessionObject)FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap()
-				.get("sessionObject")).getAnio(), 12, 31).getTime();
-		
+		fechaMin = CalendarUtil.getCalendar(
+				((SessionObject) FacesContext.getCurrentInstance()
+						.getExternalContext().getSessionMap()
+						.get("sessionObject")).getAnio(), 01, 01).getTime();
+		fechaMax = CalendarUtil.getCalendar(
+				((SessionObject) FacesContext.getCurrentInstance()
+						.getExternalContext().getSessionMap()
+						.get("sessionObject")).getAnio(), 12, 31).getTime();
+		listMov=new ArrayList<ConMovimiento>();
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -229,14 +240,19 @@ public class JournalPage implements Serializable {
 		this.transaccion = transaccion;
 	}
 
+	public Boolean getDisabledSave() {
+		return disabledSave;
+	}
+
 	public void searchCuenta() {
 		this.cuentas = journalService.getAccoutingService().dynamicSearch(
-				search,1);
+				search, 1);
 	}
 
 	public void searchCuentaCode() {
 		this.descripcionCuenta = ((ConCuenta) journalService
-				.getAccoutingService().search(searchCode,1)).getCueDescripcion();
+				.getAccoutingService().search(searchCode, 1))
+				.getCueDescripcion();
 	}
 
 	public void onRowSelect(SelectEvent event) {
@@ -256,35 +272,33 @@ public class JournalPage implements Serializable {
 
 		} else {
 			ConMovimientoDetalle det = new ConMovimientoDetalle();
-			if (!debe.equals("")&&haber.trim().equals("")) {
+			if (!debe.equals("") && haber.trim().equals("")) {
 				Double deb = Double.valueOf(debe.replace(',', '.'));
 				cuadre = cuadre + deb;
-				//haber = cuadre.toString();
+				// haber = cuadre.toString();
 				debe = "";
-				haber="";
+				haber = "";
 				det.setConCuenta(new ConCuenta(null, null, descripcionCuenta,
 						null, searchCode, null, null, null, null, null, null));
 				det.setMdeDebe(BigDecimal.valueOf(deb));
 				detalles.add(det);
 				searchCode = "";
 				descripcionCuenta = "";
-			} else if (!haber.equals("")&&debe.trim().equals("")) {
+			} else if (!haber.equals("") && debe.trim().equals("")) {
 				Double hab = Double.valueOf(haber.replace(',', '.'));
 				cuadre = cuadre - hab;
 
-				//haber = cuadre.toString();
+				// haber = cuadre.toString();
 
 				debe = "";
-				haber="";
+				haber = "";
 				det.setConCuenta(new ConCuenta(null, null, descripcionCuenta,
 						null, searchCode, null, null, null, null, null, null));
 				det.setMdeHaber(BigDecimal.valueOf(hab));
 				detalles.add(det);
 				searchCode = "";
 				descripcionCuenta = "";
-			}
-			else
-			{
+			} else {
 				FacesContext.getCurrentInstance().addMessage(
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
@@ -322,16 +336,86 @@ public class JournalPage implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Guardado",
-							"Exitosamente"));			
+							"Exitosamente"));
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
-							e.getMessage()));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e
+							.getMessage()));
 		}
 	}
 
+	private void cambio()
+	{
+		this.detalles = journalService.readAllMovimientoDetalle(movimiento
+				.getMovCodigo());
+		this.claseCode=this.movimiento.getConClase().getClaCodigo();
+		this.transaccion=this.movimiento.getMovCodigo().toString();
+		this.disabledSave=true;
+		this.tipoMovimientoCode=movimiento.getConTipoMovimiento().getTmoCodigo();		
+		this.disabledSave=true;
+		this.fecha.setTime(movimiento.getMovFechaContable().getTime());
+	}
+
+	private void loadChange() {
+		this.listMov = journalService.readAllMovimiento();
+		this.nowDir = listMov.size() - 1;
+		this.maxDir = listMov.size() - 1;
+		this.movimiento = listMov.get(nowDir);
+		cambio();
+	}
+
+	public void changeIz() {
+		this.nowDir = this.nowDir - 1;
+		if((this.nowDir)>=0)
+		{
+			this.movimiento = listMov.get(nowDir);
+			cambio();
+		}
+		else
+			this.nowDir=0;
+	}
+
+	public void changeDer() {
+		this.nowDir = this.nowDir + 1;
+		if(this.nowDir<=maxDir)
+		{
+			this.movimiento = listMov.get(nowDir);
+			cambio();
+		}
+		else
+			this.nowDir=this.maxDir;
+	}
+
+	public void changeMax() {
+		this.maxDir = listMov.size() - 1;
+		this.nowDir = listMov.size() - 1;
+		this.movimiento = listMov.get(maxDir);
+		cambio();
+	}
+
+	public void changeMin() {
+		this.movimiento = listMov.get(0);
+		this.nowDir=0;
+		cambio();
+	}
+
 	public void clear() {
+		this.maxDir = listMov.size() - 1;
+		this.movimiento = new ConMovimiento();
+		this.movimiento.setMovConcepto("");
 		detalles = new ArrayList<ConMovimientoDetalle>();
+		this.claseCode=0;
+		this.tipoMovimientoCode=0;
+		this.disabledSave=false;
+		this.transaccion="";
+		Calendar cal = Calendar.getInstance();
+		fecha = cal.getTime();
+
+	}
+
+	@PostConstruct
+	private void init() {
+		loadChange();
 	}
 }
