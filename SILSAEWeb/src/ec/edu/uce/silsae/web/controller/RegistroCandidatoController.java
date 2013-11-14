@@ -29,6 +29,7 @@ public class RegistroCandidatoController extends SelectItemController implements
 	
 	private CandidatoDTO candidatoRegistro;
 	private UsuarioDTO usuarioRegistro;
+	private int tipoDocumento;
 	
 	@EJB
 	private CandidatosService candidatosService;
@@ -69,6 +70,14 @@ public class RegistroCandidatoController extends SelectItemController implements
 
 	public void setUsuarioRegistro(UsuarioDTO usuarioRegistro) {
 		this.usuarioRegistro = usuarioRegistro;
+	}
+
+	public int getTipoDocumento() {
+		return tipoDocumento;
+	}
+
+	public void setTipoDocumento(int tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
 	}
 
 
