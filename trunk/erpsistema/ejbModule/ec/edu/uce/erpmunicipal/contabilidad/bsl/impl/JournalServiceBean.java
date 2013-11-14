@@ -206,4 +206,41 @@ public class JournalServiceBean implements JournalService {
 		return accoutingService;
 	}
 
+	@Override
+	public List<ConMovimiento> readAllMovimiento()
+	{
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<ConMovimiento> cq = cb.createQuery(ConMovimiento.class);
+
+		cq.select(cq.from(ConMovimiento.class));
+
+		List<ConMovimiento> list = entityManager.createQuery(cq).getResultList();
+
+		if (list.isEmpty())
+			return null;
+		else
+			return list;
+
+	}
+
+	@Override
+	public List<ConMovimientoDetalle> readAllMovimientoDetalle(int movCode)
+	{
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<ConMovimientoDetalle> cq = cb.createQuery(ConMovimientoDetalle.class);
+		Root<ConMovimientoDetalle> from = cq.from(ConMovimientoDetalle.class);
+		Path<ConCuenta> path = from.join("conMovimiento").get("movCodigo");
+		
+		cq.where(cb.and(cb.equal(path, movCode)));
+
+		List<ConMovimientoDetalle> list = entityManager.createQuery(cq).getResultList();
+
+		if (list.isEmpty())
+			return null;
+		else
+			return list;
+
+	}
+
+	
 }

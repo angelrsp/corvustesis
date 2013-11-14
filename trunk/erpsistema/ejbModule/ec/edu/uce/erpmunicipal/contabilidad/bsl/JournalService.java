@@ -16,6 +16,10 @@ public interface JournalService {
 			List<ConMovimientoDetalle> details);
 
 	AccoutingService getAccoutingService();
+
+	List<ConMovimiento> readAllMovimiento();
+
+	List<ConMovimientoDetalle> readAllMovimientoDetalle(int movCode);
 	
 
 }

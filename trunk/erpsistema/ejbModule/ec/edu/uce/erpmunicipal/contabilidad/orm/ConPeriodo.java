@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import ec.edu.uce.erpmunicipal.util.OrmUtil;
+
 import java.util.List;
 
 
@@ -34,6 +36,9 @@ public class ConPeriodo implements Serializable {
 	@Column(name="per_activo")
 	private Boolean perActivo;
 
+	@Transient
+	private String perNombreMes;
+	
 	//bi-directional many-to-one association to ConMovimientoDetalle
 	@OneToMany(mappedBy="conPeriodo")
 	private List<ConMovimientoDetalle> conMovimientoDetalles;
@@ -86,6 +91,15 @@ public class ConPeriodo implements Serializable {
 
 	public void setPerActivo(Boolean perActivo) {
 		this.perActivo = perActivo;
+	}
+
+	public String getPerNombreMes() {
+		this.perNombreMes=OrmUtil.getMonthName(this.perMes);
+		return perNombreMes;
+	}
+
+	public void setPerNombreMes(String perNombreMes) {
+		this.perNombreMes = perNombreMes;
 	}
 
 	public List<ConMovimientoDetalle> getConMovimientoDetalles() {
