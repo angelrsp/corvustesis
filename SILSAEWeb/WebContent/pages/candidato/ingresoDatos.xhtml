@@ -9,14 +9,14 @@
 	<ui:composition template="/template/principal.xhtml">
 		<ui:define name="contenido">
 			<fieldset>
-				<p:growl id="growl" showDetail="false" sticky="true" />
+				<p:growl id="growl" showDetail="false" />
 				<p:panel id="pnlRegistroCandidato" styleClass="tabla"
 					header="#{i18n['label.titulo.pantalla.registro.candidato']}">
 					<table id="tblRegistroCandidato" class="tabla">
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.tipo.documento']}:&#160;" /> </td>
 								<td>
-									<p:selectOneMenu>
+									<p:selectOneMenu required="true" requiredMessage="#{i18n['label.tipo.documento']}:&#160;#{i18n['label.requerido']}">
 										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
 										<f:selectItems value="#{registroCandidatoController.catalogoTipoDocumento}"></f:selectItems>
 									</p:selectOneMenu>
