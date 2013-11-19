@@ -36,6 +36,7 @@ import com.corvustec.facee.files.commons.exception.ProcessFileException;
 import com.corvustec.facee.files.commons.util.ComprobantesXmlUtil;
 import com.corvustec.facee.files.commons.util.Constantes;
 import com.corvustec.facee.files.commons.util.UtilApplication;
+import com.corvustec.facee.files.commons.util.UtilMail;
 import com.corvustec.facee.files.commons.util.UtilXML;
 import com.corvustec.facee.files.webService.ComprobantesElectronicosWs;
 import com.corvustec.facee.files.xml.commons.ImpuestoDTO;
@@ -220,9 +221,13 @@ public class ArchivoFactura extends Archivo {
 					RespuestaSolicitud response = ComprobantesElectronicosWs.enviarComprobante(xmlFile);
 					
 					if (response.getEstado().equals(ComprobantesElectronicosWs.RESPUESTA_RECIBIDA)) {
+						UtilMail.enviar(xmlFile);
 						UtilApplication.moverArchivoProcesado(file, getEstructuraArchivos().get(Constantes.carpetaProcesados));
+						//Agregado por FPU
+						
 					} else {
 						String mensaje = ComprobantesElectronicosWs.getMensajeRespuestaEnvio(response);
+						
 						logger.info("mensaje: {}", mensaje);
 					}
 				}
