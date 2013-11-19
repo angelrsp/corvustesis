@@ -249,4 +249,9 @@ public final class UtilApplication {
 		}
 		return null;
 	}
+	
+	public static void enviarMail()
+	{
+		
+	}
 }
