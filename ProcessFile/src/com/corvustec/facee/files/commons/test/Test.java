@@ -25,7 +25,7 @@ import ec.gob.sri.comprobantes.ws.RespuestaSolicitud;
 public class Test {
 
 	final static Logger logger = LoggerFactory.getLogger(Test.class);
-
+	
 	/**
 	 * @param args
 	 */
@@ -45,7 +45,6 @@ public class Test {
 			testWebService();
 			break;
 		}
-
 	}
 	
 	public static void testListener () {
