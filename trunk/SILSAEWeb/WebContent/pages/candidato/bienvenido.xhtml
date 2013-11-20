@@ -14,7 +14,7 @@
 		<ui:define name="contenido">
 			<fieldset>
 				<p:growl id="growl" showDetail="true" sticky="true" />
-				<table>
+				<table width="99%">
 					<tr>
 						<td>
 							<p style="text-align: justify;">Acceso al sistema.</p>
@@ -25,10 +25,10 @@
 								con ello podremos contactarte y conocer tu situacion como
 								egresado.</p>
 						</td>
-						<td align="center">
-							<h:commandButton value="#{i18n['boton.registrarse']}" 
-								immediate="true"
-								action ="/pages/candidato/ingresoDatos" />
+						<td align="right">
+<!-- 							<h:commandButton value="#{i18n['boton.registrarse']}"  -->
+<!-- 								immediate="true" -->
+<!-- 								action ="/pages/candidato/ingresoDatos" /> -->
 							<p:commandButton id="btnRegistro"
 								ajax="false"
 								value="#{i18n['boton.registrarse']}"

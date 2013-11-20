@@ -10,7 +10,7 @@
 	<ui:composition template="/template/principal.xhtml">
 		<ui:define name="contenido">
 			<fieldset>
-				<p:growl id="growl" showDetail="false" sticky="true" />
+				<p:growl id="growl" showDetail="false" />
 				<p:panel id="pnlLoginCandidato" styleClass="tabla"
 					header="#{i18n['label.titulo.pantalla.login.candidato']}">
 					<table>
@@ -23,16 +23,16 @@
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.contrasenia']}" /></td>
-							<td><p:inputText
+							<td><p:password
 									required="true"
 									value="#{loginController.credencialesDTO.password}" /></td>
 						</tr>
 						<tr>
 							<td><p:commandButton value="ingresar"
-									process="pnlLoginCandidato" update="@none"
+									process="pnlLoginCandidato" update="pnlLoginCandidato,growl"
 									actionListener="#{loginController.iniciarSesionUsuario}" /></td>
-							<td><h:commandButton value="ingresar"
-									action="#{loginController.iniciarSesionUsuario}" /></td>
+<!-- 							<td><h:commandButton value="ingresar" -->
+<!-- 									action="#{loginController.iniciarSesionUsuario}" /></td> -->
 						</tr>
 					</table>
 
