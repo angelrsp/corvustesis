@@ -19,6 +19,8 @@
 		<class>ec.edu.uce.silsae.ejb.persistence.entities.IdiomaDTO</class>
 		<class>ec.edu.uce.silsae.ejb.persistence.entities.ReferenciaDTO</class>
 		<class>ec.edu.uce.silsae.ejb.persistence.entities.SoftwareDTO</class>
+		<class>ec.edu.uce.silsae.ejb.persistence.entities.EstudioListDTO</class>
+		<class>ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaListDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>

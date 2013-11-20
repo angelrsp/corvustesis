@@ -34,7 +34,7 @@ public class UsuarioDAOImpl extends AbstractFacadeImpl<UsuarioDTO> implements Us
 		
 		try {
 //			u inner join u.bemCandidatos c where c.canIdentificacion =? and u.usuPassword =?
-			Query query = entityManager.createQuery("select u from UsuarioDTO u inner join u.bemCandidatos c where c.canIdentificacion =? and u.usuPassword =?");
+			Query query = entityManager.createQuery("select u from UsuarioDTO u where u.usuLogin =? and u.usuPassword =?");
 			query.setParameter(1, credencialesDTO.getUsername());
 			query.setParameter(2, credencialesDTO.getPassword());
 			List<UsuarioDTO> usuariosEncontrados = query.getResultList();

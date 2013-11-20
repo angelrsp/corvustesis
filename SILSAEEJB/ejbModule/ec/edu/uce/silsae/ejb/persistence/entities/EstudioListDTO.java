@@ -1,23 +1,31 @@
 package ec.edu.uce.silsae.ejb.persistence.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import ec.edu.uce.silsae.commons.util.CalendarUtil;
 
 
 /**
- * The persistent class for the bem_estudio database table.
+ * The persistent class for the vie_estudio database table.
  * 
  */
 @Entity
-@Table(name="bem_estudio")
-public class EstudioDTO implements Serializable {
+@Table(name="vie_estudio")
+@NamedQuery(name="EstudioListDTO.findAll", query="SELECT e FROM EstudioListDTO e")
+public class EstudioListDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@SequenceGenerator(name="BEM_ESTUDIO_ESTCODIGO_GENERATOR", sequenceName="BEM_ESTUDIO_EST_CODIGO_SEQ", allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_ESTUDIO_ESTCODIGO_GENERATOR")
-	@Column(name="est_codigo")
-	private Integer estCodigo;
+	@Column(name="cat_nivel")
+	private String catNivel;
+
+	@Column(name="cat_pais")
+	private String catPais;
 
 	@Column(name="est_anio_fin")
 	private Integer estAnioFin;
@@ -25,8 +33,15 @@ public class EstudioDTO implements Serializable {
 	@Column(name="est_anio_inicio")
 	private Integer estAnioInicio;
 
+	@Column(name="est_candidato")
+	private Integer estCandidato;
+
 	@Column(name="est_carrera")
 	private String estCarrera;
+
+	@Id
+	@Column(name="est_codigo")
+	private Integer estCodigo;
 
 	@Column(name="est_establecimiento")
 	private String estEstablecimiento;
@@ -43,20 +58,23 @@ public class EstudioDTO implements Serializable {
 	@Column(name="est_pais")
 	private Integer estPais;
 
-	//bi-directional many-to-one association to CandidatoDTO
-    @ManyToOne
-	@JoinColumn(name="est_candidato")
-	private CandidatoDTO bemCandidato;
-
-    public EstudioDTO() {
-    }
-
-	public Integer getEstCodigo() {
-		return this.estCodigo;
+	public EstudioListDTO() {
 	}
 
-	public void setEstCodigo(Integer estCodigo) {
-		this.estCodigo = estCodigo;
+	public String getCatNivel() {
+		return this.catNivel;
+	}
+
+	public void setCatNivel(String catNivel) {
+		this.catNivel = catNivel;
+	}
+
+	public String getCatPais() {
+		return this.catPais;
+	}
+
+	public void setCatPais(String catPais) {
+		this.catPais = catPais;
 	}
 
 	public Integer getEstAnioFin() {
@@ -75,12 +93,28 @@ public class EstudioDTO implements Serializable {
 		this.estAnioInicio = estAnioInicio;
 	}
 
+	public Integer getEstCandidato() {
+		return this.estCandidato;
+	}
+
+	public void setEstCandidato(Integer estCandidato) {
+		this.estCandidato = estCandidato;
+	}
+
 	public String getEstCarrera() {
 		return this.estCarrera;
 	}
 
 	public void setEstCarrera(String estCarrera) {
 		this.estCarrera = estCarrera;
+	}
+
+	public Integer getEstCodigo() {
+		return this.estCodigo;
+	}
+
+	public void setEstCodigo(Integer estCodigo) {
+		this.estCodigo = estCodigo;
 	}
 
 	public String getEstEstablecimiento() {
@@ -94,6 +128,10 @@ public class EstudioDTO implements Serializable {
 	public Integer getEstMesFin() {
 		return this.estMesFin;
 	}
+	
+	public String getEstMesFinNombre() {
+		return CalendarUtil.getMonthName(this.estMesFin);
+	}
 
 	public void setEstMesFin(Integer estMesFin) {
 		this.estMesFin = estMesFin;
@@ -103,6 +141,10 @@ public class EstudioDTO implements Serializable {
 		return this.estMesInicio;
 	}
 
+	public String getEstMesInicioNombre() {
+		return CalendarUtil.getMonthName(this.estMesInicio);
+	}
+	
 	public void setEstMesInicio(Integer estMesInicio) {
 		this.estMesInicio = estMesInicio;
 	}
@@ -123,12 +165,4 @@ public class EstudioDTO implements Serializable {
 		this.estPais = estPais;
 	}
 
-	public CandidatoDTO getBemCandidato() {
-		return this.bemCandidato;
-	}
-
-	public void setBemCandidato(CandidatoDTO bemCandidato) {
-		this.bemCandidato = bemCandidato;
-	}
-	
 }
