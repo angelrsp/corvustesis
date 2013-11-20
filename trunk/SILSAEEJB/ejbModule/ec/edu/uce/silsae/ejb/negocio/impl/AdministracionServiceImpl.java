@@ -25,7 +25,8 @@ public class AdministracionServiceImpl implements AdministracionService{
 	@Override
 	public List<CatalogoDTO> getCatalogo(CatalogoDTO catalogo) throws SilsaeException
 	{
-		log.info("registrarCandidato");
+		log.info("obtener catalogo");
+		log.info("Valor codigo catalogo "+catalogo.getCatCodigo());
 		try{
 			factoryDAO.getCatalogoImpl().getAll(catalogo);
 			return factoryDAO.getCatalogoImpl().getAll(catalogo);

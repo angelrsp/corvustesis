@@ -7,26 +7,44 @@ import javax.persistence.PersistenceContext;
 import ec.edu.uce.silsae.ejb.persistence.dao.AvisoDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.CandidatoDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.CatalogoDAO;
+import ec.edu.uce.silsae.ejb.persistence.dao.EmpresaDAO;
+import ec.edu.uce.silsae.ejb.persistence.dao.EstudioDAO;
+import ec.edu.uce.silsae.ejb.persistence.dao.ExperienciaDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.FactoryDAO;
+import ec.edu.uce.silsae.ejb.persistence.dao.IdiomaDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.PerfilDAO;
+import ec.edu.uce.silsae.ejb.persistence.dao.ReferenciaDAO;
+import ec.edu.uce.silsae.ejb.persistence.dao.SoftwareDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.UsuarioDAO;
 
 @Stateless
-public class FactoryDAOImpl implements FactoryDAO{
-	
+public class FactoryDAOImpl implements FactoryDAO {
+
 	@PersistenceContext(unitName = "silsaePU")
 	private EntityManager entityManager;
 
 	private UsuarioDAO usuarioDAO;
-	
+
 	private CandidatoDAO candidatoDAO;
-	
+
 	private AvisoDAO avisoDAO;
-	
+
 	private PerfilDAO perfilDAO;
-	
-	private CatalogoDAO catalogoDAO; 
-	
+
+	private CatalogoDAO catalogoDAO;
+
+	private EstudioDAO estudioDAO;
+
+	private ExperienciaDAO experienciaDAO;
+
+	private IdiomaDAO idiomaDAO;
+
+	private ReferenciaDAO referenciaDAO;
+
+	private SoftwareDAO softwareDAO;
+
+	private EmpresaDAO empresaDAO;
+
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
 		if (usuarioDAO == null) {
@@ -56,7 +74,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 		if (perfilDAO == null) {
 			perfilDAO = new PerfilDAOImpl(entityManager);
 		}
-		return perfilDAO;	
+		return perfilDAO;
 	}
 
 	@Override
@@ -64,7 +82,55 @@ public class FactoryDAOImpl implements FactoryDAO{
 		if (catalogoDAO == null) {
 			catalogoDAO = new CatalogoDAOImpl(entityManager);
 		}
-		return catalogoDAO;	
+		return catalogoDAO;
+	}
+
+	@Override
+	public EstudioDAO getEstudioDAOImpl() {
+		if (estudioDAO == null) {
+			estudioDAO = new EstudioDAOImpl(entityManager);
+		}
+		return estudioDAO;
+	}
+
+	@Override
+	public ExperienciaDAO getExperienciaDAOImpl() {
+		if (experienciaDAO == null) {
+			experienciaDAO = new ExperienciaDAOImpl(entityManager);
+		}
+		return experienciaDAO;
+	}
+
+	@Override
+	public IdiomaDAO getIdiomaDAOImpl() {
+		if (idiomaDAO == null) {
+			idiomaDAO = new IdiomaDAOImpl(entityManager);
+		}
+		return idiomaDAO;
+	}
+
+	@Override
+	public ReferenciaDAO getReferenciaDAOImpl() {
+		if (referenciaDAO == null) {
+			referenciaDAO = new ReferenciaDAOImpl(entityManager);
+		}
+		return referenciaDAO;
+	}
+
+	@Override
+	public SoftwareDAO getSoftwareDAOImpl() {
+		if (softwareDAO == null) {
+			softwareDAO = new SoftwareDAOImpl(entityManager);
+		}
+		return softwareDAO;
+	}
+
+	@Override
+	public EmpresaDAO getEmpresaDAOImpl() {
+		if (empresaDAO == null) {
+			empresaDAO = new EmpresaDAOImpl(entityManager);
+		}
+		return empresaDAO;
 	}
 
 }

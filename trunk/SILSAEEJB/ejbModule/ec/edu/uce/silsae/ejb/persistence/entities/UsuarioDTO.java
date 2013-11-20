@@ -39,7 +39,7 @@ public class UsuarioDTO implements Serializable {
 	private String usuLogin;
 
 	//bi-directional many-to-one association to CandidatoDTO
-	@OneToMany(mappedBy="bemUsuario")
+	@OneToMany(mappedBy="bemUsuario", fetch=FetchType.EAGER)
 	private List<CandidatoDTO> bemCandidatos;
 
 	//bi-directional many-to-one association to EmpresaDTO

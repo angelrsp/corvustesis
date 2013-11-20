@@ -10,4 +10,12 @@ public interface FactoryDAO {
 	AvisoDAO getAvisoDAOImpl();
 	PerfilDAO getPerfilDAOImpl();
 	CatalogoDAO getCatalogoImpl();
+	EstudioDAO getEstudioDAOImpl();
+	ExperienciaDAO getExperienciaDAOImpl();
+	IdiomaDAO getIdiomaDAOImpl();
+	ReferenciaDAO getReferenciaDAOImpl();
+	SoftwareDAO getSoftwareDAOImpl();
+	EmpresaDAO getEmpresaDAOImpl();
+	
+	
 }
