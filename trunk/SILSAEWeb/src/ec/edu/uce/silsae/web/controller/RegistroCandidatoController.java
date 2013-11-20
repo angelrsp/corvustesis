@@ -1,5 +1,6 @@
 package ec.edu.uce.silsae.web.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +15,7 @@ import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
+import ec.edu.uce.silsae.web.util.JsfUtil;
 
 
 @ViewScoped
@@ -29,7 +31,7 @@ public class RegistroCandidatoController extends SelectItemController implements
 	
 	private CandidatoDTO candidatoRegistro;
 	private UsuarioDTO usuarioRegistro;
-	private int tipoDocumento;
+	private Object tipoDocumento;
 	
 	@EJB
 	private CandidatosService candidatosService;
@@ -49,8 +51,16 @@ public class RegistroCandidatoController extends SelectItemController implements
 			log.info("Contrasenia {}", getUsuarioRegistro().getUsuPassword() );
 			
 			getCandidatoRegistro().setBemUsuario(getUsuarioRegistro());
-			candidatosService.registrarCandidato(getCandidatoRegistro());
+			getUsuarioRegistro().setUsuLogin(getCandidatoRegistro().getCanIdentificacion());
+			getCandidatoRegistro().setCanTipoIdentificacion(Integer.valueOf(tipoDocumento.toString()));
+			getUsuarioRegistro().setUsuLogin(getCandidatoRegistro().getCanIdentificacion());
+			UsuarioDTO user= candidatosService.registrarCandidato(getCandidatoRegistro()).getBemUsuario();
+			JsfUtil.putObject("UsuarioDTO",user);
+			JsfUtil.redirect("dato.jsf");
 		} catch (SilsaeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -72,11 +82,11 @@ public class RegistroCandidatoController extends SelectItemController implements
 		this.usuarioRegistro = usuarioRegistro;
 	}
 
-	public int getTipoDocumento() {
+	public Object getTipoDocumento() {
 		return tipoDocumento;
 	}
 
-	public void setTipoDocumento(int tipoDocumento) {
+	public void setTipoDocumento(Object tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
 	}
 
