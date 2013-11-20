@@ -11,16 +11,16 @@
 		<ui:define name="contenido">
 			<fieldset>
 				<p:growl id="growl" showDetail="true" sticky="true" />
-				<table>
+				<table width="99%">
 					<tr>
 						<td>
 							<p style="text-align: justify;">Acceso al sistema.</p>
 							<p style="text-align: justify;">Registro y Acceso para empresas que deseen registrar sus avisos y ver hojas de vida en la bolsa de empleo del SILSAE.</p>
 						</td>
-						<td align="center">
-							<h:commandButton value="#{i18n['boton.registrarse']}" 
-								immediate="true"
-								action ="/pages/empresa/ingresoDatos" />
+						<td align="right">
+<!-- 							<h:commandButton value="#{i18n['boton.registrarse']}"  -->
+<!-- 								immediate="true" -->
+<!-- 								action ="/pages/empresa/ingresoDatos" /> -->
 							<p:commandButton id="btnRegistro"
 								ajax="false"
 								value="#{i18n['boton.registrarse']}"
