@@ -11,7 +11,42 @@
 	<ui:composition template="/template/principal.xhtml">
 		<ui:define name="contenido">
 			<fieldset>
-			
+				<p:growl id="growl" showDetail="false" />
+				<p:panel id="pnlRegistroCandidato" styleClass="tabla">
+					<table>
+
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.puesto']}:&#160;" /></td>
+							<td><p:selectOneMenu>
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
+										itemValue="" />
+								</p:selectOneMenu></td>
+							<td><h:outputLabel
+									value="#{i18n['label.remuneracion']}:&#160;" /></td>
+							<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.remuneracion']}&#160;#{i18n['label.requerido']}" /></td>
+						</tr>
+
+						<tr>
+							<td><h:outputLabel
+									value="#{i18n['label.descripcion']}:&#160;" /></td>
+							<td colspan="3"><p:inputTextarea required="true"
+									requiredMessage="#{i18n['label.descripcion']}&#160;#{i18n['label.requerido']}" autoResize="false" /></td>
+						</tr>
+
+						<tr>
+							<td><h:outputLabel
+									value="#{i18n['label.fecha.caducidad']}:&#160;" /></td>
+							<td><p:calendar pattern="#{i18n['pattern.fecha']}" required="true" requiredMessage="#{i18n['label.fecha.caducidad']}:&#160;#{i18n['label.requerido']}"/></td>		
+
+							<td><h:outputLabel
+									value="#{i18n['label.vacantes']}:&#160;" /></td>
+							<td><p:inputText required="true" requiredMessage="#{i18n['label.vacantes']}:&#160;#{i18n['label.requerido']}"/></td>		
+						</tr>
+
+
+					</table>
+				</p:panel>
 			</fieldset>
 		</ui:define>
 	</ui:composition>
