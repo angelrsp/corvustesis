@@ -7,7 +7,7 @@
 	
 <h:head></h:head>
 <body>
-	<ui:composition template="/template/principal.xhtml">
+	<ui:composition template="/template/publico.xhtml">
 		<ui:define name="contenido">
 			<fieldset>
 				<p:growl id="growl" showDetail="false" />
@@ -31,8 +31,6 @@
 							<td><p:commandButton value="ingresar"
 									process="pnlLoginCandidato" update="pnlLoginCandidato,growl"
 									actionListener="#{loginController.iniciarSesionUsuario}" /></td>
-<!-- 							<td><h:commandButton value="ingresar" -->
-<!-- 									action="#{loginController.iniciarSesionUsuario}" /></td> -->
 						</tr>
 					</table>
 
