@@ -10,10 +10,12 @@
 </h:head>
 <body>
 
-	<ui:composition template="/template/principal.xhtml">
+<ui:include src="/template/publico.xhtml" />
+
+	<ui:composition template="/template/publico.xhtml">
 
 		<ui:define name="contenido">
-<fieldset>
+		<fieldset>
 			<p:panel header="MISION">
 				<p style="text-align: justify;">Formar Profesrionales
 					odontologos de nivel superior de manera integra, atendiendolas
