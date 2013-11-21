@@ -51,7 +51,7 @@ public class LoginController implements Serializable {
 				JsfUtil.putObject("UsuarioDTO",user);
 				JsfUtil.redirect("dato.jsf");
 			} else {
-				JsfUtil.addErrorMessage("mal");
+				JsfUtil.addErrorMessage("Datos Tncorrectos");
 			}
 		} catch (IOException e) {
 			JsfUtil.addErrorMessage("mal");
@@ -69,7 +69,7 @@ public class LoginController implements Serializable {
 				JsfUtil.putObject("UsuarioDTO",user);
 				JsfUtil.redirect("inicioEmpresa.jsf");
 			} else {
-				JsfUtil.addErrorMessage("mal");
+				JsfUtil.addErrorMessage("Datos Tncorrectos");
 			}
 		} catch (IOException e) {
 			JsfUtil.addErrorMessage("mal");

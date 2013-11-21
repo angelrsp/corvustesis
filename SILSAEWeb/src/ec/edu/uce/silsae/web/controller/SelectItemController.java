@@ -28,6 +28,7 @@ public abstract class SelectItemController {
 	private List<SelectItem> catalogoMes;
 	private List<SelectItem> catalogoUbicacion;
 	private List<SelectItem> catalogoTipoEmpresa;
+	private List<SelectItem> catalogoPuesto;
 	
 	@EJB
 	private AdministracionService administracionService; 
@@ -48,6 +49,7 @@ public abstract class SelectItemController {
 		catalogoNivelIdioma=new ArrayList<SelectItem>();
 		catalogoAnio=new ArrayList<SelectItem>();
 		catalogoMes=new ArrayList<SelectItem>();
+		catalogoPuesto=new ArrayList<SelectItem>();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -273,6 +275,24 @@ public abstract class SelectItemController {
 			});
 		}
 		return catalogoTipoEmpresa;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getCatalogoPuesto() throws SilsaeException {
+		if(CollectionUtils.isEmpty(catalogoPuesto))
+		{
+			CatalogoDTO catalogo=new CatalogoDTO();
+			catalogo.setCatCodigo(37);
+			catalogoPuesto=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					CatalogoDTO cat=(CatalogoDTO)arg0;
+					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
+				}
+			});
+		}
+		return catalogoPuesto;
 	}
 	
 	
