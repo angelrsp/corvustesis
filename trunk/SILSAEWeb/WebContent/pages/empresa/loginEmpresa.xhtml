@@ -7,12 +7,12 @@
 
 <h:head></h:head> 
 <body> 
-<ui:composition template="/template/principal.xhtml">
+<ui:composition template="/template/publico.xhtml">
 		<ui:define name="contenido">
 			<fieldset>
 				<p:growl id="growl" showDetail="false" sticky="true" />
 				<p:panel id="pnlLoginEmpresa" styleClass="tabla"
-					header="#{i18n['label.titulo.pantalla.login.candidato']}">
+					header="#{i18n['label.titulo.pantalla.login.empresa']}">
 					<table>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.usuario']}" /></td>
@@ -28,7 +28,7 @@
 						</tr>
 						<tr>
 							<td><p:commandButton value="#{i18n['boton.ingresar']}"
-									process="pnlLoginEmpresa" update="@none"
+									process="pnlLoginEmpresa" update="pnlLoginEmpresa,growl"
 									actionListener="#{loginController.iniciarSessionEmpresa}" /></td>
 						</tr>
 					</table>
