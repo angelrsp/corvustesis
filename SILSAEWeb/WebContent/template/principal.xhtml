@@ -41,15 +41,25 @@
 			
 			<div id="menu">
 			<h:form id="menu">
-			<p:menubar style="margin-left:auto; margin-right:auto;text-align: center; width:96%">   
-				<p:menuitem value="Inicio" url="#" />
-				<p:menuitem value="Seguimiento" url="#" />				
-		        <p:submenu label="Bolsa de Empleo">
-			        <p:menuitem value="Egresados" url="/pages/candidato/bienvenido.jsf" />
-			        <p:menuitem value="Empresas" url="/pages/empresa/bienvenido.jsf" />
-				</p:submenu>
-	        </p:menubar>
+				<p:menubar id="menuPublico" style="margin-left:auto; margin-right:auto;text-align: center; width:96%">   
+					<p:menuitem value="Inicio" url="/" />
+					<p:menuitem value="Seguimiento" url="#" />				
+			        <p:submenu label="Bolsa de Empleo">
+				        <p:menuitem value="Egresados" url="/pages/candidato/bienvenido.jsf" />
+				        <p:menuitem value="Empresas" url="/pages/empresa/bienvenido.jsf" />
+					</p:submenu>
+		        </p:menubar>
+		        
+	  			<p:menubar id="menuEmpresa" style="margin-left:auto; margin-right:auto;text-align: center; width:96%" rendered="true">
+	  				<p:menuitem value="Publicar Ofertas" url="/pages/empresa/aviso.jsf" />
+	  				<p:menuitem value="Ver Postulaciones" url="/pages/empresa/aviso.jsf" />
+	  			</p:menubar>
+	
+	  			<p:menubar id="menuConadidato" style="margin-left:auto; margin-right:auto;text-align: center; width:96%" rendered="true">
+					<p:menuitem value="Ver Ofertas" url="#" />
+	  			</p:menubar>
 	        </h:form>
+	        
 			<p:spacer height="10"></p:spacer>
 			</div>
 			
