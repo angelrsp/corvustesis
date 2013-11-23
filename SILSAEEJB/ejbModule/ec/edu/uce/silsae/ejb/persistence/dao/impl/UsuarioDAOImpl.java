@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import ec.edu.uce.silsae.commons.dto.util.CredencialesDTO;
 import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.persistence.dao.UsuarioDAO;
+import ec.edu.uce.silsae.ejb.persistence.entities.EmpresaDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
 @Stateless
@@ -41,6 +42,14 @@ public class UsuarioDAOImpl extends AbstractFacadeImpl<UsuarioDTO> implements Us
 			
 			if (usuariosEncontrados != null && usuariosEncontrados.size()==1){
 				usuarioLogin = usuariosEncontrados.get(0);
+				Query query2=entityManager.createQuery("select u from EmpresaDTO u where u.bemUsuario.usuCodigo=?");
+				query2.setParameter(1, usuarioLogin.getUsuCodigo());
+				List<EmpresaDTO> emp=query2.getResultList();
+				if(!emp.isEmpty())
+				{
+					usuarioLogin.setBemEmpresas(emp);
+				}
+				
 			}
 			
 		} catch (Exception e) {
