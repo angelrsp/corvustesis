@@ -16,7 +16,7 @@
 					<table>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.puesto']}:&#160;" /></td>
-							<td><p:selectOneMenu>
+							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.puesto']}#160;#{i18n['label.requerido']}" value="#{avisoEmpresaController.puesto}">
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
 										itemValue="" />
 									<f:selectItems value="#{avisoEmpresaController.catalogoPuesto}"></f:selectItems>	
@@ -40,38 +40,37 @@
 									value="#{i18n['label.fecha.caducidad']}:&#160;" /></td>
 							<td><p:calendar pattern="#{i18n['pattern.fecha']}"
 									required="true"
-									requiredMessage="#{i18n['label.fecha.caducidad']}:&#160;#{i18n['label.requerido']}" /></td>
+									requiredMessage="#{i18n['label.fecha.caducidad']}:&#160;#{i18n['label.requerido']}" value="#{avisoEmpresaController.fecha}"/></td>
 
 							<td><h:outputLabel value="#{i18n['label.vacantes']}:&#160;" /></td>
 							<td><p:inputText required="true"
-									requiredMessage="#{i18n['label.vacantes']}:&#160;#{i18n['label.requerido']}" value="#{avisoEmpresaController.aviso.aviVacantes}" /></td>
+									requiredMessage="#{i18n['label.vacantes']}:&#160;#{i18n['label.requerido']}" value="#{avisoEmpresaController.aviso.aviVacantes}" onkeypress="return isNumberKey(event);" /></td>
 						</tr>
 						<tr>
 							<td>
-							<p:commandButton value="#{i18n['boton.guardar']}"></p:commandButton>
+							<p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{avisoEmpresaController.guardar}" update="pnlAviso,growl" process="pnlAviso"></p:commandButton>
 							</td>
 						</tr>
 
 					</table>
+					
 					<p:spacer height="5"></p:spacer>
-					<p:dataTable>
+					
+					<p:dataTable value="#{avisoEmpresaController.avisoList}" var="avi">
 					<p:column headerText="#{i18n['label.puesto']}">
-						<h:outputLabel value="" />
+						<h:outputLabel value="#{avi.catDescripcion}" />
 					</p:column>
 					<p:column headerText="#{i18n['label.remuneracion']}">
-						<h:outputLabel value="" />
-					</p:column>
-					<p:column headerText="#{i18n['label.puesto']}">
-						<h:outputLabel value="" />
+						<h:outputLabel value="#{avi.aviRemuneracion}" />
 					</p:column>
 					<p:column headerText="#{i18n['label.descripcion']}">
-						<h:outputLabel value="" />
+						<h:outputLabel value="#{avi.aviDescripcion}" />
 					</p:column>
 					<p:column headerText="#{i18n['label.fecha.caducidad']}">
-						<h:outputLabel value="" />
+						<h:outputLabel value="#{avi.aviFechaCaducidad}" />
 					</p:column>										
 					<p:column headerText="#{i18n['label.vacantes']}">				
-						<h:outputLabel value="" />	
+						<h:outputLabel value="#{avi.aviVacantes}" />	
 					</p:column>																			
 					</p:dataTable>
 				</p:panel>
