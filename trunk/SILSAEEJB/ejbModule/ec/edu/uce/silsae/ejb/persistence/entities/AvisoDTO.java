@@ -1,10 +1,19 @@
 package ec.edu.uce.silsae.ejb.persistence.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Timestamp;
-import java.math.BigDecimal;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 
 /**
@@ -32,7 +41,7 @@ public class AvisoDTO implements Serializable {
 	private Integer aviPuesto;
 
 	@Column(name="avi_remuneracion")
-	private BigDecimal aviRemuneracion;
+	private String aviRemuneracion;
 
 	@Column(name="avi_vacantes")
 	private Integer aviVacantes;
@@ -81,11 +90,11 @@ public class AvisoDTO implements Serializable {
 		this.aviPuesto = aviPuesto;
 	}
 
-	public BigDecimal getAviRemuneracion() {
+	public String getAviRemuneracion() {
 		return this.aviRemuneracion;
 	}
 
-	public void setAviRemuneracion(BigDecimal aviRemuneracion) {
+	public void setAviRemuneracion(String aviRemuneracion) {
 		this.aviRemuneracion = aviRemuneracion;
 	}
 

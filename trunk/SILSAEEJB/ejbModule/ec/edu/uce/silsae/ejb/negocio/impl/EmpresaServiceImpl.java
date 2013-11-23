@@ -1,5 +1,7 @@
 package ec.edu.uce.silsae.ejb.negocio.impl;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -9,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.negocio.EmpresaService;
 import ec.edu.uce.silsae.ejb.persistence.dao.FactoryDAO;
+import ec.edu.uce.silsae.ejb.persistence.entities.AvisoDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.AvisoListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EmpresaDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
@@ -35,4 +39,28 @@ public class EmpresaServiceImpl implements EmpresaService {
 			throw new SilsaeException("Error al registrar Empresa");
 		}
 	}
+	
+	@Override
+	public AvisoDTO registrarAviso(AvisoDTO aviso) throws SilsaeException
+	{
+		try {
+		return factoryDAO.getAvisoDAOImpl().create(aviso);
+		} catch (Exception e) {
+			log.info("Error al registrar Aviso {}", e.toString());
+			throw new SilsaeException("Error al registrar Aviso");
+		}		
+	}
+	
+	@Override
+	public List<AvisoListDTO> obtenerAviso(EmpresaDTO empresa) throws SilsaeException
+	{
+		try {
+		return factoryDAO.getAvisoDAOImpl().getAll(empresa);
+		} catch (Exception e) {
+			log.info("Error al registrar Aviso {}", e.toString());
+			throw new SilsaeException("Error al registrar Aviso");
+		}				
+	}
+	
+	
 }
