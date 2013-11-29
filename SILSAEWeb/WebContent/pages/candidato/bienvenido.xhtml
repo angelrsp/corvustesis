@@ -14,9 +14,9 @@
 		<ui:define name="contenido">
 			<fieldset>
 				<p:growl id="growl" showDetail="true" sticky="true" />
-				<table width="99%">
+				<table width="99%" style="font-family: Verdana,Arial,sans-serif; font-size: 1.1em;">
 					<tr>
-						<td>
+						<td width="50%">
 							<p style="text-align: justify;">Acceso al sistema.</p>
 							<p style="text-align: justify;">Si eres egresado de la
 								facultad de odontologia y aun NO has registrado tus datos en el
@@ -25,10 +25,7 @@
 								con ello podremos contactarte y conocer tu situacion como
 								egresado.</p>
 						</td>
-						<td align="right">
-<!-- 							<h:commandButton value="#{i18n['boton.registrarse']}"  -->
-<!-- 								immediate="true" -->
-<!-- 								action ="/pages/candidato/ingresoDatos" /> -->
+						<td align="right" width="50%">
 							<p:commandButton id="btnRegistro"
 								ajax="false"
 								value="#{i18n['boton.registrarse']}"
