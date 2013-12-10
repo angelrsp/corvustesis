@@ -18,6 +18,7 @@ import ec.edu.uce.silsae.ejb.persistence.entities.EstudioDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EstudioListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaListDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.SoftwareDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 import ec.edu.uce.silsae.web.util.JsfUtil;
 
@@ -37,6 +38,7 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	private CandidatoDTO candidato;
 	private EstudioDTO estudio;
 	private ExperienciaDTO experiencia;
+	private SoftwareDTO herramientas;
 	
 	private Object tipoDocumento;
 	private Object nivelEstudio;
@@ -54,6 +56,7 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	
 	private List<EstudioListDTO> listEstudio;
 	private List<ExperienciaListDTO> listExperiencia;
+	private List<SoftwareDTO> listHerramientas;
 	
 	public DatosCandidatoController()
 	{
@@ -72,6 +75,8 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		listEstudio=new ArrayList<EstudioListDTO>();
 		experiencia=new ExperienciaDTO();
 		listExperiencia=new ArrayList<ExperienciaListDTO>();
+		listHerramientas=new ArrayList<SoftwareDTO>();
+		herramientas=new SoftwareDTO();
 	}
 	
 	public UsuarioDTO getUser() {
@@ -175,7 +180,6 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		try {
 			this.listEstudio=candidatosService.obtenerEstudio(getCandidato());
 		} catch (SilsaeException e) {
-			// TODO Auto-generated catch block
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
 		return this.listEstudio;
@@ -216,6 +220,18 @@ public class DatosCandidatoController extends SelectItemController implements Se
 
 	public void setTipoExperiencia(Object tipoExperiencia) {
 		this.tipoExperiencia = tipoExperiencia;
+	}
+
+	public SoftwareDTO getHerramientas() {
+		return herramientas;
+	}
+
+	public void setHerramientas(SoftwareDTO herramientas) {
+		this.herramientas = herramientas;
+	}
+
+	public List<SoftwareDTO> getListHerramientas() {
+		return listHerramientas;
 	}
 
 	public void agregarEstudio()
@@ -268,8 +284,26 @@ public class DatosCandidatoController extends SelectItemController implements Se
 
 	private void resetExperiencia()
 	{
-		setTipoExperiencia(null);
+		setExperiencia(null);
 		experiencia=new ExperienciaDTO();
 	}
+	
+	public void agregarHerramientas()
+	{
+		try{
+			herramientas.setBemCandidato(candidato);
+			herramientas.setProNivel(Integer.valueOf(nivelPrograma.toString()));
+			herramientas.setProPrograma(Integer.valueOf(programa.toString()));
+			candidatosService.agregarHerramientas(herramientas);
+			resetHerramientas();	
+		} catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
 
+	private void resetHerramientas()
+	{
+		setHerramientas(null);
+		herramientas=new SoftwareDTO();
+	}
 }
