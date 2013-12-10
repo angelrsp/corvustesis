@@ -12,6 +12,7 @@ import ec.edu.uce.silsae.ejb.persistence.entities.EstudioListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.PostulacionDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.SoftwareDTO;
 
 @Local
 public interface CandidatosService {
@@ -36,4 +37,6 @@ public interface CandidatosService {
 
 	PostulacionDTO postular(PostulacionDTO postulacionDTO)
 			throws SilsaeException;
+
+	void agregarHerramientas(SoftwareDTO software) throws SilsaeException;
 }
