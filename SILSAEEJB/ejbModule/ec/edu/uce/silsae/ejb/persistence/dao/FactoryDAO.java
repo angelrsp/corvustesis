@@ -16,6 +16,7 @@ public interface FactoryDAO {
 	ReferenciaDAO getReferenciaDAOImpl();
 	SoftwareDAO getSoftwareDAOImpl();
 	EmpresaDAO getEmpresaDAOImpl();
+	PostulacionDAO getPostulacionDAOImpl();
 	
 	
 }

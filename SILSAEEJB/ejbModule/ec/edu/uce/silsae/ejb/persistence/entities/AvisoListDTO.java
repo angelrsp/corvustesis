@@ -39,6 +39,10 @@ public class AvisoListDTO implements Serializable {
 
 	@Column(name="cat_descripcion")
 	private String catDescripcion;
+	
+	@Column(name="emp_nombre_comercial")
+	private String empNombreComercial;
+	
 
 	public AvisoListDTO() {
 	}
@@ -105,6 +109,14 @@ public class AvisoListDTO implements Serializable {
 
 	public void setCatDescripcion(String catDescripcion) {
 		this.catDescripcion = catDescripcion;
+	}
+
+	public String getEmpNombreComercial() {
+		return empNombreComercial;
+	}
+
+	public void setEmpNombreComercial(String empNombreComercial) {
+		this.empNombreComercial = empNombreComercial;
 	}
 
 }

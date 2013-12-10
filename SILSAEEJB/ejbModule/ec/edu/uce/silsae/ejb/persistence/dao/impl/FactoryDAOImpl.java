@@ -13,6 +13,7 @@ import ec.edu.uce.silsae.ejb.persistence.dao.ExperienciaDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.IdiomaDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.PerfilDAO;
+import ec.edu.uce.silsae.ejb.persistence.dao.PostulacionDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.ReferenciaDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.SoftwareDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.UsuarioDAO;
@@ -44,6 +45,8 @@ public class FactoryDAOImpl implements FactoryDAO {
 	private SoftwareDAO softwareDAO;
 
 	private EmpresaDAO empresaDAO;
+	
+	private PostulacionDAO postulacionDAO;
 
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -131,6 +134,14 @@ public class FactoryDAOImpl implements FactoryDAO {
 			empresaDAO = new EmpresaDAOImpl(entityManager);
 		}
 		return empresaDAO;
+	}
+
+	@Override
+	public PostulacionDAO getPostulacionDAOImpl() {
+		if (postulacionDAO == null) {
+			postulacionDAO = new PostulacionDAOImpl(entityManager);
+		}
+		return postulacionDAO;
 	}
 
 }

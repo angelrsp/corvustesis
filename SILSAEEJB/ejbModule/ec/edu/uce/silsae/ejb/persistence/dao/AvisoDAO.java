@@ -14,4 +14,6 @@ public interface AvisoDAO extends AbstractFacade<AvisoDTO> {
 
 	List<AvisoListDTO> getAll(EmpresaDTO empresa) throws SilsaeException;
 
+	List<AvisoListDTO> getOfertas() throws SilsaeException;
+
 }
