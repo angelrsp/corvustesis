@@ -18,6 +18,7 @@ import ec.edu.uce.silsae.ejb.persistence.entities.EstudioListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.PostulacionDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.SoftwareDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
 @Stateless
@@ -71,6 +72,19 @@ public class CandidatosServiceImpl implements CandidatosService {
 	}
 	
 
+	@Override
+	public void agregarHerramientas(SoftwareDTO software) throws SilsaeException {
+		log.info("agregarHerramientas");
+
+		try {
+			factoryDAO.getSoftwareDAOImpl().create(software);
+		} catch (Exception e) {
+			log.info("Error al registrar el Candidato {}", e.toString());
+			throw new SilsaeException("Error al registrar el Candidato");
+		}
+	}
+ 
+	
 	@Override
 	public List<EstudioListDTO> obtenerEstudio(CandidatoDTO candidato)throws SilsaeException {
 		try {
