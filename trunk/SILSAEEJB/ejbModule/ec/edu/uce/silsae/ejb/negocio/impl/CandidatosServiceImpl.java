@@ -11,11 +11,13 @@ import org.slf4j.LoggerFactory;
 import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsae.ejb.persistence.dao.FactoryDAO;
+import ec.edu.uce.silsae.ejb.persistence.entities.AvisoListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EstudioDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EstudioListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaListDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.PostulacionDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
 @Stateless
@@ -91,5 +93,26 @@ public class CandidatosServiceImpl implements CandidatosService {
 		}
 	}
 
+	@Override
+	public List<AvisoListDTO> verOfertas() throws SilsaeException
+	{
+		try {
+			return factoryDAO.getAvisoDAOImpl().getOfertas();
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Estudio {}", e.toString());
+			throw new SilsaeException("Error al obtener datos Ofertas");
+
+		}
+	}
 	
+	@Override
+	public PostulacionDTO postular(PostulacionDTO postulacionDTO) throws SilsaeException{
+		try {
+			return factoryDAO.getPostulacionDAOImpl().create(postulacionDTO);
+		} catch (Exception e) {
+			log.info("Error al insertar postulacion {}", e.toString());
+			throw new SilsaeException("Error al insertar postulacion");
+		}
+		
+	}
 }

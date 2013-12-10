@@ -58,6 +58,14 @@ public class AvisoDTO implements Serializable {
     public AvisoDTO() {
     }
 
+    
+    
+	public AvisoDTO(Integer aviNombre) {
+		this.aviNombre = aviNombre;
+	}
+
+
+
 	public Integer getAviNombre() {
 		return this.aviNombre;
 	}

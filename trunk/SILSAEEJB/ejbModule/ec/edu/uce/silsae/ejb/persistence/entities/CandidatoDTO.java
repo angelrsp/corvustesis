@@ -1,7 +1,9 @@
 package ec.edu.uce.silsae.ejb.persistence.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -69,6 +71,14 @@ public class CandidatoDTO implements Serializable {
 
     public CandidatoDTO() {
     }
+    
+    
+
+	public CandidatoDTO(Integer canCodigo) {
+		this.canCodigo = canCodigo;
+	}
+
+
 
 	public Integer getCanCodigo() {
 		return this.canCodigo;
