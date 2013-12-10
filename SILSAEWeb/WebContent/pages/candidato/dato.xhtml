@@ -148,6 +148,8 @@
 
 				<p:panel id="pnlExperiencia" styleClass="tabla"
 					header="#{i18n['label.titulo.pantalla.dato.experiencia']}">
+					<p:accordionPanel activeIndex="null">
+					<p:tab title="#{i18n['boton.agregar']}">  
 					<table>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.empresa']}:&#160;" /></td>
@@ -177,9 +179,12 @@
 										itemValue="" />
 									<f:selectItems value="#{datosCandidatoController.catalogoTipoExperiencia}"></f:selectItems>	
 								</p:selectOneMenu></td>
-							<td><p:commandButton value="#{i18n['boton.agregar']}" process="pnlExperiencia" update="pnlExperiencia,growl" actionListener="#{datosCandidatoController.agregarExperiencia}"></p:commandButton></td>
+							<td><p:commandButton value="#{i18n['boton.agregar']}" process=":contenido:pnlExperiencia" update=":contenido:pnlExperiencia,:contenido:growl" actionListener="#{datosCandidatoController.agregarExperiencia}"></p:commandButton></td>
 						</tr>
 					</table>
+				</p:tab>
+				</p:accordionPanel>
+				
 					<p:spacer height="5"/>
 					<p:dataTable value="#{datosCandidatoController.listExperiencia}" var="exp">
 					<p:column headerText="#{i18n['label.empresa']}">
