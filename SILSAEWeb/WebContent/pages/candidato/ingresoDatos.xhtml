@@ -39,9 +39,9 @@
 							<td><h:outputLabel value="#{i18n['label.nombre.primero']}:&#160;" /> </td>
 							<td><p:inputText required="true"
 									requiredMessage="#{i18n['label.nombre.primero']}&#160;#{i18n['label.requerido']}"
-									value="#{registroCandidatoController.candidatoRegistro.canNombres}"/></td>
+									value="#{registroCandidatoController.candidatoRegistro.canPrimerNombre}"/></td>
 							<td><h:outputLabel value="#{i18n['label.nombre.Segundo']}:&#160;" /> </td>
-							<td><p:inputText /></td>
+							<td><p:inputText value="#{registroCandidatoController.candidatoRegistro.canSegundoNombre}"/></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.email']}:&#160;" /> </td>
