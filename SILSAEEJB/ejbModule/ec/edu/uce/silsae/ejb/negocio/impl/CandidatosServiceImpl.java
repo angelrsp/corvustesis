@@ -19,6 +19,7 @@ import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.PostulacionDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.SoftwareDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.SoftwareListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
 @Stateless
@@ -107,6 +108,18 @@ public class CandidatosServiceImpl implements CandidatosService {
 		}
 	}
 
+	@Override
+	public List<SoftwareListDTO> obtenerHerramientas(CandidatoDTO candidato)throws SilsaeException {
+		try {
+			return factoryDAO.getSoftwareDAOImpl().getAll(candidato);
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Herramientas {}", e.toString());
+			throw new SilsaeException("Error al obtener datos de Herramientas "+e.toString());
+
+		}
+	}
+
+	
 	@Override
 	public List<AvisoListDTO> verOfertas() throws SilsaeException
 	{

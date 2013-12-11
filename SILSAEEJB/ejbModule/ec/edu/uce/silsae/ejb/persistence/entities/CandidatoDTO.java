@@ -34,9 +34,12 @@ public class CandidatoDTO implements Serializable {
 	@Column(name="can_identificacion")
 	private String canIdentificacion;
 
-	@Column(name="can_nombres")
-	private String canNombres;
+	@Column(name="can_primer_nombre")
+	private String canPrimerNombre;
 
+	@Column(name="can_segundo_nombre")
+	private String canSegundoNombre;
+	
 	@Column(name="can_tipo_identificacion")
 	private Integer canTipoIdentificacion;
 
@@ -120,14 +123,22 @@ public class CandidatoDTO implements Serializable {
 		this.canIdentificacion = canIdentificacion;
 	}
 
-	public String getCanNombres() {
-		return this.canNombres;
+	public String getCanPrimerNombre() {
+		return this.canPrimerNombre;
 	}
 
-	public void setCanNombres(String canNombres) {
-		this.canNombres = canNombres;
+	public void setCanPrimerNombre(String canPrimerNombre) {
+		this.canPrimerNombre = canPrimerNombre;
 	}
 
+	public String getCanSegundoNombre() {
+		return this.canSegundoNombre;
+	}
+
+	public void setCanSegundoNombre(String canSegundoNombre) {
+		this.canSegundoNombre = canSegundoNombre;
+	}
+	
 	public Integer getCanTipoIdentificacion() {
 		return this.canTipoIdentificacion;
 	}
