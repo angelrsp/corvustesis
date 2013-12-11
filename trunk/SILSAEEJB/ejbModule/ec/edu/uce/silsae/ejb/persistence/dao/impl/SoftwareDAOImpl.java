@@ -5,12 +5,13 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
+import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.persistence.dao.SoftwareDAO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.SoftwareDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.SoftwareListDTO;
 
 public class SoftwareDAOImpl extends AbstractFacadeImpl<SoftwareDTO> implements SoftwareDAO{
 
@@ -23,17 +24,15 @@ public class SoftwareDAOImpl extends AbstractFacadeImpl<SoftwareDTO> implements 
 	}
 
 	@Override
-	public List<SoftwareDTO> getAll(CandidatoDTO candidato)
+	public List<SoftwareListDTO> getAll(CandidatoDTO candidato) throws SilsaeException
 	{
 		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-		CriteriaQuery<SoftwareDTO> cq=cb.createQuery(SoftwareDTO.class);
-		Root<SoftwareDTO> from = cq.from(SoftwareDTO.class);
+		CriteriaQuery<SoftwareListDTO> cq=cb.createQuery(SoftwareListDTO.class);
+		Root<SoftwareListDTO> from = cq.from(SoftwareListDTO.class);
 		
-		Path<CandidatoDTO> join=from.join("bemCandidato").get("canCodigo");
+		cq.where(cb.equal(from.get("proCandidato"), candidato.getCanCodigo()));
 		
-		cq.where(cb.and(cb.equal(join, candidato.getCanCodigo())));
-		
-		List<SoftwareDTO> list=entityManager.createQuery(cq).getResultList();
+		List<SoftwareListDTO> list=entityManager.createQuery(cq).getResultList();
 		
 		if(list.isEmpty())
 			return null;
