@@ -19,6 +19,7 @@ import ec.edu.uce.silsae.ejb.persistence.entities.EstudioListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.SoftwareDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.SoftwareListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 import ec.edu.uce.silsae.web.util.JsfUtil;
 
@@ -56,7 +57,7 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	
 	private List<EstudioListDTO> listEstudio;
 	private List<ExperienciaListDTO> listExperiencia;
-	private List<SoftwareDTO> listHerramientas;
+	private List<SoftwareListDTO> listHerramientas;
 	
 	public DatosCandidatoController()
 	{
@@ -75,7 +76,7 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		listEstudio=new ArrayList<EstudioListDTO>();
 		experiencia=new ExperienciaDTO();
 		listExperiencia=new ArrayList<ExperienciaListDTO>();
-		listHerramientas=new ArrayList<SoftwareDTO>();
+		listHerramientas=new ArrayList<SoftwareListDTO>();
 		herramientas=new SoftwareDTO();
 	}
 	
@@ -230,7 +231,8 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		this.herramientas = herramientas;
 	}
 
-	public List<SoftwareDTO> getListHerramientas() {
+	public List<SoftwareListDTO> getListHerramientas() throws SilsaeException {
+		this.listHerramientas=candidatosService.obtenerHerramientas(candidato);
 		return listHerramientas;
 	}
 
@@ -284,7 +286,7 @@ public class DatosCandidatoController extends SelectItemController implements Se
 
 	private void resetExperiencia()
 	{
-		setExperiencia(null);
+		setTipoExperiencia(null);
 		experiencia=new ExperienciaDTO();
 	}
 	
@@ -295,6 +297,7 @@ public class DatosCandidatoController extends SelectItemController implements Se
 			herramientas.setProNivel(Integer.valueOf(nivelPrograma.toString()));
 			herramientas.setProPrograma(Integer.valueOf(programa.toString()));
 			candidatosService.agregarHerramientas(herramientas);
+			getHerramientas();
 			resetHerramientas();	
 		} catch (Exception e) {
 			JsfUtil.addErrorMessage(e.getMessage());
@@ -303,7 +306,8 @@ public class DatosCandidatoController extends SelectItemController implements Se
 
 	private void resetHerramientas()
 	{
-		setHerramientas(null);
+		setNivelPrograma(null);
+		setPrograma(null);
 		herramientas=new SoftwareDTO();
 	}
 }
