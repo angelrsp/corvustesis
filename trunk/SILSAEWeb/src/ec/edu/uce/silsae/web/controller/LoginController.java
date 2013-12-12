@@ -78,6 +78,25 @@ public class LoginController implements Serializable {
 		}		
 	}
 
+	
+	public void iniciarSessionAdmin()
+	{
+		try {
+			UsuarioDTO user = loginService.autenticarUsuario(credencialesDTO);
+			if (user != null) {
+				JsfUtil.addInfoMessage("bien");
+				JsfUtil.putObject("UsuarioDTO",user);
+				JsfUtil.redirect("inicio.jsf");
+			} else {
+				JsfUtil.addErrorMessage("Datos Tncorrectos");
+			}
+		} catch (IOException e) {
+			JsfUtil.addErrorMessage("mal");
+		} catch (SilsaeException e) {
+			JsfUtil.addErrorMessage("mal");
+		}		
+	}
+	
 	public CredencialesDTO getCredencialesDTO() {
 		return credencialesDTO;
 	}
