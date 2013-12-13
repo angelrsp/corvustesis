@@ -17,7 +17,10 @@ import ec.edu.uce.silsae.ejb.persistence.entities.EstudioDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EstudioListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaListDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.IdiomaDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.IdiomaListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.PostulacionDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.ReferenciaDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.SoftwareDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.SoftwareListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
@@ -85,6 +88,28 @@ public class CandidatosServiceImpl implements CandidatosService {
 		}
 	}
  
+	@Override
+	public void agregarIdioma(IdiomaDTO idioma) throws SilsaeException {
+		log.info("agregarHerramientas");
+
+		try {factoryDAO.getIdiomaDAOImpl().create(idioma);
+		} catch (Exception e) {
+			log.info("Error al registrar el Candidato {}", e.toString());
+			throw new SilsaeException("Error al registrar el Candidato");
+		}
+	}
+	
+	@Override
+	public void agregarReferencia(ReferenciaDTO referencia) throws SilsaeException {
+		log.info("agregarHerramientas");
+
+		try {
+			factoryDAO.getReferenciaDAOImpl().create(referencia);
+		} catch (Exception e) {
+			log.info("Error al registrar el Candidato {}", e.toString());
+			throw new SilsaeException("Error al registrar el Candidato");
+		}
+	}
 	
 	@Override
 	public List<EstudioListDTO> obtenerEstudio(CandidatoDTO candidato)throws SilsaeException {
@@ -112,6 +137,29 @@ public class CandidatosServiceImpl implements CandidatosService {
 	public List<SoftwareListDTO> obtenerHerramientas(CandidatoDTO candidato)throws SilsaeException {
 		try {
 			return factoryDAO.getSoftwareDAOImpl().getAll(candidato);
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Herramientas {}", e.toString());
+			throw new SilsaeException("Error al obtener datos de Herramientas "+e.toString());
+
+		}
+	}
+
+	
+	@Override
+	public List<IdiomaListDTO> obtenerIdioma(CandidatoDTO candidato)throws SilsaeException {
+		try {
+			return factoryDAO.getIdiomaDAOImpl().getAll(candidato);
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Herramientas {}", e.toString());
+			throw new SilsaeException("Error al obtener datos de Herramientas "+e.toString());
+
+		}
+	}
+
+	@Override
+	public List<ReferenciaDTO> obtenerReferencia(CandidatoDTO candidato)throws SilsaeException {
+		try {
+			return factoryDAO.getReferenciaDAOImpl().getAll(candidato);
 		} catch (Exception e) {
 			log.info("Error al obtener datos de Herramientas {}", e.toString());
 			throw new SilsaeException("Error al obtener datos de Herramientas "+e.toString());
