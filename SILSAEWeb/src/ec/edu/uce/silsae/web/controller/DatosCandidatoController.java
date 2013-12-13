@@ -18,6 +18,9 @@ import ec.edu.uce.silsae.ejb.persistence.entities.EstudioDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EstudioListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaListDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.IdiomaDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.IdiomaListDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.ReferenciaDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.SoftwareDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.SoftwareListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
@@ -40,6 +43,8 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	private EstudioDTO estudio;
 	private ExperienciaDTO experiencia;
 	private SoftwareDTO herramientas;
+	private IdiomaDTO idioma;
+	private ReferenciaDTO referencia;
 	
 	private Object tipoDocumento;
 	private Object nivelEstudio;
@@ -51,6 +56,8 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	private Object mesInicio;
 	private Object mesFin;
 	private Object tipoExperiencia;
+	private Object idiomaObj;
+	private Object nivelIdioma;
 	
 	private Date fechaInicioExp;
 	private Date fechaFinExp;
@@ -58,6 +65,8 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	private List<EstudioListDTO> listEstudio;
 	private List<ExperienciaListDTO> listExperiencia;
 	private List<SoftwareListDTO> listHerramientas;
+	private List<IdiomaListDTO> listIdioma;
+	private List<ReferenciaDTO> listReferencia;
 	
 	public DatosCandidatoController()
 	{
@@ -78,6 +87,10 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		listExperiencia=new ArrayList<ExperienciaListDTO>();
 		listHerramientas=new ArrayList<SoftwareListDTO>();
 		herramientas=new SoftwareDTO();
+		idioma=new IdiomaDTO();
+		referencia=new ReferenciaDTO();
+		listIdioma=new ArrayList<IdiomaListDTO>();
+		listReferencia=new ArrayList<ReferenciaDTO>();
 	}
 	
 	public UsuarioDTO getUser() {
@@ -236,6 +249,48 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		return listHerramientas;
 	}
 
+	public IdiomaDTO getIdioma() {
+		return idioma;
+	}
+
+	public void setIdioma(IdiomaDTO idioma) {
+		this.idioma = idioma;
+	}
+
+	public ReferenciaDTO getReferencia() {
+		return referencia;
+	}
+
+	public void setReferencia(ReferenciaDTO referencia) {
+		this.referencia = referencia;
+	}
+
+	public Object getIdiomaObj() {
+		return idiomaObj;
+	}
+
+	public void setIdiomaObj(Object idiomaObj) {
+		this.idiomaObj = idiomaObj;
+	}
+
+	public Object getNivelIdioma() {
+		return nivelIdioma;
+	}
+
+	public void setNivelIdioma(Object nivelIdioma) {
+		this.nivelIdioma = nivelIdioma;
+	}
+
+	public List<IdiomaListDTO> getListIdioma() throws SilsaeException {
+		this.listIdioma=candidatosService.obtenerIdioma(candidato);
+		return listIdioma;
+	}
+
+	public List<ReferenciaDTO> getListReferencia() throws SilsaeException {
+		listReferencia=candidatosService.obtenerReferencia(candidato);
+		return listReferencia;
+	}
+
 	public void agregarEstudio()
 	{
 		try {
@@ -297,7 +352,7 @@ public class DatosCandidatoController extends SelectItemController implements Se
 			herramientas.setProNivel(Integer.valueOf(nivelPrograma.toString()));
 			herramientas.setProPrograma(Integer.valueOf(programa.toString()));
 			candidatosService.agregarHerramientas(herramientas);
-			getHerramientas();
+			getListHerramientas();
 			resetHerramientas();	
 		} catch (Exception e) {
 			JsfUtil.addErrorMessage(e.getMessage());
@@ -309,5 +364,43 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		setNivelPrograma(null);
 		setPrograma(null);
 		herramientas=new SoftwareDTO();
+	}
+	
+	public void agregarIdioma()
+	{
+		try{
+			idioma.setBemCandidato(candidato);
+			idioma.setIdiIdioma(Integer.valueOf(idiomaObj.toString()));
+			idioma.setIdiNivel(Integer.valueOf(nivelIdioma.toString()));
+			candidatosService.agregarIdioma(idioma);
+			getListIdioma();
+			resetIdioma();	
+		} catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
+	private void resetIdioma()
+	{
+		setNivelIdioma(null);;
+		setIdiomaObj(null);
+		idioma=new IdiomaDTO();
+	}
+	public void agregarReferencia()
+	{
+		try{
+			referencia.setBemCandidato(candidato);
+			candidatosService.agregarReferencia(referencia);
+			getListReferencia();
+			resetReferencia();	
+		} catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
+	private void resetReferencia()
+	{
+		setReferencia(null);
+		referencia=new ReferenciaDTO();
 	}
 }
