@@ -3,13 +3,20 @@ package ec.edu.uce.silsae.web.controller;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.StreamedContent;
+import org.primefaces.model.UploadedFile;
 
 import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.negocio.CandidatosService;
@@ -58,6 +65,7 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	private Object tipoExperiencia;
 	private Object idiomaObj;
 	private Object nivelIdioma;
+	private Object estadoCivil;
 	
 	private Date fechaInicioExp;
 	private Date fechaFinExp;
@@ -67,6 +75,15 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	private List<SoftwareListDTO> listHerramientas;
 	private List<IdiomaListDTO> listIdioma;
 	private List<ReferenciaDTO> listReferencia;
+	
+	private UploadedFile uploadedFile;
+	
+	private Date fechaNacimiento;
+	private Date fechaMaximo;
+	
+	
+	private StreamedContent foto;
+	
 	
 	public DatosCandidatoController()
 	{
@@ -91,6 +108,12 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		referencia=new ReferenciaDTO();
 		listIdioma=new ArrayList<IdiomaListDTO>();
 		listReferencia=new ArrayList<ReferenciaDTO>();
+		
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.YEAR, -18); // to get previous year add -1
+		fechaMaximo = cal.getTime();
+		
+		estadoCivil=candidato.getCanEstadoCivil();
 	}
 	
 	public UsuarioDTO getUser() {
@@ -291,6 +314,41 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		return listReferencia;
 	}
 
+	public UploadedFile getUploadedFile() {
+		return uploadedFile;
+	}
+
+	public void setUploadedFile(UploadedFile uploadedFile) {
+		this.uploadedFile = uploadedFile;
+	}
+
+	public Date getFechaNacimiento() {
+		this.fechaNacimiento=candidato.getCanFechaNacimiento();
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public Date getFechaMaximo() {
+		return fechaMaximo;
+	}
+
+	public StreamedContent getFoto() {
+		
+		//foto = new DefaultStreamedContent(new ByteArrayInputStream(candidato.getCanFoto()) , "image/jpeg");
+		return foto;
+	}
+
+	public Object getEstadoCivil() {
+		return estadoCivil;
+	}
+
+	public void setEstadoCivil(Object estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
+
 	public void agregarEstudio()
 	{
 		try {
@@ -403,4 +461,39 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		setReferencia(null);
 		referencia=new ReferenciaDTO();
 	}
+	
+	
+	public void actualizar()
+	{
+		try {
+			candidato.setBemUsuario(user);
+			candidato.setCanFechaNacimiento(new Timestamp(fechaNacimiento.getTime()));
+			//candidato.setCanFoto(uploadedFile.getContents());
+			candidato.setCanEstadoCivil(Integer.valueOf(estadoCivil.toString()));
+			candidatosService.actualizarCandidato(candidato);
+			JsfUtil.addInfoMessage("Datos Actulizados Exitosamente");
+		} catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+	
+	public void subirImagen()
+	{
+		//candidato.setCanFoto(uploadedFile.getContents());
+	    if(uploadedFile != null) {  
+            FacesMessage msg = new FacesMessage("Succesful", uploadedFile.getFileName() + " is uploaded.");  
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+	    }
+	    else
+	    {
+            FacesMessage msg = new FacesMessage("Succesful", "No subio");  
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+	    	
+	    }
+	}
+	
+	  public void handleFileUpload(FileUploadEvent event) {  
+	        FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");  
+	        FacesContext.getCurrentInstance().addMessage(null, msg);  
+	    }
 }
