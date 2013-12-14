@@ -56,4 +56,7 @@ public interface CandidatosService {
 
 	List<ReferenciaDTO> obtenerReferencia(CandidatoDTO candidato)
 			throws SilsaeException;
+
+	CandidatoDTO actualizarCandidato(CandidatoDTO candidatoDTO)
+			throws SilsaeException;
 }

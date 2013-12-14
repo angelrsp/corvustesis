@@ -51,6 +51,23 @@ public class CandidatosServiceImpl implements CandidatosService {
 
 	}
 
+	
+	@Override
+	public CandidatoDTO actualizarCandidato(CandidatoDTO candidatoDTO)throws SilsaeException {
+
+		log.info("registrarCandidato");
+
+		try {
+			return factoryDAO.getCandidatoDAOImpl().edit(candidatoDTO);
+		} catch (Exception e) {
+			log.info("Error al registrar el Candidato {}", e.toString());
+			throw new SilsaeException("Error al registrar el Candidato");
+		}
+
+	}
+
+	
+	
 	@Override
 	public void agregarEstudio(EstudioDTO estudio) throws SilsaeException {
 		log.info("agregarEstudio");
