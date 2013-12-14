@@ -10,11 +10,26 @@
 
 	<ui:composition template="/template/candidato.xhtml">
 		<ui:define name="contenido">
+		
+<!-- 		<h:form enctype="multipart/form-data"> -->
+<!-- 			<p:messages showDetail="true"/> -->
+<!--   			<p:fileUpload mode="simple" value="#{datosCandidatoController.uploadedFile}"/> -->
+<!-- 			<p:commandButton value="Upload" ajax="false" actionListener="#{datosCandidatoController.subirImagen}" /> -->
+<!-- 		</h:form> -->
+		
+		
+		
 			<fieldset>
 				<p:growl id="growl" showDetail="true" />
-				<p:panel styleClass="tabla"
+				<p:panel id="pnlDatos" styleClass="tabla"
 					header="#{i18n['label.titulo.pantalla.dato.datos']}">
 					<table>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.foto']}:&#160;" /> </td>	
+						</tr>					
+						<tr>
+							<td colspan="3"><p:graphicImage value="#{datosCandidatoController.foto}" height="150" /></td>	
+						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.tipo.documento']}:&#160;" /> </td>
 								<td>
@@ -51,10 +66,42 @@
 							<td colspan="3"><p:inputText style="width : 90%;" required="true"
 									requiredMessage="#{i18n['label.contrasenia']}&#160;#{i18n['label.requerido']}"
 									value="#{datosCandidatoController.user.usuMail}"/></td>
+									
 						</tr>
+
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.estado.civil']}:&#160;" /> </td>
+							<td>	<p:selectOneMenu value="#{datosCandidatoController.estadoCivil}" required="true" requiredMessage="#{i18n['label.estado.civil']}:&#160;#{i18n['label.requerido']}">
+										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+										<f:selectItems value="#{datosCandidatoController.catalogoEstadoCivil}"/>										
+									</p:selectOneMenu></td>
+						</tr>
+
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.fecha.nacimiento']}:&#160;" /> </td>
+							<td><p:calendar value="#{datosCandidatoController.fechaNacimiento}" navigator="true" requiredMessage="#{i18n['label.fecha.nacimiento']}:&#160;#{i18n['label.requerido']}" pattern="#{i18n['pattern.fecha']}" required="true" maxdate="#{datosCandidatoController.fechaMaximo}" placeholder="AAAA/MM/DD"></p:calendar></td>
+							
+							<td><h:outputLabel value="#{i18n['label.lugar.nacimiento']}:&#160;" /> </td>
+							<td><p:inputText value="#{datosCandidatoController.candidato.canLugarNacimiento}" requiredMessage="#{i18n['label.lugar.nacimiento']}:&#160;#{i18n['label.requerido']}" required="true"></p:inputText></td>
+						</tr>
+
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.direccion.domicilio']}:&#160;" /> </td>
+							<td><p:inputText value="#{datosCandidatoController.user.usuDireccion}" requiredMessage="#{i18n['label.direccion.domicilio']}:&#160;#{i18n['label.requerido']}" required="true"></p:inputText></td>														
+						</tr>
+
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.telefono.convencional']}:&#160;" /> </td>
+							<td><p:inputText value="#{datosCandidatoController.user.usuTelefono}" requiredMessage="#{i18n['label.telefono.convencional']}:&#160;#{i18n['label.requerido']}" required="true"></p:inputText></td>
+
+							<td><h:outputLabel value="#{i18n['label.telefono.celular']}:&#160;" /> </td>
+							<td><p:inputText value="#{datosCandidatoController.user.usuCelular}" requiredMessage="#{i18n['label.telefono.celular']}:&#160;#{i18n['label.requerido']}" required="true"></p:inputText></td>														
+						</tr>
+
+						
 						<tr>
 							<td colspan="4" align="center">
-								<p:commandButton value="#{i18n['boton.actualizar']}"/> </td>
+								<p:commandButton actionListener="#{datosCandidatoController.actualizar}" value="#{i18n['boton.actualizar']}" process="pnlDatos" update="growl,pnlDatos" /> </td>
 						</tr>
 					</table>
 				</p:panel>
@@ -343,6 +390,31 @@
 				</p:panel>
 
 			</fieldset>
+			
+			
+	<script type="text/javascript">
+	//<![CDATA[
+// 		function readPicture(input, output)
+// 		{
+// 		    if (input.files && input.files[0])
+// 		    {
+// 		       var reader = new FileReader();
+// 		       reader.onload = function(e)
+// 		       {
+// 		           output.attr('src', e.target.result);
+// 		       };
+// 		       reader.readAsDataURL(input.files[0]);
+// 		   }
+// 		}
+
+// 		$("[id='#{upload.clientId}']").change(
+// 		    function()
+// 		    {
+// 		        readPicture(this, $("[id='#{image.clientId}']"));
+// 		    });
+		//]]>
+	</script>
+			
 		</ui:define>
 	</ui:composition>
 
