@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -39,10 +40,20 @@ public class CandidatoDTO implements Serializable {
 
 	@Column(name="can_segundo_nombre")
 	private String canSegundoNombre;
-	
+
 	@Column(name="can_tipo_identificacion")
 	private Integer canTipoIdentificacion;
+	
+	@Column(name="can_fecha_nacimiento")
+	private Timestamp canFechaNacimiento;
 
+	@Column(name="can_lugar_nacimiento")
+	private String canLugarNacimiento;
+	
+	@Column(name="can_estado_civil")
+	private Integer canEstadoCivil;
+	
+	
 	//bi-directional many-to-one association to UsuarioDTO
     @ManyToOne (cascade = CascadeType.ALL)
 	@JoinColumn(name="can_usuario")
@@ -201,6 +212,42 @@ public class CandidatoDTO implements Serializable {
 
 	public void setBemSoftwares(List<SoftwareDTO> bemSoftwares) {
 		this.bemSoftwares = bemSoftwares;
+	}
+
+
+
+	public Timestamp getCanFechaNacimiento() {
+		return canFechaNacimiento;
+	}
+
+
+
+	public void setCanFechaNacimiento(Timestamp canFechaNacimiento) {
+		this.canFechaNacimiento = canFechaNacimiento;
+	}
+
+
+
+	public String getCanLugarNacimiento() {
+		return canLugarNacimiento;
+	}
+
+
+
+	public void setCanLugarNacimiento(String canLugarNacimiento) {
+		this.canLugarNacimiento = canLugarNacimiento;
+	}
+
+
+
+	public Integer getCanEstadoCivil() {
+		return canEstadoCivil;
+	}
+
+
+
+	public void setCanEstadoCivil(Integer canEstadoCivil) {
+		this.canEstadoCivil = canEstadoCivil;
 	}
 	
 }
