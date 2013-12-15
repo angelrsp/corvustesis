@@ -9,6 +9,7 @@ import ec.edu.uce.silsae.ejb.persistence.entities.AvisoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.AvisoListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EmpresaDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.PostulacionListDTO;
 
 @Local
 public interface EmpresaService {
@@ -23,5 +24,8 @@ public interface EmpresaService {
 			throws SilsaeException;
 
 	ContactoDTO agregarContacto(ContactoDTO contacto) throws SilsaeException;
+
+	List<PostulacionListDTO> obtenerPostulacion(EmpresaDTO empresa)
+			throws SilsaeException;
 
 }
