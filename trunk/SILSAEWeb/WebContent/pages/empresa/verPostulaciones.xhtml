@@ -2,13 +2,41 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <h:head></h:head>
 <body>
 	<ui:composition template="/template/empresa.xhtml">
 		<ui:define name="contenido">
 			<fieldset>
+			
+			<p:dataTable value="#{verPostulacionController.postulacionList}" var="pos">
+			
+				<p:column headerText="#{i18n['label.puesto']}">
+					<h:outputText value="#{pos.catPuesto}" />
+				</p:column>			
+
+				<p:column headerText="#{i18n['label.remuneracion']}">
+					<h:outputText value="#{pos.aviRemuneracion}" />
+				</p:column>			
+
+				<p:column headerText="#{i18n['label.fecha.caducidad']}">
+					<h:outputText value="#{fn:substring(pos.aviFechaCaducidad,0,10)}" />
+				</p:column>			
+
+				<p:column headerText="#{i18n['label.nombres']}">
+					<h:outputText value="#{pos.canApellidoPaterno} #{pos.canApellidoMaterno} #{pos.canNombres}" />
+				</p:column>			
+
+				<p:column headerText="#{i18n['label.ci.pasaporte']}">
+					<h:outputText value="#{pos.canIdentificacion}" />
+				</p:column>			
+
+			
+			</p:dataTable>
+			
 			
 			</fieldset>
 		</ui:define>
