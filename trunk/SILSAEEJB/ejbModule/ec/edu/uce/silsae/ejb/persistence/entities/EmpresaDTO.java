@@ -38,6 +38,9 @@ public class EmpresaDTO implements Serializable {
 	@Column(name="emp_web")
 	private String empWeb;
 
+	@Column(name="emp_activa")
+	private Boolean empActiva;
+
 	//bi-directional many-to-one association to AvisoDTO
 	@OneToMany(mappedBy="bemEmpresa")
 	private List<AvisoDTO> bemAvisos;
@@ -108,6 +111,14 @@ public class EmpresaDTO implements Serializable {
 
 	public void setEmpWeb(String empWeb) {
 		this.empWeb = empWeb;
+	}
+
+	public Boolean getEmpActiva() {
+		return empActiva;
+	}
+
+	public void setEmpActiva(Boolean empActiva) {
+		this.empActiva = empActiva;
 	}
 
 	public List<AvisoDTO> getBemAvisos() {

@@ -15,6 +15,7 @@ import ec.edu.uce.silsae.ejb.persistence.entities.AvisoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.AvisoListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EmpresaDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.PostulacionListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
 @Stateless
@@ -83,5 +84,17 @@ public class EmpresaServiceImpl implements EmpresaService {
 			throw new SilsaeException("Error al registrar Aviso");
 		}				
 	}
+
+	@Override
+	public List<PostulacionListDTO> obtenerPostulacion(EmpresaDTO empresa) throws SilsaeException
+	{
+		try {
+			return factoryDAO.getPostulacionDAOImpl().getAll(empresa);
+		} catch (Exception e) {
+			log.info("Error al registrar Aviso {}", e.toString());
+			throw new SilsaeException("Error al registrar Aviso");
+		}				
+	}
+
 	
 }

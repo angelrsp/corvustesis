@@ -60,6 +60,9 @@ public class PostulacionListDTO implements Serializable {
 	@Column(name="can_usuario")
 	private Integer canUsuario;
 
+	@Column(name="cat_puesto")
+	private String catPuesto;
+
 	@Column(name="emp_codigo")
 	private Integer empCodigo;
 
@@ -215,6 +218,14 @@ public class PostulacionListDTO implements Serializable {
 
 	public void setCanUsuario(Integer canUsuario) {
 		this.canUsuario = canUsuario;
+	}
+
+	public String getCatPuesto() {
+		return this.catPuesto;
+	}
+
+	public void setCatPuesto(String catPuesto) {
+		this.catPuesto = catPuesto;
 	}
 
 	public Integer getEmpCodigo() {
