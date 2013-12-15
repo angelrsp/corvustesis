@@ -13,6 +13,7 @@ import ec.edu.uce.silsae.ejb.negocio.EmpresaService;
 import ec.edu.uce.silsae.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.silsae.ejb.persistence.entities.AvisoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.AvisoListDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EmpresaDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
@@ -29,8 +30,7 @@ public class EmpresaServiceImpl implements EmpresaService {
 	public EmpresaDTO registrarEmpresa(EmpresaDTO empresa)
 			throws SilsaeException {
 		try {
-			UsuarioDTO user=new UsuarioDTO();
-			user=empresa.getBemUsuario();
+			UsuarioDTO user=empresa.getBemUsuario();
 			user.setBemPerfil(factoryDAO.getPerfilDAOImpl().find(2));
 			user.setUsuLogin(user.getUsuMail());
 			return factoryDAO.getEmpresaDAOImpl().create(empresa);
@@ -62,5 +62,26 @@ public class EmpresaServiceImpl implements EmpresaService {
 		}				
 	}
 	
+	@Override
+	public ContactoDTO agregarContacto(ContactoDTO contacto) throws SilsaeException
+	{
+		try {
+		return factoryDAO.getContactoDAOImpl().create(contacto);
+		} catch (Exception e) {
+			log.info("Error al registrar Aviso {}", e.toString());
+			throw new SilsaeException("Error al registrar Aviso");
+		}		
+	}
+	
+	@Override
+	public List<ContactoDTO> obtenerContactos(EmpresaDTO empresa) throws SilsaeException
+	{
+		try {
+			return factoryDAO.getContactoDAOImpl().getAll(empresa);
+		} catch (Exception e) {
+			log.info("Error al registrar Aviso {}", e.toString());
+			throw new SilsaeException("Error al registrar Aviso");
+		}				
+	}
 	
 }

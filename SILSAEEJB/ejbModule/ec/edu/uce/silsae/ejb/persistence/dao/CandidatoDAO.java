@@ -7,4 +7,5 @@ import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDTO;
 @Local
 public interface CandidatoDAO extends AbstractFacade<CandidatoDTO>{
 
+
 }

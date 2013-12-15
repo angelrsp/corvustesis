@@ -24,6 +24,7 @@
 		<class>ec.edu.uce.silsae.ejb.persistence.entities.AvisoListDTO</class>
 		<class>ec.edu.uce.silsae.ejb.persistence.entities.SoftwareListDTO</class>
 		<class>ec.edu.uce.silsae.ejb.persistence.entities.IdiomaListDTO</class>
+		<class>ec.edu.uce.silsae.ejb.persistence.entities.PostulacionListDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>

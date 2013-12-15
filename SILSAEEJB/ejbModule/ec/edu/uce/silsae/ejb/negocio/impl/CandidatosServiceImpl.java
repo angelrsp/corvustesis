@@ -40,9 +40,9 @@ public class CandidatosServiceImpl implements CandidatosService {
 		log.info("registrarCandidato");
 
 		try {
-
-			UsuarioDTO user = new UsuarioDTO();
+			UsuarioDTO user = candidatoDTO.getBemUsuario();
 			user.setBemPerfil(factoryDAO.getPerfilDAOImpl().find(1));
+			candidatoDTO.setBemUsuario(user);
 			return factoryDAO.getCandidatoDAOImpl().create(candidatoDTO);
 		} catch (Exception e) {
 			log.info("Error al registrar el Candidato {}", e.toString());
