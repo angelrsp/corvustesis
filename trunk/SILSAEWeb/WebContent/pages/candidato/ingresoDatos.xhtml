@@ -23,7 +23,7 @@
 							<td><h:outputLabel value="#{i18n['label.ci.pasaporte']}:&#160;" /> </td>
 							<td><p:inputText required="true"
 									requiredMessage="#{i18n['label.ci.pasaporte']}&#160;#{i18n['label.requerido']}"
-									value="#{registroCandidatoController.candidatoRegistro.canIdentificacion}" onkeypress="return isNumberKey(event);"/></td>
+									value="#{registroCandidatoController.candidatoRegistro.canIdentificacion}" onkeypress="return isNumberKey(event);" maxlength="15"/></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.apellido.paterno']}:&#160;" /> </td>
