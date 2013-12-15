@@ -39,17 +39,30 @@
 
 						</tr>
 						<tr>
-							<td><h:outputLabel value="#{i18n['label.ubicacion']}:&#160;" />
-							</td>
+							<td><h:outputLabel value="#{i18n['label.telefono.convencional']}:&#160;" /></td>
+							<td><p:inputText value="#{registroEmpresaController.usuarioRegistro.usuTelefono}" /></td>
+
+							<td><h:outputLabel value="#{i18n['label.telefono.celular']}:&#160;" /></td>
+							<td><p:inputText value="#{registroEmpresaController.usuarioRegistro.usuCelular}" /></td>							
+														
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.ubicacion']}:&#160;" /></td>
 							<td><p:selectOneMenu value="#{registroEmpresaController.ubicacion}">
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
 										itemValue="" />
 									<f:selectItems value="#{registroEmpresaController.catalogoUbicacion}"></f:selectItems>	
 								</p:selectOneMenu></td>
+								
+								<td><h:outputLabel value="#{i18n['label.direccion']}:&#160;" /></td>
+								<td><p:inputText value="#{registroEmpresaController.usuarioRegistro.usuDireccion}" /></td>
+																
+						</tr>		
+						<tr>		
 							<td><h:outputLabel value="#{i18n['label.web']}:&#160;" /></td>
-							<td><p:inputText /></td>
-
+							<td colspan="3"><p:inputText style="width : 90%;" value="#{registroEmpresaController.empresa.empWeb}" /></td>
 						</tr>
+						
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.email']}:&#160;" />
 							</td>

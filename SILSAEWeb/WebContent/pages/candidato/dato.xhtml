@@ -159,7 +159,8 @@
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="" />
 									<f:selectItems value="#{datosCandidatoController.catalogoMes}"/>
 								</p:selectOneMenu></td>
-							<td><p:commandButton value="#{i18n['boton.agregar']}" actionListener="#{datosCandidatoController.agregarEstudio}" process=":contenido:pnlEstudios" update=":contenido:pnlEstudios,:contenido:growl"></p:commandButton></td>
+							<td><p:commandButton value="#{i18n['boton.agregar']}" actionListener="#{datosCandidatoController.agregarEstudio}"
+							 		process=":contenido:pnlEstudios" update=":contenido:pnlEstudios,:contenido:growl"></p:commandButton></td>
 						</tr>
 					</table>
 					</p:tab>
