@@ -67,7 +67,7 @@ public class LoginController implements Serializable {
 			if (user != null) {
 				JsfUtil.addInfoMessage("bien");
 				JsfUtil.putObject("UsuarioDTO",user);
-				JsfUtil.redirect("inicioEmpresa.jsf");
+				JsfUtil.redirect("dato.jsf");
 			} else {
 				JsfUtil.addErrorMessage("Datos Tncorrectos");
 			}

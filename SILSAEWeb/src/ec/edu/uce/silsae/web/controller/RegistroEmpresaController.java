@@ -81,6 +81,8 @@ public class RegistroEmpresaController extends SelectItemController implements
 		log.info("Registrando Empresa");
 		try {
 			empresa.setBemUsuario(getUsuarioRegistro());
+			empresa.setEmpUbicacion(Integer.valueOf(ubicacion.toString()));
+			empresa.setEmpSector(Integer.valueOf(tipoEmpresa.toString()));
 			empresaService.registrarEmpresa(empresa);
 			JsfUtil.redirect("inicioEmpresa.jsf");
 		} catch (SilsaeException e) {
