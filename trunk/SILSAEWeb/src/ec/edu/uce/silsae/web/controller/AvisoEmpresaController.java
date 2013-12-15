@@ -98,13 +98,20 @@ public class AvisoEmpresaController extends SelectItemController implements Seri
 			aviso.setBemEmpresa(empresa);
 			aviso.setAviFechaCaducidad(new Timestamp(fecha.getTime()));
 			empresaService.registrarAviso(aviso);
-			JsfUtil.addInfoMessage("Guardado Exitosamente");
 			getAvisoList();
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
+			resetAviso();
 		}
 		catch(Exception e){
 			log.info("Error al registrar el Candidato {}", e.toString());
 			JsfUtil.addErrorMessage(e.toString());
 
 		}
+	}
+	
+	private void resetAviso()
+	{
+		aviso=new AvisoDTO();
+		setPuesto(null);
 	}
 }
