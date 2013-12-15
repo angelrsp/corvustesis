@@ -15,7 +15,26 @@
 
 			<fieldset>
 
-Aprobar
+			<p:dataTable value="#{aprobarEmpresaController.empresaList}" var="emp">
+			
+				<p:column headerText="#{i18n['label.razon.social']}">
+					<h:outputText value="#{emp.empNombreComercial}" />
+				</p:column>			
+
+				<p:column headerText="#{i18n['label.nombre.comercial']}">
+					<h:outputText value="#{emp.empNombreComercial}" />
+				</p:column>			
+
+				<p:column headerText="#{i18n['label.ruc']}">
+					<h:outputText value="#{emp.empRuc}" />
+				</p:column>			
+
+				<p:column headerText="#{i18n['label.activo']}">
+					<h:outputText value="#{emp.empActiva==true?'Si':'No'}" />
+				</p:column>			
+
+						
+			</p:dataTable>
 
 			</fieldset>
 		</ui:define>
