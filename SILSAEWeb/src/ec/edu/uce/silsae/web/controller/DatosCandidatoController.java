@@ -368,6 +368,23 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		}
 	}
 	
+	public void onRowDelEstudios(EstudioListDTO est)
+	{
+		try {
+			estudio=new EstudioDTO();
+			estudio.setEstCodigo(est.getEstCodigo());
+			candidatosService.eliminarEstudio(estudio);
+			estudio=new EstudioDTO();
+			getListEstudio();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (SilsaeException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+	
 	private void resetEstudio()
 	{
 		setAnioFin(null);
@@ -397,6 +414,23 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		}
 	}
 
+	public void onRowDelExperiencia(ExperienciaListDTO exp)
+	{
+		try {
+			experiencia=new ExperienciaDTO();
+			experiencia.setExpCodigo(exp.getExpCodigo());
+			candidatosService.eliminarExperiencia(experiencia);
+			experiencia=new ExperienciaDTO();
+			getListExperiencia();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (SilsaeException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+	
 	private void resetExperiencia()
 	{
 		setTipoExperiencia(null);
@@ -413,6 +447,23 @@ public class DatosCandidatoController extends SelectItemController implements Se
 			getListHerramientas();
 			resetHerramientas();	
 		} catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
+	public void onRowDelHerramientas(SoftwareListDTO soft)
+	{
+		try {
+			herramientas=new SoftwareDTO();
+			herramientas.setProCodigo(soft.getProCodigo());
+			candidatosService.eliminarHerramientas(herramientas);
+			herramientas=new SoftwareDTO();
+			getListHerramientas();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (SilsaeException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		catch (Exception e) {
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
 	}
@@ -438,12 +489,31 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		}
 	}
 
+	public void onRowDelIdioma(IdiomaListDTO idi)
+	{
+		try {
+			idioma=new IdiomaDTO();
+			idioma.setIdiCodigo(idi.getIdiCodigo());
+			candidatosService.eliminarIdioma(idioma);
+			idioma=new IdiomaDTO();
+			getListHerramientas();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (SilsaeException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
+	
 	private void resetIdioma()
 	{
 		setNivelIdioma(null);;
 		setIdiomaObj(null);
 		idioma=new IdiomaDTO();
 	}
+	
 	public void agregarReferencia()
 	{
 		try{
@@ -456,6 +526,20 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		}
 	}
 
+	public void onRowDelReferencia(ReferenciaDTO ref)
+	{
+		try {
+			candidatosService.eliminarReferencia(ref);
+			getListReferencia();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (SilsaeException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+	
 	private void resetReferencia()
 	{
 		setReferencia(null);
