@@ -59,4 +59,14 @@ public interface CandidatosService {
 
 	CandidatoDTO actualizarCandidato(CandidatoDTO candidatoDTO)
 			throws SilsaeException;
+
+	void eliminarEstudio(EstudioDTO estudio) throws SilsaeException;
+
+	void eliminarExperiencia(ExperienciaDTO experiencia) throws SilsaeException;
+
+	void eliminarHerramientas(SoftwareDTO software) throws SilsaeException;
+
+	void eliminarIdioma(IdiomaDTO idioma) throws SilsaeException;
+
+	void eliminarReferencia(ReferenciaDTO referencia) throws SilsaeException;
 }

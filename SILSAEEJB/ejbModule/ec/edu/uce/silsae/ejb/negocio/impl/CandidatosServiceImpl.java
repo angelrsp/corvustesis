@@ -81,6 +81,18 @@ public class CandidatosServiceImpl implements CandidatosService {
 	}
 	
 	@Override
+	public void eliminarEstudio(EstudioDTO estudio) throws SilsaeException {
+		log.info("agregarEstudio");
+
+		try {
+			factoryDAO.getEstudioDAOImpl().remove(estudio);
+		} catch (Exception e) {
+			log.info("Error al registrar el Candidato {}", e.toString());
+			throw new SilsaeException("Error al registrar el Candidato");
+		}
+	}
+	
+	@Override
 	public void agregarExperiencia(ExperienciaDTO experiencia) throws SilsaeException {
 		log.info("agregarEstudio");
 
@@ -92,6 +104,17 @@ public class CandidatosServiceImpl implements CandidatosService {
 		}
 	}
 	
+	@Override
+	public void eliminarExperiencia(ExperienciaDTO experiencia) throws SilsaeException {
+		log.info("eliminarExperiencia");
+
+		try {
+			factoryDAO.getExperienciaDAOImpl().remove(experiencia);
+		} catch (Exception e) {
+			log.info("Error al registrar el Candidato {}", e.toString());
+			throw new SilsaeException("Error al registrar el Candidato");
+		}
+	}
 
 	@Override
 	public void agregarHerramientas(SoftwareDTO software) throws SilsaeException {
@@ -104,7 +127,20 @@ public class CandidatosServiceImpl implements CandidatosService {
 			throw new SilsaeException("Error al registrar el Candidato");
 		}
 	}
- 
+
+	@Override
+	public void eliminarHerramientas(SoftwareDTO software) throws SilsaeException {
+		log.info("eliminarHerramientas");
+
+		try {
+			factoryDAO.getSoftwareDAOImpl().remove(software);
+		} catch (Exception e) {
+			log.info("Error al registrar el Candidato {}", e.toString());
+			throw new SilsaeException("Error al registrar el Candidato");
+		}
+	}
+
+	
 	@Override
 	public void agregarIdioma(IdiomaDTO idioma) throws SilsaeException {
 		log.info("agregarHerramientas");
@@ -117,11 +153,34 @@ public class CandidatosServiceImpl implements CandidatosService {
 	}
 	
 	@Override
+	public void eliminarIdioma(IdiomaDTO idioma) throws SilsaeException {
+		log.info("eliminarIdioma");
+
+		try {factoryDAO.getIdiomaDAOImpl().remove(idioma);
+		} catch (Exception e) {
+			log.info("Error al registrar el Candidato {}", e.toString());
+			throw new SilsaeException("Error al registrar el Candidato");
+		}
+	}
+	
+	@Override
 	public void agregarReferencia(ReferenciaDTO referencia) throws SilsaeException {
 		log.info("agregarHerramientas");
 
 		try {
 			factoryDAO.getReferenciaDAOImpl().create(referencia);
+		} catch (Exception e) {
+			log.info("Error al registrar el Candidato {}", e.toString());
+			throw new SilsaeException("Error al registrar el Candidato");
+		}
+	}
+	
+	@Override
+	public void eliminarReferencia(ReferenciaDTO referencia) throws SilsaeException {
+		log.info("eliminarReferencia");
+
+		try {
+			factoryDAO.getReferenciaDAOImpl().remove(referencia);
 		} catch (Exception e) {
 			log.info("Error al registrar el Candidato {}", e.toString());
 			throw new SilsaeException("Error al registrar el Candidato");
