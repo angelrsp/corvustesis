@@ -14,5 +14,8 @@ public class CandidatoDAOImpl extends AbstractFacadeImpl<CandidatoDTO> implement
 	public CandidatoDAOImpl (EntityManager entityManager) {
 		super(entityManager);
 	}
+
 	
+	
+
 }

@@ -1,8 +1,16 @@
 package ec.edu.uce.silsae.ejb.persistence.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 
 /**
@@ -35,9 +43,9 @@ public class ContactoDTO implements Serializable {
 	@Column(name="con_telefono")
 	private String conTelefono;
 
-	//bi-directional many-to-one association to EmpresaDTO
-	@OneToMany(mappedBy="bemContacto")
-	private List<EmpresaDTO> bemEmpresas;
+    @ManyToOne
+	@JoinColumn(name="con_empresa")
+	private EmpresaDTO bemEmpresa;
 
     public ContactoDTO() {
     }
@@ -90,12 +98,12 @@ public class ContactoDTO implements Serializable {
 		this.conTelefono = conTelefono;
 	}
 
-	public List<EmpresaDTO> getBemEmpresas() {
-		return this.bemEmpresas;
+	public EmpresaDTO getBemEmpresa() {
+		return bemEmpresa;
 	}
 
-	public void setBemEmpresas(List<EmpresaDTO> bemEmpresas) {
-		this.bemEmpresas = bemEmpresas;
+	public void setBemEmpresa(EmpresaDTO bemEmpresa) {
+		this.bemEmpresa = bemEmpresa;
 	}
 	
 }

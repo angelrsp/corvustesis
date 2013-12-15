@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import ec.edu.uce.silsae.ejb.persistence.dao.AvisoDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.CandidatoDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.CatalogoDAO;
+import ec.edu.uce.silsae.ejb.persistence.dao.ContactoDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.EmpresaDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.EstudioDAO;
 import ec.edu.uce.silsae.ejb.persistence.dao.ExperienciaDAO;
@@ -47,6 +48,8 @@ public class FactoryDAOImpl implements FactoryDAO {
 	private EmpresaDAO empresaDAO;
 	
 	private PostulacionDAO postulacionDAO;
+	
+	private ContactoDAO contactoDAO;
 
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -144,4 +147,11 @@ public class FactoryDAOImpl implements FactoryDAO {
 		return postulacionDAO;
 	}
 
+	@Override
+	public ContactoDAO getContactoDAOImpl() {
+		if (contactoDAO == null) {
+			contactoDAO = new ContactoDAOImpl(entityManager);
+		}
+		return contactoDAO;
+	}
 }

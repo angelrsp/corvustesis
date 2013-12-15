@@ -48,9 +48,8 @@ public class EmpresaDTO implements Serializable {
 	private UsuarioDTO bemUsuario;
 
 	//bi-directional many-to-one association to ContactoDTO
-    @ManyToOne
-	@JoinColumn(name="emp_contacto")
-	private ContactoDTO bemContacto;
+    @OneToMany(mappedBy="bemEmpresa")
+	private List<ContactoDTO> bemContactos;
 
     public EmpresaDTO() {
     }
@@ -127,12 +126,12 @@ public class EmpresaDTO implements Serializable {
 		this.bemUsuario = bemUsuario;
 	}
 	
-	public ContactoDTO getBemContacto() {
-		return this.bemContacto;
+	public List<ContactoDTO> getBemContactos() {
+		return bemContactos;
 	}
 
-	public void setBemContacto(ContactoDTO bemContacto) {
-		this.bemContacto = bemContacto;
+	public void setBemContactos(List<ContactoDTO> bemContactos) {
+		this.bemContactos = bemContactos;
 	}
 	
 }
