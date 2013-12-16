@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.servlet.http.HttpSession;
 
 import ec.edu.uce.silsae.commons.dto.util.CredencialesDTO;
 import ec.edu.uce.silsae.commons.util.SilsaeException;
@@ -65,9 +66,15 @@ public class LoginController implements Serializable {
 		try {
 			UsuarioDTO user = loginService.autenticarUsuario(credencialesDTO);
 			if (user != null) {
-				JsfUtil.addInfoMessage("bien");
-				JsfUtil.putObject("UsuarioDTO",user);
-				JsfUtil.redirect("dato.jsf");
+				if(user.getBemEmpresas().get(0).getEmpActiva()){
+					JsfUtil.addInfoMessage("bien");
+					JsfUtil.putObject("UsuarioDTO",user);
+					JsfUtil.redirect("dato.jsf");
+				}
+				else
+				{
+					JsfUtil.addErrorMessage("Empresa no Autorizada para ingresar.");
+				}
 			} else {
 				JsfUtil.addErrorMessage("Datos Tncorrectos");
 			}
@@ -105,4 +112,14 @@ public class LoginController implements Serializable {
 		this.credencialesDTO = credencialesDTO;
 	}
 
+	public void logout()
+	{
+	      try {
+			HttpSession session = JsfUtil.getSession();
+		      session.invalidate();
+			JsfUtil.redirect("/SILSAEWeb/index.jsf");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
