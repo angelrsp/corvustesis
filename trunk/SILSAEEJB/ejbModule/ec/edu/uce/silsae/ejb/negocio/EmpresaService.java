@@ -28,4 +28,6 @@ public interface EmpresaService {
 	List<PostulacionListDTO> obtenerPostulacion(EmpresaDTO empresa)
 			throws SilsaeException;
 
+	EmpresaDTO actualizarEmpresa(EmpresaDTO empresa) throws SilsaeException;
+
 }

@@ -54,4 +54,18 @@ public class AdministracionServiceImpl implements AdministracionService{
 		}
 	}
 
+	@Override
+	public void cambiarEstadoEmpresa(EmpresaDTO empresa) throws SilsaeException
+	{
+		log.info("cambiarEstadoEmpresa");
+		try{
+			factoryDAO.getEmpresaDAOImpl().edit(empresa);
+		}
+		catch(Exception e)
+		{
+			log.info("Error al obtener catalogo" +e.toString());
+			throw new SilsaeException("Error al obtener catalogo");
+		}
+	}
+
 }

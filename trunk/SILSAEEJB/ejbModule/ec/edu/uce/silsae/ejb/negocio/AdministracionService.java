@@ -14,5 +14,7 @@ public interface AdministracionService {
 	List<CatalogoDTO> getCatalogo(CatalogoDTO catalogo) throws SilsaeException;
 
 	List<EmpresaDTO> obtenerEmpresas() throws SilsaeException;
+
+	void cambiarEstadoEmpresa(EmpresaDTO empresa) throws SilsaeException;
 	
 }
