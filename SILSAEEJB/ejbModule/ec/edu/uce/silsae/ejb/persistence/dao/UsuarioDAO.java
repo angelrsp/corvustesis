@@ -17,4 +17,7 @@ public interface UsuarioDAO extends AbstractFacade<UsuarioDTO>{
 	 */
 	UsuarioDTO buscarUsuarioLogin (CredencialesDTO credencialesDTO) throws SilsaeException;
 
+	UsuarioDTO buscarUsuario(CredencialesDTO credencialesDTO)
+			throws SilsaeException;
+
 }
