@@ -10,6 +10,7 @@
 	<ui:composition template="/template/publico.xhtml">
 		<ui:define name="contenido">
 			<fieldset>
+			<h:form id="contenido">
 				<p:growl id="growl" showDetail="false" sticky="true" />
 				<p:panel id="pnlRegistroCandidato" styleClass="tabla"
 					header="#{i18n['label.titulo.pantalla.registro.empresa']}">
@@ -90,10 +91,30 @@
 									update="pnlRegistroCandidato, growl"
 									actionListener="#{registroEmpresaController.registroEmpresa}" />
 							</td>
+							<td>
+							<p:commandButton id="showDialogButton" type="button" value="Show" onclick="mensajeDialog.show()" /> 
+							</td>
 						</tr>
 					</table>
 				</p:panel>
+				</h:form>
 			</fieldset>
+			
+			
+		    <p:dialog id="mensajeDialog" widgetVar="mensajeDialog"
+        		header="Mensaje" modal="true" appendToBody="true">
+        		<h:form>        	
+		        	<table>
+			        	<tr>
+			        		<td><h:outputText value="Al momento sus registros estan en lista de aprobacion. Luego de esto podrá empezar a usar el sistema." /></td>
+			        	</tr>
+			        	<tr align="center">	
+				        	<td><p:commandButton value="#{i18n['boton.aceptar']}" action="#{registroEmpresaController.redireccionar}" immediate="true" process="@this" /></td>
+				         </tr>   
+			        </table>
+		        </h:form>
+    		</p:dialog>
+			
 		</ui:define>
 	</ui:composition>
 

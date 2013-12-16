@@ -15,7 +15,9 @@
 
 			<fieldset>
 
-			<p:dataTable value="#{aprobarEmpresaController.empresaList}" var="emp">
+			<p:growl id="growl" showDetail="true" />
+
+			<p:dataTable id="tblEmpresa" value="#{aprobarEmpresaController.empresaList}" var="emp">
 			
 				<p:column headerText="#{i18n['label.razon.social']}">
 					<h:outputText value="#{emp.empNombreComercial}" />
@@ -33,6 +35,11 @@
 					<h:outputText value="#{emp.empActiva==true?'Si':'No'}" />
 				</p:column>			
 
+				<p:column headerText="#{i18n['label.cambiar.estado']}">
+					<p:commandButton actionListener="#{aprobarEmpresaController.cambiarEstado(emp)}" icon="	ui-icon-transfer-e-w" onclick="if(!confirm('Cambiar estado?')) return false;" 
+						update=":contenido:tblEmpresa,:contenido:growl" process="tblEmpresa">
+					</p:commandButton>
+				</p:column>			
 						
 			</p:dataTable>
 
