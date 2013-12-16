@@ -11,4 +11,7 @@ public interface LoginService {
 	
 	UsuarioDTO autenticarUsuario (CredencialesDTO credencialesDTO) throws SilsaeException;
 
+	Boolean recuperarClave(CredencialesDTO credencialesDTO)
+			throws SilsaeException;
+
 }

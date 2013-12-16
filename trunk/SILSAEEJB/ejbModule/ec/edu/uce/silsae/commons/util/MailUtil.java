@@ -9,8 +9,13 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class SendMailUtil {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+public class MailUtil {
+
+	private static final Logger log = LoggerFactory
+			.getLogger(MailUtil.class);
 	
 	 private final Properties properties = new Properties();
 	    private Session session;
@@ -30,15 +35,18 @@ public class SendMailUtil {
 	    public void send(String destino,String asunto, String mensaje) {
 	        init();
 	        try {
+	        	log.info("send");
 	            MimeMessage message = new MimeMessage(session);
 	            message.setFrom(new InternetAddress((String) properties.get("mail.smtp.mail.sender")));
 	            message.addRecipient(Message.RecipientType.TO, new InternetAddress(destino));
 	            message.setSubject(asunto);
 	            message.setText(mensaje);
 	            Transport t = session.getTransport("smtp");
+	            log.info("conectar");
 	            t.connect((String) properties.get("mail.smtp.user"), (String) properties.get("mail.smtp.password"));
 	            t.sendMessage(message, message.getAllRecipients());
 	            t.close();
+	            log.info("cerrar");
 	        } catch (MessagingException e) {
 	            return;
 	        }

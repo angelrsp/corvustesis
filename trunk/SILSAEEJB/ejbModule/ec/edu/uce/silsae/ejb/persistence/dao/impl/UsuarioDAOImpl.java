@@ -16,13 +16,16 @@ import ec.edu.uce.silsae.ejb.persistence.entities.EmpresaDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
 @Stateless
-public class UsuarioDAOImpl extends AbstractFacadeImpl<UsuarioDTO> implements UsuarioDAO{
-	
-	private static final Logger log = LoggerFactory.getLogger(UsuarioDAOImpl.class);
-	
-	public UsuarioDAOImpl () {}
-	
-	public UsuarioDAOImpl (EntityManager entityManager) {
+public class UsuarioDAOImpl extends AbstractFacadeImpl<UsuarioDTO> implements
+		UsuarioDAO {
+
+	private static final Logger log = LoggerFactory
+			.getLogger(UsuarioDAOImpl.class);
+
+	public UsuarioDAOImpl() {
+	}
+
+	public UsuarioDAOImpl(EntityManager entityManager) {
 		super(entityManager);
 	}
 
@@ -30,28 +33,30 @@ public class UsuarioDAOImpl extends AbstractFacadeImpl<UsuarioDTO> implements Us
 	@Override
 	public UsuarioDTO buscarUsuarioLogin(CredencialesDTO credencialesDTO)
 			throws SilsaeException {
-		
+
 		UsuarioDTO usuarioLogin = null;
-		
+
 		try {
-//			u inner join u.bemCandidatos c where c.canIdentificacion =? and u.usuPassword =?
-			Query query = entityManager.createQuery("select u from UsuarioDTO u where u.usuLogin =? and u.usuPassword =?");
+			// u inner join u.bemCandidatos c where c.canIdentificacion =? and
+			// u.usuPassword =?
+			Query query = entityManager
+					.createQuery("select u from UsuarioDTO u where u.usuLogin =? and u.usuPassword =?");
 			query.setParameter(1, credencialesDTO.getUsername());
 			query.setParameter(2, credencialesDTO.getPassword());
 			List<UsuarioDTO> usuariosEncontrados = query.getResultList();
-			
-			if (usuariosEncontrados != null && usuariosEncontrados.size()==1){
+
+			if (usuariosEncontrados != null && usuariosEncontrados.size() == 1) {
 				usuarioLogin = usuariosEncontrados.get(0);
-				Query query2=entityManager.createQuery("select u from EmpresaDTO u where u.bemUsuario.usuCodigo=?");
+				Query query2 = entityManager
+						.createQuery("select u from EmpresaDTO u where u.bemUsuario.usuCodigo=?");
 				query2.setParameter(1, usuarioLogin.getUsuCodigo());
-				List<EmpresaDTO> emp=query2.getResultList();
-				if(!emp.isEmpty())
-				{
+				List<EmpresaDTO> emp = query2.getResultList();
+				if (!emp.isEmpty()) {
 					usuarioLogin.setBemEmpresas(emp);
 				}
-				
+
 			}
-			
+
 		} catch (Exception e) {
 			log.info("Error al autenticar el usuario {}", e.toString());
 			throw new SilsaeException("Error al autenticar el usuario" + e);
@@ -59,4 +64,30 @@ public class UsuarioDAOImpl extends AbstractFacadeImpl<UsuarioDTO> implements Us
 		return usuarioLogin;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public UsuarioDTO buscarUsuario(CredencialesDTO credencialesDTO)
+			throws SilsaeException {
+
+		// UsuarioDTO usuarioLogin = null;
+		try {
+			// u inner join u.bemCandidatos c where c.canIdentificacion =? and
+			// u.usuPassword =?
+			Query query = entityManager
+					.createQuery("select u from UsuarioDTO u where u.usuLogin =?");
+			query.setParameter(1, credencialesDTO.getUsername());
+			List<UsuarioDTO> usuariosEncontrados = query.getResultList();
+
+			if (usuariosEncontrados.isEmpty()) {
+				return null;
+			} else {
+				return usuariosEncontrados.get(0);
+			}
+
+		} catch (Exception e) {
+			log.info("Error al autenticar el usuario {}", e.toString());
+			throw new SilsaeException("Error al autenticar el usuario" + e);
+		}
+
+	}
 }
