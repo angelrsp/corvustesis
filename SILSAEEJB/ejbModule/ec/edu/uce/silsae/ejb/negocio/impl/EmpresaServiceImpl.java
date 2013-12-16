@@ -34,7 +34,19 @@ public class EmpresaServiceImpl implements EmpresaService {
 			UsuarioDTO user=empresa.getBemUsuario();
 			user.setBemPerfil(factoryDAO.getPerfilDAOImpl().find(2));
 			user.setUsuLogin(user.getUsuMail());
+			empresa.setEmpActiva(false);
 			return factoryDAO.getEmpresaDAOImpl().create(empresa);
+		} catch (Exception e) {
+			log.info("Error al registrar Empresa {}", e.toString());
+			throw new SilsaeException("Error al registrar Empresa");
+		}
+	}
+	
+	
+	@Override
+	public EmpresaDTO actualizarEmpresa(EmpresaDTO empresa)throws SilsaeException {
+		try {
+			return factoryDAO.getEmpresaDAOImpl().edit(empresa);
 		} catch (Exception e) {
 			log.info("Error al registrar Empresa {}", e.toString());
 			throw new SilsaeException("Error al registrar Empresa");
