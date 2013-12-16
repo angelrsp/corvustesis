@@ -30,6 +30,9 @@
 							<td><p:commandButton value="#{i18n['boton.ingresar']}"
 									process="pnlLoginEmpresa" update="pnlLoginEmpresa,growl"
 									actionListener="#{loginController.iniciarSessionEmpresa}" /></td>
+							<td><p:commandButton value="#{i18n['boton.recuperar.clave']}"
+									process="@this" immediate="true"
+									actionListener="#{loginController.redireccionar}" /></td>										
 						</tr>
 					</table>
 

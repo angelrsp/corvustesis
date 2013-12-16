@@ -14,14 +14,14 @@
 				<p:panel id="pnlRecuperar" styleClass="tabla">
 					<table>
 						<tr>
-							<td>Por favor ingrese su numero de identficacion</td>
+							<td>Por favor ingrese su correo electronico de registro</td>
 						</tr>	
 						<tr>
-							<td><h:outputLabel value="#{i18n['label.ci.pasaporte']}" /></td>
+							<td><h:outputLabel value="#{i18n['label.email']}" /></td>
 							<td><p:inputText
 									required="true"
 									value="#{loginController.credencialesDTO.username}"
-									placeholder="#{i18n['label.ci.pasaporte']}" /></td>
+									placeholder="#{i18n['label.email']}" /></td>
 						</tr>
 						<tr>
 							<td colspan="2"><p:commandButton value="#{i18n['boton.enviar']}" process="pnlRecuperar"
