@@ -122,4 +122,40 @@ public class LoginController implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void recuperarClave()
+	{
+	      try {
+			HttpSession session = JsfUtil.getSession();
+		      session.invalidate();
+			JsfUtil.redirect("/SILSAEWeb/index.jsf");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void redireccionar()
+	{
+	      try {
+			JsfUtil.redirect("recuperarClave.jsf");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void enviar()
+	{
+	      try {
+	    	  if(!loginService.recuperarClave(getCredencialesDTO()))
+	    	  {
+	    		  JsfUtil.addErrorMessage("Datos no encontrado");
+	    	  }
+	    	  else{
+	    		  JsfUtil.addInfoMessage("La clave fue enviada a su correo electronico de registro");
+	    	  }
+		} catch (SilsaeException e) {
+			JsfUtil.addErrorMessage("Eror al enviar "+e.toString());
+			e.printStackTrace();
+		}
+	}
 }
