@@ -20,7 +20,9 @@
 						rendered="true">
 						<p:menuitem value="Ver Ofertas" url="/pages/candidato/verOfertas.jsf" />
 						<p:menuitem value="Hoja de Vida" url="/pages/candidato/dato.jsf" />
-						<p:menuitem value="Salir" url="#" />
+						<f:facet name="options">  
+					    	<p:commandButton value="Salir" icon="ui-icon-extlink" actionListener="#{loginController.logout}" />  
+					    </f:facet>
 					</p:menubar>
 				</h:form>
 
