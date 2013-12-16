@@ -9,6 +9,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 
 public class JsfUtil {
 
@@ -92,5 +93,13 @@ public class JsfUtil {
 		String theId = JsfUtil.getRequestParameter(requestParameterName);
 		return converter.getAsObject(FacesContext.getCurrentInstance(), component, theId);
 	}
+	
+	 public static HttpSession getSession() {
+	        return (HttpSession)
+	          FacesContext.
+	          getCurrentInstance().
+	          getExternalContext().
+	          getSession(false);
+	 }
 
 }

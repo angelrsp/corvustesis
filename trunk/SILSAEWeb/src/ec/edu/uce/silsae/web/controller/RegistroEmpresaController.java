@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -84,13 +85,21 @@ public class RegistroEmpresaController extends SelectItemController implements
 			empresa.setEmpUbicacion(Integer.valueOf(ubicacion.toString()));
 			empresa.setEmpSector(Integer.valueOf(tipoEmpresa.toString()));
 			empresaService.registrarEmpresa(empresa);
-			JsfUtil.redirect("inicioEmpresa.jsf");
+			RequestContext.getCurrentInstance().execute("mensajeDialog.show()");
+			JsfUtil.addWarningMessage("Debera esperar hasta que la empresa este autorizada para ingresar");
 		} catch (SilsaeException e) {
 			JsfUtil.addErrorMessage("Error " + e.toString());
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.info("Error Registrando Empresa"+e.toString());
 			JsfUtil.addErrorMessage("Error " + e.toString());
 		}
-
+	}
+	
+	public void redireccionar() {
+		try {
+			JsfUtil.redirect("bienvenido.jsf");
+		} catch (IOException e) {
+			JsfUtil.addErrorMessage("Error " + e.toString());
+		}
 	}
 }
