@@ -12,53 +12,140 @@
 	<ui:composition template="/template/admin.xhtml">
 
 		<ui:define name="contenido">
-
+		
 			<fieldset>
-
-			<p:growl id="growl" showDetail="true" />
-
-			<p:dataTable id="tblEmpresa" value="#{aprobarEmpresaController.empresaList}" var="emp">
-			
-				<p:column headerText="#{i18n['label.razon.social']}">
-					<h:outputText value="#{emp.empNombreComercial}" />
-				</p:column>			
-
-				<p:column headerText="#{i18n['label.nombre.comercial']}">
-					<h:outputText value="#{emp.empNombreComercial}" />
-				</p:column>			
-
-				<p:column headerText="#{i18n['label.ruc']}">
-					<h:outputText value="#{emp.empRuc}" />
-				</p:column>			
-
-				<p:column headerText="#{i18n['label.activo']}">
-					<h:outputText value="#{emp.empActiva==true?'Si':'No'}" />
-				</p:column>			
-
-				<p:column headerText="#{i18n['label.cambiar.estado']}">
-					<p:commandButton actionListener="#{aprobarEmpresaController.cambiarEstado(emp)}" icon="	ui-icon-transfer-e-w" onclick="if(!confirm('Cambiar estado?')) return false;" 
-						update=":contenido:tblEmpresa,:contenido:growl" process="tblEmpresa">
-					</p:commandButton>
-				</p:column>			
-						
-			</p:dataTable>
-
+			<form>
+				<p:growl id="growl" showDetail="true" />
+	
+				<p:dataTable id="tblEmpresa" value="#{aprobarEmpresaController.empresaList}" var="emp">
+				
+					<p:column headerText="#{i18n['label.razon.social']}">
+						<h:outputText value="#{emp.empNombreComercial}" />
+					</p:column>			
+	
+					<p:column headerText="#{i18n['label.nombre.comercial']}">
+						<h:outputText value="#{emp.empNombreComercial}" />
+					</p:column>			
+	
+					<p:column headerText="#{i18n['label.ruc']}">
+						<h:outputText value="#{emp.empRuc}" />
+					</p:column>			
+	
+					<p:column headerText="#{i18n['label.activo']}">
+						<h:outputText value="#{emp.empActiva==true?'Si':'No'}" />
+					</p:column>			
+	
+					<p:column headerText="#{i18n['label.cambiar.estado']}">
+						<p:commandButton actionListener="#{aprobarEmpresaController.cambiarEstado(emp)}" icon="	ui-icon-transfer-e-w" onclick="if(!confirm('Cambiar estado?')) return false;" 
+							update=":contenido:tblEmpresa,:contenido:growl" process="tblEmpresa">
+						</p:commandButton>
+					</p:column>			
+							
+				</p:dataTable>
+			</form>
 			</fieldset>
 			
-<!-- 			    <p:dialog id="infoEmpressa" widgetVar="infoEmpressa" -->
-<!--         		header="Empresa" modal="true" appendToBody="true"> -->
-<!--         		<h:form>        	 -->
-<!-- 		        	<table> -->
-<!-- 			        	<tr> -->
-<!-- 			        		<td><h:outputText value="Al momento sus registros estan en lista de aprobacion. Luego de esto podrá empezar a usar el sistema." /></td> -->
-<!-- 			        	</tr> -->
-<!-- 			        	<tr align="center">	 -->
-<!-- 				        	<td><p:commandButton value="#{i18n['boton.aceptar']}" action="#{registroEmpresaController.redireccionar}" immediate="true" process="@this" /></td> -->
-<!-- 				         </tr>    -->
-<!-- 			        </table> -->
-<!-- 		        </h:form> -->
-<!--     		</p:dialog> -->
+		    <p:dialog id="infoEmpressa" widgetVar="infoEmpressa"
+       			header="Empresa" modal="true" appendToBody="true">
+       		<h:form>        	
+	     		<p:panel id="pnlDatos" styleClass="tabla"
+					header="#{i18n['label.titulo.pantalla.dato.datos']}">
+					<table id="tblDatos" class="tabla">
+						<tr>
+							<td><h:outputLabel
+									value="#{i18n['label.razon.social']}:&#160;" /></td>
+							<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.razon.social']}&#160;#{i18n['label.requerido']}" value="#{aprobarEmpresaController.empresa.empRazonSocial}"/></td>
+							<td><h:outputLabel
+									value="#{i18n['label.nombre.comercial']}:&#160;" /></td>
+							<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.nombre.comercial']}&#160;#{i18n['label.requerido']}"
+									value="#{aprobarEmpresaController.empresa.empNombreComercial}"
+									 /></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.ruc']}:&#160;" /></td>
+							<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.ruc']}&#160;#{i18n['label.requerido']}" value="#{aprobarEmpresaController.empresa.empRuc}" onkeypress="return isNumberKey(event);"/></td>
+							<td><h:outputLabel value="#{i18n['label.sector']}:&#160;" /></td>
+							<td><p:selectOneMenu value="#{aprobarEmpresaController.tipoEmpresa}">
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
+										itemValue="" />
+									<f:selectItems value="#{aprobarEmpresaController.catalogoTipoEmpresa}"></f:selectItems>	
+								</p:selectOneMenu></td>
+
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.telefono.convencional']}:&#160;" /></td>
+							<td><p:inputText value="#{aprobarEmpresaController.user.usuTelefono}" /></td>
+
+							<td><h:outputLabel value="#{i18n['label.telefono.celular']}:&#160;" /></td>
+							<td><p:inputText value="#{aprobarEmpresaController.user.usuCelular}" /></td>							
+														
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.ubicacion']}:&#160;" /></td>
+							<td><p:selectOneMenu value="#{aprobarEmpresaController.ubicacion}">
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
+										itemValue="" />
+									<f:selectItems value="#{aprobarEmpresaController.catalogoUbicacion}"></f:selectItems>	
+								</p:selectOneMenu></td>
+								
+								<td><h:outputLabel value="#{i18n['label.direccion']}:&#160;" /></td>
+								<td><p:inputText value="#{aprobarEmpresaController.user.usuDireccion}" /></td>
+																
+						</tr>		
+						<tr>		
+							<td><h:outputLabel value="#{i18n['label.web']}:&#160;" /></td>
+							<td colspan="3"><p:inputText style="width : 90%;" value="#{aprobarEmpresaController.empresa.empWeb}" /></td>
+						</tr>
+						
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.email']}:&#160;" />
+							</td>
+							<td colspan="3"><p:inputText style="width : 90%;"
+									required="true"
+									requiredMessage="#{i18n['label.contrasenia']}&#160;#{i18n['label.requerido']}"
+									value="#{aprobarEmpresaController.user.usuMail}" /></td>
+						</tr>
+						<tr>
+							<td colspan="4" align="center"><p:commandButton
+									value="#{i18n['boton.actualizar']}"
+									process="pnlDatos"
+									update="pnlDatos, growl" />
+							</td>
+						</tr>
+					</table>
+				</p:panel>
 			
+				<p:panel id="pnlContactos" styleClass="tabla"
+					header="#{i18n['label.titulo.pantalla.dato.contacto']}">
+					
+					<p:dataTable value="#{aprobarEmpresaController.contactoList}" var="con">
+					
+						<p:column headerText="#{i18n['label.nombres']}">
+							<h:outputText value="#{con.conNombres}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.apellidos']}">
+							<h:outputText value="#{con.conApellidos}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.telefono']}">
+							<h:outputText value="#{con.conTelefono}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.email']}">
+							<h:outputText value="#{con.conMail}" />
+						</p:column>
+											
+					</p:dataTable>
+					
+				</p:panel>
+
+	        </h:form>
+   		</p:dialog>
+		
 			
 		</ui:define>
 
