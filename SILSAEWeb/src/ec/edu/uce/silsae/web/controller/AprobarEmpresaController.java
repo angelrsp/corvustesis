@@ -11,12 +11,14 @@ import javax.faces.bean.ViewScoped;
 
 import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.negocio.AdministracionService;
+import ec.edu.uce.silsae.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EmpresaDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 import ec.edu.uce.silsae.web.util.JsfUtil;
 
 @ViewScoped
 @ManagedBean (name = "aprobarEmpresaController")
-public class AprobarEmpresaController implements Serializable{
+public class AprobarEmpresaController extends SelectItemController implements Serializable{
 
 	/**
 	 * 
@@ -27,7 +29,12 @@ public class AprobarEmpresaController implements Serializable{
 	private AdministracionService administracionService;
 	
 	private EmpresaDTO empresa;
+	private UsuarioDTO user;
 	private List<EmpresaDTO> empresaList;
+	private List<ContactoDTO> contactoList;
+	
+	private Object tipoEmpresa;
+	private Object ubicacion;
 	
 	public AprobarEmpresaController()
 	{
@@ -39,6 +46,8 @@ public class AprobarEmpresaController implements Serializable{
 	{
 		empresa=new EmpresaDTO();
 		empresaList=new ArrayList<EmpresaDTO>();
+		contactoList=new ArrayList<ContactoDTO>();
+		user=new UsuarioDTO();
 	}
 
 	public EmpresaDTO getEmpresa() {
@@ -70,5 +79,32 @@ public class AprobarEmpresaController implements Serializable{
 		catch (Exception e) {
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
+	}
+
+	public List<ContactoDTO> getContactoList() {
+		return contactoList;
+	}
+
+	public Object getTipoEmpresa() {
+		return tipoEmpresa;
+	}
+
+	public Object getUbicacion() {
+		return ubicacion;
+	}
+
+	
+	public UsuarioDTO getUser() {
+		return user;
+	}
+
+	public void setUser(UsuarioDTO user) {
+		this.user = user;
+	}
+	
+	
+	public void buscarEmpresa()
+	{
+		
 	}
 }
