@@ -17,8 +17,9 @@ import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 import ec.edu.uce.silsae.web.util.JsfUtil;
 
 @ViewScoped
-@ManagedBean (name = "aprobarEmpresaController")
-public class AprobarEmpresaController extends SelectItemController implements Serializable{
+@ManagedBean(name = "aprobarEmpresaController")
+public class AprobarEmpresaController extends SelectItemController implements
+		Serializable {
 
 	/**
 	 * 
@@ -27,27 +28,25 @@ public class AprobarEmpresaController extends SelectItemController implements Se
 
 	@EJB
 	private AdministracionService administracionService;
-	
+
 	private EmpresaDTO empresa;
 	private UsuarioDTO user;
 	private List<EmpresaDTO> empresaList;
 	private List<ContactoDTO> contactoList;
-	
+
 	private Object tipoEmpresa;
 	private Object ubicacion;
-	
-	public AprobarEmpresaController()
-	{
-		
+
+	public AprobarEmpresaController() {
+
 	}
-	
+
 	@PostConstruct
-	private void init()
-	{
-		empresa=new EmpresaDTO();
-		empresaList=new ArrayList<EmpresaDTO>();
-		contactoList=new ArrayList<ContactoDTO>();
-		user=new UsuarioDTO();
+	private void init() {
+		empresa = new EmpresaDTO();
+		empresaList = new ArrayList<EmpresaDTO>();
+		contactoList = new ArrayList<ContactoDTO>();
+		user = new UsuarioDTO();
 	}
 
 	public EmpresaDTO getEmpresa() {
@@ -59,14 +58,13 @@ public class AprobarEmpresaController extends SelectItemController implements Se
 	}
 
 	public List<EmpresaDTO> getEmpresaList() throws SilsaeException {
-		this.empresaList=administracionService.obtenerEmpresas();
+		this.empresaList = administracionService.obtenerEmpresas();
 		return empresaList;
 	}
 
-	public void cambiarEstado(EmpresaDTO emp)
-	{
+	public void cambiarEstado(EmpresaDTO emp) {
 		try {
-			if(emp.getEmpActiva())
+			if (emp.getEmpActiva())
 				emp.setEmpActiva(false);
 			else
 				emp.setEmpActiva(true);
@@ -75,8 +73,7 @@ public class AprobarEmpresaController extends SelectItemController implements Se
 			JsfUtil.addInfoMessage("Cambiado Exitosamente");
 		} catch (SilsaeException e) {
 			JsfUtil.addErrorMessage(e.getMessage());
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
 	}
@@ -93,7 +90,6 @@ public class AprobarEmpresaController extends SelectItemController implements Se
 		return ubicacion;
 	}
 
-	
 	public UsuarioDTO getUser() {
 		return user;
 	}
@@ -101,10 +97,15 @@ public class AprobarEmpresaController extends SelectItemController implements Se
 	public void setUser(UsuarioDTO user) {
 		this.user = user;
 	}
-	
-	
-	public void buscarEmpresa()
-	{
-		
+
+	public void buscarEmpresa(EmpresaDTO emp) {
+		try {
+			empresa=emp;
+			contactoList=administracionService.obtenerContactos(empresa);
+			setUser(emp.getBemUsuario());
+		} catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+
 	}
 }
