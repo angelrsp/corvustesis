@@ -6,7 +6,9 @@ import javax.ejb.Local;
 
 import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.persistence.entities.CatalogoDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EmpresaDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
 @Local
 public interface AdministracionService {
@@ -16,5 +18,9 @@ public interface AdministracionService {
 	List<EmpresaDTO> obtenerEmpresas() throws SilsaeException;
 
 	void cambiarEstadoEmpresa(EmpresaDTO empresa) throws SilsaeException;
+
+	List<ContactoDTO> obtenerContactos(EmpresaDTO empresa)
+			throws SilsaeException;
+
 	
 }
