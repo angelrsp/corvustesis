@@ -12,7 +12,9 @@ import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.negocio.AdministracionService;
 import ec.edu.uce.silsae.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CatalogoDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EmpresaDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
 @Stateless
 public class AdministracionServiceImpl implements AdministracionService{
@@ -55,6 +57,20 @@ public class AdministracionServiceImpl implements AdministracionService{
 	}
 
 	@Override
+	public List<ContactoDTO> obtenerContactos(EmpresaDTO empresa) throws SilsaeException
+	{
+		log.info("obtenerEmpresas");
+		try{
+			return factoryDAO.getContactoDAOImpl().getAll(empresa);
+		}
+		catch(Exception e)
+		{
+			log.info("Error al obtener catalogo" +e.toString());
+			throw new SilsaeException("Error al obtener catalogo");
+		}
+	}
+	
+	@Override
 	public void cambiarEstadoEmpresa(EmpresaDTO empresa) throws SilsaeException
 	{
 		log.info("cambiarEstadoEmpresa");
@@ -68,4 +84,19 @@ public class AdministracionServiceImpl implements AdministracionService{
 		}
 	}
 
+//	@Override
+//	public EmpresaDTO obtenerEmpresa(UsuarioDTO user) throws SilsaeException
+//	{
+//		log.info("obtenerEmpresa");
+//		try{
+//			return factoryDAO.getUsuarioDAOImpl().find(user.getUsuCodigo()).getBemEmpresas().get(0);
+//		}
+//		catch(Exception e)
+//		{
+//			log.info("Error al obtener catalogo" +e.toString());
+//			throw new SilsaeException("Error al obtener catalogo");
+//		}
+//	}
+	
+	
 }
