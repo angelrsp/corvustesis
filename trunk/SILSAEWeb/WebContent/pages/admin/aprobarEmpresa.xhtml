@@ -42,7 +42,8 @@
 					</p:column>			
 					
 					<p:column style="width:4%">  
-		                <p:commandButton id="selectButton" oncomplete="PF('infoEmpressa').show()" icon="ui-icon-search" title="View" actionListener="#{aprobarEmpresaController.buscarEmpresa}" immediate="true">    
+		                <p:commandButton id="selectButton" oncomplete="PF('infoEmpressa').show()" icon="ui-icon-search" actionListener="#{aprobarEmpresaController.buscarEmpresa(emp)}" 
+		                	update=":contenido:infoEmpressa" process="tblEmpresa" title="Ver Info">    
 		    	        </p:commandButton>  
 			        </p:column>  					
 							
