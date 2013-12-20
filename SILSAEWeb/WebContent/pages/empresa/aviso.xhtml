@@ -3,7 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <h:head></h:head>
 <body>
@@ -48,7 +49,7 @@
 						</tr>
 						<tr>
 							<td>
-							<p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{avisoEmpresaController.guardar}" update="pnlAviso,growl" process="pnlAviso"></p:commandButton>
+								<p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{avisoEmpresaController.guardar}" update="pnlAviso,growl" process="pnlAviso"></p:commandButton>
 							</td>
 						</tr>
 
@@ -67,7 +68,7 @@
 						<h:outputLabel value="#{avi.aviDescripcion}" />
 					</p:column>
 					<p:column headerText="#{i18n['label.fecha.caducidad']}">
-						<h:outputLabel value="#{avi.aviFechaCaducidad}" />
+						<h:outputLabel value="#{fn:substring(avi.aviFechaCaducidad,0,10)}" />
 					</p:column>										
 					<p:column headerText="#{i18n['label.vacantes']}">				
 						<h:outputLabel value="#{avi.aviVacantes}" />	

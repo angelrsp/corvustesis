@@ -31,6 +31,10 @@ public class VerPostulacionController implements Serializable {
 	private EmpresaDTO empresa;
 	private UsuarioDTO user;
 	
+	private Object tipoDocumento;
+	
+	
+	private PostulacionListDTO postulacion;
 	private List<PostulacionListDTO> postulacionList;	
 	
 	public VerPostulacionController() {
@@ -45,13 +49,25 @@ public class VerPostulacionController implements Serializable {
 		user=(UsuarioDTO)JsfUtil.getObject("UsuarioDTO");
 		empresa=user.getBemEmpresas().get(0);
 		postulacionList= new ArrayList<PostulacionListDTO>();
+		postulacion=new PostulacionListDTO();
 	}
 
 	public List<PostulacionListDTO> getPostulacionList() throws SilsaeException {
 		this.postulacionList=empresaService.obtenerPostulacion(empresa);
 		return postulacionList;
 	}
+
+	public Object getTipoDocumento() {
+		return tipoDocumento;
+	}
 	
-	
+	public PostulacionListDTO getPostulacion() {
+		return postulacion;
+	}
+
+	public void buscarCandidato(PostulacionListDTO pos)
+	{
+		
+	}
 	
 }
