@@ -3,7 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <h:head></h:head>
 <body>
@@ -250,10 +251,10 @@
 							<h:outputText value="#{exp.expEntidad}" />
 						</p:column>
 						<p:column headerText="#{i18n['label.fecha.inicio']}">
-							<h:outputText value="#{exp.expFechaInicio}" />
+							<h:outputText value="#{fn:substring(exp.expFechaInicio,0,10)}" />
 						</p:column>
 						<p:column headerText="#{i18n['label.fecha.fin']}">
-							<h:outputText value="#{exp.expFechaFin}" />
+							<h:outputText value="#{fn:substring(exp.expFechaFin,0,10)}" />
 						</p:column>
 						<p:column headerText="#{i18n['label.tareas']}">
 							<h:outputText value="#{exp.expTareas}" />
