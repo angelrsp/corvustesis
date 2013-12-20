@@ -18,8 +18,7 @@ import ec.edu.uce.silsae.web.util.JsfUtil;
 
 @ViewScoped
 @ManagedBean(name = "aprobarEmpresaController")
-public class AprobarEmpresaController extends SelectItemController implements
-		Serializable {
+public class AprobarEmpresaController extends SelectItemController implements Serializable {
 
 	/**
 	 * 
@@ -103,6 +102,8 @@ public class AprobarEmpresaController extends SelectItemController implements
 			empresa=emp;
 			contactoList=administracionService.obtenerContactos(empresa);
 			setUser(emp.getBemUsuario());
+			tipoEmpresa=emp.getEmpSector();
+			ubicacion=emp.getEmpUbicacion();
 		} catch (Exception e) {
 			JsfUtil.addErrorMessage(e.getMessage());
 		}

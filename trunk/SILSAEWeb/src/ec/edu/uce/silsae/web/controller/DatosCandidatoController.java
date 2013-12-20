@@ -395,6 +395,7 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		setPais(null);
 		estudio.setEstCarrera("");
 		estudio.setEstEstablecimiento("");
+		estudio=new EstudioDTO();
 	}
 
 	
