@@ -14,7 +14,6 @@ import ec.edu.uce.silsae.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CatalogoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EmpresaDTO;
-import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
 @Stateless
 public class AdministracionServiceImpl implements AdministracionService{
