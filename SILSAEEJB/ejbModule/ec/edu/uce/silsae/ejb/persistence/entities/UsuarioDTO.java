@@ -65,7 +65,10 @@ public class UsuarioDTO implements Serializable {
     
     @Transient
     private String npUsuPassword;
-    
+
+    @Transient
+    private String npUsuPassword2;
+
 
     public UsuarioDTO() {
     }
@@ -156,6 +159,14 @@ public class UsuarioDTO implements Serializable {
 
 	public void setNpUsuPassword(String npUsuPassword) {
 		this.npUsuPassword = npUsuPassword;
+	}
+
+	public String getNpUsuPassword2() {
+		return npUsuPassword2;
+	}
+
+	public void setNpUsuPassword2(String npUsuPassword2) {
+		this.npUsuPassword2 = npUsuPassword2;
 	}
 	
 }
