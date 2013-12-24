@@ -13,28 +13,36 @@
 		<ui:define name="contenido">
 
 			<fieldset>
-				<p:growl id="growl" showDetail="true" />
+				<p:growl id="growl" showDetail="false" />
 				<p:panel id="pnlDatos" styleClass="tabla"
 					header="#{i18n['label.titulo.pantalla.actualizar.clave']}">
 					
 					<table>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.contrasenia.actual']}:&#160;" /> </td>
+							<td><p:password required="true"
+									requiredMessage="#{i18n['label.contrasenia.ingresar']}&#160;#{i18n['label.requerido']}"
+									value="#{actualizarClaveController.usuario.usuPassword}"/></td>
+						</tr>
 					
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.contrasenia.ingresar']}:&#160;" /> </td>
 							<td><p:password required="true"
 									requiredMessage="#{i18n['label.contrasenia.ingresar']}&#160;#{i18n['label.requerido']}"
-									value="#{actualizarClaveController.usuario.usuPassword}"/></td>
+									value="#{actualizarClaveController.usuario.npUsuPassword}"/></td>
 						</tr>
 						<tr>			
 							<td><h:outputLabel value="#{i18n['label.contrasenia.confirmar']}:&#160;" /> </td>
 							<td><p:password required="true"
 									requiredMessage="#{i18n['label.contrasenia.confirmar']}&#160;#{i18n['label.requerido']}"
-									value="#{actualizarClaveController.usuario.npUsuPassword}"/></td>
+									value="#{actualizarClaveController.usuario.npUsuPassword2}"/></td>
 						</tr>
-					
-					<tr>
-					</tr>
-					
+						
+						
+						<tr>
+							<td>
+								<p:commandButton actionListener="#{actualizarClaveController.actualizar}" value="#{i18n['boton.actualizar']}" update="growl" icon="ui-icon-disk"/> </td>
+						</tr>					
 					</table>
 					
 					
