@@ -22,5 +22,7 @@ public interface AdministracionService {
 	List<ContactoDTO> obtenerContactos(EmpresaDTO empresa)
 			throws SilsaeException;
 
+	void actualizarClave(UsuarioDTO user) throws SilsaeException;
+
 	
 }

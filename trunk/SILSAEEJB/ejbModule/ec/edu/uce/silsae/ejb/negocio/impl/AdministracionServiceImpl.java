@@ -8,12 +8,14 @@ import javax.ejb.Stateless;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ec.edu.uce.silsae.commons.dto.util.CredencialesDTO;
 import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.negocio.AdministracionService;
 import ec.edu.uce.silsae.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CatalogoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EmpresaDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 
 @Stateless
 public class AdministracionServiceImpl implements AdministracionService{
@@ -83,6 +85,35 @@ public class AdministracionServiceImpl implements AdministracionService{
 		}
 	}
 
+	
+	@Override
+	public void actualizarClave(UsuarioDTO user) throws SilsaeException
+	{
+		log.info("actualizarClave");
+		try{
+			CredencialesDTO credencialesDTO=new CredencialesDTO();
+			credencialesDTO.setPassword(user.getUsuPassword());
+			credencialesDTO.setUsername(user.getUsuLogin());
+			if(!user.getNpUsuPassword().equals(user.getNpUsuPassword2())){
+				throw new SilsaeException("Las contraseñas no coinciden");
+			}
+			else if(user.getUsuPassword().equals(user.getNpUsuPassword())){
+				throw new SilsaeException("La contraseña anterior no puede ser igual a la actual");
+			}
+			else if(factoryDAO.getUsuarioDAOImpl().buscarUsuarioLogin(credencialesDTO)!=null){
+				factoryDAO.getUsuarioDAOImpl().edit(user);	
+			}
+			else{
+				throw new SilsaeException("Contraseña actual incorrecta");
+			}
+			
+		}catch(Exception e){
+			log.info("Error al actualizarClave " +e.toString());
+			throw new SilsaeException(e.getMessage());
+		}
+	}
+
+	
 //	@Override
 //	public EmpresaDTO obtenerEmpresa(UsuarioDTO user) throws SilsaeException
 //	{
