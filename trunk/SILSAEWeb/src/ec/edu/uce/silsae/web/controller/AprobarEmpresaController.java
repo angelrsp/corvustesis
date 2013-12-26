@@ -45,7 +45,7 @@ public class AprobarEmpresaController extends SelectItemController implements Se
 		empresa = new EmpresaDTO();
 		empresaList = new ArrayList<EmpresaDTO>();
 		contactoList = new ArrayList<ContactoDTO>();
-		user = new UsuarioDTO();
+		user = new UsuarioDTO();	
 	}
 
 	public EmpresaDTO getEmpresa() {
