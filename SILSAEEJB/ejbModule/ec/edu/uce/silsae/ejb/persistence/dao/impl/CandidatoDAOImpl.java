@@ -1,8 +1,13 @@
 package ec.edu.uce.silsae.ejb.persistence.dao.impl;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 
+import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.persistence.dao.CandidatoDAO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDTO;
 
@@ -17,5 +22,17 @@ public class CandidatoDAOImpl extends AbstractFacadeImpl<CandidatoDTO> implement
 
 	
 	
-
+	@Override
+	public List<CandidatoDTO> getAll() throws SilsaeException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CandidatoDTO> cq=cb.createQuery(CandidatoDTO.class);
+		cq.from(CandidatoDTO.class);
+				
+		List<CandidatoDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
 }
