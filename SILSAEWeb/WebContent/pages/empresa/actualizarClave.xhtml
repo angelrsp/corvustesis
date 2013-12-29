@@ -1,9 +1,56 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-	<ui:composition template="">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/template/empresa.xhtml">
+		<ui:define name="contenido">
+
+			<fieldset>
+				<p:growl id="growl" showDetail="false" />
+				<p:panel id="pnlDatos" styleClass="tabla"
+					header="#{i18n['label.titulo.pantalla.actualizar.clave']}">
+					
+					<table>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.contrasenia.actual']}:&#160;" /> </td>
+							<td><p:password required="true"
+									requiredMessage="#{i18n['label.contrasenia.ingresar']}&#160;#{i18n['label.requerido']}"
+									value="#{actualizarClaveController.usuario.usuPassword}"/></td>
+						</tr>
+					
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.contrasenia.ingresar']}:&#160;" /> </td>
+							<td><p:password required="true"
+									requiredMessage="#{i18n['label.contrasenia.ingresar']}&#160;#{i18n['label.requerido']}"
+									value="#{actualizarClaveController.usuario.npUsuPassword}"/></td>
+						</tr>
+						<tr>			
+							<td><h:outputLabel value="#{i18n['label.contrasenia.confirmar']}:&#160;" /> </td>
+							<td><p:password required="true"
+									requiredMessage="#{i18n['label.contrasenia.confirmar']}&#160;#{i18n['label.requerido']}"
+									value="#{actualizarClaveController.usuario.npUsuPassword2}"/></td>
+						</tr>
+						
+						
+						<tr>
+							<td>
+								<p:commandButton actionListener="#{actualizarClaveController.actualizar}" value="#{i18n['boton.actualizar']}" update="growl" icon="ui-icon-disk"/> </td>
+						</tr>					
+					</table>
+					
+					
+				</p:panel>
+			</fieldset>
+
+		</ui:define>
 	</ui:composition>
+
+</body>
 </html>
