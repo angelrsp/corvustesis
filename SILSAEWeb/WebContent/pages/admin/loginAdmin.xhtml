@@ -28,9 +28,12 @@
 									value="#{loginController.credencialesDTO.password}" placeholder="#{i18n['label.contrasenia']}"/></td>
 						</tr>
 						<tr>
-							<td><p:commandButton value="ingresar"
+							<td><p:commandButton value="#{i18n['label.ingresar']}"
 									process="pnlLoginAdmin" update="pnlLoginAdmin,growl"
 									actionListener="#{loginController.iniciarSessionAdmin}" /></td>
+							<td><p:commandButton value="#{i18n['boton.recuperar.clave']}"
+									process="@this" immediate="true"
+									actionListener="#{loginController.redireccionar}" /></td>																		
 						</tr>
 					</table>
 
