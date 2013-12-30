@@ -35,7 +35,7 @@
 						<h:outputText value="#{emp.empActiva==true?'Si':'No'}" />
 					</p:column>			
 	
-					<p:column style="width:13%" headerText="#{i18n['label.cambiar.estado']}">
+					<p:column style="width:14%" headerText="#{i18n['label.cambiar.estado']}">
 						<p:commandButton actionListener="#{aprobarEmpresaController.cambiarEstado(emp)}" icon="	ui-icon-transfer-e-w" onclick="if(!confirm('Cambiar estado?')) return false;" 
 							process="tblEmpresa" update=":contenido:growl,tblEmpresa" title="#{i18n['label.cambiar.estado']}">
 						</p:commandButton>
