@@ -53,8 +53,8 @@ public class AdministracionServiceImpl implements AdministracionService{
 		}
 		catch(Exception e)
 		{
-			log.info("Error al obtener catalogo" +e.toString());
-			throw new SilsaeException("Error al obtener catalogo");
+			log.info("Error al obtenerEmpresas" +e.toString());
+			throw new SilsaeException("Error al obtenerEmpresas");
 		}
 	}
 	
@@ -67,8 +67,8 @@ public class AdministracionServiceImpl implements AdministracionService{
 		}
 		catch(Exception e)
 		{
-			log.info("Error al obtener obtenerCandidatos" +e.toString());
-			throw new SilsaeException("Error al obtener obtenerCandidatos");
+			log.info("Error al obtenerCandidatos" +e.toString());
+			throw new SilsaeException("Error al obtenerCandidatos");
 		}
 	}
 
@@ -81,8 +81,8 @@ public class AdministracionServiceImpl implements AdministracionService{
 		}
 		catch(Exception e)
 		{
-			log.info("Error al obtener catalogo" +e.toString());
-			throw new SilsaeException("Error al obtener catalogo");
+			log.info("Error al obtener obtenerContactos" +e.toString());
+			throw new SilsaeException("Error al obtener obtenerContactos");
 		}
 	}
 	
@@ -91,12 +91,13 @@ public class AdministracionServiceImpl implements AdministracionService{
 	{
 		log.info("cambiarEstadoEmpresa");
 		try{
+			
 			factoryDAO.getEmpresaDAOImpl().edit(empresa);
 		}
 		catch(Exception e)
 		{
-			log.info("Error al obtener catalogo" +e.toString());
-			throw new SilsaeException("Error al obtener catalogo");
+			log.info("Error al obtener obtenerContactos" +e.toString());
+			throw new SilsaeException("Error al obtener obtenerContactos");
 		}
 	}
 
