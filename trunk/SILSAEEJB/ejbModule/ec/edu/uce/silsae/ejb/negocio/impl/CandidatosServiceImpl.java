@@ -266,4 +266,18 @@ public class CandidatosServiceImpl implements CandidatosService {
 		}
 		
 	}
+	
+	@Override
+	public CandidatoDTO obtenerCandidato(Object id)throws SilsaeException {
+
+		log.info("obtenerCandidato");
+
+		try {
+			return factoryDAO.getCandidatoDAOImpl().find(id);
+		} catch (Exception e) {
+			log.info("Error al registrar el Candidato {}", e.toString());
+			throw new SilsaeException("Error al registrar el Candidato");
+		}
+
+	}
 }
