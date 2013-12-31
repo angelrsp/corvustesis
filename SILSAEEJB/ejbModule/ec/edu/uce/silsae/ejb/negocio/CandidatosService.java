@@ -69,4 +69,6 @@ public interface CandidatosService {
 	void eliminarIdioma(IdiomaDTO idioma) throws SilsaeException;
 
 	void eliminarReferencia(ReferenciaDTO referencia) throws SilsaeException;
+
+	CandidatoDTO obtenerCandidato(Object id) throws SilsaeException;
 }
