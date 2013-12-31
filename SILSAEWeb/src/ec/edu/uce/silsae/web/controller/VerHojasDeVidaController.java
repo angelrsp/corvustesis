@@ -22,8 +22,8 @@ import ec.edu.uce.silsae.ejb.persistence.entities.UsuarioDTO;
 import ec.edu.uce.silsae.web.util.JsfUtil;
 
 @ViewScoped
-@ManagedBean(name = "verCandidatoController")
-public class VerCandidatoController extends SelectItemController implements Serializable{
+@ManagedBean(name = "verHojasDeVidaController")
+public class VerHojasDeVidaController extends SelectItemController implements Serializable{
 
 	/**
 	 * 
@@ -51,7 +51,7 @@ public class VerCandidatoController extends SelectItemController implements Seri
 	private Object estadoCivil;
 	private Object tipoDocumento; 
 	
-	public VerCandidatoController()
+	public VerHojasDeVidaController()
 	{
 		
 	}
