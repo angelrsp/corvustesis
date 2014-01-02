@@ -86,7 +86,7 @@ public class RegistroEmpresaController extends SelectItemController implements
 			empresa.setEmpSector(Integer.valueOf(tipoEmpresa.toString()));
 			empresaService.registrarEmpresa(empresa);
 			RequestContext.getCurrentInstance().execute("mensajeDialog.show()");
-			JsfUtil.addWarningMessage("Debera esperar hasta que la empresa este autorizada para ingresar");
+			JsfUtil.addWarningMessage("Su registro esta en proceso de aprobación. Recibirá una notificación de autroización al correo electrónico de registro");
 		} catch (SilsaeException e) {
 			JsfUtil.addErrorMessage("Error " + e.toString());
 		} catch (Exception e) {
