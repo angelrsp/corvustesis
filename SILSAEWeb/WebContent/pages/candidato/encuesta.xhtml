@@ -13,9 +13,225 @@
 
 		<p:panel header="Trayectoria Laboral">
 		
+			<p:panel id="pnlPregunta1">
+				<table>
+					<tr>
+						<td>
+							<h:outputText value="Actividad a la que se dedica actualmente (Seleccione una de las opciones)" />
+						</td>   
+					</tr>
+					<tr>
+						<td>			
+							<p:selectOneRadio id="pregunta1">  
+		        				<f:selectItem itemLabel="Estudia (Cursa un Posgrado)." itemValue="1" />  
+		        				<f:selectItem itemLabel="Trabaja en su profesión." itemValue="2" />  
+		        				<f:selectItem itemLabel="Estudia y Trabaja." itemValue="3" />
+		        				<f:selectItem itemLabel="No Estudia Ni Trabaja." itemValue="4" />
+		        				<f:selectItem itemLabel="Otro." itemValue="5" />
+		        			</p:selectOneRadio>
+		        		</td>	
+		        		<td>
+		        			<p:inputText></p:inputText>
+		        		</td>        			
+					</tr>
+				</table>
+			</p:panel>
+			
+			<p:panel id="pnlPregunta2">			
+				<table>		
+					<tr>
+						<td>
+							<h:outputText value="(*) Si no trabaja, ¿A qué atribuye su no ingreso al ámbito laboral?" />
+						</td>   
+					</tr>			
+					<tr>
+						<td>			
+							<p:selectOneRadio id="pregunta2">  
+		        				<f:selectItem itemLabel="Falta de Fuentes de Trabajo." itemValue="1" />  
+		        				<f:selectItem itemLabel="Excesiva oferta de profesionales en su área." itemValue="2" />  
+		        				<f:selectItem itemLabel="Falta de experiencia." itemValue="3" />
+		        				<f:selectItem itemLabel="Necesita Migrar." itemValue="4" />
+		        				<f:selectItem itemLabel="Otro." itemValue="5" />
+		        			</p:selectOneRadio>
+		        		</td>
+		        		<td>
+		        			<p:inputText></p:inputText>
+		        		</td>	        		
+					</tr>				        				  
+				</table>
+			</p:panel>
+
+			<p:panel id="pnlPregunta3">			
+				<table>		
+					<tr>
+						<td>
+							<h:outputText value="Si Trabaja, indique si es:" />
+						</td>   
+					</tr>			
+					<tr>
+						<td>			
+							<p:selectOneRadio id="pregunta3">  
+		        				<f:selectItem itemLabel="En relación de Dependencia." itemValue="1" />  
+		        				<f:selectItem itemLabel="Clínica." itemValue="2" />  
+		        				<f:selectItem itemLabel="En asociación con particulares." itemValue="3" />
+		        				<f:selectItem itemLabel="Otro." itemValue="4" />
+		        			</p:selectOneRadio>
+		        		</td>
+		        		<td>
+		        			<p:inputText></p:inputText>
+		        		</td>	        		
+					</tr>				        				  
+				</table>
+			</p:panel>
+					
 		</p:panel>
 		
+		
+		<!--Datos de la Empresa y/o Institución donde labora -->
+		
 		<p:panel header="Datos de la Empresa y/o Institución donde labora">
+		
+			<p:panel id="pnlPregunta4">
+				<table>
+					<tr>
+						<td>
+							<h:outputText value="La Empresa es:" />
+						</td>   
+					</tr>
+					<tr>
+						<td>			
+							<p:selectOneRadio id="pregunta4">  
+		        				<f:selectItem itemLabel="Pública." itemValue="1" />  
+		        				<f:selectItem itemLabel="Privada." itemValue="2" />  
+		        				<f:selectItem itemLabel="Fundación." itemValue="3" />
+		        				<f:selectItem itemLabel="Mixta." itemValue="4" />
+		        				<f:selectItem itemLabel="Otro." itemValue="5" />
+		        			</p:selectOneRadio>
+		        		</td>	
+		        		<td>
+		        			<p:inputText></p:inputText>
+		        		</td>        			
+					</tr>
+					<tr>
+		        		<td>
+		        			<h:outputText value="Nombre:" />
+		        			<p:inputText></p:inputText>
+		        		</td>        																		
+					</tr>
+					<tr>
+		        		<td>
+		        			<h:outputText value="Actividad:" />
+		        			<p:inputText></p:inputText>
+		        		</td>		        		        													
+					</tr>
+					<tr>
+		        		<td>
+		        			<h:outputText value="Ubicación (País/Provincia/Ciudad/Dirección):" />
+		        			<p:inputText></p:inputText>
+		        		</td>						
+					</tr>
+					
+				</table>
+			</p:panel>		
+
+			<p:panel id="pnlPregunta5">
+				<table>
+					<tr>
+						<td>
+							<h:outputText value="Tamaño de la Empresa:" />
+						</td>   
+					</tr>
+					<tr>
+						<td>			
+							<p:selectOneRadio id="pregunta5">  
+		        				<f:selectItem itemLabel="Microempresa (1-30 Empleados)." itemValue="1" />  
+		        				<f:selectItem itemLabel="Pequeña (31-100 Empleados)." itemValue="2" />  
+		        				<f:selectItem itemLabel="Mediana (101-500 Empleados)." itemValue="3" />
+		        				<f:selectItem itemLabel="Grande (Más de 500 Empleados)." itemValue="4" />
+		        				<f:selectItem itemLabel="Otro." itemValue="5" />
+		        			</p:selectOneRadio>
+		        		</td>	
+		        		<td>
+		        			<p:inputText></p:inputText>
+		        		</td>        			
+					</tr>
+					
+					<tr>
+		        		<td>
+		        			<h:outputText value="Cargo o función que desempeña:" />
+		        			<p:inputText></p:inputText>
+		        		</td>						
+					</tr>					
+				</table>
+			</p:panel>				
+		
+			<p:panel id="pnlPregunta6">
+				<table>
+					<tr>
+						<td>
+							<h:outputText value="Antigüedad en el Empleo:" />
+						</td>   
+					</tr>
+					<tr>
+						<td>			
+							<p:selectOneRadio id="pregunta6">  
+		        				<f:selectItem itemLabel="Menos de un año." itemValue="1" />  
+		        				<f:selectItem itemLabel="Un año." itemValue="2" />  
+		        				<f:selectItem itemLabel="Dos años." itemValue="3" />
+		        				<f:selectItem itemLabel="Tres años." itemValue="4" />
+		        				<f:selectItem itemLabel="Más de tres años." itemValue="5" />
+		        				<f:selectItem itemLabel="Ninguna." itemValue="6" />
+		        			</p:selectOneRadio>
+		        		</td>	       			
+					</tr>
+								
+				</table>
+			</p:panel>		
+		
+			<p:panel id="pnlPregunta7">
+				<table>
+					<tr>
+						<td>
+							<h:outputText value="Tiempo de trabajo en la profesión:" />
+						</td>   
+					</tr>
+					<tr>
+						<td>			
+							<p:selectOneRadio id="pregunta7">  
+		        				<f:selectItem itemLabel="Dos horas diarias." itemValue="1" />  
+		        				<f:selectItem itemLabel="Cuatro horas diarias." itemValue="2" />  
+		        				<f:selectItem itemLabel="Seis horas diarias." itemValue="3" />
+		        				<f:selectItem itemLabel="Ocho horas diarias." itemValue="4" />
+		        				<f:selectItem itemLabel="Mas de ocho horas diarias." itemValue="5" />
+		        			</p:selectOneRadio>
+		        		</td>	       			
+					</tr>
+								
+				</table>
+			</p:panel>			
+
+			<p:panel id="pnlPregunta8">
+				<table>
+					<tr>
+						<td>
+							<h:outputText value="¿Cuánto tiempo se tomó para conseguir empleo de acuerdo a la denominación de su título? (Seleccione una de las opciones)" />
+						</td>   
+					</tr>
+					<tr>
+						<td>			
+							<p:selectOneRadio id="pregunta8">  
+		        				<f:selectItem itemLabel="Menos de un año." itemValue="1" />  
+		        				<f:selectItem itemLabel="Un año." itemValue="2" />  
+		        				<f:selectItem itemLabel="Dos años." itemValue="3" />
+		        				<f:selectItem itemLabel="Tres años." itemValue="4" />
+		        				<f:selectItem itemLabel="Más de tres años." itemValue="5" />
+		        			</p:selectOneRadio>
+		        		</td>	       			
+					</tr>
+								
+				</table>
+			</p:panel>
+
 		
 		</p:panel>
 
