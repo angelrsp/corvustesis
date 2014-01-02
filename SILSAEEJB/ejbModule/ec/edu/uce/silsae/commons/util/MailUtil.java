@@ -36,6 +36,7 @@ public class MailUtil {
 	        init();
 	        try {
 	        	log.info("send");
+	        	log.info("send "+destino);
 	            MimeMessage message = new MimeMessage(session);
 	            message.setFrom(new InternetAddress((String) properties.get("mail.smtp.mail.sender")));
 	            message.addRecipient(Message.RecipientType.TO, new InternetAddress(destino));

@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ec.edu.uce.silsae.commons.dto.util.CredencialesDTO;
+import ec.edu.uce.silsae.commons.util.MailUtil;
 import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.negocio.AdministracionService;
 import ec.edu.uce.silsae.ejb.persistence.dao.FactoryDAO;
@@ -91,7 +92,12 @@ public class AdministracionServiceImpl implements AdministracionService{
 	{
 		log.info("cambiarEstadoEmpresa");
 		try{
-			
+			if(empresa.getEmpActiva()){
+				new MailUtil().send(empresa.getBemUsuario().getUsuMail(), "SILSAG", "La empresa a sido registrada ya puede ingresar al sistema");
+			}
+			else{
+				new MailUtil().send(empresa.getBemUsuario().getUsuMail(), "SILSAG", "La empresa a sido cancelada del sistema SILSAG");
+			}			
 			factoryDAO.getEmpresaDAOImpl().edit(empresa);
 		}
 		catch(Exception e)

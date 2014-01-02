@@ -25,6 +25,11 @@
 		<class>ec.edu.uce.silsae.ejb.persistence.entities.SoftwareListDTO</class>
 		<class>ec.edu.uce.silsae.ejb.persistence.entities.IdiomaListDTO</class>
 		<class>ec.edu.uce.silsae.ejb.persistence.entities.PostulacionListDTO</class>
+		<class>ec.edu.uce.silsae.ejb.persistence.entities.CandidatoListDTO</class>
+		<class>ec.edu.uce.silsae.ejb.persistence.entities.ControlDTO</class>
+		<class>ec.edu.uce.silsae.ejb.persistence.entities.PreguntaDTO</class>
+		<class>ec.edu.uce.silsae.ejb.persistence.entities.RespuestaDTO</class>
+		<class>ec.edu.uce.silsae.ejb.persistence.entities.ResultadoDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>
