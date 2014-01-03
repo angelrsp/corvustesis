@@ -5,14 +5,40 @@
 	<property name="ireport.y" value="0"/>
 	<field name="canIdentificacion" class="java.lang.String"/>
 	<field name="canPrimerNombre" class="java.lang.String"/>
+	<field name="catTipoIdentificacion" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="36" splitType="Stretch"/>
+		<band height="56" splitType="Stretch">
+			<staticText>
+				<reportElement x="218" y="11" width="136" height="30" uuid="d333f38e-7cd0-4f9f-bc57-46d0ce4eb350"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Curriculum Vitae]]></text>
+			</staticText>
+		</band>
 	</title>
 	<pageHeader>
-		<band height="106" splitType="Stretch"/>
+		<band height="106" splitType="Stretch">
+			<textField>
+				<reportElement x="415" y="14" width="126" height="20" uuid="caff5c1b-2dee-42c8-bfe6-7a6cb8c12fc6"/>
+				<textFieldExpression><![CDATA[$F{canIdentificacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="308" y="14" width="100" height="20" uuid="bf5e08c6-16b9-41b1-a330-2445097ddf0d"/>
+				<text><![CDATA[Identificación:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="14" width="111" height="20" uuid="d8ded7af-1a4b-41f5-9a2a-86b462771be7"/>
+				<text><![CDATA[Tipo de Identificación:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="133" y="14" width="120" height="20" uuid="94a66180-f896-4593-afdf-b69ea0232bab"/>
+				<textFieldExpression><![CDATA[$F{catTipoIdentificacion}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="31" splitType="Stretch"/>
