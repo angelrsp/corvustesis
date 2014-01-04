@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="indicadoresPU" transaction-type="JTA">
+		<jta-data-source>java:/postgresqlSilsaeDS</jta-data-source>
+		<class>ec.edu.uce.indicadores.ejb.persistence.entities.ContactoDTO</class>
+		<class>ec.edu.uce.indicadores.ejb.persistence.entities.EvidenciaDTO</class>
+		<class>ec.edu.uce.indicadores.ejb.persistence.entities.HistoricoIndicadorDTO</class>
+		<class>ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO</class>
+		<class>ec.edu.uce.indicadores.ejb.persistence.entities.IndicadorDTO</class>
+		<class>ec.edu.uce.indicadores.ejb.persistence.entities.LocalizacionDTO</class>
+		<class>ec.edu.uce.indicadores.ejb.persistence.entities.ModeloDTO</class>
+		<class>ec.edu.uce.indicadores.ejb.persistence.entities.RegistroDTO</class>
+		<class>ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegal</class>
+		<class>ec.edu.uce.indicadores.ejb.persistence.entities.UsuarioDTO</class>
+		<properties>
+			<property name="hibernate.show_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>
