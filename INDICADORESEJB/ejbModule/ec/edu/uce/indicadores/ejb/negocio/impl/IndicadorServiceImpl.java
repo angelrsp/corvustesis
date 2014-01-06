@@ -13,6 +13,7 @@ import ec.edu.uce.indicadores.ejb.negocio.IndicadorService;
 import ec.edu.uce.indicadores.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.ModeloDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalDTO;
 
 @Stateless
@@ -96,5 +97,15 @@ public class IndicadorServiceImpl implements IndicadorService {
 		}
 	}
 
+	@Override
+	public List<ModeloDTO> obtenerModelo() throws IndicadoresException
+	{
+		try {
+			return factoryDAO.getModeloDAOImpl().getAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new IndicadoresException(e);
+		}
+	}
 
 }

@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import ec.edu.uce.indicadores.ejb.persistence.dao.ContactoDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.IesDAO;
+import ec.edu.uce.indicadores.ejb.persistence.dao.ModeloDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.RepresentanteLegalDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.UsuarioDAO;
 
@@ -24,6 +25,8 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private ContactoDAO contactoDAO;
 	
 	private IesDAO iesDAO;
+	
+	private ModeloDAO modeloDAO;
 	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -57,4 +60,11 @@ public class FactoryDAOImpl implements FactoryDAO{
 		return iesDAO;
 	}
 
+	@Override
+	public ModeloDAO getModeloDAOImpl() {
+		if (modeloDAO == null) {
+			modeloDAO = new ModeloDAOImpl(entityManager);
+		}
+		return modeloDAO;
+	}
 }

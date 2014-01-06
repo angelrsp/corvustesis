@@ -7,6 +7,7 @@ import javax.ejb.Local;
 import ec.edu.uce.indicadores.commons.util.IndicadoresException;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.ModeloDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalDTO;
 
 @Local
@@ -27,5 +28,7 @@ public interface IndicadorService {
 	List<IesDTO> obtenerIes() throws IndicadoresException;
 
 	void agregarIes(IesDTO iesDTO) throws IndicadoresException;
+
+	List<ModeloDTO> obtenerModelo() throws IndicadoresException;
 
 }
