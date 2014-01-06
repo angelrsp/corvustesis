@@ -37,6 +37,7 @@ public class HistoricoIndicadorController extends SelectItemController implement
 	private Object ies;
 	
 	private TreeNode rootNode;
+	private TreeNode selectedNode;
 	
 	@PostConstruct
 	private void init() throws IndicadoresException
@@ -78,6 +79,16 @@ public class HistoricoIndicadorController extends SelectItemController implement
 		this.rootNode = rootNode;
 	}
 	
+	public TreeNode getSelectedNode() {
+		return selectedNode;
+	}
+
+
+	public void setSelectedNode(TreeNode selectedNode) {
+		this.selectedNode = selectedNode;
+	}
+
+
 	private void obtenerArbol()
 	{
 		try {
@@ -120,7 +131,15 @@ public class HistoricoIndicadorController extends SelectItemController implement
    }
 
 	public void onNodeSelect() {
-		RequestContext rc = RequestContext.getCurrentInstance();
-		rc.execute("PF('dlgValor').show();");
+		IndicadorDTO ind=(IndicadorDTO) selectedNode.getData();
+		if(ind.getIndIndicadors().isEmpty())
+		{
+			RequestContext rc = RequestContext.getCurrentInstance();
+			rc.execute("PF('dlgValor').show();");
+		}
+		else
+		{
+			JsfUtil.addErrorMessage("Solo se permite en los nudos finales");
+		}
 	}
 }
