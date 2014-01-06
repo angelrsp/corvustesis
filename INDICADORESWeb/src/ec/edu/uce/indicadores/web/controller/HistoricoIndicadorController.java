@@ -1,7 +1,6 @@
 package ec.edu.uce.indicadores.web.controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,6 +8,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
@@ -20,15 +20,14 @@ import ec.edu.uce.indicadores.ejb.persistence.entities.ModeloDTO;
 import ec.edu.uce.indicadores.web.util.JsfUtil;
 
 @ViewScoped
-@ManagedBean(name = "indicadorController")
-public class IndicadorController extends SelectItemController implements Serializable{
+@ManagedBean(name = "historicoIndicadorController")
+public class HistoricoIndicadorController extends SelectItemController implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	@EJB
 	private IndicadorService indicadorService;
 	
@@ -37,30 +36,16 @@ public class IndicadorController extends SelectItemController implements Seriali
 	private Object modelo;
 	private Object ies;
 	
-	private int predecesor;
-	
-	List<IndicadorDTO> indicadorList;
-	
 	private TreeNode rootNode;
-
 	
 	@PostConstruct
 	private void init() throws IndicadoresException
 	{
 		indicadorDTO=new IndicadorDTO();
-		indicadorList=new ArrayList<IndicadorDTO>();
-		indicadorList=indicadorService.obtenerIndicador();
 		obtenerArbol();
 	}
-
-	public IndicadorDTO getIndicadorDTO() {
-		return indicadorDTO;
-	}
-
-	public void setIndicadorDTO(IndicadorDTO indicadorDTO) {
-		this.indicadorDTO = indicadorDTO;
-	}
-
+	
+	
 	public Object getModelo() {
 		return modelo;
 	}
@@ -77,54 +62,20 @@ public class IndicadorController extends SelectItemController implements Seriali
 		this.ies = ies;
 	}
 	
+	public IndicadorDTO getIndicadorDTO() {
+		return indicadorDTO;
+	}
+
+	public void setIndicadorDTO(IndicadorDTO indicadorDTO) {
+		this.indicadorDTO = indicadorDTO;
+	}
+	
 	public TreeNode getRootNode() {
 		return rootNode;
 	}
 
 	public void setRootNode(TreeNode rootNode) {
 		this.rootNode = rootNode;
-	}
-
-	
-	public List<IndicadorDTO> getIndicadorList() {
-		return indicadorList;
-	}
-
-	public void setIndicadorList(List<IndicadorDTO> indicadorList) {
-		this.indicadorList = indicadorList;
-	}
-
-	public int getPredecesor() {
-		return predecesor;
-	}
-
-	public void setPredecesor(int predecesor) {
-		this.predecesor = predecesor;
-	}
-
-	public void agregarIndicador()
-	{
-		try {
-			IesDTO iesDTO=new IesDTO();
-			ModeloDTO modeloDTO=new ModeloDTO();
-			IndicadorDTO predecesor=new IndicadorDTO();
-			if(getPredecesor()>0)
-			{
-				predecesor.setIndCodigo(getPredecesor());
-				getIndicadorDTO().setIndIndicador(predecesor);
-			}
-			iesDTO.setIesCodigo(Integer.parseInt(getIes().toString()));
-			modeloDTO.setModCodigo(Integer.parseInt(getModelo().toString()));
-			getIndicadorDTO().setIndy(iesDTO);
-			getIndicadorDTO().setIndModeloBean(modeloDTO);
-			indicadorService.agregarIndicador(getIndicadorDTO());
-			indicadorDTO=new IndicadorDTO();
-			obtenerArbol();
-			JsfUtil.addInfoMessage("Guardado Exitosamente");
-		} catch (IndicadoresException e) {
-			// TODO Auto-generated catch block
-			JsfUtil.addErrorMessage(e.toString());
-		}
 	}
 	
 	private void obtenerArbol()
@@ -163,9 +114,13 @@ public class IndicadorController extends SelectItemController implements Seriali
         TreeNode newNode= new DefaultTreeNode(ttParent, parent);
         for (IndicadorDTO tt : ttParent.getIndIndicadors()){
              TreeNode newNode2= newNodeWithChildren(tt, newNode);
+             
         }
         return newNode;
    }
 
-
+	public void onNodeSelect() {
+		RequestContext rc = RequestContext.getCurrentInstance();
+		rc.execute("PF('dlgValor').show();");
+	}
 }
