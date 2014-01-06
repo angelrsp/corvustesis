@@ -27,7 +27,7 @@
 					<tr>
 							<td><h:outputLabel value="#{i18n['label.ies']}:&#160;" /> </td>
 							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{indicadorController.ies}">
-										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="0"/>
 										<f:selectItems value="#{indicadorController.iesList}"></f:selectItems>
 							</p:selectOneMenu></td>
 					</tr>
@@ -69,14 +69,14 @@
 
 					<tr>
 						<td><h:outputLabel value="#{i18n['label.predecesor']}:&#160;" /> </td>
-							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.predecesor']}:&#160;#{i18n['label.requerido']}">
+							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.predecesor']}:&#160;#{i18n['label.requerido']}" value="#{indicadorController.predecesor}">
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
 									<f:selectItems value="#{indicadorController.indicadorList}" var="in" itemLabel="#{in.indNombreCorto}" itemValue="#{in.indCodigo}"></f:selectItems>
 							</p:selectOneMenu></td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center">
-							<p:commandButton actionListener="#{indicadorController.agregarIndicador}" value="#{i18n['boton.guardar']}" process="pnlDatos"/> </td>
+							<p:commandButton actionListener="#{indicadorController.agregarIndicador}" value="#{i18n['boton.guardar']}" process="pnlDatos" update="tree,pnlDatos,growl"/> </td>
 					</tr>
 					
 				</table>	
