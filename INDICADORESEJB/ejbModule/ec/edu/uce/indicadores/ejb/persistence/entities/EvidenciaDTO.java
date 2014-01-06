@@ -10,6 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="ind_evidencias")
+@NamedQuery(name="EvidenciaDTO.findAll", query="SELECT e FROM EvidenciaDTO e")
 public class EvidenciaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 

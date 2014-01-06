@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="ind_historico_indicador")
+@NamedQuery(name="HistoricoIndicadorDTO.findAll", query="SELECT h FROM HistoricoIndicadorDTO h")
 public class HistoricoIndicadorDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 

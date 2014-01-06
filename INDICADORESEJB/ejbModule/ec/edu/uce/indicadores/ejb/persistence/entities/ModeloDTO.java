@@ -11,6 +11,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="ind_modelo")
+@NamedQuery(name="ModeloDTO.findAll", query="SELECT m FROM ModeloDTO m")
 public class ModeloDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 

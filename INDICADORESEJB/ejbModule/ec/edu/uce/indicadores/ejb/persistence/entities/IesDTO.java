@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="ind_ies")
+@NamedQuery(name="IesDTO.findAll", query="SELECT i FROM IesDTO i")
 public class IesDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
