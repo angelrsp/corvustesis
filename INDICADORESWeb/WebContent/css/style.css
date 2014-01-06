@@ -1,0 +1,20 @@
+body{font-size: 9pt;font-weight:normal;}
+.header-welcome{font-size: 8pt;}
+.header-time{font-size: 8pt;}
+.menu{width:100%;font-size:8pt;}
+.comButton{font-size: 9pt;}
+.tablButton{height: 12pt;width: 17pt}
+.selBoolButton{font-size: 8pt;}
+.inputText{text-transform: uppercase;}
+.panelGrid td, .panelGrid tr{padding: 0.2em 0.1em;border: none; }
+
+/*tablas*/
+.tabla {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.ui-menuitem-text
+{
+	font-weight: bold;	
+}
