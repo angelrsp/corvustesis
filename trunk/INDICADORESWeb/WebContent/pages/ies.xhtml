@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/template/privado.xhtml">
+		<ui:define name="contenido">
+
+			<fieldset>
+				<p:growl id="growl" showDetail="false" />
+				<p:panel id="pnlDatos" styleClass="tabla"
+					header="Instituciones de Educacion Superior">
+
+					<table>
+					
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.nombre.corto']}:&#160;" /> </td>
+							<td><p:inputText required="true"
+										requiredMessage="#{i18n['label.nombre.corto']}&#160;#{i18n['label.requerido']}"
+										value="#{iesController.iesDTO.iesNombreCorto}"/></td>
+						</tr>
+	
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.razon.social']}:&#160;" /> </td>
+							<td><p:inputText required="true"
+										requiredMessage="#{i18n['label.apellidos']}&#160;#{i18n['label.requerido']}"
+										value="#{iesController.iesDTO.iesRazonSocial}"/></td>						
+						</tr>
+	
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.ruc']}:&#160;" /> </td>
+							<td><p:inputText required="true"
+										requiredMessage="#{i18n['label.ruc']}&#160;#{i18n['label.requerido']}"
+										value="#{iesController.iesDTO.iesRuc}"/></td>						
+						</tr>
+	
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.fecha.creacion']}:&#160;" /> </td>
+							<td><p:calendar required="true"
+										requiredMessage="#{i18n['label.fecha.creacion']}&#160;#{i18n['label.requerido']}"
+										value="#{iesController.fechaCreacion}" pattern="#{i18n['pattern.fecha']}"></p:calendar></td>						
+						</tr>
+
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.ley.creacion']}:&#160;" /> </td>
+							<td><p:inputText required="true"
+										requiredMessage="#{i18n['label.ley.creacion']}&#160;#{i18n['label.requerido']}"
+										value="#{iesController.iesDTO.iesLeyCreacion}"/></td>
+						</tr>
+						
+						<tr>
+							<td colspan="2" align="center">
+								<p:commandButton actionListener="#{iesController.guardarIes}" value="#{i18n['boton.guardar']}" process="pnlDatos" update="growl,pnlDatos,tblIes"/> </td>
+						</tr>
+					
+					</table>	
+
+					<p:dataTable id="tblIes" value="#{iesController.iesList}" var="ies">
+
+						<p:column headerText="#{i18n['label.nombre.corto']}">
+							<h:outputText value="#{ies.iesNombreCorto}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.razon.social']}">
+							<h:outputText value="#{ies.iesRazonSocial}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.ruc']}">
+							<h:outputText value="#{ies.iesRuc}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.fecha.creacion']}">
+							<h:outputText value="#{ies.iesFechaCreacion}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.ley.creacion']}">
+							<h:outputText value="#{ies.iesLeyCreacion}" />
+						</p:column>
+					
+					</p:dataTable>
+						
+				</p:panel>
+			</fieldset>
+
+		</ui:define>
+	</ui:composition>
+
+</body>
+</html>

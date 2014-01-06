@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/template/privado.xhtml">
+		<ui:define name="contenido">
+
+			<fieldset>
+				<p:growl id="growl" showDetail="false" />
+				
+				<p:panel id="pnlDatos" styleClass="tabla"
+					header="Representante Legal">				
+				<table>
+				
+					<tr>
+						<td><h:outputLabel value="#{i18n['label.nombres']}:&#160;" /> </td>
+						<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.nombres']}&#160;#{i18n['label.requerido']}"
+									value="#{representanteLegalController.representanteLegalDTO.rleNombres}"/></td>
+					</tr>
+
+					<tr>
+						<td><h:outputLabel value="#{i18n['label.apellidos']}:&#160;" /> </td>
+						<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.apellidos']}&#160;#{i18n['label.requerido']}"
+									value="#{representanteLegalController.representanteLegalDTO.rleApellidos}"/></td>						
+					</tr>
+
+					<tr>
+						<td><h:outputLabel value="#{i18n['label.tipo']}:&#160;" /> </td>
+						<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.tipo']}&#160;#{i18n['label.requerido']}"
+									value="#{representanteLegalController.representanteLegalDTO.rleTipo}"/></td>						
+					</tr>
+
+					<tr>
+						<td><h:outputLabel value="#{i18n['label.di']}:&#160;" /> </td>
+						<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.di']}&#160;#{i18n['label.requerido']}"
+									value="#{representanteLegalController.representanteLegalDTO.rleDi}"/></td>						
+					</tr>
+
+
+					<tr>
+						<td colspan="2" align="center">
+							<p:commandButton actionListener="#{representanteLegalController.guardarRepresentante}" value="#{i18n['boton.guardar']}" process="pnlDatos" update="growl,pnlDatos,repList"/> </td>
+					</tr>
+				
+				</table>	
+
+				
+				<p:dataTable id="repList" value="#{representanteLegalController.representanteList}" var="rep">
+
+					<p:column headerText="#{i18n['label.nombres']}">
+						<h:outputText value="#{rep.rleNombres}" />
+					</p:column>
+
+					<p:column headerText="#{i18n['label.apellidos']}">
+						<h:outputText value="#{rep.rleApellidos}" />
+					</p:column>
+
+					<p:column headerText="#{i18n['label.tipo']}">
+						<h:outputText value="#{rep.rleTipo}" />
+					</p:column>
+
+					<p:column headerText="#{i18n['label.di']}">
+						<h:outputText value="#{rep.rleDi}" />
+					</p:column>
+
+				<p:column style="width:10%" headerText="#{i18n['label.contactos']}">  
+	                <p:commandButton actionListener="#{representanteLegalController.cargarContacto(rep)}" oncomplete="PF('dlgContacto').show()" icon="ui-icon-search" 
+	                	update=":contenido:dlgContacto" process="repList" title="#{i18n['label.ver.mas']}">    
+	    	        </p:commandButton>  
+		        </p:column>
+
+								
+				</p:dataTable>
+
+											
+				</p:panel>
+				
+<!-- 				<p:commandButton id="showDialogButton" type="button" value="Show" onclick="PF('dlgContacto').show();" /> -->
+				
+				<p:dialog id="dlgContacto" widgetVar="dlgContacto" modal="true" header="Contactos">
+				
+					<p:panel id="pnlContactos" styleClass="tabla"
+						header="">
+						
+					<p:accordionPanel activeIndex="null">
+					<p:tab title="#{i18n['boton.agregar']}">  
+										
+					<table>
+					
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.tipo']}:&#160;" /> </td>
+							<td><p:inputText required="true"
+										requiredMessage="#{i18n['label.tipo']}&#160;#{i18n['label.requerido']}"
+										value="#{representanteLegalController.contactoDTO.conNombre}"/></td>
+						</tr>
+	
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.valor']}:&#160;" /> </td>
+							<td><p:inputText required="true"
+										requiredMessage="#{i18n['label.valor']}&#160;#{i18n['label.requerido']}"
+										value="#{representanteLegalController.contactoDTO.conValor}"/></td>						
+						</tr>
+	
+						<tr>
+							<td colspan="2" align="center">
+								<p:commandButton actionListener="#{representanteLegalController.agregarContacto}" value="#{i18n['boton.agregar']}" process=":contenido:pnlContactos" update=":contenido:pnlContactos,:contenido:growl,:contenido:tblContacto" /> </td>
+						</tr>
+					
+					</table>	
+	
+					</p:tab>
+					</p:accordionPanel>
+												
+					</p:panel>
+
+					<p:dataTable id="tblContacto" value="#{representanteLegalController.contactoList}" var="con">
+
+						<p:column headerText="#{i18n['label.tipo']}">
+							<h:outputText value="#{con.conNombre}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.valor']}">
+							<h:outputText value="#{con.conValor}" />
+						</p:column>
+					
+					</p:dataTable>					
+
+				</p:dialog>				
+				
+				
+			</fieldset>
+
+		</ui:define>
+	</ui:composition>
+
+</body>
+</html>
