@@ -31,7 +31,7 @@ public class RegistroDTO implements Serializable {
 	//bi-directional many-to-one association to RepresentanteLegal
 	@ManyToOne
 	@JoinColumn(name="reg_representante_legal")
-	private RepresentanteLegal indRepresentanteLegal;
+	private RepresentanteLegalDTO indRepresentanteLegal;
 
 	public RegistroDTO() {
 	}
@@ -60,11 +60,11 @@ public class RegistroDTO implements Serializable {
 		this.indy = indy;
 	}
 
-	public RepresentanteLegal getIndRepresentanteLegal() {
+	public RepresentanteLegalDTO getIndRepresentanteLegal() {
 		return this.indRepresentanteLegal;
 	}
 
-	public void setIndRepresentanteLegal(RepresentanteLegal indRepresentanteLegal) {
+	public void setIndRepresentanteLegal(RepresentanteLegalDTO indRepresentanteLegal) {
 		this.indRepresentanteLegal = indRepresentanteLegal;
 	}
 

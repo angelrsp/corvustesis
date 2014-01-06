@@ -15,7 +15,7 @@ public class LocalizacionDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="IND_LOCALIZACION_LOCCODIGO_GENERATOR", sequenceName="IND_LOCALIZACION_LOC_CODIGO_SEQ")
+	@SequenceGenerator(name="IND_LOCALIZACION_LOCCODIGO_GENERATOR", sequenceName="IND_LOCALIZACION_LOC_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="IND_LOCALIZACION_LOCCODIGO_GENERATOR")
 	@Column(name="loc_codigo")
 	private Integer locCodigo;

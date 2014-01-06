@@ -11,11 +11,11 @@ import java.util.List;
  */
 @Entity
 @Table(name="ind_representante_legal")
-public class RepresentanteLegal implements Serializable {
+public class RepresentanteLegalDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="IND_REPRESENTANTE_LEGAL_RLECODIGO_GENERATOR", sequenceName="IND_REPRESENTANTE_LEGAL_RLE_CODIGO_SEQ")
+	@SequenceGenerator(name="IND_REPRESENTANTE_LEGAL_RLECODIGO_GENERATOR", sequenceName="IND_REPRESENTANTE_LEGAL_RLE_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="IND_REPRESENTANTE_LEGAL_RLECODIGO_GENERATOR")
 	@Column(name="rle_codigo")
 	private Integer rleCodigo;
@@ -40,7 +40,7 @@ public class RepresentanteLegal implements Serializable {
 	@OneToMany(mappedBy="indRepresentanteLegal")
 	private List<RegistroDTO> indRegistros;
 
-	public RepresentanteLegal() {
+	public RepresentanteLegalDTO() {
 	}
 
 	public Integer getRleCodigo() {

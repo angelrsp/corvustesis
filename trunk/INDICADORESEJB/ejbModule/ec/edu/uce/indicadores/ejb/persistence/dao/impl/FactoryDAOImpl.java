@@ -4,7 +4,11 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import ec.edu.uce.indicadores.ejb.persistence.dao.ContactoDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.FactoryDAO;
+import ec.edu.uce.indicadores.ejb.persistence.dao.IesDAO;
+import ec.edu.uce.indicadores.ejb.persistence.dao.RepresentanteLegalDAO;
+import ec.edu.uce.indicadores.ejb.persistence.dao.UsuarioDAO;
 
 
 @Stateless
@@ -13,54 +17,44 @@ public class FactoryDAOImpl implements FactoryDAO{
 	@PersistenceContext(unitName = "indicadoresPU")
 	private EntityManager entityManager;
 
-//	private UsuarioDAO usuarioDAO;
-//	
-//	private CandidatoDAO candidatoDAO;
-//	
-//	private AvisoDAO avisoDAO;
-//	
-//	private PerfilDAO perfilDAO;
-//	
-//	private CatalogoDAO catalogoDAO; 
-//	
-//	@Override
-//	public UsuarioDAO getUsuarioDAOImpl() {
-//		if (usuarioDAO == null) {
-//			usuarioDAO = new UsuarioDAOImpl(entityManager);
-//		}
-//		return usuarioDAO;
-//	}
-//
-//	@Override
-//	public CandidatoDAO getCandidatoDAOImpl() {
-//		if (candidatoDAO == null) {
-//			candidatoDAO = new CandidatoDAOImpl(entityManager);
-//		}
-//		return candidatoDAO;
-//	}
-//
-//	@Override
-//	public AvisoDAO getAvisoDAOImpl() {
-//		if (avisoDAO == null) {
-//			avisoDAO = new AvisoDAOImpl(entityManager);
-//		}
-//		return avisoDAO;
-//	}
-//
-//	@Override
-//	public PerfilDAO getPerfilDAOImpl() {
-//		if (perfilDAO == null) {
-//			perfilDAO = new PerfilDAOImpl(entityManager);
-//		}
-//		return perfilDAO;	
-//	}
-//
-//	@Override
-//	public CatalogoDAO getCatalogoImpl() {
-//		if (catalogoDAO == null) {
-//			catalogoDAO = new CatalogoDAOImpl(entityManager);
-//		}
-//		return catalogoDAO;	
-//	}
+	private UsuarioDAO usuarioDAO;
+	
+	private RepresentanteLegalDAO representanteLegalDAO;
+
+	private ContactoDAO contactoDAO;
+	
+	private IesDAO iesDAO;
+	
+	@Override
+	public UsuarioDAO getUsuarioDAOImpl() {
+		if (usuarioDAO == null) {
+			usuarioDAO = new UsuarioDAOImpl(entityManager);
+		}
+		return usuarioDAO;
+	}
+	
+	@Override
+	public RepresentanteLegalDAO getRepresentanteLegalDAOImpl() {
+		if (representanteLegalDAO == null) {
+			representanteLegalDAO = new RepresentanteLegalDAOImpl(entityManager);
+		}
+		return representanteLegalDAO;
+	}
+
+	@Override
+	public ContactoDAO getContactoDAOImpl() {
+		if (contactoDAO == null) {
+			contactoDAO = new ContactoDAOImpl(entityManager);
+		}
+		return contactoDAO;
+	}
+
+	@Override
+	public IesDAO getIesDAOImpl() {
+		if (iesDAO == null) {
+			iesDAO = new IesDAOImpl(entityManager);
+		}
+		return iesDAO;
+	}
 
 }

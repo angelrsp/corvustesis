@@ -16,7 +16,7 @@ public class IesDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="IND_IES_IESCODIGO_GENERATOR", sequenceName="IND_IES_IES_CODIGO_SEQ")
+	@SequenceGenerator(name="IND_IES_IESCODIGO_GENERATOR", sequenceName="IND_IES_IES_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="IND_IES_IESCODIGO_GENERATOR")
 	@Column(name="ies_codigo")
 	private Integer iesCodigo;
