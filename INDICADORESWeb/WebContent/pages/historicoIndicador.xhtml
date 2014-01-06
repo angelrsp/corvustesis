@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/template/privado.xhtml">
+		<ui:define name="contenido">
+
+			<fieldset>
+				<p:growl id="growl" showDetail="false" />
+				<p:panel id="pnlDatos" styleClass="tabla"
+					header="Historico Indicador">
+					
+					<table>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.modelo']}:&#160;" /> </td>
+							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.modelo']}:&#160;#{i18n['label.requerido']}" value="#{historicoIndicadorController.modelo}">
+										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+										<f:selectItems value="#{historicoIndicadorController.modeloList}"></f:selectItems>
+							</p:selectOneMenu></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.ies']}:&#160;" /> </td>
+							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{historicoIndicadorController.ies}">
+										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+										<f:selectItems value="#{historicoIndicadorController.iesList}"></f:selectItems>
+							</p:selectOneMenu></td>
+						</tr>
+					</table>
+					
+				<p:tree value="#{historicoIndicadorController.rootNode}" var="node" id="tree" selectionMode="single">
+					<p:ajax event="select" listener="#{historicoIndicadorController.onNodeSelect}" />  
+			        <p:treeNode id="treeNode">  
+			            <h:outputText value="#{node.indNombreCorto}"/>  
+			        </p:treeNode>  
+			    </p:tree>  
+					
+				</p:panel>
+				
+				<p:dialog id="dlgValor" widgetVar="dlgValor" modal="true" header="Valores" closeOnEscape="true">
+				
+				</p:dialog>
+				
+				
+			</fieldset>
+		</ui:define>
+	</ui:composition>
+</body>					
+
+</html>
