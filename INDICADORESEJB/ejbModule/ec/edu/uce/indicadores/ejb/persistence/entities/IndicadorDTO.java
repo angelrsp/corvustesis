@@ -15,7 +15,7 @@ public class IndicadorDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="IND_INDICADOR_INDCODIGO_GENERATOR", sequenceName="IND_INDICADOR_IND_CODIGO_SEQ")
+	@SequenceGenerator(name="IND_INDICADOR_INDCODIGO_GENERATOR", sequenceName="IND_INDICADOR_IND_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="IND_INDICADOR_INDCODIGO_GENERATOR")
 	@Column(name="ind_codigo")
 	private Integer indCodigo;

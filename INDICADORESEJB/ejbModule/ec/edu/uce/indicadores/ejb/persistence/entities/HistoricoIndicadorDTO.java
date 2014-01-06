@@ -16,7 +16,7 @@ public class HistoricoIndicadorDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="IND_HISTORICO_INDICADOR_HINCODIGO_GENERATOR", sequenceName="IND_HISTORICO_INDICADOR_HIN_CODIGO_SEQ")
+	@SequenceGenerator(name="IND_HISTORICO_INDICADOR_HINCODIGO_GENERATOR", sequenceName="IND_HISTORICO_INDICADOR_HIN_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="IND_HISTORICO_INDICADOR_HINCODIGO_GENERATOR")
 	@Column(name="hin_codigo")
 	private Integer hinCodigo;

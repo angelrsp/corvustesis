@@ -14,7 +14,7 @@ public class EvidenciaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="IND_EVIDENCIAS_EVICODIGO_GENERATOR", sequenceName="IND_EVIDENCIAS_EVI_CODIGO_SEQ")
+	@SequenceGenerator(name="IND_EVIDENCIAS_EVICODIGO_GENERATOR", sequenceName="IND_EVIDENCIAS_EVI_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="IND_EVIDENCIAS_EVICODIGO_GENERATOR")
 	@Column(name="evi_codigo")
 	private Integer eviCodigo;
