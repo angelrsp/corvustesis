@@ -12,5 +12,8 @@ public interface FactoryDAO {
 	ContactoDAO getContactoDAOImpl();
 
 	IesDAO getIesDAOImpl();
+
+	ModeloDAO getModeloDAOImpl();
+
 	
 }
