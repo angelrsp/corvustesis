@@ -33,8 +33,8 @@
 						</tr>
 					</table>
 					
-				<p:tree value="#{historicoIndicadorController.rootNode}" var="node" id="tree" selectionMode="single">
-					<p:ajax event="select" listener="#{historicoIndicadorController.onNodeSelect}" />  
+				<p:tree value="#{historicoIndicadorController.rootNode}" var="node" id="tree" selectionMode="single" selection="#{historicoIndicadorController.selectedNode}">
+					<p:ajax event="select" listener="#{historicoIndicadorController.onNodeSelect}" update=":contenido:growl"/>  
 			        <p:treeNode id="treeNode">  
 			            <h:outputText value="#{node.indNombreCorto}"/>  
 			        </p:treeNode>  
@@ -43,6 +43,15 @@
 				</p:panel>
 				
 				<p:dialog id="dlgValor" widgetVar="dlgValor" modal="true" header="Valores" closeOnEscape="true">
+				
+					<table>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.valor']}:&#160;" /> </td>
+							<td><p:inputText required="true"
+										requiredMessage="#{i18n['label.valor']}&#160;#{i18n['label.requerido']}"
+										value="#{representanteLegalController.representanteLegalDTO.rleNombres}"/></td>
+						</tr>
+					</table>
 				
 				</p:dialog>
 				
