@@ -69,15 +69,23 @@
 
 					<tr>
 						<td><h:outputLabel value="#{i18n['label.predecesor']}:&#160;" /> </td>
-						<td><p:inputText required="true"
-									requiredMessage="#{i18n['label.predecesor']}&#160;#{i18n['label.requerido']}"
-									value="#{indicadorController.indicadorDTO.indVersion}"/></td>
+							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.predecesor']}:&#160;#{i18n['label.requerido']}">
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+									<f:selectItems value="#{indicadorController.indicadorList}" var="in" itemLabel="#{in.indNombreCorto}" itemValue="#{in.indCodigo}"></f:selectItems>
+							</p:selectOneMenu></td>
 					</tr>
-
+					<tr>
+						<td colspan="2" align="center">
+							<p:commandButton actionListener="#{indicadorController.agregarIndicador}" value="#{i18n['boton.guardar']}" process="pnlDatos"/> </td>
+					</tr>
 					
 				</table>	
 
-					
+				<p:tree value="#{indicadorController.rootNode}" var="node" id="tree">  
+			        <p:treeNode id="treeNode">  
+			            <h:outputText value="#{node.indNombreCorto}"/>  
+			        </p:treeNode>  
+			    </p:tree>  
 						
 				</p:panel>
 			</fieldset>
