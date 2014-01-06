@@ -12,6 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="ind_registro")
+@NamedQuery(name="RegistroDTO.findAll", query="SELECT r FROM RegistroDTO r")
 public class RegistroDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,7 +29,7 @@ public class RegistroDTO implements Serializable {
 	@JoinColumn(name="reg_ies")
 	private IesDTO indy;
 
-	//bi-directional many-to-one association to RepresentanteLegal
+	//bi-directional many-to-one association to RepresentanteLegalDTO
 	@ManyToOne
 	@JoinColumn(name="reg_representante_legal")
 	private RepresentanteLegalDTO indRepresentanteLegal;

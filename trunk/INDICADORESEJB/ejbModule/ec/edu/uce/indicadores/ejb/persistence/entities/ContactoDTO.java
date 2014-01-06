@@ -10,11 +10,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="ind_contacto")
+@NamedQuery(name="ContactoDTO.findAll", query="SELECT c FROM ContactoDTO c")
 public class ContactoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="IND_CONTACTO_CONCODIGO_GENERATOR", sequenceName="IND_CONTACTO_CON_CODIGO_SEQ")
+	@SequenceGenerator(name="IND_CONTACTO_CONCODIGO_GENERATOR", sequenceName="IND_CONTACTO_CON_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="IND_CONTACTO_CONCODIGO_GENERATOR")
 	@Column(name="con_codigo")
 	private Integer conCodigo;
@@ -25,7 +26,7 @@ public class ContactoDTO implements Serializable {
 	@Column(name="con_valor")
 	private String conValor;
 
-	//bi-directional many-to-one association to RepresentanteLegal
+	//bi-directional many-to-one association to RepresentanteLegalDTO
 	@ManyToOne
 	@JoinColumn(name="con_representante_legal")
 	private RepresentanteLegalDTO indRepresentanteLegal;

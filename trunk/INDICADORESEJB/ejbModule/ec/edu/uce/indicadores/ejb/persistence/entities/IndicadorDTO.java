@@ -11,6 +11,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="ind_indicador")
+@NamedQuery(name="IndicadorDTO.findAll", query="SELECT i FROM IndicadorDTO i")
 public class IndicadorDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -43,6 +44,15 @@ public class IndicadorDTO implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="ind_ies")
 	private IesDTO indy;
+
+	//bi-directional many-to-one association to IndicadorDTO
+	@ManyToOne
+	@JoinColumn(name="ind_predecesor")
+	private IndicadorDTO indIndicador;
+
+	//bi-directional many-to-one association to IndicadorDTO
+	@OneToMany(mappedBy="indIndicador",fetch=FetchType.EAGER)
+	private List<IndicadorDTO> indIndicadors;
 
 	//bi-directional many-to-one association to ModeloDTO
 	@ManyToOne
@@ -128,6 +138,36 @@ public class IndicadorDTO implements Serializable {
 
 	public void setIndy(IesDTO indy) {
 		this.indy = indy;
+	}
+
+	public IndicadorDTO getIndIndicador() {
+		return this.indIndicador;
+	}
+
+	public void setIndIndicador(IndicadorDTO indIndicador) {
+		this.indIndicador = indIndicador;
+	}
+
+	public List<IndicadorDTO> getIndIndicadors() {
+		return this.indIndicadors;
+	}
+
+	public void setIndIndicadors(List<IndicadorDTO> indIndicadors) {
+		this.indIndicadors = indIndicadors;
+	}
+
+	public IndicadorDTO addIndIndicador(IndicadorDTO indIndicador) {
+		getIndIndicadors().add(indIndicador);
+		indIndicador.setIndIndicador(this);
+
+		return indIndicador;
+	}
+
+	public IndicadorDTO removeIndIndicador(IndicadorDTO indIndicador) {
+		getIndIndicadors().remove(indIndicador);
+		indIndicador.setIndIndicador(null);
+
+		return indIndicador;
 	}
 
 	public ModeloDTO getIndModeloBean() {

@@ -10,6 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="ind_usuario")
+@NamedQuery(name="UsuarioDTO.findAll", query="SELECT u FROM UsuarioDTO u")
 public class UsuarioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 

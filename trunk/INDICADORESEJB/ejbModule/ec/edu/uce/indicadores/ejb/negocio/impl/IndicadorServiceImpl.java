@@ -13,6 +13,7 @@ import ec.edu.uce.indicadores.ejb.negocio.IndicadorService;
 import ec.edu.uce.indicadores.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.IndicadorDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ModeloDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalDTO;
 
@@ -63,6 +64,18 @@ public class IndicadorServiceImpl implements IndicadorService {
 		}
 	}
 
+	@Override
+	public void agregarIndicador(IndicadorDTO indicadorDTO) throws IndicadoresException
+	{
+		log.info("agregarIndicador");
+		try {
+			factoryDAO.getIndicadorDAOImpl().create(indicadorDTO);
+		} catch (Exception e) {
+			log.error(e.toString());
+			throw new IndicadoresException(e);
+		}
+	}
+
 	
 	@Override
 	public List<RepresentanteLegalDTO> obtenerRepresentantes() throws IndicadoresException
@@ -102,6 +115,39 @@ public class IndicadorServiceImpl implements IndicadorService {
 	{
 		try {
 			return factoryDAO.getModeloDAOImpl().getAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new IndicadoresException(e);
+		}
+	}
+	
+	@Override
+	public List<IndicadorDTO> obtenerIndicador() throws IndicadoresException
+	{
+		try {
+			return factoryDAO.getIndicadorDAOImpl().getAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new IndicadoresException(e);
+		}
+	}
+	
+	@Override
+	public List<IndicadorDTO> obtenerRaizIndicador(IndicadorDTO indicadorDTO) throws IndicadoresException
+	{
+		try {
+			return factoryDAO.getIndicadorDAOImpl().getRoot(indicadorDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new IndicadoresException(e);
+		}
+	}
+
+	@Override
+	public List<IndicadorDTO> obtenerHijosIndicador(IndicadorDTO indicadorDTO) throws IndicadoresException
+	{
+		try {
+			return factoryDAO.getIndicadorDAOImpl().getChildren(indicadorDTO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			throw new IndicadoresException(e);

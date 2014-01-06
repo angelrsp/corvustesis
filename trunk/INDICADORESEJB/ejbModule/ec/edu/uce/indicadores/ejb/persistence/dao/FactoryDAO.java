@@ -15,5 +15,7 @@ public interface FactoryDAO {
 
 	ModeloDAO getModeloDAOImpl();
 
+	IndicadorDAO getIndicadorDAOImpl();
+
 	
 }
