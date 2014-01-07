@@ -193,6 +193,7 @@ public class ArchivoFactura extends Archivo {
 				facturaDTO.setRetenciones(retencionesDto);
 			}
 			
+			
 			facturaDTO.setInfoFactura(infoFacturaDTO);
 			facturaDTO.setId(XML_ATRIBUTO_ID);
 			facturaDTO.setVersion(XML_ATRIBUTO_VERSION);
@@ -219,8 +220,11 @@ public class ArchivoFactura extends Archivo {
 				} else {
 					
 					RespuestaSolicitud response = ComprobantesElectronicosWs.enviarComprobante(xmlFile);
-					logger.info("response.getEstado(): {}", response.getEstado());
+					//logger.info("response.getEstado(): {}", response.getEstado());
+					logger.info("Respuesta WS: {}", response.getEstado());
+					
 					if (response.getEstado().equals(ComprobantesElectronicosWs.RESPUESTA_RECIBIDA)) {
+						
 						UtilMail.enviar(xmlFile);
 						UtilApplication.moverArchivoProcesado(file, getEstructuraArchivos().get(Constantes.carpetaProcesados));
 						//Agregado por FPU
