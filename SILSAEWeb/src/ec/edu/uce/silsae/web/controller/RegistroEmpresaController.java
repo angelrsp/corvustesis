@@ -81,12 +81,17 @@ public class RegistroEmpresaController extends SelectItemController implements
 	public void registroEmpresa() {
 		log.info("Registrando Empresa");
 		try {
+			if(!getUsuarioRegistro().getNpUsuPassword().equals(getUsuarioRegistro().getUsuPassword()))
+			{
+				JsfUtil.addErrorMessage("Las contraseñas no coinciden");
+				return;
+			}
+			
 			empresa.setBemUsuario(getUsuarioRegistro());
-			empresa.setEmpUbicacion(Integer.valueOf(ubicacion.toString()));
 			empresa.setEmpSector(Integer.valueOf(tipoEmpresa.toString()));
 			empresaService.registrarEmpresa(empresa);
 			RequestContext.getCurrentInstance().execute("mensajeDialog.show()");
-			JsfUtil.addWarningMessage("Su registro esta en proceso de aprobación. Recibirá una notificación de autroización al correo electrónico de registro");
+			//JsfUtil.addWarningMessage("Su registro esta en proceso de aprobación. Recibirá una notificación de autroización al correo electrónico de registro");
 		} catch (SilsaeException e) {
 			JsfUtil.addErrorMessage("Error " + e.toString());
 		} catch (Exception e) {
