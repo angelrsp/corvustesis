@@ -17,14 +17,14 @@
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.usuario']}" /></td>
 							<td><p:inputText
-									required="true"
+									required="true" requiredMessage="#{i18n['label.usuario']}:&#160;#{i18n['label.requerido']}"
 									value="#{loginController.credencialesDTO.username}"
 									placeholder="#{i18n['label.ci.pasaporte']}" /></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.contrasenia']}" /></td>
 							<td><p:password
-									required="true"
+									required="true" requiredMessage="#{i18n['label.contrasenia']}:&#160;#{i18n['label.requerido']}"
 									value="#{loginController.credencialesDTO.password}" placeholder="#{i18n['label.contrasenia']}" /></td>
 						</tr>
 						<tr>
