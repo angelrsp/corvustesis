@@ -23,7 +23,7 @@ public class SoftwareDTO implements Serializable {
 	private Integer proNivel;
 
 	@Column(name="pro_programa")
-	private Integer proPrograma;
+	private String proPrograma;
 
 	//bi-directional many-to-one association to CandidatoDTO
     @ManyToOne
@@ -49,11 +49,11 @@ public class SoftwareDTO implements Serializable {
 		this.proNivel = proNivel;
 	}
 
-	public Integer getProPrograma() {
+	public String getProPrograma() {
 		return this.proPrograma;
 	}
 
-	public void setProPrograma(Integer proPrograma) {
+	public void setProPrograma(String proPrograma) {
 		this.proPrograma = proPrograma;
 	}
 

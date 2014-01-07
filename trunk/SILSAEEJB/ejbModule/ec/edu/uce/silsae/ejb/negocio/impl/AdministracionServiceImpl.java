@@ -93,10 +93,15 @@ public class AdministracionServiceImpl implements AdministracionService{
 		log.info("cambiarEstadoEmpresa");
 		try{
 			if(empresa.getEmpActiva()){
-				new MailUtil().send(empresa.getBemUsuario().getUsuMail(), "SILSAG", "La empresa a sido registrada ya puede ingresar al sistema");
+				StringBuilder sb=new StringBuilder();
+				sb.append("BIENVENIDO.<br/>");
+				sb.append("La empresa registrada cumple con los requisitos.<br/>");
+				sb.append("Usted ya es miembro de SILSAG.<br/>");
+				sb.append("Facultad de Odontología");
+				new MailUtil().send(empresa.getBemUsuario().getUsuMail(), "SILSAG: Verificación y aprobación de Empresa", sb.toString());
 			}
 			else{
-				new MailUtil().send(empresa.getBemUsuario().getUsuMail(), "SILSAG", "La empresa a sido cancelada del sistema SILSAG");
+				new MailUtil().send(empresa.getBemUsuario().getUsuMail(), "SILSAG: Verificación y aprobación de Empresa", "La empresa a sido cancelada del sistema SILSAG");
 			}			
 			factoryDAO.getEmpresaDAOImpl().edit(empresa);
 		}
@@ -123,6 +128,7 @@ public class AdministracionServiceImpl implements AdministracionService{
 				throw new SilsaeException("La contraseña anterior no puede ser igual a la actual");
 			}
 			else if(factoryDAO.getUsuarioDAOImpl().buscarUsuarioLogin(credencialesDTO)!=null){
+				user.setUsuPassword(user.getNpUsuPassword());
 				factoryDAO.getUsuarioDAOImpl().edit(user);	
 			}
 			else{

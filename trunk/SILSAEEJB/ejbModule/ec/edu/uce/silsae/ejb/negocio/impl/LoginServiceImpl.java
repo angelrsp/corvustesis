@@ -37,7 +37,13 @@ public class LoginServiceImpl implements LoginService{
 			UsuarioDTO user=factoryDAO.getUsuarioDAOImpl().buscarUsuario(credencialesDTO);
 			if(user!=null)
 			{
-				new MailUtil().send(user.getUsuMail(), "Su clave", "Su clave es: "+user.getUsuPassword());
+				StringBuilder sb=new StringBuilder();
+				sb.append("La solicitud de recuperación de la clave de acceso he sido procesada.<br/>");
+				sb.append("Su credencial de acceso es: "+user.getUsuPassword()+"<br/>");
+				sb.append("Se recomienda actualizar su contraseña.<br/>");
+				sb.append("Facultad de Odontología");
+				
+				new MailUtil().send(user.getUsuMail(), "SILSAG: Recuperación de su credencial de acceso", sb.toString());
 				return true;
 			}
 			else

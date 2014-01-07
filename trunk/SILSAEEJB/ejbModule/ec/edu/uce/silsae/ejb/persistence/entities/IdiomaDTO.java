@@ -20,7 +20,7 @@ public class IdiomaDTO implements Serializable {
 	private Integer idiCodigo;
 
 	@Column(name="idi_idioma")
-	private Integer idiIdioma;
+	private String idiIdioma;
 
 	@Column(name="idi_nivel")
 	private Integer idiNivel;
@@ -41,11 +41,11 @@ public class IdiomaDTO implements Serializable {
 		this.idiCodigo = idiCodigo;
 	}
 
-	public Integer getIdiIdioma() {
+	public String getIdiIdioma() {
 		return this.idiIdioma;
 	}
 
-	public void setIdiIdioma(Integer idiIdioma) {
+	public void setIdiIdioma(String idiIdioma) {
 		this.idiIdioma = idiIdioma;
 	}
 

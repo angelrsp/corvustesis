@@ -17,9 +17,6 @@ public class SoftwareListDTO implements Serializable {
 	@Column(name="cat_nivel")
 	private String catNivel;
 
-	@Column(name="cat_programa")
-	private String catPrograma;
-
 	@Column(name="pro_candidato")
 	private Integer proCandidato;
 
@@ -31,7 +28,7 @@ public class SoftwareListDTO implements Serializable {
 	private Integer proNivel;
 
 	@Column(name="pro_programa")
-	private Integer proPrograma;
+	private String proPrograma;
 
 	public SoftwareListDTO() {
 	}
@@ -42,14 +39,6 @@ public class SoftwareListDTO implements Serializable {
 
 	public void setCatNivel(String catNivel) {
 		this.catNivel = catNivel;
-	}
-
-	public String getCatPrograma() {
-		return this.catPrograma;
-	}
-
-	public void setCatPrograma(String catPrograma) {
-		this.catPrograma = catPrograma;
 	}
 
 	public Integer getProCandidato() {
@@ -76,11 +65,11 @@ public class SoftwareListDTO implements Serializable {
 		this.proNivel = proNivel;
 	}
 
-	public Integer getProPrograma() {
+	public String getProPrograma() {
 		return this.proPrograma;
 	}
 
-	public void setProPrograma(Integer proPrograma) {
+	public void setProPrograma(String proPrograma) {
 		this.proPrograma = proPrograma;
 	}
 

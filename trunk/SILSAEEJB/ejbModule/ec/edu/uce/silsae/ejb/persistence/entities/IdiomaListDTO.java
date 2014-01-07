@@ -14,9 +14,6 @@ import javax.persistence.*;
 public class IdiomaListDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="cat_idioma")
-	private String catIdioma;
-
 	@Column(name="cat_nivel")
 	private String catNivel;
 
@@ -28,20 +25,12 @@ public class IdiomaListDTO implements Serializable {
 	private Integer idiCodigo;
 
 	@Column(name="idi_idioma")
-	private Integer idiIdioma;
+	private String idiIdioma;
 
 	@Column(name="idi_nivel")
 	private Integer idiNivel;
 
 	public IdiomaListDTO() {
-	}
-
-	public String getCatIdioma() {
-		return this.catIdioma;
-	}
-
-	public void setCatIdioma(String catIdioma) {
-		this.catIdioma = catIdioma;
 	}
 
 	public String getCatNivel() {
@@ -68,11 +57,11 @@ public class IdiomaListDTO implements Serializable {
 		this.idiCodigo = idiCodigo;
 	}
 
-	public Integer getIdiIdioma() {
+	public String getIdiIdioma() {
 		return this.idiIdioma;
 	}
 
-	public void setIdiIdioma(Integer idiIdioma) {
+	public void setIdiIdioma(String idiIdioma) {
 		this.idiIdioma = idiIdioma;
 	}
 
