@@ -443,7 +443,6 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		try{
 			herramientas.setBemCandidato(candidato);
 			herramientas.setProNivel(Integer.valueOf(nivelPrograma.toString()));
-			herramientas.setProPrograma(Integer.valueOf(programa.toString()));
 			candidatosService.agregarHerramientas(herramientas);
 			getListHerramientas();
 			resetHerramientas();	
@@ -480,7 +479,6 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	{
 		try{
 			idioma.setBemCandidato(candidato);
-			idioma.setIdiIdioma(Integer.valueOf(idiomaObj.toString()));
 			idioma.setIdiNivel(Integer.valueOf(nivelIdioma.toString()));
 			candidatosService.agregarIdioma(idioma);
 			getListIdioma();
