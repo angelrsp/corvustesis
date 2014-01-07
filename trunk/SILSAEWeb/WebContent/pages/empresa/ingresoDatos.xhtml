@@ -32,7 +32,7 @@
 							<td><p:inputText required="true"
 									requiredMessage="#{i18n['label.ruc']}&#160;#{i18n['label.requerido']}" value="#{registroEmpresaController.empresa.empRuc}" onkeypress="return isNumberKey(event);"/></td>
 							<td><h:outputLabel value="#{i18n['label.sector']}:&#160;" /></td>
-							<td><p:selectOneMenu value="#{registroEmpresaController.tipoEmpresa}">
+							<td><p:selectOneMenu value="#{registroEmpresaController.tipoEmpresa}" required="true" requiredMessage="#{i18n['label.sector']}&#160;#{i18n['label.requerido']}">
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
 										itemValue="" />
 									<f:selectItems value="#{registroEmpresaController.catalogoTipoEmpresa}"></f:selectItems>	
@@ -41,7 +41,7 @@
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.telefono.convencional']}:&#160;" /></td>
-							<td><p:inputText value="#{registroEmpresaController.usuarioRegistro.usuTelefono}" /></td>
+							<td><p:inputText value="#{registroEmpresaController.usuarioRegistro.usuTelefono}" required="true" requiredMessage="#{i18n['label.telefono.convencional']}&#160;#{i18n['label.requerido']}"/></td>
 
 							<td><h:outputLabel value="#{i18n['label.telefono.celular']}:&#160;" /></td>
 							<td><p:inputText value="#{registroEmpresaController.usuarioRegistro.usuCelular}" /></td>							
@@ -49,14 +49,10 @@
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.ubicacion']}:&#160;" /></td>
-							<td><p:selectOneMenu value="#{registroEmpresaController.ubicacion}">
-									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
-										itemValue="" />
-									<f:selectItems value="#{registroEmpresaController.catalogoUbicacion}"></f:selectItems>	
-								</p:selectOneMenu></td>
-								
-								<td><h:outputLabel value="#{i18n['label.direccion']}:&#160;" /></td>
-								<td><p:inputText value="#{registroEmpresaController.usuarioRegistro.usuDireccion}" /></td>
+							<td><p:inputText value="#{registroEmpresaController.empresa.empUbicacion}" required="true" requiredMessage="#{i18n['label.ubicacion']}&#160;#{i18n['label.requerido']}"  /></td>
+															
+							<td><h:outputLabel value="#{i18n['label.direccion']}:&#160;" /></td>
+							<td><p:inputText value="#{registroEmpresaController.usuarioRegistro.usuDireccion}" required="true" requiredMessage="#{i18n['label.direccion']}&#160;#{i18n['label.requerido']}"  /></td>
 																
 						</tr>		
 						<tr>		
@@ -91,9 +87,9 @@
 									update="pnlRegistroCandidato, growl"
 									actionListener="#{registroEmpresaController.registroEmpresa}" />
 							</td>
-							<td>
-							<p:commandButton id="showDialogButton" type="button" value="Show" onclick="mensajeDialog.show()" /> 
-							</td>
+<!-- 							<td> -->
+<!-- 							<p:commandButton id="showDialogButton" type="button" value="Show" onclick="mensajeDialog.show()" />  -->
+<!-- 							</td> -->
 						</tr>
 					</table>
 				</p:panel>
@@ -106,7 +102,7 @@
         		<h:form>        	
 		        	<table>
 			        	<tr>
-			        		<td><h:outputText value="Al momento sus registros estan en lista de aprobacion. Luego de esto podrá empezar a usar el sistema." /></td>
+			        		<td><h:outputText value="Su registro esta en proceso de aprobación. Recibirá una notificación de autroización al correo electrónico de registro." /></td>
 			        	</tr>
 			        	<tr align="center">	
 				        	<td><p:commandButton value="#{i18n['boton.aceptar']}" action="#{registroEmpresaController.redireccionar}" immediate="true" process="@this" /></td>
