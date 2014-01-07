@@ -93,6 +93,7 @@ public final class ComprobantesElectronicosWs {
 		try {
 			RecepcionComprobantes port = service.getRecepcionComprobantesPort();
 			response = port.validarComprobante(UtilApplication.fileToByte(xmlFile));
+			
 		} catch (Exception e) {
 			logger.info("Error al enviar el comprobante {}", e.toString());
 			response = new RespuestaSolicitud();
