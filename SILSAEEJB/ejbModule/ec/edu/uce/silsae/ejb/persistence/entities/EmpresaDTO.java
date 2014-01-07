@@ -33,7 +33,7 @@ public class EmpresaDTO implements Serializable {
 	private Integer empSector;
 
 	@Column(name="emp_ubicacion")
-	private Integer empUbicacion;
+	private String empUbicacion;
 
 	@Column(name="emp_web")
 	private String empWeb;
@@ -97,11 +97,11 @@ public class EmpresaDTO implements Serializable {
 		this.empSector = empSector;
 	}
 
-	public Integer getEmpUbicacion() {
+	public String getEmpUbicacion() {
 		return this.empUbicacion;
 	}
 
-	public void setEmpUbicacion(Integer empUbicacion) {
+	public void setEmpUbicacion(String empUbicacion) {
 		this.empUbicacion = empUbicacion;
 	}
 

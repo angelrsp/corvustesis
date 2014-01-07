@@ -67,9 +67,6 @@ public class CandidatoListDTO implements Serializable {
 	@Column(name="cat_idioma_nivel")
 	private String catIdiomaNivel;
 
-	@Column(name="cat_programa")
-	private String catPrograma;
-
 	@Column(name="cat_programa_nivel")
 	private String catProgramaNivel;
 
@@ -153,7 +150,7 @@ public class CandidatoListDTO implements Serializable {
 	private Integer proNivel;
 
 	@Column(name="pro_programa")
-	private Integer proPrograma;
+	private String proPrograma;
 
 	@Column(name="ref_candidato")
 	private Integer refCandidato;
@@ -331,14 +328,6 @@ public class CandidatoListDTO implements Serializable {
 
 	public void setCatIdiomaNivel(String catIdiomaNivel) {
 		this.catIdiomaNivel = catIdiomaNivel;
-	}
-
-	public String getCatPrograma() {
-		return this.catPrograma;
-	}
-
-	public void setCatPrograma(String catPrograma) {
-		this.catPrograma = catPrograma;
 	}
 
 	public String getCatProgramaNivel() {
@@ -557,11 +546,11 @@ public class CandidatoListDTO implements Serializable {
 		this.proNivel = proNivel;
 	}
 
-	public Integer getProPrograma() {
+	public String getProPrograma() {
 		return this.proPrograma;
 	}
 
-	public void setProPrograma(Integer proPrograma) {
+	public void setProPrograma(String proPrograma) {
 		this.proPrograma = proPrograma;
 	}
 
