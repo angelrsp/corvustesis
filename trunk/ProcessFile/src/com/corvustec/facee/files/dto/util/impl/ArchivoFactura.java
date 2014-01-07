@@ -225,6 +225,8 @@ public class ArchivoFactura extends Archivo {
 					
 					if (response.getEstado().equals(ComprobantesElectronicosWs.RESPUESTA_RECIBIDA)) {
 						
+						
+						
 						UtilMail.enviar(xmlFile);
 						UtilApplication.moverArchivoProcesado(file, getEstructuraArchivos().get(Constantes.carpetaProcesados));
 						//Agregado por FPU
