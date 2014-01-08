@@ -2,9 +2,9 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="candidato" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="976531c1-25ef-4365-bee3-5a4c78ff5113">
 	<property name="ireport.zoom" value="1.3310000000000004"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="132"/>
+	<property name="ireport.y" value="48"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["/home/fernando/_javaee/SILSAEWeb/WebContent/report/"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["C:\\_javaee\\SILSAEWeb\\WebContent\\report\\"]]></defaultValueExpression>
 	</parameter>
 	<field name="canIdentificacion" class="java.lang.String"/>
 	<field name="canPrimerNombre" class="java.lang.String"/>
