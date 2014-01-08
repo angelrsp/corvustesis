@@ -10,7 +10,7 @@
 <body>
 
 
-	<ui:composition template="/template/admin.xhtml">
+	<ui:composition template="/template/empresa.xhtml">
 
 		<ui:define name="contenido">
 		
@@ -64,19 +64,19 @@
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.apellido.paterno']}:&#160;" /> </td>
-							<td><p:inputText value="#{verHojasDeVidaController.candidato.canApellidoPaterno}"/></td>
+							<td><p:inputText value="#{verHojasDeVidaController.candidato.canApellidoPaterno}" readonly="true"/></td>
 							<td><h:outputLabel value="#{i18n['label.apellido.materno']}:&#160;" /> </td>
-							<td><p:inputText value="#{verHojasDeVidaController.candidato.canApellidoMaterno}"/></td>
+							<td><p:inputText value="#{verHojasDeVidaController.candidato.canApellidoMaterno}" readonly="true"/></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.nombre.primero']}:&#160;" /> </td>
-							<td><p:inputText value="#{verHojasDeVidaController.candidato.canPrimerNombre}"/></td>
+							<td><p:inputText value="#{verHojasDeVidaController.candidato.canPrimerNombre}" readonly="true"/></td>
 							<td><h:outputLabel value="#{i18n['label.nombre.Segundo']}:&#160;" /> </td>
-							<td><p:inputText value="#{verHojasDeVidaController.candidato.canSegundoNombre}" /></td>
+							<td><p:inputText value="#{verHojasDeVidaController.candidato.canSegundoNombre}" readonly="true"/></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.email']}:&#160;" /> </td>
-							<td colspan="3"><p:inputText style="width : 90%;" value="#{verHojasDeVidaController.user.usuMail}"/></td>
+							<td colspan="3"><p:inputText style="width : 90%;" value="#{verHojasDeVidaController.user.usuMail}" readonly="true"/></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.estado.civil']}:&#160;"/> </td>
@@ -87,23 +87,23 @@
 
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.fecha.nacimiento']}" /> </td>
-							<td><p:inputText value="#{verHojasDeVidaController.candidato.canFechaNacimiento}" /></td>
+							<td><p:inputText value="#{verHojasDeVidaController.candidato.canFechaNacimiento}" readonly="true"/></td>
 							
 							<td><h:outputLabel value="#{i18n['label.lugar.nacimiento']}:&#160;" /> </td>
-							<td><p:inputText value="#{verHojasDeVidaController.candidato.canLugarNacimiento}"></p:inputText></td>
+							<td><p:inputText value="#{verHojasDeVidaController.candidato.canLugarNacimiento}" readonly="true"></p:inputText></td>
 						</tr>
 
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.direccion.domicilio']}:&#160;" /> </td>
-							<td><p:inputText value="#{verHojasDeVidaController.user.usuDireccion}"></p:inputText></td>														
+							<td><p:inputText value="#{verHojasDeVidaController.user.usuDireccion}" readonly="true"></p:inputText></td>														
 						</tr>
 
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.telefono.convencional']}:&#160;" /> </td>
-							<td><p:inputText value="#{verHojasDeVidaController.user.usuTelefono}"></p:inputText></td>
+							<td><p:inputText value="#{verHojasDeVidaController.user.usuTelefono}" readonly="true"></p:inputText></td>
 
 							<td><h:outputLabel value="#{i18n['label.telefono.celular']}:&#160;" /> </td>
-							<td><p:inputText value="#{verHojasDeVidaController.user.usuCelular}"></p:inputText></td>														
+							<td><p:inputText value="#{verHojasDeVidaController.user.usuCelular}" readonly="true"></p:inputText></td>														
 						</tr>
 						
 					</table>
@@ -145,7 +145,7 @@
 					<p:panel id="pnlExperiencia" styleClass="tabla"
 						header="#{i18n['label.titulo.pantalla.dato.experiencia']}">				
 						
-						<p:dataTable id="tblExperiencia" value="#{verHojasDeVidaController.experienciaList}" var="exp">
+						<p:dataTable id="tblExperiencia" value="#{verHojasDeVidaController.experienciaList}" var="exp" emptyMessage="#{i18n['table.vacio']}">
 						
 						<p:column headerText="#{i18n['label.empresa']}">
 								<h:outputText value="#{exp.expEntidad}" />
@@ -179,7 +179,7 @@
 						<p:dataTable id="tblHerramienta" value="#{verHojasDeVidaController.herramientasList}" var="her" emptyMessage="#{i18n['table.vacio']}">
 						
 							<p:column headerText="#{i18n['label.programa']}">
-								<h:outputText value="#{her.catPrograma}" />
+								<h:outputText value="#{her.proPrograma}" />
 							</p:column>
 	
 							<p:column headerText="#{i18n['label.nivel.programa']}">
@@ -197,7 +197,7 @@
 						<p:dataTable id="tblIdioma" emptyMessage="#{i18n['table.vacio']}" value="#{verHojasDeVidaController.idiomaList}" var="idi">
 						
 							<p:column headerText="#{i18n['label.idioma']}">
-								<h:outputText value="#{idi.catIdioma}" />
+								<h:outputText value="#{idi.idiIdioma}" />
 							</p:column>
 	
 							<p:column headerText="#{i18n['label.nivel.idioma']}">

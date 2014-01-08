@@ -21,7 +21,7 @@
 				<p:dataTable id="tblCandidato" value="#{verCandidatoController.candidatoList}" var="can">
 				
 					<p:column headerText="#{i18n['label.ci.pasaporte']}">
-						<h:outputText value="#{can.canIdentificacion}" />
+						<h:outputText value="#{can.canIdentificacion}"/>
 					</p:column>			
 
 					<p:column headerText="#{i18n['label.apellidos']}">
@@ -35,6 +35,11 @@
 					<p:column headerText="#{i18n['label.fecha.nacimiento']}">
 						<h:outputText value="#{fn:substring(can.canFechaNacimiento,0,10)}" />
 					</p:column>	
+
+					<p:column headerText="#{i18n['label.nivel.estudio2']}">
+						<h:outputText value="#{can.catMaxNivelEstudio}" />
+					</p:column>	
+
 
 					<p:column style="width:8%" headerText="#{i18n['label.ver.mas']}">  
 		                <p:commandButton actionListener="#{verCandidatoController.buscarCandidato(can)}" oncomplete="PF('infoCandidato').show()" icon="ui-icon-search" 
@@ -60,23 +65,23 @@
 									</p:selectOneMenu>
 								</td>
 							<td><h:outputLabel value="#{i18n['label.ci.pasaporte']}:&#160;" /> </td>
-							<td><p:inputText value="#{verCandidatoController.candidato.canIdentificacion}" onkeypress="return isNumberKey(event);"/></td>
+							<td><p:inputText value="#{verCandidatoController.candidato.canIdentificacion}" onkeypress="return isNumberKey(event);" readonly="true"/></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.apellido.paterno']}:&#160;" /> </td>
-							<td><p:inputText value="#{verCandidatoController.candidato.canApellidoPaterno}"/></td>
+							<td><p:inputText value="#{verCandidatoController.candidato.canApellidoPaterno}" readonly="true"/></td>
 							<td><h:outputLabel value="#{i18n['label.apellido.materno']}:&#160;" /> </td>
-							<td><p:inputText value="#{verCandidatoController.candidato.canApellidoMaterno}"/></td>
+							<td><p:inputText value="#{verCandidatoController.candidato.canApellidoMaterno}" readonly="true"/></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.nombre.primero']}:&#160;" /> </td>
-							<td><p:inputText value="#{verCandidatoController.candidato.canPrimerNombre}"/></td>
+							<td><p:inputText value="#{verCandidatoController.candidato.canPrimerNombre}" readonly="true"/></td>
 							<td><h:outputLabel value="#{i18n['label.nombre.Segundo']}:&#160;" /> </td>
-							<td><p:inputText value="#{verCandidatoController.candidato.canSegundoNombre}" /></td>
+							<td><p:inputText value="#{verCandidatoController.candidato.canSegundoNombre}" readonly="true"/></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.email']}:&#160;" /> </td>
-							<td colspan="3"><p:inputText style="width : 90%;" value="#{verCandidatoController.user.usuMail}"/></td>
+							<td colspan="3"><p:inputText style="width : 90%;" value="#{verCandidatoController.user.usuMail}" readonly="true"/></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.estado.civil']}:&#160;"/> </td>
@@ -87,23 +92,23 @@
 
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.fecha.nacimiento']}" /> </td>
-							<td><p:inputText value="#{verCandidatoController.candidato.canFechaNacimiento}" /></td>
+							<td><p:inputText value="#{verCandidatoController.candidato.canFechaNacimiento}" readonly="true"/></td>
 							
 							<td><h:outputLabel value="#{i18n['label.lugar.nacimiento']}:&#160;" /> </td>
-							<td><p:inputText value="#{verCandidatoController.candidato.canLugarNacimiento}"></p:inputText></td>
+							<td><p:inputText value="#{verCandidatoController.candidato.canLugarNacimiento}" readonly="true"></p:inputText></td>
 						</tr>
 
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.direccion.domicilio']}:&#160;" /> </td>
-							<td><p:inputText value="#{verCandidatoController.user.usuDireccion}"></p:inputText></td>														
+							<td><p:inputText value="#{verCandidatoController.user.usuDireccion}" readonly="true"></p:inputText></td>														
 						</tr>
 
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.telefono.convencional']}:&#160;" /> </td>
-							<td><p:inputText value="#{verCandidatoController.user.usuTelefono}"></p:inputText></td>
+							<td><p:inputText value="#{verCandidatoController.user.usuTelefono}" readonly="true"></p:inputText></td>
 
 							<td><h:outputLabel value="#{i18n['label.telefono.celular']}:&#160;" /> </td>
-							<td><p:inputText value="#{verCandidatoController.user.usuCelular}"></p:inputText></td>														
+							<td><p:inputText value="#{verCandidatoController.user.usuCelular}" readonly="true"></p:inputText></td>														
 						</tr>
 						
 					</table>
@@ -145,7 +150,7 @@
 					<p:panel id="pnlExperiencia" styleClass="tabla"
 						header="#{i18n['label.titulo.pantalla.dato.experiencia']}">				
 						
-						<p:dataTable id="tblExperiencia" value="#{verCandidatoController.experienciaList}" var="exp">
+						<p:dataTable id="tblExperiencia" value="#{verCandidatoController.experienciaList}" var="exp" emptyMessage="#{i18n['table.vacio']}">
 						
 						<p:column headerText="#{i18n['label.empresa']}">
 								<h:outputText value="#{exp.expEntidad}" />
@@ -179,7 +184,7 @@
 						<p:dataTable id="tblHerramienta" value="#{verCandidatoController.herramientasList}" var="her" emptyMessage="#{i18n['table.vacio']}">
 						
 							<p:column headerText="#{i18n['label.programa']}">
-								<h:outputText value="#{her.catPrograma}" />
+								<h:outputText value="#{her.proPrograma}" />
 							</p:column>
 	
 							<p:column headerText="#{i18n['label.nivel.programa']}">
@@ -197,7 +202,7 @@
 						<p:dataTable id="tblIdioma" emptyMessage="#{i18n['table.vacio']}" value="#{verCandidatoController.idiomaList}" var="idi">
 						
 							<p:column headerText="#{i18n['label.idioma']}">
-								<h:outputText value="#{idi.catIdioma}" />
+								<h:outputText value="#{idi.idiIdioma}" />
 							</p:column>
 	
 							<p:column headerText="#{i18n['label.nivel.idioma']}">
