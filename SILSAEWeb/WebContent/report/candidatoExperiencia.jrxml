@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="condidatoExperiencia" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="faff49b3-ed89-4ae6-b38e-39fa8b648e2b">
 	<property name="ireport.zoom" value="1.6105100000000008"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="67"/>
 	<property name="ireport.y" value="0"/>
 	<field name="catTipoExperiencia" class="java.lang.String"/>
 	<field name="expEntidad" class="java.lang.String"/>
@@ -51,14 +51,14 @@
 				<text><![CDATA[Tareas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="496" y="2" width="59" height="20" uuid="35a6f83e-847b-4b1c-bbb4-54c81ecc1253"/>
+				<reportElement x="469" y="2" width="69" height="20" uuid="35a6f83e-847b-4b1c-bbb4-54c81ecc1253"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha Fin]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="410" y="2" width="86" height="20" uuid="58bf3d4b-8efc-4388-8909-01663d6a4d5f"/>
+				<reportElement x="410" y="2" width="59" height="20" uuid="58bf3d4b-8efc-4388-8909-01663d6a4d5f"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -89,11 +89,11 @@
 				<textFieldExpression><![CDATA[$F{expTareas}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="496" y="0" width="59" height="20" uuid="50a92577-6f0d-48ee-bb83-1084827582ef"/>
+				<reportElement x="469" y="0" width="59" height="20" uuid="50a92577-6f0d-48ee-bb83-1084827582ef"/>
 				<textFieldExpression><![CDATA[$F{expFechaFin}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="410" y="0" width="86" height="20" uuid="20cfc637-42a7-47ca-947c-4c63c1c72951"/>
+				<reportElement x="410" y="0" width="59" height="20" uuid="20cfc637-42a7-47ca-947c-4c63c1c72951"/>
 				<textFieldExpression><![CDATA[$F{expFechaInicio}]]></textFieldExpression>
 			</textField>
 		</band>
