@@ -8,6 +8,7 @@ import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.persistence.entities.AvisoListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDatoDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoEstudioDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EstudioDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EstudioListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaDTO;
@@ -74,5 +75,8 @@ public interface CandidatosService {
 	CandidatoDTO obtenerCandidato(Object id) throws SilsaeException;
 
 	List<CandidatoDatoDTO> obtenerCandidatoDato(CandidatoDTO candidato)
+			throws SilsaeException;
+
+	List<CandidatoEstudioDTO> obtenerCandidatoEstudio(CandidatoDTO candidato)
 			throws SilsaeException;
 }

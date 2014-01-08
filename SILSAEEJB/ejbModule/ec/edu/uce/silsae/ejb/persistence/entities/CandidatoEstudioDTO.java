@@ -1,8 +1,11 @@
 package ec.edu.uce.silsae.ejb.persistence.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.sql.Timestamp;
+import java.util.List;
 
 
 /**
@@ -51,12 +54,18 @@ public class CandidatoEstudioDTO implements Serializable {
 
 	@Column(name="can_tipo_identificacion")
 	private Integer canTipoIdentificacion;
-
+	
 	@Column(name="can_usuario")
 	private Integer canUsuario;
 
+	@Column(name="cat_estado_civil")
+	private String catEstadoCivil;
+	
 	@Column(name="cat_max_nivel_estudio")
 	private String catMaxNivelEstudio;
+
+	@Column(name="cat_tipo_identificacion")
+	private String catTipoIdentificacion;
 
 	@Column(name="usu_celular")
 	private String usuCelular;
@@ -82,6 +91,16 @@ public class CandidatoEstudioDTO implements Serializable {
 	@Column(name="usu_telefono")
 	private String usuTelefono;
 
+	@Transient
+	private String canNombres;
+	
+	@Transient
+	private List<EstudioListDTO> canEstudios;
+	
+	@Transient
+	private List<ExperienciaListDTO> canExperiencia;
+	
+	
 	public CandidatoEstudioDTO() {
 	}
 
@@ -189,12 +208,28 @@ public class CandidatoEstudioDTO implements Serializable {
 		this.canUsuario = canUsuario;
 	}
 
+	public String getCatEstadoCivil() {
+		return catEstadoCivil;
+	}
+
+	public void setCatEstadoCivil(String catEstadoCivil) {
+		this.catEstadoCivil = catEstadoCivil;
+	}
+
 	public String getCatMaxNivelEstudio() {
 		return this.catMaxNivelEstudio;
 	}
 
 	public void setCatMaxNivelEstudio(String catMaxNivelEstudio) {
 		this.catMaxNivelEstudio = catMaxNivelEstudio;
+	}
+
+	public String getCatTipoIdentificacion() {
+		return catTipoIdentificacion;
+	}
+
+	public void setCatTipoIdentificacion(String catTipoIdentificacion) {
+		this.catTipoIdentificacion = catTipoIdentificacion;
 	}
 
 	public String getUsuCelular() {
@@ -259,6 +294,27 @@ public class CandidatoEstudioDTO implements Serializable {
 
 	public void setUsuTelefono(String usuTelefono) {
 		this.usuTelefono = usuTelefono;
+	}
+
+	public String getCanNombres() {
+		canNombres= this.canPrimerNombre+" "+this.canSegundoNombre+" "+this.canApellidoPaterno+" "+this.canApellidoMaterno;
+		return canNombres;
+	}
+
+	public List<EstudioListDTO> getCanEstudios() {
+		return canEstudios;
+	}
+
+	public void setCanEstudios(List<EstudioListDTO> canEstudios) {
+		this.canEstudios = canEstudios;
+	}
+
+	public List<ExperienciaListDTO> getCanExperiencia() {
+		return canExperiencia;
+	}
+
+	public void setCanExperiencia(List<ExperienciaListDTO> canExperiencia) {
+		this.canExperiencia = canExperiencia;
 	}
 
 }

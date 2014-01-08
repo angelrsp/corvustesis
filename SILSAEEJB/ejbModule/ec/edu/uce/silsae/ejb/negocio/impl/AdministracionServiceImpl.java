@@ -13,7 +13,6 @@ import ec.edu.uce.silsae.commons.util.MailUtil;
 import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.negocio.AdministracionService;
 import ec.edu.uce.silsae.ejb.persistence.dao.FactoryDAO;
-import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoEstudioDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CatalogoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ContactoDTO;

@@ -18,5 +18,8 @@ public interface CandidatoDAO extends AbstractFacade<CandidatoDTO>{
 
 	List<CandidatoEstudioDTO> getCandidatoEstudio() throws SilsaeException;
 
+	List<CandidatoEstudioDTO> getCandidatoEstudio(CandidatoDTO candidatoDTO)
+			throws SilsaeException;
+
 
 }
