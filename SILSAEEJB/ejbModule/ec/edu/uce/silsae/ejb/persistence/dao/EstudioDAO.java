@@ -13,5 +13,7 @@ public interface EstudioDAO extends AbstractFacade<EstudioDTO>{
 
 	List<EstudioListDTO> getAll(CandidatoDTO can);
 
+	Integer getMax(CandidatoDTO can);
+
 	
 }

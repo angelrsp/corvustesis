@@ -12,6 +12,7 @@ import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.persistence.dao.CandidatoDAO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDatoDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoEstudioDTO;
 
 @Stateless
 public class CandidatoDAOImpl extends AbstractFacadeImpl<CandidatoDTO> implements CandidatoDAO{
@@ -54,4 +55,20 @@ public class CandidatoDAOImpl extends AbstractFacadeImpl<CandidatoDTO> implement
 		else
 			return list;
 	}
+	
+
+	@Override
+	public List<CandidatoEstudioDTO> getCandidatoEstudio() throws SilsaeException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CandidatoEstudioDTO> cq=cb.createQuery(CandidatoEstudioDTO.class);
+		cq.from(CandidatoEstudioDTO.class);
+				
+		List<CandidatoEstudioDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
+
 }

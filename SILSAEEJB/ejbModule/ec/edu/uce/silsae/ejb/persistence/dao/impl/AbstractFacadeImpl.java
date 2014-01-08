@@ -40,6 +40,7 @@ public abstract class AbstractFacadeImpl<T> implements AbstractFacade<T>{
 
 	public void remove(T entity) {
 		entityManager.remove(entityManager.merge(entity));
+		entityManager.flush();
 	}
 
 	public T find(Object id) {

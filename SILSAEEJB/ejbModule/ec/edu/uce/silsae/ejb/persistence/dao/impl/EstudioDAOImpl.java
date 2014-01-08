@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 import ec.edu.uce.silsae.ejb.persistence.dao.EstudioDAO;
@@ -53,5 +54,25 @@ public class EstudioDAOImpl extends AbstractFacadeImpl<EstudioDTO> implements Es
 			return null;
 		else
 			return list;
+	}
+	
+	@Override
+	public Integer getMax(CandidatoDTO can)
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<Integer> cq=cb.createQuery(Integer.class);
+		Root<EstudioDTO> from = cq.from(EstudioDTO.class);
+		Path<CandidatoDTO> join=from.join("bemCandidato");
+		
+		cq.multiselect(cb.max(from.get("estNivel").as(Integer.class)));
+		
+		cq.where(cb.equal(join, can.getCanCodigo()));
+		
+		List<Integer> list=entityManager.createQuery(cq).getResultList();
+		
+		if(list.isEmpty())
+			return null;
+		else
+			return list.get(0);
 	}
 }

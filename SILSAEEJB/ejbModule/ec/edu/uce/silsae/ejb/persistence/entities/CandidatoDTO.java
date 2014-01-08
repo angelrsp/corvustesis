@@ -53,7 +53,10 @@ public class CandidatoDTO implements Serializable {
 	@Column(name="can_estado_civil")
 	private Integer canEstadoCivil;
 	
+	@Column(name="can_max_estudio")
+	private Integer canMaxEstudio;
 	
+
 	//bi-directional many-to-one association to UsuarioDTO
     @ManyToOne (cascade = CascadeType.ALL)
 	@JoinColumn(name="can_usuario")
@@ -248,6 +251,18 @@ public class CandidatoDTO implements Serializable {
 
 	public void setCanEstadoCivil(Integer canEstadoCivil) {
 		this.canEstadoCivil = canEstadoCivil;
+	}
+
+
+
+	public Integer getCanMaxEstudio() {
+		return canMaxEstudio;
+	}
+
+
+
+	public void setCanMaxEstudio(Integer canMaxEstudio) {
+		this.canMaxEstudio = canMaxEstudio;
 	}
 	
 }
