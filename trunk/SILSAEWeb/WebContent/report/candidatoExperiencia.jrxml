@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="condidatoExperiencia" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="faff49b3-ed89-4ae6-b38e-39fa8b648e2b">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.6105100000000008"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<field name="catTipoExperiencia" class="java.lang.String"/>
@@ -14,39 +14,60 @@
 		<band splitType="Stretch"/>
 	</background>
 	<columnHeader>
-		<band height="61" splitType="Stretch">
+		<band height="23" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="41" width="100" height="20" uuid="e3ace3a7-58bd-458d-aec6-973effe6cc90"/>
+				<reportElement x="0" y="2" width="100" height="20" uuid="e3ace3a7-58bd-458d-aec6-973effe6cc90"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Tipo de Experiencia]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="41" width="100" height="20" uuid="34d0ec40-0cfc-4753-96a5-02f8579d84f9"/>
+				<reportElement x="100" y="2" width="100" height="20" uuid="34d0ec40-0cfc-4753-96a5-02f8579d84f9"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Entidad]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="200" y="41" width="78" height="20" uuid="3d4c6db1-8161-490e-b2ea-e7b3667b1673"/>
+				<reportElement x="200" y="2" width="78" height="20" uuid="3d4c6db1-8161-490e-b2ea-e7b3667b1673"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Puesto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="278" y="41" width="51" height="20" uuid="f167521f-c630-401e-8333-52025bb1fbe6"/>
+				<reportElement x="278" y="2" width="51" height="20" uuid="f167521f-c630-401e-8333-52025bb1fbe6"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Rubro]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="329" y="41" width="81" height="20" uuid="31b86e41-ffc2-4b34-b7bf-2e16382b7c03"/>
+				<reportElement x="329" y="2" width="81" height="20" uuid="31b86e41-ffc2-4b34-b7bf-2e16382b7c03"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Tareas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="496" y="41" width="59" height="20" uuid="35a6f83e-847b-4b1c-bbb4-54c81ecc1253"/>
+				<reportElement x="496" y="2" width="59" height="20" uuid="35a6f83e-847b-4b1c-bbb4-54c81ecc1253"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Fecha Fin]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="410" y="41" width="86" height="20" uuid="58bf3d4b-8efc-4388-8909-01663d6a4d5f"/>
+				<reportElement x="410" y="2" width="86" height="20" uuid="58bf3d4b-8efc-4388-8909-01663d6a4d5f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Fecha Inicio]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="0" y="0" width="100" height="20" uuid="d2f3d1ce-b080-4c73-9239-dee869b308a0"/>
 				<textFieldExpression><![CDATA[$F{catTipoExperiencia}]]></textFieldExpression>
@@ -77,13 +98,4 @@
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
