@@ -4,25 +4,67 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<field name="estCarrera" class="java.lang.String"/>
+	<field name="catNivel" class="java.lang.String"/>
+	<field name="estEstablecimiento" class="java.lang.String"/>
+	<field name="catPais" class="java.lang.String"/>
+	<field name="estAnioInicio" class="java.lang.String"/>
+	<field name="estAnioFin" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<pageHeader>
-		<band height="35" splitType="Stretch"/>
-	</pageHeader>
 	<columnHeader>
-		<band height="31" splitType="Stretch">
+		<band height="21" splitType="Stretch">
 			<staticText>
-				<reportElement x="13" y="11" width="100" height="20" uuid="e3dcb9c6-3efe-4579-b903-6024b33298d3"/>
+				<reportElement x="245" y="1" width="100" height="20" uuid="e3dcb9c6-3efe-4579-b903-6024b33298d3"/>
 				<text><![CDATA[Carrera]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="76" height="20" uuid="92d8c7e5-944d-479f-ad43-930dae530b78"/>
+				<text><![CDATA[Nivel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="76" y="1" width="169" height="20" uuid="6511b538-086a-4eb5-b394-ff0e20cd8b00"/>
+				<text><![CDATA[Establecimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="0" width="78" height="20" uuid="f3627b1c-72d2-42fa-91de-aad68b976357"/>
+				<text><![CDATA[Pais]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="423" y="1" width="53" height="20" uuid="2094c843-5164-454b-849e-5cca13ee14c8"/>
+				<text><![CDATA[Año Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="1" width="55" height="20" uuid="1468a494-e32c-4ef9-bb35-b86f20ce10a6"/>
+				<text><![CDATA[Año Fin]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="27" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="76" height="20" uuid="08ecc55d-924e-4530-87d2-0611c11b6f51"/>
+				<textFieldExpression><![CDATA[$F{catNivel}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="76" y="0" width="169" height="20" uuid="06fd82ee-bc6a-4201-adf7-a0b05ea6eee7"/>
+				<textFieldExpression><![CDATA[$F{estEstablecimiento}]]></textFieldExpression>
+			</textField>
 			<textField>
-				<reportElement x="13" y="0" width="100" height="20" uuid="814a2d0e-272b-4672-901b-e0fede4ed572"/>
+				<reportElement x="423" y="0" width="53" height="20" uuid="bebef39b-6cad-4f70-b3a3-cd12c3899473"/>
+				<textFieldExpression><![CDATA[$F{estAnioInicio}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="245" y="0" width="100" height="20" uuid="814a2d0e-272b-4672-901b-e0fede4ed572"/>
 				<textFieldExpression><![CDATA[$F{estCarrera}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="0" width="78" height="20" uuid="ea5fd227-d940-4bf4-a215-a473cb37fca7"/>
+				<textFieldExpression><![CDATA[$F{catPais}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="476" y="0" width="55" height="20" uuid="903d0a93-9b4f-43dc-bb02-b46262f0e563"/>
+				<textFieldExpression><![CDATA[$F{estAnioFin}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

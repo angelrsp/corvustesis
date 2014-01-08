@@ -1,57 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="candidato" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="976531c1-25ef-4365-bee3-5a4c78ff5113">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.3310000000000004"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="102"/>
+	<property name="ireport.y" value="184"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\_javaee\\SILSAEWeb\\WebContent\\report\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["/home/fernando/_javaee/SILSAEWeb/WebContent/report/"]]></defaultValueExpression>
 	</parameter>
 	<field name="canIdentificacion" class="java.lang.String"/>
 	<field name="canPrimerNombre" class="java.lang.String"/>
 	<field name="catTipoIdentificacion" class="java.lang.String"/>
+	<field name="canEstudios" class="java.util.List"/>
+	<field name="canNombres" class="java.lang.String"/>
+	<field name="catEstadoCivil" class="java.lang.String"/>
+	<field name="canLugarNacimiento" class="java.lang.String"/>
+	<field name="usuDireccion" class="java.lang.String"/>
+	<field name="usuTelefono" class="java.lang.String"/>
+	<field name="usuCelular" class="java.lang.String"/>
+	<field name="usuMail" class="java.lang.String"/>
+	<field name="canExperiencia" class="java.util.List"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="56" splitType="Stretch">
+		<band height="268" splitType="Stretch">
 			<staticText>
-				<reportElement x="218" y="11" width="136" height="30" uuid="d333f38e-7cd0-4f9f-bc57-46d0ce4eb350"/>
+				<reportElement x="208" y="6" width="164" height="30" uuid="d333f38e-7cd0-4f9f-bc57-46d0ce4eb350"/>
 				<textElement>
 					<font size="18"/>
 				</textElement>
-				<text><![CDATA[Curriculum Vitae]]></text>
+				<text><![CDATA[Currículum Vitae]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="106" splitType="Stretch">
+		<band height="23" splitType="Stretch">
+			<rectangle>
+				<reportElement x="123" y="-224" width="420" height="199" uuid="06e2fe50-f665-4bc7-8ed0-c6f6adb96f62"/>
+			</rectangle>
 			<textField>
-				<reportElement x="415" y="14" width="126" height="20" uuid="caff5c1b-2dee-42c8-bfe6-7a6cb8c12fc6"/>
+				<reportElement x="129" y="-218" width="400" height="20" uuid="bdb1e341-9139-443e-a3bc-384bd78f3a7c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{canNombres}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="132" y="-185" width="100" height="20" uuid="56bbc466-d915-404f-98f1-229dfc5a054a"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[IDENTIFICACIÓN:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="283" y="-185" width="115" height="20" uuid="1d1853d0-6239-47e0-a542-64a6be73febc"/>
 				<textFieldExpression><![CDATA[$F{canIdentificacion}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="308" y="14" width="100" height="20" uuid="bf5e08c6-16b9-41b1-a330-2445097ddf0d"/>
-				<text><![CDATA[Identificación:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="12" y="14" width="111" height="20" uuid="d8ded7af-1a4b-41f5-9a2a-86b462771be7"/>
-				<text><![CDATA[Tipo de Identificación:]]></text>
+				<reportElement x="132" y="-165" width="120" height="20" uuid="b808ad04-a2e9-4325-8d5d-8d6171f18dea"/>
+				<text><![CDATA[TIPO DE IDENTIFICACIÓN]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="133" y="14" width="120" height="20" uuid="94a66180-f896-4593-afdf-b69ea0232bab"/>
+				<reportElement x="283" y="-165" width="138" height="20" uuid="2b599186-a076-4359-962e-89061b3e63b8"/>
 				<textFieldExpression><![CDATA[$F{catTipoIdentificacion}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="132" y="-145" width="100" height="20" uuid="3b5393f0-0268-46cd-afbb-4071413899ab"/>
+				<text><![CDATA[ESTADO CIVIL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="283" y="-145" width="100" height="20" uuid="e5cb50a2-d800-4c44-affd-29cff5f33e28"/>
+				<textFieldExpression><![CDATA[$F{catEstadoCivil}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="132" y="-126" width="125" height="20" uuid="6a364a2a-a1a8-4377-a430-50749c76fa2e"/>
+				<text><![CDATA[LUGAR DE NACIMIENTO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="283" y="-126" width="138" height="20" uuid="cdee3a77-b834-4068-985a-515e5a0b049a"/>
+				<textFieldExpression><![CDATA[$F{canLugarNacimiento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="132" y="-106" width="141" height="20" uuid="7e56af47-7ca2-403e-b54c-abe07bad8c2e"/>
+				<text><![CDATA[DIRECCIÓN DOMICILIARIA:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="283" y="-106" width="246" height="20" uuid="58160a50-4700-4fb0-8454-269d5160c762"/>
+				<textFieldExpression><![CDATA[$F{usuDireccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="132" y="-87" width="100" height="20" uuid="f1b33469-0d6b-44b4-81e7-a16f30516f84"/>
+				<text><![CDATA[TELEFONO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="283" y="-87" width="100" height="20" uuid="9681da2f-1460-4330-ab28-31391af65d00"/>
+				<textFieldExpression><![CDATA[$F{usuTelefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="-87" width="100" height="20" uuid="51adc293-fecf-4778-8a5a-bc9ee5353ecc"/>
+				<textFieldExpression><![CDATA[$F{usuCelular}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="132" y="-67" width="100" height="20" uuid="4ceb69e2-6c50-4651-9e7b-89b42b0312f2"/>
+				<text><![CDATA[E-Mail:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="283" y="-67" width="199" height="20" uuid="3f6de50e-30ad-455f-a27d-9068f072b37b"/>
+				<textFieldExpression><![CDATA[$F{usuMail}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="129" y="-193" width="400" height="1" uuid="83cd29ff-b292-46be-a981-25944aecf79b"/>
+			</line>
 		</band>
 	</pageHeader>
-	<columnHeader>
-		<band height="31" splitType="Stretch"/>
-	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="51" splitType="Stretch">
 			<subreport>
-				<reportElement x="133" y="12" width="200" height="100" uuid="92eda439-86c5-410f-b7c4-b9b0416fdf64"/>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<reportElement x="-11" y="28" width="200" height="22" uuid="92eda439-86c5-410f-b7c4-b9b0416fdf64"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{canEstudios})]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "candidatoEstudio.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="1" y="0" width="126" height="20" uuid="2874f872-2d73-4f7e-b0e5-c9abfb223321"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Formación Académica]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="24" width="555" height="1" uuid="2a31180d-5181-411f-b765-3addc0d1cc6a"/>
+			</line>
+		</band>
+		<band height="53">
+			<staticText>
+				<reportElement x="6" y="0" width="126" height="20" uuid="7db2c362-546d-4416-828e-b2d8d038dd93"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Experiencia Laboral]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="24" width="555" height="1" uuid="83f3a64b-5c87-44ee-bba5-5c49423b433a"/>
+			</line>
+			<subreport>
+				<reportElement x="-9" y="28" width="200" height="20" uuid="d23bcc4e-9d76-426b-8f20-bb350052644d"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{canExperiencia})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "candidatoExperiencia.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
