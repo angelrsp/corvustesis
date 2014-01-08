@@ -1,7 +1,7 @@
 package ec.edu.uce.silsae.web.util;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Map;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -11,11 +11,10 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 public class ReportUtil {
 
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static JasperPrint init(String urlJasper,Collection<?> collection) throws JRException
+	public static JasperPrint init(String urlJasper,Map<String, Object> parameters,Collection<?> collection) throws JRException
 	{
 		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(collection);
-		JasperPrint jasperPrint = JasperFillManager.fillReport(urlJasper, new HashMap(),beanCollectionDataSource);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(urlJasper, parameters,beanCollectionDataSource);
 		return jasperPrint;
 	}
 	
