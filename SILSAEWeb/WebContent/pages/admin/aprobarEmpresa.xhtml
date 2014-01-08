@@ -20,7 +20,7 @@
 				<p:dataTable id="tblEmpresa" value="#{aprobarEmpresaController.empresaList}" var="emp">
 				
 					<p:column headerText="#{i18n['label.razon.social']}">
-						<h:outputText value="#{emp.empNombreComercial}" />
+						<h:outputText value="#{emp.empNombreComercial}"/>
 					</p:column>			
 	
 					<p:column headerText="#{i18n['label.nombre.comercial']}">
@@ -58,23 +58,16 @@
 					header="#{i18n['label.titulo.pantalla.dato.datos']}">
 					<table id="tblDatos" class="tabla">
 						<tr>
-							<td><h:outputLabel
-									value="#{i18n['label.razon.social']}:&#160;" /></td>
-							<td><p:inputText required="true"
-									requiredMessage="#{i18n['label.razon.social']}&#160;#{i18n['label.requerido']}" value="#{aprobarEmpresaController.empresa.empRazonSocial}"/></td>
-							<td><h:outputLabel
-									value="#{i18n['label.nombre.comercial']}:&#160;" /></td>
-							<td><p:inputText required="true"
-									requiredMessage="#{i18n['label.nombre.comercial']}&#160;#{i18n['label.requerido']}"
-									value="#{aprobarEmpresaController.empresa.empNombreComercial}"
-									 /></td>
+							<td><h:outputLabel value="#{i18n['label.razon.social']}:&#160;" /></td>
+							<td><p:inputText value="#{aprobarEmpresaController.empresa.empRazonSocial}" readonly="true"/></td>
+							<td><h:outputLabel value="#{i18n['label.nombre.comercial']}:&#160;" /></td>
+							<td><p:inputText value="#{aprobarEmpresaController.empresa.empNombreComercial}" readonly="true"/></td>
  						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.ruc']}:&#160;" /></td>
-							<td><p:inputText required="true"
-									requiredMessage="#{i18n['label.ruc']}&#160;#{i18n['label.requerido']}" value="#{aprobarEmpresaController.empresa.empRuc}" onkeypress="return isNumberKey(event);"/></td>
+							<td><p:inputText value="#{aprobarEmpresaController.empresa.empRuc}" onkeypress="return isNumberKey(event);" readonly="true"/></td>
 							<td><h:outputLabel value="#{i18n['label.sector']}:&#160;" /></td>
-							<td><p:selectOneMenu value="#{aprobarEmpresaController.tipoEmpresa}">
+							<td><p:selectOneMenu value="#{aprobarEmpresaController.tipoEmpresa}" disabled="true">
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
 										itemValue="" />
 									<f:selectItems value="#{aprobarEmpresaController.catalogoTipoEmpresa}"></f:selectItems>	
@@ -83,27 +76,23 @@
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.telefono.convencional']}:&#160;" /></td>
-							<td><p:inputText value="#{aprobarEmpresaController.user.usuTelefono}" /></td>
+							<td><p:inputText value="#{aprobarEmpresaController.user.usuTelefono}" readonly="true"/></td>
 
 							<td><h:outputLabel value="#{i18n['label.telefono.celular']}:&#160;" /></td>
-							<td><p:inputText value="#{aprobarEmpresaController.user.usuCelular}" /></td>							
+							<td><p:inputText value="#{aprobarEmpresaController.user.usuCelular}" readonly="true"/></td>							
 														
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.ubicacion']}:&#160;" /></td>
-							<td><p:selectOneMenu value="#{aprobarEmpresaController.ubicacion}">
-									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
-										itemValue="" />
-									<f:selectItems value="#{aprobarEmpresaController.catalogoUbicacion}"></f:selectItems>	
-								</p:selectOneMenu></td>
+							<td><p:inputText value="#{aprobarEmpresaController.empresa.empUbicacion}" readonly="true"/></td>
 								
-								<td><h:outputLabel value="#{i18n['label.direccion']}:&#160;" /></td>
-								<td><p:inputText value="#{aprobarEmpresaController.user.usuDireccion}" /></td>
+							<td><h:outputLabel value="#{i18n['label.direccion']}:&#160;" /></td>
+							<td><p:inputText value="#{aprobarEmpresaController.user.usuDireccion}" readonly="true"/></td>
 																
 						</tr>		
 						<tr>		
 							<td><h:outputLabel value="#{i18n['label.web']}:&#160;" /></td>
-							<td colspan="3"><p:inputText style="width : 90%;" value="#{aprobarEmpresaController.empresa.empWeb}" /></td>
+							<td colspan="3"><p:inputText style="width : 90%;" value="#{aprobarEmpresaController.empresa.empWeb}" readonly="true"/></td>
 						</tr>						
 					</table>
 				</p:panel>
@@ -111,7 +100,7 @@
 				<p:panel id="pnlContactos" styleClass="tabla"
 					header="#{i18n['label.titulo.pantalla.dato.contacto']}">
 					
-					<p:dataTable value="#{aprobarEmpresaController.contactoList}" var="con">
+					<p:dataTable value="#{aprobarEmpresaController.contactoList}" var="con" emptyMessage="#{i18n['table.vacio']}">
 					
 						<p:column headerText="#{i18n['label.nombres']}">
 							<h:outputText value="#{con.conNombres}" />
