@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="candidato" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="976531c1-25ef-4365-bee3-5a4c78ff5113">
 	<property name="ireport.zoom" value="1.3310000000000004"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="184"/>
+	<property name="ireport.y" value="132"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/home/fernando/_javaee/SILSAEWeb/WebContent/report/"]]></defaultValueExpression>
 	</parameter>
@@ -33,7 +33,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="23" splitType="Stretch">
+		<band height="11" splitType="Stretch">
 			<rectangle>
 				<reportElement x="123" y="-224" width="420" height="199" uuid="06e2fe50-f665-4bc7-8ed0-c6f6adb96f62"/>
 			</rectangle>
@@ -113,42 +113,39 @@
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="51" splitType="Stretch">
+		<band height="63" splitType="Stretch">
 			<subreport>
-				<reportElement x="-11" y="28" width="200" height="22" uuid="92eda439-86c5-410f-b7c4-b9b0416fdf64"/>
+				<reportElement x="-11" y="30" width="566" height="33" uuid="92eda439-86c5-410f-b7c4-b9b0416fdf64"/>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{canEstudios})]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "candidatoEstudio.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="1" y="0" width="126" height="20" uuid="2874f872-2d73-4f7e-b0e5-c9abfb223321"/>
+				<reportElement x="0" y="0" width="132" height="20" uuid="2a6dcd95-0af8-4127-88f8-95981e6a3dac"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Formación Académica]]></text>
+				<text><![CDATA[Formacion Académica]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="24" width="555" height="1" uuid="2a31180d-5181-411f-b765-3addc0d1cc6a"/>
+				<reportElement x="0" y="26" width="555" height="1" uuid="27269cec-9c53-48a4-8127-eb6751a37252"/>
 			</line>
 		</band>
-		<band height="53">
+		<band height="62">
+			<subreport>
+				<reportElement x="-11" y="27" width="565" height="35" uuid="d23bcc4e-9d76-426b-8f20-bb350052644d"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{canExperiencia})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "candidatoExperiencia.jasper"]]></subreportExpression>
+			</subreport>
 			<staticText>
-				<reportElement x="6" y="0" width="126" height="20" uuid="7db2c362-546d-4416-828e-b2d8d038dd93"/>
+				<reportElement x="1" y="0" width="132" height="20" uuid="c27ebe0d-f5ed-4c67-9d6e-5b0bb8276c6a"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Experiencia Laboral]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="24" width="555" height="1" uuid="83f3a64b-5c87-44ee-bba5-5c49423b433a"/>
+				<reportElement x="0" y="22" width="554" height="1" uuid="95122ff6-287f-4587-9957-217c74a3cf74"/>
 			</line>
-			<subreport>
-				<reportElement x="-9" y="28" width="200" height="20" uuid="d23bcc4e-9d76-426b-8f20-bb350052644d"/>
-				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{canExperiencia})]]></dataSourceExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "candidatoExperiencia.jasper"]]></subreportExpression>
-			</subreport>
 		</band>
 	</detail>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>

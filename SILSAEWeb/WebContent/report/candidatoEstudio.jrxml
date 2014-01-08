@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="candidatoEstudio" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6c3e1e7d-ce88-4883-ad70-b5e75e3799c5">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.610510000000001"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<field name="estCarrera" class="java.lang.String"/>
@@ -16,65 +16,74 @@
 		<band height="21" splitType="Stretch">
 			<staticText>
 				<reportElement x="245" y="1" width="100" height="20" uuid="e3dcb9c6-3efe-4579-b903-6024b33298d3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Carrera]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="1" width="76" height="20" uuid="92d8c7e5-944d-479f-ad43-930dae530b78"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Nivel]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="76" y="1" width="169" height="20" uuid="6511b538-086a-4eb5-b394-ff0e20cd8b00"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Establecimiento]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="345" y="0" width="78" height="20" uuid="f3627b1c-72d2-42fa-91de-aad68b976357"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Pais]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="423" y="1" width="53" height="20" uuid="2094c843-5164-454b-849e-5cca13ee14c8"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Año Inicio]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="476" y="1" width="55" height="20" uuid="1468a494-e32c-4ef9-bb35-b86f20ce10a6"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Año Fin]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="27" splitType="Stretch">
+		<band height="16" splitType="Stretch">
 			<textField isBlankWhenNull="true">
-				<reportElement x="0" y="0" width="76" height="20" uuid="08ecc55d-924e-4530-87d2-0611c11b6f51"/>
+				<reportElement x="0" y="0" width="76" height="15" uuid="08ecc55d-924e-4530-87d2-0611c11b6f51"/>
 				<textFieldExpression><![CDATA[$F{catNivel}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="76" y="0" width="169" height="20" uuid="06fd82ee-bc6a-4201-adf7-a0b05ea6eee7"/>
+				<reportElement x="76" y="0" width="169" height="15" uuid="06fd82ee-bc6a-4201-adf7-a0b05ea6eee7"/>
 				<textFieldExpression><![CDATA[$F{estEstablecimiento}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="423" y="0" width="53" height="20" uuid="bebef39b-6cad-4f70-b3a3-cd12c3899473"/>
+				<reportElement x="423" y="0" width="53" height="15" uuid="bebef39b-6cad-4f70-b3a3-cd12c3899473"/>
 				<textFieldExpression><![CDATA[$F{estAnioInicio}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="245" y="0" width="100" height="20" uuid="814a2d0e-272b-4672-901b-e0fede4ed572"/>
+				<reportElement x="245" y="0" width="100" height="15" uuid="814a2d0e-272b-4672-901b-e0fede4ed572"/>
 				<textFieldExpression><![CDATA[$F{estCarrera}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="345" y="0" width="78" height="20" uuid="ea5fd227-d940-4bf4-a215-a473cb37fca7"/>
+				<reportElement x="345" y="0" width="78" height="15" uuid="ea5fd227-d940-4bf4-a215-a473cb37fca7"/>
 				<textFieldExpression><![CDATA[$F{catPais}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="476" y="0" width="55" height="20" uuid="903d0a93-9b4f-43dc-bb02-b46262f0e563"/>
+				<reportElement x="476" y="0" width="55" height="15" uuid="903d0a93-9b4f-43dc-bb02-b46262f0e563"/>
 				<textFieldExpression><![CDATA[$F{estAnioFin}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
