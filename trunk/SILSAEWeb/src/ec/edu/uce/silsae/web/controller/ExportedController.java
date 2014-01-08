@@ -56,9 +56,9 @@ public class ExportedController implements Serializable{
 		try {
 			FacesContext facesContext= FacesContext.getCurrentInstance();
 			candidatoEstudio=candidatosService.obtenerCandidatoEstudio(candidato);
-			//jasperPrint = ReportUtil.init("C:\\_javaee\\SILSAEWeb\\WebContent\\report\\candidato.jasper", candidatoEstudio);
+			jasperPrint = ReportUtil.init("C:\\_javaee\\SILSAEWeb\\WebContent\\report\\candidato.jasper", new HashMap(),candidatoEstudio);
 							
-			jasperPrint = ReportUtil.init("/home/fernando/_javaee/SILSAEWeb/WebContent/report/candidato.jasper", new HashMap(),candidatoEstudio);
+			//jasperPrint = ReportUtil.init("/home/fernando/_javaee/SILSAEWeb/WebContent/report/candidato.jasper", new HashMap(),candidatoEstudio);
 			HttpServletResponse httpServletResponse=(HttpServletResponse)facesContext.getExternalContext().getResponse();
 		    httpServletResponse.addHeader("Content-disposition", "attachment; filename=curriculum.pdf");
 		    ServletOutputStream servletOutputStream=httpServletResponse.getOutputStream();
