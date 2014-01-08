@@ -13,6 +13,7 @@ import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.negocio.AdministracionService;
 import ec.edu.uce.silsae.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoEstudioDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EstudioListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.IdiomaListDTO;
@@ -36,7 +37,7 @@ public class VerHojasDeVidaController extends SelectItemController implements Se
 	private CandidatosService candidatosService;
 	
 
-	public List<CandidatoDTO> candidatoList;
+	public List<CandidatoEstudioDTO> candidatoList;
 	
 	private List<EstudioListDTO> estudioList;
 	private List<ExperienciaListDTO> experienciaList;
@@ -60,7 +61,7 @@ public class VerHojasDeVidaController extends SelectItemController implements Se
 	private void init()
 	{
 		candidato=new CandidatoDTO();
-		candidatoList=new ArrayList<CandidatoDTO>();
+		candidatoList=new ArrayList<CandidatoEstudioDTO>();
 		estudioList=new ArrayList<EstudioListDTO>();
 		experienciaList=new ArrayList<ExperienciaListDTO>();
 		herramientasList=new ArrayList<SoftwareListDTO>();
@@ -68,7 +69,7 @@ public class VerHojasDeVidaController extends SelectItemController implements Se
 		referenciaList=new ArrayList<ReferenciaDTO>();
 	}
 
-	public List<CandidatoDTO> getCandidatoList() throws SilsaeException {
+	public List<CandidatoEstudioDTO> getCandidatoList() throws SilsaeException {
 		this.candidatoList=administracionService.obtenerCandidatos();
 		return candidatoList;
 	}
@@ -117,17 +118,17 @@ public class VerHojasDeVidaController extends SelectItemController implements Se
 		return referenciaList;
 	}
 
-	public void buscarCandidato(CandidatoDTO can) {
+	public void buscarCandidato(CandidatoEstudioDTO can) {
 		try {
-			setCandidato(can);
+			setCandidato(candidatosService.obtenerCandidato(can.getCanCodigo()));
 			this.estadoCivil=can.getCanEstadoCivil();
 			this.tipoDocumento=can.getCanTipoIdentificacion();
-			setUser(can.getBemUsuario());
-			this.estudioList=candidatosService.obtenerEstudio(can);
-			this.experienciaList=candidatosService.obtenerExperiencia(can);
-			this.herramientasList=candidatosService.obtenerHerramientas(can);
-			this.idiomaList=candidatosService.obtenerIdioma(can);
-			this.referenciaList=candidatosService.obtenerReferencia(can);
+			setUser(getCandidato().getBemUsuario());
+			this.estudioList=candidatosService.obtenerEstudio(getCandidato());
+			this.experienciaList=candidatosService.obtenerExperiencia(getCandidato());
+			this.herramientasList=candidatosService.obtenerHerramientas(getCandidato());
+			this.idiomaList=candidatosService.obtenerIdioma(getCandidato());
+			this.referenciaList=candidatosService.obtenerReferencia(getCandidato());
 		} catch (Exception e) {
 			JsfUtil.addErrorMessage(e.getMessage());
 		}

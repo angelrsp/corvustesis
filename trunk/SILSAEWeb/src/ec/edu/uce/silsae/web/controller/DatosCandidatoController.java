@@ -352,6 +352,7 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	public void agregarEstudio()
 	{
 		try {
+			//estudio=new EstudioDTO();
 			estudio.setBemCandidato(candidato);
 			estudio.setEstAnioFin(Integer.valueOf(anioFin.toString()));
 			estudio.setEstAnioInicio(Integer.valueOf(anioInicio.toString()));
@@ -373,6 +374,7 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		try {
 			estudio=new EstudioDTO();
 			estudio.setEstCodigo(est.getEstCodigo());
+			estudio.setBemCandidato(getCandidato());
 			candidatosService.eliminarEstudio(estudio);
 			estudio=new EstudioDTO();
 			getListEstudio();
