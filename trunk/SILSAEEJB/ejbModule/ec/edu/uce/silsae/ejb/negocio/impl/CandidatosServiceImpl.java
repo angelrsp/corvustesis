@@ -14,6 +14,7 @@ import ec.edu.uce.silsae.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.silsae.ejb.persistence.entities.AvisoListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDatoDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoEstudioDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EstudioDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EstudioListDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ExperienciaDTO;
@@ -224,6 +225,23 @@ public class CandidatosServiceImpl implements CandidatosService {
 
 		}
 	}
+	
+	@Override
+	public List<CandidatoEstudioDTO> obtenerCandidatoEstudio(CandidatoDTO candidato)throws SilsaeException {
+		try {
+			List<CandidatoEstudioDTO> list=factoryDAO.getCandidatoDAOImpl().getCandidatoEstudio(candidato);
+			CandidatoDTO can=new CandidatoDTO();
+			can.setCanCodigo(candidato.getCanCodigo());
+			list.get(0).setCanEstudios(obtenerEstudio(can));
+			list.get(0).setCanExperiencia(obtenerExperiencia(can));
+			return list;
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Estudio {}", e.toString());
+			throw new SilsaeException("Error al registrar el Candidato");
+
+		}
+	}
+	
 	
 	@Override
 	public List<ExperienciaListDTO> obtenerExperiencia(CandidatoDTO candidato)throws SilsaeException {

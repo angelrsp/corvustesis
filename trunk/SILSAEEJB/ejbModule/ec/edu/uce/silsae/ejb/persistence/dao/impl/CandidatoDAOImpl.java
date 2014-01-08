@@ -70,5 +70,21 @@ public class CandidatoDAOImpl extends AbstractFacadeImpl<CandidatoDTO> implement
 		else
 			return list;
 	}
+	
+	@Override
+	public List<CandidatoEstudioDTO> getCandidatoEstudio(CandidatoDTO candidatoDTO) throws SilsaeException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CandidatoEstudioDTO> cq=cb.createQuery(CandidatoEstudioDTO.class);
+		Root<CandidatoEstudioDTO> from= cq.from(CandidatoEstudioDTO.class);
+		
+		cq.where(cb.equal(from.get("canCodigo"),candidatoDTO.getCanCodigo()));
+		
+		List<CandidatoEstudioDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
 
 }
