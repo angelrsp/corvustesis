@@ -25,8 +25,8 @@ public class MailUtil {
 	        properties.put("mail.smtp.host", "smtp.gmail.com");
 	        properties.put("mail.smtp.starttls.enable", "true");
 	        properties.put("mail.smtp.port", 587);
-	        properties.put("mail.smtp.mail.sender", "fensefernando@gmail.com");
-	        properties.put("mail.smtp.password", "corvus;tec,.");
+	        properties.put("mail.smtp.mail.sender", "silsag.fod@gmail.com");
+	        properties.put("mail.smtp.password", "admin.fod2014");
 	        properties.put("mail.smtp.user", "fensefernando@gmail.com");
 	        properties.put("mail.smtp.auth", "true");
 	        session = Session.getDefaultInstance(properties);

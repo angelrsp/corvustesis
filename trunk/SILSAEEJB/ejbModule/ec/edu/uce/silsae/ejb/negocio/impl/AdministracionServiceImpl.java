@@ -14,6 +14,7 @@ import ec.edu.uce.silsae.commons.util.SilsaeException;
 import ec.edu.uce.silsae.ejb.negocio.AdministracionService;
 import ec.edu.uce.silsae.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoDTO;
+import ec.edu.uce.silsae.ejb.persistence.entities.CandidatoEstudioDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.CatalogoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsae.ejb.persistence.entities.EmpresaDTO;
@@ -60,11 +61,11 @@ public class AdministracionServiceImpl implements AdministracionService{
 	}
 	
 	@Override
-	public List<CandidatoDTO> obtenerCandidatos() throws SilsaeException
+	public List<CandidatoEstudioDTO> obtenerCandidatos() throws SilsaeException
 	{
 		log.info("obtenerCandidatos");
 		try{
-			return factoryDAO.getCandidatoDAOImpl().getAll();
+			return factoryDAO.getCandidatoDAOImpl().getCandidatoEstudio();
 		}
 		catch(Exception e)
 		{

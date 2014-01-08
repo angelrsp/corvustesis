@@ -19,6 +19,9 @@ public class PostulacionDTO implements Serializable {
 	@Column(name="pos_codigo")
 	private Integer posCodigo;
 
+	@Column(name="pos_aceptado")
+	private Boolean posAceptado;
+	
 	//bi-directional many-to-one association to AvisoDTO
     @ManyToOne
 	@JoinColumn(name="pos_aviso")
@@ -38,6 +41,14 @@ public class PostulacionDTO implements Serializable {
 
 	public void setPosCodigo(Integer posCodigo) {
 		this.posCodigo = posCodigo;
+	}
+
+	public Boolean getPosAceptado() {
+		return posAceptado;
+	}
+
+	public void setPosAceptado(Boolean posAceptado) {
+		this.posAceptado = posAceptado;
 	}
 
 	public AvisoDTO getBemAviso() {

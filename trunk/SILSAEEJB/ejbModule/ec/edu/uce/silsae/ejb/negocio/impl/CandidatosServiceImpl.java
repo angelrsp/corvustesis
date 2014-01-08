@@ -75,6 +75,10 @@ public class CandidatosServiceImpl implements CandidatosService {
 
 		try {
 			factoryDAO.getEstudioDAOImpl().create(estudio);
+			CandidatoDTO can=estudio.getBemCandidato();
+			Integer es=factoryDAO.getEstudioDAOImpl().getMax(can);
+			can.setCanMaxEstudio(es);
+			factoryDAO.getCandidatoDAOImpl().edit(can);
 		} catch (Exception e) {
 			log.info("Error al registrar el Candidato {}", e.toString());
 			throw new SilsaeException("Error al registrar el Candidato");
@@ -83,13 +87,24 @@ public class CandidatosServiceImpl implements CandidatosService {
 	
 	@Override
 	public void eliminarEstudio(EstudioDTO estudio) throws SilsaeException {
-		log.info("agregarEstudio");
+		log.info("eliminarEstudio");
 
 		try {
+			CandidatoDTO can=estudio.getBemCandidato();
 			factoryDAO.getEstudioDAOImpl().remove(estudio);
+			if(factoryDAO.getEstudioDAOImpl().getAll(can)!=null)
+			{
+				Integer es=factoryDAO.getEstudioDAOImpl().getMax(can);
+				can.setCanMaxEstudio(es);
+			}
+			else
+			{
+				can.setCanMaxEstudio(null);
+			}
+			factoryDAO.getCandidatoDAOImpl().edit(can);
 		} catch (Exception e) {
-			log.info("Error al registrar el Candidato {}", e.toString());
-			throw new SilsaeException("Error al registrar el Candidato");
+			log.info("Error al eliminarEstudio {}", e.toString());
+			throw new SilsaeException("Error al eliminarEstudio");
 		}
 	}
 	

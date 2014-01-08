@@ -61,9 +61,6 @@ public class CandidatoListDTO implements Serializable {
 	@Column(name="cat_experiencia_tipo")
 	private String catExperienciaTipo;
 
-	@Column(name="cat_idioma")
-	private String catIdioma;
-
 	@Column(name="cat_idioma_nivel")
 	private String catIdiomaNivel;
 
@@ -312,14 +309,6 @@ public class CandidatoListDTO implements Serializable {
 
 	public void setCatExperienciaTipo(String catExperienciaTipo) {
 		this.catExperienciaTipo = catExperienciaTipo;
-	}
-
-	public String getCatIdioma() {
-		return this.catIdioma;
-	}
-
-	public void setCatIdioma(String catIdioma) {
-		this.catIdioma = catIdioma;
 	}
 
 	public String getCatIdiomaNivel() {
