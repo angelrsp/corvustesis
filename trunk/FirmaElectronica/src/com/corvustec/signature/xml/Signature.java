@@ -35,6 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
+import com.corvustec.signature.xml.commons.enums.XAdESSchemas;
 import com.corvustec.signature.xml.commons.util.MessagesApplication;
 import com.corvustec.signature.xml.exception.SignatureException;
 import com.corvustec.util.EncryptedUtil;
@@ -86,7 +87,9 @@ public class Signature {
                 PrivateKey privateKey = (PrivateKey) keyStore.getKey(alias, EncryptedUtil.getInstancia().desencriptar(pass).toCharArray()); 
                
                 // Instanciamos un objeto XMLSignature desde el Document. El algoritmo de firma ser� DSA 
-                XMLSignature xmlSignature = new XMLSignature(doc, null, XMLSignature.ALGO_ID_SIGNATURE_RSA_SHA1); 
+                XMLSignature xmlSignature = new XMLSignature(doc, null, XMLSignature.ALGO_ID_SIGNATURE_RSA_SHA1);
+                xmlSignature.setXPathNamespaceContext("etsi", XAdESSchemas.XAdES_132.getSchemaUri());
+                
                
                 String idSignature=newID("Signature");
                 String idObject=newID("Object");
@@ -107,6 +110,7 @@ public class Signature {
                 xmlSignature.addDocument("", transforms, Constants.ALGO_ID_DIGEST_SHA1); 
                
                 // A�adimos el KeyInfo del certificado cuya clave privada usamos 
+                
                 X509Certificate cert = (X509Certificate) keyStore.getCertificate(alias); 
                 xmlSignature.addKeyInfo(cert); 
                 xmlSignature.addKeyInfo(cert.getPublicKey()); 
@@ -180,7 +184,7 @@ public class Signature {
     }
 
    
-      private static void fixAliases(KeyStore keyStore) {
+    private static void fixAliases(KeyStore keyStore) {
           Field field;
           //Iterator i$;
           try
@@ -205,7 +209,6 @@ public class Signature {
                   String hashCode = Integer.toString(certificates[0].hashCode());
 
                   field = entry.getClass().getDeclaredField("alias");
-                  field.setAccessible(true);
                   String alias = (String)field.get(entry);
 
                   if (!alias.equals(hashCode))

@@ -4,7 +4,7 @@ import java.util.ResourceBundle;
 
 public class MessagesApplication {
 
-private static final String BUNDLE_NAME = "com.corvustec.facee.files.commons.resources.ApplicationResources";
+private static final String BUNDLE_NAME = "com.corvustec.signature.xml.commons.resorces.ApplicationResources";
 	
 	private static ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 	
