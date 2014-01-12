@@ -1,17 +1,19 @@
 package com.corvustec.signature.xml;
 
-import es.mityc.firmaJava.libreria.xades.DataToSign;
-import es.mityc.firmaJava.libreria.xades.EnumFormatoFirma;
-import es.mityc.firmaJava.libreria.xades.XAdESSchemas;
-import es.mityc.javasign.xml.refs.InternObjectToSign;
-import es.mityc.javasign.xml.refs.ObjectToSign;
 import java.io.IOException;
 import java.security.PrivateKey;
 import java.security.Provider;
 import java.security.cert.X509Certificate;
+
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+
+import es.mityc.firmaJava.libreria.xades.DataToSign;
+import es.mityc.firmaJava.libreria.xades.XAdESSchemas;
+import es.mityc.javasign.xml.refs.InternObjectToSign;
+import es.mityc.javasign.xml.refs.ObjectToSign;
 
 public class FirmasGenericasXAdES extends FirmaGenerica
 {
