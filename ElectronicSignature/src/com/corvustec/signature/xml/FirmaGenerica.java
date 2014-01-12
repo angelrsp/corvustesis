@@ -20,7 +20,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -28,7 +27,9 @@ import org.xml.sax.SAXException;
 
 public abstract class FirmaGenerica
 {
-  private static final Logger LOG = Logger.getLogger(FirmaGenerica.class);
+	
+  private static final Logger logger =Logger.getLogger(FirmaGenerica.class);
+  
   private String directorioSalidaFirma;
   private Provider provider;
   private X509Certificate certificado;
@@ -36,19 +37,18 @@ public abstract class FirmaGenerica
 
   protected FirmaGenerica(String directorioSalidaFirma, Provider provider, X509Certificate certificado, PrivateKey privateKey)
   {
-    BasicConfigurator.configure();
-    Logger.getRootLogger().setLevel(Level.ERROR);
-
-    this.directorioSalidaFirma = directorioSalidaFirma;
-    this.provider = provider;
-    this.certificado = certificado;
-    this.privateKey = privateKey;
+	  logger.info("Constructor FirmaGenerica");
+	  
+	  this.directorioSalidaFirma = directorioSalidaFirma;
+	  this.provider = provider;
+	  this.certificado = certificado;
+	  this.privateKey = privateKey;
   }
 
   public FirmaGenerica()
   {
     BasicConfigurator.configure();
-    Logger.getRootLogger().setLevel(Level.INFO);
+    //Logger.getRootLogger().setLevel(Level.INFO);
   }
 
   protected void execute()
@@ -64,7 +64,7 @@ public abstract class FirmaGenerica
     try {
       res = firma.signFile(this.certificado, datosAFirmar, this.privateKey, this.provider);
     } catch (Exception e1) {
-      LOG.error("Error al firmar el documento ", e1);
+      logger.error("Error al firmar el documento ", e1);
     }
     documentoFirmado = (Document)res[0];
     try
@@ -73,7 +73,7 @@ public abstract class FirmaGenerica
       saveDocumentToFile(documentoFirmado, getSignatureFileName());
     }
     catch (Exception e) {
-      LOG.error("Error al guardar el documento en el directorio de destino ", e);
+      logger.error("Error al guardar el documento en el directorio de destino ", e);
     } finally {
       firma = null;
       datosAFirmar = null;
@@ -98,7 +98,7 @@ public abstract class FirmaGenerica
       FileOutputStream fos = new FileOutputStream(pathfile);
       UtilidadTratarNodo.saveDocumentToOutputStream(document, fos, true);
     } catch (FileNotFoundException e) {
-      LOG.error("FileNotFoundException: Error al salvar el documento", e);
+      logger.error("FileNotFoundException: Error al salvar el documento", e);
     }
   }
 
@@ -128,7 +128,7 @@ public abstract class FirmaGenerica
       Transformer serializer = tfactory.newTransformer();
       serializer.transform(new DOMSource(doc), new StreamResult(stringWriter));
     } catch (TransformerException e) {
-      LOG.error("Error al imprimir el documento", e);
+      logger.error("Error al imprimir el documento", e);
       return null;
     }
 

@@ -13,16 +13,19 @@ import java.security.KeyStoreException;
 import java.security.KeyStoreSpi;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
+import java.security.Provider;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.Random;
 
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.xml.security.c14n.Canonicalizer;
 import org.apache.xml.security.exceptions.XMLSecurityException;
@@ -34,6 +37,7 @@ import org.apache.xml.security.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 import com.corvustec.signature.xml.commons.enums.XAdESSchemas;
 import com.corvustec.signature.xml.commons.util.MessagesApplication;
@@ -58,6 +62,71 @@ public class Signature {
    
     private static final String KEYSTORE_TYPE=MessagesApplication.getInstancia().getString("com.corvustec.signature.xml.key.file");
    
+    
+    public static Boolean execute(String pathXml,String pathXmlSignature,String pathSignature,String passSignature)
+    {
+    	String alias;
+		String pass=EncryptedUtil.getInstancia().desencriptar(passSignature);
+		Provider provider = null;
+		KeyStore keyStore;
+		Boolean isExcute;
+		
+		try {
+			keyStore = KeyStore.getInstance(KEYSTORE_TYPE);
+			keyStore.load(new FileInputStream(pathSignature), pass.toCharArray());
+			
+			 //Cargamos los alias en el keyStore
+		    fixAliases(keyStore);
+		  
+		    //Obtenemos el alias
+		    alias=getAlias(keyStore);
+		  
+		    // Obtenemos la clave privada, pues la necesitaremos para encriptar.		    
+		    KeyStore tmpKs = keyStore;
+		    
+		    PrivateKey privateKey = (PrivateKey) tmpKs.getKey(alias, pass.toCharArray()); 
+		    
+		    
+		    provider = keyStore.getProvider();
+		    
+		    FirmasGenericasXAdES firmador = new FirmasGenericasXAdES();
+		    X509Certificate certificado = (X509Certificate)keyStore.getCertificate(alias);
+		
+		    certificado.checkValidity(new GregorianCalendar().getTime());
+		    
+		    firmador.ejecutarFirmaXades(pathXml, null, pathXmlSignature, provider, certificado, privateKey);
+			isExcute=true;
+		} catch (NoSuchAlgorithmException e1) {
+			isExcute=false;
+			e1.printStackTrace();
+		} catch (CertificateException e1) {
+			isExcute=false;
+			e1.printStackTrace();
+		} catch (FileNotFoundException e1) {
+			isExcute=false;
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			isExcute=false;
+			e1.printStackTrace();
+		} catch (KeyStoreException e) {
+			isExcute=false;
+			e.printStackTrace();
+		} catch (UnrecoverableKeyException e) {
+			isExcute=false;
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			isExcute=false;
+			e.printStackTrace();
+		} catch (SAXException e) {
+			isExcute=false;
+			e.printStackTrace();
+		}
+		return isExcute;
+    }
+    
+    
+    
+    
     public static Boolean Xml(File file, String pathSignature,String pass) throws SignatureException{
     	
         String alias;
