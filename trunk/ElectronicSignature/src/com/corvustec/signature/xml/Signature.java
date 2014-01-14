@@ -63,7 +63,7 @@ public class Signature {
     private static final String KEYSTORE_TYPE=MessagesApplication.getInstancia().getString("com.corvustec.signature.xml.key.file");
    
     
-    public static Boolean execute(String pathXml,String pathXmlSignature,String pathSignature,String passSignature)
+    public static Boolean execute(File file,String pathXmlSignature,String pathSignature,String passSignature)
     {
     	String alias;
 		String pass=EncryptedUtil.getInstancia().desencriptar(passSignature);
@@ -94,7 +94,7 @@ public class Signature {
 		
 		    certificado.checkValidity(new GregorianCalendar().getTime());
 		    
-		    firmador.ejecutarFirmaXades(pathXml, null, pathXmlSignature, provider, certificado, privateKey);
+		    firmador.ejecutarFirmaXades(file.getAbsolutePath(), null, pathXmlSignature, provider, certificado, privateKey);
 			isExcute=true;
 		} catch (NoSuchAlgorithmException e1) {
 			isExcute=false;
