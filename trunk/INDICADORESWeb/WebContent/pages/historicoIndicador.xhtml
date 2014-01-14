@@ -34,7 +34,7 @@
 					</table>
 					
 				<p:tree value="#{historicoIndicadorController.rootNode}" var="node" id="tree" selectionMode="single" selection="#{historicoIndicadorController.selectedNode}">
-					<p:ajax event="select" listener="#{historicoIndicadorController.onNodeSelect}" update=":contenido:growl"/>  
+					<p:ajax event="select" listener="#{historicoIndicadorController.onNodeSelect}" update=":contenido:growl,:contenido:pnlValor"/>  
 			        <p:treeNode id="treeNode">  
 			            <h:outputText value="#{node.indNombreCorto}"/>  
 			        </p:treeNode>  
@@ -42,19 +42,103 @@
 					
 				</p:panel>
 				
+				
 				<p:dialog id="dlgValor" widgetVar="dlgValor" modal="true" header="Valores" closeOnEscape="true">
+				
+				<p:panel id="pnlValor" styleClass="tabla"
+					header="Valor">
 				
 					<table>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.valor']}:&#160;" /> </td>
 							<td><p:inputText required="true"
 										requiredMessage="#{i18n['label.valor']}&#160;#{i18n['label.requerido']}"
-										value="#{representanteLegalController.representanteLegalDTO.rleNombres}"/></td>
+										value="#{historicoIndicadorController.historicoIndicadorDTO.hinValor}"/></td>
 						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.observacion']}:&#160;" /> </td>
+							<td><p:inputText required="true"
+										requiredMessage="#{i18n['label.observacion']}&#160;#{i18n['label.requerido']}"
+										value="#{historicoIndicadorController.historicoIndicadorDTO.hinObservacion}"/></td>
+						</tr>		
+
+					<tr>
+						<td colspan="2" align="center">
+							<p:commandButton actionListener="#{historicoIndicadorController.agregarValor}" value="#{i18n['boton.agregar']}" process="pnlValor" update="pnlValor,growl"/> </td>
+					</tr>
+						
 					</table>
-				
+					
+					
+					<p:dataTable id="tblValor" value="#{historicoIndicadorController.historicoIndicadorList}" var="his">
+					
+						<p:column headerText="#{i18n['label.valor']}">
+							<h:outputText value="#{his.hinValor}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.fecha']}">
+							<h:outputText value="#{his.hinFecha}" />
+						</p:column>
+					
+						<p:column headerText="#{i18n['label.observacion']}">
+							<h:outputText value="#{his.hinObservacion}" />
+						</p:column>
+					
+						<p:column style="width:8%" headerText="#{i18n['label.evidencia']}">  
+			                <p:commandButton actionListener="#{historicoIndicadorController.buscarEvidencias(his)}" oncomplete="PF('dlgEvidencia').show()" icon="ui-icon-search" 
+			                	update=":contenido:pnlEvidencia,:contenido:growl" process="tblValor" title="#{i18n['label.evidencia']}">    
+			    	        </p:commandButton>  
+				        </p:column>  					
+										
+					</p:dataTable>
+										
+					
+				</p:panel>
+
+				</p:dialog>
+
+				<p:dialog id="dlgEvidencia" widgetVar="dlgEvidencia" modal="true" header="Evidencias" closeOnEscape="true">
+				<p:panel id="pnlEvidencia" styleClass="tabla"
+					header="Evidencia">
+
+					<table>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.nombre']}:&#160;" /> </td>
+							<td><p:inputText required="true"
+										requiredMessage="#{i18n['label.nombre']}&#160;#{i18n['label.requerido']}"
+										value="#{historicoIndicadorController.evidenciaDTO.eviNombre}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.observacion']}:&#160;" /> </td>
+							<td><p:inputText required="true"
+										requiredMessage="#{i18n['label.observacion']}&#160;#{i18n['label.requerido']}"
+										value="#{historicoIndicadorController.evidenciaDTO.eviObservacion}"/></td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center">
+								<p:commandButton actionListener="#{historicoIndicadorController.agregarEvidencia}" value="#{i18n['boton.agregar']}" process="pnlEvidencia" update="pnlEvidencia,growl"/> </td>
+						</tr>
+										
+					</table>
+
+					<p:dataTable id="tblEvidencia" value="#{historicoIndicadorController.evidenciaList}" var="evi">
+					
+						<p:column headerText="#{i18n['label.nombre']}">
+							<h:outputText value="#{evi.eviNombre}" />
+						</p:column>
+					
+						<p:column headerText="#{i18n['label.observacion']}">
+							<h:outputText value="#{evi.eviObservacion}" />
+						</p:column>
+															
+					</p:dataTable>
+
+
+				</p:panel>
+								
 				</p:dialog>
 				
+
 				
 			</fieldset>
 		</ui:define>

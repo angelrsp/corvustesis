@@ -16,6 +16,28 @@
 				<p:panel id="pnlDatos" styleClass="tabla"
 					header="Registro">
 					
+					<table>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.representante.legal']}:&#160;" /> </td>
+							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.representante.legal']}:&#160;#{i18n['label.requerido']}" value="#{historicoIndicadorController.modelo}">
+										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+										<f:selectItems value="#{registroController.representanteLegalList}"></f:selectItems>
+							</p:selectOneMenu></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.ies']}:&#160;" /> </td>
+							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{historicoIndicadorController.ies}">
+										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+										<f:selectItems value="#{registroController.iesList}"></f:selectItems>
+							</p:selectOneMenu></td>
+						</tr>
+					</table>
+					
+					<p:dataTable>
+					
+					
+					
+					</p:dataTable>
 						
 				</p:panel>
 			</fieldset>
