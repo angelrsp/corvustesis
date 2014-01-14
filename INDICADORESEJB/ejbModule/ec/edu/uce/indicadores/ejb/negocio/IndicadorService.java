@@ -6,9 +6,12 @@ import javax.ejb.Local;
 
 import ec.edu.uce.indicadores.commons.util.IndicadoresException;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ContactoDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.EvidenciaDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.HistoricoIndicadorDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IndicadorDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ModeloDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.RegistroDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalDTO;
 
 @Local
@@ -42,5 +45,24 @@ public interface IndicadorService {
 			throws IndicadoresException;
 
 	List<IndicadorDTO> obtenerIndicador() throws IndicadoresException;
+
+	void agregarValor(HistoricoIndicadorDTO historicoIndicadorDTO)
+			throws IndicadoresException;
+
+	List<HistoricoIndicadorDTO> obtenerValores(IndicadorDTO indicadorDTO)
+			throws IndicadoresException;
+
+	void agregarEvidencia(EvidenciaDTO evidenciaDTO)
+			throws IndicadoresException;
+
+	List<EvidenciaDTO> obtenerEvidencias(
+			HistoricoIndicadorDTO historicoIndicadorDTO)
+			throws IndicadoresException;
+
+	void agregarRegistro(RegistroDTO registroDTO) throws IndicadoresException;
+
+	List<RegistroDTO> obtenerRegistro(
+			RepresentanteLegalDTO representanteLegalDTO, IesDTO iesDTO)
+			throws IndicadoresException;
 
 }

@@ -12,9 +12,12 @@ import ec.edu.uce.indicadores.commons.util.IndicadoresException;
 import ec.edu.uce.indicadores.ejb.negocio.IndicadorService;
 import ec.edu.uce.indicadores.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ContactoDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.EvidenciaDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.HistoricoIndicadorDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IndicadorDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ModeloDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.RegistroDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalDTO;
 
 @Stateless
@@ -154,4 +157,80 @@ public class IndicadorServiceImpl implements IndicadorService {
 		}
 	}
 
+	
+	@Override
+	public void agregarValor(HistoricoIndicadorDTO historicoIndicadorDTO) throws IndicadoresException
+	{
+		log.info("agregarIndicador");
+		try {
+			factoryDAO.getHistoricoIndicadorDAOImpl().create(historicoIndicadorDTO);
+		} catch (Exception e) {
+			log.error(e.toString());
+			throw new IndicadoresException(e);
+		}
+	}
+	
+	
+	@Override
+	public List<HistoricoIndicadorDTO> obtenerValores(IndicadorDTO indicadorDTO) throws IndicadoresException
+	{
+		try {
+			return factoryDAO.getHistoricoIndicadorDAOImpl().getAll(indicadorDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new IndicadoresException(e);
+		}
+	}
+	
+	
+	@Override
+	public void agregarEvidencia(EvidenciaDTO evidenciaDTO) throws IndicadoresException
+	{
+		log.info("agregarEvidencia");
+		try {
+			factoryDAO.getEvidenciaDAOImpl().create(evidenciaDTO);
+		} catch (Exception e) {
+			log.error(e.toString());
+			throw new IndicadoresException(e);
+		}
+	}
+	
+	
+	@Override
+	public List<EvidenciaDTO> obtenerEvidencias(HistoricoIndicadorDTO historicoIndicadorDTO) throws IndicadoresException
+	{
+		try {
+			return factoryDAO.getEvidenciaDAOImpl().getAll(historicoIndicadorDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new IndicadoresException(e);
+		}
+	}
+	
+
+	@Override
+	public void agregarRegistro(RegistroDTO registroDTO) throws IndicadoresException
+	{
+		log.info("agregarRegistro");
+		try {
+			factoryDAO.getRegistroDAOImpl().create(registroDTO);
+		} catch (Exception e) {
+			log.error(e.toString());
+			throw new IndicadoresException(e);
+		}
+	}
+	
+	
+	@Override
+	public List<RegistroDTO> obtenerRegistro(RepresentanteLegalDTO representanteLegalDTO,IesDTO iesDTO) throws IndicadoresException
+	{
+		try {
+			return factoryDAO.getRegistroDAOImpl().getAll(representanteLegalDTO, iesDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new IndicadoresException(e);
+		}
+	}
+
+	
 }

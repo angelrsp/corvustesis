@@ -5,10 +5,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import ec.edu.uce.indicadores.ejb.persistence.dao.ContactoDAO;
+import ec.edu.uce.indicadores.ejb.persistence.dao.EvidenciaDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.FactoryDAO;
+import ec.edu.uce.indicadores.ejb.persistence.dao.HistoricoIndicadorDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.IesDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.IndicadorDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.ModeloDAO;
+import ec.edu.uce.indicadores.ejb.persistence.dao.RegistroDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.RepresentanteLegalDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.UsuarioDAO;
 
@@ -30,6 +33,12 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private ModeloDAO modeloDAO;
 	
 	private IndicadorDAO indicadorDAO;
+	
+	private HistoricoIndicadorDAO historicoIndicadorDAO;
+	
+	private EvidenciaDAO evidenciaDAO;
+	
+	private RegistroDAO registroDAO;
 	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -77,5 +86,30 @@ public class FactoryDAOImpl implements FactoryDAO{
 			indicadorDAO = new IndicadorDAOImpl(entityManager);
 		}
 		return indicadorDAO;
+	}
+	
+	
+	@Override
+	public HistoricoIndicadorDAO getHistoricoIndicadorDAOImpl() {
+		if (historicoIndicadorDAO == null) {
+			historicoIndicadorDAO = new HistoricoIndicadorDAOImpl(entityManager);
+		}
+		return historicoIndicadorDAO;
+	}	
+	
+	@Override
+	public EvidenciaDAO getEvidenciaDAOImpl() {
+		if (evidenciaDAO == null) {
+			evidenciaDAO = new EvidenciaDAOImpl(entityManager);
+		}
+		return evidenciaDAO;
+	}	
+	
+	@Override
+	public RegistroDAO getRegistroDAOImpl() {
+		if (registroDAO == null) {
+			registroDAO = new RegistroDAOImpl(entityManager);
+		}
+		return registroDAO;
 	}	
 }
