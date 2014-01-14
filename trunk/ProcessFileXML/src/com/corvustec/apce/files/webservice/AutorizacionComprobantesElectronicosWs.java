@@ -13,12 +13,10 @@ import com.corvustec.apce.files.commons.exception.ProcessFileException;
 import com.corvustec.apce.files.commons.util.MessagesApplication;
 import com.corvustec.apce.files.commons.util.UtilWebService;
 
-import ec.gob.sri.comprobantes.ws.Comprobante;
-import ec.gob.sri.comprobantes.ws.aut.Mensaje;
-import ec.gob.sri.comprobantes.ws.RespuestaSolicitud;
 import ec.gob.sri.comprobantes.ws.aut.Autorizacion;
 import ec.gob.sri.comprobantes.ws.aut.AutorizacionComprobantes;
 import ec.gob.sri.comprobantes.ws.aut.AutorizacionComprobantesService;
+import ec.gob.sri.comprobantes.ws.aut.Mensaje;
 import ec.gob.sri.comprobantes.ws.aut.RespuestaComprobante;
 
 public class AutorizacionComprobantesElectronicosWs {
@@ -106,17 +104,21 @@ public class AutorizacionComprobantesElectronicosWs {
 	        	{
 	        		for(Mensaje m:item.getMensajes().getMensaje())
 	        		{
+	        			mensaje.append(item.getEstado());
 	        			mensaje.append(m.getMensaje()).append(", ");
 	        			mensaje.append(m.getInformacionAdicional() == null ? "" : m.getInformacionAdicional());
 	        			mensaje.append(saltoLinea);
 	        			
-	        			logger.info("identificador {}",m.getIdentificador());
-	        			logger.info("mensaje {}",m.getMensaje());
-	        			logger.info("informacion adicional {}",m.getInformacionAdicional());
-	        			logger.info("tipo {}",m.getTipo());
+//	        			logger.info("identificador {}",m.getIdentificador());
+//	        			logger.info("mensaje {}",m.getMensaje());
+//	        			logger.info("informacion adicional {}",m.getInformacionAdicional());
+//	        			logger.info("tipo {}",m.getTipo());
 	        		}
 	        	}
-	        	
+	        	else
+	        	{
+	        		mensaje.append(item.getEstado());
+	        	}
 	        }
 		 }
 	        	
