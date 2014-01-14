@@ -14,11 +14,13 @@ import ec.edu.uce.indicadores.commons.util.IndicadoresException;
 import ec.edu.uce.indicadores.ejb.negocio.IndicadorService;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ModeloDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalDTO;
 
 public abstract class SelectItemController {
 
 	private List<SelectItem> iesList;
 	private List<SelectItem> modeloList;
+	private List<SelectItem> representanteLegalList;
 	
 	@EJB
 	private IndicadorService indicadorService;
@@ -33,6 +35,7 @@ public abstract class SelectItemController {
 	{
 		iesList=new ArrayList<SelectItem>();
 		modeloList=new ArrayList<SelectItem>();
+		representanteLegalList=new ArrayList<SelectItem>();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -67,4 +70,19 @@ public abstract class SelectItemController {
 		return modeloList;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getRepresentanteLegalList() throws IndicadoresException {
+		if(CollectionUtils.isEmpty(representanteLegalList))
+		{
+			representanteLegalList=(List<SelectItem>) CollectionUtils.collect(indicadorService.obtenerRepresentantes(),new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					RepresentanteLegalDTO rep=(RepresentanteLegalDTO) arg0;
+					return new SelectItem(rep.getRleCodigo(), rep.getRleNombres()+" "+rep.getRleApellidos());
+				}
+			});
+		}
+		return representanteLegalList;
+	}
 }

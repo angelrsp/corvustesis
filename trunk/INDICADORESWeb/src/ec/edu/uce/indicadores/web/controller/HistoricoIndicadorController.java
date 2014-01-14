@@ -1,6 +1,9 @@
 package ec.edu.uce.indicadores.web.controller;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +17,8 @@ import org.primefaces.model.TreeNode;
 
 import ec.edu.uce.indicadores.commons.util.IndicadoresException;
 import ec.edu.uce.indicadores.ejb.negocio.IndicadorService;
+import ec.edu.uce.indicadores.ejb.persistence.entities.EvidenciaDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.HistoricoIndicadorDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IndicadorDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ModeloDTO;
@@ -31,7 +36,12 @@ public class HistoricoIndicadorController extends SelectItemController implement
 	@EJB
 	private IndicadorService indicadorService;
 	
+	private HistoricoIndicadorDTO historicoIndicadorDTO;
+	private HistoricoIndicadorDTO hisIndTemp;
+	private EvidenciaDTO evidenciaDTO;
+	
 	private IndicadorDTO indicadorDTO;
+	private IndicadorDTO indTemp;
 	
 	private Object modelo;
 	private Object ies;
@@ -39,11 +49,18 @@ public class HistoricoIndicadorController extends SelectItemController implement
 	private TreeNode rootNode;
 	private TreeNode selectedNode;
 	
+	private List<HistoricoIndicadorDTO> historicoIndicadorList;
+	private List<EvidenciaDTO> evidenciaList;
+	
 	@PostConstruct
 	private void init() throws IndicadoresException
 	{
 		indicadorDTO=new IndicadorDTO();
 		obtenerArbol();
+		historicoIndicadorList=new ArrayList<HistoricoIndicadorDTO>();
+		historicoIndicadorDTO=new HistoricoIndicadorDTO();
+		evidenciaDTO=new EvidenciaDTO();
+		evidenciaList=new ArrayList<EvidenciaDTO>();
 	}
 	
 	
@@ -71,6 +88,16 @@ public class HistoricoIndicadorController extends SelectItemController implement
 		this.indicadorDTO = indicadorDTO;
 	}
 	
+	public HistoricoIndicadorDTO getHistoricoIndicadorDTO() {
+		return historicoIndicadorDTO;
+	}
+
+
+	public void setHistoricoIndicadorDTO(HistoricoIndicadorDTO historicoIndicadorDTO) {
+		this.historicoIndicadorDTO = historicoIndicadorDTO;
+	}
+
+
 	public TreeNode getRootNode() {
 		return rootNode;
 	}
@@ -86,6 +113,37 @@ public class HistoricoIndicadorController extends SelectItemController implement
 
 	public void setSelectedNode(TreeNode selectedNode) {
 		this.selectedNode = selectedNode;
+	}
+
+
+	public EvidenciaDTO getEvidenciaDTO() {
+		return evidenciaDTO;
+	}
+
+
+	public void setEvidenciaDTO(EvidenciaDTO evidenciaDTO) {
+		this.evidenciaDTO = evidenciaDTO;
+	}
+
+
+	public List<HistoricoIndicadorDTO> getHistoricoIndicadorList() {
+		return historicoIndicadorList;
+	}
+
+
+	public void setHistoricoIndicadorList(
+			List<HistoricoIndicadorDTO> historicoIndicadorList) {
+		this.historicoIndicadorList = historicoIndicadorList;
+	}
+
+
+	public List<EvidenciaDTO> getEvidenciaList() {
+		return evidenciaList;
+	}
+
+
+	public void setEvidenciaList(List<EvidenciaDTO> evidenciaList) {
+		this.evidenciaList = evidenciaList;
 	}
 
 
@@ -131,15 +189,64 @@ public class HistoricoIndicadorController extends SelectItemController implement
    }
 
 	public void onNodeSelect() {
-		IndicadorDTO ind=(IndicadorDTO) selectedNode.getData();
-		if(ind.getIndIndicadors().isEmpty())
-		{
-			RequestContext rc = RequestContext.getCurrentInstance();
-			rc.execute("PF('dlgValor').show();");
+		try {
+			IndicadorDTO ind=(IndicadorDTO) selectedNode.getData();
+			indTemp=new IndicadorDTO();
+			indTemp=ind;
+			if(ind.getIndIndicadors().isEmpty())
+			{
+				RequestContext rc = RequestContext.getCurrentInstance();
+				rc.execute("PF('dlgValor').show();");
+				
+				historicoIndicadorList=indicadorService.obtenerValores(indTemp);
+			}
+			else
+			{
+				JsfUtil.addErrorMessage("Solo se permite en los nudos finales");
+			}
 		}
-		else
-		{
-			JsfUtil.addErrorMessage("Solo se permite en los nudos finales");
+		 catch (IndicadoresException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void agregarValor()
+	{
+		try {
+			getHistoricoIndicadorDTO().setHinFecha(new Timestamp(new Date().getTime()));
+			getHistoricoIndicadorDTO().setIndIndicador(indTemp);
+			indicadorService.agregarValor(getHistoricoIndicadorDTO());
+			historicoIndicadorList=indicadorService.obtenerValores(indTemp);
+			historicoIndicadorDTO=new HistoricoIndicadorDTO();
+		} catch (IndicadoresException e) {
+			// TODO Auto-generated catch block
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void buscarEvidencias(HistoricoIndicadorDTO his)
+	{
+		try {
+			hisIndTemp=his;
+			evidenciaList=indicadorService.obtenerEvidencias(hisIndTemp);
+		} catch (IndicadoresException e) {
+			// TODO Auto-generated catch block
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void agregarEvidencia()
+	{
+		try {
+			getEvidenciaDTO().setIndHistoricoIndicador(hisIndTemp);
+			indicadorService.agregarEvidencia(getEvidenciaDTO());
+			evidenciaDTO=new EvidenciaDTO();
+			buscarEvidencias(hisIndTemp);
+		} catch (IndicadoresException e) {
+			// TODO Auto-generated catch block
+			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
 }
