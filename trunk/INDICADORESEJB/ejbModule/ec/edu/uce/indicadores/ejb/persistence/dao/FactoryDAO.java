@@ -17,5 +17,11 @@ public interface FactoryDAO {
 
 	IndicadorDAO getIndicadorDAOImpl();
 
+	HistoricoIndicadorDAO getHistoricoIndicadorDAOImpl();
+
+	EvidenciaDAO getEvidenciaDAOImpl();
+
+	RegistroDAO getRegistroDAOImpl();
+
 	
 }
