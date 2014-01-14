@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.corvustec.apce.files.commons.util.Constantes;
+import com.corvustec.apce.files.commons.util.UtilApplication;
 import com.corvustec.apce.files.commons.util.UtilMail;
 import com.corvustec.apce.files.webservice.AutorizacionComprobantesElectronicosWs;
 import com.corvustec.apce.files.webservice.ComprobantesElectronicosWs;
@@ -13,7 +14,6 @@ import com.corvustec.signature.xml.Signature;
 
 import ec.gob.sri.comprobantes.ws.RespuestaSolicitud;
 import ec.gob.sri.comprobantes.ws.aut.Autorizacion;
-import ec.gob.sri.comprobantes.ws.aut.Mensaje;
 import ec.gob.sri.comprobantes.ws.aut.RespuestaComprobante;
 
 public class ArchivoXML {
@@ -21,21 +21,21 @@ public class ArchivoXML {
 	
 	private final static Logger logger = LoggerFactory.getLogger(ArchivoXML.class);
 	
-	public static void procesarComprobante(String file)
+	public static void procesarComprobante(String fileXml,String fileXmlSignature,String pathSignature,String passSignature)
 	{
-		File xmlFile=new File(file);
-		
+		File xmlFile=new File(fileXml);
+		String comprobante = null;
 		try {	
 			
-		//if (Signature.Xml(xmlFile, "/home/fernando/FacturacionElectronica/clientes/Prueba/Firma/francisco_arturo_velez_rojas.p12","ulygGd+Hh/4di7WinfA1NA==")){
+		if (Signature.execute(xmlFile, fileXmlSignature, pathSignature, passSignature)){
 			
 			Object a = ComprobantesElectronicosWs.verificarConectividad(Constantes.AMBIENTE, ComprobantesElectronicosWs.SERVICIO_RECEPCION);
 			
 			if (a == null) {
 				logger.info("No se puede conectar al servicio del SRI implementar envio contingencia");
 			} else {
-				
-				RespuestaSolicitud response = ComprobantesElectronicosWs.enviarComprobante(xmlFile);
+				File xmlFileSignature=new File(fileXmlSignature);
+				RespuestaSolicitud response = ComprobantesElectronicosWs.enviarComprobante(xmlFileSignature);
 				logger.info("Respuesta WS: {}", response.getEstado());
 				
 				if (response.getEstado().equals(ComprobantesElectronicosWs.RESPUESTA_RECIBIDA)) {
@@ -46,19 +46,28 @@ public class ArchivoXML {
 					}
 					else
 					{
-//						RespuestaComprobante responseAut=AutorizacionComprobantesElectronicosWs.autorizacionComprobante("0710201301179125123700110010650000000107791051216");
-//
-//						String respuestaAut= AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(responseAut);
-//
-//						logger.info("Respuesta WS Autorizacion {}",respuestaAut);
+						RespuestaComprobante responseAut=AutorizacionComprobantesElectronicosWs.autorizacionComprobante("1101201401171679011600110010012004000271234560118");
+
+						String respuestaAut= AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(responseAut);
+
+						logger.info("Respuesta WS Autorizacion {}",respuestaAut);
 						
-//  					        item.setComprobante("<![CDATA[" + item.getComprobante() + "]]>");
-//
-//						          XStream xstream = XStreamUtil.getRespuestaXStream();
-//						          Writer writer = null;
-//						          ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//						          writer = new OutputStreamWriter(outputStream, "UTF-8");
-//						          writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+						
+						
+						for (Autorizacion item : responseAut.getAutorizaciones().getAutorizacion()) {
+						
+							comprobante=item.getComprobante();
+  					        //item.setComprobante("<![CDATA[" + item.getComprobante() + "]]>");
+  					        
+							
+							
+  					        //logger.info("Compronate {}",item.getComprobante());
+
+//  					        XStream xstream = XStreamUtil.getRespuestaXStream();
+//  					        Writer writer = null;
+//  					        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//  					        writer = new OutputStreamWriter(outputStream, "UTF-8");
+//  					        writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 //
 //						          xstream.toXML(item, writer);
 //						          String xmlAutorizacion = outputStream.toString("UTF-8");
@@ -78,10 +87,14 @@ public class ArchivoXML {
 //						          }
 					          
 					        //}
-						 //}
+							
+						 }
+						if(comprobante!=null)
+							UtilApplication.convertStringToDocument(comprobante);
+						UtilMail.enviar(xmlFileSignature);
 					}
 					
-					UtilMail.enviar(xmlFile);
+					
 					//UtilApplication.moverArchivoProcesado(file, getEstructuraArchivos().get(Constantes.carpetaProcesados));
 					//Agregado por FPU
 					
@@ -91,11 +104,11 @@ public class ArchivoXML {
 				}
 			}
 			
-		//} else {
-		//	logger.info("No se pudo firmar el archivo {} ", file);
-		//}
+		} else {
+			logger.info("No se pudo firmar el archivo {} ", fileXml);
+		}
 		} catch (Exception e) {
-			logger.info("Problemas al procesar comprobante {}, {} ", file, e.toString());
+			logger.info("Problemas al procesar comprobante {}, {} ", fileXml, e.toString());
 		}
 	}
 	
