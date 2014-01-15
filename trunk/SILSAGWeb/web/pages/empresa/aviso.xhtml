@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/template/empresa.xhtml">
+		<ui:define name="contenido">
+			<fieldset>
+				<p:growl id="growl" showDetail="false" />
+				<p:panel id="pnlAviso" styleClass="tabla">
+					<table>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.puesto']}:&#160;" /></td>
+							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.puesto']}#160;#{i18n['label.requerido']}" value="#{avisoEmpresaController.puesto}">
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
+										itemValue="" />
+									<f:selectItems value="#{avisoEmpresaController.catalogoPuesto}"></f:selectItems>	
+								</p:selectOneMenu></td>
+							<td><h:outputLabel
+									value="#{i18n['label.remuneracion']}:&#160;" /></td>
+							<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.remuneracion']}&#160;#{i18n['label.requerido']}" value="#{avisoEmpresaController.aviso.aviRemuneracion}" /></td>
+						</tr>
+
+						<tr>
+							<td><h:outputLabel
+									value="#{i18n['label.descripcion']}:&#160;" /></td>
+							<td colspan="3"><p:inputTextarea required="true"
+									requiredMessage="#{i18n['label.descripcion']}&#160;#{i18n['label.requerido']}"
+									autoResize="false" value="#{avisoEmpresaController.aviso.aviDescripcion}"/></td>
+						</tr>
+
+						<tr>
+							<td><h:outputLabel
+									value="#{i18n['label.fecha.caducidad']}:&#160;" /></td>
+							<td><p:calendar pattern="#{i18n['pattern.fecha']}"
+									required="true"
+									requiredMessage="#{i18n['label.fecha.caducidad']}:&#160;#{i18n['label.requerido']}" value="#{avisoEmpresaController.fecha}"/></td>
+
+							<td><h:outputLabel value="#{i18n['label.vacantes']}:&#160;" /></td>
+							<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.vacantes']}:&#160;#{i18n['label.requerido']}" value="#{avisoEmpresaController.aviso.aviVacantes}" onkeypress="return isNumberKey(event);" /></td>
+						</tr>
+						<tr>
+							<td>
+								<p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{avisoEmpresaController.guardar}" update="pnlAviso,growl" process="pnlAviso"></p:commandButton>
+							</td>
+						</tr>
+
+					</table>
+					
+					<p:spacer height="5"></p:spacer>
+					
+					<p:dataTable value="#{avisoEmpresaController.avisoList}" var="avi" emptyMessage="#{i18n['table.vacio']}">
+					<p:column headerText="#{i18n['label.puesto']}">
+						<h:outputLabel value="#{avi.catDescripcion}" />
+					</p:column>
+					<p:column headerText="#{i18n['label.remuneracion']}">
+						<h:outputLabel value="#{avi.aviRemuneracion}" />
+					</p:column>
+					<p:column headerText="#{i18n['label.descripcion']}">
+						<h:outputLabel value="#{avi.aviDescripcion}" />
+					</p:column>
+					<p:column headerText="#{i18n['label.fecha.caducidad']}">
+						<h:outputLabel value="#{fn:substring(avi.aviFechaCaducidad,0,10)}" />
+					</p:column>										
+					<p:column headerText="#{i18n['label.vacantes']}">				
+						<h:outputLabel value="#{avi.aviVacantes}" />	
+					</p:column>																			
+					</p:dataTable>
+				</p:panel>
+			</fieldset>
+		</ui:define>
+	</ui:composition>
+
+</body>
+</html>
