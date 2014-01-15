@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template/publico.xhtml">
+		<ui:define name="contenido">
+			<fieldset>
+			<h:form id="contenido">
+				<p:growl id="growl" showDetail="false" sticky="true" />
+				<p:panel id="pnlRegistroCandidato" styleClass="tabla"
+					header="#{i18n['label.titulo.pantalla.registro.empresa']}">
+					<table id="tblRegistroCandidato" class="tabla">
+						<tr>
+							<td><h:outputLabel
+									value="#{i18n['label.razon.social']}:&#160;" /></td>
+							<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.razon.social']}&#160;#{i18n['label.requerido']}" value="#{registroEmpresaController.empresa.empRazonSocial}"/></td>
+							<td><h:outputLabel
+									value="#{i18n['label.nombre.comercial']}:&#160;" /></td>
+							<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.nombre.comercial']}&#160;#{i18n['label.requerido']}"
+									value="#{registroEmpresaController.empresa.empNombreComercial}"
+									 /></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.ruc']}:&#160;" /></td>
+							<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.ruc']}&#160;#{i18n['label.requerido']}" value="#{registroEmpresaController.empresa.empRuc}" onkeypress="return isNumberKey(event);"/></td>
+							<td><h:outputLabel value="#{i18n['label.sector']}:&#160;" /></td>
+							<td><p:selectOneMenu value="#{registroEmpresaController.tipoEmpresa}" required="true" requiredMessage="#{i18n['label.sector']}&#160;#{i18n['label.requerido']}">
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
+										itemValue="" />
+									<f:selectItems value="#{registroEmpresaController.catalogoTipoEmpresa}"></f:selectItems>	
+								</p:selectOneMenu></td>
+
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.telefono.convencional']}:&#160;" /></td>
+							<td><p:inputText value="#{registroEmpresaController.usuarioRegistro.usuTelefono}" required="true" requiredMessage="#{i18n['label.telefono.convencional']}&#160;#{i18n['label.requerido']}"/></td>
+
+							<td><h:outputLabel value="#{i18n['label.telefono.celular']}:&#160;" /></td>
+							<td><p:inputText value="#{registroEmpresaController.usuarioRegistro.usuCelular}" /></td>							
+														
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.ubicacion']}:&#160;" /></td>
+							<td><p:inputText value="#{registroEmpresaController.empresa.empUbicacion}" required="true" requiredMessage="#{i18n['label.ubicacion']}&#160;#{i18n['label.requerido']}"  /></td>
+															
+							<td><h:outputLabel value="#{i18n['label.direccion']}:&#160;" /></td>
+							<td><p:inputText value="#{registroEmpresaController.usuarioRegistro.usuDireccion}" required="true" requiredMessage="#{i18n['label.direccion']}&#160;#{i18n['label.requerido']}"  /></td>
+																
+						</tr>		
+						<tr>		
+							<td><h:outputLabel value="#{i18n['label.web']}:&#160;" /></td>
+							<td colspan="3"><p:inputText style="width : 90%;" value="#{registroEmpresaController.empresa.empWeb}" /></td>
+						</tr>
+						
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.email']}:&#160;" />
+							</td>
+							<td colspan="3"><p:inputText style="width : 90%;"
+									required="true"
+									requiredMessage="#{i18n['label.contrasenia']}&#160;#{i18n['label.requerido']}"
+									value="#{registroEmpresaController.usuarioRegistro.usuMail}" /></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel
+									value="#{i18n['label.contrasenia.ingresar']}:&#160;" /></td>
+							<td><p:password required="true"
+									requiredMessage="#{i18n['label.contrasenia.ingresar']}&#160;#{i18n['label.requerido']}"
+									value="#{registroEmpresaController.usuarioRegistro.usuPassword}" /></td>
+							<td><h:outputLabel
+									value="#{i18n['label.contrasenia.confirmar']}:&#160;" /></td>
+							<td><p:password required="true"
+									requiredMessage="#{i18n['label.contrasenia.confirmar']}&#160;#{i18n['label.requerido']}"
+									value="#{registroEmpresaController.usuarioRegistro.npUsuPassword}" /></td>
+						</tr>
+						<tr>
+							<td colspan="4" align="center"><p:commandButton
+									value="#{i18n['boton.registrarse']}"
+									process="pnlRegistroCandidato"
+									update="pnlRegistroCandidato, growl"
+									actionListener="#{registroEmpresaController.registroEmpresa}" />
+							</td>
+<!-- 							<td> -->
+<!-- 							<p:commandButton id="showDialogButton" type="button" value="Show" onclick="mensajeDialog.show()" />  -->
+<!-- 							</td> -->
+						</tr>
+					</table>
+				</p:panel>
+				</h:form>
+			</fieldset>
+			
+			
+		    <p:dialog id="mensajeDialog" widgetVar="mensajeDialog"
+        		header="Mensaje" modal="true" appendToBody="true">
+        		<h:form>        	
+		        	<table>
+			        	<tr>
+			        		<td><h:outputText value="Su registro esta en proceso de aprobación. Recibirá una notificación de autroización al correo electrónico de registro." /></td>
+			        	</tr>
+			        	<tr align="center">	
+				        	<td><p:commandButton value="#{i18n['boton.aceptar']}" action="#{registroEmpresaController.redireccionar}" immediate="true" process="@this" /></td>
+				         </tr>   
+			        </table>
+		        </h:form>
+    		</p:dialog>
+			
+		</ui:define>
+	</ui:composition>
+
+</body>
+</html>

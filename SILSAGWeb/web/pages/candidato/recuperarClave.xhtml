@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template/publico.xhtml">
+		<ui:define name="contenido">
+			<fieldset>
+				<p:growl id="growl" showDetail="false" />
+				<p:panel id="pnlRecuperar" styleClass="tabla">
+					<table>
+						<tr>
+							<td>Por favor ingrese su numero de identficacion</td>
+						</tr>	
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.ci.pasaporte']}" /></td>
+							<td><p:inputText
+									required="true"
+									value="#{loginController.credencialesDTO.username}"
+									placeholder="#{i18n['label.ci.pasaporte']}" /></td>
+						</tr>
+						<tr>
+							<td colspan="2"><p:commandButton value="#{i18n['boton.recuperar']}" process="pnlRecuperar"
+									actionListener="#{loginController.enviar}" update="growl" /></td>
+						</tr>
+					</table>
+				</p:panel>
+			</fieldset>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

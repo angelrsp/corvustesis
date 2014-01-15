@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Universidad Central del Ecuador - Silsae</title>
+</h:head>
+<body>
+
+	<ui:composition template="/template/publico.xhtml">
+		<ui:define name="contenido">
+			<fieldset>
+				<p:growl id="growl" showDetail="true" sticky="true" />
+				<table width="99%" style="font-family: Verdana,Arial,sans-serif; font-size: 1.1em;">
+					<tr>
+						<td width="50%">
+							<p style="text-align: justify;font-weight: bold;">BIENVENIDO.</p>
+							<p style="text-align: justify;font-weight: bold;">ACCESO A SILSAG.</p>
+							<p style="text-align: justify;">
+							
+							Si eres Egresado / Graduado de la
+								Facultad de Odontologia y aun NO has registrado tus datos en el
+								sistema.</p>
+							<p style="text-align: justify;">Te invitamos a que lo hagas
+								con ello podremos contactarte y conocer tu situacion actual.</p>
+						</td>
+						<td align="right" width="50%">
+							<p:commandButton id="btnRegistro"
+								ajax="false"
+								value="#{i18n['boton.registrarse']}"
+								action ="/pages/candidato/ingresoDatos"/>
+							<p:commandButton id="btnIngresar"
+								ajax="false"
+								value="#{i18n['label.ingresar']}"
+								action ="/pages/candidato/loginCandidato"/>
+						</td>
+					</tr>
+				</table>
+			</fieldset>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

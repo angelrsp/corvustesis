@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<ui:include src="/template/head.xhtml" />
+</h:head>
+<body>
+	<div align="center">
+		<div style="width: 995px; box-shadow: 0 0 20px #2E2D32;">
+			<ui:include src="/template/header.xhtml" />
+			<div id="menu">
+				<h:form id="menu">
+				
+					<p:menubar id="menuEmpresa"
+						style="margin-left:auto; margin-right:auto;text-align: center; width:96%"
+						rendered="true">
+						<p:menuitem value="Datos"
+							url="/pages/empresa/dato.jsf" />						
+						<p:menuitem value="Publicar Ofertas"
+							url="/pages/empresa/aviso.jsf" />
+						<p:menuitem value="Ver Postulaciones"
+							url="/pages/empresa/verPostulaciones.jsf" />
+						<p:menuitem value="Ver Currículums Vitae"
+							url="/pages/empresa/verHojasDeVida.jsf" />
+						<p:menuitem value="Actualizar Contraseña"
+							url="/pages/empresa/actualizarClave.jsf" />							
+					    <f:facet name="options">  
+					            <p:commandButton value="Salir" icon="ui-icon-extlink" actionListener="#{loginController.logout}" />  
+					    </f:facet>
+         			</p:menubar>
+					
+				</h:form>
+
+				<p:spacer height="10"></p:spacer>
+
+				<div id="content" align="left" style="width: 950px;">
+					<h:form id="contenido">
+						<ui:insert name="contenido"></ui:insert>
+						<p:spacer height="10"></p:spacer>
+					</h:form>
+				</div>
+			</div>
+		</div>
+		<ui:include src="/template/footer.xhtml" />
+	</div>
+</body>
+</html>

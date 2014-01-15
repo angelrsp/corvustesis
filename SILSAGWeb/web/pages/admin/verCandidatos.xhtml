@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head></h:head>
+<body>
+
+
+	<ui:composition template="/template/admin.xhtml">
+
+		<ui:define name="contenido">
+		
+			<fieldset>
+			
+				<p:growl id="growl" showDetail="true" />
+				
+				<p:dataTable id="tblCandidato" value="#{verCandidatoController.candidatoList}" var="can">
+				
+					<p:column headerText="#{i18n['label.ci.pasaporte']}">
+						<h:outputText value="#{can.canIdentificacion}"/>
+					</p:column>			
+
+					<p:column headerText="#{i18n['label.apellidos']}">
+						<h:outputText value="#{can.canApellidoPaterno} #{can.canApellidoMaterno}" />
+					</p:column>			
+
+					<p:column headerText="#{i18n['label.nombres']}">
+						<h:outputText value="#{can.canPrimerNombre} #{can.canSegundoNombre}" />
+					</p:column>			
+
+					<p:column headerText="#{i18n['label.fecha.nacimiento']}">
+						<h:outputText value="#{fn:substring(can.canFechaNacimiento,0,10)}" />
+					</p:column>	
+
+					<p:column headerText="#{i18n['label.nivel.estudio2']}">
+						<h:outputText value="#{can.catMaxNivelEstudio}" />
+					</p:column>	
+
+
+					<p:column style="width:8%" headerText="#{i18n['label.ver.mas']}">  
+		                <p:commandButton actionListener="#{verCandidatoController.buscarCandidato(can)}" oncomplete="PF('infoCandidato').show()" icon="ui-icon-search" 
+		                	update=":contenido:infoCandidato,:contenido:growl" process="tblCandidato" title="#{i18n['label.ver.mas']}">    
+		    	        </p:commandButton>  
+			        </p:column>  					
+				
+				</p:dataTable>
+				
+			</fieldset>
+		
+		   <p:dialog id="infoCandidato" widgetVar="infoCandidato"
+      			header="Candidato" modal="true" closeOnEscape="true" resizable="false">
+      			
+      			<p:scrollPanel style="width:800px;height:600px" mode="native">  
+      			
+      			<table>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.tipo.documento']}:&#160;" /> </td>
+								<td>
+									<p:selectOneMenu value="#{verCandidatoController.tipoDocumento}" disabled="true">
+										<f:selectItems value="#{verCandidatoController.catalogoTipoDocumento}"></f:selectItems>
+									</p:selectOneMenu>
+								</td>
+							<td><h:outputLabel value="#{i18n['label.ci.pasaporte']}:&#160;" /> </td>
+							<td><p:inputText value="#{verCandidatoController.candidato.canIdentificacion}" onkeypress="return isNumberKey(event);" readonly="true"/></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.apellido.paterno']}:&#160;" /> </td>
+							<td><p:inputText value="#{verCandidatoController.candidato.canApellidoPaterno}" readonly="true"/></td>
+							<td><h:outputLabel value="#{i18n['label.apellido.materno']}:&#160;" /> </td>
+							<td><p:inputText value="#{verCandidatoController.candidato.canApellidoMaterno}" readonly="true"/></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.nombre.primero']}:&#160;" /> </td>
+							<td><p:inputText value="#{verCandidatoController.candidato.canPrimerNombre}" readonly="true"/></td>
+							<td><h:outputLabel value="#{i18n['label.nombre.Segundo']}:&#160;" /> </td>
+							<td><p:inputText value="#{verCandidatoController.candidato.canSegundoNombre}" readonly="true"/></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.email']}:&#160;" /> </td>
+							<td colspan="3"><p:inputText style="width : 90%;" value="#{verCandidatoController.user.usuMail}" readonly="true"/></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.estado.civil']}:&#160;"/> </td>
+							<td><p:selectOneMenu value="#{verCandidatoController.estadoCivil}" disabled="true">
+									<f:selectItems value="#{verCandidatoController.catalogoEstadoCivil}"/>										
+								</p:selectOneMenu></td>
+						</tr>
+
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.fecha.nacimiento']}" /> </td>
+							<td><p:inputText value="#{verCandidatoController.candidato.canFechaNacimiento}" readonly="true"/></td>
+							
+							<td><h:outputLabel value="#{i18n['label.lugar.nacimiento']}:&#160;" /> </td>
+							<td><p:inputText value="#{verCandidatoController.candidato.canLugarNacimiento}" readonly="true"></p:inputText></td>
+						</tr>
+
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.direccion.domicilio']}:&#160;" /> </td>
+							<td><p:inputText value="#{verCandidatoController.user.usuDireccion}" readonly="true"></p:inputText></td>														
+						</tr>
+
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.telefono.convencional']}:&#160;" /> </td>
+							<td><p:inputText value="#{verCandidatoController.user.usuTelefono}" readonly="true"></p:inputText></td>
+
+							<td><h:outputLabel value="#{i18n['label.telefono.celular']}:&#160;" /> </td>
+							<td><p:inputText value="#{verCandidatoController.user.usuCelular}" readonly="true"></p:inputText></td>														
+						</tr>
+						
+					</table>
+
+					<p:spacer height="5"/>
+					
+					<p:panel id="pnlEstudios" styleClass="tabla"
+						header="#{i18n['label.titulo.pantalla.dato.estudios']}">
+						<p:dataTable id="tblEstudio" value="#{verCandidatoController.estudioList}" var="est" emptyMessage="#{i18n['table.vacio']}">
+							<p:column headerText="#{i18n['label.nivel.estudio']}">
+								<h:outputText value="#{est.catNivel}" />
+							</p:column>
+							<p:column headerText="#{i18n['label.establecimiento']}">
+								<h:outputText value="#{est.estEstablecimiento}" />
+							</p:column>
+							<p:column headerText="#{i18n['label.pais']}">
+								<h:outputText value="#{est.catPais}" />
+							</p:column>
+							<p:column headerText="#{i18n['label.carrera']}">
+								<h:outputText value="#{est.estCarrera}" />
+							</p:column>
+							<p:column headerText="#{i18n['label.anio.inicio']}">
+								<h:outputText value="#{est.estAnioInicio}" />
+							</p:column>
+							<p:column headerText="#{i18n['label.mes.inicio']}">
+								<h:outputText value="#{est.estMesInicioNombre}" />
+							</p:column>
+							<p:column headerText="#{i18n['label.anio.fin']}">
+								<h:outputText value="#{est.estAnioFin}" />
+							</p:column>
+							<p:column headerText="#{i18n['label.mes.fin']}">
+								<h:outputText value="#{est.estMesFinNombre}" />
+							</p:column>	
+						</p:dataTable>
+					</p:panel>
+				
+					<p:spacer height="5"/>
+					
+					<p:panel id="pnlExperiencia" styleClass="tabla"
+						header="#{i18n['label.titulo.pantalla.dato.experiencia']}">				
+						
+						<p:dataTable id="tblExperiencia" value="#{verCandidatoController.experienciaList}" var="exp" emptyMessage="#{i18n['table.vacio']}">
+						
+						<p:column headerText="#{i18n['label.empresa']}">
+								<h:outputText value="#{exp.expEntidad}" />
+							</p:column>
+							<p:column headerText="#{i18n['label.fecha.inicio']}">
+								<h:outputText value="#{fn:substring(exp.expFechaInicio,0,10)}" />
+							</p:column>
+							<p:column headerText="#{i18n['label.fecha.fin']}">
+								<h:outputText value="#{fn:substring(exp.expFechaFin,0,10)}" />
+							</p:column>
+							<p:column headerText="#{i18n['label.tareas']}">
+								<h:outputText value="#{exp.expTareas}" />
+							</p:column>
+							<p:column headerText="#{i18n['label.puesto']}">
+								<h:outputText value="#{exp.expPuesto}" />
+							</p:column>
+							<p:column headerText="#{i18n['label.rubro']}">
+								<h:outputText value="#{exp.expRubro}" />
+							</p:column>
+							<p:column headerText="#{i18n['label.tipo.experiencia']}">
+								<h:outputText value="#{exp.catTipoExperiencia}" />
+							</p:column>
+													
+						</p:dataTable>					
+					</p:panel>							
+
+					<p:spacer height="5"/>
+
+					<p:panel id="pnlHerramientas" styleClass="tabla"
+						header="#{i18n['label.titulo.pantalla.dato.herramientas']}">
+						<p:dataTable id="tblHerramienta" value="#{verCandidatoController.herramientasList}" var="her" emptyMessage="#{i18n['table.vacio']}">
+						
+							<p:column headerText="#{i18n['label.programa']}">
+								<h:outputText value="#{her.proPrograma}" />
+							</p:column>
+	
+							<p:column headerText="#{i18n['label.nivel.programa']}">
+								<h:outputText value="#{her.catNivel}" />
+							</p:column>
+						
+						</p:dataTable>					
+					</p:panel>
+
+					<p:spacer height="5"/>
+
+					<p:panel id="pnlIdioma" styleClass="tabla"
+						header="#{i18n['label.titulo.pantalla.dato.idioma']}" emptyMessage="#{i18n['table.vacio']}">
+					
+						<p:dataTable id="tblIdioma" emptyMessage="#{i18n['table.vacio']}" value="#{verCandidatoController.idiomaList}" var="idi">
+						
+							<p:column headerText="#{i18n['label.idioma']}">
+								<h:outputText value="#{idi.idiIdioma}" />
+							</p:column>
+	
+							<p:column headerText="#{i18n['label.nivel.idioma']}">
+								<h:outputText value="#{idi.catNivel}" />
+							</p:column>
+							
+						</p:dataTable>					
+					</p:panel>
+
+					<p:spacer height="5"/>
+
+					<p:panel id="pnlReferencia" styleClass="tabla"
+						header="#{i18n['label.titulo.pantalla.dato.referencia']}">
+					
+					<p:dataTable id="tblReferencia" emptyMessage="#{i18n['table.vacio']}" value="#{verCandidatoController.referenciaList}" var="ref">
+					
+						<p:column headerText="#{i18n['label.nombre.completo']}">
+							<h:outputText value="#{ref.refNombre}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.telefono']}">
+							<h:outputText value="#{ref.refNombre}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.email']}">
+							<h:outputText value="#{ref.refMail}" />
+						</p:column>
+					
+					</p:dataTable>
+										
+				</p:panel>
+
+
+				</p:scrollPanel>
+
+			</p:dialog>		
+
+		
+		</ui:define>
+		
+	</ui:composition>
+	
+</body>
+
+</html>			
