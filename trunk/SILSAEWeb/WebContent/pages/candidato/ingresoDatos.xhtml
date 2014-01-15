@@ -61,11 +61,14 @@
 									requiredMessage="#{i18n['label.contrasenia.confirmar']}&#160;#{i18n['label.requerido']}"
 									value="#{registroCandidatoController.usuarioRegistro.npUsuPassword2}"/></td>
 						</tr>
-						<tr>
-							<td colspan="4" align="center">
+						<tr  align="center">
+							<td colspan="3">
 								<p:commandButton value="#{i18n['boton.registrarse']}" 
 									process="pnlRegistroCandidato" update="pnlRegistroCandidato, growl"
-									actionListener="#{registroCandidatoController.registroCandidato}"/> </td>
+									actionListener="#{registroCandidatoController.registroCandidato}"/> 
+							<p:commandButton value="#{i18n['boton.atras']}"
+									process="@this" immediate="true"
+									actionListener="#{registroCandidatoController.atras}" /></td>									
 						</tr>
 					</table>
 				</p:panel>
