@@ -12,10 +12,8 @@ import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.negocio.EmpresaService;
 import ec.edu.uce.silsag.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.silsag.ejb.persistence.entities.AvisoDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.AvisoListDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EmpresaDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.PostulacionListDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
 
 @Stateless
@@ -64,16 +62,16 @@ public class EmpresaServiceImpl implements EmpresaService {
 		}		
 	}
 	
-	@Override
-	public List<AvisoListDTO> obtenerAviso(EmpresaDTO empresa) throws SilsagException
-	{
-		try {
-		return factoryDAO.getAvisoDAOImpl().getAll(empresa);
-		} catch (Exception e) {
-			log.info("Error al registrar Aviso {}", e.toString());
-			throw new SilsagException("Error al registrar Aviso");
-		}				
-	}
+//	@Override
+//	public List<AvisoListDTO> obtenerAviso(EmpresaDTO empresa) throws SilsagException
+//	{
+//		try {
+//		return factoryDAO.getAvisoDAOImpl().getAll(empresa);
+//		} catch (Exception e) {
+//			log.info("Error al registrar Aviso {}", e.toString());
+//			throw new SilsagException("Error al registrar Aviso");
+//		}				
+//	}
 	
 	@Override
 	public ContactoDTO agregarContacto(ContactoDTO contacto) throws SilsagException
@@ -97,16 +95,16 @@ public class EmpresaServiceImpl implements EmpresaService {
 		}				
 	}
 
-	@Override
-	public List<PostulacionListDTO> obtenerPostulacion(EmpresaDTO empresa) throws SilsagException
-	{
-		try {
-			return factoryDAO.getPostulacionDAOImpl().getAll(empresa);
-		} catch (Exception e) {
-			log.info("Error al registrar Aviso {}", e.toString());
-			throw new SilsagException("Error al registrar Aviso");
-		}				
-	}
+//	@Override
+//	public List<PostulacionListDTO> obtenerPostulacion(EmpresaDTO empresa) throws SilsagException
+//	{
+//		try {
+//			return factoryDAO.getPostulacionDAOImpl().getAll(empresa);
+//		} catch (Exception e) {
+//			log.info("Error al registrar Aviso {}", e.toString());
+//			throw new SilsagException("Error al registrar Aviso");
+//		}				
+//	}
 
 	
 }

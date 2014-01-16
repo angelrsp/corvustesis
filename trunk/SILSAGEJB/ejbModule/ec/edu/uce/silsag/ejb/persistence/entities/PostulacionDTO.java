@@ -10,30 +10,31 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="bem_postulacion")
+@NamedQuery(name="PostulacionDTO.findAll", query="SELECT p FROM PostulacionDTO p")
 public class PostulacionDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_POSTULACION_POSCODIGO_GENERATOR", sequenceName="BEM_POSTULACION_POS_CODIGO_SEQ", allocationSize=1)
+	@SequenceGenerator(name="BEM_POSTULACION_POSCODIGO_GENERATOR", sequenceName="BEM_POSTULACION_POS_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_POSTULACION_POSCODIGO_GENERATOR")
 	@Column(name="pos_codigo")
 	private Integer posCodigo;
 
 	@Column(name="pos_aceptado")
 	private Boolean posAceptado;
-	
+
 	//bi-directional many-to-one association to AvisoDTO
-    @ManyToOne
+	@ManyToOne
 	@JoinColumn(name="pos_aviso")
 	private AvisoDTO bemAviso;
 
 	//bi-directional many-to-one association to CandidatoDTO
-    @ManyToOne
+	@ManyToOne
 	@JoinColumn(name="pos_candidato")
 	private CandidatoDTO bemCandidato;
 
-    public PostulacionDTO() {
-    }
+	public PostulacionDTO() {
+	}
 
 	public Integer getPosCodigo() {
 		return this.posCodigo;
@@ -44,7 +45,7 @@ public class PostulacionDTO implements Serializable {
 	}
 
 	public Boolean getPosAceptado() {
-		return posAceptado;
+		return this.posAceptado;
 	}
 
 	public void setPosAceptado(Boolean posAceptado) {
@@ -58,7 +59,7 @@ public class PostulacionDTO implements Serializable {
 	public void setBemAviso(AvisoDTO bemAviso) {
 		this.bemAviso = bemAviso;
 	}
-	
+
 	public CandidatoDTO getBemCandidato() {
 		return this.bemCandidato;
 	}
@@ -66,5 +67,5 @@ public class PostulacionDTO implements Serializable {
 	public void setBemCandidato(CandidatoDTO bemCandidato) {
 		this.bemCandidato = bemCandidato;
 	}
-	
+
 }

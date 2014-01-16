@@ -11,14 +11,18 @@ import java.util.List;
  */
 @Entity
 @Table(name="bem_empresa")
+@NamedQuery(name="EmpresaDTO.findAll", query="SELECT e FROM EmpresaDTO e")
 public class EmpresaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_EMPRESA_EMPCODIGO_GENERATOR", sequenceName="BEM_EMPRESA_EMP_CODIGO_SEQ", allocationSize=1)
+	@SequenceGenerator(name="BEM_EMPRESA_EMPCODIGO_GENERATOR", sequenceName="BEM_EMPRESA_EMP_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_EMPRESA_EMPCODIGO_GENERATOR")
 	@Column(name="emp_codigo")
 	private Integer empCodigo;
+
+	@Column(name="emp_activa")
+	private Boolean empActiva;
 
 	@Column(name="emp_nombre_comercial")
 	private String empNombreComercial;
@@ -33,29 +37,26 @@ public class EmpresaDTO implements Serializable {
 	private Integer empSector;
 
 	@Column(name="emp_ubicacion")
-	private String empUbicacion;
+	private Integer empUbicacion;
 
 	@Column(name="emp_web")
 	private String empWeb;
-
-	@Column(name="emp_activa")
-	private Boolean empActiva;
 
 	//bi-directional many-to-one association to AvisoDTO
 	@OneToMany(mappedBy="bemEmpresa")
 	private List<AvisoDTO> bemAvisos;
 
+	//bi-directional many-to-one association to ContactoDTO
+	@OneToMany(mappedBy="bemEmpresa")
+	private List<ContactoDTO> bemContactos;
+
 	//bi-directional many-to-one association to UsuarioDTO
-    @ManyToOne (cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="emp_usuario")
 	private UsuarioDTO bemUsuario;
 
-	//bi-directional many-to-one association to ContactoDTO
-    @OneToMany(mappedBy="bemEmpresa")
-	private List<ContactoDTO> bemContactos;
-
-    public EmpresaDTO() {
-    }
+	public EmpresaDTO() {
+	}
 
 	public Integer getEmpCodigo() {
 		return this.empCodigo;
@@ -63,6 +64,14 @@ public class EmpresaDTO implements Serializable {
 
 	public void setEmpCodigo(Integer empCodigo) {
 		this.empCodigo = empCodigo;
+	}
+
+	public Boolean getEmpActiva() {
+		return this.empActiva;
+	}
+
+	public void setEmpActiva(Boolean empActiva) {
+		this.empActiva = empActiva;
 	}
 
 	public String getEmpNombreComercial() {
@@ -97,11 +106,11 @@ public class EmpresaDTO implements Serializable {
 		this.empSector = empSector;
 	}
 
-	public String getEmpUbicacion() {
+	public Integer getEmpUbicacion() {
 		return this.empUbicacion;
 	}
 
-	public void setEmpUbicacion(String empUbicacion) {
+	public void setEmpUbicacion(Integer empUbicacion) {
 		this.empUbicacion = empUbicacion;
 	}
 
@@ -113,14 +122,6 @@ public class EmpresaDTO implements Serializable {
 		this.empWeb = empWeb;
 	}
 
-	public Boolean getEmpActiva() {
-		return empActiva;
-	}
-
-	public void setEmpActiva(Boolean empActiva) {
-		this.empActiva = empActiva;
-	}
-
 	public List<AvisoDTO> getBemAvisos() {
 		return this.bemAvisos;
 	}
@@ -128,7 +129,43 @@ public class EmpresaDTO implements Serializable {
 	public void setBemAvisos(List<AvisoDTO> bemAvisos) {
 		this.bemAvisos = bemAvisos;
 	}
-	
+
+	public AvisoDTO addBemAviso(AvisoDTO bemAviso) {
+		getBemAvisos().add(bemAviso);
+		bemAviso.setBemEmpresa(this);
+
+		return bemAviso;
+	}
+
+	public AvisoDTO removeBemAviso(AvisoDTO bemAviso) {
+		getBemAvisos().remove(bemAviso);
+		bemAviso.setBemEmpresa(null);
+
+		return bemAviso;
+	}
+
+	public List<ContactoDTO> getBemContactos() {
+		return this.bemContactos;
+	}
+
+	public void setBemContactos(List<ContactoDTO> bemContactos) {
+		this.bemContactos = bemContactos;
+	}
+
+	public ContactoDTO addBemContacto(ContactoDTO bemContacto) {
+		getBemContactos().add(bemContacto);
+		bemContacto.setBemEmpresa(this);
+
+		return bemContacto;
+	}
+
+	public ContactoDTO removeBemContacto(ContactoDTO bemContacto) {
+		getBemContactos().remove(bemContacto);
+		bemContacto.setBemEmpresa(null);
+
+		return bemContacto;
+	}
+
 	public UsuarioDTO getBemUsuario() {
 		return this.bemUsuario;
 	}
@@ -136,13 +173,5 @@ public class EmpresaDTO implements Serializable {
 	public void setBemUsuario(UsuarioDTO bemUsuario) {
 		this.bemUsuario = bemUsuario;
 	}
-	
-	public List<ContactoDTO> getBemContactos() {
-		return bemContactos;
-	}
 
-	public void setBemContactos(List<ContactoDTO> bemContactos) {
-		this.bemContactos = bemContactos;
-	}
-	
 }

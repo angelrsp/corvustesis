@@ -11,11 +11,12 @@ import java.util.List;
  */
 @Entity
 @Table(name="bem_modulo")
+@NamedQuery(name="ModuloDTO.findAll", query="SELECT m FROM ModuloDTO m")
 public class ModuloDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_MODULO_MODCODIGO_GENERATOR", sequenceName="BEM_MODULO_MOD_CODIGO_SEQ", allocationSize=1)
+	@SequenceGenerator(name="BEM_MODULO_MODCODIGO_GENERATOR", sequenceName="BEM_MODULO_MOD_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_MODULO_MODCODIGO_GENERATOR")
 	@Column(name="mod_codigo")
 	private Integer modCodigo;
@@ -27,8 +28,8 @@ public class ModuloDTO implements Serializable {
 	@OneToMany(mappedBy="bemModulo")
 	private List<PantallaDTO> bemPantallas;
 
-    public ModuloDTO() {
-    }
+	public ModuloDTO() {
+	}
 
 	public Integer getModCodigo() {
 		return this.modCodigo;
@@ -53,5 +54,19 @@ public class ModuloDTO implements Serializable {
 	public void setBemPantallas(List<PantallaDTO> bemPantallas) {
 		this.bemPantallas = bemPantallas;
 	}
-	
+
+	public PantallaDTO addBemPantalla(PantallaDTO bemPantalla) {
+		getBemPantallas().add(bemPantalla);
+		bemPantalla.setBemModulo(this);
+
+		return bemPantalla;
+	}
+
+	public PantallaDTO removeBemPantalla(PantallaDTO bemPantalla) {
+		getBemPantallas().remove(bemPantalla);
+		bemPantalla.setBemModulo(null);
+
+		return bemPantalla;
+	}
+
 }

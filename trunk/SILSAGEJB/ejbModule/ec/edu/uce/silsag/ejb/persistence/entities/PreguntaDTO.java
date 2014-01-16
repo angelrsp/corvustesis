@@ -16,7 +16,7 @@ public class PreguntaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_PREGUNTA_PRECODIGO_GENERATOR", sequenceName="BEM_PREGUNTA_PRE_CODIGO_SEQ")
+	@SequenceGenerator(name="BEM_PREGUNTA_PRECODIGO_GENERATOR", sequenceName="BEM_PREGUNTA_PRE_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_PREGUNTA_PRECODIGO_GENERATOR")
 	@Column(name="pre_codigo")
 	private Integer preCodigo;

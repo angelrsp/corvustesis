@@ -11,11 +11,12 @@ import java.util.List;
  */
 @Entity
 @Table(name="bem_catalogo")
+@NamedQuery(name="CatalogoDTO.findAll", query="SELECT c FROM CatalogoDTO c")
 public class CatalogoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_CATALOGO_CATCODIGO_GENERATOR", sequenceName="BEM_CATALOGO_CAT_CODIGO_SEQ", allocationSize=1)
+	@SequenceGenerator(name="BEM_CATALOGO_CATCODIGO_GENERATOR", sequenceName="BEM_CATALOGO_CAT_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_CATALOGO_CATCODIGO_GENERATOR")
 	@Column(name="cat_codigo")
 	private Integer catCodigo;
@@ -24,7 +25,7 @@ public class CatalogoDTO implements Serializable {
 	private String catDescripcion;
 
 	//bi-directional many-to-one association to CatalogoDTO
-    @ManyToOne
+	@ManyToOne
 	@JoinColumn(name="cat_padre")
 	private CatalogoDTO bemCatalogo;
 
@@ -32,8 +33,8 @@ public class CatalogoDTO implements Serializable {
 	@OneToMany(mappedBy="bemCatalogo")
 	private List<CatalogoDTO> bemCatalogos;
 
-    public CatalogoDTO() {
-    }
+	public CatalogoDTO() {
+	}
 
 	public Integer getCatCodigo() {
 		return this.catCodigo;
@@ -58,7 +59,7 @@ public class CatalogoDTO implements Serializable {
 	public void setBemCatalogo(CatalogoDTO bemCatalogo) {
 		this.bemCatalogo = bemCatalogo;
 	}
-	
+
 	public List<CatalogoDTO> getBemCatalogos() {
 		return this.bemCatalogos;
 	}
@@ -66,5 +67,19 @@ public class CatalogoDTO implements Serializable {
 	public void setBemCatalogos(List<CatalogoDTO> bemCatalogos) {
 		this.bemCatalogos = bemCatalogos;
 	}
-	
+
+	public CatalogoDTO addBemCatalogo(CatalogoDTO bemCatalogo) {
+		getBemCatalogos().add(bemCatalogo);
+		bemCatalogo.setBemCatalogo(this);
+
+		return bemCatalogo;
+	}
+
+	public CatalogoDTO removeBemCatalogo(CatalogoDTO bemCatalogo) {
+		getBemCatalogos().remove(bemCatalogo);
+		bemCatalogo.setBemCatalogo(null);
+
+		return bemCatalogo;
+	}
+
 }
