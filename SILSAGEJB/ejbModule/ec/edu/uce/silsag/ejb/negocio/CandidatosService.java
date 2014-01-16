@@ -10,6 +10,7 @@ import ec.edu.uce.silsag.ejb.persistence.entities.EstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.PostulacionDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ReferenciaDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.ResultadoDTO;
 
 @Local
 public interface CandidatosService {
@@ -46,5 +47,8 @@ public interface CandidatosService {
 	void eliminarReferencia(ReferenciaDTO referencia) throws SilsagException;
 
 	CandidatoDTO obtenerCandidato(Object id) throws SilsagException;
+
+	List<ResultadoDTO> obtenerResutado(CandidatoDTO candidatoDTO)
+			throws SilsagException;
 
 }
