@@ -11,11 +11,12 @@ import java.util.List;
  */
 @Entity
 @Table(name="bem_perfil")
+@NamedQuery(name="PerfilDTO.findAll", query="SELECT p FROM PerfilDTO p")
 public class PerfilDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_PERFIL_PERCODIGO_GENERATOR", sequenceName="BEM_PERFIL_PER_CODIGO_SEQ", allocationSize=1)
+	@SequenceGenerator(name="BEM_PERFIL_PERCODIGO_GENERATOR", sequenceName="BEM_PERFIL_PER_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_PERFIL_PERCODIGO_GENERATOR")
 	@Column(name="per_codigo")
 	private Integer perCodigo;
@@ -31,8 +32,8 @@ public class PerfilDTO implements Serializable {
 	@OneToMany(mappedBy="bemPerfil")
 	private List<UsuarioDTO> bemUsuarios;
 
-    public PerfilDTO() {
-    }
+	public PerfilDTO() {
+	}
 
 	public Integer getPerCodigo() {
 		return this.perCodigo;
@@ -57,7 +58,21 @@ public class PerfilDTO implements Serializable {
 	public void setBemPerfilPermisos(List<PerfilPermisoDTO> bemPerfilPermisos) {
 		this.bemPerfilPermisos = bemPerfilPermisos;
 	}
-	
+
+	public PerfilPermisoDTO addBemPerfilPermiso(PerfilPermisoDTO bemPerfilPermiso) {
+		getBemPerfilPermisos().add(bemPerfilPermiso);
+		bemPerfilPermiso.setBemPerfil(this);
+
+		return bemPerfilPermiso;
+	}
+
+	public PerfilPermisoDTO removeBemPerfilPermiso(PerfilPermisoDTO bemPerfilPermiso) {
+		getBemPerfilPermisos().remove(bemPerfilPermiso);
+		bemPerfilPermiso.setBemPerfil(null);
+
+		return bemPerfilPermiso;
+	}
+
 	public List<UsuarioDTO> getBemUsuarios() {
 		return this.bemUsuarios;
 	}
@@ -65,5 +80,19 @@ public class PerfilDTO implements Serializable {
 	public void setBemUsuarios(List<UsuarioDTO> bemUsuarios) {
 		this.bemUsuarios = bemUsuarios;
 	}
-	
+
+	public UsuarioDTO addBemUsuario(UsuarioDTO bemUsuario) {
+		getBemUsuarios().add(bemUsuario);
+		bemUsuario.setBemPerfil(this);
+
+		return bemUsuario;
+	}
+
+	public UsuarioDTO removeBemUsuario(UsuarioDTO bemUsuario) {
+		getBemUsuarios().remove(bemUsuario);
+		bemUsuario.setBemPerfil(null);
+
+		return bemUsuario;
+	}
+
 }

@@ -12,11 +12,9 @@ import ec.edu.uce.silsag.ejb.persistence.dao.EmpresaDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.EstudioDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.ExperienciaDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.FactoryDAO;
-import ec.edu.uce.silsag.ejb.persistence.dao.IdiomaDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.PerfilDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.PostulacionDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.ReferenciaDAO;
-import ec.edu.uce.silsag.ejb.persistence.dao.SoftwareDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.UsuarioDAO;
 
 @Stateless
@@ -39,11 +37,7 @@ public class FactoryDAOImpl implements FactoryDAO {
 
 	private ExperienciaDAO experienciaDAO;
 
-	private IdiomaDAO idiomaDAO;
-
 	private ReferenciaDAO referenciaDAO;
-
-	private SoftwareDAO softwareDAO;
 
 	private EmpresaDAO empresaDAO;
 	
@@ -108,27 +102,11 @@ public class FactoryDAOImpl implements FactoryDAO {
 	}
 
 	@Override
-	public IdiomaDAO getIdiomaDAOImpl() {
-		if (idiomaDAO == null) {
-			idiomaDAO = new IdiomaDAOImpl(entityManager);
-		}
-		return idiomaDAO;
-	}
-
-	@Override
 	public ReferenciaDAO getReferenciaDAOImpl() {
 		if (referenciaDAO == null) {
 			referenciaDAO = new ReferenciaDAOImpl(entityManager);
 		}
 		return referenciaDAO;
-	}
-
-	@Override
-	public SoftwareDAO getSoftwareDAOImpl() {
-		if (softwareDAO == null) {
-			softwareDAO = new SoftwareDAOImpl(entityManager);
-		}
-		return softwareDAO;
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package ec.edu.uce.silsag.ejb.persistence.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.math.BigDecimal;
 
 
 /**
@@ -12,11 +11,12 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="bem_experiencia")
+@NamedQuery(name="ExperienciaDTO.findAll", query="SELECT e FROM ExperienciaDTO e")
 public class ExperienciaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_EXPERIENCIA_EXPCODIGO_GENERATOR", sequenceName="BEM_EXPERIENCIA_EXP_CODIGO_SEQ", allocationSize=1)
+	@SequenceGenerator(name="BEM_EXPERIENCIA_EXPCODIGO_GENERATOR", sequenceName="BEM_EXPERIENCIA_EXP_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_EXPERIENCIA_EXPCODIGO_GENERATOR")
 	@Column(name="exp_codigo")
 	private Integer expCodigo;
@@ -33,22 +33,16 @@ public class ExperienciaDTO implements Serializable {
 	@Column(name="exp_puesto")
 	private String expPuesto;
 
-	@Column(name="exp_rubro")
-	private BigDecimal expRubro;
-
 	@Column(name="exp_tareas")
 	private String expTareas;
 
-	@Column(name="exp_tipo_experiencia")
-	private Integer expTipoExperiencia;
-
 	//bi-directional many-to-one association to CandidatoDTO
-    @ManyToOne
+	@ManyToOne
 	@JoinColumn(name="exp_candidato")
 	private CandidatoDTO bemCandidato;
 
-    public ExperienciaDTO() {
-    }
+	public ExperienciaDTO() {
+	}
 
 	public Integer getExpCodigo() {
 		return this.expCodigo;
@@ -90,28 +84,12 @@ public class ExperienciaDTO implements Serializable {
 		this.expPuesto = expPuesto;
 	}
 
-	public BigDecimal getExpRubro() {
-		return this.expRubro;
-	}
-
-	public void setExpRubro(BigDecimal expRubro) {
-		this.expRubro = expRubro;
-	}
-
 	public String getExpTareas() {
 		return this.expTareas;
 	}
 
 	public void setExpTareas(String expTareas) {
 		this.expTareas = expTareas;
-	}
-
-	public Integer getExpTipoExperiencia() {
-		return this.expTipoExperiencia;
-	}
-
-	public void setExpTipoExperiencia(Integer expTipoExperiencia) {
-		this.expTipoExperiencia = expTipoExperiencia;
 	}
 
 	public CandidatoDTO getBemCandidato() {
@@ -121,5 +99,5 @@ public class ExperienciaDTO implements Serializable {
 	public void setBemCandidato(CandidatoDTO bemCandidato) {
 		this.bemCandidato = bemCandidato;
 	}
-	
+
 }

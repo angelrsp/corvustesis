@@ -13,7 +13,6 @@ import ec.edu.uce.silsag.commons.util.MailUtil;
 import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.negocio.AdministracionService;
 import ec.edu.uce.silsag.ejb.persistence.dao.FactoryDAO;
-import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoEstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CatalogoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EmpresaDTO;
@@ -59,19 +58,19 @@ public class AdministracionServiceImpl implements AdministracionService{
 		}
 	}
 	
-	@Override
-	public List<CandidatoEstudioDTO> obtenerCandidatos() throws SilsagException
-	{
-		log.info("obtenerCandidatos");
-		try{
-			return factoryDAO.getCandidatoDAOImpl().getCandidatoEstudio();
-		}
-		catch(Exception e)
-		{
-			log.info("Error al obtenerCandidatos" +e.toString());
-			throw new SilsagException("Error al obtenerCandidatos");
-		}
-	}
+//	@Override
+//	public List<CandidatoEstudioDTO> obtenerCandidatos() throws SilsagException
+//	{
+//		log.info("obtenerCandidatos");
+//		try{
+//			return factoryDAO.getCandidatoDAOImpl().getCandidatoEstudio();
+//		}
+//		catch(Exception e)
+//		{
+//			log.info("Error al obtenerCandidatos" +e.toString());
+//			throw new SilsagException("Error al obtenerCandidatos");
+//		}
+//	}
 
 	@Override
 	public List<ContactoDTO> obtenerContactos(EmpresaDTO empresa) throws SilsagException

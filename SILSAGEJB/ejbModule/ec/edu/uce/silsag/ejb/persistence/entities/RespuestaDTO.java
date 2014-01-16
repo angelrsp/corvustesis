@@ -16,7 +16,7 @@ public class RespuestaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_RESPUESTA_RESCODIGO_GENERATOR", sequenceName="BEM_RESPUESTA_RES_CODIGO_SEQ")
+	@SequenceGenerator(name="BEM_RESPUESTA_RESCODIGO_GENERATOR", sequenceName="BEM_RESPUESTA_RES_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_RESPUESTA_RESCODIGO_GENERATOR")
 	@Column(name="res_codigo")
 	private Integer resCodigo;

@@ -10,11 +10,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="bem_parametro")
+@NamedQuery(name="ParametroDTO.findAll", query="SELECT p FROM ParametroDTO p")
 public class ParametroDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_PARAMETRO_PARCODIGO_GENERATOR", sequenceName="BEM_PARAMETRO_PAR_CODIGO_SEQ", allocationSize=1)
+	@SequenceGenerator(name="BEM_PARAMETRO_PARCODIGO_GENERATOR", sequenceName="BEM_PARAMETRO_PAR_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_PARAMETRO_PARCODIGO_GENERATOR")
 	@Column(name="par_codigo")
 	private Integer parCodigo;
@@ -25,8 +26,8 @@ public class ParametroDTO implements Serializable {
 	@Column(name="par_valor")
 	private String parValor;
 
-    public ParametroDTO() {
-    }
+	public ParametroDTO() {
+	}
 
 	public Integer getParCodigo() {
 		return this.parCodigo;

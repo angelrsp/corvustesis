@@ -1,16 +1,7 @@
 package ec.edu.uce.silsag.ejb.persistence.entities;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 /**
@@ -19,11 +10,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="bem_contacto")
+@NamedQuery(name="ContactoDTO.findAll", query="SELECT c FROM ContactoDTO c")
 public class ContactoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_CONTACTO_CONCODIGO_GENERATOR", sequenceName="BEM_CONTACTO_CON_CODIGO_SEQ", allocationSize=1)
+	@SequenceGenerator(name="BEM_CONTACTO_CONCODIGO_GENERATOR", sequenceName="BEM_CONTACTO_CON_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_CONTACTO_CONCODIGO_GENERATOR")
 	@Column(name="con_codigo")
 	private Integer conCodigo;
@@ -43,12 +35,13 @@ public class ContactoDTO implements Serializable {
 	@Column(name="con_telefono")
 	private String conTelefono;
 
-    @ManyToOne
+	//bi-directional many-to-one association to EmpresaDTO
+	@ManyToOne
 	@JoinColumn(name="con_empresa")
 	private EmpresaDTO bemEmpresa;
 
-    public ContactoDTO() {
-    }
+	public ContactoDTO() {
+	}
 
 	public Integer getConCodigo() {
 		return this.conCodigo;
@@ -99,11 +92,11 @@ public class ContactoDTO implements Serializable {
 	}
 
 	public EmpresaDTO getBemEmpresa() {
-		return bemEmpresa;
+		return this.bemEmpresa;
 	}
 
 	public void setBemEmpresa(EmpresaDTO bemEmpresa) {
 		this.bemEmpresa = bemEmpresa;
 	}
-	
+
 }

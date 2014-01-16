@@ -10,11 +10,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="bem_referencia")
+@NamedQuery(name="ReferenciaDTO.findAll", query="SELECT r FROM ReferenciaDTO r")
 public class ReferenciaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_REFERENCIA_REFCODIGO_GENERATOR", sequenceName="BEM_REFERENCIA_REF_CODIGO_SEQ", allocationSize=1)
+	@SequenceGenerator(name="BEM_REFERENCIA_REFCODIGO_GENERATOR", sequenceName="BEM_REFERENCIA_REF_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_REFERENCIA_REFCODIGO_GENERATOR")
 	@Column(name="ref_codigo")
 	private Integer refCodigo;
@@ -28,13 +29,16 @@ public class ReferenciaDTO implements Serializable {
 	@Column(name="ref_telefono")
 	private String refTelefono;
 
+	@Column(name="ref_tipo_empresa")
+	private Integer refTipoEmpresa;
+
 	//bi-directional many-to-one association to CandidatoDTO
-    @ManyToOne
+	@ManyToOne
 	@JoinColumn(name="ref_candidato")
 	private CandidatoDTO bemCandidato;
 
-    public ReferenciaDTO() {
-    }
+	public ReferenciaDTO() {
+	}
 
 	public Integer getRefCodigo() {
 		return this.refCodigo;
@@ -68,6 +72,14 @@ public class ReferenciaDTO implements Serializable {
 		this.refTelefono = refTelefono;
 	}
 
+	public Integer getRefTipoEmpresa() {
+		return this.refTipoEmpresa;
+	}
+
+	public void setRefTipoEmpresa(Integer refTipoEmpresa) {
+		this.refTipoEmpresa = refTipoEmpresa;
+	}
+
 	public CandidatoDTO getBemCandidato() {
 		return this.bemCandidato;
 	}
@@ -75,5 +87,5 @@ public class ReferenciaDTO implements Serializable {
 	public void setBemCandidato(CandidatoDTO bemCandidato) {
 		this.bemCandidato = bemCandidato;
 	}
-	
+
 }

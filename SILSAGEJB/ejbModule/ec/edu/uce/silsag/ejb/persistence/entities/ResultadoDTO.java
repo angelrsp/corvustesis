@@ -15,13 +15,15 @@ public class ResultadoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_RESULTADO_RSUCODIGO_GENERATOR", sequenceName="BEM_RESULTADO_RSU_CODIGO_SEQ")
+	@SequenceGenerator(name="BEM_RESULTADO_RSUCODIGO_GENERATOR", sequenceName="BEM_RESULTADO_RSU_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_RESULTADO_RSUCODIGO_GENERATOR")
 	@Column(name="rsu_codigo")
 	private Integer rsuCodigo;
 
-	@Column(name="rsu_candidato")
-	private Integer rsuCandidato;
+	//bi-directional many-to-one association to CandidatoDTO
+	@ManyToOne
+	@JoinColumn(name="rsu_candidato")
+	private CandidatoDTO bemCandidato;
 
 	//bi-directional many-to-one association to RespuestaDTO
 	@ManyToOne
@@ -39,12 +41,12 @@ public class ResultadoDTO implements Serializable {
 		this.rsuCodigo = rsuCodigo;
 	}
 
-	public Integer getRsuCandidato() {
-		return this.rsuCandidato;
+	public CandidatoDTO getBemCandidato() {
+		return this.bemCandidato;
 	}
 
-	public void setRsuCandidato(Integer rsuCandidato) {
-		this.rsuCandidato = rsuCandidato;
+	public void setBemCandidato(CandidatoDTO bemCandidato) {
+		this.bemCandidato = bemCandidato;
 	}
 
 	public RespuestaDTO getBemRespuesta() {

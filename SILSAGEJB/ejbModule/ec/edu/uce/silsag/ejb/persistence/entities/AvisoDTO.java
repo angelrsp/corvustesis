@@ -1,19 +1,10 @@
 package ec.edu.uce.silsag.ejb.persistence.entities;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.math.BigDecimal;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 
 /**
@@ -22,14 +13,15 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="bem_aviso")
+@NamedQuery(name="AvisoDTO.findAll", query="SELECT a FROM AvisoDTO a")
 public class AvisoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_AVISO_AVINOMBRE_GENERATOR", sequenceName="BEM_AVISO_AVI_NOMBRE_SEQ", allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_AVISO_AVINOMBRE_GENERATOR")
-	@Column(name="avi_nombre")
-	private Integer aviNombre;
+	@SequenceGenerator(name="BEM_AVISO_AVICODIGO_GENERATOR", sequenceName="BEM_AVISO_AVI_CODIGO_SEQ",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_AVISO_AVICODIGO_GENERATOR")
+	@Column(name="avi_codigo")
+	private Integer aviCodigo;
 
 	@Column(name="avi_descripcion")
 	private String aviDescripcion;
@@ -41,13 +33,13 @@ public class AvisoDTO implements Serializable {
 	private Integer aviPuesto;
 
 	@Column(name="avi_remuneracion")
-	private String aviRemuneracion;
+	private BigDecimal aviRemuneracion;
 
 	@Column(name="avi_vacantes")
 	private Integer aviVacantes;
 
 	//bi-directional many-to-one association to EmpresaDTO
-    @ManyToOne
+	@ManyToOne
 	@JoinColumn(name="avi_empresa")
 	private EmpresaDTO bemEmpresa;
 
@@ -55,23 +47,15 @@ public class AvisoDTO implements Serializable {
 	@OneToMany(mappedBy="bemAviso")
 	private List<PostulacionDTO> bemPostulacions;
 
-    public AvisoDTO() {
-    }
-
-    
-    
-	public AvisoDTO(Integer aviNombre) {
-		this.aviNombre = aviNombre;
+	public AvisoDTO() {
 	}
 
-
-
-	public Integer getAviNombre() {
-		return this.aviNombre;
+	public Integer getAviCodigo() {
+		return this.aviCodigo;
 	}
 
-	public void setAviNombre(Integer aviNombre) {
-		this.aviNombre = aviNombre;
+	public void setAviCodigo(Integer aviCodigo) {
+		this.aviCodigo = aviCodigo;
 	}
 
 	public String getAviDescripcion() {
@@ -98,11 +82,11 @@ public class AvisoDTO implements Serializable {
 		this.aviPuesto = aviPuesto;
 	}
 
-	public String getAviRemuneracion() {
+	public BigDecimal getAviRemuneracion() {
 		return this.aviRemuneracion;
 	}
 
-	public void setAviRemuneracion(String aviRemuneracion) {
+	public void setAviRemuneracion(BigDecimal aviRemuneracion) {
 		this.aviRemuneracion = aviRemuneracion;
 	}
 
@@ -121,7 +105,7 @@ public class AvisoDTO implements Serializable {
 	public void setBemEmpresa(EmpresaDTO bemEmpresa) {
 		this.bemEmpresa = bemEmpresa;
 	}
-	
+
 	public List<PostulacionDTO> getBemPostulacions() {
 		return this.bemPostulacions;
 	}
@@ -129,5 +113,19 @@ public class AvisoDTO implements Serializable {
 	public void setBemPostulacions(List<PostulacionDTO> bemPostulacions) {
 		this.bemPostulacions = bemPostulacions;
 	}
-	
+
+	public PostulacionDTO addBemPostulacion(PostulacionDTO bemPostulacion) {
+		getBemPostulacions().add(bemPostulacion);
+		bemPostulacion.setBemAviso(this);
+
+		return bemPostulacion;
+	}
+
+	public PostulacionDTO removeBemPostulacion(PostulacionDTO bemPostulacion) {
+		getBemPostulacions().remove(bemPostulacion);
+		bemPostulacion.setBemAviso(null);
+
+		return bemPostulacion;
+	}
+
 }

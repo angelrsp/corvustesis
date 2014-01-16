@@ -11,11 +11,12 @@ import java.util.List;
  */
 @Entity
 @Table(name="bem_pantalla")
+@NamedQuery(name="PantallaDTO.findAll", query="SELECT p FROM PantallaDTO p")
 public class PantallaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="BEM_PANTALLA_PANCODIGO_GENERATOR", sequenceName="BEM_PANTALLA_PAN_CODIGO_SEQ", allocationSize=1)
+	@SequenceGenerator(name="BEM_PANTALLA_PANCODIGO_GENERATOR", sequenceName="BEM_PANTALLA_PAN_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_PANTALLA_PANCODIGO_GENERATOR")
 	@Column(name="pan_codigo")
 	private Integer panCodigo;
@@ -36,7 +37,7 @@ public class PantallaDTO implements Serializable {
 	private String panUrl;
 
 	//bi-directional many-to-one association to ModuloDTO
-    @ManyToOne
+	@ManyToOne
 	@JoinColumn(name="pan_modulo")
 	private ModuloDTO bemModulo;
 
@@ -44,8 +45,8 @@ public class PantallaDTO implements Serializable {
 	@OneToMany(mappedBy="bemPantalla")
 	private List<PerfilPermisoDTO> bemPerfilPermisos;
 
-    public PantallaDTO() {
-    }
+	public PantallaDTO() {
+	}
 
 	public Integer getPanCodigo() {
 		return this.panCodigo;
@@ -102,7 +103,7 @@ public class PantallaDTO implements Serializable {
 	public void setBemModulo(ModuloDTO bemModulo) {
 		this.bemModulo = bemModulo;
 	}
-	
+
 	public List<PerfilPermisoDTO> getBemPerfilPermisos() {
 		return this.bemPerfilPermisos;
 	}
@@ -110,5 +111,19 @@ public class PantallaDTO implements Serializable {
 	public void setBemPerfilPermisos(List<PerfilPermisoDTO> bemPerfilPermisos) {
 		this.bemPerfilPermisos = bemPerfilPermisos;
 	}
-	
+
+	public PerfilPermisoDTO addBemPerfilPermiso(PerfilPermisoDTO bemPerfilPermiso) {
+		getBemPerfilPermisos().add(bemPerfilPermiso);
+		bemPerfilPermiso.setBemPantalla(this);
+
+		return bemPerfilPermiso;
+	}
+
+	public PerfilPermisoDTO removeBemPerfilPermiso(PerfilPermisoDTO bemPerfilPermiso) {
+		getBemPerfilPermisos().remove(bemPerfilPermiso);
+		bemPerfilPermiso.setBemPantalla(null);
+
+		return bemPerfilPermiso;
+	}
+
 }
