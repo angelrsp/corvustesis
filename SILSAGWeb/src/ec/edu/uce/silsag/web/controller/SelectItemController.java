@@ -15,7 +15,7 @@ import ec.edu.uce.silsag.ejb.negocio.AdministracionService;
 import ec.edu.uce.silsag.ejb.persistence.entities.CatalogoDTO;
 
 
-public abstract class SelectItemController {
+public abstract class SelectItemController{
 
 	private List<SelectItem> catalogoTipoDocumento;
 	private List<SelectItem> catalogoNivelEstudio;
@@ -36,6 +36,7 @@ public abstract class SelectItemController {
 	private AdministracionService administracionService; 
 
 	public SelectItemController() {
+		
 	}
 	
 	@PostConstruct
