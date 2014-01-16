@@ -21,7 +21,7 @@ public class ArchivoXML {
 	
 	private final static Logger logger = LoggerFactory.getLogger(ArchivoXML.class);
 	
-	public static void procesarComprobante(String fileXml,String fileXmlSignature,String pathSignature,String passSignature)
+	public static void procesarComprobante(String fileXml,String fileXmlSignature,String pathSignature,String passSignature,String claveAcceso)
 	{
 		File xmlFile=new File(fileXml);
 		String comprobante = null;
@@ -46,7 +46,7 @@ public class ArchivoXML {
 					}
 					else
 					{
-						RespuestaComprobante responseAut=AutorizacionComprobantesElectronicosWs.autorizacionComprobante("1101201401171679011600110010012004000271234560118");
+						RespuestaComprobante responseAut=AutorizacionComprobantesElectronicosWs.autorizacionComprobante(claveAcceso);
 
 						String respuestaAut= AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(responseAut);
 
