@@ -22,14 +22,8 @@ import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EstudioDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.EstudioListDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaListDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.IdiomaDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.IdiomaListDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ReferenciaDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.SoftwareDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.SoftwareListDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
 import ec.edu.uce.silsag.web.util.JsfUtil;
 
@@ -49,8 +43,6 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	private CandidatoDTO candidato;
 	private EstudioDTO estudio;
 	private ExperienciaDTO experiencia;
-	private SoftwareDTO herramientas;
-	private IdiomaDTO idioma;
 	private ReferenciaDTO referencia;
 	
 	private Object tipoDocumento;
@@ -70,10 +62,8 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	private Date fechaInicioExp;
 	private Date fechaFinExp;
 	
-	private List<EstudioListDTO> listEstudio;
-	private List<ExperienciaListDTO> listExperiencia;
-	private List<SoftwareListDTO> listHerramientas;
-	private List<IdiomaListDTO> listIdioma;
+//	private List<EstudioListDTO> listEstudio;
+//	private List<ExperienciaListDTO> listExperiencia;
 	private List<ReferenciaDTO> listReferencia;
 	
 	private UploadedFile uploadedFile;
@@ -99,14 +89,10 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		candidato=user.getBemCandidatos().get(0);
 		tipoDocumento=candidato.getCanTipoIdentificacion();
 		estudio=new EstudioDTO();
-		listEstudio=new ArrayList<EstudioListDTO>();
+//		listEstudio=new ArrayList<EstudioListDTO>();
 		experiencia=new ExperienciaDTO();
-		listExperiencia=new ArrayList<ExperienciaListDTO>();
-		listHerramientas=new ArrayList<SoftwareListDTO>();
-		herramientas=new SoftwareDTO();
-		idioma=new IdiomaDTO();
+//		listExperiencia=new ArrayList<ExperienciaListDTO>();
 		referencia=new ReferenciaDTO();
-		listIdioma=new ArrayList<IdiomaListDTO>();
 		listReferencia=new ArrayList<ReferenciaDTO>();
 		
 		Calendar cal = Calendar.getInstance();
@@ -213,14 +199,14 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		this.mesFin = mesFin;
 	}
 
-	public List<EstudioListDTO> getListEstudio() {
-		try {
-			this.listEstudio=candidatosService.obtenerEstudio(getCandidato());
-		} catch (SilsagException e) {
-			JsfUtil.addErrorMessage(e.getMessage());
-		}
-		return this.listEstudio;
-	}
+//	public List<EstudioListDTO> getListEstudio() {
+//		try {
+//			this.listEstudio=candidatosService.obtenerEstudio(getCandidato());
+//		} catch (SilsagException e) {
+//			JsfUtil.addErrorMessage(e.getMessage());
+//		}
+//		return this.listEstudio;
+//	}
 
 	public ExperienciaDTO getExperiencia() {
 		return experiencia;
@@ -246,10 +232,10 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		this.fechaFinExp = fechaFinExp;
 	}
 
-	public List<ExperienciaListDTO> getListExperiencia() throws SilsagException {
-			this.listExperiencia=candidatosService.obtenerExperiencia(candidato);
-		return this.listExperiencia;
-	}
+//	public List<ExperienciaListDTO> getListExperiencia() throws SilsagException {
+//			this.listExperiencia=candidatosService.obtenerExperiencia(candidato);
+//		return this.listExperiencia;
+//	}
 
 	public Object getTipoExperiencia() {
 		return tipoExperiencia;
@@ -257,27 +243,6 @@ public class DatosCandidatoController extends SelectItemController implements Se
 
 	public void setTipoExperiencia(Object tipoExperiencia) {
 		this.tipoExperiencia = tipoExperiencia;
-	}
-
-	public SoftwareDTO getHerramientas() {
-		return herramientas;
-	}
-
-	public void setHerramientas(SoftwareDTO herramientas) {
-		this.herramientas = herramientas;
-	}
-
-	public List<SoftwareListDTO> getListHerramientas() throws SilsagException {
-		this.listHerramientas=candidatosService.obtenerHerramientas(candidato);
-		return listHerramientas;
-	}
-
-	public IdiomaDTO getIdioma() {
-		return idioma;
-	}
-
-	public void setIdioma(IdiomaDTO idioma) {
-		this.idioma = idioma;
 	}
 
 	public ReferenciaDTO getReferencia() {
@@ -302,11 +267,6 @@ public class DatosCandidatoController extends SelectItemController implements Se
 
 	public void setNivelIdioma(Object nivelIdioma) {
 		this.nivelIdioma = nivelIdioma;
-	}
-
-	public List<IdiomaListDTO> getListIdioma() throws SilsagException {
-		this.listIdioma=candidatosService.obtenerIdioma(candidato);
-		return listIdioma;
 	}
 
 	public List<ReferenciaDTO> getListReferencia() throws SilsagException {
@@ -354,14 +314,10 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		try {
 			//estudio=new EstudioDTO();
 			estudio.setBemCandidato(candidato);
-			estudio.setEstAnioFin(Integer.valueOf(anioFin.toString()));
-			estudio.setEstAnioInicio(Integer.valueOf(anioInicio.toString()));
-			estudio.setEstMesFin(Integer.valueOf(mesFin.toString()));
-			estudio.setEstMesInicio(Integer.valueOf(mesInicio.toString()));
 			estudio.setEstNivel(Integer.valueOf(nivelEstudio.toString()));
 			estudio.setEstPais(Integer.valueOf(pais.toString()));
 			candidatosService.agregarEstudio(estudio);
-			getListEstudio();
+//			getListEstudio();
 			resetEstudio();
 			JsfUtil.addInfoMessage("Agregado Exitosamente");
 		} catch (Exception e) {
@@ -369,23 +325,23 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		}
 	}
 	
-	public void onRowDelEstudios(EstudioListDTO est)
-	{
-		try {
-			estudio=new EstudioDTO();
-			estudio.setEstCodigo(est.getEstCodigo());
-			estudio.setBemCandidato(getCandidato());
-			candidatosService.eliminarEstudio(estudio);
-			estudio=new EstudioDTO();
-			getListEstudio();
-			JsfUtil.addInfoMessage("Eliminado Exitosamente");
-		} catch (SilsagException e) {
-			JsfUtil.addErrorMessage(e.getMessage());
-		}
-		catch (Exception e) {
-			JsfUtil.addErrorMessage(e.getMessage());
-		}
-	}
+//	public void onRowDelEstudios(EstudioListDTO est)
+//	{
+//		try {
+//			estudio=new EstudioDTO();
+//			estudio.setEstCodigo(est.getEstCodigo());
+//			estudio.setBemCandidato(getCandidato());
+//			candidatosService.eliminarEstudio(estudio);
+//			estudio=new EstudioDTO();
+//			getListEstudio();
+//			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+//		} catch (SilsagException e) {
+//			JsfUtil.addErrorMessage(e.getMessage());
+//		}
+//		catch (Exception e) {
+//			JsfUtil.addErrorMessage(e.getMessage());
+//		}
+//	}
 	
 	private void resetEstudio()
 	{
@@ -405,114 +361,38 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	{
 		try {
 			experiencia.setBemCandidato(candidato);
-			experiencia.setExpTipoExperiencia(Integer.valueOf(tipoExperiencia.toString()));
 			experiencia.setExpFechaInicio(new Timestamp(fechaInicioExp.getTime()));
 			experiencia.setExpFechaFin(new Timestamp(fechaFinExp.getTime()));
 			candidatosService.agregarExperiencia(experiencia);
 			resetExperiencia();
-			getListExperiencia();
+			//getListExperiencia();
 			JsfUtil.addInfoMessage("Agregado Exitosamente");
 		} catch (Exception e) {
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
 	}
 
-	public void onRowDelExperiencia(ExperienciaListDTO exp)
-	{
-		try {
-			experiencia=new ExperienciaDTO();
-			experiencia.setExpCodigo(exp.getExpCodigo());
-			candidatosService.eliminarExperiencia(experiencia);
-			experiencia=new ExperienciaDTO();
-			getListExperiencia();
-			JsfUtil.addInfoMessage("Eliminado Exitosamente");
-		} catch (SilsagException e) {
-			JsfUtil.addErrorMessage(e.getMessage());
-		}
-		catch (Exception e) {
-			JsfUtil.addErrorMessage(e.getMessage());
-		}
-	}
+//	public void onRowDelExperiencia(ExperienciaListDTO exp)
+//	{
+//		try {
+//			experiencia=new ExperienciaDTO();
+//			experiencia.setExpCodigo(exp.getExpCodigo());
+//			candidatosService.eliminarExperiencia(experiencia);
+//			experiencia=new ExperienciaDTO();
+//			getListExperiencia();
+//			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+//		} catch (SilsagException e) {
+//			JsfUtil.addErrorMessage(e.getMessage());
+//		}
+//		catch (Exception e) {
+//			JsfUtil.addErrorMessage(e.getMessage());
+//		}
+//	}
 	
 	private void resetExperiencia()
 	{
 		setTipoExperiencia(null);
 		experiencia=new ExperienciaDTO();
-	}
-	
-	public void agregarHerramientas()
-	{
-		try{
-			herramientas.setBemCandidato(candidato);
-			herramientas.setProNivel(Integer.valueOf(nivelPrograma.toString()));
-			candidatosService.agregarHerramientas(herramientas);
-			getListHerramientas();
-			resetHerramientas();	
-		} catch (Exception e) {
-			JsfUtil.addErrorMessage(e.getMessage());
-		}
-	}
-
-	public void onRowDelHerramientas(SoftwareListDTO soft)
-	{
-		try {
-			herramientas=new SoftwareDTO();
-			herramientas.setProCodigo(soft.getProCodigo());
-			candidatosService.eliminarHerramientas(herramientas);
-			herramientas=new SoftwareDTO();
-			getListHerramientas();
-			JsfUtil.addInfoMessage("Eliminado Exitosamente");
-		} catch (SilsagException e) {
-			JsfUtil.addErrorMessage(e.getMessage());
-		}
-		catch (Exception e) {
-			JsfUtil.addErrorMessage(e.getMessage());
-		}
-	}
-
-	private void resetHerramientas()
-	{
-		setNivelPrograma(null);
-		setPrograma(null);
-		herramientas=new SoftwareDTO();
-	}
-	
-	public void agregarIdioma()
-	{
-		try{
-			idioma.setBemCandidato(candidato);
-			idioma.setIdiNivel(Integer.valueOf(nivelIdioma.toString()));
-			candidatosService.agregarIdioma(idioma);
-			getListIdioma();
-			resetIdioma();	
-		} catch (Exception e) {
-			JsfUtil.addErrorMessage(e.getMessage());
-		}
-	}
-
-	public void onRowDelIdioma(IdiomaListDTO idi)
-	{
-		try {
-			idioma=new IdiomaDTO();
-			idioma.setIdiCodigo(idi.getIdiCodigo());
-			candidatosService.eliminarIdioma(idioma);
-			idioma=new IdiomaDTO();
-			getListHerramientas();
-			JsfUtil.addInfoMessage("Eliminado Exitosamente");
-		} catch (SilsagException e) {
-			JsfUtil.addErrorMessage(e.getMessage());
-		}
-		catch (Exception e) {
-			JsfUtil.addErrorMessage(e.getMessage());
-		}
-	}
-
-	
-	private void resetIdioma()
-	{
-		setNivelIdioma(null);;
-		setIdiomaObj(null);
-		idioma=new IdiomaDTO();
 	}
 	
 	public void agregarReferencia()

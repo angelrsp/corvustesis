@@ -2,9 +2,6 @@ package ec.edu.uce.silsag.web.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -13,16 +10,11 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoEstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
 import ec.edu.uce.silsag.web.util.JsfUtil;
-import ec.edu.uce.silsag.web.util.ReportUtil;
 
 @ViewScoped
 @ManagedBean(name = "exportedController")
@@ -36,13 +28,13 @@ public class ExportedController implements Serializable{
 	@EJB
 	private CandidatosService candidatosService;
 	
-	private List<CandidatoEstudioDTO> candidatoEstudio;
+//	private List<CandidatoEstudioDTO> candidatoEstudio;
 
 	private UsuarioDTO user;
 	private CandidatoDTO candidato;
 	
 	public ExportedController() {
-		candidatoEstudio=new ArrayList<CandidatoEstudioDTO>();
+//		candidatoEstudio=new ArrayList<CandidatoEstudioDTO>();
 		user=new UsuarioDTO();
 		candidato=new CandidatoDTO();
 		user=(UsuarioDTO)JsfUtil.getObject("UsuarioDTO");
@@ -55,19 +47,15 @@ public class ExportedController implements Serializable{
 		JasperPrint jasperPrint;
 		try {
 			FacesContext facesContext= FacesContext.getCurrentInstance();
-			candidatoEstudio=candidatosService.obtenerCandidatoEstudio(candidato);
-			jasperPrint = ReportUtil.init("C:\\_javaee\\SILSAEWeb\\WebContent\\report\\candidato.jasper", new HashMap(),candidatoEstudio);
+//			candidatoEstudio=candidatosService.obtenerCandidatoEstudio(candidato);
+//			jasperPrint = ReportUtil.init("C:\\_javaee\\SILSAEWeb\\WebContent\\report\\candidato.jasper", new HashMap(),candidatoEstudio);
 							
 			//jasperPrint = ReportUtil.init("/home/fernando/_javaee/SILSAEWeb/WebContent/report/candidato.jasper", new HashMap(),candidatoEstudio);
 			HttpServletResponse httpServletResponse=(HttpServletResponse)facesContext.getExternalContext().getResponse();
 		    httpServletResponse.addHeader("Content-disposition", "attachment; filename=curriculum.pdf");
 		    ServletOutputStream servletOutputStream=httpServletResponse.getOutputStream();
-		    JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
+//		    JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
 		    facesContext.responseComplete();
-		} catch (SilsagException e) {
-			JsfUtil.addErrorMessage(e.getMessage());
-		} catch (JRException e) {
-			JsfUtil.addErrorMessage(e.getMessage());		
 		} catch (IOException e) {
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
