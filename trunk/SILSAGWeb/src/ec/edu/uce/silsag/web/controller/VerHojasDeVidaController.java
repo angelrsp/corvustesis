@@ -9,18 +9,11 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.negocio.AdministracionService;
 import ec.edu.uce.silsag.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoEstudioDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.EstudioListDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaListDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.IdiomaListDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ReferenciaDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.SoftwareListDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
-import ec.edu.uce.silsag.web.util.JsfUtil;
 
 @ViewScoped
 @ManagedBean(name = "verHojasDeVidaController")
@@ -37,12 +30,10 @@ public class VerHojasDeVidaController extends SelectItemController implements Se
 	private CandidatosService candidatosService;
 	
 
-	public List<CandidatoEstudioDTO> candidatoList;
-	
-	private List<EstudioListDTO> estudioList;
-	private List<ExperienciaListDTO> experienciaList;
-	private List<SoftwareListDTO> herramientasList;
-	private List<IdiomaListDTO> idiomaList;
+//	public List<CandidatoEstudioDTO> candidatoList;
+//	
+//	private List<EstudioListDTO> estudioList;
+//	private List<ExperienciaListDTO> experienciaList;
 	private List<ReferenciaDTO> referenciaList;
 
 	
@@ -61,18 +52,16 @@ public class VerHojasDeVidaController extends SelectItemController implements Se
 	private void init()
 	{
 		candidato=new CandidatoDTO();
-		candidatoList=new ArrayList<CandidatoEstudioDTO>();
-		estudioList=new ArrayList<EstudioListDTO>();
-		experienciaList=new ArrayList<ExperienciaListDTO>();
-		herramientasList=new ArrayList<SoftwareListDTO>();
-		idiomaList=new ArrayList<IdiomaListDTO>();
+//		candidatoList=new ArrayList<CandidatoEstudioDTO>();
+//		estudioList=new ArrayList<EstudioListDTO>();
+//		experienciaList=new ArrayList<ExperienciaListDTO>();
 		referenciaList=new ArrayList<ReferenciaDTO>();
 	}
 
-	public List<CandidatoEstudioDTO> getCandidatoList() throws SilsagException {
-		this.candidatoList=administracionService.obtenerCandidatos();
-		return candidatoList;
-	}
+//	public List<CandidatoEstudioDTO> getCandidatoList() throws SilsagException {
+//		this.candidatoList=administracionService.obtenerCandidatos();
+//		return candidatoList;
+//	}
 	
 	public CandidatoDTO getCandidato() {
 		return candidato;
@@ -98,41 +87,33 @@ public class VerHojasDeVidaController extends SelectItemController implements Se
 		return estadoCivil;
 	}
 
-	public List<EstudioListDTO> getEstudioList() {
-		return estudioList;
-	}
-
-	public List<ExperienciaListDTO> getExperienciaList() {
-		return experienciaList;
-	}
-
-	public List<SoftwareListDTO> getHerramientasList() {
-		return herramientasList;
-	}
-
-	public List<IdiomaListDTO> getIdiomaList() {
-		return idiomaList;
-	}
+//	public List<EstudioListDTO> getEstudioList() {
+//		return estudioList;
+//	}
+//
+//	public List<ExperienciaListDTO> getExperienciaList() {
+//		return experienciaList;
+//	}
 
 	public List<ReferenciaDTO> getReferenciaList() {
 		return referenciaList;
 	}
 
-	public void buscarCandidato(CandidatoEstudioDTO can) {
-		try {
-			setCandidato(candidatosService.obtenerCandidato(can.getCanCodigo()));
-			this.estadoCivil=can.getCanEstadoCivil();
-			this.tipoDocumento=can.getCanTipoIdentificacion();
-			setUser(getCandidato().getBemUsuario());
-			this.estudioList=candidatosService.obtenerEstudio(getCandidato());
-			this.experienciaList=candidatosService.obtenerExperiencia(getCandidato());
-			this.herramientasList=candidatosService.obtenerHerramientas(getCandidato());
-			this.idiomaList=candidatosService.obtenerIdioma(getCandidato());
-			this.referenciaList=candidatosService.obtenerReferencia(getCandidato());
-		} catch (Exception e) {
-			JsfUtil.addErrorMessage(e.getMessage());
-		}
-
-	}
+//	public void buscarCandidato(CandidatoEstudioDTO can) {
+//		try {
+//			setCandidato(candidatosService.obtenerCandidato(can.getCanCodigo()));
+//			this.estadoCivil=can.getCanEstadoCivil();
+//			this.tipoDocumento=can.getCanTipoIdentificacion();
+//			setUser(getCandidato().getBemUsuario());
+//			this.estudioList=candidatosService.obtenerEstudio(getCandidato());
+//			this.experienciaList=candidatosService.obtenerExperiencia(getCandidato());
+//			this.herramientasList=candidatosService.obtenerHerramientas(getCandidato());
+//			this.idiomaList=candidatosService.obtenerIdioma(getCandidato());
+//			this.referenciaList=candidatosService.obtenerReferencia(getCandidato());
+//		} catch (Exception e) {
+//			JsfUtil.addErrorMessage(e.getMessage());
+//		}
+//
+//	}
 
 }

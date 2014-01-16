@@ -9,17 +9,11 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsag.ejb.negocio.EmpresaService;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EmpresaDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.EstudioListDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaListDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.IdiomaListDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.PostulacionListDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ReferenciaDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.SoftwareListDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
 import ec.edu.uce.silsag.web.util.JsfUtil;
 
@@ -45,15 +39,13 @@ public class VerPostulacionController extends SelectItemController implements Se
 	private Object estadoCivil;
 	private Object tipoDocumento; 
 	
-	private PostulacionListDTO postulacion;
-	private List<PostulacionListDTO> postulacionList;	
+//	private PostulacionListDTO postulacion;
+//	private List<PostulacionListDTO> postulacionList;	
 	
 	private CandidatoDTO candidato;
 	
-	private List<EstudioListDTO> estudioList;
-	private List<ExperienciaListDTO> experienciaList;
-	private List<SoftwareListDTO> herramientasList;
-	private List<IdiomaListDTO> idiomaList;
+//	private List<EstudioListDTO> estudioList;
+//	private List<ExperienciaListDTO> experienciaList;
 	private List<ReferenciaDTO> referenciaList;
 	
 	public VerPostulacionController() {
@@ -68,20 +60,18 @@ public class VerPostulacionController extends SelectItemController implements Se
 		empresa=new EmpresaDTO();
 		usuario=(UsuarioDTO)JsfUtil.getObject("UsuarioDTO");
 		empresa=usuario.getBemEmpresas().get(0);
-		postulacionList= new ArrayList<PostulacionListDTO>();
-		postulacion=new PostulacionListDTO();
+//		postulacionList= new ArrayList<PostulacionListDTO>();
+//		postulacion=new PostulacionListDTO();
 		candidato=new CandidatoDTO();
-		estudioList=new ArrayList<EstudioListDTO>();
-		experienciaList=new ArrayList<ExperienciaListDTO>();
-		herramientasList=new ArrayList<SoftwareListDTO>();
-		idiomaList=new ArrayList<IdiomaListDTO>();
+//		estudioList=new ArrayList<EstudioListDTO>();
+//		experienciaList=new ArrayList<ExperienciaListDTO>();
 		referenciaList=new ArrayList<ReferenciaDTO>();
 	}
 
-	public List<PostulacionListDTO> getPostulacionList() throws SilsagException {
-		this.postulacionList=empresaService.obtenerPostulacion(empresa);
-		return postulacionList;
-	}
+//	public List<PostulacionListDTO> getPostulacionList() throws SilsagException {
+//		this.postulacionList=empresaService.obtenerPostulacion(empresa);
+//		return postulacionList;
+//	}
 
 	public Object getTipoDocumento() {
 		return tipoDocumento;
@@ -91,9 +81,9 @@ public class VerPostulacionController extends SelectItemController implements Se
 		return estadoCivil;
 	}
 	
-	public PostulacionListDTO getPostulacion() {
-		return postulacion;
-	}
+//	public PostulacionListDTO getPostulacion() {
+//		return postulacion;
+//	}
 
 	public CandidatoDTO getCandidato() {
 		return candidato;
@@ -104,21 +94,13 @@ public class VerPostulacionController extends SelectItemController implements Se
 	}
 
 
-	public List<EstudioListDTO> getEstudioList() {
-		return estudioList;
-	}
-
-	public List<ExperienciaListDTO> getExperienciaList() {
-		return experienciaList;
-	}
-
-	public List<SoftwareListDTO> getHerramientasList() {
-		return herramientasList;
-	}
-
-	public List<IdiomaListDTO> getIdiomaList() {
-		return idiomaList;
-	}
+//	public List<EstudioListDTO> getEstudioList() {
+//		return estudioList;
+//	}
+//
+//	public List<ExperienciaListDTO> getExperienciaList() {
+//		return experienciaList;
+//	}
 
 	public List<ReferenciaDTO> getReferenciaList() {
 		return referenciaList;
@@ -128,21 +110,19 @@ public class VerPostulacionController extends SelectItemController implements Se
 		return user;
 	}
 
-	public void buscarCandidato(PostulacionListDTO pos)
-	{
-		try {
-			setCandidato(candidatosService.obtenerCandidato(pos.getCanCodigo()));
-			this.estadoCivil=getCandidato().getCanEstadoCivil();
-			this.tipoDocumento=getCandidato().getCanTipoIdentificacion();
-			this.estudioList=candidatosService.obtenerEstudio(getCandidato());
-			this.experienciaList=candidatosService.obtenerExperiencia(getCandidato());
-			this.herramientasList=candidatosService.obtenerHerramientas(getCandidato());
-			this.idiomaList=candidatosService.obtenerIdioma(getCandidato());
-			this.referenciaList=candidatosService.obtenerReferencia(getCandidato());
-			user=getCandidato().getBemUsuario();
-		} catch (Exception e) {
-			JsfUtil.addErrorMessage(e.getMessage());
-		}
-	}
+//	public void buscarCandidato(PostulacionListDTO pos)
+//	{
+//		try {
+//			setCandidato(candidatosService.obtenerCandidato(pos.getCanCodigo()));
+//			this.estadoCivil=getCandidato().getCanEstadoCivil();
+//			this.tipoDocumento=getCandidato().getCanTipoIdentificacion();
+////			this.estudioList=candidatosService.obtenerEstudio(getCandidato());
+////			this.experienciaList=candidatosService.obtenerExperiencia(getCandidato());
+//			this.referenciaList=candidatosService.obtenerReferencia(getCandidato());
+//			user=getCandidato().getBemUsuario();
+//		} catch (Exception e) {
+//			JsfUtil.addErrorMessage(e.getMessage());
+//		}
+//	}
 	
 }

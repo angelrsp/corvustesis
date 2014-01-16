@@ -171,39 +171,40 @@
 					</p:tab>
 					</p:accordionPanel>
 					<p:spacer height="5"/>
-					<p:dataTable id="tblEstudio" value="#{datosCandidatoController.listEstudio}" var="est" emptyMessage="#{i18n['table.campo.obligatorio']}">
-						<p:column headerText="#{i18n['label.nivel.estudio']}">
-							<h:outputText value="#{est.catNivel}" />
-						</p:column>
-						<p:column headerText="#{i18n['label.establecimiento']}">
-							<h:outputText value="#{est.estEstablecimiento}" />
-						</p:column>
-						<p:column headerText="#{i18n['label.pais']}">
-							<h:outputText value="#{est.catPais}" />
-						</p:column>
-						<p:column headerText="#{i18n['label.carrera']}">
-							<h:outputText value="#{est.estCarrera}" />
-						</p:column>
-						<p:column headerText="#{i18n['label.anio.inicio']}">
-							<h:outputText value="#{est.estAnioInicio}" />
-						</p:column>
-						<p:column headerText="#{i18n['label.mes.inicio']}">
-							<h:outputText value="#{est.estMesInicioNombre}" />
-						</p:column>
-						<p:column headerText="#{i18n['label.anio.fin']}">
-							<h:outputText value="#{est.estAnioFin}" />
-						</p:column>
-						<p:column headerText="#{i18n['label.mes.fin']}">
-							<h:outputText value="#{est.estMesFinNombre}" />
-						</p:column>	
+					
+<!-- 					<p:dataTable id="tblEstudio" value="#{datosCandidatoController.listEstudio}" var="est" emptyMessage="#{i18n['table.campo.obligatorio']}"> -->
+<!-- 						<p:column headerText="#{i18n['label.nivel.estudio']}"> -->
+<!-- 							<h:outputText value="#{est.catNivel}" /> -->
+<!-- 						</p:column> -->
+<!-- 						<p:column headerText="#{i18n['label.establecimiento']}"> -->
+<!-- 							<h:outputText value="#{est.estEstablecimiento}" /> -->
+<!-- 						</p:column> -->
+<!-- 						<p:column headerText="#{i18n['label.pais']}"> -->
+<!-- 							<h:outputText value="#{est.catPais}" /> -->
+<!-- 						</p:column> -->
+<!-- 						<p:column headerText="#{i18n['label.carrera']}"> -->
+<!-- 							<h:outputText value="#{est.estCarrera}" /> -->
+<!-- 						</p:column> -->
+<!-- 						<p:column headerText="#{i18n['label.anio.inicio']}"> -->
+<!-- 							<h:outputText value="#{est.estAnioInicio}" /> -->
+<!-- 						</p:column> -->
+<!-- 						<p:column headerText="#{i18n['label.mes.inicio']}"> -->
+<!-- 							<h:outputText value="#{est.estMesInicioNombre}" /> -->
+<!-- 						</p:column> -->
+<!-- 						<p:column headerText="#{i18n['label.anio.fin']}"> -->
+<!-- 							<h:outputText value="#{est.estAnioFin}" /> -->
+<!-- 						</p:column> -->
+<!-- 						<p:column headerText="#{i18n['label.mes.fin']}"> -->
+<!-- 							<h:outputText value="#{est.estMesFinNombre}" /> -->
+<!-- 						</p:column>	 -->
 						
-						<p:column headerText="#{i18n['label.eliminar']}">
-							<p:commandButton actionListener="#{datosCandidatoController.onRowDelEstudios(est)}" icon="ui-icon-close" 
-								immediate="true" onclick="if(!confirm('Eliminar?')) return false;" update=":contenido:tblEstudio,:contenido:growl" process=":contenido:tblEstudio">
-							</p:commandButton>
-						</p:column>
-																							
-					</p:dataTable>
+<!-- 						<p:column headerText="#{i18n['label.eliminar']}"> -->
+<!-- 							<p:commandButton actionListener="#{datosCandidatoController.onRowDelEstudios(est)}" icon="ui-icon-close"  -->
+<!-- 								immediate="true" onclick="if(!confirm('Eliminar?')) return false;" update=":contenido:tblEstudio,:contenido:growl" process=":contenido:tblEstudio"> -->
+<!-- 							</p:commandButton> -->
+<!-- 						</p:column> -->
+<!-- 					</p:dataTable> -->
+					
 				</p:panel>
 
 				<p:panel id="pnlExperiencia" styleClass="tabla"
@@ -227,8 +228,6 @@
 							<td><p:inputText value="#{datosCandidatoController.experiencia.expTareas}"></p:inputText></td>
 							<td><h:outputLabel value="#{i18n['label.puesto']}:&#160;" /></td>
 							<td><p:inputText value="#{datosCandidatoController.experiencia.expPuesto}"></p:inputText></td>
-							<td><h:outputLabel value="#{i18n['label.rubro']}:&#160;" /></td>
-							<td><p:inputText value="#{datosCandidatoController.experiencia.expRubro}"></p:inputText></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel
@@ -246,124 +245,37 @@
 				</p:accordionPanel>
 				
 					<p:spacer height="5"/>
-					<p:dataTable id="tblExperiencia" value="#{datosCandidatoController.listExperiencia}" var="exp" emptyMessage="#{i18n['table.campo.obligatorio']}">
-					<p:column headerText="#{i18n['label.empresa']}">
-							<h:outputText value="#{exp.expEntidad}" />
-						</p:column>
-						<p:column headerText="#{i18n['label.fecha.inicio']}">
-							<h:outputText value="#{fn:substring(exp.expFechaInicio,0,10)}" />
-						</p:column>
-						<p:column headerText="#{i18n['label.fecha.fin']}">
-							<h:outputText value="#{fn:substring(exp.expFechaFin,0,10)}" />
-						</p:column>
-						<p:column headerText="#{i18n['label.tareas']}">
-							<h:outputText value="#{exp.expTareas}" />
-						</p:column>
-						<p:column headerText="#{i18n['label.puesto']}">
-							<h:outputText value="#{exp.expPuesto}" />
-						</p:column>
-						<p:column headerText="#{i18n['label.rubro']}">
-							<h:outputText value="#{exp.expRubro}" />
-						</p:column>
-						<p:column headerText="#{i18n['label.tipo.experiencia']}">
-							<h:outputText value="#{exp.catTipoExperiencia}" />
-						</p:column>
+					
+<!-- 					<p:dataTable id="tblExperiencia" value="#{datosCandidatoController.listExperiencia}" var="exp" emptyMessage="#{i18n['table.campo.obligatorio']}"> -->
+<!-- 					<p:column headerText="#{i18n['label.empresa']}"> -->
+<!-- 							<h:outputText value="#{exp.expEntidad}" /> -->
+<!-- 						</p:column> -->
+<!-- 						<p:column headerText="#{i18n['label.fecha.inicio']}"> -->
+<!-- 							<h:outputText value="#{fn:substring(exp.expFechaInicio,0,10)}" /> -->
+<!-- 						</p:column> -->
+<!-- 						<p:column headerText="#{i18n['label.fecha.fin']}"> -->
+<!-- 							<h:outputText value="#{fn:substring(exp.expFechaFin,0,10)}" /> -->
+<!-- 						</p:column> -->
+<!-- 						<p:column headerText="#{i18n['label.tareas']}"> -->
+<!-- 							<h:outputText value="#{exp.expTareas}" /> -->
+<!-- 						</p:column> -->
+<!-- 						<p:column headerText="#{i18n['label.puesto']}"> -->
+<!-- 							<h:outputText value="#{exp.expPuesto}" /> -->
+<!-- 						</p:column> -->
+<!-- 						<p:column headerText="#{i18n['label.rubro']}"> -->
+<!-- 							<h:outputText value="#{exp.expRubro}" /> -->
+<!-- 						</p:column> -->
+<!-- 						<p:column headerText="#{i18n['label.tipo.experiencia']}"> -->
+<!-- 							<h:outputText value="#{exp.catTipoExperiencia}" /> -->
+<!-- 						</p:column> -->
 						
-						<p:column headerText="#{i18n['label.eliminar']}">
-							<p:commandButton actionListener="#{datosCandidatoController.onRowDelExperiencia(exp)}" icon="ui-icon-close" immediate="true" 
-								onclick="if(!confirm('Eliminar?')) return false" process=":contenido:tblExperiencia" update=":contenido:tblExperiencia,:contenido:growl"></p:commandButton>
-						</p:column>
+<!-- 						<p:column headerText="#{i18n['label.eliminar']}"> -->
+<!-- 							<p:commandButton actionListener="#{datosCandidatoController.onRowDelExperiencia(exp)}" icon="ui-icon-close" immediate="true"  -->
+<!-- 								onclick="if(!confirm('Eliminar?')) return false" process=":contenido:tblExperiencia" update=":contenido:tblExperiencia,:contenido:growl"></p:commandButton> -->
+<!-- 						</p:column> -->
 						
-					</p:dataTable>					
-				</p:panel>
+<!-- 					</p:dataTable>					 -->
 
-				<p:panel id="pnlHerramientas" styleClass="tabla"
-					header="#{i18n['label.titulo.pantalla.dato.herramientas']}">
-				<p:accordionPanel activeIndex="null">
-					<p:tab title="#{i18n['boton.agregar']}">  
-						<table>
-							<tr>
-								<td><h:outputLabel value="#{i18n['label.programa']}:&#160;" />
-								</td>
-								<td><p:inputText value="#{datosCandidatoController.herramientas.proPrograma}" requiredMessage="#{i18n['label.programa']}:&#160;#{i18n['label.requerido']}" required="true"></p:inputText></td>
-	
-								<td><h:outputLabel
-										value="#{i18n['label.nivel.programa']}:&#160;" /></td>
-								<td><p:selectOneMenu required="true"
-										requiredMessage="#{i18n['label.nivel.programa']}:&#160;#{i18n['label.requerido']}" value="#{datosCandidatoController.nivelPrograma}">
-										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
-											itemValue="" />
-										<f:selectItems value="#{datosCandidatoController.catalogoNivelPrograma}"></f:selectItems>										
-									</p:selectOneMenu></td>
-								<td><p:commandButton value="#{i18n['boton.agregar']}" update=":contenido:growl,:contenido:pnlHerramientas" process=":contenido:pnlHerramientas" actionListener="#{datosCandidatoController.agregarHerramientas}"></p:commandButton>
-								</td>
-							</tr>
-						</table>
-					</p:tab>
-					</p:accordionPanel>	
-					
-					<p:spacer height="5"/>
-					<p:dataTable id="tblHerramienta" value="#{datosCandidatoController.listHerramientas}" var="her" emptyMessage="#{i18n['table.campo.obligatorio']}">
-					
-						<p:column headerText="#{i18n['label.programa']}">
-							<h:outputText value="#{her.proPrograma}" />
-						</p:column>
-
-						<p:column headerText="#{i18n['label.nivel.programa']}">
-							<h:outputText value="#{her.catNivel}" />
-						</p:column>
-
-						<p:column headerText="#{i18n['label.eliminar']}">
-							<p:commandButton actionListener="#{datosCandidatoController.onRowDelHerramientas(her)}" icon="ui-icon-close" immediate="true" onclick="if(!confirm('Eliminar?')) return false"
-							 process=":contenido:tblHerramienta" update=":contenido:tblHerramienta,:contenido:growl"></p:commandButton>
-						</p:column>
-					
-					</p:dataTable>					
-				</p:panel>
-
-				<p:panel id="pnlIdioma" styleClass="tabla"
-					header="#{i18n['label.titulo.pantalla.dato.idioma']}" emptyMessage="#{i18n['table.vacio']}">
-				<p:accordionPanel activeIndex="null">
-					<p:tab title="#{i18n['boton.agregar']}">  
-					<table>
-						<tr>
-							<td><h:outputLabel value="#{i18n['label.idioma']}:&#160;" />
-							</td>
-							
-							<td><p:inputText value="#{datosCandidatoController.idioma.idiIdioma}" requiredMessage="#{i18n['label.idioma']}:&#160;#{i18n['label.requerido']}" required="true"></p:inputText></td>
-							
-							<td><h:outputLabel
-									value="#{i18n['label.nivel.idioma']}:&#160;" /></td>
-							<td><p:selectOneMenu required="true" value="#{datosCandidatoController.nivelIdioma}"
-									requiredMessage="#{i18n['label.nivel.idioma']}:&#160;#{i18n['label.requerido']}">
-									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
-										itemValue="" />
-									<f:selectItems value="#{datosCandidatoController.catalogoNivelIdioma}"></f:selectItems>										
-								</p:selectOneMenu></td>
-							<td><p:commandButton value="#{i18n['boton.agregar']}" update=":contenido:pnlIdioma,:contenido:growl" process=":contenido:pnlIdioma" actionListener="#{datosCandidatoController.agregarIdioma}"></p:commandButton>
-							</td>
-						</tr>
-					</table>
-					</p:tab>
-					</p:accordionPanel>
-					
-					<p:spacer height="5"/>
-					<p:dataTable id="tblIdioma" value="#{datosCandidatoController.listIdioma}" var="idi" emptyMessage="#{i18n['table.campo.obligatorio']}">
-					
-						<p:column headerText="#{i18n['label.idioma']}">
-							<h:outputText value="#{idi.idiIdioma}" />
-						</p:column>
-
-						<p:column headerText="#{i18n['label.nivel.idioma']}">
-							<h:outputText value="#{idi.catNivel}" />
-						</p:column>
-
-						<p:column headerText="#{i18n['label.eliminar']}">
-							<p:commandButton actionListener="#{datosCandidatoController.onRowDelIdioma(idi)}" icon="ui-icon-close" immediate="true" onclick="if(!confirm('Eliminar?')) return false"
-							process=":contenido:tblIdioma" update=":contenido:tblIdioma,:contenido:growl"></p:commandButton>
-						</p:column>
-						
-					</p:dataTable>					
 				</p:panel>
 
 				<p:panel id="pnlReferencia" styleClass="tabla"
