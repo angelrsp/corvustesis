@@ -15,6 +15,7 @@ import ec.edu.uce.silsag.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.PerfilDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.PostulacionDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.ReferenciaDAO;
+import ec.edu.uce.silsag.ejb.persistence.dao.ResultadoDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.UsuarioDAO;
 
 @Stateless
@@ -44,6 +45,8 @@ public class FactoryDAOImpl implements FactoryDAO {
 	private PostulacionDAO postulacionDAO;
 	
 	private ContactoDAO contactoDAO;
+	
+	private ResultadoDAO resultadoDAO;
 
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -131,5 +134,13 @@ public class FactoryDAOImpl implements FactoryDAO {
 			contactoDAO = new ContactoDAOImpl(entityManager);
 		}
 		return contactoDAO;
+	}
+	
+	@Override
+	public ResultadoDAO getResultadoDAOImpl() {
+		if (resultadoDAO == null) {
+			resultadoDAO = new ResultadoDAOImpl(entityManager);
+		}
+		return resultadoDAO;
 	}
 }

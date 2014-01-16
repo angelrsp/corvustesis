@@ -16,6 +16,7 @@ import ec.edu.uce.silsag.ejb.persistence.entities.EstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.PostulacionDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ReferenciaDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.ResultadoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
 
 @Stateless
@@ -247,6 +248,18 @@ public class CandidatosServiceImpl implements CandidatosService {
 			log.info("Error al registrar el Candidato {}", e.toString());
 			throw new SilsagException("Error al registrar el Candidato");
 		}
+	}
+	
+	@Override
+	public List<ResultadoDTO> obtenerResutado(CandidatoDTO candidatoDTO)throws SilsagException
+	{
+		try {
+			return factoryDAO.getResultadoDAOImpl().getAll(candidatoDTO);
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Herramientas {}", e.toString());
+			throw new SilsagException("Error al obtener datos de Herramientas "+e.toString());
 
+		}
+		
 	}
 }
