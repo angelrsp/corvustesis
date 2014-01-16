@@ -12,17 +12,18 @@
 	<ui:composition template="/template/candidato.xhtml">
 		<ui:define name="contenido">
 		
-		<h:form enctype="multipart/form-data">
+<!-- 			<h:form enctype="multipart/form-data" prependId="false"> -->
 			  
+<!-- <p:fileUpload binding="#{upload}" mode="simple" -->
+<!--     allowTypes="/(\.|\/)(gif|jpe?g|png)$/" -->
+<!--     value="#{personBean.uploadedFile}"/> -->
 			
-<p:fileUpload fileUploadListener="#{datosCandidatoController.handleFileUpload}" 
-			    			mode="advanced" dragDropSupport="false" sizeLimit="10485760" 
-			    			fileLimit="1" allowTypes="/(\.|\/)(doc|docx|pdf|png)$/"
-			    			immediate="true" process="@form" update="@form"/>  
+<!-- <p:fileUpload id="fileU" value="#{datosCandidatoController.uploadedFile}"  --> 
+<!--  			    			mode="simple" />   --> 
 
-			<p:commandButton value="Upload" actionListener="#{datosCandidatoController.subirImagen}" />
-		</h:form>
-		
+<!--  			<p:commandButton value="Upload" actionListener="#{datosCandidatoController.subirImagen}" process="fileU,@this" immediate="true"/> --> 
+<!-- 		</h:form> -->
+
 		
 		
 			<fieldset>
