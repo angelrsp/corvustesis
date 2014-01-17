@@ -98,14 +98,14 @@ public class AutorizacionComprobantesElectronicosWs {
 			 
 	        for (Autorizacion item : response.getAutorizaciones().getAutorizacion()) {
 	        	
-	        	logger.info("estado {}",item.getEstado());
+	        	logger.info("estado {} ",item.getEstado());
 	        	
 	        	if(item.getEstado().equals(AutorizacionComprobantesElectronicosWs.ESTADO_NO_AUTORIZADO))
 	        	{
 	        		for(Mensaje m:item.getMensajes().getMensaje())
 	        		{
-	        			mensaje.append(item.getEstado());
-	        			mensaje.append(m.getMensaje()).append(", ");
+	        			mensaje.append(item.getEstado()).append(" ");
+	        			mensaje.append(m.getMensaje()).append(" , ");
 	        			mensaje.append(m.getInformacionAdicional() == null ? "" : m.getInformacionAdicional());
 	        			mensaje.append(saltoLinea);
 	        			

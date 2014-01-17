@@ -1,20 +1,91 @@
-[2014-01-13 16:45:08,371]DEBUG   719[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdUsingDOM(IdResolver.java:138) - getElementByIdUsingDOM() Search for ID Signature98651-SignedProperties227436
-[2014-01-13 16:45:08,373]DEBUG   721[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineResolve(ResolverFragment.java:96) - Try to catch an Element with ID Signature98651-SignedProperties227436 and Element was [etsi:SignedProperties: null]
-[2014-01-13 16:45:08,422]DEBUG   770[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:59) - Pre-digested input:
-[2014-01-13 16:45:08,422]DEBUG   770[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:64) - <etsi:SignedProperties xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature98651-SignedProperties227436"><etsi:SignedSignatureProperties><etsi:SigningTime>2014-01-13T16:45:07-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>8MgNdCPJAQHLWZSA1uGRgGjzhwY=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC</ds:X509IssuerName><ds:X509SerialNumber>1312930870</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-804067"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties>
-[2014-01-13 16:45:08,423]DEBUG   771[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
-[2014-01-13 16:45:08,423]DEBUG   771[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
-[2014-01-13 16:45:08,424]DEBUG   772[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
-[2014-01-13 16:45:08,424]DEBUG   772[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Certificate1360788"
-[2014-01-13 16:45:08,424]DEBUG   772[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
-[2014-01-13 16:45:08,425]DEBUG   773[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
-[2014-01-13 16:45:08,425]DEBUG   773[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
-[2014-01-13 16:45:08,425]DEBUG   773[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Certificate1360788"
-[2014-01-13 16:45:08,425]DEBUG   773[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdType(IdResolver.java:151) - getElementByIdType() Search for ID Certificate1360788
-[2014-01-13 16:45:08,425]DEBUG   773[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementById(IdResolver.java:99) - I could find an Element using the simple getElementByIdType method: ds:KeyInfo
-[2014-01-13 16:45:08,426]DEBUG   774[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineResolve(ResolverFragment.java:96) - Try to catch an Element with ID Certificate1360788 and Element was [ds:KeyInfo: null]
-[2014-01-13 16:45:08,427]DEBUG   775[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:59) - Pre-digested input:
-[2014-01-13 16:45:08,427]DEBUG   775[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:64) - <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Certificate1360788">
+[2014-01-15 17:47:03,049]DEBUG   728[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-ripemd160, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSARIPEMD160)
+[2014-01-15 17:47:03,049]DEBUG   728[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-ripemd160 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSARIPEMD160
+[2014-01-15 17:47:03,051]DEBUG   730[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-sha256, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA256)
+[2014-01-15 17:47:03,051]DEBUG   730[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-sha256 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA256
+[2014-01-15 17:47:03,052]DEBUG   731[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-sha384, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA384)
+[2014-01-15 17:47:03,053]DEBUG   732[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-sha384 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA384
+[2014-01-15 17:47:03,055]DEBUG   734[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-sha512, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA512)
+[2014-01-15 17:47:03,055]DEBUG   734[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-sha512 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA512
+[2014-01-15 17:47:03,058]DEBUG   737[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1, adsi.org.apache.xml.security.algorithms.implementations.SignatureECDSA$SignatureECDSASHA1)
+[2014-01-15 17:47:03,058]DEBUG   737[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1 adsi.org.apache.xml.security.algorithms.implementations.SignatureECDSA$SignatureECDSASHA1
+[2014-01-15 17:47:03,059]DEBUG   738[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-md5, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacMD5)
+[2014-01-15 17:47:03,059]DEBUG   738[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-md5 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacMD5
+[2014-01-15 17:47:03,060]DEBUG   739[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-ripemd160, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacRIPEMD160)
+[2014-01-15 17:47:03,060]DEBUG   739[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-ripemd160 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacRIPEMD160
+[2014-01-15 17:47:03,061]DEBUG   740[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-sha256, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA256)
+[2014-01-15 17:47:03,061]DEBUG   740[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-sha256 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA256
+[2014-01-15 17:47:03,062]DEBUG   741[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-sha384, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA384)
+[2014-01-15 17:47:03,062]DEBUG   741[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-sha384 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA384
+[2014-01-15 17:47:03,063]DEBUG   742[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-sha512, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA512)
+[2014-01-15 17:47:03,063]DEBUG   742[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-sha512 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA512
+[2014-01-15 17:47:03,092]DEBUG   771[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverDirectHTTP: A simple resolver for requests to HTTP space
+[2014-01-15 17:47:03,094]DEBUG   773[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverBigLocalFilesystem: A simple resolver for requests to the local file system with big files
+[2014-01-15 17:47:03,096]DEBUG   775[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment: A simple resolver for requests of same-document URIs
+[2014-01-15 17:47:03,097]DEBUG   776[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverXPointer: A simple resolver for requests of XPointer fragents
+[2014-01-15 17:47:03,100]DEBUG   779[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.RSAKeyValueResolver: Can extract RSA public keys
+[2014-01-15 17:47:03,101]DEBUG   780[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.DSAKeyValueResolver: Can extract DSA public keys
+[2014-01-15 17:47:03,102]DEBUG   781[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509CertificateResolver: Can extract public keys from X509 certificates
+[2014-01-15 17:47:03,103]DEBUG   782[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509SKIResolver: Uses an X509v3 SubjectKeyIdentifier extension to retrieve a certificate from the storages
+[2014-01-15 17:47:03,104]DEBUG   783[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.RetrievalMethodResolver: Resolves keys and certificates using ResourceResolvers
+[2014-01-15 17:47:03,106]DEBUG   785[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509SubjectNameResolver: Uses an X509 SubjectName to retrieve a certificate from the storages
+[2014-01-15 17:47:03,109]DEBUG   788[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509IssuerSerialResolver: Uses an X509 IssuerName and IssuerSerial to retrieve a certificate from the storages
+[2014-01-15 17:47:03,110]DEBUG   789[main] - adsi.org.apache.xml.security.Init.init(Init.java:365) - Now I try to bind prefixes:
+[2014-01-15 17:47:03,110]DEBUG   789[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind ds to http://www.w3.org/2000/09/xmldsig#
+[2014-01-15 17:47:03,110]DEBUG   789[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind xenc to http://www.w3.org/2001/04/xmlenc#
+[2014-01-15 17:47:03,110]DEBUG   789[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind experimental to http://www.xmlsecurity.org/experimental#
+[2014-01-15 17:47:03,110]DEBUG   789[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind dsig-xpath-old to http://www.w3.org/2002/04/xmldsig-filter2
+[2014-01-15 17:47:03,110]DEBUG   789[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind dsig-xpath to http://www.w3.org/2002/06/xmldsig-filter2
+[2014-01-15 17:47:03,110]DEBUG   789[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind ec to http://www.w3.org/2001/10/xml-exc-c14n#
+[2014-01-15 17:47:03,111]DEBUG   790[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind xx to http://www.nue.et-inf.uni-siegen.de/~geuer-pollmann/#xpathFilter
+[2014-01-15 17:47:03,111]DEBUG   790[main] - adsi.org.apache.xml.security.Init.init(Init.java:387) - XX_init                             327 ms
+[2014-01-15 17:47:03,112]DEBUG   791[main] - adsi.org.apache.xml.security.Init.init(Init.java:388) -   XX_prng                           0 ms
+[2014-01-15 17:47:03,112]DEBUG   791[main] - adsi.org.apache.xml.security.Init.init(Init.java:389) -   XX_parsing                        24 ms
+[2014-01-15 17:47:03,112]DEBUG   791[main] - adsi.org.apache.xml.security.Init.init(Init.java:390) -   XX_configure_i18n                 23 ms
+[2014-01-15 17:47:03,112]DEBUG   791[main] - adsi.org.apache.xml.security.Init.init(Init.java:391) -   XX_configure_reg_c14n             28 ms
+[2014-01-15 17:47:03,112]DEBUG   791[main] - adsi.org.apache.xml.security.Init.init(Init.java:392) -   XX_configure_reg_jcemapper        4 ms
+[2014-01-15 17:47:03,112]DEBUG   791[main] - adsi.org.apache.xml.security.Init.init(Init.java:393) -   XX_configure_reg_keyInfo          8 ms
+[2014-01-15 17:47:03,113]DEBUG   792[main] - adsi.org.apache.xml.security.Init.init(Init.java:394) -   XX_configure_reg_keyResolver      12 ms
+[2014-01-15 17:47:03,113]DEBUG   792[main] - adsi.org.apache.xml.security.Init.init(Init.java:395) -   XX_configure_reg_prefixes         1 ms
+[2014-01-15 17:47:03,113]DEBUG   792[main] - adsi.org.apache.xml.security.Init.init(Init.java:396) -   XX_configure_reg_resourceresolver 8 ms
+[2014-01-15 17:47:03,113]DEBUG   792[main] - adsi.org.apache.xml.security.Init.init(Init.java:397) -   XX_configure_reg_sigalgos         164 ms
+[2014-01-15 17:47:03,113]DEBUG   792[main] - adsi.org.apache.xml.security.Init.init(Init.java:398) -   XX_configure_reg_transforms       52 ms
+[2014-01-15 17:47:03,113]DEBUG   792[main] - adsi.org.apache.xml.security.algorithms.JCEMapper.translateURItoJCEID(JCEMapper.java:101) - Request for URI http://www.w3.org/2000/09/xmldsig#sha1
+[2014-01-15 17:47:03,133]DEBUG   812[main] - adsi.org.apache.xml.security.algorithms.JCEMapper.translateURItoJCEID(JCEMapper.java:101) - Request for URI http://www.w3.org/2000/09/xmldsig#sha1
+[2014-01-15 17:47:03,145]DEBUG   824[main] - adsi.org.apache.xml.security.transforms.Transform.<init>(Transform.java:103) - Create URI "http://www.w3.org/2000/09/xmldsig#enveloped-signature" class "class adsi.org.apache.xml.security.transforms.implementations.TransformEnvelopedSignature"
+[2014-01-15 17:47:03,145]DEBUG   824[main] - adsi.org.apache.xml.security.transforms.Transform.<init>(Transform.java:105) - The NodeList is null
+[2014-01-15 17:47:03,145]DEBUG   824[main] - adsi.org.apache.xml.security.transforms.Transforms.addTransform(Transforms.java:222) - Transforms.addTransform(http://www.w3.org/2000/09/xmldsig#enveloped-signature)
+[2014-01-15 17:47:03,214]DEBUG   893[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.buildSigner(SignatureAlgorithm.java:133) - Create URI "http://www.w3.org/2000/09/xmldsig#rsa-sha1" class "class adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA1"
+[2014-01-15 17:47:03,215]DEBUG   894[main] - adsi.org.apache.xml.security.algorithms.JCEMapper.translateURItoJCEID(JCEMapper.java:101) - Request for URI http://www.w3.org/2000/09/xmldsig#rsa-sha1
+[2014-01-15 17:47:03,215]DEBUG   894[main] - adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA.<init>(SignatureBaseRSA.java:67) - Created SignatureRSA using SHA1withRSA
+[2014-01-15 17:47:03,215]DEBUG   894[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
+[2014-01-15 17:47:03,215]DEBUG   894[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
+[2014-01-15 17:47:03,215]DEBUG   894[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverDirectHTTP
+[2014-01-15 17:47:03,216]DEBUG   895[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverDirectHTTP.engineCanResolve(ResolverDirectHTTP.java:261) - quick fail for empty URIs and local ones
+[2014-01-15 17:47:03,216]DEBUG   895[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverBigLocalFilesystem
+[2014-01-15 17:47:03,216]DEBUG   895[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
+[2014-01-15 17:47:03,216]DEBUG   895[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Signature645114-SignedProperties706742"
+[2014-01-15 17:47:03,218]DEBUG   897[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
+[2014-01-15 17:47:03,218]DEBUG   897[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
+[2014-01-15 17:47:03,219]DEBUG   898[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
+[2014-01-15 17:47:03,219]DEBUG   898[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Signature645114-SignedProperties706742"
+[2014-01-15 17:47:03,219]DEBUG   898[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdType(IdResolver.java:151) - getElementByIdType() Search for ID Signature645114-SignedProperties706742
+[2014-01-15 17:47:03,219]DEBUG   898[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdUsingDOM(IdResolver.java:138) - getElementByIdUsingDOM() Search for ID Signature645114-SignedProperties706742
+[2014-01-15 17:47:03,220]DEBUG   899[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineResolve(ResolverFragment.java:96) - Try to catch an Element with ID Signature645114-SignedProperties706742 and Element was [etsi:SignedProperties: null]
+[2014-01-15 17:47:03,231]DEBUG   910[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:59) - Pre-digested input:
+[2014-01-15 17:47:03,231]DEBUG   910[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:64) - <etsi:SignedProperties xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature645114-SignedProperties706742"><etsi:SignedSignatureProperties><etsi:SigningTime>2014-01-15T17:47:02-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>8MgNdCPJAQHLWZSA1uGRgGjzhwY=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC</ds:X509IssuerName><ds:X509SerialNumber>1312930870</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-759634"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties>
+[2014-01-15 17:47:03,231]DEBUG   910[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
+[2014-01-15 17:47:03,232]DEBUG   911[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
+[2014-01-15 17:47:03,232]DEBUG   911[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
+[2014-01-15 17:47:03,232]DEBUG   911[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Certificate1562330"
+[2014-01-15 17:47:03,233]DEBUG   912[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
+[2014-01-15 17:47:03,233]DEBUG   912[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
+[2014-01-15 17:47:03,233]DEBUG   912[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
+[2014-01-15 17:47:03,233]DEBUG   912[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Certificate1562330"
+[2014-01-15 17:47:03,233]DEBUG   912[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdType(IdResolver.java:151) - getElementByIdType() Search for ID Certificate1562330
+[2014-01-15 17:47:03,234]DEBUG   913[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementById(IdResolver.java:99) - I could find an Element using the simple getElementByIdType method: ds:KeyInfo
+[2014-01-15 17:47:03,234]DEBUG   913[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineResolve(ResolverFragment.java:96) - Try to catch an Element with ID Certificate1562330 and Element was [ds:KeyInfo: null]
+[2014-01-15 17:47:03,235]DEBUG   914[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:59) - Pre-digested input:
+[2014-01-15 17:47:03,235]DEBUG   914[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:64) - <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Certificate1562330">
 <ds:X509Data>
 <ds:X509Certificate>
 MIIJrjCCB5agAwIBAgIETkG8NjANBgkqhkiG9w0BAQsFADCBoTELMAkGA1UEBhMCRUMxIjAgBgNV
@@ -76,31 +147,31 @@ CoYfMcbZ+VYyD8Obh4yBUNp6mBXMNRhsIXSAMw==
 </ds:RSAKeyValue>
 </ds:KeyValue>
 </ds:KeyInfo>
-[2014-01-13 16:45:08,427]DEBUG   775[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
-[2014-01-13 16:45:08,427]DEBUG   775[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
-[2014-01-13 16:45:08,427]DEBUG   775[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
-[2014-01-13 16:45:08,429]DEBUG   777[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#comprobante"
-[2014-01-13 16:45:08,429]DEBUG   777[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
-[2014-01-13 16:45:08,429]DEBUG   777[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
-[2014-01-13 16:45:08,429]DEBUG   777[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
-[2014-01-13 16:45:08,430]DEBUG   778[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#comprobante"
-[2014-01-13 16:45:08,430]DEBUG   778[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdType(IdResolver.java:151) - getElementByIdType() Search for ID comprobante
-[2014-01-13 16:45:08,430]DEBUG   778[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdUsingDOM(IdResolver.java:138) - getElementByIdUsingDOM() Search for ID comprobante
-[2014-01-13 16:45:08,430]DEBUG   778[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineResolve(ResolverFragment.java:96) - Try to catch an Element with ID comprobante and Element was [factura: null]
-[2014-01-13 16:45:08,430]DEBUG   778[main] - adsi.org.apache.xml.security.utils.ElementProxy.<init>(ElementProxy.java:195) - setElement("ds:Transform", "null")
-[2014-01-13 16:45:08,433]DEBUG   781[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:59) - Pre-digested input:
-[2014-01-13 16:45:08,433]DEBUG   781[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:64) - <factura id="comprobante" version="1.0.0"> 
+[2014-01-15 17:47:03,235]DEBUG   914[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
+[2014-01-15 17:47:03,236]DEBUG   915[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
+[2014-01-15 17:47:03,236]DEBUG   915[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
+[2014-01-15 17:47:03,236]DEBUG   915[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#comprobante"
+[2014-01-15 17:47:03,236]DEBUG   915[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
+[2014-01-15 17:47:03,236]DEBUG   915[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
+[2014-01-15 17:47:03,237]DEBUG   916[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
+[2014-01-15 17:47:03,237]DEBUG   916[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#comprobante"
+[2014-01-15 17:47:03,237]DEBUG   916[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdType(IdResolver.java:151) - getElementByIdType() Search for ID comprobante
+[2014-01-15 17:47:03,238]DEBUG   917[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdUsingDOM(IdResolver.java:138) - getElementByIdUsingDOM() Search for ID comprobante
+[2014-01-15 17:47:03,238]DEBUG   917[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineResolve(ResolverFragment.java:96) - Try to catch an Element with ID comprobante and Element was [factura: null]
+[2014-01-15 17:47:03,238]DEBUG   917[main] - adsi.org.apache.xml.security.utils.ElementProxy.<init>(ElementProxy.java:195) - setElement("ds:Transform", "null")
+[2014-01-15 17:47:03,285]DEBUG   964[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:59) - Pre-digested input:
+[2014-01-15 17:47:03,285]DEBUG   964[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:64) - <factura id="comprobante" version="1.0.0"> 
  <infoTributaria> 
 <ambiente>1</ambiente> 
 <tipoEmision>1</tipoEmision> 
 <razonSocial>PRUEBAS SERVICIO RENTAS INTERNAS</razonSocial> 
 <nombreComercial>PRUEBAS SERVICIO RENTAS INTERNAS</nombreComercial> 
 <ruc>1716790116001</ruc> 
-<claveAcceso>1101201401171679011600110010012004000261234560112</claveAcceso> 
+<claveAcceso>110120140117167901160011001001200400030123456011</claveAcceso> 
 <codDoc>01</codDoc> 
 <estab>001</estab> 
 <ptoEmi>001</ptoEmi> 
-<secuencial>200400026</secuencial> 
+<secuencial>200400030</secuencial> 
 <dirMatriz>Bartolome Sanchez N74-108 y Joaquin Mancheno</dirMatriz> 
 </infoTributaria> 
 <infoFactura> 
@@ -151,149 +222,152 @@ CoYfMcbZ+VYyD8Obh4yBUNp6mBXMNRhsIXSAMw==
 <campoAdicional nombre="Impuesto ISD">15.42x</campoAdicional> 
 </infoAdicional> 
 </factura>
-[2014-01-13 16:45:08,435]DEBUG   783[main] - adsi.org.apache.xml.security.utils.SignerOutputStream.write(SignerOutputStream.java:68) - Canonicalized SignedInfo:
-[2014-01-13 16:45:08,435]DEBUG   783[main] - adsi.org.apache.xml.security.utils.SignerOutputStream.write(SignerOutputStream.java:73) - <ds:SignedInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature-SignedInfo843036">
+[2014-01-15 17:47:03,286]DEBUG   965[main] - adsi.org.apache.xml.security.utils.SignerOutputStream.write(SignerOutputStream.java:68) - Canonicalized SignedInfo:
+[2014-01-15 17:47:03,286]DEBUG   965[main] - adsi.org.apache.xml.security.utils.SignerOutputStream.write(SignerOutputStream.java:73) - <ds:SignedInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature-SignedInfo1010641">
 <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:CanonicalizationMethod>
 <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
-<ds:Reference Id="SignedPropertiesID48705" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature98651-SignedProperties227436">
+<ds:Reference Id="SignedPropertiesID890157" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature645114-SignedProperties706742">
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>4vwJt3dnlAeRvnWqIYKAInvmk3M=</ds:DigestValue>
+<ds:DigestValue>FCu9P9mR/yrTc4/3VUvqqotrY9Q=</ds:DigestValue>
 </ds:Reference>
-<ds:Reference URI="#Certificate1360788">
+<ds:Reference URI="#Certificate1562330">
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>q0OwXrU9zT1p3Stwr6ZexqKNGL0=</ds:DigestValue>
+<ds:DigestValue>hWWTozFFYEbjXaRdTjLqJWrnu7g=</ds:DigestValue>
 </ds:Reference>
-<ds:Reference Id="Reference-ID-804067" URI="#comprobante">
+<ds:Reference Id="Reference-ID-759634" URI="#comprobante">
 <ds:Transforms>
 <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>iCZmLfVdCUJkMjSkVCm7uhmP7AQ=</ds:DigestValue>
+<ds:DigestValue>nGILDKVxmhh+NsYnCxc3GzhbjeM=</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
-[2014-01-13 16:45:08,717]DEBUG  1065[main] - es.mityc.firmaJava.libreria.xades.FirmaXML.signFile(FirmaXML.java:567) - Se realiza XADES-T  -> false
-[2014-01-13 16:45:08,719]DEBUG  1067[main] - es.mityc.firmaJava.libreria.xades.FirmaXML.signFile(FirmaXML.java:591) - Se realiza XADES-C ->false
-[2014-01-13 16:45:08,719]DEBUG  1067[main] - es.mityc.firmaJava.libreria.xades.FirmaXML.signFile(FirmaXML.java:786) - Se realiza XADES-X -> false
-[2014-01-13 16:45:08,719]DEBUG  1067[main] - es.mityc.firmaJava.libreria.xades.FirmaXML.signFile(FirmaXML.java:789) - Se realiza XADES-XL ->  false
-[2014-01-13 16:45:10,212] INFO  2560[main] - com.corvustec.apce.files.ArchivoXML.procesarComprobante(ArchivoXML.java:39) - Respuesta WS: RECIBIDA
-[2014-01-13 16:45:10,501] INFO  2849[main] - com.corvustec.apce.files.ArchivoXML.procesarComprobante(ArchivoXML.java:53) - Respuesta WS Autorizacion 
-[2014-01-13 16:46:15,257] INFO     0[main] - com.corvustec.apce.files.main.Process.main(Process.java:19) - Procesar Archivo 
-[2014-01-13 16:46:15,513] INFO   256[main] - com.corvustec.signature.xml.FirmaGenerica.<init>(FirmaGenerica.java:40) - Constructor FirmaGenerica
-[2014-01-13 16:46:15,694]DEBUG   437[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/TR/2001/REC-xml-c14n-20010315, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer20010315OmitComments)
-[2014-01-13 16:46:15,696]DEBUG   439[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer20010315WithComments)
-[2014-01-13 16:46:15,698]DEBUG   441[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/2001/10/xml-exc-c14n#, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer20010315ExclOmitComments)
-[2014-01-13 16:46:15,699]DEBUG   442[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/2001/10/xml-exc-c14n#WithComments, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer20010315ExclWithComments)
-[2014-01-13 16:46:15,701]DEBUG   444[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/2006/12/xml-c14n11, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer11_OmitComments)
-[2014-01-13 16:46:15,701]DEBUG   444[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/2006/12/xml-c14n11#WithComments, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer11_WithComments)
-[2014-01-13 16:46:15,708]DEBUG   451[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2000/09/xmldsig#base64, adsi.org.apache.xml.security.transforms.implementations.TransformBase64Decode)
-[2014-01-13 16:46:15,709]DEBUG   452[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/TR/2001/REC-xml-c14n-20010315, adsi.org.apache.xml.security.transforms.implementations.TransformC14N)
-[2014-01-13 16:46:15,709]DEBUG   452[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments, adsi.org.apache.xml.security.transforms.implementations.TransformC14NWithComments)
-[2014-01-13 16:46:15,730]DEBUG   473[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2006/12/xml-c14n11, adsi.org.apache.xml.security.transforms.implementations.TransformC14N11)
-[2014-01-13 16:46:15,731]DEBUG   474[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2006/12/xml-c14n11#WithComments, adsi.org.apache.xml.security.transforms.implementations.TransformC14N11_WithComments)
-[2014-01-13 16:46:15,737]DEBUG   480[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2001/10/xml-exc-c14n#, adsi.org.apache.xml.security.transforms.implementations.TransformC14NExclusive)
-[2014-01-13 16:46:15,738]DEBUG   481[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2001/10/xml-exc-c14n#WithComments, adsi.org.apache.xml.security.transforms.implementations.TransformC14NExclusiveWithComments)
-[2014-01-13 16:46:15,740]DEBUG   483[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/TR/1999/REC-xpath-19991116, adsi.org.apache.xml.security.transforms.implementations.TransformXPath)
-[2014-01-13 16:46:15,742]DEBUG   485[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2000/09/xmldsig#enveloped-signature, adsi.org.apache.xml.security.transforms.implementations.TransformEnvelopedSignature)
-[2014-01-13 16:46:15,744]DEBUG   487[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/TR/1999/REC-xslt-19991116, adsi.org.apache.xml.security.transforms.implementations.TransformXSLT)
-[2014-01-13 16:46:15,745]DEBUG   488[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2002/04/xmldsig-filter2, adsi.org.apache.xml.security.transforms.implementations.TransformXPath2Filter)
-[2014-01-13 16:46:15,746]DEBUG   489[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2002/06/xmldsig-filter2, adsi.org.apache.xml.security.transforms.implementations.TransformXPath2Filter)
-[2014-01-13 16:46:15,750]DEBUG   493[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.providerInit(SignatureAlgorithm.java:375) - Init() called
-[2014-01-13 16:46:15,752]DEBUG   495[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2000/09/xmldsig#dsa-sha1, adsi.org.apache.xml.security.algorithms.implementations.SignatureDSA)
-[2014-01-13 16:46:15,752]DEBUG   495[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2000/09/xmldsig#dsa-sha1 adsi.org.apache.xml.security.algorithms.implementations.SignatureDSA
-[2014-01-13 16:46:15,754]DEBUG   497[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2000/09/xmldsig#rsa-sha1, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA1)
-[2014-01-13 16:46:15,754]DEBUG   497[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2000/09/xmldsig#rsa-sha1 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA1
-[2014-01-13 16:46:15,756]DEBUG   499[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2000/09/xmldsig#hmac-sha1, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA1)
-[2014-01-13 16:46:15,756]DEBUG   499[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2000/09/xmldsig#hmac-sha1 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA1
-[2014-01-13 16:46:15,758]DEBUG   501[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-md5, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSAMD5)
-[2014-01-13 16:46:15,758]DEBUG   501[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-md5 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSAMD5
-[2014-01-13 16:46:15,808]DEBUG   551[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-ripemd160, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSARIPEMD160)
-[2014-01-13 16:46:15,808]DEBUG   551[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-ripemd160 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSARIPEMD160
-[2014-01-13 16:46:15,809]DEBUG   552[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-sha256, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA256)
-[2014-01-13 16:46:15,809]DEBUG   552[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-sha256 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA256
-[2014-01-13 16:46:15,809]DEBUG   552[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-sha384, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA384)
-[2014-01-13 16:46:15,810]DEBUG   553[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-sha384 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA384
-[2014-01-13 16:46:15,810]DEBUG   553[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-sha512, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA512)
-[2014-01-13 16:46:15,810]DEBUG   553[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-sha512 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA512
-[2014-01-13 16:46:15,813]DEBUG   556[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1, adsi.org.apache.xml.security.algorithms.implementations.SignatureECDSA$SignatureECDSASHA1)
-[2014-01-13 16:46:15,813]DEBUG   556[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1 adsi.org.apache.xml.security.algorithms.implementations.SignatureECDSA$SignatureECDSASHA1
-[2014-01-13 16:46:15,813]DEBUG   556[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-md5, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacMD5)
-[2014-01-13 16:46:15,813]DEBUG   556[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-md5 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacMD5
-[2014-01-13 16:46:15,814]DEBUG   557[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-ripemd160, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacRIPEMD160)
-[2014-01-13 16:46:15,814]DEBUG   557[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-ripemd160 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacRIPEMD160
-[2014-01-13 16:46:15,815]DEBUG   558[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-sha256, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA256)
-[2014-01-13 16:46:15,815]DEBUG   558[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-sha256 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA256
-[2014-01-13 16:46:15,816]DEBUG   559[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-sha384, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA384)
-[2014-01-13 16:46:15,816]DEBUG   559[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-sha384 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA384
-[2014-01-13 16:46:15,816]DEBUG   559[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-sha512, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA512)
-[2014-01-13 16:46:15,816]DEBUG   559[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-sha512 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA512
-[2014-01-13 16:46:15,826]DEBUG   569[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverDirectHTTP: A simple resolver for requests to HTTP space
-[2014-01-13 16:46:15,827]DEBUG   570[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverBigLocalFilesystem: A simple resolver for requests to the local file system with big files
-[2014-01-13 16:46:15,851]DEBUG   594[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment: A simple resolver for requests of same-document URIs
-[2014-01-13 16:46:15,852]DEBUG   595[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverXPointer: A simple resolver for requests of XPointer fragents
-[2014-01-13 16:46:15,854]DEBUG   597[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.RSAKeyValueResolver: Can extract RSA public keys
-[2014-01-13 16:46:15,856]DEBUG   599[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.DSAKeyValueResolver: Can extract DSA public keys
-[2014-01-13 16:46:15,856]DEBUG   599[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509CertificateResolver: Can extract public keys from X509 certificates
-[2014-01-13 16:46:15,857]DEBUG   600[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509SKIResolver: Uses an X509v3 SubjectKeyIdentifier extension to retrieve a certificate from the storages
-[2014-01-13 16:46:15,858]DEBUG   601[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.RetrievalMethodResolver: Resolves keys and certificates using ResourceResolvers
-[2014-01-13 16:46:15,860]DEBUG   603[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509SubjectNameResolver: Uses an X509 SubjectName to retrieve a certificate from the storages
-[2014-01-13 16:46:15,864]DEBUG   607[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509IssuerSerialResolver: Uses an X509 IssuerName and IssuerSerial to retrieve a certificate from the storages
-[2014-01-13 16:46:15,868]DEBUG   611[main] - adsi.org.apache.xml.security.Init.init(Init.java:365) - Now I try to bind prefixes:
-[2014-01-13 16:46:15,868]DEBUG   611[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind ds to http://www.w3.org/2000/09/xmldsig#
-[2014-01-13 16:46:15,869]DEBUG   612[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind xenc to http://www.w3.org/2001/04/xmlenc#
-[2014-01-13 16:46:15,869]DEBUG   612[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind experimental to http://www.xmlsecurity.org/experimental#
-[2014-01-13 16:46:15,869]DEBUG   612[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind dsig-xpath-old to http://www.w3.org/2002/04/xmldsig-filter2
-[2014-01-13 16:46:15,869]DEBUG   612[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind dsig-xpath to http://www.w3.org/2002/06/xmldsig-filter2
-[2014-01-13 16:46:15,870]DEBUG   613[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind ec to http://www.w3.org/2001/10/xml-exc-c14n#
-[2014-01-13 16:46:15,870]DEBUG   613[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind xx to http://www.nue.et-inf.uni-siegen.de/~geuer-pollmann/#xpathFilter
-[2014-01-13 16:46:15,870]DEBUG   613[main] - adsi.org.apache.xml.security.Init.init(Init.java:387) - XX_init                             223 ms
-[2014-01-13 16:46:15,870]DEBUG   613[main] - adsi.org.apache.xml.security.Init.init(Init.java:388) -   XX_prng                           0 ms
-[2014-01-13 16:46:15,870]DEBUG   613[main] - adsi.org.apache.xml.security.Init.init(Init.java:389) -   XX_parsing                        25 ms
-[2014-01-13 16:46:15,870]DEBUG   613[main] - adsi.org.apache.xml.security.Init.init(Init.java:390) -   XX_configure_i18n                 3 ms
-[2014-01-13 16:46:15,870]DEBUG   613[main] - adsi.org.apache.xml.security.Init.init(Init.java:391) -   XX_configure_reg_c14n             19 ms
-[2014-01-13 16:46:15,871]DEBUG   614[main] - adsi.org.apache.xml.security.Init.init(Init.java:392) -   XX_configure_reg_jcemapper        4 ms
-[2014-01-13 16:46:15,871]DEBUG   614[main] - adsi.org.apache.xml.security.Init.init(Init.java:393) -   XX_configure_reg_keyInfo          6 ms
-[2014-01-13 16:46:15,871]DEBUG   614[main] - adsi.org.apache.xml.security.Init.init(Init.java:394) -   XX_configure_reg_keyResolver      15 ms
-[2014-01-13 16:46:15,871]DEBUG   614[main] - adsi.org.apache.xml.security.Init.init(Init.java:395) -   XX_configure_reg_prefixes         2 ms
-[2014-01-13 16:46:15,871]DEBUG   614[main] - adsi.org.apache.xml.security.Init.init(Init.java:396) -   XX_configure_reg_resourceresolver 29 ms
-[2014-01-13 16:46:15,871]DEBUG   614[main] - adsi.org.apache.xml.security.Init.init(Init.java:397) -   XX_configure_reg_sigalgos         71 ms
-[2014-01-13 16:46:15,872]DEBUG   615[main] - adsi.org.apache.xml.security.Init.init(Init.java:398) -   XX_configure_reg_transforms       44 ms
-[2014-01-13 16:46:15,873]DEBUG   616[main] - adsi.org.apache.xml.security.algorithms.JCEMapper.translateURItoJCEID(JCEMapper.java:101) - Request for URI http://www.w3.org/2000/09/xmldsig#sha1
-[2014-01-13 16:46:15,892]DEBUG   635[main] - adsi.org.apache.xml.security.algorithms.JCEMapper.translateURItoJCEID(JCEMapper.java:101) - Request for URI http://www.w3.org/2000/09/xmldsig#sha1
-[2014-01-13 16:46:15,973]DEBUG   716[main] - adsi.org.apache.xml.security.transforms.Transform.<init>(Transform.java:103) - Create URI "http://www.w3.org/2000/09/xmldsig#enveloped-signature" class "class adsi.org.apache.xml.security.transforms.implementations.TransformEnvelopedSignature"
-[2014-01-13 16:46:15,973]DEBUG   716[main] - adsi.org.apache.xml.security.transforms.Transform.<init>(Transform.java:105) - The NodeList is null
-[2014-01-13 16:46:15,973]DEBUG   716[main] - adsi.org.apache.xml.security.transforms.Transforms.addTransform(Transforms.java:222) - Transforms.addTransform(http://www.w3.org/2000/09/xmldsig#enveloped-signature)
-[2014-01-13 16:46:16,068]DEBUG   811[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.buildSigner(SignatureAlgorithm.java:133) - Create URI "http://www.w3.org/2000/09/xmldsig#rsa-sha1" class "class adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA1"
-[2014-01-13 16:46:16,068]DEBUG   811[main] - adsi.org.apache.xml.security.algorithms.JCEMapper.translateURItoJCEID(JCEMapper.java:101) - Request for URI http://www.w3.org/2000/09/xmldsig#rsa-sha1
-[2014-01-13 16:46:16,068]DEBUG   811[main] - adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA.<init>(SignatureBaseRSA.java:67) - Created SignatureRSA using SHA1withRSA
-[2014-01-13 16:46:16,069]DEBUG   812[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
-[2014-01-13 16:46:16,069]DEBUG   812[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
-[2014-01-13 16:46:16,069]DEBUG   812[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverDirectHTTP
-[2014-01-13 16:46:16,069]DEBUG   812[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverDirectHTTP.engineCanResolve(ResolverDirectHTTP.java:261) - quick fail for empty URIs and local ones
-[2014-01-13 16:46:16,069]DEBUG   812[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverBigLocalFilesystem
-[2014-01-13 16:46:16,069]DEBUG   812[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
-[2014-01-13 16:46:16,070]DEBUG   813[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Signature153674-SignedProperties125106"
-[2014-01-13 16:46:16,071]DEBUG   814[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
-[2014-01-13 16:46:16,071]DEBUG   814[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
-[2014-01-13 16:46:16,075]DEBUG   818[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
-[2014-01-13 16:46:16,075]DEBUG   818[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Signature153674-SignedProperties125106"
-[2014-01-13 16:46:16,075]DEBUG   818[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdType(IdResolver.java:151) - getElementByIdType() Search for ID Signature153674-SignedProperties125106
-[2014-01-13 16:46:16,075]DEBUG   818[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdUsingDOM(IdResolver.java:138) - getElementByIdUsingDOM() Search for ID Signature153674-SignedProperties125106
-[2014-01-13 16:46:16,076]DEBUG   819[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineResolve(ResolverFragment.java:96) - Try to catch an Element with ID Signature153674-SignedProperties125106 and Element was [etsi:SignedProperties: null]
-[2014-01-13 16:46:16,087]DEBUG   830[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:59) - Pre-digested input:
-[2014-01-13 16:46:16,087]DEBUG   830[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:64) - <etsi:SignedProperties xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature153674-SignedProperties125106"><etsi:SignedSignatureProperties><etsi:SigningTime>2014-01-13T16:46:15-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>8MgNdCPJAQHLWZSA1uGRgGjzhwY=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC</ds:X509IssuerName><ds:X509SerialNumber>1312930870</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-264221"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties>
-[2014-01-13 16:46:16,087]DEBUG   830[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
-[2014-01-13 16:46:16,087]DEBUG   830[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
-[2014-01-13 16:46:16,088]DEBUG   831[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
-[2014-01-13 16:46:16,088]DEBUG   831[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Certificate1806449"
-[2014-01-13 16:46:16,088]DEBUG   831[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
-[2014-01-13 16:46:16,088]DEBUG   831[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
-[2014-01-13 16:46:16,088]DEBUG   831[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
-[2014-01-13 16:46:16,088]DEBUG   831[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Certificate1806449"
-[2014-01-13 16:46:16,088]DEBUG   831[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdType(IdResolver.java:151) - getElementByIdType() Search for ID Certificate1806449
-[2014-01-13 16:46:16,088]DEBUG   831[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementById(IdResolver.java:99) - I could find an Element using the simple getElementByIdType method: ds:KeyInfo
-[2014-01-13 16:46:16,088]DEBUG   831[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineResolve(ResolverFragment.java:96) - Try to catch an Element with ID Certificate1806449 and Element was [ds:KeyInfo: null]
-[2014-01-13 16:46:16,089]DEBUG   832[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:59) - Pre-digested input:
-[2014-01-13 16:46:16,090]DEBUG   833[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:64) - <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Certificate1806449">
+[2014-01-15 17:47:03,433]DEBUG  1112[main] - es.mityc.firmaJava.libreria.xades.FirmaXML.signFile(FirmaXML.java:567) - Se realiza XADES-T  -> false
+[2014-01-15 17:47:03,433]DEBUG  1112[main] - es.mityc.firmaJava.libreria.xades.FirmaXML.signFile(FirmaXML.java:591) - Se realiza XADES-C ->false
+[2014-01-15 17:47:03,433]DEBUG  1112[main] - es.mityc.firmaJava.libreria.xades.FirmaXML.signFile(FirmaXML.java:786) - Se realiza XADES-X -> false
+[2014-01-15 17:47:03,433]DEBUG  1112[main] - es.mityc.firmaJava.libreria.xades.FirmaXML.signFile(FirmaXML.java:789) - Se realiza XADES-XL ->  false
+[2014-01-15 17:47:05,352] INFO  3031[main] - com.corvustec.apce.files.ArchivoXML.procesarComprobante(ArchivoXML.java:39) - Respuesta WS: DEVUELTA
+[2014-01-15 17:47:05,353] INFO  3032[main] - com.corvustec.apce.files.ArchivoXML.procesarComprobante(ArchivoXML.java:103) - mensaje: 110120140117167901160011001001200400030123456011
+ARCHIVO NO CUMPLE ESTRUCTURA XML, Se encontró el siguiente error en la estructura del comprobante: cvc-pattern-valid: Value '110120140117167901160011001001200400030123456011' is not facet-valid with respect to pattern '[0-9]{49}' for type 'claveAcceso'.
+
+[2014-01-15 17:48:36,707] INFO     0[main] - com.corvustec.apce.files.main.Process.main(Process.java:68) - Procesar Archivo 
+[2014-01-15 17:49:10,161] INFO     0[main] - com.corvustec.apce.files.main.Process.main(Process.java:68) - Procesar Archivo 
+[2014-01-15 17:49:10,525] INFO   364[main] - com.corvustec.signature.xml.FirmaGenerica.<init>(FirmaGenerica.java:40) - Constructor FirmaGenerica
+[2014-01-15 17:49:10,748]DEBUG   587[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/TR/2001/REC-xml-c14n-20010315, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer20010315OmitComments)
+[2014-01-15 17:49:10,751]DEBUG   590[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer20010315WithComments)
+[2014-01-15 17:49:10,753]DEBUG   592[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/2001/10/xml-exc-c14n#, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer20010315ExclOmitComments)
+[2014-01-15 17:49:10,755]DEBUG   594[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/2001/10/xml-exc-c14n#WithComments, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer20010315ExclWithComments)
+[2014-01-15 17:49:10,757]DEBUG   596[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/2006/12/xml-c14n11, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer11_OmitComments)
+[2014-01-15 17:49:10,757]DEBUG   596[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/2006/12/xml-c14n11#WithComments, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer11_WithComments)
+[2014-01-15 17:49:10,763]DEBUG   602[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2000/09/xmldsig#base64, adsi.org.apache.xml.security.transforms.implementations.TransformBase64Decode)
+[2014-01-15 17:49:10,764]DEBUG   603[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/TR/2001/REC-xml-c14n-20010315, adsi.org.apache.xml.security.transforms.implementations.TransformC14N)
+[2014-01-15 17:49:10,765]DEBUG   604[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments, adsi.org.apache.xml.security.transforms.implementations.TransformC14NWithComments)
+[2014-01-15 17:49:10,779]DEBUG   618[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2006/12/xml-c14n11, adsi.org.apache.xml.security.transforms.implementations.TransformC14N11)
+[2014-01-15 17:49:10,780]DEBUG   619[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2006/12/xml-c14n11#WithComments, adsi.org.apache.xml.security.transforms.implementations.TransformC14N11_WithComments)
+[2014-01-15 17:49:10,786]DEBUG   625[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2001/10/xml-exc-c14n#, adsi.org.apache.xml.security.transforms.implementations.TransformC14NExclusive)
+[2014-01-15 17:49:10,787]DEBUG   626[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2001/10/xml-exc-c14n#WithComments, adsi.org.apache.xml.security.transforms.implementations.TransformC14NExclusiveWithComments)
+[2014-01-15 17:49:10,789]DEBUG   628[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/TR/1999/REC-xpath-19991116, adsi.org.apache.xml.security.transforms.implementations.TransformXPath)
+[2014-01-15 17:49:10,793]DEBUG   632[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2000/09/xmldsig#enveloped-signature, adsi.org.apache.xml.security.transforms.implementations.TransformEnvelopedSignature)
+[2014-01-15 17:49:10,797]DEBUG   636[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/TR/1999/REC-xslt-19991116, adsi.org.apache.xml.security.transforms.implementations.TransformXSLT)
+[2014-01-15 17:49:10,798]DEBUG   637[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2002/04/xmldsig-filter2, adsi.org.apache.xml.security.transforms.implementations.TransformXPath2Filter)
+[2014-01-15 17:49:10,798]DEBUG   637[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2002/06/xmldsig-filter2, adsi.org.apache.xml.security.transforms.implementations.TransformXPath2Filter)
+[2014-01-15 17:49:10,804]DEBUG   643[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.providerInit(SignatureAlgorithm.java:375) - Init() called
+[2014-01-15 17:49:10,807]DEBUG   646[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2000/09/xmldsig#dsa-sha1, adsi.org.apache.xml.security.algorithms.implementations.SignatureDSA)
+[2014-01-15 17:49:10,807]DEBUG   646[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2000/09/xmldsig#dsa-sha1 adsi.org.apache.xml.security.algorithms.implementations.SignatureDSA
+[2014-01-15 17:49:10,809]DEBUG   648[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2000/09/xmldsig#rsa-sha1, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA1)
+[2014-01-15 17:49:10,809]DEBUG   648[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2000/09/xmldsig#rsa-sha1 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA1
+[2014-01-15 17:49:10,811]DEBUG   650[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2000/09/xmldsig#hmac-sha1, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA1)
+[2014-01-15 17:49:10,811]DEBUG   650[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2000/09/xmldsig#hmac-sha1 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA1
+[2014-01-15 17:49:10,812]DEBUG   651[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-md5, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSAMD5)
+[2014-01-15 17:49:10,813]DEBUG   652[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-md5 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSAMD5
+[2014-01-15 17:49:10,825]DEBUG   664[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-ripemd160, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSARIPEMD160)
+[2014-01-15 17:49:10,825]DEBUG   664[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-ripemd160 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSARIPEMD160
+[2014-01-15 17:49:10,827]DEBUG   666[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-sha256, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA256)
+[2014-01-15 17:49:10,827]DEBUG   666[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-sha256 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA256
+[2014-01-15 17:49:10,827]DEBUG   666[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-sha384, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA384)
+[2014-01-15 17:49:10,827]DEBUG   666[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-sha384 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA384
+[2014-01-15 17:49:10,828]DEBUG   667[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-sha512, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA512)
+[2014-01-15 17:49:10,828]DEBUG   667[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-sha512 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA512
+[2014-01-15 17:49:10,831]DEBUG   670[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1, adsi.org.apache.xml.security.algorithms.implementations.SignatureECDSA$SignatureECDSASHA1)
+[2014-01-15 17:49:10,831]DEBUG   670[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1 adsi.org.apache.xml.security.algorithms.implementations.SignatureECDSA$SignatureECDSASHA1
+[2014-01-15 17:49:10,833]DEBUG   672[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-md5, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacMD5)
+[2014-01-15 17:49:10,834]DEBUG   673[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-md5 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacMD5
+[2014-01-15 17:49:10,835]DEBUG   674[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-ripemd160, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacRIPEMD160)
+[2014-01-15 17:49:10,835]DEBUG   674[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-ripemd160 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacRIPEMD160
+[2014-01-15 17:49:10,835]DEBUG   674[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-sha256, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA256)
+[2014-01-15 17:49:10,836]DEBUG   675[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-sha256 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA256
+[2014-01-15 17:49:10,836]DEBUG   675[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-sha384, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA384)
+[2014-01-15 17:49:10,836]DEBUG   675[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-sha384 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA384
+[2014-01-15 17:49:10,838]DEBUG   677[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-sha512, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA512)
+[2014-01-15 17:49:10,838]DEBUG   677[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-sha512 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA512
+[2014-01-15 17:49:10,855]DEBUG   694[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverDirectHTTP: A simple resolver for requests to HTTP space
+[2014-01-15 17:49:10,857]DEBUG   696[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverBigLocalFilesystem: A simple resolver for requests to the local file system with big files
+[2014-01-15 17:49:10,860]DEBUG   699[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment: A simple resolver for requests of same-document URIs
+[2014-01-15 17:49:10,861]DEBUG   700[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverXPointer: A simple resolver for requests of XPointer fragents
+[2014-01-15 17:49:10,863]DEBUG   702[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.RSAKeyValueResolver: Can extract RSA public keys
+[2014-01-15 17:49:10,865]DEBUG   704[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.DSAKeyValueResolver: Can extract DSA public keys
+[2014-01-15 17:49:10,865]DEBUG   704[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509CertificateResolver: Can extract public keys from X509 certificates
+[2014-01-15 17:49:10,866]DEBUG   705[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509SKIResolver: Uses an X509v3 SubjectKeyIdentifier extension to retrieve a certificate from the storages
+[2014-01-15 17:49:10,867]DEBUG   706[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.RetrievalMethodResolver: Resolves keys and certificates using ResourceResolvers
+[2014-01-15 17:49:10,871]DEBUG   710[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509SubjectNameResolver: Uses an X509 SubjectName to retrieve a certificate from the storages
+[2014-01-15 17:49:10,873]DEBUG   712[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509IssuerSerialResolver: Uses an X509 IssuerName and IssuerSerial to retrieve a certificate from the storages
+[2014-01-15 17:49:10,874]DEBUG   713[main] - adsi.org.apache.xml.security.Init.init(Init.java:365) - Now I try to bind prefixes:
+[2014-01-15 17:49:10,874]DEBUG   713[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind ds to http://www.w3.org/2000/09/xmldsig#
+[2014-01-15 17:49:10,875]DEBUG   714[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind xenc to http://www.w3.org/2001/04/xmlenc#
+[2014-01-15 17:49:10,875]DEBUG   714[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind experimental to http://www.xmlsecurity.org/experimental#
+[2014-01-15 17:49:10,875]DEBUG   714[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind dsig-xpath-old to http://www.w3.org/2002/04/xmldsig-filter2
+[2014-01-15 17:49:10,875]DEBUG   714[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind dsig-xpath to http://www.w3.org/2002/06/xmldsig-filter2
+[2014-01-15 17:49:10,875]DEBUG   714[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind ec to http://www.w3.org/2001/10/xml-exc-c14n#
+[2014-01-15 17:49:10,875]DEBUG   714[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind xx to http://www.nue.et-inf.uni-siegen.de/~geuer-pollmann/#xpathFilter
+[2014-01-15 17:49:10,875]DEBUG   714[main] - adsi.org.apache.xml.security.Init.init(Init.java:387) - XX_init                             182 ms
+[2014-01-15 17:49:10,876]DEBUG   715[main] - adsi.org.apache.xml.security.Init.init(Init.java:388) -   XX_prng                           0 ms
+[2014-01-15 17:49:10,876]DEBUG   715[main] - adsi.org.apache.xml.security.Init.init(Init.java:389) -   XX_parsing                        28 ms
+[2014-01-15 17:49:10,876]DEBUG   715[main] - adsi.org.apache.xml.security.Init.init(Init.java:390) -   XX_configure_i18n                 4 ms
+[2014-01-15 17:49:10,876]DEBUG   715[main] - adsi.org.apache.xml.security.Init.init(Init.java:391) -   XX_configure_reg_c14n             26 ms
+[2014-01-15 17:49:10,876]DEBUG   715[main] - adsi.org.apache.xml.security.Init.init(Init.java:392) -   XX_configure_reg_jcemapper        4 ms
+[2014-01-15 17:49:10,876]DEBUG   715[main] - adsi.org.apache.xml.security.Init.init(Init.java:393) -   XX_configure_reg_keyInfo          7 ms
+[2014-01-15 17:49:10,877]DEBUG   716[main] - adsi.org.apache.xml.security.Init.init(Init.java:394) -   XX_configure_reg_keyResolver      12 ms
+[2014-01-15 17:49:10,877]DEBUG   716[main] - adsi.org.apache.xml.security.Init.init(Init.java:395) -   XX_configure_reg_prefixes         1 ms
+[2014-01-15 17:49:10,877]DEBUG   716[main] - adsi.org.apache.xml.security.Init.init(Init.java:396) -   XX_configure_reg_resourceresolver 15 ms
+[2014-01-15 17:49:10,877]DEBUG   716[main] - adsi.org.apache.xml.security.Init.init(Init.java:397) -   XX_configure_reg_sigalgos         41 ms
+[2014-01-15 17:49:10,877]DEBUG   716[main] - adsi.org.apache.xml.security.Init.init(Init.java:398) -   XX_configure_reg_transforms       40 ms
+[2014-01-15 17:49:10,878]DEBUG   717[main] - adsi.org.apache.xml.security.algorithms.JCEMapper.translateURItoJCEID(JCEMapper.java:101) - Request for URI http://www.w3.org/2000/09/xmldsig#sha1
+[2014-01-15 17:49:10,899]DEBUG   738[main] - adsi.org.apache.xml.security.algorithms.JCEMapper.translateURItoJCEID(JCEMapper.java:101) - Request for URI http://www.w3.org/2000/09/xmldsig#sha1
+[2014-01-15 17:49:11,016]DEBUG   855[main] - adsi.org.apache.xml.security.transforms.Transform.<init>(Transform.java:103) - Create URI "http://www.w3.org/2000/09/xmldsig#enveloped-signature" class "class adsi.org.apache.xml.security.transforms.implementations.TransformEnvelopedSignature"
+[2014-01-15 17:49:11,016]DEBUG   855[main] - adsi.org.apache.xml.security.transforms.Transform.<init>(Transform.java:105) - The NodeList is null
+[2014-01-15 17:49:11,017]DEBUG   856[main] - adsi.org.apache.xml.security.transforms.Transforms.addTransform(Transforms.java:222) - Transforms.addTransform(http://www.w3.org/2000/09/xmldsig#enveloped-signature)
+[2014-01-15 17:49:11,040]DEBUG   879[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.buildSigner(SignatureAlgorithm.java:133) - Create URI "http://www.w3.org/2000/09/xmldsig#rsa-sha1" class "class adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA1"
+[2014-01-15 17:49:11,090]DEBUG   929[main] - adsi.org.apache.xml.security.algorithms.JCEMapper.translateURItoJCEID(JCEMapper.java:101) - Request for URI http://www.w3.org/2000/09/xmldsig#rsa-sha1
+[2014-01-15 17:49:11,091]DEBUG   930[main] - adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA.<init>(SignatureBaseRSA.java:67) - Created SignatureRSA using SHA1withRSA
+[2014-01-15 17:49:11,091]DEBUG   930[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
+[2014-01-15 17:49:11,091]DEBUG   930[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
+[2014-01-15 17:49:11,091]DEBUG   930[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverDirectHTTP
+[2014-01-15 17:49:11,092]DEBUG   931[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverDirectHTTP.engineCanResolve(ResolverDirectHTTP.java:261) - quick fail for empty URIs and local ones
+[2014-01-15 17:49:11,092]DEBUG   931[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverBigLocalFilesystem
+[2014-01-15 17:49:11,092]DEBUG   931[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
+[2014-01-15 17:49:11,094]DEBUG   933[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Signature379885-SignedProperties503598"
+[2014-01-15 17:49:11,095]DEBUG   934[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
+[2014-01-15 17:49:11,095]DEBUG   934[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
+[2014-01-15 17:49:11,095]DEBUG   934[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
+[2014-01-15 17:49:11,095]DEBUG   934[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Signature379885-SignedProperties503598"
+[2014-01-15 17:49:11,096]DEBUG   935[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdType(IdResolver.java:151) - getElementByIdType() Search for ID Signature379885-SignedProperties503598
+[2014-01-15 17:49:11,096]DEBUG   935[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdUsingDOM(IdResolver.java:138) - getElementByIdUsingDOM() Search for ID Signature379885-SignedProperties503598
+[2014-01-15 17:49:11,097]DEBUG   936[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineResolve(ResolverFragment.java:96) - Try to catch an Element with ID Signature379885-SignedProperties503598 and Element was [etsi:SignedProperties: null]
+[2014-01-15 17:49:11,115]DEBUG   954[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:59) - Pre-digested input:
+[2014-01-15 17:49:11,115]DEBUG   954[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:64) - <etsi:SignedProperties xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature379885-SignedProperties503598"><etsi:SignedSignatureProperties><etsi:SigningTime>2014-01-15T17:49:10-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>8MgNdCPJAQHLWZSA1uGRgGjzhwY=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC</ds:X509IssuerName><ds:X509SerialNumber>1312930870</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-801814"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties>
+[2014-01-15 17:49:11,116]DEBUG   955[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
+[2014-01-15 17:49:11,116]DEBUG   955[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
+[2014-01-15 17:49:11,117]DEBUG   956[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
+[2014-01-15 17:49:11,117]DEBUG   956[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Certificate1713614"
+[2014-01-15 17:49:11,117]DEBUG   956[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
+[2014-01-15 17:49:11,117]DEBUG   956[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
+[2014-01-15 17:49:11,118]DEBUG   957[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
+[2014-01-15 17:49:11,118]DEBUG   957[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Certificate1713614"
+[2014-01-15 17:49:11,118]DEBUG   957[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdType(IdResolver.java:151) - getElementByIdType() Search for ID Certificate1713614
+[2014-01-15 17:49:11,118]DEBUG   957[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementById(IdResolver.java:99) - I could find an Element using the simple getElementByIdType method: ds:KeyInfo
+[2014-01-15 17:49:11,118]DEBUG   957[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineResolve(ResolverFragment.java:96) - Try to catch an Element with ID Certificate1713614 and Element was [ds:KeyInfo: null]
+[2014-01-15 17:49:11,119]DEBUG   958[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:59) - Pre-digested input:
+[2014-01-15 17:49:11,120]DEBUG   959[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:64) - <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Certificate1713614">
 <ds:X509Data>
 <ds:X509Certificate>
 MIIJrjCCB5agAwIBAgIETkG8NjANBgkqhkiG9w0BAQsFADCBoTELMAkGA1UEBhMCRUMxIjAgBgNV
@@ -355,31 +429,31 @@ CoYfMcbZ+VYyD8Obh4yBUNp6mBXMNRhsIXSAMw==
 </ds:RSAKeyValue>
 </ds:KeyValue>
 </ds:KeyInfo>
-[2014-01-13 16:46:16,090]DEBUG   833[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
-[2014-01-13 16:46:16,090]DEBUG   833[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
-[2014-01-13 16:46:16,090]DEBUG   833[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
-[2014-01-13 16:46:16,090]DEBUG   833[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#comprobante"
-[2014-01-13 16:46:16,090]DEBUG   833[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
-[2014-01-13 16:46:16,090]DEBUG   833[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
-[2014-01-13 16:46:16,090]DEBUG   833[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
-[2014-01-13 16:46:16,092]DEBUG   835[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#comprobante"
-[2014-01-13 16:46:16,092]DEBUG   835[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdType(IdResolver.java:151) - getElementByIdType() Search for ID comprobante
-[2014-01-13 16:46:16,092]DEBUG   835[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdUsingDOM(IdResolver.java:138) - getElementByIdUsingDOM() Search for ID comprobante
-[2014-01-13 16:46:16,092]DEBUG   835[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineResolve(ResolverFragment.java:96) - Try to catch an Element with ID comprobante and Element was [factura: null]
-[2014-01-13 16:46:16,092]DEBUG   835[main] - adsi.org.apache.xml.security.utils.ElementProxy.<init>(ElementProxy.java:195) - setElement("ds:Transform", "null")
-[2014-01-13 16:46:16,095]DEBUG   838[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:59) - Pre-digested input:
-[2014-01-13 16:46:16,095]DEBUG   838[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:64) - <factura id="comprobante" version="1.0.0"> 
+[2014-01-15 17:49:11,120]DEBUG   959[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
+[2014-01-15 17:49:11,120]DEBUG   959[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
+[2014-01-15 17:49:11,121]DEBUG   960[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
+[2014-01-15 17:49:11,121]DEBUG   960[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#comprobante"
+[2014-01-15 17:49:11,121]DEBUG   960[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
+[2014-01-15 17:49:11,121]DEBUG   960[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
+[2014-01-15 17:49:11,122]DEBUG   961[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
+[2014-01-15 17:49:11,122]DEBUG   961[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#comprobante"
+[2014-01-15 17:49:11,122]DEBUG   961[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdType(IdResolver.java:151) - getElementByIdType() Search for ID comprobante
+[2014-01-15 17:49:11,123]DEBUG   962[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdUsingDOM(IdResolver.java:138) - getElementByIdUsingDOM() Search for ID comprobante
+[2014-01-15 17:49:11,123]DEBUG   962[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineResolve(ResolverFragment.java:96) - Try to catch an Element with ID comprobante and Element was [factura: null]
+[2014-01-15 17:49:11,123]DEBUG   962[main] - adsi.org.apache.xml.security.utils.ElementProxy.<init>(ElementProxy.java:195) - setElement("ds:Transform", "null")
+[2014-01-15 17:49:11,131]DEBUG   970[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:59) - Pre-digested input:
+[2014-01-15 17:49:11,131]DEBUG   970[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:64) - <factura id="comprobante" version="1.0.0"> 
  <infoTributaria> 
 <ambiente>1</ambiente> 
 <tipoEmision>1</tipoEmision> 
 <razonSocial>PRUEBAS SERVICIO RENTAS INTERNAS</razonSocial> 
 <nombreComercial>PRUEBAS SERVICIO RENTAS INTERNAS</nombreComercial> 
 <ruc>1716790116001</ruc> 
-<claveAcceso>1101201401171679011600110010012004000261234560112</claveAcceso> 
+<claveAcceso>1101201401171679011600110010012004000311234560111</claveAcceso> 
 <codDoc>01</codDoc> 
 <estab>001</estab> 
 <ptoEmi>001</ptoEmi> 
-<secuencial>200400026</secuencial> 
+<secuencial>200400031</secuencial> 
 <dirMatriz>Bartolome Sanchez N74-108 y Joaquin Mancheno</dirMatriz> 
 </infoTributaria> 
 <infoFactura> 
@@ -430,134 +504,151 @@ CoYfMcbZ+VYyD8Obh4yBUNp6mBXMNRhsIXSAMw==
 <campoAdicional nombre="Impuesto ISD">15.42x</campoAdicional> 
 </infoAdicional> 
 </factura>
-[2014-01-13 16:46:16,096]DEBUG   839[main] - adsi.org.apache.xml.security.utils.SignerOutputStream.write(SignerOutputStream.java:68) - Canonicalized SignedInfo:
-[2014-01-13 16:46:16,096]DEBUG   839[main] - adsi.org.apache.xml.security.utils.SignerOutputStream.write(SignerOutputStream.java:73) - <ds:SignedInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature-SignedInfo955500">
+[2014-01-15 17:49:11,183]DEBUG  1022[main] - adsi.org.apache.xml.security.utils.SignerOutputStream.write(SignerOutputStream.java:68) - Canonicalized SignedInfo:
+[2014-01-15 17:49:11,183]DEBUG  1022[main] - adsi.org.apache.xml.security.utils.SignerOutputStream.write(SignerOutputStream.java:73) - <ds:SignedInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature-SignedInfo222713">
 <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:CanonicalizationMethod>
 <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
-<ds:Reference Id="SignedPropertiesID935496" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature153674-SignedProperties125106">
+<ds:Reference Id="SignedPropertiesID628614" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature379885-SignedProperties503598">
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>OCUCVskM1oblr54/qYoAGWgaG8k=</ds:DigestValue>
+<ds:DigestValue>8vt1qvmRA5hCs4f+UKArt3YTn3E=</ds:DigestValue>
 </ds:Reference>
-<ds:Reference URI="#Certificate1806449">
+<ds:Reference URI="#Certificate1713614">
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>isveDxudeoiuxwQKK58/zQ8LYx0=</ds:DigestValue>
+<ds:DigestValue>1XFay8Hyi+/o/DRYJdkzgN7zhak=</ds:DigestValue>
 </ds:Reference>
-<ds:Reference Id="Reference-ID-264221" URI="#comprobante">
+<ds:Reference Id="Reference-ID-801814" URI="#comprobante">
 <ds:Transforms>
 <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>iCZmLfVdCUJkMjSkVCm7uhmP7AQ=</ds:DigestValue>
+<ds:DigestValue>Vy1Dk6xrFuXmZnhwYeWYtObBtJY=</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
-[2014-01-13 16:46:16,217]DEBUG   960[main] - es.mityc.firmaJava.libreria.xades.FirmaXML.signFile(FirmaXML.java:567) - Se realiza XADES-T  -> false
-[2014-01-13 16:46:16,217]DEBUG   960[main] - es.mityc.firmaJava.libreria.xades.FirmaXML.signFile(FirmaXML.java:591) - Se realiza XADES-C ->false
-[2014-01-13 16:46:16,218]DEBUG   961[main] - es.mityc.firmaJava.libreria.xades.FirmaXML.signFile(FirmaXML.java:786) - Se realiza XADES-X -> false
-[2014-01-13 16:46:16,218]DEBUG   961[main] - es.mityc.firmaJava.libreria.xades.FirmaXML.signFile(FirmaXML.java:789) - Se realiza XADES-XL ->  false
-[2014-01-13 16:46:17,717] INFO  2460[main] - com.corvustec.apce.files.ArchivoXML.procesarComprobante(ArchivoXML.java:39) - Respuesta WS: RECIBIDA
-[2014-01-13 16:46:18,120] INFO  2863[main] - com.corvustec.apce.files.webservice.AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(AutorizacionComprobantesElectronicosWs.java:101) - estado NO AUTORIZADO
-[2014-01-13 16:46:18,121] INFO  2864[main] - com.corvustec.apce.files.webservice.AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(AutorizacionComprobantesElectronicosWs.java:112) - identificador 43
-[2014-01-13 16:46:18,121] INFO  2864[main] - com.corvustec.apce.files.webservice.AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(AutorizacionComprobantesElectronicosWs.java:113) - mensaje CLAVE ACCESO REGISTRADA
-[2014-01-13 16:46:18,126] INFO  2869[main] - com.corvustec.apce.files.webservice.AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(AutorizacionComprobantesElectronicosWs.java:114) - informacion adicional null
-[2014-01-13 16:46:18,126] INFO  2869[main] - com.corvustec.apce.files.webservice.AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(AutorizacionComprobantesElectronicosWs.java:115) - tipo ERROR
-[2014-01-13 16:46:18,127] INFO  2870[main] - com.corvustec.apce.files.webservice.AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(AutorizacionComprobantesElectronicosWs.java:112) - identificador 60
-[2014-01-13 16:46:18,127] INFO  2870[main] - com.corvustec.apce.files.webservice.AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(AutorizacionComprobantesElectronicosWs.java:113) - mensaje ESTE PROCESO FUE REALIZADO EN EL AMBIENTE DE PRUEBAS
-[2014-01-13 16:46:18,127] INFO  2870[main] - com.corvustec.apce.files.webservice.AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(AutorizacionComprobantesElectronicosWs.java:114) - informacion adicional null
-[2014-01-13 16:46:18,127] INFO  2870[main] - com.corvustec.apce.files.webservice.AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(AutorizacionComprobantesElectronicosWs.java:115) - tipo INFORMATIVO
-[2014-01-13 16:46:18,127] INFO  2870[main] - com.corvustec.apce.files.webservice.AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(AutorizacionComprobantesElectronicosWs.java:101) - estado AUTORIZADO
-[2014-01-13 16:46:18,127] INFO  2870[main] - com.corvustec.apce.files.ArchivoXML.procesarComprobante(ArchivoXML.java:53) - Respuesta WS Autorizacion NO AUTORIZADOCLAVE ACCESO REGISTRADA, 
-NO AUTORIZADOESTE PROCESO FUE REALIZADO EN EL AMBIENTE DE PRUEBAS, 
-AUTORIZADO
-[2014-01-13 16:46:18,127] INFO  2870[main] - com.corvustec.apce.files.ArchivoXML.procesarComprobante(ArchivoXML.java:59) - comporbante <?xml version="1.0" encoding="UTF-8"?>
-<factura id="comprobante" version="1.0.0"> 
- <infoTributaria> 
-<ambiente>1</ambiente> 
-<tipoEmision>1</tipoEmision> 
-<razonSocial>PRUEBAS SERVICIO RENTAS INTERNAS</razonSocial> 
-<nombreComercial>PRUEBAS SERVICIO RENTAS INTERNAS</nombreComercial> 
-<ruc>1716790116001</ruc> 
-<claveAcceso>1101201401171679011600110010012004000261234560112</claveAcceso> 
-<codDoc>01</codDoc> 
-<estab>001</estab> 
-<ptoEmi>001</ptoEmi> 
-<secuencial>200400026</secuencial> 
-<dirMatriz>Bartolome Sanchez N74-108 y Joaquin Mancheno</dirMatriz> 
-</infoTributaria> 
-<infoFactura> 
-<fechaEmision>11/01/2014</fechaEmision> 
-<dirEstablecimiento>ULTIMAS NOTICIAS</dirEstablecimiento> 
-<contribuyenteEspecial>5368</contribuyenteEspecial> 
-<obligadoContabilidad>NO</obligadoContabilidad> 
-<tipoIdentificacionComprador>05</tipoIdentificacionComprador> 
-<guiaRemision>001-001-000000001</guiaRemision> 
-<razonSocialComprador>RIVERA VAEZ MARCO MIGUEL</razonSocialComprador> 
-<identificacionComprador>1703330413</identificacionComprador> 
-<totalSinImpuestos>84</totalSinImpuestos> 
-<totalDescuento>0</totalDescuento> 
-<totalConImpuestos> 
- <totalImpuesto> 
-<codigo>2</codigo> 
-<codigoPorcentaje>2</codigoPorcentaje> 
-<baseImponible>84</baseImponible> 
-<valor>10.08</valor> 
-</totalImpuesto> 
-</totalConImpuestos> 
-<propina>0.00</propina> 
-<importeTotal>94.08</importeTotal> 
-<moneda>DOLAR</moneda> 
-</infoFactura> 
- <detalles> 
- <detalle> 
-<codigoPrincipal>AC01100</codigoPrincipal> 
-<codigoAuxiliar>AC01100</codigoAuxiliar> 
-<descripcion>DENSIMETRO </descripcion> 
-<cantidad>12</cantidad> 
-<precioUnitario>7</precioUnitario> 
-<descuento>0</descuento> 
-<precioTotalSinImpuesto>84</precioTotalSinImpuesto> 
- <impuestos> 
- <impuesto> 
-<codigo>2</codigo> 
-<codigoPorcentaje>2</codigoPorcentaje> 
-<tarifa>12</tarifa> 
-<baseImponible>84</baseImponible> 
-<valor>10.08</valor> 
-</impuesto> 
-</impuestos> 
- </detalle> 
- </detalles> 
- <infoAdicional> 
-<campoAdicional nombre="Codigo Impuesto ISD">4580</campoAdicional> 
-<campoAdicional nombre="Impuesto ISD">15.42x</campoAdicional> 
-</infoAdicional> 
-<ds:Signature Id="Signature153674" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#">
-<ds:SignedInfo Id="Signature-SignedInfo955500">
-<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
-<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
-<ds:Reference Id="SignedPropertiesID935496" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature153674-SignedProperties125106">
-<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-<ds:DigestValue>OCUCVskM1oblr54/qYoAGWgaG8k=</ds:DigestValue>
-</ds:Reference>
-<ds:Reference URI="#Certificate1806449">
-<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-<ds:DigestValue>isveDxudeoiuxwQKK58/zQ8LYx0=</ds:DigestValue>
-</ds:Reference>
-<ds:Reference Id="Reference-ID-264221" URI="#comprobante">
-<ds:Transforms>
-<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
-</ds:Transforms>
-<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-<ds:DigestValue>iCZmLfVdCUJkMjSkVCm7uhmP7AQ=</ds:DigestValue>
-</ds:Reference>
-</ds:SignedInfo>
-<ds:SignatureValue Id="SignatureValue829097">
-Pd9FuK23Tv89IY8R0tf8OUe79Yfk4klR/NMvtYQLxtwDd7y3rc2pq2goZuJsprNLlpE0UtB+qzIF
-GSHI0q/+3mLWjA5YNDUPAfCgNZDWV4aK2j4+ekq+EfkPMm7uNimdrfRQWhvymJB5WfpZzZUuMpnG
-uN/JUJPFxDdoK31FRn6Dgw5iKBRqMvOVAGHC2hWF7aM7ar57d7dPytRymxx1Xc41tBIdaGry72P1
-FKcoBDcuWyftlaan7CCT9ZR0A6yy/uc5mzCKXQM1NNxy9eaMzh5ktlZMdONY5yGNGraMkX03TKsE
-7ky33pJdPrjMBOlfzEJIe21yemFj2D6Nk3/yCA==
-</ds:SignatureValue>
-<ds:KeyInfo Id="Certificate1806449">
+[2014-01-15 17:49:11,269]DEBUG  1108[main] - es.mityc.firmaJava.libreria.xades.FirmaXML.signFile(FirmaXML.java:567) - Se realiza XADES-T  -> false
+[2014-01-15 17:49:11,269]DEBUG  1108[main] - es.mityc.firmaJava.libreria.xades.FirmaXML.signFile(FirmaXML.java:591) - Se realiza XADES-C ->false
+[2014-01-15 17:49:11,269]DEBUG  1108[main] - es.mityc.firmaJava.libreria.xades.FirmaXML.signFile(FirmaXML.java:786) - Se realiza XADES-X -> false
+[2014-01-15 17:49:11,269]DEBUG  1108[main] - es.mityc.firmaJava.libreria.xades.FirmaXML.signFile(FirmaXML.java:789) - Se realiza XADES-XL ->  false
+[2014-01-15 17:49:12,821] INFO  2660[main] - com.corvustec.apce.files.ArchivoXML.procesarComprobante(ArchivoXML.java:39) - Respuesta WS: RECIBIDA
+[2014-01-15 17:49:13,322] INFO  3161[main] - com.corvustec.apce.files.webservice.AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(AutorizacionComprobantesElectronicosWs.java:101) - estado AUTORIZADO
+[2014-01-15 17:49:13,322] INFO  3161[main] - com.corvustec.apce.files.ArchivoXML.procesarComprobante(ArchivoXML.java:53) - Respuesta WS Autorizacion AUTORIZADO
+[2014-01-15 17:49:49,855] INFO     0[main] - com.corvustec.apce.files.main.Process.main(Process.java:68) - Procesar Archivo 
+[2014-01-15 17:50:10,998] INFO     0[main] - com.corvustec.apce.files.main.Process.main(Process.java:68) - Procesar Archivo 
+[2014-01-15 17:50:11,316] INFO   318[main] - com.corvustec.signature.xml.FirmaGenerica.<init>(FirmaGenerica.java:40) - Constructor FirmaGenerica
+[2014-01-15 17:50:11,513]DEBUG   515[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/TR/2001/REC-xml-c14n-20010315, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer20010315OmitComments)
+[2014-01-15 17:50:11,515]DEBUG   517[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer20010315WithComments)
+[2014-01-15 17:50:11,517]DEBUG   519[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/2001/10/xml-exc-c14n#, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer20010315ExclOmitComments)
+[2014-01-15 17:50:11,519]DEBUG   521[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/2001/10/xml-exc-c14n#WithComments, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer20010315ExclWithComments)
+[2014-01-15 17:50:11,520]DEBUG   522[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/2006/12/xml-c14n11, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer11_OmitComments)
+[2014-01-15 17:50:11,521]DEBUG   523[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/2006/12/xml-c14n11#WithComments, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer11_WithComments)
+[2014-01-15 17:50:11,526]DEBUG   528[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2000/09/xmldsig#base64, adsi.org.apache.xml.security.transforms.implementations.TransformBase64Decode)
+[2014-01-15 17:50:11,528]DEBUG   530[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/TR/2001/REC-xml-c14n-20010315, adsi.org.apache.xml.security.transforms.implementations.TransformC14N)
+[2014-01-15 17:50:11,528]DEBUG   530[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments, adsi.org.apache.xml.security.transforms.implementations.TransformC14NWithComments)
+[2014-01-15 17:50:11,537]DEBUG   539[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2006/12/xml-c14n11, adsi.org.apache.xml.security.transforms.implementations.TransformC14N11)
+[2014-01-15 17:50:11,538]DEBUG   540[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2006/12/xml-c14n11#WithComments, adsi.org.apache.xml.security.transforms.implementations.TransformC14N11_WithComments)
+[2014-01-15 17:50:11,544]DEBUG   546[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2001/10/xml-exc-c14n#, adsi.org.apache.xml.security.transforms.implementations.TransformC14NExclusive)
+[2014-01-15 17:50:11,545]DEBUG   547[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2001/10/xml-exc-c14n#WithComments, adsi.org.apache.xml.security.transforms.implementations.TransformC14NExclusiveWithComments)
+[2014-01-15 17:50:11,546]DEBUG   548[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/TR/1999/REC-xpath-19991116, adsi.org.apache.xml.security.transforms.implementations.TransformXPath)
+[2014-01-15 17:50:11,548]DEBUG   550[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2000/09/xmldsig#enveloped-signature, adsi.org.apache.xml.security.transforms.implementations.TransformEnvelopedSignature)
+[2014-01-15 17:50:11,553]DEBUG   555[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/TR/1999/REC-xslt-19991116, adsi.org.apache.xml.security.transforms.implementations.TransformXSLT)
+[2014-01-15 17:50:11,554]DEBUG   556[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2002/04/xmldsig-filter2, adsi.org.apache.xml.security.transforms.implementations.TransformXPath2Filter)
+[2014-01-15 17:50:11,554]DEBUG   556[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2002/06/xmldsig-filter2, adsi.org.apache.xml.security.transforms.implementations.TransformXPath2Filter)
+[2014-01-15 17:50:11,561]DEBUG   563[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.providerInit(SignatureAlgorithm.java:375) - Init() called
+[2014-01-15 17:50:11,563]DEBUG   565[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2000/09/xmldsig#dsa-sha1, adsi.org.apache.xml.security.algorithms.implementations.SignatureDSA)
+[2014-01-15 17:50:11,563]DEBUG   565[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2000/09/xmldsig#dsa-sha1 adsi.org.apache.xml.security.algorithms.implementations.SignatureDSA
+[2014-01-15 17:50:11,565]DEBUG   567[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2000/09/xmldsig#rsa-sha1, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA1)
+[2014-01-15 17:50:11,565]DEBUG   567[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2000/09/xmldsig#rsa-sha1 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA1
+[2014-01-15 17:50:11,567]DEBUG   569[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2000/09/xmldsig#hmac-sha1, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA1)
+[2014-01-15 17:50:11,567]DEBUG   569[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2000/09/xmldsig#hmac-sha1 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA1
+[2014-01-15 17:50:11,651]DEBUG   653[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-md5, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSAMD5)
+[2014-01-15 17:50:11,652]DEBUG   654[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-md5 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSAMD5
+[2014-01-15 17:50:11,653]DEBUG   655[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-ripemd160, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSARIPEMD160)
+[2014-01-15 17:50:11,653]DEBUG   655[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-ripemd160 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSARIPEMD160
+[2014-01-15 17:50:11,653]DEBUG   655[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-sha256, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA256)
+[2014-01-15 17:50:11,653]DEBUG   655[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-sha256 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA256
+[2014-01-15 17:50:11,654]DEBUG   656[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-sha384, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA384)
+[2014-01-15 17:50:11,654]DEBUG   656[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-sha384 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA384
+[2014-01-15 17:50:11,655]DEBUG   657[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-sha512, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA512)
+[2014-01-15 17:50:11,655]DEBUG   657[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-sha512 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA512
+[2014-01-15 17:50:11,657]DEBUG   659[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1, adsi.org.apache.xml.security.algorithms.implementations.SignatureECDSA$SignatureECDSASHA1)
+[2014-01-15 17:50:11,657]DEBUG   659[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1 adsi.org.apache.xml.security.algorithms.implementations.SignatureECDSA$SignatureECDSASHA1
+[2014-01-15 17:50:11,658]DEBUG   660[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-md5, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacMD5)
+[2014-01-15 17:50:11,658]DEBUG   660[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-md5 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacMD5
+[2014-01-15 17:50:11,659]DEBUG   661[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-ripemd160, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacRIPEMD160)
+[2014-01-15 17:50:11,659]DEBUG   661[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-ripemd160 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacRIPEMD160
+[2014-01-15 17:50:11,661]DEBUG   663[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-sha256, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA256)
+[2014-01-15 17:50:11,661]DEBUG   663[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-sha256 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA256
+[2014-01-15 17:50:11,661]DEBUG   663[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-sha384, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA384)
+[2014-01-15 17:50:11,661]DEBUG   663[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-sha384 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA384
+[2014-01-15 17:50:11,662]DEBUG   664[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-sha512, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA512)
+[2014-01-15 17:50:11,662]DEBUG   664[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-sha512 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA512
+[2014-01-15 17:50:11,673]DEBUG   675[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverDirectHTTP: A simple resolver for requests to HTTP space
+[2014-01-15 17:50:11,675]DEBUG   677[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverBigLocalFilesystem: A simple resolver for requests to the local file system with big files
+[2014-01-15 17:50:11,677]DEBUG   679[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment: A simple resolver for requests of same-document URIs
+[2014-01-15 17:50:11,678]DEBUG   680[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverXPointer: A simple resolver for requests of XPointer fragents
+[2014-01-15 17:50:11,680]DEBUG   682[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.RSAKeyValueResolver: Can extract RSA public keys
+[2014-01-15 17:50:11,682]DEBUG   684[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.DSAKeyValueResolver: Can extract DSA public keys
+[2014-01-15 17:50:11,682]DEBUG   684[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509CertificateResolver: Can extract public keys from X509 certificates
+[2014-01-15 17:50:11,683]DEBUG   685[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509SKIResolver: Uses an X509v3 SubjectKeyIdentifier extension to retrieve a certificate from the storages
+[2014-01-15 17:50:11,685]DEBUG   687[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.RetrievalMethodResolver: Resolves keys and certificates using ResourceResolvers
+[2014-01-15 17:50:11,687]DEBUG   689[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509SubjectNameResolver: Uses an X509 SubjectName to retrieve a certificate from the storages
+[2014-01-15 17:50:11,689]DEBUG   691[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509IssuerSerialResolver: Uses an X509 IssuerName and IssuerSerial to retrieve a certificate from the storages
+[2014-01-15 17:50:11,690]DEBUG   692[main] - adsi.org.apache.xml.security.Init.init(Init.java:365) - Now I try to bind prefixes:
+[2014-01-15 17:50:11,690]DEBUG   692[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind ds to http://www.w3.org/2000/09/xmldsig#
+[2014-01-15 17:50:11,691]DEBUG   693[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind xenc to http://www.w3.org/2001/04/xmlenc#
+[2014-01-15 17:50:11,691]DEBUG   693[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind experimental to http://www.xmlsecurity.org/experimental#
+[2014-01-15 17:50:11,691]DEBUG   693[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind dsig-xpath-old to http://www.w3.org/2002/04/xmldsig-filter2
+[2014-01-15 17:50:11,691]DEBUG   693[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind dsig-xpath to http://www.w3.org/2002/06/xmldsig-filter2
+[2014-01-15 17:50:11,691]DEBUG   693[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind ec to http://www.w3.org/2001/10/xml-exc-c14n#
+[2014-01-15 17:50:11,691]DEBUG   693[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind xx to http://www.nue.et-inf.uni-siegen.de/~geuer-pollmann/#xpathFilter
+[2014-01-15 17:50:11,691]DEBUG   693[main] - adsi.org.apache.xml.security.Init.init(Init.java:387) - XX_init                             229 ms
+[2014-01-15 17:50:11,692]DEBUG   694[main] - adsi.org.apache.xml.security.Init.init(Init.java:388) -   XX_prng                           0 ms
+[2014-01-15 17:50:11,692]DEBUG   694[main] - adsi.org.apache.xml.security.Init.init(Init.java:389) -   XX_parsing                        26 ms
+[2014-01-15 17:50:11,692]DEBUG   694[main] - adsi.org.apache.xml.security.Init.init(Init.java:390) -   XX_configure_i18n                 5 ms
+[2014-01-15 17:50:11,692]DEBUG   694[main] - adsi.org.apache.xml.security.Init.init(Init.java:391) -   XX_configure_reg_c14n             22 ms
+[2014-01-15 17:50:11,692]DEBUG   694[main] - adsi.org.apache.xml.security.Init.init(Init.java:392) -   XX_configure_reg_jcemapper        4 ms
+[2014-01-15 17:50:11,693]DEBUG   695[main] - adsi.org.apache.xml.security.Init.init(Init.java:393) -   XX_configure_reg_keyInfo          7 ms
+[2014-01-15 17:50:11,693]DEBUG   695[main] - adsi.org.apache.xml.security.Init.init(Init.java:394) -   XX_configure_reg_keyResolver      11 ms
+[2014-01-15 17:50:11,694]DEBUG   696[main] - adsi.org.apache.xml.security.Init.init(Init.java:395) -   XX_configure_reg_prefixes         1 ms
+[2014-01-15 17:50:11,694]DEBUG   696[main] - adsi.org.apache.xml.security.Init.init(Init.java:396) -   XX_configure_reg_resourceresolver 8 ms
+[2014-01-15 17:50:11,694]DEBUG   696[main] - adsi.org.apache.xml.security.Init.init(Init.java:397) -   XX_configure_reg_sigalgos         108 ms
+[2014-01-15 17:50:11,694]DEBUG   696[main] - adsi.org.apache.xml.security.Init.init(Init.java:398) -   XX_configure_reg_transforms       33 ms
+[2014-01-15 17:50:11,694]DEBUG   696[main] - adsi.org.apache.xml.security.algorithms.JCEMapper.translateURItoJCEID(JCEMapper.java:101) - Request for URI http://www.w3.org/2000/09/xmldsig#sha1
+[2014-01-15 17:50:11,715]DEBUG   717[main] - adsi.org.apache.xml.security.algorithms.JCEMapper.translateURItoJCEID(JCEMapper.java:101) - Request for URI http://www.w3.org/2000/09/xmldsig#sha1
+[2014-01-15 17:50:11,727]DEBUG   729[main] - adsi.org.apache.xml.security.transforms.Transform.<init>(Transform.java:103) - Create URI "http://www.w3.org/2000/09/xmldsig#enveloped-signature" class "class adsi.org.apache.xml.security.transforms.implementations.TransformEnvelopedSignature"
+[2014-01-15 17:50:11,727]DEBUG   729[main] - adsi.org.apache.xml.security.transforms.Transform.<init>(Transform.java:105) - The NodeList is null
+[2014-01-15 17:50:11,727]DEBUG   729[main] - adsi.org.apache.xml.security.transforms.Transforms.addTransform(Transforms.java:222) - Transforms.addTransform(http://www.w3.org/2000/09/xmldsig#enveloped-signature)
+[2014-01-15 17:50:11,828]DEBUG   830[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.buildSigner(SignatureAlgorithm.java:133) - Create URI "http://www.w3.org/2000/09/xmldsig#rsa-sha1" class "class adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA1"
+[2014-01-15 17:50:11,829]DEBUG   831[main] - adsi.org.apache.xml.security.algorithms.JCEMapper.translateURItoJCEID(JCEMapper.java:101) - Request for URI http://www.w3.org/2000/09/xmldsig#rsa-sha1
+[2014-01-15 17:50:11,829]DEBUG   831[main] - adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA.<init>(SignatureBaseRSA.java:67) - Created SignatureRSA using SHA1withRSA
+[2014-01-15 17:50:11,829]DEBUG   831[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
+[2014-01-15 17:50:11,829]DEBUG   831[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
+[2014-01-15 17:50:11,830]DEBUG   832[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverDirectHTTP
+[2014-01-15 17:50:11,830]DEBUG   832[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverDirectHTTP.engineCanResolve(ResolverDirectHTTP.java:261) - quick fail for empty URIs and local ones
+[2014-01-15 17:50:11,830]DEBUG   832[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverBigLocalFilesystem
+[2014-01-15 17:50:11,830]DEBUG   832[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
+[2014-01-15 17:50:11,831]DEBUG   833[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Signature273759-SignedProperties194946"
+[2014-01-15 17:50:11,833]DEBUG   835[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
+[2014-01-15 17:50:11,834]DEBUG   836[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
+[2014-01-15 17:50:11,835]DEBUG   837[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
+[2014-01-15 17:50:11,835]DEBUG   837[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Signature273759-SignedProperties194946"
+[2014-01-15 17:50:11,835]DEBUG   837[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdType(IdResolver.java:151) - getElementByIdType() Search for ID Signature273759-SignedProperties194946
+[2014-01-15 17:50:11,835]DEBUG   837[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdUsingDOM(IdResolver.java:138) - getElementByIdUsingDOM() Search for ID Signature273759-SignedProperties194946
+[2014-01-15 17:50:11,837]DEBUG   839[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineResolve(ResolverFragment.java:96) - Try to catch an Element with ID Signature273759-SignedProperties194946 and Element was [etsi:SignedProperties: null]
+[2014-01-15 17:50:11,848]DEBUG   850[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:59) - Pre-digested input:
+[2014-01-15 17:50:11,849]DEBUG   851[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:64) - <etsi:SignedProperties xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature273759-SignedProperties194946"><etsi:SignedSignatureProperties><etsi:SigningTime>2014-01-15T17:50:11-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>8MgNdCPJAQHLWZSA1uGRgGjzhwY=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC</ds:X509IssuerName><ds:X509SerialNumber>1312930870</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-318722"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties>
+[2014-01-15 17:50:11,849]DEBUG   851[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
+[2014-01-15 17:50:11,849]DEBUG   851[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
+[2014-01-15 17:50:11,850]DEBUG   852[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
+[2014-01-15 17:50:11,850]DEBUG   852[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Certificate1280202"
+[2014-01-15 17:50:11,850]DEBUG   852[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
+[2014-01-15 17:50:11,850]DEBUG   852[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
+[2014-01-15 17:50:11,850]DEBUG   852[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
+[2014-01-15 17:50:11,850]DEBUG   852[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Certificate1280202"
+[2014-01-15 17:50:11,850]DEBUG   852[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdType(IdResolver.java:151) - getElementByIdType() Search for ID Certificate1280202
+[2014-01-15 17:50:11,850]DEBUG   852[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementById(IdResolver.java:99) - I could find an Element using the simple getElementByIdType method: ds:KeyInfo
+[2014-01-15 17:50:11,852]DEBUG   854[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineResolve(ResolverFragment.java:96) - Try to catch an Element with ID Certificate1280202 and Element was [ds:KeyInfo: null]
+[2014-01-15 17:50:11,853]DEBUG   855[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:59) - Pre-digested input:
+[2014-01-15 17:50:11,853]DEBUG   855[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:64) - <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Certificate1280202">
 <ds:X509Data>
 <ds:X509Certificate>
 MIIJrjCCB5agAwIBAgIETkG8NjANBgkqhkiG9w0BAQsFADCBoTELMAkGA1UEBhMCRUMxIjAgBgNV
@@ -619,270 +710,3 @@ CoYfMcbZ+VYyD8Obh4yBUNp6mBXMNRhsIXSAMw==
 </ds:RSAKeyValue>
 </ds:KeyValue>
 </ds:KeyInfo>
-<ds:Object Id="Signature153674-Object236897"><etsi:QualifyingProperties Target="#Signature153674"><etsi:SignedProperties Id="Signature153674-SignedProperties125106"><etsi:SignedSignatureProperties><etsi:SigningTime>2014-01-13T16:46:15-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>8MgNdCPJAQHLWZSA1uGRgGjzhwY=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC</ds:X509IssuerName><ds:X509SerialNumber>1312930870</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-264221"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties></etsi:QualifyingProperties></ds:Object></ds:Signature></factura>
-[2014-01-13 16:46:18,128] INFO  2871[main] - com.corvustec.apce.files.ArchivoXML.procesarComprobante(ArchivoXML.java:59) - comporbante <?xml version="1.0" encoding="UTF-8"?>
-<factura id="comprobante" version="1.0.0"> 
- <infoTributaria> 
-<ambiente>1</ambiente> 
-<tipoEmision>1</tipoEmision> 
-<razonSocial>PRUEBAS SERVICIO RENTAS INTERNAS</razonSocial> 
-<nombreComercial>PRUEBAS SERVICIO RENTAS INTERNAS</nombreComercial> 
-<ruc>1716790116001</ruc> 
-<claveAcceso>1101201401171679011600110010012004000261234560112</claveAcceso> 
-<codDoc>01</codDoc> 
-<estab>001</estab> 
-<ptoEmi>001</ptoEmi> 
-<secuencial>200400026</secuencial> 
-<dirMatriz>Bartolome Sanchez N74-108 y Joaquin Mancheno</dirMatriz> 
-</infoTributaria> 
-<infoFactura> 
-<fechaEmision>11/01/2014</fechaEmision> 
-<dirEstablecimiento>ULTIMAS NOTICIAS</dirEstablecimiento> 
-<contribuyenteEspecial>5368</contribuyenteEspecial> 
-<obligadoContabilidad>NO</obligadoContabilidad> 
-<tipoIdentificacionComprador>05</tipoIdentificacionComprador> 
-<guiaRemision>001-001-000000001</guiaRemision> 
-<razonSocialComprador>RIVERA VAEZ MARCO MIGUEL</razonSocialComprador> 
-<identificacionComprador>1703330413</identificacionComprador> 
-<totalSinImpuestos>84</totalSinImpuestos> 
-<totalDescuento>0</totalDescuento> 
-<totalConImpuestos> 
- <totalImpuesto> 
-<codigo>2</codigo> 
-<codigoPorcentaje>2</codigoPorcentaje> 
-<baseImponible>84</baseImponible> 
-<valor>10.08</valor> 
-</totalImpuesto> 
-</totalConImpuestos> 
-<propina>0.00</propina> 
-<importeTotal>94.08</importeTotal> 
-<moneda>DOLAR</moneda> 
-</infoFactura> 
- <detalles> 
- <detalle> 
-<codigoPrincipal>AC01100</codigoPrincipal> 
-<codigoAuxiliar>AC01100</codigoAuxiliar> 
-<descripcion>DENSIMETRO </descripcion> 
-<cantidad>12</cantidad> 
-<precioUnitario>7</precioUnitario> 
-<descuento>0</descuento> 
-<precioTotalSinImpuesto>84</precioTotalSinImpuesto> 
- <impuestos> 
- <impuesto> 
-<codigo>2</codigo> 
-<codigoPorcentaje>2</codigoPorcentaje> 
-<tarifa>12</tarifa> 
-<baseImponible>84</baseImponible> 
-<valor>10.08</valor> 
-</impuesto> 
-</impuestos> 
- </detalle> 
- </detalles> 
- <infoAdicional> 
-<campoAdicional nombre="Codigo Impuesto ISD">4580</campoAdicional> 
-<campoAdicional nombre="Impuesto ISD">15.42x</campoAdicional> 
-</infoAdicional> 
-<ds:Signature Id="Signature98651" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#">
-<ds:SignedInfo Id="Signature-SignedInfo843036">
-<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
-<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
-<ds:Reference Id="SignedPropertiesID48705" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature98651-SignedProperties227436">
-<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-<ds:DigestValue>4vwJt3dnlAeRvnWqIYKAInvmk3M=</ds:DigestValue>
-</ds:Reference>
-<ds:Reference URI="#Certificate1360788">
-<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-<ds:DigestValue>q0OwXrU9zT1p3Stwr6ZexqKNGL0=</ds:DigestValue>
-</ds:Reference>
-<ds:Reference Id="Reference-ID-804067" URI="#comprobante">
-<ds:Transforms>
-<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
-</ds:Transforms>
-<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-<ds:DigestValue>iCZmLfVdCUJkMjSkVCm7uhmP7AQ=</ds:DigestValue>
-</ds:Reference>
-</ds:SignedInfo>
-<ds:SignatureValue Id="SignatureValue65411">
-AWcNDjpEbjtcy0RoLQIgFTnYBmIMpuqrQWN8Fu3fShC/bAiQFVUlkc+UZ/JxQ3mEyY1nEod1vNRJ
-sbT5rH4vANXezBka6rNN0cH3gmuPaNoYxuVZUz1KGwAeK7bxMVdpmk2lbrFZAzVZ72D+8tLk8iCD
-B+lkTDoPfTeC54ROi9NtxSjBNn0+lsXnavO5gP0Uls4h4fkhNbA5slnp33kRS2L5bSNt83zZJqR9
-w66UK/WzxMsDuJYpgBVf9357vEedMhpUkLQ9ilrc85Lqr2yxWFP0UIHXDvw4jIHpB/FZaLKcd7Su
-BGGGbziPCSlymKJQPlcFqdcell0GWi5B1Os0TA==
-</ds:SignatureValue>
-<ds:KeyInfo Id="Certificate1360788">
-<ds:X509Data>
-<ds:X509Certificate>
-MIIJrjCCB5agAwIBAgIETkG8NjANBgkqhkiG9w0BAQsFADCBoTELMAkGA1UEBhMCRUMxIjAgBgNV
-BAoTGUJBTkNPIENFTlRSQUwgREVMIEVDVUFET1IxNzA1BgNVBAsTLkVOVElEQUQgREUgQ0VSVElG
-SUNBQ0lPTiBERSBJTkZPUk1BQ0lPTi1FQ0lCQ0UxDjAMBgNVBAcTBVFVSVRPMSUwIwYDVQQDExxB
-QyBCQU5DTyBDRU5UUkFMIERFTCBFQ1VBRE9SMB4XDTEzMDcxMDE5Mzg1OFoXDTE0MDcxMDIwMDg1
-OFowgbQxCzAJBgNVBAYTAkVDMSIwIAYDVQQKExlCQU5DTyBDRU5UUkFMIERFTCBFQ1VBRE9SMTcw
-NQYDVQQLEy5FTlRJREFEIERFIENFUlRJRklDQUNJT04gREUgSU5GT1JNQUNJT04tRUNJQkNFMQ4w
-DAYDVQQHEwVRVUlUTzE4MBEGA1UEBRMKMDAwMDAzMDU1OTAjBgNVBAMTHEZSQU5DSVNDTyBBUlRV
-Uk8gVkVMRVogUk9KQVMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDdGwHa2ElsuabJ
-nJZdIv6+/E/cKVJwk9LHkafQoNIUddfoXboOSTxMBMZDZBRv4wWbcfwJw4tVoDS6iXeKPNPkQMKu
-KNlMxjptoqkZ1TEVKSOsczRx9RIAB7Ty67LHJyQcFCS+h9oE1x5bM/CFxVVv2mDP6IHGUFhxOLqy
-10EWkLxfCScrVkCBi1f9bHeDhar/4OexKEiA7Wj9wp++T80niRLAVDCOCb4Uy8v0u9ZSGSV+pdpX
-muSXWD9+IlzsRJ0hjPxEEJncsXUYIwrfL69KD3fw5oBAftHqGeGk8DOpvUyENyIKhh8xxtn5VjIP
-w5uHjIFQ2nqYFcw1GGwhdIAzAgMBAAGjggTXMIIE0zALBgNVHQ8EBAMCB4AwZgYDVR0gBF8wXTBb
-BgsrBgEEAYKoOwIBATBMMEoGCCsGAQUFBwIBFj5odHRwOi8vd3d3LmVjaS5iY2UuZWMvcG9saXRp
-Y2EtY2VydGlmaWNhZG8vcGVyc29uYS1uYXR1cmFsLnBkZjCBkQYIKwYBBQUHAQEEgYQwgYEwPgYI
-KwYBBQUHMAGGMmh0dHA6Ly9vY3NwLmVjaS5iY2UuZWMvZWpiY2EvcHVibGljd2ViL3N0YXR1cy9v
-Y3NwMD8GCCsGAQUFBzABhjNodHRwOi8vb2NzcDEuZWNpLmJjZS5lYy9lamJjYS9wdWJsaWN3ZWIv
-c3RhdHVzL29jc3AwGgYKKwYBBAGCqDsDAQQMEwoxNzE2NzkwMTE2MCAGCisGAQQBgqg7AwIEEhMQ
-RlJBTkNJU0NPIEFSVFVSTzAVBgorBgEEAYKoOwMDBAcTBVZFTEVaMBUGCisGAQQBgqg7AwQEBxMF
-Uk9KQVMwPAYKKwYBBAGCqDsDBwQuEyxBViBBTUVSSUNBIE4yMTI1IFkgTUFSUVVFUyBERSBWQVJF
-TEEgRVNRVUlOQTAZBgorBgEEAYKoOwMIBAsTCTAyMjUwMTk4NzAVBgorBgEEAYKoOwMJBAcTBVF1
-aXRvMBcGCisGAQQBgqg7AwwECRMHRUNVQURPUjAdBgorBgEEAYKoOwMLBA8TDTE3MTY3OTAxMTYw
-MDEwIAYKKwYBBAGCqDsDMwQSExBTT0ZUV0FSRS1BUkNISVZPMB4GA1UdEQQXMBWBE3B2ZWxlekB2
-ZWxlei5uZXQuZWMwggHdBgNVHR8EggHUMIIB0DCCAcygggHIoIIBxIaB1GxkYXA6Ly9iY2VxbGRh
-cHN1YnAxLmJjZS5lYy9jbj1DUkw4Mixjbj1BQyUyMEJBTkNPJTIwQ0VOVFJBTCUyMERFTCUyMEVD
-VUFET1IsbD1RVUlUTyxvdT1FTlRJREFEJTIwREUlMjBDRVJUSUZJQ0FDSU9OJTIwREUlMjBJTkZP
-Uk1BQ0lPTi1FQ0lCQ0Usbz1CQU5DTyUyMENFTlRSQUwlMjBERUwlMjBFQ1VBRE9SLGM9RUM/Y2Vy
-dGlmaWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlhjRodHRwOi8vd3d3LmVjaS5iY2UuZWMvQ1JML2Vj
-aV9iY2VfZWNfY3JsZmlsZWNvbWIuY3JspIG0MIGxMQswCQYDVQQGEwJFQzEiMCAGA1UEChMZQkFO
-Q08gQ0VOVFJBTCBERUwgRUNVQURPUjE3MDUGA1UECxMuRU5USURBRCBERSBDRVJUSUZJQ0FDSU9O
-IERFIElORk9STUFDSU9OLUVDSUJDRTEOMAwGA1UEBxMFUVVJVE8xJTAjBgNVBAMTHEFDIEJBTkNP
-IENFTlRSQUwgREVMIEVDVUFET1IxDjAMBgNVBAMTBUNSTDgyMCsGA1UdEAQkMCKADzIwMTMwNzEw
-MTkzODU4WoEPMjAxNDA3MTAyMDA4NThaMB8GA1UdIwQYMBaAFBj58PvmMhyZZjkqyouyaX1JJ7/O
-MB0GA1UdDgQWBBTXULC8sCII5/Kq4SAaQC0Hwk3aiTAJBgNVHRMEAjAAMBkGCSqGSIb2fQdBAAQM
-MAobBFY4LjEDAgSwMA0GCSqGSIb3DQEBCwUAA4ICAQAIrYxxIiAbu3rV5/+ohyN12L8151+8YGbn
-T0Pe2tancj6EAOfv6Y8j1dKpc76oGJ51k9x/mSSAo6Wpa6bwmkd15rDg69vd6V1gizwf9pbMgkqU
-+MqLwIxtz5XEQW7UBpJEJECP0uXqTheQRI3T9yCuZgScgL00hUwSIQWOQoQHlFHtwGgrR4kPlap7
-djCbRrHk0vBNReiONU7Qucl+QFmKBlCzEi3pyw5/6FS1zlS97CYfrS3joiaGOsYTH2tNA1I9lgpc
-5/906fhmjKaEPvACOW6PFgCHqyKDT3esWObcHiE3xj8+l72CAiK6yUWxIxDdTnPqiDUhvsqcE7Qz
-NxAZenOQkSAcfrsenggb59XCPLZjtjoiifLGPQG2NRTELHtHjszSy0X3MUHzlPeVycgEZGR8eX/I
-qA9qtzUUtXiFff3DbPZoOzqGBvL2pmKLPMsGsC4/Y+DhbGLQA5rqE9YxIPrYATj0RtNi9nvfMCsx
-6H+F9PMOeQj0z54YGvh7c8Ei2JCUXfWyE0iF2jtUfcw2968WKMDilHkScBrjDeKotnCdpuSpuolJ
-8NJLIGioE2iFS/2MAocqvofk25F4LbhYJqBNOpQn5yjyqG+FUAfSR+FPiF73Xvus2/8x8HC+CGym
-vctYPD+QBth2v+kwNXTLTJwmU50Fukzyz+pmMkhf+A==
-</ds:X509Certificate>
-</ds:X509Data>
-<ds:KeyValue>
-<ds:RSAKeyValue>
-<ds:Modulus>
-3RsB2thJbLmmyZyWXSL+vvxP3ClScJPSx5Gn0KDSFHXX6F26Dkk8TATGQ2QUb+MFm3H8CcOLVaA0
-uol3ijzT5EDCrijZTMY6baKpGdUxFSkjrHM0cfUSAAe08uuyxyckHBQkvofaBNceWzPwhcVVb9pg
-z+iBxlBYcTi6stdBFpC8XwknK1ZAgYtX/Wx3g4Wq/+DnsShIgO1o/cKfvk/NJ4kSwFQwjgm+FMvL
-9LvWUhklfqXaV5rkl1g/fiJc7ESdIYz8RBCZ3LF1GCMK3y+vSg938OaAQH7R6hnhpPAzqb1MhDci
-CoYfMcbZ+VYyD8Obh4yBUNp6mBXMNRhsIXSAMw==
-</ds:Modulus>
-<ds:Exponent>AQAB</ds:Exponent>
-</ds:RSAKeyValue>
-</ds:KeyValue>
-</ds:KeyInfo>
-<ds:Object Id="Signature98651-Object203890"><etsi:QualifyingProperties Target="#Signature98651"><etsi:SignedProperties Id="Signature98651-SignedProperties227436"><etsi:SignedSignatureProperties><etsi:SigningTime>2014-01-13T16:45:07-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>8MgNdCPJAQHLWZSA1uGRgGjzhwY=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC</ds:X509IssuerName><ds:X509SerialNumber>1312930870</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-804067"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties></etsi:QualifyingProperties></ds:Object></ds:Signature></factura>
-[2014-01-13 16:47:53,671] INFO     0[main] - com.corvustec.apce.files.main.Process.main(Process.java:19) - Procesar Archivo 
-[2014-01-13 16:48:20,109] INFO     0[main] - com.corvustec.apce.files.main.Process.main(Process.java:19) - Procesar Archivo 
-[2014-01-13 16:49:00,729] INFO     0[main] - com.corvustec.apce.files.main.Process.main(Process.java:19) - Procesar Archivo 
-[2014-01-13 16:49:00,996] INFO   267[main] - com.corvustec.signature.xml.FirmaGenerica.<init>(FirmaGenerica.java:40) - Constructor FirmaGenerica
-[2014-01-13 16:49:01,181]DEBUG   452[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/TR/2001/REC-xml-c14n-20010315, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer20010315OmitComments)
-[2014-01-13 16:49:01,183]DEBUG   454[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer20010315WithComments)
-[2014-01-13 16:49:01,185]DEBUG   456[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/2001/10/xml-exc-c14n#, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer20010315ExclOmitComments)
-[2014-01-13 16:49:01,186]DEBUG   457[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/2001/10/xml-exc-c14n#WithComments, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer20010315ExclWithComments)
-[2014-01-13 16:49:01,188]DEBUG   459[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/2006/12/xml-c14n11, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer11_OmitComments)
-[2014-01-13 16:49:01,189]DEBUG   460[main] - adsi.org.apache.xml.security.Init.init(Init.java:194) - Canonicalizer.register(http://www.w3.org/2006/12/xml-c14n11#WithComments, adsi.org.apache.xml.security.c14n.implementations.Canonicalizer11_WithComments)
-[2014-01-13 16:49:01,194]DEBUG   465[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2000/09/xmldsig#base64, adsi.org.apache.xml.security.transforms.implementations.TransformBase64Decode)
-[2014-01-13 16:49:01,194]DEBUG   465[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/TR/2001/REC-xml-c14n-20010315, adsi.org.apache.xml.security.transforms.implementations.TransformC14N)
-[2014-01-13 16:49:01,197]DEBUG   468[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments, adsi.org.apache.xml.security.transforms.implementations.TransformC14NWithComments)
-[2014-01-13 16:49:01,325]DEBUG   596[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2006/12/xml-c14n11, adsi.org.apache.xml.security.transforms.implementations.TransformC14N11)
-[2014-01-13 16:49:01,326]DEBUG   597[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2006/12/xml-c14n11#WithComments, adsi.org.apache.xml.security.transforms.implementations.TransformC14N11_WithComments)
-[2014-01-13 16:49:01,330]DEBUG   601[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2001/10/xml-exc-c14n#, adsi.org.apache.xml.security.transforms.implementations.TransformC14NExclusive)
-[2014-01-13 16:49:01,331]DEBUG   602[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2001/10/xml-exc-c14n#WithComments, adsi.org.apache.xml.security.transforms.implementations.TransformC14NExclusiveWithComments)
-[2014-01-13 16:49:01,332]DEBUG   603[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/TR/1999/REC-xpath-19991116, adsi.org.apache.xml.security.transforms.implementations.TransformXPath)
-[2014-01-13 16:49:01,335]DEBUG   606[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2000/09/xmldsig#enveloped-signature, adsi.org.apache.xml.security.transforms.implementations.TransformEnvelopedSignature)
-[2014-01-13 16:49:01,337]DEBUG   608[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/TR/1999/REC-xslt-19991116, adsi.org.apache.xml.security.transforms.implementations.TransformXSLT)
-[2014-01-13 16:49:01,339]DEBUG   610[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2002/04/xmldsig-filter2, adsi.org.apache.xml.security.transforms.implementations.TransformXPath2Filter)
-[2014-01-13 16:49:01,339]DEBUG   610[main] - adsi.org.apache.xml.security.Init.init(Init.java:222) - Transform.register(http://www.w3.org/2002/06/xmldsig-filter2, adsi.org.apache.xml.security.transforms.implementations.TransformXPath2Filter)
-[2014-01-13 16:49:01,343]DEBUG   614[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.providerInit(SignatureAlgorithm.java:375) - Init() called
-[2014-01-13 16:49:01,345]DEBUG   616[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2000/09/xmldsig#dsa-sha1, adsi.org.apache.xml.security.algorithms.implementations.SignatureDSA)
-[2014-01-13 16:49:01,345]DEBUG   616[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2000/09/xmldsig#dsa-sha1 adsi.org.apache.xml.security.algorithms.implementations.SignatureDSA
-[2014-01-13 16:49:01,347]DEBUG   618[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2000/09/xmldsig#rsa-sha1, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA1)
-[2014-01-13 16:49:01,347]DEBUG   618[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2000/09/xmldsig#rsa-sha1 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA1
-[2014-01-13 16:49:01,349]DEBUG   620[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2000/09/xmldsig#hmac-sha1, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA1)
-[2014-01-13 16:49:01,349]DEBUG   620[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2000/09/xmldsig#hmac-sha1 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA1
-[2014-01-13 16:49:01,352]DEBUG   623[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-md5, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSAMD5)
-[2014-01-13 16:49:01,352]DEBUG   623[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-md5 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSAMD5
-[2014-01-13 16:49:01,353]DEBUG   624[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-ripemd160, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSARIPEMD160)
-[2014-01-13 16:49:01,353]DEBUG   624[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-ripemd160 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSARIPEMD160
-[2014-01-13 16:49:01,354]DEBUG   625[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-sha256, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA256)
-[2014-01-13 16:49:01,354]DEBUG   625[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-sha256 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA256
-[2014-01-13 16:49:01,354]DEBUG   625[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-sha384, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA384)
-[2014-01-13 16:49:01,354]DEBUG   625[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-sha384 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA384
-[2014-01-13 16:49:01,355]DEBUG   626[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#rsa-sha512, adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA512)
-[2014-01-13 16:49:01,355]DEBUG   626[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#rsa-sha512 adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA512
-[2014-01-13 16:49:01,358]DEBUG   629[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1, adsi.org.apache.xml.security.algorithms.implementations.SignatureECDSA$SignatureECDSASHA1)
-[2014-01-13 16:49:01,358]DEBUG   629[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1 adsi.org.apache.xml.security.algorithms.implementations.SignatureECDSA$SignatureECDSASHA1
-[2014-01-13 16:49:01,359]DEBUG   630[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-md5, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacMD5)
-[2014-01-13 16:49:01,359]DEBUG   630[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-md5 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacMD5
-[2014-01-13 16:49:01,359]DEBUG   630[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-ripemd160, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacRIPEMD160)
-[2014-01-13 16:49:01,359]DEBUG   630[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-ripemd160 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacRIPEMD160
-[2014-01-13 16:49:01,360]DEBUG   631[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-sha256, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA256)
-[2014-01-13 16:49:01,360]DEBUG   631[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-sha256 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA256
-[2014-01-13 16:49:01,361]DEBUG   632[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-sha384, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA384)
-[2014-01-13 16:49:01,361]DEBUG   632[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-sha384 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA384
-[2014-01-13 16:49:01,361]DEBUG   632[main] - adsi.org.apache.xml.security.Init.init(Init.java:276) - SignatureAlgorithm.register(http://www.w3.org/2001/04/xmldsig-more#hmac-sha512, adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA512)
-[2014-01-13 16:49:01,361]DEBUG   632[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.register(SignatureAlgorithm.java:396) - Try to register http://www.w3.org/2001/04/xmldsig-more#hmac-sha512 adsi.org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA512
-[2014-01-13 16:49:01,371]DEBUG   642[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverDirectHTTP: A simple resolver for requests to HTTP space
-[2014-01-13 16:49:01,372]DEBUG   643[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverBigLocalFilesystem: A simple resolver for requests to the local file system with big files
-[2014-01-13 16:49:01,374]DEBUG   645[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment: A simple resolver for requests of same-document URIs
-[2014-01-13 16:49:01,375]DEBUG   646[main] - adsi.org.apache.xml.security.Init.init(Init.java:309) - Register Resolver: adsi.org.apache.xml.security.utils.resolver.implementations.ResolverXPointer: A simple resolver for requests of XPointer fragents
-[2014-01-13 16:49:01,378]DEBUG   649[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.RSAKeyValueResolver: Can extract RSA public keys
-[2014-01-13 16:49:01,380]DEBUG   651[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.DSAKeyValueResolver: Can extract DSA public keys
-[2014-01-13 16:49:01,381]DEBUG   652[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509CertificateResolver: Can extract public keys from X509 certificates
-[2014-01-13 16:49:01,381]DEBUG   652[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509SKIResolver: Uses an X509v3 SubjectKeyIdentifier extension to retrieve a certificate from the storages
-[2014-01-13 16:49:01,382]DEBUG   653[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.RetrievalMethodResolver: Resolves keys and certificates using ResourceResolvers
-[2014-01-13 16:49:01,384]DEBUG   655[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509SubjectNameResolver: Uses an X509 SubjectName to retrieve a certificate from the storages
-[2014-01-13 16:49:01,386]DEBUG   657[main] - adsi.org.apache.xml.security.Init.init(Init.java:348) - Register Resolver: adsi.org.apache.xml.security.keys.keyresolver.implementations.X509IssuerSerialResolver: Uses an X509 IssuerName and IssuerSerial to retrieve a certificate from the storages
-[2014-01-13 16:49:01,387]DEBUG   658[main] - adsi.org.apache.xml.security.Init.init(Init.java:365) - Now I try to bind prefixes:
-[2014-01-13 16:49:01,387]DEBUG   658[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind ds to http://www.w3.org/2000/09/xmldsig#
-[2014-01-13 16:49:01,388]DEBUG   659[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind xenc to http://www.w3.org/2001/04/xmlenc#
-[2014-01-13 16:49:01,388]DEBUG   659[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind experimental to http://www.xmlsecurity.org/experimental#
-[2014-01-13 16:49:01,388]DEBUG   659[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind dsig-xpath-old to http://www.w3.org/2002/04/xmldsig-filter2
-[2014-01-13 16:49:01,388]DEBUG   659[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind dsig-xpath to http://www.w3.org/2002/06/xmldsig-filter2
-[2014-01-13 16:49:01,388]DEBUG   659[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind ec to http://www.w3.org/2001/10/xml-exc-c14n#
-[2014-01-13 16:49:01,388]DEBUG   659[main] - adsi.org.apache.xml.security.Init.init(Init.java:375) - Now I try to bind xx to http://www.nue.et-inf.uni-siegen.de/~geuer-pollmann/#xpathFilter
-[2014-01-13 16:49:01,388]DEBUG   659[main] - adsi.org.apache.xml.security.Init.init(Init.java:387) - XX_init                             257 ms
-[2014-01-13 16:49:01,389]DEBUG   660[main] - adsi.org.apache.xml.security.Init.init(Init.java:388) -   XX_prng                           0 ms
-[2014-01-13 16:49:01,389]DEBUG   660[main] - adsi.org.apache.xml.security.Init.init(Init.java:389) -   XX_parsing                        27 ms
-[2014-01-13 16:49:01,389]DEBUG   660[main] - adsi.org.apache.xml.security.Init.init(Init.java:390) -   XX_configure_i18n                 4 ms
-[2014-01-13 16:49:01,389]DEBUG   660[main] - adsi.org.apache.xml.security.Init.init(Init.java:391) -   XX_configure_reg_c14n             21 ms
-[2014-01-13 16:49:01,389]DEBUG   660[main] - adsi.org.apache.xml.security.Init.init(Init.java:392) -   XX_configure_reg_jcemapper        3 ms
-[2014-01-13 16:49:01,389]DEBUG   660[main] - adsi.org.apache.xml.security.Init.init(Init.java:393) -   XX_configure_reg_keyInfo          6 ms
-[2014-01-13 16:49:01,389]DEBUG   660[main] - adsi.org.apache.xml.security.Init.init(Init.java:394) -   XX_configure_reg_keyResolver      11 ms
-[2014-01-13 16:49:01,390]DEBUG   661[main] - adsi.org.apache.xml.security.Init.init(Init.java:395) -   XX_configure_reg_prefixes         1 ms
-[2014-01-13 16:49:01,390]DEBUG   661[main] - adsi.org.apache.xml.security.Init.init(Init.java:396) -   XX_configure_reg_resourceresolver 7 ms
-[2014-01-13 16:49:01,390]DEBUG   661[main] - adsi.org.apache.xml.security.Init.init(Init.java:397) -   XX_configure_reg_sigalgos         23 ms
-[2014-01-13 16:49:01,390]DEBUG   661[main] - adsi.org.apache.xml.security.Init.init(Init.java:398) -   XX_configure_reg_transforms       150 ms
-[2014-01-13 16:49:01,391]DEBUG   662[main] - adsi.org.apache.xml.security.algorithms.JCEMapper.translateURItoJCEID(JCEMapper.java:101) - Request for URI http://www.w3.org/2000/09/xmldsig#sha1
-[2014-01-13 16:49:01,409]DEBUG   680[main] - adsi.org.apache.xml.security.algorithms.JCEMapper.translateURItoJCEID(JCEMapper.java:101) - Request for URI http://www.w3.org/2000/09/xmldsig#sha1
-[2014-01-13 16:49:01,421]DEBUG   692[main] - adsi.org.apache.xml.security.transforms.Transform.<init>(Transform.java:103) - Create URI "http://www.w3.org/2000/09/xmldsig#enveloped-signature" class "class adsi.org.apache.xml.security.transforms.implementations.TransformEnvelopedSignature"
-[2014-01-13 16:49:01,421]DEBUG   692[main] - adsi.org.apache.xml.security.transforms.Transform.<init>(Transform.java:105) - The NodeList is null
-[2014-01-13 16:49:01,421]DEBUG   692[main] - adsi.org.apache.xml.security.transforms.Transforms.addTransform(Transforms.java:222) - Transforms.addTransform(http://www.w3.org/2000/09/xmldsig#enveloped-signature)
-[2014-01-13 16:49:01,441]DEBUG   712[main] - adsi.org.apache.xml.security.algorithms.SignatureAlgorithm.buildSigner(SignatureAlgorithm.java:133) - Create URI "http://www.w3.org/2000/09/xmldsig#rsa-sha1" class "class adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA1"
-[2014-01-13 16:49:01,441]DEBUG   712[main] - adsi.org.apache.xml.security.algorithms.JCEMapper.translateURItoJCEID(JCEMapper.java:101) - Request for URI http://www.w3.org/2000/09/xmldsig#rsa-sha1
-[2014-01-13 16:49:01,442]DEBUG   713[main] - adsi.org.apache.xml.security.algorithms.implementations.SignatureBaseRSA.<init>(SignatureBaseRSA.java:67) - Created SignatureRSA using SHA1withRSA
-[2014-01-13 16:49:01,442]DEBUG   713[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
-[2014-01-13 16:49:01,442]DEBUG   713[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
-[2014-01-13 16:49:01,442]DEBUG   713[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverDirectHTTP
-[2014-01-13 16:49:01,442]DEBUG   713[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverDirectHTTP.engineCanResolve(ResolverDirectHTTP.java:261) - quick fail for empty URIs and local ones
-[2014-01-13 16:49:01,442]DEBUG   713[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverBigLocalFilesystem
-[2014-01-13 16:49:01,443]DEBUG   714[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
-[2014-01-13 16:49:01,443]DEBUG   714[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Signature430505-SignedProperties121841"
-[2014-01-13 16:49:01,444]DEBUG   715[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
-[2014-01-13 16:49:01,444]DEBUG   715[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
-[2014-01-13 16:49:01,444]DEBUG   715[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
-[2014-01-13 16:49:01,444]DEBUG   715[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Signature430505-SignedProperties121841"
-[2014-01-13 16:49:01,445]DEBUG   716[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdType(IdResolver.java:151) - getElementByIdType() Search for ID Signature430505-SignedProperties121841
-[2014-01-13 16:49:01,445]DEBUG   716[main] - adsi.org.apache.xml.security.utils.IdResolver.getElementByIdUsingDOM(IdResolver.java:138) - getElementByIdUsingDOM() Search for ID Signature430505-SignedProperties121841
-[2014-01-13 16:49:01,446]DEBUG   717[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineResolve(ResolverFragment.java:96) - Try to catch an Element with ID Signature430505-SignedProperties121841 and Element was [etsi:SignedProperties: null]
-[2014-01-13 16:49:01,456]DEBUG   727[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:59) - Pre-digested input:
-[2014-01-13 16:49:01,456]DEBUG   727[main] - adsi.org.apache.xml.security.utils.DigesterOutputStream.write(DigesterOutputStream.java:64) - <etsi:SignedProperties xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature430505-SignedProperties121841"><etsi:SignedSignatureProperties><etsi:SigningTime>2014-01-13T16:49:01-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>8MgNdCPJAQHLWZSA1uGRgGjzhwY=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC</ds:X509IssuerName><ds:X509SerialNumber>1312930870</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-796934"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties>
-[2014-01-13 16:49:01,457]DEBUG   728[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
-[2014-01-13 16:49:01,457]DEBUG   728[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
-[2014-01-13 16:49:01,457]DEBUG   728[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
-[2014-01-13 16:49:01,457]DEBUG   728[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Certificate1121774"
-[2014-01-13 16:49:01,457]DEBUG   728[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:158) - I was asked to create a ResourceResolver and got 0
-[2014-01-13 16:49:01,457]DEBUG   728[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:159) -  extra resolvers to my existing 4 system-wide resolvers
-[2014-01-13 16:49:01,458]DEBUG   729[main] - adsi.org.apache.xml.security.utils.resolver.ResourceResolver.getInstance(ResourceResolver.java:118) - check resolvability by class adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment
-[2014-01-13 16:49:01,458]DEBUG   729[main] - adsi.org.apache.xml.security.utils.resolver.implementations.ResolverFragment.engineCanResolve(ResolverFragment.java:132) - State I can resolve reference: "#Certificate1121774"

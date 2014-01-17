@@ -1,19 +1,12 @@
 package com.corvustec.apce.files.main;
 
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.corvustec.apce.files.ArchivoXML;
@@ -30,8 +23,9 @@ public class Process {
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		try{
 		
 //		String filepath = "D:\\FacturacionElectronica\\clientes\\Prueba\\firmado\\fac-2004000000023.xml";
 //		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -39,8 +33,20 @@ public class Process {
 //		Document doc = docBuilder.parse(filepath);
 //		
 //		String docStr= UtilApplication.convertDocumentToString(doc);
-//		
-//		Document document=UtilApplication.convertStringToDocument(docStr);
+	
+			
+			
+			String xmlStr=args[0];
+			String claveAcceso=args[1];
+			String pathSignature=args[2];
+			String claveFirma=args[3];
+			
+			Document document=UtilApplication.convertStringToDocument(xmlStr);
+			
+			String pathXml=UtilApplication.getTempPath()+"\\"+claveAcceso+".xml";
+			
+			UtilApplication.saveDocumenteDisk(document, pathXml);
+		
 //		
 //		
 //		NodeList infoTributaria = document.getElementsByTagName("infoTributaria");
@@ -65,23 +71,23 @@ public class Process {
 //		}
 		
 		
-		logger.info("Procesar Archivo ");
-		String fileXml,fileXmlSignature,pathSignature;
-		fileXml="D:\\FacturacionElectronica\\clientes\\Prueba\\xml\\fac-2004000000023.xml";
-		fileXmlSignature="D:\\FacturacionElectronica\\clientes\\Prueba\\firmado\\fac-2004000000023.xml";
-		pathSignature="D:\\FacturacionElectronica\\clientes\\Prueba\\firma\\francisco_arturo_velez_rojas.p12";
+			logger.info("Procesar Archivo ");
+			logger.info("pathXml {}",pathXml);
+			logger.info("pathSignature {}",pathSignature);
+			logger.info("claveFirma {}",claveFirma);
+			logger.info("claveAcceso {}",claveAcceso);
+			
+			
+//			String fileXml,fileXmlSignature,pathSignature;
+//			fileXml="D:\\FacturacionElectronica\\clientes\\Prueba\\xml\\fac-2004000000023.xml";
+//			fileXmlSignature="D:\\FacturacionElectronica\\clientes\\Prueba\\firmado\\fac-2004000000023.xml";
+//			pathSignature="D:\\FacturacionElectronica\\clientes\\Prueba\\firma\\francisco_arturo_velez_rojas.p12";
+			
+			ArchivoXML.procesarComprobante(pathXml,pathXml,pathSignature,claveFirma,claveAcceso);
+		} catch (Exception e) {
+			logger.info("Error "+e.toString());
+		}
 		
-		ArchivoXML.procesarComprobante(fileXml,fileXmlSignature,pathSignature,"ulygGd+Hh/4di7WinfA1NA=","1101201401171679011600110010012004000321234560115");
-		
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.YEAR,2014);
-		cal.set(Calendar.MONTH,0);
-		cal.set(Calendar.DAY_OF_MONTH,11);
-
-		Date date = cal.getTime();
-		
-		String a= UtilApplication.getClaveAcceso(date, "01", "1716790116001", "1", "200400032", "12345601", "1", "001", "001");
-		System.out.print(a);
 	}
 
 }
