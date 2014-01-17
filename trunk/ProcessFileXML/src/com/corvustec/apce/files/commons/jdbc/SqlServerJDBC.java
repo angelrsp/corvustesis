@@ -20,8 +20,9 @@ public class SqlServerJDBC {
 	public SqlServerJDBC() {
 	    try {
 	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-	        String connectionUrl = "jdbc:sqlserver://localhost;databaseName=electronic";//user=sa;password=desarrollo123,.;";    	
+	        String connectionUrl = "jdbc:sqlserver://ECUIO009543\\CORVUSTEC;databaseName=electronic";//user=sa;password=desarrollo123,.;";    	
 			conn = DriverManager.getConnection(connectionUrl,"sa","desarrollo123,.");
+			logger.info("SQLServer Conectado");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			logger.info("Error SQLException {}",e.toString());

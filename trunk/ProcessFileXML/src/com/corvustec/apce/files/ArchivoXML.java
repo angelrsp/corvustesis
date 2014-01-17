@@ -66,7 +66,7 @@ public class ArchivoXML {
 						
 							comprobante=item.getComprobante();
 							
-							//sqlServer.execute("insert into flujo (archivo,clave,recibido,autorizado) values('"+comprobante+"','"+claveAcceso+"',"+1+")");
+							sqlServer.execute("insert into flujo (archivo,clave,autorizado) values('"+comprobante+"','"+claveAcceso+"',"+1+")");
 							
   					        //item.setComprobante("<![CDATA[" + item.getComprobante() + "]]>");
   					        
