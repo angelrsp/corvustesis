@@ -5,6 +5,7 @@ import java.io.File;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.corvustec.apce.files.commons.jdbc.SqlServerJDBC;
 import com.corvustec.apce.files.commons.util.Constantes;
 import com.corvustec.apce.files.commons.util.UtilApplication;
 import com.corvustec.apce.files.commons.util.UtilMail;
@@ -27,7 +28,7 @@ public class ArchivoXML {
 		String comprobante = null;
 		try {	
 			
-		if (Signature.execute(xmlFile, fileXmlSignature, pathSignature, passSignature)){
+		if (Signature.executeNoEncrypted(xmlFile, fileXmlSignature, pathSignature, passSignature)){
 			
 			Object a = ComprobantesElectronicosWs.verificarConectividad(Constantes.AMBIENTE, ComprobantesElectronicosWs.SERVICIO_RECEPCION);
 			
@@ -40,6 +41,7 @@ public class ArchivoXML {
 				
 				if (response.getEstado().equals(ComprobantesElectronicosWs.RESPUESTA_RECIBIDA)) {
 					
+					
 					Object aut= AutorizacionComprobantesElectronicosWs.verificarConectividad(Constantes.AMBIENTE, AutorizacionComprobantesElectronicosWs.SERVICIO_AUTORIZACION);
 					if(aut == null) {
 						logger.info("No se puede conectar al servicio Autorizacion del SRI implementar envio contingencia");
@@ -51,12 +53,21 @@ public class ArchivoXML {
 						String respuestaAut= AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(responseAut);
 
 						logger.info("Respuesta WS Autorizacion {}",respuestaAut);
+						logger.info("claveAcceso {}",respuestaAut);
 						
-						
-						
-						for (Autorizacion item : responseAut.getAutorizaciones().getAutorizacion()) {
+						if(respuestaAut.equals(AutorizacionComprobantesElectronicosWs.ESTADO_AUTORIZADO))
+						{
+							
+							SqlServerJDBC sqlServer=SqlServerJDBC.getInstance();
+
+
+							
+							for (Autorizacion item : responseAut.getAutorizaciones().getAutorizacion()) {
 						
 							comprobante=item.getComprobante();
+							
+							//sqlServer.execute("insert into flujo (archivo,clave,recibido,autorizado) values('"+comprobante+"','"+claveAcceso+"',"+1+")");
+							
   					        //item.setComprobante("<![CDATA[" + item.getComprobante() + "]]>");
   					        
 							
@@ -88,10 +99,12 @@ public class ArchivoXML {
 					          
 					        //}
 							
-						 }
-						if(comprobante!=null)
-							UtilApplication.convertStringToDocument(comprobante);
-						UtilMail.enviar(xmlFileSignature);
+							}
+							if(comprobante!=null)
+								UtilApplication.convertStringToDocument(comprobante);
+							logger.info("Enviar mail");
+							UtilMail.enviar(xmlFileSignature);
+						}
 					}
 					
 					
@@ -108,7 +121,7 @@ public class ArchivoXML {
 			logger.info("No se pudo firmar el archivo {} ", fileXml);
 		}
 		} catch (Exception e) {
-			logger.info("Problemas al procesar comprobante {}, {} ", fileXml, e.toString());
+			logger.info("Problemas al procesar comprobante {}, {} ", fileXmlSignature, e.toString());
 		}
 	}
 	
