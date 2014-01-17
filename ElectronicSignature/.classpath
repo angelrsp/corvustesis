@@ -26,9 +26,9 @@
 	<classpathentry kind="lib" path="lib/xmlsec-1.4.2-ADSI-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/xmlsec-1.5.5.jar"/>
 	<classpathentry kind="lib" path="lib/util.jar"/>
-	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-api-1.7.2.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-log4j12-1.7.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.8.jar"/>
+	<classpathentry kind="lib" path="/ProcessFileXML/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="/ProcessFileXML/lib/slf4j-api-1.7.2.jar"/>
+	<classpathentry kind="lib" path="/ProcessFileXML/lib/slf4j-log4j12-1.7.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

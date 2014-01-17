@@ -63,17 +63,26 @@ public class Signature {
     private static final String KEYSTORE_TYPE=MessagesApplication.getInstancia().getString("com.corvustec.signature.xml.key.file");
    
     
-    public static Boolean execute(File file,String pathXmlSignature,String pathSignature,String passSignature)
+    public static Boolean executeEncrypted(File file,String pathXmlSignature,String pathSignature,String passSignature)
+    {
+    	String pass=EncryptedUtil.getInstancia().desencriptar(passSignature);
+    	if(executeNoEncrypted(file,pathXmlSignature,pathSignature,pass))
+    		return true;
+    	else
+    		return false;
+    }
+    
+    
+    public static Boolean executeNoEncrypted(File file,String pathXmlSignature,String pathSignature,String passSignature)
     {
     	String alias;
-		String pass=EncryptedUtil.getInstancia().desencriptar(passSignature);
 		Provider provider = null;
 		KeyStore keyStore;
 		Boolean isExcute;
 		
 		try {
 			keyStore = KeyStore.getInstance(KEYSTORE_TYPE);
-			keyStore.load(new FileInputStream(pathSignature), pass.toCharArray());
+			keyStore.load(new FileInputStream(pathSignature), passSignature.toCharArray());
 			
 			 //Cargamos los alias en el keyStore
 		    fixAliases(keyStore);
@@ -84,7 +93,7 @@ public class Signature {
 		    // Obtenemos la clave privada, pues la necesitaremos para encriptar.		    
 		    KeyStore tmpKs = keyStore;
 		    
-		    PrivateKey privateKey = (PrivateKey) tmpKs.getKey(alias, pass.toCharArray()); 
+		    PrivateKey privateKey = (PrivateKey) tmpKs.getKey(alias, passSignature.toCharArray()); 
 		    
 		    
 		    provider = keyStore.getProvider();
@@ -144,7 +153,7 @@ public class Signature {
                
                 //Creamos la instancia con del keystore con el tipo esto puede ser JKS, PCSK12, etc
                 KeyStore keyStore  = KeyStore.getInstance(KEYSTORE_TYPE);
-                keyStore.load(new FileInputStream(pathSignature), EncryptedUtil.getInstancia().desencriptar(pass).toCharArray()); 
+                keyStore.load(new FileInputStream(pathSignature), pass.toCharArray()); 
                
                 //Cargamos los alias en el keyStore
                 fixAliases(keyStore);
@@ -153,7 +162,7 @@ public class Signature {
                 alias=getAlias(keyStore);
                
                 // Obtenemos la clave privada, pues la necesitaremos para encriptar. 
-                PrivateKey privateKey = (PrivateKey) keyStore.getKey(alias, EncryptedUtil.getInstancia().desencriptar(pass).toCharArray()); 
+                PrivateKey privateKey = (PrivateKey) keyStore.getKey(alias, pass.toCharArray()); 
                
                 // Instanciamos un objeto XMLSignature desde el Document. El algoritmo de firma ser� DSA 
                 XMLSignature xmlSignature = new XMLSignature(doc, null, XMLSignature.ALGO_ID_SIGNATURE_RSA_SHA1);
