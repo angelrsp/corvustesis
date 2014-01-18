@@ -96,11 +96,11 @@ public class AdministracionServiceImpl implements AdministracionService{
 				sb.append("BIENVENIDO.<br/>");
 				sb.append("La empresa registrada cumple con los requisitos.<br/>");
 				sb.append("Usted ya es miembro de SILSAG.<br/>");
-				sb.append("Facultad de Odontolog铆a");
-				new MailUtil().send(empresa.getBemUsuario().getUsuMail(), "SILSAG: Verificaci贸n y aprobaci贸n de Empresa", sb.toString());
+				sb.append("Facultad de Odontolog韆");
+				new MailUtil().send(empresa.getBemUsuario().getUsuMail(), "SILSAG: Verificaci髇 y aprobaci髇 de Empresa", sb.toString());
 			}
 			else{
-				new MailUtil().send(empresa.getBemUsuario().getUsuMail(), "SILSAG: Verificaci贸n y aprobaci贸n de Empresa", "La empresa a sido cancelada del sistema SILSAG");
+				new MailUtil().send(empresa.getBemUsuario().getUsuMail(), "SILSAG: Verificaci髇 y aprobaci髇 de Empresa", "La empresa a sido cancelada del sistema SILSAG");
 			}			
 			factoryDAO.getEmpresaDAOImpl().edit(empresa);
 		}

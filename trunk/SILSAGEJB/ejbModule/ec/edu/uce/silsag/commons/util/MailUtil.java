@@ -1,5 +1,6 @@
 package ec.edu.uce.silsag.commons.util;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -26,8 +27,9 @@ public class MailUtil {
 	        properties.put("mail.smtp.starttls.enable", "true");
 	        properties.put("mail.smtp.port", 587);
 	        properties.put("mail.smtp.mail.sender", "silsag.fod@gmail.com");
+	        properties.put("mail.smtp.mail.sender.name", "SILSAG");
 	        properties.put("mail.smtp.password", "admin.fod2014");
-	        properties.put("mail.smtp.user", "fensefernando@gmail.com");
+	        properties.put("mail.smtp.user", "silsag.fod@gmail.com");
 	        properties.put("mail.smtp.auth", "true");
 	        session = Session.getDefaultInstance(properties);
 	    }
@@ -38,7 +40,7 @@ public class MailUtil {
 	        	log.info("send");
 	        	log.info("send "+destino);
 	            MimeMessage message = new MimeMessage(session);
-	            message.setFrom(new InternetAddress((String) properties.get("mail.smtp.mail.sender")));
+	            message.setFrom(new InternetAddress((String) properties.get("mail.smtp.mail.sender"),(String) properties.get("mail.smtp.mail.sender.name")));
 	            message.addRecipient(Message.RecipientType.TO, new InternetAddress(destino));
 	            message.setSubject(asunto);
 	            message.setText(mensaje,"ISO-8859-1","html");
@@ -49,8 +51,11 @@ public class MailUtil {
 	            t.close();
 	            log.info("cerrar");
 	        } catch (MessagingException e) {
+	        	log.info(e.toString());
 	            return;
-	        }
+	        } catch (UnsupportedEncodingException e) {
+	        	log.info(e.toString());
+			}
 	    }
 	
 }
