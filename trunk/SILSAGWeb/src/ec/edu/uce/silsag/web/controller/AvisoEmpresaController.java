@@ -2,7 +2,9 @@ package ec.edu.uce.silsag.web.controller;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -12,6 +14,7 @@ import javax.faces.bean.ViewScoped;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.negocio.EmpresaService;
 import ec.edu.uce.silsag.ejb.persistence.entities.AvisoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EmpresaDTO;
@@ -37,7 +40,7 @@ public class AvisoEmpresaController extends SelectItemController implements Seri
 	private UsuarioDTO user;
 	private EmpresaDTO empresa;
 	private AvisoDTO aviso;
-//	private List<AvisoListDTO> avisoList;
+	private List<AvisoDTO> avisoList;
 
 	private Object puesto;
 	private Date fecha;
@@ -49,7 +52,7 @@ public class AvisoEmpresaController extends SelectItemController implements Seri
 		aviso=new AvisoDTO();
 		user=(UsuarioDTO)JsfUtil.getObject("UsuarioDTO");
 		empresa=user.getBemEmpresas().get(0);
-		//avisoList=new ArrayList<AvisoListDTO>(); 
+		avisoList=new ArrayList<AvisoDTO>(); 
 	}
 	
 	public AvisoDTO getAviso() {
@@ -77,24 +80,22 @@ public class AvisoEmpresaController extends SelectItemController implements Seri
 		this.fecha = fecha;
 	}
 
-//	public List<AvisoListDTO> getAvisoList() {
-//		try {
-//			this.avisoList=empresaService.obtenerAviso(empresa);
-//		} catch (SilsagException e) {
-//			// TODO Auto-generated catch block
-//			JsfUtil.addErrorMessage(e.toString());
-//		}
-//		return avisoList;
-//	}
+	public List<AvisoDTO> getAvisoList() {
+		try {
+			this.avisoList=empresaService.obtenerAviso(empresa);
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+		return avisoList;
+	}
 
 	public void guardar()
 	{
 		try{
-			aviso.setAviPuesto(Integer.valueOf(puesto.toString()));
 			aviso.setBemEmpresa(empresa);
 			aviso.setAviFechaCaducidad(new Timestamp(fecha.getTime()));
 			empresaService.registrarAviso(aviso);
-//			getAvisoList();
+			getAvisoList();
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 			resetAviso();
 		}

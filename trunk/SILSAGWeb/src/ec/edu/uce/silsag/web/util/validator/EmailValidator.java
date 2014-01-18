@@ -32,7 +32,7 @@ public class EmailValidator implements Validator {
         Matcher matcher = EMAIL_COMPILED_PATTERN.matcher((String)o);
          
         if (!matcher.matches()) {   // Email doesn't match
-            FacesMessage msg = new FacesMessage("Email no v√°lido!", "Email Validation Error");
+            FacesMessage msg = new FacesMessage("Email no v·lido!", "Email Validation Error");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
