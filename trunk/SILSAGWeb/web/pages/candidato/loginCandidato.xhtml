@@ -18,8 +18,8 @@
 							<td><h:outputLabel value="#{i18n['label.usuario']}" /></td>
 							<td><p:inputText
 									required="true" requiredMessage="#{i18n['label.usuario']}:&#160;#{i18n['label.requerido']}"
-									value="#{loginController.credencialesDTO.username}"
-									placeholder="#{i18n['label.ci.pasaporte']}" /></td>
+									value="#{loginController.credencialesDTO.username}" onkeypress="return isNumberKey(event);"
+									placeholder="#{i18n['label.ci.pasaporte']}" maxlength="15" /></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.contrasenia']}" /></td>
