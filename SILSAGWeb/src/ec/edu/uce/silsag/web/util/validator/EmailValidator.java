@@ -23,7 +23,7 @@ public class EmailValidator implements Validator {
     public void validate(FacesContext fc, UIComponent c, Object o) throws ValidatorException {
         // No value is not ok
         if (o == null || "".equals((String)o)) {
-            FacesMessage msg = new FacesMessage("Email no v√°lido!", "Email Validation Error");
+            FacesMessage msg = new FacesMessage("Email no v·lido!", "Email Validation Error");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }

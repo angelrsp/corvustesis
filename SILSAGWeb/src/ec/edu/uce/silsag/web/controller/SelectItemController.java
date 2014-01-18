@@ -21,16 +21,12 @@ public abstract class SelectItemController{
 	private List<SelectItem> catalogoNivelEstudio;
 	private List<SelectItem> catalogoTipoExperiencia;
 	private List<SelectItem> catalogoPais;
-	private List<SelectItem> catalogoPrograma;
-	private List<SelectItem> catalogoNivelPrograma;
-	private List<SelectItem> catalogoIdioma;
-	private List<SelectItem> catalogoNivelIdioma;
-	private List<SelectItem> catalogoAnio;
-	private List<SelectItem> catalogoMes;
 	private List<SelectItem> catalogoUbicacion;
 	private List<SelectItem> catalogoTipoEmpresa;
 	private List<SelectItem> catalogoPuesto;
 	private List<SelectItem> catalogoEstadoCivil;
+	private List<SelectItem> catalogoGenero;
+	
 	
 	@EJB
 	private AdministracionService administracionService; 
@@ -46,12 +42,6 @@ public abstract class SelectItemController{
 		catalogoNivelEstudio=new ArrayList<SelectItem>();
 		catalogoTipoExperiencia=new ArrayList<SelectItem>();
 		catalogoPais=new ArrayList<SelectItem>();
-		catalogoPrograma=new ArrayList<SelectItem>();
-		catalogoNivelPrograma=new ArrayList<SelectItem>();
-		catalogoIdioma=new ArrayList<SelectItem>();
-		catalogoNivelIdioma=new ArrayList<SelectItem>();
-		catalogoAnio=new ArrayList<SelectItem>();
-		catalogoMes=new ArrayList<SelectItem>();
 		catalogoPuesto=new ArrayList<SelectItem>();
 		catalogoEstadoCivil=new ArrayList<SelectItem>();
 	}
@@ -99,7 +89,7 @@ public abstract class SelectItemController{
 		if(CollectionUtils.isEmpty(catalogoTipoExperiencia))
 		{
 			CatalogoDTO catalogo=new CatalogoDTO();
-			catalogo.setCatCodigo(10);
+			catalogo.setCatCodigo(8);
 			catalogoTipoExperiencia=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
 				
 				@Override
@@ -118,7 +108,7 @@ public abstract class SelectItemController{
 		if(CollectionUtils.isEmpty(catalogoPais))
 		{
 			CatalogoDTO catalogo=new CatalogoDTO();
-			catalogo.setCatCodigo(13);
+			catalogo.setCatCodigo(11);
 			catalogoPais=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
 				
 				@Override
@@ -133,124 +123,11 @@ public abstract class SelectItemController{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<SelectItem> getCatalogoPrograma() throws SilsagException {
-		if(CollectionUtils.isEmpty(catalogoPrograma))
-		{
-			CatalogoDTO catalogo=new CatalogoDTO();
-			catalogo.setCatCodigo(15);
-			catalogoPrograma=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
-				
-				@Override
-				public Object transform(Object arg0) {
-					CatalogoDTO cat=(CatalogoDTO)arg0;
-					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
-				}
-			});
-			
-		}
-		return catalogoPrograma;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<SelectItem> getCatalogoNivelPrograma() throws SilsagException
-	{
-		if(CollectionUtils.isEmpty(catalogoNivelPrograma))
-		{
-			CatalogoDTO catalogo=new CatalogoDTO();
-			catalogo.setCatCodigo(19);
-			catalogoNivelPrograma=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
-				
-				@Override
-				public Object transform(Object arg0) {
-					CatalogoDTO cat=(CatalogoDTO)arg0;
-					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
-				}
-			});
-			
-		}
-		return catalogoNivelPrograma;
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<SelectItem> getCatalogoIdioma() throws SilsagException {
-		if(CollectionUtils.isEmpty(catalogoIdioma))
-		{
-			CatalogoDTO catalogo=new CatalogoDTO();
-			catalogo.setCatCodigo(23);
-			catalogoIdioma=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
-				
-				@Override
-				public Object transform(Object arg0) {
-					CatalogoDTO cat=(CatalogoDTO)arg0;
-					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
-				}
-			});
-			
-		}
-		return catalogoIdioma;
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<SelectItem> getCatalogoNivelIdioma() throws SilsagException {
-		if(CollectionUtils.isEmpty(catalogoNivelIdioma))
-		{
-			CatalogoDTO catalogo=new CatalogoDTO();
-			catalogo.setCatCodigo(28);
-			catalogoNivelIdioma=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
-				
-				@Override
-				public Object transform(Object arg0) {
-					CatalogoDTO cat=(CatalogoDTO)arg0;
-					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
-				}
-			});
-		}
-		return catalogoNivelIdioma;
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<SelectItem> getCatalogoAnio() throws SilsagException {
-		if(CollectionUtils.isEmpty(catalogoAnio))
-		{
-			CatalogoDTO catalogo=new CatalogoDTO();
-			catalogo.setCatCodigo(0);
-			catalogoAnio=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
-				
-				@Override
-				public Object transform(Object arg0) {
-					CatalogoDTO cat=(CatalogoDTO)arg0;
-					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
-				}
-			});
-		}
-
-		return catalogoAnio;
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<SelectItem> getCatalogoMes() throws SilsagException {
-		if(CollectionUtils.isEmpty(catalogoMes))
-		{
-			CatalogoDTO catalogo=new CatalogoDTO();
-			catalogo.setCatCodigo(-1);
-			catalogoMes=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
-				
-				@Override
-				public Object transform(Object arg0) {
-					CatalogoDTO cat=(CatalogoDTO)arg0;
-					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
-				}
-			});
-		}
-		return catalogoMes;
-	}
-
-	@SuppressWarnings("unchecked")
 	public List<SelectItem> getCatalogoUbicacion() throws SilsagException {
 		if(CollectionUtils.isEmpty(catalogoUbicacion))
 		{
 			CatalogoDTO catalogo=new CatalogoDTO();
-			catalogo.setCatCodigo(35);
+			catalogo.setCatCodigo(11);
 			catalogoUbicacion=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
 				
 				@Override
@@ -268,7 +145,7 @@ public abstract class SelectItemController{
 		if(CollectionUtils.isEmpty(catalogoTipoEmpresa))
 		{
 			CatalogoDTO catalogo=new CatalogoDTO();
-			catalogo.setCatCodigo(32);
+			catalogo.setCatCodigo(16);
 			catalogoTipoEmpresa=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
 				
 				@Override
@@ -286,7 +163,7 @@ public abstract class SelectItemController{
 		if(CollectionUtils.isEmpty(catalogoPuesto))
 		{
 			CatalogoDTO catalogo=new CatalogoDTO();
-			catalogo.setCatCodigo(37);
+			catalogo.setCatCodigo(25);
 			catalogoPuesto=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
 				
 				@Override
@@ -305,7 +182,7 @@ public abstract class SelectItemController{
 		if(CollectionUtils.isEmpty(catalogoEstadoCivil))
 		{
 			CatalogoDTO catalogo=new CatalogoDTO();
-			catalogo.setCatCodigo(39);//Codigo Catalogo
+			catalogo.setCatCodigo(19);//Codigo Catalogo
 			catalogoEstadoCivil=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
 				
 				@Override
@@ -318,5 +195,22 @@ public abstract class SelectItemController{
 		return catalogoEstadoCivil;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getCatalogoGenero() throws SilsagException {
+		if(CollectionUtils.isEmpty(catalogoGenero))
+		{
+			CatalogoDTO catalogo=new CatalogoDTO();
+			catalogo.setCatCodigo(32);//Codigo Catalogo
+			catalogoGenero=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					CatalogoDTO cat=(CatalogoDTO)arg0;
+					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
+				}
+			});
+		}
+		return catalogoGenero;
+	}
 	
 }
