@@ -51,7 +51,7 @@ public class EmpresaDTO implements Serializable {
 	private List<ContactoDTO> bemContactos;
 
 	//bi-directional many-to-one association to UsuarioDTO
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="emp_usuario")
 	private UsuarioDTO bemUsuario;
 

@@ -10,7 +10,6 @@ import javax.persistence.criteria.Root;
 
 import ec.edu.uce.silsag.ejb.persistence.dao.ResultadoDAO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
-import ec.edu.uce.silsag.ejb.persistence.entities.EstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ResultadoDTO;
 
 public class ResultadoDAOImpl extends AbstractFacadeImpl<ResultadoDTO> implements ResultadoDAO{

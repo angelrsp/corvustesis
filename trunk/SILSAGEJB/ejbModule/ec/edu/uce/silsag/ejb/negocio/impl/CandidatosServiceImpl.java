@@ -1,6 +1,7 @@
 package ec.edu.uce.silsag.ejb.negocio.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -15,7 +16,9 @@ import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.PostulacionDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.PreguntaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ReferenciaDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.RespuestaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ResultadoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
 
@@ -253,6 +256,7 @@ public class CandidatosServiceImpl implements CandidatosService {
 	@Override
 	public List<ResultadoDTO> obtenerResutado(CandidatoDTO candidatoDTO)throws SilsagException
 	{
+		log.info("obtenerResutado");
 		try {
 			return factoryDAO.getResultadoDAOImpl().getAll(candidatoDTO);
 		} catch (Exception e) {
@@ -262,4 +266,88 @@ public class CandidatosServiceImpl implements CandidatosService {
 		}
 		
 	}
+	
+	
+	@Override
+	public List<PreguntaDTO> obtenerPregunta()throws SilsagException
+	{
+		log.info("obtenerPregunta");
+		try {
+			return factoryDAO.getPreguntaDAOImpl().getAll();
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Herramientas {}", e.toString());
+			throw new SilsagException("Error al obtener datos de Herramientas "+e.toString());
+
+		}
+		
+	}
+	
+	@Override
+	public void guardarResultados(Object[] respuestas,Map<Integer, String> respuestaTexto,CandidatoDTO candidatoDTO)
+	{
+		log.info("guardarResultados");	
+		
+		RespuestaDTO respuesta;
+
+		ResultadoDTO resul;
+		
+		for(int i=0; i<respuestas.length;i++)
+		{
+			if(respuestas[i]!=null)
+			{
+				resul=new ResultadoDTO();
+				respuesta=new RespuestaDTO();
+				respuesta.setResCodigo(Integer.valueOf(respuestas[i].toString()));
+				resul.setBemRespuesta(respuesta);
+				resul.setBemCandidato(candidatoDTO);
+				factoryDAO.getResultadoDAOImpl().create(resul);
+			}
+		}
+		
+		for(Integer integ:respuestaTexto.keySet())
+		{
+			if(respuestaTexto.get(integ)!=null)
+			{
+				resul=new ResultadoDTO();
+				respuesta=new RespuestaDTO();
+				respuesta.setResCodigo(integ);
+				resul.setBemRespuesta(respuesta);
+				resul.setBemCandidato(candidatoDTO);
+				resul.setRsuAdicional(respuestaTexto.get(integ));
+				factoryDAO.getResultadoDAOImpl().create(resul);
+			}
+		}
+		
+	}
+	
+	
+	@Override
+	public List<RespuestaDTO> obtenerRespuestaPorTipo(int tipo)throws SilsagException
+	{
+		log.info("obtenerRespuestaPorTipo");
+		try {
+			return factoryDAO.getRespuestaDAOImpl().getByType(tipo);
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Herramientas {}", e.toString());
+			throw new SilsagException("Error al obtener datos de Herramientas "+e.toString());
+
+		}
+		
+	}
+	
+	
+	@Override
+	public List<RespuestaDTO> obtenerRespuesta()throws SilsagException
+	{
+		log.info("obtenerPregunta");
+		try {
+			return factoryDAO.getRespuestaDAOImpl().getAll();
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Herramientas {}", e.toString());
+			throw new SilsagException("Error al obtener datos de Herramientas "+e.toString());
+
+		}
+		
+	}
+	
 }
