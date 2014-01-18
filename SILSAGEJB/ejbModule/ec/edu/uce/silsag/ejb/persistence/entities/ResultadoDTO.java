@@ -20,6 +20,9 @@ public class ResultadoDTO implements Serializable {
 	@Column(name="rsu_codigo")
 	private Integer rsuCodigo;
 
+	@Column(name="rsu_adicional")
+	private String rsuAdicional;
+	
 	//bi-directional many-to-one association to CandidatoDTO
 	@ManyToOne
 	@JoinColumn(name="rsu_candidato")
@@ -39,6 +42,14 @@ public class ResultadoDTO implements Serializable {
 
 	public void setRsuCodigo(Integer rsuCodigo) {
 		this.rsuCodigo = rsuCodigo;
+	}
+
+	public String getRsuAdicional() {
+		return rsuAdicional;
+	}
+
+	public void setRsuAdicional(String rsuAdicional) {
+		this.rsuAdicional = rsuAdicional;
 	}
 
 	public CandidatoDTO getBemCandidato() {

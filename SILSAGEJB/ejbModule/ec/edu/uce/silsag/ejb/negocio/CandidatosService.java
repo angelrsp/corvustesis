@@ -1,6 +1,7 @@
 package ec.edu.uce.silsag.ejb.negocio;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Local;
 
@@ -9,7 +10,9 @@ import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.PostulacionDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.PreguntaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ReferenciaDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.RespuestaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ResultadoDTO;
 
 @Local
@@ -50,5 +53,14 @@ public interface CandidatosService {
 
 	List<ResultadoDTO> obtenerResutado(CandidatoDTO candidatoDTO)
 			throws SilsagException;
+
+	List<PreguntaDTO> obtenerPregunta() throws SilsagException;
+
+	List<RespuestaDTO> obtenerRespuestaPorTipo(int tipo) throws SilsagException;
+
+	void guardarResultados(Object[] respuestas,
+			Map<Integer, String> respuestaTexto, CandidatoDTO candidatoDTO);
+
+	List<RespuestaDTO> obtenerRespuesta() throws SilsagException;
 
 }

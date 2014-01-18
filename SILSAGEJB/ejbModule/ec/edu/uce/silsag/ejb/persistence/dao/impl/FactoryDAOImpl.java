@@ -14,9 +14,12 @@ import ec.edu.uce.silsag.ejb.persistence.dao.ExperienciaDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.PerfilDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.PostulacionDAO;
+import ec.edu.uce.silsag.ejb.persistence.dao.PreguntaDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.ReferenciaDAO;
+import ec.edu.uce.silsag.ejb.persistence.dao.RespuestaDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.ResultadoDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.UsuarioDAO;
+import ec.edu.uce.silsag.ejb.persistence.entities.RespuestaDTO;
 
 @Stateless
 public class FactoryDAOImpl implements FactoryDAO {
@@ -47,7 +50,11 @@ public class FactoryDAOImpl implements FactoryDAO {
 	private ContactoDAO contactoDAO;
 	
 	private ResultadoDAO resultadoDAO;
+	
+	private PreguntaDAO preguntaDAO;
 
+	private RespuestaDAO respuestaDAO;
+	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
 		if (usuarioDAO == null) {
@@ -143,4 +150,21 @@ public class FactoryDAOImpl implements FactoryDAO {
 		}
 		return resultadoDAO;
 	}
+	
+	@Override
+	public PreguntaDAO getPreguntaDAOImpl() {
+		if (preguntaDAO == null) {
+			preguntaDAO = new PreguntaDAOImpl(entityManager);
+		}
+		return preguntaDAO;
+	}
+	
+	@Override
+	public RespuestaDAO getRespuestaDAOImpl() {
+		if (respuestaDAO == null) {
+			respuestaDAO = new RespuestaDAOImpl(entityManager);
+		}
+		return respuestaDAO;
+	}
+
 }
