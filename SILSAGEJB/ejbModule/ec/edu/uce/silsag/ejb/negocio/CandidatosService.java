@@ -7,6 +7,7 @@ import javax.ejb.Local;
 
 import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.persistence.entities.AdicionalDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.AvisoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CursoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EstudioDTO;
@@ -82,6 +83,11 @@ public interface CandidatosService {
 	void eliminarCurso(CursoDTO cursoDTO) throws SilsagException;
 
 	List<ExperienciaListDTO> obtenerExperiencia(CandidatoDTO candidato)
+			throws SilsagException;
+
+	List<AvisoDTO> verOfertas(CandidatoDTO candidatoDTO) throws SilsagException;
+
+	List<PostulacionDTO> obtenerPostulacion(CandidatoDTO candidatoDTO)
 			throws SilsagException;
 
 }

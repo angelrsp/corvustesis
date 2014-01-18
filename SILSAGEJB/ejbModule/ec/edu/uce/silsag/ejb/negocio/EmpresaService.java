@@ -8,6 +8,7 @@ import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.persistence.entities.AvisoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EmpresaDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.PostulacionDTO;
 
 @Local
 public interface EmpresaService {
@@ -22,5 +23,13 @@ public interface EmpresaService {
 	ContactoDTO agregarContacto(ContactoDTO contacto) throws SilsagException;
 
 	EmpresaDTO actualizarEmpresa(EmpresaDTO empresa) throws SilsagException;
+
+	List<AvisoDTO> obtenerAviso(EmpresaDTO empresa) throws SilsagException;
+
+	List<PostulacionDTO> obtenerPostulacion(EmpresaDTO empresa)
+			throws SilsagException;
+
+	void aceptarPostulacion(PostulacionDTO postulacionDTO)
+			throws SilsagException;
 
 }

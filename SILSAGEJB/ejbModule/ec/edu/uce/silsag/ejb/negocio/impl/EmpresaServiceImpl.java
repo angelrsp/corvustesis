@@ -14,6 +14,7 @@ import ec.edu.uce.silsag.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.silsag.ejb.persistence.entities.AvisoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EmpresaDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.PostulacionDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
 
 @Stateless
@@ -62,16 +63,16 @@ public class EmpresaServiceImpl implements EmpresaService {
 		}		
 	}
 	
-//	@Override
-//	public List<AvisoListDTO> obtenerAviso(EmpresaDTO empresa) throws SilsagException
-//	{
-//		try {
-//		return factoryDAO.getAvisoDAOImpl().getAll(empresa);
-//		} catch (Exception e) {
-//			log.info("Error al registrar Aviso {}", e.toString());
-//			throw new SilsagException("Error al registrar Aviso");
-//		}				
-//	}
+	@Override
+	public List<AvisoDTO> obtenerAviso(EmpresaDTO empresa) throws SilsagException
+	{
+		try {
+		return factoryDAO.getAvisoDAOImpl().getAll(empresa);
+		} catch (Exception e) {
+			log.info("Error al registrar Aviso {}", e.toString());
+			throw new SilsagException("Error al registrar Aviso");
+		}				
+	}
 	
 	@Override
 	public ContactoDTO agregarContacto(ContactoDTO contacto) throws SilsagException
@@ -95,16 +96,27 @@ public class EmpresaServiceImpl implements EmpresaService {
 		}				
 	}
 
-//	@Override
-//	public List<PostulacionListDTO> obtenerPostulacion(EmpresaDTO empresa) throws SilsagException
-//	{
-//		try {
-//			return factoryDAO.getPostulacionDAOImpl().getAll(empresa);
-//		} catch (Exception e) {
-//			log.info("Error al registrar Aviso {}", e.toString());
-//			throw new SilsagException("Error al registrar Aviso");
-//		}				
-//	}
+	@Override
+	public List<PostulacionDTO> obtenerPostulacion(EmpresaDTO empresa) throws SilsagException
+	{
+		try {
+			return factoryDAO.getPostulacionDAOImpl().getAll(empresa);
+		} catch (Exception e) {
+			log.info("Error alobtenerPostulacion {}", e.toString());
+			throw new SilsagException("Error al obtenerPostulacion");
+		}				
+	}
 
-	
+	@Override
+	public void aceptarPostulacion(PostulacionDTO postulacionDTO) throws SilsagException
+	{
+		log.info("aceptarPostulacion");
+		try {
+			postulacionDTO.setPosAceptado(true);
+			factoryDAO.getPostulacionDAOImpl().edit(postulacionDTO);
+		} catch (Exception e) {
+			log.info("Error al aceptarPostulacion {}", e.toString());
+			throw new SilsagException("Error al aceptarPostulacion");
+		}		
+	}
 }

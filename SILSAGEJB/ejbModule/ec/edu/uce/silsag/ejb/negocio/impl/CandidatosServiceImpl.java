@@ -13,6 +13,7 @@ import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsag.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.silsag.ejb.persistence.entities.AdicionalDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.AvisoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CursoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EstudioDTO;
@@ -220,17 +221,17 @@ public class CandidatosServiceImpl implements CandidatosService {
 	}
 
 	
-//	@Override
-//	public List<AvisoListDTO> verOfertas() throws SilsagException
-//	{
-//		try {
-//			return factoryDAO.getAvisoDAOImpl().getOfertas();
-//		} catch (Exception e) {
-//			log.info("Error al obtener datos de Estudio {}", e.toString());
-//			throw new SilsagException("Error al obtener datos Ofertas");
-//
-//		}
-//	}
+	@Override
+	public List<AvisoDTO> verOfertas(CandidatoDTO candidatoDTO) throws SilsagException
+	{
+		try {
+			return factoryDAO.getAvisoDAOImpl().getOfertas(candidatoDTO);
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Estudio {}", e.toString());
+			throw new SilsagException("Error al obtener datos Ofertas");
+
+		}
+	}
 	
 	@Override
 	public PostulacionDTO postular(PostulacionDTO postulacionDTO) throws SilsagException{
@@ -434,5 +435,21 @@ public class CandidatosServiceImpl implements CandidatosService {
 		}
 		
 	}
+
+	
+	@Override
+	public List<PostulacionDTO> obtenerPostulacion(CandidatoDTO candidatoDTO)throws SilsagException
+	{
+		log.info("obtenerPostulacion");
+		try {
+			return factoryDAO.getPostulacionDAOImpl().getAll(candidatoDTO);
+		} catch (Exception e) {
+			log.info("Error al obtenerPostulacion {}", e.toString());
+			throw new SilsagException("Error al obtenerPostulacion "+e.toString());
+
+		}
+		
+	}
+
 	
 }

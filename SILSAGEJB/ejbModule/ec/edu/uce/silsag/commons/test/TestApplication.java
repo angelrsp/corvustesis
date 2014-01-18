@@ -21,6 +21,7 @@ public class TestApplication {
 		String originalDesencriptado = EncriptarUtil.getFactory().desencriptar(originalEncriptado);
 		
 		System.out.println("desencriptar: " + originalDesencriptado);
+			
 	}
 
 }
