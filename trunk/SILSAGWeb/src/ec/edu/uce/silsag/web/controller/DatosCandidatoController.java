@@ -26,9 +26,12 @@ import org.slf4j.LoggerFactory;
 
 import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.negocio.CandidatosService;
+import ec.edu.uce.silsag.ejb.persistence.entities.AdicionalDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.CursoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaListDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ReferenciaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
 import ec.edu.uce.silsag.web.util.JsfUtil;
@@ -52,33 +55,33 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	private EstudioDTO estudio;
 	private ExperienciaDTO experiencia;
 	private ReferenciaDTO referencia;
+	private CursoDTO curso;
+	private AdicionalDTO adicional;
 	
 	private Object tipoDocumento;
 	private Object nivelEstudio;
 	private Object pais;
-	private Object programa;
-	private Object nivelPrograma;
-	private Object anioInicio;
-	private Object anioFin;
-	private Object mesInicio;
-	private Object mesFin;
-	private Object tipoExperiencia;
-	private Object idiomaObj;
-	private Object nivelIdioma;
+	private Object tipoEmpresa;
 	private Object estadoCivil;
+	private Object genero;
 	
 	private Date fechaInicioExp;
 	private Date fechaFinExp;
 	
 //	private List<EstudioListDTO> listEstudio;
-//	private List<ExperienciaListDTO> listExperiencia;
+	private List<ExperienciaListDTO> experienciaList;
 	private List<ReferenciaDTO> listReferencia;
+	private List<CursoDTO> cursoList;
+	private List<AdicionalDTO> adicionalList;
 	
 	private UploadedFile uploadedFile;
 	
 	private Date fechaNacimiento;
 	private Date fechaMaximo;
 	
+	private Date fechaInicioCurso;
+	private Date fechaFinCurso;
+	private Date fechaMaximoActual;
 	
 	private Part file1;
 	
@@ -101,29 +104,35 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		estudio=new EstudioDTO();
 //		listEstudio=new ArrayList<EstudioListDTO>();
 		experiencia=new ExperienciaDTO();
-//		listExperiencia=new ArrayList<ExperienciaListDTO>();
+		experienciaList=new ArrayList<ExperienciaListDTO>();
 		referencia=new ReferenciaDTO();
 		listReferencia=new ArrayList<ReferenciaDTO>();
+		
+		curso=new CursoDTO();
+		cursoList=new ArrayList<CursoDTO>();
+		
+		adicional=new AdicionalDTO();
+		adicionalList=new ArrayList<AdicionalDTO>();
+		
+		
 		
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.YEAR, -18); // to get previous year add -1
 		fechaMaximo = cal.getTime();
 		
+		cal=Calendar.getInstance();
+		fechaMaximoActual=cal.getTime() ;
+		
 		estadoCivil=candidato.getCanEstadoCivil();
 		
 		try {
 			if(candidatosService.obtenerResutado(candidato)==null)
-			{
 				JsfUtil.redirect("/SILSAGWeb/pages/candidato/encuesta.jsf");
-			}
 		} catch (SilsagException e) {
-			// TODO Auto-generated catch block
-			logger.info("AA",e.toString());
+			logger.info(e.toString());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.info(e.toString());
 		}
-		
 		logger.info("Inicio");
 	}
 	
@@ -207,53 +216,7 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		this.pais = pais;
 	}
 
-	public Object getPrograma() {
-		return programa;
-	}
-
-	public void setPrograma(Object programa) {
-		this.programa = programa;
-	}
-
-	public Object getNivelPrograma() {
-		return nivelPrograma;
-	}
-
-	public void setNivelPrograma(Object nivelPrograma) {
-		this.nivelPrograma = nivelPrograma;
-	}
-
-	public Object getAnioInicio() {
-		return anioInicio;
-	}
-
-	public void setAnioInicio(Object anioInicio) {
-		this.anioInicio = anioInicio;
-	}
-
-	public Object getAnioFin() {
-		return anioFin;
-	}
-
-	public void setAnioFin(Object anioFin) {
-		this.anioFin = anioFin;
-	}
-
-	public Object getMesInicio() {
-		return mesInicio;
-	}
-
-	public void setMesInicio(Object mesInicio) {
-		this.mesInicio = mesInicio;
-	}
-
-	public Object getMesFin() {
-		return mesFin;
-	}
-
-	public void setMesFin(Object mesFin) {
-		this.mesFin = mesFin;
-	}
+	
 
 //	public List<EstudioListDTO> getListEstudio() {
 //		try {
@@ -263,6 +226,22 @@ public class DatosCandidatoController extends SelectItemController implements Se
 //		}
 //		return this.listEstudio;
 //	}
+
+	public Date getFechaInicioCurso() {
+		return fechaInicioCurso;
+	}
+
+	public void setFechaInicioCurso(Date fechaInicioCurso) {
+		this.fechaInicioCurso = fechaInicioCurso;
+	}
+
+	public Date getFechaFinCurso() {
+		return fechaFinCurso;
+	}
+
+	public void setFechaFinCurso(Date fechaFinCurso) {
+		this.fechaFinCurso = fechaFinCurso;
+	}
 
 	public ExperienciaDTO getExperiencia() {
 		return experiencia;
@@ -288,17 +267,37 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		this.fechaFinExp = fechaFinExp;
 	}
 
-//	public List<ExperienciaListDTO> getListExperiencia() throws SilsagException {
-//			this.listExperiencia=candidatosService.obtenerExperiencia(candidato);
-//		return this.listExperiencia;
-//	}
-
-	public Object getTipoExperiencia() {
-		return tipoExperiencia;
+	public List<ExperienciaListDTO> getExperienciaList() {
+		try {
+			this.experienciaList=candidatosService.obtenerExperiencia(candidato);
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+		return this.experienciaList;
 	}
 
-	public void setTipoExperiencia(Object tipoExperiencia) {
-		this.tipoExperiencia = tipoExperiencia;
+	public Object getTipoEmpresa() {
+		return tipoEmpresa;
+	}
+
+	public void setTipoEmpresa(Object tipoEmpresa) {
+		this.tipoEmpresa=tipoEmpresa;
+	}
+
+	public CursoDTO getCurso() {
+		return curso;
+	}
+
+	public void setCurso(CursoDTO curso) {
+		this.curso = curso;
+	}
+
+	public AdicionalDTO getAdicional() {
+		return adicional;
+	}
+
+	public void setAdicional(AdicionalDTO adicional) {
+		this.adicional = adicional;
 	}
 
 	public ReferenciaDTO getReferencia() {
@@ -307,22 +306,6 @@ public class DatosCandidatoController extends SelectItemController implements Se
 
 	public void setReferencia(ReferenciaDTO referencia) {
 		this.referencia = referencia;
-	}
-
-	public Object getIdiomaObj() {
-		return idiomaObj;
-	}
-
-	public void setIdiomaObj(Object idiomaObj) {
-		this.idiomaObj = idiomaObj;
-	}
-
-	public Object getNivelIdioma() {
-		return nivelIdioma;
-	}
-
-	public void setNivelIdioma(Object nivelIdioma) {
-		this.nivelIdioma = nivelIdioma;
 	}
 
 	public List<ReferenciaDTO> getListReferencia() throws SilsagException {
@@ -347,6 +330,36 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
+	public Date getFechaMaximoActual() {
+		return fechaMaximoActual;
+	}
+
+	public List<CursoDTO> getCursoList() {
+		try {
+			this.cursoList=candidatosService.obtenerCurso(getCandidato());
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+		return cursoList;
+	}
+
+	public void setCursoList(List<CursoDTO> cursoList) {
+		this.cursoList = cursoList;
+	}
+
+	public List<AdicionalDTO> getAdicionalList() {
+		try {
+			this.adicionalList=candidatosService.obtenerAdicional(getCandidato());
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+		return adicionalList;
+	}
+
+	public void setAdicionalList(List<AdicionalDTO> adicionalList) {
+		this.adicionalList = adicionalList;
+	}
+
 	public Part getFile1() {
 		return file1;
 	}
@@ -367,6 +380,14 @@ public class DatosCandidatoController extends SelectItemController implements Se
 
 	public Object getEstadoCivil() {
 		return estadoCivil;
+	}
+
+	public Object getGenero() {
+		return genero;
+	}
+
+	public void setGenero(Object genero) {
+		this.genero = genero;
 	}
 
 	public void setEstadoCivil(Object estadoCivil) {
@@ -409,10 +430,6 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	
 	private void resetEstudio()
 	{
-		setAnioFin(null);
-		setAnioInicio(null);
-		setMesFin(null);
-		setMesInicio(null);
 		setNivelEstudio(null);
 		setPais(null);
 		estudio.setEstCarrera("");
@@ -424,48 +441,44 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	public void agregarExperiencia()
 	{
 		try {
-			experiencia.setBemCandidato(candidato);
-			experiencia.setExpFechaInicio(new Timestamp(fechaInicioExp.getTime()));
-			experiencia.setExpFechaFin(new Timestamp(fechaFinExp.getTime()));
-			candidatosService.agregarExperiencia(experiencia);
-			resetExperiencia();
-			//getListExperiencia();
-			JsfUtil.addInfoMessage("Agregado Exitosamente");
+			 getExperiencia().setBemCandidato(getCandidato());
+			 getExperiencia().setExpFechaInicio(new Timestamp(fechaInicioExp.getTime()));
+			 getExperiencia().setExpFechaFin(new Timestamp(fechaFinExp.getTime()));
+			 getExperiencia().setExpTipoEmpresa(Integer.valueOf(getTipoEmpresa().toString()));
+			 candidatosService.agregarExperiencia(getExperiencia());
+			 setExperiencia(new ExperienciaDTO());
+			 getExperienciaList();
+			 JsfUtil.addInfoMessage("Agregado Exitosamente");
 		} catch (Exception e) {
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
 	}
 
-//	public void onRowDelExperiencia(ExperienciaListDTO exp)
-//	{
-//		try {
-//			experiencia=new ExperienciaDTO();
-//			experiencia.setExpCodigo(exp.getExpCodigo());
-//			candidatosService.eliminarExperiencia(experiencia);
-//			experiencia=new ExperienciaDTO();
-//			getListExperiencia();
-//			JsfUtil.addInfoMessage("Eliminado Exitosamente");
-//		} catch (SilsagException e) {
-//			JsfUtil.addErrorMessage(e.getMessage());
-//		}
-//		catch (Exception e) {
-//			JsfUtil.addErrorMessage(e.getMessage());
-//		}
-//	}
-	
-	private void resetExperiencia()
+	public void onRowDelExperiencia(ExperienciaListDTO exp)
 	{
-		setTipoExperiencia(null);
-		experiencia=new ExperienciaDTO();
+		try {
+			setExperiencia(new ExperienciaDTO());
+			getExperiencia().setExpCodigo(exp.getExpCodigo());
+			candidatosService.eliminarExperiencia(getExperiencia());
+			setExperiencia(new ExperienciaDTO());
+			getExperienciaList();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
 	}
 	
 	public void agregarReferencia()
 	{
 		try{
-			referencia.setBemCandidato(candidato);
-			candidatosService.agregarReferencia(referencia);
+			getReferencia().setBemCandidato(getCandidato());
+			candidatosService.agregarReferencia(getReferencia());
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
 			getListReferencia();
-			resetReferencia();	
+			setReferencia(new ReferenciaDTO());	
 		} catch (Exception e) {
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
@@ -484,13 +497,66 @@ public class DatosCandidatoController extends SelectItemController implements Se
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
 	}
+		
 	
-	private void resetReferencia()
+	public void agregarCurso()
 	{
-		setReferencia(null);
-		referencia=new ReferenciaDTO();
+		try {
+			getCurso().setBemCandidato(getCandidato());
+			getCurso().setCurFechaInicio(new Timestamp(getFechaInicioCurso().getTime()));
+			getCurso().setCurFechaFin(new Timestamp(getFechaFinCurso().getTime()));
+			candidatosService.agregarCurso(getCurso());
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
+			getCursoList();
+			setCurso(new CursoDTO());
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 	
+	public void onRowDelCurso(CursoDTO cur)
+	{
+		try {
+			candidatosService.eliminarCurso(cur);
+			getCursoList();
+			setCurso(new CursoDTO());
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+	
+	public void agregarAdicional()
+	{
+		try {
+			getAdicional().setBemCandidato(getCandidato());
+			candidatosService.agregarAdicional(getAdicional());
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
+			getAdicionalList();
+			setAdicional(new AdicionalDTO());
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
+	public void onRowDelAdicional(AdicionalDTO adi)
+	{
+		try {
+			candidatosService.eliminarAdicional(adi);
+			getAdicionalList();
+			setAdicional(new AdicionalDTO());
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
 	
 	public void actualizar()
 	{
@@ -499,6 +565,7 @@ public class DatosCandidatoController extends SelectItemController implements Se
 			candidato.setCanFechaNacimiento(new Timestamp(fechaNacimiento.getTime()));
 			//candidato.setCanFoto(uploadedFile.getContents());
 			candidato.setCanEstadoCivil(Integer.valueOf(estadoCivil.toString()));
+			candidato.setCanSexo(Integer.valueOf(genero.toString()));
 			candidatosService.actualizarCandidato(candidato);
 			JsfUtil.addInfoMessage("Datos Actulizados Exitosamente");
 		} catch (Exception e) {
