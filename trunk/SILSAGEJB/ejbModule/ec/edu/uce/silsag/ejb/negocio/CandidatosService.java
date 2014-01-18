@@ -6,9 +6,12 @@ import java.util.Map;
 import javax.ejb.Local;
 
 import ec.edu.uce.silsag.commons.util.SilsagException;
+import ec.edu.uce.silsag.ejb.persistence.entities.AdicionalDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.CursoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaListDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.PostulacionDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.PreguntaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ReferenciaDTO;
@@ -62,5 +65,23 @@ public interface CandidatosService {
 			Map<Integer, String> respuestaTexto, CandidatoDTO candidatoDTO);
 
 	List<RespuestaDTO> obtenerRespuesta() throws SilsagException;
+
+	List<CursoDTO> obtenerCurso(CandidatoDTO candidatoDTO)
+			throws SilsagException;
+
+	CursoDTO agregarCurso(CursoDTO cursoDTO) throws SilsagException;
+
+	AdicionalDTO agregarAdicional(AdicionalDTO adicionalDTO)
+			throws SilsagException;
+
+	List<AdicionalDTO> obtenerAdicional(CandidatoDTO candidatoDTO)
+			throws SilsagException;
+
+	void eliminarAdicional(AdicionalDTO adicionalDTO) throws SilsagException;
+
+	void eliminarCurso(CursoDTO cursoDTO) throws SilsagException;
+
+	List<ExperienciaListDTO> obtenerExperiencia(CandidatoDTO candidato)
+			throws SilsagException;
 
 }

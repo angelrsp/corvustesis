@@ -6,18 +6,22 @@ import java.sql.Timestamp;
 
 
 /**
- * The persistent class for the bem_experiencia database table.
+ * The persistent class for the vie_experiencia database table.
  * 
  */
 @Entity
-@Table(name="bem_experiencia")
-@NamedQuery(name="ExperienciaDTO.findAll", query="SELECT e FROM ExperienciaDTO e")
-public class ExperienciaDTO implements Serializable {
+@Table(name="vie_experiencia")
+@NamedQuery(name="ExperienciaListDTO.findAll", query="SELECT e FROM ExperienciaListDTO e")
+public class ExperienciaListDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Column(name="cat_tipo_empresa")
+	private String catTipoEmpresa;
+
+	@Column(name="exp_candidato")
+	private Integer expCandidato;
+
 	@Id
-	@SequenceGenerator(name="BEM_EXPERIENCIA_EXPCODIGO_GENERATOR", sequenceName="BEM_EXPERIENCIA_EXP_CODIGO_SEQ",allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="BEM_EXPERIENCIA_EXPCODIGO_GENERATOR")
 	@Column(name="exp_codigo")
 	private Integer expCodigo;
 
@@ -39,13 +43,23 @@ public class ExperienciaDTO implements Serializable {
 	@Column(name="exp_tipo_empresa")
 	private Integer expTipoEmpresa;
 
-	
-	//bi-directional many-to-one association to CandidatoDTO
-	@ManyToOne
-	@JoinColumn(name="exp_candidato")
-	private CandidatoDTO bemCandidato;
+	public ExperienciaListDTO() {
+	}
 
-	public ExperienciaDTO() {
+	public String getCatTipoEmpresa() {
+		return this.catTipoEmpresa;
+	}
+
+	public void setCatTipoEmpresa(String catTipoEmpresa) {
+		this.catTipoEmpresa = catTipoEmpresa;
+	}
+
+	public Integer getExpCandidato() {
+		return this.expCandidato;
+	}
+
+	public void setExpCandidato(Integer expCandidato) {
+		this.expCandidato = expCandidato;
 	}
 
 	public Integer getExpCodigo() {
@@ -92,24 +106,16 @@ public class ExperienciaDTO implements Serializable {
 		return this.expTareas;
 	}
 
-	public Integer getExpTipoEmpresa() {
-		return expTipoEmpresa;
-	}
-
-	public void setExpTipoEmpresa(Integer expTipoEmpresa) {
-		this.expTipoEmpresa = expTipoEmpresa;
-	}
-
 	public void setExpTareas(String expTareas) {
 		this.expTareas = expTareas;
 	}
 
-	public CandidatoDTO getBemCandidato() {
-		return this.bemCandidato;
+	public Integer getExpTipoEmpresa() {
+		return this.expTipoEmpresa;
 	}
 
-	public void setBemCandidato(CandidatoDTO bemCandidato) {
-		this.bemCandidato = bemCandidato;
+	public void setExpTipoEmpresa(Integer expTipoEmpresa) {
+		this.expTipoEmpresa = expTipoEmpresa;
 	}
 
 }
