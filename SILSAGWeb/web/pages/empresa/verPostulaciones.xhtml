@@ -10,29 +10,40 @@
 <body>
 	<ui:composition template="/template/empresa.xhtml">
 		<ui:define name="contenido">
+		
 			<fieldset>
-			
+			<p:growl id="growl"></p:growl>	
 			<p:dataTable id="tblPostulacion" value="#{verPostulacionController.postulacionList}" var="pos">
 			
 				<p:column headerText="#{i18n['label.puesto']}">
-					<h:outputText value="#{pos.catPuesto}" />
+					<h:outputText value="#{pos.bemAviso.aviPuesto}" />
 				</p:column>			
 
 				<p:column headerText="#{i18n['label.remuneracion']}">
-					<h:outputText value="#{pos.aviRemuneracion}" />
+					<h:outputText value="#{pos.bemAviso.aviRemuneracion}" />
 				</p:column>			
 
 				<p:column headerText="#{i18n['label.fecha.caducidad']}">
-					<h:outputText value="#{fn:substring(pos.aviFechaCaducidad,0,10)}" />
+					<h:outputText value="#{fn:substring(pos.bemAviso.aviFechaCaducidad,0,10)}" />
 				</p:column>			
 
 				<p:column headerText="#{i18n['label.nombres']}">
-					<h:outputText value="#{pos.canApellidoPaterno} #{pos.canApellidoMaterno} #{pos.canNombres}" />
+					<h:outputText value="#{pos.bemCandidato.canApellidoPaterno} #{pos.bemCandidato.canApellidoMaterno} #{pos.bemCandidato.canPrimerNombre} #{pos.bemCandidato.canSegundoNombre}" />
 				</p:column>			
 
 				<p:column headerText="#{i18n['label.ci.pasaporte']}">
-					<h:outputText value="#{pos.canIdentificacion}" />
+					<h:outputText value="#{pos.bemCandidato.canIdentificacion}" />
 				</p:column>			
+
+				<p:column headerText="#{i18n['label.aceptado']}">
+					<h:outputText value="#{pos.posAceptado==true?'Aceptado':'No Aceptado'}" />
+				</p:column>			
+
+				<p:column style="width:8%" headerText="#{i18n['label.aceptar']}">  
+	                <p:commandButton actionListener="#{verPostulacionController.aceptarCandidato(pos)}" icon="ui-icon-transfer-e-w"  onclick="if(!confirm('¿Esta seguro que desea aprobar al candidato?')) return false;"
+	                	update=":contenido:tblPostulacion,:contenido:growl" process="tblPostulacion" title="#{i18n['label.ver.mas']}">    
+	    	        </p:commandButton>  
+		        </p:column>  					
 
 				<p:column style="width:8%" headerText="#{i18n['label.ver.mas']}">  
 	                <p:commandButton actionListener="#{verPostulacionController.buscarCandidato(pos)}" oncomplete="PF('infoCandidato').show()" icon="ui-icon-search" 
@@ -112,81 +123,84 @@
 					
 					<p:panel id="pnlEstudios" styleClass="tabla"
 						header="#{i18n['label.titulo.pantalla.dato.estudios']}">
-						<p:dataTable id="tblEstudio" value="#{verPostulacionController.estudioList}" var="est" emptyMessage="#{i18n['table.vacio']}">
-							<p:column headerText="#{i18n['label.nivel.estudio']}">
-								<h:outputText value="#{est.catNivel}" />
-							</p:column>
-							<p:column headerText="#{i18n['label.establecimiento']}">
-								<h:outputText value="#{est.estEstablecimiento}" />
-							</p:column>
-							<p:column headerText="#{i18n['label.pais']}">
-								<h:outputText value="#{est.catPais}" />
-							</p:column>
-							<p:column headerText="#{i18n['label.carrera']}">
-								<h:outputText value="#{est.estCarrera}" />
-							</p:column>
-							<p:column headerText="#{i18n['label.anio.inicio']}">
-								<h:outputText value="#{est.estAnioInicio}" />
-							</p:column>
-							<p:column headerText="#{i18n['label.mes.inicio']}">
-								<h:outputText value="#{est.estMesInicioNombre}" />
-							</p:column>
-							<p:column headerText="#{i18n['label.anio.fin']}">
-								<h:outputText value="#{est.estAnioFin}" />
-							</p:column>
-							<p:column headerText="#{i18n['label.mes.fin']}">
-								<h:outputText value="#{est.estMesFinNombre}" />
-							</p:column>	
-						</p:dataTable>
-					</p:panel>
+<!-- 						<p:dataTable id="tblEstudio" value="#{verPostulacionController.estudioList}" var="est" emptyMessage="#{i18n['table.vacio']}"> -->
+<!-- 							<p:column headerText="#{i18n['label.nivel.estudio']}"> -->
+<!-- 								<h:outputText value="#{est.catNivel}" /> -->
+<!-- 							</p:column> -->
+<!-- 							<p:column headerText="#{i18n['label.establecimiento']}"> -->
+<!-- 								<h:outputText value="#{est.estEstablecimiento}" /> -->
+<!-- 							</p:column> -->
+<!-- 							<p:column headerText="#{i18n['label.pais']}"> -->
+<!-- 								<h:outputText value="#{est.catPais}" /> -->
+<!-- 							</p:column> -->
+<!-- 							<p:column headerText="#{i18n['label.carrera']}"> -->
+<!-- 								<h:outputText value="#{est.estCarrera}" /> -->
+<!-- 							</p:column> -->
+<!-- 							<p:column headerText="#{i18n['label.anio.inicio']}"> -->
+<!-- 								<h:outputText value="#{est.estAnioInicio}" /> -->
+<!-- 							</p:column> -->
+<!-- 							<p:column headerText="#{i18n['label.mes.inicio']}"> -->
+<!-- 								<h:outputText value="#{est.estMesInicioNombre}" /> -->
+<!-- 							</p:column> -->
+<!-- 							<p:column headerText="#{i18n['label.anio.fin']}"> -->
+<!-- 								<h:outputText value="#{est.estAnioFin}" /> -->
+<!-- 							</p:column> -->
+<!-- 							<p:column headerText="#{i18n['label.mes.fin']}"> -->
+<!-- 								<h:outputText value="#{est.estMesFinNombre}" /> -->
+<!-- 							</p:column>	 -->
+<!-- 						</p:dataTable> -->
+ 					</p:panel>
 				
 					<p:spacer height="5"/>
 					
 					<p:panel id="pnlExperiencia" styleClass="tabla"
 						header="#{i18n['label.titulo.pantalla.dato.experiencia']}">				
 						
-						<p:dataTable id="tblExperiencia" value="#{verPostulacionController.experienciaList}" var="exp" emptyMessage="#{i18n['table.vacio']}">
+<!-- 						<p:dataTable id="tblExperiencia" value="#{verPostulacionController.experienciaList}" var="exp" emptyMessage="#{i18n['table.vacio']}"> -->
 						
-						<p:column headerText="#{i18n['label.empresa']}">
-								<h:outputText value="#{exp.expEntidad}" />
-							</p:column>
-							<p:column headerText="#{i18n['label.fecha.inicio']}">
-								<h:outputText value="#{fn:substring(exp.expFechaInicio,0,10)}" />
-							</p:column>
-							<p:column headerText="#{i18n['label.fecha.fin']}">
-								<h:outputText value="#{fn:substring(exp.expFechaFin,0,10)}" />
-							</p:column>
-							<p:column headerText="#{i18n['label.tareas']}">
-								<h:outputText value="#{exp.expTareas}" />
-							</p:column>
-							<p:column headerText="#{i18n['label.puesto']}">
-								<h:outputText value="#{exp.expPuesto}" />
-							</p:column>
-							<p:column headerText="#{i18n['label.rubro']}">
-								<h:outputText value="#{exp.expRubro}" />
-							</p:column>
-							<p:column headerText="#{i18n['label.tipo.experiencia']}">
-								<h:outputText value="#{exp.catTipoExperiencia}" />
-							</p:column>
+<!-- 						<p:column headerText="#{i18n['label.empresa']}"> -->
+<!-- 								<h:outputText value="#{exp.expEntidad}" /> -->
+<!-- 							</p:column> -->
+<!-- 							<p:column headerText="#{i18n['label.fecha.inicio']}"> -->
+<!-- 								<h:outputText value="#{fn:substring(exp.expFechaInicio,0,10)}" /> -->
+<!-- 							</p:column> -->
+<!-- 							<p:column headerText="#{i18n['label.fecha.fin']}"> -->
+<!-- 								<h:outputText value="#{fn:substring(exp.expFechaFin,0,10)}" /> -->
+<!-- 							</p:column> -->
+<!-- 							<p:column headerText="#{i18n['label.tareas']}"> -->
+<!-- 								<h:outputText value="#{exp.expTareas}" /> -->
+<!-- 							</p:column> -->
+<!-- 							<p:column headerText="#{i18n['label.puesto']}"> -->
+<!-- 								<h:outputText value="#{exp.expPuesto}" /> -->
+<!-- 							</p:column> -->
+<!-- 							<p:column headerText="#{i18n['label.rubro']}"> -->
+<!-- 								<h:outputText value="#{exp.expRubro}" /> -->
+<!-- 							</p:column> -->
+<!-- 							<p:column headerText="#{i18n['label.tipo.experiencia']}"> -->
+<!-- 								<h:outputText value="#{exp.catTipoExperiencia}" /> -->
+<!-- 							</p:column> -->
 													
-						</p:dataTable>					
+<!-- 						</p:dataTable>	 -->
+										
 					</p:panel>							
 
 					<p:spacer height="5"/>
 
 					<p:panel id="pnlHerramientas" styleClass="tabla"
 						header="#{i18n['label.titulo.pantalla.dato.herramientas']}">
-						<p:dataTable id="tblHerramienta" value="#{verPostulacionController.herramientasList}" var="her" emptyMessage="#{i18n['table.vacio']}">
 						
-							<p:column headerText="#{i18n['label.programa']}">
-								<h:outputText value="#{her.proPrograma}" />
-							</p:column>
+<!-- 						<p:dataTable id="tblHerramienta" value="#{verPostulacionController.herramientasList}" var="her" emptyMessage="#{i18n['table.vacio']}"> -->
+						
+<!-- 							<p:column headerText="#{i18n['label.programa']}"> -->
+<!-- 								<h:outputText value="#{her.proPrograma}" /> -->
+<!-- 							</p:column> -->
 	
-							<p:column headerText="#{i18n['label.nivel.programa']}">
-								<h:outputText value="#{her.catNivel}" />
-							</p:column>
+<!-- 							<p:column headerText="#{i18n['label.nivel.programa']}"> -->
+<!-- 								<h:outputText value="#{her.catNivel}" /> -->
+<!-- 							</p:column> -->
 						
-						</p:dataTable>					
+<!-- 						</p:dataTable>	 -->
+										
 					</p:panel>
 
 					<p:spacer height="5"/>
@@ -194,17 +208,18 @@
 					<p:panel id="pnlIdioma" styleClass="tabla"
 						header="#{i18n['label.titulo.pantalla.dato.idioma']}" emptyMessage="#{i18n['table.vacio']}">
 					
-						<p:dataTable id="tblIdioma" emptyMessage="#{i18n['table.vacio']}" value="#{verPostulacionController.idiomaList}" var="idi">
+<!-- 						<p:dataTable id="tblIdioma" emptyMessage="#{i18n['table.vacio']}" value="#{verPostulacionController.idiomaList}" var="idi"> -->
 						
-							<p:column headerText="#{i18n['label.idioma']}">
-								<h:outputText value="#{idi.idiIdioma}" />
-							</p:column>
+<!-- 							<p:column headerText="#{i18n['label.idioma']}"> -->
+<!-- 								<h:outputText value="#{idi.idiIdioma}" /> -->
+<!-- 							</p:column> -->
 	
-							<p:column headerText="#{i18n['label.nivel.idioma']}">
-								<h:outputText value="#{idi.catNivel}" />
-							</p:column>
+<!-- 							<p:column headerText="#{i18n['label.nivel.idioma']}"> -->
+<!-- 								<h:outputText value="#{idi.catNivel}" /> -->
+<!-- 							</p:column> -->
 							
-						</p:dataTable>					
+<!-- 						</p:dataTable>	 -->
+										
 					</p:panel>
 
 					<p:spacer height="5"/>
@@ -212,21 +227,21 @@
 					<p:panel id="pnlReferencia" styleClass="tabla"
 						header="#{i18n['label.titulo.pantalla.dato.referencia']}">
 					
-					<p:dataTable id="tblReferencia" emptyMessage="#{i18n['table.vacio']}" value="#{verPostulacionController.referenciaList}" var="ref">
+<!-- 					<p:dataTable id="tblReferencia" emptyMessage="#{i18n['table.vacio']}" value="#{verPostulacionController.referenciaList}" var="ref"> -->
 					
-						<p:column headerText="#{i18n['label.nombre.completo']}">
-							<h:outputText value="#{ref.refNombre}" />
-						</p:column>
+<!-- 						<p:column headerText="#{i18n['label.nombre.completo']}"> -->
+<!-- 							<h:outputText value="#{ref.refNombre}" /> -->
+<!-- 						</p:column> -->
 
-						<p:column headerText="#{i18n['label.telefono']}">
-							<h:outputText value="#{ref.refNombre}" />
-						</p:column>
+<!-- 						<p:column headerText="#{i18n['label.telefono']}"> -->
+<!-- 							<h:outputText value="#{ref.refNombre}" /> -->
+<!-- 						</p:column> -->
 
-						<p:column headerText="#{i18n['label.email']}">
-							<h:outputText value="#{ref.refMail}" />
-						</p:column>
+<!-- 						<p:column headerText="#{i18n['label.email']}"> -->
+<!-- 							<h:outputText value="#{ref.refMail}" /> -->
+<!-- 						</p:column> -->
 					
-					</p:dataTable>
+<!-- 					</p:dataTable> -->
 										
 				</p:panel>
 

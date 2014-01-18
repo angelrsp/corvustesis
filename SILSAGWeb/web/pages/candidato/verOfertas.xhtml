@@ -15,16 +15,19 @@
 				<p:panel header="">
 					<p:dataGrid value="#{verOfertasCandidatoController.ofertasList}"
 						var="ofe" columns="1" emptyMessage="#{i18n['table.vacio']}">
-						<p:panel header="#{ofe.empNombreComercial}">
+						<p:panel header="#{ofe.bemEmpresa.empNombreComercial}">
 						<h:panelGrid columns="2">
 							<h:outputText value="#{i18n['label.remuneracion']}:&#160;" />
 							<h:outputText value="#{ofe.aviRemuneracion}" />
 							
 							<h:outputText value="#{i18n['label.puesto']}:&#160;" />
-							<h:outputText value="#{ofe.catDescripcion}" />
+							<h:outputText value="#{ofe.aviPuesto}" />
 							
 							<h:outputText value="#{i18n['label.descripcion']}:&#160;" />
 							<h:outputText value="#{ofe.aviDescripcion}" />
+
+							<h:outputText value="#{i18n['label.vacantes']}:&#160;" />
+							<h:outputText value="#{ofe.aviVacantes}" />
 							
 							<p:commandButton value="#{i18n['boton.postularse']}" onclick="if(!confirm('Esta seguro(a) que desea postularse?')) return false;" actionListener="#{verOfertasCandidatoController.postularse(ofe)}" update=":contenido:growl"></p:commandButton>
 						</h:panelGrid>	
