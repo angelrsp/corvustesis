@@ -12,9 +12,12 @@ import org.slf4j.LoggerFactory;
 import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsag.ejb.persistence.dao.FactoryDAO;
+import ec.edu.uce.silsag.ejb.persistence.entities.AdicionalDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.CursoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaListDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.PostulacionDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.PreguntaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ReferenciaDTO;
@@ -106,7 +109,7 @@ public class CandidatosServiceImpl implements CandidatosService {
 	
 	@Override
 	public void agregarExperiencia(ExperienciaDTO experiencia) throws SilsagException {
-		log.info("agregarEstudio");
+		log.info("agregarExperiencia");
 
 		try {
 			factoryDAO.getExperienciaDAOImpl().create(experiencia);
@@ -190,18 +193,18 @@ public class CandidatosServiceImpl implements CandidatosService {
 //
 //		}
 //	}
-//	
-//	
-//	@Override
-//	public List<ExperienciaListDTO> obtenerExperiencia(CandidatoDTO candidato)throws SilsagException {
-//		try {
-//			return factoryDAO.getExperienciaDAOImpl().getAll(candidato);
-//		} catch (Exception e) {
-//			log.info("Error al obtener datos de Estudio {}", e.toString());
-//			throw new SilsagException("Error al registrar el Candidato");
-//
-//		}
-//	}
+	
+
+	@Override
+	public List<ExperienciaListDTO> obtenerExperiencia(CandidatoDTO candidato)throws SilsagException {
+		try {
+			return factoryDAO.getExperienciaDAOImpl().getAll(candidato);
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Estudio {}", e.toString());
+			throw new SilsagException("Error al registrar el Candidato");
+
+		}
+	}
 
 	
 
@@ -339,9 +342,91 @@ public class CandidatosServiceImpl implements CandidatosService {
 	@Override
 	public List<RespuestaDTO> obtenerRespuesta()throws SilsagException
 	{
-		log.info("obtenerPregunta");
+		log.info("obtenerRespuesta");
 		try {
 			return factoryDAO.getRespuestaDAOImpl().getAll();
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Herramientas {}", e.toString());
+			throw new SilsagException("Error al obtener datos de Herramientas "+e.toString());
+
+		}
+		
+	}
+	
+	
+	@Override
+	public CursoDTO agregarCurso(CursoDTO cursoDTO)throws SilsagException
+	{
+		log.info("agregarCurso");
+		try {
+			return factoryDAO.getCursoDAOImpl().create(cursoDTO);
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Herramientas {}", e.toString());
+			throw new SilsagException("Error al obtener datos de Herramientas "+e.toString());
+
+		}
+	}
+	
+	@Override
+	public void eliminarCurso(CursoDTO cursoDTO)throws SilsagException
+	{
+		log.info("eliminarCurso");
+		try {
+			factoryDAO.getCursoDAOImpl().remove(cursoDTO);
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Herramientas {}", e.toString());
+			throw new SilsagException("Error al obtener datos de Herramientas "+e.toString());
+
+		}
+	}
+	
+	@Override
+	public List<CursoDTO> obtenerCurso(CandidatoDTO candidatoDTO)throws SilsagException
+	{
+		log.info("obtenerCurso");
+		try {
+			return factoryDAO.getCursoDAOImpl().getAll(candidatoDTO);
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Herramientas {}", e.toString());
+			throw new SilsagException("Error al obtener datos de Herramientas "+e.toString());
+
+		}
+		
+	}
+
+
+	@Override
+	public AdicionalDTO agregarAdicional(AdicionalDTO adicionalDTO)throws SilsagException
+	{
+		log.info("agregarAdicional");
+		try {
+			return factoryDAO.getAdicionalDAOImpl().create(adicionalDTO);
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Herramientas {}", e.toString());
+			throw new SilsagException("Error al obtener datos de Herramientas "+e.toString());
+
+		}
+	}
+
+	@Override
+	public void eliminarAdicional(AdicionalDTO adicionalDTO)throws SilsagException
+	{
+		log.info("eliminarAdicional");
+		try {
+			factoryDAO.getAdicionalDAOImpl().remove(adicionalDTO);;
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Herramientas {}", e.toString());
+			throw new SilsagException("Error al obtener datos de Herramientas "+e.toString());
+
+		}
+	}
+	
+	@Override
+	public List<AdicionalDTO> obtenerAdicional(CandidatoDTO candidatoDTO)throws SilsagException
+	{
+		log.info("obtenerAdicional");
+		try {
+			return factoryDAO.getAdicionalDAOImpl().getAll(candidatoDTO);
 		} catch (Exception e) {
 			log.info("Error al obtener datos de Herramientas {}", e.toString());
 			throw new SilsagException("Error al obtener datos de Herramientas "+e.toString());

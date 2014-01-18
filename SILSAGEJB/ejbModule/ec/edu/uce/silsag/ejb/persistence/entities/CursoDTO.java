@@ -30,6 +30,9 @@ public class CursoDTO implements Serializable {
 	@Column(name="cur_fecha_inicio")
 	private Timestamp curFechaInicio;
 
+	@Column(name="cur_descripcion")
+	private String curDescripcion;
+	
 	//bi-directional many-to-one association to CandidatoDTO
 	@ManyToOne
 	@JoinColumn(name="cur_candidato")
@@ -68,6 +71,14 @@ public class CursoDTO implements Serializable {
 
 	public void setCurFechaInicio(Timestamp curFechaInicio) {
 		this.curFechaInicio = curFechaInicio;
+	}
+
+	public String getCurDescripcion() {
+		return curDescripcion;
+	}
+
+	public void setCurDescripcion(String curDescripcion) {
+		this.curDescripcion = curDescripcion;
 	}
 
 	public CandidatoDTO getBemCandidato() {

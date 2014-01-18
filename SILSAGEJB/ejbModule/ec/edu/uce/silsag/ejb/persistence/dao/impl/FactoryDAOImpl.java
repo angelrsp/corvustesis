@@ -4,10 +4,12 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import ec.edu.uce.silsag.ejb.persistence.dao.AdicionalDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.AvisoDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.CandidatoDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.CatalogoDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.ContactoDAO;
+import ec.edu.uce.silsag.ejb.persistence.dao.CursoDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.EmpresaDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.EstudioDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.ExperienciaDAO;
@@ -19,7 +21,6 @@ import ec.edu.uce.silsag.ejb.persistence.dao.ReferenciaDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.RespuestaDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.ResultadoDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.UsuarioDAO;
-import ec.edu.uce.silsag.ejb.persistence.entities.RespuestaDTO;
 
 @Stateless
 public class FactoryDAOImpl implements FactoryDAO {
@@ -54,6 +55,10 @@ public class FactoryDAOImpl implements FactoryDAO {
 	private PreguntaDAO preguntaDAO;
 
 	private RespuestaDAO respuestaDAO;
+	
+	private CursoDAO cursoDAO;
+	
+	private AdicionalDAO adicionalDAO;
 	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -167,4 +172,19 @@ public class FactoryDAOImpl implements FactoryDAO {
 		return respuestaDAO;
 	}
 
+	@Override
+	public CursoDAO getCursoDAOImpl() {
+		if (cursoDAO == null) {
+			cursoDAO = new CursoDAOImpl(entityManager);
+		}
+		return cursoDAO;
+	}
+	
+	@Override
+	public AdicionalDAO getAdicionalDAOImpl() {
+		if (adicionalDAO == null) {
+			adicionalDAO = new AdicionalDAOImpl(entityManager);
+		}
+		return adicionalDAO;
+	}
 }
