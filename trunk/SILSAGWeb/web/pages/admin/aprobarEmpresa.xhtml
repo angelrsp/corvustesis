@@ -36,7 +36,7 @@
 					</p:column>			
 	
 					<p:column style="width:14%" headerText="#{i18n['label.cambiar.estado']}">
-						<p:commandButton actionListener="#{aprobarEmpresaController.cambiarEstado(emp)}" icon="	ui-icon-transfer-e-w" onclick="if(!confirm('Cambiar estado?')) return false;" 
+						<p:commandButton actionListener="#{aprobarEmpresaController.cambiarEstado(emp)}" icon="ui-icon-transfer-e-w" onclick="if(!confirm('Cambiar estado?')) return false;" 
 							process="tblEmpresa" update=":contenido:growl,tblEmpresa" title="#{i18n['label.cambiar.estado']}">
 						</p:commandButton>
 					</p:column>			
@@ -93,7 +93,11 @@
 						<tr>		
 							<td><h:outputLabel value="#{i18n['label.web']}:&#160;" /></td>
 							<td colspan="3"><p:inputText style="width : 90%;" value="#{aprobarEmpresaController.empresa.empWeb}" readonly="true"/></td>
-						</tr>						
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.email']}:&#160;" /></td>
+							<td colspan="3"><p:inputText style="width : 90%;" value="#{aprobarEmpresaController.user.usuMail}" /></td>							
+						</tr>				
 					</table>
 				</p:panel>
 			

@@ -30,7 +30,7 @@
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.ruc']}:&#160;" /></td>
 							<td><p:inputText required="true"
-									requiredMessage="#{i18n['label.ruc']}&#160;#{i18n['label.requerido']}" value="#{registroEmpresaController.empresa.empRuc}" onkeypress="return isNumberKey(event);"/></td>
+									requiredMessage="#{i18n['label.ruc']}&#160;#{i18n['label.requerido']}" value="#{registroEmpresaController.empresa.empRuc}" onkeypress="return isNumberKey(event);" maxlength="13"/></td>
 							<td><h:outputLabel value="#{i18n['label.sector']}:&#160;" /></td>
 							<td><p:selectOneMenu value="#{registroEmpresaController.tipoEmpresa}" required="true" requiredMessage="#{i18n['label.sector']}&#160;#{i18n['label.requerido']}">
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
@@ -41,10 +41,10 @@
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.telefono.convencional']}:&#160;" /></td>
-							<td><p:inputText value="#{registroEmpresaController.usuarioRegistro.usuTelefono}" required="true" requiredMessage="#{i18n['label.telefono.convencional']}&#160;#{i18n['label.requerido']}"/></td>
+							<td><p:inputText value="#{registroEmpresaController.usuarioRegistro.usuTelefono}" required="true" requiredMessage="#{i18n['label.telefono.convencional']}&#160;#{i18n['label.requerido']}" onkeypress="return isNumberKey(event);" maxlength="11"/></td>
 
 							<td><h:outputLabel value="#{i18n['label.telefono.celular']}:&#160;" /></td>
-							<td><p:inputText value="#{registroEmpresaController.usuarioRegistro.usuCelular}" /></td>							
+							<td><p:inputText value="#{registroEmpresaController.usuarioRegistro.usuCelular}" onkeypress="return isNumberKey(event);" maxlength="12"/></td>							
 														
 						</tr>
 						<tr>
@@ -61,12 +61,14 @@
 						</tr>
 						
 						<tr>
-							<td><h:outputLabel value="#{i18n['label.email']}:&#160;" />
-							</td>
+							<td><h:outputLabel value="#{i18n['label.email']}:&#160;" /></td>
 							<td colspan="3"><p:inputText style="width : 90%;"
 									required="true"
 									requiredMessage="#{i18n['label.contrasenia']}&#160;#{i18n['label.requerido']}"
-									value="#{registroEmpresaController.usuarioRegistro.usuMail}" /></td>
+									value="#{registroEmpresaController.usuarioRegistro.usuMail}" >
+										<f:validator validatorId="emailValidator"></f:validator>
+									</p:inputText>
+							</td>
 						</tr>
 						<tr>
 							<td><h:outputLabel
@@ -87,9 +89,6 @@
 									update="pnlRegistroCandidato, growl"
 									actionListener="#{registroEmpresaController.registroEmpresa}" />
 							</td>
-<!-- 							<td> -->
-<!-- 							<p:commandButton id="showDialogButton" type="button" value="Show" onclick="mensajeDialog.show()" />  -->
-<!-- 							</td> -->
 						</tr>
 					</table>
 				</p:panel>

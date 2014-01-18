@@ -49,14 +49,10 @@
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.ubicacion']}:&#160;" /></td>
-							<td><p:selectOneMenu value="#{datosEmpresaController.ubicacion}">
-									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
-										itemValue="" />
-									<f:selectItems value="#{datosEmpresaController.catalogoUbicacion}"></f:selectItems>	
-								</p:selectOneMenu></td>
+							<td><p:inputText value="#{datosEmpresaController.empresa.empUbicacion}" /></td>
 								
-								<td><h:outputLabel value="#{i18n['label.direccion']}:&#160;" /></td>
-								<td><p:inputText value="#{datosEmpresaController.user.usuDireccion}" /></td>
+							<td><h:outputLabel value="#{i18n['label.direccion']}:&#160;" /></td>
+							<td><p:inputText value="#{datosEmpresaController.user.usuDireccion}" /></td>
 																
 						</tr>		
 						<tr>		

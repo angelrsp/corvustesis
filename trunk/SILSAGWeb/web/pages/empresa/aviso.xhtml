@@ -17,15 +17,13 @@
 					<table>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.puesto']}:&#160;" /></td>
-							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.puesto']}#160;#{i18n['label.requerido']}" value="#{avisoEmpresaController.puesto}">
-									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
-										itemValue="" />
-									<f:selectItems value="#{avisoEmpresaController.catalogoPuesto}"></f:selectItems>	
-								</p:selectOneMenu></td>
+							<td><p:inputText required="true" requiredMessage="#{i18n['label.puesto']}:&#160;#{i18n['label.requerido']}" value="#{avisoEmpresaController.aviso.aviPuesto}" /></td>
+							
 							<td><h:outputLabel
 									value="#{i18n['label.remuneracion']}:&#160;" /></td>
 							<td><p:inputText required="true"
 									requiredMessage="#{i18n['label.remuneracion']}&#160;#{i18n['label.requerido']}" value="#{avisoEmpresaController.aviso.aviRemuneracion}" /></td>
+									
 						</tr>
 
 						<tr>
@@ -59,7 +57,7 @@
 					
 					<p:dataTable value="#{avisoEmpresaController.avisoList}" var="avi" emptyMessage="#{i18n['table.vacio']}">
 					<p:column headerText="#{i18n['label.puesto']}">
-						<h:outputLabel value="#{avi.catDescripcion}" />
+						<h:outputLabel value="#{avi.aviPuesto}" />
 					</p:column>
 					<p:column headerText="#{i18n['label.remuneracion']}">
 						<h:outputLabel value="#{avi.aviRemuneracion}" />
