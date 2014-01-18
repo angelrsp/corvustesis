@@ -44,8 +44,6 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	
 	private static final Logger logger = LoggerFactory.getLogger(DatosCandidatoController.class);
 	
-	AbstractCandidatoController abs=AbstractCandidatoController.getInstance();
-	
 	@EJB
 	private CandidatosService candidatosService;
 	
@@ -93,7 +91,7 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	}
 	
 	@PostConstruct
-	private void init()
+	private void init() 
 	{
 		user=new UsuarioDTO();
 		candidato=new CandidatoDTO();
@@ -112,6 +110,20 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		fechaMaximo = cal.getTime();
 		
 		estadoCivil=candidato.getCanEstadoCivil();
+		
+		try {
+			if(candidatosService.obtenerResutado(candidato)==null)
+			{
+				JsfUtil.redirect("/SILSAGWeb/pages/candidato/encuesta.jsf");
+			}
+		} catch (SilsagException e) {
+			// TODO Auto-generated catch block
+			logger.info("AA",e.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		logger.info("Inicio");
 	}
 	
