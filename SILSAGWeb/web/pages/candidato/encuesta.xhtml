@@ -11,74 +11,80 @@
 	<ui:composition template="/template/candidato.xhtml">
 		<ui:define name="contenido">
 
+		
 		<p:panel header="Trayectoria Laboral">
 		
 			<p:panel id="pnlPregunta1">
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="Actividad a la que se dedica actualmente (Seleccione una de las opciones)" />
+							<h:outputText value="#{encuestaController.preguntaList.get(0).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta1">  
-		        				<f:selectItem itemLabel="Estudia (Cursa un Posgrado)." itemValue="1" />  
-		        				<f:selectItem itemLabel="Trabaja en su profesión." itemValue="2" />  
-		        				<f:selectItem itemLabel="Estudia y Trabaja." itemValue="3" />
-		        				<f:selectItem itemLabel="No Estudia Ni Trabaja." itemValue="4" />
-		        				<f:selectItem itemLabel="Otro." itemValue="5" />
+							<p:selectOneRadio id="pregunta1" value="#{encuestaController.respuesta[0]}" required="true">
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(0).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(0).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(1).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(1).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(2).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(2).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(3).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(3).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(4).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(4).resDescripcion}"/>
+								<f:ajax render="textOtro1" />
+								<f:ajax render="pnlPregunta2" />
+								<f:ajax render="pnlPregunta3" />								
 		        			</p:selectOneRadio>
 		        		</td>	
 		        		<td>
-		        			<p:inputText></p:inputText>
+		        			<p:inputText id="textOtro1" value="#{encuestaController.respuestaTexto[0]}" disabled="#{encuestaController.respuesta[0].toString()!='5'}"></p:inputText>
 		        		</td>        			
 					</tr>
 				</table>
 			</p:panel>
 			
-			<p:panel id="pnlPregunta2">			
+			<p:panel id="pnlPregunta2" visible="#{encuestaController.respuesta[0].toString()=='4'}">			
 				<table>		
 					<tr>
 						<td>
-							<h:outputText value="(*) Si no trabaja, ¿A qué atribuye su no ingreso al ámbito laboral?" />
+							<h:outputText value="#{encuestaController.preguntaList.get(1).preDescripcion}" />
 						</td>   
 					</tr>			
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta2">  
-		        				<f:selectItem itemLabel="Falta de Fuentes de Trabajo." itemValue="1" />  
-		        				<f:selectItem itemLabel="Excesiva oferta de profesionales en su área." itemValue="2" />  
-		        				<f:selectItem itemLabel="Falta de experiencia." itemValue="3" />
-		        				<f:selectItem itemLabel="Necesita Migrar." itemValue="4" />
-		        				<f:selectItem itemLabel="Otro." itemValue="5" />
+							<p:selectOneRadio id="pregunta2" value="#{encuestaController.respuesta[1]}" required="#{encuestaController.respuesta[0].toString()=='4'}">
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(5).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(5).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(6).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(6).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(7).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(7).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(8).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(8).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(9).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(9).resDescripcion}"/>
+								<f:ajax render="textOtro2" />							  
 		        			</p:selectOneRadio>
 		        		</td>
 		        		<td>
-		        			<p:inputText></p:inputText>
+		        			<p:inputText id="textOtro2" value="#{encuestaController.respuestaTexto[1]}" disabled="#{encuestaController.respuesta[1].toString()!='10'}"></p:inputText>
 		        		</td>	        		
 					</tr>				        				  
 				</table>
 			</p:panel>
 
-			<p:panel id="pnlPregunta3">			
+			<p:panel id="pnlPregunta3" visible="#{encuestaController.respuesta[0].toString()=='4'}">			
 				<table>		
 					<tr>
 						<td>
-							<h:outputText value="Si Trabaja, indique si es:" />
+							<h:outputText value="#{encuestaController.preguntaList.get(2).preDescripcion}" />
 						</td>   
 					</tr>			
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta3">  
-		        				<f:selectItem itemLabel="En relación de Dependencia." itemValue="1" />  
-		        				<f:selectItem itemLabel="Clínica." itemValue="2" />  
-		        				<f:selectItem itemLabel="En asociación con particulares." itemValue="3" />
-		        				<f:selectItem itemLabel="Otro." itemValue="4" />
+							<p:selectOneRadio id="pregunta3" value="#{encuestaController.respuesta[2]}" required="#{encuestaController.respuesta[0].toString()=='4'}">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(10).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(10).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(11).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(11).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(12).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(12).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(13).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(13).resDescripcion}"/>
+								<f:ajax render="textOtro3" />							
 		        			</p:selectOneRadio>
 		        		</td>
 		        		<td>
-		        			<p:inputText></p:inputText>
+		        			<p:inputText id="textOtro3" value="#{encuestaController.respuestaTexto[2]}" disabled="#{encuestaController.respuesta[2].toString()!='14'}"></p:inputText>
 		        		</td>	        		
 					</tr>				        				  
 				</table>
@@ -87,7 +93,7 @@
 		</p:panel>
 		
 		
-		<!--Datos de la Empresa y/o Institución donde labora -->
+ 		<!--Datos de la Empresa y/o Institución donde labora --> 
 		
 		<p:panel header="Datos de la Empresa y/o Institución donde labora">
 		
@@ -95,39 +101,40 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="La Empresa es:" />
+							<h:outputText value="#{encuestaController.preguntaList.get(3).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta4">  
-		        				<f:selectItem itemLabel="Pública." itemValue="1" />  
-		        				<f:selectItem itemLabel="Privada." itemValue="2" />  
-		        				<f:selectItem itemLabel="Fundación." itemValue="3" />
-		        				<f:selectItem itemLabel="Mixta." itemValue="4" />
-		        				<f:selectItem itemLabel="Otro." itemValue="5" />
+							<p:selectOneRadio id="pregunta4" value="#{encuestaController.respuesta[3]}" required="true">  							
+		        				<f:selectItem itemValue="#{encuestaController.respuestaList.get(14).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(14).resDescripcion}"/>
+		        				<f:selectItem itemValue="#{encuestaController.respuestaList.get(15).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(15).resDescripcion}"/>
+		        				<f:selectItem itemValue="#{encuestaController.respuestaList.get(16).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(16).resDescripcion}"/>
+		        				<f:selectItem itemValue="#{encuestaController.respuestaList.get(17).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(17).resDescripcion}"/>
+		        				<f:selectItem itemValue="#{encuestaController.respuestaList.get(18).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(18).resDescripcion}"/>
+		        				<f:ajax render="textOtro4" />  
 		        			</p:selectOneRadio>
 		        		</td>	
 		        		<td>
-		        			<p:inputText></p:inputText>
+		        			<p:inputText id="textOtro4" value="#{encuestaController.respuestaTexto[3]}" disabled="#{encuestaController.respuesta[3].toString()!='19'}"></p:inputText>
 		        		</td>        			
 					</tr>
 					<tr>
 		        		<td>
 		        			<h:outputText value="Nombre:" />
-		        			<p:inputText></p:inputText>
+		        			<p:inputText value="#{encuestaController.respuestaTexto[4]}" required="true"></p:inputText>
 		        		</td>        																		
 					</tr>
 					<tr>
 		        		<td>
 		        			<h:outputText value="Actividad:" />
-		        			<p:inputText></p:inputText>
+		        			<p:inputText value="#{encuestaController.respuestaTexto[5]}" required="true"></p:inputText>
 		        		</td>		        		        													
 					</tr>
 					<tr>
 		        		<td>
 		        			<h:outputText value="Ubicación (País/Provincia/Ciudad/Dirección):" />
-		        			<p:inputText></p:inputText>
+		        			<p:inputText value="#{encuestaController.respuestaTexto[6]}" required="true"></p:inputText>
 		        		</td>						
 					</tr>
 					
@@ -138,28 +145,29 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="Tamaño de la Empresa:" />
+							<h:outputText value="#{encuestaController.preguntaList.get(4).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta5">  
-		        				<f:selectItem itemLabel="Microempresa (1-30 Empleados)." itemValue="1" />  
-		        				<f:selectItem itemLabel="Pequeña (31-100 Empleados)." itemValue="2" />  
-		        				<f:selectItem itemLabel="Mediana (101-500 Empleados)." itemValue="3" />
-		        				<f:selectItem itemLabel="Grande (Más de 500 Empleados)." itemValue="4" />
-		        				<f:selectItem itemLabel="Otro." itemValue="5" />
+							<p:selectOneRadio id="pregunta5" value="#{encuestaController.respuesta[4]}" required="true">  	
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(22).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(22).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(23).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(23).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(24).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(24).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(25).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(25).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(26).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(26).resDescripcion}"/>
+								<f:ajax render="textOtro5" />																								
 		        			</p:selectOneRadio>
 		        		</td>	
 		        		<td>
-		        			<p:inputText></p:inputText>
+		        			<p:inputText id="textOtro5" value="#{encuestaController.respuestaTexto[7]}" disabled="#{encuestaController.respuesta[4].toString()!='27'}"></p:inputText>
 		        		</td>        			
 					</tr>
 					
 					<tr>
 		        		<td>
 		        			<h:outputText value="Cargo o función que desempeña:" />
-		        			<p:inputText></p:inputText>
+		        			<p:inputText value="#{encuestaController.respuestaTexto[8]}" required="true"></p:inputText>
 		        		</td>						
 					</tr>					
 				</table>
@@ -169,18 +177,18 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="Antigüedad en el Empleo:" />
+							<h:outputText value="#{encuestaController.preguntaList.get(5).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta6">  
-		        				<f:selectItem itemLabel="Menos de un año." itemValue="1" />  
-		        				<f:selectItem itemLabel="Un año." itemValue="2" />  
-		        				<f:selectItem itemLabel="Dos años." itemValue="3" />
-		        				<f:selectItem itemLabel="Tres años." itemValue="4" />
-		        				<f:selectItem itemLabel="Más de tres años." itemValue="5" />
-		        				<f:selectItem itemLabel="Ninguna." itemValue="6" />
+							<p:selectOneRadio id="pregunta6" value="#{encuestaController.respuesta[5]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(28).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(28).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(29).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(29).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(30).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(30).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(31).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(31).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(32).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(32).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(33).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(33).resDescripcion}"/>							
 		        			</p:selectOneRadio>
 		        		</td>	       			
 					</tr>
@@ -192,17 +200,17 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="Tiempo de trabajo en la profesión:" />
+							<h:outputText value="#{encuestaController.preguntaList.get(6).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta7">  
-		        				<f:selectItem itemLabel="Dos horas diarias." itemValue="1" />  
-		        				<f:selectItem itemLabel="Cuatro horas diarias." itemValue="2" />  
-		        				<f:selectItem itemLabel="Seis horas diarias." itemValue="3" />
-		        				<f:selectItem itemLabel="Ocho horas diarias." itemValue="4" />
-		        				<f:selectItem itemLabel="Mas de ocho horas diarias." itemValue="5" />
+							<p:selectOneRadio id="pregunta7" value="#{encuestaController.respuesta[6]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(34).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(34).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(35).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(35).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(36).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(36).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(37).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(37).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(38).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(38).resDescripcion}"/>							
 		        			</p:selectOneRadio>
 		        		</td>	       			
 					</tr>
@@ -214,17 +222,17 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="¿Cuánto tiempo se tomó para conseguir empleo de acuerdo a la denominación de su título? (Seleccione una de las opciones)" />
+							<h:outputText value="#{encuestaController.preguntaList.get(7).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta8">  
-		        				<f:selectItem itemLabel="Menos de un año." itemValue="1" />  
-		        				<f:selectItem itemLabel="Un año." itemValue="2" />  
-		        				<f:selectItem itemLabel="Dos años." itemValue="3" />
-		        				<f:selectItem itemLabel="Tres años." itemValue="4" />
-		        				<f:selectItem itemLabel="Más de tres años." itemValue="5" />
+							<p:selectOneRadio id="pregunta8" value="#{encuestaController.respuesta[7]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(39).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(39).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(40).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(40).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(41).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(41).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(42).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(42).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(43).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(43).resDescripcion}"/>							
 		        			</p:selectOneRadio>
 		        		</td>	       			
 					</tr>
@@ -236,22 +244,23 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="Medio por el cual consiguió el empleo (Seleccione una de las opciones)" />
+							<h:outputText value="#{encuestaController.preguntaList.get(8).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta9">  
-		        				<f:selectItem itemLabel="Contactos Personales." itemValue="1" />  
-		        				<f:selectItem itemLabel="Prácticas Pre-Profesionales." itemValue="2" />  
-		        				<f:selectItem itemLabel="Medios masivos de comunicación." itemValue="3" />
-		        				<f:selectItem itemLabel="Concurso de Méritos y Oposición." itemValue="4" />
-		        				<f:selectItem itemLabel="Más de tres años." itemValue="5" />
-		        				<f:selectItem itemLabel="Otro." itemValue="6" />
+							<p:selectOneRadio id="pregunta9" value="#{encuestaController.respuesta[8]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(44).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(44).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(45).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(45).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(46).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(46).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(47).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(47).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(48).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(48).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(49).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(49).resDescripcion}"/>
+								<f:ajax render="textOtro6" />							
 		        			</p:selectOneRadio>
 		        		</td>
 		        		<td>
-		        			<p:inputText></p:inputText>
+		        			<p:inputText id="textOtro6" value="#{encuestaController.respuestaTexto[9]}" disabled="#{encuestaController.respuesta[8].toString()!='50'}"></p:inputText>
 		        		</td>  		        			       			
 					</tr>
 								
@@ -262,18 +271,19 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="Ingreso Remunerativo mensual (USD)" />
+							<h:outputText value="#{encuestaController.preguntaList.get(9).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta10">  
-		        				<f:selectItem itemLabel="Menor a $ 500.00" itemValue="1" />  
-		        				<f:selectItem itemLabel="De $ 500.00 a $ 800.00" itemValue="2" />  
-		        				<f:selectItem itemLabel="De $ 801.00 a $ 1000.00" itemValue="3" />
-		        				<f:selectItem itemLabel="De $ 1001.00 a $ 1200.00" itemValue="4" />
-		        				<f:selectItem itemLabel="Mayor a $ 1200.00" itemValue="5" />
-		        				<f:selectItem itemLabel="Ninguna de las anteriores." itemValue="6" />
+							<p:selectOneRadio id="pregunta10" value="#{encuestaController.respuesta[9]}" required="true">  
+								
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(50).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(50).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(51).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(51).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(52).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(52).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(53).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(53).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(54).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(54).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(55).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(55).resDescripcion}"/>							
 		        			</p:selectOneRadio>
 		        		</td>
 					</tr>
@@ -286,21 +296,22 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="Nivel Jerárquico en el trabajo (Seleccione una de las opciones)" />
+							<h:outputText value="#{encuestaController.preguntaList.get(10).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta11">  
-		        				<f:selectItem itemLabel="Directivo." itemValue="1" />  
-		        				<f:selectItem itemLabel="Jefe de Área." itemValue="2" />  
-		        				<f:selectItem itemLabel="Odontólogo Especialista." itemValue="3" />
-		        				<f:selectItem itemLabel="Odontólogo General." itemValue="4" />
-		        				<f:selectItem itemLabel="Otro." itemValue="5" />
+							<p:selectOneRadio id="pregunta11" value="#{encuestaController.respuesta[10]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(56).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(56).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(57).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(57).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(58).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(58).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(59).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(59).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(60).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(60).resDescripcion}"/>
+								<f:ajax render="textOtro7" />							
 		        			</p:selectOneRadio>
 		        		</td>
 		        		<td>
-		        			<p:inputText></p:inputText>
+		        			<p:inputText id="textOtro7" value="#{encuestaController.respuestaTexto[10]}" disabled="#{encuestaController.respuesta[10].toString()!='61'}"></p:inputText>
 		        		</td>  		        			       					        		
 					</tr>
 								
@@ -311,21 +322,22 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="Condición de Empleo (Seleccione una de las opciones)" />
+							<h:outputText value="#{encuestaController.preguntaList.get(11).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta12">  
-		        				<f:selectItem itemLabel="Nombramiento." itemValue="1" />  
-		        				<f:selectItem itemLabel="Eventual/ Temporal." itemValue="2" />  
-		        				<f:selectItem itemLabel="Contrato." itemValue="3" />
-		        				<f:selectItem itemLabel="Proyecto." itemValue="4" />
-		        				<f:selectItem itemLabel="Otro." itemValue="5" />
+							<p:selectOneRadio id="pregunta12" value="#{encuestaController.respuesta[11]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(61).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(61).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(62).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(62).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(63).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(63).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(64).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(64).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(65).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(65).resDescripcion}"/>
+								<f:ajax render="textOtro8" />							
 		        			</p:selectOneRadio>
 		        		</td>
 		        		<td>
-		        			<p:inputText></p:inputText>
+		        			<p:inputText id="textOtro8" value="#{encuestaController.respuestaTexto[11]}" disabled="#{encuestaController.respuesta[11].toString()!='66'}"></p:inputText>
 		        		</td>  		        			       					        		
 					</tr>
 								
@@ -336,18 +348,18 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="Condición de Empleo (Seleccione una de las opciones)" />
+							<h:outputText value="#{encuestaController.preguntaList.get(12).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta13">  
-		        				<f:selectItem itemLabel="0%." itemValue="1" />  
-		        				<f:selectItem itemLabel="20%." itemValue="2" />  
-		        				<f:selectItem itemLabel="40%." itemValue="3" />
-		        				<f:selectItem itemLabel="60%." itemValue="4" />
-		        				<f:selectItem itemLabel="80%." itemValue="5" />
-		        				<f:selectItem itemLabel="100%." itemValue="5" />
+							<p:selectOneRadio id="pregunta13" value="#{encuestaController.respuesta[12]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(66).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(66).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(67).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(67).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(68).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(68).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(69).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(69).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(70).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(70).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(71).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(71).resDescripcion}"/>							
 		        			</p:selectOneRadio>
 		        		</td>
 					</tr>
@@ -359,20 +371,21 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="¿Está satisfecho con su actual empleo?" />
+							<h:outputText value="#{encuestaController.preguntaList.get(13).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta14">  
-		        				<f:selectItem itemLabel="Si." itemValue="1" />  
-		        				<f:selectItem itemLabel="Medianamente." itemValue="2" />  
-		        				<f:selectItem itemLabel="No." itemValue="3" />
-		        				<f:selectItem itemLabel="Otro." itemValue="4" />
+							<p:selectOneRadio id="pregunta14" value="#{encuestaController.respuesta[13]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(72).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(72).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(73).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(73).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(74).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(74).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(75).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(75).resDescripcion}"/>
+								<f:ajax render="textOtro9" />							
 		        			</p:selectOneRadio>
 		        		</td>
 		        		<td>
-		        			<p:inputText></p:inputText>
+		        			<p:inputText id="textOtro9" value="#{encuestaController.respuestaTexto[12]}" disabled="#{encuestaController.respuesta[13].toString()!='76'}"></p:inputText>
 		        		</td>  		        			       					        				        		
 					</tr>
 								
@@ -382,17 +395,17 @@
 		</p:panel>
 
 
-		<p:panel header="trayectoria Académica">
+		<p:panel header="Trayectoria Académica">
 		
 			<p:panel id="pnlPregunta15">
 			
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="Competencias laborales que demanda su ocupación actual:" />
+							<h:outputText value="#{encuestaController.preguntaList.get(14).preDescripcion}" />
 						</td>
 						<td>
-							<p:inputText></p:inputText>
+							<p:inputText value="#{encuestaController.respuestaTexto[13]}" required="true"></p:inputText>
 						</td>   
 					</tr>							
 				</table>
@@ -403,16 +416,16 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="¿El título obtenido le ha facilitado el acceso a otras esferas laborales de la carrera en la que se gradúo? (Seleccione una de las opciones)" />
+							<h:outputText value="#{encuestaController.preguntaList.get(15).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta16">  
-		        				<f:selectItem itemLabel="Contantemente." itemValue="1" />  
-		        				<f:selectItem itemLabel="Esporádicamente." itemValue="2" />  
-		        				<f:selectItem itemLabel="Rara vez." itemValue="3" />
-		        				<f:selectItem itemLabel="Nunca." itemValue="4" />
+							<p:selectOneRadio id="pregunta16" value="#{encuestaController.respuesta[15]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(77).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(77).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(78).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(78).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(79).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(79).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(80).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(80).resDescripcion}"/>							
 		        			</p:selectOneRadio>
 		        		</td>
 					</tr>
@@ -424,21 +437,22 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="¿Qué posgrado le gustaría tomar en la facultad? (Seleccione una de las opciones)" />
+							<h:outputText value="#{encuestaController.preguntaList.get(16).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta17">  
-		        				<f:selectItem itemLabel="Odontopediatría." itemValue="1" />  
-		        				<f:selectItem itemLabel="Estética y operatoria dental." itemValue="2" />  
-		        				<f:selectItem itemLabel="Endodoncia." itemValue="3" />
-		        				<f:selectItem itemLabel="Implantología." itemValue="4" />
-								<f:selectItem itemLabel="Otro." itemValue="5" />		        				
+							<p:selectOneRadio id="pregunta17" value="#{encuestaController.respuesta[16]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(81).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(81).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(82).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(82).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(83).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(83).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(84).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(84).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(85).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(85).resDescripcion}"/>
+								<f:ajax render="textOtro10" />							
 		        			</p:selectOneRadio>
 		        		</td>
 						<td>
-							<p:inputText></p:inputText>
+							<p:inputText id="textOtro10" value="#{encuestaController.respuestaTexto[14]}" disabled="#{encuestaController.respuesta[16].toString()!='86'}"></p:inputText>
 						</td>   		        		
 					</tr>
 								
@@ -449,15 +463,15 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="¿Si tuviera la oportunidad de estudiar lo haría nuevamente en la Facultad?" />
+							<h:outputText value="#{encuestaController.preguntaList.get(17).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta18">  
-		        				<f:selectItem itemLabel="Si." itemValue="1" />  
-		        				<f:selectItem itemLabel="No." itemValue="2" />  
-		        				<f:selectItem itemLabel="No sé." itemValue="3" />
+							<p:selectOneRadio id="pregunta18" value="#{encuestaController.respuesta[17]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(86).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(86).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(87).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(87).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(88).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(88).resDescripcion}"/>
 		        			</p:selectOneRadio>
 		        		</td>
 					</tr>
@@ -469,16 +483,16 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="Utilidad de las prácticas Pre-Profesionales para el desarrollo laboral y profesional realizadas en la Clínica Integral de la Facultad" />
+							<h:outputText value="#{encuestaController.preguntaList.get(18).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta19">  
-		        				<f:selectItem itemLabel="Excelente." itemValue="1" />  
-		        				<f:selectItem itemLabel="Muy bueno." itemValue="2" />
-		        				<f:selectItem itemLabel="Bueno." itemValue="3" />  
-		        				<f:selectItem itemLabel="Regular." itemValue="4" />
+							<p:selectOneRadio id="pregunta19" value="#{encuestaController.respuesta[17]}" required="true">
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(89).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(89).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(90).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(90).resDescripcion}"/>							
+							  	<f:selectItem itemValue="#{encuestaController.respuestaList.get(91).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(91).resDescripcion}"/>
+							  	<f:selectItem itemValue="#{encuestaController.respuestaList.get(92).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(92).resDescripcion}"/>
 		        			</p:selectOneRadio>
 		        		</td>
 					</tr>
@@ -490,15 +504,15 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="Considera que los contenidos de las Asignaturas vistos a lo largo de la carrera resultaron:" />
+							<h:outputText value="#{encuestaController.preguntaList.get(19).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta20">  
-		        				<f:selectItem itemLabel="Muy actuales." itemValue="1" />  
-		        				<f:selectItem itemLabel="Medianamente actuales." itemValue="2" />  
-		        				<f:selectItem itemLabel="Apenas actuales." itemValue="3" />
+							<p:selectOneRadio id="pregunta20" value="#{encuestaController.respuesta[19]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(93).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(93).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(94).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(94).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(95).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(95).resDescripcion}"/>
 		        			</p:selectOneRadio>
 		        		</td>
 					</tr>
@@ -509,15 +523,15 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="¿Cuál es su grado de pertenencia hacia la carrera?" />
+							<h:outputText value="#{encuestaController.preguntaList.get(20).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta21">  
-		        				<f:selectItem itemLabel="Alto." itemValue="1" />  
-		        				<f:selectItem itemLabel="Medio." itemValue="2" />  
-		        				<f:selectItem itemLabel="Bajo." itemValue="3" />
+							<p:selectOneRadio id="pregunta21" value="#{encuestaController.respuesta[20]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(96).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(96).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(97).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(97).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(98).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(98).resDescripcion}"/>							
 		        			</p:selectOneRadio>
 		        		</td>
 					</tr>
@@ -528,16 +542,16 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="¿Con qué frecuencia recibe información de la facultad?" />
+							<h:outputText value="#{encuestaController.preguntaList.get(21).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta22">  
-		        				<f:selectItem itemLabel="Contantemente." itemValue="1" />  
-		        				<f:selectItem itemLabel="Esporádicamente." itemValue="2" />  
-		        				<f:selectItem itemLabel="Rara vez." itemValue="3" />
-								<f:selectItem itemLabel="Nunca." itemValue="4" />		        				
+							<p:selectOneRadio id="pregunta22" value="#{encuestaController.respuesta[21]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(99).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(99).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(100).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(100).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(101).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(101).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(102).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(102).resDescripcion}"/>							
 		        			</p:selectOneRadio>
 		        		</td>
 					</tr>
@@ -548,14 +562,14 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="¿Recomendaría a un estudiante bachiller, familiar, amigo a que ingrese a estudiar la carrera?" />
+							<h:outputText value="#{encuestaController.preguntaList.get(22).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta23">  
-		        				<f:selectItem itemLabel="Si." itemValue="1" />  
-		        				<f:selectItem itemLabel="No." itemValue="2" />  
+							<p:selectOneRadio id="pregunta23" value="#{encuestaController.respuesta[22]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(103).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(103).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(104).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(104).resDescripcion}"/>							
 		        			</p:selectOneRadio>
 		        		</td>
 					</tr>
@@ -566,16 +580,16 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="¿Cómo clasifica su formación académica con respecto a su desempeño laboral?" />
+							<h:outputText value="#{encuestaController.preguntaList.get(23).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta24">  
-		        				<f:selectItem itemLabel="Excelente." itemValue="1" />  
-		        				<f:selectItem itemLabel="Muy buena." itemValue="2" />
-		        				<f:selectItem itemLabel="Buena." itemValue="3" />
-		        				<f:selectItem itemLabel="Regular." itemValue="4" />  
+							<p:selectOneRadio id="pregunta24" value="#{encuestaController.respuesta[23]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(105).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(105).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(106).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(106).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(107).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(107).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(108).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(108).resDescripcion}"/>							
 		        			</p:selectOneRadio>
 		        		</td>
 					</tr>
@@ -586,121 +600,113 @@
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="¿La Bibliografía y el material sugerido por los docentes fue?" />
+							<h:outputText value="#{encuestaController.preguntaList.get(24).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta25">  
-		        				<f:selectItem itemLabel="Actualizado." itemValue="1" />  
-		        				<f:selectItem itemLabel="Medianamente actualizado." itemValue="2" />
-		        				<f:selectItem itemLabel="Apenas actualizado." itemValue="3" />
+							<p:selectOneRadio id="pregunta25" value="#{encuestaController.respuesta[24]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(109).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(109).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(110).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(110).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(111).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(111).resDescripcion}"/>
+															
 		        			</p:selectOneRadio>
 		        		</td>
 					</tr>
 				</table>
 			</p:panel>											
-
-			<p:panel id="pnlPregunta27">
+										
+			<p:panel id="pnlPregunta26">
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="¿La Bibliografía y el material sugerido por los docentes fue?" />
+							<h:outputText value="#{encuestaController.preguntaList.get(25).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta27">  
-		        				<f:selectItem itemLabel="Actualizado." itemValue="1" />  
-		        				<f:selectItem itemLabel="Medianamente actualizado." itemValue="2" />
-		        				<f:selectItem itemLabel="Apenas actualizado." itemValue="3" />
-		        			</p:selectOneRadio>
-		        		</td>
-					</tr>
-				</table>
-			</p:panel>			
-								
-
-			<p:panel id="pnlPregunta28">
-				<table>
-					<tr>
-						<td>
-							<h:outputText value="¿Los recursos de tecnología informática ofrecidos por su facultad le resultaron?" />
-						</td>   
-					</tr>
-					<tr>
-						<td>			
-							<p:selectOneRadio id="pregunta28">  
-		        				<f:selectItem itemLabel="Adecuados." itemValue="1" />  
-		        				<f:selectItem itemLabel="Medianamente adecuados." itemValue="2" />
-		        				<f:selectItem itemLabel="Apenas adecuados." itemValue="3" />
+							<p:selectOneRadio id="pregunta26" value="#{encuestaController.respuesta[25]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(112).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(112).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(113).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(113).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(114).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(114).resDescripcion}"/>							
 		        			</p:selectOneRadio>
 		        		</td>
 					</tr>
 				</table>
 			</p:panel>	
 									
-			<p:panel id="pnlPregunta29">
+			<p:panel id="pnlPregunta27">
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="¿Con qué frecuencia visita usted la Facultad?" />
+							<h:outputText value="#{encuestaController.preguntaList.get(26).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta29">  
-		        				<f:selectItem itemLabel="Constantemente." itemValue="1" />  
-		        				<f:selectItem itemLabel="Esporádicamente." itemValue="2" />
-		        				<f:selectItem itemLabel="Rara vez." itemValue="3" />
-								<f:selectItem itemLabel="Nunca." itemValue="4" />		        				
+							<p:selectOneRadio id="pregunta27" value="#{encuestaController.respuesta[26]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(115).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(115).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(116).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(116).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(117).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(117).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(118).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(118).resDescripcion}"/>							
 		        			</p:selectOneRadio>
 		        		</td>
 					</tr>
 				</table>
 			</p:panel>										
 									
-			<p:panel id="pnlPregunta30">
+			<p:panel id="pnlPregunta28">
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="¿Percibió la actividad pedagógica y el recurso dictado de los docentes cómo?" />
+							<h:outputText value="#{encuestaController.preguntaList.get(27).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta30">  
-		        				<f:selectItem itemLabel="Innovador." itemValue="1" />  
-		        				<f:selectItem itemLabel="Tradicional." itemValue="2" />
-		        				<f:selectItem itemLabel="Obsoleto." itemValue="3" />
+							<p:selectOneRadio id="pregunta28" value="#{encuestaController.respuesta[27]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(119).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(119).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(120).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(120).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(121).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(121).resDescripcion}"/>
 		        			</p:selectOneRadio>
 		        		</td>
 					</tr>
 				</table>
 			</p:panel>										
 
-			<p:panel id="pnlPregunta31">
+			<p:panel id="pnlPregunta29">
 				<table>
 					<tr>
 						<td>
-							<h:outputText value="¿Qué información de la facultad le agradaría recibir?" />
+							<h:outputText value="#{encuestaController.preguntaList.get(28).preDescripcion}" />
 						</td>   
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta31">  
-		        				<f:selectItem itemLabel="Seminarios." itemValue="1" />  
-		        				<f:selectItem itemLabel="Cursos." itemValue="2" />
-		        				<f:selectItem itemLabel="Eventos." itemValue="3" />
-								<f:selectItem itemLabel="Posgrados." itemValue="4" />
-								<f:selectItem itemLabel="Talleres." itemValue="5" />
-								<f:selectItem itemLabel="Otros." itemValue="6" />																		        				
+							<p:selectOneRadio id="pregunta29" value="#{encuestaController.respuesta[28]}" required="true">  
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(122).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(122).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(123).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(123).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(124).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(124).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(125).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(125).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(126).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(126).resDescripcion}"/>
+								<f:selectItem itemValue="#{encuestaController.respuestaList.get(127).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(127).resDescripcion}"/>
+								<f:ajax render="textOtro11" />							
 		        			</p:selectOneRadio>
 		        		</td>
 						<td>
-							<p:inputText></p:inputText>
+							<p:inputText id="textOtro11" value="#{encuestaController.respuestaTexto[15]}" disabled="#{encuestaController.respuesta[28].toString()!='128'}"></p:inputText>
 						</td>   		        				        		
 					</tr>
+				</table>
+			</p:panel>
+			
+			<p:panel>
+				<table width="90%">
+					<tr align="center">
+						<td>
+							<p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{encuestaController.guardar}" process="@form" update="@form"></p:commandButton>
+						</td>
+					</tr>				
 				</table>
 			</p:panel>	
 									
