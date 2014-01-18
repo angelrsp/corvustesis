@@ -117,7 +117,7 @@ public class LoginController implements Serializable {
 	      try {
 			HttpSession session = JsfUtil.getSession();
 		      session.invalidate();
-			JsfUtil.redirect("/SILSAEWeb/index.jsf");
+			JsfUtil.redirect("/SILSAGWeb/index.jsf");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -128,7 +128,7 @@ public class LoginController implements Serializable {
 	      try {
 			HttpSession session = JsfUtil.getSession();
 		      session.invalidate();
-			JsfUtil.redirect("/SILSAEWeb/index.jsf");
+			JsfUtil.redirect("/SILSAGWeb/index.jsf");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
