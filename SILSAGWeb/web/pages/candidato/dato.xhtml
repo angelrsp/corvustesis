@@ -82,6 +82,14 @@
 										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
 										<f:selectItems value="#{datosCandidatoController.catalogoEstadoCivil}"/>										
 									</p:selectOneMenu></td>
+									
+							<td><h:outputLabel value="#{i18n['label.genero']}:&#160;" /> </td>
+							<td>	<p:selectOneMenu value="#{datosCandidatoController.genero}" required="true" requiredMessage="#{i18n['label.genero']}:&#160;#{i18n['label.requerido']}">
+										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+										<f:selectItems value="#{datosCandidatoController.catalogoGenero}"/>										
+									</p:selectOneMenu></td>
+									
+									
 						</tr>
 
 						<tr>
@@ -99,10 +107,10 @@
 
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.telefono.convencional']}:&#160;" /> </td>
-							<td><p:inputText value="#{datosCandidatoController.user.usuTelefono}" requiredMessage="#{i18n['label.telefono.convencional']}:&#160;#{i18n['label.requerido']}" required="true"></p:inputText></td>
+							<td><p:inputText value="#{datosCandidatoController.user.usuTelefono}" requiredMessage="#{i18n['label.telefono.convencional']}:&#160;#{i18n['label.requerido']}" required="true" onkeypress="return isNumberKey(event);"></p:inputText></td>
 
 							<td><h:outputLabel value="#{i18n['label.telefono.celular']}:&#160;" /> </td>
-							<td><p:inputText value="#{datosCandidatoController.user.usuCelular}" requiredMessage="#{i18n['label.telefono.celular']}:&#160;#{i18n['label.requerido']}" required="true"></p:inputText></td>														
+							<td><p:inputText value="#{datosCandidatoController.user.usuCelular}" requiredMessage="#{i18n['label.telefono.celular']}:&#160;#{i18n['label.requerido']}" required="true" onkeypress="return isNumberKey(event);"></p:inputText></td>														
 						</tr>
 
 						
@@ -110,10 +118,6 @@
 							<td colspan="4" align="center">
 								<p:commandButton actionListener="#{datosCandidatoController.actualizar}" value="#{i18n['boton.actualizar']}" process="pnlDatos" update="growl,pnlDatos" /> </td>
 						</tr>
-<!-- 						<tr> -->
-<!-- 							<td colspan="4" align="center"> -->
-<!-- 								<p:commandButton actionListener="#{loginController.logout}" value="Salitr" process="@this" /> </td> -->
-<!-- 						</tr>						 -->
 					</table>
 				</p:panel>
 
@@ -148,30 +152,8 @@
 							<td><p:inputText value="#{datosCandidatoController.estudio.estCarrera}"></p:inputText></td>
 						</tr>
 						<tr>
-							<td><h:outputLabel value="#{i18n['label.anio.inicio']}:&#160;" /></td>
-							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.anio.inicio']}:&#160;#{i18n['label.requerido']}" value="#{datosCandidatoController.anioInicio}">
-									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="" />
-									<f:selectItems value="#{datosCandidatoController.catalogoAnio}"/>
-								</p:selectOneMenu></td>							
-							<td><h:outputLabel value="#{i18n['label.mes.inicio']}:&#160;" /></td>
-							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.mes.inicio']}:&#160;#{i18n['label.requerido']}" value="#{datosCandidatoController.mesInicio}">
-									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="" />
-									<f:selectItems value="#{datosCandidatoController.catalogoMes}"/>									
-								</p:selectOneMenu></td>
 						</tr>
 						<tr>																
-							<td><h:outputLabel value="#{i18n['label.anio.fin']}:&#160;" /></td>
-							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.anio.fin']}:&#160;#{i18n['label.requerido']}" value="#{datosCandidatoController.anioFin}">
-									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="" />
-									<f:selectItems value="#{datosCandidatoController.catalogoAnio}"/>
-								</p:selectOneMenu></td>							
-							<td><h:outputLabel value="#{i18n['label.mes.fin']}:&#160;" /></td>
-							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.mes.fin']}:&#160;#{i18n['label.requerido']}" value="#{datosCandidatoController.mesFin}">
-									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="" />
-									<f:selectItems value="#{datosCandidatoController.catalogoMes}"/>
-								</p:selectOneMenu></td>
-							<td><p:commandButton value="#{i18n['boton.agregar']}" actionListener="#{datosCandidatoController.agregarEstudio}"
-							 		process=":contenido:pnlEstudios" update=":contenido:pnlEstudios,:contenido:growl"></p:commandButton></td>
 						</tr>
 					</table>
 					</p:tab>
@@ -213,6 +195,113 @@
 					
 				</p:panel>
 
+
+				<p:panel id="pnlCursos" styleClass="tabla" header="#{i18n['label.titulo.pantalla.dato.cursos.realizados']}">
+					<p:accordionPanel activeIndex="null">
+						<p:tab title="#{i18n['boton.agregar']}">
+						  
+						  <table>
+						  	<tr>
+					  			<td><h:outputLabel value="#{i18n['label.entidad']}:&#160;" /></td>
+								<td><p:inputText value="#{datosCandidatoController.curso.curEntidad}" requiredMessage="#{i18n['label.entidad']}:&#160;#{i18n['label.requerido']}" required="true"></p:inputText></td>					  			
+						  	</tr>
+						  	<tr>
+					  			<td><h:outputLabel value="#{i18n['label.descripcion']}:&#160;" /></td>
+								<td><p:inputTextarea value="#{datosCandidatoController.curso.curDescripcion}" requiredMessage="#{i18n['label.descripcion']}:&#160;#{i18n['label.requerido']}" required="true" autoResize="false"/></td>					  			
+						  	</tr>
+						  	<tr>
+					  			<td><h:outputLabel value="#{i18n['label.fecha.inicio']}:&#160;" /></td>
+						  		<td><p:calendar value="#{datosCandidatoController.fechaInicioCurso}" navigator="true" requiredMessage="#{i18n['label.fecha.inicio']}:&#160;#{i18n['label.requerido']}" pattern="#{i18n['pattern.fecha']}" required="true" maxdate="#{datosCandidatoController.fechaMaximoActual}" placeholder="AAAA/MM/DD"></p:calendar></td>
+
+					  			<td><h:outputLabel value="#{i18n['label.fecha.fin']}:&#160;" /></td>
+						  		<td><p:calendar value="#{datosCandidatoController.fechaFinCurso}" navigator="true" requiredMessage="#{i18n['label.fecha.fin']}:&#160;#{i18n['label.requerido']}" pattern="#{i18n['pattern.fecha']}" required="true" maxdate="#{datosCandidatoController.fechaMaximoActual}" placeholder="AAAA/MM/DD"></p:calendar></td>
+						  		
+						  	</tr>
+						  	<tr align="center">
+						  		<td colspan="4"><p:commandButton value="#{i18n['boton.agregar']}" process=":contenido:pnlCursos" update=":contenido:pnlCursos,:contenido:growl" actionListener="#{datosCandidatoController.agregarCurso}"></p:commandButton></td>
+						  	</tr>
+						  </table>
+						  
+						</p:tab>				
+					</p:accordionPanel>
+					
+					<p:spacer height="5"/>
+					
+					<p:dataTable id="tblCurso" value="#{datosCandidatoController.cursoList}" var="cur" emptyMessage="#{i18n['table.campo.obligatorio']}">
+					
+						<p:column headerText="#{i18n['label.entidad']}">
+							<h:outputText value="#{cur.curEntidad}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.descripcion']}">
+							<h:outputText value="#{cur.curDescripcion}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.fecha.inicio']}">
+							<h:outputText value="#{fn:substring(cur.curFechaInicio,0,10)}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.fecha.fin']}">
+							<h:outputText value="#{fn:substring(cur.curFechaFin,0,10)}" />
+						</p:column>
+					
+						<p:column headerText="#{i18n['label.eliminar']}" width="15">
+							<p:commandButton actionListener="#{datosCandidatoController.onRowDelCurso(cur)}" icon="ui-icon-close" 
+								immediate="true" onclick="if(!confirm('Eliminar?')) return false;" update=":contenido:tblCurso,:contenido:growl" process=":contenido:tblCurso">
+							</p:commandButton>
+						</p:column>
+					
+					
+					</p:dataTable>
+					
+				</p:panel>
+
+				<p:panel id="pnlAdicional" styleClass="tabla"
+					header="#{i18n['label.titulo.pantalla.dato.conocimiento.adicional']}">
+					<p:accordionPanel activeIndex="null">
+						<p:tab title="#{i18n['boton.agregar']}">
+						
+						<table>
+						  	<tr>
+					  			<td><h:outputLabel value="#{i18n['label.nombre']}:&#160;" /></td>
+								<td><p:inputText value="#{datosCandidatoController.adicional.proNombre}" requiredMessage="#{i18n['label.nombre']}:&#160;#{i18n['label.requerido']}" required="true"></p:inputText></td>
+
+					  			<td><h:outputLabel value="#{i18n['label.descripcion']}:&#160;" /></td>
+								<td><p:inputTextarea value="#{datosCandidatoController.adicional.proDescripcion}" requiredMessage="#{i18n['label.descripcion']}:&#160;#{i18n['label.requerido']}" required="true" autoResize="false" maxlength="255"/></td>					  											
+													  			
+						  	</tr>
+						  	<tr align="center">
+						  		<td colspan="4"><p:commandButton value="#{i18n['boton.agregar']}" process=":contenido:pnlAdicional" update=":contenido:pnlAdicional,:contenido:growl" actionListener="#{datosCandidatoController.agregarAdicional}"></p:commandButton></td>
+						  	</tr>						  	
+						</table>
+						  
+						</p:tab>				
+					</p:accordionPanel>
+
+					<p:spacer height="5"/>
+					
+					<p:dataTable id="tblAdicional" value="#{datosCandidatoController.adicionalList}" var="adi">
+					
+						<p:column headerText="#{i18n['label.nombre']}">
+							<h:outputText value="#{adi.proNombre}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.descripcion']}">
+							<h:outputText value="#{adi.proDescripcion}" />
+						</p:column>					
+					
+						<p:column headerText="#{i18n['label.eliminar']}" width="15">
+							<p:commandButton actionListener="#{datosCandidatoController.onRowDelAdicional(adi)}" icon="ui-icon-close" 
+								immediate="true" onclick="if(!confirm('Eliminar?')) return false;" update=":contenido:tblAdicional,:contenido:growl" process=":contenido:tblAdicional">
+							</p:commandButton>
+						</p:column>
+					
+					
+					</p:dataTable>
+
+
+				</p:panel>
+
 				<p:panel id="pnlExperiencia" styleClass="tabla"
 					header="#{i18n['label.titulo.pantalla.dato.experiencia']}">
 					<p:accordionPanel activeIndex="null">
@@ -223,10 +312,10 @@
 							<td><p:inputText value="#{datosCandidatoController.experiencia.expEntidad}" required="true" requiredMessage="#{i18n['label.empresa']}:&#160;#{i18n['label.requerido']}"></p:inputText></td>
 							<td><h:outputLabel
 									value="#{i18n['label.fecha.inicio']}:&#160;" /></td>
-							<td><p:calendar pattern="#{i18n['pattern.fecha']}" value="#{datosCandidatoController.fechaInicioExp}" required="true" requiredMessage="#{i18n['label.fecha.inicio']}:&#160;#{i18n['label.requerido']}"></p:calendar>
+							<td><p:calendar pattern="#{i18n['pattern.fecha']}" value="#{datosCandidatoController.fechaInicioExp}" required="true" requiredMessage="#{i18n['label.fecha.inicio']}:&#160;#{i18n['label.requerido']}" maxdate="#{datosCandidatoController.fechaMaximoActual}" placeholder="AAAA/MM/DD"></p:calendar>
 							</td>
 							<td><h:outputLabel value="#{i18n['label.fecha.fin']}:&#160;" /></td>
-							<td><p:calendar pattern="#{i18n['pattern.fecha']}" value="#{datosCandidatoController.fechaFinExp}" required="true" requiredMessage="#{i18n['label.fecha.fin']}:&#160;#{i18n['label.requerido']}"></p:calendar>
+							<td><p:calendar pattern="#{i18n['pattern.fecha']}" value="#{datosCandidatoController.fechaFinExp}" required="true" requiredMessage="#{i18n['label.fecha.fin']}:&#160;#{i18n['label.requerido']}" maxdate="#{datosCandidatoController.fechaMaximoActual}" placeholder="AAAA/MM/DD"></p:calendar>
 							</td>
 						</tr>
 						<tr>
@@ -237,14 +326,15 @@
 						</tr>
 						<tr>
 							<td><h:outputLabel
-									value="#{i18n['label.tipo.experiencia']}:&#160;" /></td>
-							<td><p:selectOneMenu required="true" value="#{datosCandidatoController.tipoExperiencia}"
-									requiredMessage="#{i18n['label.tipo.experiencia']}:&#160;#{i18n['label.requerido']}">
-									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
-										itemValue="" />
-									<f:selectItems value="#{datosCandidatoController.catalogoTipoExperiencia}"></f:selectItems>	
+									value="#{i18n['label.sector.empresa']}:&#160;" /></td>
+							<td><p:selectOneMenu required="true" value="#{datosCandidatoController.tipoEmpresa}"
+									requiredMessage="#{i18n['label.sector.empresa']}:&#160;#{i18n['label.requerido']}">
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="" />
+									<f:selectItems value="#{datosCandidatoController.catalogoTipoEmpresa}"></f:selectItems>	
 								</p:selectOneMenu></td>
-							<td><p:commandButton value="#{i18n['boton.agregar']}" process=":contenido:pnlExperiencia" update=":contenido:pnlExperiencia,:contenido:growl" actionListener="#{datosCandidatoController.agregarExperiencia}"></p:commandButton></td>
+						</tr>
+						<tr align="center">
+							<td colspan="4"><p:commandButton value="#{i18n['boton.agregar']}" process=":contenido:pnlExperiencia" update=":contenido:pnlExperiencia,:contenido:growl" actionListener="#{datosCandidatoController.agregarExperiencia}"></p:commandButton></td>						
 						</tr>
 					</table>
 				</p:tab>
@@ -252,35 +342,33 @@
 				
 					<p:spacer height="5"/>
 					
-<!-- 					<p:dataTable id="tblExperiencia" value="#{datosCandidatoController.listExperiencia}" var="exp" emptyMessage="#{i18n['table.campo.obligatorio']}"> -->
-<!-- 					<p:column headerText="#{i18n['label.empresa']}"> -->
-<!-- 							<h:outputText value="#{exp.expEntidad}" /> -->
-<!-- 						</p:column> -->
-<!-- 						<p:column headerText="#{i18n['label.fecha.inicio']}"> -->
-<!-- 							<h:outputText value="#{fn:substring(exp.expFechaInicio,0,10)}" /> -->
-<!-- 						</p:column> -->
-<!-- 						<p:column headerText="#{i18n['label.fecha.fin']}"> -->
-<!-- 							<h:outputText value="#{fn:substring(exp.expFechaFin,0,10)}" /> -->
-<!-- 						</p:column> -->
-<!-- 						<p:column headerText="#{i18n['label.tareas']}"> -->
-<!-- 							<h:outputText value="#{exp.expTareas}" /> -->
-<!-- 						</p:column> -->
-<!-- 						<p:column headerText="#{i18n['label.puesto']}"> -->
-<!-- 							<h:outputText value="#{exp.expPuesto}" /> -->
-<!-- 						</p:column> -->
-<!-- 						<p:column headerText="#{i18n['label.rubro']}"> -->
-<!-- 							<h:outputText value="#{exp.expRubro}" /> -->
-<!-- 						</p:column> -->
-<!-- 						<p:column headerText="#{i18n['label.tipo.experiencia']}"> -->
-<!-- 							<h:outputText value="#{exp.catTipoExperiencia}" /> -->
-<!-- 						</p:column> -->
+					<p:dataTable id="tblExperiencia" value="#{datosCandidatoController.experienciaList}" var="exp" emptyMessage="#{i18n['table.campo.obligatorio']}">
+					
+						<p:column headerText="#{i18n['label.empresa']}">
+							<h:outputText value="#{exp.expEntidad}" />
+						</p:column>
+						<p:column headerText="#{i18n['label.fecha.inicio']}">
+							<h:outputText value="#{fn:substring(exp.expFechaInicio,0,10)}" />
+						</p:column>
+						<p:column headerText="#{i18n['label.fecha.fin']}">
+							<h:outputText value="#{fn:substring(exp.expFechaFin,0,10)}" />
+						</p:column>
+						<p:column headerText="#{i18n['label.tareas']}">
+							<h:outputText value="#{exp.expTareas}" />
+						</p:column>
+						<p:column headerText="#{i18n['label.puesto']}">
+							<h:outputText value="#{exp.expPuesto}" />
+						</p:column>
+						<p:column headerText="#{i18n['label.sector.empresa']}">
+							<h:outputText value="#{exp.catTipoEmpresa}" />
+						</p:column>
 						
-<!-- 						<p:column headerText="#{i18n['label.eliminar']}"> -->
-<!-- 							<p:commandButton actionListener="#{datosCandidatoController.onRowDelExperiencia(exp)}" icon="ui-icon-close" immediate="true"  -->
-<!-- 								onclick="if(!confirm('Eliminar?')) return false" process=":contenido:tblExperiencia" update=":contenido:tblExperiencia,:contenido:growl"></p:commandButton> -->
-<!-- 						</p:column> -->
+						<p:column headerText="#{i18n['label.eliminar']}" width="15">
+							<p:commandButton actionListener="#{datosCandidatoController.onRowDelExperiencia(exp)}" icon="ui-icon-close" immediate="true"
+								onclick="if(!confirm('Eliminar?')) return false" process=":contenido:tblExperiencia" update=":contenido:tblExperiencia,:contenido:growl"></p:commandButton>
+						</p:column>
 						
-<!-- 					</p:dataTable>					 -->
+					</p:dataTable>					
 
 				</p:panel>
 
@@ -300,9 +388,12 @@
 						</tr>
 						<tr>
 							<td><h:outputText value="#{i18n['label.email']}:&#160;" /></td>
-							<td><p:inputText value="#{datosCandidatoController.referencia.refMail}" required="true" requiredMessage="#{i18n['label.email']}:&#160;#{i18n['label.requerido']}"></p:inputText></td>
-							<td><p:commandButton actionListener="#{datosCandidatoController.agregarReferencia}" value="#{i18n['boton.agregar']}" process=":contenido:pnlReferencia" update=":contenido:pnlReferencia,:contenido:growl"></p:commandButton>
-							</td>
+							<td><p:inputText value="#{datosCandidatoController.referencia.refMail}" required="true" requiredMessage="#{i18n['label.email']}:&#160;#{i18n['label.requerido']}">
+								<f:validator validatorId="emailValidator"></f:validator>
+								</p:inputText></td>
+						</tr>
+						<tr align="center">
+							<td colspan="4"><p:commandButton actionListener="#{datosCandidatoController.agregarReferencia}" value="#{i18n['boton.agregar']}" process=":contenido:pnlReferencia" update=":contenido:pnlReferencia,:contenido:growl"></p:commandButton></td>
 						</tr>
 					</table>
 					</p:tab>
@@ -324,7 +415,7 @@
 							<h:outputText value="#{ref.refMail}" />
 						</p:column>
 
-						<p:column headerText="#{i18n['label.eliminar']}">
+						<p:column headerText="#{i18n['label.eliminar']}" width="15">
 							<p:commandButton actionListener="#{datosCandidatoController.onRowDelReferencia(ref)}" icon="ui-icon-close" immediate="true" onclick="if(!confirm('Eliminar?')) return false;"
 							process=":contenido:tblReferencia" update=":contenido:tblReferencia,:contenido:growl"></p:commandButton>
 						</p:column>
