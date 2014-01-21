@@ -26,6 +26,8 @@ public abstract class SelectItemController{
 	private List<SelectItem> catalogoPuesto;
 	private List<SelectItem> catalogoEstadoCivil;
 	private List<SelectItem> catalogoGenero;
+	private List<SelectItem> catalogoEspeciliadadTercerNivel;
+	private List<SelectItem> catalogoEspeciliadadCuartoNivel;
 	
 	
 	@EJB
@@ -44,6 +46,8 @@ public abstract class SelectItemController{
 		catalogoPais=new ArrayList<SelectItem>();
 		catalogoPuesto=new ArrayList<SelectItem>();
 		catalogoEstadoCivil=new ArrayList<SelectItem>();
+		catalogoEspeciliadadCuartoNivel=new ArrayList<SelectItem>();
+		catalogoEspeciliadadTercerNivel=new ArrayList<SelectItem>();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -213,4 +217,39 @@ public abstract class SelectItemController{
 		return catalogoGenero;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getCatalogoEspeciliadadTercerNivel() throws SilsagException {
+		if(CollectionUtils.isEmpty(catalogoEspeciliadadTercerNivel))
+		{
+			CatalogoDTO catalogo=new CatalogoDTO();
+			catalogo.setCatCodigo(35);//Codigo Catalogo
+			catalogoEspeciliadadTercerNivel=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					CatalogoDTO cat=(CatalogoDTO)arg0;
+					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
+				}
+			});
+		}
+		return catalogoEspeciliadadTercerNivel;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getCatalogoEspeciliadadCuartoNivel() throws SilsagException {
+		if(CollectionUtils.isEmpty(catalogoEspeciliadadTercerNivel))
+		{
+			CatalogoDTO catalogo=new CatalogoDTO();
+			catalogo.setCatCodigo(38);//Codigo Catalogo
+			catalogoEspeciliadadCuartoNivel=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					CatalogoDTO cat=(CatalogoDTO)arg0;
+					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
+				}
+			});
+		}
+		return catalogoEspeciliadadCuartoNivel;
+	}
 }

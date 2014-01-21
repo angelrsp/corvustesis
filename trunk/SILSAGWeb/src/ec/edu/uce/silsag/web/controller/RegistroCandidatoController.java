@@ -2,6 +2,8 @@ package ec.edu.uce.silsag.web.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -54,15 +56,17 @@ public class RegistroCandidatoController extends SelectItemController implements
 			getUsuarioRegistro().setUsuLogin(getCandidatoRegistro().getCanIdentificacion());
 			getCandidatoRegistro().setCanTipoIdentificacion(Integer.valueOf(tipoDocumento.toString()));
 			getUsuarioRegistro().setUsuLogin(getCandidatoRegistro().getCanIdentificacion());
+			getCandidatoRegistro().setCanFechaUltima(new Timestamp(new Date().getTime()));
 			UsuarioDTO user= candidatosService.registrarCandidato(getCandidatoRegistro()).getBemUsuario();
 			JsfUtil.putObject("UsuarioDTO",user);
 			JsfUtil.redirect("dato.jsf");
 		} catch (SilsagException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JsfUtil.addErrorMessage("El número de identificación ingresado ya existe en el sistema");
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
 
