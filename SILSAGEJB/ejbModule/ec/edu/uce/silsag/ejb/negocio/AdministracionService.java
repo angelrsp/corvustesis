@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import ec.edu.uce.silsag.commons.util.SilsagException;
+import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoEstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CatalogoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EmpresaDTO;
@@ -23,6 +24,8 @@ public interface AdministracionService {
 			throws SilsagException;
 
 	void actualizarClave(UsuarioDTO user) throws SilsagException;
+
+	List<CandidatoEstudioDTO> obtenerCandidatos() throws SilsagException;
 
 
 	
