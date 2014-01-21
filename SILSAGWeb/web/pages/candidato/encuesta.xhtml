@@ -14,6 +14,8 @@
 		
 		<p:panel header="Trayectoria Laboral">
 		
+		<p:growl id="growl"></p:growl>
+		
 			<p:panel id="pnlPregunta1">
 				<table>
 					<tr>
@@ -23,7 +25,7 @@
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta1" value="#{encuestaController.respuesta[0]}" required="true">
+							<p:selectOneRadio id="pregunta1" value="#{encuestaController.respuesta[0]}" required="true" requiredMessage="Pregunta no llenada: #{encuestaController.preguntaList.get(0).preDescripcion}">
 								<f:selectItem itemValue="#{encuestaController.respuestaList.get(0).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(0).resDescripcion}"/>
 								<f:selectItem itemValue="#{encuestaController.respuestaList.get(1).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(1).resDescripcion}"/>
 								<f:selectItem itemValue="#{encuestaController.respuestaList.get(2).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(2).resDescripcion}"/>
@@ -50,7 +52,7 @@
 					</tr>			
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta2" value="#{encuestaController.respuesta[1]}" required="#{encuestaController.respuesta[0].toString()=='4'}">
+							<p:selectOneRadio id="pregunta2" value="#{encuestaController.respuesta[1]}" required="#{encuestaController.respuesta[0].toString()=='4'}" requiredMessage="Pregunta no llenada: #{encuestaController.preguntaList.get(1).preDescripcion}">
 								<f:selectItem itemValue="#{encuestaController.respuestaList.get(5).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(5).resDescripcion}"/>
 								<f:selectItem itemValue="#{encuestaController.respuestaList.get(6).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(6).resDescripcion}"/>
 								<f:selectItem itemValue="#{encuestaController.respuestaList.get(7).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(7).resDescripcion}"/>
@@ -75,7 +77,7 @@
 					</tr>			
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta3" value="#{encuestaController.respuesta[2]}" required="#{encuestaController.respuesta[0].toString()=='4'}">  
+							<p:selectOneRadio id="pregunta3" value="#{encuestaController.respuesta[2]}" required="#{encuestaController.respuesta[0].toString()=='4'}" requiredMessage="Pregunta no llenada: #{encuestaController.preguntaList.get(2).preDescripcion}">  
 								<f:selectItem itemValue="#{encuestaController.respuestaList.get(10).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(10).resDescripcion}"/>
 								<f:selectItem itemValue="#{encuestaController.respuestaList.get(11).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(11).resDescripcion}"/>
 								<f:selectItem itemValue="#{encuestaController.respuestaList.get(12).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(12).resDescripcion}"/>
@@ -106,7 +108,7 @@
 					</tr>
 					<tr>
 						<td>			
-							<p:selectOneRadio id="pregunta4" value="#{encuestaController.respuesta[3]}" required="true">  							
+							<p:selectOneRadio id="pregunta4" value="#{encuestaController.respuesta[3]}" required="true" requiredMessage="Pregunta no llenada: #{encuestaController.preguntaList.get(3).preDescripcion}">  							
 		        				<f:selectItem itemValue="#{encuestaController.respuestaList.get(14).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(14).resDescripcion}"/>
 		        				<f:selectItem itemValue="#{encuestaController.respuestaList.get(15).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(15).resDescripcion}"/>
 		        				<f:selectItem itemValue="#{encuestaController.respuestaList.get(16).resCodigo}" itemLabel="#{encuestaController.respuestaList.get(16).resDescripcion}"/>
