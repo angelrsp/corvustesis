@@ -12,8 +12,12 @@ import javax.faces.bean.ViewScoped;
 import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsag.ejb.negocio.EmpresaService;
+import ec.edu.uce.silsag.ejb.persistence.entities.AdicionalDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.CursoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EmpresaDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.EstudioListDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaListDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.PostulacionDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ReferenciaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
@@ -40,15 +44,17 @@ public class VerPostulacionController extends SelectItemController implements Se
 	
 	private Object estadoCivil;
 	private Object tipoDocumento; 
+	private Object genero;
 	
-	private PostulacionDTO postulacion;
 	private List<PostulacionDTO> postulacionList;	
 	
 	private CandidatoDTO candidato;
 	
-//	private List<EstudioListDTO> estudioList;
-//	private List<ExperienciaListDTO> experienciaList;
+	private List<EstudioListDTO> estudioList;
+	private List<ExperienciaListDTO> experienciaList;
 	private List<ReferenciaDTO> referenciaList;
+	private List<CursoDTO> cursoList;
+	private List<AdicionalDTO> adicionalList;
 	
 	public VerPostulacionController() {
 		
@@ -63,11 +69,12 @@ public class VerPostulacionController extends SelectItemController implements Se
 		usuario=(UsuarioDTO)JsfUtil.getObject("UsuarioDTO");
 		empresa=usuario.getBemEmpresas().get(0);
 		postulacionList= new ArrayList<PostulacionDTO>();
-		postulacion=new PostulacionDTO();
 		candidato=new CandidatoDTO();
-//		estudioList=new ArrayList<EstudioListDTO>();
-//		experienciaList=new ArrayList<ExperienciaListDTO>();
+		estudioList=new ArrayList<EstudioListDTO>();
+		experienciaList=new ArrayList<ExperienciaListDTO>();
 		referenciaList=new ArrayList<ReferenciaDTO>();
+		cursoList=new ArrayList<CursoDTO>();
+		adicionalList=new ArrayList<AdicionalDTO>();
 	}
 
 	public List<PostulacionDTO> getPostulacionList() throws SilsagException {
@@ -83,10 +90,10 @@ public class VerPostulacionController extends SelectItemController implements Se
 		return estadoCivil;
 	}
 	
-//	public PostulacionListDTO getPostulacion() {
-//		return postulacion;
-//	}
-
+	public Object getGenero() {
+		return genero;
+	}
+	
 	public CandidatoDTO getCandidato() {
 		return candidato;
 	}
@@ -96,17 +103,26 @@ public class VerPostulacionController extends SelectItemController implements Se
 	}
 
 
-//	public List<EstudioListDTO> getEstudioList() {
-//		return estudioList;
-//	}
-//
-//	public List<ExperienciaListDTO> getExperienciaList() {
-//		return experienciaList;
-//	}
+	public List<EstudioListDTO> getEstudioList() {
+		return estudioList;
+	}
+
+	public List<ExperienciaListDTO> getExperienciaList() {
+		return experienciaList;
+	}
 
 	public List<ReferenciaDTO> getReferenciaList() {
 		return referenciaList;
 	}
+
+	public List<CursoDTO> getCursoList() {
+		return cursoList;
+	}
+
+	public List<AdicionalDTO> getAdicionalList() {
+		return adicionalList;
+	}
+
 	
 	public UsuarioDTO getUser() {
 		return user;
@@ -114,17 +130,20 @@ public class VerPostulacionController extends SelectItemController implements Se
 
 	public void buscarCandidato(PostulacionDTO pos)
 	{
-//		try {
-//			setCandidato(candidatosService.obtenerCandidato(pos.getCanCodigo()));
-//			this.estadoCivil=getCandidato().getCanEstadoCivil();
-//			this.tipoDocumento=getCandidato().getCanTipoIdentificacion();
-////			this.estudioList=candidatosService.obtenerEstudio(getCandidato());
-////			this.experienciaList=candidatosService.obtenerExperiencia(getCandidato());
-//			this.referenciaList=candidatosService.obtenerReferencia(getCandidato());
-//			user=getCandidato().getBemUsuario();
-//		} catch (Exception e) {
-//			JsfUtil.addErrorMessage(e.getMessage());
-//		}
+		try {
+			setCandidato(pos.getBemCandidato());
+			this.estadoCivil=getCandidato().getCanEstadoCivil();
+			this.tipoDocumento=getCandidato().getCanTipoIdentificacion();
+			this.genero=getCandidato().getCanSexo();
+			this.estudioList=candidatosService.obtenerEstudio(getCandidato());
+			this.experienciaList=candidatosService.obtenerExperiencia(getCandidato());
+			this.referenciaList=candidatosService.obtenerReferencia(getCandidato());
+			this.cursoList=candidatosService.obtenerCurso(getCandidato());
+			this.adicionalList=candidatosService.obtenerAdicional(getCandidato());
+			user=getCandidato().getBemUsuario();
+		} catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
 	}
 	
 	public void aceptarCandidato(PostulacionDTO pos)
@@ -136,5 +155,6 @@ public class VerPostulacionController extends SelectItemController implements Se
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
+
 	
 }
