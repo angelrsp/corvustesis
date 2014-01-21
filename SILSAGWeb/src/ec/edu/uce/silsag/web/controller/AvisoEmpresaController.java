@@ -3,6 +3,7 @@ package ec.edu.uce.silsag.web.controller;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -44,6 +45,7 @@ public class AvisoEmpresaController extends SelectItemController implements Seri
 
 	private Object puesto;
 	private Date fecha;
+	private Date fechaMinima;
 	
 	
 	@PostConstruct
@@ -53,6 +55,9 @@ public class AvisoEmpresaController extends SelectItemController implements Seri
 		user=(UsuarioDTO)JsfUtil.getObject("UsuarioDTO");
 		empresa=user.getBemEmpresas().get(0);
 		avisoList=new ArrayList<AvisoDTO>(); 
+		Calendar cal = Calendar.getInstance();
+		fechaMinima = cal.getTime();
+
 	}
 	
 	public AvisoDTO getAviso() {
@@ -78,6 +83,14 @@ public class AvisoEmpresaController extends SelectItemController implements Seri
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public Date getFechaMinima() {
+		return fechaMinima;
+	}
+
+	public void setFechaMinima(Date fechaMinima) {
+		this.fechaMinima = fechaMinima;
 	}
 
 	public List<AvisoDTO> getAvisoList() {
