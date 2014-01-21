@@ -1,5 +1,7 @@
 package ec.edu.uce.silsag.ejb.negocio.impl;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -63,6 +65,7 @@ public class CandidatosServiceImpl implements CandidatosService {
 		log.info("registrarCandidato");
 
 		try {
+			candidatoDTO.setCanFechaUltima(new Timestamp(new Date().getTime()));
 			return factoryDAO.getCandidatoDAOImpl().edit(candidatoDTO);
 		} catch (Exception e) {
 			log.info("Error al registrar el Candidato {}", e.toString());
@@ -82,6 +85,7 @@ public class CandidatosServiceImpl implements CandidatosService {
 			CandidatoDTO can=estudio.getBemCandidato();
 			Integer es=factoryDAO.getEstudioDAOImpl().getMax(can);
 			can.setCanMaxEstudio(es);
+			can.setCanFechaUltima(new Timestamp(new Date().getTime()));
 			factoryDAO.getCandidatoDAOImpl().edit(can);
 		} catch (Exception e) {
 			log.info("Error al registrar el Candidato {}", e.toString());

@@ -11,6 +11,7 @@ import javax.persistence.criteria.Root;
 import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.persistence.dao.CandidatoDAO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoEstudioDTO;
 
 @Stateless
 public class CandidatoDAOImpl extends AbstractFacadeImpl<CandidatoDTO> implements CandidatoDAO{
@@ -69,22 +70,22 @@ public class CandidatoDAOImpl extends AbstractFacadeImpl<CandidatoDTO> implement
 //		else
 //			return list;
 //	}
-//	
-//
-//	@Override
-//	public List<CandidatoEstudioDTO> getCandidatoEstudio() throws SilsagException
-//	{
-//		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-//		CriteriaQuery<CandidatoEstudioDTO> cq=cb.createQuery(CandidatoEstudioDTO.class);
-//		cq.from(CandidatoEstudioDTO.class);
-//				
-//		List<CandidatoEstudioDTO> list=entityManager.createQuery(cq).getResultList();
-//		if(list.isEmpty())
-//			return null;
-//		else
-//			return list;
-//	}
-//	
+	
+
+	@Override
+	public List<CandidatoEstudioDTO> getCandidatoEstudio() throws SilsagException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CandidatoEstudioDTO> cq=cb.createQuery(CandidatoEstudioDTO.class);
+		cq.from(CandidatoEstudioDTO.class);
+				
+		List<CandidatoEstudioDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
+	
 //	@Override
 //	public List<CandidatoEstudioDTO> getCandidatoEstudio(CandidatoDTO candidatoDTO) throws SilsagException
 //	{
