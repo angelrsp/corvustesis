@@ -24,6 +24,7 @@
 		<class>ec.edu.uce.silsag.ejb.persistence.entities.ResultadoDTO</class>
 		<class>ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO</class>
 		<class>ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaListDTO</class>
+		<class>ec.edu.uce.silsag.ejb.persistence.entities.EstudioListDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>

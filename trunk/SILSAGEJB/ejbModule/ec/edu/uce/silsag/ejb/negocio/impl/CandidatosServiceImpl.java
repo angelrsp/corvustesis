@@ -17,6 +17,7 @@ import ec.edu.uce.silsag.ejb.persistence.entities.AvisoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CursoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EstudioDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.EstudioListDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ExperienciaListDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.PostulacionDTO;
@@ -44,10 +45,13 @@ public class CandidatosServiceImpl implements CandidatosService {
 			UsuarioDTO user = candidatoDTO.getBemUsuario();
 			user.setBemPerfil(factoryDAO.getPerfilDAOImpl().find(1));
 			candidatoDTO.setBemUsuario(user);
-			return factoryDAO.getCandidatoDAOImpl().create(candidatoDTO);
+			if(factoryDAO.getCandidatoDAOImpl().getByIdentificacion(candidatoDTO))
+				throw new SilsagException("El numero de idendificacion ingresado ya existe en el sistema");
+			else
+				return factoryDAO.getCandidatoDAOImpl().create(candidatoDTO);
 		} catch (Exception e) {
 			log.info("Error al registrar el Candidato {}", e.toString());
-			throw new SilsagException("Error al registrar el Candidato");
+			throw new SilsagException(e);
 		}
 
 	}
@@ -157,17 +161,17 @@ public class CandidatosServiceImpl implements CandidatosService {
 		}
 	}
 	
-//	@Override
-//	public List<EstudioListDTO> obtenerEstudio(CandidatoDTO candidato)throws SilsagException {
-//		try {
-//			return factoryDAO.getEstudioDAOImpl().getAll(candidato);
-//		} catch (Exception e) {
-//			log.info("Error al obtener datos de Estudio {}", e.toString());
-//			throw new SilsagException("Error al registrar el Candidato");
-//
-//		}
-//	}
-//
+	@Override
+	public List<EstudioListDTO> obtenerEstudio(CandidatoDTO candidato)throws SilsagException {
+		try {
+			return factoryDAO.getEstudioDAOImpl().getAllList(candidato);
+		} catch (Exception e) {
+			log.info("Error al obtener datos de Estudio {}", e.toString());
+			throw new SilsagException("Error al registrar el Candidato");
+
+		}
+	}
+
 //	@Override
 //	public List<CandidatoDatoDTO> obtenerCandidatoDato(CandidatoDTO candidato)throws SilsagException {
 //		try {

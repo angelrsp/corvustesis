@@ -38,12 +38,12 @@ public class LoginServiceImpl implements LoginService{
 			if(user!=null)
 			{
 				StringBuilder sb=new StringBuilder();
-				sb.append("La solicitud de recuperaciÃ³n de la clave de acceso he sido procesada.<br/>");
+				sb.append("La solicitud de recuperación de la clave de acceso he sido procesada.<br/>");
 				sb.append("Su credencial de acceso es: "+user.getUsuPassword()+"<br/>");
-				sb.append("Se recomienda actualizar su contraseÃ±a.<br/>");
-				sb.append("Facultad de OdontologÃ­a");
+				sb.append("Se recomienda actualizar su contraseña.<br/>");
+				sb.append("Facultad de Odontología");
 				
-				new MailUtil().send(user.getUsuMail(), "SILSAG: RecuperaciÃ³n de su credencial de acceso", sb.toString());
+				new MailUtil().send(user.getUsuMail(), "SILSAG: Recuperación de su credencial de acceso", sb.toString());
 				return true;
 			}
 			else

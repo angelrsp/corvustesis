@@ -31,6 +31,10 @@ public class MailUtil {
 	        properties.put("mail.smtp.password", "admin.fod2014");
 	        properties.put("mail.smtp.user", "silsag.fod@gmail.com");
 	        properties.put("mail.smtp.auth", "true");
+	        properties.put("mail.smtp.starttls.enable", "true"); 
+	        properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+
 	        session = Session.getDefaultInstance(properties);
 	    }
 	    

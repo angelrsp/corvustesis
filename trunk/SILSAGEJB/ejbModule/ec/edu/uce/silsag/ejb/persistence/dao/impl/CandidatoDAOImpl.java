@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.persistence.dao.CandidatoDAO;
@@ -35,6 +36,22 @@ public class CandidatoDAOImpl extends AbstractFacadeImpl<CandidatoDTO> implement
 		else
 			return list;
 	}
+	
+	@Override
+	public Boolean getByIdentificacion(CandidatoDTO candidatoDTO) {
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CandidatoDTO> cq=cb.createQuery(CandidatoDTO.class);
+		Root<CandidatoDTO> from= cq.from(CandidatoDTO.class);
+		
+		cq.where(cb.equal(from.get("canIdentificacion"), candidatoDTO.getCanIdentificacion()));
+		
+		List<CandidatoDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return false;
+		else
+			return true;	
+	}
+	
 	
 //	@Override
 //	public List<CandidatoDatoDTO> getData(CandidatoDTO can) throws SilsagException
