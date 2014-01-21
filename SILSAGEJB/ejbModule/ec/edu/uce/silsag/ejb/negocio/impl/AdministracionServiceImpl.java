@@ -131,7 +131,7 @@ public class AdministracionServiceImpl implements AdministracionService{
 				factoryDAO.getUsuarioDAOImpl().edit(user);	
 			}
 			else{
-				throw new SilsagException("ContraseÃ±a actual incorrecta");
+				throw new SilsagException("Contraseña actual incorrecta");
 			}
 			
 		}catch(Exception e){

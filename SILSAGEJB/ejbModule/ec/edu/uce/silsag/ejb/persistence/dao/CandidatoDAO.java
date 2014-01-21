@@ -12,5 +12,7 @@ public interface CandidatoDAO extends AbstractFacade<CandidatoDTO>{
 
 	List<CandidatoDTO> getAll() throws SilsagException;
 
+	Boolean getByIdentificacion(CandidatoDTO candidatoDTO);
+
 
 }
