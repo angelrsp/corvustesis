@@ -69,8 +69,10 @@ public class CandidatosServiceImpl implements CandidatosService {
 
 		try {
 			candidatoDTO.setCanFechaUltima(new Timestamp(new Date().getTime()));
-			Integer es=factoryDAO.getEstudioDAOImpl().getMax(candidatoDTO);
-			candidatoDTO.setCanMaxEstudio(es);
+			if(factoryDAO.getEstudioDAOImpl().getAll(candidatoDTO)!=null){
+				Integer es=factoryDAO.getEstudioDAOImpl().getMax(candidatoDTO);
+				candidatoDTO.setCanMaxEstudio(es);
+			}
 			return factoryDAO.getCandidatoDAOImpl().edit(candidatoDTO);
 		} catch (Exception e) {
 			log.info("Error al registrar el Candidato {}", e.toString());
