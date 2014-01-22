@@ -15,7 +15,7 @@
 		
 		<fieldset>
 				<p:growl id="growl" showDetail="false" />
-				<p:panel header="">
+				
 					<p:dataGrid value="#{misPostulacionesController.postulacionList}"
 						var="pos" columns="1" emptyMessage="#{i18n['table.vacio']}">
 						<p:panel header="#{pos.bemAviso.bemEmpresa.empNombreComercial}">
@@ -40,7 +40,7 @@
 						</h:panelGrid>	
 						</p:panel>
 					</p:dataGrid>
-				</p:panel>
+				
 			</fieldset>
 		
 		

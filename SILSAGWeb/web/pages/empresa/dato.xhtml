@@ -11,7 +11,7 @@
 	<ui:composition template="/template/empresa.xhtml">
 		<ui:define name="contenido">
 			<fieldset>
-				<p:growl id="growl" showDetail="true" />
+				<p:growl id="growl" showDetail="false" />
 				<p:panel id="pnlDatos" styleClass="tabla"
 					header="#{i18n['label.titulo.pantalla.dato.empresa']}">
 					<table id="tblDatos" class="tabla">
@@ -71,7 +71,7 @@
 						<tr>
 							<td colspan="4" align="center"><p:commandButton
 									value="#{i18n['boton.actualizar']}"
-									process="pnlDatos"
+									process="pnlDatos" actionListener="#{datosEmpresaController.actualizar}"
 									update="pnlDatos, growl" />
 							</td>
 						</tr>

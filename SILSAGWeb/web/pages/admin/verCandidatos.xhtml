@@ -14,14 +14,14 @@
 
 		<ui:define name="contenido">
 		
-			<fieldset>
+				<fieldset>
 			
 				<p:growl id="growl" showDetail="true" />
 				
 				<p:dataTable id="tblCandidato" value="#{verCandidatoController.candidatoList}" var="can">
 				
 					<p:column headerText="#{i18n['label.ci.pasaporte']}">
-						<h:outputText value="#{can.canIdentificacion}"/>
+						<h:outputText value="#{can.canIdentificacion}" />
 					</p:column>			
 
 					<p:column headerText="#{i18n['label.apellidos']}">
@@ -36,11 +36,6 @@
 						<h:outputText value="#{fn:substring(can.canFechaNacimiento,0,10)}" />
 					</p:column>	
 
-					<p:column headerText="#{i18n['label.nivel.estudio2']}">
-						<h:outputText value="#{can.catMaxNivelEstudio}" />
-					</p:column>	
-
-
 					<p:column style="width:8%" headerText="#{i18n['label.ver.mas']}">  
 		                <p:commandButton actionListener="#{verCandidatoController.buscarCandidato(can)}" oncomplete="PF('infoCandidato').show()" icon="ui-icon-search" 
 		                	update=":contenido:infoCandidato,:contenido:growl" process="tblCandidato" title="#{i18n['label.ver.mas']}">    
@@ -51,10 +46,12 @@
 				
 			</fieldset>
 		
-		   <p:dialog id="infoCandidato" widgetVar="infoCandidato"
+		    <p:dialog id="infoCandidato" widgetVar="infoCandidato"
       			header="Candidato" modal="true" closeOnEscape="true" resizable="false">
       			
       			<p:scrollPanel style="width:800px;height:600px" mode="native">  
+      			
+      			<p:panel id="curr">
       			
       			<table>
 						<tr>
@@ -88,11 +85,16 @@
 							<td><p:selectOneMenu value="#{verCandidatoController.estadoCivil}" disabled="true">
 									<f:selectItems value="#{verCandidatoController.catalogoEstadoCivil}"/>										
 								</p:selectOneMenu></td>
+							<td><h:outputLabel value="#{i18n['label.genero']}:&#160;" /> </td>
+							<td><p:selectOneMenu value="#{verCandidatoController.genero}" disabled="true">
+										<f:selectItems value="#{verCandidatoController.catalogoGenero}"/>										
+								</p:selectOneMenu></td>								
+								
 						</tr>
 
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.fecha.nacimiento']}" /> </td>
-							<td><p:inputText value="#{verCandidatoController.candidato.canFechaNacimiento}" readonly="true"/></td>
+							<td><p:inputText value="#{fn:substring(verCandidatoController.candidato.canFechaNacimiento,0,10)}" readonly="true"/></td>
 							
 							<td><h:outputLabel value="#{i18n['label.lugar.nacimiento']}:&#160;" /> </td>
 							<td><p:inputText value="#{verCandidatoController.candidato.canLugarNacimiento}" readonly="true"></p:inputText></td>
@@ -117,9 +119,17 @@
 					
 					<p:panel id="pnlEstudios" styleClass="tabla"
 						header="#{i18n['label.titulo.pantalla.dato.estudios']}">
+						
 						<p:dataTable id="tblEstudio" value="#{verCandidatoController.estudioList}" var="est" emptyMessage="#{i18n['table.vacio']}">
+
 							<p:column headerText="#{i18n['label.nivel.estudio']}">
 								<h:outputText value="#{est.catNivel}" />
+							</p:column>
+							<p:column headerText="#{i18n['label.especialidad']}">
+								<h:outputText value="#{est.catEspecialidad}" />
+							</p:column>
+							<p:column headerText="#{i18n['label.carrera']}">
+								<h:outputText value="#{est.estCarrera}" />
 							</p:column>
 							<p:column headerText="#{i18n['label.establecimiento']}">
 								<h:outputText value="#{est.estEstablecimiento}" />
@@ -127,32 +137,68 @@
 							<p:column headerText="#{i18n['label.pais']}">
 								<h:outputText value="#{est.catPais}" />
 							</p:column>
-							<p:column headerText="#{i18n['label.carrera']}">
-								<h:outputText value="#{est.estCarrera}" />
+							<p:column headerText="#{i18n['label.fecha.inicio']}">
+								<h:outputText value="#{fn:substring(est.estFechaInicio,0,10)}" />
 							</p:column>
-							<p:column headerText="#{i18n['label.anio.inicio']}">
-								<h:outputText value="#{est.estAnioInicio}" />
+							<p:column headerText="#{i18n['label.fecha.fin']}">
+								<h:outputText value="#{fn:substring(est.estFechaFin,0,10)}" />
 							</p:column>
-							<p:column headerText="#{i18n['label.mes.inicio']}">
-								<h:outputText value="#{est.estMesInicioNombre}" />
-							</p:column>
-							<p:column headerText="#{i18n['label.anio.fin']}">
-								<h:outputText value="#{est.estAnioFin}" />
-							</p:column>
-							<p:column headerText="#{i18n['label.mes.fin']}">
-								<h:outputText value="#{est.estMesFinNombre}" />
-							</p:column>	
+
 						</p:dataTable>
-					</p:panel>
+ 					</p:panel>
 				
 					<p:spacer height="5"/>
 					
-					<p:panel id="pnlExperiencia" styleClass="tabla"
-						header="#{i18n['label.titulo.pantalla.dato.experiencia']}">				
+					<p:panel id="pnlCursos" styleClass="tabla" header="#{i18n['label.titulo.pantalla.dato.cursos.realizados']}">
+					
+						<p:dataTable id="tblCurso" value="#{verCandidatoController.cursoList}" var="cur" emptyMessage="#{i18n['table.vacio']}">
+						
+							<p:column headerText="#{i18n['label.entidad']}">
+								<h:outputText value="#{cur.curEntidad}" />
+							</p:column>
+	
+							<p:column headerText="#{i18n['label.descripcion']}">
+								<h:outputText value="#{cur.curDescripcion}" />
+							</p:column>
+	
+							<p:column headerText="#{i18n['label.fecha.inicio']}">
+								<h:outputText value="#{fn:substring(cur.curFechaInicio,0,10)}" />
+							</p:column>
+	
+							<p:column headerText="#{i18n['label.fecha.fin']}">
+								<h:outputText value="#{fn:substring(cur.curFechaFin,0,10)}" />
+							</p:column>
+												
+						</p:dataTable>		
+									
+					</p:panel>
+
+					<p:spacer height="5"/>
+					
+					
+					<p:panel id="pnlAdicional" styleClass="tabla" header="#{i18n['label.titulo.pantalla.dato.conocimiento.adicional']}">
+					
+						<p:dataTable id="tblAdicional" value="#{verCandidatoController.adicionalList}" var="adi" emptyMessage="#{i18n['table.vacio']}">
+						
+							<p:column headerText="#{i18n['label.nombre']}">
+								<h:outputText value="#{adi.proNombre}" />
+							</p:column>
+	
+							<p:column headerText="#{i18n['label.descripcion']}">
+								<h:outputText value="#{adi.proDescripcion}" />
+							</p:column>					
+																		
+						</p:dataTable>
+					
+					</p:panel>
+
+					<p:spacer height="5"/>
+
+					<p:panel id="pnlExperiencia" styleClass="tabla" header="#{i18n['label.titulo.pantalla.dato.experiencia']}">
 						
 						<p:dataTable id="tblExperiencia" value="#{verCandidatoController.experienciaList}" var="exp" emptyMessage="#{i18n['table.vacio']}">
 						
-						<p:column headerText="#{i18n['label.empresa']}">
+							<p:column headerText="#{i18n['label.empresa']}">
 								<h:outputText value="#{exp.expEntidad}" />
 							</p:column>
 							<p:column headerText="#{i18n['label.fecha.inicio']}">
@@ -167,57 +213,19 @@
 							<p:column headerText="#{i18n['label.puesto']}">
 								<h:outputText value="#{exp.expPuesto}" />
 							</p:column>
-							<p:column headerText="#{i18n['label.rubro']}">
-								<h:outputText value="#{exp.expRubro}" />
+							<p:column headerText="#{i18n['label.sector.empresa']}">
+								<h:outputText value="#{exp.catTipoEmpresa}" />
 							</p:column>
-							<p:column headerText="#{i18n['label.tipo.experiencia']}">
-								<h:outputText value="#{exp.catTipoExperiencia}" />
-							</p:column>
-													
-						</p:dataTable>					
-					</p:panel>							
-
-					<p:spacer height="5"/>
-
-					<p:panel id="pnlHerramientas" styleClass="tabla"
-						header="#{i18n['label.titulo.pantalla.dato.herramientas']}">
-						<p:dataTable id="tblHerramienta" value="#{verCandidatoController.herramientasList}" var="her" emptyMessage="#{i18n['table.vacio']}">
-						
-							<p:column headerText="#{i18n['label.programa']}">
-								<h:outputText value="#{her.proPrograma}" />
-							</p:column>
-	
-							<p:column headerText="#{i18n['label.nivel.programa']}">
-								<h:outputText value="#{her.catNivel}" />
-							</p:column>
-						
-						</p:dataTable>					
+														
+						</p:dataTable>		
+											
 					</p:panel>
 
 					<p:spacer height="5"/>
 
-					<p:panel id="pnlIdioma" styleClass="tabla"
-						header="#{i18n['label.titulo.pantalla.dato.idioma']}" emptyMessage="#{i18n['table.vacio']}">
+					<p:panel id="pnlReferencia" styleClass="tabla" header="#{i18n['label.titulo.pantalla.dato.referencia']}">
 					
-						<p:dataTable id="tblIdioma" emptyMessage="#{i18n['table.vacio']}" value="#{verCandidatoController.idiomaList}" var="idi">
-						
-							<p:column headerText="#{i18n['label.idioma']}">
-								<h:outputText value="#{idi.idiIdioma}" />
-							</p:column>
-	
-							<p:column headerText="#{i18n['label.nivel.idioma']}">
-								<h:outputText value="#{idi.catNivel}" />
-							</p:column>
-							
-						</p:dataTable>					
-					</p:panel>
-
-					<p:spacer height="5"/>
-
-					<p:panel id="pnlReferencia" styleClass="tabla"
-						header="#{i18n['label.titulo.pantalla.dato.referencia']}">
-					
-					<p:dataTable id="tblReferencia" emptyMessage="#{i18n['table.vacio']}" value="#{verCandidatoController.referenciaList}" var="ref">
+					<p:dataTable id="tblReferencia" value="#{verCandidatoController.referenciaList}" var="ref" emptyMessage="#{i18n['table.vacio']}">
 					
 						<p:column headerText="#{i18n['label.nombre.completo']}">
 							<h:outputText value="#{ref.refNombre}" />
@@ -231,10 +239,15 @@
 							<h:outputText value="#{ref.refMail}" />
 						</p:column>
 					
-					</p:dataTable>
+					</p:dataTable>	
 										
 				</p:panel>
 
+				</p:panel>
+
+			    <p:commandButton value="Imprimir" type="button" icon="ui-icon-print">  
+			        <p:printer target="curr" />  
+			    </p:commandButton>  
 
 				</p:scrollPanel>
 
