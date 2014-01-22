@@ -22,3 +22,5 @@ body{font-size: 9pt;font-weight:normal;}
 .ui-slidemenu-content {
    min-height: 300px;
 }
+
+.red { color: red; }
