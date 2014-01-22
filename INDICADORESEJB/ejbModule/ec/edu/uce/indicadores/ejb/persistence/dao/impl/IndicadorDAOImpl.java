@@ -6,13 +6,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ec.edu.uce.indicadores.ejb.persistence.dao.IndicadorDAO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IndicadorDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.ModeloDTO;
 
 public class IndicadorDAOImpl extends AbstractFacadeImpl<IndicadorDTO> implements IndicadorDAO{
 	
@@ -34,8 +37,10 @@ public class IndicadorDAOImpl extends AbstractFacadeImpl<IndicadorDTO> implement
 		CriteriaQuery<IndicadorDTO> cq=cb.createQuery(IndicadorDTO.class);
 		Root<IndicadorDTO> from= cq.from(IndicadorDTO.class);
 		//from.join("indIndicador",JoinType.LEFT).get("indCodigo").isNull();
+		Path<IesDTO> join1=from.join("indy");
+		Path<ModeloDTO> join2=from.join("indModeloBean");
 		
-		cq.where(cb.isNull(from.join("indIndicador",JoinType.LEFT)));
+		cq.where(cb.equal(join1.get("iesCodigo"), indicadorDTO.getIndy().getIesCodigo()), cb.equal(join2.get("modCodigo"), indicadorDTO.getIndModeloBean().getModCodigo()),cb.isNull(from.join("indIndicador",JoinType.LEFT)));
 		
 		List<IndicadorDTO> list=entityManager.createQuery(cq).getResultList();	
 		if(list.isEmpty())
