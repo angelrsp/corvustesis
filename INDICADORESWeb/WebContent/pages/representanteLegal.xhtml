@@ -43,7 +43,7 @@
 						<td><h:outputLabel value="#{i18n['label.di']}:&#160;" /> </td>
 						<td><p:inputText required="true"
 									requiredMessage="#{i18n['label.di']}&#160;#{i18n['label.requerido']}"
-									value="#{representanteLegalController.representanteLegalDTO.rleDi}"/></td>						
+									value="#{representanteLegalController.representanteLegalDTO.rleDi}" onkeypress="return isNumberKey(event)"/></td>						
 					</tr>
 
 
@@ -87,14 +87,11 @@
 				
 <!-- 				<p:commandButton id="showDialogButton" type="button" value="Show" onclick="PF('dlgContacto').show();" /> -->
 				
-				<p:dialog id="dlgContacto" widgetVar="dlgContacto" modal="true" header="Contactos">
+				<p:dialog id="dlgContacto" widgetVar="dlgContacto" modal="true" header="Contactos" appendTo="@(body)">
 				
 					<p:panel id="pnlContactos" styleClass="tabla"
 						header="">
-						
-					<p:accordionPanel activeIndex="null">
-					<p:tab title="#{i18n['boton.agregar']}">  
-										
+																
 					<table>
 					
 						<tr>
@@ -117,10 +114,7 @@
 						</tr>
 					
 					</table>	
-	
-					</p:tab>
-					</p:accordionPanel>
-												
+													
 					</p:panel>
 
 					<p:dataTable id="tblContacto" value="#{representanteLegalController.contactoList}" var="con">

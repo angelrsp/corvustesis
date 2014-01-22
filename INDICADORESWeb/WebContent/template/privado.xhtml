@@ -3,47 +3,59 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      	xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<ui:include src="/template/head.xhtml" />
 </h:head>
 <body>
-	<div align="center">
-		<div style="width: 995px; box-shadow: 0 0 20px #2E2D32;">
-			<ui:include src="/template/header.xhtml" />
-			<div id="menu">
-				<h:form id="menu">
 
-					<p:menubar id="menuPrivado"
-						style="margin-left:auto; margin-right:auto;text-align: center; width:96%"
-						rendered="true">
-						<p:menuitem value="Inicio" url="/pages/home.jsf" />
-						<p:menuitem value="Representante Legal" url="/pages/representanteLegal.jsf" />
-						<p:menuitem value="IES" url="/pages/ies.jsf" />
-						<p:menuitem value="Registro" url="/pages/registro.jsf" />
-						<p:menuitem value="Indicador" url="/pages/indicador.jsf" />
-						<p:menuitem value="Historico Indicador" url="/pages/historicoIndicador.jsf" />
-						<p:submenu label="Reportes">
-							<p:menuitem value="Indicador" url="/pages/report/indicador.jsf" />
-						</p:submenu>
-						<f:facet name="options">
-					    	<p:commandButton value="Salir" icon="ui-icon-extlink" actionListener="#{loginController.logout}" />  
-					    </f:facet>
-					</p:menubar>
-				</h:form>
+<p:layout fullPage="true">  
 
-				<p:spacer height="10"></p:spacer>
+	<p:layoutUnit position="north" size="110" style="background-color:#003979;">	      
+	<table width="100%" style="background-color:#003979; height: 88px;">
+			<tr>
+				<td align="center"><h:graphicImage value="/images/uce2.jpg" height="88" /></td>
+			</tr>
+		</table>
+	</p:layoutUnit>  
 
-				<div id="content" align="left" style="width: 950px;">
-					<h:form id="contenido">
-						<ui:insert name="contenido"></ui:insert>
-						<p:spacer height="10"></p:spacer>
-					</h:form>
-				</div>
-			</div>
-		</div>
-		<ui:include src="/template/footer.xhtml" />
-	</div>
+   <p:layoutUnit position="west" size="200" header="Indicadores" resizable="true" collapsible="true">  
+
+	<h:form id="menu">
+		<p:slideMenu id="menuPrivado" backLabel="Atras">
+			
+			<p:menuitem value="Inicio" url="/pages/home.jsf" />
+			<p:separator />  
+			<p:menuitem value="Representante Legal" url="/pages/representanteLegal.jsf" />
+			<p:separator />  
+			<p:menuitem value="IES" url="/pages/ies.jsf" />
+			<p:separator />  
+			<p:menuitem value="Registro" url="/pages/registro.jsf" />
+			<p:separator />  
+			<p:menuitem value="Indicador" url="/pages/indicador.jsf" />
+			<p:separator />  
+			<p:menuitem value="Historico Indicador" url="/pages/historicoIndicador.jsf" />
+			<p:separator />
+				
+			<p:submenu label="Reportes">
+				<p:menuitem value="Indicador" url="/pages/report/indicador.jsf" />
+			</p:submenu>
+			<p:separator />
+			
+			<p:menuitem value="Salir" actionListener="#{loginController.logout}" icon="ui-icon-close"/>
+			
+		</p:slideMenu>
+	</h:form>
+
+   </p:layoutUnit> 
+
+    <p:layoutUnit position="center">
+		<h:form id="contenido">
+			<ui:insert name="contenido"></ui:insert>
+		</h:form>  
+	</p:layoutUnit>
+	  
+</p:layout>				
 </body>
 </html>
