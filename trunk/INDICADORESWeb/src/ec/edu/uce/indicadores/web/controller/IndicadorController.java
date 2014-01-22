@@ -49,7 +49,7 @@ public class IndicadorController extends SelectItemController implements Seriali
 	{
 		indicadorDTO=new IndicadorDTO();
 		indicadorList=new ArrayList<IndicadorDTO>();
-		indicadorList=indicadorService.obtenerIndicador();
+//		indicadorList=indicadorService.obtenerIndicador();
 		obtenerArbol();
 	}
 
@@ -127,19 +127,21 @@ public class IndicadorController extends SelectItemController implements Seriali
 		}
 	}
 	
-	private void obtenerArbol()
+	public void obtenerArbol()
 	{
 		try {
+			
 			IesDTO iesDTO=new IesDTO();
 			ModeloDTO modeloDTO=new ModeloDTO();
 			if(getIes()!=null)
 				iesDTO.setIesCodigo(Integer.parseInt(getIes().toString()));
 			else
-				iesDTO.setIesCodigo(0);
+				return;
 			if(getModelo()!=null)
 				modeloDTO.setModCodigo(Integer.parseInt(getModelo().toString()));
 			else
-				modeloDTO.setModCodigo(0);
+				return;
+			indicadorList=indicadorService.obtenerIndicador();
 			getIndicadorDTO().setIndy(iesDTO);
 			getIndicadorDTO().setIndModeloBean(modeloDTO);
 			List<IndicadorDTO> indicaList=indicadorService.obtenerRaizIndicador(getIndicadorDTO());
