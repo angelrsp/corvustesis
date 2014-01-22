@@ -11,12 +11,15 @@ import javax.ejb.Stateless;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ec.edu.uce.silsag.commons.dto.util.EstudioReportDTO;
 import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsag.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.silsag.ejb.persistence.entities.AdicionalDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.AnioEstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.AvisoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoEstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CursoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EstudioListDTO;
@@ -62,10 +65,12 @@ public class CandidatosServiceImpl implements CandidatosService {
 	@Override
 	public CandidatoDTO actualizarCandidato(CandidatoDTO candidatoDTO)throws SilsagException {
 
-		log.info("registrarCandidato");
+		log.info("actualizarCandidato");
 
 		try {
 			candidatoDTO.setCanFechaUltima(new Timestamp(new Date().getTime()));
+			Integer es=factoryDAO.getEstudioDAOImpl().getMax(candidatoDTO);
+			candidatoDTO.setCanMaxEstudio(es);
 			return factoryDAO.getCandidatoDAOImpl().edit(candidatoDTO);
 		} catch (Exception e) {
 			log.info("Error al registrar el Candidato {}", e.toString());
@@ -460,4 +465,62 @@ public class CandidatosServiceImpl implements CandidatosService {
 	}
 
 	
+	@Override
+	public List<CandidatoEstudioDTO> obtenerCandidatos(int nivelEstudio, int genero) throws SilsagException
+	{
+		log.info("obtenerCandidatos");
+		try{
+			return factoryDAO.getCandidatoDAOImpl().getCandidatoEstudio(nivelEstudio,genero);
+		}
+		catch(Exception e)
+		{
+			log.info("Error al obtenerCandidatos" +e.toString());
+			throw new SilsagException("Error al obtenerCandidatos");
+		}
+	}
+	
+	
+	
+	@Override
+	public List<AnioEstudioDTO> obtenerAnios() throws SilsagException
+	{
+		log.info("obtenerAnios");
+		try{
+			return factoryDAO.getCandidatoDAOImpl().getYearEstudio();
+		}
+		catch(Exception e)
+		{
+			log.info("Error al obtenerCandidatos" +e.toString());
+			throw new SilsagException("Error al obtenerCandidatos");
+		}
+	}
+	
+	@Override
+	public List<EstudioReportDTO> obtenerNivelReporte(int anio) throws SilsagException
+	{
+		log.info("obtenerNivelReporte");
+		try{
+			return factoryDAO.getCandidatoDAOImpl().getNivel(anio);
+		}
+		catch(Exception e)
+		{
+			log.info("Error al obtenerCandidatos" +e.toString());
+			throw new SilsagException("Error al obtenerCandidatos");
+		}
+	}
+	
+	@Override
+	public List<EstudioReportDTO> obtenerNivelReporte() throws SilsagException
+	{
+		log.info("obtenerNivelReporte");
+		try{
+			return factoryDAO.getCandidatoDAOImpl().getNivel();
+		}
+		catch(Exception e)
+		{
+			log.info("Error al obtenerCandidatos" +e.toString());
+			throw new SilsagException("Error al obtenerCandidatos");
+		}
+	}
+
 }
