@@ -15,7 +15,6 @@ import ec.edu.uce.indicadores.commons.util.IndicadoresException;
 import ec.edu.uce.indicadores.ejb.persistence.dao.EvidenciaDAO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.EvidenciaDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.HistoricoIndicadorDTO;
-import ec.edu.uce.indicadores.ejb.persistence.entities.IndicadorDTO;
 
 public class EvidenciaDAOImpl extends AbstractFacadeImpl<EvidenciaDTO> implements EvidenciaDAO{
 
