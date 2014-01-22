@@ -19,22 +19,39 @@
 					<table>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.representante.legal']}:&#160;" /> </td>
-							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.representante.legal']}:&#160;#{i18n['label.requerido']}" value="#{historicoIndicadorController.modelo}">
-										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
-										<f:selectItems value="#{registroController.representanteLegalList}"></f:selectItems>
+							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.representante.legal']}:&#160;#{i18n['label.requerido']}" value="#{registroController.representanteLegalObject}">
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+									<f:selectItems value="#{registroController.representanteLegalList}"></f:selectItems>
+									<p:ajax event="change" process="@this" update="tblRegistro,growl" listener="#{registroController.obtenerRegistroLista}" immediate="true"></p:ajax>
+									<p:ajax event="change" process="@this" update="tblRegistro,growl" listener="#{registroController.obtenerRegistroLista}" immediate="true"></p:ajax>	
 							</p:selectOneMenu></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.ies']}:&#160;" /> </td>
-							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{historicoIndicadorController.ies}">
-										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
-										<f:selectItems value="#{registroController.iesList}"></f:selectItems>
+							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{registroController.iesObject}">
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+									<f:selectItems value="#{registroController.iesList}"></f:selectItems>
+									<p:ajax event="change" process="@this" update="tblRegistro,growl" listener="#{registroController.obtenerRegistroLista}" immediate="true"></p:ajax>
+									<p:ajax event="change" process="@this" update="tblRegistro,growl" listener="#{registroController.obtenerRegistroLista}" immediate="true"></p:ajax>
 							</p:selectOneMenu></td>
 						</tr>
+						
+						<tr>
+							<td colspan="2" align="center">
+								<p:commandButton actionListener="#{registroController.agregar}" value="#{i18n['boton.agregar']}" process="pnlDatos" update="pnlDatos,growl" /> </td>
+						</tr>
+						
 					</table>
 					
-					<p:dataTable>
+					<p:dataTable id="tblRegistro" value="#{registroController.registroList}" var="reg">
 					
+						<p:column headerText="#{i18n['label.representante.legal']}">
+							<h:outputText value="#{reg.indRepresentanteLegal.rleNombres} #{reg.indRepresentanteLegal.rleApellidos}" />
+						</p:column>
+					
+						<p:column headerText="#{i18n['label.ies']}">
+							<h:outputText value="#{reg.indy.iesRazonSocial}" />
+						</p:column>
 					
 					
 					</p:dataTable>
