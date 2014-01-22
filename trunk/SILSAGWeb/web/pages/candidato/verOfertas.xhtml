@@ -3,7 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <h:head></h:head>
 <body>
@@ -12,7 +13,11 @@
 		<ui:define name="contenido">
 			<fieldset>
 				<p:growl id="growl" showDetail="false" />
-				<p:panel header="">
+				
+				<table width="99%" align="center">
+				
+				
+				
 					<p:dataGrid value="#{verOfertasCandidatoController.ofertasList}"
 						var="ofe" columns="1" emptyMessage="#{i18n['table.vacio']}">
 						<p:panel header="#{ofe.bemEmpresa.empNombreComercial}">
@@ -28,12 +33,16 @@
 
 							<h:outputText value="#{i18n['label.vacantes']}:&#160;" />
 							<h:outputText value="#{ofe.aviVacantes}" />
+
+							<h:outputText value="#{i18n['label.fecha.caducidad']}:&#160;" />
+							<h:outputText value="#{fn:substring(ofe.aviFechaCaducidad,0,10)}" />
 							
 							<p:commandButton value="#{i18n['boton.postularse']}" onclick="if(!confirm('Esta seguro(a) que desea postularse?')) return false;" actionListener="#{verOfertasCandidatoController.postularse(ofe)}" update=":contenido:growl"></p:commandButton>
 						</h:panelGrid>	
 						</p:panel>
 					</p:dataGrid>
-				</p:panel>
+					
+				</table>
 			</fieldset>
 		</ui:define>
 	</ui:composition>

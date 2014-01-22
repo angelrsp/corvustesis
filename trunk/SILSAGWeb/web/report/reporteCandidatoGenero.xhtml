@@ -14,10 +14,29 @@
 		<ui:define name="contenido">
 		
 			<fieldset>
-			
-			
-			
-			
+			<p:growl id="growl"></p:growl>
+			<p:panel>
+			<table>
+			<tr>
+				<td><h:outputLabel value="#{i18n['label.nivel.estudio']}:&#160;" /></td>
+				<td><p:selectOneMenu value="#{reporteCandidatoGeneroController.nivelEstudio}" required="true" requiredMessage="#{i18n['label.nivel.estudio']}:&#160;#{i18n['label.requerido']}" >
+					<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="" />
+					<f:selectItems value="#{reporteCandidatoGeneroController.catalogoNivelEstudio}"></f:selectItems>
+					<f:selectItem itemLabel="--Todos--" itemValue="0" />
+					</p:selectOneMenu></td>
+			</tr>
+			<tr>
+				<td><p:commandButton value="Ver Reporte" actionListener="#{reporteCandidatoGeneroController.verReporte}" update="sample,growl"></p:commandButton></td>
+			</tr>
+			<tr>
+            </tr>
+            
+            </table>
+            
+            <p:pieChart id="sample" value="#{reporteCandidatoGeneroController.pieModel}" legendPosition="w"  
+                title="Reporte" style="width:400px;height:300px" showDataLabels="true" />
+
+			</p:panel>                  
 			</fieldset>
 		</ui:define>
 	</ui:composition>

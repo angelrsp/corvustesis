@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/template/admin.xhtml">
+
+		<ui:define name="contenido">
+		
+			<fieldset>
+				<p:growl id="growl"></p:growl>
+				<p:panel>
+				<table>
+				<tr>
+				<td><h:outputLabel value="#{i18n['label.anio']}:&#160;" /></td>
+				<td><p:selectOneMenu value="#{reporteCandidatoEstudioController.anio}" required="true" requiredMessage="#{i18n['label.anio']}:&#160;#{i18n['label.requerido']}" >
+					<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="" />
+					<f:selectItems value="#{reporteCandidatoEstudioController.listAnio}" var="an" itemValue="#{an.anioEstudio}" itemLabel="#{an.anioEstudio}"></f:selectItems>
+					<f:selectItem itemLabel="--Todos--" itemValue="0" />
+					</p:selectOneMenu></td>			
+				
+ 				</tr>
+				<tr>
+					<td><p:commandButton value="Ver Reporte" actionListener="#{reporteCandidatoEstudioController.verReporte}" update="basic,growl"></p:commandButton></td>
+				</tr>
+				</table>
+				
+				<p:barChart id="basic" value="#{reporteCandidatoEstudioController.categoryModel}" legendPosition="ne"  
+            		title="Reporte" min="0" max="200" style="height:300px"/>  
+				
+				</p:panel>
+			</fieldset>
+		</ui:define>
+	</ui:composition>			
+			
+			
+</html>
