@@ -20,15 +20,19 @@
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.modelo']}:&#160;" /> </td>
 							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.modelo']}:&#160;#{i18n['label.requerido']}" value="#{historicoIndicadorController.modelo}">
-										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
-										<f:selectItems value="#{historicoIndicadorController.modeloList}"></f:selectItems>
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+									<f:selectItems value="#{historicoIndicadorController.modeloList}"></f:selectItems>
+									<p:ajax event="change" process="@this" update="tree" listener="#{historicoIndicadorController.obtenerArbol}" immediate="true"></p:ajax>
+									<p:ajax event="change" process="@this" update="tree" listener="#{historicoIndicadorController.obtenerArbol}" immediate="true"></p:ajax>										
 							</p:selectOneMenu></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.ies']}:&#160;" /> </td>
 							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{historicoIndicadorController.ies}">
-										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
-										<f:selectItems value="#{historicoIndicadorController.iesList}"></f:selectItems>
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+									<f:selectItems value="#{historicoIndicadorController.iesList}"></f:selectItems>
+									<p:ajax event="change" process="@this" update="tree" listener="#{historicoIndicadorController.obtenerArbol}" immediate="true"></p:ajax>
+									<p:ajax event="change" process="@this" update="tree" listener="#{historicoIndicadorController.obtenerArbol}" immediate="true"></p:ajax>																			
 							</p:selectOneMenu></td>
 						</tr>
 					</table>

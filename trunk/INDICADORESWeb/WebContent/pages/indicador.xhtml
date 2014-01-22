@@ -20,15 +20,19 @@
 					<tr>
 							<td><h:outputLabel value="#{i18n['label.modelo']}:&#160;" /> </td>
 							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.modelo']}:&#160;#{i18n['label.requerido']}" value="#{indicadorController.modelo}">
-										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
-										<f:selectItems value="#{indicadorController.modeloList}"></f:selectItems>
+								<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+								<f:selectItems value="#{indicadorController.modeloList}"></f:selectItems>
+								<p:ajax event="change" process="@this" update="tree,growl" listener="#{indicadorController.obtenerArbol}" immediate="true"></p:ajax>
+								<p:ajax event="change" process="@this" update="predecesor,tree,growl" listener="#{indicadorController.obtenerArbol}" immediate="true"></p:ajax>											
 							</p:selectOneMenu></td>
 					</tr>
 					<tr>
 							<td><h:outputLabel value="#{i18n['label.ies']}:&#160;" /> </td>
 							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{indicadorController.ies}">
-										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="0"/>
-										<f:selectItems value="#{indicadorController.iesList}"></f:selectItems>
+								<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="0"/>
+								<f:selectItems value="#{indicadorController.iesList}"></f:selectItems>
+								<p:ajax event="change" process="@this" update="tree,growl" listener="#{indicadorController.obtenerArbol}" immediate="true"></p:ajax>
+								<p:ajax event="change" process="@this" update="predecesor,tree,growl" listener="#{indicadorController.obtenerArbol}" immediate="true"></p:ajax>																			
 							</p:selectOneMenu></td>
 					</tr>
 
@@ -69,7 +73,7 @@
 
 					<tr>
 						<td><h:outputLabel value="#{i18n['label.predecesor']}:&#160;" /> </td>
-							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.predecesor']}:&#160;#{i18n['label.requerido']}" value="#{indicadorController.predecesor}">
+							<td><p:selectOneMenu id="predecesor" required="true" requiredMessage="#{i18n['label.predecesor']}:&#160;#{i18n['label.requerido']}" value="#{indicadorController.predecesor}">
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
 									<f:selectItems value="#{indicadorController.indicadorList}" var="in" itemLabel="#{in.indNombreCorto}" itemValue="#{in.indCodigo}"></f:selectItems>
 							</p:selectOneMenu></td>
