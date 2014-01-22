@@ -28,6 +28,7 @@ public abstract class SelectItemController{
 	private List<SelectItem> catalogoGenero;
 	private List<SelectItem> catalogoEspeciliadadTercerNivel;
 	private List<SelectItem> catalogoEspeciliadadCuartoNivel;
+	private List<SelectItem> catalogoMes;
 	
 	
 	@EJB
@@ -48,6 +49,7 @@ public abstract class SelectItemController{
 		catalogoEstadoCivil=new ArrayList<SelectItem>();
 		catalogoEspeciliadadCuartoNivel=new ArrayList<SelectItem>();
 		catalogoEspeciliadadTercerNivel=new ArrayList<SelectItem>();
+		catalogoMes=new ArrayList<SelectItem>();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -251,5 +253,23 @@ public abstract class SelectItemController{
 			});
 		}
 		return catalogoEspeciliadadCuartoNivel;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getCatalogoMes() throws SilsagException {
+		if(CollectionUtils.isEmpty(catalogoMes))
+		{
+			CatalogoDTO catalogo=new CatalogoDTO();
+			catalogo.setCatCodigo(-1);
+			catalogoMes=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					CatalogoDTO cat=(CatalogoDTO)arg0;
+					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
+				}
+			});
+		}
+		return catalogoMes;
 	}
 }
