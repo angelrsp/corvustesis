@@ -115,4 +115,15 @@ public class DatosEmpresaController extends SelectItemController implements Seri
 		}
 	}
 	
+	
+	public void actualizar()
+	{
+		try {
+			getEmpresa().setBemUsuario(getUser());
+			empresaService.actualizarEmpresa(getEmpresa());
+			JsfUtil.addInfoMessage("Empresa Actualizada Exitosamante");
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
 }
