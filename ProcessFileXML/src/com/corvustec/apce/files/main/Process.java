@@ -51,6 +51,7 @@ public class Process {
 			logger.info("claveAcceso {}",claveAcceso);
 			logger.info("claveFirma {}",claveFirma);
 			logger.info("codFactura {}",codFactura);
+			logger.info("conHost {}",conHost);
 			logger.info("conDataBase {}",conDataBase);
 			logger.info("conUser {}",conUser);
 			logger.info("conPass {}",conPass);
