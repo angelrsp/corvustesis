@@ -17,11 +17,11 @@ public class SqlServerJDBC {
 	
 	private static SqlServerJDBC instance;
 	
-	public SqlServerJDBC() {
+	public SqlServerJDBC(String host,String dataBase,String user,String pass) {
 	    try {
 	    	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-	        String connectionUrl = "jdbc:sqlserver://ECUIO009543\\CORVUSTEC;databaseName=electronic";//user=sa;password=desarrollo123,.;";    	
-			conn = DriverManager.getConnection(connectionUrl,"sa","desarrollo123,.");
+	        String connectionUrl = "jdbc:sqlserver://"+host+";databaseName="+dataBase+"";//user=sa;password=desarrollo123,.;";    	
+			conn = DriverManager.getConnection(connectionUrl,user,pass);
 			logger.info("SQLServer Conectado");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -34,10 +34,10 @@ public class SqlServerJDBC {
 	}
 	
 	
-	public static SqlServerJDBC getInstance()
+	public static SqlServerJDBC getInstance(String host,String dataBase,String user,String pass)
 	{
 		if(instance==null)
-			instance=new SqlServerJDBC();
+			instance=new SqlServerJDBC(host,dataBase,user,pass);
 		return instance;
 	}
 	

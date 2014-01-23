@@ -22,10 +22,16 @@ public class ArchivoXML {
 	
 	private final static Logger logger = LoggerFactory.getLogger(ArchivoXML.class);
 	
-	public static void procesarComprobante(String fileXml,String fileXmlSignature,String pathSignature,String passSignature,String claveAcceso)
+	public static void procesarComprobante(String fileXml,String fileXmlSignature,String pathSignature,String passSignature,String claveAcceso,String codFactura,
+	String conHost,
+	String conDataBase,
+	String conUser,
+	String conPass,String xmlBody)
 	{
 		File xmlFile=new File(fileXml);
 		String comprobante = null;
+		String autorizacion=null;
+		String fechaHora=null;
 		try {	
 			
 		if (Signature.executeNoEncrypted(xmlFile, fileXmlSignature, pathSignature, passSignature)){
@@ -58,15 +64,18 @@ public class ArchivoXML {
 						if(respuestaAut.equals(AutorizacionComprobantesElectronicosWs.ESTADO_AUTORIZADO))
 						{
 							
-							SqlServerJDBC sqlServer=SqlServerJDBC.getInstance();
+							SqlServerJDBC sqlServer=SqlServerJDBC.getInstance(conHost,conDataBase,conPass,conUser);
 
 
 							
 							for (Autorizacion item : responseAut.getAutorizaciones().getAutorizacion()) {
 						
-							comprobante=item.getComprobante();
+								autorizacion= item.getNumeroAutorizacion();
+								comprobante=item.getComprobante();
+								fechaHora=item.getFechaAutorizacion().toString();
+								
 							
-							sqlServer.execute("insert into flujo (archivo,clave,autorizado) values('"+comprobante+"','"+claveAcceso+"',"+1+")");
+							sqlServer.execute("insert into facelec (codfac,fechahorafe,clavefe,noautfe,xmldocfe,xmlfirfe,estadofe) values('"+codFactura+"','"+fechaHora+"','"+claveAcceso+"','"+autorizacion+"','"+comprobante+"','"+xmlBody+"','"+comprobante+"',"+1+")");
 							
   					        //item.setComprobante("<![CDATA[" + item.getComprobante() + "]]>");
   					        
