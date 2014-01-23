@@ -46,6 +46,7 @@ public class Process {
 			String conDataBase=args[6];
 			String conUser=args[7];
 			String conPass=args[8];
+			String mailDestino=args[9];
 
 			logger.info("xmlStr {}",xmlStr);
 			logger.info("claveAcceso {}",claveAcceso);
@@ -55,6 +56,7 @@ public class Process {
 			logger.info("conDataBase {}",conDataBase);
 			logger.info("conUser {}",conUser);
 			logger.info("conPass {}",conPass);
+			logger.info("mailDestino {}",mailDestino);
 			
 			Document document=UtilApplication.convertStringToDocument(xmlStr);
 			
@@ -103,7 +105,7 @@ public class Process {
 			conHost,
 			conDataBase,
 			conUser,
-			conPass,xmlStr);
+			conPass,xmlStr,mailDestino);
 		} catch (Exception e) {
 			logger.info("Error "+e.toString());
 		}

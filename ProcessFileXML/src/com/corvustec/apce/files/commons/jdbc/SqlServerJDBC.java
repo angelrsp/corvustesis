@@ -48,6 +48,7 @@ public class SqlServerJDBC {
 			preparedStatement = conn.prepareCall(sql);
 			preparedStatement.execute();
 			preparedStatement.close();
+			logger.info("SQLServer Executado");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			logger.info("Error SQLException {}",e.toString());
