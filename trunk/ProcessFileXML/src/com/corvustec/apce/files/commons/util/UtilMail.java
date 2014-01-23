@@ -35,12 +35,11 @@ public class UtilMail {
 
             // Se compone la parte del texto
             BodyPart texto = new MimeBodyPart();
-            texto.setText("Estimado(a) cliente reciba un cordial saludo. Su factura electrÃ³nica esta adjunto");
+            texto.setText("Estimado(a) cliente reciba un cordial saludo. Su factura electrónica esta adjunto");
 
             // Se compone el adjunto con la imagen
             BodyPart adjunto = new MimeBodyPart();
-            adjunto.setDataHandler(
-                new DataHandler(new FileDataSource(file.getAbsolutePath())));
+            adjunto.setDataHandler(new DataHandler(new FileDataSource(file.getAbsolutePath())));
             adjunto.setFileName(file.getName());
 
             // Una MultiParte para agrupar texto e imagen.
@@ -52,9 +51,7 @@ public class UtilMail {
             // contenido.
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress("washofernando@hotmail.com"));
-            message.addRecipient(
-                Message.RecipientType.TO,
-                new InternetAddress("fensefernando@gmail.com"));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress("fensefernando@gmail.com"));
             message.setSubject("Factura Electronica Corvustec");
             message.setContent(multiParte);
 

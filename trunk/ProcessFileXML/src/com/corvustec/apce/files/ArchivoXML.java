@@ -32,6 +32,8 @@ public class ArchivoXML {
 		String comprobante = null;
 		String autorizacion=null;
 		String fechaHora=null;
+		String respuestaAut=null;
+		String sqlQuery=null;
 		try {	
 			
 		if (Signature.executeNoEncrypted(xmlFile, fileXmlSignature, pathSignature, passSignature)){
@@ -43,7 +45,7 @@ public class ArchivoXML {
 			} else {
 				File xmlFileSignature=new File(fileXmlSignature);
 				RespuestaSolicitud response = ComprobantesElectronicosWs.enviarComprobante(xmlFileSignature);
-				logger.info("Respuesta WS: {}", response.getEstado());
+				logger.info("Respuesta WS Envio: {}", response.getEstado());
 				
 				if (response.getEstado().equals(ComprobantesElectronicosWs.RESPUESTA_RECIBIDA)) {
 					
@@ -55,27 +57,35 @@ public class ArchivoXML {
 					else
 					{
 						RespuestaComprobante responseAut=AutorizacionComprobantesElectronicosWs.autorizacionComprobante(claveAcceso);
-
-						String respuestaAut= AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(responseAut);
-
-						logger.info("Respuesta WS Autorizacion {}",respuestaAut);
-						logger.info("claveAcceso {}",respuestaAut);
-						
-						if(respuestaAut.equals(AutorizacionComprobantesElectronicosWs.ESTADO_AUTORIZADO))
-						{
-							
-							SqlServerJDBC sqlServer=SqlServerJDBC.getInstance(conHost,conDataBase,conPass,conUser);
-
+								
+						SqlServerJDBC sqlServer=SqlServerJDBC.getInstance(conHost,conDataBase,conUser,conPass);
 
 							
 							for (Autorizacion item : responseAut.getAutorizaciones().getAutorizacion()) {
-						
-								autorizacion= item.getNumeroAutorizacion();
-								comprobante=item.getComprobante();
-								fechaHora=item.getFechaAutorizacion().toString();
+
+								respuestaAut=item.getEstado();
 								
-							
-							sqlServer.execute("insert into facelec (codfac,fechahorafe,clavefe,noautfe,xmldocfe,xmlfirfe,estadofe) values('"+codFactura+"','"+fechaHora+"','"+claveAcceso+"','"+autorizacion+"','"+comprobante+"','"+xmlBody+"','"+comprobante+"',"+1+")");
+								logger.info("Respuesta WS Autorizacion {}",respuestaAut);
+								logger.info("claveAcceso {}",claveAcceso);
+
+								
+								if(respuestaAut.equals(AutorizacionComprobantesElectronicosWs.ESTADO_AUTORIZADO))
+								{
+								
+									autorizacion= item.getNumeroAutorizacion();
+									comprobante=item.getComprobante();
+									fechaHora=item.getFechaAutorizacion().toString();
+								
+									sqlQuery="insert into facelec (codfac,fechahorafe,clavefe,noautfe,xmlfirfe,estadofe) values('"+codFactura+"','"+
+											fechaHora+"','"+claveAcceso+"','"+autorizacion+"','"+comprobante+"',"+1+")";
+									
+									sqlServer.execute(sqlQuery);
+									
+									
+									UtilApplication.convertStringToDocument(comprobante);
+									logger.info("Enviar mail");
+									UtilMail.enviar(xmlFileSignature);
+								}
 							
   					        //item.setComprobante("<![CDATA[" + item.getComprobante() + "]]>");
   					        
@@ -107,12 +117,6 @@ public class ArchivoXML {
 //						          }
 					          
 					        //}
-							
-							}
-							if(comprobante!=null)
-								UtilApplication.convertStringToDocument(comprobante);
-							logger.info("Enviar mail");
-							UtilMail.enviar(xmlFileSignature);
 						}
 					}
 					
