@@ -26,7 +26,7 @@ public class ArchivoXML {
 	String conHost,
 	String conDataBase,
 	String conUser,
-	String conPass,String xmlBody)
+	String conPass,String xmlBody,String mailDestino)
 	{
 		File xmlFile=new File(fileXml);
 		String comprobante = null;
@@ -84,7 +84,7 @@ public class ArchivoXML {
 									
 									UtilApplication.convertStringToDocument(comprobante);
 									logger.info("Enviar mail");
-									UtilMail.enviar(xmlFileSignature);
+									UtilMail.enviar(mailDestino,"Facturacion Electronica","Estimado(a) cliente reciba un cordial saludo. Su factura electrónica esta adjunto",xmlFileSignature);
 								}
 							
   					        //item.setComprobante("<![CDATA[" + item.getComprobante() + "]]>");
