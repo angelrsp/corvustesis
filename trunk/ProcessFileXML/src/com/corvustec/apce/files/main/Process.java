@@ -34,12 +34,26 @@ public class Process {
 //		
 //		String docStr= UtilApplication.convertDocumentToString(doc);
 	
-			
+			logger.info("Argumentos ");
+
 			
 			String xmlStr=args[0];
 			String claveAcceso=args[1];
 			String pathSignature=args[2];
 			String claveFirma=args[3];
+			String codFactura=args[4];
+			String conHost=args[5];
+			String conDataBase=args[6];
+			String conUser=args[7];
+			String conPass=args[8];
+
+			logger.info("xmlStr {}",xmlStr);
+			logger.info("claveAcceso {}",claveAcceso);
+			logger.info("claveFirma {}",claveFirma);
+			logger.info("codFactura {}",codFactura);
+			logger.info("conDataBase {}",conDataBase);
+			logger.info("conUser {}",conUser);
+			logger.info("conPass {}",conPass);
 			
 			Document document=UtilApplication.convertStringToDocument(xmlStr);
 			
@@ -76,6 +90,7 @@ public class Process {
 			logger.info("pathSignature {}",pathSignature);
 			logger.info("claveFirma {}",claveFirma);
 			logger.info("claveAcceso {}",claveAcceso);
+			logger.info("codFactura {}",codFactura);
 			
 			
 //			String fileXml,fileXmlSignature,pathSignature;
@@ -83,7 +98,11 @@ public class Process {
 //			fileXmlSignature="D:\\FacturacionElectronica\\clientes\\Prueba\\firmado\\fac-2004000000023.xml";
 //			pathSignature="D:\\FacturacionElectronica\\clientes\\Prueba\\firma\\francisco_arturo_velez_rojas.p12";
 			
-			ArchivoXML.procesarComprobante(pathXml,pathXml,pathSignature,claveFirma,claveAcceso);
+			ArchivoXML.procesarComprobante(pathXml,pathXml,pathSignature,claveFirma,claveAcceso,codFactura,
+			conHost,
+			conDataBase,
+			conUser,
+			conPass,xmlStr);
 		} catch (Exception e) {
 			logger.info("Error "+e.toString());
 		}
