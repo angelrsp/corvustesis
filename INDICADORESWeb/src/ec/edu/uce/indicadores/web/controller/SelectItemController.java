@@ -11,7 +11,9 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
 
 import ec.edu.uce.indicadores.commons.util.IndicadoresException;
+import ec.edu.uce.indicadores.ejb.negocio.AdministracionService;
 import ec.edu.uce.indicadores.ejb.negocio.IndicadorService;
+import ec.edu.uce.indicadores.ejb.persistence.entities.CatalogoDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ModeloDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalDTO;
@@ -21,9 +23,15 @@ public abstract class SelectItemController {
 	private List<SelectItem> iesList;
 	private List<SelectItem> modeloList;
 	private List<SelectItem> representanteLegalList;
+	private List<SelectItem> catalogoTipoContacto;
+	private List<SelectItem> catalogoTipoDocumento;
 	
 	@EJB
 	private IndicadorService indicadorService;
+	
+	@EJB
+	private AdministracionService administracionService;
+	
 	
 	public SelectItemController()
 	{
@@ -36,6 +44,8 @@ public abstract class SelectItemController {
 		iesList=new ArrayList<SelectItem>();
 		modeloList=new ArrayList<SelectItem>();
 		representanteLegalList=new ArrayList<SelectItem>();
+		catalogoTipoContacto=new ArrayList<SelectItem>();
+		catalogoTipoDocumento=new ArrayList<SelectItem>();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -84,5 +94,45 @@ public abstract class SelectItemController {
 			});
 		}
 		return representanteLegalList;
+	}
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getCatalogoTipoContacto() throws IndicadoresException {
+		if(CollectionUtils.isEmpty(catalogoTipoContacto))
+		{
+			CatalogoDTO catalogo=new CatalogoDTO();
+			catalogo.setCatCodigo(1);
+			catalogoTipoContacto=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					CatalogoDTO cat=(CatalogoDTO)arg0;
+					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
+				}
+			});
+			
+		}
+		return catalogoTipoContacto;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getCatalogoTipoDocumento() throws IndicadoresException {
+		if(CollectionUtils.isEmpty(catalogoTipoDocumento))
+		{
+			CatalogoDTO catalogo=new CatalogoDTO();
+			catalogo.setCatCodigo(5);
+			catalogoTipoDocumento=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					CatalogoDTO cat=(CatalogoDTO)arg0;
+					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
+				}
+			});
+			
+		}
+		return catalogoTipoDocumento;
 	}
 }
