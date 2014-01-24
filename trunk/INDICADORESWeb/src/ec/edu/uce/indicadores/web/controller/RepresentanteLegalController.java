@@ -100,20 +100,22 @@ public class RepresentanteLegalController extends SelectItemController implement
 	{
 		try {
 			getRepresentanteLegalDTO().setRleTipo(Integer.valueOf(tipoDocumento.toString()));
+			getRepresentanteLegalDTO().setRleCodigo(null);
 			indicadorService.agregarRepresentanteLegal(getRepresentanteLegalDTO());
 			getRepresentanteList();
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
+			setRepresentanteLegalDTO(new RepresentanteLegalDTO());
 		} catch (IndicadoresException e) {
 			// TODO Auto-generated catch block
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
 	
-	public void cargarContacto(RepresentanteLegalDTO rep)
+	public void cargarContacto(RepresentanteLegalListDTO rep)
 	{
 		try {
-			this.representanteLegalDTO=rep;
-			this.contactoList=indicadorService.obtenerContactos(rep);
+			getRepresentanteLegalDTO().setRleCodigo(rep.getRleCodigo());
+			this.contactoList=indicadorService.obtenerContactos(getRepresentanteLegalDTO());
 		} catch (IndicadoresException e) {
 			// TODO Auto-generated catch block
 			JsfUtil.addErrorMessage(e.toString());
@@ -126,7 +128,9 @@ public class RepresentanteLegalController extends SelectItemController implement
 			contactoDTO.setConTipo(Integer.valueOf(tipoContacto.toString()));
 			contactoDTO.setIndRepresentanteLegal(representanteLegalDTO);
 			indicadorService.agregarContacto(contactoDTO);
-			cargarContacto(representanteLegalDTO);
+			RepresentanteLegalListDTO li=new RepresentanteLegalListDTO();
+			li.setRleCodigo(representanteLegalDTO.getRleCodigo());
+			cargarContacto(li);
 			contactoDTO=new ContactoDTO();
 			tipoContacto=null;
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
