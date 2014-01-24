@@ -64,7 +64,7 @@ public class IndicadorServiceImpl implements IndicadorService {
 		try {
 			factoryDAO.getIesDAOImpl().create(iesDTO);
 		} catch (Exception e) {
-			log.error(e.toString());
+			log.error("agregarIes {}",e.toString());
 			throw new IndicadoresException(e);
 		}
 	}
@@ -234,5 +234,26 @@ public class IndicadorServiceImpl implements IndicadorService {
 		}
 	}
 
+	@Override
+	public List<RegistroDTO> obtenerRegistro(IesDTO iesDTO) throws IndicadoresException
+	{
+		try {
+			return factoryDAO.getRegistroDAOImpl().getAll(iesDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new IndicadoresException(e);
+		}
+	}
 	
+	@Override
+	public ModeloDTO agregarModelo(ModeloDTO modeloDTO) throws IndicadoresException
+	{
+		log.info("agregarModelo");
+		try {
+			return factoryDAO.getModeloDAOImpl().create(modeloDTO);
+		} catch (Exception e) {
+			log.error("Error agregarModelo {}",e.toString());
+			throw new IndicadoresException(e);
+		}
+	}
 }

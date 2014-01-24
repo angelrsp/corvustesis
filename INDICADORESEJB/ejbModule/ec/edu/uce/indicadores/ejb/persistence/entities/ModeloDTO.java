@@ -24,6 +24,9 @@ public class ModeloDTO implements Serializable {
 	@Column(name="mod_descripcion")
 	private String modDescripcion;
 
+	@Column(name="mod_version")
+	private String modVersion;
+
 	//bi-directional many-to-one association to IndicadorDTO
 	@OneToMany(mappedBy="indModeloBean")
 	private List<IndicadorDTO> indIndicadors;
@@ -45,6 +48,14 @@ public class ModeloDTO implements Serializable {
 
 	public void setModDescripcion(String modDescripcion) {
 		this.modDescripcion = modDescripcion;
+	}
+
+	public String getModVersion() {
+		return modVersion;
+	}
+
+	public void setModVersion(String modVersion) {
+		this.modVersion = modVersion;
 	}
 
 	public List<IndicadorDTO> getIndIndicadors() {

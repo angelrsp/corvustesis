@@ -67,4 +67,10 @@ public interface IndicadorService {
 			RepresentanteLegalDTO representanteLegalDTO, IesDTO iesDTO)
 			throws IndicadoresException;
 
+	List<RegistroDTO> obtenerRegistro(IesDTO iesDTO)
+			throws IndicadoresException;
+
+	ModeloDTO agregarModelo(ModeloDTO modeloDTO) throws IndicadoresException;
+
+
 }
