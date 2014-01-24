@@ -10,52 +10,55 @@
 </h:head>
 <body>
 
-<p:layout fullPage="true">  
 
-	<p:layoutUnit position="north" size="110" style="background-color:#003979;">	      
-	<table width="100%" style="background-color:#003979; height: 88px;">
-			<tr>
-				<td align="center"><h:graphicImage value="/images/uce2.jpg" height="88" /></td>
-			</tr>
-		</table>
-	</p:layoutUnit>  
+	<table width="100%" border="0" style="height:100%">
+		<tr>
+			<td colspan="2">
+				<table width="100%" style="background-color:#003979; height: 100px;">
+					<tr>
+						<td align="center"><h:graphicImage value="/images/uce2.jpg" height="100" /></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
 
-   <p:layoutUnit position="west" size="200" header="Indicadores" resizable="true" collapsible="true">  
-
-	<h:form id="menu">
-		<p:slideMenu id="menuPrivado" backLabel="Atrás">
+		<tr style="height: 100%">
+			<td style="width: 10px;" valign="top">
 			
-			<p:menuitem value="Inicio" url="/pages/home.jsf" />
-			<p:separator />  
-			<p:menuitem value="Representante Legal" url="/pages/representanteLegal.jsf" />
-			<p:separator />  
-			<p:menuitem value="IES" url="/pages/ies.jsf" />
-			<p:separator />  
-			<p:menuitem value="Registro" url="/pages/registro.jsf" />
-			<p:separator />  
-			<p:menuitem value="Indicador" url="/pages/indicador.jsf" />
-			<p:separator />  
-			<p:menuitem value="Historico Indicador" url="/pages/historicoIndicador.jsf" />
-			<p:separator />
-				
-			<p:submenu label="Reportes">
-				<p:menuitem value="Indicador" url="/pages/report/indicador.jsf" />
-			</p:submenu>
-			<p:separator />
-			
-			<p:menuitem value="Salir" actionListener="#{loginController.logout}" icon="ui-icon-close"/>
-			
-		</p:slideMenu>
-	</h:form>
+				<h:form id="menu">
+					<p:slideMenu id="menuPrivado" backLabel="Atrás">
+						
+						<p:menuitem value="Inicio" url="/pages/home.jsf" />
+						<p:menuitem value="Representante Legal" url="/pages/representanteLegal.jsf" />
+						<p:menuitem value="IES" url="/pages/ies.jsf" />
+						<p:menuitem value="Registro" url="/pages/registro.jsf" />
+						<p:menuitem value="Indicador" url="/pages/indicador.jsf" />
+						<p:menuitem value="Historico Indicador" url="/pages/historicoIndicador.jsf" />
+							
+						<p:submenu label="Reportes">
+							<p:menuitem value="Indicador" url="/pages/report/indicador.jsf" />
+						</p:submenu>
+						
+						<p:menuitem value="Salir" actionListener="#{loginController.logout}" icon="ui-icon-close"/>
+						
+					</p:slideMenu>
+				</h:form>
+								
+			</td>
+					
+			<td valign="top" height="100%">
+				<h:form id="contenido">
+					<ui:insert name="contenido"></ui:insert>
+				</h:form>	
+			</td>
+		</tr>
 
-   </p:layoutUnit> 
+	</table>
 
-    <p:layoutUnit position="center">
-		<h:form id="contenido">
-			<ui:insert name="contenido"></ui:insert>
-		</h:form>  
-	</p:layoutUnit>
-	  
-</p:layout>				
+
+	<ui:include src="/template/footer.xhtml" />
+
+
+		
 </body>
 </html>

@@ -11,39 +11,40 @@
 	<ui:composition template="/template/privado.xhtml">
 		<ui:define name="contenido">
 
-			<fieldset>
+			
+			
 				<p:growl id="growl" showDetail="false" />
 				
-				<p:panel id="pnlDatos" styleClass="tabla"
-					header="Representante Legal">				
+				<p:panel id="pnlDatos" styleClass="tabla" header="Representante Legal">				
 				<table>
 				
 					<tr>
 						<td><h:outputLabel value="#{i18n['label.nombres']}:&#160;" /> </td>
 						<td><p:inputText required="true"
 									requiredMessage="#{i18n['label.nombres']}&#160;#{i18n['label.requerido']}"
-									value="#{representanteLegalController.representanteLegalDTO.rleNombres}"/></td>
+									value="#{representanteLegalController.representanteLegalDTO.rleNombres}"/><span class="red">*</span></td>
 					</tr>
 
 					<tr>
 						<td><h:outputLabel value="#{i18n['label.apellidos']}:&#160;" /> </td>
 						<td><p:inputText required="true"
 									requiredMessage="#{i18n['label.apellidos']}&#160;#{i18n['label.requerido']}"
-									value="#{representanteLegalController.representanteLegalDTO.rleApellidos}"/></td>						
+									value="#{representanteLegalController.representanteLegalDTO.rleApellidos}"/><span class="red">*</span></td>						
 					</tr>
 
 					<tr>
-						<td><h:outputLabel value="#{i18n['label.tipo']}:&#160;" /> </td>
-						<td><p:inputText required="true"
-									requiredMessage="#{i18n['label.tipo']}&#160;#{i18n['label.requerido']}"
-									value="#{representanteLegalController.representanteLegalDTO.rleTipo}"/></td>						
+						<td><h:outputLabel value="#{i18n['label.tipo.documento']}:&#160;" /> </td>
+							<td><p:selectOneMenu value="#{representanteLegalController.tipoDocumento}" required="true" requiredMessage="#{i18n['label.tipo.documento']}:&#160;#{i18n['label.requerido']}">
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="" />
+									<f:selectItems value="#{representanteLegalController.catalogoTipoDocumento}"></f:selectItems>	
+								</p:selectOneMenu><span class="red">*</span></td>
 					</tr>
 
 					<tr>
 						<td><h:outputLabel value="#{i18n['label.di']}:&#160;" /> </td>
 						<td><p:inputText required="true"
 									requiredMessage="#{i18n['label.di']}&#160;#{i18n['label.requerido']}"
-									value="#{representanteLegalController.representanteLegalDTO.rleDi}" onkeypress="return isNumberKey(event)"/></td>						
+									value="#{representanteLegalController.representanteLegalDTO.rleDi}" onkeypress="return isNumberKey(event)"/><span class="red">*</span></td>						
 					</tr>
 
 
@@ -65,8 +66,8 @@
 						<h:outputText value="#{rep.rleApellidos}" />
 					</p:column>
 
-					<p:column headerText="#{i18n['label.tipo']}">
-						<h:outputText value="#{rep.rleTipo}" />
+					<p:column headerText="#{i18n['label.tipo.documento']}">
+						<h:outputText value="#{rep.catTipoDocumento}" />
 					</p:column>
 
 					<p:column headerText="#{i18n['label.di']}">
@@ -75,7 +76,7 @@
 
 				<p:column style="width:10%" headerText="#{i18n['label.contactos']}">  
 	                <p:commandButton actionListener="#{representanteLegalController.cargarContacto(rep)}" oncomplete="PF('dlgContacto').show()" icon="ui-icon-search" 
-	                	update=":contenido:dlgContacto" process="repList" title="#{i18n['label.ver.mas']}">    
+	                	update=":contenido:pnlContactos" process="repList" title="#{i18n['label.ver.mas']}">    
 	    	        </p:commandButton>  
 		        </p:column>
 
@@ -85,20 +86,20 @@
 											
 				</p:panel>
 				
-<!-- 				<p:commandButton id="showDialogButton" type="button" value="Show" onclick="PF('dlgContacto').show();" /> -->
 				
-				<p:dialog id="dlgContacto" widgetVar="dlgContacto" modal="true" header="Contactos" appendTo="@(body)">
+	
+				<p:dialog id="dlgContacto" widgetVar="dlgContacto" modal="true" header="Contactos">
 				
-					<p:panel id="pnlContactos" styleClass="tabla"
-						header="">
+					<p:panel id="pnlContactos" styleClass="tabla">
 																
 					<table>
 					
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.tipo']}:&#160;" /> </td>
-							<td><p:inputText required="true"
-										requiredMessage="#{i18n['label.tipo']}&#160;#{i18n['label.requerido']}"
-										value="#{representanteLegalController.contactoDTO.conNombre}"/></td>
+							<td><p:selectOneMenu value="#{representanteLegalController.tipoContacto}" required="true" requiredMessage="#{i18n['label.tipo']}:&#160;#{i18n['label.requerido']}">
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="" />
+									<f:selectItems value="#{representanteLegalController.catalogoTipoContacto}"></f:selectItems>	
+								</p:selectOneMenu></td>
 						</tr>
 	
 						<tr>
@@ -110,17 +111,16 @@
 	
 						<tr>
 							<td colspan="2" align="center">
-								<p:commandButton actionListener="#{representanteLegalController.agregarContacto}" value="#{i18n['boton.agregar']}" process=":contenido:pnlContactos" update=":contenido:pnlContactos,:contenido:growl,:contenido:tblContacto" /> </td>
+								<p:commandButton actionListener="#{representanteLegalController.agregarContacto}" value="#{i18n['boton.agregar']}" process="pnlContactos" update="pnlContactos,:contenido:growl" /> </td>
 						</tr>
 					
 					</table>	
 													
-					</p:panel>
 
 					<p:dataTable id="tblContacto" value="#{representanteLegalController.contactoList}" var="con">
 
 						<p:column headerText="#{i18n['label.tipo']}">
-							<h:outputText value="#{con.conNombre}" />
+							<h:outputText value="#{con.catTipoContacto}" />
 						</p:column>
 
 						<p:column headerText="#{i18n['label.valor']}">
@@ -129,10 +129,11 @@
 					
 					</p:dataTable>					
 
-				</p:dialog>				
-				
-				
-			</fieldset>
+					</p:panel>
+
+				</p:dialog>			
+	
+	
 
 		</ui:define>
 	</ui:composition>
