@@ -12,6 +12,7 @@
 	<ui:composition template="/template/privado.xhtml">
 		<ui:define name="contenido">
 
+
 			<fieldset>
 				<p:growl id="growl" showDetail="false" />
 				<p:panel id="pnlDatos" styleClass="tabla"
@@ -86,6 +87,53 @@
 					</p:dataTable>
 						
 				</p:panel>
+				
+				
+				
+				
+				<p:dialog id="dlgRepresentante" widgetVar="dlgRepresentante" modal="true" header="Contactos">
+				
+					<p:panel id="pnlRepresentante" styleClass="tabla">
+																
+					<table>
+					
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.representante.legal']}:&#160;" /> </td>
+							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.representante.legal']}:&#160;#{i18n['label.requerido']}" value="#{registroController.representanteLegalObject}">
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+									<f:selectItems value="#{registroController.representanteLegalList}"></f:selectItems>
+									<p:ajax event="change" process="@this" update="tblRegistro,growl" listener="#{registroController.obtenerRegistroLista}" immediate="true"></p:ajax>
+									<p:ajax event="change" process="@this" update="tblRegistro,growl" listener="#{registroController.obtenerRegistroLista}" immediate="true"></p:ajax>	
+							</p:selectOneMenu></td>
+						</tr>
+	
+						<tr>
+							<td colspan="2" align="center">
+								<p:commandButton actionListener="#{registroController.agregar}" value="#{i18n['boton.agregar']}" process="pnlDatos" update="pnlDatos,growl" /> </td>
+						</tr>
+					
+					</table>	
+													
+
+					<p:dataTable id="tblRegistro" value="#{representanteLegalController.contactoList}" var="con">
+
+						<p:column headerText="#{i18n['label.tipo']}">
+							<h:outputText value="#{con.catTipoContacto}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.valor']}">
+							<h:outputText value="#{con.conValor}" />
+						</p:column>
+					
+					</p:dataTable>					
+
+					</p:panel>
+
+				</p:dialog>			
+	
+				
+				
+				
 			</fieldset>
 
 		</ui:define>

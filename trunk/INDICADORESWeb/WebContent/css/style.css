@@ -24,3 +24,19 @@ body{font-size: 9pt;font-weight:normal;}
 }
 
 .red { color: red; }
+
+html, body {
+    height: 98%
+}
+
+.ui-tabs-panels
+{
+    height: 100%;
+    width: 100%;
+}
+
+.ui-tabs-panel
+{
+    height: 100%;   
+    width: 100%;
+}
