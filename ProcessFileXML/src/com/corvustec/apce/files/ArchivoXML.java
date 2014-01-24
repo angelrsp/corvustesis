@@ -33,16 +33,18 @@ public class ArchivoXML {
 		String autorizacion=null;
 		String fechaHora=null;
 		String respuestaAut=null;
+		String mensaje=null;
+		SqlServerJDBC sqlServer = SqlServerJDBC.getInstance(conHost,conDataBase,conUser,conPass);;
 		try {	
 			
 		if (Signature.executeNoEncrypted(xmlFile, fileXmlSignature, pathSignature, passSignature)){
 			
 			Object a = ComprobantesElectronicosWs.verificarConectividad(Constantes.AMBIENTE, ComprobantesElectronicosWs.SERVICIO_RECEPCION);
 			
-			SqlServerJDBC sqlServer=SqlServerJDBC.getInstance(conHost,conDataBase,conUser,conPass);
-			
 			if (a == null) {
-				logger.info("No se puede conectar al servicio del SRI implementar envio contingencia");
+				mensaje="No se puede conectar al servicio del SRI implementar envio contingencia";
+				logger.info(mensaje);
+				escribirError(sqlServer, codFactura, fechaHora, claveAcceso, autorizacion, comprobante, mensaje);
 			} else {
 				File xmlFileSignature=new File(fileXmlSignature);
 				RespuestaSolicitud response = ComprobantesElectronicosWs.enviarComprobante(xmlFileSignature);
@@ -54,6 +56,8 @@ public class ArchivoXML {
 					Object aut= AutorizacionComprobantesElectronicosWs.verificarConectividad(Constantes.AMBIENTE, AutorizacionComprobantesElectronicosWs.SERVICIO_AUTORIZACION);
 					if(aut == null) {
 						logger.info("No se puede conectar al servicio Autorizacion del SRI implementar envio contingencia");
+						logger.info(mensaje);
+						escribirError(sqlServer, codFactura, fechaHora, claveAcceso, autorizacion, comprobante, mensaje);						
 					}
 					else
 					{
@@ -83,7 +87,7 @@ public class ArchivoXML {
 								}
 								else
 								{
-									String mensaje=AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(item);
+									mensaje=AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(item);
 									escribirError(sqlServer, codFactura, fechaHora, claveAcceso, autorizacion, comprobante, mensaje);
 								}
 							
@@ -127,7 +131,7 @@ public class ArchivoXML {
 					//Agregado por FPU
 					
 				} else {
-					String mensaje = ComprobantesElectronicosWs.getMensajeRespuestaEnvio(response);
+					mensaje = ComprobantesElectronicosWs.getMensajeRespuestaEnvio(response);
 					logger.info("mensaje: {}", mensaje);
 					
 					escribirError(sqlServer, codFactura, fechaHora, claveAcceso, autorizacion, comprobante, mensaje);
@@ -137,9 +141,11 @@ public class ArchivoXML {
 			
 		} else {
 			logger.info("No se pudo firmar el archivo {} ", fileXml);
+			escribirError(sqlServer, codFactura, fechaHora, claveAcceso, autorizacion, comprobante, "No se pudo firmar el archivo");
 		}
 		} catch (Exception e) {
 			logger.info("Problemas al procesar comprobante {}, {} ", fileXmlSignature, e.toString());
+			escribirError(sqlServer, codFactura, fechaHora, claveAcceso, autorizacion, comprobante, e.toString());
 		}
 	}
 	
