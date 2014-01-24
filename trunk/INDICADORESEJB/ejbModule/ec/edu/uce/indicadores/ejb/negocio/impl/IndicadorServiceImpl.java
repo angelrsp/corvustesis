@@ -12,6 +12,7 @@ import ec.edu.uce.indicadores.commons.util.IndicadoresException;
 import ec.edu.uce.indicadores.ejb.negocio.IndicadorService;
 import ec.edu.uce.indicadores.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ContactoDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.ContactoListDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.EvidenciaDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.HistoricoIndicadorDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
@@ -19,6 +20,7 @@ import ec.edu.uce.indicadores.ejb.persistence.entities.IndicadorDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ModeloDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.RegistroDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalListDTO;
 
 @Stateless
 public class IndicadorServiceImpl implements IndicadorService {
@@ -81,7 +83,7 @@ public class IndicadorServiceImpl implements IndicadorService {
 
 	
 	@Override
-	public List<RepresentanteLegalDTO> obtenerRepresentantes() throws IndicadoresException
+	public List<RepresentanteLegalListDTO> obtenerRepresentantes() throws IndicadoresException
 	{
 		try {
 			return factoryDAO.getRepresentanteLegalDAOImpl().getAll();
@@ -92,7 +94,7 @@ public class IndicadorServiceImpl implements IndicadorService {
 	}
 	
 	@Override
-	public List<ContactoDTO> obtenerContactos(RepresentanteLegalDTO representanteLegalDTO) throws IndicadoresException
+	public List<ContactoListDTO> obtenerContactos(RepresentanteLegalDTO representanteLegalDTO) throws IndicadoresException
 	{
 		try {
 			return factoryDAO.getContactoDAOImpl().getAll(representanteLegalDTO);

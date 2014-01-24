@@ -20,8 +20,8 @@ public class ContactoDTO implements Serializable {
 	@Column(name="con_codigo")
 	private Integer conCodigo;
 
-	@Column(name="con_nombre")
-	private String conNombre;
+	@Column(name="con_tipo")
+	private Integer conTipo;
 
 	@Column(name="con_valor")
 	private String conValor;
@@ -42,12 +42,12 @@ public class ContactoDTO implements Serializable {
 		this.conCodigo = conCodigo;
 	}
 
-	public String getConNombre() {
-		return this.conNombre;
+	public Integer getConTipo() {
+		return this.conTipo;
 	}
 
-	public void setConNombre(String conNombre) {
-		this.conNombre = conNombre;
+	public void setConTipo(Integer conTipo) {
+		this.conTipo = conTipo;
 	}
 
 	public String getConValor() {

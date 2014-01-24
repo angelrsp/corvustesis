@@ -23,5 +23,7 @@ public interface FactoryDAO {
 
 	RegistroDAO getRegistroDAOImpl();
 
+	CatalogoDAO getCatalogoImpl();
+
 	
 }

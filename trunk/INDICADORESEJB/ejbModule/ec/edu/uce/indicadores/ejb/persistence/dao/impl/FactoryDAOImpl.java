@@ -4,6 +4,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import ec.edu.uce.indicadores.ejb.persistence.dao.CatalogoDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.ContactoDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.EvidenciaDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.FactoryDAO;
@@ -39,6 +40,8 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private EvidenciaDAO evidenciaDAO;
 	
 	private RegistroDAO registroDAO;
+	
+	private CatalogoDAO catalogoDAO;
 	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -111,5 +114,13 @@ public class FactoryDAOImpl implements FactoryDAO{
 			registroDAO = new RegistroDAOImpl(entityManager);
 		}
 		return registroDAO;
+	}
+
+	@Override
+	public CatalogoDAO getCatalogoImpl() {
+		if (catalogoDAO == null) {
+			catalogoDAO = new CatalogoDAOImpl(entityManager);
+		}
+		return catalogoDAO;
 	}	
 }
