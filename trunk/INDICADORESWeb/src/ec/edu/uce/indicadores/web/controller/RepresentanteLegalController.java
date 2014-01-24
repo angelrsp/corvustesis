@@ -12,12 +12,14 @@ import javax.faces.bean.ViewScoped;
 import ec.edu.uce.indicadores.commons.util.IndicadoresException;
 import ec.edu.uce.indicadores.ejb.negocio.IndicadorService;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ContactoDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.ContactoListDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalListDTO;
 import ec.edu.uce.indicadores.web.util.JsfUtil;
 
 @ViewScoped
 @ManagedBean(name = "representanteLegalController")
-public class RepresentanteLegalController implements Serializable {
+public class RepresentanteLegalController extends SelectItemController implements Serializable {
 
 	/**
 	 * 
@@ -30,16 +32,19 @@ public class RepresentanteLegalController implements Serializable {
 	private RepresentanteLegalDTO representanteLegalDTO;
 	private ContactoDTO contactoDTO;
 	
-	private List<RepresentanteLegalDTO> representanteList;
-	private List<ContactoDTO> contactoList;
+	private List<RepresentanteLegalListDTO> representanteList;
+	private List<ContactoListDTO> contactoList;
+	
+	private Object tipoContacto;
+	private Object tipoDocumento;
 	
 	@PostConstruct
 	private void init()
 	{
 		representanteLegalDTO=new RepresentanteLegalDTO();
 		contactoDTO=new ContactoDTO();
-		representanteList=new ArrayList<RepresentanteLegalDTO>();
-		contactoList=new ArrayList<ContactoDTO>();
+		representanteList=new ArrayList<RepresentanteLegalListDTO>();
+		contactoList=new ArrayList<ContactoListDTO>();
 	}
 
 	public RepresentanteLegalDTO getRepresentanteLegalDTO() {
@@ -58,26 +63,43 @@ public class RepresentanteLegalController implements Serializable {
 		this.contactoDTO = contactoDTO;
 	}
 
-	public List<RepresentanteLegalDTO> getRepresentanteList() throws IndicadoresException {
+	public List<RepresentanteLegalListDTO> getRepresentanteList() throws IndicadoresException {
 		this.representanteList=indicadorService.obtenerRepresentantes();
 		return representanteList;
 	}
 
-	public void setRepresentanteList(List<RepresentanteLegalDTO> representanteList) {
+	public void setRepresentanteList(List<RepresentanteLegalListDTO> representanteList) {
 		this.representanteList = representanteList;
 	}
 
-	public List<ContactoDTO> getContactoList() {
+	public List<ContactoListDTO> getContactoList() {
 		return contactoList;
 	}
 
-	public void setContactoList(List<ContactoDTO> contactoList) {
+	public void setContactoList(List<ContactoListDTO> contactoList) {
 		this.contactoList = contactoList;
+	}
+
+	public Object getTipoContacto() {
+		return tipoContacto;
+	}
+
+	public void setTipoContacto(Object tipoContacto) {
+		this.tipoContacto = tipoContacto;
+	}
+
+	public Object getTipoDocumento() {
+		return tipoDocumento;
+	}
+
+	public void setTipoDocumento(Object tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
 	}
 
 	public void guardarRepresentante()
 	{
 		try {
+			getRepresentanteLegalDTO().setRleTipo(Integer.valueOf(tipoDocumento.toString()));
 			indicadorService.agregarRepresentanteLegal(getRepresentanteLegalDTO());
 			getRepresentanteList();
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
@@ -101,10 +123,12 @@ public class RepresentanteLegalController implements Serializable {
 	public void agregarContacto()
 	{
 		try {
+			contactoDTO.setConTipo(Integer.valueOf(tipoContacto.toString()));
 			contactoDTO.setIndRepresentanteLegal(representanteLegalDTO);
 			indicadorService.agregarContacto(contactoDTO);
 			cargarContacto(representanteLegalDTO);
 			contactoDTO=new ContactoDTO();
+			tipoContacto=null;
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 		} catch (IndicadoresException e) {
 			// TODO Auto-generated catch block
