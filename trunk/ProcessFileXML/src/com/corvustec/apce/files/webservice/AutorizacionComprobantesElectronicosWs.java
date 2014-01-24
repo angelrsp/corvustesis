@@ -127,5 +127,22 @@ public class AutorizacionComprobantesElectronicosWs {
 	}
 	
 	
+	public static String getMensajeRespuestaEnvio(Autorizacion item)
+	{
+		final String saltoLinea = "\n";
+		
+		StringBuilder mensaje=new StringBuilder();
+
+		for(Mensaje m:item.getMensajes().getMensaje())
+		{
+			mensaje.append(item.getEstado()).append(" ");
+			mensaje.append(m.getMensaje()).append(" ; ");
+			mensaje.append(m.getInformacionAdicional() == null ? "" : m.getInformacionAdicional());
+			mensaje.append(saltoLinea);			
+		}
+		return mensaje.toString();
+				
+	}
+	
 }
 	

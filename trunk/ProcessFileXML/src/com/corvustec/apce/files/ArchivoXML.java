@@ -33,12 +33,13 @@ public class ArchivoXML {
 		String autorizacion=null;
 		String fechaHora=null;
 		String respuestaAut=null;
-		String sqlQuery=null;
 		try {	
 			
 		if (Signature.executeNoEncrypted(xmlFile, fileXmlSignature, pathSignature, passSignature)){
 			
 			Object a = ComprobantesElectronicosWs.verificarConectividad(Constantes.AMBIENTE, ComprobantesElectronicosWs.SERVICIO_RECEPCION);
+			
+			SqlServerJDBC sqlServer=SqlServerJDBC.getInstance(conHost,conDataBase,conUser,conPass);
 			
 			if (a == null) {
 				logger.info("No se puede conectar al servicio del SRI implementar envio contingencia");
@@ -57,9 +58,6 @@ public class ArchivoXML {
 					else
 					{
 						RespuestaComprobante responseAut=AutorizacionComprobantesElectronicosWs.autorizacionComprobante(claveAcceso);
-								
-						SqlServerJDBC sqlServer=SqlServerJDBC.getInstance(conHost,conDataBase,conUser,conPass);
-
 							
 							for (Autorizacion item : responseAut.getAutorizaciones().getAutorizacion()) {
 
@@ -76,15 +74,17 @@ public class ArchivoXML {
 									comprobante=item.getComprobante();
 									fechaHora=item.getFechaAutorizacion().toString();
 								
-									sqlQuery="insert into facelec (codfac,fechahorafe,clavefe,noautfe,xmlfirfe,estadofe) values('"+codFactura+"','"+
-											fechaHora+"','"+claveAcceso+"','"+autorizacion+"','"+comprobante+"',"+1+")";
-									
-									sqlServer.execute(sqlQuery);
-									
+									escribirCorrecto(sqlServer, codFactura, fechaHora, claveAcceso, autorizacion, comprobante);
 									
 									UtilApplication.convertStringToDocument(comprobante);
 									logger.info("Enviar mail");
 									UtilMail.enviar(mailDestino,"Facturacion Electronica","Estimado(a) cliente reciba un cordial saludo. Su factura electrónica esta adjunto",xmlFileSignature);
+									break;
+								}
+								else
+								{
+									String mensaje=AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(item);
+									escribirError(sqlServer, codFactura, fechaHora, claveAcceso, autorizacion, comprobante, mensaje);
 								}
 							
   					        //item.setComprobante("<![CDATA[" + item.getComprobante() + "]]>");
@@ -117,6 +117,8 @@ public class ArchivoXML {
 //						          }
 					          
 					        //}
+								
+								
 						}
 					}
 					
@@ -127,6 +129,9 @@ public class ArchivoXML {
 				} else {
 					String mensaje = ComprobantesElectronicosWs.getMensajeRespuestaEnvio(response);
 					logger.info("mensaje: {}", mensaje);
+					
+					escribirError(sqlServer, codFactura, fechaHora, claveAcceso, autorizacion, comprobante, mensaje);
+					
 				}
 			}
 			
@@ -136,6 +141,62 @@ public class ArchivoXML {
 		} catch (Exception e) {
 			logger.info("Problemas al procesar comprobante {}, {} ", fileXmlSignature, e.toString());
 		}
+	}
+	
+	
+	private static void escribirError(SqlServerJDBC sqlServer,String codFactura,String fechaHora,String claveAcceso,String autorizacion,String comprobante,String mensaje)
+	{
+		String sqlQuery=null;
+		if(!sqlServer.exists("select * from facelec where clavefe='"+claveAcceso+"'"))
+		{
+			sqlQuery="insert into facelec (codfac,fechahorafe,clavefe,noautfe,xmlfirfe,estadofe,errorfe) values('"+codFactura+"','"+
+					fechaHora+"','"+claveAcceso+"','"+autorizacion+"','"+comprobante+"',"+0+",'"+mensaje+"')";
+			
+			sqlServer.execute(sqlQuery);
+		}
+		else
+		{
+			sqlQuery="update facelec set "
+					+ "codfac='"+codFactura+"',"
+					+ "fechahorafe='"+fechaHora+"',"
+					+ "clavefe='"+claveAcceso+"',"
+					+ "noautfe='"+autorizacion+"',"
+					+ "xmlfirfe='"+comprobante+"',"
+					+ "estadofe="+0+","
+					+ "errorfe='"+mensaje+"' "
+					+ "where clavefe='"+claveAcceso+"'";
+			
+			sqlServer.execute(sqlQuery);						
+		}
+	}
+	
+	private static void escribirCorrecto(SqlServerJDBC sqlServer,String codFactura,String fechaHora,String claveAcceso,String autorizacion, String comprobante)
+	{
+		
+		String sqlQuery;
+		if(!sqlServer.exists("select * from facelec where clavefe='"+claveAcceso+"'"))
+		{
+			sqlQuery="insert into facelec (codfac,fechahorafe,clavefe,noautfe,xmlfirfe,estadofe) values('"+codFactura+"','"+
+					fechaHora+"','"+claveAcceso+"','"+autorizacion+"','"+comprobante+"',"+1+")";
+			
+			sqlServer.execute(sqlQuery);
+		}
+		else
+		{
+			sqlQuery="update facelec set "
+					+ "codfac='"+codFactura+"',"
+					+ "fechahorafe='"+fechaHora+"',"
+					+ "clavefe='"+claveAcceso+"',"
+					+ "noautfe='"+autorizacion+"',"
+					+ "xmlfirfe='"+comprobante+"',"
+					+ "estadofe="+1+","
+					+ "errorfe=' '"
+			+ "where clavefe='"+claveAcceso+"'";
+					
+			sqlServer.execute(sqlQuery);
+		}
+		
+
 	}
 	
 }
