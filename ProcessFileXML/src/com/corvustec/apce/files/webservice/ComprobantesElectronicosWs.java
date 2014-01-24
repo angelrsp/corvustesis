@@ -141,7 +141,7 @@ public final class ComprobantesElectronicosWs {
 				mensajeRespuesta.append(comprobante.getClaveAcceso()).append(saltoLinea);
 				
 				for (Mensaje sms : comprobante.getMensajes().getMensaje()) {
-					mensajeRespuesta.append(sms.getMensaje()).append(", ");
+					mensajeRespuesta.append(sms.getMensaje()).append("; ");
 					mensajeRespuesta.append(sms.getInformacionAdicional() == null ? "" : sms.getInformacionAdicional());
 					mensajeRespuesta.append(saltoLinea);
 				}

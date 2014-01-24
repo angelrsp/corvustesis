@@ -64,7 +64,11 @@ public class UtilMail {
             part.setDataHandler(new DataHandler(new FileDataSource(file.getAbsolutePath())));
             part.setFileName(file.getName());
             
+            BodyPart texto = new MimeBodyPart();
+            texto.setText(mensaje);
+            
             MimeMultipart mp=new MimeMultipart();
+            mp.addBodyPart(texto);
             mp.addBodyPart(part);
             
             message.setFrom(new InternetAddress((String) properties.get("mail.smtp.mail.sender"),(String) properties.get("mail.smtp.mail.sender.name")));
@@ -72,6 +76,7 @@ public class UtilMail {
             message.setSubject(asunto);
             message.setText(mensaje,"ISO-8859-1","html");
             message.setContent(mp);
+            
             Transport t = session.getTransport("smtp");
             log.info("conectar");
             t.connect((String) properties.get("mail.smtp.user"), (String) properties.get("mail.smtp.password"));
