@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/template/privado.xhtml">
+		<ui:define name="contenido">
+		
+		<p:growl id="growl"></p:growl>
+		
+		<p:panel id="pnlModelo" header="#{i18n['label.titulo.pantalla.modelo']}">
+		
+		<table>
+			<tr>
+				<td><h:outputLabel value="#{i18n['label.nombre']}:&#160;" /></td>
+				<td><p:inputText value="#{modeloController.modeloDTO.modDescripcion}" required="true" requiredMessage="#{i18n['label.nombre']}:&#160;#{i18n['label.requerido']}"/><span class="red">*</span></td>
+				
+				<td><h:outputLabel value="#{i18n['label.version']}:&#160;" /></td>
+				<td><p:inputText value="#{modeloController.modeloDTO.modVersion}" required="true" requiredMessage="#{i18n['label.version']}:&#160;#{i18n['label.requerido']}"/><span class="red">*</span></td>
+			</tr>
+		
+			<tr>
+				<td colspan="4" align="center"><p:commandButton actionListener="#{modeloController.agregarModelo}" value="#{i18n['boton.agregar']}" process="pnlModelo" update="pnlModelo,growl" /> </td>
+			</tr>
+		
+		</table>
+		
+		<p:spacer height="5"/>
+		
+		<p:dataTable value="#{modeloController.modeloList}" var="mode">
+		
+			<p:column headerText="#{i18n['label.nombre']}">
+				<h:outputText value="#{mode.modDescripcion}" />
+			</p:column>
+
+			<p:column headerText="#{i18n['label.version']}">
+				<h:outputText value="#{mode.modVersion}" />
+			</p:column>
+		
+		
+		</p:dataTable>
+		
+		
+		</p:panel>
+		
+		</ui:define>
+	</ui:composition>
+</body>
+</html>		
