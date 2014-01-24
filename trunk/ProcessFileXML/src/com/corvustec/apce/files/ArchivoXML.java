@@ -147,6 +147,7 @@ public class ArchivoXML {
 	private static void escribirError(SqlServerJDBC sqlServer,String codFactura,String fechaHora,String claveAcceso,String autorizacion,String comprobante,String mensaje)
 	{
 		String sqlQuery=null;
+		mensaje=mensaje.replace('\'', '"');
 		if(!sqlServer.exists("select * from facelec where clavefe='"+claveAcceso+"'"))
 		{
 			sqlQuery="insert into facelec (codfac,fechahorafe,clavefe,noautfe,xmlfirfe,estadofe,errorfe) values('"+codFactura+"','"+
@@ -172,8 +173,7 @@ public class ArchivoXML {
 	
 	private static void escribirCorrecto(SqlServerJDBC sqlServer,String codFactura,String fechaHora,String claveAcceso,String autorizacion, String comprobante)
 	{
-		
-		String sqlQuery;
+		String sqlQuery=null;
 		if(!sqlServer.exists("select * from facelec where clavefe='"+claveAcceso+"'"))
 		{
 			sqlQuery="insert into facelec (codfac,fechahorafe,clavefe,noautfe,xmlfirfe,estadofe) values('"+codFactura+"','"+
