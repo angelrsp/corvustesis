@@ -1,7 +1,10 @@
 package ec.edu.uce.indicadores.ejb.persistence.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -33,9 +36,19 @@ public class IndicadorDTO implements Serializable {
 	@Column(name="ind_utilidad")
 	private String indUtilidad;
 
-	@Column(name="ind_version")
-	private String indVersion;
+	@Column(name="ind_valor_inicial")
+	private BigDecimal indValorInicial;
 
+	@Column(name="ind_valor_actual")
+	private BigDecimal indValorActual;
+
+	@Column(name="ind_valor_objetivo")
+	private BigDecimal indValorObjetivo;
+
+	@Column(name="ind_valor_ideal")
+	private BigDecimal indValorIdeal;
+
+	
 	//bi-directional many-to-one association to HistoricoIndicadorDTO
 	@OneToMany(mappedBy="indIndicador")
 	private List<HistoricoIndicadorDTO> indHistoricoIndicadors;
@@ -102,20 +115,44 @@ public class IndicadorDTO implements Serializable {
 		this.indUtilidad = indUtilidad;
 	}
 
-	public String getIndVersion() {
-		return this.indVersion;
-	}
-
-	public void setIndVersion(String indVersion) {
-		this.indVersion = indVersion;
-	}
-
 	public List<HistoricoIndicadorDTO> getIndHistoricoIndicadors() {
 		return this.indHistoricoIndicadors;
 	}
 
 	public void setIndHistoricoIndicadors(List<HistoricoIndicadorDTO> indHistoricoIndicadors) {
 		this.indHistoricoIndicadors = indHistoricoIndicadors;
+	}
+
+	public BigDecimal getIndValorInicial() {
+		return indValorInicial;
+	}
+
+	public void setIndValorInicial(BigDecimal indValorInicial) {
+		this.indValorInicial = indValorInicial;
+	}
+
+	public BigDecimal getIndValorActual() {
+		return indValorActual;
+	}
+
+	public void setIndValorActual(BigDecimal indValorActual) {
+		this.indValorActual = indValorActual;
+	}
+
+	public BigDecimal getIndValorObjetivo() {
+		return indValorObjetivo;
+	}
+
+	public void setIndValorObjetivo(BigDecimal indValorObjetivo) {
+		this.indValorObjetivo = indValorObjetivo;
+	}
+
+	public BigDecimal getIndValorIdeal() {
+		return indValorIdeal;
+	}
+
+	public void setIndValorIdeal(BigDecimal indValorIdeal) {
+		this.indValorIdeal = indValorIdeal;
 	}
 
 	public HistoricoIndicadorDTO addIndHistoricoIndicador(HistoricoIndicadorDTO indHistoricoIndicador) {
