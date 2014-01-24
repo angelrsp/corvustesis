@@ -31,7 +31,7 @@ public class RepresentanteLegalDTO implements Serializable {
 	private String rleNombres;
 
 	@Column(name="rle_tipo")
-	private String rleTipo;
+	private Integer rleTipo;
 
 	//bi-directional many-to-one association to ContactoDTO
 	@OneToMany(mappedBy="indRepresentanteLegal")
@@ -76,11 +76,11 @@ public class RepresentanteLegalDTO implements Serializable {
 		this.rleNombres = rleNombres;
 	}
 
-	public String getRleTipo() {
+	public Integer getRleTipo() {
 		return this.rleTipo;
 	}
 
-	public void setRleTipo(String rleTipo) {
+	public void setRleTipo(Integer rleTipo) {
 		this.rleTipo = rleTipo;
 	}
 

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import ec.edu.uce.indicadores.commons.util.IndicadoresException;
 import ec.edu.uce.indicadores.ejb.persistence.dao.RepresentanteLegalDAO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalListDTO;
 
 public class RepresentanteLegalDAOImpl extends AbstractFacadeImpl<RepresentanteLegalDTO> implements RepresentanteLegalDAO{
 
@@ -28,14 +29,14 @@ public class RepresentanteLegalDAOImpl extends AbstractFacadeImpl<RepresentanteL
 	
 
 	@Override
-	public List<RepresentanteLegalDTO> getAll() throws IndicadoresException
+	public List<RepresentanteLegalListDTO> getAll() throws IndicadoresException
 	{
 		log.info("getAll");
 		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-		CriteriaQuery<RepresentanteLegalDTO> cq=cb.createQuery(RepresentanteLegalDTO.class);
-		cq.from(RepresentanteLegalDTO.class);
+		CriteriaQuery<RepresentanteLegalListDTO> cq=cb.createQuery(RepresentanteLegalListDTO.class);
+		cq.from(RepresentanteLegalListDTO.class);
 			
-		List<RepresentanteLegalDTO> list=entityManager.createQuery(cq).getResultList();	
+		List<RepresentanteLegalListDTO> list=entityManager.createQuery(cq).getResultList();	
 		if(list.isEmpty())
 			return null;
 		else
