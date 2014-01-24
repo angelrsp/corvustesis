@@ -16,7 +16,7 @@ import ec.edu.uce.indicadores.ejb.negocio.IndicadorService;
 import ec.edu.uce.indicadores.ejb.persistence.entities.CatalogoDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ModeloDTO;
-import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalListDTO;
 
 public abstract class SelectItemController {
 
@@ -88,7 +88,7 @@ public abstract class SelectItemController {
 				
 				@Override
 				public Object transform(Object arg0) {
-					RepresentanteLegalDTO rep=(RepresentanteLegalDTO) arg0;
+					RepresentanteLegalListDTO rep=(RepresentanteLegalListDTO) arg0;
 					return new SelectItem(rep.getRleCodigo(), rep.getRleNombres()+" "+rep.getRleApellidos());
 				}
 			});
