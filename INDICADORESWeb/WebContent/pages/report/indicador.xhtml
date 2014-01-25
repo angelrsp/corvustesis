@@ -39,7 +39,7 @@
 				</table>			
 			
 				<p:tree value="#{reporteIndicadorController.rootNode}" var="node" id="tree" selectionMode="single" selection="#{reporteIndicadorController.selectedNode}">
-					<p:ajax event="select" listener="#{reporteIndicadorController.onNodeSelect}" update=":contenido:growl,:contenido:lineChart"/>  
+					<p:ajax event="select" listener="#{reporteIndicadorController.onNodeSelect}" update=":contenido:growl,:contenido:pnlValorReporte"/>  
 			        <p:treeNode id="treeNode">  
 			            <h:outputText value="#{node.indNombreCorto}"/>  
 			        </p:treeNode>  
@@ -47,11 +47,33 @@
 			
 			</p:panel>
 			
-			<p:dialog id="dlgValorReporte" widgetVar="dlgValorReporte" modal="true" header="Datos" closeOnEscape="true" width="800" height="600">
+			<p:dialog id="dlgValorReporte" widgetVar="dlgValorReporte" modal="true" header="Datos" closeOnEscape="true" width="1024" height="600">
 			
-				<p:lineChart id="lineChart" value="#{reporteIndicadorController.categoryModel}" legendPosition="ne"   
-	             title="Historial" style="height:300px;margin-top:20px" xaxisLabel="Fecha" yaxisLabel="Valor" /> 
-			
+				<p:panel id="pnlValorReporte">
+					<p:lineChart id="lineChart" value="#{reporteIndicadorController.categoryModel}" legendPosition="ne"   
+		             title="Historial" style="height:300px;margin-top:20px" xaxisLabel="Fecha" yaxisLabel="Valor" /> 
+				
+				<table>
+					<tr>
+						<td><h:outputLabel value="Valor Inicial:" /></td>
+						<td><h:outputLabel value="#{reporteIndicadorController.indicadorDTO.indValorInicial}" /></td>
+					</tr>
+					<tr>	
+						<td><h:outputLabel value="Valor Actual:" /></td>
+						<td><h:outputLabel value="#{reporteIndicadorController.indicadorDTO.indValorActual}" /></td>
+					</tr>	
+					<tr>
+						<td><h:outputLabel value="Valor Objetivo:" /></td>
+						<td><h:outputLabel value="#{reporteIndicadorController.indicadorDTO.indValorObjetivo}" /></td>
+					</tr>
+					<tr>	
+						<td><h:outputLabel value="Valor Ideal:" /></td>
+						<td><h:outputLabel value="#{reporteIndicadorController.indicadorDTO.indValorIdeal}" /></td>												
+					</tr>
+				</table>
+				
+				</p:panel>
+				
 			</p:dialog>
 			
 			
