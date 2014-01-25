@@ -156,6 +156,8 @@ public class ReporteIndicadorController extends SelectItemController implements 
 			IndicadorDTO ind=(IndicadorDTO) selectedNode.getData();
 			indTemp=new IndicadorDTO();
 			indTemp=ind;
+			setIndicadorDTO(new IndicadorDTO());
+			setIndicadorDTO(indTemp);
 			RequestContext rc = RequestContext.getCurrentInstance();
 			if(ind.getIndIndicadors().isEmpty())
 			{
@@ -170,7 +172,7 @@ public class ReporteIndicadorController extends SelectItemController implements 
 			}
 			else
 			{
-				historicoIndicadorList=indicadorService.obtenerValores(indTemp);
+				indicadorService.actualizarValores(indTemp);
 				rc.execute("PF('dlgValorReporte').show();");
 				indTemp=indicadorService.obtenerIndicador(indTemp.getIndCodigo());
 				createChartLinePatern(indTemp.getIndIndicadors());
