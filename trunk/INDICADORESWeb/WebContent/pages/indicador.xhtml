@@ -75,13 +75,20 @@
 					<tr>
 						<td><h:outputLabel value="#{i18n['label.valor.objetivo']}:&#160;" /> </td>
 						<td><p:inputText required="true"
-									requiredMessage="#{i18n['label.version']}&#160;#{i18n['label.requerido']}"
-									value="#{indicadorController.indicadorDTO.indValorIdeal}" onkeypress="return isDecimalKey(event);"/></td>
+									requiredMessage="#{i18n['label.valor.objetivo']}&#160;#{i18n['label.requerido']}"
+									value="#{indicadorController.indicadorDTO.indValorObjetivo}" onkeypress="return isDecimalKey(event);"/></td>
+					</tr>
+
+					<tr>
+						<td><h:outputLabel value="#{i18n['label.descriptor']}:&#160;" /> </td>
+						<td><p:inputTextarea required="true"
+									requiredMessage="#{i18n['label.descriptor']}&#160;#{i18n['label.requerido']}"
+									value="#{indicadorController.indicadorDTO.indDescriptor}" autoResize="false"/></td>
 					</tr>
 
 					<tr>
 						<td><h:outputLabel value="#{i18n['label.predecesor']}:&#160;" /> </td>
-							<td><p:selectOneMenu id="predecesor" required="true" requiredMessage="#{i18n['label.predecesor']}:&#160;#{i18n['label.requerido']}" value="#{indicadorController.predecesor}">
+							<td><p:selectOneMenu id="predecesor" requiredMessage="#{i18n['label.predecesor']}:&#160;#{i18n['label.requerido']}" value="#{indicadorController.predecesor}">
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
 									<f:selectItems value="#{indicadorController.indicadorList}" var="in" itemLabel="#{in.indNombreCorto}" itemValue="#{in.indCodigo}"></f:selectItems>
 							</p:selectOneMenu></td>

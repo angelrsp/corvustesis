@@ -58,7 +58,7 @@
 							<td><h:outputLabel value="#{i18n['label.valor']}:&#160;" /> </td>
 							<td><p:inputText required="true"
 										requiredMessage="#{i18n['label.valor']}&#160;#{i18n['label.requerido']}"
-										value="#{historicoIndicadorController.historicoIndicadorDTO.hinValor}"/></td>
+										value="#{historicoIndicadorController.historicoIndicadorDTO.hinValor}" onkeypress="return isDecimalKey(event)"/></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.observacion']}:&#160;" /> </td>
