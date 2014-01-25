@@ -193,20 +193,17 @@ public class HistoricoIndicadorController extends SelectItemController implement
 			IndicadorDTO ind=(IndicadorDTO) selectedNode.getData();
 			indTemp=new IndicadorDTO();
 			indTemp=ind;
-			if(ind.getIndIndicadors().isEmpty())
-			{
+			if(ind.getIndIndicadors().isEmpty()){
 				RequestContext rc = RequestContext.getCurrentInstance();
 				rc.execute("PF('dlgValor').show();");
 				
 				historicoIndicadorList=indicadorService.obtenerValores(indTemp);
 			}
-			else
-			{
+			else{
 				JsfUtil.addErrorMessage("Solo se permite en los nudos finales");
 			}
 		}
 		 catch (IndicadoresException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -221,7 +218,6 @@ public class HistoricoIndicadorController extends SelectItemController implement
 			historicoIndicadorList=indicadorService.obtenerValores(indTemp);
 			historicoIndicadorDTO=new HistoricoIndicadorDTO();
 		} catch (IndicadoresException e) {
-			// TODO Auto-generated catch block
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}

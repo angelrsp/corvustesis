@@ -156,12 +156,12 @@ public class ReporteIndicadorController extends SelectItemController implements 
 			IndicadorDTO ind=(IndicadorDTO) selectedNode.getData();
 			indTemp=new IndicadorDTO();
 			indTemp=ind;
+			RequestContext rc = RequestContext.getCurrentInstance();
 			if(ind.getIndIndicadors().isEmpty())
 			{
 				historicoIndicadorList=indicadorService.obtenerValores(indTemp);
 				if(historicoIndicadorList!=null)
 				{
-					RequestContext rc = RequestContext.getCurrentInstance();
 					rc.execute("PF('dlgValorReporte').show();");
 					createChartLine(historicoIndicadorList);
 				}
@@ -170,7 +170,10 @@ public class ReporteIndicadorController extends SelectItemController implements 
 			}
 			else
 			{
-				JsfUtil.addErrorMessage("Solo se permite en los nudos finales");
+				historicoIndicadorList=indicadorService.obtenerValores(indTemp);
+				rc.execute("PF('dlgValorReporte').show();");
+				indTemp=indicadorService.obtenerIndicador(indTemp.getIndCodigo());
+				createChartLinePatern(indTemp.getIndIndicadors());
 			}
 		}
 		 catch (Exception e) {
@@ -188,11 +191,28 @@ public class ReporteIndicadorController extends SelectItemController implements 
   
         for(HistoricoIndicadorDTO his:list)
         {
-            data1.set(his.getHinFecha().toString(), Integer.valueOf(his.getHinValor()));
+            data1.set(his.getHinFecha().toString(), his.getHinValor());
         }
         
         categoryModel.addSeries(data1);    
 	}
+
+	
+	private void createChartLinePatern(List<IndicadorDTO> list)
+	{
+		categoryModel = new CartesianChartModel();  
+		  
+        ChartSeries data1 = new ChartSeries();  
+        data1.setLabel("Indicador");  
+  
+        for(IndicadorDTO ind:list)
+        {
+            data1.set(ind.getIndNombreCorto(), ind.getIndValorActual());
+        }
+        
+        categoryModel.addSeries(data1);    
+	}
+
 	
 	private void initChart()
 	{
