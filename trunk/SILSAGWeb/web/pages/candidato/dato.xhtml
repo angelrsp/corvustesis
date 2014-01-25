@@ -12,18 +12,10 @@
 	<ui:composition template="/template/candidato.xhtml">
 		<ui:define name="contenido">
 		
-<!-- 			<h:form enctype="multipart/form-data" prependId="false"> -->
+ 			<h:form id="contenido" enctype="multipart/form-data">
 			  
-<!-- <p:fileUpload binding="#{upload}" mode="simple" -->
-<!--     allowTypes="/(\.|\/)(gif|jpe?g|png)$/" -->
-<!--     value="#{personBean.uploadedFile}"/> -->
-			
-<!-- <p:fileUpload id="fileU" value="#{datosCandidatoController.uploadedFile}"  --> 
-<!--  			    			mode="simple" />   --> 
-
-<!--  			<p:commandButton value="Upload" actionListener="#{datosCandidatoController.subirImagen}" process="fileU,@this" immediate="true"/> --> 
-<!-- 		</h:form> -->
-
+             <p:fileUpload fileUploadListener="#{datosCandidatoController.handleFileUpload}" mode="advanced" dragDropSupport="false"  
+                  update="growl" sizeLimit="1000000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />			
 		
 		
 			<fieldset>
@@ -443,7 +435,7 @@
 
 			</fieldset>
 			
-			
+</h:form>			
 	<script type="text/javascript">
 	//<![CDATA[
 // 		function readPicture(input, output)
@@ -466,7 +458,7 @@
 // 		    });
 		//]]>
 	</script>
-			
+					
 		</ui:define>
 	</ui:composition>
 
