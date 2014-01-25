@@ -48,6 +48,9 @@ public class IndicadorDTO implements Serializable {
 	@Column(name="ind_valor_ideal")
 	private BigDecimal indValorIdeal;
 
+	@Column(name="ind_descriptor")
+	private String indDescriptor;
+
 	
 	//bi-directional many-to-one association to HistoricoIndicadorDTO
 	@OneToMany(mappedBy="indIndicador")
@@ -153,6 +156,14 @@ public class IndicadorDTO implements Serializable {
 
 	public void setIndValorIdeal(BigDecimal indValorIdeal) {
 		this.indValorIdeal = indValorIdeal;
+	}
+
+	public String getIndDescriptor() {
+		return indDescriptor;
+	}
+
+	public void setIndDescriptor(String indDescriptor) {
+		this.indDescriptor = indDescriptor;
 	}
 
 	public HistoricoIndicadorDTO addIndHistoricoIndicador(HistoricoIndicadorDTO indHistoricoIndicador) {
