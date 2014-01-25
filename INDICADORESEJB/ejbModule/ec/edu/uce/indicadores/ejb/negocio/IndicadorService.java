@@ -74,5 +74,8 @@ public interface IndicadorService {
 
 	IndicadorDTO obtenerIndicador(Object id) throws IndicadoresException;
 
+	void actualizarValores(IndicadorDTO indicadorDTO)
+			throws IndicadoresException;
+
 
 }
