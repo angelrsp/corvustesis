@@ -20,5 +20,5 @@ body{font-size: 9pt;font-weight:normal;}
 }
 
 .ui-menu .ui-menu-parent .ui-menu-child {
-width: 191px;
+	width: 300px;
 }
