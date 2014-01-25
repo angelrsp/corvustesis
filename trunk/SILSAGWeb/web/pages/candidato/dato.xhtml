@@ -14,10 +14,12 @@
 		
  			<h:form id="contenido" enctype="multipart/form-data">
 			  
-             <p:fileUpload fileUploadListener="#{datosCandidatoController.handleFileUpload}" mode="advanced" dragDropSupport="false"  
-                  update="growl" sizeLimit="1000000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />			
+				<p:panel header="Subir Foto">
+			  
+        	     <p:fileUpload fileUploadListener="#{datosCandidatoController.handleFileUpload}" mode="advanced" dragDropSupport="false"  
+                  update="growl" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" />			
 		
-		
+				</p:panel>
 			<fieldset>
 				<p:growl id="growl" showDetail="true" />
 								
@@ -25,12 +27,12 @@
 				<p:panel id="pnlDatos" styleClass="tabla"
 					header="#{i18n['label.titulo.pantalla.dato.candidato']}">
 					<table>
-<!-- 						<tr> -->
-<!-- 							<td><h:outputLabel value="#{i18n['label.foto']}:&#160;" /> </td>	 -->
-<!-- 						</tr>					 -->
-<!-- 						<tr> -->
-<!-- 							<td colspan="3"><p:graphicImage value="#{datosCandidatoController.foto}" height="150" /></td>	 -->
-<!-- 						</tr> -->
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.foto']}:&#160;" /> </td>	
+						</tr>					
+						<tr>
+<!-- 							<td colspan="3"><p:graphicImage id="foto" value="#{datosCandidatoController.candidato.canFoto}" height="150" /></td>	 -->
+						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.tipo.documento']}:&#160;" /> </td>
 								<td>
