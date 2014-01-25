@@ -23,7 +23,7 @@ import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
 public class AdministracionServiceImpl implements AdministracionService{
 	
 	
-	private static final Logger log = LoggerFactory.getLogger(CandidatosServiceImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(AdministracionServiceImpl.class);
 	
 	@EJB
 	private FactoryDAO factoryDAO;

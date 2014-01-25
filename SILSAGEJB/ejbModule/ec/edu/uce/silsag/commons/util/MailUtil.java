@@ -43,11 +43,14 @@ public class MailUtil {
 	        try {
 	        	log.info("send");
 	        	log.info("send "+destino);
-	            MimeMessage message = new MimeMessage(session);
+	        	
+	        	MimeMessage message = new MimeMessage(session);
+	            
 	            message.setFrom(new InternetAddress((String) properties.get("mail.smtp.mail.sender"),(String) properties.get("mail.smtp.mail.sender.name")));
 	            message.addRecipient(Message.RecipientType.TO, new InternetAddress(destino));
 	            message.setSubject(asunto);
 	            message.setText(mensaje,"ISO-8859-1","html");
+	            
 	            Transport t = session.getTransport("smtp");
 	            log.info("conectar");
 	            t.connect((String) properties.get("mail.smtp.user"), (String) properties.get("mail.smtp.password"));
