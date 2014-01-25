@@ -72,5 +72,7 @@ public interface IndicadorService {
 
 	ModeloDTO agregarModelo(ModeloDTO modeloDTO) throws IndicadoresException;
 
+	IndicadorDTO obtenerIndicador(Object id) throws IndicadoresException;
+
 
 }

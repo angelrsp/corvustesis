@@ -1,5 +1,6 @@
 package ec.edu.uce.indicadores.ejb.persistence.dao.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -40,6 +41,8 @@ public class HistoricoIndicadorDAOImpl extends AbstractFacadeImpl<HistoricoIndic
 		Path<IndicadorDTO> join=from.join("indIndicador");
 		
 		cq.where(cb.equal(join.get("indCodigo"), indicadorDTO.getIndCodigo()));
+		
+		cq.orderBy(cb.asc(from.get("hinFecha").as(Timestamp.class)));
 		
 		List<HistoricoIndicadorDTO> list=entityManager.createQuery(cq).getResultList();	
 		if(list.isEmpty())

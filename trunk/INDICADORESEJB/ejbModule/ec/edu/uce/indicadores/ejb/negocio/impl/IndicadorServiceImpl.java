@@ -1,5 +1,6 @@
 package ec.edu.uce.indicadores.ejb.negocio.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -137,6 +138,18 @@ public class IndicadorServiceImpl implements IndicadorService {
 		}
 	}
 	
+	
+	@Override
+	public IndicadorDTO obtenerIndicador(Object id) throws IndicadoresException
+	{
+		try {
+			return factoryDAO.getIndicadorDAOImpl().find(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new IndicadoresException(e);
+		}
+	}
+	
 	@Override
 	public List<IndicadorDTO> obtenerRaizIndicador(IndicadorDTO indicadorDTO) throws IndicadoresException
 	{
@@ -165,6 +178,12 @@ public class IndicadorServiceImpl implements IndicadorService {
 	{
 		log.info("agregarIndicador");
 		try {
+			
+			IndicadorDTO ind= factoryDAO.getIndicadorDAOImpl().find(historicoIndicadorDTO.getIndIndicador().getIndCodigo());
+			if(ind.getIndValorInicial()==null)
+				ind.setIndValorInicial(historicoIndicadorDTO.getHinValor());				
+			ind.setIndValorActual(historicoIndicadorDTO.getHinValor());
+			factoryDAO.getIndicadorDAOImpl().edit(ind);
 			factoryDAO.getHistoricoIndicadorDAOImpl().create(historicoIndicadorDTO);
 		} catch (Exception e) {
 			log.error(e.toString());
@@ -174,14 +193,57 @@ public class IndicadorServiceImpl implements IndicadorService {
 	
 	
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see ec.edu.uce.indicadores.ejb.negocio.IndicadorService#obtenerValores(ec.edu.uce.indicadores.ejb.persistence.entities.IndicadorDTO)
+	 * Valores para reporte
+	 */
 	public List<HistoricoIndicadorDTO> obtenerValores(IndicadorDTO indicadorDTO) throws IndicadoresException
 	{
+		List<HistoricoIndicadorDTO> hisList=null;
+		List<HistoricoIndicadorDTO> hisListAux=null;
+		IndicadorDTO indTemp;
 		try {
-			return factoryDAO.getHistoricoIndicadorDAOImpl().getAll(indicadorDTO);
+			if(indicadorDTO.getIndIndicadors().isEmpty())
+				hisList= factoryDAO.getHistoricoIndicadorDAOImpl().getAll(indicadorDTO);
+			else
+			{
+				int tam;
+				BigDecimal inicial = BigDecimal.ZERO,actual=BigDecimal.ZERO;
+				for(IndicadorDTO ind: indicadorDTO.getIndIndicadors())
+				{
+					hisListAux=factoryDAO.getHistoricoIndicadorDAOImpl().getAll(ind);
+					if(hisListAux!=null)
+					{
+						tam=hisListAux.size();
+						inicial=BigDecimal.valueOf(inicial.doubleValue()+hisListAux.get(0).getHinValor().doubleValue());
+						actual=BigDecimal.valueOf(actual.doubleValue()+ hisListAux.get(tam-1).getHinValor().doubleValue());
+					}
+				}
+				indicadorDTO=factoryDAO.getIndicadorDAOImpl().find(indicadorDTO.getIndCodigo());
+				indicadorDTO.setIndValorActual(actual);
+				indicadorDTO.setIndValorInicial(inicial);
+				factoryDAO.getIndicadorDAOImpl().edit(indicadorDTO);	
+				
+				inicial = BigDecimal.ZERO;actual=BigDecimal.ZERO;
+				
+					for(IndicadorDTO ind: indicadorDTO.getIndIndicadors())
+					{
+						indTemp= factoryDAO.getIndicadorDAOImpl().find(ind.getIndCodigo());
+						inicial=BigDecimal.valueOf(inicial.doubleValue()+(indTemp.getIndValorInicial()!=null? indTemp.getIndValorInicial().doubleValue():0));
+						actual=BigDecimal.valueOf(actual.doubleValue()+(indTemp.getIndValorActual()!=null?indTemp.getIndValorActual().doubleValue():0));
+					}
+					indicadorDTO=factoryDAO.getIndicadorDAOImpl().find(indicadorDTO.getIndCodigo());
+					indicadorDTO.setIndValorActual(actual);
+					indicadorDTO.setIndValorInicial(inicial);
+					factoryDAO.getIndicadorDAOImpl().edit(indicadorDTO);										
+				
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			throw new IndicadoresException(e);
 		}
+		return hisList;
 	}
 	
 	

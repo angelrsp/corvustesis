@@ -1,7 +1,10 @@
 package ec.edu.uce.indicadores.ejb.persistence.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -29,7 +32,7 @@ public class HistoricoIndicadorDTO implements Serializable {
 	private String hinObservacion;
 
 	@Column(name="hin_valor")
-	private String hinValor;
+	private BigDecimal hinValor;
 
 	//bi-directional many-to-one association to EvidenciaDTO
 	@OneToMany(mappedBy="indHistoricoIndicador")
@@ -67,11 +70,11 @@ public class HistoricoIndicadorDTO implements Serializable {
 		this.hinObservacion = hinObservacion;
 	}
 
-	public String getHinValor() {
+	public BigDecimal getHinValor() {
 		return this.hinValor;
 	}
 
-	public void setHinValor(String hinValor) {
+	public void setHinValor(BigDecimal hinValor) {
 		this.hinValor = hinValor;
 	}
 
