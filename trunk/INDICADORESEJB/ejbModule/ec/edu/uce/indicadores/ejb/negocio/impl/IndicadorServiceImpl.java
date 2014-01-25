@@ -1,6 +1,7 @@
 package ec.edu.uce.indicadores.ejb.negocio.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -193,59 +194,70 @@ public class IndicadorServiceImpl implements IndicadorService {
 	
 	
 	@Override
-	/*
-	 * (non-Javadoc)
-	 * @see ec.edu.uce.indicadores.ejb.negocio.IndicadorService#obtenerValores(ec.edu.uce.indicadores.ejb.persistence.entities.IndicadorDTO)
-	 * Valores para reporte
-	 */
 	public List<HistoricoIndicadorDTO> obtenerValores(IndicadorDTO indicadorDTO) throws IndicadoresException
 	{
-		List<HistoricoIndicadorDTO> hisList=null;
-		List<HistoricoIndicadorDTO> hisListAux=null;
-		IndicadorDTO indTemp;
+		log.info("obtenerValores");
 		try {
-			if(indicadorDTO.getIndIndicadors().isEmpty())
-				hisList= factoryDAO.getHistoricoIndicadorDAOImpl().getAll(indicadorDTO);
-			else
-			{
-				int tam;
-				BigDecimal inicial = BigDecimal.ZERO,actual=BigDecimal.ZERO;
-				for(IndicadorDTO ind: indicadorDTO.getIndIndicadors())
-				{
-					hisListAux=factoryDAO.getHistoricoIndicadorDAOImpl().getAll(ind);
-					if(hisListAux!=null)
-					{
-						tam=hisListAux.size();
-						inicial=BigDecimal.valueOf(inicial.doubleValue()+hisListAux.get(0).getHinValor().doubleValue());
-						actual=BigDecimal.valueOf(actual.doubleValue()+ hisListAux.get(tam-1).getHinValor().doubleValue());
-					}
-				}
-				indicadorDTO=factoryDAO.getIndicadorDAOImpl().find(indicadorDTO.getIndCodigo());
-				indicadorDTO.setIndValorActual(actual);
-				indicadorDTO.setIndValorInicial(inicial);
-				factoryDAO.getIndicadorDAOImpl().edit(indicadorDTO);	
-				
-				inicial = BigDecimal.ZERO;actual=BigDecimal.ZERO;
-				
-					for(IndicadorDTO ind: indicadorDTO.getIndIndicadors())
-					{
-						indTemp= factoryDAO.getIndicadorDAOImpl().find(ind.getIndCodigo());
-						inicial=BigDecimal.valueOf(inicial.doubleValue()+(indTemp.getIndValorInicial()!=null? indTemp.getIndValorInicial().doubleValue():0));
-						actual=BigDecimal.valueOf(actual.doubleValue()+(indTemp.getIndValorActual()!=null?indTemp.getIndValorActual().doubleValue():0));
-					}
-					indicadorDTO=factoryDAO.getIndicadorDAOImpl().find(indicadorDTO.getIndCodigo());
-					indicadorDTO.setIndValorActual(actual);
-					indicadorDTO.setIndValorInicial(inicial);
-					factoryDAO.getIndicadorDAOImpl().edit(indicadorDTO);										
-				
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			return factoryDAO.getHistoricoIndicadorDAOImpl().getAll(indicadorDTO);
+		}catch (Exception e) {
+			log.error(e.toString());
 			throw new IndicadoresException(e);
 		}
-		return hisList;
+		
 	}
 	
+	@Override
+	public void actualizarValores(IndicadorDTO indicadorDTO) throws IndicadoresException
+	{
+		log.info("actualizarValores");
+		BigDecimal inicial = BigDecimal.ZERO,actual=BigDecimal.ZERO;
+
+		inicial=valor(indicadorDTO).get(0);
+		actual=valor(indicadorDTO).get(1);
+		indicadorDTO.setIndValorInicial(inicial);
+		indicadorDTO.setIndValorActual(actual);
+		factoryDAO.getIndicadorDAOImpl().edit(indicadorDTO);
+	}
+	
+	private List<BigDecimal> valor(IndicadorDTO ind) throws IndicadoresException
+	{
+		List<HistoricoIndicadorDTO> hisListAux=null;
+		hisListAux= factoryDAO.getHistoricoIndicadorDAOImpl().getAll(ind);
+		List<BigDecimal> listVal=new ArrayList<BigDecimal>();
+		List<BigDecimal> listValTemp=new ArrayList<BigDecimal>();
+		
+		listVal.add(0, BigDecimal.ZERO);
+		listVal.add(1, BigDecimal.ZERO);
+		
+		int tam;
+		//IndicadorDTO indTemp;
+		BigDecimal inicial = BigDecimal.ZERO,actual=BigDecimal.ZERO;
+		if(hisListAux!=null)
+		{
+			tam=hisListAux.size();
+			listVal.set(0, BigDecimal.valueOf(listVal.get(0).doubleValue()+hisListAux.get(0).getHinValor().doubleValue()));
+			listVal.set(1, BigDecimal.valueOf(listVal.get(1).doubleValue()+hisListAux.get(tam-1).getHinValor().doubleValue()));
+		}
+		else
+		{
+			for(IndicadorDTO indi: ind.getIndIndicadors())
+			{
+				listValTemp=valor(indi);
+				listVal.set(0, BigDecimal.valueOf(inicial.doubleValue()+ listValTemp.get(0).doubleValue()));
+				listVal.set(1,BigDecimal.valueOf(actual.doubleValue()+listValTemp.get(1).doubleValue()));
+				
+				inicial=listVal.get(0);
+				actual=listVal.get(1);				
+			}
+			if(ind.getIndIndicadors().size()>0)
+			{
+				ind.setIndValorInicial(inicial);
+				ind.setIndValorActual(actual);
+				factoryDAO.getIndicadorDAOImpl().edit(ind);
+			}			
+		}
+		return listVal;
+	}
 	
 	@Override
 	public void agregarEvidencia(EvidenciaDTO evidenciaDTO) throws IndicadoresException
