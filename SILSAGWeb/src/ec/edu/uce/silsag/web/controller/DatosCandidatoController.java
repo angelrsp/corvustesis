@@ -1,8 +1,8 @@
 package ec.edu.uce.silsag.web.controller;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -12,15 +12,10 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.Part;
 
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.StreamedContent;
-import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,8 +71,6 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	private List<CursoDTO> cursoList;
 	private List<AdicionalDTO> adicionalList;
 	
-	private UploadedFile uploadedFile;
-	
 	private Date fechaNacimiento;
 	private Date fechaMaximo;
 	
@@ -88,13 +81,7 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	private Date fechaInicioEstudio;
 	private Date fechaFinEstudio;
 	
-	
-	
-	private Part file1;
-	
-	private StreamedContent foto;
-	
-	
+		
 	public DatosCandidatoController()
 	{
 		
@@ -145,36 +132,6 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		logger.info("Inicio");
 	}
 	
-	
-    public String upload() throws IOException {  
-        InputStream inputStream = file1.getInputStream();          
-       FileOutputStream outputStream = new FileOutputStream(getFilename(file1));  
-         
-       byte[] buffer = new byte[4096];          
-       int bytesRead = 0;  
-       while(true) {                          
-           bytesRead = inputStream.read(buffer);  
-           if(bytesRead > 0) {  
-               outputStream.write(buffer, 0, bytesRead);  
-           }else {  
-               break;  
-           }                         
-       }  
-       outputStream.close();  
-       inputStream.close();  
-        
-       return "success";  
-   }  
- 
-   private static String getFilename(Part part) {  
-       for (String cd : part.getHeader("content-disposition").split(";")) {  
-           if (cd.trim().startsWith("filename")) {  
-               String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");  
-               return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.  
-           }  
-       }  
-       return null;  
-   } 
 	
 	public UsuarioDTO getUser() {
 		return user;
@@ -344,14 +301,6 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		return listReferencia;
 	}
 
-	public UploadedFile getUploadedFile() {
-		return uploadedFile;
-	}
-
-	public void setUploadedFile(UploadedFile uploadedFile) {
-		this.uploadedFile = uploadedFile;
-	}
-
 	public Date getFechaNacimiento() {
 		this.fechaNacimiento=candidato.getCanFechaNacimiento();
 		return fechaNacimiento;
@@ -391,22 +340,8 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		this.adicionalList = adicionalList;
 	}
 
-	public Part getFile1() {
-		return file1;
-	}
-
-	public void setFile1(Part file1) {
-		this.file1 = file1;
-	}
-
 	public Date getFechaMaximo() {
 		return fechaMaximo;
-	}
-
-	public StreamedContent getFoto() {
-		
-		//foto = new DefaultStreamedContent(new ByteArrayInputStream(candidato.getCanFoto()) , "image/jpeg");
-		return foto;
 	}
 
 	public Object getEstadoCivil() {
@@ -614,26 +549,25 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		}
 	}
 	
-	public void subirImagen()
-	{
-		logger.info("subirImagen");
-		//candidato.setCanFoto(uploadedFile.getContents());
-	    if(uploadedFile != null) {  
-            FacesMessage msg = new FacesMessage("Succesful", uploadedFile.getFileName() + " is uploaded.");  
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-            logger.info("Si");
-	    }
-	    else
-	    {
-            FacesMessage msg = new FacesMessage("Succesful", "No subio");  
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-            logger.info("No");
-	    }
+	public void handleFileUpload(FileUploadEvent event) {  
+		logger.info("Entro imagen");      
+		getCandidato().setCanFoto(event.getFile().getContents());
+	       JsfUtil.addInfoMessage("Succesful"+ event.getFile().getFileName() + " is uploaded.");
+	       saveToDisk(event.getFile().getContents(), event.getFile().getFileName());
+	       //candidatosService.actualizarCandidato(getCandidato());
 	}
 	
-	  public void handleFileUpload(FileUploadEvent event) {  
-		  logger.info("Entro imagen");
-	        FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");  
-	        FacesContext.getCurrentInstance().addMessage(null, msg);  
-	    }
+	private String saveToDisk(byte[] bytefile,String filename)
+	{
+		try {
+			FileOutputStream fos=new FileOutputStream(filename);
+			fos.write(bytefile);
+			fos.close();
+		} catch (FileNotFoundException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		} catch (IOException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+		return filename;
+	}
 }
