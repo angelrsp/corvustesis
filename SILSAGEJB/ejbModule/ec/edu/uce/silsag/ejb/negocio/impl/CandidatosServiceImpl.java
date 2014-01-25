@@ -73,6 +73,7 @@ public class CandidatosServiceImpl implements CandidatosService {
 				Integer es=factoryDAO.getEstudioDAOImpl().getMax(candidatoDTO);
 				candidatoDTO.setCanMaxEstudio(es);
 			}
+			//log.info("foto {}",candidatoDTO.getCanFoto());
 			return factoryDAO.getCandidatoDAOImpl().edit(candidatoDTO);
 		} catch (Exception e) {
 			log.info("Error al registrar el Candidato {}", e.toString());
