@@ -10,7 +10,7 @@
 
 	<ui:composition template="/template/privado.xhtml">
 		<ui:define name="contenido">
-
+<h:form id="contenido" enctype="multipart/form-data">
 
 			<fieldset>
 				<p:growl id="growl" showDetail="false" />
@@ -119,6 +119,15 @@
 										requiredMessage="#{i18n['label.observacion']}&#160;#{i18n['label.requerido']}"
 										value="#{historicoIndicadorController.evidenciaDTO.eviObservacion}"/></td>
 						</tr>
+						
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.archivo']}:&#160;" /></td>
+							<td>
+	        	     			<p:fileUpload fileUploadListener="#{historicoIndicadorController.handleFileUpload}" mode="advanced" dragDropSupport="false"  
+                  					update=":contenido:growl" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" />			
+							</td>
+						</tr>
+						
 						<tr>
 							<td colspan="2" align="center">
 								<p:commandButton actionListener="#{historicoIndicadorController.agregarEvidencia}" value="#{i18n['boton.agregar']}" process="pnlEvidencia" update="pnlEvidencia,growl"/> </td>
@@ -135,6 +144,12 @@
 						<p:column headerText="#{i18n['label.observacion']}">
 							<h:outputText value="#{evi.eviObservacion}" />
 						</p:column>
+
+						<p:column headerText="#{i18n['label.descargar']}">
+			                <p:commandButton actionListener="#{historicoIndicadorController.descargarEvidencia(evi)}" icon="ui-icon-arrow-1-s" ajax="false" immediate="true" 
+			                	title="#{i18n['label.descargar']}">    
+			    	        </p:commandButton>  
+						</p:column>
 															
 					</p:dataTable>
 
@@ -145,7 +160,7 @@
 				
 	
 			</fieldset>
-				
+</h:form>				
 		</ui:define>
 	</ui:composition>
 </body>					
