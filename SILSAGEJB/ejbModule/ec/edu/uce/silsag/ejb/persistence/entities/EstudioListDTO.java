@@ -43,6 +43,9 @@ public class EstudioListDTO implements Serializable {
 	@Column(name="est_establecimiento")
 	private String estEstablecimiento;
 
+	@Column(name="est_registro")
+	private String estRegistro;
+	
 	@Column(name="est_fecha_fin")
 	private Timestamp estFechaFin;
 
@@ -128,6 +131,14 @@ public class EstudioListDTO implements Serializable {
 
 	public void setEstEstablecimiento(String estEstablecimiento) {
 		this.estEstablecimiento = estEstablecimiento;
+	}
+
+	public String getEstRegistro() {
+		return estRegistro;
+	}
+
+	public void setEstRegistro(String estRegistro) {
+		this.estRegistro = estRegistro;
 	}
 
 	public Timestamp getEstFechaFin() {

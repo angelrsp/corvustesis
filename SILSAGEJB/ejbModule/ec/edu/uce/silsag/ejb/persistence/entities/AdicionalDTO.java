@@ -26,6 +26,10 @@ public class AdicionalDTO implements Serializable {
 	@Column(name="pro_nombre")
 	private String proNombre;
 
+	@Column(name="adi_archivo")
+	private byte[] adiArchivo;
+	
+	
 	//bi-directional many-to-one association to CandidatoDTO
 	@ManyToOne
 	@JoinColumn(name="pro_candidato")
@@ -56,6 +60,14 @@ public class AdicionalDTO implements Serializable {
 
 	public void setProNombre(String proNombre) {
 		this.proNombre = proNombre;
+	}
+
+	public byte[] getAdiArchivo() {
+		return adiArchivo;
+	}
+
+	public void setAdiArchivo(byte[] adiArchivo) {
+		this.adiArchivo = adiArchivo;
 	}
 
 	public CandidatoDTO getBemCandidato() {

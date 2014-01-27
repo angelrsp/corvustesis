@@ -33,6 +33,10 @@ public class CursoDTO implements Serializable {
 	@Column(name="cur_descripcion")
 	private String curDescripcion;
 	
+	@Column(name="cur_archivo")
+	private byte[] curArchivo;
+	
+	
 	//bi-directional many-to-one association to CandidatoDTO
 	@ManyToOne
 	@JoinColumn(name="cur_candidato")
@@ -79,6 +83,14 @@ public class CursoDTO implements Serializable {
 
 	public void setCurDescripcion(String curDescripcion) {
 		this.curDescripcion = curDescripcion;
+	}
+
+	public byte[] getCurArchivo() {
+		return curArchivo;
+	}
+
+	public void setCurArchivo(byte[] curArchivo) {
+		this.curArchivo = curArchivo;
 	}
 
 	public CandidatoDTO getBemCandidato() {

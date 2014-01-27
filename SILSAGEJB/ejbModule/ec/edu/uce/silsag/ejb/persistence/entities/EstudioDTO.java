@@ -44,7 +44,13 @@ public class EstudioDTO implements Serializable {
 
 	@Column(name="est_pais")
 	private Integer estPais;
-
+	
+	@Column(name="est_registro")
+	private String estRegistro;
+	
+	@Column(name="est_archivo")
+	private byte[] estArchivo;
+	
 	//bi-directional many-to-one association to CandidatoDTO
 	@ManyToOne
 	@JoinColumn(name="est_candidato")
@@ -123,6 +129,22 @@ public class EstudioDTO implements Serializable {
 
 	public void setEstPais(Integer estPais) {
 		this.estPais = estPais;
+	}
+
+	public String getEstRegistro() {
+		return estRegistro;
+	}
+
+	public void setEstRegistro(String estRegistro) {
+		this.estRegistro = estRegistro;
+	}
+
+	public byte[] getEstArchivo() {
+		return estArchivo;
+	}
+
+	public void setEstArchivo(byte[] estArchivo) {
+		this.estArchivo = estArchivo;
 	}
 
 	public CandidatoDTO getBemCandidato() {
