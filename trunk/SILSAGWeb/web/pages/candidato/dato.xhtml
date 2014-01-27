@@ -16,10 +16,11 @@
 			  
 				<p:panel header="Subir Foto">
 			  
-        	     <p:fileUpload fileUploadListener="#{datosCandidatoController.handleFileUpload}" mode="advanced" dragDropSupport="false"  
-                  update="growl" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" />			
+        	     <p:fileUpload fileUploadListener="#{imagenCandidatoController.handleFileUpload}" mode="advanced" dragDropSupport="false"  
+                  update="growl" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" oncomplete="location.reload(true)" />			
 		
 				</p:panel>
+				
 			<fieldset>
 				<p:growl id="growl" showDetail="true" />
 								
@@ -28,11 +29,9 @@
 					header="#{i18n['label.titulo.pantalla.dato.candidato']}">
 					<table>
 						<tr>
-							<td><h:outputLabel value="#{i18n['label.foto']}:&#160;" /> </td>	
+							<td><h:outputLabel value="#{i18n['label.foto']}:&#160;" /> </td>
+							<td colspan="3"><p:graphicImage id="foto" value="#{imagenCandidatoController.image}" height="150" /></td>	
 						</tr>					
-						<tr>
-<!-- 							<td colspan="3"><p:graphicImage id="foto" value="#{datosCandidatoController.candidato.canFoto}" height="150" /></td>	 -->
-						</tr>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.tipo.documento']}:&#160;" /> </td>
 								<td>
@@ -132,6 +131,7 @@
 									<f:ajax render="carrera" />
 									<f:ajax render="establecimiento" />
 									<f:ajax render="pais" />
+									<f:ajax render="registro" />
 								</p:selectOneMenu></td>
 								
 							<td><h:outputLabel	value="#{i18n['label.especialidad']}:&#160;" /></td>
@@ -155,7 +155,10 @@
 									requiredMessage="#{i18n['label.pais']}:&#160;#{i18n['label.requerido']}" value="#{datosCandidatoController.pais}">
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="" />
 									<f:selectItems value="#{datosCandidatoController.catalogoPais}"></f:selectItems>	
-								</p:selectOneMenu></td>						
+								</p:selectOneMenu></td>
+							
+							<td><h:outputLabel value="#{i18n['label.registro.senecyt']}:&#160;" /></td>
+							<td><p:inputText id="registro" value="#{datosCandidatoController.estudio.estRegistro}" disabled="#{datosCandidatoController.nivelEstudio.toString()=='5'||datosCandidatoController.nivelEstudio.toString()=='0'}" /></td>						
 						</tr>
 						
 					  	<tr>
@@ -166,8 +169,19 @@
 					  		<td><p:calendar value="#{datosCandidatoController.fechaFinEstudio}" navigator="true" requiredMessage="#{i18n['label.fecha.fin']}:&#160;#{i18n['label.requerido']}" pattern="#{i18n['pattern.fecha']}" required="true" maxdate="#{datosCandidatoController.fechaMaximoActual}" placeholder="AAAA/MM/DD"></p:calendar></td>
 					  		
 					  	</tr>
+					  	
+					  	<tr>
+						  	<td colspan="3">
+								 <p:fileUpload fileUploadListener="#{datosCandidatoController.handleFileUploadEstudio}" mode="advanced" dragDropSupport="false"  
+                  					 update="growlAdi" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar"/>
+                  				<p:growl id="growlAdi" />	 						  	
+						  	</td>
+						  	
+					  	</tr>
+					  	
+					  	
 					  	<tr align="center">
-							<td colspan="4"><p:commandButton value="#{i18n['boton.agregar']}" process=":contenido:pnlEstudios" update=":contenido:pnlEstudios,:contenido:growl" actionListener="#{datosCandidatoController.agregarEstudio}"></p:commandButton></td>					  	
+							<td colspan="4"><p:commandButton value="#{i18n['boton.agregar']}" process=":contenido:pnlEstudios" update=":contenido:pnlEstudios" actionListener="#{datosCandidatoController.agregarEstudio}"></p:commandButton></td>					  	
 					  	</tr>
 					</table>
 					</p:tab>
@@ -191,11 +205,20 @@
 						<p:column headerText="#{i18n['label.pais']}">
 							<h:outputText value="#{est.catPais}" />
 						</p:column>
+						<p:column headerText="#{i18n['label.registro.senecyt']}">
+							<h:outputText value="#{est.estRegistro}" />
+						</p:column>						
 						<p:column headerText="#{i18n['label.fecha.inicio']}">
 							<h:outputText value="#{fn:substring(est.estFechaInicio,0,10)}" />
 						</p:column>
 						<p:column headerText="#{i18n['label.fecha.fin']}">
 							<h:outputText value="#{fn:substring(est.estFechaFin,0,10)}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.descargar']}" width="15">
+							<p:commandButton actionListener="#{datosCandidatoController.descargarEstudio(est)}" icon="ui-icon-arrowthick-1-s" ajax="false" 
+								immediate="true" update=":contenido:growl">
+							</p:commandButton>
 						</p:column>
 						
 						<p:column headerText="#{i18n['label.eliminar']}" width="15">
@@ -203,6 +226,7 @@
 								immediate="true" onclick="if(!confirm('Eliminar?')) return false;" update=":contenido:tblEstudio,:contenido:growl" process=":contenido:tblEstudio">
 							</p:commandButton>
 						</p:column>
+						
 					</p:dataTable>
 					
 				</p:panel>
@@ -227,8 +251,15 @@
 
 					  			<td><h:outputLabel value="#{i18n['label.fecha.fin']}:&#160;" /></td>
 						  		<td><p:calendar value="#{datosCandidatoController.fechaFinCurso}" navigator="true" requiredMessage="#{i18n['label.fecha.fin']}:&#160;#{i18n['label.requerido']}" pattern="#{i18n['pattern.fecha']}" required="true" maxdate="#{datosCandidatoController.fechaMaximoActual}" placeholder="AAAA/MM/DD"></p:calendar></td>
+							</tr>						  		
+						  	<tr>
+							  	<td colspan="3">
+									 <p:fileUpload fileUploadListener="#{datosCandidatoController.handleFileUploadCurso}" mode="advanced" dragDropSupport="false"  
+	                  					 update="growlCur" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar"/>
+	                  				<p:growl id="growlCur" />	 						  	
+							  	</td>
+						  	</tr>						  								  		
 						  		
-						  	</tr>
 						  	<tr align="center">
 						  		<td colspan="4"><p:commandButton value="#{i18n['boton.agregar']}" process=":contenido:pnlCursos" update=":contenido:pnlCursos,:contenido:growl" actionListener="#{datosCandidatoController.agregarCurso}"></p:commandButton></td>
 						  	</tr>
@@ -256,6 +287,12 @@
 						<p:column headerText="#{i18n['label.fecha.fin']}">
 							<h:outputText value="#{fn:substring(cur.curFechaFin,0,10)}" />
 						</p:column>
+
+						<p:column headerText="#{i18n['label.descargar']}" width="15">
+							<p:commandButton actionListener="#{datosCandidatoController.descargarCurso(cur)}" icon="ui-icon-arrowthick-1-s" ajax="false" 
+								immediate="true" update=":contenido:growl">
+							</p:commandButton>
+						</p:column>
 					
 						<p:column headerText="#{i18n['label.eliminar']}" width="15">
 							<p:commandButton actionListener="#{datosCandidatoController.onRowDelCurso(cur)}" icon="ui-icon-close" 
@@ -275,6 +312,7 @@
 						
 						<table>
 						  	<tr>
+						  	
 					  			<td><h:outputLabel value="#{i18n['label.nombre']}:&#160;" /></td>
 								<td><p:inputText value="#{datosCandidatoController.adicional.proNombre}" requiredMessage="#{i18n['label.nombre']}:&#160;#{i18n['label.requerido']}" required="true"></p:inputText></td>
 
@@ -282,8 +320,17 @@
 								<td><p:inputTextarea value="#{datosCandidatoController.adicional.proDescripcion}" requiredMessage="#{i18n['label.descripcion']}:&#160;#{i18n['label.requerido']}" required="true" autoResize="false" maxlength="255"/></td>					  											
 													  			
 						  	</tr>
+						  	
+						  	<tr>
+							  	<td colspan="3">
+									 <p:fileUpload fileUploadListener="#{datosCandidatoController.handleFileUploadAdicional}" mode="advanced" dragDropSupport="false"  
+	                  					 update="growlEst" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar"/>
+	                  				<p:growl id="growlEst" />	 						  	
+							  	</td>
+						  	</tr>						  								  								  	
+						  	
 						  	<tr align="center">
-						  		<td colspan="4"><p:commandButton value="#{i18n['boton.agregar']}" process=":contenido:pnlAdicional" update=":contenido:pnlAdicional,:contenido:growl" actionListener="#{datosCandidatoController.agregarAdicional}"></p:commandButton></td>
+						  		<td colspan="4"><p:commandButton value="#{i18n['boton.agregar']}" process=":contenido:pnlAdicional" update=":contenido:pnlAdicional" actionListener="#{datosCandidatoController.agregarAdicional}"></p:commandButton></td>
 						  	</tr>						  	
 						</table>
 						  
@@ -300,14 +347,19 @@
 
 						<p:column headerText="#{i18n['label.descripcion']}">
 							<h:outputText value="#{adi.proDescripcion}" />
-						</p:column>					
-					
-						<p:column headerText="#{i18n['label.eliminar']}" width="15">
-							<p:commandButton actionListener="#{datosCandidatoController.onRowDelAdicional(adi)}" icon="ui-icon-close" 
-								immediate="true" onclick="if(!confirm('Eliminar?')) return false;" update=":contenido:tblAdicional,:contenido:growl" process=":contenido:tblAdicional">
+						</p:column>
+											
+						<p:column headerText="#{i18n['label.descargar']}" width="15">
+							<p:commandButton actionListener="#{datosCandidatoController.descargarAdicional(adi)}" icon="ui-icon-arrowthick-1-s" ajax="false" 
+								immediate="true" update=":contenido:growl">
 							</p:commandButton>
 						</p:column>
 					
+						<p:column headerText="#{i18n['label.eliminar']}" width="15">
+							<p:commandButton actionListener="#{datosCandidatoController.onRowDelAdicional(adi)}" icon="ui-icon-close" 
+								immediate="true" onclick="if(!confirm('Eliminar?')) return false;" update=":contenido:tblAdicional" process=":contenido:tblAdicional">
+							</p:commandButton>
+						</p:column>
 					
 					</p:dataTable>
 
@@ -345,6 +397,16 @@
 									<f:selectItems value="#{datosCandidatoController.catalogoTipoEmpresa}"></f:selectItems>	
 								</p:selectOneMenu></td>
 						</tr>
+						
+					  	<tr>
+						  	<td colspan="3">
+								 <p:fileUpload fileUploadListener="#{datosCandidatoController.handleFileUploadExperiencia}" mode="advanced" dragDropSupport="false"  
+                  					 update="growlExp" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar"/>
+                  				<p:growl id="growlExp" />	 						  	
+						  	</td>
+					  	</tr>						  								  								  	
+						
+						
 						<tr align="center">
 							<td colspan="4"><p:commandButton value="#{i18n['boton.agregar']}" process=":contenido:pnlExperiencia" update=":contenido:pnlExperiencia,:contenido:growl" actionListener="#{datosCandidatoController.agregarExperiencia}"></p:commandButton></td>						
 						</tr>
@@ -373,6 +435,12 @@
 						</p:column>
 						<p:column headerText="#{i18n['label.sector.empresa']}">
 							<h:outputText value="#{exp.catTipoEmpresa}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.descargar']}" width="15">
+							<p:commandButton actionListener="#{datosCandidatoController.descargarExperiencia(exp)}" icon="ui-icon-arrowthick-1-s" ajax="false" 
+								immediate="true" update=":contenido:growl">
+							</p:commandButton>
 						</p:column>
 						
 						<p:column headerText="#{i18n['label.eliminar']}" width="15">
@@ -404,8 +472,17 @@
 								<f:validator validatorId="emailValidator"></f:validator>
 								</p:inputText></td>
 						</tr>
+						
+					  	<tr>
+						  	<td colspan="3">
+								 <p:fileUpload fileUploadListener="#{datosCandidatoController.handleFileUploadReferencia}" mode="advanced" dragDropSupport="false"  
+                  					 update="growlRef" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar"/>
+                  				<p:growl id="growlRef" />	 						  	
+						  	</td>
+					  	</tr>						  								  								  							
+						
 						<tr align="center">
-							<td colspan="4"><p:commandButton actionListener="#{datosCandidatoController.agregarReferencia}" value="#{i18n['boton.agregar']}" process=":contenido:pnlReferencia" update=":contenido:pnlReferencia,:contenido:growl"></p:commandButton></td>
+							<td colspan="4"><p:commandButton actionListener="#{datosCandidatoController.agregarReferencia}" value="#{i18n['boton.agregar']}" process=":contenido:pnlReferencia" update=":contenido:pnlReferencia"></p:commandButton></td>
 						</tr>
 					</table>
 					</p:tab>
@@ -426,6 +503,13 @@
 						<p:column headerText="#{i18n['label.email']}">
 							<h:outputText value="#{ref.refMail}" />
 						</p:column>
+
+						<p:column headerText="#{i18n['label.descargar']}" width="15">
+							<p:commandButton actionListener="#{datosCandidatoController.descargarReferencia(ref)}" icon="ui-icon-arrowthick-1-s" ajax="false" 
+								immediate="true" update=":contenido:growl">
+							</p:commandButton>
+						</p:column>
+
 
 						<p:column headerText="#{i18n['label.eliminar']}" width="15">
 							<p:commandButton actionListener="#{datosCandidatoController.onRowDelReferencia(ref)}" icon="ui-icon-close" immediate="true" onclick="if(!confirm('Eliminar?')) return false;"

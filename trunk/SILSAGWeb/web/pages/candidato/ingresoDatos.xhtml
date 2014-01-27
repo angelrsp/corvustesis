@@ -8,6 +8,8 @@
 <body>
 	<ui:composition template="/template/publico.xhtml">
 		<ui:define name="contenido">
+		
+<h:form id="contenido">		
 			<fieldset>
 				<p:growl id="growl" showDetail="false" />
 				<p:panel id="pnlRegistroCandidato" styleClass="tabla">
@@ -55,11 +57,11 @@
 							<td><h:outputLabel value="#{i18n['label.contrasenia.ingresar']}:&#160;" /> </td>
 							<td><p:password required="true"
 									requiredMessage="#{i18n['label.contrasenia.ingresar']}&#160;#{i18n['label.requerido']}"
-									value="#{registroCandidatoController.usuarioRegistro.usuPassword}"/></td>
+									value="#{registroCandidatoController.usuarioRegistro.usuPassword}" feedback="true"/></td>
 							<td><h:outputLabel value="#{i18n['label.contrasenia.confirmar']}:&#160;" /> </td>
 							<td><p:password required="true"
 									requiredMessage="#{i18n['label.contrasenia.confirmar']}&#160;#{i18n['label.requerido']}"
-									value="#{registroCandidatoController.usuarioRegistro.npUsuPassword2}"/></td>
+									value="#{registroCandidatoController.usuarioRegistro.npUsuPassword2}" feedback="true"/></td>
 						</tr>
 						<tr  align="center">
 							<td colspan="3">
@@ -73,6 +75,8 @@
 					</table>
 				</p:panel>
 			</fieldset>
+			
+</h:form>			
 		</ui:define>
 	</ui:composition>
 </body>
