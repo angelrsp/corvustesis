@@ -27,13 +27,13 @@
 					
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.contrasenia.ingresar']}:&#160;" /> </td>
-							<td><p:password required="true"
+							<td><p:password required="true" feedback="true"
 									requiredMessage="#{i18n['label.contrasenia.ingresar']}&#160;#{i18n['label.requerido']}"
 									value="#{actualizarClaveController.usuario.npUsuPassword}"/></td>
 						</tr>
 						<tr>			
 							<td><h:outputLabel value="#{i18n['label.contrasenia.confirmar']}:&#160;" /> </td>
-							<td><p:password required="true"
+							<td><p:password required="true" feedback="true"
 									requiredMessage="#{i18n['label.contrasenia.confirmar']}&#160;#{i18n['label.requerido']}"
 									value="#{actualizarClaveController.usuario.npUsuPassword2}"/></td>
 						</tr>
