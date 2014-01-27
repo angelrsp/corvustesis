@@ -2,7 +2,7 @@ package ec.edu.uce.silsag.web.util.validator;
 
 public class Identification {
 
-	public boolean isCedula(String cedula) {
+	public static boolean isCedula(String cedula) {
 		boolean cedulaCorrecta = false;
 
 		try {
