@@ -18,6 +18,7 @@ import ec.edu.uce.silsag.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
 import ec.edu.uce.silsag.web.util.JsfUtil;
+import ec.edu.uce.silsag.web.util.validator.Identification;
 
 
 @ViewScoped
@@ -52,6 +53,13 @@ public class RegistroCandidatoController extends SelectItemController implements
 			
 			log.info("Contrasenia {}", getUsuarioRegistro().getUsuPassword() );
 			
+			if(Integer.valueOf(tipoDocumento.toString())==3)
+			{
+				if(!Identification.isCedula(getCandidatoRegistro().getCanIdentificacion())){
+					JsfUtil.addErrorMessage("Cédula invalida");
+					return;
+				}
+			}			
 			getCandidatoRegistro().setBemUsuario(getUsuarioRegistro());
 			getUsuarioRegistro().setUsuLogin(getCandidatoRegistro().getCanIdentificacion());
 			getCandidatoRegistro().setCanTipoIdentificacion(Integer.valueOf(tipoDocumento.toString()));

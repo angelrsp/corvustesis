@@ -1,7 +1,5 @@
 package ec.edu.uce.silsag.web.controller;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -81,6 +79,7 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	private Date fechaInicioEstudio;
 	private Date fechaFinEstudio;
 	
+	
 		
 	public DatosCandidatoController()
 	{
@@ -103,6 +102,8 @@ public class DatosCandidatoController extends SelectItemController implements Se
 		referencia=new ReferenciaDTO();
 		listReferencia=new ArrayList<ReferenciaDTO>();
 		
+		
+		//foto=new DefaultStreamedContent();
 		curso=new CursoDTO();
 		cursoList=new ArrayList<CursoDTO>();
 		
@@ -552,22 +553,102 @@ public class DatosCandidatoController extends SelectItemController implements Se
 	public void handleFileUpload(FileUploadEvent event) {  
 		logger.info("Entro imagen");      
 		getCandidato().setCanFoto(event.getFile().getContents());
-	       JsfUtil.addInfoMessage("Succesful"+ event.getFile().getFileName() + " is uploaded.");
-	       saveToDisk(event.getFile().getContents(), event.getFile().getFileName());
-	       //candidatosService.actualizarCandidato(getCandidato());
+	    JsfUtil.addInfoMessage("Succesful"+ event.getFile().getFileName() + " is uploaded.");
+	    try {
+			candidatosService.actualizarCandidato(getCandidato());
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
 	}
 	
-	private String saveToDisk(byte[] bytefile,String filename)
+
+	
+	public void handleFileUploadEstudio(FileUploadEvent event) {        
+		getEstudio().setEstArchivo(event.getFile().getContents());
+	    JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+	}
+	
+
+	
+	public void descargarEstudio(EstudioListDTO est)
 	{
 		try {
-			FileOutputStream fos=new FileOutputStream(filename);
-			fos.write(bytefile);
-			fos.close();
-		} catch (FileNotFoundException e) {
-			JsfUtil.addErrorMessage(e.toString());
-		} catch (IOException e) {
-			JsfUtil.addErrorMessage(e.toString());
+			logger.info("descargarEstudio");
+			EstudioDTO estu=candidatosService.obtenerEstudio(est.getEstCodigo());
+			byte[] archivo=estu.getEstArchivo();
+			if(archivo!=null)
+				JsfUtil.descargarArchivo(archivo);
+			else
+				JsfUtil.addErrorMessage("No existe archivo");
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
 		}
-		return filename;
 	}
+
+	public void handleFileUploadCurso(FileUploadEvent event) {        
+		getCurso().setCurArchivo(event.getFile().getContents());
+	    JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+	}	
+	
+	public void descargarCurso(CursoDTO cur)
+	{
+		logger.info("descargarEstudio");
+		byte[] archivo=cur.getCurArchivo();
+		if(archivo!=null)
+			JsfUtil.descargarArchivo(archivo);
+		else
+			JsfUtil.addErrorMessage("No existe archivo");
+	}
+	
+	public void handleFileUploadAdicional(FileUploadEvent event) {        
+		getAdicional().setAdiArchivo(event.getFile().getContents());
+	    JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+	}	
+	
+	public void descargarAdicional(AdicionalDTO adi)
+	{
+		logger.info("descargarAdicional");
+		byte[] archivo=adi.getAdiArchivo();
+		if(archivo!=null)
+			JsfUtil.descargarArchivo(archivo);
+		else
+			JsfUtil.addErrorMessage("No existe archivo");
+	}
+	
+	public void handleFileUploadExperiencia(FileUploadEvent event) {        
+		getExperiencia().setExpArchivo(event.getFile().getContents());
+	    JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+	}	
+	
+	public void descargarExperiencia(ExperienciaListDTO exp)
+	{
+		logger.info("descargarAdicional");
+		ExperienciaDTO expe;
+		try {
+			expe = candidatosService.obtenerEsperiencia(exp.getExpCodigo());
+			byte[] archivo=expe.getExpArchivo();
+			if(archivo!=null)
+				JsfUtil.descargarArchivo(archivo);
+			else
+				JsfUtil.addErrorMessage("No existe archivo");
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
+	public void handleFileUploadReferencia(FileUploadEvent event) {        
+		getReferencia().setRefArchivo(event.getFile().getContents());
+	    JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+	}	
+	
+	public void descargarReferencia(ReferenciaDTO ref)
+	{
+		byte[] archivo=ref.getRefArchivo();
+		if(archivo!=null)
+			JsfUtil.descargarArchivo(archivo);
+		else
+			JsfUtil.addErrorMessage("No existe archivo");
+	}
+
+	
 }
