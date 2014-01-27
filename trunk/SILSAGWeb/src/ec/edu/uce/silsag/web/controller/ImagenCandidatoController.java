@@ -37,8 +37,14 @@ public class ImagenCandidatoController {
     
     public StreamedContent getImage() throws SilsagException{    	
     	byte [] arregloImagen=candidatosService.obtenerCandidato(candidato.getCanCodigo()).getCanFoto();
-    	String mime=JsfUtil.getTypeFile(arregloImagen);
-        return new DefaultStreamedContent(new ByteArrayInputStream(arregloImagen),mime);
+    	String mime;
+    	if(arregloImagen!=null)
+    	{
+    		mime=JsfUtil.getTypeFile(arregloImagen);
+    		return new DefaultStreamedContent(new ByteArrayInputStream(arregloImagen),mime);
+    	}
+    	else
+    		return new DefaultStreamedContent();
     }
     
     
