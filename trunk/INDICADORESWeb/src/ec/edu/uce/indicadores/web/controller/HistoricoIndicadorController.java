@@ -1,5 +1,7 @@
 package ec.edu.uce.indicadores.web.controller;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -10,8 +12,12 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
@@ -245,4 +251,42 @@ public class HistoricoIndicadorController extends SelectItemController implement
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
+	
+	
+	public void handleFileUpload(FileUploadEvent event) {  
+		getEvidenciaDTO().setEviArchivo(event.getFile().getContents());
+	    JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+	}
+
+	
+	public void descargarEvidencia(EvidenciaDTO evi)
+	{
+		if(evi.getEviArchivo()!=null)
+		{
+		byte[] pdfData = evi.getEviArchivo();
+	    FacesContext facesContext = FacesContext.getCurrentInstance();
+	    ExternalContext externalContext = facesContext.getExternalContext();
+	    HttpServletResponse response = (HttpServletResponse) externalContext.getResponse();
+
+	    // Initialize response.
+	    response.reset(); // Some JSF component library or some Filter might have set some headers in the buffer beforehand. We want to get rid of them, else it may collide.
+	    response.setContentType(JsfUtil.getTypeFile(pdfData)); // Check http://www.iana.org/assignments/media-types for all types. Use if necessary ServletContext#getMimeType() for auto-detection based on filename.
+	    response.setHeader("Content-disposition", "attachment; filename=\"name.pdf\""); // The Save As popup magic is done here. You can give it any filename you want, this only won't work in MSIE, it will use current request URL as filename instead.
+
+	    // Write file to response.
+	    OutputStream output;
+		try {
+			output = response.getOutputStream();
+		    output.write(pdfData);
+		    output.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			JsfUtil.addErrorMessage(e.toString());
+		}
+
+	    // Inform JSF to not take the response in hands.
+	    facesContext.responseComplete(); // Important! Else JSF will attempt to render the response which obviously will fail since it's already written with a file and closed.
+		}
+	}
+	
 }

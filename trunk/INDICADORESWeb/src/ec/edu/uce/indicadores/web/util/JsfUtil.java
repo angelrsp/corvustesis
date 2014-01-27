@@ -11,6 +11,12 @@ import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 
+import net.sf.jmimemagic.Magic;
+import net.sf.jmimemagic.MagicException;
+import net.sf.jmimemagic.MagicMatch;
+import net.sf.jmimemagic.MagicMatchNotFoundException;
+import net.sf.jmimemagic.MagicParseException;
+
 public class JsfUtil {
 
 	public static SelectItem[] getSelectItems(List<?> entities,
@@ -102,4 +108,22 @@ public class JsfUtil {
 	          getSession(false);
 	 }
 
+	public static String getTypeFile(byte[] content)
+	{
+		String mimeType = null;
+		try {		
+			MagicMatch match = Magic.getMagicMatch(content);
+			mimeType = match.getMimeType();
+		} catch (MagicParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MagicMatchNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MagicException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mimeType;
+	}
 }
