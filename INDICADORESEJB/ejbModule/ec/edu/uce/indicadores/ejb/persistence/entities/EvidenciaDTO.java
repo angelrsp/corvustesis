@@ -29,6 +29,9 @@ public class EvidenciaDTO implements Serializable {
 	@Column(name="evi_valor")
 	private String eviValor;
 
+	@Column(name="evi_archivo")
+	private byte[] eviArchivo;
+	
 	//bi-directional many-to-one association to HistoricoIndicadorDTO
 	@ManyToOne
 	@JoinColumn(name="evi_his_indicador")
@@ -67,6 +70,14 @@ public class EvidenciaDTO implements Serializable {
 
 	public void setEviValor(String eviValor) {
 		this.eviValor = eviValor;
+	}
+
+	public byte[] getEviArchivo() {
+		return eviArchivo;
+	}
+
+	public void setEviArchivo(byte[] eviArchivo) {
+		this.eviArchivo = eviArchivo;
 	}
 
 	public HistoricoIndicadorDTO getIndHistoricoIndicador() {
