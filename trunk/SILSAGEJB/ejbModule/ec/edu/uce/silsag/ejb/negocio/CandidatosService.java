@@ -106,4 +106,8 @@ public interface CandidatosService {
 
 	List<EstudioReportDTO> obtenerNivelReporte() throws SilsagException;
 
+	EstudioDTO obtenerEstudio(Object id) throws SilsagException;
+
+	ExperienciaDTO obtenerEsperiencia(Object id) throws SilsagException;
+
 }

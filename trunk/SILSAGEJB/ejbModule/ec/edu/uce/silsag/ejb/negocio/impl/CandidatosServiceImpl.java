@@ -526,4 +526,33 @@ public class CandidatosServiceImpl implements CandidatosService {
 		}
 	}
 
+	@Override
+	public EstudioDTO obtenerEstudio(Object id) throws SilsagException
+	{
+		log.info("obtenerEstudio");
+		try{
+			return factoryDAO.getEstudioDAOImpl().find(id);
+		}
+		catch(Exception e)
+		{
+			log.info("Error al obtenerCandidatos" +e.toString());
+			throw new SilsagException("Error al obtenerCandidatos");
+		}		
+	}
+	
+	
+	@Override
+	public ExperienciaDTO obtenerEsperiencia(Object id) throws SilsagException
+	{
+		log.info("obtenerEstudio");
+		try{
+			return factoryDAO.getExperienciaDAOImpl().find(id);
+		}
+		catch(Exception e)
+		{
+			log.info("Error al obtenerCandidatos" +e.toString());
+			throw new SilsagException("Error al obtenerCandidatos");
+		}		
+	
+	}
 }

@@ -1,6 +1,7 @@
 package ec.edu.uce.silsag.ejb.persistence.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -32,6 +33,10 @@ public class ReferenciaDTO implements Serializable {
 	@Column(name="ref_tipo_empresa")
 	private Integer refTipoEmpresa;
 
+	@Column(name="ref_archivo")
+	private byte[] refArchivo;
+
+	
 	//bi-directional many-to-one association to CandidatoDTO
 	@ManyToOne
 	@JoinColumn(name="ref_candidato")
@@ -78,6 +83,14 @@ public class ReferenciaDTO implements Serializable {
 
 	public void setRefTipoEmpresa(Integer refTipoEmpresa) {
 		this.refTipoEmpresa = refTipoEmpresa;
+	}
+
+	public byte[] getRefArchivo() {
+		return refArchivo;
+	}
+
+	public void setRefArchivo(byte[] refArchivo) {
+		this.refArchivo = refArchivo;
 	}
 
 	public CandidatoDTO getBemCandidato() {

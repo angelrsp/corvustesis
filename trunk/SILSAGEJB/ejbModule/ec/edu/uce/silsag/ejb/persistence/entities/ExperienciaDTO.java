@@ -39,6 +39,9 @@ public class ExperienciaDTO implements Serializable {
 	@Column(name="exp_tipo_empresa")
 	private Integer expTipoEmpresa;
 
+	@Column(name="exp_archivo")
+	private byte[] expArchivo;
+
 	
 	//bi-directional many-to-one association to CandidatoDTO
 	@ManyToOne
@@ -102,6 +105,14 @@ public class ExperienciaDTO implements Serializable {
 
 	public void setExpTareas(String expTareas) {
 		this.expTareas = expTareas;
+	}
+
+	public byte[] getExpArchivo() {
+		return expArchivo;
+	}
+
+	public void setExpArchivo(byte[] expArchivo) {
+		this.expArchivo = expArchivo;
 	}
 
 	public CandidatoDTO getBemCandidato() {
