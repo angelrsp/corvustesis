@@ -27,6 +27,7 @@
 		<class>ec.edu.uce.silsag.ejb.persistence.entities.EstudioListDTO</class>
 		<class>ec.edu.uce.silsag.ejb.persistence.entities.CandidatoEstudioDTO</class>
 		<class>ec.edu.uce.silsag.ejb.persistence.entities.AnioEstudioDTO</class>
+		<class>ec.edu.uce.silsag.ejb.persistence.entities.CandidatoListDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>

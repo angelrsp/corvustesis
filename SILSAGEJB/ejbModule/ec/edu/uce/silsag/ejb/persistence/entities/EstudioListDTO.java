@@ -58,6 +58,7 @@ public class EstudioListDTO implements Serializable {
 	@Column(name="est_pais")
 	private Integer estPais;
 
+	
 	public EstudioListDTO() {
 	}
 
@@ -172,5 +173,6 @@ public class EstudioListDTO implements Serializable {
 	public void setEstPais(Integer estPais) {
 		this.estPais = estPais;
 	}
+
 
 }

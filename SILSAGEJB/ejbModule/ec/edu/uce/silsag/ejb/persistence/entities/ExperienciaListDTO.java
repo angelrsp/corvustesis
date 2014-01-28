@@ -43,6 +43,9 @@ public class ExperienciaListDTO implements Serializable {
 	@Column(name="exp_tipo_empresa")
 	private Integer expTipoEmpresa;
 
+	
+	
+	
 	public ExperienciaListDTO() {
 	}
 

@@ -12,6 +12,7 @@ import ec.edu.uce.silsag.ejb.persistence.entities.AnioEstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.AvisoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoEstudioDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoListDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CursoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EstudioListDTO;
@@ -109,5 +110,8 @@ public interface CandidatosService {
 	EstudioDTO obtenerEstudio(Object id) throws SilsagException;
 
 	ExperienciaDTO obtenerEsperiencia(Object id) throws SilsagException;
+
+	CandidatoListDTO obtenerCandidato(CandidatoDTO candidatoDTO)
+			throws SilsagException;
 
 }

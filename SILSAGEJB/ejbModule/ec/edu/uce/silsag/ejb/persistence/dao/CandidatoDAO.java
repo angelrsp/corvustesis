@@ -9,6 +9,7 @@ import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.persistence.entities.AnioEstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoEstudioDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoListDTO;
 
 @Local
 public interface CandidatoDAO extends AbstractFacade<CandidatoDTO>{
@@ -27,6 +28,8 @@ public interface CandidatoDAO extends AbstractFacade<CandidatoDTO>{
 	List<EstudioReportDTO> getNivel() throws SilsagException;
 
 	List<EstudioReportDTO> getNivel(int anio) throws SilsagException;
+
+	CandidatoListDTO getCandidato(CandidatoDTO can) throws SilsagException;
 
 
 }

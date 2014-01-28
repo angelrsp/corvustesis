@@ -20,6 +20,7 @@ import ec.edu.uce.silsag.ejb.persistence.entities.AnioEstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.AvisoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoEstudioDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoListDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CursoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EstudioListDTO;
@@ -61,6 +62,19 @@ public class CandidatosServiceImpl implements CandidatosService {
 
 	}
 
+	@Override
+	public CandidatoListDTO obtenerCandidato(CandidatoDTO candidatoDTO)throws SilsagException {
+
+		log.info("obtenerCandidato");
+
+		try {
+				return factoryDAO.getCandidatoDAOImpl().getCandidato(candidatoDTO);
+		} catch (Exception e) {
+			log.info("Error al registrar el Candidato {}", e.toString());
+			throw new SilsagException(e);
+		}
+
+	}
 	
 	@Override
 	public CandidatoDTO actualizarCandidato(CandidatoDTO candidatoDTO)throws SilsagException {

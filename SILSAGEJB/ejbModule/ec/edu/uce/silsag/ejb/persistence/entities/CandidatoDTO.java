@@ -97,6 +97,8 @@ public class CandidatoDTO implements Serializable {
 	@OneToMany(mappedBy="bemCandidato")
 	private List<ResultadoDTO> bemResultados;
 
+
+	
 	public CandidatoDTO() {
 	}
 
@@ -367,6 +369,8 @@ public class CandidatoDTO implements Serializable {
 	public void setBemResultados(List<ResultadoDTO> bemResultados) {
 		this.bemResultados = bemResultados;
 	}
+
+
 
 	public ResultadoDTO addBemResultado(ResultadoDTO bemResultado) {
 		getBemResultados().add(bemResultado);
