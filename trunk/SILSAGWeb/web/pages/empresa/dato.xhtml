@@ -115,7 +115,7 @@
 					</p:tab>
 					</p:accordionPanel>
 					
-					<p:dataTable value="#{datosEmpresaController.contactos}" var="con">
+					<p:dataTable value="#{datosEmpresaController.contactos}" var="con" emptyMessage="#{i18n['table.vacio']}">
 					
 						<p:column headerText="#{i18n['label.nombres']}">
 							<h:outputText value="#{con.conNombres}" />

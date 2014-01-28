@@ -39,7 +39,7 @@
 									value="#{i18n['label.fecha.caducidad']}:&#160;" /></td>
 							<td><p:calendar pattern="#{i18n['pattern.fecha']}"
 									required="true" mindate="#{avisoEmpresaController.fechaMinima}"
-									requiredMessage="#{i18n['label.fecha.caducidad']}:&#160;#{i18n['label.requerido']}" value="#{avisoEmpresaController.fecha}"/></td>
+									requiredMessage="#{i18n['label.fecha.caducidad']}:&#160;#{i18n['label.requerido']}" value="#{avisoEmpresaController.fecha}" placeholder="AAAA/MM/DD" navigator="true"/></td>
 
 							<td><h:outputLabel value="#{i18n['label.vacantes']}:&#160;" /></td>
 							<td><p:inputText required="true"
