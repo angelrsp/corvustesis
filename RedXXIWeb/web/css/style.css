@@ -1,0 +1,12 @@
+@CHARSET "ISO-8859-1";
+
+body{
+	background-color:  #322724;
+	font-size: 10pt;font-weight:normal;
+}
+
+.panelGrid td, .panelGrid tr{padding: 0.2em 0.1em;border: none; }
+
+.ui-menu .ui-menu-parent .ui-menu-child {
+/*width: 300px;*/
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+
+</h:head>
+
+<body>
+
+	<ui:composition template="/WEB-INF/template/privado.xhtml">
+
+		<ui:define name="contenido">
+			<p:panel  footer="Ciespal">
+	
+				<p:panel header="Datos Instituacionales">
+	
+				<table>
+					<tr>
+						<td><h:outputText value="Nombre:" /></td>
+						<td><p:inputText></p:inputText></td>
+						
+						<td><h:outputText value="Universidad:" /></td>
+						<td>
+							<p:selectOneMenu>
+								<f:selectItem itemLabel="--Seleccione--"/>
+							</p:selectOneMenu>
+						</td>
+												
+					</tr>
+					
+					<tr>
+						<td><h:outputText value="Categoría o Acreditación:" /></td>
+						<td><p:inputText></p:inputText></td>						
+					</tr>
+	
+					<tr>
+						<td><h:outputText value="País:" /></td>
+						<td>
+							<p:selectOneMenu>
+								<f:selectItem itemLabel="--Seleccione--"/>
+							</p:selectOneMenu>
+						</td>
+
+						<td><h:outputText value="Provincia / Estado:" /></td>
+						<td>
+							<p:selectOneMenu>
+								<f:selectItem itemLabel="--Seleccione--"/>
+							</p:selectOneMenu>
+						</td>
+
+						<td><h:outputText value="Ciudad:" /></td>
+						<td>
+							<p:selectOneMenu>
+								<f:selectItem itemLabel="--Seleccione--"/>
+							</p:selectOneMenu>
+						</td>
+				
+					</tr>
+	
+					<tr>
+						<td><h:outputText value="Miembros del Claustro:" /></td>
+						<td><p:inputText></p:inputText></td>
+					
+					</tr>
+	
+				</table>
+				
+				</p:panel>
+	
+				<p:panel header="Contactos">
+				
+				<table>
+					<tr>
+						<td><h:outputText value="Tipo:" /></td>
+						<td>
+							<p:selectOneMenu>
+								<f:selectItem itemLabel="--Seleccione--"/>
+							</p:selectOneMenu>
+						</td>
+						<td><h:outputText value="Valor:" /></td>
+						<td><p:inputText></p:inputText></td>
+					</tr>			
+				</table>
+				
+				</p:panel>
+				
+				<p:panel header="Carreras">
+				
+				<table>
+					<tr>
+						<td><h:outputText value="Nombre:" /></td>
+						<td><p:inputText></p:inputText></td>
+						<td><h:outputText value="Perfil:" /></td>
+						<td><p:inputText></p:inputText></td>
+					</tr>			
+				</table>
+				
+				</p:panel>
+	
+				<p:panel header="Mensiones">
+				
+				<table>
+					<tr>
+						<td><h:outputText value="Nombres:" /></td>
+						<td><p:inputText></p:inputText></td>
+					</tr>			
+				</table>
+				
+				</p:panel>
+	
+				<p:panel header="Eventos">
+				
+				<table>
+					<tr>
+						<td><h:outputText value="Nombres:" /></td>
+						<td><p:inputText></p:inputText></td>
+					</tr>			
+				</table>
+				
+				</p:panel>
+	
+	
+				<p:panel header="Publicaciones">
+				
+				<table>
+					<tr>
+						<td><h:outputText value="Nombres:" /></td>
+						<td><p:inputText></p:inputText></td>
+					</tr>			
+				</table>
+				
+				</p:panel>
+	
+				<p:panel header="Noticias">
+				
+				<table>
+					<tr>
+						<td><p:editor></p:editor></td>
+						
+					</tr>			
+				</table>
+				
+				</p:panel>
+	
+	
+			</p:panel>
+
+		</ui:define>
+
+	</ui:composition>
+
+
+
+
+
+</body>
+</html>
