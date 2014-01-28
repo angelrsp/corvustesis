@@ -28,7 +28,7 @@ public class InfoFacturaDTO {
    
     private BigDecimal totalDescuento;
    
-    //private TotalConImpuestosDTO totalConImpuestos;
+    private TotalConImpuestosDTO totalConImpuestos;
    
     private BigDecimal propina;
    
@@ -138,6 +138,14 @@ public class InfoFacturaDTO {
 
 	public void setImporteTotal(BigDecimal importeTotal) {
 		this.importeTotal = importeTotal;
+	}
+
+	public TotalConImpuestosDTO getTotalConImpuestos() {
+		return totalConImpuestos;
+	}
+
+	public void setTotalConImpuestos(TotalConImpuestosDTO totalConImpuestos) {
+		this.totalConImpuestos = totalConImpuestos;
 	}
 
 	public String getMoneda() {
