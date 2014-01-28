@@ -16,6 +16,7 @@ import ec.edu.uce.silsag.ejb.persistence.dao.CandidatoDAO;
 import ec.edu.uce.silsag.ejb.persistence.entities.AnioEstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoEstudioDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoListDTO;
 
 @Stateless
 public class CandidatoDAOImpl extends AbstractFacadeImpl<CandidatoDTO> implements CandidatoDAO{
@@ -41,6 +42,23 @@ public class CandidatoDAOImpl extends AbstractFacadeImpl<CandidatoDTO> implement
 		else
 			return list;
 	}
+	
+	@Override
+	public CandidatoListDTO getCandidato(CandidatoDTO can) throws SilsagException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CandidatoListDTO> cq=cb.createQuery(CandidatoListDTO.class);
+		Root<CandidatoListDTO> from= cq.from(CandidatoListDTO.class);
+				
+		cq.where(cb.equal(from.get("canCodigo"), can.getCanCodigo()));
+		
+		List<CandidatoListDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return null;
+		else
+			return list.get(0);
+	}
+	
 	
 	@Override
 	public Boolean getByIdentificacion(CandidatoDTO candidatoDTO) {
