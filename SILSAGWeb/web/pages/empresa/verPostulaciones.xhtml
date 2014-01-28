@@ -13,7 +13,7 @@
 		
 			<fieldset>
 			<p:growl id="growl"></p:growl>	
-			<p:dataTable id="tblPostulacion" value="#{verPostulacionController.postulacionList}" var="pos">
+			<p:dataTable id="tblPostulacion" value="#{verPostulacionController.postulacionList}" var="pos" emptyMessage="#{i18n['table.vacio']}">
 			
 				<p:column headerText="#{i18n['label.puesto']}">
 					<h:outputText value="#{pos.bemAviso.aviPuesto}" />

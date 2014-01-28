@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="condidatoExperiencia" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="faff49b3-ed89-4ae6-b38e-39fa8b648e2b">
 	<property name="ireport.zoom" value="1.6105100000000008"/>
-	<property name="ireport.x" value="67"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<field name="catTipoExperiencia" class="java.lang.String"/>
 	<field name="expEntidad" class="java.lang.String"/>
 	<field name="expFechaInicio" class="java.lang.String"/>
 	<field name="expFechaFin" class="java.lang.String"/>
 	<field name="expPuesto" class="java.lang.String"/>
-	<field name="expRubro" class="java.lang.String"/>
 	<field name="expTareas" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<columnHeader>
 		<band height="23" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="2" width="100" height="20" uuid="e3ace3a7-58bd-458d-aec6-973effe6cc90"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Tipo de Experiencia]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="100" y="2" width="100" height="20" uuid="34d0ec40-0cfc-4753-96a5-02f8579d84f9"/>
 				<textElement>
@@ -35,13 +26,6 @@
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Puesto]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="278" y="2" width="51" height="20" uuid="f167521f-c630-401e-8333-52025bb1fbe6"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Rubro]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="329" y="2" width="81" height="20" uuid="31b86e41-ffc2-4b34-b7bf-2e16382b7c03"/>
@@ -69,20 +53,12 @@
 	<detail>
 		<band height="22" splitType="Stretch">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="0" y="0" width="100" height="20" uuid="d2f3d1ce-b080-4c73-9239-dee869b308a0"/>
-				<textFieldExpression><![CDATA[$F{catTipoExperiencia}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="100" y="0" width="100" height="20" uuid="6ad3143e-1c00-4d54-9223-9916879d1f06"/>
 				<textFieldExpression><![CDATA[$F{expEntidad}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="200" y="0" width="78" height="20" uuid="d681ded8-0099-463d-b3d7-b2412fc240cf"/>
 				<textFieldExpression><![CDATA[$F{expPuesto}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="278" y="0" width="51" height="20" uuid="201a7e47-528c-4242-a2ed-1481cbdce679"/>
-				<textFieldExpression><![CDATA[$F{expRubro}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="329" y="0" width="81" height="20" uuid="1d364122-691c-46f6-b85f-fa785fe2fc77"/>
