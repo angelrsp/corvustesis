@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="factura" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="83137a45-a338-442b-b1e6-56787b374341">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="infoTributaria.claveAcceso" class="java.lang.String"/>
+	<field name="infoTributaria.ambiente" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="151" splitType="Stretch">
+			<textField>
+				<reportElement x="53" y="45" width="144" height="20" uuid="35400c8f-dd02-4b9a-9172-6e416ff44426"/>
+				<textFieldExpression><![CDATA[$F{infoTributaria.ambiente}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="333" y="65" width="200" height="50" uuid="11d048e3-91bd-478b-8b6f-9b2b1531f6e0"/>
+				<jr:Codabar xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="bottom">
+					<jr:codeExpression><![CDATA[$F{infoTributaria.claveAcceso}]]></jr:codeExpression>
+				</jr:Codabar>
+			</componentElement>
+			<staticText>
+				<reportElement x="334" y="45" width="113" height="20" uuid="e7c252cf-0575-4557-853a-c24e373e71fd"/>
+				<text><![CDATA[CLAVE DE ACCESO]]></text>
+			</staticText>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch"/>
