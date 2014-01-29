@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="redXXIPU" transaction-type="JTA">
+	<jta-data-source>java:/postgresqlRedXXIDS</jta-data-source>
+		<class>net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO</class>
+		<class>net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO</class>
+		<class>net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO</class>
+		<class>net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO</class>
+		<class>net.ciespal.redxxi.ejb.persistence.entities.EspecalidadDTO</class>
+		<class>net.ciespal.redxxi.ejb.persistence.entities.EventoDTO</class>
+		<class>net.ciespal.redxxi.ejb.persistence.entities.FacultadCarreraDTO</class>
+		<class>net.ciespal.redxxi.ejb.persistence.entities.MencionDTO</class>
+		<class>net.ciespal.redxxi.ejb.persistence.entities.NoticiaDTO</class>
+		<class>net.ciespal.redxxi.ejb.persistence.entities.ObraDTO</class>
+		<class>net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO</class>
+		<class>net.ciespal.redxxi.ejb.persistence.entities.ProyectosInvestigacionDTO</class>
+		<class>net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO</class>
+		<class>net.ciespal.redxxi.ejb.persistence.entities.PublicacionPeriodicaDTO</class>
+		<class>net.ciespal.redxxi.ejb.persistence.entities.UbicacionDTO</class>
+		<class>net.ciespal.redxxi.ejb.persistence.entities.UniversidadDTO</class>
+		<properties>
+			<property name="hibernate.show_sql" value="true"/>
+		</properties>		
+	</persistence-unit>
+</persistence>
