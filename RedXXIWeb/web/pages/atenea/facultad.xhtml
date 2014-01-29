@@ -15,57 +15,56 @@
 	<ui:composition template="/WEB-INF/template/privado.xhtml">
 
 		<ui:define name="contenido">
-			<p:panel  footer="Ciespal">
+		
+			<p:panel footer="Ciespal">
 	
-				<p:panel header="Datos Instituacionales">
+				<p:panel header="Datos">
 	
 				<table>
 					<tr>
-						<td><h:outputText value="Nombre:" /></td>
-						<td><p:inputText></p:inputText></td>
-						
+					
 						<td><h:outputText value="Universidad:" /></td>
-						<td>
-							<p:selectOneMenu>
+						<td><p:selectOneMenu>
 								<f:selectItem itemLabel="--Seleccione--"/>
-							</p:selectOneMenu>
-						</td>
-												
+							</p:selectOneMenu></td>
+						<td><p:commandButton onclick="PF('dlgUniversidad').show()" type="button" value="Agregar"></p:commandButton></td>	
+					
+					</tr>
+					<tr>					
+						<td><h:outputText value="Tipo:" /></td>
+						<td><p:selectOneMenu id="somTipo" value="#{facultadController.tipoEstablecimiento}">
+								<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
+								<f:selectItems value="#{facultadController.catalogoTipoEstablecimiento}"/>
+								<f:ajax render="cbxFacultad"/>
+								<f:ajax render="btnAgregarFacultad"/>
+							</p:selectOneMenu></td>						
+
+						<td><h:outputText value="Facultad:" /></td>
+						<td><p:selectOneMenu id="cbxFacultad" disabled="#{facultadController.tipoEstablecimiento.toString()!='3'}">
+								<f:selectItem itemLabel="--Seleccione--"/>
+							</p:selectOneMenu></td>						
+						<td><p:commandButton id="btnAgregarFacultad" disabled="#{facultadController.tipoEstablecimiento.toString()!='3'}" onclick="PF('dlgFacultad').show()" type="button" value="Agregar"></p:commandButton></td>																									
 					</tr>
 					
 					<tr>
-						<td><h:outputText value="Categoría o Acreditación:" /></td>
-						<td><p:inputText></p:inputText></td>						
+						<td><h:outputText value="Nombre:" /></td>
+						<td><p:inputText id="txtNombre" value="#{facultadController.tipoEstablecimiento}"></p:inputText></td>
+
+						<td><h:outputText value="Datos Institucionales:" /></td>
+						<td><p:inputTextarea autoResize="false" /></td>
 					</tr>
 	
-					<tr>
-						<td><h:outputText value="País:" /></td>
-						<td>
-							<p:selectOneMenu>
-								<f:selectItem itemLabel="--Seleccione--"/>
-							</p:selectOneMenu>
-						</td>
-
-						<td><h:outputText value="Provincia / Estado:" /></td>
-						<td>
-							<p:selectOneMenu>
-								<f:selectItem itemLabel="--Seleccione--"/>
-							</p:selectOneMenu>
-						</td>
-
-						<td><h:outputText value="Ciudad:" /></td>
-						<td>
-							<p:selectOneMenu>
-								<f:selectItem itemLabel="--Seleccione--"/>
-							</p:selectOneMenu>
-						</td>
-				
-					</tr>
 	
 					<tr>
-						<td><h:outputText value="Miembros del Claustro:" /></td>
+						<td><h:outputText value="Año de Fundación:" /></td>
+						<td><p:inputText></p:inputText></td>					
+					
+						<td><h:outputText value="Número de Profesores:" /></td>
 						<td><p:inputText></p:inputText></td>
-					
+					</tr>
+
+					<tr>
+						<td colspan="5" align="center"><p:commandButton value="Guardar"></p:commandButton></td>
 					</tr>
 	
 				</table>
@@ -84,32 +83,35 @@
 						</td>
 						<td><h:outputText value="Valor:" /></td>
 						<td><p:inputText></p:inputText></td>
+						<td><p:commandButton value="Agregar"/></td>
 					</tr>			
 				</table>
 				
-				</p:panel>
+				<p:spacer height="10"/>
 				
-				<p:panel header="Carreras">
-				
-				<table>
-					<tr>
-						<td><h:outputText value="Nombre:" /></td>
-						<td><p:inputText></p:inputText></td>
-						<td><h:outputText value="Perfil:" /></td>
-						<td><p:inputText></p:inputText></td>
-					</tr>			
-				</table>
+				<p:dataTable emptyMessage="No existen registros">
+					<p:column headerText="Tipo"></p:column>
+					<p:column headerText="Valor"></p:column>
+					<p:column headerText="Editar" width="15"></p:column>
+					<p:column headerText="Eliminar" width="15"></p:column>
+				</p:dataTable>
 				
 				</p:panel>
-	
+					
 				<p:panel header="Mensiones">
 				
-				<table>
-					<tr>
-						<td><h:outputText value="Nombres:" /></td>
-						<td><p:inputText></p:inputText></td>
-					</tr>			
-				</table>
+					<table>
+						<tr>
+							<td><h:outputText value="Nombres:" /></td>
+							<td><p:inputText></p:inputText></td>
+						</tr>			
+					</table>
+
+				<p:dataTable>
+					<p:column headerText="Nombres"></p:column>
+					<p:column headerText="Editar" width="15"></p:column>
+					<p:column headerText="Eliminar" width="15"></p:column>					
+				</p:dataTable>
 				
 				</p:panel>
 	
@@ -121,6 +123,13 @@
 						<td><p:inputText></p:inputText></td>
 					</tr>			
 				</table>
+
+				<p:dataTable>
+					<p:column headerText="Nombres"></p:column>
+					<p:column headerText="Editar" width="15"></p:column>
+					<p:column headerText="Eliminar" width="15"></p:column>					
+				</p:dataTable>
+
 				
 				</p:panel>
 	
@@ -133,6 +142,13 @@
 						<td><p:inputText></p:inputText></td>
 					</tr>			
 				</table>
+
+				<p:dataTable>
+					<p:column headerText="Nombres"></p:column>
+					<p:column headerText="Editar" width="15"></p:column>
+					<p:column headerText="Eliminar" width="15"></p:column>					
+				</p:dataTable>
+
 				
 				</p:panel>
 	
@@ -142,14 +158,234 @@
 					<tr>
 						<td><p:editor></p:editor></td>
 						
-					</tr>			
+					</tr>
+					
 				</table>
+
 				
 				</p:panel>
 	
 	
+	
+	
 			</p:panel>
+			
+			
+			<p:dialog widgetVar="dlgUniversidad" header="Universidad" modal="true" closeOnEscape="true">
+				<p:panel>
+				
+				<table>
+					<tr>
+						<td><h:outputText value="Nombre:" /></td>
+						<td><p:inputText></p:inputText></td>
+					</tr>	
+					<tr>	
+						<td><h:outputText value="Categoría o Acreditación:" /></td>
+						<td><p:inputText></p:inputText></td>						
+					</tr>
+					
+					<tr>
+						<td><h:outputText value="País:" /></td>
+						<td>
+							<p:selectOneMenu>
+								<f:selectItem itemLabel="--Seleccione--"/>
+							</p:selectOneMenu>
+						</td>
+						<td><p:commandButton value="Nuevo" type="button" onclick="PF('dlgPais').show()"/></td>
+					</tr>
+					
+					<tr>
+						<td><h:outputText value="Provincia / Estado:" /></td>
+						<td>
+							<p:selectOneMenu>
+								<f:selectItem itemLabel="--Seleccione--"/>
+							</p:selectOneMenu>
+						</td>
+						<td><p:commandButton value="Nuevo" type="button" onclick="PF('dlgProvincia').show()"/></td>						
+					</tr>
+					<tr>
+						<td><h:outputText value="Ciudad:" /></td>
+						<td>
+							<p:selectOneMenu>
+								<f:selectItem itemLabel="--Seleccione--"/>
+							</p:selectOneMenu>
+						</td>
+						<td><p:commandButton value="Nuevo" type="button" onclick="PF('dlgCiudad').show()"/></td>
+					</tr>
+					
+					<tr>
+						<td  colspan="3" align="center"><p:commandButton value="Guardar"></p:commandButton></td>
+					</tr>
+				</table>
 
+				<p:dataTable emptyMessage="No existen registros">
+			
+					<p:column headerText="Nombre"></p:column>
+					<p:column headerText="Acreditación"></p:column>
+					<p:column headerText="País"></p:column>
+					<p:column headerText="Provincia / Estado"></p:column>
+					<p:column headerText="Ciudad"></p:column>
+					<p:column headerText="Editar" width="15"></p:column>
+					<p:column headerText="Eliminar" width="15"></p:column>
+				
+				</p:dataTable>
+
+
+				
+				</p:panel>
+			
+			</p:dialog>
+
+			<p:dialog widgetVar="dlgFacultad" header="Facultad" modal="true" closeOnEscape="true">
+
+				<p:panel>
+				
+				<table>
+					<tr>
+						<td><h:outputText value="Nombre:" /></td>
+						<td><p:inputText /></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Datos Institucionales:" /></td>
+						<td><p:inputTextarea autoResize="false" /></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Año de Fundación:" /></td>
+						<td><p:inputText/></td>
+					</tr>												
+					<tr>
+						<td><h:outputText value="Número de Profesores:" /></td>
+						<td><p:inputText></p:inputText></td>					
+					</tr>
+					<tr>
+						<td colspan="3" align="center"><p:commandButton value="Guardar"></p:commandButton></td>
+					</tr>
+				</table>
+
+
+				<p:dataTable emptyMessage="No existen registros">
+			
+					<p:column headerText="Nombre"></p:column>
+					<p:column headerText="Datos Instituacionales"></p:column>
+					<p:column headerText="Año de Fundación"></p:column>
+					<p:column headerText="Número de Profesores"></p:column>
+					<p:column headerText="Editar" width="15"></p:column>
+					<p:column headerText="Eliminar" width="15"></p:column>
+				
+				</p:dataTable>
+
+				
+				</p:panel>
+										
+			</p:dialog>
+			
+			<p:dialog widgetVar="dlgPais" modal="true" closeOnEscape="true" header="País">
+			
+				<table>
+					<tr>
+						<td><h:outputText value="Nombre:" /></td>
+						<td><p:inputText /></td>					
+					</tr>
+				
+					<tr>
+						<td colspan="2" align="center"><p:commandButton value="Guardar"></p:commandButton></td>					
+					</tr>
+									
+				</table>
+
+				<p:dataTable emptyMessage="No existen registros">
+			
+					<p:column headerText="País"></p:column>
+					<p:column headerText="Editar" width="15"></p:column>
+					<p:column headerText="Eliminar" width="15"></p:column>
+				
+				</p:dataTable>
+
+			
+			</p:dialog>			
+
+			<p:dialog widgetVar="dlgProvincia" modal="true" closeOnEscape="true" header="Provincia / Estado">
+			
+				<table>
+					<tr>
+						<td><h:outputText value="País:" /></td>
+						<td>
+							<p:selectOneMenu>
+								<f:selectItem itemLabel="--Seleccione--"/>
+							</p:selectOneMenu>
+						</td>
+					</tr>
+					
+					<tr>
+						<td><h:outputText value="Nombre:" /></td>
+						<td><p:inputText /></td>
+					</tr>
+				
+					<tr>
+						<td colspan="2" align="center"><p:commandButton value="Guardar"></p:commandButton></td>					
+					</tr>
+									
+				</table>
+
+				<p:dataTable emptyMessage="No existen registros">
+			
+					<p:column headerText="País"></p:column>
+					<p:column headerText="Provincia / Estado"></p:column>
+					<p:column headerText="Editar" width="15"></p:column>
+					<p:column headerText="Eliminar" width="15"></p:column>
+				
+				</p:dataTable>
+
+			
+			</p:dialog>			
+
+			<p:dialog widgetVar="dlgCiudad" modal="true" closeOnEscape="true" header="Ciudad">
+			
+				<table>
+					<tr>
+						<td><h:outputText value="País:" /></td>
+						<td>
+							<p:selectOneMenu>
+								<f:selectItem itemLabel="--Seleccione--"/>
+							</p:selectOneMenu>
+						</td>
+					</tr>
+					
+					<tr>
+						<td><h:outputText value="Provincia / Estado:" /></td>
+						<td>
+							<p:selectOneMenu>
+								<f:selectItem itemLabel="--Seleccione--"/>
+							</p:selectOneMenu>
+						</td>
+					</tr>
+
+					<tr>
+						<td><h:outputText value="Nombre:" /></td>
+						<td><p:inputText /></td>
+					</tr>
+				
+					<tr>
+						<td colspan="2" align="center"><p:commandButton value="Guardar"></p:commandButton></td>					
+					</tr>
+					
+				
+				</table>
+
+					<p:dataTable emptyMessage="No existen registros">
+				
+						<p:column headerText="País"></p:column>
+						<p:column headerText="Provincia / Estado"></p:column>
+						<p:column headerText="Ciudad"></p:column>
+						<p:column headerText="Editar" width="15"></p:column>
+						<p:column headerText="Eliminar" width="15"></p:column>
+					
+					</p:dataTable>
+
+			
+			</p:dialog>			
+			
+			
 		</ui:define>
 
 	</ui:composition>
