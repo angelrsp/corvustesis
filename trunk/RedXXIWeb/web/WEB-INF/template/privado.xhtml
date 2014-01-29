@@ -29,14 +29,14 @@
 			<p:menubar>  
 			
 		        <p:submenu label="Atenea">		        
-			        <p:menuitem value="FACULTADES DE COMUNICACION" url="#"/>
+			        <p:menuitem value="FACULTADES DE COMUNICACION" url="/pages/atenea/facultad.jsf"/>
 			        <p:menuitem value="ORGANIZACIONES PROFESIONALES Y CIENTIFICAS RELACIONADAS CON LA COMUNICACIÓN" url="#" />
 			        <p:menuitem value="DOCTORES EN CIENCIAS (phd)" url="#" />
 			        <p:menuitem value="ARTICULOS, MONOGRAFIAS, LIBROS, REVISTAS" url="#" />
 			        <p:separator />  			              
 			     </p:submenu>  
 		
-		        <p:menuitem value="Salir" url="http://www.primefaces.org" icon="ui-icon-close" />  
+		        <p:menuitem value="Salir" url="#" icon="ui-icon-close" />  
 		  
 		    </p:menubar>  
 					
@@ -55,6 +55,13 @@
 	
 
 </div>
+
+<p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>  
+              
+<p:dialog modal="true" widgetVar="statusDialog" header="Cargando..."   
+        draggable="false" closable="false">  
+    <p:graphicImage value="/images/ajaxloadingbar.gif" />  
+</p:dialog>
 
 </body>
 </html>
