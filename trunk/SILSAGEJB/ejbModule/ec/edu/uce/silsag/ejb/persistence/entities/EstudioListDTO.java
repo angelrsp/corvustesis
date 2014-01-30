@@ -58,6 +58,9 @@ public class EstudioListDTO implements Serializable {
 	@Column(name="est_pais")
 	private Integer estPais;
 
+	@Column(name="est_archivo")
+	private byte[] estArchivo;
+	
 	
 	public EstudioListDTO() {
 	}
@@ -172,6 +175,14 @@ public class EstudioListDTO implements Serializable {
 
 	public void setEstPais(Integer estPais) {
 		this.estPais = estPais;
+	}
+
+	public byte[] getEstArchivo() {
+		return estArchivo;
+	}
+
+	public void setEstArchivo(byte[] estArchivo) {
+		this.estArchivo = estArchivo;
 	}
 
 

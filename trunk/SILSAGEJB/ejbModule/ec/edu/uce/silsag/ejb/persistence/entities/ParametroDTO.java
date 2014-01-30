@@ -25,6 +25,9 @@ public class ParametroDTO implements Serializable {
 
 	@Column(name="par_valor")
 	private String parValor;
+	
+	@Column(name="par_valor_imagen")
+	private byte[] parValorImagen;
 
 	public ParametroDTO() {
 	}
@@ -51,6 +54,14 @@ public class ParametroDTO implements Serializable {
 
 	public void setParValor(String parValor) {
 		this.parValor = parValor;
+	}
+
+	public byte[] getParValorImagen() {
+		return parValorImagen;
+	}
+
+	public void setParValorImagen(byte[] parValorImagen) {
+		this.parValorImagen = parValorImagen;
 	}
 
 }

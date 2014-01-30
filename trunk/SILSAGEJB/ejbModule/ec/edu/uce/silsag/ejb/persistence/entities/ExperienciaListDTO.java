@@ -43,6 +43,8 @@ public class ExperienciaListDTO implements Serializable {
 	@Column(name="exp_tipo_empresa")
 	private Integer expTipoEmpresa;
 
+	@Column(name="exp_archivo")
+	private byte[] expArchivo;
 	
 	
 	
@@ -119,6 +121,14 @@ public class ExperienciaListDTO implements Serializable {
 
 	public void setExpTipoEmpresa(Integer expTipoEmpresa) {
 		this.expTipoEmpresa = expTipoEmpresa;
+	}
+
+	public byte[] getExpArchivo() {
+		return expArchivo;
+	}
+
+	public void setExpArchivo(byte[] expArchivo) {
+		this.expArchivo = expArchivo;
 	}
 
 }
