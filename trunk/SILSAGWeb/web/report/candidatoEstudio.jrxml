@@ -1,64 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="candidatoEstudio" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6c3e1e7d-ce88-4883-ad70-b5e75e3799c5">
-	<property name="ireport.zoom" value="1.610510000000001"/>
+	<property name="ireport.zoom" value="4.594972986357223"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="12"/>
 	<field name="estCarrera" class="java.lang.String"/>
 	<field name="catNivel" class="java.lang.String"/>
 	<field name="estEstablecimiento" class="java.lang.String"/>
 	<field name="catPais" class="java.lang.String"/>
+	<field name="catEspecialidad" class="java.lang.String"/>
+	<field name="estFechaInicio" class="java.lang.String"/>
+	<field name="estFechaFin" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<columnHeader>
-		<band height="21" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="245" y="1" width="100" height="20" uuid="e3dcb9c6-3efe-4579-b903-6024b33298d3"/>
+				<reportElement x="319" y="0" width="100" height="20" uuid="e3dcb9c6-3efe-4579-b903-6024b33298d3"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Carrera]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="1" width="76" height="20" uuid="92d8c7e5-944d-479f-ad43-930dae530b78"/>
+				<reportElement x="0" y="0" width="64" height="20" uuid="92d8c7e5-944d-479f-ad43-930dae530b78"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nivel]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="76" y="1" width="169" height="20" uuid="6511b538-086a-4eb5-b394-ff0e20cd8b00"/>
+				<reportElement x="64" y="0" width="123" height="20" uuid="6511b538-086a-4eb5-b394-ff0e20cd8b00"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Establecimiento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="345" y="0" width="78" height="20" uuid="f3627b1c-72d2-42fa-91de-aad68b976357"/>
+				<reportElement x="187" y="0" width="132" height="20" uuid="7a52d356-f95c-48c6-b3e3-07846cbcdf67"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Pais]]></text>
+				<text><![CDATA[Especialidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="419" y="0" width="59" height="20" uuid="cd8cfa80-2c5b-4411-a274-d0097804cb32"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[Fecha Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="478" y="0" width="58" height="20" uuid="34029ef5-fa8a-487f-bc7a-cd1203730af1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[Fecha Fin]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="16" splitType="Stretch">
 			<textField isBlankWhenNull="true">
-				<reportElement x="0" y="0" width="76" height="15" uuid="08ecc55d-924e-4530-87d2-0611c11b6f51"/>
+				<reportElement x="0" y="0" width="64" height="15" uuid="08ecc55d-924e-4530-87d2-0611c11b6f51"/>
 				<textFieldExpression><![CDATA[$F{catNivel}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="76" y="0" width="169" height="15" uuid="06fd82ee-bc6a-4201-adf7-a0b05ea6eee7"/>
+				<reportElement x="64" y="0" width="123" height="15" uuid="06fd82ee-bc6a-4201-adf7-a0b05ea6eee7"/>
 				<textFieldExpression><![CDATA[$F{estEstablecimiento}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="245" y="0" width="100" height="15" uuid="814a2d0e-272b-4672-901b-e0fede4ed572"/>
+				<reportElement x="319" y="0" width="100" height="15" uuid="814a2d0e-272b-4672-901b-e0fede4ed572"/>
 				<textFieldExpression><![CDATA[$F{estCarrera}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="345" y="0" width="78" height="15" uuid="ea5fd227-d940-4bf4-a215-a473cb37fca7"/>
-				<textFieldExpression><![CDATA[$F{catPais}]]></textFieldExpression>
+				<reportElement x="187" y="0" width="132" height="15" uuid="515ed8ea-cc84-4c2c-8911-5753486d9dcd"/>
+				<textFieldExpression><![CDATA[$F{catEspecialidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="0" width="59" height="15" uuid="6acf5f0d-3b4e-495a-a30e-3af03808cac0"/>
+				<textFieldExpression><![CDATA[$F{estFechaInicio}.substring(0,10)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="478" y="0" width="58" height="15" uuid="ca6e017c-2aa7-463d-8349-01a8a8e91cd6"/>
+				<textFieldExpression><![CDATA[$F{estFechaFin}.substring(0,10)]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

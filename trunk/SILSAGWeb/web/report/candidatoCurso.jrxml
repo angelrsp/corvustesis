@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="candidatoCurso" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="36a7dd44-1cdd-4303-9994-cb8b14668e49">
+	<property name="ireport.zoom" value="2.593742460100003"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="curDescripcion" class="java.lang.String"/>
+	<field name="curEntidad" class="java.lang.String"/>
+	<field name="curFechaInicio" class="java.lang.String"/>
+	<field name="curFechaFin" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="83172a0c-39c7-488f-9084-37591af2711c"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Entidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="297" height="20" uuid="b31662c2-3d67-4c60-9502-597207980bd0"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="0" width="67" height="20" uuid="eef33625-5c2d-437a-9dae-5cdcfbabf89d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="464" y="0" width="67" height="20" uuid="80a0efd3-286f-409d-8e15-d84397052df3"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Fin]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="4193dfac-07b2-4001-abc8-1384c62474ba"/>
+				<textFieldExpression><![CDATA[$F{curEntidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="297" height="20" uuid="6a4a2d3c-9eaf-4c25-9a48-169a4e43f4c9"/>
+				<textFieldExpression><![CDATA[$F{curDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="397" y="0" width="67" height="20" uuid="58991eff-8e33-4c64-a97d-9b418aedb541"/>
+				<textFieldExpression><![CDATA[$F{curFechaInicio}.substring(0,10)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="464" y="0" width="67" height="20" uuid="035d989e-c456-4af2-ba98-3a8ec55d4a3f"/>
+				<textFieldExpression><![CDATA[$F{curFechaFin}.substring(0,10)]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
