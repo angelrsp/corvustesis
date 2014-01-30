@@ -51,23 +51,28 @@ public class ImagenCandidatoController {
     	}
     	else
     	{
-    		if(candidato.getCanSexo()==33)
+    		if(candidato.getCanSexo()!=null)
     		{
-    			arregloImagen=administracionService.obtenerParametro(2).getParValorImagen();
-    		}
-    		else if(candidato.getCanSexo()==34)
-    		{
-    			arregloImagen=administracionService.obtenerParametro(1).getParValorImagen();
-    		}
-    		if(arregloImagen!=null)
-    		{
-	    		mime=JsfUtil.getTypeFile(arregloImagen);
-	    		return new DefaultStreamedContent(new ByteArrayInputStream(arregloImagen),mime);
+	    		if(candidato.getCanSexo()==33)
+	    		{
+	    			arregloImagen=administracionService.obtenerParametro(2).getParValorImagen();
+	    		}
+	    		else if(candidato.getCanSexo()==34)
+	    		{
+	    			arregloImagen=administracionService.obtenerParametro(1).getParValorImagen();
+	    		}
+	    		if(arregloImagen!=null)
+	    		{
+		    		mime=JsfUtil.getTypeFile(arregloImagen);
+		    		return new DefaultStreamedContent(new ByteArrayInputStream(arregloImagen),mime);
+	    		}
+	    		else
+	    		{
+	    			return new DefaultStreamedContent();
+	    		}
     		}
     		else
-    		{
     			return new DefaultStreamedContent();
-    		}
     	}
     }
     
