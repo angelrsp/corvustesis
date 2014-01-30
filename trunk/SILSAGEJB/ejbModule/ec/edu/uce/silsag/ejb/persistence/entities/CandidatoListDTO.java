@@ -1,5 +1,6 @@
 package ec.edu.uce.silsag.ejb.persistence.entities;
 
+import java.io.InputStream;
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -106,6 +107,17 @@ public class CandidatoListDTO implements Serializable {
 	@Transient
 	private List<ExperienciaListDTO> canExperiencia;
 	
+	@Transient
+	private List<CursoDTO> canCurso;
+	
+	@Transient
+	private List<AdicionalDTO> canAdicional;	
+	
+	@Transient
+	private List<ReferenciaDTO> canReferencia;
+	
+	@Transient
+	private InputStream canFotoStream;
 	
 	public CandidatoListDTO() {
 	}
@@ -341,5 +353,37 @@ public class CandidatoListDTO implements Serializable {
 
 	public void setCanExperiencia(List<ExperienciaListDTO> canExperiencia) {
 		this.canExperiencia = canExperiencia;
+	}
+
+	public List<CursoDTO> getCanCurso() {
+		return canCurso;
+	}
+
+	public void setCanCurso(List<CursoDTO> list) {
+		this.canCurso = list;
+	}
+
+	public List<AdicionalDTO> getCanAdicional() {
+		return canAdicional;
+	}
+
+	public void setCanAdicional(List<AdicionalDTO> canAdicional) {
+		this.canAdicional = canAdicional;
+	}
+
+	public List<ReferenciaDTO> getCanReferencia() {
+		return canReferencia;
+	}
+
+	public void setCanReferencia(List<ReferenciaDTO> canReferencia) {
+		this.canReferencia = canReferencia;
+	}
+
+	public InputStream getCanFotoStream() {
+		return canFotoStream;
+	}
+
+	public void setCanFotoStream(InputStream canFotoStream) {
+		this.canFotoStream = canFotoStream;
 	}
 }
