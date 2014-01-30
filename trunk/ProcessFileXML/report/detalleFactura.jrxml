@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="detalleFactura" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="15f65153-d623-4085-a11d-8dd5611c9334">
+	<property name="ireport.zoom" value="1.9487171000000016"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="codigoPrincipal" class="java.lang.String"/>
+	<field name="codigoAuxiliar" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="precioUnitario" class="java.lang.String"/>
+	<field name="descuento" class="java.lang.String"/>
+	<field name="precioTotalSinImpuesto" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="65" height="27" uuid="350f2067-d49d-4945-9118-9e7f8a3615fe"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Cod. Principal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="65" y="0" width="65" height="27" uuid="91d04ea0-4574-4d4d-afca-d1d69ac9621e"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Cod. Auxiliar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="0" width="37" height="27" uuid="7992c57a-5617-4b03-83e9-2651fb038992"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Cant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="0" width="153" height="27" uuid="9e1b4a88-7f62-4ab0-af29-3a88db967f99"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="50" height="27" uuid="166e535b-1c19-477d-b0c8-956f62c4207d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Precio Unitario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="0" width="54" height="27" uuid="49cdb44a-f530-40f0-959c-a7a2d81720b8"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Descuento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="424" y="0" width="100" height="27" uuid="98bc9475-e5ab-4315-a75f-d4db09f3c51c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Precio Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="65" height="15" uuid="ad48f790-1351-407b-a9f8-93eb3d1fe061"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{codigoPrincipal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="65" y="0" width="65" height="15" uuid="82e4ab10-293c-47f6-bfb5-7af815e0a80a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{codigoAuxiliar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="0" width="37" height="15" uuid="c07bc72b-3514-4501-94b1-1a2e417b6076"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="167" y="0" width="153" height="15" uuid="5cd87683-5eee-410d-a3c6-43b5ec8c9fce"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="0" width="50" height="15" uuid="f33f9d1d-d514-418f-aa97-b91cce166752"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{precioUnitario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="54" height="15" uuid="fcaf0fac-af42-4aa0-9bbb-791a1bf6cd30"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{descuento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="424" y="0" width="100" height="15" uuid="ae98e83c-5592-4266-b874-81613fad65da"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{precioTotalSinImpuesto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,47 +1,301 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="factura" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="83137a45-a338-442b-b1e6-56787b374341">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.6105100000000008"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="323"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\_javaee\\ProcessFileXML\\report\\"]]></defaultValueExpression>
+	</parameter>
 	<field name="infoTributaria.claveAcceso" class="java.lang.String"/>
 	<field name="infoTributaria.ambiente" class="java.lang.String"/>
+	<field name="infoTributaria.ruc" class="java.lang.String"/>
+	<field name="infoFactura.guiaRemision" class="java.lang.String"/>
+	<field name="autorizacion" class="java.lang.String"/>
+	<field name="fechaHoraAutorizacion" class="java.lang.String"/>
+	<field name="infoTributaria.ambienteText" class="java.lang.String"/>
+	<field name="infoTributaria.tipoEmisonText" class="java.lang.String"/>
+	<field name="infoFactura.contribuyenteEspecial" class="java.lang.String"/>
+	<field name="infoTributaria.dirMatriz" class="java.lang.String"/>
+	<field name="infoFactura.obligadoContabilidad" class="java.lang.String"/>
+	<field name="infoTributaria.secuencial" class="java.lang.String"/>
+	<field name="infoTributaria.ptoEmi" class="java.lang.String"/>
+	<field name="infoTributaria.estab" class="java.lang.String"/>
+	<field name="infoFactura.fechaEmision" class="java.lang.String"/>
+	<field name="infoFactura.razonSocialComprador" class="java.lang.String"/>
+	<field name="infoFactura.identificacionComprador" class="java.lang.String"/>
+	<field name="detalles.detalle" class="java.util.List"/>
+	<field name="infoFactura.importeTotal" class="java.lang.String"/>
+	<field name="infoFactura.propina" class="java.lang.String"/>
+	<field name="infoFactura.totalSinImpuestos" class="java.lang.String"/>
+	<field name="iva" class="java.lang.String"/>
+	<field name="infoFactura.totalDescuento" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="151" splitType="Stretch">
-			<textField>
-				<reportElement x="53" y="45" width="144" height="20" uuid="35400c8f-dd02-4b9a-9172-6e416ff44426"/>
-				<textFieldExpression><![CDATA[$F{infoTributaria.ambiente}]]></textFieldExpression>
-			</textField>
+		<band height="313" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="324" y="3" width="228" height="246" uuid="d0f2f04e-2bf7-46f0-b502-03f928c7d8f8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="334" y="13" width="38" height="15" uuid="c9ba5488-3b6c-4c2b-ba6a-7554caaa7e39"/>
+				<text><![CDATA[RUC:]]></text>
+			</staticText>
 			<componentElement>
-				<reportElement x="333" y="65" width="200" height="50" uuid="11d048e3-91bd-478b-8b6f-9b2b1531f6e0"/>
+				<reportElement x="333" y="206" width="212" height="50" uuid="11d048e3-91bd-478b-8b6f-9b2b1531f6e0"/>
 				<jr:Codabar xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="bottom">
 					<jr:codeExpression><![CDATA[$F{infoTributaria.claveAcceso}]]></jr:codeExpression>
 				</jr:Codabar>
 			</componentElement>
 			<staticText>
-				<reportElement x="334" y="45" width="113" height="20" uuid="e7c252cf-0575-4557-853a-c24e373e71fd"/>
+				<reportElement x="334" y="187" width="113" height="15" uuid="e7c252cf-0575-4557-853a-c24e373e71fd"/>
 				<text><![CDATA[CLAVE DE ACCESO]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="379" y="14" width="100" height="15" uuid="c4442ba3-6a3a-426c-8ab0-f6e26051e52d"/>
+				<textFieldExpression><![CDATA[$F{infoTributaria.ruc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="335" y="32" width="100" height="15" uuid="666eb607-9845-4341-a60a-01e814c2fd5a"/>
+				<text><![CDATA[FACTURA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="335" y="49" width="22" height="15" uuid="44035117-3ec8-4b33-907a-b187e4d806e8"/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="335" y="69" width="156" height="15" uuid="81dbef9b-61fd-4588-b323-68035eddb1be"/>
+				<text><![CDATA[NÚMERO DE AUTORIZACIÓN]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="334" y="88" width="100" height="13" uuid="f463a483-8148-4580-ab9b-44e4f835ef70"/>
+				<textFieldExpression><![CDATA[$F{autorizacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="334" y="106" width="92" height="28" uuid="fffd83eb-9d24-4736-94d6-fcfa85c200df"/>
+				<text><![CDATA[FECHA Y HORA DE AUTORIZACIÓN]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="435" y="106" width="100" height="28" uuid="589f1f7b-be0b-4383-8dad-2a2d12b826d3"/>
+				<textFieldExpression><![CDATA[$F{fechaHoraAutorizacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="334" y="142" width="92" height="15" uuid="fbbf9196-8bb1-4cbd-8bb1-435e6dcd9448"/>
+				<text><![CDATA[AMBIENTE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="434" y="142" width="100" height="15" uuid="b974b94d-b0c9-4be4-ba7e-97e046e354c2"/>
+				<textFieldExpression><![CDATA[$F{infoTributaria.ambienteText}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="334" y="164" width="92" height="15" uuid="895a1482-ac0d-4014-8f7f-b13e0df9f1d8"/>
+				<text><![CDATA[EMISIÓN:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="434" y="165" width="100" height="15" uuid="e0f7116e-064a-46ab-a962-28104632b2ce"/>
+				<textFieldExpression><![CDATA[$F{infoTributaria.tipoEmisonText}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="10">
+				<reportElement x="4" y="129" width="306" height="120" uuid="9614fa7f-4989-45f2-8249-c63ba319fb7d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="74" y="139" width="163" height="20" uuid="061b0d37-e826-4b76-ba35-4c7e3a3e9d97"/>
+				<text><![CDATA[SERVICIO DE RENTAS INTERNAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="38" y="164" width="53" height="15" uuid="34ae4fdd-9d0c-4282-a155-ed4376ef1879"/>
+				<text><![CDATA[Dir Matriz:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="105" y="164" width="156" height="15" uuid="53114b24-f29d-4691-97de-32c27ad46271"/>
+				<textFieldExpression><![CDATA[$F{infoTributaria.dirMatriz}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="38" y="194" width="123" height="15" uuid="a8ac415e-15bf-453f-a670-ae66e010e558"/>
+				<text><![CDATA[Contribuyente Especial No:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="184" y="194" width="66" height="15" uuid="12b2410d-e02d-41c8-8f30-b1060d1e4432"/>
+				<textFieldExpression><![CDATA[$F{infoFactura.contribuyenteEspecial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="38" y="215" width="183" height="15" uuid="fbc2038c-767d-44d7-9c38-1e3758e5f0da"/>
+				<text><![CDATA[OBLIGADO A LLEVAR CONTABILIBAD:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="232" y="215" width="29" height="15" uuid="c54b82eb-3124-4a1d-b166-5e5158941f3a"/>
+				<textFieldExpression><![CDATA[$F{infoFactura.obligadoContabilidad}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="4" y="258" width="548" height="53" uuid="fe0aa62e-e066-433b-93fd-9ad88c49e2e7"/>
+			</rectangle>
+			<textField>
+				<reportElement x="360" y="49" width="30" height="15" uuid="29640962-e436-4b47-84da-00cfb67fa097"/>
+				<textFieldExpression><![CDATA[$F{infoTributaria.estab}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="49" width="30" height="15" uuid="9d798718-0487-455e-bd99-ec93fd8f96c1"/>
+				<textFieldExpression><![CDATA[$F{infoTributaria.ptoEmi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="434" y="49" width="101" height="15" uuid="f2c168b8-8139-435d-a3e8-2ec6d9b1dc8a"/>
+				<textFieldExpression><![CDATA[$F{infoTributaria.secuencial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="263" width="162" height="15" uuid="352b109c-6d68-44ce-8ac5-196e5752703b"/>
+				<text><![CDATA[Razon Social / Nombres y Apellidos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="289" width="70" height="15" uuid="b6c74b7c-1a04-4b92-8746-6f51ffe88a60"/>
+				<text><![CDATA[Fecha Emisión:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="263" width="53" height="15" uuid="8c1abe14-6ae9-489a-9177-8425108a4837"/>
+				<text><![CDATA[RUC / CI:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="289" width="70" height="15" uuid="e396109c-3ed1-44b7-8530-73d23d1a8315"/>
+				<text><![CDATA[Guía Remisión:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="289" width="87" height="15" uuid="f7c51011-7e30-4d2b-bba2-2e6a9e482043"/>
+				<textFieldExpression><![CDATA[$F{infoFactura.fechaEmision}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="190" y="263" width="160" height="20" uuid="9594bbc2-4ffa-40ca-a29f-fe9ff2cdbb75"/>
+				<textFieldExpression><![CDATA[$F{infoFactura.razonSocialComprador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="429" y="263" width="100" height="15" uuid="e26b44a7-8a09-4538-85e4-00fe62cac987"/>
+				<textFieldExpression><![CDATA[$F{infoFactura.identificacionComprador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="441" y="289" width="100" height="15" uuid="bafbcb42-50d0-4e5a-84b3-89d6a73df6a8"/>
+				<textFieldExpression><![CDATA[$F{infoFactura.guiaRemision}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch"/>
-	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="27" splitType="Stretch">
+			<subreport>
+				<reportElement x="-13" y="0" width="200" height="25" uuid="5766f5a6-8dd7-4997-b22d-f026f0899695"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{detalles.detalle})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "detalleFactura.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="78" splitType="Stretch">
+			<staticText>
+				<reportElement x="299" y="61" width="135" height="15" uuid="6399fd9b-47a1-4212-b647-96773e74ab1b"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[VALOR TOTAL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="434" y="61" width="100" height="15" uuid="dd952a28-c48d-45ed-b18e-e70da979caf7"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{infoFactura.importeTotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="299" y="46" width="135" height="15" uuid="1a79ad9a-f37a-4c03-a8cc-ed7d1680d7c3"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[PROPINA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="434" y="46" width="100" height="15" uuid="01221296-3c76-4862-a5cd-d2b35807b036"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{infoFactura.propina}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="299" y="1" width="135" height="15" uuid="5730f6e4-4f5a-4dff-b111-07b186aeca63"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[SUTOTAL SIN IMPUESTOS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="434" y="1" width="100" height="15" uuid="a57c566b-9c55-43d6-b6ca-937ff43f074c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{infoFactura.totalSinImpuestos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="299" y="16" width="135" height="15" uuid="d34ce3a8-7e2b-4753-b811-4d03f7ae5d92"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[DESCUENTO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="434" y="16" width="100" height="15" uuid="a330159d-a3d5-4617-9229-eda6e49ff097"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{infoFactura.totalDescuento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="299" y="31" width="135" height="15" uuid="5c75ddda-a40f-4924-bc94-784a19a0b8a8"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[IVA 12%]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="434" y="31" width="100" height="15" uuid="cd43a23a-3aa6-4c04-8880-9224eb45722f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{iva}]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
