@@ -1,6 +1,8 @@
 package ec.edu.uce.silsag.web.controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,7 +46,6 @@ public class ExportedController implements Serializable{
 	private CandidatoDTO candidato;
 	
 	public ExportedController() {
-//		candidatoEstudio=new ArrayList<CandidatoEstudioDTO>();
 		user=new UsuarioDTO();
 		candidato=new CandidatoDTO();
 		user=(UsuarioDTO)JsfUtil.getObject("UsuarioDTO");
@@ -64,6 +65,15 @@ public class ExportedController implements Serializable{
 			
 			candidatoListDTO.setCanEstudios(candidatosService.obtenerEstudio(candidato));
 			candidatoListDTO.setCanExperiencia(candidatosService.obtenerExperiencia(candidato));
+			candidatoListDTO.setCanCurso(candidatosService.obtenerCurso(candidato));
+			candidatoListDTO.setCanAdicional(candidatosService.obtenerAdicional(candidato));
+			candidatoListDTO.setCanReferencia(candidatosService.obtenerReferencia(candidato));
+			
+			if(candidato.getCanFoto()!=null)
+			{
+				InputStream myInputStream = new ByteArrayInputStream(candidato.getCanFoto());
+				candidatoListDTO.setCanFotoStream(myInputStream);
+			}
 			
 			candidatoList.add(candidatoListDTO);
 //			candidatoEstudio=candidatosService.obtenerCandidatoEstudio(candidato);
