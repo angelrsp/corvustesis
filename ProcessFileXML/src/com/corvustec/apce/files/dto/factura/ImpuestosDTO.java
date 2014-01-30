@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.corvustec.apce.files.dto;
+package com.corvustec.apce.files.dto.factura;
 
 import java.io.Serializable;
 import java.util.List;

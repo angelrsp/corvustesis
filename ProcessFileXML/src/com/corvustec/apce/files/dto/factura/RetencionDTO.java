@@ -1,16 +1,15 @@
 /**
  * 
  */
-package com.corvustec.apce.files.dto;
+package com.corvustec.apce.files.dto.factura;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * @author wilmerPC
  *
  */
-public class ImpuestoDTO implements Serializable{
+public class RetencionDTO implements Serializable{
 
 	/**
 	 * 
@@ -23,12 +22,10 @@ public class ImpuestoDTO implements Serializable{
 	
 	private Double tarifa;
 	
-	private BigDecimal baseImponible;
+	private Double valor;
 	
-	private BigDecimal valor;
-	
-	public ImpuestoDTO () {}
-	
+	public RetencionDTO () {}
+
 	/**
 	 * @return the codigo
 	 */
@@ -72,30 +69,16 @@ public class ImpuestoDTO implements Serializable{
 	}
 
 	/**
-	 * @return the baseImponible
-	 */
-	public BigDecimal getBaseImponible() {
-		return baseImponible;
-	}
-
-	/**
-	 * @param baseImponible the baseImponible to set
-	 */
-	public void setBaseImponible(BigDecimal baseImponible) {
-		this.baseImponible = baseImponible;
-	}
-
-	/**
 	 * @return the valor
 	 */
-	public BigDecimal getValor() {
+	public Double getValor() {
 		return valor;
 	}
 
 	/**
 	 * @param valor the valor to set
 	 */
-	public void setValor(BigDecimal valor) {
+	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 
@@ -104,9 +87,9 @@ public class ImpuestoDTO implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "ImpuestoDTO [codigo=" + codigo + ", codigoPorcentaje="
-				+ codigoPorcentaje + ", tarifa=" + tarifa + ", baseImponible="
-				+ baseImponible + ", valor=" + valor + "]";
+		return "RetencionDTO [codigo=" + codigo + ", codigoPorcentaje="
+				+ codigoPorcentaje + ", tarifa=" + tarifa + ", valor=" + valor
+				+ "]";
 	}
 	
 }

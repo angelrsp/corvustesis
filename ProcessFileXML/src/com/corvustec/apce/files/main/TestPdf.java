@@ -27,21 +27,21 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.corvustec.apce.files.commons.util.ReportUtil;
-import com.corvustec.apce.files.dto.DetalleFacturaDTO;
-import com.corvustec.apce.files.dto.DetallesDTO;
-import com.corvustec.apce.files.dto.FacturaDTO;
-import com.corvustec.apce.files.dto.ImpuestoDTO;
-import com.corvustec.apce.files.dto.ImpuestosDTO;
-import com.corvustec.apce.files.dto.InfoFacturaDTO;
-import com.corvustec.apce.files.dto.InfoTributariaDTO;
-import com.corvustec.apce.files.dto.TotalConImpuestosDTO;
-import com.corvustec.apce.files.dto.TotalImpuestoDTO;
+import com.corvustec.apce.files.dto.factura.DetalleFacturaDTO;
+import com.corvustec.apce.files.dto.factura.DetallesDTO;
+import com.corvustec.apce.files.dto.factura.FacturaDTO;
+import com.corvustec.apce.files.dto.factura.ImpuestoDTO;
+import com.corvustec.apce.files.dto.factura.ImpuestosDTO;
+import com.corvustec.apce.files.dto.factura.InfoFacturaDTO;
+import com.corvustec.apce.files.dto.factura.InfoTributariaDTO;
+import com.corvustec.apce.files.dto.factura.TotalConImpuestosDTO;
+import com.corvustec.apce.files.dto.factura.TotalImpuestoDTO;
 
 
 public class TestPdf {
 
 	
-	public static void main(String[] args) {
+	public static void mainPDF() {
 	
 		String filepath = "D:\\FacturacionElectronica\\2301201401171679011600110010012004000851234560117.xml";
 				
@@ -55,7 +55,7 @@ public class TestPdf {
 			
 			NodeList infoTributaria = document.getElementsByTagName("infoTributaria");
 			NodeList infoFactura = document.getElementsByTagName("infoFactura");
-			
+						
 			InfoTributariaDTO infoTributariaDTO=new InfoTributariaDTO();
 			InfoFacturaDTO infoFacturaDTO=new InfoFacturaDTO();
 			
@@ -81,6 +81,8 @@ public class TestPdf {
 				
 			}
 			
+			TotalConImpuestosDTO totalConImpuestosDTO=new TotalConImpuestosDTO();
+			
 			for (int temp = 0; temp < infoFactura.getLength(); temp++) {
 				Node infoFacturaNode = infoFactura.item(temp);
 				
@@ -98,10 +100,12 @@ public class TestPdf {
 					infoFacturaDTO.setIdentificacionComprador(eElement.getElementsByTagName("identificacionComprador").item(0).getTextContent());
 					infoFacturaDTO.setTotalSinImpuestos(BigDecimal.valueOf(Double.valueOf(eElement.getElementsByTagName("totalSinImpuestos").item(0).getTextContent())));
 					infoFacturaDTO.setTotalDescuento(BigDecimal.valueOf(Double.valueOf(eElement.getElementsByTagName("totalDescuento").item(0).getTextContent())));
+					infoFacturaDTO.setPropina(BigDecimal.valueOf(Double.valueOf(eElement.getElementsByTagName("propina").item(0).getTextContent())));
+					infoFacturaDTO.setImporteTotal(BigDecimal.valueOf(Double.valueOf(eElement.getElementsByTagName("importeTotal").item(0).getTextContent())));
 					
-					NodeList totalConImpuestos = eElement.getElementsByTagName("totalConImpuestos");
+					NodeList totalConImpuestos = eElement.getElementsByTagName("totalImpuesto");
 					
-					TotalConImpuestosDTO totalConImpuestosDTO=new TotalConImpuestosDTO();
+					
 					
 					List<TotalImpuestoDTO> totalImpuestoDTOList=new ArrayList<TotalImpuestoDTO>();
 					
@@ -127,7 +131,9 @@ public class TestPdf {
 				
 			}
 			
-			NodeList detalles = document.getElementsByTagName("detalles");
+			infoFacturaDTO.setTotalConImpuestos(totalConImpuestosDTO);
+			
+			NodeList detalles = document.getElementsByTagName("detalles").item(0).getChildNodes();
 			DetallesDTO detallesDTO=new DetallesDTO();
 			
 			List<DetalleFacturaDTO> detalleFacturaDTOList=new ArrayList<DetalleFacturaDTO>();
@@ -188,7 +194,11 @@ public class TestPdf {
 			facturaDTO.setInfoFactura(infoFacturaDTO);
 			facturaDTO.setInfoTributaria(infoTributariaDTO);
 			
-			exportFactura(facturaDTO);
+			facturaDTO.getInfoFactura().getTotalConImpuestos().getTotalImpuesto().get(0).getCodigo().equals("2");
+			
+			facturaDTO.setIva(facturaDTO.getInfoFactura().getTotalConImpuestos().getTotalImpuesto().get(0).getCodigo().equals("2")?facturaDTO.getInfoFactura().getTotalConImpuestos().getTotalImpuesto().get(0).getValor():"0");
+			
+			exportFactura(facturaDTO,"123456789","2014-02-01");
 			
 			
 		} catch (ParserConfigurationException e) {
@@ -205,9 +215,12 @@ public class TestPdf {
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private static void exportFactura(FacturaDTO fact)
+	private static void exportFactura(FacturaDTO fact,String autorizacion,String fechaHoraAuto)
 	{
+		fact.setAutorizacion(autorizacion);
+		fact.setFechaHoraAutorizacion(fechaHoraAuto);
 		List<FacturaDTO> factLis=new ArrayList<FacturaDTO>();
+		
 		factLis.add(fact);
 		JasperPrint jasperPrint;
 		try {

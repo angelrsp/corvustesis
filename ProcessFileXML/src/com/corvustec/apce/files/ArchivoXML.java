@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.corvustec.apce.files.commons.jdbc.SqlServerJDBC;
 import com.corvustec.apce.files.commons.util.Constantes;
+import com.corvustec.apce.files.commons.util.ProcessPdfUtil;
 import com.corvustec.apce.files.commons.util.UtilApplication;
 import com.corvustec.apce.files.commons.util.UtilMail;
 import com.corvustec.apce.files.webservice.AutorizacionComprobantesElectronicosWs;
@@ -82,7 +83,8 @@ public class ArchivoXML {
 									
 									UtilApplication.convertStringToDocument(comprobante);
 									logger.info("Enviar mail");
-									UtilMail.enviar(mailDestino,"Facturacion Electronica","Estimado(a) cliente reciba un cordial saludo. Su factura electrónica esta adjunto",xmlFileSignature);
+									File pdf=new File(ProcessPdfUtil.Factura(comprobante, autorizacion, fechaHora));
+									UtilMail.enviar(mailDestino,"Facturacion Electronica","Estimado(a) cliente reciba un cordial saludo. Su factura electrónica esta adjunto",xmlFileSignature,pdf);
 									break;
 								}
 								else
