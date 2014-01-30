@@ -17,11 +17,11 @@
 				<p:panel header="Subir Foto">
 			  
         	     <p:fileUpload fileUploadListener="#{imagenCandidatoController.handleFileUpload}" mode="advanced" dragDropSupport="false"  
-                  update="growl" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" oncomplete="location.reload(true)" />			
+                  update="growl,foto" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" oncomplete="location.reload(true)" />			
 		
 				</p:panel>
 				
-			<fieldset>
+			
 				<p:growl id="growl" showDetail="true" />
 								
 				
@@ -217,7 +217,7 @@
 
 						<p:column headerText="#{i18n['label.descargar']}" width="15">
 							<p:commandButton actionListener="#{datosCandidatoController.descargarEstudio(est)}" icon="ui-icon-arrowthick-1-s" ajax="false" 
-								immediate="true" update=":contenido:growl">
+								immediate="true" update=":contenido:growl" disabled="#{est.estArchivo==null}">
 							</p:commandButton>
 						</p:column>
 						
@@ -290,7 +290,7 @@
 
 						<p:column headerText="#{i18n['label.descargar']}" width="15">
 							<p:commandButton actionListener="#{datosCandidatoController.descargarCurso(cur)}" icon="ui-icon-arrowthick-1-s" ajax="false" 
-								immediate="true" update=":contenido:growl">
+								immediate="true" update=":contenido:growl" disabled="#{cur.curArchivo==null}">
 							</p:commandButton>
 						</p:column>
 					
@@ -351,7 +351,7 @@
 											
 						<p:column headerText="#{i18n['label.descargar']}" width="15">
 							<p:commandButton actionListener="#{datosCandidatoController.descargarAdicional(adi)}" icon="ui-icon-arrowthick-1-s" ajax="false" 
-								immediate="true" update=":contenido:growl">
+								immediate="true" update=":contenido:growl" disabled="#{adi.adiArchivo==null}">
 							</p:commandButton>
 						</p:column>
 					
@@ -439,7 +439,7 @@
 
 						<p:column headerText="#{i18n['label.descargar']}" width="15">
 							<p:commandButton actionListener="#{datosCandidatoController.descargarExperiencia(exp)}" icon="ui-icon-arrowthick-1-s" ajax="false" 
-								immediate="true" update=":contenido:growl">
+								immediate="true" update=":contenido:growl" disabled="#{exp.expArchivo==null}">
 							</p:commandButton>
 						</p:column>
 						
@@ -506,7 +506,7 @@
 
 						<p:column headerText="#{i18n['label.descargar']}" width="15">
 							<p:commandButton actionListener="#{datosCandidatoController.descargarReferencia(ref)}" icon="ui-icon-arrowthick-1-s" ajax="false" 
-								immediate="true" update=":contenido:growl">
+								immediate="true" update=":contenido:growl" disabled="#{ref.refArchivo==null}">
 							</p:commandButton>
 						</p:column>
 
@@ -519,7 +519,7 @@
 					</p:dataTable>					
 				</p:panel>
 
-			</fieldset>
+			
 			
 </h:form>			
 	<script type="text/javascript">
