@@ -11,6 +11,7 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import ec.edu.uce.silsag.commons.util.SilsagException;
+import ec.edu.uce.silsag.ejb.negocio.AdministracionService;
 import ec.edu.uce.silsag.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
@@ -23,6 +24,10 @@ public class ImagenCandidatoController {
 	
     @EJB
     private CandidatosService candidatosService;
+    
+    @EJB
+    private AdministracionService administracionService;
+    
 
 	private UsuarioDTO user;
 	private CandidatoDTO candidato;
@@ -36,7 +41,8 @@ public class ImagenCandidatoController {
 	}
     
     public StreamedContent getImage() throws SilsagException{    	
-    	byte [] arregloImagen=candidatosService.obtenerCandidato(candidato.getCanCodigo()).getCanFoto();
+    	byte [] arregloImagen;
+    	arregloImagen=candidatosService.obtenerCandidato(candidato.getCanCodigo()).getCanFoto();
     	String mime;
     	if(arregloImagen!=null)
     	{
@@ -44,7 +50,25 @@ public class ImagenCandidatoController {
     		return new DefaultStreamedContent(new ByteArrayInputStream(arregloImagen),mime);
     	}
     	else
-    		return new DefaultStreamedContent();
+    	{
+    		if(candidato.getCanSexo()==33)
+    		{
+    			arregloImagen=administracionService.obtenerParametro(2).getParValorImagen();
+    		}
+    		else if(candidato.getCanSexo()==34)
+    		{
+    			arregloImagen=administracionService.obtenerParametro(1).getParValorImagen();
+    		}
+    		if(arregloImagen!=null)
+    		{
+	    		mime=JsfUtil.getTypeFile(arregloImagen);
+	    		return new DefaultStreamedContent(new ByteArrayInputStream(arregloImagen),mime);
+    		}
+    		else
+    		{
+    			return new DefaultStreamedContent();
+    		}
+    	}
     }
     
     
