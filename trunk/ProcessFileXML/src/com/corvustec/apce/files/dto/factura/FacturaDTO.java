@@ -1,4 +1,4 @@
-package com.corvustec.apce.files.dto;
+package com.corvustec.apce.files.dto.factura;
 
 import java.io.Serializable;
 
@@ -21,6 +21,13 @@ public class FacturaDTO implements Serializable{
 	private DetallesDTO detalles;
 	
 	private RetencionesDTO retenciones;
+	
+	private String autorizacion;
+	
+	private String fechaHoraAutorizacion;
+	
+	private String iva;
+		 	
 	
 	public FacturaDTO () {}
 
@@ -106,6 +113,30 @@ public class FacturaDTO implements Serializable{
 	 */
 	public void setRetenciones(RetencionesDTO retenciones) {
 		this.retenciones = retenciones;
+	}
+
+	public String getAutorizacion() {
+		return autorizacion;
+	}
+
+	public void setAutorizacion(String autorizacion) {
+		this.autorizacion = autorizacion;
+	}
+
+	public String getFechaHoraAutorizacion() {
+		return fechaHoraAutorizacion;
+	}
+
+	public void setFechaHoraAutorizacion(String fechaHoraAutorizacion) {
+		this.fechaHoraAutorizacion = fechaHoraAutorizacion;
+	}
+
+	public String getIva() {
+		return iva;
+	}
+
+	public void setIva(String iva) {
+		this.iva = iva;
 	}
 
 }

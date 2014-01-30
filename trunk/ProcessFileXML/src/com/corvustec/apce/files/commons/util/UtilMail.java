@@ -51,7 +51,7 @@ public class UtilMail {
         session = Session.getDefaultInstance(properties);
     }
     
-    public void send(String destino,String asunto, String mensaje,File file) {
+    public void send(String destino,String asunto, String mensaje,File file,File filepdf) {
         init();
         try {
         	log.info("send");
@@ -64,12 +64,20 @@ public class UtilMail {
             part.setDataHandler(new DataHandler(new FileDataSource(file.getAbsolutePath())));
             part.setFileName(file.getName());
             
+            BodyPart part2=new MimeBodyPart();
+            part2.setDataHandler(new DataHandler(new FileDataSource(filepdf.getAbsolutePath())));
+            part2.setFileName(filepdf.getName());
+
+            
             BodyPart texto = new MimeBodyPart();
             texto.setText(mensaje);
             
             MimeMultipart mp=new MimeMultipart();
             mp.addBodyPart(texto);
             mp.addBodyPart(part);
+            mp.addBodyPart(part2);
+            
+            
             
             message.setFrom(new InternetAddress((String) properties.get("mail.smtp.mail.sender"),(String) properties.get("mail.smtp.mail.sender.name")));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(destino));
@@ -92,8 +100,8 @@ public class UtilMail {
     }
 	
     
-    public static void enviar(String destino,String asunto, String mensaje,File file)
+    public static void enviar(String destino,String asunto, String mensaje,File file,File filepdf)
     {
-    	new UtilMail().send(destino, asunto, mensaje, file);
+    	new UtilMail().send(destino, asunto, mensaje, file,filepdf);
     }
 }

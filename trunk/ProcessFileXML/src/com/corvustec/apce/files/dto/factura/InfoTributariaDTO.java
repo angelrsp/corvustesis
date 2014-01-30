@@ -1,6 +1,8 @@
-package com.corvustec.apce.files.dto;
+package com.corvustec.apce.files.dto.factura;
 
 import java.io.Serializable;
+
+import com.corvustec.apce.files.commons.util.MessagesApplication;
 
 public class InfoTributariaDTO implements Serializable{
 
@@ -25,6 +27,10 @@ public class InfoTributariaDTO implements Serializable{
    
     private String codDoc;
    
+    private String ambienteText;
+    
+    private String tipoEmisonText;
+    
     /**
      * establecimiento
      */
@@ -125,6 +131,34 @@ public class InfoTributariaDTO implements Serializable{
 
 	public void setDirMatriz(String dirMatriz) {
 		this.dirMatriz = dirMatriz;
+	}
+
+	public String getAmbienteText() {
+		if(getAmbiente().equals(MessagesApplication.getInstancia().getString("com.corvustec.apce.files.ambiente.desarrollo"))){
+			ambienteText=MessagesApplication.getInstancia().getString("com.corvustec.apce.files.ambiente.desarrolloText");
+		}
+		else if(getAmbiente().equals(MessagesApplication.getInstancia().getString("com.corvustec.apce.files.ambiente.produccion"))){
+			ambienteText=MessagesApplication.getInstancia().getString("com.corvustec.apce.files.ambiente.produccionText");
+		}
+		return ambienteText;
+	}
+
+	public void setAmbienteText(String ambienteText) {
+		this.ambienteText = ambienteText;
+	}
+
+	public String getTipoEmisonText() {
+		if(getTipoEmision().equals(MessagesApplication.getInstancia().getString("com.corvustec.apce.files.tipo.emision.normal"))){
+			tipoEmisonText=MessagesApplication.getInstancia().getString("com.corvustec.apce.files.tipo.emision.normalText");
+		}
+		else if(getTipoEmision().equals(MessagesApplication.getInstancia().getString("com.corvustec.apce.files.tipo.emision.contingencia"))){
+			tipoEmisonText=MessagesApplication.getInstancia().getString("com.corvustec.apce.files.tipo.emision.contingenciaText");
+		}
+		return tipoEmisonText;
+	}
+
+	public void setTipoEmisonText(String tipoEmisonText) {
+		this.tipoEmisonText = tipoEmisonText;
 	}
 
 }
