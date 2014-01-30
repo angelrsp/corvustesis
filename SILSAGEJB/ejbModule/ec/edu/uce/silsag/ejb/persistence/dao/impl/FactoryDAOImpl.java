@@ -14,6 +14,7 @@ import ec.edu.uce.silsag.ejb.persistence.dao.EmpresaDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.EstudioDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.ExperienciaDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.FactoryDAO;
+import ec.edu.uce.silsag.ejb.persistence.dao.ParametroDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.PerfilDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.PostulacionDAO;
 import ec.edu.uce.silsag.ejb.persistence.dao.PreguntaDAO;
@@ -59,6 +60,8 @@ public class FactoryDAOImpl implements FactoryDAO {
 	private CursoDAO cursoDAO;
 	
 	private AdicionalDAO adicionalDAO;
+	
+	private ParametroDAO parametroDAO;
 	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -186,5 +189,13 @@ public class FactoryDAOImpl implements FactoryDAO {
 			adicionalDAO = new AdicionalDAOImpl(entityManager);
 		}
 		return adicionalDAO;
+	}
+	
+	@Override
+	public ParametroDAO getParametroDAOImpl() {
+		if (parametroDAO == null) {
+			parametroDAO = new ParametroDAOImpl(entityManager);
+		}
+		return parametroDAO;
 	}
 }

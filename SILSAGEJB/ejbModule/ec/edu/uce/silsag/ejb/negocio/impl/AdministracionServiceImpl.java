@@ -17,6 +17,7 @@ import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoEstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CatalogoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EmpresaDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.ParametroDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
 
 @Stateless
@@ -156,5 +157,17 @@ public class AdministracionServiceImpl implements AdministracionService{
 //		}
 //	}
 	
-	
+	@Override
+	public ParametroDTO obtenerParametro(Object id) throws SilsagException
+	{
+		log.info("obtenerParametro");
+		try{
+			return factoryDAO.getParametroDAOImpl().find(id);
+		}
+		catch(Exception e)
+		{
+			log.info("Error al obtenerParametro" +e.toString());
+			throw new SilsagException("Error al obtenerParametro");
+		}
+	}
 }

@@ -21,6 +21,7 @@ public interface FactoryDAO {
 	RespuestaDAO getRespuestaDAOImpl();
 	CursoDAO getCursoDAOImpl();
 	AdicionalDAO getAdicionalDAOImpl();
+	ParametroDAO getParametroDAOImpl();
 	
 	
 }

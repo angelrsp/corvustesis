@@ -9,6 +9,7 @@ import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoEstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CatalogoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EmpresaDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.ParametroDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
 
 @Local
@@ -26,6 +27,8 @@ public interface AdministracionService {
 	void actualizarClave(UsuarioDTO user) throws SilsagException;
 
 	List<CandidatoEstudioDTO> obtenerCandidatos() throws SilsagException;
+
+	ParametroDTO obtenerParametro(Object id) throws SilsagException;
 
 
 	
