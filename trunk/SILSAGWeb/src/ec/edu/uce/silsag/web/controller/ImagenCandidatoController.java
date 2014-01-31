@@ -72,7 +72,11 @@ public class ImagenCandidatoController {
 	    		}
     		}
     		else
-    			return new DefaultStreamedContent();
+    		{
+    			arregloImagen=administracionService.obtenerParametro(3).getParValorImagen();
+    			mime=JsfUtil.getTypeFile(arregloImagen);
+	    		return new DefaultStreamedContent(new ByteArrayInputStream(arregloImagen),mime);
+    		}
     	}
     }
     
