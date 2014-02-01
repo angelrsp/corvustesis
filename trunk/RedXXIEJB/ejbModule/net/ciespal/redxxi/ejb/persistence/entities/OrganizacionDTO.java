@@ -15,7 +15,7 @@ public class OrganizacionDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_ORGANIZACION_ORGCODIGO_GENERATOR", sequenceName="ATE_ORGANIZACION_ORG_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="ATE_ORGANIZACION_ORGCODIGO_GENERATOR", sequenceName="ATE_ORGANIZACION_ORG_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_ORGANIZACION_ORGCODIGO_GENERATOR")
 	@Column(name="org_codigo")
 	private Integer orgCodigo;

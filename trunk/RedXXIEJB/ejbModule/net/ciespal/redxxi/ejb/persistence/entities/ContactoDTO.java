@@ -15,7 +15,7 @@ public class ContactoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_CONTACTOS_CONCODIGO_GENERATOR", sequenceName="ATE_CONTACTOS_CON_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="ATE_CONTACTOS_CONCODIGO_GENERATOR", sequenceName="ATE_CONTACTOS_CON_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_CONTACTOS_CONCODIGO_GENERATOR")
 	@Column(name="con_codigo")
 	private Integer conCodigo;

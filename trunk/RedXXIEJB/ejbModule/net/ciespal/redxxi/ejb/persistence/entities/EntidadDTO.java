@@ -16,10 +16,14 @@ public class EntidadDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_ENTIDAD_ENTCODIGO_GENERATOR", sequenceName="ATE_ENTIDAD_ENT_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="ATE_ENTIDAD_ENTCODIGO_GENERATOR", sequenceName="ATE_ENTIDAD_ENT_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_ENTIDAD_ENTCODIGO_GENERATOR")
 	@Column(name="ent_codigo")
 	private Integer entCodigo;
+
+	//bi-directional many-to-one association to CentroDTO
+	@OneToMany(mappedBy="ateEntidad")
+	private List<CentroDTO> ateCentros;
 
 	//bi-directional many-to-one association to ContactoDTO
 	@OneToMany(mappedBy="ateEntidad")
@@ -29,26 +33,25 @@ public class EntidadDTO implements Serializable {
 	@OneToMany(mappedBy="ateEntidad")
 	private List<DoctorDTO> ateDoctors;
 
-	//bi-directional many-to-one association to UbicacionDTO
-	@ManyToOne
-	@JoinColumn(name="ent_ubicacion")
-	private UbicacionDTO ateUbicacion;
-
-	//bi-directional many-to-one association to FacultadCarreraDTO
+	//bi-directional many-to-one association to EventoDTO
 	@OneToMany(mappedBy="ateEntidad")
-	private List<FacultadCarreraDTO> ateFacultadCarreras;
+	private List<EventoDTO> ateEventos;
 
 	//bi-directional many-to-one association to NoticiaDTO
 	@OneToMany(mappedBy="ateEntidad")
 	private List<NoticiaDTO> ateNoticias;
 
+	//bi-directional many-to-one association to ObraDTO
+	@OneToMany(mappedBy="ateEntidad")
+	private List<ObraDTO> ateObras;
+
 	//bi-directional many-to-one association to OrganizacionDTO
 	@OneToMany(mappedBy="ateEntidad")
 	private List<OrganizacionDTO> ateOrganizacions;
 
-	//bi-directional many-to-one association to ProyectosInvestigacionDTO
+	//bi-directional many-to-one association to ProyectoInvestigacionDTO
 	@OneToMany(mappedBy="ateEntidad")
-	private List<ProyectosInvestigacionDTO> ateProyectosInvestigacions;
+	private List<ProyectoInvestigacionDTO> ateProyectoInvestigacions;
 
 	//bi-directional many-to-one association to PublicacionDTO
 	@OneToMany(mappedBy="ateEntidad")
@@ -63,6 +66,28 @@ public class EntidadDTO implements Serializable {
 
 	public void setEntCodigo(Integer entCodigo) {
 		this.entCodigo = entCodigo;
+	}
+
+	public List<CentroDTO> getAteCentros() {
+		return this.ateCentros;
+	}
+
+	public void setAteCentros(List<CentroDTO> ateCentros) {
+		this.ateCentros = ateCentros;
+	}
+
+	public CentroDTO addAteCentro(CentroDTO ateCentro) {
+		getAteCentros().add(ateCentro);
+		ateCentro.setAteEntidad(this);
+
+		return ateCentro;
+	}
+
+	public CentroDTO removeAteCentro(CentroDTO ateCentro) {
+		getAteCentros().remove(ateCentro);
+		ateCentro.setAteEntidad(null);
+
+		return ateCentro;
 	}
 
 	public List<ContactoDTO> getAteContactos() {
@@ -109,34 +134,26 @@ public class EntidadDTO implements Serializable {
 		return ateDoctor;
 	}
 
-	public UbicacionDTO getAteUbicacion() {
-		return this.ateUbicacion;
+	public List<EventoDTO> getAteEventos() {
+		return this.ateEventos;
 	}
 
-	public void setAteUbicacion(UbicacionDTO ateUbicacion) {
-		this.ateUbicacion = ateUbicacion;
+	public void setAteEventos(List<EventoDTO> ateEventos) {
+		this.ateEventos = ateEventos;
 	}
 
-	public List<FacultadCarreraDTO> getAteFacultadCarreras() {
-		return this.ateFacultadCarreras;
+	public EventoDTO addAteEvento(EventoDTO ateEvento) {
+		getAteEventos().add(ateEvento);
+		ateEvento.setAteEntidad(this);
+
+		return ateEvento;
 	}
 
-	public void setAteFacultadCarreras(List<FacultadCarreraDTO> ateFacultadCarreras) {
-		this.ateFacultadCarreras = ateFacultadCarreras;
-	}
+	public EventoDTO removeAteEvento(EventoDTO ateEvento) {
+		getAteEventos().remove(ateEvento);
+		ateEvento.setAteEntidad(null);
 
-	public FacultadCarreraDTO addAteFacultadCarrera(FacultadCarreraDTO ateFacultadCarrera) {
-		getAteFacultadCarreras().add(ateFacultadCarrera);
-		ateFacultadCarrera.setAteEntidad(this);
-
-		return ateFacultadCarrera;
-	}
-
-	public FacultadCarreraDTO removeAteFacultadCarrera(FacultadCarreraDTO ateFacultadCarrera) {
-		getAteFacultadCarreras().remove(ateFacultadCarrera);
-		ateFacultadCarrera.setAteEntidad(null);
-
-		return ateFacultadCarrera;
+		return ateEvento;
 	}
 
 	public List<NoticiaDTO> getAteNoticias() {
@@ -161,6 +178,28 @@ public class EntidadDTO implements Serializable {
 		return ateNoticia;
 	}
 
+	public List<ObraDTO> getAteObras() {
+		return this.ateObras;
+	}
+
+	public void setAteObras(List<ObraDTO> ateObras) {
+		this.ateObras = ateObras;
+	}
+
+	public ObraDTO addAteObra(ObraDTO ateObra) {
+		getAteObras().add(ateObra);
+		ateObra.setAteEntidad(this);
+
+		return ateObra;
+	}
+
+	public ObraDTO removeAteObra(ObraDTO ateObra) {
+		getAteObras().remove(ateObra);
+		ateObra.setAteEntidad(null);
+
+		return ateObra;
+	}
+
 	public List<OrganizacionDTO> getAteOrganizacions() {
 		return this.ateOrganizacions;
 	}
@@ -183,26 +222,26 @@ public class EntidadDTO implements Serializable {
 		return ateOrganizacion;
 	}
 
-	public List<ProyectosInvestigacionDTO> getAteProyectosInvestigacions() {
-		return this.ateProyectosInvestigacions;
+	public List<ProyectoInvestigacionDTO> getAteProyectoInvestigacions() {
+		return this.ateProyectoInvestigacions;
 	}
 
-	public void setAteProyectosInvestigacions(List<ProyectosInvestigacionDTO> ateProyectosInvestigacions) {
-		this.ateProyectosInvestigacions = ateProyectosInvestigacions;
+	public void setAteProyectoInvestigacions(List<ProyectoInvestigacionDTO> ateProyectoInvestigacions) {
+		this.ateProyectoInvestigacions = ateProyectoInvestigacions;
 	}
 
-	public ProyectosInvestigacionDTO addAteProyectosInvestigacion(ProyectosInvestigacionDTO ateProyectosInvestigacion) {
-		getAteProyectosInvestigacions().add(ateProyectosInvestigacion);
-		ateProyectosInvestigacion.setAteEntidad(this);
+	public ProyectoInvestigacionDTO addAteProyectoInvestigacion(ProyectoInvestigacionDTO ateProyectoInvestigacion) {
+		getAteProyectoInvestigacions().add(ateProyectoInvestigacion);
+		ateProyectoInvestigacion.setAteEntidad(this);
 
-		return ateProyectosInvestigacion;
+		return ateProyectoInvestigacion;
 	}
 
-	public ProyectosInvestigacionDTO removeAteProyectosInvestigacion(ProyectosInvestigacionDTO ateProyectosInvestigacion) {
-		getAteProyectosInvestigacions().remove(ateProyectosInvestigacion);
-		ateProyectosInvestigacion.setAteEntidad(null);
+	public ProyectoInvestigacionDTO removeAteProyectoInvestigacion(ProyectoInvestigacionDTO ateProyectoInvestigacion) {
+		getAteProyectoInvestigacions().remove(ateProyectoInvestigacion);
+		ateProyectoInvestigacion.setAteEntidad(null);
 
-		return ateProyectosInvestigacion;
+		return ateProyectoInvestigacion;
 	}
 
 	public List<PublicacionDTO> getAtePublicacions() {

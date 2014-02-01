@@ -15,7 +15,7 @@ public class PublicacionDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_PUBLICACION_PUBCODIGO_GENERATOR", sequenceName="ATE_PUBLICACION_PUB_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="ATE_PUBLICACION_PUBCODIGO_GENERATOR", sequenceName="ATE_PUBLICACION_PUB_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_PUBLICACION_PUBCODIGO_GENERATOR")
 	@Column(name="pub_codigo")
 	private Integer pubCodigo;

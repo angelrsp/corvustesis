@@ -15,7 +15,7 @@ public class NoticiaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_NOTICIAS_NOTCODIGO_GENERATOR", sequenceName="ATE_NOTICIAS_NOT_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="ATE_NOTICIAS_NOTCODIGO_GENERATOR", sequenceName="ATE_NOTICIAS_NOT_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_NOTICIAS_NOTCODIGO_GENERATOR")
 	@Column(name="not_codigo")
 	private Integer notCodigo;

@@ -17,7 +17,7 @@ public class DoctorDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_DOCTOR_DOCCODIGO_GENERATOR", sequenceName="ATE_DOCTOR_DOC_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="ATE_DOCTOR_DOCCODIGO_GENERATOR", sequenceName="ATE_DOCTOR_DOC_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_DOCTOR_DOCCODIGO_GENERATOR")
 	@Column(name="doc_codigo")
 	private Integer docCodigo;
@@ -60,10 +60,6 @@ public class DoctorDTO implements Serializable {
 	//bi-directional many-to-one association to EspecalidadDTO
 	@OneToMany(mappedBy="ateDoctor")
 	private List<EspecalidadDTO> ateEspecalidads;
-
-	//bi-directional many-to-one association to ObraDTO
-	@OneToMany(mappedBy="ateDoctor")
-	private List<ObraDTO> ateObras;
 
 	public DoctorDTO() {
 	}
@@ -184,28 +180,6 @@ public class DoctorDTO implements Serializable {
 		ateEspecalidad.setAteDoctor(null);
 
 		return ateEspecalidad;
-	}
-
-	public List<ObraDTO> getAteObras() {
-		return this.ateObras;
-	}
-
-	public void setAteObras(List<ObraDTO> ateObras) {
-		this.ateObras = ateObras;
-	}
-
-	public ObraDTO addAteObra(ObraDTO ateObra) {
-		getAteObras().add(ateObra);
-		ateObra.setAteDoctor(this);
-
-		return ateObra;
-	}
-
-	public ObraDTO removeAteObra(ObraDTO ateObra) {
-		getAteObras().remove(ateObra);
-		ateObra.setAteDoctor(null);
-
-		return ateObra;
 	}
 
 }

@@ -15,7 +15,7 @@ public class MencionDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_MENCIONES_MENCODIGO_GENERATOR", sequenceName="ATE_MENCIONES_MEN_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="ATE_MENCIONES_MENCODIGO_GENERATOR", sequenceName="ATE_MENCIONES_MEN_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_MENCIONES_MENCODIGO_GENERATOR")
 	@Column(name="men_codigo")
 	private Integer menCodigo;
@@ -23,10 +23,10 @@ public class MencionDTO implements Serializable {
 	@Column(name="men_nombre")
 	private String menNombre;
 
-	//bi-directional many-to-one association to FacultadCarreraDTO
+	//bi-directional many-to-one association to CarreraDTO
 	@ManyToOne
-	@JoinColumn(name="men_facultad")
-	private FacultadCarreraDTO ateFacultadCarrera;
+	@JoinColumn(name="men_carrera")
+	private CarreraDTO ateCarrera;
 
 	public MencionDTO() {
 	}
@@ -47,12 +47,12 @@ public class MencionDTO implements Serializable {
 		this.menNombre = menNombre;
 	}
 
-	public FacultadCarreraDTO getAteFacultadCarrera() {
-		return this.ateFacultadCarrera;
+	public CarreraDTO getAteCarrera() {
+		return this.ateCarrera;
 	}
 
-	public void setAteFacultadCarrera(FacultadCarreraDTO ateFacultadCarrera) {
-		this.ateFacultadCarrera = ateFacultadCarrera;
+	public void setAteCarrera(CarreraDTO ateCarrera) {
+		this.ateCarrera = ateCarrera;
 	}
 
 }
