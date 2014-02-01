@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
 
-import javax.faces.context.FacesContext;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,10 +45,15 @@ public class ApplicationUtil {
     
 	public static String saveToDisk(byte[] bytefile)
 	{
-		String file,path,pathAbs = null;
+		String file,path,date,pathAbs = null;
 		try {
 			file= UUID.randomUUID().toString();
-			path=FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+			//path=FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+			date=String.valueOf(CalendarUtil.getYear())+"\\"+String.valueOf(CalendarUtil.getMonth())+"\\"+String.valueOf(CalendarUtil.getDay());
+			path=System.getProperty("jboss.server.data.dir")+"\\SILSAG\\"+date;
+			File f= new File(path);
+			if(!f.exists())
+				f.mkdirs();
 			pathAbs=path+"\\"+file+".bin";
 			FileOutputStream fos=new FileOutputStream(pathAbs);
 			fos.write(bytefile);
