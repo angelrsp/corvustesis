@@ -15,7 +15,7 @@ public class PublicacionPeriodicaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_PUBLICACIONES_PERIODICAS_PPECODIGO_GENERATOR", sequenceName="ATE_PUBLICACIONES_PERIODICAS_PPE_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="ATE_PUBLICACIONES_PERIODICAS_PPECODIGO_GENERATOR", sequenceName="ATE_PUBLICACIONES_PERIODICAS_PPE_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_PUBLICACIONES_PERIODICAS_PPECODIGO_GENERATOR")
 	@Column(name="ppe_codigo")
 	private Integer ppeCodigo;
@@ -23,10 +23,10 @@ public class PublicacionPeriodicaDTO implements Serializable {
 	@Column(name="ppe_nombre")
 	private Integer ppeNombre;
 
-	//bi-directional many-to-one association to FacultadCarreraDTO
+	//bi-directional many-to-one association to CentroDTO
 	@ManyToOne
 	@JoinColumn(name="ppe_facultad")
-	private FacultadCarreraDTO ateFacultadCarrera;
+	private CentroDTO ateCentro;
 
 	public PublicacionPeriodicaDTO() {
 	}
@@ -47,12 +47,12 @@ public class PublicacionPeriodicaDTO implements Serializable {
 		this.ppeNombre = ppeNombre;
 	}
 
-	public FacultadCarreraDTO getAteFacultadCarrera() {
-		return this.ateFacultadCarrera;
+	public CentroDTO getAteCentro() {
+		return this.ateCentro;
 	}
 
-	public void setAteFacultadCarrera(FacultadCarreraDTO ateFacultadCarrera) {
-		this.ateFacultadCarrera = ateFacultadCarrera;
+	public void setAteCentro(CentroDTO ateCentro) {
+		this.ateCentro = ateCentro;
 	}
 
 }

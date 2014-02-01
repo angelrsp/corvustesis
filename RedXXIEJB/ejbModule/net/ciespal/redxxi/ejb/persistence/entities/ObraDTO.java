@@ -15,18 +15,27 @@ public class ObraDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_OBRAS_OBRCODIGO_GENERATOR", sequenceName="ATE_OBRAS_OBR_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="ATE_OBRAS_OBRCODIGO_GENERATOR", sequenceName="ATE_OBRAS_OBR_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_OBRAS_OBRCODIGO_GENERATOR")
 	@Column(name="obr_codigo")
 	private Integer obrCodigo;
 
+	@Column(name="obr_campo_conocimiento")
+	private Integer obrCampoConocimiento;
+
 	@Column(name="obr_nombre")
 	private String obrNombre;
 
-	//bi-directional many-to-one association to DoctorDTO
+	@Column(name="obr_tipo")
+	private Integer obrTipo;
+
+	@Column(name="obr_ubicacion")
+	private Integer obrUbicacion;
+
+	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne
-	@JoinColumn(name="obr_doctor")
-	private DoctorDTO ateDoctor;
+	@JoinColumn(name="obr_entidad")
+	private EntidadDTO ateEntidad;
 
 	public ObraDTO() {
 	}
@@ -39,6 +48,14 @@ public class ObraDTO implements Serializable {
 		this.obrCodigo = obrCodigo;
 	}
 
+	public Integer getObrCampoConocimiento() {
+		return this.obrCampoConocimiento;
+	}
+
+	public void setObrCampoConocimiento(Integer obrCampoConocimiento) {
+		this.obrCampoConocimiento = obrCampoConocimiento;
+	}
+
 	public String getObrNombre() {
 		return this.obrNombre;
 	}
@@ -47,12 +64,28 @@ public class ObraDTO implements Serializable {
 		this.obrNombre = obrNombre;
 	}
 
-	public DoctorDTO getAteDoctor() {
-		return this.ateDoctor;
+	public Integer getObrTipo() {
+		return this.obrTipo;
 	}
 
-	public void setAteDoctor(DoctorDTO ateDoctor) {
-		this.ateDoctor = ateDoctor;
+	public void setObrTipo(Integer obrTipo) {
+		this.obrTipo = obrTipo;
+	}
+
+	public Integer getObrUbicacion() {
+		return this.obrUbicacion;
+	}
+
+	public void setObrUbicacion(Integer obrUbicacion) {
+		this.obrUbicacion = obrUbicacion;
+	}
+
+	public EntidadDTO getAteEntidad() {
+		return this.ateEntidad;
+	}
+
+	public void setAteEntidad(EntidadDTO ateEntidad) {
+		this.ateEntidad = ateEntidad;
 	}
 
 }

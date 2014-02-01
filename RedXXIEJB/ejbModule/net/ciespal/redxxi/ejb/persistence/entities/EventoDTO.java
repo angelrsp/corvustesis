@@ -15,7 +15,7 @@ public class EventoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_EVENTOS_EVECODIGO_GENERATOR", sequenceName="ATE_EVENTOS_EVE_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="ATE_EVENTOS_EVECODIGO_GENERATOR", sequenceName="ATE_EVENTOS_EVE_CODIGO_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_EVENTOS_EVECODIGO_GENERATOR")
 	@Column(name="eve_codigo")
 	private Integer eveCodigo;
@@ -23,10 +23,13 @@ public class EventoDTO implements Serializable {
 	@Column(name="eve_nombre")
 	private String eveNombre;
 
-	//bi-directional many-to-one association to FacultadCarreraDTO
+	@Column(name="eve_ubicacion")
+	private Integer eveUbicacion;
+
+	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne
-	@JoinColumn(name="eve_facultad")
-	private FacultadCarreraDTO ateFacultadCarrera;
+	@JoinColumn(name="eve_entidad")
+	private EntidadDTO ateEntidad;
 
 	public EventoDTO() {
 	}
@@ -47,12 +50,20 @@ public class EventoDTO implements Serializable {
 		this.eveNombre = eveNombre;
 	}
 
-	public FacultadCarreraDTO getAteFacultadCarrera() {
-		return this.ateFacultadCarrera;
+	public Integer getEveUbicacion() {
+		return this.eveUbicacion;
 	}
 
-	public void setAteFacultadCarrera(FacultadCarreraDTO ateFacultadCarrera) {
-		this.ateFacultadCarrera = ateFacultadCarrera;
+	public void setEveUbicacion(Integer eveUbicacion) {
+		this.eveUbicacion = eveUbicacion;
+	}
+
+	public EntidadDTO getAteEntidad() {
+		return this.ateEntidad;
+	}
+
+	public void setAteEntidad(EntidadDTO ateEntidad) {
+		this.ateEntidad = ateEntidad;
 	}
 
 }
