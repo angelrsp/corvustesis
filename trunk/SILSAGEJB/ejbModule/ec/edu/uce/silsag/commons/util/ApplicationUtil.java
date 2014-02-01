@@ -1,9 +1,15 @@
 package ec.edu.uce.silsag.commons.util;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.nio.file.Path;
+import java.util.UUID;
+
+import javax.faces.context.FacesContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,10 +45,14 @@ public class ApplicationUtil {
     }
 	
     
-	public static String saveToDisk(byte[] bytefile,String filename)
+	public static String saveToDisk(byte[] bytefile)
 	{
+		String file,path,pathAbs = null;
 		try {
-			FileOutputStream fos=new FileOutputStream(filename);
+			file= UUID.randomUUID().toString();
+			path=FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+			pathAbs=path+"\\"+file+".bin";
+			FileOutputStream fos=new FileOutputStream(pathAbs);
 			fos.write(bytefile);
 			fos.close();
 		} catch (FileNotFoundException e) {
@@ -50,7 +60,15 @@ public class ApplicationUtil {
 		} catch (IOException e) {
 			logger.info("FileNotFoundException {}",e.toString());
 		}
-		return filename;
+		return pathAbs;
+	}
+	
+	public static byte[] getFileToDisk(String filePath)
+	{
+		
+		ObjectInputStream file = new ObjectInputStream(new FileInputStream( filePath ));
+		byte[] content=new byte[file.read];
+		file.readByte();
 	}
     
 }
