@@ -89,7 +89,7 @@ public class CandidatosServiceImpl implements CandidatosService {
 				candidatoDTO.setCanMaxEstudio(es);
 			}
 			
-			ApplicationUtil.saveToDisk(candidatoDTO.getCanFoto());
+			//ApplicationUtil.saveToDisk(candidatoDTO.getCanFoto());
 			
 			return factoryDAO.getCandidatoDAOImpl().edit(candidatoDTO);
 		} catch (Exception e) {

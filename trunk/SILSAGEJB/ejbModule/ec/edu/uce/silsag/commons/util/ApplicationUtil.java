@@ -45,16 +45,18 @@ public class ApplicationUtil {
     
 	public static String saveToDisk(byte[] bytefile)
 	{
-		String file,path,date,pathAbs = null;
+		String file,path,date,pathAbs,pathSave = null;
 		try {
 			file= UUID.randomUUID().toString();
 			//path=FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
 			date=String.valueOf(CalendarUtil.getYear())+"\\"+String.valueOf(CalendarUtil.getMonth())+"\\"+String.valueOf(CalendarUtil.getDay());
+			pathSave="\\SILSAG\\"+date;
 			path=System.getProperty("jboss.server.data.dir")+"\\SILSAG\\"+date;
 			File f= new File(path);
 			if(!f.exists())
 				f.mkdirs();
 			pathAbs=path+"\\"+file+".bin";
+			pathSave=pathSave+"\\"+file+".bin";
 			FileOutputStream fos=new FileOutputStream(pathAbs);
 			fos.write(bytefile);
 			fos.close();
@@ -63,7 +65,7 @@ public class ApplicationUtil {
 		} catch (IOException e) {
 			logger.info("FileNotFoundException {}",e.toString());
 		}
-		return pathAbs;
+		return pathSave;
 	}
 	
 	public static byte[] getFileToDisk(String filePath)
