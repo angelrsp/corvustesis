@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<p:panel header="#{i18n['label.panel.proyecto.investigacion']}">
+		
+		<table>
+		
+			<tr>
+				<td><h:outputText value="#{i18n['label.titulo']}:&#160;" /></td>
+				<td><p:inputText/></td>
+				
+				<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
+				<td><p:inputText/></td>
+				
+				<td><h:outputText value="#{i18n['label.coordinador']}:&#160;" /></td>
+				<td><p:inputText/></td>				
+			</tr>
+			
+		</table>
+
+		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
+		
+			<p:column headerText="#{i18n['label.titulo']}">
+				<h:outputText value="" />
+			</p:column>
+
+			<p:column headerText="#{i18n['label.perfil']}">
+				<h:outputText value="" />
+			</p:column>
+
+			<p:column headerText="#{i18n['label.coordinador']}">
+				<h:outputText value="" />
+			</p:column>
+				
+		</p:dataTable>
+		
+	</p:panel>
+
+</html>
