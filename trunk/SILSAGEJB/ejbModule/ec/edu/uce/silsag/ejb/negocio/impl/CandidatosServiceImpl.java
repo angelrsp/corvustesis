@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ec.edu.uce.silsag.commons.dto.util.EstudioReportDTO;
+import ec.edu.uce.silsag.commons.util.ApplicationUtil;
 import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsag.ejb.persistence.dao.FactoryDAO;
@@ -88,7 +89,7 @@ public class CandidatosServiceImpl implements CandidatosService {
 				candidatoDTO.setCanMaxEstudio(es);
 			}
 			
-			
+			ApplicationUtil.saveToDisk(candidatoDTO.getCanFoto());
 			
 			return factoryDAO.getCandidatoDAOImpl().edit(candidatoDTO);
 		} catch (Exception e) {
