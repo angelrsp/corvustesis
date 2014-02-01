@@ -1,12 +1,12 @@
 package ec.edu.uce.silsag.commons.util;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.nio.file.Path;
+import java.io.InputStream;
 import java.util.UUID;
 
 import javax.faces.context.FacesContext;
@@ -65,10 +65,42 @@ public class ApplicationUtil {
 	
 	public static byte[] getFileToDisk(String filePath)
 	{
-		
-		ObjectInputStream file = new ObjectInputStream(new FileInputStream( filePath ));
-		byte[] content=new byte[file.read];
-		file.readByte();
+		logger.info("Reading in binary file named : " + filePath);
+	    File file = new File(filePath);
+	    logger.info("File size: " + file.length());
+	    byte[] result = new byte[(int)file.length()];
+	    try {
+	      InputStream input = null;
+	      try {
+	        int totalBytesRead = 0;
+	        input = new BufferedInputStream(new FileInputStream(file));
+	        while(totalBytesRead < result.length){
+	          int bytesRemaining = result.length - totalBytesRead;
+	          //input.read() returns -1, 0, or more :
+	          int bytesRead = input.read(result, totalBytesRead, bytesRemaining); 
+	          if (bytesRead > 0){
+	            totalBytesRead = totalBytesRead + bytesRead;
+	          }
+	        }
+	        /*
+	         the above style is a bit tricky: it places bytes into the 'result' array; 
+	         'result' is an output parameter;
+	         the while loop usually has a single iteration only.
+	        */
+	        logger.info("Num bytes read: " + totalBytesRead);
+	      }
+	      finally {
+	    	  logger.info("Closing input stream.");
+	        input.close();
+	      }
+	    }
+	    catch (FileNotFoundException ex) {
+	    	logger.info("File not found.");
+	    }
+	    catch (IOException ex) {
+	    	logger.info(ex.toString());
+	    }
+	    return result;
 	}
     
 }
