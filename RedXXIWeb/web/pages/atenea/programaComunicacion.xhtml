@@ -9,51 +9,60 @@
 
 		<ui:define name="contenido">
 		
-		<p:panel header="#{i18n['label.panel.datos']}">
+		<p:growl id="growl"></p:growl>
+		
+		<p:panel id="pnlDatos" header="#{i18n['label.panel.datos']}">
 		
 		<table>
 		
 			<tr>
 				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
-				<td><p:selectOneMenu>
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}">
 						<f:selectItem itemLabel="--Seleccione--"/>
 					</p:selectOneMenu></td>
 				<td><p:commandButton onclick="PF('dlgPais').show()" type="button" value="#{i18n['boton.agregar']}"/></td>
 
-				<td><h:outputText value="#{i18n['label.universidad']}:&#160;" /></td>
-				<td><p:selectOneMenu>
+				<td><h:outputText value="#{i18n['label.provincia']}:&#160;" /></td>
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}">
 						<f:selectItem itemLabel="--Seleccione--"/>
 					</p:selectOneMenu></td>
-				<td><p:commandButton onclick="PF('dlgUniversidad').show()" type="button" value="#{i18n['boton.agregar']}"/></td>	
+				<td><p:commandButton onclick="PF('dlgProvincia').show()" type="button" value="#{i18n['boton.agregar']}"/></td>
+
+			</tr>
+			<tr>
+
+				<td><h:outputText value="#{i18n['label.ciudad']}:&#160;" /></td>
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}">
+						<f:selectItem itemLabel="--Seleccione--"/>
+					</p:selectOneMenu></td>
+				<td><p:commandButton onclick="PF('dlgCiudad').show()" type="button" value="#{i18n['boton.agregar']}"/></td>
+
 					
 			</tr>
 			
 			<tr>
-				<td><h:outputText value="#{i18n['label.provincia']}:&#160;" /></td>
-				<td><p:selectOneMenu>
+
+				<td><h:outputText value="#{i18n['label.universidad']}:&#160;" /></td>
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.universidad']}&#160;#{i18n['label.requerido']}">
 						<f:selectItem itemLabel="--Seleccione--"/>
 					</p:selectOneMenu></td>
-				<td><p:commandButton onclick="PF('dlgUniversidad').show()" type="button" value="#{i18n['boton.agregar']}"/></td>
+				<td><p:commandButton onclick="PF('dlgUniversidad').show()" type="button" value="#{i18n['boton.agregar']}"/></td>	
 				
 				
 				<td><h:outputText value="#{i18n['label.facultad']}:&#160;" /></td>
-				<td><p:selectOneMenu>
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.facultad']}&#160;#{i18n['label.requerido']}">
 						<f:selectItem itemLabel="--Seleccione--"/>
 					</p:selectOneMenu></td>
-				<td><p:commandButton onclick="PF('dlgUniversidad').show()" type="button" value="#{i18n['boton.agregar']}"/></td>
+				<td><p:commandButton onclick="PF('dlgFacultad').show()" type="button" value="#{i18n['boton.agregar']}"/></td>
 			</tr>
 			
 			<tr>
-				<td><h:outputText value="#{i18n['label.ciudad']}:&#160;" /></td>
-				<td><p:selectOneMenu>
-						<f:selectItem itemLabel="--Seleccione--"/>
-					</p:selectOneMenu></td>
-				<td><p:commandButton onclick="PF('dlgUniversidad').show()" type="button" value="#{i18n['boton.agregar']}"/></td>
+
 				<td><h:outputText value="#{i18n['label.escuela']}:&#160;" /></td>
-				<td><p:selectOneMenu>
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.escuela']}&#160;#{i18n['label.requerido']}">
 						<f:selectItem itemLabel="--Seleccione--"/>
 					</p:selectOneMenu></td>
-				<td><p:commandButton onclick="PF('dlgUniversidad').show()" type="button" value="#{i18n['boton.agregar']}"/></td>
+				<td><p:commandButton onclick="PF('dlgEscuela').show()" type="button" value="#{i18n['boton.agregar']}"/></td>
 							
 			</tr>		
 
@@ -62,39 +71,63 @@
 			<tr>
 			
 				<td><h:outputText value="#{i18n['label.carrera']}:&#160;" /></td>
-				<td><p:selectOneMenu>
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.carrera']}&#160;#{i18n['label.requerido']}">
 						<f:selectItem itemLabel="--Seleccione--"/>
 					</p:selectOneMenu></td>
-				<td><p:commandButton onclick="PF('dlgUniversidad').show()" type="button" value="#{i18n['boton.agregar']}"/></td>			
 
 				<td><h:outputText value="#{i18n['label.modalidad']}:&#160;" /></td>
-				<td><p:selectOneMenu>
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.modalidad']}&#160;#{i18n['label.requerido']}">
 						<f:selectItem itemLabel="--Seleccione--"/>
 					</p:selectOneMenu></td>
-				<td><p:commandButton onclick="PF('dlgUniversidad').show()" type="button" value="#{i18n['boton.agregar']}"/></td>			
 
 			
 			</tr>
 			
 			<tr>
 				<td><h:outputText value="#{i18n['label.perfil.carrera']}:&#160;" /></td>
-				<td colspan="2"><p:inputTextarea autoResize="false"></p:inputTextarea></td>
+				<td colspan="2"><p:inputTextarea autoResize="false" required="true" requiredMessage="#{i18n['label.perfil.carrera']}&#160;#{i18n['label.requerido']}"></p:inputTextarea></td>
 				<td><h:outputText value="#{i18n['label.cantidad.profesor']}:&#160;" /></td>
-				<td><p:inputText style="width:50px;"/></td>	
+				<td><p:inputText style="width:50px;" required="true" requiredMessage="#{i18n['label.cantidad.profesor']}&#160;#{i18n['label.requerido']}"/></td>	
 				<td><h:outputText value="#{i18n['label.cantidad.estudiante']}:&#160;" /></td>
-				<td><p:inputText style="width:50px;"/></td>	
+				<td><p:inputText style="width:50px;" required="true" requiredMessage="#{i18n['label.cantidad.estudiante']}&#160;#{i18n['label.requerido']}"/></td>	
 					
 			</tr>
 			
 			<tr>
-				<td colspan="9" align="center"><p:commandButton value="#{i18n['boton.guardar']}"/></td>
+				<td colspan="9" align="center"><p:commandButton value="#{i18n['boton.guardar']}" process="pnlDatos" update="pnlDatos,growl"/>
+				<p:commandButton value="#{i18n['boton.buscar']}" process="pnlDatos" update="pnlDatos,growl"/></td>
 			</tr>
 			
 		</table>
 		
 		</p:panel>
 		
-	
+		<p:panel header="#{i18n['label.panel.contacto']}">
+				
+		<table>
+			<tr>
+				<td><h:outputText value="#{i18n['label.tipo']}:&#160;:" /></td>
+				<td>
+					<p:selectOneMenu>
+						<f:selectItem itemLabel="--Seleccione--"/>
+					</p:selectOneMenu>
+				</td>
+				<td><h:outputText value="#{i18n['label.valor']}:&#160;" /></td>
+				<td><p:inputText></p:inputText></td>
+				<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>
+			</tr>			
+		</table>
+		
+		<p:spacer height="10"/>
+		
+		<p:dataTable emptyMessage="No existen registros">
+			<p:column headerText="#{i18n['label.tipo']}"></p:column>
+			<p:column headerText="#{i18n['label.valor']}"></p:column>
+			<p:column headerText="#{i18n['boton.editar']}" width="15"></p:column>
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15"></p:column>
+		</p:dataTable>
+		
+		</p:panel>
 		
 		
 		<p:panel header="#{i18n['label.mension']}">
@@ -103,7 +136,7 @@
 			<tr>
 				<td><h:outputText value="#{i18n['label.mension']}:&#160;" /></td>
 				<td><p:inputTextarea></p:inputTextarea></td>
-				<td><p:commandButton onclick="PF('dlgUniversidad').show()" type="button" value="#{i18n['boton.agregar']}"></p:commandButton></td>				
+				<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>				
 			</tr>
 		</table>
 		
@@ -141,7 +174,7 @@
 				<td><h:outputText value="#{i18n['label.coordinador']}:&#160;" /></td>
 				<td><p:inputText/></td>
 				
-				<td><p:commandButton value="#{i18n['boton.agregar']}"/></td>
+				<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>
 			</tr>
 			
 		</table>
@@ -180,7 +213,8 @@
 					<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
 					<td><p:inputText/></td>
 					<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
-					<td><p:inputText/></td>													
+					<td><p:inputText/></td>
+					<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>
 				</tr>
 			</table>
 
@@ -212,7 +246,7 @@
 				<tr>
 					<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
 					<td><p:inputText/></td>
-					<td><p:commandButton value="#{i18n['boton.agregar']}"/></td>					
+					<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>					
 				</tr>
 			</table>
 
@@ -235,10 +269,194 @@
 		</p:panel>
 
 
-		<p:dialog widgetVar="dlgPais" header="#{i18n['label.pais']}">
+		<p:dialog widgetVar="dlgPais" header="#{i18n['label.pais']}" modal="true" closeOnEscape="true">
+
+		<table>
 		
+			<tr>
+				<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>
+				<td><p:inputText/></td>
+								
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><p:commandButton value="#{i18n['boton.guardar']}"/></td>
+			</tr>
+		</table>
+
+		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
+		
+			<p:column headerText="#{i18n['label.descripcion']}">
+				<h:outputText value="" />
+			</p:column>
+		
+		</p:dataTable>
+				
+		</p:dialog>
+
+		<p:dialog widgetVar="dlgProvincia" header="#{i18n['label.provincia']}" modal="true" closeOnEscape="true">
+
+		<table>
+			<tr>
+				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
+				<td><p:selectOneMenu>
+					<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
+				</p:selectOneMenu></td>
+			</tr>		
+			<tr>
+				<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>
+				<td><p:inputText/></td>
+								
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><p:commandButton value="#{i18n['boton.guardar']}"/></td>
+			</tr>
+		</table>
+
+		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
+		
+			<p:column headerText="#{i18n['label.descripcion']}">
+				<h:outputText value="" />
+			</p:column>
+		
+		</p:dataTable>
+				
+		</p:dialog>
+		
+
+		<p:dialog widgetVar="dlgCiudad" header="#{i18n['label.ciudad']}" modal="true" closeOnEscape="true">
+
+		<table>
+			<tr>
+				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
+				<td><p:selectOneMenu>
+					<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
+				</p:selectOneMenu></td>
+			</tr>
+			<tr>
+				<td><h:outputText value="#{i18n['label.provincia']}:&#160;" /></td>
+				<td><p:selectOneMenu>
+					<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
+				</p:selectOneMenu></td>
+			</tr>		
+					
+			<tr>
+				<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>
+				<td><p:inputText/></td>
+								
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><p:commandButton value="#{i18n['boton.guardar']}"/></td>
+			</tr>
+		</table>
+
+		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
+		
+			<p:column headerText="#{i18n['label.descripcion']}">
+				<h:outputText value="" />
+			</p:column>
+		
+		</p:dataTable>
+				
+		</p:dialog>
+
+
+
+		
+		<p:dialog widgetVar="dlgUniversidad" header="#{i18n['label.universidad']}" modal="true" closeOnEscape="true">
+
+		<table>
+			<tr>
+				<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>
+				<td><p:inputText/></td>
+								
+			</tr>
+			<tr>
+				<td><h:outputText value="#{i18n['label.categoria.acreditacion']}:&#160;" /></td>
+				<td><p:inputText/></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><p:commandButton value="#{i18n['boton.guardar']}"/></td>
+			</tr>
+		</table>
+		
+		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
+		
+			<p:column headerText="#{i18n['label.descripcion']}">
+				<h:outputText value="" />
+			</p:column>
+		
+		</p:dataTable>
+		
+		</p:dialog>		
+
+
+		<p:dialog widgetVar="dlgFacultad" header="#{i18n['label.facultad']}" modal="true" closeOnEscape="true">
+		
+		<table>
+			<tr>
+				<td><h:outputText value="#{i18n['label.universidad']}:&#160;" /></td>
+				<td><p:selectOneMenu>
+					<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
+				</p:selectOneMenu></td>
+			</tr>		
+		
+			<tr>
+				<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>
+				<td><p:inputText/></td>
+								
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><p:commandButton value="#{i18n['boton.guardar']}"/></td>
+			</tr>
+		</table>
+
+		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
+		
+			<p:column headerText="#{i18n['label.descripcion']}">
+				<h:outputText value="" />
+			</p:column>
+		
+		</p:dataTable>
 		
 		</p:dialog>
+
+		<p:dialog widgetVar="dlgEscuela" header="#{i18n['label.escuela']}" modal="true" closeOnEscape="true">
+		
+		<table>
+			<tr>
+				<td><h:outputText value="#{i18n['label.universidad']}:&#160;" /></td>
+				<td><p:selectOneMenu>
+					<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
+				</p:selectOneMenu></td>
+			</tr>		
+
+			<tr>
+				<td><h:outputText value="#{i18n['label.facultad']}:&#160;" /></td>
+				<td><p:selectOneMenu>
+					<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
+				</p:selectOneMenu></td>
+			</tr>		
+		
+			<tr>
+				<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>
+				<td><p:inputText/></td>
+								
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><p:commandButton value="#{i18n['boton.guardar']}"/></td>
+			</tr>
+		</table>
+
+		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
+		
+			<p:column headerText="#{i18n['label.descripcion']}">
+				<h:outputText value="" />
+			</p:column>
+		
+		</p:dataTable>
+		
+		</p:dialog>
+
 		
 		</ui:define>
 	</ui:composition>
