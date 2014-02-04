@@ -35,8 +35,16 @@
 				<td><p:commandButton onclick="PF('dlgUniversidad').show()" type="button" value="#{i18n['boton.agregar']}"/></td>
 			</tr>
 			<tr>
+				<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
+				<td><p:inputText/></td>
+				<td><h:outputText value="#{i18n['label.datos.institucionales']}:&#160;" /></td>
+				<td colspan="2"><p:inputTextarea autoResize="false"/></td>			
+							
+			</tr>
+
+			<tr>
 				<td><h:outputText value="#{i18n['label.mision']}:&#160;" /></td>
-				<td><p:inputTextarea autoResize="false"/></td>
+				<td colspan="2"><p:inputTextarea autoResize="false"/></td>			
 			</tr>
 
 			<tr>

@@ -106,10 +106,11 @@
 				
 		<table>
 			<tr>
-				<td><h:outputText value="#{i18n['label.tipo']}:&#160;:" /></td>
+				<td><h:outputText value="#{i18n['label.tipo']}:&#160;" /></td>
 				<td>
 					<p:selectOneMenu>
 						<f:selectItem itemLabel="--Seleccione--"/>
+						<f:selectItems value="#{programaController.catalogoTipoContacto}"/>
 					</p:selectOneMenu>
 				</td>
 				<td><h:outputText value="#{i18n['label.valor']}:&#160;" /></td>
@@ -130,11 +131,11 @@
 		</p:panel>
 		
 		
-		<p:panel header="#{i18n['label.mension']}">
+		<p:panel header="#{i18n['label.menciones']}">
 		
 		<table>
 			<tr>
-				<td><h:outputText value="#{i18n['label.mension']}:&#160;" /></td>
+				<td><h:outputText value="#{i18n['label.mencion']}:&#160;" /></td>
 				<td><p:inputTextarea></p:inputTextarea></td>
 				<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>				
 			</tr>

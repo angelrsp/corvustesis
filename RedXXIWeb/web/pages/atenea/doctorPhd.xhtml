@@ -12,8 +12,47 @@
 		<p:panel header="#{i18n['label.panel.datos']}">
 		
 		<table>
+		
 			<tr>
+				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}">
+						<f:selectItem itemLabel="--Seleccione--"/>
+					</p:selectOneMenu></td>
+				<td><p:commandButton onclick="PF('dlgPais').show()" type="button" value="#{i18n['boton.agregar']}"/></td>
+
+				<td><h:outputText value="#{i18n['label.provincia']}:&#160;" /></td>
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}">
+						<f:selectItem itemLabel="--Seleccione--"/>
+					</p:selectOneMenu></td>
+				<td><p:commandButton onclick="PF('dlgProvincia').show()" type="button" value="#{i18n['boton.agregar']}"/></td>
+
 			</tr>
+			
+			<tr>
+				<td><h:outputText value="#{i18n['label.ciudad']}:&#160;" /></td>
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}">
+						<f:selectItem itemLabel="--Seleccione--"/>
+					</p:selectOneMenu></td>
+				<td><p:commandButton onclick="PF('dlgCiudad').show()" type="button" value="#{i18n['boton.agregar']}"/></td>
+			</tr>
+			
+			<tr>
+				<td><h:outputText value="#{i18n['label.nombres']}:&#160;" /></td>
+				<td><p:inputText/></td>
+				
+				<td><h:outputText value="#{i18n['label.apellidos']}:&#160;" /></td>
+				<td><p:inputText/></td>
+			</tr>			
+
+			<tr>
+				<td><h:outputText value="#{i18n['label.fecha.nacimiento']}:&#160;" /></td>
+				<td><p:calendar showOn="button" navigator="true" /></td>
+				
+				<td><h:outputText value="#{i18n['label.apellidos']}:&#160;" /></td>
+				<td><p:inputText/></td>
+			</tr>			
+
+				
 		</table>
 		
 		</p:panel>
