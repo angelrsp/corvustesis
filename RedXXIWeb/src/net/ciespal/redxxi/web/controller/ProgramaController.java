@@ -17,7 +17,7 @@ public class ProgramaController extends SelectItemController{
 	private AteneaService ateneaService;
 		
 	
-	@ManagedProperty(value="universidadDataManager")
+	@ManagedProperty(value="#{universidadDataManager}")
 	private UniversidadDataManager universidadDataManager;
 	
 	public ProgramaController() {
@@ -32,6 +32,10 @@ public class ProgramaController extends SelectItemController{
 	public void agregarUniversidad()
 	{
 		
+	}
+
+	public void setUniversidadDataManager(UniversidadDataManager universidadDataManager) {
+		this.universidadDataManager = universidadDataManager;
 	}
 
 
