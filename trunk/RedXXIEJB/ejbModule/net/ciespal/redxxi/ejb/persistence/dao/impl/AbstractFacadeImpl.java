@@ -1,6 +1,7 @@
 package net.ciespal.redxxi.ejb.persistence.dao.impl;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -45,8 +46,7 @@ public abstract class AbstractFacadeImpl<T> implements AbstractFacade<T>{
 	}
 
 //	public List<T> findAll() {
-//		javax.persistence.criteria.CriteriaQuery cq = getEntityManager()
-//				.getCriteriaBuilder().createQuery();
+//		javax.persistence.criteria.CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
 //		cq.select(cq.from(entityClass));
 //		return getEntityManager().createQuery(cq).getResultList();
 //	}

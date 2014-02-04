@@ -14,4 +14,6 @@ public interface AdministracionService {
 	List<CatalogoDTO> getCatalogo(CatalogoDTO catalogo)
 			throws CorvustecException;
 
+	CatalogoDTO createCatalogo(CatalogoDTO catalogo) throws CorvustecException;
+
 }

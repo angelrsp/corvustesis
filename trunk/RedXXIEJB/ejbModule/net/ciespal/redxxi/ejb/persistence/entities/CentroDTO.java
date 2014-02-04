@@ -16,7 +16,7 @@ public class CentroDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_CENTRO_CENCODIGO_GENERATOR", sequenceName="ATE_CENTRO_CEN_CODIGO_SEQ")
+	@SequenceGenerator(name="ATE_CENTRO_CENCODIGO_GENERATOR", sequenceName="ATE_CENTRO_CEN_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_CENTRO_CENCODIGO_GENERATOR")
 	@Column(name="cen_codigo")
 	private Integer cenCodigo;
@@ -35,6 +35,9 @@ public class CentroDTO implements Serializable {
 
 	@Column(name="cen_ubicacion")
 	private Integer cenUbicacion;
+
+	@Column(name="cen_categoria")
+	private String cenCategoria;
 
 	//bi-directional many-to-one association to CarreraDTO
 	@OneToMany(mappedBy="ateCentro")
@@ -106,6 +109,14 @@ public class CentroDTO implements Serializable {
 
 	public void setAteCarreras(List<CarreraDTO> ateCarreras) {
 		this.ateCarreras = ateCarreras;
+	}
+
+	public String getCenCategoria() {
+		return cenCategoria;
+	}
+
+	public void setCenCategoria(String cenCategoria) {
+		this.cenCategoria = cenCategoria;
 	}
 
 	public CarreraDTO addAteCarrera(CarreraDTO ateCarrera) {
