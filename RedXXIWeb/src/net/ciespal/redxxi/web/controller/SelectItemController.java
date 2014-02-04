@@ -22,6 +22,7 @@ public abstract class SelectItemController {
 	private AdministracionService administracionService; 
 
 	private List<SelectItem> catalogoTipoEstablecimiento;
+	private List<SelectItem> catalogoTipoContacto;
 	
 	public SelectItemController() {
 	}
@@ -30,6 +31,7 @@ public abstract class SelectItemController {
 	private void init()
 	{
 		catalogoTipoEstablecimiento=new ArrayList<SelectItem>();
+		catalogoTipoContacto=new ArrayList<SelectItem>();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -51,5 +53,22 @@ public abstract class SelectItemController {
 		return catalogoTipoEstablecimiento;
 	}
 
-	
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getCatalogoTipoContacto() throws CorvustecException {
+		if(CollectionUtils.isEmpty(catalogoTipoContacto))
+		{
+			CatalogoDTO catalogo=new CatalogoDTO();
+			catalogo.setCatCodigo(8);
+			catalogoTipoContacto=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					CatalogoDTO cat=(CatalogoDTO)arg0;
+					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
+				}
+			});
+			
+		}
+		return catalogoTipoContacto;
+	}
 }
