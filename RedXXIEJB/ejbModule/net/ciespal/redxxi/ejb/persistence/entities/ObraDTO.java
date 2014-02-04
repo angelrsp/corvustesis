@@ -2,21 +2,22 @@ package net.ciespal.redxxi.ejb.persistence.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
- * The persistent class for the ate_obras database table.
+ * The persistent class for the ate_obra database table.
  * 
  */
 @Entity
-@Table(name="ate_obras")
+@Table(name="ate_obra")
 @NamedQuery(name="ObraDTO.findAll", query="SELECT o FROM ObraDTO o")
 public class ObraDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_OBRAS_OBRCODIGO_GENERATOR", sequenceName="ATE_OBRAS_OBR_CODIGO_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_OBRAS_OBRCODIGO_GENERATOR")
+	@SequenceGenerator(name="ATE_OBRA_OBRCODIGO_GENERATOR", sequenceName="ATE_OBRA_OBR_CODIGO_SEQ")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_OBRA_OBRCODIGO_GENERATOR")
 	@Column(name="obr_codigo")
 	private Integer obrCodigo;
 
@@ -33,9 +34,8 @@ public class ObraDTO implements Serializable {
 	private Integer obrUbicacion;
 
 	//bi-directional many-to-one association to EntidadDTO
-	@ManyToOne
-	@JoinColumn(name="obr_entidad")
-	private EntidadDTO ateEntidad;
+	@OneToMany(mappedBy="ateObra")
+	private List<EntidadDTO> ateEntidads;
 
 	public ObraDTO() {
 	}
@@ -80,12 +80,26 @@ public class ObraDTO implements Serializable {
 		this.obrUbicacion = obrUbicacion;
 	}
 
-	public EntidadDTO getAteEntidad() {
-		return this.ateEntidad;
+	public List<EntidadDTO> getAteEntidads() {
+		return this.ateEntidads;
 	}
 
-	public void setAteEntidad(EntidadDTO ateEntidad) {
-		this.ateEntidad = ateEntidad;
+	public void setAteEntidads(List<EntidadDTO> ateEntidads) {
+		this.ateEntidads = ateEntidads;
+	}
+
+	public EntidadDTO addAteEntidad(EntidadDTO ateEntidad) {
+		getAteEntidads().add(ateEntidad);
+		ateEntidad.setAteObra(this);
+
+		return ateEntidad;
+	}
+
+	public EntidadDTO removeAteEntidad(EntidadDTO ateEntidad) {
+		getAteEntidads().remove(ateEntidad);
+		ateEntidad.setAteObra(null);
+
+		return ateEntidad;
 	}
 
 }

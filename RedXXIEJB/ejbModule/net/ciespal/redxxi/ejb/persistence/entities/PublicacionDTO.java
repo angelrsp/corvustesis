@@ -2,6 +2,7 @@ package net.ciespal.redxxi.ejb.persistence.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -41,6 +42,9 @@ public class PublicacionDTO implements Serializable {
 	@Column(name="pub_tematica")
 	private String pubTematica;
 
+	@Column(name="pub_tipo")
+	private Integer pubTipo;
+
 	@Column(name="pub_titulo")
 	private String pubTitulo;
 
@@ -48,9 +52,8 @@ public class PublicacionDTO implements Serializable {
 	private String pubTituloPublicacion;
 
 	//bi-directional many-to-one association to EntidadDTO
-	@ManyToOne
-	@JoinColumn(name="pub_entidad")
-	private EntidadDTO ateEntidad;
+	@OneToMany(mappedBy="atePublicacion")
+	private List<EntidadDTO> ateEntidads;
 
 	public PublicacionDTO() {
 	}
@@ -119,6 +122,14 @@ public class PublicacionDTO implements Serializable {
 		this.pubTematica = pubTematica;
 	}
 
+	public Integer getPubTipo() {
+		return this.pubTipo;
+	}
+
+	public void setPubTipo(Integer pubTipo) {
+		this.pubTipo = pubTipo;
+	}
+
 	public String getPubTitulo() {
 		return this.pubTitulo;
 	}
@@ -135,12 +146,26 @@ public class PublicacionDTO implements Serializable {
 		this.pubTituloPublicacion = pubTituloPublicacion;
 	}
 
-	public EntidadDTO getAteEntidad() {
-		return this.ateEntidad;
+	public List<EntidadDTO> getAteEntidads() {
+		return this.ateEntidads;
 	}
 
-	public void setAteEntidad(EntidadDTO ateEntidad) {
-		this.ateEntidad = ateEntidad;
+	public void setAteEntidads(List<EntidadDTO> ateEntidads) {
+		this.ateEntidads = ateEntidads;
+	}
+
+	public EntidadDTO addAteEntidad(EntidadDTO ateEntidad) {
+		getAteEntidads().add(ateEntidad);
+		ateEntidad.setAtePublicacion(this);
+
+		return ateEntidad;
+	}
+
+	public EntidadDTO removeAteEntidad(EntidadDTO ateEntidad) {
+		getAteEntidads().remove(ateEntidad);
+		ateEntidad.setAtePublicacion(null);
+
+		return ateEntidad;
 	}
 
 }

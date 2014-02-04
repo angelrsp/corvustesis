@@ -2,6 +2,7 @@ package net.ciespal.redxxi.ejb.persistence.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -36,9 +37,8 @@ public class ProyectoInvestigacionDTO implements Serializable {
 	private Integer pinUbicacion;
 
 	//bi-directional many-to-one association to EntidadDTO
-	@ManyToOne
-	@JoinColumn(name="pin_entidad")
-	private EntidadDTO ateEntidad;
+	@OneToMany(mappedBy="ateProyectoInvestigacion")
+	private List<EntidadDTO> ateEntidads;
 
 	public ProyectoInvestigacionDTO() {
 	}
@@ -91,12 +91,26 @@ public class ProyectoInvestigacionDTO implements Serializable {
 		this.pinUbicacion = pinUbicacion;
 	}
 
-	public EntidadDTO getAteEntidad() {
-		return this.ateEntidad;
+	public List<EntidadDTO> getAteEntidads() {
+		return this.ateEntidads;
 	}
 
-	public void setAteEntidad(EntidadDTO ateEntidad) {
-		this.ateEntidad = ateEntidad;
+	public void setAteEntidads(List<EntidadDTO> ateEntidads) {
+		this.ateEntidads = ateEntidads;
+	}
+
+	public EntidadDTO addAteEntidad(EntidadDTO ateEntidad) {
+		getAteEntidads().add(ateEntidad);
+		ateEntidad.setAteProyectoInvestigacion(this);
+
+		return ateEntidad;
+	}
+
+	public EntidadDTO removeAteEntidad(EntidadDTO ateEntidad) {
+		getAteEntidads().remove(ateEntidad);
+		ateEntidad.setAteProyectoInvestigacion(null);
+
+		return ateEntidad;
 	}
 
 }

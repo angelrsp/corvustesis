@@ -16,7 +16,6 @@
 	<class>net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO</class>
-	<class>net.ciespal.redxxi.ejb.persistence.entities.PublicacionPeriodicaDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>		

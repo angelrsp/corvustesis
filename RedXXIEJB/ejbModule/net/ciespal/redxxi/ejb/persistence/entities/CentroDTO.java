@@ -49,15 +49,6 @@ public class CentroDTO implements Serializable {
 	@OneToMany(mappedBy="ateCentro")
 	private List<CentroDTO> ateCentros;
 
-	//bi-directional many-to-one association to EntidadDTO
-	@ManyToOne
-	@JoinColumn(name="cen_entidad")
-	private EntidadDTO ateEntidad;
-
-	//bi-directional many-to-one association to PublicacionPeriodicaDTO
-	@OneToMany(mappedBy="ateCentro")
-	private List<PublicacionPeriodicaDTO> atePublicacionesPeriodicas;
-
 	public CentroDTO() {
 	}
 
@@ -159,36 +150,6 @@ public class CentroDTO implements Serializable {
 		ateCentro.setAteCentro(null);
 
 		return ateCentro;
-	}
-
-	public EntidadDTO getAteEntidad() {
-		return this.ateEntidad;
-	}
-
-	public void setAteEntidad(EntidadDTO ateEntidad) {
-		this.ateEntidad = ateEntidad;
-	}
-
-	public List<PublicacionPeriodicaDTO> getAtePublicacionesPeriodicas() {
-		return this.atePublicacionesPeriodicas;
-	}
-
-	public void setAtePublicacionesPeriodicas(List<PublicacionPeriodicaDTO> atePublicacionesPeriodicas) {
-		this.atePublicacionesPeriodicas = atePublicacionesPeriodicas;
-	}
-
-	public PublicacionPeriodicaDTO addAtePublicacionesPeriodica(PublicacionPeriodicaDTO atePublicacionesPeriodica) {
-		getAtePublicacionesPeriodicas().add(atePublicacionesPeriodica);
-		atePublicacionesPeriodica.setAteCentro(this);
-
-		return atePublicacionesPeriodica;
-	}
-
-	public PublicacionPeriodicaDTO removeAtePublicacionesPeriodica(PublicacionPeriodicaDTO atePublicacionesPeriodica) {
-		getAtePublicacionesPeriodicas().remove(atePublicacionesPeriodica);
-		atePublicacionesPeriodica.setAteCentro(null);
-
-		return atePublicacionesPeriodica;
 	}
 
 }
