@@ -47,6 +47,10 @@ public class CarreraDTO implements Serializable {
 	@JoinColumn(name="car_centro")
 	private CentroDTO ateCentro;
 
+	//bi-directional many-to-one association to EntidadDTO
+	@OneToMany(mappedBy="ateCarrera")
+	private List<EntidadDTO> ateEntidads;
+
 	//bi-directional many-to-one association to MencionDTO
 	@OneToMany(mappedBy="ateCarrera")
 	private List<MencionDTO> ateMenciones;
@@ -124,6 +128,28 @@ public class CarreraDTO implements Serializable {
 
 	public void setAteCentro(CentroDTO ateCentro) {
 		this.ateCentro = ateCentro;
+	}
+
+	public List<EntidadDTO> getAteEntidads() {
+		return this.ateEntidads;
+	}
+
+	public void setAteEntidads(List<EntidadDTO> ateEntidads) {
+		this.ateEntidads = ateEntidads;
+	}
+
+	public EntidadDTO addAteEntidad(EntidadDTO ateEntidad) {
+		getAteEntidads().add(ateEntidad);
+		ateEntidad.setAteCarrera(this);
+
+		return ateEntidad;
+	}
+
+	public EntidadDTO removeAteEntidad(EntidadDTO ateEntidad) {
+		getAteEntidads().remove(ateEntidad);
+		ateEntidad.setAteCarrera(null);
+
+		return ateEntidad;
 	}
 
 	public List<MencionDTO> getAteMenciones() {

@@ -2,7 +2,6 @@ package net.ciespal.redxxi.ejb.persistence.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -21,41 +20,50 @@ public class EntidadDTO implements Serializable {
 	@Column(name="ent_codigo")
 	private Integer entCodigo;
 
-	//bi-directional many-to-one association to CentroDTO
-	@OneToMany(mappedBy="ateEntidad")
-	private List<CentroDTO> ateCentros;
-
-	//bi-directional many-to-one association to ContactoDTO
-	@OneToMany(mappedBy="ateEntidad")
-	private List<ContactoDTO> ateContactos;
+	//bi-directional many-to-one association to CarreraDTO
+	@ManyToOne
+	@JoinColumn(name="ent_carrera")
+	private CarreraDTO ateCarrera;
 
 	//bi-directional many-to-one association to DoctorDTO
-	@OneToMany(mappedBy="ateEntidad")
-	private List<DoctorDTO> ateDoctors;
-
-	//bi-directional many-to-one association to EventoDTO
-	@OneToMany(mappedBy="ateEntidad")
-	private List<EventoDTO> ateEventos;
-
-	//bi-directional many-to-one association to NoticiaDTO
-	@OneToMany(mappedBy="ateEntidad")
-	private List<NoticiaDTO> ateNoticias;
-
-	//bi-directional many-to-one association to ObraDTO
-	@OneToMany(mappedBy="ateEntidad")
-	private List<ObraDTO> ateObras;
+	@ManyToOne
+	@JoinColumn(name="ent_doctor")
+	private DoctorDTO ateDoctor;
 
 	//bi-directional many-to-one association to OrganizacionDTO
-	@OneToMany(mappedBy="ateEntidad")
-	private List<OrganizacionDTO> ateOrganizacions;
+	@ManyToOne
+	@JoinColumn(name="ent_organizacion")
+	private OrganizacionDTO ateOrganizacion;
 
 	//bi-directional many-to-one association to ProyectoInvestigacionDTO
-	@OneToMany(mappedBy="ateEntidad")
-	private List<ProyectoInvestigacionDTO> ateProyectoInvestigacions;
+	@ManyToOne
+	@JoinColumn(name="ent_proyecto_intestigacion")
+	private ProyectoInvestigacionDTO ateProyectoInvestigacion;
 
 	//bi-directional many-to-one association to PublicacionDTO
-	@OneToMany(mappedBy="ateEntidad")
-	private List<PublicacionDTO> atePublicacions;
+	@ManyToOne
+	@JoinColumn(name="ent_publicacion")
+	private PublicacionDTO atePublicacion;
+
+	//bi-directional many-to-one association to ContactoDTO
+	@ManyToOne
+	@JoinColumn(name="ent_contacto")
+	private ContactoDTO ateContacto;
+
+	//bi-directional many-to-one association to EventoDTO
+	@ManyToOne
+	@JoinColumn(name="ent_evento")
+	private EventoDTO ateEvento;
+
+	//bi-directional many-to-one association to NoticiaDTO
+	@ManyToOne
+	@JoinColumn(name="ent_noticias")
+	private NoticiaDTO ateNoticia;
+
+	//bi-directional many-to-one association to ObraDTO
+	@ManyToOne
+	@JoinColumn(name="ent_obra")
+	private ObraDTO ateObra;
 
 	public EntidadDTO() {
 	}
@@ -68,202 +76,76 @@ public class EntidadDTO implements Serializable {
 		this.entCodigo = entCodigo;
 	}
 
-	public List<CentroDTO> getAteCentros() {
-		return this.ateCentros;
+	public CarreraDTO getAteCarrera() {
+		return this.ateCarrera;
 	}
 
-	public void setAteCentros(List<CentroDTO> ateCentros) {
-		this.ateCentros = ateCentros;
+	public void setAteCarrera(CarreraDTO ateCarrera) {
+		this.ateCarrera = ateCarrera;
 	}
 
-	public CentroDTO addAteCentro(CentroDTO ateCentro) {
-		getAteCentros().add(ateCentro);
-		ateCentro.setAteEntidad(this);
-
-		return ateCentro;
+	public DoctorDTO getAteDoctor() {
+		return this.ateDoctor;
 	}
 
-	public CentroDTO removeAteCentro(CentroDTO ateCentro) {
-		getAteCentros().remove(ateCentro);
-		ateCentro.setAteEntidad(null);
-
-		return ateCentro;
+	public void setAteDoctor(DoctorDTO ateDoctor) {
+		this.ateDoctor = ateDoctor;
 	}
 
-	public List<ContactoDTO> getAteContactos() {
-		return this.ateContactos;
+	public OrganizacionDTO getAteOrganizacion() {
+		return this.ateOrganizacion;
 	}
 
-	public void setAteContactos(List<ContactoDTO> ateContactos) {
-		this.ateContactos = ateContactos;
+	public void setAteOrganizacion(OrganizacionDTO ateOrganizacion) {
+		this.ateOrganizacion = ateOrganizacion;
 	}
 
-	public ContactoDTO addAteContacto(ContactoDTO ateContacto) {
-		getAteContactos().add(ateContacto);
-		ateContacto.setAteEntidad(this);
-
-		return ateContacto;
+	public ProyectoInvestigacionDTO getAteProyectoInvestigacion() {
+		return this.ateProyectoInvestigacion;
 	}
 
-	public ContactoDTO removeAteContacto(ContactoDTO ateContacto) {
-		getAteContactos().remove(ateContacto);
-		ateContacto.setAteEntidad(null);
-
-		return ateContacto;
+	public void setAteProyectoInvestigacion(ProyectoInvestigacionDTO ateProyectoInvestigacion) {
+		this.ateProyectoInvestigacion = ateProyectoInvestigacion;
 	}
 
-	public List<DoctorDTO> getAteDoctors() {
-		return this.ateDoctors;
+	public PublicacionDTO getAtePublicacion() {
+		return this.atePublicacion;
 	}
 
-	public void setAteDoctors(List<DoctorDTO> ateDoctors) {
-		this.ateDoctors = ateDoctors;
+	public void setAtePublicacion(PublicacionDTO atePublicacion) {
+		this.atePublicacion = atePublicacion;
 	}
 
-	public DoctorDTO addAteDoctor(DoctorDTO ateDoctor) {
-		getAteDoctors().add(ateDoctor);
-		ateDoctor.setAteEntidad(this);
-
-		return ateDoctor;
+	public ContactoDTO getAteContacto() {
+		return this.ateContacto;
 	}
 
-	public DoctorDTO removeAteDoctor(DoctorDTO ateDoctor) {
-		getAteDoctors().remove(ateDoctor);
-		ateDoctor.setAteEntidad(null);
-
-		return ateDoctor;
+	public void setAteContacto(ContactoDTO ateContacto) {
+		this.ateContacto = ateContacto;
 	}
 
-	public List<EventoDTO> getAteEventos() {
-		return this.ateEventos;
+	public EventoDTO getAteEvento() {
+		return this.ateEvento;
 	}
 
-	public void setAteEventos(List<EventoDTO> ateEventos) {
-		this.ateEventos = ateEventos;
+	public void setAteEvento(EventoDTO ateEvento) {
+		this.ateEvento = ateEvento;
 	}
 
-	public EventoDTO addAteEvento(EventoDTO ateEvento) {
-		getAteEventos().add(ateEvento);
-		ateEvento.setAteEntidad(this);
-
-		return ateEvento;
+	public NoticiaDTO getAteNoticia() {
+		return this.ateNoticia;
 	}
 
-	public EventoDTO removeAteEvento(EventoDTO ateEvento) {
-		getAteEventos().remove(ateEvento);
-		ateEvento.setAteEntidad(null);
-
-		return ateEvento;
+	public void setAteNoticia(NoticiaDTO ateNoticia) {
+		this.ateNoticia = ateNoticia;
 	}
 
-	public List<NoticiaDTO> getAteNoticias() {
-		return this.ateNoticias;
+	public ObraDTO getAteObra() {
+		return this.ateObra;
 	}
 
-	public void setAteNoticias(List<NoticiaDTO> ateNoticias) {
-		this.ateNoticias = ateNoticias;
-	}
-
-	public NoticiaDTO addAteNoticia(NoticiaDTO ateNoticia) {
-		getAteNoticias().add(ateNoticia);
-		ateNoticia.setAteEntidad(this);
-
-		return ateNoticia;
-	}
-
-	public NoticiaDTO removeAteNoticia(NoticiaDTO ateNoticia) {
-		getAteNoticias().remove(ateNoticia);
-		ateNoticia.setAteEntidad(null);
-
-		return ateNoticia;
-	}
-
-	public List<ObraDTO> getAteObras() {
-		return this.ateObras;
-	}
-
-	public void setAteObras(List<ObraDTO> ateObras) {
-		this.ateObras = ateObras;
-	}
-
-	public ObraDTO addAteObra(ObraDTO ateObra) {
-		getAteObras().add(ateObra);
-		ateObra.setAteEntidad(this);
-
-		return ateObra;
-	}
-
-	public ObraDTO removeAteObra(ObraDTO ateObra) {
-		getAteObras().remove(ateObra);
-		ateObra.setAteEntidad(null);
-
-		return ateObra;
-	}
-
-	public List<OrganizacionDTO> getAteOrganizacions() {
-		return this.ateOrganizacions;
-	}
-
-	public void setAteOrganizacions(List<OrganizacionDTO> ateOrganizacions) {
-		this.ateOrganizacions = ateOrganizacions;
-	}
-
-	public OrganizacionDTO addAteOrganizacion(OrganizacionDTO ateOrganizacion) {
-		getAteOrganizacions().add(ateOrganizacion);
-		ateOrganizacion.setAteEntidad(this);
-
-		return ateOrganizacion;
-	}
-
-	public OrganizacionDTO removeAteOrganizacion(OrganizacionDTO ateOrganizacion) {
-		getAteOrganizacions().remove(ateOrganizacion);
-		ateOrganizacion.setAteEntidad(null);
-
-		return ateOrganizacion;
-	}
-
-	public List<ProyectoInvestigacionDTO> getAteProyectoInvestigacions() {
-		return this.ateProyectoInvestigacions;
-	}
-
-	public void setAteProyectoInvestigacions(List<ProyectoInvestigacionDTO> ateProyectoInvestigacions) {
-		this.ateProyectoInvestigacions = ateProyectoInvestigacions;
-	}
-
-	public ProyectoInvestigacionDTO addAteProyectoInvestigacion(ProyectoInvestigacionDTO ateProyectoInvestigacion) {
-		getAteProyectoInvestigacions().add(ateProyectoInvestigacion);
-		ateProyectoInvestigacion.setAteEntidad(this);
-
-		return ateProyectoInvestigacion;
-	}
-
-	public ProyectoInvestigacionDTO removeAteProyectoInvestigacion(ProyectoInvestigacionDTO ateProyectoInvestigacion) {
-		getAteProyectoInvestigacions().remove(ateProyectoInvestigacion);
-		ateProyectoInvestigacion.setAteEntidad(null);
-
-		return ateProyectoInvestigacion;
-	}
-
-	public List<PublicacionDTO> getAtePublicacions() {
-		return this.atePublicacions;
-	}
-
-	public void setAtePublicacions(List<PublicacionDTO> atePublicacions) {
-		this.atePublicacions = atePublicacions;
-	}
-
-	public PublicacionDTO addAtePublicacion(PublicacionDTO atePublicacion) {
-		getAtePublicacions().add(atePublicacion);
-		atePublicacion.setAteEntidad(this);
-
-		return atePublicacion;
-	}
-
-	public PublicacionDTO removeAtePublicacion(PublicacionDTO atePublicacion) {
-		getAtePublicacions().remove(atePublicacion);
-		atePublicacion.setAteEntidad(null);
-
-		return atePublicacion;
+	public void setAteObra(ObraDTO ateObra) {
+		this.ateObra = ateObra;
 	}
 
 }

@@ -2,21 +2,22 @@ package net.ciespal.redxxi.ejb.persistence.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
- * The persistent class for the ate_noticias database table.
+ * The persistent class for the ate_noticia database table.
  * 
  */
 @Entity
-@Table(name="ate_noticias")
+@Table(name="ate_noticia")
 @NamedQuery(name="NoticiaDTO.findAll", query="SELECT n FROM NoticiaDTO n")
 public class NoticiaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_NOTICIAS_NOTCODIGO_GENERATOR", sequenceName="ATE_NOTICIAS_NOT_CODIGO_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_NOTICIAS_NOTCODIGO_GENERATOR")
+	@SequenceGenerator(name="ATE_NOTICIA_NOTCODIGO_GENERATOR", sequenceName="ATE_NOTICIA_NOT_CODIGO_SEQ")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_NOTICIA_NOTCODIGO_GENERATOR")
 	@Column(name="not_codigo")
 	private Integer notCodigo;
 
@@ -24,9 +25,8 @@ public class NoticiaDTO implements Serializable {
 	private String notDescripcion;
 
 	//bi-directional many-to-one association to EntidadDTO
-	@ManyToOne
-	@JoinColumn(name="not_entidad")
-	private EntidadDTO ateEntidad;
+	@OneToMany(mappedBy="ateNoticia")
+	private List<EntidadDTO> ateEntidads;
 
 	public NoticiaDTO() {
 	}
@@ -47,12 +47,26 @@ public class NoticiaDTO implements Serializable {
 		this.notDescripcion = notDescripcion;
 	}
 
-	public EntidadDTO getAteEntidad() {
-		return this.ateEntidad;
+	public List<EntidadDTO> getAteEntidads() {
+		return this.ateEntidads;
 	}
 
-	public void setAteEntidad(EntidadDTO ateEntidad) {
-		this.ateEntidad = ateEntidad;
+	public void setAteEntidads(List<EntidadDTO> ateEntidads) {
+		this.ateEntidads = ateEntidads;
+	}
+
+	public EntidadDTO addAteEntidad(EntidadDTO ateEntidad) {
+		getAteEntidads().add(ateEntidad);
+		ateEntidad.setAteNoticia(this);
+
+		return ateEntidad;
+	}
+
+	public EntidadDTO removeAteEntidad(EntidadDTO ateEntidad) {
+		getAteEntidads().remove(ateEntidad);
+		ateEntidad.setAteNoticia(null);
+
+		return ateEntidad;
 	}
 
 }

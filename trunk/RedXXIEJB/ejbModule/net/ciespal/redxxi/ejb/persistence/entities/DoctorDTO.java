@@ -43,8 +43,8 @@ public class DoctorDTO implements Serializable {
 	@Column(name="doc_institucion_trabajo")
 	private String docInstitucionTrabajo;
 
-	@Column(name="doc_nombre")
-	private String docNombre;
+	@Column(name="doc_nombres")
+	private String docNombres;
 
 	@Column(name="doc_resumen_tesis")
 	private String docResumenTesis;
@@ -53,9 +53,8 @@ public class DoctorDTO implements Serializable {
 	private String docTituloTesis;
 
 	//bi-directional many-to-one association to EntidadDTO
-	@ManyToOne
-	@JoinColumn(name="doc_entidad")
-	private EntidadDTO ateEntidad;
+	@OneToMany(mappedBy="ateDoctor")
+	private List<EntidadDTO> ateEntidads;
 
 	//bi-directional many-to-one association to EspecalidadDTO
 	@OneToMany(mappedBy="ateDoctor")
@@ -128,12 +127,12 @@ public class DoctorDTO implements Serializable {
 		this.docInstitucionTrabajo = docInstitucionTrabajo;
 	}
 
-	public String getDocNombre() {
-		return this.docNombre;
+	public String getDocNombres() {
+		return this.docNombres;
 	}
 
-	public void setDocNombre(String docNombre) {
-		this.docNombre = docNombre;
+	public void setDocNombres(String docNombres) {
+		this.docNombres = docNombres;
 	}
 
 	public String getDocResumenTesis() {
@@ -152,12 +151,26 @@ public class DoctorDTO implements Serializable {
 		this.docTituloTesis = docTituloTesis;
 	}
 
-	public EntidadDTO getAteEntidad() {
-		return this.ateEntidad;
+	public List<EntidadDTO> getAteEntidads() {
+		return this.ateEntidads;
 	}
 
-	public void setAteEntidad(EntidadDTO ateEntidad) {
-		this.ateEntidad = ateEntidad;
+	public void setAteEntidads(List<EntidadDTO> ateEntidads) {
+		this.ateEntidads = ateEntidads;
+	}
+
+	public EntidadDTO addAteEntidad(EntidadDTO ateEntidad) {
+		getAteEntidads().add(ateEntidad);
+		ateEntidad.setAteDoctor(this);
+
+		return ateEntidad;
+	}
+
+	public EntidadDTO removeAteEntidad(EntidadDTO ateEntidad) {
+		getAteEntidads().remove(ateEntidad);
+		ateEntidad.setAteDoctor(null);
+
+		return ateEntidad;
 	}
 
 	public List<EspecalidadDTO> getAteEspecalidads() {
