@@ -5,12 +5,14 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
+import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.corvustec.commons.util.CorvustecException;
 
@@ -34,6 +36,34 @@ public class AteneaServiceImpl implements AteneaService{
 			logger.info("Error createCentro {}",e.toString());
 			throw new CorvustecException("Error al createCentro");
 		}
+	}
+	
+	@Override
+	public CarreraDTO createCarrera(CarreraDTO carrera) throws CorvustecException
+	{
+		logger.info("createCarrera");
+		try{
+			return factoryDAO.getCarreraDAOImpl().create(carrera);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error createCarrera {}",e.toString());
+			throw new CorvustecException("Error al createCarrera");
+		}
+	}	
+	
+	@Override
+	public EntidadDTO createEntidad(EntidadDTO entidad) throws CorvustecException
+	{
+		logger.info("createEntidad");
+		try{
+			return factoryDAO.getEntidadImpl().create(entidad);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error createEntidad {}",e.toString());
+			throw new CorvustecException("Error al createEntidad");
+		}		
 	}
 	
 	@Override
