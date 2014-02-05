@@ -22,19 +22,17 @@ public class UniversidadDataManager implements Serializable{
 	private CentroDTO universidadSelect;
 	private CentroDTO facultad;
 	private CentroDTO facultadSelect;
-	public CentroDTO getEscuela() {
-		return escuela;
-	}
 
-	public void setEscuela(CentroDTO escuela) {
-		this.escuela = escuela;
-	}
 
 	private CentroDTO escuela;
 	
 	private List<CentroDTO> universidadList;
 	private List<CentroDTO> facultadList;
 	private List<CentroDTO> escuelaList;
+	
+	private int universidadCode;
+	private int facultadCode;
+	private int escuelaCode;
 	
 	public UniversidadDataManager() {
 		universidad=new CentroDTO();
@@ -69,6 +67,14 @@ public class UniversidadDataManager implements Serializable{
 		return facultad;
 	}
 
+	public CentroDTO getEscuela() {
+		return escuela;
+	}
+
+	public void setEscuela(CentroDTO escuela) {
+		this.escuela = escuela;
+	}
+	
 	public void setFacultad(CentroDTO facultad) {
 		this.facultad = facultad;
 	}
@@ -103,6 +109,30 @@ public class UniversidadDataManager implements Serializable{
 
 	public void setEscuelaList(List<CentroDTO> escuelaList) {
 		this.escuelaList = escuelaList;
+	}
+
+	public int getUniversidadCode() {
+		return universidadCode;
+	}
+
+	public void setUniversidadCode(int universidadCode) {
+		this.universidadCode = universidadCode;
+	}
+
+	public int getFacultadCode() {
+		return facultadCode;
+	}
+
+	public void setFacultadCode(int facultadCode) {
+		this.facultadCode = facultadCode;
+	}
+
+	public int getEscuelaCode() {
+		return escuelaCode;
+	}
+
+	public void setEscuelaCode(int escuelaCode) {
+		this.escuelaCode = escuelaCode;
 	}
 	
 }

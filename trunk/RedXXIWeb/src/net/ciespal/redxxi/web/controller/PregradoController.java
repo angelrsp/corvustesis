@@ -6,14 +6,15 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import net.ciespal.redxxi.ejb.negocio.AdministracionService;
-import net.ciespal.redxxi.ejb.negocio.AteneaService;
-import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
-import net.ciespal.redxxi.web.commons.util.JsfUtil;
-import net.ciespal.redxxi.web.datamanager.CatalogoDataManager;
-import net.ciespal.redxxi.web.datamanager.UniversidadDataManager;
-
 import com.corvustec.commons.util.CorvustecException;
+
+import net.ciespal.redxxi.ejb.negocio.AteneaService;
+import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
+import net.ciespal.redxxi.web.commons.util.JsfUtil;
+import net.ciespal.redxxi.web.datamanager.CarreraDataManager;
+import net.ciespal.redxxi.web.datamanager.UniversidadDataManager;
 
 @ViewScoped
 @ManagedBean(name = "pregradoController")
@@ -21,17 +22,13 @@ public class PregradoController extends SelectItemController{
 
 	@EJB
 	private AteneaService ateneaService;
-		
-	@EJB
-	private AdministracionService administracionService;
-	
-	
+			
+	@ManagedProperty(value="#{universidadDataManager}")
+	private UniversidadDataManager universidadDataManager;
 
-	
-	@ManagedProperty(value="#{catalogoDataManager}")
-	private CatalogoDataManager catalogoDataManager;
-	
-	
+	@ManagedProperty(value="#{carreraDataManager}")
+	private CarreraDataManager carreraDataManager;
+
 	public PregradoController() {
 		
 	}
@@ -39,93 +36,85 @@ public class PregradoController extends SelectItemController{
 	@PostConstruct
 	private void init()
 	{
+		obtenerUniversidad();
 	}
 	
-
-
-	public void setCatalogoDataManager(CatalogoDataManager catalogoDataManager) {
-		this.catalogoDataManager = catalogoDataManager;
+	public UniversidadDataManager getUniversidadDataManager() {
+		return universidadDataManager;
 	}
 
-	public void agregarUniversidad()
+	public void setUniversidadDataManager(UniversidadDataManager universidadDataManager) {
+		this.universidadDataManager = universidadDataManager;
+	}
+
+	public void setCarreraDataManager(CarreraDataManager carreraDataManager) {
+		this.carreraDataManager = carreraDataManager;
+	}
+
+	public void obtenerUniversidad()
+	{
+		try {
+			universidadDataManager.setUniversidadList(ateneaService.obtenerCentroPadre());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	
+	public void obtenerFacultad()
+	{
+		try {
+			CentroDTO centro=new CentroDTO();
+			centro.setCenCodigo(universidadDataManager.getUniversidadCode());
+			universidadDataManager.setFacultadList(ateneaService.obtenerCentroHijo(centro));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}	
+	}
+	
+	public void obtenerEscuela()
+	{
+		try {
+			CentroDTO centro=new CentroDTO();
+			centro.setCenCodigo(universidadDataManager.getFacultadCode());
+			universidadDataManager.setEscuelaList(ateneaService.obtenerCentroHijo(centro));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}	
+	}
+	
+	public void guardar()
+	{
+		CentroDTO centro;
+		EntidadDTO entidad;
+		try {
+			centro=new CentroDTO();
+			entidad=new EntidadDTO();
+			if(universidadDataManager.getEscuelaCode()!=0)
+				centro.setCenCodigo(universidadDataManager.getEscuelaCode());
+			else if(universidadDataManager.getFacultadCode()!=0)
+				centro.setCenCodigo(universidadDataManager.getFacultadCode());
+			else{
+				JsfUtil.addErrorMessage("Problemas para asignar centro de estudios");
+				return;
+			}
+			carreraDataManager.getCarrera().setAteCentro(centro);
+			carreraDataManager.getCarrera().setCarModalidad(Integer.valueOf(carreraDataManager.getModalidad().toString()));
+			
+			entidad.setAteCarrera(carreraDataManager.getCarrera());;
+			carreraDataManager.setEntidad(ateneaService.createEntidad(entidad));
+			
+			carreraDataManager.setCarrera(new CarreraDTO());
+			
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void guardarContacto()
 	{
 		
-	}
-	
-	public void crearPais()
-	{
-		CatalogoDTO catalogo;
-		try {
-			catalogo=new CatalogoDTO();
-			catalogo.setCatCodigo(13);
-			catalogoDataManager.getCatalogo().setAteCatalogo(catalogo);
-			administracionService.createCatalogo(catalogoDataManager.getCatalogo());
-			JsfUtil.addInfoMessage("Guardado Exitosamente");
-			buscarPais();
-			catalogoDataManager.setCatalogo(new CatalogoDTO());
-		} catch (CorvustecException e) {
-			JsfUtil.addErrorMessage(e.toString());
-		}
-	}
-	
-	public void buscarPais()
-	{
-		CatalogoDTO catalogo;
-		try {
-			catalogo=new CatalogoDTO();
-			catalogo.setCatCodigo(13);
-			catalogoDataManager.setCatalogoList(administracionService.getCatalogo(catalogo));
-			catalogoDataManager.setCatalogo(new CatalogoDTO());
-			getCatalogoPais();
-		} catch (CorvustecException e) {
-			JsfUtil.addErrorMessage(e.toString());
-		}
-	}
-	
-	public void crearProvincia()
-	{
-		CatalogoDTO catalogo;
-		try {
-			catalogo=new CatalogoDTO();
-			catalogo.setCatCodigo(Integer.valueOf(getPais().toString()));
-			catalogoDataManager.getCatalogo().setAteCatalogo(catalogo);
-			administracionService.createCatalogo(catalogoDataManager.getCatalogo());
-			JsfUtil.addInfoMessage("Guardado Exitosamente");
-			buscarProvincia();
-			catalogoDataManager.setCatalogo(new CatalogoDTO());
-		} catch (CorvustecException e) {
-			JsfUtil.addErrorMessage(e.toString());
-		}		
-	}
-	
-	public void buscarProvincia()
-	{
-		CatalogoDTO catalogo;
-		try {
-			catalogo=new CatalogoDTO();
-			catalogo.setCatCodigo(getPais()!=null?Integer.valueOf(getPais().toString()):-3);
-			catalogoDataManager.setCatalogoList(administracionService.getCatalogo(catalogo));
-			catalogoDataManager.setCatalogo(new CatalogoDTO());
-			getCatalogoPais();
-		} catch (CorvustecException e) {
-			JsfUtil.addErrorMessage(e.toString());
-		}		
-	}
-	
-	public void obtenerProvinciaChange() {
-		try {
-			getCatalogoProvincia();
-		} catch (CorvustecException e) {
-			JsfUtil.addErrorMessage(e.toString());
-		}		
-	}
-	
-	public void obtenerCiudadChange() {
-		try {
-			getCatalogoCiudad();
-		} catch (CorvustecException e) {
-			JsfUtil.addErrorMessage(e.toString());
-		}		
 	}
 
 }
