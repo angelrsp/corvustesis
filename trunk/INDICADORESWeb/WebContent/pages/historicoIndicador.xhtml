@@ -39,13 +39,57 @@
 					</table>
 					
 				<p:tree value="#{historicoIndicadorController.rootNode}" var="node" id="tree" selectionMode="single" selection="#{historicoIndicadorController.selectedNode}">
-					<p:ajax event="select" listener="#{historicoIndicadorController.onNodeSelect}" update=":contenido:growl,:contenido:pnlValor"/>  
+					<p:ajax event="select" listener="#{historicoIndicadorController.onNodeSelect}" update=":contenido:growl,:contenido:pnlValor,:contenido:pnlValorReporte"/>  
 			        <p:treeNode id="treeNode">  
 			            <h:outputText value="#{node.indNombreCorto}"/>  
 			        </p:treeNode>  
 			    </p:tree>  
 					
 				</p:panel>
+				
+				
+			<p:dialog id="dlgValorReporte" widgetVar="dlgValorReporte" modal="true" header="Datos" closeOnEscape="true" width="1024" height="600">
+			
+				<p:panel id="pnlValorReporte">
+					<p:lineChart id="lineChart" value="#{historicoIndicadorController.categoryModel}" legendPosition="ne"   
+		             title="Historial" style="height:300px;margin-top:20px" xaxisLabel="Fecha" yaxisLabel="Valor" /> 
+				
+				<table>
+					<tr>
+						<td><h:outputLabel value="Descriptor:" /></td>
+						<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indDescriptor}" /></td>
+					</tr>				
+					<tr>
+						<td><h:outputLabel value="Valor Inicial:" /></td>
+						<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorInicial}" /></td>
+					</tr>
+					<tr>	
+						<td><h:outputLabel value="Valor Actual:" /></td>
+						<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorActual}" /></td>
+					</tr>	
+					<tr>
+						<td><h:outputLabel value="Valor Objetivo:" /></td>
+						<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorObjetivo}" /></td>
+					</tr>
+					<tr>	
+						<td><h:outputLabel value="Valor Ideal:" /></td>
+						<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal}" /></td>												
+					</tr>
+					<tr>
+						<td><h:outputLabel value="Brecha Ideal:" /></td>
+						<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>
+						<td><h:outputLabel value="Brecha Objetivo:" /></td>
+						<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorObjetivo - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>
+					</tr>
+					
+					<tr>
+						<td><p:commandButton value="#{i18n['boton.agregar']}" type="button" onclick="PF('dlgValor').show();"/> </td>
+					</tr>
+				</table>
+				
+				</p:panel>
+				
+			</p:dialog>				
 				
 				
 				<p:dialog id="dlgValor" widgetVar="dlgValor" modal="true" header="Valores" closeOnEscape="true">

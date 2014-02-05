@@ -10,17 +10,41 @@
 
 	<ui:composition template="/template/privado.xhtml">
 		<ui:define name="contenido">
-<h:form id="contenido">
+			<h:form id="contenido">
 			<fieldset>
 				<p:growl id="growl" showDetail="false" />
 				<p:panel id="pnlDatos" styleClass="tabla"
 					header="Inicio">
 					
+					<table>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.modelo']}:&#160;" /> </td>
+							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.modelo']}:&#160;#{i18n['label.requerido']}" value="#{indicadorDataManager.modelo}">
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+									<f:selectItems value="#{inicioController.modeloList}"></f:selectItems>
+							</p:selectOneMenu></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.ies']}:&#160;" /> </td>
+							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{indicadorDataManager.ies}">
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+									<f:selectItems value="#{inicioController.iesList}"></f:selectItems>
+							</p:selectOneMenu></td>
+						</tr>
 						
+						<tr>
+							<td>
+								<p:commandButton value="#{i18n['boton.aceptar']}" actionListener="#{inicioController.aceptar}"/>
+							</td>
+						</tr>
+						
+					</table>					
+					
+											
 				</p:panel>
 			</fieldset>
 
-</h:form>
+			</h:form>
 		</ui:define>
 	</ui:composition>
 
