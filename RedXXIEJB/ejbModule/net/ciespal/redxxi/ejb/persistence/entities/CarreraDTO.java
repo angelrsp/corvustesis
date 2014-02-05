@@ -16,7 +16,7 @@ public class CarreraDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_CARRERA_CARCODIGO_GENERATOR", sequenceName="ATE_CARRERA_CAR_CODIGO_SEQ")
+	@SequenceGenerator(name="ATE_CARRERA_CARCODIGO_GENERATOR", sequenceName="ATE_CARRERA_CAR_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_CARRERA_CARCODIGO_GENERATOR")
 	@Column(name="car_codigo")
 	private Integer carCodigo;
@@ -48,7 +48,7 @@ public class CarreraDTO implements Serializable {
 	private CentroDTO ateCentro;
 
 	//bi-directional many-to-one association to EntidadDTO
-	@OneToMany(mappedBy="ateCarrera")
+	@OneToMany(mappedBy="ateCarrera",cascade={CascadeType.ALL},fetch=FetchType.EAGER)
 	private List<EntidadDTO> ateEntidads;
 
 	//bi-directional many-to-one association to MencionDTO

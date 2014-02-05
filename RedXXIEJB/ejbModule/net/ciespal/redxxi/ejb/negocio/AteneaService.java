@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 
 import com.corvustec.commons.util.CorvustecException;
 
@@ -17,5 +19,9 @@ public interface AteneaService {
 
 	List<CentroDTO> obtenerCentroHijo(CentroDTO centro)
 			throws CorvustecException;
+
+	CarreraDTO createCarrera(CarreraDTO carrera) throws CorvustecException;
+
+	EntidadDTO createEntidad(EntidadDTO entidad) throws CorvustecException;
 
 }
