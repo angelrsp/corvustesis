@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import org.primefaces.model.DefaultTreeNode;
@@ -17,6 +18,7 @@ import ec.edu.uce.indicadores.ejb.negocio.IndicadorService;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IndicadorDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ModeloDTO;
+import ec.edu.uce.indicadores.web.datamanager.IndicadorDataManager;
 import ec.edu.uce.indicadores.web.util.JsfUtil;
 
 @ViewScoped
@@ -31,6 +33,9 @@ public class IndicadorController extends SelectItemController implements Seriali
 	
 	@EJB
 	private IndicadorService indicadorService;
+	
+	@ManagedProperty(value="#{indicadorDataManager}")
+	private IndicadorDataManager indicadorDataManager;
 	
 	private IndicadorDTO indicadorDTO;
 	
@@ -50,7 +55,14 @@ public class IndicadorController extends SelectItemController implements Seriali
 		indicadorDTO=new IndicadorDTO();
 		indicadorList=new ArrayList<IndicadorDTO>();
 //		indicadorList=indicadorService.obtenerIndicador();
+		
+		modelo=indicadorDataManager.getModelo();
+		ies=indicadorDataManager.getIes();
 		obtenerArbol();
+	}
+
+	public void setIndicadorDataManager(IndicadorDataManager indicadorDataManager) {
+		this.indicadorDataManager = indicadorDataManager;
 	}
 
 	public IndicadorDTO getIndicadorDTO() {

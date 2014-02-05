@@ -209,7 +209,7 @@ public class ReporteIndicadorController extends SelectItemController implements 
   
         for(IndicadorDTO ind:list)
         {
-            data1.set(ind.getIndNombreCorto(), ind.getIndValorActual());
+
         }
         
         categoryModel.addSeries(data1);    
