@@ -89,6 +89,8 @@ public class ArchivoXML {
 								}
 								else
 								{
+									comprobante=item.getComprobante();
+									logger.info("comprobante {}",comprobante);
 									mensaje=AutorizacionComprobantesElectronicosWs.getMensajeRespuestaEnvio(item);
 									escribirError(sqlServer, codFactura, fechaHora, claveAcceso, autorizacion, comprobante, mensaje);
 								}
