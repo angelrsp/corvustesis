@@ -107,28 +107,28 @@ public class Signature {
 			isExcute=true;
 		} catch (NoSuchAlgorithmException e1) {
 			isExcute=false;
-			e1.printStackTrace();
+			logger.info("NoSuchAlgorithmException {}",e1.toString());
 		} catch (CertificateException e1) {
 			isExcute=false;
-			e1.printStackTrace();
+			logger.info("CertificateException {}",e1.toString());
 		} catch (FileNotFoundException e1) {
 			isExcute=false;
-			e1.printStackTrace();
+			logger.info("FileNotFoundException {}",e1.toString());
 		} catch (IOException e1) {
 			isExcute=false;
-			e1.printStackTrace();
+			logger.info("IOException {}",e1.toString());
 		} catch (KeyStoreException e) {
 			isExcute=false;
-			e.printStackTrace();
+			logger.info("KeyStoreException {}",e.toString());
 		} catch (UnrecoverableKeyException e) {
 			isExcute=false;
-			e.printStackTrace();
+			logger.info("UnrecoverableKeyException {}",e.toString());
 		} catch (ParserConfigurationException e) {
 			isExcute=false;
-			e.printStackTrace();
+			logger.info("ParserConfigurationException {}",e.toString());
 		} catch (SAXException e) {
 			isExcute=false;
-			e.printStackTrace();
+			logger.info("SAXException {}",e.toString());
 		}
 		return isExcute;
     }
