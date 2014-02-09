@@ -6,15 +6,18 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import com.corvustec.commons.util.CorvustecException;
-
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
-import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.ModalidadDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.CarreraDataManager;
+import net.ciespal.redxxi.web.datamanager.ContactoDataManager;
 import net.ciespal.redxxi.web.datamanager.UniversidadDataManager;
+
+import com.corvustec.commons.util.CorvustecException;
 
 @ViewScoped
 @ManagedBean(name = "pregradoController")
@@ -29,6 +32,10 @@ public class PregradoController extends SelectItemController{
 	@ManagedProperty(value="#{carreraDataManager}")
 	private CarreraDataManager carreraDataManager;
 
+	@ManagedProperty(value="#{contactoDataManager}")
+	private ContactoDataManager contactoDataManager;
+
+	
 	public PregradoController() {
 		
 	}
@@ -49,6 +56,10 @@ public class PregradoController extends SelectItemController{
 
 	public void setCarreraDataManager(CarreraDataManager carreraDataManager) {
 		this.carreraDataManager = carreraDataManager;
+	}
+
+	public void setContactoDataManager(ContactoDataManager contactoDataManager) {
+		this.contactoDataManager = contactoDataManager;
 	}
 
 	public void obtenerUniversidad()
@@ -87,7 +98,15 @@ public class PregradoController extends SelectItemController{
 	{
 		CentroDTO centro;
 		EntidadDTO entidad;
+		ModalidadDTO mod;
 		try {
+			carreraDataManager.getCarrera().setCarCodigo(null);
+			for(Object obj:carreraDataManager.getModalidadSelect()){
+				mod=new ModalidadDTO();
+				mod.setModModalidad(Integer.valueOf(obj.toString()));
+				carreraDataManager.getCarrera().addAteModalidad(mod);
+			}
+			
 			centro=new CentroDTO();
 			entidad=new EntidadDTO();
 			if(universidadDataManager.getEscuelaCode()!=0)
@@ -99,12 +118,9 @@ public class PregradoController extends SelectItemController{
 				return;
 			}
 			carreraDataManager.getCarrera().setAteCentro(centro);
-			carreraDataManager.getCarrera().setCarModalidad(Integer.valueOf(carreraDataManager.getModalidad().toString()));
 			
 			entidad.setAteCarrera(carreraDataManager.getCarrera());;
 			carreraDataManager.setEntidad(ateneaService.createEntidad(entidad));
-			
-			carreraDataManager.setCarrera(new CarreraDTO());
 			
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 		} catch (CorvustecException e) {
@@ -112,9 +128,35 @@ public class PregradoController extends SelectItemController{
 		}
 	}
 	
-	public void guardarContacto()
+	public void crearContacto()
 	{
-		
+		try {
+			if(carreraDataManager.getEntidad().getEntCodigo()==null||carreraDataManager.getEntidad().getEntCodigo()==0){
+				JsfUtil.addErrorMessage("Debe guardar ");
+				return;
+			}
+			contactoDataManager.getContacto().setAteEntidad(carreraDataManager.getEntidad());
+			contactoDataManager.getContacto().setConTipo(Integer.valueOf(contactoDataManager.getTipoContacto().toString()));
+			ateneaService.createContacto(contactoDataManager.getContacto());
+			contactoDataManager.setContactoList(ateneaService.readContacto(carreraDataManager.getEntidad()));
+			contactoDataManager.setContacto(new ContactoDTO());
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 
+	
+	public void crearMension()
+	{
+		try {
+			carreraDataManager.getMencion().setAteCarrera(carreraDataManager.getEntidad().getAteCarrera());
+			ateneaService.createMencion(carreraDataManager.getMencion());
+			carreraDataManager.setMencionList(ateneaService.readMencion(carreraDataManager.getEntidad().getAteCarrera()));
+			carreraDataManager.setMencion(new MencionDTO());
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
 }
