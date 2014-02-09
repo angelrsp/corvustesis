@@ -12,44 +12,44 @@
 	<ui:composition template="/template/admin.xhtml">
 
 		<ui:define name="contenido">
-		
-			<fieldset>
-			
-				<p:growl id="growl" showDetail="true" />
-	
-				<p:dataTable id="tblEmpresa" value="#{aprobarEmpresaController.empresaList}" var="emp">
-				
-					<p:column headerText="#{i18n['label.razon.social']}">
-						<h:outputText value="#{emp.empNombreComercial}"/>
-					</p:column>			
-	
-					<p:column headerText="#{i18n['label.nombre.comercial']}">
-						<h:outputText value="#{emp.empNombreComercial}" />
-					</p:column>			
-	
-					<p:column headerText="#{i18n['label.ruc']}">
-						<h:outputText value="#{emp.empRuc}" />
-					</p:column>			
-	
-					<p:column headerText="#{i18n['label.activo']}">
-						<h:outputText value="#{emp.empActiva==true?'Si':'No'}" />
-					</p:column>			
-	
-					<p:column style="width:14%" headerText="#{i18n['label.cambiar.estado']}">
-						<p:commandButton actionListener="#{aprobarEmpresaController.cambiarEstado(emp)}" icon="ui-icon-transfer-e-w" onclick="if(!confirm('Cambiar estado?')) return false;" 
-							process="tblEmpresa" update=":contenido:growl,tblEmpresa" title="#{i18n['label.cambiar.estado']}">
-						</p:commandButton>
-					</p:column>			
 					
-					<p:column style="width:8%" headerText="#{i18n['label.ver.mas']}">  
-		                <p:commandButton actionListener="#{aprobarEmpresaController.buscarEmpresa(emp)}" oncomplete="PF('infoEmpressa').show()" icon="ui-icon-search" 
-		                	update=":contenido:infoEmpresa,:contenido:growl" process="tblEmpresa" title="#{i18n['label.ver.mas']}">    
-		    	        </p:commandButton>  
-			        </p:column>  					
-							
-				</p:dataTable>
+			<p:growl id="growl" showDetail="true" />
+			<p:panel>
+			<p:dataTable id="tblEmpresa" value="#{aprobarEmpresaController.empresaList}" var="emp">
 			
-			</fieldset>
+				<p:column headerText="#{i18n['label.razon.social']}">
+					<h:outputText value="#{emp.empNombreComercial}"/>
+				</p:column>			
+
+				<p:column headerText="#{i18n['label.nombre.comercial']}">
+					<h:outputText value="#{emp.empNombreComercial}" />
+				</p:column>			
+
+				<p:column headerText="#{i18n['label.ruc']}">
+					<h:outputText value="#{emp.empRuc}" />
+				</p:column>			
+
+				<p:column headerText="#{i18n['label.activo']}">
+					<h:outputText value="#{emp.empActiva==true?'Si':'No'}" />
+				</p:column>			
+
+				<p:column style="width:14%" headerText="#{i18n['label.cambiar.estado']}">
+					<p:commandButton actionListener="#{aprobarEmpresaController.cambiarEstado(emp)}" icon="ui-icon-transfer-e-w" onclick="if(!confirm('Cambiar estado?')) return false;" 
+						process="tblEmpresa" update=":contenido:growl,tblEmpresa" title="#{i18n['label.cambiar.estado']}">
+					</p:commandButton>
+				</p:column>			
+				
+				<p:column style="width:8%" headerText="#{i18n['label.ver.mas']}">  
+	                <p:commandButton actionListener="#{aprobarEmpresaController.buscarEmpresa(emp)}" oncomplete="PF('infoEmpressa').show()" icon="ui-icon-search" 
+	                	update=":contenido:infoEmpresa,:contenido:growl" process="tblEmpresa" title="#{i18n['label.ver.mas']}">    
+	    	        </p:commandButton>  
+		        </p:column>  					
+						
+			</p:dataTable>
+
+	    	<h:outputText value="Registros: #{aprobarEmpresaController.empresaList.size()}" />
+	    	
+		    </p:panel> 
 			
 		   <p:dialog id="infoEmpresa" widgetVar="infoEmpressa"
       			header="Empresa" modal="true" closeOnEscape="true">
