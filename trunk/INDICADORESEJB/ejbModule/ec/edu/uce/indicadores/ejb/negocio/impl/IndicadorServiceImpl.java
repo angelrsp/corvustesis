@@ -30,8 +30,7 @@ public class IndicadorServiceImpl implements IndicadorService {
 	@EJB
 	private FactoryDAO factoryDAO;
 	
-	private static final Logger log = LoggerFactory
-			.getLogger(IndicadorServiceImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(IndicadorServiceImpl.class);
 
 	
 	
@@ -90,7 +89,6 @@ public class IndicadorServiceImpl implements IndicadorService {
 		try {
 			return factoryDAO.getRepresentanteLegalDAOImpl().getAll();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			throw new IndicadoresException(e);
 		}
 	}
@@ -101,7 +99,6 @@ public class IndicadorServiceImpl implements IndicadorService {
 		try {
 			return factoryDAO.getContactoDAOImpl().getAll(representanteLegalDTO);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			throw new IndicadoresException(e);
 		}
 	}
@@ -112,7 +109,6 @@ public class IndicadorServiceImpl implements IndicadorService {
 		try {
 			return factoryDAO.getIesDAOImpl().getAll();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			throw new IndicadoresException(e);
 		}
 	}
