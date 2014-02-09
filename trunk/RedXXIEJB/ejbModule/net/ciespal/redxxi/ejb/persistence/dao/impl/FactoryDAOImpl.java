@@ -7,8 +7,10 @@ import javax.persistence.PersistenceContext;
 import net.ciespal.redxxi.ejb.persistence.dao.CarreraDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.CatalogoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.CentroDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.ContactoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.EntidadDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.MencionDAO;
 
 
 @Stateless
@@ -21,6 +23,8 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private CentroDAO centroDAO;
 	private CarreraDAO carreraDAO;
 	private EntidadDAO entidadDAO;
+	private ContactoDAO contactoDAO;
+	private MencionDAO mensionDAO;
 	
 	@Override
 	public CatalogoDAO getCatalogoImpl() {
@@ -47,10 +51,26 @@ public class FactoryDAOImpl implements FactoryDAO{
 	}
 
 	@Override
-	public EntidadDAO getEntidadImpl() {
+	public EntidadDAO getEntidadDAOImpl() {
 		if (entidadDAO == null) {
 			entidadDAO = new EntidadDAOImpl(entityManager);
 		}
 		return entidadDAO;
+	}
+	
+	@Override
+	public ContactoDAO getContactoDAOImpl() {
+		if (contactoDAO == null) {
+			contactoDAO = new ContactoDAOImpl(entityManager);
+		}
+		return contactoDAO;
+	}
+	
+	@Override
+	public MencionDAO getMencionDAOImpl() {
+		if (mensionDAO == null) {
+			mensionDAO = new MencionDAOImpl(entityManager);
+		}
+		return mensionDAO;
 	}
 }

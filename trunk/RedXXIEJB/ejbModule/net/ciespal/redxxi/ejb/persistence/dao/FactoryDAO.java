@@ -5,6 +5,8 @@ public interface FactoryDAO {
 	CatalogoDAO getCatalogoImpl();
 	CentroDAO getCentroDAOImpl();
 	CarreraDAO getCarreraDAOImpl();
-	EntidadDAO getEntidadImpl();
+	EntidadDAO getEntidadDAOImpl();
+	ContactoDAO getContactoDAOImpl();
+	MencionDAO getMencionDAOImpl();
 
 }

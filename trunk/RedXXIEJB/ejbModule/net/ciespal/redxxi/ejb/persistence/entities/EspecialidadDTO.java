@@ -5,18 +5,18 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the ate_especalidad database table.
+ * The persistent class for the ate_especialidad database table.
  * 
  */
 @Entity
-@Table(name="ate_especalidad")
-@NamedQuery(name="EspecalidadDTO.findAll", query="SELECT e FROM EspecalidadDTO e")
-public class EspecalidadDTO implements Serializable {
+@Table(name="ate_especialidad")
+@NamedQuery(name="EspecialidadDTO.findAll", query="SELECT e FROM EspecialidadDTO e")
+public class EspecialidadDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_ESPECALIDAD_ESPCODIGO_GENERATOR", sequenceName="ATE_ESPECALIDAD_ESP_CODIGO_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_ESPECALIDAD_ESPCODIGO_GENERATOR")
+	@SequenceGenerator(name="ATE_ESPECIALIDAD_ESPCODIGO_GENERATOR", sequenceName="ATE_ESPECIALIDAD_ESP_CODIGO_SEQ")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_ESPECIALIDAD_ESPCODIGO_GENERATOR")
 	@Column(name="esp_codigo")
 	private Integer espCodigo;
 
@@ -28,7 +28,7 @@ public class EspecalidadDTO implements Serializable {
 	@JoinColumn(name="esp_doctor")
 	private DoctorDTO ateDoctor;
 
-	public EspecalidadDTO() {
+	public EspecialidadDTO() {
 	}
 
 	public Integer getEspCodigo() {

@@ -8,14 +8,16 @@
 	<class>net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO</class>
-	<class>net.ciespal.redxxi.ejb.persistence.entities.EspecalidadDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.EspecialidadDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.EventoDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.MencionDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.ModalidadDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.NoticiaDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.ObraDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>		

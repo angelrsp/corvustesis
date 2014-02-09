@@ -1,7 +1,10 @@
 package net.ciespal.redxxi.ejb.persistence.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,8 +27,8 @@ public class CarreraDTO implements Serializable {
 	@Column(name="car_alumno")
 	private Integer carAlumno;
 
-	@Column(name="car_modalidad")
-	private Integer carModalidad;
+	@Column(name="car_nombre")
+	private String carNombre;
 
 	@Column(name="car_perfil")
 	private String carPerfil;
@@ -48,12 +51,16 @@ public class CarreraDTO implements Serializable {
 	private CentroDTO ateCentro;
 
 	//bi-directional many-to-one association to EntidadDTO
-	@OneToMany(mappedBy="ateCarrera",cascade={CascadeType.ALL},fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="ateCarrera",cascade={CascadeType.ALL,CascadeType.PERSIST})
 	private List<EntidadDTO> ateEntidads;
 
 	//bi-directional many-to-one association to MencionDTO
 	@OneToMany(mappedBy="ateCarrera")
-	private List<MencionDTO> ateMenciones;
+	private List<MencionDTO> ateMencions;
+
+	//bi-directional many-to-one association to ModalidadDTO
+	@OneToMany(mappedBy="ateCarrera",cascade={CascadeType.ALL,CascadeType.PERSIST})
+	private List<ModalidadDTO> ateModalidads;
 
 	public CarreraDTO() {
 	}
@@ -74,12 +81,12 @@ public class CarreraDTO implements Serializable {
 		this.carAlumno = carAlumno;
 	}
 
-	public Integer getCarModalidad() {
-		return this.carModalidad;
+	public String getCarNombre() {
+		return this.carNombre;
 	}
 
-	public void setCarModalidad(Integer carModalidad) {
-		this.carModalidad = carModalidad;
+	public void setCarNombre(String carNombre) {
+		this.carNombre = carNombre;
 	}
 
 	public String getCarPerfil() {
@@ -152,26 +159,51 @@ public class CarreraDTO implements Serializable {
 		return ateEntidad;
 	}
 
-	public List<MencionDTO> getAteMenciones() {
-		return this.ateMenciones;
+	public List<MencionDTO> getAteMencions() {
+		return this.ateMencions;
 	}
 
-	public void setAteMenciones(List<MencionDTO> ateMenciones) {
-		this.ateMenciones = ateMenciones;
+	public void setAteMencions(List<MencionDTO> ateMencions) {
+		this.ateMencions = ateMencions;
 	}
 
-	public MencionDTO addAteMencione(MencionDTO ateMencione) {
-		getAteMenciones().add(ateMencione);
-		ateMencione.setAteCarrera(this);
+	public MencionDTO addAteMencion(MencionDTO ateMencion) {
+		getAteMencions().add(ateMencion);
+		ateMencion.setAteCarrera(this);
 
-		return ateMencione;
+		return ateMencion;
 	}
 
-	public MencionDTO removeAteMencione(MencionDTO ateMencione) {
-		getAteMenciones().remove(ateMencione);
-		ateMencione.setAteCarrera(null);
+	public MencionDTO removeAteMencion(MencionDTO ateMencion) {
+		getAteMencions().remove(ateMencion);
+		ateMencion.setAteCarrera(null);
 
-		return ateMencione;
+		return ateMencion;
+	}
+
+	public List<ModalidadDTO> getAteModalidads() {
+		return this.ateModalidads;
+	}
+
+	public void setAteModalidads(List<ModalidadDTO> ateModalidads) {
+		this.ateModalidads = ateModalidads;
+	}
+
+	public ModalidadDTO addAteModalidad(ModalidadDTO ateModalidad) {
+		if(ateModalidad!=null){
+			if(getAteModalidads()==null)
+				setAteModalidads(new ArrayList<ModalidadDTO>());
+			getAteModalidads().add(ateModalidad);
+			ateModalidad.setAteCarrera(this);
+		}
+		return ateModalidad;
+	}
+
+	public ModalidadDTO removeAteModalidad(ModalidadDTO ateModalidad) {
+		getAteModalidads().remove(ateModalidad);
+		ateModalidad.setAteCarrera(null);
+
+		return ateModalidad;
 	}
 
 }

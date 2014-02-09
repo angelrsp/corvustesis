@@ -56,9 +56,9 @@ public class DoctorDTO implements Serializable {
 	@OneToMany(mappedBy="ateDoctor")
 	private List<EntidadDTO> ateEntidads;
 
-	//bi-directional many-to-one association to EspecalidadDTO
+	//bi-directional many-to-one association to EspecialidadDTO
 	@OneToMany(mappedBy="ateDoctor")
-	private List<EspecalidadDTO> ateEspecalidads;
+	private List<EspecialidadDTO> ateEspecialidads;
 
 	public DoctorDTO() {
 	}
@@ -173,26 +173,26 @@ public class DoctorDTO implements Serializable {
 		return ateEntidad;
 	}
 
-	public List<EspecalidadDTO> getAteEspecalidads() {
-		return this.ateEspecalidads;
+	public List<EspecialidadDTO> getAteEspecialidads() {
+		return this.ateEspecialidads;
 	}
 
-	public void setAteEspecalidads(List<EspecalidadDTO> ateEspecalidads) {
-		this.ateEspecalidads = ateEspecalidads;
+	public void setAteEspecialidads(List<EspecialidadDTO> ateEspecialidads) {
+		this.ateEspecialidads = ateEspecialidads;
 	}
 
-	public EspecalidadDTO addAteEspecalidad(EspecalidadDTO ateEspecalidad) {
-		getAteEspecalidads().add(ateEspecalidad);
-		ateEspecalidad.setAteDoctor(this);
+	public EspecialidadDTO addAteEspecialidad(EspecialidadDTO ateEspecialidad) {
+		getAteEspecialidads().add(ateEspecialidad);
+		ateEspecialidad.setAteDoctor(this);
 
-		return ateEspecalidad;
+		return ateEspecialidad;
 	}
 
-	public EspecalidadDTO removeAteEspecalidad(EspecalidadDTO ateEspecalidad) {
-		getAteEspecalidads().remove(ateEspecalidad);
-		ateEspecalidad.setAteDoctor(null);
+	public EspecialidadDTO removeAteEspecialidad(EspecialidadDTO ateEspecialidad) {
+		getAteEspecialidads().remove(ateEspecialidad);
+		ateEspecialidad.setAteDoctor(null);
 
-		return ateEspecalidad;
+		return ateEspecialidad;
 	}
 
 }

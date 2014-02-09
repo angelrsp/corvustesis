@@ -16,7 +16,7 @@ public class ProyectoInvestigacionDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_PROYECTO_INVESTIGACION_PINCODIGO_GENERATOR", sequenceName="ATE_PROYECTO_INVESTIGACION_PIN_CODIGO_SEQ")
+	@SequenceGenerator(name="ATE_PROYECTO_INVESTIGACION_PINCODIGO_GENERATOR", sequenceName="ATE_PROYECTO_INVESTIGACION_PIN_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_PROYECTO_INVESTIGACION_PINCODIGO_GENERATOR")
 	@Column(name="pin_codigo")
 	private Integer pinCodigo;
