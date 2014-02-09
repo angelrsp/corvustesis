@@ -5,18 +5,18 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the ate_menciones database table.
+ * The persistent class for the ate_mencion database table.
  * 
  */
 @Entity
-@Table(name="ate_menciones")
+@Table(name="ate_mencion")
 @NamedQuery(name="MencionDTO.findAll", query="SELECT m FROM MencionDTO m")
 public class MencionDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_MENCIONES_MENCODIGO_GENERATOR", sequenceName="ATE_MENCIONES_MEN_CODIGO_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_MENCIONES_MENCODIGO_GENERATOR")
+	@SequenceGenerator(name="ATE_MENCION_MENCODIGO_GENERATOR", sequenceName="ATE_MENCION_MEN_CODIGO_SEQ",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_MENCION_MENCODIGO_GENERATOR")
 	@Column(name="men_codigo")
 	private Integer menCodigo;
 

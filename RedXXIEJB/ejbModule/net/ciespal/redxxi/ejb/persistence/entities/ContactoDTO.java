@@ -2,7 +2,6 @@ package net.ciespal.redxxi.ejb.persistence.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -16,7 +15,7 @@ public class ContactoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_CONTACTO_CONCODIGO_GENERATOR", sequenceName="ATE_CONTACTO_CON_CODIGO_SEQ")
+	@SequenceGenerator(name="ATE_CONTACTO_CONCODIGO_GENERATOR", sequenceName="ATE_CONTACTO_CON_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_CONTACTO_CONCODIGO_GENERATOR")
 	@Column(name="con_codigo")
 	private Integer conCodigo;
@@ -28,8 +27,9 @@ public class ContactoDTO implements Serializable {
 	private String conValor;
 
 	//bi-directional many-to-one association to EntidadDTO
-	@OneToMany(mappedBy="ateContacto")
-	private List<EntidadDTO> ateEntidads;
+	@ManyToOne
+	@JoinColumn(name="con_entidad")
+	private EntidadDTO ateEntidad;
 
 	public ContactoDTO() {
 	}
@@ -58,26 +58,12 @@ public class ContactoDTO implements Serializable {
 		this.conValor = conValor;
 	}
 
-	public List<EntidadDTO> getAteEntidads() {
-		return this.ateEntidads;
+	public EntidadDTO getAteEntidad() {
+		return this.ateEntidad;
 	}
 
-	public void setAteEntidads(List<EntidadDTO> ateEntidads) {
-		this.ateEntidads = ateEntidads;
-	}
-
-	public EntidadDTO addAteEntidad(EntidadDTO ateEntidad) {
-		getAteEntidads().add(ateEntidad);
-		ateEntidad.setAteContacto(this);
-
-		return ateEntidad;
-	}
-
-	public EntidadDTO removeAteEntidad(EntidadDTO ateEntidad) {
-		getAteEntidads().remove(ateEntidad);
-		ateEntidad.setAteContacto(null);
-
-		return ateEntidad;
+	public void setAteEntidad(EntidadDTO ateEntidad) {
+		this.ateEntidad = ateEntidad;
 	}
 
 }

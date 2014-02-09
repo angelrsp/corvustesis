@@ -2,6 +2,7 @@ package net.ciespal.redxxi.ejb.persistence.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -30,6 +31,21 @@ public class EntidadDTO implements Serializable {
 	@JoinColumn(name="ent_doctor")
 	private DoctorDTO ateDoctor;
 
+	//bi-directional many-to-one association to EventoDTO
+	@ManyToOne
+	@JoinColumn(name="ent_evento")
+	private EventoDTO ateEvento;
+
+	//bi-directional many-to-one association to NoticiaDTO
+	@ManyToOne
+	@JoinColumn(name="ent_noticias")
+	private NoticiaDTO ateNoticia;
+
+	//bi-directional many-to-one association to ObraDTO
+	@ManyToOne
+	@JoinColumn(name="ent_obra")
+	private ObraDTO ateObra;
+
 	//bi-directional many-to-one association to OrganizacionDTO
 	@ManyToOne
 	@JoinColumn(name="ent_organizacion")
@@ -46,24 +62,8 @@ public class EntidadDTO implements Serializable {
 	private PublicacionDTO atePublicacion;
 
 	//bi-directional many-to-one association to ContactoDTO
-	@ManyToOne
-	@JoinColumn(name="ent_contacto")
-	private ContactoDTO ateContacto;
-
-	//bi-directional many-to-one association to EventoDTO
-	@ManyToOne
-	@JoinColumn(name="ent_evento")
-	private EventoDTO ateEvento;
-
-	//bi-directional many-to-one association to NoticiaDTO
-	@ManyToOne
-	@JoinColumn(name="ent_noticias")
-	private NoticiaDTO ateNoticia;
-
-	//bi-directional many-to-one association to ObraDTO
-	@ManyToOne
-	@JoinColumn(name="ent_obra")
-	private ObraDTO ateObra;
+	@OneToMany(mappedBy="ateEntidad")
+	private List<ContactoDTO> ateContactos;
 
 	public EntidadDTO() {
 	}
@@ -92,6 +92,30 @@ public class EntidadDTO implements Serializable {
 		this.ateDoctor = ateDoctor;
 	}
 
+	public EventoDTO getAteEvento() {
+		return this.ateEvento;
+	}
+
+	public void setAteEvento(EventoDTO ateEvento) {
+		this.ateEvento = ateEvento;
+	}
+
+	public NoticiaDTO getAteNoticia() {
+		return this.ateNoticia;
+	}
+
+	public void setAteNoticia(NoticiaDTO ateNoticia) {
+		this.ateNoticia = ateNoticia;
+	}
+
+	public ObraDTO getAteObra() {
+		return this.ateObra;
+	}
+
+	public void setAteObra(ObraDTO ateObra) {
+		this.ateObra = ateObra;
+	}
+
 	public OrganizacionDTO getAteOrganizacion() {
 		return this.ateOrganizacion;
 	}
@@ -116,36 +140,26 @@ public class EntidadDTO implements Serializable {
 		this.atePublicacion = atePublicacion;
 	}
 
-	public ContactoDTO getAteContacto() {
-		return this.ateContacto;
+	public List<ContactoDTO> getAteContactos() {
+		return this.ateContactos;
 	}
 
-	public void setAteContacto(ContactoDTO ateContacto) {
-		this.ateContacto = ateContacto;
+	public void setAteContactos(List<ContactoDTO> ateContactos) {
+		this.ateContactos = ateContactos;
 	}
 
-	public EventoDTO getAteEvento() {
-		return this.ateEvento;
+	public ContactoDTO addAteContacto(ContactoDTO ateContacto) {
+		getAteContactos().add(ateContacto);
+		ateContacto.setAteEntidad(this);
+
+		return ateContacto;
 	}
 
-	public void setAteEvento(EventoDTO ateEvento) {
-		this.ateEvento = ateEvento;
-	}
+	public ContactoDTO removeAteContacto(ContactoDTO ateContacto) {
+		getAteContactos().remove(ateContacto);
+		ateContacto.setAteEntidad(null);
 
-	public NoticiaDTO getAteNoticia() {
-		return this.ateNoticia;
-	}
-
-	public void setAteNoticia(NoticiaDTO ateNoticia) {
-		this.ateNoticia = ateNoticia;
-	}
-
-	public ObraDTO getAteObra() {
-		return this.ateObra;
-	}
-
-	public void setAteObra(ObraDTO ateObra) {
-		this.ateObra = ateObra;
+		return ateContacto;
 	}
 
 }
