@@ -66,6 +66,7 @@ public class HistoricoIndicadorController extends SelectItemController implement
 	private List<HistoricoIndicadorDTO> historicoIndicadorList;
 	private List<EvidenciaDTO> evidenciaList;
 	
+	private boolean disabledAddValue;
 	
 	private CartesianChartModel categoryModel;  
 	
@@ -173,6 +174,14 @@ public class HistoricoIndicadorController extends SelectItemController implement
         return categoryModel;  
     } 
 
+	public boolean isDisabledAddValue() {
+		return disabledAddValue;
+	}
+
+	public void setDisabledAddValue(boolean disabledAddValue) {
+		this.disabledAddValue = disabledAddValue;
+	}
+
 	public void obtenerArbol()
 	{
 		try {
@@ -244,19 +253,20 @@ public class HistoricoIndicadorController extends SelectItemController implement
 			setIndicadorDTO(new IndicadorDTO());
 			setIndicadorDTO(indTemp);
 			RequestContext rc = RequestContext.getCurrentInstance();
-			if(ind.getIndIndicadors().isEmpty())
-			{
+			if(ind.getIndIndicadors().isEmpty()){
+				disabledAddValue=false;
 				historicoIndicadorList=indicadorService.obtenerValores(indTemp);
-				if(historicoIndicadorList!=null)
-				{
+				if(historicoIndicadorList!=null){
 					rc.execute("PF('dlgValorReporte').show();");
 					createChartLine(historicoIndicadorList);
 				}
-				else
-					JsfUtil.addErrorMessage("No existen datos en historial");
+				else{
+					rc.execute("PF('dlgValorReporte').show();");
+					//JsfUtil.addErrorMessage("No existen datos en historial");
+				}
 			}
-			else
-			{
+			else{
+				disabledAddValue=true;
 				indicadorService.actualizarValores(indTemp);
 				rc.execute("PF('dlgValorReporte').show();");
 				indTemp=indicadorService.obtenerIndicador(indTemp.getIndCodigo());
@@ -310,7 +320,7 @@ public class HistoricoIndicadorController extends SelectItemController implement
         data1.setLabel("Indicador");  
   
         
-         data1.set("0", 1);
+         data1.set("0", 0);
         
         
         categoryModel.addSeries(data1);    		
@@ -324,6 +334,8 @@ public class HistoricoIndicadorController extends SelectItemController implement
 			indicadorService.agregarValor(getHistoricoIndicadorDTO());
 			historicoIndicadorList=indicadorService.obtenerValores(indTemp);
 			historicoIndicadorDTO=new HistoricoIndicadorDTO();
+			createChartLine(historicoIndicadorList);
+			setIndicadorDTO(indicadorService.obtenerIndicador(indTemp.getIndCodigo()));
 		} catch (IndicadoresException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
