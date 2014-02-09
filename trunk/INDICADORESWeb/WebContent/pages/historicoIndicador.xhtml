@@ -52,7 +52,7 @@
 			
 				<p:panel id="pnlValorReporte">
 					<p:lineChart id="lineChart" value="#{historicoIndicadorController.categoryModel}" legendPosition="ne"   
-		             title="Historial" style="height:300px;margin-top:20px" xaxisLabel="Fecha" yaxisLabel="Valor" /> 
+		             title="Historial" style="height:300px;margin-top:20px" xaxisLabel="" yaxisLabel="Valor" /> 
 				
 				<table>
 					<tr>
@@ -83,7 +83,7 @@
 					</tr>
 					
 					<tr>
-						<td><p:commandButton value="#{i18n['boton.agregar']}" type="button" onclick="PF('dlgValor').show();"/> </td>
+						<td><p:commandButton value="#{i18n['boton.agregar']}" type="button" onclick="PF('dlgValor').show();" disabled="#{historicoIndicadorController.disabledAddValue}"/> </td>
 					</tr>
 				</table>
 				
@@ -113,7 +113,7 @@
 
 					<tr>
 						<td colspan="2" align="center">
-							<p:commandButton actionListener="#{historicoIndicadorController.agregarValor}" value="#{i18n['boton.agregar']}" process="pnlValor" update="pnlValor,growl"/> </td>
+							<p:commandButton actionListener="#{historicoIndicadorController.agregarValor}" value="#{i18n['boton.agregar']}" process="pnlValor" update="pnlValor,growl,pnlValorReporte"/> </td>
 					</tr>
 						
 					</table>
