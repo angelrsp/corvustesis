@@ -10,7 +10,9 @@ import javax.persistence.criteria.Root;
 
 import ec.edu.uce.silsag.ejb.persistence.dao.ResultadoDAO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.RespuestaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ResultadoDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.ResultadoListDTO;
 
 public class ResultadoDAOImpl extends AbstractFacadeImpl<ResultadoDTO> implements ResultadoDAO{
 
@@ -41,5 +43,23 @@ public class ResultadoDAOImpl extends AbstractFacadeImpl<ResultadoDTO> implement
 			return list;
 
 	}
-	
+
+	@Override
+	public List<ResultadoListDTO> getAllByRespuesta(RespuestaDTO respuesta)
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<ResultadoListDTO> cq=cb.createQuery(ResultadoListDTO.class);
+		Root<ResultadoListDTO> from = cq.from(ResultadoListDTO.class);
+				
+		cq.where(cb.equal(from.get("resCodigo"), respuesta.getResCodigo()));
+		
+		List<ResultadoListDTO> list=entityManager.createQuery(cq).getResultList();
+		
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+
+	}
+
 }

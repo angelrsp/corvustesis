@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ec.edu.uce.silsag.commons.dto.util.EstudioReportDTO;
-import ec.edu.uce.silsag.commons.util.ApplicationUtil;
+import ec.edu.uce.silsag.commons.util.MailUtil;
 import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.negocio.CandidatosService;
 import ec.edu.uce.silsag.ejb.persistence.dao.FactoryDAO;
@@ -65,11 +65,9 @@ public class CandidatosServiceImpl implements CandidatosService {
 
 	@Override
 	public CandidatoListDTO obtenerCandidato(CandidatoDTO candidatoDTO)throws SilsagException {
-
 		log.info("obtenerCandidato");
-
 		try {
-				return factoryDAO.getCandidatoDAOImpl().getCandidato(candidatoDTO);
+			return factoryDAO.getCandidatoDAOImpl().getCandidato(candidatoDTO);
 		} catch (Exception e) {
 			log.info("Error al registrar el Candidato {}", e.toString());
 			throw new SilsagException(e);
@@ -79,9 +77,7 @@ public class CandidatosServiceImpl implements CandidatosService {
 	
 	@Override
 	public CandidatoDTO actualizarCandidato(CandidatoDTO candidatoDTO)throws SilsagException {
-
 		log.info("actualizarCandidato");
-
 		try {
 			candidatoDTO.setCanFechaUltima(new Timestamp(new Date().getTime()));
 			if(factoryDAO.getEstudioDAOImpl().getAll(candidatoDTO)!=null){
@@ -104,7 +100,6 @@ public class CandidatosServiceImpl implements CandidatosService {
 	@Override
 	public void agregarEstudio(EstudioDTO estudio) throws SilsagException {
 		log.info("agregarEstudio");
-
 		try {
 			factoryDAO.getEstudioDAOImpl().create(estudio);
 			CandidatoDTO can=estudio.getBemCandidato();
@@ -269,6 +264,7 @@ public class CandidatosServiceImpl implements CandidatosService {
 	@Override
 	public PostulacionDTO postular(PostulacionDTO postulacionDTO) throws SilsagException{
 		try {
+			new MailUtil().send(postulacionDTO.getBemAviso().getBemEmpresa().getBemUsuario().getUsuMail(), "Postulacion", "Nueva postulacion");
 			return factoryDAO.getPostulacionDAOImpl().create(postulacionDTO);
 		} catch (Exception e) {
 			log.info("Error al insertar postulacion {}", e.toString());
