@@ -14,37 +14,38 @@
 
 		<ui:define name="contenido">
 		
-				<fieldset>
 			
-				<p:growl id="growl" showDetail="true" />
-				
-				<p:dataTable id="tblCandidato" value="#{verCandidatoController.candidatoList}" var="can">
-				
-					<p:column headerText="#{i18n['label.ci.pasaporte']}">
-						<h:outputText value="#{can.canIdentificacion}" />
-					</p:column>			
+		<p:growl id="growl" showDetail="true" />
+		<p:panel>		
+			<p:dataTable id="tblCandidato" value="#{verCandidatoController.candidatoList}" var="can">
+			
+				<p:column headerText="#{i18n['label.ci.pasaporte']}">
+					<h:outputText value="#{can.canIdentificacion}" />
+				</p:column>			
 
-					<p:column headerText="#{i18n['label.apellidos']}">
-						<h:outputText value="#{can.canApellidoPaterno} #{can.canApellidoMaterno}" />
-					</p:column>			
+				<p:column headerText="#{i18n['label.apellidos']}">
+					<h:outputText value="#{can.canApellidoPaterno} #{can.canApellidoMaterno}" />
+				</p:column>			
 
-					<p:column headerText="#{i18n['label.nombres']}">
-						<h:outputText value="#{can.canPrimerNombre} #{can.canSegundoNombre}" />
-					</p:column>			
+				<p:column headerText="#{i18n['label.nombres']}">
+					<h:outputText value="#{can.canPrimerNombre} #{can.canSegundoNombre}" />
+				</p:column>			
 
-					<p:column headerText="#{i18n['label.fecha.nacimiento']}">
-						<h:outputText value="#{fn:substring(can.canFechaNacimiento,0,10)}" />
-					</p:column>	
+				<p:column headerText="#{i18n['label.fecha.nacimiento']}">
+					<h:outputText value="#{fn:substring(can.canFechaNacimiento,0,10)}" />
+				</p:column>	
 
-					<p:column style="width:8%" headerText="#{i18n['label.ver.mas']}">  
-		                <p:commandButton actionListener="#{verCandidatoController.buscarCandidato(can)}" oncomplete="PF('infoCandidato').show()" icon="ui-icon-search" 
-		                	update=":contenido:infoCandidato,:contenido:growl" process="tblCandidato" title="#{i18n['label.ver.mas']}">    
-		    	        </p:commandButton>  
-			        </p:column>  					
+				<p:column style="width:8%" headerText="#{i18n['label.ver.mas']}">  
+	                <p:commandButton actionListener="#{verCandidatoController.buscarCandidato(can)}" oncomplete="PF('infoCandidato').show()" icon="ui-icon-search" 
+	                	update=":contenido:infoCandidato,:contenido:growl" process="tblCandidato" title="#{i18n['label.ver.mas']}">    
+	    	        </p:commandButton>  
+		        </p:column>  					
+			
+			</p:dataTable>
+			
+			<h:outputText value="Registros: #{verCandidatoController.candidatoList.size()}" />
 				
-				</p:dataTable>
-				
-			</fieldset>
+			</p:panel>
 		
 		    <p:dialog id="infoCandidato" widgetVar="infoCandidato"
       			header="Candidato" modal="true" closeOnEscape="true" resizable="false">
