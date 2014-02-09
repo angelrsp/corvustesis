@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ec.edu.uce.silsag.commons.util.MailUtil;
 import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.negocio.EmpresaService;
 import ec.edu.uce.silsag.ejb.persistence.dao.FactoryDAO;
@@ -114,6 +115,7 @@ public class EmpresaServiceImpl implements EmpresaService {
 		try {
 			postulacionDTO.setPosAceptado(true);
 			factoryDAO.getPostulacionDAOImpl().edit(postulacionDTO);
+			new MailUtil().send(postulacionDTO.getBemCandidato().getBemUsuario().getUsuMail(), "Postulacion Acptada", "Su postulacion fue aceptada");
 		} catch (Exception e) {
 			log.info("Error al aceptarPostulacion {}", e.toString());
 			throw new SilsagException("Error al aceptarPostulacion");
