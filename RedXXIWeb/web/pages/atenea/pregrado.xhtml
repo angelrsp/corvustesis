@@ -11,7 +11,7 @@
 		
 		<p:growl id="growl"></p:growl>
 		
-		<p:panel id="pnlDatos" header="#{i18n['label.panel.datos']}">
+		<p:panel id="pnlDatos" header="#{i18n['label.panel.pregrado']}">
 		
 		<table>
 		
@@ -39,7 +39,7 @@
 			
 			<tr>
 				<td><h:outputText value="#{i18n['label.escuela']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somEscuela" required="true" requiredMessage="#{i18n['label.escuela']}&#160;#{i18n['label.requerido']}" value="#{universidadDataManager.escuelaCode}">
+				<td><p:selectOneMenu id="somEscuela" value="#{universidadDataManager.escuelaCode}">
 						<f:selectItem itemLabel="--Seleccione--" itemValue="0"/>
 						<f:selectItems value="#{pregradoController.universidadDataManager.escuelaList}" var="fac" itemValue="#{fac.cenCodigo}" itemLabel="#{fac.cenNombre}"/>						
 					</p:selectOneMenu></td>
@@ -49,75 +49,87 @@
 			<tr>
 			
 				<td><h:outputText value="#{i18n['label.modalidad']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.modalidad']}&#160;#{i18n['label.requerido']}" value="#{carreraDataManager.modalidad}">
-						<f:selectItem itemLabel="--Seleccione--"/>
-						<f:selectItems value="#{pregradoController.catalogoModalidad}"/>
-					</p:selectOneMenu></td>
-
-			
+				
+				<td><p:selectManyCheckbox id="smcModalidad" required="true" value="#{carreraDataManager.modalidadSelect}">  
+            			<f:selectItems value="#{pregradoController.catalogoModalidad}"/>  
+        			</p:selectManyCheckbox></td>
 			</tr>
 			
+		</table>
+			
+		<table>
 			<tr>
+			
+				<td><h:outputText value="#{i18n['label.nombre.carrera']}:&#160;" /></td>
+				<td colspan="2"><p:inputText required="true" requiredMessage="#{i18n['label.nombre']}&#160;#{i18n['label.requerido']}" value="#{carreraDataManager.carrera.carNombre}"/></td>
+			
 				<td><h:outputText value="#{i18n['label.perfil.carrera']}:&#160;" /></td>
 				<td colspan="2"><p:inputTextarea autoResize="false" required="true" requiredMessage="#{i18n['label.perfil.carrera']}&#160;#{i18n['label.requerido']}" value="#{carreraDataManager.carrera.carPerfil}"/></td>
+			</tr>	
+		</table>
+		
+		<table>	
+			<tr>	
 				<td><h:outputText value="#{i18n['label.cantidad.profesor']}:&#160;" /></td>
-				<td><p:inputText style="width:50px;" required="true" requiredMessage="#{i18n['label.cantidad.profesor']}&#160;#{i18n['label.requerido']}" value="#{carreraDataManager.carrera.carProfesor}"/></td>	
+				<td><p:inputText style="width:50px;" required="true" requiredMessage="#{i18n['label.cantidad.profesor']}&#160;#{i18n['label.requerido']}" value="#{carreraDataManager.carrera.carProfesor}" onkeypress="return isNumberKey(event)"/></td>	
 				<td><h:outputText value="#{i18n['label.cantidad.estudiante']}:&#160;" /></td>
-				<td><p:inputText style="width:50px;" required="true" requiredMessage="#{i18n['label.cantidad.estudiante']}&#160;#{i18n['label.requerido']}" value="#{carreraDataManager.carrera.carAlumno}"/></td>	
-					
+				<td><p:inputText style="width:50px;" required="true" requiredMessage="#{i18n['label.cantidad.estudiante']}&#160;#{i18n['label.requerido']}" value="#{carreraDataManager.carrera.carAlumno}" onkeypress="return isNumberKey(event)"/></td>						
 			</tr>
 			
 			<tr>
 				<td colspan="9" align="center"><p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{pregradoController.guardar}" process="pnlDatos" update="pnlDatos,growl"/></td>
 			</tr>
-			
 		</table>
 		
 		</p:panel>
 		
-		<p:panel header="#{i18n['label.panel.contacto']}">
+		<p:panel id="pnlContacto" header="#{i18n['label.panel.contacto']}">
 				
 		<table>
 			<tr>
 				<td><h:outputText value="#{i18n['label.tipo']}:&#160;" /></td>
 				<td>
-					<p:selectOneMenu>
+					<p:selectOneMenu required="true" requiredMessage="#{i18n['label.cantidad.estudiante']}&#160;#{i18n['label.requerido']}" value="#{contactoDataManager.tipoContacto}">
 						<f:selectItem itemLabel="--Seleccione--"/>
 						<f:selectItems value="#{pregradoController.catalogoTipoContacto}"/>
 					</p:selectOneMenu>
 				</td>
 				<td><h:outputText value="#{i18n['label.valor']}:&#160;" /></td>
-				<td><p:inputText></p:inputText></td>
-				<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>
+				<td><p:inputText value="#{contactoDataManager.contacto.conValor}" required="true" requiredMessage="#{i18n['label.valor']}&#160;#{i18n['label.requerido']}"/></td>
+				<td><p:commandButton value="#{i18n['boton.agregar']}" actionListener="#{pregradoController.crearContacto}" process="pnlContacto" update="pnlContacto,growl"/></td>
 			</tr>			
 		</table>
 		
 		<p:spacer height="10"/>
 		
-		<p:dataTable emptyMessage="No existen registros">
-			<p:column headerText="#{i18n['label.tipo']}"></p:column>
-			<p:column headerText="#{i18n['label.valor']}"></p:column>
+		<p:dataTable emptyMessage="No existen registros" value="#{contactoDataManager.contactoList}" var="con">
+			<p:column headerText="#{i18n['label.tipo']}">
+				<h:outputText value="#{con.catTipo}" />
+			</p:column>
+			<p:column headerText="#{i18n['label.valor']}">
+				<h:outputText value="#{con.conValor}" />
+			</p:column>
 			<p:column headerText="#{i18n['boton.editar']}" width="15"></p:column>
 			<p:column headerText="#{i18n['boton.eliminar']}" width="15"></p:column>
 		</p:dataTable>
 		
 		</p:panel>
 		
-		
-		<p:panel header="#{i18n['label.menciones']}">
+		<!-- Investigacion Menciones / Especialidades -->
+		<p:panel id="pnlMencion" header="#{i18n['label.menciones']}">
 		
 		<table>
 			<tr>
 				<td><h:outputText value="#{i18n['label.mencion']}:&#160;" /></td>
-				<td><p:inputTextarea></p:inputTextarea></td>
-				<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>				
+				<td><p:inputTextarea value="#{carreraDataManager.mencion.menNombre}" required="true" requiredMessage="#{i18n['label.mencion']}&#160;#{i18n['label.requerido']}"/></td>
+				<td><p:commandButton actionListener="#{pregradoController.crearMension}" value="#{i18n['boton.agregar']}" process="pnlMencion,growl" update="pnlMencion"/></td>				
 			</tr>
 		</table>
 		
-		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
+		<p:dataTable emptyMessage="#{i18n['table.vacio']}" value="#{carreraDataManager.mencionList}" var="men">
 		
 			<p:column headerText="#{i18n['label.descripcion']}">
-				<h:outputText value="" />
+				<h:outputText value="#{men.menNombre}" />
 			</p:column>
 
 			<p:column headerText="#{i18n['boton.editar']}" width="15">
