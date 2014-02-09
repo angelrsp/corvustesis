@@ -12,6 +12,8 @@
 		<p:growl id="growl"></p:growl>
 		
 		<p:panel id="pnlDatos" header="#{i18n['label.panel.datos']}">
+
+		<!-- Universidad -->
 		
 		<table>
 			<tr>
@@ -43,8 +45,6 @@
 				<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
 				<td><p:inputText value="#{universidadDataManager.universidad.cenNombre}" required="true" requiredMessage="#{i18n['label.nombre']}&#160;#{i18n['label.requerido']}"/></td>
 
-				<td><h:outputText value="#{i18n['label.datos.institucionales']}:&#160;" /></td>
-				<td><p:inputTextarea value="#{universidadDataManager.universidad.cenDatoInstitucional}" autoResize="false" required="true" requiredMessage="#{i18n['label.datos.institucionales']}&#160;#{i18n['label.requerido']}"/></td>								
 			</tr>		
 
 			<tr>
@@ -60,8 +60,12 @@
 		
 		<p:dataTable id="tblUniversidad" value="#{universidadDataManager.universidadList}" var="uni">
 
-			<p:column headerText="#{i18n['label.nombre']}">
+			<p:column headerText="#{i18n['label.nombre.universidad']}">
 				<h:outputText value="#{uni.cenNombre}" />
+			</p:column>
+
+			<p:column headerText="#{i18n['label.categoria.acreditacion']}">
+				<h:outputText value="#{uni.cenCategoria}" />
 			</p:column>
 
 			<p:column headerText="#{i18n['label.facultad']}" width="15">
@@ -75,6 +79,8 @@
 		
 		
 		</p:panel>
+
+		<!-- Faculdad -->
 
 		<p:dialog widgetVar="dlgFacultad" modal="true" closeOnEscape="true">
 		
@@ -102,6 +108,11 @@
 				<p:column headerText="#{i18n['label.nombre']}">
 					<h:outputText value="#{fac.cenNombre}" />
 				</p:column>
+
+				<p:column headerText="#{i18n['label.datos.institucionales']}">
+					<h:outputText value="#{fac.cenDatoInstitucional}" />
+				</p:column>
+
 			
 				<p:column headerText="#{i18n['label.escuela']}" width="15">
 					<p:commandButton actionListener="#{universidadController.obtenerEscuela(fac)}" oncomplete="PF('dlgEscuela').show()" icon="ui-icon-newwin" 
@@ -125,6 +136,11 @@
 					<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
 					<td><p:inputText value="#{universidadDataManager.escuela.cenNombre}" required="true" requiredMessage="#{i18n['label.nombre']}&#160;#{i18n['label.requerido']}"/></td>
 				</tr>
+
+				<tr>
+					<td><h:outputText value="#{i18n['label.datos.institucionales']}:&#160;" /></td>
+					<td><p:inputTextarea value="#{universidadDataManager.escuela.cenDatoInstitucional}" autoResize="false" required="true" requiredMessage="#{i18n['label.datos.institucionales']}&#160;#{i18n['label.requerido']}"/></td>								
+				</tr>		
 
 				<tr>
 					<td colspan="4" align="center"><p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{universidadController.crearEscuela}" process="pnlEscuela" update="growl,pnlEscuela"/></td>
