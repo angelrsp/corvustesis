@@ -11,6 +11,7 @@ import ec.edu.uce.silsag.ejb.persistence.entities.CatalogoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EmpresaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ParametroDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.PostulacionDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.PreguntaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
 
@@ -33,6 +34,11 @@ public interface AdministracionService {
 	ParametroDTO obtenerParametro(Object id) throws SilsagException;
 
 	List<ResultadoReportDTO> obtenerResultadoPorPregunta(PreguntaDTO pregunta)
+			throws SilsagException;
+
+	List<PostulacionDTO> obtenerPostulacion() throws SilsagException;
+
+	List<PostulacionDTO> obtenerPostulacion(Boolean estado)
 			throws SilsagException;
 
 

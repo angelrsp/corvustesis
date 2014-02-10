@@ -19,6 +19,7 @@ import ec.edu.uce.silsag.ejb.persistence.entities.CatalogoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EmpresaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ParametroDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.PostulacionDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.PreguntaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
 
@@ -176,9 +177,37 @@ public class AdministracionServiceImpl implements AdministracionService{
 	@Override
 	public List<ResultadoReportDTO> obtenerResultadoPorPregunta(PreguntaDTO pregunta) throws SilsagException
 	{
-		log.info("obtenerParametro");
+		log.info("obtenerResultadoPorPregunta");
 		try{
 			return factoryDAO.getResultadoDAOImpl().getAllByPregunta(pregunta);
+		}
+		catch(Exception e)
+		{
+			log.info("Error al obtenerResultadoPorPregunta" +e.toString());
+			throw new SilsagException("Error al obtenerResultadoPorPregunta");
+		}
+	}
+
+	@Override
+	public List<PostulacionDTO> obtenerPostulacion() throws SilsagException
+	{
+		log.info("obtenerParametro");
+		try{
+			return factoryDAO.getPostulacionDAOImpl().getAll();
+		}
+		catch(Exception e)
+		{
+			log.info("Error al obtenerParametro" +e.toString());
+			throw new SilsagException("Error al obtenerParametro");
+		}
+	}
+	
+	@Override
+	public List<PostulacionDTO> obtenerPostulacion(Boolean estado) throws SilsagException
+	{
+		log.info("obtenerParametro");
+		try{
+			return factoryDAO.getPostulacionDAOImpl().getAll(estado);
 		}
 		catch(Exception e)
 		{

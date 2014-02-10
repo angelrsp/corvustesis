@@ -64,5 +64,35 @@ public class PostulacionDAOImpl extends AbstractFacadeImpl<PostulacionDTO> imple
 			return list;
 	}
 	
-	
+
+	@Override
+	public List<PostulacionDTO> getAll() throws SilsagException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<PostulacionDTO> cq=cb.createQuery(PostulacionDTO.class);
+		cq.from(PostulacionDTO.class);
+		
+		List<PostulacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
+
+	@Override
+	public List<PostulacionDTO> getAll(Boolean estado) throws SilsagException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<PostulacionDTO> cq=cb.createQuery(PostulacionDTO.class);
+		Root<PostulacionDTO> from = cq.from(PostulacionDTO.class);
+		
+		cq.where(cb.equal(from.get("posAceptado"), estado));
+		
+		List<PostulacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
+
 }

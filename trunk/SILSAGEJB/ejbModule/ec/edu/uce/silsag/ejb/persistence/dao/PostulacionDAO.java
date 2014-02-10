@@ -17,6 +17,10 @@ public interface PostulacionDAO extends AbstractFacade<PostulacionDTO>{
 	List<PostulacionDTO> getAll(CandidatoDTO candidatoDTO)
 			throws SilsagException;
 
+	List<PostulacionDTO> getAll() throws SilsagException;
+
+	List<PostulacionDTO> getAll(Boolean estado) throws SilsagException;
+
 	
 
 }
