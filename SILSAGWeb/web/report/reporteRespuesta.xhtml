@@ -12,12 +12,26 @@
 		
 		<p:growl id="growl"></p:growl>
 		
-		<p:panel>
+		<p:panel id="pnlPregunta">
 			<table>
 				<tr>
 					<td><h:outputLabel value="#{i18n['label.pregunta']}:&#160;" /></td>
+				</tr>	
+				<tr>	
+					<td><p:selectOneMenu value="#{reporteRespuestaController.preguntaCode}" required="true" requiredMessage="#{i18n['label.pregunta']}:&#160;#{i18n['label.requerido']}" >
+						<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="" />
+						<f:selectItems value="#{reporteRespuestaController.preguntaList}" var="pre" itemValue="#{pre.preCodigo}" itemLabel="#{pre.preDescripcion}"></f:selectItems>
+						
+						</p:selectOneMenu></td>					
+				</tr>
+				<tr>
+					<td><p:commandButton value="#{i18n['boton.buscar']}" actionListener="#{reporteRespuestaController.buscar}" process="pnlPregunta" update="pnlPregunta,growl"/></td>
 				</tr>
 			</table>
+			
+			<p:pieChart id="sample" value="#{reporteRespuestaController.pieModel}" legendPosition="w"  
+                title="Gráfico" style="width:500px;height:400px" showDataLabels="true" />  
+			
 		</p:panel>
 	</ui:define>		
 </ui:composition>
