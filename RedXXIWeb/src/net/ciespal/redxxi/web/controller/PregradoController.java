@@ -12,9 +12,11 @@ import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ModalidadDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.CarreraDataManager;
 import net.ciespal.redxxi.web.datamanager.ContactoDataManager;
+import net.ciespal.redxxi.web.datamanager.ProyectoDataManager;
 import net.ciespal.redxxi.web.datamanager.UniversidadDataManager;
 
 import com.corvustec.commons.util.CorvustecException;
@@ -34,6 +36,9 @@ public class PregradoController extends SelectItemController{
 
 	@ManagedProperty(value="#{contactoDataManager}")
 	private ContactoDataManager contactoDataManager;
+
+	@ManagedProperty(value="#{proyectoDataManager}")
+	private ProyectoDataManager proyectoDataManager;
 
 	
 	public PregradoController() {
@@ -60,6 +65,10 @@ public class PregradoController extends SelectItemController{
 
 	public void setContactoDataManager(ContactoDataManager contactoDataManager) {
 		this.contactoDataManager = contactoDataManager;
+	}
+
+	public void setProyectoDataManager(ProyectoDataManager proyectoDataManager) {
+		this.proyectoDataManager = proyectoDataManager;
 	}
 
 	public void obtenerUniversidad()
@@ -119,9 +128,9 @@ public class PregradoController extends SelectItemController{
 			}
 			carreraDataManager.getCarrera().setAteCentro(centro);
 			
-			entidad.setAteCarrera(carreraDataManager.getCarrera());;
+			entidad.setAteCarrera(carreraDataManager.getCarrera());
 			carreraDataManager.setEntidad(ateneaService.createEntidad(entidad));
-			
+			entidad.setAteCarrera(carreraDataManager.getEntidad().getAteCarrera());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
@@ -154,6 +163,23 @@ public class PregradoController extends SelectItemController{
 			ateneaService.createMencion(carreraDataManager.getMencion());
 			carreraDataManager.setMencionList(ateneaService.readMencion(carreraDataManager.getEntidad().getAteCarrera()));
 			carreraDataManager.setMencion(new MencionDTO());
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void createProyecto()
+	{
+		EntidadDTO ent;
+		try {
+			ent=new EntidadDTO();
+			ent.setAteProyectoInvestigacion(proyectoDataManager.getProyecto());
+			ent=ateneaService.createEntidad(ent);
+			ent.setAteCarrera(carreraDataManager.getCarrera());
+			ateneaService.updateEntidad(ent);
+			proyectoDataManager.setProyectoList(ateneaService.readProyectoInvestigacion(ent.getAteCarrera()));
+			proyectoDataManager.setProyecto(new ProyectoInvestigacionDTO());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
