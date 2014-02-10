@@ -31,6 +31,9 @@
 			
 			<p:pieChart id="sample" value="#{reporteRespuestaController.pieModel}" legendPosition="w"  
                 title="Gráfico" style="width:500px;height:400px" showDataLabels="true" />  
+
+			<p:barChart id="basic" value="#{reporteRespuestaController.categoryModel}" legendPosition="ne"  
+            	title="Basic Bar Chart" min="0" max="200" style="height:300px"/> 
 			
 		</p:panel>
 	</ui:define>		
