@@ -111,11 +111,9 @@ public class EncuestaController implements Serializable{
 			candidatosService.guardarResultados(respuesta, respuestaText, candidato);
 			JsfUtil.redirect("/SILSAGWeb/pages/candidato/dato.jsf");
 		} catch (SilsagException e) {
-			// TODO Auto-generated catch block
 			JsfUtil.addErrorMessage(e.toString());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JsfUtil.addErrorMessage(e.toString());
 		}	
 		
 	}

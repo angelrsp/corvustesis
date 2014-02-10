@@ -9,6 +9,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.model.chart.CartesianChartModel;
+import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.PieChartModel;
 
 import ec.edu.uce.silsag.commons.dto.util.ResultadoReportDTO;
@@ -37,6 +39,7 @@ public class ReporteRespuestaController implements Serializable{
 
 	
 	private PieChartModel pieModel;  
+	private CartesianChartModel categoryModel;  
 	
 	private List<ResultadoReportDTO> resultadoList;
   	
@@ -48,6 +51,7 @@ public class ReporteRespuestaController implements Serializable{
 		try {
 			this.preguntaList=candidatosService.obtenerPregunta();
 			createPieModel();
+			createCategoryModel();
 		} catch (SilsagException e) {
 			e.printStackTrace();
 		}		
@@ -73,6 +77,9 @@ public class ReporteRespuestaController implements Serializable{
         return pieModel;  
     }  
 
+    public CartesianChartModel getCategoryModel() {  
+        return categoryModel;  
+    }  
 	
 	public void buscar()
 	{
@@ -82,6 +89,7 @@ public class ReporteRespuestaController implements Serializable{
 			pregunta.setPreCodigo(getPreguntaCode());
 			resultadoList=administracionService.obtenerResultadoPorPregunta(pregunta);
 			createPieModel(resultadoList);
+			createCategoryModel(resultadoList);
 		} catch (SilsagException e) {
 			e.printStackTrace();
 		}
@@ -92,6 +100,17 @@ public class ReporteRespuestaController implements Serializable{
         pieModel.set("Sin Dato", 0);  
     }  
 
+    private void createCategoryModel() {  
+        categoryModel = new CartesianChartModel();  
+  
+        ChartSeries series = new ChartSeries();  
+        series.setLabel("Ninguno");  
+  
+        series.set("Sin Dato", 1);  
+  
+        categoryModel.addSeries(series);
+    }
+    
     private void createPieModel(List<ResultadoReportDTO> list)
     {
         pieModel = new PieChartModel();
@@ -105,4 +124,19 @@ public class ReporteRespuestaController implements Serializable{
         	pieModel.set("Sin Dato", 0);
         }     	
     }
+    
+    private void createCategoryModel(List<ResultadoReportDTO> list) {  
+        categoryModel = new CartesianChartModel();  
+  
+        for(ResultadoReportDTO rep:list)
+        {
+	        ChartSeries series = new ChartSeries();  
+	        series.setLabel(rep.getResDescripcion());  
+	  
+	        series.set("Repuesta", rep.getCantidad());  
+	  
+	        categoryModel.addSeries(series);          	
+        }
+    }
+
 }
