@@ -40,3 +40,10 @@ html, body {
     height: 100%;   
     width: 100%;
 }
+
+
+.ies01 {
+	width: 16px;   
+    height: 16px;   
+	background-image: url("/images/ies01.jpg") !important;
+}
