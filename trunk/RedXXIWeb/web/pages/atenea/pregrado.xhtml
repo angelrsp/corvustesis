@@ -146,37 +146,37 @@
 		
 		
 		<!-- Investigacion cientifica -->
-		<p:panel header="#{i18n['label.panel.proyecto.investigacion']}">
+		<p:panel id="pnlProyecto" header="#{i18n['label.panel.proyecto.investigacion']}">
 		
 		<table>
 		
 			<tr>
 				<td><h:outputText value="#{i18n['label.titulo']}:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinNombre}" required="true" requiredMessage="#{i18n['label.titulo']}&#160;#{i18n['label.requerido']}"/></td>
 				
 				<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinPerfil}" required="true" requiredMessage="#{i18n['label.perfil']}&#160;#{i18n['label.requerido']}"/></td>
 				
 				<td><h:outputText value="#{i18n['label.coordinador']}:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinCoordinador}" required="true" requiredMessage="#{i18n['label.coordinador']}&#160;#{i18n['label.requerido']}"/></td>
 				
-				<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>
+				<td><p:commandButton actionListener="#{pregradoController.createProyecto}" value="#{i18n['boton.agregar']}" process="pnlProyecto" update="pnlProyecto,growl"/></td>
 			</tr>
 			
 		</table>
 
-		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
+		<p:dataTable emptyMessage="#{i18n['table.vacio']}" value="#{proyectoDataManager.proyectoList}" var="pro">
 		
 			<p:column headerText="#{i18n['label.titulo']}">
-				<h:outputText value="" />
+				<h:outputText value="#{pro.pinNombre}" />
 			</p:column>
 
 			<p:column headerText="#{i18n['label.perfil']}">
-				<h:outputText value="" />
+				<h:outputText value="#{pro.pinPerfil}" />
 			</p:column>
 
 			<p:column headerText="#{i18n['label.coordinador']}">
-				<h:outputText value="" />
+				<h:outputText value="#{pro.pinCoordinador}" />
 			</p:column>
 
 			<p:column headerText="#{i18n['boton.editar']}" width="15">
