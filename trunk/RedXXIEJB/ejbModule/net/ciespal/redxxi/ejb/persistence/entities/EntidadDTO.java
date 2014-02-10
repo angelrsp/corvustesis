@@ -52,7 +52,7 @@ public class EntidadDTO implements Serializable {
 	private OrganizacionDTO ateOrganizacion;
 
 	//bi-directional many-to-one association to ProyectoInvestigacionDTO
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="ent_proyecto_intestigacion")
 	private ProyectoInvestigacionDTO ateProyectoInvestigacion;
 

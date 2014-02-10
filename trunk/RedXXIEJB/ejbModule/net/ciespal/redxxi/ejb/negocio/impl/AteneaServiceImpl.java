@@ -13,6 +13,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -155,4 +156,45 @@ public class AteneaServiceImpl implements AteneaService{
 			throw new CorvustecException("Error al obtenerCentroHijo");
 		}
 	}
+	
+	@Override
+	public List<ProyectoInvestigacionDTO> readProyectoInvestigacion(CarreraDTO carrera) throws CorvustecException
+	{
+		logger.info("obtenerProyectoInvestigacion");
+		try{
+			return factoryDAO.getProyectoInvestigacionDAOImpl().getAll(carrera);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error obtenerProyectoInvestigacion {}",e.toString());
+			throw new CorvustecException("Error al obtenerProyectoInvestigacion");
+		}
+	}
+
+	@Override
+	public ProyectoInvestigacionDTO createProyectoInvestigacion(ProyectoInvestigacionDTO proyecto) throws CorvustecException
+	{
+		logger.info("createProyectoInvestigacion");
+		try{
+			return factoryDAO.getProyectoInvestigacionDAOImpl().create(proyecto);
+		}
+		catch(Exception e){
+			logger.info("Error createProyectoInvestigacion {}",e.toString());
+			throw new CorvustecException("Error al createProyectoInvestigacion");
+		}
+	}
+
+	@Override
+	public void updateEntidad(EntidadDTO entidad) throws CorvustecException
+	{
+		logger.info("updateEntidad");
+		try{
+			factoryDAO.getEntidadDAOImpl().edit(entidad);
+		}
+		catch(Exception e){
+			logger.info("Error updateEntidad {}",e.toString());
+			throw new CorvustecException("Error al updateEntidad");
+		}
+	}
+
 }

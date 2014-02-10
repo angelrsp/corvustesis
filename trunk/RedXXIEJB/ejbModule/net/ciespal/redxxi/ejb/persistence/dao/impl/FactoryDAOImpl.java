@@ -11,6 +11,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.ContactoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.EntidadDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.MencionDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.ProyectoInvestigacionDAO;
 
 
 @Stateless
@@ -25,6 +26,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private EntidadDAO entidadDAO;
 	private ContactoDAO contactoDAO;
 	private MencionDAO mensionDAO;
+	private ProyectoInvestigacionDAO proyectoInvestigacionDAO;
 	
 	@Override
 	public CatalogoDAO getCatalogoImpl() {
@@ -73,4 +75,13 @@ public class FactoryDAOImpl implements FactoryDAO{
 		}
 		return mensionDAO;
 	}
+	
+	@Override
+	public ProyectoInvestigacionDAO getProyectoInvestigacionDAOImpl() {
+		if (proyectoInvestigacionDAO == null) {
+			proyectoInvestigacionDAO = new ProyectoInvestigacionDAOImpl(entityManager);
+		}
+		return proyectoInvestigacionDAO;
+	}
+
 }
