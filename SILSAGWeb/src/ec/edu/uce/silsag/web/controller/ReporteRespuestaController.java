@@ -128,15 +128,26 @@ public class ReporteRespuestaController implements Serializable{
     private void createCategoryModel(List<ResultadoReportDTO> list) {  
         categoryModel = new CartesianChartModel();  
   
-        for(ResultadoReportDTO rep:list)
+        if(list!=null)
         {
-	        ChartSeries series = new ChartSeries();  
-	        series.setLabel(rep.getResDescripcion());  
-	  
-	        series.set("Repuesta", rep.getCantidad());  
-	  
-	        categoryModel.addSeries(series);          	
+	        for(ResultadoReportDTO rep:list)
+	        {
+		        ChartSeries series = new ChartSeries();  
+		        series.setLabel(rep.getResDescripcion());  
+		  
+		        series.set("Repuesta", rep.getCantidad());  
+		  
+		        categoryModel.addSeries(series);          	
+	        }
+        }else{
+            ChartSeries series = new ChartSeries();  
+            series.setLabel("Ninguno");  
+      
+            series.set("Sin Dato", 1);  
+      
+            categoryModel.addSeries(series);        	
         }
+        
     }
 
 }
