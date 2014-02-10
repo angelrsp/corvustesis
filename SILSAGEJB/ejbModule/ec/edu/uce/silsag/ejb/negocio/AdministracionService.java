@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import ec.edu.uce.silsag.commons.dto.util.ResultadoReportDTO;
 import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.persistence.entities.CandidatoEstudioDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.CatalogoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EmpresaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ParametroDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.PreguntaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
 
 @Local
@@ -29,6 +31,9 @@ public interface AdministracionService {
 	List<CandidatoEstudioDTO> obtenerCandidatos() throws SilsagException;
 
 	ParametroDTO obtenerParametro(Object id) throws SilsagException;
+
+	List<ResultadoReportDTO> obtenerResultadoPorPregunta(PreguntaDTO pregunta)
+			throws SilsagException;
 
 
 	

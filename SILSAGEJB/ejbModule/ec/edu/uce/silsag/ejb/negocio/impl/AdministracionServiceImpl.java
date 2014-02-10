@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ec.edu.uce.silsag.commons.dto.util.CredencialesDTO;
+import ec.edu.uce.silsag.commons.dto.util.ResultadoReportDTO;
 import ec.edu.uce.silsag.commons.util.MailUtil;
 import ec.edu.uce.silsag.commons.util.SilsagException;
 import ec.edu.uce.silsag.ejb.negocio.AdministracionService;
@@ -18,6 +19,7 @@ import ec.edu.uce.silsag.ejb.persistence.entities.CatalogoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.EmpresaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.ParametroDTO;
+import ec.edu.uce.silsag.ejb.persistence.entities.PreguntaDTO;
 import ec.edu.uce.silsag.ejb.persistence.entities.UsuarioDTO;
 
 @Stateless
@@ -170,4 +172,19 @@ public class AdministracionServiceImpl implements AdministracionService{
 			throw new SilsagException("Error al obtenerParametro");
 		}
 	}
+	
+	@Override
+	public List<ResultadoReportDTO> obtenerResultadoPorPregunta(PreguntaDTO pregunta) throws SilsagException
+	{
+		log.info("obtenerParametro");
+		try{
+			return factoryDAO.getResultadoDAOImpl().getAllByPregunta(pregunta);
+		}
+		catch(Exception e)
+		{
+			log.info("Error al obtenerParametro" +e.toString());
+			throw new SilsagException("Error al obtenerParametro");
+		}
+	}
+
 }
