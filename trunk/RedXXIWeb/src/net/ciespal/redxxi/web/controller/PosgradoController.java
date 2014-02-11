@@ -6,29 +6,23 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import com.corvustec.commons.util.CorvustecException;
+
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.EventoDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ModalidadDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.CarreraDataManager;
 import net.ciespal.redxxi.web.datamanager.ContactoDataManager;
-import net.ciespal.redxxi.web.datamanager.EventoDataManager;
-import net.ciespal.redxxi.web.datamanager.ProyectoDataManager;
-import net.ciespal.redxxi.web.datamanager.PublicacionDataManager;
 import net.ciespal.redxxi.web.datamanager.UniversidadDataManager;
 
-import com.corvustec.commons.util.CorvustecException;
-
 @ViewScoped
-@ManagedBean(name = "pregradoController")
-public class PregradoController extends SelectItemController{
+@ManagedBean(name = "posgradoController")
+public class PosgradoController extends SelectItemController {
 
+	
 	@EJB
 	private AteneaService ateneaService;
 			
@@ -37,24 +31,10 @@ public class PregradoController extends SelectItemController{
 
 	@ManagedProperty(value="#{carreraDataManager}")
 	private CarreraDataManager carreraDataManager;
-
+	
 	@ManagedProperty(value="#{contactoDataManager}")
 	private ContactoDataManager contactoDataManager;
-
-	@ManagedProperty(value="#{proyectoDataManager}")
-	private ProyectoDataManager proyectoDataManager;
-
-	@ManagedProperty(value="#{publicacionDataManager}")
-	private PublicacionDataManager publicacionDataManager;
-
-	@ManagedProperty(value="#{eventoDataManager}")
-	private EventoDataManager eventoDataManager;
-
-	
-	public PregradoController() {
 		
-	}
-	
 	@PostConstruct
 	private void init()
 	{
@@ -76,20 +56,7 @@ public class PregradoController extends SelectItemController{
 	public void setContactoDataManager(ContactoDataManager contactoDataManager) {
 		this.contactoDataManager = contactoDataManager;
 	}
-
-	public void setProyectoDataManager(ProyectoDataManager proyectoDataManager) {
-		this.proyectoDataManager = proyectoDataManager;
-	}
-
-	public void setPublicacionDataManager(
-			PublicacionDataManager publicacionDataManager) {
-		this.publicacionDataManager = publicacionDataManager;
-	}
-
-	public void setEventoDataManager(EventoDataManager eventoDataManager) {
-		this.eventoDataManager = eventoDataManager;
-	}
-
+	
 	public void obtenerUniversidad()
 	{
 		try {
@@ -98,7 +65,6 @@ public class PregradoController extends SelectItemController{
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
-	
 	
 	public void obtenerFacultad()
 	{
@@ -122,6 +88,7 @@ public class PregradoController extends SelectItemController{
 		}	
 	}
 	
+	
 	public void guardar()
 	{
 		CentroDTO centro;
@@ -129,7 +96,9 @@ public class PregradoController extends SelectItemController{
 		ModalidadDTO mod;
 		try {
 			carreraDataManager.getCarrera().setCarCodigo(null);
-			carreraDataManager.getCarrera().setCarTipo(6);
+			carreraDataManager.getCarrera().setCarTipo(7);
+			carreraDataManager.getCarrera().setCarTipoPosgrado(Integer.valueOf(carreraDataManager.getTipoPosgrado().toString()));
+			
 			for(Object obj:carreraDataManager.getModalidadSelect()){
 				mod=new ModalidadDTO();
 				mod.setModModalidad(Integer.valueOf(obj.toString()));
@@ -176,68 +145,4 @@ public class PregradoController extends SelectItemController{
 	}
 
 	
-	public void crearMension()
-	{
-		try {
-			carreraDataManager.getMencion().setAteCarrera(carreraDataManager.getEntidad().getAteCarrera());
-			ateneaService.createMencion(carreraDataManager.getMencion());
-			carreraDataManager.setMencionList(ateneaService.readMencion(carreraDataManager.getEntidad().getAteCarrera()));
-			carreraDataManager.setMencion(new MencionDTO());
-			JsfUtil.addInfoMessage("Guardado Exitosamente");
-		} catch (CorvustecException e) {
-			JsfUtil.addErrorMessage(e.toString());
-		}
-	}
-	
-	public void createProyecto()
-	{
-		EntidadDTO ent;
-		try {
-			ent=new EntidadDTO();
-			ent.setAteProyectoInvestigacion(proyectoDataManager.getProyecto());
-			ent=ateneaService.createEntidad(ent);
-			ent.setAteCarrera(carreraDataManager.getCarrera());
-			ateneaService.updateEntidad(ent);
-			proyectoDataManager.setProyectoList(ateneaService.readProyectoInvestigacion(ent.getAteCarrera()));
-			proyectoDataManager.setProyecto(new ProyectoInvestigacionDTO());
-			JsfUtil.addInfoMessage("Guardado Exitosamente");
-		} catch (CorvustecException e) {
-			JsfUtil.addErrorMessage(e.toString());
-		}
-	}
-	
-	public void createPublicacion()
-	{
-		EntidadDTO ent;
-		try {
-			ent=new EntidadDTO();
-			ent.setAtePublicacion(publicacionDataManager.getPublicacion());
-			ent=ateneaService.createEntidad(ent);
-			ent.setAteCarrera(carreraDataManager.getCarrera());
-			ateneaService.updateEntidad(ent);
-			publicacionDataManager.setPublicacionList(ateneaService.readPublicacion(ent.getAteCarrera()));
-			publicacionDataManager.setPublicacion(new PublicacionDTO());
-			JsfUtil.addInfoMessage("Guardado Exitosamente");
-		} catch (CorvustecException e) {
-			JsfUtil.addErrorMessage(e.toString());
-		}
-	}
-	
-	public void createEvento()
-	{
-		EntidadDTO ent;
-		try {
-			ent=new EntidadDTO();
-			ent.setAteEvento(eventoDataManager.getEvento());
-			ent=ateneaService.createEntidad(ent);
-			ent.setAteCarrera(carreraDataManager.getCarrera());
-			ateneaService.updateEntidad(ent);
-			eventoDataManager.setEventoList(ateneaService.readEvento(ent.getAteCarrera()));
-			eventoDataManager.setEvento(new EventoDTO());
-			JsfUtil.addInfoMessage("Guardado Exitosamente");
-		} catch (CorvustecException e) {
-			JsfUtil.addErrorMessage(e.toString());
-		}
-	}
-
 }

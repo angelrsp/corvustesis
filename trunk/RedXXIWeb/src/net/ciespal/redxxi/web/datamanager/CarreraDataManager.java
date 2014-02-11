@@ -24,6 +24,7 @@ public class CarreraDataManager implements Serializable{
 	private CarreraDTO carrera;
 	private Object modalidad;
 	private EntidadDTO entidad;
+	private Object tipoPosgrado;
 	
 	private List<Object> modalidadSelect;
 	
@@ -65,6 +66,14 @@ public class CarreraDataManager implements Serializable{
 
 	public void setEntidad(EntidadDTO entidad) {
 		this.entidad = entidad;
+	}
+
+	public Object getTipoPosgrado() {
+		return tipoPosgrado;
+	}
+
+	public void setTipoPosgrado(Object tipoPosgrado) {
+		this.tipoPosgrado = tipoPosgrado;
 	}
 
 	public List<Object> getModalidadSelect() {

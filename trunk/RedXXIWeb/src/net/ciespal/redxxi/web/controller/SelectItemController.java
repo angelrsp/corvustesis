@@ -27,6 +27,7 @@ public abstract class SelectItemController {
 	private List<SelectItem> catalogoProvincia;
 	private List<SelectItem> catalogoCiudad;
 	private List<SelectItem> catalogoModalidad;
+	private List<SelectItem> catalogoTipoPosgrado;
 	
 	private Object pais;
 	private Object provincia;
@@ -156,6 +157,26 @@ public abstract class SelectItemController {
 		}
 		return catalogoModalidad;
 	}	
+	
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getCatalogoTipoPosgrado() throws CorvustecException {
+		if(CollectionUtils.isEmpty(catalogoTipoPosgrado))
+		{
+			CatalogoDTO catalogo=new CatalogoDTO();
+			catalogo.setCatCodigo(26);
+			catalogoTipoPosgrado=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					CatalogoDTO cat=(CatalogoDTO)arg0;
+					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
+				}
+			});
+			
+		}
+		return catalogoTipoPosgrado;
+	}
+	
 	
 	public Object getPais() {
 		return pais;
