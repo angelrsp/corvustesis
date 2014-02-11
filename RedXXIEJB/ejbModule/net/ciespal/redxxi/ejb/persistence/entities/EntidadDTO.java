@@ -32,7 +32,7 @@ public class EntidadDTO implements Serializable {
 	private DoctorDTO ateDoctor;
 
 	//bi-directional many-to-one association to EventoDTO
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="ent_evento")
 	private EventoDTO ateEvento;
 
@@ -57,7 +57,7 @@ public class EntidadDTO implements Serializable {
 	private ProyectoInvestigacionDTO ateProyectoInvestigacion;
 
 	//bi-directional many-to-one association to PublicacionDTO
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="ent_publicacion")
 	private PublicacionDTO atePublicacion;
 

@@ -12,8 +12,10 @@ import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.EventoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -184,6 +186,62 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 
+	
+	@Override
+	public List<EventoDTO> readEvento(CarreraDTO carrera) throws CorvustecException
+	{
+		logger.info("readEvento");
+		try{
+			return factoryDAO.getEventoDAOImpl().getAll(carrera);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readEvento {}",e.toString());
+			throw new CorvustecException("Error al readEvento");
+		}
+	}
+
+	@Override
+	public EventoDTO createEvento(EventoDTO evento) throws CorvustecException
+	{
+		logger.info("createProyectoInvestigacion");
+		try{
+			return factoryDAO.getEventoDAOImpl().create(evento);
+		}
+		catch(Exception e){
+			logger.info("Error createProyectoInvestigacion {}",e.toString());
+			throw new CorvustecException("Error al createProyectoInvestigacion");
+		}
+	}
+	
+	@Override
+	public List<PublicacionDTO> readPublicacion(CarreraDTO carrera) throws CorvustecException
+	{
+		logger.info("readEvento");
+		try{
+			return factoryDAO.getPublicacionDAOImpl().getAll(carrera);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readEvento {}",e.toString());
+			throw new CorvustecException("Error al readEvento");
+		}
+	}
+
+	@Override
+	public PublicacionDTO createPublicacion(PublicacionDTO publicacion) throws CorvustecException
+	{
+		logger.info("createProyectoInvestigacion");
+		try{
+			return factoryDAO.getPublicacionDAOImpl().create(publicacion);
+		}
+		catch(Exception e){
+			logger.info("Error createProyectoInvestigacion {}",e.toString());
+			throw new CorvustecException("Error al createProyectoInvestigacion");
+		}
+	}
+	
+	
 	@Override
 	public void updateEntidad(EntidadDTO entidad) throws CorvustecException
 	{
