@@ -39,6 +39,12 @@ public class ProyectoInvestigacionDTO implements Serializable {
 	@Column(name="pin_ubicacion")
 	private Integer pinUbicacion;
 
+	@Column(name="pin_anio_inicio")
+	private Integer pinAnioInicio;
+
+	@Column(name="pin_duracion")
+	private String pinDuracion;
+
 	//bi-directional many-to-one association to EntidadDTO
 	@OneToMany(mappedBy="ateProyectoInvestigacion",cascade={CascadeType.ALL,CascadeType.PERSIST})
 	private List<EntidadDTO> ateEntidads;
@@ -92,6 +98,22 @@ public class ProyectoInvestigacionDTO implements Serializable {
 
 	public void setPinUbicacion(Integer pinUbicacion) {
 		this.pinUbicacion = pinUbicacion;
+	}
+
+	public Integer getPinAnioInicio() {
+		return pinAnioInicio;
+	}
+
+	public void setPinAnioInicio(Integer pinAnioInicio) {
+		this.pinAnioInicio = pinAnioInicio;
+	}
+
+	public String getPinDuracion() {
+		return pinDuracion;
+	}
+
+	public void setPinDuracion(String pinDuracion) {
+		this.pinDuracion = pinDuracion;
 	}
 
 	public List<EntidadDTO> getAteEntidads() {

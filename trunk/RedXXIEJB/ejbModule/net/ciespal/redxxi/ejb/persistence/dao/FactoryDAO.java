@@ -9,5 +9,7 @@ public interface FactoryDAO {
 	ContactoDAO getContactoDAOImpl();
 	MencionDAO getMencionDAOImpl();
 	ProyectoInvestigacionDAO getProyectoInvestigacionDAOImpl();
+	EventoDAO getEventoDAOImpl();
+	PublicacionDAO getPublicacionDAOImpl();
 
 }
