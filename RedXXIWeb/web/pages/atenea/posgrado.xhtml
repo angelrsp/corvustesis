@@ -11,30 +11,37 @@
 		
 		<p:growl id="growl"></p:growl>
 		
-		<p:panel id="pnlDatos" header="#{i18n['label.panel.datos']}">
+		<p:panel id="pnlDatos" header="#{i18n['label.panel.posgrado']}">
 		
 		<table>
 		
-			
 			<tr>
 
 				<td><h:outputText value="#{i18n['label.universidad']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.universidad']}&#160;#{i18n['label.requerido']}">
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.universidad']}&#160;#{i18n['label.requerido']}" value="#{universidadDataManager.universidadCode}">
 						<f:selectItem itemLabel="--Seleccione--"/>
+						<f:selectItems value="#{posgradoController.universidadDataManager.universidadList}" var="uni" itemValue="#{uni.cenCodigo}" itemLabel="#{uni.cenNombre}"/>
+						<p:ajax event="change" immediate="true" process="@this" listener="#{posgradoController.obtenerFacultad}" update="somFacultad"/>
+						<p:ajax event="change" immediate="true" process="@this" listener="#{posgradoController.obtenerFacultad}" update="somFacultad"/>
+						<p:ajax event="change" immediate="true" process="@this" listener="#{posgradoController.obtenerEscuela}" update="somEscuela"/>		
 					</p:selectOneMenu></td>
 				
 				
 				<td><h:outputText value="#{i18n['label.facultad']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.facultad']}&#160;#{i18n['label.requerido']}">
+				<td><p:selectOneMenu id="somFacultad" required="true" requiredMessage="#{i18n['label.facultad']}&#160;#{i18n['label.requerido']}" value="#{universidadDataManager.facultadCode}">
 						<f:selectItem itemLabel="--Seleccione--"/>
+						<f:selectItems value="#{posgradoController.universidadDataManager.facultadList}" var="fac" itemValue="#{fac.cenCodigo}" itemLabel="#{fac.cenNombre}"/>
+						<p:ajax event="change" immediate="true" process="@this" listener="#{posgradoController.obtenerEscuela}" update="somEscuela"/>
+						<p:ajax event="change" immediate="true" process="@this" listener="#{posgradoController.obtenerEscuela}" update="somEscuela"/>
+																
 					</p:selectOneMenu></td>
 			</tr>
 			
 			<tr>
-
 				<td><h:outputText value="#{i18n['label.escuela']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.escuela']}&#160;#{i18n['label.requerido']}">
-						<f:selectItem itemLabel="--Seleccione--"/>
+				<td><p:selectOneMenu id="somEscuela" value="#{universidadDataManager.escuelaCode}">
+						<f:selectItem itemLabel="--Seleccione--" itemValue="0"/>
+						<f:selectItems value="#{posgradoController.universidadDataManager.escuelaList}" var="fac" itemValue="#{fac.cenCodigo}" itemLabel="#{fac.cenNombre}"/>						
 					</p:selectOneMenu></td>
 							
 			</tr>		
@@ -42,54 +49,81 @@
 			<tr>
 			
 				<td><h:outputText value="#{i18n['label.modalidad']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.modalidad']}&#160;#{i18n['label.requerido']}">
-						<f:selectItem itemLabel="--Seleccione--"/>
-					</p:selectOneMenu></td>
-
-			
+				
+				<td><p:selectManyCheckbox id="smcModalidad" required="true" value="#{carreraDataManager.modalidadSelect}">  
+            			<f:selectItems value="#{posgradoController.catalogoModalidad}"/>  
+        			</p:selectManyCheckbox></td>
 			</tr>
 			
+		</table>
+		
+		<table>	
 			<tr>
+			
+				<td><h:outputText value="#{i18n['label.nombre.carrera']}:&#160;" /></td>
+				<td><p:inputText required="true" requiredMessage="#{i18n['label.nombre.carrera']}&#160;#{i18n['label.requerido']}"/></td>
+			
 				<td><h:outputText value="#{i18n['label.perfil.carrera']}:&#160;" /></td>
-				<td colspan="2"><p:inputTextarea autoResize="false" required="true" requiredMessage="#{i18n['label.perfil.carrera']}&#160;#{i18n['label.requerido']}"></p:inputTextarea></td>
+				<td><p:inputTextarea autoResize="false" required="true" requiredMessage="#{i18n['label.perfil.carrera']}&#160;#{i18n['label.requerido']}"/></td>
+				
+			</tr>
+
+			<tr>
+				<td><h:outputText value="#{i18n['label.tipo']}:&#160;" /></td>
+				<td><p:selectOneMenu id="somTipoPosgrado" required="true" requiredMessage="#{i18n['label.tipo']}&#160;#{i18n['label.requerido']}" value="#{carreraDataManager.tipoPosgrado}">
+						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
+						<f:selectItems value="#{posgradoController.catalogoTipoPosgrado}"/>						
+					</p:selectOneMenu></td>	
+			</tr>
+			
+		</table>
+		
+		<table>	
+			
+			<tr>
 				<td><h:outputText value="#{i18n['label.cantidad.profesor']}:&#160;" /></td>
 				<td><p:inputText style="width:50px;" required="true" requiredMessage="#{i18n['label.cantidad.profesor']}&#160;#{i18n['label.requerido']}"/></td>	
 				<td><h:outputText value="#{i18n['label.cantidad.estudiante']}:&#160;" /></td>
 				<td><p:inputText style="width:50px;" required="true" requiredMessage="#{i18n['label.cantidad.estudiante']}&#160;#{i18n['label.requerido']}"/></td>	
-					
 			</tr>
+
 			
 			<tr>
-				<td colspan="9" align="center"><p:commandButton value="#{i18n['boton.guardar']}" process="pnlDatos" update="pnlDatos,growl"/>
-				<p:commandButton value="#{i18n['boton.buscar']}" process="pnlDatos" update="pnlDatos,growl"/></td>
+				<td colspan="9" align="center"><p:commandButton actionListener="#{posgradoController.guardar}" value="#{i18n['boton.guardar']}" process="pnlDatos" update="pnlDatos,growl"/>
+				<p:commandButton value="#{i18n['boton.nuevo']}" process="pnlDatos" update="pnlDatos,growl"/></td>
 			</tr>
 			
 		</table>
 		
 		</p:panel>
 		
-		<p:panel header="#{i18n['label.panel.contacto']}">
+		<!-- Contactos -->
+		<p:panel id="pnlContacto" header="#{i18n['label.panel.contacto']}">
 				
 		<table>
 			<tr>
 				<td><h:outputText value="#{i18n['label.tipo']}:&#160;" /></td>
 				<td>
-					<p:selectOneMenu>
+					<p:selectOneMenu required="true" requiredMessage="#{i18n['label.cantidad.estudiante']}&#160;#{i18n['label.requerido']}" value="#{contactoDataManager.tipoContacto}">
 						<f:selectItem itemLabel="--Seleccione--"/>
-						<f:selectItems value="#{pregradoController.catalogoTipoContacto}"/>
+						<f:selectItems value="#{posgradoController.catalogoTipoContacto}"/>
 					</p:selectOneMenu>
 				</td>
 				<td><h:outputText value="#{i18n['label.valor']}:&#160;" /></td>
-				<td><p:inputText></p:inputText></td>
-				<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>
+				<td><p:inputText value="#{contactoDataManager.contacto.conValor}" required="true" requiredMessage="#{i18n['label.valor']}&#160;#{i18n['label.requerido']}"/></td>
+				<td><p:commandButton value="#{i18n['boton.agregar']}" actionListener="#{posgradoController.crearContacto}" process="pnlContacto" update="pnlContacto,growl"/></td>
 			</tr>			
 		</table>
 		
 		<p:spacer height="10"/>
 		
-		<p:dataTable emptyMessage="No existen registros">
-			<p:column headerText="#{i18n['label.tipo']}"></p:column>
-			<p:column headerText="#{i18n['label.valor']}"></p:column>
+		<p:dataTable emptyMessage="No existen registros" value="#{contactoDataManager.contactoList}" var="con">
+			<p:column headerText="#{i18n['label.tipo']}">
+				<h:outputText value="#{con.catTipo}" />
+			</p:column>
+			<p:column headerText="#{i18n['label.valor']}">
+				<h:outputText value="#{con.conValor}" />
+			</p:column>
 			<p:column headerText="#{i18n['boton.editar']}" width="15"></p:column>
 			<p:column headerText="#{i18n['boton.eliminar']}" width="15"></p:column>
 		</p:dataTable>
@@ -173,267 +207,7 @@
 	</p:panel>		
 		
 		
-		<p:panel header="#{i18n['label.panel.revista']}">
 		
-			<table>
-				<tr>
-					<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
-					<td><p:inputText/></td>
-					<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
-					<td><p:inputText/></td>
-					<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>
-				</tr>
-			</table>
-
-			<p:dataTable emptyMessage="#{i18n['table.vacio']}">
-			
-				<p:column headerText="#{i18n['label.nombre']}">
-					<h:outputText value="" />
-				</p:column>
-	
-				<p:column headerText="#{i18n['label.perfil']}">
-					<h:outputText value="" />
-				</p:column>
-
-				<p:column headerText="#{i18n['boton.editar']}" width="15">
-					<h:outputText value="" />
-				</p:column>
-	
-				<p:column headerText="#{i18n['boton.eliminar']}" width="15">
-					<h:outputText value="" />
-				</p:column>
-						
-			</p:dataTable>
-			
-		</p:panel>
-
-		<p:panel header="#{i18n['label.panel.evento']}">
-		
-			<table>
-				<tr>
-					<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
-					<td><p:inputText/></td>
-					<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>					
-				</tr>
-			</table>
-
-		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
-		
-			<p:column headerText="#{i18n['label.nombre']}">
-				<h:outputText value="" />
-			</p:column>
-
-			<p:column headerText="#{i18n['boton.editar']}" width="15">
-				<h:outputText value="" />
-			</p:column>
-
-			<p:column headerText="#{i18n['boton.eliminar']}" width="15">
-				<h:outputText value="" />
-			</p:column>
-				
-		</p:dataTable>
-			
-		</p:panel>
-
-
-		<p:dialog id="dlgPais" widgetVar="dlgPais" header="#{i18n['label.pais']}" modal="true" closeOnEscape="true">
-
-		<p:panel id="pnlPais">
-
-		<table>
-		
-			<tr>
-				<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>
-				<td><p:inputText value="#{catalogoDataManager.catalogo.catDescripcion}" required="true"/></td>								
-			</tr>
-			<tr>
-				<td colspan="2" align="center"><p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{pregradoController.crearPais}" update=":contenido:growl,pnlPais" process="pnlPais"/></td>
-			</tr>
-		</table>
-
-		<p:dataTable emptyMessage="#{i18n['table.vacio']}" value="#{catalogoDataManager.catalogoList}" var="cat">
-		
-			<p:column headerText="#{i18n['label.descripcion']}">
-				<h:outputText value="#{cat.catDescripcion}" />
-			</p:column>
-		
-		</p:dataTable>
-
-		</p:panel>
-				
-		</p:dialog>
-
-		<p:dialog widgetVar="dlgProvincia" header="#{i18n['label.provincia']}" modal="true" closeOnEscape="true">
-
-		<p:panel id="pnlProvincia">
-
-		<table>
-			<tr>
-				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" value="#{pregradoController.pais}">
-					<f:selectItem itemLabel="#{i18n['label.seleccione']}" itemValue=""/>
-					<f:selectItems value="#{pregradoController.catalogoPais}"/>
-					<p:ajax event="change" update="pnlProvincia" listener="#{pregradoController.buscarProvincia}" process="@this"></p:ajax>
-				</p:selectOneMenu></td>
-			</tr>		
-			<tr>
-				<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>
-				<td><p:inputText value="#{catalogoDataManager.catalogo.catDescripcion}"/></td>
-								
-			</tr>
-			<tr>
-				<td colspan="2" align="center"><p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{pregradoController.crearProvincia}" process="pnlProvincia" update=":contenido:growl,pnlProvincia"/></td>
-			</tr>
-		</table>
-
-		<p:dataTable emptyMessage="#{i18n['table.vacio']}" value="#{catalogoDataManager.catalogoList}" var="cat">
-		
-			<p:column headerText="#{i18n['label.descripcion']}">
-				<h:outputText value="#{cat.catDescripcion}" />
-			</p:column>
-		
-		</p:dataTable>
-
-		</p:panel>				
-		</p:dialog>
-		
-
-		<p:dialog widgetVar="dlgCiudad" header="#{i18n['label.ciudad']}" modal="true" closeOnEscape="true">
-
-		<table>
-			<tr>
-				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
-				<td><p:selectOneMenu>
-					<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
-					<f:selectItems value="#{pregradoController.catalogoPais}"/>
-				</p:selectOneMenu></td>
-			</tr>
-			<tr>
-				<td><h:outputText value="#{i18n['label.provincia']}:&#160;" /></td>
-				<td><p:selectOneMenu>
-					<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
-				</p:selectOneMenu></td>
-			</tr>		
-					
-			<tr>
-				<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>
-				<td><p:inputText/></td>
-								
-			</tr>
-			<tr>
-				<td colspan="2" align="center"><p:commandButton value="#{i18n['boton.guardar']}"/></td>
-			</tr>
-		</table>
-
-		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
-		
-			<p:column headerText="#{i18n['label.descripcion']}">
-				<h:outputText value="" />
-			</p:column>
-		
-		</p:dataTable>
-				
-		</p:dialog>
-
-
-
-		
-		<p:dialog id="dlgUniversidad" widgetVar="dlgUniversidad" header="#{i18n['label.universidad']}" modal="true" closeOnEscape="true">
-
-		<table>
-			<tr>
-				<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>
-				<td><p:inputText/></td>
-								
-			</tr>
-			<tr>
-				<td><h:outputText value="#{i18n['label.categoria.acreditacion']}:&#160;" /></td>
-				<td><p:inputText/></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center"><p:commandButton value="#{i18n['boton.guardar']}" update=":contenido:growl"/></td>
-			</tr>
-		</table>
-		
-		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
-		
-			<p:column headerText="#{i18n['label.descripcion']}">
-				<h:outputText value="" />
-			</p:column>
-		
-		</p:dataTable>
-		
-		</p:dialog>		
-
-
-		<p:dialog widgetVar="dlgFacultad" header="#{i18n['label.facultad']}" modal="true" closeOnEscape="true">
-		
-		<table>
-			<tr>
-				<td><h:outputText value="#{i18n['label.universidad']}:&#160;" /></td>
-				<td><p:selectOneMenu>
-					<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
-				</p:selectOneMenu></td>
-			</tr>		
-		
-			<tr>
-				<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>
-				<td><p:inputText/></td>
-								
-			</tr>
-			<tr>
-				<td colspan="2" align="center"><p:commandButton value="#{i18n['boton.guardar']}"/></td>
-			</tr>
-		</table>
-
-		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
-		
-			<p:column headerText="#{i18n['label.descripcion']}">
-				<h:outputText value="" />
-			</p:column>
-		
-		</p:dataTable>
-		
-		</p:dialog>
-
-		<p:dialog widgetVar="dlgEscuela" header="#{i18n['label.escuela']}" modal="true" closeOnEscape="true">
-		
-		<table>
-			<tr>
-				<td><h:outputText value="#{i18n['label.universidad']}:&#160;" /></td>
-				<td><p:selectOneMenu>
-					<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
-				</p:selectOneMenu></td>
-			</tr>		
-
-			<tr>
-				<td><h:outputText value="#{i18n['label.facultad']}:&#160;" /></td>
-				<td><p:selectOneMenu>
-					<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
-				</p:selectOneMenu></td>
-			</tr>		
-		
-			<tr>
-				<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>
-				<td><p:inputText/></td>
-								
-			</tr>
-			<tr>
-				<td colspan="2" align="center"><p:commandButton value="#{i18n['boton.guardar']}"/></td>
-			</tr>
-		</table>
-
-		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
-		
-			<p:column headerText="#{i18n['label.descripcion']}">
-				<h:outputText value="" />
-			</p:column>
-		
-		</p:dataTable>
-		
-		</p:dialog>
-
-		
-		</ui:define>
-	</ui:composition>
+	</ui:define>
+</ui:composition>
 </html>

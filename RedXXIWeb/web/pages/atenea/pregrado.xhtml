@@ -83,6 +83,8 @@
 		
 		</p:panel>
 		
+		
+		<!-- Contactos -->
 		<p:panel id="pnlContacto" header="#{i18n['label.panel.contacto']}">
 				
 		<table>
@@ -159,6 +161,12 @@
 				
 				<td><h:outputText value="#{i18n['label.coordinador']}:&#160;" /></td>
 				<td><p:inputText value="#{proyectoDataManager.proyecto.pinCoordinador}" required="true" requiredMessage="#{i18n['label.coordinador']}&#160;#{i18n['label.requerido']}"/></td>
+			</tr>	
+			<tr>
+				<td><h:outputText value="#{i18n['label.anio.inicio']}:&#160;" /></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinAnioInicio}" required="true" requiredMessage="#{i18n['label.anio.inicio']}&#160;#{i18n['label.requerido']}" onkeypress="return isNumberKey(event)"/></td>
+				<td><h:outputText value="#{i18n['label.duracion.aproximada']}:&#160;" /></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinDuracion}" required="true" requiredMessage="#{i18n['label.duracion.aproximada']}&#160;#{i18n['label.requerido']}"/></td>
 				
 				<td><p:commandButton actionListener="#{pregradoController.createProyecto}" value="#{i18n['boton.agregar']}" process="pnlProyecto" update="pnlProyecto,growl"/></td>
 			</tr>
@@ -191,55 +199,33 @@
 		
 	</p:panel>		
 		
-		
-		<p:panel header="#{i18n['label.panel.revista']}">
-		
-			<table>
-				<tr>
-					<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
-					<td><p:inputText/></td>
-					<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
-					<td><p:inputText/></td>
-					<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>
-				</tr>
-			</table>
-
-			<p:dataTable emptyMessage="#{i18n['table.vacio']}">
-			
-				<p:column headerText="#{i18n['label.nombre']}">
-					<h:outputText value="" />
-				</p:column>
+	<!-- Revista  Publicacion -->	
+	<p:panel id="pnlPublicacion" header="#{i18n['label.panel.revista']}">
 	
-				<p:column headerText="#{i18n['label.perfil']}">
-					<h:outputText value="" />
-				</p:column>
+		<table>
+			<tr>
+				<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
+				<td><p:inputText value="#{publicacionDataManager.publicacion.pubTitulo}"/></td>
+				<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
+				<td><p:inputText value="#{publicacionDataManager.publicacion.pubResumen}"/></td>
+				<td><h:outputText value="#{i18n['label.isbn']}:&#160;" /></td>
+				<td><p:inputText value="#{publicacionDataManager.publicacion.pubIsbn}"/></td>				
+				<td><p:commandButton value="#{i18n['boton.agregar']}" process="pnlPublicacion" update="pnlPublicacion,growl" actionListener="#{pregradoController.createPublicacion}"/></td>
+			</tr>
+		</table>
 
-				<p:column headerText="#{i18n['boton.editar']}" width="15">
-					<h:outputText value="" />
-				</p:column>
-	
-				<p:column headerText="#{i18n['boton.eliminar']}" width="15">
-					<h:outputText value="" />
-				</p:column>
-						
-			</p:dataTable>
-			
-		</p:panel>
-
-		<p:panel header="#{i18n['label.panel.evento']}">
-		
-			<table>
-				<tr>
-					<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
-					<td><p:inputText/></td>
-					<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>					
-				</tr>
-			</table>
-
-		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
+		<p:dataTable emptyMessage="#{i18n['table.vacio']}" value="#{publicacionDataManager.publicacionList}" var="pub">
 		
 			<p:column headerText="#{i18n['label.nombre']}">
-				<h:outputText value="" />
+				<h:outputText value="#{pub.pubTitulo}" />
+			</p:column>
+
+			<p:column headerText="#{i18n['label.perfil']}">
+				<h:outputText value="#{pub.pubResumen}" />
+			</p:column>
+
+			<p:column headerText="#{i18n['label.isbn']}">
+				<h:outputText value="#{pub.pubIsbn}" />
 			</p:column>
 
 			<p:column headerText="#{i18n['boton.editar']}" width="15">
@@ -249,18 +235,48 @@
 			<p:column headerText="#{i18n['boton.eliminar']}" width="15">
 				<h:outputText value="" />
 			</p:column>
-				
+					
 		</p:dataTable>
-			
-		</p:panel>
+		
+	</p:panel>
 
-
-
-
+	<!-- Evento -->
+	<p:panel id="pnlEvento" header="#{i18n['label.panel.evento']}">
 	
+		<table>
+			<tr>
+				<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
+				<td><p:inputText value="#{eventoDataManager.evento.eveNombre}"/></td>
+				
+				<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
+				<td><p:inputText value="#{eventoDataManager.evento.evePerfil}"/></td>
+				
+				
+				<td><p:commandButton value="#{i18n['boton.agregar']}" process="pnlEvento" update="pnlEvento,growl" actionListener="#{pregradoController.createEvento}"/></td>					
+			</tr>
+		</table>
 
+	<p:dataTable emptyMessage="#{i18n['table.vacio']}" value="#{eventoDataManager.eventoList}" var="eve">
+	
+		<p:column headerText="#{i18n['label.nombre']}">
+			<h:outputText value="#{eve.eveNombre}" />
+		</p:column>
+
+		<p:column headerText="#{i18n['label.perfil']}">
+			<h:outputText value="#{eve.evePerfil}" />
+		</p:column>
+
+		<p:column headerText="#{i18n['boton.editar']}" width="15">
+			<h:outputText value="" />
+		</p:column>
+
+		<p:column headerText="#{i18n['boton.eliminar']}" width="15">
+			<h:outputText value="" />
+		</p:column>
+			
+	</p:dataTable>
 		
-		
+	</p:panel>
 
 		
 		</ui:define>
