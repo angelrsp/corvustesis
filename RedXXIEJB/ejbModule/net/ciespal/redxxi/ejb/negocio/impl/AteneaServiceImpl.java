@@ -188,6 +188,22 @@ public class AteneaServiceImpl implements AteneaService{
 	}
 	
 	@Override
+	public List<ContactoListDTO> readContacto(OrganizacionDTO organizacion) throws CorvustecException
+	{
+		logger.info("readContacto");
+		try{
+			return factoryDAO.getContactoDAOImpl().getAll(organizacion);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readContacto {}",e.toString());
+			throw new CorvustecException("Error al readContacto");
+		}		
+	}	
+	
+	
+	/* Mencion */
+	@Override
 	public List<MencionDTO> readMencion(CarreraDTO carrera) throws CorvustecException
 	{
 		logger.info("readContacto");

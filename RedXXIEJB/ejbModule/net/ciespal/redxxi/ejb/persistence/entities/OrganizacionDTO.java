@@ -1,7 +1,10 @@
 package net.ciespal.redxxi.ejb.persistence.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,7 +19,7 @@ public class OrganizacionDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_ORGANIZACION_ORGCODIGO_GENERATOR", sequenceName="ATE_ORGANIZACION_ORG_CODIGO_SEQ")
+	@SequenceGenerator(name="ATE_ORGANIZACION_ORGCODIGO_GENERATOR", sequenceName="ATE_ORGANIZACION_ORG_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_ORGANIZACION_ORGCODIGO_GENERATOR")
 	@Column(name="org_codigo")
 	private Integer orgCodigo;
@@ -41,7 +44,7 @@ public class OrganizacionDTO implements Serializable {
 
 	
 	//bi-directional many-to-one association to EntidadDTO
-	@OneToMany(mappedBy="ateOrganizacion")
+	@OneToMany(mappedBy="ateOrganizacion",cascade={CascadeType.ALL,CascadeType.PERSIST},fetch=FetchType.EAGER)
 	private List<EntidadDTO> ateEntidads;
 
 	public OrganizacionDTO() {
@@ -112,9 +115,13 @@ public class OrganizacionDTO implements Serializable {
 	}
 
 	public EntidadDTO addAteEntidad(EntidadDTO ateEntidad) {
-		getAteEntidads().add(ateEntidad);
-		ateEntidad.setAteOrganizacion(this);
-
+		if(ateEntidad!=null)
+		{
+			if(getAteEntidads()==null)
+				setAteEntidads(new ArrayList<EntidadDTO>());
+			getAteEntidads().add(ateEntidad);
+			ateEntidad.setAteOrganizacion(this);
+		}
 		return ateEntidad;
 	}
 
