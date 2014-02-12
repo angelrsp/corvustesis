@@ -8,12 +8,16 @@ import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
 
 public interface ContactoDAO extends AbstractFacade<ContactoDTO>{
 
 	List<ContactoListDTO> getAll(EntidadDTO entidad) throws CorvustecException;
 
 	List<ContactoListDTO> getAll(CarreraDTO carrera) throws CorvustecException;
+
+	List<ContactoListDTO> getAll(OrganizacionDTO organizacion)
+			throws CorvustecException;
 
 	
 }

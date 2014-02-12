@@ -75,4 +75,7 @@ public interface AteneaService {
 	List<OrganizacionDTO> readOrganizacion(Object ubicacion)
 			throws CorvustecException;
 
+	List<ContactoListDTO> readContacto(OrganizacionDTO organizacion)
+			throws CorvustecException;
+
 }
