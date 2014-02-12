@@ -68,13 +68,21 @@
 				<h:outputText value="#{uni.cenCategoria}" />
 			</p:column>
 
+			<p:column headerText="#{i18n['boton.editar']}" width="15">
+				<p:commandButton actionListener="#{universidadController.editUniversidad(uni)}" icon="ui-icon-pencil" 
+	               	update=":contenido:pnlDatos,:contenido:growl" process="tblUniversidad" title="#{i18n['boton.editar']}" immediate="true"/>    				
+			</p:column>
+
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{universidadController.deleteUniversidad(uni)}" icon="ui-icon-close" 
+	               	update=":contenido:pnlDatos,:contenido:growl" process="tblUniversidad" title="#{i18n['boton.eliminar']}" onclick="return pregunta();" immediate="true"/>    				
+			</p:column>
+
 			<p:column headerText="#{i18n['label.facultad']}" width="15">
 				<p:commandButton actionListener="#{universidadController.obtenerFacultad(uni)}" oncomplete="PF('dlgFacultad').show()" icon="ui-icon-newwin" 
 	               	update=":contenido:pnlFacultad" process="tblUniversidad" title="#{i18n['label.facultad']}"/>    
-				
 			</p:column>
 
-		
 		</p:dataTable>
 		
 		
@@ -113,6 +121,15 @@
 					<h:outputText value="#{fac.cenDatoInstitucional}" />
 				</p:column>
 
+				<p:column headerText="#{i18n['boton.editar']}" width="15">
+					<p:commandButton actionListener="#{universidadController.editFacultad(fac)}" icon="ui-icon-pencil" 
+		               	update=":contenido:pnlFacultad,:contenido:growl" process="tblFacultad" title="#{i18n['boton.editar']}" immediate="true"/>    				
+				</p:column>
+	
+				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{universidadController.deleteFacultad(fac)}" icon="ui-icon-close" 
+		               	update=":contenido:pnlFacultad,:contenido:growl" process="tblFacultad" title="#{i18n['boton.eliminar']}" onclick="return pregunta();" immediate="true"/>    				
+				</p:column>
 			
 				<p:column headerText="#{i18n['label.escuela']}" width="15">
 					<p:commandButton actionListener="#{universidadController.obtenerEscuela(fac)}" oncomplete="PF('dlgEscuela').show()" icon="ui-icon-newwin" 

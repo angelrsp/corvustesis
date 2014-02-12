@@ -31,9 +31,8 @@
 				<td><p:selectOneMenu id="somFacultad" required="true" requiredMessage="#{i18n['label.facultad']}&#160;#{i18n['label.requerido']}" value="#{universidadDataManager.facultadCode}">
 						<f:selectItem itemLabel="--Seleccione--"/>
 						<f:selectItems value="#{pregradoController.universidadDataManager.facultadList}" var="fac" itemValue="#{fac.cenCodigo}" itemLabel="#{fac.cenNombre}"/>
-						<p:ajax event="change" immediate="true" process="@this" listener="#{pregradoController.obtenerEscuela}" update="somEscuela"/>
-						<p:ajax event="change" immediate="true" process="@this" listener="#{pregradoController.obtenerEscuela}" update="somEscuela"/>
-																
+						<p:ajax event="change" immediate="true" process="@this" listener="#{pregradoController.obtenerEscuela}" update="somEscuela,tblCarrera"/>
+						<p:ajax event="change" immediate="true" process="@this" listener="#{pregradoController.obtenerEscuela}" update="somEscuela,tblCarrera"/>
 					</p:selectOneMenu></td>
 			</tr>
 			
@@ -80,9 +79,29 @@
 				<td colspan="9" align="center"><p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{pregradoController.guardar}" process="pnlDatos" update="pnlDatos,growl"/></td>
 			</tr>
 		</table>
+
+
+		<p:dataTable id="tblCarrera" value="#{carreraDataManager.carreraList}" var="car">
+		
+			<p:column headerText="#{i18n['label.nombre.carrera']}">
+				<h:outputText value="#{car.carNombre}" />
+			</p:column>
+		
+			<p:column headerText="#{i18n['label.detalles']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{pregradoController.selectCarrera(car)}" icon="ui-icon-newwin" 
+	               	update=":contenido:pnlDatos,:contenido:growl" process="tblCarrera" oncomplete="PF('dlgDetalles').show()"/>    				
+			</p:column>
+		
+		</p:dataTable>
+
 		
 		</p:panel>
 		
+		
+		<!-- Dialogo -->
+		<p:dialog id="dlgDetalles" widgetVar="dlgDetalles" modal="true" resizable="false" closeOnEscape="true">
+		
+		<p:scrollPanel style="height:600px" mode="native">
 		
 		<!-- Contactos -->
 		<p:panel id="pnlContacto" header="#{i18n['label.panel.contacto']}">
@@ -278,6 +297,9 @@
 		
 	</p:panel>
 
+	</p:scrollPanel>
+
+	</p:dialog>
 		
 		</ui:define>
 	</ui:composition>
