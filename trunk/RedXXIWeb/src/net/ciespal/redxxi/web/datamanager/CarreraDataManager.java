@@ -6,13 +6,13 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
 
-@SessionScoped
+@ViewScoped
 @ManagedBean(name="carreraDataManager")
 public class CarreraDataManager implements Serializable{
 
@@ -22,6 +22,7 @@ public class CarreraDataManager implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private CarreraDTO carrera;
+	private CarreraDTO carreraSelect;
 	private Object modalidad;
 	private EntidadDTO entidad;
 	private Object tipoPosgrado;
@@ -31,6 +32,8 @@ public class CarreraDataManager implements Serializable{
 	private MencionDTO mencion;
 	private List<MencionDTO> mencionList;
 	
+	private List<CarreraDTO> carreraList;
+	
 	public CarreraDataManager() {
 	}
 	
@@ -38,9 +41,11 @@ public class CarreraDataManager implements Serializable{
 	private void init()
 	{
 		carrera=new CarreraDTO();
+		carreraSelect=new CarreraDTO();
 		entidad=new EntidadDTO();
 		mencion=new MencionDTO();
 		mencionList=new ArrayList<MencionDTO>();
+		carreraList=new ArrayList<CarreraDTO>();
 	}
 
 
@@ -50,6 +55,14 @@ public class CarreraDataManager implements Serializable{
 
 	public void setCarrera(CarreraDTO carrera) {
 		this.carrera = carrera;
+	}
+
+	public CarreraDTO getCarreraSelect() {
+		return carreraSelect;
+	}
+
+	public void setCarreraSelect(CarreraDTO carreraSelect) {
+		this.carreraSelect = carreraSelect;
 	}
 
 	public Object getModalidad() {
@@ -98,6 +111,14 @@ public class CarreraDataManager implements Serializable{
 
 	public void setMencionList(List<MencionDTO> mencionList) {
 		this.mencionList = mencionList;
+	}
+
+	public List<CarreraDTO> getCarreraList() {
+		return carreraList;
+	}
+
+	public void setCarreraList(List<CarreraDTO> carreraList) {
+		this.carreraList = carreraList;
 	}
 
 

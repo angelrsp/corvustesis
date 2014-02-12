@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
+import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
@@ -117,6 +118,7 @@ public class PregradoController extends SelectItemController{
 			CentroDTO centro=new CentroDTO();
 			centro.setCenCodigo(universidadDataManager.getFacultadCode());
 			universidadDataManager.setEscuelaList(ateneaService.obtenerCentroHijo(centro));
+			carreraDataManager.setCarreraList(ateneaService.readCarrera(centro));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}	
@@ -150,11 +152,29 @@ public class PregradoController extends SelectItemController{
 			
 			entidad.setAteCarrera(carreraDataManager.getCarrera());
 			carreraDataManager.setEntidad(ateneaService.createEntidad(entidad));
+			carreraDataManager.setCarreraList(ateneaService.readCarrera(centro));
 			entidad.setAteCarrera(carreraDataManager.getEntidad().getAteCarrera());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
+	}
+	
+	public void selectCarrera(CarreraDTO car)
+	{
+		carreraDataManager.setCarreraSelect(car);
+		carreraDataManager.setEntidad(carreraDataManager.getCarreraSelect().getAteEntidads().get(0));
+		buscarContactos();
+	}
+	
+	
+	public void buscarContactos()
+	{
+		try {
+			contactoDataManager.setContactoList(ateneaService.readContacto(carreraDataManager.getEntidad()));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}		
 	}
 	
 	public void crearContacto()
