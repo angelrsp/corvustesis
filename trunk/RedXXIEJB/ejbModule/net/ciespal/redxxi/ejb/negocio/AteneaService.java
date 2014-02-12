@@ -58,4 +58,10 @@ public interface AteneaService {
 	List<PublicacionDTO> readPublicacion(CarreraDTO carrera)
 			throws CorvustecException;
 
+	void deleteCentro(CentroDTO centro) throws CorvustecException;
+
+	void updateCentro(CentroDTO centro) throws CorvustecException;
+
+	List<CarreraDTO> readCarrera(CentroDTO centro) throws CorvustecException;
+
 }

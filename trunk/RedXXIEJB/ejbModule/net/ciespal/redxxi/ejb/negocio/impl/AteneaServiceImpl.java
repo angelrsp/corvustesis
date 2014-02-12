@@ -30,6 +30,7 @@ public class AteneaServiceImpl implements AteneaService{
 	@EJB
 	private FactoryDAO factoryDAO;
 	
+	/* Centro */
 	@Override
 	public CentroDTO createCentro(CentroDTO centro) throws CorvustecException
 	{
@@ -45,6 +46,33 @@ public class AteneaServiceImpl implements AteneaService{
 	}
 	
 	@Override
+	public void deleteCentro(CentroDTO centro) throws CorvustecException
+	{
+		logger.info("eliminarCentro");
+		try{
+			factoryDAO.getCentroDAOImpl().remove(centro);
+		}
+		catch(Exception e){
+			logger.info("Error eliminarCentro {}",e.toString());
+			throw new CorvustecException("Error al eliminarCentro");
+		}		
+	}
+	
+	@Override
+	public void updateCentro(CentroDTO centro) throws CorvustecException
+	{
+		logger.info("updateCentro");
+		try{
+			factoryDAO.getCentroDAOImpl().edit(centro);
+		}
+		catch(Exception e){
+			logger.info("Error updateCentro {}",e.toString());
+			throw new CorvustecException("Error al updateCentro");
+		}		
+	}
+	
+	/* Carrera */
+	@Override
 	public CarreraDTO createCarrera(CarreraDTO carrera) throws CorvustecException
 	{
 		logger.info("createCarrera");
@@ -59,6 +87,22 @@ public class AteneaServiceImpl implements AteneaService{
 	}	
 	
 	@Override
+	public List<CarreraDTO> readCarrera(CentroDTO centro) throws CorvustecException
+	{
+		logger.info("readCarrera");
+		try{
+			return factoryDAO.getCarreraDAOImpl().getAll(centro);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readCarrera {}",e.toString());
+			throw new CorvustecException("Error al readCarrera");
+		}
+	}	
+	
+	
+	/* Entidad */
+	@Override
 	public EntidadDTO createEntidad(EntidadDTO entidad) throws CorvustecException
 	{
 		logger.info("createEntidad");
@@ -70,6 +114,19 @@ public class AteneaServiceImpl implements AteneaService{
 			logger.info("Error createEntidad {}",e.toString());
 			throw new CorvustecException("Error al createEntidad");
 		}		
+	}
+	
+	@Override
+	public void updateEntidad(EntidadDTO entidad) throws CorvustecException
+	{
+		logger.info("updateEntidad");
+		try{
+			factoryDAO.getEntidadDAOImpl().edit(entidad);
+		}
+		catch(Exception e){
+			logger.info("Error updateEntidad {}",e.toString());
+			throw new CorvustecException("Error al updateEntidad");
+		}
 	}
 	
 	@Override
@@ -242,17 +299,7 @@ public class AteneaServiceImpl implements AteneaService{
 	}
 	
 	
-	@Override
-	public void updateEntidad(EntidadDTO entidad) throws CorvustecException
-	{
-		logger.info("updateEntidad");
-		try{
-			factoryDAO.getEntidadDAOImpl().edit(entidad);
-		}
-		catch(Exception e){
-			logger.info("Error updateEntidad {}",e.toString());
-			throw new CorvustecException("Error al updateEntidad");
-		}
-	}
 
+
+	
 }
