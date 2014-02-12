@@ -54,7 +54,7 @@ public class CarreraDTO implements Serializable {
 	private CentroDTO ateCentro;
 
 	//bi-directional many-to-one association to EntidadDTO
-	@OneToMany(mappedBy="ateCarrera",cascade={CascadeType.ALL,CascadeType.PERSIST})
+	@OneToMany(mappedBy="ateCarrera",cascade={CascadeType.ALL,CascadeType.PERSIST},fetch=FetchType.EAGER)
 	private List<EntidadDTO> ateEntidads;
 
 	//bi-directional many-to-one association to MencionDTO

@@ -11,6 +11,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EventoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 
@@ -62,6 +63,16 @@ public interface AteneaService {
 
 	void updateCentro(CentroDTO centro) throws CorvustecException;
 
-	List<CarreraDTO> readCarrera(CentroDTO centro) throws CorvustecException;
+	List<CarreraDTO> readCarrera(CentroDTO centro, Object tipo)
+			throws CorvustecException;
+
+	List<ContactoListDTO> readContacto(CarreraDTO carrera)
+			throws CorvustecException;
+
+	OrganizacionDTO createOrganizacion(OrganizacionDTO organizacion)
+			throws CorvustecException;
+
+	List<OrganizacionDTO> readOrganizacion(Object ubicacion)
+			throws CorvustecException;
 
 }

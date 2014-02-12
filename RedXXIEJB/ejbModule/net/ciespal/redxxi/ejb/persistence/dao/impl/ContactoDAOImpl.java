@@ -7,7 +7,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import com.corvustec.commons.util.CorvustecException;
+
 import net.ciespal.redxxi.ejb.persistence.dao.ContactoDAO;
+import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
@@ -49,6 +52,23 @@ public class ContactoDAOImpl extends AbstractFacadeImpl<ContactoDTO> implements 
 		Root<ContactoListDTO> from = cq.from(ContactoListDTO.class);
 		
 		cq.where(cb.equal(from.get("entCodigo"), entidad.getEntCodigo()));
+		
+		List<ContactoListDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
+	
+	
+	@Override
+	public List<ContactoListDTO> getAll(CarreraDTO carrera) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<ContactoListDTO> cq=cb.createQuery(ContactoListDTO.class);
+		Root<ContactoListDTO> from = cq.from(ContactoListDTO.class);
+		
+		cq.where(cb.equal(from.get("entCarrera"), carrera.getCarCodigo()));
 		
 		List<ContactoListDTO> list=entityManager.createQuery(cq).getResultList();
 		if(list.isEmpty())

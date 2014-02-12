@@ -14,6 +14,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EventoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 
@@ -48,14 +49,14 @@ public class AteneaServiceImpl implements AteneaService{
 	@Override
 	public void deleteCentro(CentroDTO centro) throws CorvustecException
 	{
-		logger.info("eliminarCentro");
+		logger.info("deleteCentro");
 		try{
 			factoryDAO.getCentroDAOImpl().remove(centro);
 		}
 		catch(Exception e){
 			logger.info("Error eliminarCentro {}",e.toString());
 			throw new CorvustecException("Error al eliminarCentro");
-		}		
+		}
 	}
 	
 	@Override
@@ -87,11 +88,11 @@ public class AteneaServiceImpl implements AteneaService{
 	}	
 	
 	@Override
-	public List<CarreraDTO> readCarrera(CentroDTO centro) throws CorvustecException
+	public List<CarreraDTO> readCarrera(CentroDTO centro,Object tipo) throws CorvustecException
 	{
 		logger.info("readCarrera");
 		try{
-			return factoryDAO.getCarreraDAOImpl().getAll(centro);
+			return factoryDAO.getCarreraDAOImpl().getAll(centro,tipo);
 		}
 		catch(Exception e)
 		{
@@ -143,7 +144,7 @@ public class AteneaServiceImpl implements AteneaService{
 		}		
 	}
 	
-	
+	/* Contacto */
 	@Override
 	public ContactoDTO createContacto(ContactoDTO contactoDTO) throws CorvustecException
 	{
@@ -159,6 +160,34 @@ public class AteneaServiceImpl implements AteneaService{
 	}
 
 	@Override
+	public List<ContactoListDTO> readContacto(EntidadDTO entidad) throws CorvustecException
+	{
+		logger.info("readContacto");
+		try{
+			return factoryDAO.getContactoDAOImpl().getAll(entidad);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readContacto {}",e.toString());
+			throw new CorvustecException("Error al readContacto");
+		}		
+	}
+
+	@Override
+	public List<ContactoListDTO> readContacto(CarreraDTO carrera) throws CorvustecException
+	{
+		logger.info("readContacto");
+		try{
+			return factoryDAO.getContactoDAOImpl().getAll(carrera);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readContacto {}",e.toString());
+			throw new CorvustecException("Error al readContacto");
+		}		
+	}
+	
+	@Override
 	public List<MencionDTO> readMencion(CarreraDTO carrera) throws CorvustecException
 	{
 		logger.info("readContacto");
@@ -173,19 +202,7 @@ public class AteneaServiceImpl implements AteneaService{
 	}
 
 	
-	@Override
-	public List<ContactoListDTO> readContacto(EntidadDTO entidad) throws CorvustecException
-	{
-		logger.info("readContacto");
-		try{
-			return factoryDAO.getContactoDAOImpl().getAll(entidad);
-		}
-		catch(Exception e)
-		{
-			logger.info("Error readContacto {}",e.toString());
-			throw new CorvustecException("Error al readContacto");
-		}		
-	}
+	
 	
 	
 	@Override
@@ -297,9 +314,31 @@ public class AteneaServiceImpl implements AteneaService{
 			throw new CorvustecException("Error al createProyectoInvestigacion");
 		}
 	}
-	
-	
 
+	/* Organizacion */
+	@Override
+	public OrganizacionDTO createOrganizacion(OrganizacionDTO organizacion) throws CorvustecException
+	{
+		logger.info("createOrganizacion");
+		try{
+			return factoryDAO.getOrganizacioDAOImpl().create(organizacion);
+		}
+		catch(Exception e){
+			logger.info("Error createOrganizacion {}",e.toString());
+			throw new CorvustecException("Error al createOrganizacion");
+		}
+	}
 
-	
+	@Override
+	public List<OrganizacionDTO> readOrganizacion(Object ubicacion) throws CorvustecException
+	{
+		logger.info("readOrganizacion");
+		try{
+			return factoryDAO.getOrganizacioDAOImpl().getAll(ubicacion);
+		}
+		catch(Exception e){
+			logger.info("Error readOrganizacion {}",e.toString());
+			throw new CorvustecException("Error al readOrganizacion");
+		}
+	}
 }
