@@ -80,33 +80,41 @@
 		<!-- Dialog -->
 		<p:dialog id="dglDetalle" widgetVar="dglDetalles" modal="true" closeOnEscape="true">
 		
-		<p:panel header="#{i18n['label.panel.contacto']}">
+		<!-- Contactos -->
+		<p:panel id="pnlContacto" header="#{i18n['label.panel.contacto']}">
 				
 		<table>
 			<tr>
-				<td><h:outputText value="#{i18n['label.tipo']}:&#160;:" /></td>
+				<td><h:outputText value="#{i18n['label.tipo']}:&#160;" /></td>
 				<td>
-					<p:selectOneMenu>
+					<p:selectOneMenu required="true" requiredMessage="#{i18n['label.tipo']}&#160;#{i18n['label.requerido']}" value="#{contactoDataManager.tipoContacto}">
 						<f:selectItem itemLabel="--Seleccione--"/>
+						<f:selectItems value="#{organizacionController.catalogoTipoContacto}"/>
 					</p:selectOneMenu>
 				</td>
 				<td><h:outputText value="#{i18n['label.valor']}:&#160;" /></td>
-				<td><p:inputText></p:inputText></td>
-				<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>
+				<td><p:inputText value="#{contactoDataManager.contacto.conValor}" required="true" requiredMessage="#{i18n['label.valor']}&#160;#{i18n['label.requerido']}"/></td>
+				<td><p:commandButton value="#{i18n['boton.agregar']}" actionListener="#{organizacionController.crearContacto}" process="pnlContacto" update="pnlContacto,growl"/></td>
 			</tr>			
 		</table>
 		
 		<p:spacer height="10"/>
 		
-		<p:dataTable emptyMessage="No existen registros">
-			<p:column headerText="#{i18n['label.tipo']}"></p:column>
-			<p:column headerText="#{i18n['label.valor']}"></p:column>
+		<p:dataTable emptyMessage="No existen registros" value="#{contactoDataManager.contactoList}" var="con">
+			<p:column headerText="#{i18n['label.tipo']}">
+				<h:outputText value="#{con.catTipo}" />
+			</p:column>
+			<p:column headerText="#{i18n['label.valor']}">
+				<h:outputText value="#{con.conValor}" />
+			</p:column>
 			<p:column headerText="#{i18n['boton.editar']}" width="15"></p:column>
 			<p:column headerText="#{i18n['boton.eliminar']}" width="15"></p:column>
 		</p:dataTable>
 		
 		</p:panel>
-
+		
+		
+		
 		<p:panel header="#{i18n['label.panel.evento']}">
 		
 			<table>
