@@ -62,7 +62,7 @@ public class EntidadDTO implements Serializable {
 	private PublicacionDTO atePublicacion;
 
 	//bi-directional many-to-one association to ContactoDTO
-	@OneToMany(mappedBy="ateEntidad",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="ateEntidad")
 	private List<ContactoDTO> ateContactos;
 
 	public EntidadDTO() {
