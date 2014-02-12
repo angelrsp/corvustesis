@@ -15,7 +15,7 @@ public class EspecialidadDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_ESPECIALIDAD_ESPCODIGO_GENERATOR", sequenceName="ATE_ESPECIALIDAD_ESP_CODIGO_SEQ")
+	@SequenceGenerator(name="ATE_ESPECIALIDAD_ESPCODIGO_GENERATOR", sequenceName="ATE_ESPECIALIDAD_ESP_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_ESPECIALIDAD_ESPCODIGO_GENERATOR")
 	@Column(name="esp_codigo")
 	private Integer espCodigo;

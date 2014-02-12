@@ -12,6 +12,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.EntidadDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.EventoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.MencionDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.OrganizacioDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ProyectoInvestigacionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PublicacionDAO;
 
@@ -31,6 +32,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private ProyectoInvestigacionDAO proyectoInvestigacionDAO;
 	private PublicacionDAO publicacionDAO;
 	private EventoDAO eventoDAO;
+	private OrganizacioDAO organizacioDAO;
 	
 	@Override
 	public CatalogoDAO getCatalogoImpl() {
@@ -102,5 +104,13 @@ public class FactoryDAOImpl implements FactoryDAO{
 			publicacionDAO = new PublicacionDAOImpl(entityManager);
 		}
 		return publicacionDAO;
+	}
+	
+	@Override
+	public OrganizacioDAO getOrganizacioDAOImpl() {
+		if (organizacioDAO == null) {
+			organizacioDAO = new OrganizacioDAOImpl(entityManager);
+		}
+		return organizacioDAO;
 	}
 }

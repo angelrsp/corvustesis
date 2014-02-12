@@ -9,6 +9,8 @@ import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
 
 public interface CarreraDAO extends AbstractFacade<CarreraDTO> {
 
-	List<CarreraDTO> getAll(CentroDTO centro) throws CorvustecException;
+
+	List<CarreraDTO> getAll(CentroDTO centro, Object tipo)
+			throws CorvustecException;
 
 }

@@ -16,7 +16,7 @@ public class EventoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ATE_EVENTO_EVECODIGO_GENERATOR", sequenceName="ATE_EVENTO_EVE_CODIGO_SEQ")
+	@SequenceGenerator(name="ATE_EVENTO_EVECODIGO_GENERATOR", sequenceName="ATE_EVENTO_EVE_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ATE_EVENTO_EVECODIGO_GENERATOR")
 	@Column(name="eve_codigo")
 	private Integer eveCodigo;

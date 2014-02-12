@@ -25,7 +25,7 @@ public class CarreraDAOImpl extends AbstractFacadeImpl<CarreraDTO> implements Ca
 	}
 	
 	@Override
-	public List<CarreraDTO> getAll(CentroDTO centro) throws CorvustecException
+	public List<CarreraDTO> getAll(CentroDTO centro,Object tipo) throws CorvustecException
 	{
 		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
 		CriteriaQuery<CarreraDTO> cq=cb.createQuery(CarreraDTO.class);
@@ -33,7 +33,7 @@ public class CarreraDAOImpl extends AbstractFacadeImpl<CarreraDTO> implements Ca
 		
 		Path<CentroDTO> join1=from.join("ateCentro");
 		
-		cq.where(cb.and(cb.equal(join1.get("cenCodigo"), centro.getCenCodigo()),cb.equal(from.get("carTipo"), 6)));
+		cq.where(cb.and(cb.equal(join1.get("cenCodigo"), centro.getCenCodigo()),cb.equal(from.get("carTipo"), tipo)));
 		
 		List<CarreraDTO> list=entityManager.createQuery(cq).getResultList();
 		if(list.isEmpty())

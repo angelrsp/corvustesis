@@ -36,6 +36,10 @@ public class OrganizacionDTO implements Serializable {
 	@Column(name="org_nombre")
 	private String orgNombre;
 
+	@Column(name="org_ubicacion")
+	private Integer orgUbicacion;
+
+	
 	//bi-directional many-to-one association to EntidadDTO
 	@OneToMany(mappedBy="ateOrganizacion")
 	private List<EntidadDTO> ateEntidads;
@@ -89,6 +93,14 @@ public class OrganizacionDTO implements Serializable {
 
 	public void setOrgNombre(String orgNombre) {
 		this.orgNombre = orgNombre;
+	}
+
+	public Integer getOrgUbicacion() {
+		return orgUbicacion;
+	}
+
+	public void setOrgUbicacion(Integer orgUbicacion) {
+		this.orgUbicacion = orgUbicacion;
 	}
 
 	public List<EntidadDTO> getAteEntidads() {
