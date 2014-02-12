@@ -118,7 +118,7 @@ public class PregradoController extends SelectItemController{
 			CentroDTO centro=new CentroDTO();
 			centro.setCenCodigo(universidadDataManager.getFacultadCode());
 			universidadDataManager.setEscuelaList(ateneaService.obtenerCentroHijo(centro));
-			carreraDataManager.setCarreraList(ateneaService.readCarrera(centro));
+			carreraDataManager.setCarreraList(ateneaService.readCarrera(centro,6));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}	
@@ -152,7 +152,7 @@ public class PregradoController extends SelectItemController{
 			
 			entidad.setAteCarrera(carreraDataManager.getCarrera());
 			carreraDataManager.setEntidad(ateneaService.createEntidad(entidad));
-			carreraDataManager.setCarreraList(ateneaService.readCarrera(centro));
+			carreraDataManager.setCarreraList(ateneaService.readCarrera(centro,6));
 			entidad.setAteCarrera(carreraDataManager.getEntidad().getAteCarrera());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 		} catch (CorvustecException e) {
@@ -162,16 +162,19 @@ public class PregradoController extends SelectItemController{
 	
 	public void selectCarrera(CarreraDTO car)
 	{
-		carreraDataManager.setCarreraSelect(car);
-		carreraDataManager.setEntidad(carreraDataManager.getCarreraSelect().getAteEntidads().get(0));
+		carreraDataManager.setCarrera(car);
 		buscarContactos();
+		buscarMension();
+		buscarProyecto();
+		buscarPublicacion();
+		buscarEvento();
 	}
 	
 	
 	public void buscarContactos()
 	{
 		try {
-			contactoDataManager.setContactoList(ateneaService.readContacto(carreraDataManager.getEntidad()));
+			contactoDataManager.setContactoList(ateneaService.readContacto(carreraDataManager.getCarrera()));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}		
@@ -180,14 +183,14 @@ public class PregradoController extends SelectItemController{
 	public void crearContacto()
 	{
 		try {
-			if(carreraDataManager.getEntidad().getEntCodigo()==null||carreraDataManager.getEntidad().getEntCodigo()==0){
+			if(carreraDataManager.getCarrera().getCarCodigo()==null || carreraDataManager.getCarrera().getCarCodigo()==0){
 				JsfUtil.addErrorMessage("Debe guardar ");
 				return;
 			}
-			contactoDataManager.getContacto().setAteEntidad(carreraDataManager.getEntidad());
+			contactoDataManager.getContacto().setAteEntidad(carreraDataManager.getCarrera().getAteEntidads().get(0));
 			contactoDataManager.getContacto().setConTipo(Integer.valueOf(contactoDataManager.getTipoContacto().toString()));
 			ateneaService.createContacto(contactoDataManager.getContacto());
-			contactoDataManager.setContactoList(ateneaService.readContacto(carreraDataManager.getEntidad()));
+			buscarContactos();
 			contactoDataManager.setContacto(new ContactoDTO());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 		} catch (CorvustecException e) {
@@ -199,11 +202,20 @@ public class PregradoController extends SelectItemController{
 	public void crearMension()
 	{
 		try {
-			carreraDataManager.getMencion().setAteCarrera(carreraDataManager.getEntidad().getAteCarrera());
+			carreraDataManager.getMencion().setAteCarrera(carreraDataManager.getCarrera());
 			ateneaService.createMencion(carreraDataManager.getMencion());
-			carreraDataManager.setMencionList(ateneaService.readMencion(carreraDataManager.getEntidad().getAteCarrera()));
+			buscarMension();
 			carreraDataManager.setMencion(new MencionDTO());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void buscarMension()
+	{
+		try {
+			carreraDataManager.setMencionList(ateneaService.readMencion(carreraDataManager.getCarrera()));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
@@ -218,9 +230,18 @@ public class PregradoController extends SelectItemController{
 			ent=ateneaService.createEntidad(ent);
 			ent.setAteCarrera(carreraDataManager.getCarrera());
 			ateneaService.updateEntidad(ent);
-			proyectoDataManager.setProyectoList(ateneaService.readProyectoInvestigacion(ent.getAteCarrera()));
+			buscarProyecto();
 			proyectoDataManager.setProyecto(new ProyectoInvestigacionDTO());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void buscarProyecto()
+	{
+		try {
+			proyectoDataManager.setProyectoList(ateneaService.readProyectoInvestigacion(carreraDataManager.getCarrera()));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
@@ -235,9 +256,18 @@ public class PregradoController extends SelectItemController{
 			ent=ateneaService.createEntidad(ent);
 			ent.setAteCarrera(carreraDataManager.getCarrera());
 			ateneaService.updateEntidad(ent);
-			publicacionDataManager.setPublicacionList(ateneaService.readPublicacion(ent.getAteCarrera()));
+			buscarPublicacion();
 			publicacionDataManager.setPublicacion(new PublicacionDTO());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void buscarPublicacion()
+	{
+		try {
+			publicacionDataManager.setPublicacionList(ateneaService.readPublicacion(carreraDataManager.getCarrera()));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
@@ -252,9 +282,18 @@ public class PregradoController extends SelectItemController{
 			ent=ateneaService.createEntidad(ent);
 			ent.setAteCarrera(carreraDataManager.getCarrera());
 			ateneaService.updateEntidad(ent);
-			eventoDataManager.setEventoList(ateneaService.readEvento(ent.getAteCarrera()));
+			buscarEvento();
 			eventoDataManager.setEvento(new EventoDTO());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void buscarEvento()
+	{
+		try {
+			eventoDataManager.setEventoList(ateneaService.readEvento(carreraDataManager.getCarrera()));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
