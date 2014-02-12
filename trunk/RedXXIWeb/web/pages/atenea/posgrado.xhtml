@@ -31,9 +31,8 @@
 				<td><p:selectOneMenu id="somFacultad" required="true" requiredMessage="#{i18n['label.facultad']}&#160;#{i18n['label.requerido']}" value="#{universidadDataManager.facultadCode}">
 						<f:selectItem itemLabel="--Seleccione--"/>
 						<f:selectItems value="#{posgradoController.universidadDataManager.facultadList}" var="fac" itemValue="#{fac.cenCodigo}" itemLabel="#{fac.cenNombre}"/>
-						<p:ajax event="change" immediate="true" process="@this" listener="#{posgradoController.obtenerEscuela}" update="somEscuela"/>
-						<p:ajax event="change" immediate="true" process="@this" listener="#{posgradoController.obtenerEscuela}" update="somEscuela"/>
-																
+						<p:ajax event="change" immediate="true" process="@this" listener="#{posgradoController.obtenerEscuela}" update="somEscuela,tblCarrera"/>
+						<p:ajax event="change" immediate="true" process="@this" listener="#{posgradoController.obtenerEscuela}" update="somEscuela,tblCarrera"/>
 					</p:selectOneMenu></td>
 			</tr>
 			
@@ -47,9 +46,7 @@
 			</tr>		
 
 			<tr>
-			
 				<td><h:outputText value="#{i18n['label.modalidad']}:&#160;" /></td>
-				
 				<td><p:selectManyCheckbox id="smcModalidad" required="true" value="#{carreraDataManager.modalidadSelect}">  
             			<f:selectItems value="#{posgradoController.catalogoModalidad}"/>  
         			</p:selectManyCheckbox></td>
@@ -95,7 +92,27 @@
 			
 		</table>
 		
+		<p:dataTable id="tblCarrera" value="#{carreraDataManager.carreraList}" var="car">
+		
+			<p:column headerText="#{i18n['label.nombre.carrera']}">
+				<h:outputText value="#{car.carNombre}" />
+			</p:column>
+		
+			<p:column headerText="#{i18n['label.detalles']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{posgradoController.selectCarrera(car)}" icon="ui-icon-newwin" 
+	               	update=":contenido:pnlDatos,:contenido:growl,:contenido:dlgDetalles" process="tblCarrera" oncomplete="PF('dlgDetalle').show()"/>    				
+			</p:column>
+		
+		</p:dataTable>		
+		
+		
 		</p:panel>
+		
+		
+		<!-- Dialogo -->
+		<p:dialog id="dlgDetalles" widgetVar="dlgDetalle" modal="true" resizable="false" closeOnEscape="true">
+		
+		<p:scrollPanel style="height:540px" mode="native">
 		
 		<!-- Contactos -->
 		<p:panel id="pnlContacto" header="#{i18n['label.panel.contacto']}">
@@ -131,20 +148,21 @@
 		</p:panel>
 		
 		
-		<p:panel header="#{i18n['label.menciones']}">
+		<!-- Investigacion Menciones / Especialidades -->
+		<p:panel id="pnlMencion" header="#{i18n['label.menciones']}">
 		
 		<table>
 			<tr>
 				<td><h:outputText value="#{i18n['label.mencion']}:&#160;" /></td>
-				<td><p:inputTextarea></p:inputTextarea></td>
-				<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>				
+				<td><p:inputTextarea value="#{carreraDataManager.mencion.menNombre}" required="true" requiredMessage="#{i18n['label.mencion']}&#160;#{i18n['label.requerido']}"/></td>
+				<td><p:commandButton actionListener="#{posgradoController.crearMension}" value="#{i18n['boton.agregar']}" process="pnlMencion,growl" update="pnlMencion"/></td>				
 			</tr>
 		</table>
 		
-		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
+		<p:dataTable emptyMessage="#{i18n['table.vacio']}" value="#{carreraDataManager.mencionList}" var="men">
 		
 			<p:column headerText="#{i18n['label.descripcion']}">
-				<h:outputText value="" />
+				<h:outputText value="#{men.menNombre}" />
 			</p:column>
 
 			<p:column headerText="#{i18n['boton.editar']}" width="15">
@@ -161,37 +179,43 @@
 		
 		
 		<!-- Investigacion cientifica -->
-		<p:panel header="#{i18n['label.panel.proyecto.investigacion']}">
+		<p:panel id="pnlProyecto" header="#{i18n['label.panel.proyecto.investigacion']}">
 		
 		<table>
 		
 			<tr>
 				<td><h:outputText value="#{i18n['label.titulo']}:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinNombre}" required="true" requiredMessage="#{i18n['label.titulo']}&#160;#{i18n['label.requerido']}"/></td>
 				
 				<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinPerfil}" required="true" requiredMessage="#{i18n['label.perfil']}&#160;#{i18n['label.requerido']}"/></td>
 				
 				<td><h:outputText value="#{i18n['label.coordinador']}:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinCoordinador}" required="true" requiredMessage="#{i18n['label.coordinador']}&#160;#{i18n['label.requerido']}"/></td>
+			</tr>	
+			<tr>
+				<td><h:outputText value="#{i18n['label.anio.inicio']}:&#160;" /></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinAnioInicio}" required="true" requiredMessage="#{i18n['label.anio.inicio']}&#160;#{i18n['label.requerido']}" onkeypress="return isNumberKey(event)"/></td>
+				<td><h:outputText value="#{i18n['label.duracion.aproximada']}:&#160;" /></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinDuracion}" required="true" requiredMessage="#{i18n['label.duracion.aproximada']}&#160;#{i18n['label.requerido']}"/></td>
 				
-				<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>
+				<td><p:commandButton actionListener="#{posgradoController.createProyecto}" value="#{i18n['boton.agregar']}" process="pnlProyecto" update="pnlProyecto,growl"/></td>
 			</tr>
 			
 		</table>
 
-		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
+		<p:dataTable emptyMessage="#{i18n['table.vacio']}" value="#{proyectoDataManager.proyectoList}" var="pro">
 		
 			<p:column headerText="#{i18n['label.titulo']}">
-				<h:outputText value="" />
+				<h:outputText value="#{pro.pinNombre}" />
 			</p:column>
 
 			<p:column headerText="#{i18n['label.perfil']}">
-				<h:outputText value="" />
+				<h:outputText value="#{pro.pinPerfil}" />
 			</p:column>
 
 			<p:column headerText="#{i18n['label.coordinador']}">
-				<h:outputText value="" />
+				<h:outputText value="#{pro.pinCoordinador}" />
 			</p:column>
 
 			<p:column headerText="#{i18n['boton.editar']}" width="15">
@@ -206,7 +230,9 @@
 		
 	</p:panel>		
 		
-		
+			
+		</p:scrollPanel>
+		</p:dialog>
 		
 	</ui:define>
 </ui:composition>

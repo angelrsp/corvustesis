@@ -89,17 +89,16 @@
 		
 			<p:column headerText="#{i18n['label.detalles']}" width="15" style="text-align: center">
 				<p:commandButton actionListener="#{pregradoController.selectCarrera(car)}" icon="ui-icon-newwin" 
-	               	update=":contenido:pnlDatos,:contenido:growl" process="tblCarrera" oncomplete="PF('dlgDetalles').show()"/>    				
+	               	update=":contenido:pnlDatos,:contenido:growl,:contenido:dlgDetalles" process="tblCarrera" oncomplete="PF('dlgDetalle').show()"/>    				
 			</p:column>
 		
 		</p:dataTable>
 
-		
 		</p:panel>
 		
 		
 		<!-- Dialogo -->
-		<p:dialog id="dlgDetalles" widgetVar="dlgDetalles" modal="true" resizable="false" closeOnEscape="true">
+		<p:dialog id="dlgDetalles" widgetVar="dlgDetalle" modal="true" resizable="false" closeOnEscape="true">
 		
 		<p:scrollPanel style="height:600px" mode="native">
 		
