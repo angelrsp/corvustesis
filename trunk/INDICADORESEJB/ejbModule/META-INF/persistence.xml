@@ -15,6 +15,10 @@
 		<class>ec.edu.uce.indicadores.ejb.persistence.entities.CatalogoDTO</class>
 		<class>ec.edu.uce.indicadores.ejb.persistence.entities.ContactoListDTO</class>
 		<class>ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalListDTO</class>
+		<class>ec.edu.uce.indicadores.ejb.persistence.entities.AccesoDTO</class>
+		<class>ec.edu.uce.indicadores.ejb.persistence.entities.OpcionDTO</class>
+		<class>ec.edu.uce.indicadores.ejb.persistence.entities.PerfilDTO</class>
+		<class>ec.edu.uce.indicadores.ejb.persistence.entities.UsuarioPerfilDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>
