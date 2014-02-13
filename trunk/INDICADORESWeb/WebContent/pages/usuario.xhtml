@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/template/privado.xhtml">
+	<ui:define name="contenido">
+		<h:form id="contenido" enctype="multipart/form-data">
+	
+			<p:growl id="growl" showDetail="false" />	
+
+			<p:panel header="Usuarios">
+			
+			<table>
+			
+				<tr>
+					<td><h:outputLabel value="#{i18n['label.ies']}:&#160;" /> </td>
+					<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}">
+							<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+							<f:selectItems value="#{usuarioController.iesList}"></f:selectItems>
+					</p:selectOneMenu></td>
+				</tr>			
+			
+				<tr>
+					<td><h:outputText value="Usuario:" /></td>
+					<td><p:inputText/></td>
+				</tr>
+				<tr>	
+					<td><h:outputLabel value="Contraseña:&#160;" /> </td>
+					<td><p:password required="true"	feedback="true"/></td>
+				</tr>
+				<tr>	
+					<td><h:outputLabel value="Confirmar Contraseña:&#160;" /> </td>
+					<td><p:password required="true"	feedback="true"/></td>		
+				</tr>
+				
+				<tr>
+					<td><h:outputLabel value="#{i18n['label.perfil']}:&#160;" /> </td>
+					<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.perfil']}:&#160;#{i18n['label.requerido']}">
+							<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+					</p:selectOneMenu></td>
+				</tr>							
+				
+				<tr>
+					<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>																		
+				</tr>
+			
+			</table>
+			
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+
+</html>
