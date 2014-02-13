@@ -1,7 +1,9 @@
 package net.ciespal.redxxi.ejb.persistence.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -66,6 +68,10 @@ public class EntidadDTO implements Serializable {
 	private List<ContactoDTO> ateContactos;
 
 	public EntidadDTO() {
+	}
+
+	public EntidadDTO(Integer entCodigo) {
+		this.entCodigo = entCodigo;
 	}
 
 	public Integer getEntCodigo() {

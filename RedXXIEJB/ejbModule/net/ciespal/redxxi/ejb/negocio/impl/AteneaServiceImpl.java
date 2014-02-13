@@ -130,27 +130,32 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 	
-	@Override
-	public MencionDTO createMencion(MencionDTO mencion) throws CorvustecException
-	{
-		logger.info("createMencion");
-		try{
-			return factoryDAO.getMencionDAOImpl().create(mencion);
-		}
-		catch(Exception e)
-		{
-			logger.info("Error createMencion {}",e.toString());
-			throw new CorvustecException("Error al createMencion");
-		}		
-	}
+
 	
 	/* Contacto */
 	@Override
-	public ContactoDTO createContacto(ContactoDTO contactoDTO) throws CorvustecException
+	public ContactoDTO createOrUpdateContacto(ContactoDTO contactoDTO) throws CorvustecException
 	{
-		logger.info("createEntidad");
+		logger.info("createOrUpdateContacto");
 		try{
-			return factoryDAO.getContactoDAOImpl().create(contactoDTO);
+			if(contactoDTO.getConCodigo()!=null)
+				return factoryDAO.getContactoDAOImpl().edit(contactoDTO);
+			else
+				return factoryDAO.getContactoDAOImpl().create(contactoDTO);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error createOrUpdateContacto {}",e.toString());
+			throw new CorvustecException("Error al createOrUpdateContacto");
+		}		
+	}
+
+	@Override
+	public void deleteContacto(ContactoDTO contactoDTO) throws CorvustecException
+	{
+		logger.info("deleteContacto");
+		try{
+			factoryDAO.getContactoDAOImpl().remove(contactoDTO);
 		}
 		catch(Exception e)
 		{
@@ -159,6 +164,7 @@ public class AteneaServiceImpl implements AteneaService{
 		}		
 	}
 
+	
 	@Override
 	public List<ContactoListDTO> readContacto(EntidadDTO entidad) throws CorvustecException
 	{
@@ -204,6 +210,37 @@ public class AteneaServiceImpl implements AteneaService{
 	
 	/* Mencion */
 	@Override
+	public MencionDTO createOrUpdateMencion(MencionDTO mencion) throws CorvustecException
+	{
+		logger.info("createMencion");
+		try{
+			if(mencion.getMenCodigo()!=null)
+				return factoryDAO.getMencionDAOImpl().edit(mencion);
+			else
+				return factoryDAO.getMencionDAOImpl().create(mencion);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error createMencion {}",e.toString());
+			throw new CorvustecException("Error al createMencion");
+		}		
+	}
+	
+	@Override
+	public void deleteMencion(MencionDTO mencion) throws CorvustecException
+	{
+		logger.info("deleteMencion");
+		try{
+			factoryDAO.getMencionDAOImpl().remove(mencion);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error deleteMencion {}",e.toString());
+			throw new CorvustecException("Error al deleteMencion");
+		}		
+	}
+	
+	@Override
 	public List<MencionDTO> readMencion(CarreraDTO carrera) throws CorvustecException
 	{
 		logger.info("readContacto");
@@ -216,10 +253,58 @@ public class AteneaServiceImpl implements AteneaService{
 			throw new CorvustecException("Error al readContacto");
 		}		
 	}
+	
+	/* Proyecto */
+	@Override
+	public ProyectoInvestigacionDTO createOrUpdateProyectoInvestigacion(ProyectoInvestigacionDTO proyecto) throws CorvustecException
+	{
+		logger.info("createOrUpdateProyectoInvestigacion");
+		try{
+			if(proyecto.getPinCodigo()!=null)
+				return factoryDAO.getProyectoInvestigacionDAOImpl().edit(proyecto);
+			else	
+				return factoryDAO.getProyectoInvestigacionDAOImpl().create(proyecto);
+		}
+		catch(Exception e){
+			logger.info("Error createOrUpdateProyectoInvestigacion {}",e.toString());
+			throw new CorvustecException("Error al createOrUpdateProyectoInvestigacion");
+		}
+	}
+
+	@Override
+	public void deleteProyectoInvestigacion(ProyectoInvestigacionDTO proyecto) throws CorvustecException
+	{
+		logger.info("deleteProyectoInvestigacion");
+		try{
+			for(EntidadDTO ent:proyecto.getAteEntidads())
+			{
+				for(ContactoDTO con:factoryDAO.getContactoDAOImpl().getAll2(ent))
+					factoryDAO.getContactoDAOImpl().remove(con);
+				factoryDAO.getEntidadDAOImpl().remove(ent);
+			}
+			factoryDAO.getProyectoInvestigacionDAOImpl().remove(proyecto);
+		}
+		catch(Exception e){
+			logger.info("Error deleteProyectoInvestigacion {}",e.toString());
+			throw new CorvustecException("Error al deleteProyectoInvestigacion");
+		}
+	}
 
 	
-	
-	
+	@Override
+	public List<ProyectoInvestigacionDTO> readProyectoInvestigacion(CarreraDTO carrera) throws CorvustecException
+	{
+		logger.info("obtenerProyectoInvestigacion");
+		try{
+			return factoryDAO.getProyectoInvestigacionDAOImpl().getAll(carrera);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error obtenerProyectoInvestigacion {}",e.toString());
+			throw new CorvustecException("Error al obtenerProyectoInvestigacion");
+		}
+	}
+
 	
 	@Override
 	public List<CentroDTO> obtenerCentroPadre() throws CorvustecException
@@ -249,32 +334,7 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 	
-	@Override
-	public List<ProyectoInvestigacionDTO> readProyectoInvestigacion(CarreraDTO carrera) throws CorvustecException
-	{
-		logger.info("obtenerProyectoInvestigacion");
-		try{
-			return factoryDAO.getProyectoInvestigacionDAOImpl().getAll(carrera);
-		}
-		catch(Exception e)
-		{
-			logger.info("Error obtenerProyectoInvestigacion {}",e.toString());
-			throw new CorvustecException("Error al obtenerProyectoInvestigacion");
-		}
-	}
-
-	@Override
-	public ProyectoInvestigacionDTO createProyectoInvestigacion(ProyectoInvestigacionDTO proyecto) throws CorvustecException
-	{
-		logger.info("createProyectoInvestigacion");
-		try{
-			return factoryDAO.getProyectoInvestigacionDAOImpl().create(proyecto);
-		}
-		catch(Exception e){
-			logger.info("Error createProyectoInvestigacion {}",e.toString());
-			throw new CorvustecException("Error al createProyectoInvestigacion");
-		}
-	}
+	
 
 	
 	@Override
