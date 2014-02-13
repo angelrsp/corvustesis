@@ -11,17 +11,28 @@
 	
 			<p:growl id="growl" showDetail="false" />	
 
-			<p:panel header="Acceso">			
+			<p:panel id="pnlAcceso" header="Acceso">			
 				<table>
 				
 					<tr>
 						<td><h:outputText value="Perfil:" /></td>
-						<td><p:selectOneMenu>
+						<td><p:selectOneMenu value="#{accesoController.pefilSelect}">
 							<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
-						</p:selectOneMenu></td>				
+							<f:selectItems value="#{accesoController.perfilList}" var="per" itemLabel="#{per.perDescripcion}" itemValue="#{per.perCodigo}"/>
+							<p:ajax event="change" listener="#{accesoController.readAcceso}" process="@this" update="pnlAcceso"/>
+						</p:selectOneMenu></td>
+						<td><p:commandButton value="Guardar" actionListener="#{accesoController.save}" process="pnlAcceso" update="pnlAcceso,growl"/></td>				
 					</tr>
-				
+				</table>	
+				<table>
+					<tr>
+					<td><p:selectManyCheckbox id="smcModalidad" value="#{accesoController.opcionSelect}" layout="pageDirection">  
+	            			<f:selectItems value="#{accesoController.opcionCheck}" var="opt" itemValue="#{opt.opcCodigo}" itemLabel="#{opt.opcNombre}"/>  
+	        			</p:selectManyCheckbox></td>
+					</tr>
 				</table>
+				
+				
 			</p:panel>
 		</h:form>
 	</ui:define>

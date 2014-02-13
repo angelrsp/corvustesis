@@ -18,7 +18,7 @@
 			
 				<tr>
 					<td><h:outputLabel value="#{i18n['label.ies']}:&#160;" /> </td>
-					<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}">
+					<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{usuarioController.iesSelect}">
 							<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
 							<f:selectItems value="#{usuarioController.iesList}"></f:selectItems>
 					</p:selectOneMenu></td>
@@ -49,6 +49,14 @@
 				</tr>
 			
 			</table>
+
+			<p:dataTable value="#{usuarioController.userList}" var="usu">
+			
+				<p:column headerText="Usuario">
+					<h:outputText value="#{usu.usuLogin}" />
+				</p:column>
+										
+			</p:dataTable>
 			
 			</p:panel>
 
