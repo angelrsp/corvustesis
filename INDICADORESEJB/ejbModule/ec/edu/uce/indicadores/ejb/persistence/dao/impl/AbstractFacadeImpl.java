@@ -1,8 +1,12 @@
 package ec.edu.uce.indicadores.ejb.persistence.dao.impl;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 
 import ec.edu.uce.indicadores.ejb.persistence.dao.AbstractFacade;
 
@@ -43,6 +47,20 @@ public abstract class AbstractFacadeImpl<T> implements AbstractFacade<T>{
 		return entityManager.find(entityClass, id);
 	}
 
+	public List<T> findAll() {
+		
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<T> cq=cb.createQuery(entityClass);
+		cq.from(entityClass);
+		
+		List<T> list=entityManager.createQuery(cq).getResultList();
+		
+		if(list.isEmpty())
+			return new ArrayList<T>();
+		else
+			return list;
+	}
+	
 //	public List<T> findAll() {
 //		javax.persistence.criteria.CriteriaQuery cq = getEntityManager()
 //				.getCriteriaBuilder().createQuery();

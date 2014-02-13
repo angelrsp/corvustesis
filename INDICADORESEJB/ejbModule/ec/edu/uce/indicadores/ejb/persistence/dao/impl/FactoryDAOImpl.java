@@ -4,6 +4,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import ec.edu.uce.indicadores.ejb.persistence.dao.AccesoDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.CatalogoDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.ContactoDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.EvidenciaDAO;
@@ -12,6 +13,8 @@ import ec.edu.uce.indicadores.ejb.persistence.dao.HistoricoIndicadorDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.IesDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.IndicadorDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.ModeloDAO;
+import ec.edu.uce.indicadores.ejb.persistence.dao.OpcionDAO;
+import ec.edu.uce.indicadores.ejb.persistence.dao.PerfilDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.RegistroDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.RepresentanteLegalDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.UsuarioDAO;
@@ -42,6 +45,12 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private RegistroDAO registroDAO;
 	
 	private CatalogoDAO catalogoDAO;
+	
+	private PerfilDAO perfilDAO;
+	
+	private AccesoDAO accesoDAO;
+	
+	private OpcionDAO opcionDAO;
 	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -123,4 +132,28 @@ public class FactoryDAOImpl implements FactoryDAO{
 		}
 		return catalogoDAO;
 	}	
+	
+	@Override
+	public PerfilDAO getPerfilDAOImpl() {
+		if (perfilDAO == null) {
+			perfilDAO = new PerfilDAOImpl(entityManager);
+		}
+		return perfilDAO;
+	}
+	
+	@Override
+	public AccesoDAO getAccesoDAOImpl() {
+		if (accesoDAO == null) {
+			accesoDAO = new AccesoDAOImpl(entityManager);
+		}
+		return accesoDAO;
+	}
+	
+	@Override
+	public OpcionDAO getOpcionDAOImpl() {
+		if (opcionDAO == null) {
+			opcionDAO = new OpcionDAOImpl(entityManager);
+		}
+		return opcionDAO;
+	}
 }

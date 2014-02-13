@@ -4,6 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Root;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import ec.edu.uce.indicadores.commons.dto.util.CredencialesDTO;
 import ec.edu.uce.indicadores.commons.util.IndicadoresException;
 import ec.edu.uce.indicadores.ejb.persistence.dao.UsuarioDAO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.UsuarioDTO;
 
 public class UsuarioDAOImpl extends AbstractFacadeImpl<UsuarioDTO> implements UsuarioDAO{
@@ -51,5 +56,21 @@ public class UsuarioDAOImpl extends AbstractFacadeImpl<UsuarioDTO> implements Us
 		return usuarioLogin;
 	}
 
+	@Override
+	public List<UsuarioDTO> getAll(IesDTO ies) throws IndicadoresException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<UsuarioDTO> cq=cb.createQuery(UsuarioDTO.class);
+		Root<UsuarioDTO> from= cq.from(UsuarioDTO.class);
+		Path<IesDTO> join2=from.join("indy");
+		
+		cq.where(cb.equal(join2.get("iesCodigo"), ies.getIesCodigo()));
+		
+		List<UsuarioDTO> list=entityManager.createQuery(cq).getResultList();	
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
 	
 }

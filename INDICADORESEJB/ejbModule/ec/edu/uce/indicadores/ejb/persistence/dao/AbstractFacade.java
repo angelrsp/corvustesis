@@ -1,5 +1,7 @@
 package ec.edu.uce.indicadores.ejb.persistence.dao;
 
+import java.util.List;
+
 public interface AbstractFacade<T> {
 	
 	T create(T entity);
@@ -10,4 +12,5 @@ public interface AbstractFacade<T> {
 	
 	T find(Object id);
 
+	List<T> findAll();
 }

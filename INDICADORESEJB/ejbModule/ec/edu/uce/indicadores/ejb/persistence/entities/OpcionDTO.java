@@ -28,7 +28,7 @@ public class OpcionDTO implements Serializable {
 	private String opcUrl;
 
 	//bi-directional many-to-one association to AccesoDTO
-	@OneToMany(mappedBy="indOpcion")
+	@OneToMany(mappedBy="indOpcion",fetch=FetchType.EAGER)
 	private List<AccesoDTO> indAccesos;
 
 	public OpcionDTO() {
