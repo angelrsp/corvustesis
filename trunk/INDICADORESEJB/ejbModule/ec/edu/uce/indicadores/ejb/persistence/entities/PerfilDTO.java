@@ -1,7 +1,9 @@
 package ec.edu.uce.indicadores.ejb.persistence.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -16,7 +18,7 @@ public class PerfilDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="IND_PERFIL_PERCODIGO_GENERATOR", sequenceName="IND_PERFIL_PER_CODIGO_SEQ")
+	@SequenceGenerator(name="IND_PERFIL_PERCODIGO_GENERATOR", sequenceName="IND_PERFIL_PER_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="IND_PERFIL_PERCODIGO_GENERATOR")
 	@Column(name="per_codigo")
 	private Integer perCodigo;
@@ -34,6 +36,13 @@ public class PerfilDTO implements Serializable {
 
 	public PerfilDTO() {
 	}
+
+	public PerfilDTO(Integer perCodigo) {
+		super();
+		this.perCodigo = perCodigo;
+	}
+
+
 
 	public Integer getPerCodigo() {
 		return this.perCodigo;

@@ -25,5 +25,11 @@ public interface FactoryDAO {
 
 	CatalogoDAO getCatalogoImpl();
 
+	PerfilDAO getPerfilDAOImpl();
+
+	AccesoDAO getAccesoDAOImpl();
+
+	OpcionDAO getOpcionDAOImpl();
+
 	
 }

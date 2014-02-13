@@ -77,5 +77,9 @@ public interface IndicadorService {
 	void actualizarValores(IndicadorDTO indicadorDTO)
 			throws IndicadoresException;
 
+	ModeloDTO obtenerModelo(Object id) throws IndicadoresException;
+
+	IesDTO obtenerIes(Object id) throws IndicadoresException;
+
 
 }

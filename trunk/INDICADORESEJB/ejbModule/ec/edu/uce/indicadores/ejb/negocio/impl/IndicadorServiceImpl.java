@@ -114,12 +114,33 @@ public class IndicadorServiceImpl implements IndicadorService {
 	}
 
 	@Override
+	public IesDTO obtenerIes(Object id) throws IndicadoresException
+	{
+		log.info("obtenerIes");
+		try {
+			return factoryDAO.getIesDAOImpl().find(id);
+		} catch (Exception e) {
+			throw new IndicadoresException(e);
+		}
+	}
+	
+	@Override
 	public List<ModeloDTO> obtenerModelo() throws IndicadoresException
 	{
 		try {
 			return factoryDAO.getModeloDAOImpl().getAll();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			throw new IndicadoresException(e);
+		}
+	}
+	
+	@Override
+	public ModeloDTO obtenerModelo(Object id) throws IndicadoresException
+	{
+		log.info("obtenerModelo");
+		try {
+			return factoryDAO.getModeloDAOImpl().find(id);
+		} catch (Exception e) {
 			throw new IndicadoresException(e);
 		}
 	}
