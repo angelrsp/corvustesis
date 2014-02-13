@@ -10,9 +10,8 @@
 
 	<ui:composition template="/template/privado.xhtml">
 		<ui:define name="contenido">
-<h:form id="contenido" enctype="multipart/form-data">
-
-			<fieldset>
+			<h:form id="contenido" enctype="multipart/form-data">
+			
 				<p:growl id="growl" showDetail="false" />
 				<p:panel id="pnlDatos" styleClass="tabla"
 					header="Historico Indicador">
@@ -38,65 +37,83 @@
 						</tr>
 					</table>
 					
-				<p:tree value="#{historicoIndicadorController.rootNode}" var="node" id="tree" selectionMode="single" selection="#{historicoIndicadorController.selectedNode}">
-					<p:ajax event="select" listener="#{historicoIndicadorController.onNodeSelect}" update=":contenido:growl,:contenido:pnlValor,:contenido:pnlValorReporte"/>  
-			        <p:treeNode id="treeNode">  
-			            <h:outputText value="#{node.indNombreCorto}"/>  
-			        </p:treeNode>  
-			    </p:tree>  
+					<p:tree value="#{historicoIndicadorController.rootNode}" var="node" id="tree" selectionMode="single" selection="#{historicoIndicadorController.selectedNode}">
+						<p:ajax event="select" listener="#{historicoIndicadorController.onNodeSelect}" update=":contenido:growl,:contenido:pnlValor,:contenido:pnlValorReporte,:contenido:pnlDescriptor"/>  
+				        <p:treeNode id="treeNode">  
+				            <h:outputText value="#{node.indNombreCorto}"/>  
+				        </p:treeNode>  
+				    </p:tree>  
 					
 				</p:panel>
 				
 				
-			<p:dialog id="dlgValorReporte" widgetVar="dlgValorReporte" modal="true" header="Datos" closeOnEscape="true" width="1024" height="600">
-			
-				<p:panel id="pnlValorReporte">
-					<p:lineChart id="lineChart" value="#{historicoIndicadorController.categoryModel}" legendPosition="ne"   
-		             title="Historial" style="height:300px;margin-top:20px" xaxisLabel="" yaxisLabel="Valor" /> 
+				<p:dialog id="reporte" widgetVar="dlgValorReporte" modal="true" header="#{historicoIndicadorController.indicadorDTO.indNombreCorto}" closeOnEscape="true" width="1024" height="600">
 				
-				<table>
-					<tr>
-						<td><h:outputLabel value="Descriptor:" /></td>
-						<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indDescriptor}" /></td>
-					</tr>				
-					<tr>
-						<td><h:outputLabel value="Valor Inicial:" /></td>
-						<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorInicial}" /></td>
-					</tr>
-					<tr>	
-						<td><h:outputLabel value="Valor Actual:" /></td>
-						<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorActual}" /></td>
-					</tr>	
-					<tr>
-						<td><h:outputLabel value="Valor Objetivo:" /></td>
-						<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorObjetivo}" /></td>
-					</tr>
-					<tr>	
-						<td><h:outputLabel value="Valor Ideal:" /></td>
-						<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal}" /></td>												
-					</tr>
-					<tr>
-						<td><h:outputLabel value="Brecha Ideal:" /></td>
-						<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>
-						<td><h:outputLabel value="Brecha Objetivo:" /></td>
-						<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorObjetivo - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>
-					</tr>
+				<p:scrollPanel>
+					<p:panel id="pnlValorReporte">
 					
-					<tr>
-						<td><p:commandButton value="#{i18n['boton.agregar']}" type="button" onclick="PF('dlgValor').show();" disabled="#{historicoIndicadorController.disabledAddValue}"/> </td>
-					</tr>
-				</table>
-				
-				</p:panel>
-				
-			</p:dialog>				
+						<table>
+						<tr><td><h:outputText value="Indicador: #{historicoIndicadorController.indicadorDTO.indNombreCorto}" style="font-weight:bold" /></td></tr>	
+						</table>
+					
+						<div align="center">
+						<p:pieChart id="sample" value="#{historicoIndicadorController.pieModel}" legendPosition="w"  
+                			title="Historial" style="width:400px;height:300px" showDataLabels="true" /> 					
+						</div>
+						<p:lineChart id="lineChart" value="#{historicoIndicadorController.categoryModel}" legendPosition="ne"   
+			             title="Historial" style="height:300px;margin-top:20px" xaxisLabel="" yaxisLabel="Valor" animate="true"  /> 
+					
+						<div align="center">
+						<p:meterGaugeChart id="sampleDash" value="#{historicoIndicadorController.meterGaugeModel}" 
+							style="width:400px;height:250px" title="Ideal / Objetivo" label="km/h"/>  						
+						</div>
+					<table width="100%">
+						<tr>
+							<td><h:outputLabel value="Valor Inicial:" style="font-weight:bold" /></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorInicial}" /></td>
+							
+							<td><h:outputLabel value="Brecha Ideal:" style="font-weight:bold"/></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>						
+						</tr>
+						<tr>	
+							<td><h:outputLabel value="Valor Actual:" style="font-weight:bold"/></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorActual}" /></td>
+							
+							<td><h:outputLabel value="Brecha Objetivo:" style="font-weight:bold"/></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorObjetivo - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>						
+						</tr>
+						<tr>
+							<td><h:outputLabel value="Valor Ideal:" style="font-weight:bold"/></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal}" /></td>												
+						</tr>							
+						<tr>
+							<td><h:outputLabel value="Valor Objetivo:" style="font-weight:bold"/></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorObjetivo}" /></td>
+						</tr>
+						
+						<tr>
+							<td colspan="4" align="center"><p:commandButton value="Registro Valor Actual" type="button" onclick="PF('dlgValor').show();" disabled="#{historicoIndicadorController.disabledAddValue}"/> 
+							<p:commandButton value="Ver Descriptor" type="button" onclick="PF('dlgDescriptor').show();"/> </td>						
+						</tr>
+					</table>
+					
+					</p:panel>
+					
+					
+				</p:scrollPanel>	
+				</p:dialog>				
 				
 				
 				<p:dialog id="dlgValor" widgetVar="dlgValor" modal="true" header="Valores" closeOnEscape="true">
 				
-				<p:panel id="pnlValor" styleClass="tabla"
-					header="Valor">
+				<p:panel id="pnlValor" styleClass="tabla">
 				
+					<table>
+					<tr><td><h:outputText value="Indicador: #{historicoIndicadorController.indicadorDTO.indNombreCorto}" style="font-weight:bold" /></td></tr>	
+					</table>
+	
+					<p:spacer height="2"/>
+									
 					<table>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.valor']}:&#160;" /> </td>
@@ -110,7 +127,7 @@
 										requiredMessage="#{i18n['label.observacion']}&#160;#{i18n['label.requerido']}"
 										value="#{historicoIndicadorController.historicoIndicadorDTO.hinObservacion}"/></td>
 						</tr>		
-
+	
 					<tr>
 						<td colspan="2" align="center">
 							<p:commandButton actionListener="#{historicoIndicadorController.agregarValor}" value="#{i18n['boton.agregar']}" process="pnlValor" update="pnlValor,growl,pnlValorReporte"/> </td>
@@ -124,7 +141,7 @@
 						<p:column headerText="#{i18n['label.valor']}">
 							<h:outputText value="#{his.hinValor}" />
 						</p:column>
-
+	
 						<p:column headerText="#{i18n['label.fecha']}">
 							<h:outputText value="#{his.hinFecha}" />
 						</p:column>
@@ -143,13 +160,19 @@
 										
 					
 				</p:panel>
-
+	
 				</p:dialog>
 
 				<p:dialog id="dlgEvidencia" widgetVar="dlgEvidencia" modal="true" header="Evidencias" closeOnEscape="true">
-				<p:panel id="pnlEvidencia" styleClass="tabla"
-					header="Evidencia">
-
+				
+				<p:panel id="pnlEvidencia" styleClass="tabla">
+					
+					<table>
+					<tr><td><h:outputText value="Indicador: #{historicoIndicadorController.indicadorDTO.indNombreCorto}" style="font-weight:bold" /></td></tr>	
+					</table>
+					
+					<p:spacer height="2"/>
+					
 					<table>
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.nombre']}:&#160;" /> </td>
@@ -168,7 +191,7 @@
 							<td><h:outputLabel value="#{i18n['label.archivo']}:&#160;" /></td>
 							<td>
 	        	     			<p:fileUpload fileUploadListener="#{historicoIndicadorController.handleFileUpload}" mode="advanced" dragDropSupport="false"  
-                  					update=":contenido:growl" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" />			
+	                 					update=":contenido:growl" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" />			
 							</td>
 						</tr>
 						
@@ -178,7 +201,7 @@
 						</tr>
 										
 					</table>
-
+	
 					<p:dataTable id="tblEvidencia" value="#{historicoIndicadorController.evidenciaList}" var="evi">
 					
 						<p:column headerText="#{i18n['label.nombre']}">
@@ -188,7 +211,7 @@
 						<p:column headerText="#{i18n['label.observacion']}">
 							<h:outputText value="#{evi.eviObservacion}" />
 						</p:column>
-
+	
 						<p:column headerText="#{i18n['label.descargar']}">
 			                <p:commandButton actionListener="#{historicoIndicadorController.descargarEvidencia(evi)}" icon="ui-icon-arrow-1-s" ajax="false" immediate="true" 
 			                	title="#{i18n['label.descargar']}">    
@@ -196,15 +219,38 @@
 						</p:column>
 															
 					</p:dataTable>
-
-
+	
+	
 				</p:panel>
 								
 				</p:dialog>
+					
+					
+				<p:dialog id="dlgDescriptor" widgetVar="dlgDescriptor" modal="true" header="Descriptor" closeOnEscape="true">
+			
+					<p:panel id="pnlDescriptor" styleClass="tabla">
+						
+						<table>
+						<tr><td><h:outputText value="Indicador: #{historicoIndicadorController.indicadorDTO.indNombreCorto}" style="font-weight:bold" /></td></tr>	
+						</table>
+		
+						<table>
+							<tr>
+								<td><h:outputLabel value="Descriptor:" /></td>
+							</tr>
+							<tr>	
+								<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indDescriptor}" /></td>
+							</tr>				
+						</table>
+		
+						
+					</p:panel>
+					
+				</p:dialog>
+		
+			
+			</h:form>		
 				
-	
-			</fieldset>
-</h:form>				
 		</ui:define>
 	</ui:composition>
 </body>					

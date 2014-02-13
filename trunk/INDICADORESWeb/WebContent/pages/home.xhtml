@@ -11,7 +11,6 @@
 	<ui:composition template="/template/privado.xhtml">
 		<ui:define name="contenido">
 			<h:form id="contenido">
-			<fieldset>
 				<p:growl id="growl" showDetail="false" />
 				<p:panel id="pnlDatos" styleClass="tabla"
 					header="Inicio">
@@ -34,7 +33,7 @@
 						
 						<tr>
 							<td>
-								<p:commandButton value="#{i18n['boton.aceptar']}" actionListener="#{inicioController.aceptar}"/>
+								<p:commandButton value="#{i18n['boton.aceptar']}" actionListener="#{inicioController.aceptar}" oncomplete="PF('dglMensaje').show();" process="pnlDatos" update="mensaje"/>
 							</td>
 						</tr>
 						
@@ -42,7 +41,32 @@
 					
 											
 				</p:panel>
-			</fieldset>
+
+				<p:dialog id="mensaje" widgetVar="dglMensaje" header="Mensaje" modal="true" closeOnEscape="true">
+					<table width="100%">
+						<tr>
+							<td><h:outputText value="Usted ha seleccionado:" style="font-weight:bold"/></td>
+						</tr>
+					</table>
+					
+					<table width="100%">	
+						<tr>
+							<td><h:outputText value="Institución de Educación Superior:" style="font-weight:bold"/></td>
+							<td><h:outputText value="#{indicadorDataManager.iesDTO.iesRazonSocial}" /></td>
+						</tr>	
+						<tr>	
+							<td><h:outputText value="Modelo:" style="font-weight:bold" /></td>
+							<td><h:outputText value="#{indicadorDataManager.modeloDTO.modDescripcion}" /></td>							
+						</tr>
+
+						<tr>	
+							<td colspan="2" align="center"><p:commandButton value="#{i18n['boton.aceptar']}" type="button" onclick="PF('dglMensaje').hide();"/></td>							
+						</tr>
+
+
+					</table>
+				</p:dialog>
+
 
 			</h:form>
 		</ui:define>
