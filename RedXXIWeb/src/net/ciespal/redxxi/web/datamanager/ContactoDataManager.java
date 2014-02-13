@@ -6,12 +6,12 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO;
 
-@SessionScoped
+@ViewScoped
 @ManagedBean(name="contactoDataManager")
 public class ContactoDataManager implements Serializable{
 

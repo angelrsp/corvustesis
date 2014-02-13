@@ -155,7 +155,7 @@ public class PosgradoController extends SelectItemController {
 			}
 			contactoDataManager.getContacto().setAteEntidad(carreraDataManager.getCarrera().getAteEntidads().get(0));
 			contactoDataManager.getContacto().setConTipo(Integer.valueOf(contactoDataManager.getTipoContacto().toString()));
-			ateneaService.createContacto(contactoDataManager.getContacto());
+			ateneaService.createOrUpdateContacto(contactoDataManager.getContacto());
 			buscarContactos();
 			contactoDataManager.setContacto(new ContactoDTO());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
@@ -178,7 +178,7 @@ public class PosgradoController extends SelectItemController {
 	{
 		try {
 			carreraDataManager.getMencion().setAteCarrera(carreraDataManager.getCarrera());
-			ateneaService.createMencion(carreraDataManager.getMencion());
+			ateneaService.createOrUpdateMencion(carreraDataManager.getMencion());
 			buscarMension();
 			carreraDataManager.setMencion(new MencionDTO());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");

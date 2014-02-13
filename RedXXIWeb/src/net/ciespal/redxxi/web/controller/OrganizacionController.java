@@ -109,7 +109,7 @@ public class OrganizacionController extends SelectItemController{
 			}
 			contactoDataManager.getContacto().setAteEntidad(organizacionDataManager.getOrganizacion().getAteEntidads().get(0));
 			contactoDataManager.getContacto().setConTipo(Integer.valueOf(contactoDataManager.getTipoContacto().toString()));
-			ateneaService.createContacto(contactoDataManager.getContacto());
+			ateneaService.createOrUpdateContacto(contactoDataManager.getContacto());
 			buscarContactos();
 			contactoDataManager.setContacto(new ContactoDTO());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
