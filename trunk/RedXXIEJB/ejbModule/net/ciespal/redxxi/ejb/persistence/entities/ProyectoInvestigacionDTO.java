@@ -46,7 +46,7 @@ public class ProyectoInvestigacionDTO implements Serializable {
 	private String pinDuracion;
 
 	//bi-directional many-to-one association to EntidadDTO
-	@OneToMany(mappedBy="ateProyectoInvestigacion",cascade={CascadeType.ALL,CascadeType.PERSIST})
+	@OneToMany(mappedBy="ateProyectoInvestigacion",cascade={CascadeType.ALL,CascadeType.PERSIST},fetch=FetchType.EAGER)
 	private List<EntidadDTO> ateEntidads;
 
 	public ProyectoInvestigacionDTO() {

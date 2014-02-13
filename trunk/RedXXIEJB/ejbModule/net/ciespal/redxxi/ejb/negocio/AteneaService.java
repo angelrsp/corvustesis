@@ -31,21 +31,13 @@ public interface AteneaService {
 
 	EntidadDTO createEntidad(EntidadDTO entidad) throws CorvustecException;
 
-	ContactoDTO createContacto(ContactoDTO contactoDTO)
-			throws CorvustecException;
-
 	List<ContactoListDTO> readContacto(EntidadDTO entidad)
 			throws CorvustecException;
-
-	MencionDTO createMencion(MencionDTO mencion) throws CorvustecException;
 
 	List<MencionDTO> readMencion(CarreraDTO carrera) throws CorvustecException;
 
 	List<ProyectoInvestigacionDTO> readProyectoInvestigacion(
 			CarreraDTO carrera) throws CorvustecException;
-
-	ProyectoInvestigacionDTO createProyectoInvestigacion(
-			ProyectoInvestigacionDTO proyecto) throws CorvustecException;
 
 	void updateEntidad(EntidadDTO entidad) throws CorvustecException;
 
@@ -76,6 +68,22 @@ public interface AteneaService {
 			throws CorvustecException;
 
 	List<ContactoListDTO> readContacto(OrganizacionDTO organizacion)
+			throws CorvustecException;
+
+	ContactoDTO createOrUpdateContacto(ContactoDTO contactoDTO)
+			throws CorvustecException;
+
+	void deleteContacto(ContactoDTO contactoDTO) throws CorvustecException;
+
+	MencionDTO createOrUpdateMencion(MencionDTO mencion)
+			throws CorvustecException;
+
+	void deleteMencion(MencionDTO mencion) throws CorvustecException;
+
+	ProyectoInvestigacionDTO createOrUpdateProyectoInvestigacion(
+			ProyectoInvestigacionDTO proyecto) throws CorvustecException;
+
+	void deleteProyectoInvestigacion(ProyectoInvestigacionDTO proyecto)
 			throws CorvustecException;
 
 }

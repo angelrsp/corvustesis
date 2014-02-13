@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 import com.corvustec.commons.util.CorvustecException;
@@ -27,23 +28,23 @@ public class ContactoDAOImpl extends AbstractFacadeImpl<ContactoDTO> implements 
 	}
 	
 
-//	@Override
-//	public List<ContactoDTO> getAll(EntidadDTO entidad) throws CorvustecException
-//	{
-//		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-//		CriteriaQuery<ContactoDTO> cq=cb.createQuery(ContactoDTO.class);
-//		Root<ContactoDTO> from = cq.from(ContactoDTO.class);
-//		
-//		Path<EntidadDTO> join=from.join("ateEntidads").get("entCodigo");
-//		
-//		cq.where(cb.and(cb.equal(join, entidad.getEntCodigo())));
-//		
-//		List<ContactoDTO> list=entityManager.createQuery(cq).getResultList();
-//		if(list.isEmpty())
-//			return null;
-//		else
-//			return list;
-//	}
+	@Override
+	public List<ContactoDTO> getAll2(EntidadDTO entidad) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<ContactoDTO> cq=cb.createQuery(ContactoDTO.class);
+		Root<ContactoDTO> from = cq.from(ContactoDTO.class);
+		
+		Path<EntidadDTO> join=from.join("ateEntidad");
+		
+		cq.where(cb.and(cb.equal(join.get("entCodigo"), entidad.getEntCodigo())));
+		
+		List<ContactoDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
 	
 	@Override
 	public List<ContactoListDTO> getAll(EntidadDTO entidad)

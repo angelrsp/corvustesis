@@ -19,5 +19,7 @@ public interface ContactoDAO extends AbstractFacade<ContactoDTO>{
 	List<ContactoListDTO> getAll(OrganizacionDTO organizacion)
 			throws CorvustecException;
 
+	List<ContactoDTO> getAll2(EntidadDTO entidad) throws CorvustecException;
+
 	
 }
