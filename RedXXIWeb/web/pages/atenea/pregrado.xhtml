@@ -122,15 +122,21 @@
 		
 		<p:spacer height="10"/>
 		
-		<p:dataTable emptyMessage="No existen registros" value="#{contactoDataManager.contactoList}" var="con">
+		<p:dataTable id="tblContacto" emptyMessage="#{i18n['table.vacio']}" value="#{contactoDataManager.contactoList}" var="con">
 			<p:column headerText="#{i18n['label.tipo']}">
 				<h:outputText value="#{con.catTipo}" />
 			</p:column>
 			<p:column headerText="#{i18n['label.valor']}">
 				<h:outputText value="#{con.conValor}" />
 			</p:column>
-			<p:column headerText="#{i18n['boton.editar']}" width="15"></p:column>
-			<p:column headerText="#{i18n['boton.eliminar']}" width="15"></p:column>
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{pregradoController.editContacto(con)}" icon="ui-icon-pencil" process=":contenido:tblContacto" update=":contenido:pnlContacto"/>
+			</p:column>
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{pregradoController.deleteContacto(con)}" icon="ui-icon-close" process=":contenido:tblContacto" update=":contenido:pnlContacto">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
+			</p:column>
 		</p:dataTable>
 		
 		</p:panel>
@@ -146,18 +152,19 @@
 			</tr>
 		</table>
 		
-		<p:dataTable emptyMessage="#{i18n['table.vacio']}" value="#{carreraDataManager.mencionList}" var="men">
+		<p:dataTable id="tblMencion" emptyMessage="#{i18n['table.vacio']}" value="#{carreraDataManager.mencionList}" var="men">
 		
 			<p:column headerText="#{i18n['label.descripcion']}">
 				<h:outputText value="#{men.menNombre}" />
 			</p:column>
 
-			<p:column headerText="#{i18n['boton.editar']}" width="15">
-				<h:outputText value="" />
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{pregradoController.editMencion(men)}" icon="ui-icon-pencil" process=":contenido:tblMencion" update=":contenido:pnlMencion"/>
 			</p:column>
-
-			<p:column headerText="#{i18n['boton.eliminar']}" width="15">
-				<h:outputText value="" />
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{pregradoController.deleteMencion(men)}" icon="ui-icon-close" process=":contenido:tblMencion" update=":contenido:tblMencion">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
 			</p:column>
 					
 		</p:dataTable>
@@ -165,7 +172,7 @@
 		</p:panel>
 		
 		
-		<!-- Investigacion cientifica -->
+		<!-- Proyectos Investigacion cientifica -->
 		<p:panel id="pnlProyecto" header="#{i18n['label.panel.proyecto.investigacion']}">
 		
 		<table>
@@ -191,7 +198,7 @@
 			
 		</table>
 
-		<p:dataTable emptyMessage="#{i18n['table.vacio']}" value="#{proyectoDataManager.proyectoList}" var="pro">
+		<p:dataTable id="tblProyecto" emptyMessage="#{i18n['table.vacio']}" value="#{proyectoDataManager.proyectoList}" var="pro">
 		
 			<p:column headerText="#{i18n['label.titulo']}">
 				<h:outputText value="#{pro.pinNombre}" />
@@ -205,12 +212,13 @@
 				<h:outputText value="#{pro.pinCoordinador}" />
 			</p:column>
 
-			<p:column headerText="#{i18n['boton.editar']}" width="15">
-				<h:outputText value="" />
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{pregradoController.editProyecto(pro)}" icon="ui-icon-pencil" process=":contenido:tblProyecto" update=":contenido:pnlProyecto"/>
 			</p:column>
-
-			<p:column headerText="#{i18n['boton.eliminar']}" width="15">
-				<h:outputText value="" />
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{pregradoController.deleteProyecto(pro)}" icon="ui-icon-close" process=":contenido:tblProyecto" update=":contenido:tblProyecto">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
 			</p:column>
 				
 		</p:dataTable>
@@ -299,6 +307,10 @@
 	</p:scrollPanel>
 
 	</p:dialog>
+		
+
+		
+		
 		
 		</ui:define>
 	</ui:composition>
