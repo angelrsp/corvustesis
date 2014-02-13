@@ -23,6 +23,8 @@ import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.PieChartModel;
+import org.primefaces.model.chart.MeterGaugeChartModel; 
 
 import ec.edu.uce.indicadores.commons.util.IndicadoresException;
 import ec.edu.uce.indicadores.ejb.negocio.IndicadorService;
@@ -70,6 +72,10 @@ public class HistoricoIndicadorController extends SelectItemController implement
 	
 	private CartesianChartModel categoryModel;  
 	
+	private PieChartModel pieModel;  
+	
+	private MeterGaugeChartModel meterGaugeModel;  
+	
 	@PostConstruct
 	private void init() throws IndicadoresException
 	{
@@ -82,6 +88,8 @@ public class HistoricoIndicadorController extends SelectItemController implement
 		evidenciaDTO=new EvidenciaDTO();
 		evidenciaList=new ArrayList<EvidenciaDTO>();
 		initChart();
+		createPieModel();
+		createMeterGaugeModel();
 	}
 	
 	public void setIndicadorDataManager(IndicadorDataManager indicadorDataManager) {
@@ -140,6 +148,10 @@ public class HistoricoIndicadorController extends SelectItemController implement
 	}
 
 
+	public MeterGaugeChartModel getMeterGaugeModel() {
+		return meterGaugeModel;
+	}
+
 	public EvidenciaDTO getEvidenciaDTO() {
 		return evidenciaDTO;
 	}
@@ -182,6 +194,10 @@ public class HistoricoIndicadorController extends SelectItemController implement
 		this.disabledAddValue = disabledAddValue;
 	}
 
+	public PieChartModel getPieModel() {  
+        return pieModel;  
+    }  
+	
 	public void obtenerArbol()
 	{
 		try {
@@ -207,7 +223,6 @@ public class HistoricoIndicadorController extends SelectItemController implement
 				}
 			}			
 		} catch (IndicadoresException e) {
-			// TODO Auto-generated catch block
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
@@ -259,6 +274,8 @@ public class HistoricoIndicadorController extends SelectItemController implement
 				if(historicoIndicadorList!=null){
 					rc.execute("PF('dlgValorReporte').show();");
 					createChartLine(historicoIndicadorList);
+					createPieModel(historicoIndicadorList);
+					createMeterGaugeModel(indTemp);
 				}
 				else{
 					rc.execute("PF('dlgValorReporte').show();");
@@ -271,6 +288,8 @@ public class HistoricoIndicadorController extends SelectItemController implement
 				rc.execute("PF('dlgValorReporte').show();");
 				indTemp=indicadorService.obtenerIndicador(indTemp.getIndCodigo());
 				createChartLinePatern(indTemp.getIndIndicadors());
+				createPieModelPatern(indTemp.getIndIndicadors());
+				createMeterGaugeModel(indTemp);
 			}
 		}
 		 catch (Exception e) {
@@ -279,52 +298,100 @@ public class HistoricoIndicadorController extends SelectItemController implement
 	}
 	
 	
+	@SuppressWarnings("serial")
+	private void createMeterGaugeModel(final IndicadorDTO ind) {  
+		  
+        List<Number> intervals = new ArrayList<Number>(){{  
+            add(ind.getIndValorIdeal());  
+            add(ind.getIndValorObjetivo());  
+        }};  
+  
+        meterGaugeModel = new MeterGaugeChartModel(ind.getIndValorActual(), intervals);  
+    }  	
+	
+	@SuppressWarnings("serial")
+	private void createMeterGaugeModel() {  
+		  
+        List<Number> intervals = new ArrayList<Number>(){{  
+            add(20);  
+            add(50);  
+            add(120);  
+            add(220);  
+        }};  
+  
+        meterGaugeModel = new MeterGaugeChartModel(140, intervals);  
+    }  	
 	
 	  private void createChartLine(List<HistoricoIndicadorDTO> list)
-      {
+	  {
 		  categoryModel = new CartesianChartModel();  
-               
-          ChartSeries data1 = new ChartSeries();  
-          data1.setLabel("Indicador");  
-
-	      for(HistoricoIndicadorDTO his:list)
-	      {
-	          data1.set(his.getHinFecha().toString(), his.getHinValor());
-	      }
-	     
-	      categoryModel.addSeries(data1);    
-      }
-
-     
-      private void createChartLinePatern(List<IndicadorDTO> list)
-      {
-          categoryModel = new CartesianChartModel();  
-               
+	           
 	      ChartSeries data1 = new ChartSeries();  
 	      data1.setLabel("Indicador");  
 	
-	      for(IndicadorDTO ind:list)
+	      for(HistoricoIndicadorDTO his:list)
 	      {
-	          data1.set(ind.getIndNombreCorto(), ind.getIndValorActual());
+	          data1.set(his.getHinFecha().toString().substring(0, 10), his.getHinValor());
 	      }
 	     
 	      categoryModel.addSeries(data1);    
-      }
+	  }
+	
+	 
+	private void createChartLinePatern(List<IndicadorDTO> list)
+	{
+		categoryModel = new CartesianChartModel();  
+		           
+		ChartSeries data1 = new ChartSeries();  
+		data1.setLabel("Indicador");  
+		
+		for(IndicadorDTO ind:list)
+		{
+			data1.set(ind.getIndNombreCorto(), ind.getIndValorActual());
+		}
+		 
+		categoryModel.addSeries(data1);    
+	}
 
 
+	 private void createPieModel(List<HistoricoIndicadorDTO> list) {  
+		pieModel = new PieChartModel();  
+		 
+		for(HistoricoIndicadorDTO his:list)
+		{
+			pieModel.set(his.getHinFecha().toString().substring(0, 10), his.getHinValor());
+		}
+	 }  
+	
+	 private void createPieModelPatern(List<IndicadorDTO> list) {  
+		pieModel = new PieChartModel();  
+		 
+		for(IndicadorDTO ind:list)
+		{
+			pieModel.set(ind.getIndNombreCorto(), ind.getIndValorActual());
+		}
+	 } 
+	
 	private void initChart()
 	{
 		categoryModel = new CartesianChartModel();  
 		  
-        ChartSeries data1 = new ChartSeries();  
-        data1.setLabel("Indicador");  
-  
-        
-         data1.set("0", 0);
-        
-        
-        categoryModel.addSeries(data1);    		
+	    ChartSeries data1 = new ChartSeries();  
+	    data1.setLabel("Indicador");  
+	  
+	        
+	    data1.set("0", 0);
+	    
+	    
+	    categoryModel.addSeries(data1);    		
 	}
+	
+	
+	 private void createPieModel() {  
+        pieModel = new PieChartModel();  
+  
+        pieModel.set("0", 0);  
+    }  
 	
 	public void agregarValor()
 	{
