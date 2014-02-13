@@ -10,6 +10,7 @@ import net.ciespal.redxxi.ejb.negocio.AteneaService;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EventoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
@@ -189,7 +190,7 @@ public class PregradoController extends SelectItemController{
 			}
 			contactoDataManager.getContacto().setAteEntidad(carreraDataManager.getCarrera().getAteEntidads().get(0));
 			contactoDataManager.getContacto().setConTipo(Integer.valueOf(contactoDataManager.getTipoContacto().toString()));
-			ateneaService.createContacto(contactoDataManager.getContacto());
+			ateneaService.createOrUpdateContacto(contactoDataManager.getContacto());
 			buscarContactos();
 			contactoDataManager.setContacto(new ContactoDTO());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
@@ -198,12 +199,31 @@ public class PregradoController extends SelectItemController{
 		}
 	}
 
+	public void editContacto(ContactoListDTO con)
+	{
+		contactoDataManager.getContacto().setConCodigo(con.getConCodigo());
+		contactoDataManager.getContacto().setConTipo(con.getConTipo());
+		contactoDataManager.getContacto().setConValor(con.getConValor());
+		contactoDataManager.getContacto().setAteEntidad(new EntidadDTO(con.getEntCodigo()));
+		contactoDataManager.setTipoContacto(con.getConTipo());
+	}
+	
+	public void deleteContacto(ContactoListDTO con)
+	{
+		try {
+			ateneaService.deleteContacto(new ContactoDTO(con.getConCodigo()));
+			buscarContactos();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
 	
 	public void crearMension()
 	{
 		try {
 			carreraDataManager.getMencion().setAteCarrera(carreraDataManager.getCarrera());
-			ateneaService.createMencion(carreraDataManager.getMencion());
+			ateneaService.createOrUpdateMencion(carreraDataManager.getMencion());
 			buscarMension();
 			carreraDataManager.setMencion(new MencionDTO());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
@@ -221,6 +241,21 @@ public class PregradoController extends SelectItemController{
 		}
 	}
 	
+	public void editMencion(MencionDTO men)
+	{
+		carreraDataManager.setMencion(men);
+	}
+	
+	public void deleteMencion(MencionDTO men)
+	{
+		try {
+			ateneaService.deleteMencion(men);
+			buscarMension();
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
 	public void createProyecto()
 	{
 		EntidadDTO ent;
@@ -233,6 +268,22 @@ public class PregradoController extends SelectItemController{
 			buscarProyecto();
 			proyectoDataManager.setProyecto(new ProyectoInvestigacionDTO());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void editProyecto(ProyectoInvestigacionDTO pro)
+	{
+		proyectoDataManager.setProyecto(pro);
+	}
+	
+	public void deleteProyecto(ProyectoInvestigacionDTO pro)
+	{
+		try {
+			ateneaService.deleteProyectoInvestigacion(pro);
+			buscarProyecto();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
