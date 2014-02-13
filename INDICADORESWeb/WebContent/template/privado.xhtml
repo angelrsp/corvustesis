@@ -23,23 +23,25 @@
 		</tr>
 
 		<tr style="height: 100%">
-			<td style="width: 10px;" valign="top">
+			<td style="width: 15px;" valign="top">
 			
 				<h:form id="menu">
-					<p:slideMenu id="menuPrivado" backLabel="Atrás">
+					<p:slideMenu id="menuPrivado" backLabel="Atrás" style="width:200px">
 						
-						<p:menuitem value="Inicio" url="/pages/home.jsf" />
-						<p:menuitem value="Representante Legal" url="/pages/representanteLegal.jsf" />
-						<p:menuitem value="IES" url="/pages/ies.jsf" icon="ies01" />
-						<p:menuitem value="Modelo" url="/pages/modelo.jsf" />						
-						<p:menuitem value="Indicador" url="/pages/indicador.jsf" />
-						<p:menuitem value="Historico Indicador" url="/pages/historicoIndicador.jsf" />
+						<p:menuitem value="Inicio" url="/pages/home.jsf"  icon="home"/>
+						<p:menuitem value="Usuarios" url="/pages/usuario.jsf"  icon="user"/>
+						<p:menuitem value="Acceso" url="/pages/acceso.jsf"  icon="access"/>
+						<p:menuitem value="Representante Legal" url="/pages/representanteLegal.jsf" icon="representante" />
+						<p:menuitem value="IES" url="/pages/ies.jsf" icon="ies" />
+						<p:menuitem value="Modelo" url="/pages/modelo.jsf" icon="modelo" />						
+						<p:menuitem value="Indicador" url="/pages/indicador.jsf" icon="indicador" />
+						<p:menuitem value="Historico Indicador" url="/pages/historicoIndicador.jsf" icon="historico" />
 							
 						<p:submenu label="Reportes">
 							<p:menuitem value="Indicador" url="/pages/report/indicador.jsf" />
 						</p:submenu>
 						
-						<p:menuitem value="Salir" actionListener="#{loginController.logout}" icon="ui-icon-close"/>
+						<p:menuitem value="Salir" actionListener="#{loginController.logout}" icon="exit"/>
 						
 					</p:slideMenu>
 				</h:form>

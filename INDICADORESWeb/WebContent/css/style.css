@@ -21,6 +21,7 @@ body{font-size: 9pt;font-weight:normal;}
 
 .ui-slidemenu-content {
    min-height: 300px;
+   width: 200px;
 }
 
 .red { color: red; }
@@ -42,8 +43,30 @@ html, body {
 }
 
 
-.ies01 {
-	width: 16px;   
-    height: 16px;   
-	background-image: url("/images/ies01.jpg") !important;
+.ies {
+	background-image: url("../images/ies.png") !important;
+}
+.home {
+	background-image: url("../images/home.png") !important;
+}
+.representante {
+	background-image: url("../images/representante.png") !important;
+}
+.indicador {
+	background-image: url("../images/indicador.png") !important;
+}
+.modelo {
+	background-image: url("../images/modelo.png") !important;
+}
+.historico {
+	background-image: url("../images/historico.png") !important;
+}
+.user {
+	background-image: url("../images/user.png") !important;
+}
+.access {
+	background-image: url("../images/access.png") !important;
+}
+.exit{
+	background-image: url("../images/salir.png") !important;
 }
