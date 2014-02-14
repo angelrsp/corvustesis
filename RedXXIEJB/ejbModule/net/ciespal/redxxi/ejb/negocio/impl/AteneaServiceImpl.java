@@ -276,13 +276,7 @@ public class AteneaServiceImpl implements AteneaService{
 	{
 		logger.info("deleteProyectoInvestigacion");
 		try{
-			for(EntidadDTO ent:proyecto.getAteEntidads())
-			{
-				for(ContactoDTO con:factoryDAO.getContactoDAOImpl().getAll2(ent))
-					factoryDAO.getContactoDAOImpl().remove(con);
-				factoryDAO.getEntidadDAOImpl().remove(ent);
-			}
-			factoryDAO.getProyectoInvestigacionDAOImpl().remove(proyecto);
+			factoryDAO.getProyectoInvestigacionDAOImpl().remove2(proyecto);
 		}
 		catch(Exception e){
 			logger.info("Error deleteProyectoInvestigacion {}",e.toString());
@@ -304,38 +298,36 @@ public class AteneaServiceImpl implements AteneaService{
 			throw new CorvustecException("Error al obtenerProyectoInvestigacion");
 		}
 	}
-
 	
+	/* Evento */
 	@Override
-	public List<CentroDTO> obtenerCentroPadre() throws CorvustecException
+	public EventoDTO createOrUpdateEvento(EventoDTO evento) throws CorvustecException
 	{
-		logger.info("obtenerCentroPadre");
+		logger.info("createProyectoInvestigacion");
 		try{
-			return factoryDAO.getCentroDAOImpl().findAllPather();
+			if(evento.getEveCodigo()!=null)
+				return factoryDAO.getEventoDAOImpl().edit(evento);
+			else
+				return factoryDAO.getEventoDAOImpl().create(evento);
 		}
-		catch(Exception e)
-		{
-			logger.info("Error obtenerCentroPadre {}",e.toString());
-			throw new CorvustecException("Error al obtenerCentroPadre");
+		catch(Exception e){
+			logger.info("Error createProyectoInvestigacion {}",e.toString());
+			throw new CorvustecException("Error al createProyectoInvestigacion");
 		}
 	}
 	
 	@Override
-	public List<CentroDTO> obtenerCentroHijo(CentroDTO centro) throws CorvustecException
+	public void deleteEvento(EventoDTO evento) throws CorvustecException
 	{
-		logger.info("obtenerCentroHijo");
+		logger.info("createProyectoInvestigacion");
 		try{
-			return factoryDAO.getCentroDAOImpl().findAllChild(centro);
+			factoryDAO.getEventoDAOImpl().remove2(evento);
 		}
-		catch(Exception e)
-		{
-			logger.info("Error obtenerCentroHijo {}",e.toString());
-			throw new CorvustecException("Error al obtenerCentroHijo");
+		catch(Exception e){
+			logger.info("Error createProyectoInvestigacion {}",e.toString());
+			throw new CorvustecException("Error al createProyectoInvestigacion");
 		}
 	}
-	
-	
-
 	
 	@Override
 	public List<EventoDTO> readEvento(CarreraDTO carrera) throws CorvustecException
@@ -351,16 +343,37 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 
+
+	
+	
+	/* Publicacion */
 	@Override
-	public EventoDTO createEvento(EventoDTO evento) throws CorvustecException
+	public PublicacionDTO createOrUpdatePublicacion(PublicacionDTO publicacion) throws CorvustecException
 	{
-		logger.info("createProyectoInvestigacion");
+		logger.info("createOrUpdatePublicacion");
 		try{
-			return factoryDAO.getEventoDAOImpl().create(evento);
+			if(publicacion.getPubCodigo()!=null)
+				return factoryDAO.getPublicacionDAOImpl().edit(publicacion);
+			else			
+				return factoryDAO.getPublicacionDAOImpl().create(publicacion);
 		}
 		catch(Exception e){
-			logger.info("Error createProyectoInvestigacion {}",e.toString());
-			throw new CorvustecException("Error al createProyectoInvestigacion");
+			logger.info("Error createOrUpdatePublicacion {}",e.toString());
+			throw new CorvustecException("Error al createOrUpdatePublicacion");
+		}
+	}
+
+	
+	@Override
+	public void deletePublicacion(PublicacionDTO publicacion) throws CorvustecException
+	{
+		logger.info("createOrUpdatePublicacion");
+		try{
+			factoryDAO.getPublicacionDAOImpl().remove2(publicacion);
+		}
+		catch(Exception e){
+			logger.info("Error createOrUpdatePublicacion {}",e.toString());
+			throw new CorvustecException("Error al createOrUpdatePublicacion");
 		}
 	}
 	
@@ -378,18 +391,7 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 
-	@Override
-	public PublicacionDTO createPublicacion(PublicacionDTO publicacion) throws CorvustecException
-	{
-		logger.info("createProyectoInvestigacion");
-		try{
-			return factoryDAO.getPublicacionDAOImpl().create(publicacion);
-		}
-		catch(Exception e){
-			logger.info("Error createProyectoInvestigacion {}",e.toString());
-			throw new CorvustecException("Error al createProyectoInvestigacion");
-		}
-	}
+	
 
 	/* Organizacion */
 	@Override
@@ -415,6 +417,36 @@ public class AteneaServiceImpl implements AteneaService{
 		catch(Exception e){
 			logger.info("Error readOrganizacion {}",e.toString());
 			throw new CorvustecException("Error al readOrganizacion");
+		}
+	}
+	
+	
+	/* Centro */
+	@Override
+	public List<CentroDTO> obtenerCentroPadre() throws CorvustecException
+	{
+		logger.info("obtenerCentroPadre");
+		try{
+			return factoryDAO.getCentroDAOImpl().findAllPather();
+		}
+		catch(Exception e)
+		{
+			logger.info("Error obtenerCentroPadre {}",e.toString());
+			throw new CorvustecException("Error al obtenerCentroPadre");
+		}
+	}
+	
+	@Override
+	public List<CentroDTO> obtenerCentroHijo(CentroDTO centro) throws CorvustecException
+	{
+		logger.info("obtenerCentroHijo");
+		try{
+			return factoryDAO.getCentroDAOImpl().findAllChild(centro);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error obtenerCentroHijo {}",e.toString());
+			throw new CorvustecException("Error al obtenerCentroHijo");
 		}
 	}
 }

@@ -3,6 +3,7 @@ package net.ciespal.redxxi.ejb.persistence.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
@@ -10,6 +11,7 @@ import javax.persistence.criteria.Root;
 
 import net.ciespal.redxxi.ejb.persistence.dao.PublicacionDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 
 import com.corvustec.commons.util.CorvustecException;
@@ -40,5 +42,23 @@ public class PublicacionDAOImpl extends AbstractFacadeImpl<PublicacionDTO> imple
 			return null;
 		else
 			return list;
+	}
+	
+	
+	
+	@Override
+	public void remove2(PublicacionDTO pub)
+	{
+		Query query;
+		for(EntidadDTO ent:pub.getAteEntidads())
+		{	 
+			query= entityManager.createQuery("delete from EntidadDTO where entCodigo=:codigo");
+			query.setParameter("codigo", ent.getEntCodigo());
+			query.executeUpdate();
+		}
+		
+		query= entityManager.createQuery("delete from PublicacionDTO where pubCodigo=:codigo");
+		query.setParameter("codigo", pub.getPubCodigo());
+		query.executeUpdate();
 	}
 }

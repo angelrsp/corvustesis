@@ -1,5 +1,6 @@
 package net.ciespal.redxxi.ejb.persistence.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -41,7 +42,7 @@ public class ContactoDAOImpl extends AbstractFacadeImpl<ContactoDTO> implements 
 		
 		List<ContactoDTO> list=entityManager.createQuery(cq).getResultList();
 		if(list.isEmpty())
-			return null;
+			return new ArrayList<ContactoDTO>();
 		else
 			return list;
 	}

@@ -1,7 +1,10 @@
 package net.ciespal.redxxi.ejb.persistence.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,7 +37,7 @@ public class EventoDTO implements Serializable {
 	private Integer eveUbicacion;
 
 	//bi-directional many-to-one association to EntidadDTO
-	@OneToMany(mappedBy="ateEvento")
+	@OneToMany(mappedBy="ateEvento",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<EntidadDTO> ateEntidads;
 
 	public EventoDTO() {
@@ -89,9 +92,13 @@ public class EventoDTO implements Serializable {
 	}
 
 	public EntidadDTO addAteEntidad(EntidadDTO ateEntidad) {
-		getAteEntidads().add(ateEntidad);
-		ateEntidad.setAteEvento(this);
-
+		if(ateEntidad!=null)
+		{
+			if(getAteEntidads()==null)
+				setAteEntidads(new ArrayList<EntidadDTO>());
+			getAteEntidads().add(ateEntidad);
+			ateEntidad.setAteEvento(this);
+		}
 		return ateEntidad;
 	}
 
