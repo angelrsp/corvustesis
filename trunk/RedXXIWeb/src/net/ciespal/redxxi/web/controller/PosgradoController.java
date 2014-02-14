@@ -12,6 +12,7 @@ import net.ciespal.redxxi.ejb.negocio.AteneaService;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ModalidadDTO;
@@ -146,6 +147,15 @@ public class PosgradoController extends SelectItemController {
 		buscarProyecto();
 	}
 	
+	public void buscarContactos()
+	{
+		try {
+			contactoDataManager.setContactoList(ateneaService.readContacto(carreraDataManager.getCarrera()));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}		
+	}
+	
 	public void crearContacto()
 	{
 		try {
@@ -163,16 +173,26 @@ public class PosgradoController extends SelectItemController {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
-	
-	public void buscarContactos()
+
+	public void editContacto(ContactoListDTO con)
 	{
-		try {
-			contactoDataManager.setContactoList(ateneaService.readContacto(carreraDataManager.getCarrera()));
-		} catch (CorvustecException e) {
-			JsfUtil.addErrorMessage(e.toString());
-		}		
+		contactoDataManager.getContacto().setConCodigo(con.getConCodigo());
+		contactoDataManager.getContacto().setConTipo(con.getConTipo());
+		contactoDataManager.getContacto().setConValor(con.getConValor());
+		contactoDataManager.getContacto().setAteEntidad(new EntidadDTO(con.getEntCodigo()));
+		contactoDataManager.setTipoContacto(con.getConTipo());
 	}
 	
+	public void deleteContacto(ContactoListDTO con)
+	{
+		try {
+			ateneaService.deleteContacto(new ContactoDTO(con.getConCodigo()));
+			buscarContactos();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
 	
 	public void crearMension()
 	{
@@ -196,18 +216,49 @@ public class PosgradoController extends SelectItemController {
 		}
 	}
 	
+	public void editMencion(MencionDTO men)
+	{
+		carreraDataManager.setMencion(men);
+	}
+	
+	public void deleteMencion(MencionDTO men)
+	{
+		try {
+			ateneaService.deleteMencion(men);
+			buscarMension();
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
 	public void createProyecto()
 	{
 		EntidadDTO ent;
 		try {
 			ent=new EntidadDTO();
-			ent.setAteProyectoInvestigacion(proyectoDataManager.getProyecto());
-			ent=ateneaService.createEntidad(ent);
+			proyectoDataManager.getProyecto().addAteEntidad(ent);
+			ent=ateneaService.createOrUpdateProyectoInvestigacion(proyectoDataManager.getProyecto()).getAteEntidads().get(0);
 			ent.setAteCarrera(carreraDataManager.getCarrera());
 			ateneaService.updateEntidad(ent);
 			buscarProyecto();
 			proyectoDataManager.setProyecto(new ProyectoInvestigacionDTO());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void editProyecto(ProyectoInvestigacionDTO pro)
+	{
+		proyectoDataManager.setProyecto(pro);
+	}
+	
+	public void deleteProyecto(ProyectoInvestigacionDTO pro)
+	{
+		try {
+			ateneaService.deleteProyectoInvestigacion(pro);
+			buscarProyecto();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
@@ -220,5 +271,10 @@ public class PosgradoController extends SelectItemController {
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
+	}
+	
+	public void resetCarrera()
+	{
+		carreraDataManager.setCarrera(new CarreraDTO());
 	}
 }
