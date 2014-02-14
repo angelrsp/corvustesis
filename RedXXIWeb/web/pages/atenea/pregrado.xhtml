@@ -100,6 +100,8 @@
 		<!-- Dialogo -->
 		<p:dialog id="dlgDetalles" widgetVar="dlgDetalle" modal="true" resizable="false" closeOnEscape="true">
 		
+		<p:ajax event="close" update=":contenido:pnlDatos" listener="#{pregradoController.resetCarrera}"/>
+		
 		<p:scrollPanel style="height:600px" mode="native">
 		
 		<!-- Contactos -->
@@ -216,7 +218,7 @@
 				<p:commandButton actionListener="#{pregradoController.editProyecto(pro)}" icon="ui-icon-pencil" process=":contenido:tblProyecto" update=":contenido:pnlProyecto"/>
 			</p:column>
 			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
-				<p:commandButton actionListener="#{pregradoController.deleteProyecto(pro)}" icon="ui-icon-close" process=":contenido:tblProyecto" update=":contenido:tblProyecto">
+				<p:commandButton actionListener="#{pregradoController.deleteProyecto(pro)}" icon="ui-icon-close" process=":contenido:tblProyecto" update=":contenido:tblProyecto,:contenido:growl">
 					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
 				</p:commandButton>
 			</p:column>
@@ -240,7 +242,7 @@
 			</tr>
 		</table>
 
-		<p:dataTable emptyMessage="#{i18n['table.vacio']}" value="#{publicacionDataManager.publicacionList}" var="pub">
+		<p:dataTable id="tblPublicacion" emptyMessage="#{i18n['table.vacio']}" value="#{publicacionDataManager.publicacionList}" var="pub">
 		
 			<p:column headerText="#{i18n['label.nombre']}">
 				<h:outputText value="#{pub.pubTitulo}" />
@@ -254,12 +256,13 @@
 				<h:outputText value="#{pub.pubIsbn}" />
 			</p:column>
 
-			<p:column headerText="#{i18n['boton.editar']}" width="15">
-				<h:outputText value="" />
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{pregradoController.editPublicacion(pub)}" icon="ui-icon-pencil" process=":contenido:tblPublicacion" update=":contenido:pnlPublicacion"/>
 			</p:column>
-
-			<p:column headerText="#{i18n['boton.eliminar']}" width="15">
-				<h:outputText value="" />
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{pregradoController.deletePublicacion(pub)}" icon="ui-icon-close" process=":contenido:tblPublicacion" update=":contenido:tblPublicacion,:contenido:growl">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
 			</p:column>
 					
 		</p:dataTable>
@@ -282,25 +285,26 @@
 			</tr>
 		</table>
 
-	<p:dataTable emptyMessage="#{i18n['table.vacio']}" value="#{eventoDataManager.eventoList}" var="eve">
+		<p:dataTable id="tblEvento" emptyMessage="#{i18n['table.vacio']}" value="#{eventoDataManager.eventoList}" var="eve">
+		
+			<p:column headerText="#{i18n['label.nombre']}">
+				<h:outputText value="#{eve.eveNombre}" />
+			</p:column>
 	
-		<p:column headerText="#{i18n['label.nombre']}">
-			<h:outputText value="#{eve.eveNombre}" />
-		</p:column>
+			<p:column headerText="#{i18n['label.perfil']}">
+				<h:outputText value="#{eve.evePerfil}" />
+			</p:column>
 
-		<p:column headerText="#{i18n['label.perfil']}">
-			<h:outputText value="#{eve.evePerfil}" />
-		</p:column>
-
-		<p:column headerText="#{i18n['boton.editar']}" width="15">
-			<h:outputText value="" />
-		</p:column>
-
-		<p:column headerText="#{i18n['boton.eliminar']}" width="15">
-			<h:outputText value="" />
-		</p:column>
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{pregradoController.editEvento(eve)}" icon="ui-icon-pencil" process=":contenido:tblEvento" update=":contenido:pnlEvento"/>
+			</p:column>
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{pregradoController.deleteEvento(eve)}" icon="ui-icon-close" process=":contenido:tblEvento" update=":contenido:tblEvento,:contenido:growl">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
+			</p:column>
 			
-	</p:dataTable>
+		</p:dataTable>
 		
 	</p:panel>
 
