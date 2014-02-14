@@ -261,8 +261,8 @@ public class PregradoController extends SelectItemController{
 		EntidadDTO ent;
 		try {
 			ent=new EntidadDTO();
-			ent.setAteProyectoInvestigacion(proyectoDataManager.getProyecto());
-			ent=ateneaService.createEntidad(ent);
+			proyectoDataManager.getProyecto().addAteEntidad(ent);
+			ent=ateneaService.createOrUpdateProyectoInvestigacion(proyectoDataManager.getProyecto()).getAteEntidads().get(0);
 			ent.setAteCarrera(carreraDataManager.getCarrera());
 			ateneaService.updateEntidad(ent);
 			buscarProyecto();
@@ -303,8 +303,8 @@ public class PregradoController extends SelectItemController{
 		EntidadDTO ent;
 		try {
 			ent=new EntidadDTO();
-			ent.setAtePublicacion(publicacionDataManager.getPublicacion());
-			ent=ateneaService.createEntidad(ent);
+			publicacionDataManager.getPublicacion().addAteEntidad(ent);
+			ent=ateneaService.createOrUpdatePublicacion(publicacionDataManager.getPublicacion()).getAteEntidads().get(0);
 			ent.setAteCarrera(carreraDataManager.getCarrera());
 			ateneaService.updateEntidad(ent);
 			buscarPublicacion();
@@ -314,6 +314,22 @@ public class PregradoController extends SelectItemController{
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
+	
+	public void editPublicacion(PublicacionDTO pub)
+	{
+		publicacionDataManager.setPublicacion(pub);
+	}
+	
+	public void deletePublicacion(PublicacionDTO pub)
+	{
+		try {
+			ateneaService.deletePublicacion(pub);
+			buscarPublicacion();
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
 	
 	public void buscarPublicacion()
 	{
@@ -329,13 +345,28 @@ public class PregradoController extends SelectItemController{
 		EntidadDTO ent;
 		try {
 			ent=new EntidadDTO();
-			ent.setAteEvento(eventoDataManager.getEvento());
-			ent=ateneaService.createEntidad(ent);
+			eventoDataManager.getEvento().addAteEntidad(ent);
+			ent= ateneaService.createOrUpdateEvento(eventoDataManager.getEvento()).getAteEntidads().get(0);
 			ent.setAteCarrera(carreraDataManager.getCarrera());
 			ateneaService.updateEntidad(ent);
 			buscarEvento();
 			eventoDataManager.setEvento(new EventoDTO());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void editEvento(EventoDTO eve)
+	{
+		eventoDataManager.setEvento(eve);
+	}
+	
+	public void deleteEvento(EventoDTO eve)
+	{
+		try {
+			ateneaService.deleteEvento(eve);
+			buscarEvento();
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
@@ -348,6 +379,12 @@ public class PregradoController extends SelectItemController{
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
+	}
+
+	
+	public void resetCarrera()
+	{
+		carreraDataManager.setCarrera(new CarreraDTO());
 	}
 
 }
