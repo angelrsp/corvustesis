@@ -20,8 +20,10 @@ public class UsuarioPerfilDTO implements Serializable {
 	@Column(name="upe_codigo")
 	private Integer upeCodigo;
 
-	@Column(name="upe_usuario")
-	private Integer upeUsuario;
+	//bi-directional many-to-one association to PerfilDTO
+	@ManyToOne
+	@JoinColumn(name="upe_usuario")
+	private UsuarioDTO indUsuario;
 
 	//bi-directional many-to-one association to PerfilDTO
 	@ManyToOne
@@ -39,12 +41,13 @@ public class UsuarioPerfilDTO implements Serializable {
 		this.upeCodigo = upeCodigo;
 	}
 
-	public Integer getUpeUsuario() {
-		return this.upeUsuario;
+
+	public UsuarioDTO getIndUsuario() {
+		return indUsuario;
 	}
 
-	public void setUpeUsuario(Integer upeUsuario) {
-		this.upeUsuario = upeUsuario;
+	public void setIndUsuario(UsuarioDTO indUsuario) {
+		this.indUsuario = indUsuario;
 	}
 
 	public PerfilDTO getIndPerfil() {

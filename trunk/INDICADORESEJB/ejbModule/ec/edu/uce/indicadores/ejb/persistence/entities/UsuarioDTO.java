@@ -1,6 +1,9 @@
 package ec.edu.uce.indicadores.ejb.persistence.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -33,7 +36,11 @@ public class UsuarioDTO implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="usu_ies")
 	private IesDTO indy;
-
+	
+	//bi-directional many-to-one association to UsuarioPerfilDTO
+	@OneToMany(mappedBy="indUsuario",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	private List<UsuarioPerfilDTO> indUsuarioPerfils;
+	
 	public UsuarioDTO() {
 	}
 
@@ -77,4 +84,22 @@ public class UsuarioDTO implements Serializable {
 		this.indy = indy;
 	}
 
+	public List<UsuarioPerfilDTO> getIndUsuarioPerfils() {
+		return indUsuarioPerfils;
+	}
+
+	public void setIndUsuarioPerfils(List<UsuarioPerfilDTO> indUsuarioPerfils) {
+		this.indUsuarioPerfils = indUsuarioPerfils;
+	}
+
+	public UsuarioPerfilDTO addIndUsuarioPerfil(UsuarioPerfilDTO indUsuarioPerfil) {
+		if(indUsuarioPerfil!=null)
+		{
+			if(getIndUsuarioPerfils()==null)
+				setIndUsuarioPerfils(new ArrayList<UsuarioPerfilDTO>());
+			getIndUsuarioPerfils().add(indUsuarioPerfil);
+			indUsuarioPerfil.setIndUsuario(this);
+		}
+		return indUsuarioPerfil;
+	}
 }

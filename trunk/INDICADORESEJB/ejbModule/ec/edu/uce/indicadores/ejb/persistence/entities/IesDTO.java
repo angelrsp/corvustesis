@@ -1,7 +1,9 @@
 package ec.edu.uce.indicadores.ejb.persistence.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -56,6 +58,15 @@ public class IesDTO implements Serializable {
 
 	public IesDTO() {
 	}
+
+	
+	
+	public IesDTO(Integer iesCodigo) {
+		super();
+		this.iesCodigo = iesCodigo;
+	}
+
+
 
 	public Integer getIesCodigo() {
 		return this.iesCodigo;
