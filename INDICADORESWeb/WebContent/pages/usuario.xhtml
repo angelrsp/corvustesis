@@ -12,7 +12,7 @@
 	
 			<p:growl id="growl" showDetail="false" />	
 
-			<p:panel header="Usuarios">
+			<p:panel id="pnlUsuarios" header="Usuarios">
 			
 			<table>
 			
@@ -21,31 +21,33 @@
 					<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{usuarioController.iesSelect}">
 							<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
 							<f:selectItems value="#{usuarioController.iesList}"></f:selectItems>
+							<p:ajax event="change" listener="#{usuarioController.readUser}" process="@this" update="pnlUsuarios"/>
 					</p:selectOneMenu></td>
 				</tr>			
 			
 				<tr>
 					<td><h:outputText value="Usuario:" /></td>
-					<td><p:inputText/></td>
+					<td><p:inputText value="#{usuarioController.user.usuLogin}" required="true"/></td>
 				</tr>
 				<tr>	
 					<td><h:outputLabel value="Contraseña:&#160;" /> </td>
-					<td><p:password required="true"	feedback="true"/></td>
+					<td><p:password id="pass1" value="#{usuarioController.user.usuClave}" required="true" feedback="true" match="pass2"/></td>
 				</tr>
 				<tr>	
 					<td><h:outputLabel value="Confirmar Contraseña:&#160;" /> </td>
-					<td><p:password required="true"	feedback="true"/></td>		
+					<td><p:password id="pass2" value="#{usuarioController.user.usuClave}" required="true" feedback="true"/></td>		
 				</tr>
 				
 				<tr>
 					<td><h:outputLabel value="#{i18n['label.perfil']}:&#160;" /> </td>
-					<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.perfil']}:&#160;#{i18n['label.requerido']}">
+					<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.perfil']}:&#160;#{i18n['label.requerido']}" value="#{usuarioController.perfilSelect}">
 							<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+							<f:selectItems value="#{usuarioController.perfilList}" var="per" itemValue="#{per.perCodigo}" itemLabel="#{per.perDescripcion}"/>
 					</p:selectOneMenu></td>
 				</tr>							
 				
 				<tr>
-					<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>																		
+					<td><p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{usuarioController.createUser}" process="pnlUsuarios" update="pnlUsuarios,growl"/></td>																		
 				</tr>
 			
 			</table>
@@ -55,6 +57,15 @@
 				<p:column headerText="Usuario">
 					<h:outputText value="#{usu.usuLogin}" />
 				</p:column>
+
+				<p:column headerText="Institución de Educacion Superior">
+					<h:outputText value="#{usu.indy.iesRazonSocial}" />
+				</p:column>
+
+				<p:column headerText="Perfil">
+					<h:outputText value="#{usu.indUsuarioPerfils.get(0).indPerfil.perDescripcion}" />
+				</p:column>
+
 										
 			</p:dataTable>
 			
