@@ -12,4 +12,6 @@ public interface ProyectoInvestigacionDAO extends AbstractFacade<ProyectoInvesti
 	List<ProyectoInvestigacionDTO> getAll(CarreraDTO carrera)
 			throws CorvustecException;
 
+	void remove2(ProyectoInvestigacionDTO pro);
+
 }

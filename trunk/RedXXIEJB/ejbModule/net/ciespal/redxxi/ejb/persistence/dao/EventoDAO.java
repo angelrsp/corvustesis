@@ -11,5 +11,7 @@ public interface EventoDAO extends AbstractFacade<EventoDTO>{
 
 	List<EventoDTO> getAll(CarreraDTO carrera) throws CorvustecException;
 
+	void remove2(EventoDTO eve);
+
 	
 }

@@ -24,7 +24,7 @@ public class EntidadDTO implements Serializable {
 	private Integer entCodigo;
 
 	//bi-directional many-to-one association to CarreraDTO
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="ent_carrera")
 	private CarreraDTO ateCarrera;
 
@@ -34,7 +34,7 @@ public class EntidadDTO implements Serializable {
 	private DoctorDTO ateDoctor;
 
 	//bi-directional many-to-one association to EventoDTO
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="ent_evento")
 	private EventoDTO ateEvento;
 
@@ -54,12 +54,12 @@ public class EntidadDTO implements Serializable {
 	private OrganizacionDTO ateOrganizacion;
 
 	//bi-directional many-to-one association to ProyectoInvestigacionDTO
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="ent_proyecto_intestigacion")
 	private ProyectoInvestigacionDTO ateProyectoInvestigacion;
 
 	//bi-directional many-to-one association to PublicacionDTO
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="ent_publicacion")
 	private PublicacionDTO atePublicacion;
 

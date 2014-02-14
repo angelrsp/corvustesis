@@ -3,6 +3,7 @@ package net.ciespal.redxxi.ejb.persistence.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
@@ -10,6 +11,7 @@ import javax.persistence.criteria.Root;
 
 import net.ciespal.redxxi.ejb.persistence.dao.ProyectoInvestigacionDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
 
 import com.corvustec.commons.util.CorvustecException;
@@ -42,5 +44,19 @@ public class ProyectoInvestigacionDAOImpl extends AbstractFacadeImpl<ProyectoInv
 			return list;
 	}
 
-	
+	@Override
+	public void remove2(ProyectoInvestigacionDTO pro)
+	{
+		Query query;
+		for(EntidadDTO ent:pro.getAteEntidads())
+		{	 
+			query= entityManager.createQuery("delete from EntidadDTO where entCodigo=:codigo");
+			query.setParameter("codigo", ent.getEntCodigo());
+			query.executeUpdate();
+		}
+		
+		query= entityManager.createQuery("delete from ProyectoInvestigacionDTO where pinCodigo=:codigo");
+		query.setParameter("codigo", pro.getPinCodigo());
+		query.executeUpdate();
+	}
 }

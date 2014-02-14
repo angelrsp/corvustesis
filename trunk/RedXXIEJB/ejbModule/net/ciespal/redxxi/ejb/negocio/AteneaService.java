@@ -41,12 +41,7 @@ public interface AteneaService {
 
 	void updateEntidad(EntidadDTO entidad) throws CorvustecException;
 
-	EventoDTO createEvento(EventoDTO evento) throws CorvustecException;
-
 	List<EventoDTO> readEvento(CarreraDTO carrera) throws CorvustecException;
-
-	PublicacionDTO createPublicacion(PublicacionDTO publicacion)
-			throws CorvustecException;
 
 	List<PublicacionDTO> readPublicacion(CarreraDTO carrera)
 			throws CorvustecException;
@@ -85,5 +80,15 @@ public interface AteneaService {
 
 	void deleteProyectoInvestigacion(ProyectoInvestigacionDTO proyecto)
 			throws CorvustecException;
+
+	PublicacionDTO createOrUpdatePublicacion(PublicacionDTO publicacion)
+			throws CorvustecException;
+
+	void deletePublicacion(PublicacionDTO publicacion)
+			throws CorvustecException;
+
+	EventoDTO createOrUpdateEvento(EventoDTO evento) throws CorvustecException;
+
+	void deleteEvento(EventoDTO evento) throws CorvustecException;
 
 }
