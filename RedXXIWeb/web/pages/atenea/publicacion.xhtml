@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/WEB-INF/template/privado.xhtml">
+
+		<ui:define name="contenido">
+		<p:growl id="growl"></p:growl>
+		
+		<p:panel id="pnlDato" header="#{i18n['label.panel.publicacion']}">
+
+		<table>
+		
+			<tr>
+				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{publicacionController.pais}">
+						<f:selectItem itemLabel="--Seleccione--"/>
+						<f:selectItems value="#{publicacionController.catalogoPais}"/>
+						<p:ajax event="change" listener="#{publicacionController.obtenerProvinciaChange}" process="@this" update="somProvinvia"/>						
+					</p:selectOneMenu></td>
+
+				<td><h:outputText value="#{i18n['label.provincia']}:&#160;" /></td>
+				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{publicacionController.provincia}">
+						<f:selectItem itemLabel="--Seleccione--"/>
+						<f:selectItems value="#{publicacionController.catalogoProvincia}"/>
+						<p:ajax event="change" listener="#{publicacionController.obtenerCiudadChange}" process="@this" update="somCiudad"/>
+					</p:selectOneMenu></td>
+
+			</tr>
+			<tr>
+
+				<td><h:outputText value="#{i18n['label.ciudad']}:&#160;" /></td>
+				<td><p:selectOneMenu id="somCiudad" value="#{publicacionController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}">
+						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
+						<f:selectItems value="#{publicacionController.catalogoCiudad}"/>
+						<p:ajax event="change" listener="#{publicacionController.ciudadChange}" process="@this" update="somCiudad,pnlDato"/>						
+					</p:selectOneMenu></td>
+			</tr>
+
+			<tr>
+				<td><h:outputText value="#{i18n['label.tipo']}:&#160;" /></td>
+				<td><p:selectOneMenu value="#{publicacionDataManager.tipoPublicacion}" required="true" requiredMessage="#{i18n['label.tipo']}&#160;#{i18n['label.requerido']}">
+						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
+						<f:selectItems value="#{publicacionController.catalogoTipoPublicacion}"/>
+					</p:selectOneMenu></td>	
+					
+				<td><h:outputText value="#{i18n['label.titulo']}:&#160;" /></td>
+				<td><p:inputText value="#{publicacionDataManager.publicacion.pubTitulo}" required="true" requiredMessage="#{i18n['label.titulo']}&#160;#{i18n['label.requerido']}"/></td>
+			</tr>
+			
+			<tr>	
+				<td><h:outputText value="#{i18n['label.autores']}:&#160;" /></td>
+				<td><p:inputTextarea value="#{publicacionDataManager.publicacion.pubAutor}" autoResize="false" required="true" requiredMessage="#{i18n['label.autores']}&#160;#{i18n['label.requerido']}"/></td>
+
+				<td><h:outputText value="#{i18n['label.anio.publicacion']}:&#160;" /></td>
+				<td><p:inputText value="#{publicacionDataManager.publicacion.pubAnioPublicacion}" onkeypress="return isNumberKey(event)" maxlength="4" required="true" requiredMessage="#{i18n['label.anio.publicacion']}&#160;#{i18n['label.requerido']}"/></td>				
+			</tr>
+
+			<tr>
+				<td><h:outputText value="#{i18n['label.tipo']}:&#160;" /></td>
+				<td><p:selectOneMenu value="#{publicacionDataManager.tipoPublicacion}" required="true" requiredMessage="#{i18n['label.tipo']}&#160;#{i18n['label.requerido']}">
+						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
+						<f:selectItems value="#{publicacionController.catalogoTipoPublicacion}"/>	
+					</p:selectOneMenu></td>
+
+				<td><h:outputText value="#{i18n['label.campo.conocimiento']}:&#160;" /></td>
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.campo.conocimiento']}&#160;#{i18n['label.requerido']}" value="#{publicacionController.campoConocimiento}">
+						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
+						<f:selectItems value="#{publicacionController.catalogoCampoConocimiento}"/>	
+						<p:ajax event="change" listener="#{publicacionController.obtenerSubcampoChange}" process="@this" update="somSubcampo"/>						
+					</p:selectOneMenu></td>
+
+				<td><p:selectOneMenu id="somSubcampo" value="#{publicacionController.subCampoConocimiento}" required="true" requiredMessage="#{i18n['label.campo.conocimiento']}&#160;#{i18n['label.requerido']}">
+						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
+						<f:selectItems value="#{publicacionController.catalogoSubCampoConocimiento}"/>	
+					</p:selectOneMenu></td>
+								
+			</tr>			
+			
+			<tr>
+				<td colspan="4" align="center"><p:commandButton value="#{i18n['boton.guardar']}" process="pnlDato" update="pnlDato,growl" actionListener="#{publicacionController.save}"/></td>
+			</tr>				
+
+		</table>
+		
+		<p:dataTable value="#{publicacionDataManager.publicacionList}" var="pub">
+		
+			<p:column headerText="#{i18n['label.titulo']}">
+				<h:outputText value="#{pub.pubTitulo}" />
+			</p:column>		
+		
+		</p:dataTable>
+		
+		
+		</p:panel>
+		
+		</ui:define>
+		
+	</ui:composition>			
+		
+		
+</html>
