@@ -28,10 +28,18 @@ public abstract class SelectItemController {
 	private List<SelectItem> catalogoCiudad;
 	private List<SelectItem> catalogoModalidad;
 	private List<SelectItem> catalogoTipoPosgrado;
+	private List<SelectItem> catalogoSexo;
+	private List<SelectItem> catalogoTipoPublicacion;
+	private List<SelectItem> catalogoCampoConocimiento;
+	private List<SelectItem> catalogoSubCampoConocimiento;
 	
 	private Object pais;
 	private Object provincia;
 	private Object ciudad;
+	
+	private Object campoConocimiento;
+	private Object subCampoConocimiento;
+	
 	
 	public SelectItemController() {
 	}
@@ -44,6 +52,8 @@ public abstract class SelectItemController {
 		catalogoPais=new ArrayList<SelectItem>();
 		catalogoProvincia=new ArrayList<SelectItem>();
 		catalogoCiudad=new ArrayList<SelectItem>();
+		catalogoCampoConocimiento=new ArrayList<SelectItem>();
+		catalogoSubCampoConocimiento=new ArrayList<SelectItem>();				
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -177,6 +187,90 @@ public abstract class SelectItemController {
 		return catalogoTipoPosgrado;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getCatalogoSexo() throws CorvustecException {
+		if(CollectionUtils.isEmpty(catalogoSexo))
+		{
+			CatalogoDTO catalogo=new CatalogoDTO();
+			catalogo.setCatCodigo(30);
+			catalogoSexo=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					CatalogoDTO cat=(CatalogoDTO)arg0;
+					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
+				}
+			});
+			
+		}
+		return catalogoSexo;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getCatalogoTipoPublicacion() throws CorvustecException {
+		if(CollectionUtils.isEmpty(catalogoTipoPublicacion))
+		{
+			CatalogoDTO catalogo=new CatalogoDTO();
+			catalogo.setCatCodigo(33);
+			catalogoTipoPublicacion=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					CatalogoDTO cat=(CatalogoDTO)arg0;
+					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
+				}
+			});
+			
+		}
+		return catalogoTipoPublicacion;
+	}
+
+	
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getCatalogoCampoConocimiento() throws CorvustecException {
+		if(CollectionUtils.isEmpty(catalogoCampoConocimiento))
+		{
+			CatalogoDTO catalogo=new CatalogoDTO();
+			catalogo.setCatCodigo(38);
+			catalogoCampoConocimiento=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					CatalogoDTO cat=(CatalogoDTO)arg0;
+					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
+				}
+			});
+			
+		}		
+		
+		return catalogoCampoConocimiento;
+	}
+
+
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getCatalogoSubCampoConocimiento() throws CorvustecException {
+		if(CollectionUtils.isEmpty(catalogoSubCampoConocimiento))
+		{
+			CatalogoDTO catalogo=new CatalogoDTO();
+			catalogo.setCatCodigo(campoConocimiento!=null?Integer.valueOf(campoConocimiento.toString()):-3);
+			if(administracionService.getCatalogo(catalogo)==null)
+				return new ArrayList<SelectItem>();
+			catalogoSubCampoConocimiento=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					CatalogoDTO cat=(CatalogoDTO)arg0;
+					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
+				}
+			});
+			
+		}		
+		
+		return catalogoSubCampoConocimiento;
+	}
+
+
+	
 	
 	public Object getPais() {
 		return pais;
@@ -200,5 +294,21 @@ public abstract class SelectItemController {
 
 	public void setCiudad(Object ciudad) {
 		this.ciudad = ciudad;
+	}
+
+	public Object getCampoConocimiento() {
+		return campoConocimiento;
+	}
+
+	public void setCampoConocimiento(Object campoConocimiento) {
+		this.campoConocimiento = campoConocimiento;
+	}
+
+	public Object getSubCampoConocimiento() {
+		return subCampoConocimiento;
+	}
+
+	public void setSubCampoConocimiento(Object subCampoConocimiento) {
+		this.subCampoConocimiento = subCampoConocimiento;
 	}
 }
