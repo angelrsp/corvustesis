@@ -5,7 +5,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="/WEB-INF/template/privado.xhtml">
+	<ui:composition template="/WEB-INF/template/privado.xhtml">
 
 		<ui:define name="contenido">
 		<p:growl id="growl"></p:growl>
@@ -44,12 +44,12 @@
 				<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
 				<td><p:inputText value="#{organizacionDataManager.organizacion.orgNombre}"/></td>
 				<td><h:outputText value="#{i18n['label.datos.institucionales']}:&#160;" /></td>
-				<td colspan="2"><p:inputTextarea value="#{organizacionDataManager.organizacion.orgDatosInstitucionales}" autoResize="false"/></td>			
+				<td colspan="2"><p:inputTextarea value="#{organizacionDataManager.organizacion.orgDatosInstitucionales}" autoResize="false" maxlength="200" counterTemplate="{0}" counter="contDat"/><h:outputText id="contDat" /></td>			
 			</tr>
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.mision']}:&#160;" /></td>
-				<td colspan="2"><p:inputTextarea value="#{organizacionDataManager.organizacion.orgMision}" autoResize="false"/></td>			
+				<td colspan="2"><p:inputTextarea value="#{organizacionDataManager.organizacion.orgMision}" autoResize="false" counter="contMis" counterTemplate="{0}" maxlength="400"/><h:outputText id="contMis" /></td>			
 			</tr>
 
 			<tr>
@@ -100,88 +100,114 @@
 		
 		<p:spacer height="10"/>
 		
-		<p:dataTable emptyMessage="No existen registros" value="#{contactoDataManager.contactoList}" var="con">
+		<p:dataTable id="tblContacto" emptyMessage="No existen registros" value="#{contactoDataManager.contactoList}" var="con">
 			<p:column headerText="#{i18n['label.tipo']}">
 				<h:outputText value="#{con.catTipo}" />
 			</p:column>
 			<p:column headerText="#{i18n['label.valor']}">
 				<h:outputText value="#{con.conValor}" />
 			</p:column>
-			<p:column headerText="#{i18n['boton.editar']}" width="15"></p:column>
-			<p:column headerText="#{i18n['boton.eliminar']}" width="15"></p:column>
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{organizacionController.editContacto(con)}" icon="ui-icon-pencil" process=":contenido:tblContacto" update=":contenido:pnlContacto"/>
+			</p:column>
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{organizacionController.deleteContacto(con)}" icon="ui-icon-close" process=":contenido:tblContacto" update=":contenido:pnlContacto">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
+			</p:column>
 		</p:dataTable>
 		
 		</p:panel>
 		
 		
+		<!-- Evento -->
+		<p:panel id="pnlEvento" header="#{i18n['label.panel.evento']}">
 		
-		<p:panel header="#{i18n['label.panel.evento']}">
-		
-			<table>
-				<tr>
-					<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
-					<td><p:inputText/></td>
-					<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>					
-				</tr>
-			</table>
+		<table>
+			<tr>
+				<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
+				<td><p:inputText value="#{eventoDataManager.evento.eveNombre}"/></td>
+				
+				<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
+				<td><p:inputText value="#{eventoDataManager.evento.evePerfil}"/></td>
+				
+				
+				<td><p:commandButton value="#{i18n['boton.agregar']}" process="pnlEvento" update="pnlEvento,growl" actionListener="#{organizacionController.createEvento}"/></td>					
+			</tr>
+		</table>
 
-		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
+		<p:dataTable id="tblEvento" emptyMessage="#{i18n['table.vacio']}" value="#{eventoDataManager.eventoList}" var="eve">
 		
 			<p:column headerText="#{i18n['label.nombre']}">
-				<h:outputText value="" />
+				<h:outputText value="#{eve.eveNombre}" />
+			</p:column>
+	
+			<p:column headerText="#{i18n['label.perfil']}">
+				<h:outputText value="#{eve.evePerfil}" />
 			</p:column>
 
-			<p:column headerText="#{i18n['boton.editar']}" width="15">
-				<h:outputText value="" />
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{organizacionController.editEvento(eve)}" icon="ui-icon-pencil" process=":contenido:tblEvento" update=":contenido:pnlEvento"/>
 			</p:column>
-
-			<p:column headerText="#{i18n['boton.eliminar']}" width="15">
-				<h:outputText value="" />
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{organizacionController.deleteEvento(eve)}" icon="ui-icon-close" process=":contenido:tblEvento" update=":contenido:tblEvento,:contenido:growl">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
 			</p:column>
-				
+			
 		</p:dataTable>
+
 			
 		</p:panel>
 
-		<p:panel header="#{i18n['label.panel.proyecto.investigacion']}">
+
+		<!--Proyecto Investigacion  -->
+		<p:panel id="pnlProyecto" header="#{i18n['label.panel.proyecto.investigacion']}">
 		
 		<table>
 		
 			<tr>
 				<td><h:outputText value="#{i18n['label.titulo']}:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinNombre}" required="true" requiredMessage="#{i18n['label.titulo']}&#160;#{i18n['label.requerido']}"/></td>
 				
 				<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinPerfil}" required="true" requiredMessage="#{i18n['label.perfil']}&#160;#{i18n['label.requerido']}"/></td>
 				
 				<td><h:outputText value="#{i18n['label.coordinador']}:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinCoordinador}" required="true" requiredMessage="#{i18n['label.coordinador']}&#160;#{i18n['label.requerido']}"/></td>
+			</tr>	
+			<tr>
+				<td><h:outputText value="#{i18n['label.anio.inicio']}:&#160;" /></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinAnioInicio}" required="true" requiredMessage="#{i18n['label.anio.inicio']}&#160;#{i18n['label.requerido']}" onkeypress="return isNumberKey(event)"/></td>
+				<td><h:outputText value="#{i18n['label.duracion.aproximada']}:&#160;" /></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinDuracion}" required="true" requiredMessage="#{i18n['label.duracion.aproximada']}&#160;#{i18n['label.requerido']}"/></td>
 				
-				<td><p:commandButton value="#{i18n['boton.guardar']}"/></td>
+				<td><p:commandButton actionListener="#{organizacionController.createProyecto}" value="#{i18n['boton.agregar']}" process="pnlProyecto" update="pnlProyecto,growl"/></td>
 			</tr>
 			
 		</table>
 
-		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
+		<p:dataTable id="tblProyecto" emptyMessage="#{i18n['table.vacio']}" value="#{proyectoDataManager.proyectoList}" var="pro">
 		
 			<p:column headerText="#{i18n['label.titulo']}">
-				<h:outputText value="" />
+				<h:outputText value="#{pro.pinNombre}" />
 			</p:column>
 
 			<p:column headerText="#{i18n['label.perfil']}">
-				<h:outputText value="" />
+				<h:outputText value="#{pro.pinPerfil}" />
 			</p:column>
 
 			<p:column headerText="#{i18n['label.coordinador']}">
-				<h:outputText value="" />
+				<h:outputText value="#{pro.pinCoordinador}" />
 			</p:column>
 
-			<p:column headerText="#{i18n['boton.editar']}" width="15">
-				<h:outputText value="" />
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{organizacionController.editProyecto(pro)}" icon="ui-icon-pencil" process=":contenido:tblProyecto" update=":contenido:pnlProyecto"/>
 			</p:column>
-
-			<p:column headerText="#{i18n['boton.eliminar']}" width="15">
-				<h:outputText value="" />
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{organizacionController.deleteProyecto(pro)}" icon="ui-icon-close" process=":contenido:tblProyecto" update=":contenido:tblProyecto,:contenido:growl">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
 			</p:column>
 				
 		</p:dataTable>

@@ -9,53 +9,127 @@
 	<ui:define name="contenido">
 		<p:growl id="growl"></p:growl>
 		
-		<p:panel header="#{i18n['label.panel.datos']}">
+		<p:panel id="pnlDato" header="#{i18n['label.panel.doctor']}">
 		
 		<table>
 		
 			<tr>
 				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}">
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{doctorController.pais}">
 						<f:selectItem itemLabel="--Seleccione--"/>
+						<f:selectItems value="#{doctorController.catalogoPais}"/>
+						<p:ajax event="change" listener="#{doctorController.obtenerProvinciaChange}" process="@this" update="somProvinvia"/>						
 					</p:selectOneMenu></td>
-				<td><p:commandButton onclick="PF('dlgPais').show()" type="button" value="#{i18n['boton.agregar']}"/></td>
 
 				<td><h:outputText value="#{i18n['label.provincia']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}">
+				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{doctorController.provincia}">
 						<f:selectItem itemLabel="--Seleccione--"/>
+						<f:selectItems value="#{doctorController.catalogoProvincia}"/>
+						<p:ajax event="change" listener="#{doctorController.obtenerCiudadChange}" process="@this" update="somCiudad"/>
 					</p:selectOneMenu></td>
-				<td><p:commandButton onclick="PF('dlgProvincia').show()" type="button" value="#{i18n['boton.agregar']}"/></td>
 
 			</tr>
-			
 			<tr>
+
 				<td><h:outputText value="#{i18n['label.ciudad']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}">
-						<f:selectItem itemLabel="--Seleccione--"/>
+				<td><p:selectOneMenu id="somCiudad" value="#{doctorController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}">
+						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
+						<f:selectItems value="#{doctorController.catalogoCiudad}"/>
+						<p:ajax event="change" listener="#{doctorController.ciudadChange}" process="@this" update="somCiudad,pnlDato"/>						
 					</p:selectOneMenu></td>
-				<td><p:commandButton onclick="PF('dlgCiudad').show()" type="button" value="#{i18n['boton.agregar']}"/></td>
 			</tr>
 			
 			<tr>
 				<td><h:outputText value="#{i18n['label.nombres']}:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><p:inputText value="#{doctorDataManager.doctor.docNombres}"/></td>
 				
 				<td><h:outputText value="#{i18n['label.apellidos']}:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><p:inputText value="#{doctorDataManager.doctor.docApellidos}"/></td>
 			</tr>			
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.fecha.nacimiento']}:&#160;" /></td>
-				<td><p:calendar showOn="button" navigator="true" /></td>
+				<td><p:calendar value="#{doctorDataManager.fechaNacimiento}" required="true" requiredMessage="#{i18n['label.fecha.nacimiento']}&#160;#{i18n['label.requerido']}" showOn="button" navigator="true" pattern="#{i18n['pattern.fecha']}" placeholder="#{i18n['pattern.fecha.placeholder']}"/></td>
 				
-				<td><h:outputText value="#{i18n['label.apellidos']}:&#160;" /></td>
-				<td><p:inputText/></td>
-			</tr>			
+				<td><h:outputText value="#{i18n['label.sexo']}:&#160;" /></td>
+				<td><p:selectOneRadio value="#{doctorDataManager.sexoSelect}" required="true" requiredMessage="#{i18n['label.sexo']}&#160;#{i18n['label.requerido']}">
+					<f:selectItems value="#{doctorController.catalogoSexo}"/>
+				</p:selectOneRadio></td>
+			</tr>
 
-				
+			<tr>
+				<td colspan="4" align="center"><p:commandButton value="#{i18n['boton.guardar']}" process="pnlDato" update="pnlDato,growl" actionListener="#{doctorController.save}"/></td>
+			</tr>				
 		</table>
 		
+		
+		<p:dataTable id="tblDoctor" value="#{doctorDataManager.doctorList}" var="doc">
+		
+			<p:column headerText="#{i18n['label.nombres']}">
+				<h:outputText value="#{doc.docNombres}" />
+			</p:column>		
+
+			<p:column headerText="#{i18n['label.apellidos']}">
+				<h:outputText value="#{doc.docApellidos}" />
+			</p:column>		
+
+			<p:column headerText="#{i18n['label.detalles']}" width="15" style="text-align: center">
+				<p:commandButton icon="ui-icon-newwin" actionListener="#{doctorController.doctorSelect(doc)}"
+	               	update=":contenido:pnlDato,:contenido:growl,:contenido:dlgDetalle" process="tblDoctor" oncomplete="PF('dlgDetalles').show()"/>    				
+			</p:column>
+		
+		</p:dataTable>
+		
 		</p:panel>
+		
+		
+		<p:dialog id="dlgDetalle" widgetVar="dlgDetalles" modal="true" closeOnEscape="true">
+		
+		<!-- Contactos -->
+		<p:panel id="pnlContacto" header="#{i18n['label.panel.contacto']}">
+				
+		<table>
+			<tr>
+				<td><h:outputText value="#{i18n['label.tipo']}:&#160;" /></td>
+				<td>
+					<p:selectOneMenu required="true" requiredMessage="#{i18n['label.cantidad.estudiante']}&#160;#{i18n['label.requerido']}" value="#{contactoDataManager.tipoContacto}">
+						<f:selectItem itemLabel="--Seleccione--"/>
+						<f:selectItems value="#{doctorController.catalogoTipoContacto}"/>
+					</p:selectOneMenu>
+				</td>
+				<td><h:outputText value="#{i18n['label.valor']}:&#160;" /></td>
+				<td><p:inputText value="#{contactoDataManager.contacto.conValor}" required="true" requiredMessage="#{i18n['label.valor']}&#160;#{i18n['label.requerido']}"/></td>
+				<td><p:commandButton value="#{i18n['boton.agregar']}" actionListener="#{doctorController.crearContacto}" process="pnlContacto" update="pnlContacto,growl"/></td>
+			</tr>			
+		</table>
+		
+		<p:spacer height="10"/>
+		
+		<p:dataTable id="tblContacto" emptyMessage="#{i18n['table.vacio']}" value="#{contactoDataManager.contactoList}" var="con">
+			<p:column headerText="#{i18n['label.tipo']}">
+				<h:outputText value="#{con.catTipo}" />
+			</p:column>
+			<p:column headerText="#{i18n['label.valor']}">
+				<h:outputText value="#{con.conValor}" />
+			</p:column>
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{doctorController.editContacto(con)}" icon="ui-icon-pencil" process=":contenido:tblContacto" update=":contenido:pnlContacto"/>
+			</p:column>
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{doctorController.deleteContacto(con)}" icon="ui-icon-close" process=":contenido:tblContacto" update=":contenido:pnlContacto">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+		
+		</p:panel>
+		
+		
+		
+		
+		
+		</p:dialog>
+		
 		
 	</ui:define>
 </ui:composition>				
