@@ -12,5 +12,6 @@ public interface FactoryDAO {
 	EventoDAO getEventoDAOImpl();
 	PublicacionDAO getPublicacionDAOImpl();
 	OrganizacioDAO getOrganizacioDAOImpl();
+	DoctorDAO getDoctorDAOImpl();
 
 }

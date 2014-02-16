@@ -13,4 +13,6 @@ public interface PublicacionDAO extends AbstractFacade<PublicacionDTO>{
 
 	void remove2(PublicacionDTO pub);
 
+	List<PublicacionDTO> getAll(Object ubicacion) throws CorvustecException;
+
 }

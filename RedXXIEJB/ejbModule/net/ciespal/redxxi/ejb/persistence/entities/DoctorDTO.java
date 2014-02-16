@@ -1,8 +1,11 @@
 package net.ciespal.redxxi.ejb.persistence.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -52,8 +55,14 @@ public class DoctorDTO implements Serializable {
 	@Column(name="doc_titulo_tesis")
 	private String docTituloTesis;
 
+	@Column(name="doc_ubicacion")
+	private Integer docUbicacion;
+
+	@Column(name="doc_sexo")
+	private Integer docSexo;
+
 	//bi-directional many-to-one association to EntidadDTO
-	@OneToMany(mappedBy="ateDoctor")
+	@OneToMany(mappedBy="ateDoctor",cascade={CascadeType.ALL,CascadeType.PERSIST},fetch=FetchType.EAGER)
 	private List<EntidadDTO> ateEntidads;
 
 	//bi-directional many-to-one association to EspecialidadDTO
@@ -151,6 +160,22 @@ public class DoctorDTO implements Serializable {
 		this.docTituloTesis = docTituloTesis;
 	}
 
+	public Integer getDocUbicacion() {
+		return docUbicacion;
+	}
+
+	public void setDocUbicacion(Integer docUbicacion) {
+		this.docUbicacion = docUbicacion;
+	}
+
+	public Integer getDocSexo() {
+		return docSexo;
+	}
+
+	public void setDocSexo(Integer docSexo) {
+		this.docSexo = docSexo;
+	}
+
 	public List<EntidadDTO> getAteEntidads() {
 		return this.ateEntidads;
 	}
@@ -160,9 +185,12 @@ public class DoctorDTO implements Serializable {
 	}
 
 	public EntidadDTO addAteEntidad(EntidadDTO ateEntidad) {
-		getAteEntidads().add(ateEntidad);
-		ateEntidad.setAteDoctor(this);
-
+		if(ateEntidad!=null){
+			if(getAteEntidads()==null)
+				setAteEntidads(new ArrayList<EntidadDTO>());
+			getAteEntidads().add(ateEntidad);
+			ateEntidad.setAteDoctor(this);
+		}
 		return ateEntidad;
 	}
 

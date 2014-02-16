@@ -11,6 +11,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EventoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
@@ -207,7 +208,19 @@ public class AteneaServiceImpl implements AteneaService{
 		}		
 	}	
 	
-	
+	@Override
+	public List<ContactoListDTO> readContacto(DoctorDTO doctor) throws CorvustecException
+	{
+		logger.info("readContacto");
+		try{
+			return factoryDAO.getContactoDAOImpl().getAll(doctor);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readContacto {}",e.toString());
+			throw new CorvustecException("Error al readContacto");
+		}		
+	}	
 	/* Mencion */
 	@Override
 	public MencionDTO createOrUpdateMencion(MencionDTO mencion) throws CorvustecException
@@ -299,6 +312,21 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 	
+	@Override
+	public List<ProyectoInvestigacionDTO> readProyectoInvestigacion(OrganizacionDTO org) throws CorvustecException
+	{
+		logger.info("obtenerProyectoInvestigacion");
+		try{
+			return factoryDAO.getProyectoInvestigacionDAOImpl().getAll(org);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error obtenerProyectoInvestigacion {}",e.toString());
+			throw new CorvustecException("Error al obtenerProyectoInvestigacion");
+		}
+	}
+	
+	
 	/* Evento */
 	@Override
 	public EventoDTO createOrUpdateEvento(EventoDTO evento) throws CorvustecException
@@ -343,7 +371,19 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 
-
+	@Override
+	public List<EventoDTO> readEvento(OrganizacionDTO org) throws CorvustecException
+	{
+		logger.info("readEvento");
+		try{
+			return factoryDAO.getEventoDAOImpl().getAll(org);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readEvento {}",e.toString());
+			throw new CorvustecException("Error al readEvento");
+		}
+	}
 	
 	
 	/* Publicacion */
@@ -380,18 +420,30 @@ public class AteneaServiceImpl implements AteneaService{
 	@Override
 	public List<PublicacionDTO> readPublicacion(CarreraDTO carrera) throws CorvustecException
 	{
-		logger.info("readEvento");
+		logger.info("readPublicacion");
 		try{
 			return factoryDAO.getPublicacionDAOImpl().getAll(carrera);
 		}
 		catch(Exception e)
 		{
-			logger.info("Error readEvento {}",e.toString());
-			throw new CorvustecException("Error al readEvento");
+			logger.info("Error readPublicacion {}",e.toString());
+			throw new CorvustecException("Error al readPublicacion");
 		}
 	}
 
-	
+	@Override
+	public List<PublicacionDTO> readPublicacion(Object ubicacion) throws CorvustecException
+	{
+		logger.info("readPublicacion");
+		try{
+			return factoryDAO.getPublicacionDAOImpl().getAll(ubicacion);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readPublicacion {}",e.toString());
+			throw new CorvustecException("Error al readPublicacion");
+		}
+	}
 
 	/* Organizacion */
 	@Override
@@ -447,6 +499,36 @@ public class AteneaServiceImpl implements AteneaService{
 		{
 			logger.info("Error obtenerCentroHijo {}",e.toString());
 			throw new CorvustecException("Error al obtenerCentroHijo");
+		}
+	}
+	
+	/* Doctor */
+	@Override
+	public DoctorDTO createDoctor(DoctorDTO doctor) throws CorvustecException
+	{
+		logger.info("createOrganizacion");
+		try{
+			return factoryDAO.getDoctorDAOImpl().create(doctor);
+		}
+		catch(Exception e){
+			logger.info("Error createOrganizacion {}",e.toString());
+			throw new CorvustecException("Error al createOrganizacion");
+		}
+	}
+	
+	
+	
+	@Override
+	public List<DoctorDTO> readDoctor(Object ubicacion) throws CorvustecException
+	{
+		logger.info("readDoctor");
+		try{
+			return factoryDAO.getDoctorDAOImpl().getAll(ubicacion);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readDoctor {}",e.toString());
+			throw new CorvustecException("Error al readDoctor");
 		}
 	}
 }
