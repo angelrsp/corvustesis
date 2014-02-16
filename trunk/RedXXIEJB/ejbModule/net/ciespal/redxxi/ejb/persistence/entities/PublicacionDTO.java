@@ -57,6 +57,16 @@ public class PublicacionDTO implements Serializable {
 	@Column(name="pub_isbn")
 	private String pubIsbn;
 
+	@Column(name="pub_autor")
+	private String pubAutor;
+
+	@Column(name="pub_campo_conocimiento")
+	private Integer pubCampoConocimiento;
+
+	@Column(name="pub_ubicacion")
+	private Integer pubUbicacion;
+
+	
 	//bi-directional many-to-one association to EntidadDTO
 	@OneToMany(mappedBy="atePublicacion",fetch=FetchType.EAGER,cascade=CascadeType.PERSIST)
 	private List<EntidadDTO> ateEntidads;
@@ -150,6 +160,30 @@ public class PublicacionDTO implements Serializable {
 
 	public void setPubIsbn(String pubIsbn) {
 		this.pubIsbn = pubIsbn;
+	}
+
+	public String getPubAutor() {
+		return pubAutor;
+	}
+
+	public void setPubAutor(String pubAutor) {
+		this.pubAutor = pubAutor;
+	}
+
+	public Integer getPubCampoConocimiento() {
+		return pubCampoConocimiento;
+	}
+
+	public void setPubCampoConocimiento(Integer pubCampoConocimiento) {
+		this.pubCampoConocimiento = pubCampoConocimiento;
+	}
+
+	public Integer getPubUbicacion() {
+		return pubUbicacion;
+	}
+
+	public void setPubUbicacion(Integer pubUbicacion) {
+		this.pubUbicacion = pubUbicacion;
 	}
 
 	public String getPubTituloPublicacion() {

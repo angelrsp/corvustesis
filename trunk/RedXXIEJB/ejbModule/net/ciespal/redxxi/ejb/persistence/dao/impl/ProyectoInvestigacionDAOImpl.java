@@ -12,6 +12,7 @@ import javax.persistence.criteria.Root;
 import net.ciespal.redxxi.ejb.persistence.dao.ProyectoInvestigacionDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
 
 import com.corvustec.commons.util.CorvustecException;
@@ -36,6 +37,24 @@ public class ProyectoInvestigacionDAOImpl extends AbstractFacadeImpl<ProyectoInv
 		Path<CarreraDTO> join1=from.join("ateEntidads");
 		
 		cq.where(cb.equal(join1.get("ateCarrera"), carrera.getCarCodigo()));
+		
+		List<ProyectoInvestigacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
+	
+	@Override
+	public List<ProyectoInvestigacionDTO> getAll(OrganizacionDTO org) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<ProyectoInvestigacionDTO> cq=cb.createQuery(ProyectoInvestigacionDTO.class);
+		Root<ProyectoInvestigacionDTO> from = cq.from(ProyectoInvestigacionDTO.class);
+		
+		Path<OrganizacionDTO> join1=from.join("ateEntidads");
+		
+		cq.where(cb.equal(join1.get("ateOrganizacion"), org.getOrgCodigo()));
 		
 		List<ProyectoInvestigacionDTO> list=entityManager.createQuery(cq).getResultList();
 		if(list.isEmpty())

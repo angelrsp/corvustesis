@@ -45,6 +45,22 @@ public class PublicacionDAOImpl extends AbstractFacadeImpl<PublicacionDTO> imple
 	}
 	
 	
+	@Override
+	public List<PublicacionDTO> getAll(Object ubicacion) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<PublicacionDTO> cq=cb.createQuery(PublicacionDTO.class);
+		Root<PublicacionDTO> from = cq.from(PublicacionDTO.class);
+		
+		cq.where(cb.equal(from.get("pubUbicacion"),ubicacion));
+		
+		List<PublicacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
+	
 	
 	@Override
 	public void remove2(PublicacionDTO pub)

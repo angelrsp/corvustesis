@@ -8,6 +8,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EventoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
@@ -90,5 +91,20 @@ public interface AteneaService {
 	EventoDTO createOrUpdateEvento(EventoDTO evento) throws CorvustecException;
 
 	void deleteEvento(EventoDTO evento) throws CorvustecException;
+
+	List<EventoDTO> readEvento(OrganizacionDTO org) throws CorvustecException;
+
+	List<ProyectoInvestigacionDTO> readProyectoInvestigacion(OrganizacionDTO org)
+			throws CorvustecException;
+
+	List<DoctorDTO> readDoctor(Object ubicacion) throws CorvustecException;
+
+	DoctorDTO createDoctor(DoctorDTO doctor) throws CorvustecException;
+
+	List<ContactoListDTO> readContacto(DoctorDTO doctor)
+			throws CorvustecException;
+
+	List<PublicacionDTO> readPublicacion(Object ubicacion)
+			throws CorvustecException;
 
 }
