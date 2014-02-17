@@ -27,6 +27,9 @@ public class OpcionDTO implements Serializable {
 	@Column(name="opc_url")
 	private String opcUrl;
 
+	@Column(name="opc_icono")
+	private String opcIcono;
+
 	//bi-directional many-to-one association to AccesoDTO
 	@OneToMany(mappedBy="indOpcion",fetch=FetchType.EAGER)
 	private List<AccesoDTO> indAccesos;
@@ -60,6 +63,14 @@ public class OpcionDTO implements Serializable {
 
 	public List<AccesoDTO> getIndAccesos() {
 		return this.indAccesos;
+	}
+
+	public String getOpcIcono() {
+		return opcIcono;
+	}
+
+	public void setOpcIcono(String opcIcono) {
+		this.opcIcono = opcIcono;
 	}
 
 	public void setIndAccesos(List<AccesoDTO> indAccesos) {
