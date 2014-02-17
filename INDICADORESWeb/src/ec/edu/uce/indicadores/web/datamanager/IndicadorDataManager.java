@@ -7,6 +7,7 @@ import javax.faces.bean.SessionScoped;
 
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ModeloDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.UsuarioDTO;
 
 @SessionScoped
 @ManagedBean(name="indicadorDataManager")
@@ -23,9 +24,15 @@ public class IndicadorDataManager implements Serializable{
 	
 	private IesDTO iesDTO;
 	private ModeloDTO modeloDTO;
+
+	private UsuarioDTO user;
+	
+	
+	
 	
 	public IndicadorDataManager() {
 		
+		user=new UsuarioDTO();
 	}
 
 	public Object getIes() {
@@ -58,5 +65,15 @@ public class IndicadorDataManager implements Serializable{
 
 	public void setModeloDTO(ModeloDTO modeloDTO) {
 		this.modeloDTO = modeloDTO;
+	}
+
+
+
+	public UsuarioDTO getUser() {
+		return user;
+	}
+
+	public void setUser(UsuarioDTO user) {
+		this.user = user;
 	}
 }
