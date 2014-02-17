@@ -30,6 +30,8 @@ public class LoginController implements Serializable{
 
 	private CredencialesDTO credencialesDTO;
 
+
+	
 	public LoginController() {
 	}
 
@@ -71,7 +73,7 @@ public class LoginController implements Serializable{
 	      try {
 			HttpSession session = JsfUtil.getSession();
 		      session.invalidate();
-			JsfUtil.redirect("/INDICADORESWeb/index.jsf");
+			JsfUtil.redirect("/INDICADORESWeb/pages/index.jsf");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
