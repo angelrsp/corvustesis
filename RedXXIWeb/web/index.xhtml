@@ -8,16 +8,62 @@
 
 <h:head>
 
-
+<title>Ciespal - Red Siglo XXI</title>
 
 </h:head>
 
 
 <body>
 
+<h:form>
 
-<ui:composition template="/WEB-INF/template/privado.xhtml"></ui:composition>
+<table width="100%">
 
+<tr align="center"><td colspan="3">Ciespal</td></tr>
+
+<tr>
+
+	<td width="33%" align="left">
+		<table>
+			<tr>
+				<td>
+					<h:dataTable value="#{indexController.catalogoDataManager.catalogoList}" var="cat">
+		    			<h:column>
+		    				<f:facet name="header">Paises</f:facet>
+		    				<h:commandLink actionListener="#{indexController.paises}" value="#{cat.catDescripcion}" />
+		    			</h:column>					
+					</h:dataTable>
+				</td>
+			</tr>
+		</table>
+	
+	</td>
+	
+	<td width="33%" align="center">
+		<table>
+			<tr>
+				<td>
+					<h:dataTable value="#{noticiaController.noticiaDataManager.noticiaList}" var="noti" width="100%">
+					
+		    			<h:column>
+		    				<f:facet name="header">Noticias</f:facet>
+		    				<h:outputText value="#{noti.notDescripcion}" escape="false"/>
+		    			</h:column>										
+					
+					</h:dataTable>
+				</td>
+			</tr>
+		</table>
+	</td>
+	
+	
+	
+	<td width="33%" align="right"><a href="pages/home.jsf">Entrar</a></td>
+</tr>
+
+</table>
+
+</h:form>
 </body>
 
 </html>
