@@ -15,6 +15,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EventoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.NoticiaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
@@ -531,4 +532,35 @@ public class AteneaServiceImpl implements AteneaService{
 			throw new CorvustecException("Error al readDoctor");
 		}
 	}
+	
+	/* Noticia */	
+	@Override
+	public NoticiaDTO createNoticia(NoticiaDTO noticia) throws CorvustecException
+	{
+		logger.info("createNoticia");
+		try{
+			return factoryDAO.getNoticiaDAOImpl().create(noticia);
+		}
+		catch(Exception e){
+			logger.info("Error createNoticia {}",e.toString());
+			throw new CorvustecException("Error al createNoticia");
+		}
+	}
+	
+	@Override
+	public List<NoticiaDTO> readNoticia() throws CorvustecException
+	{
+		logger.info("readNoticia");
+		try{
+			return factoryDAO.getNoticiaDAOImpl().getAll();
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readNoticia {}",e.toString());
+			throw new CorvustecException("Error al readNoticia");
+		}
+	}
+
+	
+
 }
