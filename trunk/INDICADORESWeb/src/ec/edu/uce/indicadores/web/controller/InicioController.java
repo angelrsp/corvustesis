@@ -1,5 +1,6 @@
 package ec.edu.uce.indicadores.web.controller;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,11 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.MenuModel;
@@ -40,7 +45,7 @@ public class InicioController extends SelectItemController {
 	@PostConstruct
 	private void init()
 	{
-		indicadorDataManager.setUser((UsuarioDTO)JsfUtil.getObject("UsuarioDTO"));
+		indicadorDataManager.setUser((UsuarioDTO)JsfUtil.getObject("UsuarioDTO"));		
 		menuModel=new DefaultMenuModel();
 	}
 	
@@ -52,6 +57,10 @@ public class InicioController extends SelectItemController {
 		} catch (IndicadoresException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public IndicadorDataManager getIndicadorDataManager() {
+		return indicadorDataManager;
 	}
 
 	public void setIndicadorDataManager(IndicadorDataManager indicadorDataManager) {
@@ -90,6 +99,24 @@ public class InicioController extends SelectItemController {
 
 	public void setMenuModel(MenuModel menuModel) {
 		this.menuModel = menuModel;
+	}
+	
+	
+	public StreamedContent getImage(){
+		String mime;
+		FacesContext context = FacesContext.getCurrentInstance();
+		if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+            // So, we're rendering the HTML. Return a stub StreamedContent so that it will generate right URL.
+            return new DefaultStreamedContent();
+        }else{
+			if(indicadorDataManager.getUser().getIndy().getIesImagen()!=null)
+			{
+				mime=JsfUtil.getTypeFile(indicadorDataManager.getUser().getIndy().getIesImagen());
+				return new DefaultStreamedContent(new ByteArrayInputStream(indicadorDataManager.getUser().getIndy().getIesImagen()),mime);
+			}
+			else
+				return new DefaultStreamedContent();
+        }
 	}
 	
 }
