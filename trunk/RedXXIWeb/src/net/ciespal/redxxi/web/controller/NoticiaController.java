@@ -42,7 +42,7 @@ public class NoticiaController {
 	public void save()
 	{
 		try {
-			ateneaService.createNoticia(noticiaDataManager.getNoticia());
+			ateneaService.createOrUpdateNoticia(noticiaDataManager.getNoticia());
 			readNoticia();
 			noticiaDataManager.setNoticia(new NoticiaDTO());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
@@ -59,4 +59,21 @@ public class NoticiaController {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
+	
+	public void edit(NoticiaDTO noti)
+	{
+		noticiaDataManager.setNoticia(noti);
+	}
+	
+	public void delete(NoticiaDTO noti)
+	{
+		try {
+			ateneaService.deleteNoticia(noti);
+			readNoticia(); 
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
 }
