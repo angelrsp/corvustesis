@@ -3,11 +3,14 @@ package net.ciespal.redxxi.ejb.persistence.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
+
+import com.corvustec.commons.util.CorvustecException;
 
 import net.ciespal.redxxi.ejb.persistence.dao.NoticiaDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
@@ -34,6 +37,8 @@ public class NoticiaDAOImpl extends AbstractFacadeImpl<NoticiaDTO> implements No
 		
 		cq.where(cb.isNull(join1.get("entCodigo")));
 		
+		cq.orderBy(cb.desc(from.get("notDestacado")),cb.desc(from.get("notFecha")));
+		
 		List<NoticiaDTO> list=entityManager.createQuery(cq).getResultList();
 		if(list.isEmpty())
 			return null;
@@ -41,4 +46,12 @@ public class NoticiaDAOImpl extends AbstractFacadeImpl<NoticiaDTO> implements No
 			return list;
 	}
 	
+	@Override
+	public void remove2(NoticiaDTO noticia) throws CorvustecException
+	{
+		Query query;
+		query=entityManager.createQuery("delete from NoticiaDTO noti where noti.notCodigo=:codigo");
+		query.setParameter("codigo", noticia.getNotCodigo());
+		query.executeUpdate();
+	}
 }

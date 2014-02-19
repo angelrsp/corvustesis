@@ -108,8 +108,11 @@ public interface AteneaService {
 	List<PublicacionDTO> readPublicacion(Object ubicacion)
 			throws CorvustecException;
 
-	NoticiaDTO createNoticia(NoticiaDTO noticia) throws CorvustecException;
-
 	List<NoticiaDTO> readNoticia() throws CorvustecException;
+
+	NoticiaDTO createOrUpdateNoticia(NoticiaDTO noticia)
+			throws CorvustecException;
+
+	void deleteNoticia(NoticiaDTO noticia) throws CorvustecException;
 
 }

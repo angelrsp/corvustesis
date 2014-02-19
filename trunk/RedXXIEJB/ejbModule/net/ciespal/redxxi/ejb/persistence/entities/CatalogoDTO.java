@@ -1,7 +1,9 @@
 package net.ciespal.redxxi.ejb.persistence.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -24,6 +26,16 @@ public class CatalogoDTO implements Serializable {
 	@Column(name="cat_descripcion")
 	private String catDescripcion;
 
+	@Column(name="cat_descripcion2")
+	private String catDescripcion2;
+
+	@Column(name="cat_auxiliar")
+	private String catAuxiliar;
+
+	@Column(name="cat_imagen")
+	private byte[] catImagen;
+
+	
 	//bi-directional many-to-one association to CatalogoDTO
 	@ManyToOne
 	@JoinColumn(name="cat_predecesor")
@@ -34,6 +46,11 @@ public class CatalogoDTO implements Serializable {
 	private List<CatalogoDTO> ateCatalogos;
 
 	public CatalogoDTO() {
+	}
+
+	public CatalogoDTO(Integer catCodigo) {
+		super();
+		this.catCodigo = catCodigo;
 	}
 
 	public Integer getCatCodigo() {
@@ -50,6 +67,30 @@ public class CatalogoDTO implements Serializable {
 
 	public void setCatDescripcion(String catDescripcion) {
 		this.catDescripcion = catDescripcion;
+	}
+
+	public String getCatDescripcion2() {
+		return catDescripcion2;
+	}
+
+	public void setCatDescripcion2(String catDescripcion2) {
+		this.catDescripcion2 = catDescripcion2;
+	}
+
+	public String getCatAuxiliar() {
+		return catAuxiliar;
+	}
+
+	public void setCatAuxiliar(String catAuxiliar) {
+		this.catAuxiliar = catAuxiliar;
+	}
+
+	public byte[] getCatImagen() {
+		return catImagen;
+	}
+
+	public void setCatImagen(byte[] catImagen) {
+		this.catImagen = catImagen;
 	}
 
 	public CatalogoDTO getAteCatalogo() {
