@@ -1,5 +1,7 @@
 package net.ciespal.redxxi.ejb.negocio.impl;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -535,18 +537,35 @@ public class AteneaServiceImpl implements AteneaService{
 	
 	/* Noticia */	
 	@Override
-	public NoticiaDTO createNoticia(NoticiaDTO noticia) throws CorvustecException
+	public NoticiaDTO createOrUpdateNoticia(NoticiaDTO noticia) throws CorvustecException
 	{
 		logger.info("createNoticia");
 		try{
-			return factoryDAO.getNoticiaDAOImpl().create(noticia);
+			noticia.setNotFecha(new Timestamp(new Date().getTime()));
+			if(noticia.getNotCodigo()!=null)
+				return factoryDAO.getNoticiaDAOImpl().edit(noticia);
+			else
+				return factoryDAO.getNoticiaDAOImpl().create(noticia);
 		}
 		catch(Exception e){
 			logger.info("Error createNoticia {}",e.toString());
 			throw new CorvustecException("Error al createNoticia");
 		}
 	}
-	
+
+	@Override
+	public void deleteNoticia(NoticiaDTO noticia) throws CorvustecException
+	{
+		logger.info("createNoticia");
+		try{
+			factoryDAO.getNoticiaDAOImpl().remove2(noticia);
+		}
+		catch(Exception e){
+			logger.info("Error createNoticia {}",e.toString());
+			throw new CorvustecException("Error al createNoticia");
+		}
+	}
+
 	@Override
 	public List<NoticiaDTO> readNoticia() throws CorvustecException
 	{

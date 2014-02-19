@@ -1,7 +1,10 @@
 package net.ciespal.redxxi.ejb.persistence.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -24,6 +27,19 @@ public class NoticiaDTO implements Serializable {
 	@Column(name="not_descripcion")
 	private String notDescripcion;
 
+	@Column(name="not_resumen")
+	private String notResumen;
+
+	@Column(name="not_destacado")
+	private Boolean notDestacado;
+
+	@Column(name="not_activo")
+	private Boolean notActivo;
+	
+	@Column(name="not_fecha")
+	private Timestamp notFecha;
+	
+
 	//bi-directional many-to-one association to EntidadDTO
 	@OneToMany(mappedBy="ateNoticia")
 	private List<EntidadDTO> ateEntidads;
@@ -45,6 +61,38 @@ public class NoticiaDTO implements Serializable {
 
 	public void setNotDescripcion(String notDescripcion) {
 		this.notDescripcion = notDescripcion;
+	}
+
+	public String getNotResumen() {
+		return notResumen;
+	}
+
+	public void setNotResumen(String notResumen) {
+		this.notResumen = notResumen;
+	}
+
+	public Boolean getNotDestacado() {
+		return notDestacado;
+	}
+
+	public void setNotDestacado(Boolean notDestacado) {
+		this.notDestacado = notDestacado;
+	}
+
+	public Boolean getNotActivo() {
+		return notActivo;
+	}
+
+	public void setNotActivo(Boolean notActivo) {
+		this.notActivo = notActivo;
+	}
+
+	public Timestamp getNotFecha() {
+		return notFecha;
+	}
+
+	public void setNotFecha(Timestamp notFecha) {
+		this.notFecha = notFecha;
 	}
 
 	public List<EntidadDTO> getAteEntidads() {
