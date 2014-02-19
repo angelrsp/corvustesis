@@ -32,6 +32,9 @@ public class UsuarioDTO implements Serializable {
 	@Column(name="usu_mail")
 	private String usuMail;
 
+	@Column(name="usu_nombre")
+	private String usuNombre;
+
 	//bi-directional many-to-one association to IesDTO
 	@ManyToOne
 	@JoinColumn(name="usu_ies")
@@ -74,6 +77,14 @@ public class UsuarioDTO implements Serializable {
 
 	public void setUsuMail(String usuMail) {
 		this.usuMail = usuMail;
+	}
+
+	public String getUsuNombre() {
+		return usuNombre;
+	}
+
+	public void setUsuNombre(String usuNombre) {
+		this.usuNombre = usuNombre;
 	}
 
 	public IesDTO getIndy() {

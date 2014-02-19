@@ -31,5 +31,7 @@ public interface FactoryDAO {
 
 	OpcionDAO getOpcionDAOImpl();
 
+	ParametroDAO getParametroDAOImpl();
+
 	
 }
