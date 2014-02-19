@@ -31,8 +31,8 @@
 		<h:form>
 			<p:menubar>  
 				<p:submenu label="Sistema">
-						
 					<p:menuitem value="NOTICIAS" url="/pages/sistema/noticia.jsf" />
+					<p:menuitem value="UBICACIONES" url="/pages/sistema/ubicacion.jsf" />
 				</p:submenu>
 				
 		        <p:submenu label="Atenea">
@@ -48,7 +48,7 @@
 			        <p:separator />  			              
 			     </p:submenu>  
 		
-		        <p:menuitem value="Salir" url="#" icon="ui-icon-close" />  
+		        <p:menuitem value="Salir" actionListener="#{loginController.logout}" icon="ui-icon-close" />  
 		  
 		    </p:menubar>  
 					

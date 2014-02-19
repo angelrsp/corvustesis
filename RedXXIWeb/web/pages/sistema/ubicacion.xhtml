@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/template/privado.xhtml">
+	<ui:define name="contenido">
+	
+	
+		<p:growl id="growl"/>
+		
+		<p:panel id="pnlDato" header="#{i18n['label.panel.noticia']}">
+		
+			<table>
+
+				<tr>
+					<td><h:outputText value="#{i18n['label.nombre.completo']}:&#160;" /></td>
+					<td><p:inputText required="true" requiredMessage="#{i18n['label.nombre.completo']}&#160;#{i18n['label.requerido']}" value="#{ubicacionDataManager.pais.catDescripcion2}"/></td>
+					
+					<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
+					<td><p:inputText required="true" requiredMessage="#{i18n['label.nombre']}&#160;#{i18n['label.requerido']}" value="#{ubicacionDataManager.pais.catDescripcion}"/></td>							
+				</tr>
+
+				<tr>
+					<td><h:outputText value="#{i18n['label.imagen']}:&#160;" /></td>
+					<td><p:fileUpload fileUploadListener="#{ubicacionController.handleFileUpload}" mode="advanced" dragDropSupport="true"  
+                  		update="growl,image" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" oncomplete="location.reload(true)" auto="true"/></td>
+					<td><p:graphicImage id="image" value="#{ubicacionController.image}" cache="false" height="80"/></td>                  								
+				</tr>
+
+				<tr>
+					<td><h:outputText value="#{i18n['label.poblacion']}:&#160;" /></td>
+					<td><p:inputText required="true" requiredMessage="#{i18n['label.poblacion']}&#160;#{i18n['label.requerido']}" value="#{ubicacionDataManager.pais.catAuxiliar}"/></td>
+				</tr>
+
+								
+			</table>
+			
+			<p:dataTable value="#{ubicacionController.ubicacionDataManager.paisList}" var="pai">
+
+				<p:column headerText="#{i18n['label.nombre.completo']}">
+					<h:outputText value="#{pai.catDescripcion2}"/>
+				</p:column>					
+			
+				<p:column headerText="#{i18n['label.nombre']}">
+					<h:outputText value="#{pai.catDescripcion}"/>
+				</p:column>					
+
+				<p:column headerText="#{i18n['label.poblacion']}">
+					<h:outputText value="#{pai.catAuxiliar}"/>
+				</p:column>					
+			
+			</p:dataTable>
+			
+		</p:panel>
+	</ui:define>
+</ui:composition>
+		
+</html>
