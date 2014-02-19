@@ -35,10 +35,14 @@
 					<td><p:inputText required="true" requiredMessage="#{i18n['label.poblacion']}&#160;#{i18n['label.requerido']}" value="#{ubicacionDataManager.pais.catAuxiliar}"/></td>
 				</tr>
 
+			<tr>
+				<td colspan="4" align="center"><p:commandButton value="#{i18n['boton.guardar']}" process="pnlDato" update="pnlDato,growl" actionListener="#{ubicacionController.savePais}"/></td>
+			</tr>							
+
 								
 			</table>
 			
-			<p:dataTable value="#{ubicacionController.ubicacionDataManager.paisList}" var="pai">
+			<p:dataTable id="tblPais" value="#{ubicacionController.ubicacionDataManager.paisList}" var="pai">
 
 				<p:column headerText="#{i18n['label.nombre.completo']}">
 					<h:outputText value="#{pai.catDescripcion2}"/>
@@ -52,6 +56,15 @@
 					<h:outputText value="#{pai.catAuxiliar}"/>
 				</p:column>					
 			
+				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{ubicacionController.editPais(pai)}" icon="ui-icon-pencil" process=":contenido:tblPais" update=":contenido:pnlDato"/>
+				</p:column>
+				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{ubicacionController.deletePais(pai)}" icon="ui-icon-close" process=":contenido:tblPais" update=":contenido:pnlDato">
+						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+					</p:commandButton>
+				</p:column>
+						
 			</p:dataTable>
 			
 		</p:panel>
