@@ -16,12 +16,13 @@ body{font-size: 9pt;font-weight:normal;}
 
 .ui-menuitem-text
 {
-	font-weight: bold;	
+	font-weight: bold;
+	font-size: 15pt;
 }
 
 .ui-slidemenu-content {
    min-height: 300px;
-   width: 200px;
+   width: 500px;
 }
 
 .red { color: red; }
@@ -42,6 +43,10 @@ html, body {
     width: 100%;
 }
 
+.jqplot-title{
+     color:red;
+     font-size: 30pt;
+}
 
 .ies {
 	background-image: url("../images/ies.png") !important;
