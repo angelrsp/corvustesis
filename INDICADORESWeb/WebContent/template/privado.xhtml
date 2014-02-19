@@ -22,7 +22,7 @@
 							<tr>	
 								<td><p:graphicImage value="#{inicioController.image}" height="100"/> </td>
 								<td><h:outputText style="color:white; font-size: 12pt;font-weight: bold;" value="Institución de Educacion Superior:" /></td>
-								<td><h:outputText style="color:white;" value="#{inicioController.indicadorDataManager.user.indy.iesRazonSocial}" /></td>
+								<td><h:outputText style="color:white; font-size: 12pt" value="#{inicioController.indicadorDataManager.user.indy.iesRazonSocial}" /></td>
 							</tr>
 						</table>	
 					</td>									
@@ -74,11 +74,11 @@
 						
 <!-- 					</p:slideMenu> -->
 					
-					<p:slideMenu id="menuPrivado2" backLabel="Atrás" style="width:200px" model="#{inicioController.menuModel}">
+					<p:slideMenu id="menuPrivado2" backLabel="Atrás" style="width:290px" model="#{inicioController.menuModel}">
 												
 					</p:slideMenu>					
 					
-					<p:menu style="width:200px">
+					<p:menu style="width:290px">
 						<p:menuitem value="Salir" actionListener="#{loginController.logout}" icon="exit"/>
 					</p:menu>
 					

@@ -33,6 +33,33 @@
 				</table>
 				
 				
+				<table>
+					<tr>
+						<td><h:outputLabel value="#{i18n['label.modelo']}:&#160;" /> </td>
+						<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.modelo']}:&#160;#{i18n['label.requerido']}" value="#{accesoController.modelo}">
+								<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+								<f:selectItems value="#{accesoController.modeloList}"></f:selectItems>
+								<p:ajax event="change" process="@this" update="tree" listener="#{accesoController.obtenerArbol}" immediate="true"></p:ajax>
+								<p:ajax event="change" process="@this" update="tree" listener="#{accesoController.obtenerArbol}" immediate="true"></p:ajax>										
+						</p:selectOneMenu></td>
+					</tr>
+					<tr>
+						<td><h:outputLabel value="#{i18n['label.ies']}:&#160;" /> </td>
+						<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{accesoController.ies}">
+								<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+								<f:selectItems value="#{accesoController.iesList}"></f:selectItems>
+								<p:ajax event="change" process="@this" update="tree" listener="#{accesoController.obtenerArbol}" immediate="true"></p:ajax>
+								<p:ajax event="change" process="@this" update="tree" listener="#{accesoController.obtenerArbol}" immediate="true"></p:ajax>																			
+						</p:selectOneMenu></td>
+					</tr>
+				</table>
+				
+				<p:tree value="#{accesoController.rootNode}" var="node" id="tree" selectionMode="checkbox">
+			        <p:treeNode id="treeNode">  
+			            <h:outputText value="#{node.indNombreCorto}"/>  
+			        </p:treeNode>  
+			    </p:tree>  
+				
 			</p:panel>
 		</h:form>
 	</ui:define>

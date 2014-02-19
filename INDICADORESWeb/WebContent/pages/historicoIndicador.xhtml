@@ -60,12 +60,19 @@
 						<p:pieChart id="sample" value="#{historicoIndicadorController.pieModel}" legendPosition="w"  
                 			title="Historial" style="width:400px;height:300px" showDataLabels="true" /> 					
 						</div>
+						
+						<br/>
+						
+						<div>
 						<p:lineChart id="lineChart" value="#{historicoIndicadorController.categoryModel}" legendPosition="ne"   
 			             title="Historial" style="height:300px;margin-top:20px" xaxisLabel="" yaxisLabel="Valor" animate="true"  /> 
-					
+						</div>
+						
+						<br/>
+						
 						<div align="center">
 						<p:meterGaugeChart id="sampleDash" value="#{historicoIndicadorController.meterGaugeModel}" 
-							style="width:400px;height:250px" title="Ideal / Objetivo" label="km/h"/>  						
+							style="width:400px;height:250px" title="Ideal / Objetivo" label="%"/>  						
 						</div>
 					<table width="100%">
 						<tr>
