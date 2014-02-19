@@ -11,6 +11,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.event.FileUploadEvent;
+
 import ec.edu.uce.indicadores.commons.util.IndicadoresException;
 import ec.edu.uce.indicadores.ejb.negocio.IndicadorService;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
@@ -100,7 +102,6 @@ public class IesController extends SelectItemController implements Serializable{
 			iesDTO=new IesDTO();
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 		} catch (IndicadoresException e) {
-			// TODO Auto-generated catch block
 			JsfUtil.addErrorMessage(e.toString());
 		}	
 	}
@@ -118,7 +119,6 @@ public class IesController extends SelectItemController implements Serializable{
 			indicadorService.agregarRegistro(registroDTO);
 			obtenerRegistroLista(getIesDTO());
 		} catch (IndicadoresException e) {
-			// TODO Auto-generated catch block
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
@@ -138,4 +138,14 @@ public class IesController extends SelectItemController implements Serializable{
 	{
 		setIesDTO(new IesDTO());
 	}
+	
+	
+	public void handleFileUpload(FileUploadEvent event)
+	{
+		JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+		getIesDTO().setIesImagen(event.getFile().getContents());
+		getIesDTO().setIesImagenName(event.getFile().getFileName());
+	}
+
+	
 }

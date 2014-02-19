@@ -96,20 +96,17 @@ public class AccesoController implements Serializable {
 	public void readAcceso()
 	{
 		PerfilDTO perfil;
-		Boolean flag=false;
 		try {
 			checkList=new HashMap<String,OpcionDTO>();
 			perfil=new PerfilDTO();
 			perfil.setPerCodigo(Integer.valueOf(getPefilSelect().toString()));
 			opcionCheck=administracionService.readOpcion();
 
+			opcionSelect=new ArrayList<String>();
 			for(OpcionDTO opt: administracionService.readOpcion(perfil))
 			{
 				opcionSelect.add(opt.getOpcCodigo().toString());
-				flag=true;
 			}
-			if(!flag)
-				opcionSelect=new ArrayList<String>();
 			
 		} catch (IndicadoresException e) {
 			JsfUtil.addErrorMessage(e.toString());
