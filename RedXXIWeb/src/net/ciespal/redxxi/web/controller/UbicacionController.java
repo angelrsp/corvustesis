@@ -78,13 +78,19 @@ public class UbicacionController implements Serializable{
         }
 	}
 	
+	
+	
+	
 	public void savePais()
 	{
 		try {
-			administracionService.createCatalogo(ubicacionDataManager.getPais());
+			if(ubicacionDataManager.getImageBytePais()!=null)
+				ubicacionDataManager.getPais().setCatImagen(ubicacionDataManager.getImageBytePais());
+			administracionService.createOrUpdateCatalogo(ubicacionDataManager.getPais());
 			ubicacionDataManager.setPais(new CatalogoDTO());
+			ubicacionDataManager.setImageBytePais(null);
 			readPais();
-			JsfUtil.addErrorMessage("Guardado Exitosamente");
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
@@ -98,4 +104,15 @@ public class UbicacionController implements Serializable{
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
+	
+	public void editPais(CatalogoDTO pais)
+	{
+		ubicacionDataManager.setPais(pais);
+	}
+
+	public void deletePais(CatalogoDTO pais)
+	{
+		
+	}
+
 }
