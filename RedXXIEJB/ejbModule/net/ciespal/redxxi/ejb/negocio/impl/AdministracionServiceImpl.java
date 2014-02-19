@@ -52,6 +52,23 @@ public class AdministracionServiceImpl implements AdministracionService{
 	}
 	
 	@Override
+	public CatalogoDTO createOrUpdateCatalogo(CatalogoDTO catalogo) throws CorvustecException
+	{
+		logger.info("createOrUpdateCatalogo");
+		try{
+			if(catalogo.getCatCodigo()!=null)
+				return factoryDAO.getCatalogoImpl().edit(catalogo);
+			else
+				return factoryDAO.getCatalogoImpl().create(catalogo);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al createCatalogo" +e.toString());
+			throw new CorvustecException("Error al createCatalogo");
+		}
+	}
+	
+	@Override
 	public CatalogoDTO getCatalogo(Object id) throws CorvustecException
 	{
 		logger.info("getCatalogo");
