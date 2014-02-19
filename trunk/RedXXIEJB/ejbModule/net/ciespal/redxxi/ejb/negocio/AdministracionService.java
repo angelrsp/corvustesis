@@ -18,4 +18,7 @@ public interface AdministracionService {
 
 	CatalogoDTO getCatalogo(Object id) throws CorvustecException;
 
+	CatalogoDTO createOrUpdateCatalogo(CatalogoDTO catalogo)
+			throws CorvustecException;
+
 }
