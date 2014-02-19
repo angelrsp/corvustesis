@@ -19,6 +19,18 @@ public class CalendarUtil {
 		return year;
 	}
 
+	public static int getMonth() {
+		Calendar cal = Calendar.getInstance();
+		int month = cal.get(Calendar.MONTH);
+		return month+1;
+	}
+
+	public static int getDay() {
+		Calendar cal = Calendar.getInstance();
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		return day;
+	}
+
 	public static int getMonth(Timestamp da) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(da);
