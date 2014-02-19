@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import ec.edu.uce.indicadores.commons.util.ApplicationUtil;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -39,6 +41,17 @@ public class IesDTO implements Serializable {
 	@Column(name="ies_ruc")
 	private String iesRuc;
 
+	@Column(name="ies_imagen")
+	private byte[] iesImagen;
+
+	@Column(name="ies_imagen_name")
+	private String iesImagenName;
+
+	
+	@Transient
+	private String iesPathImagen;
+
+	
 	//bi-directional many-to-one association to LocalizacionDTO
 	@ManyToOne
 	@JoinColumn(name="ies_localizacion")
@@ -114,6 +127,32 @@ public class IesDTO implements Serializable {
 
 	public void setIesRuc(String iesRuc) {
 		this.iesRuc = iesRuc;
+	}
+
+	public byte[] getIesImagen() {
+		return iesImagen;
+	}
+
+	public void setIesImagen(byte[] iesImagen) {
+		this.iesImagen = iesImagen;
+	}
+
+	public String getIesImagenName() {
+		return iesImagenName;
+	}
+
+	public void setIesImagenName(String iesImagenName) {
+		this.iesImagenName = iesImagenName;
+	}
+
+	public String getIesPathImagen() {
+		if(getIesImagen()!=null)
+			iesPathImagen=ApplicationUtil.saveToDisk(getIesImagen(),getIesImagenName());
+		return iesPathImagen;
+	}
+
+	public void setIesPathImagen(String iesPathImagen) {
+		this.iesPathImagen = iesPathImagen;
 	}
 
 	public LocalizacionDTO getIndLocalizacion() {
