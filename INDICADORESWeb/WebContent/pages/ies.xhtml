@@ -53,11 +53,17 @@
 										requiredMessage="#{i18n['label.ley.creacion']}&#160;#{i18n['label.requerido']}"
 										value="#{iesController.iesDTO.iesLeyCreacion}"/><span class="red">*</span></td>
 						</tr>
+
+						<tr>
+							<td colspan="2"><p:fileUpload fileUploadListener="#{iesController.handleFileUpload}" mode="advanced" dragDropSupport="true"  
+                  				update="growl" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar"/></td>
+						</tr>
 						
 						<tr>
 							<td colspan="2" align="center">
 								<p:commandButton actionListener="#{iesController.guardarIes}" value="#{i18n['boton.guardar']}" process="pnlDatos" update="growl,pnlDatos,tblIes"/> </td>
 						</tr>
+					
 					
 					</table>	
 

@@ -15,19 +15,35 @@
 		<tr>
 			<td colspan="2">
 				<table width="100%" style="background-color:#003979; height: 100px;">
-<!-- 					<tr> -->
-<!-- 						<td align="center"><h:graphicImage value="/images/uce2.jpg" height="100" /></td> -->
-<!-- 					</tr> -->
 
 				<tr>
-				<td align="center">
-					<object type="application/x-shockwave-flash" 
-					height="110" width="800" data="../animation/flashvortex.swf">
-					<param name="movie" value="../animation/flashvortex.swf" />
-					<param name="menu" value="false" />
-					<param name="quality" value="high" />
-					</object>				
-				</td>
+					<td align="left" valign="bottom" width="33%">
+						<table>
+							<tr>	
+								<td><p:graphicImage value="#{inicioController.image}" height="100"/> </td>
+								<td><h:outputText style="color:white; font-size: 12pt;font-weight: bold;" value="Institución de Educacion Superior:" /></td>
+								<td><h:outputText style="color:white;" value="#{inicioController.indicadorDataManager.user.indy.iesRazonSocial}" /></td>
+							</tr>
+						</table>	
+					</td>									
+				
+					<td align="center" width="33%">
+						<object type="application/x-shockwave-flash" 
+						height="110" width="800" data="../animation/flashvortex.swf">
+						<param name="movie" value="../animation/flashvortex.swf" />
+						<param name="menu" value="false" />
+						<param name="quality" value="high" />
+						</object>				
+					</td>
+					
+					<td align="right" width="33%">
+						<table>
+							<tr>
+								<td><h:outputText style="color:white; font-size: 12pt;font-weight: bold;" value="Bienvenido:" /></td>
+								<td><h:outputText style="color:white; font-size: 12pt;" value="#{inicioController.indicadorDataManager.user.usuNombre}" /></td>
+							</tr>	
+						</table>	
+					</td>									
 				</tr>
 					
 					
