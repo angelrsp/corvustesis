@@ -13,8 +13,22 @@
 		
 		<table>
 			<tr>
+				<td><h:outputText value="#{i18n['label.resumen']}:&#160;" /></td>
+				<td><p:editor value="#{noticiaDataManager.noticia.notResumen}" required="true" requiredMessage="#{i18n['label.resumen']}&#160;#{i18n['label.requerido']}"/></td>
+			</tr>
+		
+			<tr>
 				<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>
-				<td><p:editor value="#{noticiaDataManager.noticia.notDescripcion}"/></td>
+				<td><p:editor value="#{noticiaDataManager.noticia.notDescripcion}" required="true" requiredMessage="#{i18n['label.descripcion']}&#160;#{i18n['label.requerido']}"/></td>
+			</tr>
+
+			<tr>
+				<td><h:outputText value="#{i18n['label.destacado']}:&#160;" /></td>
+				<td><p:selectBooleanButton value="#{noticiaDataManager.noticia.notDestacado}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/></td>
+			</tr>
+			<tr>	
+				<td><h:outputText value="#{i18n['label.activo']}:&#160;" /></td>
+				<td><p:selectBooleanButton value="#{noticiaDataManager.noticia.notActivo}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/></td>				
 			</tr>
 			
 			<tr>
@@ -22,12 +36,32 @@
 			</tr>							
 		</table>
 				
-		<p:dataTable value="#{noticiaController.noticiaDataManager.noticiaList}" var="noti">
-		
+		<p:dataTable id="tblNoticia" value="#{noticiaController.noticiaDataManager.noticiaList}" var="noti">
+
+			<p:column headerText="#{i18n['label.resumen']}">
+					<h:outputText value="#{noti.notResumen}" escape="false"/>
+			</p:column>				
 		
 			<p:column headerText="#{i18n['label.descripcion']}">
-					<h:outputText value="#{noti.notDescripcion}" />
+					<h:outputText value="#{noti.notDescripcion}" escape="false"/>
 			</p:column>		
+
+			<p:column headerText="#{i18n['label.activo']}">
+					<h:outputText value="#{noti.notActivo?'Si':'No'}"/>
+			</p:column>		
+		
+			<p:column headerText="#{i18n['label.destacado']}">
+					<h:outputText value="#{noti.notDestacado?'Si':'No'}"/>
+			</p:column>		
+
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{noticiaController.edit(noti)}" icon="ui-icon-pencil" process=":contenido:tblNoticia" update=":contenido:pnlDato"/>
+			</p:column>
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{noticiaController.delete(noti)}" icon="ui-icon-close" process=":contenido:tblNoticia" update=":contenido:pnlDato">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
+			</p:column>
 		
 		
 		</p:dataTable>		
