@@ -26,6 +26,18 @@ public class CalendarUtil {
 		return month + 1;
 	}
 
+	public static int getMonth() {
+		Calendar cal = Calendar.getInstance();
+		int month = cal.get(Calendar.MONTH);
+		return month+1;
+	}
+
+	public static int getDay() {
+		Calendar cal = Calendar.getInstance();
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		return day;
+	}
+	
 	public static Calendar getCalendar(int year, int month, int day) {
 		Calendar cal = GregorianCalendar.getInstance();
 		cal.set(Calendar.YEAR, year);
