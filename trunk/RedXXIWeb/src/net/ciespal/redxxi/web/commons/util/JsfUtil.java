@@ -1,8 +1,12 @@
 package net.ciespal.redxxi.web.commons.util;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -13,6 +17,8 @@ import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.corvustec.commons.util.CalendarUtil;
 
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicException;
@@ -111,6 +117,33 @@ public class JsfUtil {
 	          getSession(false);
 	 }
 
+	 public static String saveToDisk(byte[] bytefile)
+		{
+			String file,path,date,pathAbs,pathSave = null;
+			try {
+				//mime=getTypeFile(bytefile);
+				//mime=mime.split("/")[1];
+				file= UUID.randomUUID().toString();
+				//path=FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+				date=String.valueOf(CalendarUtil.getYear())+"\\"+String.valueOf(CalendarUtil.getMonth())+"\\"+String.valueOf(CalendarUtil.getDay());
+				
+				path=getRealPath()+"\\images\\tmp\\"+date;
+				File f= new File(path);
+				if(!f.exists())
+					f.mkdirs();
+				pathAbs=path+"\\"+file+".jpg";
+				pathSave="\\images\\tmp\\"+date+"\\"+file+".jpg";//+mime;
+				pathSave=pathSave.replace('\\', '/');
+				FileOutputStream fos=new FileOutputStream(pathAbs);
+				fos.write(bytefile);
+				fos.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return pathSave;
+		}
 	 
 	public static String getTypeFile(byte[] content)
 	{
