@@ -57,6 +57,7 @@ public class UbicacionController implements Serializable{
 	public void handleFileUpload(FileUploadEvent event)
 	{
 		JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+		ubicacionDataManager.setPathPrueba(JsfUtil.saveToDisk(event.getFile().getContents()));
 		ubicacionDataManager.setImageBytePais(event.getFile().getContents());
 		getImage();
 	}
