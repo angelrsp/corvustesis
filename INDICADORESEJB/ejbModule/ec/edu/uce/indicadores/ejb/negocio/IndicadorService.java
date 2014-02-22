@@ -22,9 +22,6 @@ public interface IndicadorService {
 	List<RepresentanteLegalListDTO> obtenerRepresentantes()
 			throws IndicadoresException;
 
-	void agregarRepresentanteLegal(RepresentanteLegalDTO representanteLegalDTO)
-			throws IndicadoresException;
-
 	List<ContactoListDTO> obtenerContactos(
 			RepresentanteLegalDTO representanteLegalDTO)
 			throws IndicadoresException;
@@ -80,6 +77,10 @@ public interface IndicadorService {
 	ModeloDTO obtenerModelo(Object id) throws IndicadoresException;
 
 	IesDTO obtenerIes(Object id) throws IndicadoresException;
+
+	void createOrUpdateRepresentanteLegal(
+			RepresentanteLegalDTO representanteLegalDTO)
+			throws IndicadoresException;
 
 
 }

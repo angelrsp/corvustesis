@@ -19,6 +19,7 @@ import ec.edu.uce.indicadores.ejb.persistence.dao.PerfilDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.RegistroDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.RepresentanteLegalDAO;
 import ec.edu.uce.indicadores.ejb.persistence.dao.UsuarioDAO;
+import ec.edu.uce.indicadores.ejb.persistence.dao.UsuarioPerfilDAO;
 
 
 @Stateless
@@ -54,6 +55,8 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private OpcionDAO opcionDAO;
 	
 	private ParametroDAO parametroDAO;
+	
+	private UsuarioPerfilDAO usuarioPerfilDAO;
 	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -166,6 +169,14 @@ public class FactoryDAOImpl implements FactoryDAO{
 			parametroDAO = new ParametroDAOImpl(entityManager);
 		}
 		return parametroDAO;
+	}
+
+	@Override
+	public UsuarioPerfilDAO getUsuarioPerfilDAOImpl() {
+		if (usuarioPerfilDAO == null) {
+			usuarioPerfilDAO = new UsuarioPerfilDAOImpl(entityManager);
+		}
+		return usuarioPerfilDAO;
 	}
 
 }
