@@ -1,5 +1,6 @@
 package ec.edu.uce.indicadores.web.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import ec.edu.uce.indicadores.commons.util.IndicadoresException;
@@ -15,6 +17,7 @@ import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.PerfilDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.UsuarioDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.UsuarioPerfilDTO;
+import ec.edu.uce.indicadores.web.datamanager.IndicadorDataManager;
 import ec.edu.uce.indicadores.web.util.JsfUtil;
 
 @ViewScoped
@@ -29,6 +32,9 @@ public class UsuarioController extends SelectItemController implements Serializa
 	@EJB
 	private AdministracionService administracionService;
 	
+	@ManagedProperty(value="#{indicadorDataManager}")
+	private IndicadorDataManager indicadorDataManager;
+	
 	private UsuarioDTO user;
 	private List<UsuarioDTO> userList;
 	
@@ -37,6 +43,7 @@ public class UsuarioController extends SelectItemController implements Serializa
 	private Object iesSelect;
 	private Object perfilSelect;
 	
+	private Boolean disabledIes;
 	
 	public UsuarioController() {
 	}
@@ -44,10 +51,26 @@ public class UsuarioController extends SelectItemController implements Serializa
 	@PostConstruct
 	private void init()
 	{
+		if(indicadorDataManager.getIes()!=null)
+			iesSelect=indicadorDataManager.getIes();
+		else{
+			try {
+				JsfUtil.redirect("home.jsf");
+			} catch (IOException e) {
+				JsfUtil.addErrorMessage(e.toString());
+			}
+		}
 		user=new UsuarioDTO();
 		userList=new ArrayList<UsuarioDTO>();
 		perfilList=new ArrayList<PerfilDTO>();
+		readUser();
+		disabledIes=true;
 	}
+	
+	public void setIndicadorDataManager(IndicadorDataManager indicadorDataManager) {
+		this.indicadorDataManager = indicadorDataManager;
+	}
+
 	
 	public UsuarioDTO getUser() {
 		return user;
@@ -85,6 +108,14 @@ public class UsuarioController extends SelectItemController implements Serializa
 		this.perfilList = perfilList;
 	}
 
+	public Boolean getDisabledIes() {
+		return disabledIes;
+	}
+
+	public void setDisabledIes(Boolean disabledIes) {
+		this.disabledIes = disabledIes;
+	}
+
 	public Object getPerfilSelect() {
 		return perfilSelect;
 	}
@@ -99,8 +130,12 @@ public class UsuarioController extends SelectItemController implements Serializa
 			up=new UsuarioPerfilDTO();
 			up.setIndPerfil(new PerfilDTO(Integer.valueOf(getPerfilSelect().toString())));
 			getUser().setIndy(new IesDTO(Integer.valueOf(iesSelect.toString())));
+			getUser().setIndUsuarioPerfils(new ArrayList<UsuarioPerfilDTO>());
 			getUser().addIndUsuarioPerfil(up);
-			administracionService.createUser(getUser());
+			
+			administracionService.createOrUpdateUser(getUser());
+			
+			setUser(new UsuarioDTO());
 			readUser();
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 		} catch (IndicadoresException e) {
@@ -119,4 +154,16 @@ public class UsuarioController extends SelectItemController implements Serializa
 		}
 	}
 	
+	
+	public void editUser(UsuarioDTO user)
+	{
+		setUser(user);
+		setPerfilSelect(user.getIndUsuarioPerfils().get(0).getIndPerfil().getPerCodigo());
+	}
+	
+	public void deleteUser(UsuarioDTO user)
+	{
+		//setUser(user);
+	}
+
 }

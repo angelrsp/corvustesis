@@ -1,5 +1,6 @@
 package ec.edu.uce.indicadores.web.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,18 +66,29 @@ public class AccesoController extends SelectItemController implements Serializab
 	
 	private IndicadorDTO indicadorDTO;
 	
+	private Boolean disabled;
+	
 	public AccesoController() {
 	}
 	
 	@PostConstruct
 	private void init()	{
+		indicadorDTO=new IndicadorDTO();
 		perfilList=new ArrayList<PerfilDTO>(); 
 		opcionCheck=new ArrayList<OpcionDTO>();
 		opcionSelect=new ArrayList<String>();
+		if(indicadorDataManager.getIes()!=null)
+			ies=indicadorDataManager.getIes();
+		else{
+			try {
+				JsfUtil.redirect("home.jsf");
+			} catch (IOException e) {
+				JsfUtil.addErrorMessage(e.toString());
+			}
+		}
 		modelo=indicadorDataManager.getModelo();
-		ies=indicadorDataManager.getIes();
 		obtenerArbol();
-		indicadorDTO=new IndicadorDTO();
+		disabled=true;
 	}
 	
 	public IndicadorDataManager getIndicadorDataManager() {
@@ -175,6 +187,14 @@ public class AccesoController extends SelectItemController implements Serializab
 
 	public void setOpcionSelect(List<String> opcionSelect) {
 		this.opcionSelect = opcionSelect;
+	}
+
+	public Boolean getDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(Boolean disabled) {
+		this.disabled = disabled;
 	}
 
 	public void readAcceso()
