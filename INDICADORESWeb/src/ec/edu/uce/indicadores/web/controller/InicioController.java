@@ -42,11 +42,22 @@ public class InicioController extends SelectItemController {
 	
 	private MenuModel menuModel;
 	
+	
+	private Boolean desactivado;
+	
+	private Boolean visible;
+	
+	public InicioController() {
+		visible=true;
+	}
+	
 	@PostConstruct
 	private void init()
 	{
 		indicadorDataManager.setUser((UsuarioDTO)JsfUtil.getObject("UsuarioDTO"));		
 		menuModel=new DefaultMenuModel();
+		desactivado=false;
+		visible=true;
 	}
 	
 	public void aceptar()
@@ -54,6 +65,8 @@ public class InicioController extends SelectItemController {
 		try {
 			indicadorDataManager.setIesDTO(indicadorService.obtenerIes(Integer.valueOf(indicadorDataManager.getIes().toString())));
 			indicadorDataManager.setModeloDTO(indicadorService.obtenerModelo(Integer.valueOf(indicadorDataManager.getModelo().toString())));
+			desactivado=true;
+			visible=false;
 		} catch (IndicadoresException e) {
 			e.printStackTrace();
 		}
@@ -117,6 +130,22 @@ public class InicioController extends SelectItemController {
 			else
 				return new DefaultStreamedContent();
         }
+	}
+
+	public Boolean getDesactivado() {
+		return desactivado;
+	}
+
+	public void setDesactivado(Boolean desactivado) {
+		this.desactivado = desactivado;
+	}
+
+	public Boolean getVisible() {
+		return visible;
+	}
+
+	public void setVisible(Boolean visible) {
+		this.visible = visible;
 	}
 	
 }

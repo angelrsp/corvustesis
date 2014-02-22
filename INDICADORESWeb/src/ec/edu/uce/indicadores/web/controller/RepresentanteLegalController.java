@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import ec.edu.uce.indicadores.commons.util.IndicadoresException;
@@ -15,7 +16,9 @@ import ec.edu.uce.indicadores.ejb.persistence.entities.ContactoDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ContactoListDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalListDTO;
+import ec.edu.uce.indicadores.web.datamanager.IndicadorDataManager;
 import ec.edu.uce.indicadores.web.util.JsfUtil;
+import ec.edu.uce.indicadores.web.util.validator.Identification;
 
 @ViewScoped
 @ManagedBean(name = "representanteLegalController")
@@ -28,6 +31,9 @@ public class RepresentanteLegalController extends SelectItemController implement
 
 	@EJB
 	private IndicadorService indicadorService;
+	
+	@ManagedProperty(value="#{indicadorDataManager}")
+	private IndicadorDataManager indicadorDataManager;
 	
 	private RepresentanteLegalDTO representanteLegalDTO;
 	private ContactoDTO contactoDTO;
@@ -47,6 +53,10 @@ public class RepresentanteLegalController extends SelectItemController implement
 		contactoList=new ArrayList<ContactoListDTO>();
 	}
 
+	public void setIndicadorDataManager(IndicadorDataManager indicadorDataManager) {
+		this.indicadorDataManager = indicadorDataManager;
+	}
+	
 	public RepresentanteLegalDTO getRepresentanteLegalDTO() {
 		return representanteLegalDTO;
 	}
@@ -99,17 +109,42 @@ public class RepresentanteLegalController extends SelectItemController implement
 	public void guardarRepresentante()
 	{
 		try {
+			if(Integer.valueOf(tipoDocumento.toString())==6)
+			{
+				if(!Identification.isCedula(getRepresentanteLegalDTO().getRleDi()))
+				{
+					JsfUtil.addErrorMessage("Cedula Invalida");
+					return;
+				}
+			}
 			getRepresentanteLegalDTO().setRleTipo(Integer.valueOf(tipoDocumento.toString()));
 			getRepresentanteLegalDTO().setRleCodigo(null);
-			indicadorService.agregarRepresentanteLegal(getRepresentanteLegalDTO());
+			indicadorService.createOrUpdateRepresentanteLegal(getRepresentanteLegalDTO());
 			getRepresentanteList();
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 			setRepresentanteLegalDTO(new RepresentanteLegalDTO());
 		} catch (IndicadoresException e) {
-			// TODO Auto-generated catch block
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
+	
+	
+	public void editRepresentante(RepresentanteLegalListDTO representante)
+	{
+		RepresentanteLegalDTO rep=new RepresentanteLegalDTO();
+		rep.setRleApellidos(representante.getRleApellidos());
+		rep.setRleNombres(representante.getRleNombres());
+		rep.setRleCodigo(representante.getRleCodigo());
+		rep.setRleDi(representante.getRleDi());
+		setTipoDocumento(representante.getRleTipo());
+		setRepresentanteLegalDTO(rep);
+	}
+
+	public void deleteRepresentante(RepresentanteLegalDTO representanteLegalDTO)
+	{
+		
+	}
+
 	
 	public void cargarContacto(RepresentanteLegalListDTO rep)
 	{
@@ -139,4 +174,5 @@ public class RepresentanteLegalController extends SelectItemController implement
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
+	
 }
