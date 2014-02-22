@@ -13,7 +13,7 @@
 			<h:form id="contenido">
 				<p:growl id="growl" showDetail="false" />
 				<p:panel id="pnlDatos" styleClass="tabla"
-					header="Inicio">
+					header="Inicio" visible="#{inicioController.visible}">
 					
 					<table>
 						<tr>
@@ -33,7 +33,7 @@
 						
 						<tr>
 							<td>
-								<p:commandButton value="#{i18n['boton.aceptar']}" actionListener="#{inicioController.aceptar}" oncomplete="PF('dglMensaje').show();" process="pnlDatos" update="mensaje"/>
+								<p:commandButton value="#{i18n['boton.aceptar']}" actionListener="#{inicioController.aceptar}" oncomplete="PF('dglMensaje').show();" process="pnlDatos" update="pnlDatos,mensaje"/>
 							</td>
 						</tr>
 						
