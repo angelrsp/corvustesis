@@ -18,12 +18,17 @@
 			
 				<tr>
 					<td><h:outputLabel value="#{i18n['label.ies']}:&#160;" /> </td>
-					<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{usuarioController.iesSelect}">
+					<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{usuarioController.iesSelect}" disabled="#{usuarioController.disabledIes}">
 							<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
 							<f:selectItems value="#{usuarioController.iesList}"></f:selectItems>
 							<p:ajax event="change" listener="#{usuarioController.readUser}" process="@this" update="pnlUsuarios"/>
 					</p:selectOneMenu></td>
 				</tr>			
+
+				<tr>
+					<td><h:outputText value="Nombre:" /></td>
+					<td><p:inputText value="#{usuarioController.user.usuNombre}" required="true"/></td>
+				</tr>
 			
 				<tr>
 					<td><h:outputText value="Usuario:" /></td>
@@ -52,7 +57,11 @@
 			
 			</table>
 
-			<p:dataTable value="#{usuarioController.userList}" var="usu">
+			<p:dataTable id="tblUsuario" value="#{usuarioController.userList}" var="usu">
+
+				<p:column headerText="Nombre">
+					<h:outputText value="#{usu.usuNombre}" />
+				</p:column>
 			
 				<p:column headerText="Usuario">
 					<h:outputText value="#{usu.usuLogin}" />
@@ -66,10 +75,26 @@
 					<h:outputText value="#{usu.indUsuarioPerfils.get(0).indPerfil.perDescripcion}" />
 				</p:column>
 
+				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{usuarioController.editUser(usu)}" icon="ui-icon-pencil" process=":contenido:tblUsuario" update=":contenido:pnlUsuarios"/>
+				</p:column>
+				
+				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{usuarioController.deleteUser(usu)}" icon="ui-icon-close" process=":contenido:tblUsuario" update=":contenido:pnlUsuarios">
+						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+					</p:commandButton>
+				</p:column>
+
 										
 			</p:dataTable>
 			
 			</p:panel>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
+	        	<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+	        	<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+    		</p:confirmDialog>  
+
 
 		</h:form>
 	</ui:define>

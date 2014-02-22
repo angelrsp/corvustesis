@@ -80,9 +80,18 @@
 	    	        </p:commandButton>  
 		        </p:column>
 
+
+				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{representanteLegalController.editRepresentante(rep)}" icon="ui-icon-pencil" process=":contenido:repList" update=":contenido:pnlDatos"/>
+				</p:column>
+				
+				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{representanteLegalController.deleteRepresentante(rep)}" icon="ui-icon-close" process=":contenido:repList" update=":contenido:pnlDatos">
+						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+					</p:commandButton>
+				</p:column>
 								
 				</p:dataTable>
-
 											
 				</p:panel>
 				
@@ -132,6 +141,12 @@
 					</p:panel>
 
 				</p:dialog>			
+	
+	
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
+	        	<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+	        	<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+    		</p:confirmDialog>  
 	
 	
 </h:form>
