@@ -19,8 +19,6 @@ public interface AdministracionService {
 
 	List<UsuarioDTO> readUser(IesDTO ies) throws IndicadoresException;
 
-	UsuarioDTO createUser(UsuarioDTO user) throws IndicadoresException;
-
 	List<PerfilDTO> readPerfil() throws IndicadoresException;
 
 	PerfilDTO createPerfil(PerfilDTO perfil) throws IndicadoresException;
@@ -31,5 +29,7 @@ public interface AdministracionService {
 
 	void createAcceso(List<String> option, Object perfil)
 			throws IndicadoresException;
+
+	UsuarioDTO createOrUpdateUser(UsuarioDTO user) throws IndicadoresException;
 
 }

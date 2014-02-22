@@ -43,16 +43,22 @@ public class AdministracionServiceImpl implements AdministracionService{
 	}
 	
 	@Override
-	public UsuarioDTO createUser(UsuarioDTO user) throws IndicadoresException
+	public UsuarioDTO createOrUpdateUser(UsuarioDTO user) throws IndicadoresException
 	{
-		log.info("createUser");
+		log.info("createOrUpdateUser");
 		try{
-			return factoryDAO.getUsuarioDAOImpl().create(user);
+			if(user.getUsuCodigo()!=null)
+			{
+				factoryDAO.getUsuarioPerfilDAOImpl().remove2(user.getIndUsuarioPerfils().get(0));
+				return factoryDAO.getUsuarioDAOImpl().edit(user);
+			}
+			else
+				return factoryDAO.getUsuarioDAOImpl().create(user);
 		}
 		catch(Exception e)
 		{
-			log.info("Error al createUser" +e.toString());
-			throw new IndicadoresException("Error al createUser");
+			log.info("Error al createOrUpdateUser" +e.toString());
+			throw new IndicadoresException("Error al createOrUpdateUser");
 		}		
 	}
 	

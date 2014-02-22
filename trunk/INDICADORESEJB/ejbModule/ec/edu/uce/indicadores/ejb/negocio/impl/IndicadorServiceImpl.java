@@ -35,13 +35,16 @@ public class IndicadorServiceImpl implements IndicadorService {
 	
 	
 	@Override
-	public void agregarRepresentanteLegal(RepresentanteLegalDTO representanteLegalDTO) throws IndicadoresException
+	public void createOrUpdateRepresentanteLegal(RepresentanteLegalDTO representanteLegalDTO) throws IndicadoresException
 	{
-		log.info("agregarRepresentanteLegal");
+		log.info("createOrUpdateRepresentanteLegal");
 		try {
-			factoryDAO.getRepresentanteLegalDAOImpl().create(representanteLegalDTO);
+			if(representanteLegalDTO.getRleCodigo()!=null)
+				factoryDAO.getRepresentanteLegalDAOImpl().edit(representanteLegalDTO);
+			else
+				factoryDAO.getRepresentanteLegalDAOImpl().create(representanteLegalDTO);
 		} catch (Exception e) {
-			log.error(e.toString());
+			log.error("createOrUpdateRepresentanteLegal {}",e.toString());
 			throw new IndicadoresException(e);
 		}
 	}

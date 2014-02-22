@@ -33,5 +33,7 @@ public interface FactoryDAO {
 
 	ParametroDAO getParametroDAOImpl();
 
+	UsuarioPerfilDAO getUsuarioPerfilDAOImpl();
+
 	
 }
