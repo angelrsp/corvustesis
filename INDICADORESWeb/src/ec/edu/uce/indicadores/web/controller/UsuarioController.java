@@ -163,7 +163,20 @@ public class UsuarioController extends SelectItemController implements Serializa
 	
 	public void deleteUser(UsuarioDTO user)
 	{
-		//setUser(user);
+		try {
+			administracionService.deleteUsuario(user);
+			readUser();
+		} catch (IndicadoresException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+		
 	}
+	
+	public void cancel()
+	{
+		setUser(new UsuarioDTO());
+		setPerfilSelect(null);
+	}
+	
 
 }

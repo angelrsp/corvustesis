@@ -1,5 +1,8 @@
 package ec.edu.uce.indicadores.web.util;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -11,6 +14,7 @@ import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 
+import ec.edu.uce.indicadores.commons.util.MessagesApplicacion;
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicException;
 import net.sf.jmimemagic.MagicMatch;
@@ -115,15 +119,42 @@ public class JsfUtil {
 			MagicMatch match = Magic.getMagicMatch(content);
 			mimeType = match.getMimeType();
 		} catch (MagicParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (MagicMatchNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (MagicException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return mimeType;
+	}
+	
+	public static String saveToDiskUpdload(byte[] bytefile,String fileName)
+	{
+		String pathDir,pathFile = null;
+		File f;
+		try {
+			//date=String.valueOf(CalendarUtil.getYear())+"\\"+String.valueOf(CalendarUtil.getMonth())+"\\"+String.valueOf(CalendarUtil.getDay());
+			
+			pathDir=MessagesApplicacion.getString("com.corvustec.indicadores.path.web")+"\\images\\tmp\\upload\\";
+			pathFile=pathDir+"\\"+fileName;
+			
+			f= new File(pathFile);
+			if(f.exists())
+				f.delete();
+			
+			f= new File(pathDir);
+			if(!f.exists())
+				f.mkdirs();
+			FileOutputStream fos=new FileOutputStream(pathFile);
+			fos.write(bytefile);
+			fos.close();
+			pathFile="\\images\\tmp\\upload\\"+fileName;
+			pathFile=pathFile.replace('\\', '/');
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return pathFile;
 	}
 }

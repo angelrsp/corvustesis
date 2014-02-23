@@ -76,12 +76,27 @@ public class HistoricoIndicadorController extends SelectItemController implement
 	
 	private MeterGaugeChartModel meterGaugeModel;  
 	
+	private Boolean disabled;
+	
+	
 	@PostConstruct
 	private void init() throws IndicadoresException
 	{
+		disabled=true;
 		indicadorDTO=new IndicadorDTO();
 		modelo=indicadorDataManager.getModelo();
-		ies=indicadorDataManager.getIes();
+		
+		if(indicadorDataManager.getIes()!=null)
+			ies=indicadorDataManager.getIes();
+		else{
+			try {
+				JsfUtil.redirect("home.jsf");
+			} catch (IOException e) {
+				JsfUtil.addErrorMessage(e.toString());
+			}
+		}
+
+		
 		obtenerArbol();
 		historicoIndicadorList=new ArrayList<HistoricoIndicadorDTO>();
 		historicoIndicadorDTO=new HistoricoIndicadorDTO();
@@ -180,6 +195,14 @@ public class HistoricoIndicadorController extends SelectItemController implement
 
 	public void setEvidenciaList(List<EvidenciaDTO> evidenciaList) {
 		this.evidenciaList = evidenciaList;
+	}
+
+	public Boolean getDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(Boolean disabled) {
+		this.disabled = disabled;
 	}
 
 	public CartesianChartModel getCategoryModel() {  
