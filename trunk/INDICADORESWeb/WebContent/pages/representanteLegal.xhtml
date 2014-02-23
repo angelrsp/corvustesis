@@ -50,7 +50,8 @@
 
 					<tr>
 						<td colspan="2" align="center">
-							<p:commandButton actionListener="#{representanteLegalController.guardarRepresentante}" value="#{i18n['boton.guardar']}" process="pnlDatos" update="growl,pnlDatos,repList"/> </td>
+							<p:commandButton actionListener="#{representanteLegalController.guardarRepresentante}" value="#{i18n['boton.guardar']}" process="pnlDatos" update="growl,pnlDatos,repList" icon="ui-icon-disk"/> 
+							<p:commandButton value="#{i18n['boton.cancelar']}" actionListener="#{representanteLegalController.cancel}" process="@this" update="growl,pnlDatos" icon="ui-icon-cancel"/></td>
 					</tr>
 				
 				</table>	
@@ -86,7 +87,7 @@
 				</p:column>
 				
 				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
-					<p:commandButton actionListener="#{representanteLegalController.deleteRepresentante(rep)}" icon="ui-icon-close" process=":contenido:repList" update=":contenido:pnlDatos">
+					<p:commandButton actionListener="#{representanteLegalController.deleteRepresentante(rep)}" icon="ui-icon-close" process=":contenido:repList" update=":contenido:growl,:contenido:pnlDatos">
 						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
 					</p:commandButton>
 				</p:column>
@@ -120,7 +121,8 @@
 	
 						<tr>
 							<td colspan="2" align="center">
-								<p:commandButton actionListener="#{representanteLegalController.agregarContacto}" value="#{i18n['boton.agregar']}" process="pnlContactos" update="pnlContactos,:contenido:growl" /> </td>
+								<p:commandButton actionListener="#{representanteLegalController.agregarContacto}" value="#{i18n['boton.agregar']}" process="pnlContactos" update="pnlContactos,:contenido:growl" icon="ui-icon-disk"/>
+								 <p:commandButton value="#{i18n['boton.cancelar']}" actionListener="#{representanteLegalController.cancelContacto}" process="@this" update="growl,pnlContactos" icon="ui-icon-cancel"/></td>
 						</tr>
 					
 					</table>	
@@ -135,6 +137,18 @@
 						<p:column headerText="#{i18n['label.valor']}">
 							<h:outputText value="#{con.conValor}" />
 						</p:column>
+
+				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{representanteLegalController.editContacto(con)}" icon="ui-icon-pencil" process=":contenido:tblContacto" update=":contenido:pnlContactos"/>
+				</p:column>
+				
+				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{representanteLegalController.deleteContacto(con)}" icon="ui-icon-close" process=":contenido:tblContacto" update=":contenido:growl,:contenido:pnlContactos">
+						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+					</p:commandButton>
+				</p:column>
+
+
 					
 					</p:dataTable>					
 
