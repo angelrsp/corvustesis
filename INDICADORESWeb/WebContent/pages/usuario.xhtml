@@ -52,7 +52,9 @@
 				</tr>							
 				
 				<tr>
-					<td><p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{usuarioController.createUser}" process="pnlUsuarios" update="pnlUsuarios,growl"/></td>																		
+					<td colspan="2" align="center"><p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{usuarioController.createUser}" process="pnlUsuarios" update="pnlUsuarios,growl" icon="ui-icon-disk"/>
+						<p:commandButton value="#{i18n['boton.cancelar']}" actionListener="#{usuarioController.cancel}" process="@this" update="pnlUsuarios,growl" icon="ui-icon-cancel"/>
+						</td>																		
 				</tr>
 			
 			</table>

@@ -19,21 +19,23 @@
 		<table>
 			<tr>
 				<td><h:outputLabel value="#{i18n['label.nombre']}:&#160;" /></td>
-				<td><p:inputText value="#{modeloController.modeloDTO.modDescripcion}" required="true" requiredMessage="#{i18n['label.nombre']}:&#160;#{i18n['label.requerido']}"/><span class="red">*</span></td>
-				
+				<td><p:inputText value="#{modeloController.modeloDTO.modDescripcion}" required="true" requiredMessage="#{i18n['label.nombre']}:&#160;#{i18n['label.requerido']}" disabled="false"/><span class="red">*</span></td>
+			</tr>
+			<tr>
 				<td><h:outputLabel value="#{i18n['label.version']}:&#160;" /></td>
 				<td><p:inputText value="#{modeloController.modeloDTO.modVersion}" required="true" requiredMessage="#{i18n['label.version']}:&#160;#{i18n['label.requerido']}"/><span class="red">*</span></td>
 			</tr>
 		
 			<tr>
-				<td colspan="4" align="center"><p:commandButton actionListener="#{modeloController.agregarModelo}" value="#{i18n['boton.agregar']}" process="pnlModelo" update="pnlModelo,growl" /> </td>
+				<td colspan="4" align="center"><p:commandButton actionListener="#{modeloController.agregarModelo}" value="#{i18n['boton.guardar']}" process="pnlModelo" update="pnlModelo,growl" icon="ui-icon-disk"/> 
+				<p:commandButton value="#{i18n['boton.cancelar']}" actionListener="#{modeloController.cancel}" process="@this" update="pnlModelo,growl" icon="ui-icon-cancel"/></td>
 			</tr>
 		
 		</table>
 		
 		<p:spacer height="5"/>
 		
-		<p:dataTable value="#{modeloController.modeloList}" var="mode">
+		<p:dataTable id="tblModelo" value="#{modeloController.modeloList}" var="mode">
 		
 			<p:column headerText="#{i18n['label.nombre']}">
 				<h:outputText value="#{mode.modDescripcion}" />
@@ -42,12 +44,29 @@
 			<p:column headerText="#{i18n['label.version']}">
 				<h:outputText value="#{mode.modVersion}" />
 			</p:column>
+			
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{modeloController.edit(mode)}" icon="ui-icon-pencil" process=":contenido:tblModelo" update=":contenido:pnlModelo"/>
+			</p:column>
+			
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{modeloController.delete(mode)}" icon="ui-icon-close" process=":contenido:tblModelo" update=":contenido:pnlModelo,:contenido:growl">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
+			</p:column>
 		
 		
 		</p:dataTable>
 		
 		
 		</p:panel>
+		
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
+	        	<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+	        	<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+    		</p:confirmDialog>  
+		
+		
 </h:form>		
 		</ui:define>
 	</ui:composition>

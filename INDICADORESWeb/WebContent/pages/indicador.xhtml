@@ -20,7 +20,7 @@
 				<table>
 					<tr>
 							<td><h:outputLabel value="#{i18n['label.modelo']}:&#160;" /> </td>
-							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.modelo']}:&#160;#{i18n['label.requerido']}" value="#{indicadorController.modelo}">
+							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.modelo']}:&#160;#{i18n['label.requerido']}" value="#{indicadorController.modelo}" disabled="#{indicadorController.disabled}">
 								<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
 								<f:selectItems value="#{indicadorController.modeloList}"></f:selectItems>
 								<p:ajax event="change" process="@this" update="tree,growl" listener="#{indicadorController.obtenerArbol}" immediate="true"></p:ajax>
@@ -29,7 +29,7 @@
 					</tr>
 					<tr>
 							<td><h:outputLabel value="#{i18n['label.ies']}:&#160;" /> </td>
-							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{indicadorController.ies}">
+							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{indicadorController.ies}" disabled="#{indicadorController.disabled}">
 								<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="0"/>
 								<f:selectItems value="#{indicadorController.iesList}"></f:selectItems>
 								<p:ajax event="change" process="@this" update="tree,growl" listener="#{indicadorController.obtenerArbol}" immediate="true"></p:ajax>
@@ -81,9 +81,8 @@
 
 					<tr>
 						<td><h:outputLabel value="#{i18n['label.descriptor']}:&#160;" /> </td>
-						<td><p:inputTextarea required="true"
-									requiredMessage="#{i18n['label.descriptor']}&#160;#{i18n['label.requerido']}"
-									value="#{indicadorController.indicadorDTO.indDescriptor}" autoResize="false"/></td>
+						<td><p:editor required="true" requiredMessage="#{i18n['label.descriptor']}&#160;#{i18n['label.requerido']}"
+									value="#{indicadorController.indicadorDTO.indDescriptor}"/></td>
 					</tr>
 
 					<tr>
