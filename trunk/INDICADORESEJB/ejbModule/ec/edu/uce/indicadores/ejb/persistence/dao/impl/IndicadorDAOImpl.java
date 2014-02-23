@@ -80,4 +80,23 @@ public class IndicadorDAOImpl extends AbstractFacadeImpl<IndicadorDTO> implement
 		else
 			return list;
 	}
+	
+	@Override
+	public List<IndicadorDTO> getAll(ModeloDTO modeloDTO)
+	{
+		log.info("getRoot");
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<IndicadorDTO> cq=cb.createQuery(IndicadorDTO.class);
+		Root<IndicadorDTO> from= cq.from(IndicadorDTO.class);
+		//from.join("indIndicador",JoinType.LEFT).get("indCodigo").isNull();
+		Path<ModeloDTO> join2=from.join("indModeloBean");
+		
+		cq.where(cb.equal(join2.get("modCodigo"), modeloDTO.getModCodigo()));
+		
+		List<IndicadorDTO> list=entityManager.createQuery(cq).getResultList();	
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
 }

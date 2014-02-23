@@ -73,4 +73,17 @@ public class UsuarioDAOImpl extends AbstractFacadeImpl<UsuarioDTO> implements Us
 			return list;
 	}
 	
+	@Override
+	public void remove2(UsuarioDTO user)
+	{
+		Query query;
+		query=entityManager.createQuery("delete from UsuarioPerfilDTO uspe where uspe.indUsuario.usuCodigo=:codigo");
+		query.setParameter("codigo", user.getUsuCodigo());
+		query.executeUpdate();
+
+		query=entityManager.createQuery("delete from UsuarioDTO usu where usu.usuCodigo=:codigo");
+		query.setParameter("codigo", user.getUsuCodigo());
+		query.executeUpdate();
+
+	}
 }

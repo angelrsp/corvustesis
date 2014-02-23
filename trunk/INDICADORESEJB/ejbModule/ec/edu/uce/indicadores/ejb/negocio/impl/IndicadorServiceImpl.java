@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ec.edu.uce.indicadores.commons.util.ApplicationUtil;
 import ec.edu.uce.indicadores.commons.util.IndicadoresException;
 import ec.edu.uce.indicadores.ejb.negocio.IndicadorService;
 import ec.edu.uce.indicadores.ejb.persistence.dao.FactoryDAO;
@@ -50,11 +51,52 @@ public class IndicadorServiceImpl implements IndicadorService {
 	}
 
 	@Override
-	public void agregarContacto(ContactoDTO contactoDTO) throws IndicadoresException
+	public void deleteRepresentanteLegal(RepresentanteLegalDTO representanteLegalDTO) throws IndicadoresException
 	{
-		log.info("agregarContacto");
+		log.info("deleteRepresentanteLegal");
 		try {
-			factoryDAO.getContactoDAOImpl().create(contactoDTO);
+			if(obtenerRegistro(representanteLegalDTO)==null)
+				factoryDAO.getRepresentanteLegalDAOImpl().remove2(representanteLegalDTO);
+			else
+				throw new IndicadoresException("No fue posible borrar existen dependencias");
+		} catch (Exception e) {
+			log.error("obtenerRegistro {}",e.toString());
+			throw new IndicadoresException(e);
+		}
+	}
+	
+	@Override
+	public List<RegistroDTO> obtenerRegistro(RepresentanteLegalDTO rep) throws IndicadoresException
+	{
+		log.info("obtenerRegistro");
+		try {
+			return factoryDAO.getRegistroDAOImpl().getAll(rep);
+		} catch (Exception e) {
+			throw new IndicadoresException(e);
+		}
+	}
+
+	@Override
+	public void deleteRegistro(RegistroDTO registro) throws IndicadoresException
+	{
+		log.info("deleteRegistro");
+		try {
+			factoryDAO.getRegistroDAOImpl().remove(registro);
+		} catch (Exception e) {
+			throw new IndicadoresException(e);
+		}
+	}
+
+	
+	@Override
+	public void createOrUpdateContacto(ContactoDTO contactoDTO) throws IndicadoresException
+	{
+		log.info("createOrUpdateContacto");
+		try {
+			if(contactoDTO.getConCodigo()!=null)
+				factoryDAO.getContactoDAOImpl().edit(contactoDTO);
+			else
+				factoryDAO.getContactoDAOImpl().create(contactoDTO);
 		} catch (Exception e) {
 			log.error(e.toString());
 			throw new IndicadoresException(e);
@@ -62,17 +104,52 @@ public class IndicadorServiceImpl implements IndicadorService {
 	}
 
 	@Override
-	public void agregarIes(IesDTO iesDTO) throws IndicadoresException
+	public void deleteContacto(ContactoDTO contactoDTO) throws IndicadoresException
 	{
-		log.info("agregarIes");
+		log.info("deleteContacto");
 		try {
-			factoryDAO.getIesDAOImpl().create(iesDTO);
+			factoryDAO.getContactoDAOImpl().remove(contactoDTO);
 		} catch (Exception e) {
-			log.error("agregarIes {}",e.toString());
+			log.error(e.toString());
 			throw new IndicadoresException(e);
 		}
 	}
 
+	
+	@Override
+	public void createOrUpdateIes(IesDTO iesDTO) throws IndicadoresException
+	{
+		log.info("createOrUpdateIes");
+		try {
+			if(iesDTO.getIesImagenName()!=null)
+				ApplicationUtil.deletefile(iesDTO.getIesImagenName());
+			if(iesDTO.getIesCodigo()!=null)
+				factoryDAO.getIesDAOImpl().edit(iesDTO);
+			else
+				factoryDAO.getIesDAOImpl().create(iesDTO);
+		} catch (Exception e) {
+			log.error("createOrUpdateIes {}",e.toString());
+			throw new IndicadoresException(e);
+		}
+	}
+
+	@Override
+	public void deleteIes(IesDTO iesDTO) throws IndicadoresException
+	{
+		log.info("deleteIes");
+		try {
+			if(obtenerRegistro(iesDTO)==null)
+				factoryDAO.getIesDAOImpl().remove2(iesDTO);
+			else
+				throw new IndicadoresException("No fue posible borrar existen dependencias");
+		} catch (Exception e) {
+			log.error("deleteIes {}",e.toString());
+			throw new IndicadoresException(e);
+		}
+	}
+
+	
+	
 	@Override
 	public void agregarIndicador(IndicadorDTO indicadorDTO) throws IndicadoresException
 	{
@@ -197,7 +274,7 @@ public class IndicadorServiceImpl implements IndicadorService {
 	@Override
 	public void agregarValor(HistoricoIndicadorDTO historicoIndicadorDTO) throws IndicadoresException
 	{
-		log.info("agregarIndicador");
+		log.info("agregarValor");
 		try {
 			
 			IndicadorDTO ind= factoryDAO.getIndicadorDAOImpl().find(historicoIndicadorDTO.getIndIndicador().getIndCodigo());
@@ -309,13 +386,16 @@ public class IndicadorServiceImpl implements IndicadorService {
 	{
 		log.info("agregarRegistro");
 		try {
-			factoryDAO.getRegistroDAOImpl().create(registroDTO);
+			if(obtenerRegistro(registroDTO.getIndRepresentanteLegal(),registroDTO.getIndy())==null)
+				factoryDAO.getRegistroDAOImpl().create(registroDTO);
+			else
+				throw new IndicadoresException("Ya ha sido asignado");
 		} catch (Exception e) {
 			log.error(e.toString());
 			throw new IndicadoresException(e);
 		}
 	}
-	
+
 	
 	@Override
 	public List<RegistroDTO> obtenerRegistro(RepresentanteLegalDTO representanteLegalDTO,IesDTO iesDTO) throws IndicadoresException
@@ -340,14 +420,43 @@ public class IndicadorServiceImpl implements IndicadorService {
 	}
 	
 	@Override
-	public ModeloDTO agregarModelo(ModeloDTO modeloDTO) throws IndicadoresException
+	public ModeloDTO createOrUpdateModelo(ModeloDTO modeloDTO) throws IndicadoresException
 	{
 		log.info("agregarModelo");
 		try {
-			return factoryDAO.getModeloDAOImpl().create(modeloDTO);
+			if(modeloDTO.getModCodigo()!=null)
+				return factoryDAO.getModeloDAOImpl().edit(modeloDTO);
+			else
+				return factoryDAO.getModeloDAOImpl().create(modeloDTO);
 		} catch (Exception e) {
 			log.error("Error agregarModelo {}",e.toString());
 			throw new IndicadoresException(e);
 		}
+	}
+	
+	@Override
+	public void deleteModelo(ModeloDTO modeloDTO) throws IndicadoresException
+	{
+		log.info("agregarModelo");
+		try {
+			if(obtenerIndicador(modeloDTO)==null)
+				factoryDAO.getModeloDAOImpl().remove2(modeloDTO);
+			else
+				throw new IndicadoresException("No se puede borrar existen dependencias");
+		} catch (Exception e) {
+			log.error("Error agregarModelo {}",e.toString());
+			throw new IndicadoresException(e);
+		}
+	}
+	
+	public List<IndicadorDTO> obtenerIndicador(ModeloDTO modelo) throws IndicadoresException
+	{
+		try {
+			return factoryDAO.getIndicadorDAOImpl().getAll(modelo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new IndicadoresException(e);
+		}
+
 	}
 }
