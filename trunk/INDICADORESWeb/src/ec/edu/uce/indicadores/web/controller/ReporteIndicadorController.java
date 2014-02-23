@@ -200,6 +200,7 @@ public class ReporteIndicadorController extends SelectItemController implements 
 	}
 
 	
+	@SuppressWarnings("unused")
 	private void createChartLinePatern(List<IndicadorDTO> list)
 	{
 		categoryModel = new CartesianChartModel();  

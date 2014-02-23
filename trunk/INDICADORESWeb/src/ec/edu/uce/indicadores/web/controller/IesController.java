@@ -41,6 +41,9 @@ public class IesController extends SelectItemController implements Serializable{
 	
 	private Object representanteLegal;
 	
+	private String pathImagen;
+	
+	
 	@PostConstruct
 	private void init()
 	{
@@ -92,14 +95,22 @@ public class IesController extends SelectItemController implements Serializable{
 		this.registroList = registroList;
 	}
 
+	public String getPathImagen() {
+		return pathImagen;
+	}
+
+	public void setPathImagen(String pathImagen) {
+		this.pathImagen = pathImagen;
+	}
+
 	public void guardarIes()
 	{
 		try {
 			getIesDTO().setIesFechaCreacion(new Timestamp(fechaCreacion.getTime()));
-			getIesDTO().setIesCodigo(null);
-			indicadorService.agregarIes(getIesDTO());
+			indicadorService.createOrUpdateIes(getIesDTO());
 			getIesList();
 			iesDTO=new IesDTO();
+			setPathImagen(null);
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 		} catch (IndicadoresException e) {
 			JsfUtil.addErrorMessage(e.toString());
@@ -123,6 +134,17 @@ public class IesController extends SelectItemController implements Serializable{
 		}
 	}
 	
+	
+	public void deleteRegistro(RegistroDTO registro)
+	{
+		try {
+			indicadorService.deleteRegistro(registro);
+			obtenerRegistroLista(getIesDTO());
+		} catch (IndicadoresException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
 	public void obtenerRegistroLista(IesDTO ies)
 	{
 		try {
@@ -140,12 +162,34 @@ public class IesController extends SelectItemController implements Serializable{
 	}
 	
 	
-	public void handleFileUpload(FileUploadEvent event)
-	{
+	public void handleFileUpload(FileUploadEvent event)	{
 		JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
 		getIesDTO().setIesImagen(event.getFile().getContents());
 		getIesDTO().setIesImagenName(event.getFile().getFileName());
+		setPathImagen(JsfUtil.saveToDiskUpdload(event.getFile().getContents(), event.getFile().getFileName()));
 	}
 
+
+	public void editIes(IesDTO ies)
+	{
+		setIesDTO(ies);
+		setPathImagen(ies.getIesPathImagen());
+	}
 	
+	public void cancel()
+	{
+		setIesDTO(new IesDTO());
+		setPathImagen(null);
+	}
+	
+	public void deleteIes(IesDTO ies)
+	{
+		try {
+			indicadorService.deleteIes(ies);
+			getIesList();
+		} catch (IndicadoresException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
 }

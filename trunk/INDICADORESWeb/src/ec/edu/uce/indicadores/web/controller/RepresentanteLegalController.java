@@ -140,9 +140,25 @@ public class RepresentanteLegalController extends SelectItemController implement
 		setRepresentanteLegalDTO(rep);
 	}
 
-	public void deleteRepresentante(RepresentanteLegalDTO representanteLegalDTO)
+	public void cancel()
 	{
-		
+		setRepresentanteLegalDTO(new RepresentanteLegalDTO());
+		setTipoDocumento(null);
+	}
+	
+	public void deleteRepresentante(RepresentanteLegalListDTO representante)
+	{
+		try {
+			RepresentanteLegalDTO rep=new RepresentanteLegalDTO();
+			rep.setRleApellidos(representante.getRleApellidos());
+			rep.setRleNombres(representante.getRleNombres());
+			rep.setRleCodigo(representante.getRleCodigo());
+			rep.setRleDi(representante.getRleDi());
+			indicadorService.deleteRepresentanteLegal(rep);
+			getRepresentanteLegalList();
+		} catch (IndicadoresException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 
 	
@@ -152,7 +168,6 @@ public class RepresentanteLegalController extends SelectItemController implement
 			getRepresentanteLegalDTO().setRleCodigo(rep.getRleCodigo());
 			this.contactoList=indicadorService.obtenerContactos(getRepresentanteLegalDTO());
 		} catch (IndicadoresException e) {
-			// TODO Auto-generated catch block
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
@@ -162,7 +177,7 @@ public class RepresentanteLegalController extends SelectItemController implement
 		try {
 			contactoDTO.setConTipo(Integer.valueOf(tipoContacto.toString()));
 			contactoDTO.setIndRepresentanteLegal(representanteLegalDTO);
-			indicadorService.agregarContacto(contactoDTO);
+			indicadorService.createOrUpdateContacto(contactoDTO);
 			RepresentanteLegalListDTO li=new RepresentanteLegalListDTO();
 			li.setRleCodigo(representanteLegalDTO.getRleCodigo());
 			cargarContacto(li);
@@ -170,9 +185,40 @@ public class RepresentanteLegalController extends SelectItemController implement
 			tipoContacto=null;
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 		} catch (IndicadoresException e) {
-			// TODO Auto-generated catch block
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
 	
+	
+	public void editContacto(ContactoListDTO contacto)
+	{
+		ContactoDTO con=new ContactoDTO();
+		con.setConCodigo(contacto.getConCodigo());
+		con.setConValor(contacto.getConValor());
+		setContactoDTO(con);
+		setTipoContacto(contacto.getConTipo());
+	}
+
+	
+	public void deleteContacto(ContactoListDTO contacto)
+	{
+		try {
+			ContactoDTO con=new ContactoDTO();
+			con.setConCodigo(contacto.getConCodigo());
+			con.setConValor(contacto.getConValor());
+			indicadorService.deleteContacto(con);
+			RepresentanteLegalListDTO li=new RepresentanteLegalListDTO();
+			li.setRleCodigo(representanteLegalDTO.getRleCodigo());
+			cargarContacto(li);
+		} catch (IndicadoresException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void cancelContacto()
+	{
+		setContactoDTO(new ContactoDTO());
+		setTipoContacto(null);
+	}
+
 }

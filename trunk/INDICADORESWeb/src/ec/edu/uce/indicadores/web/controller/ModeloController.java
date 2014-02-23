@@ -64,11 +64,31 @@ public class ModeloController implements Serializable {
 	public void agregarModelo()
 	{
 		try {
-			indicadorService.agregarModelo(getModeloDTO());
+			indicadorService.createOrUpdateModelo(getModeloDTO());
 			getModeloList();
 			setModeloDTO(new ModeloDTO());
 		} catch (IndicadoresException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
+	
+	public void edit(ModeloDTO mode) 
+	{
+		setModeloDTO(mode);
+	}
+	
+	public void delete(ModeloDTO mode) 
+	{
+		try {
+			indicadorService.deleteModelo(mode);
+		} catch (IndicadoresException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void cancel()
+	{
+		setModeloDTO(new ModeloDTO());
+	}
+
 }

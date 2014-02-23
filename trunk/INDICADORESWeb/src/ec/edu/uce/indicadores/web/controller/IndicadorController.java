@@ -1,5 +1,6 @@
 package ec.edu.uce.indicadores.web.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,7 @@ public class IndicadorController extends SelectItemController implements Seriali
 	
 	private TreeNode rootNode;
 
+	private Boolean disabled;
 	
 	@PostConstruct
 	private void init() throws IndicadoresException
@@ -56,9 +58,21 @@ public class IndicadorController extends SelectItemController implements Seriali
 		indicadorList=new ArrayList<IndicadorDTO>();
 //		indicadorList=indicadorService.obtenerIndicador();
 		
+		if(indicadorDataManager.getIes()!=null)
+			ies=indicadorDataManager.getIes();
+		else{
+			try {
+				JsfUtil.redirect("home.jsf");
+			} catch (IOException e) {
+				JsfUtil.addErrorMessage(e.toString());
+			}
+		}
+		
+		
 		modelo=indicadorDataManager.getModelo();
-		ies=indicadorDataManager.getIes();
+		
 		obtenerArbol();
+		disabled=true;
 	}
 
 	public void setIndicadorDataManager(IndicadorDataManager indicadorDataManager) {
@@ -112,6 +126,14 @@ public class IndicadorController extends SelectItemController implements Seriali
 
 	public void setPredecesor(int predecesor) {
 		this.predecesor = predecesor;
+	}
+
+	public Boolean getDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(Boolean disabled) {
+		this.disabled = disabled;
 	}
 
 	public void agregarIndicador()
