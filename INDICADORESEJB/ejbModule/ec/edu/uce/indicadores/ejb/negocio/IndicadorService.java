@@ -26,11 +26,7 @@ public interface IndicadorService {
 			RepresentanteLegalDTO representanteLegalDTO)
 			throws IndicadoresException;
 
-	void agregarContacto(ContactoDTO contactoDTO) throws IndicadoresException;
-
 	List<IesDTO> obtenerIes() throws IndicadoresException;
-
-	void agregarIes(IesDTO iesDTO) throws IndicadoresException;
 
 	List<ModeloDTO> obtenerModelo() throws IndicadoresException;
 
@@ -67,8 +63,6 @@ public interface IndicadorService {
 	List<RegistroDTO> obtenerRegistro(IesDTO iesDTO)
 			throws IndicadoresException;
 
-	ModeloDTO agregarModelo(ModeloDTO modeloDTO) throws IndicadoresException;
-
 	IndicadorDTO obtenerIndicador(Object id) throws IndicadoresException;
 
 	void actualizarValores(IndicadorDTO indicadorDTO)
@@ -81,6 +75,28 @@ public interface IndicadorService {
 	void createOrUpdateRepresentanteLegal(
 			RepresentanteLegalDTO representanteLegalDTO)
 			throws IndicadoresException;
+
+	void createOrUpdateIes(IesDTO iesDTO) throws IndicadoresException;
+
+	ModeloDTO createOrUpdateModelo(ModeloDTO modeloDTO)
+			throws IndicadoresException;
+
+	List<RegistroDTO> obtenerRegistro(RepresentanteLegalDTO rep)
+			throws IndicadoresException;
+
+	void deleteRepresentanteLegal(RepresentanteLegalDTO representanteLegalDTO)
+			throws IndicadoresException;
+
+	void createOrUpdateContacto(ContactoDTO contactoDTO)
+			throws IndicadoresException;
+
+	void deleteContacto(ContactoDTO contactoDTO) throws IndicadoresException;
+
+	void deleteIes(IesDTO iesDTO) throws IndicadoresException;
+
+	void deleteRegistro(RegistroDTO registro) throws IndicadoresException;
+
+	void deleteModelo(ModeloDTO modeloDTO) throws IndicadoresException;
 
 
 }

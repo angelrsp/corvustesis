@@ -14,5 +14,7 @@ public interface UsuarioDAO extends AbstractFacade<UsuarioDTO>{
 
 	List<UsuarioDTO> getAll(IesDTO ies) throws IndicadoresException;
 
+	void remove2(UsuarioDTO user);
+
 
 }

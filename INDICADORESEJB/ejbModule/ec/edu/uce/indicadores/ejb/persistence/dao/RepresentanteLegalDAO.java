@@ -10,6 +10,8 @@ public interface RepresentanteLegalDAO extends AbstractFacade<RepresentanteLegal
 
 	List<RepresentanteLegalListDTO> getAll() throws IndicadoresException;
 
+	void remove2(RepresentanteLegalDTO representante);
+
 	
 	
 	

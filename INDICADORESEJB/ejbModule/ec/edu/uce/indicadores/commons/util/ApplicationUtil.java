@@ -6,12 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.UUID;
 
-import javax.ejb.EJB;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import ec.edu.uce.indicadores.ejb.persistence.dao.FactoryDAO;
 
 
 public class ApplicationUtil {
@@ -43,59 +39,52 @@ public class ApplicationUtil {
 		return pathSave;
 	}
 	
-	
-	public static String saveToDisk(byte[] bytefile,String name)
+	public static String saveToDisk(byte[] bytefile,String fileName)
 	{
-		String file,path,date,pathAbs,exten,pathSave = null;
-		
+		String pathDir,pathFile = null;
+		File f;
 		try {
-			exten=name.split("\\.")[1];
-			file= UUID.randomUUID().toString();
-			//path=FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
-			date=String.valueOf(CalendarUtil.getYear())+"\\"+String.valueOf(CalendarUtil.getMonth())+"\\"+String.valueOf(CalendarUtil.getDay());
-			path=System.getProperty("jboss.home.dir")+"\\standalone\\deployments\\INDICADORES.ear\\INDICADORESWeb.war\\images\\tmp\\"+date;
+			//date=String.valueOf(CalendarUtil.getYear())+"\\"+String.valueOf(CalendarUtil.getMonth())+"\\"+String.valueOf(CalendarUtil.getDay());
 			
-			File f= new File(path);
+			pathDir=MessagesApplicacion.getString("com.corvustec.indicadores.path.web")+"\\images\\tmp\\";
+			pathFile=pathDir+"\\"+fileName;
+			
+			f= new File(pathFile);
 			if(!f.exists())
-				f.mkdirs();
-			pathAbs=path+"\\"+file+"."+exten;
-			pathSave="images\\tmp\\"+date+"\\"+file+"."+exten;
-			FileOutputStream fos=new FileOutputStream(pathAbs);
-			fos.write(bytefile);
-			fos.close();
+			{
+				f= new File(pathDir);
+				if(!f.exists())
+					f.mkdirs();
+				FileOutputStream fos=new FileOutputStream(pathFile);
+				fos.write(bytefile);
+				fos.close();
+			}	
+			pathFile="\\images\\tmp\\"+fileName;
+			pathFile=pathFile.replace('\\', '/');
 		} catch (FileNotFoundException e) {
-			logger.info("FileNotFoundException {}",e.toString());
+			e.printStackTrace();
 		} catch (IOException e) {
-			logger.info("FileNotFoundException {}",e.toString());
+			e.printStackTrace();
 		}
-		return pathSave;
+		return pathFile;
 	}
 	
-	public static String saveToDisk(byte[] bytefile)
+	
+	public static void deletefile(String fileName)
 	{
-		String file,path,date,pathAbs,pathSave = null;
-		try {
-			//mime=getTypeFile(bytefile);
-			//mime=mime.split("/")[1];
-			file= UUID.randomUUID().toString();
-			//path=FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
-			date=String.valueOf(CalendarUtil.getYear())+"\\"+String.valueOf(CalendarUtil.getMonth())+"\\"+String.valueOf(CalendarUtil.getDay());
-			pathSave="\\SILSAG\\"+date;
-			path=System.getProperty("jboss.server.data.dir")+"\\SILSAG\\"+date;
-			File f= new File(path);
-			if(!f.exists())
-				f.mkdirs();
-			pathAbs=path+"\\"+file+".jpg";//+mime;
-			pathSave=pathSave+"\\"+file+".jpg";//+mime;
-			FileOutputStream fos=new FileOutputStream(pathAbs);
-			fos.write(bytefile);
-			fos.close();
-		} catch (FileNotFoundException e) {
-			logger.info("FileNotFoundException {}",e.toString());
-		} catch (IOException e) {
-			logger.info("FileNotFoundException {}",e.toString());
-		}
-		return pathSave;
+		String pathDir,pathFile = null;
+		File f;
+
+		//date=String.valueOf(CalendarUtil.getYear())+"\\"+String.valueOf(CalendarUtil.getMonth())+"\\"+String.valueOf(CalendarUtil.getDay());
+		
+		pathDir=MessagesApplicacion.getString("com.corvustec.indicadores.path.web")+"\\images\\tmp\\";
+		pathFile=pathDir+"\\"+fileName;
+		
+		f= new File(pathFile);
+		if(f.exists())
+		{
+			f.delete();
+		}	
 	}
 	
 //	public static String getTypeFile(byte[] content)

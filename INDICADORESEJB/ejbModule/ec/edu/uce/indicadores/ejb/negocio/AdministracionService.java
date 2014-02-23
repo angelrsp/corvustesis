@@ -32,4 +32,6 @@ public interface AdministracionService {
 
 	UsuarioDTO createOrUpdateUser(UsuarioDTO user) throws IndicadoresException;
 
+	void deleteUsuario(UsuarioDTO user) throws IndicadoresException;
+
 }

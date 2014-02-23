@@ -9,4 +9,6 @@ public interface ModeloDAO extends AbstractFacade<ModeloDTO>{
 
 	List<ModeloDTO> getAll() throws IndicadoresException;
 
+	void remove2(ModeloDTO modelo);
+
 }

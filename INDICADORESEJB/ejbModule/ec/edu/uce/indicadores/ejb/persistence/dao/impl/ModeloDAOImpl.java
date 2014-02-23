@@ -3,6 +3,7 @@ package ec.edu.uce.indicadores.ejb.persistence.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
@@ -44,4 +45,13 @@ public class ModeloDAOImpl extends AbstractFacadeImpl<ModeloDTO> implements Mode
 			return list;
 	}
 	
+	@Override
+	public void remove2(ModeloDTO modelo)
+	{
+		Query query;
+		query=entityManager.createQuery("delete from ModeloDTO mod where mod.modCodigo=:codigo");
+		query.setParameter("codigo", modelo.getModCodigo());
+		query.executeUpdate();
+
+	}
 }

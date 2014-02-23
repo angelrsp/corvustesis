@@ -3,6 +3,7 @@ package ec.edu.uce.indicadores.ejb.persistence.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
@@ -41,6 +42,21 @@ public class RepresentanteLegalDAOImpl extends AbstractFacadeImpl<RepresentanteL
 			return null;
 		else
 			return list;
+	}
+	
+	@Override
+	public void remove2(RepresentanteLegalDTO representante)
+	{
+		Query query;
+		
+		query=entityManager.createQuery("delete from ContactoDTO con where con.indRepresentanteLegal.rleCodigo=:codigo");
+		query.setParameter("codigo", representante.getRleCodigo());
+		query.executeUpdate();
+		
+		
+		query=entityManager.createQuery("delete from RepresentanteLegalDTO rep where rep.rleCodigo=:codigo");
+		query.setParameter("codigo", representante.getRleCodigo());
+		query.executeUpdate();
 	}
 	
 }

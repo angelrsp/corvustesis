@@ -3,6 +3,7 @@ package ec.edu.uce.indicadores.ejb.persistence.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -46,6 +47,14 @@ public class IesDAOImpl extends AbstractFacadeImpl<IesDTO> implements IesDAO{
 			return list;
 	}
 
-	
+	@Override
+	public void remove2(IesDTO ies)
+	{
+		Query query;
+		
+		query=entityManager.createQuery("delete from IesDTO ies where ies.iesCodigo=:codigo");
+		query.setParameter("codigo", ies.getIesCodigo());
+		query.executeUpdate();
+	}
 	
 }

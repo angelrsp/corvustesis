@@ -14,4 +14,7 @@ public interface RegistroDAO extends AbstractFacade<RegistroDTO>{
 
 	List<RegistroDTO> getAll(IesDTO iesDTO) throws IndicadoresException;
 
+	List<RegistroDTO> getAll(RepresentanteLegalDTO rep)
+			throws IndicadoresException;
+
 }

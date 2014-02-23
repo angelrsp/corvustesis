@@ -156,4 +156,16 @@ public class AdministracionServiceImpl implements AdministracionService{
 			throw new IndicadoresException("Error al readOpcion");
 		}
 	}
+	
+	@Override
+	public void deleteUsuario(UsuarioDTO user) throws IndicadoresException
+	{
+		try {
+			factoryDAO.getUsuarioDAOImpl().remove2(user);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new IndicadoresException(e);
+		}
+	}
+
 }

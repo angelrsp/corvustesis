@@ -9,4 +9,6 @@ public interface IesDAO extends AbstractFacade<IesDTO>{
 
 	List<IesDTO> getAll() throws IndicadoresException;
 
+	void remove2(IesDTO ies);
+
 }

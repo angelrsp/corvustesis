@@ -68,4 +68,22 @@ public class RegistroDAOImpl extends AbstractFacadeImpl<RegistroDTO> implements 
 		else
 			return list;
 	}
+	
+	@Override
+	public List<RegistroDTO> getAll(RepresentanteLegalDTO rep) throws IndicadoresException
+	{
+		logger.info("getAll");
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<RegistroDTO> cq=cb.createQuery(RegistroDTO.class);
+		Root<RegistroDTO> from= cq.from(RegistroDTO.class);
+		Path<RepresentanteLegalDTO> join2=from.join("indRepresentanteLegal");
+		
+		cq.where(cb.equal(join2.get("rleCodigo"), rep.getRleCodigo()));
+		
+		List<RegistroDTO> list=entityManager.createQuery(cq).getResultList();	
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
 }
