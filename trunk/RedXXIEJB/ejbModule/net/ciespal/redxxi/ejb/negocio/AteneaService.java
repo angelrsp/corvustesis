@@ -115,4 +115,6 @@ public interface AteneaService {
 
 	void deleteNoticia(NoticiaDTO noticia) throws CorvustecException;
 
+	List<NoticiaDTO> readNoticiaPublic() throws CorvustecException;
+
 }

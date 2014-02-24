@@ -12,5 +12,7 @@ public interface NoticiaDAO extends AbstractFacade<NoticiaDTO>{
 
 	void remove2(NoticiaDTO noticia) throws CorvustecException;
 
+	List<NoticiaDTO> getAllPublic();
+
 	
 }

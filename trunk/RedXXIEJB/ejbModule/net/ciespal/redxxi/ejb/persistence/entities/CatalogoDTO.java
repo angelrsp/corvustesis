@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.corvustec.commons.util.ApplicationUtil;
+
 import java.util.List;
 
 
@@ -35,6 +37,11 @@ public class CatalogoDTO implements Serializable {
 	@Column(name="cat_imagen")
 	private byte[] catImagen;
 
+	@Column(name="cat_imagen_nombre")
+	private String catImagenNombre;
+	
+	@Transient
+	private String catImagenPath;
 	
 	//bi-directional many-to-one association to CatalogoDTO
 	@ManyToOne
@@ -91,6 +98,24 @@ public class CatalogoDTO implements Serializable {
 
 	public void setCatImagen(byte[] catImagen) {
 		this.catImagen = catImagen;
+	}
+
+	public String getCatImagenNombre() {
+		return catImagenNombre;
+	}
+
+	public void setCatImagenNombre(String catImagenNombre) {
+		this.catImagenNombre = catImagenNombre;
+	}
+
+	public String getCatImagenPath() {
+		if(getCatImagen()!=null)
+			this.catImagenPath=ApplicationUtil.saveToDisk(getCatImagen(), getCatImagenNombre());
+		return catImagenPath;
+	}
+
+	public void setCatImagenPath(String catImagenPath) {
+		this.catImagenPath = catImagenPath;
 	}
 
 	public CatalogoDTO getAteCatalogo() {

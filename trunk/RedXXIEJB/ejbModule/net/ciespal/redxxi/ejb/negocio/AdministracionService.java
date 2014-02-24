@@ -14,11 +14,11 @@ public interface AdministracionService {
 	List<CatalogoDTO> getCatalogo(CatalogoDTO catalogo)
 			throws CorvustecException;
 
-	CatalogoDTO createCatalogo(CatalogoDTO catalogo) throws CorvustecException;
-
 	CatalogoDTO getCatalogo(Object id) throws CorvustecException;
 
 	CatalogoDTO createOrUpdateCatalogo(CatalogoDTO catalogo)
 			throws CorvustecException;
+
+	void deleteCatalogo(CatalogoDTO catalogo) throws CorvustecException;
 
 }

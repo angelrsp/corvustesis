@@ -31,7 +31,7 @@ public class CatalogoDAOImpl extends AbstractFacadeImpl<CatalogoDTO> implements 
 		List<CatalogoDTO> list = null;
 		if(catalogo.getCatCodigo()>0)
 		{
-		Query query = entityManager.createQuery("select cat from CatalogoDTO cat inner join cat.ateCatalogo catP where catP.catCodigo=?");
+		Query query = entityManager.createQuery("select cat from CatalogoDTO cat inner join cat.ateCatalogo catP where catP.catCodigo=? order by cat.catDescripcion");
 		query.setParameter(1, catalogo.getCatCodigo());
 		
 		list=query.getResultList();
@@ -44,6 +44,7 @@ public class CatalogoDAOImpl extends AbstractFacadeImpl<CatalogoDTO> implements 
 		}
 		return list;
 	}
+		
 	
 	private List<CatalogoDTO> getYears()
 	{
@@ -76,6 +77,15 @@ public class CatalogoDAOImpl extends AbstractFacadeImpl<CatalogoDTO> implements 
 		return list;
 	}
 
+	@Override
+	public void remove2(CatalogoDTO catalogo)
+	{
+		Query query;
+		query=entityManager.createQuery("delete from CatalogoDTO cat where cat.catCodigo=:codigo");
+		query.setParameter("codigo", catalogo.getCatCodigo());
+		query.executeUpdate();
+	}
+	
 	private Map<Integer, String> getMonthList()
 	{
 		Map<Integer, String> month=new HashMap<Integer, String>();
