@@ -35,5 +35,7 @@ public interface FactoryDAO {
 
 	UsuarioPerfilDAO getUsuarioPerfilDAOImpl();
 
+	PermisoIndicadorDAO getPermisoIndicadorDAOImpl();
+
 	
 }

@@ -34,6 +34,11 @@ public class PerfilDTO implements Serializable {
 	@OneToMany(mappedBy="indPerfil")
 	private List<UsuarioPerfilDTO> indUsuarioPerfils;
 
+	//bi-directional many-to-one association to UsuarioPerfilDTO
+	@OneToMany(mappedBy="indPerfil")
+	private List<PermisoIndicadorDTO> indPermisoIndicadors;
+
+	
 	public PerfilDTO() {
 	}
 
@@ -66,6 +71,15 @@ public class PerfilDTO implements Serializable {
 
 	public void setIndAccesos(List<AccesoDTO> indAccesos) {
 		this.indAccesos = indAccesos;
+	}
+
+	public List<PermisoIndicadorDTO> getIndPermisoIndicadors() {
+		return indPermisoIndicadors;
+	}
+
+	public void setIndPermisoIndicadors(
+			List<PermisoIndicadorDTO> indPermisoIndicadors) {
+		this.indPermisoIndicadors = indPermisoIndicadors;
 	}
 
 	public AccesoDTO addIndAcceso(AccesoDTO indAcceso) {
