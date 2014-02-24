@@ -54,7 +54,7 @@
 					</tr>
 				</table>
 				
-				<p:tree value="#{accesoController.rootNode}" var="node" id="tree" selectionMode="checkbox">
+				<p:tree value="#{accesoController.rootNode}" var="node" id="tree" selectionMode="checkbox" selection="#{accesoController.selectedNodes}">
 			        <p:treeNode id="treeNode">  
 			            <h:outputText value="#{node.indNombreCorto}"/>  
 			        </p:treeNode>  
