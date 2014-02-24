@@ -20,6 +20,7 @@
 		<class>ec.edu.uce.indicadores.ejb.persistence.entities.PerfilDTO</class>
 		<class>ec.edu.uce.indicadores.ejb.persistence.entities.UsuarioPerfilDTO</class>
 		<class>ec.edu.uce.indicadores.ejb.persistence.entities.ParametroDTO</class>
+		<class>ec.edu.uce.indicadores.ejb.persistence.entities.PermisoIndicadorDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>

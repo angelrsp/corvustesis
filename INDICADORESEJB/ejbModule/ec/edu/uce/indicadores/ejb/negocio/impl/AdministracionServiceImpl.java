@@ -14,8 +14,10 @@ import ec.edu.uce.indicadores.ejb.persistence.dao.FactoryDAO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.AccesoDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.CatalogoDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.IndicadorDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.OpcionDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.PerfilDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.PermisoIndicadorDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.UsuarioDTO;
 
 @Stateless
@@ -63,11 +65,12 @@ public class AdministracionServiceImpl implements AdministracionService{
 	}
 	
 	@Override
-	public void createAcceso(List<String> option,Object perfil) throws IndicadoresException
+	public void createAcceso(List<String> option,Object perfil,List<IndicadorDTO> indicadorList) throws IndicadoresException
 	{
 		log.info("createAcceso");
 		AccesoDTO acc;
 		OpcionDTO op;
+		PermisoIndicadorDTO perInd;
 		try{
 			factoryDAO.getAccesoDAOImpl().remove(new PerfilDTO(Integer.valueOf(perfil.toString())));
 			for(String opt:option){
@@ -78,12 +81,38 @@ public class AdministracionServiceImpl implements AdministracionService{
 				acc.setIndPerfil(new PerfilDTO(Integer.valueOf(perfil.toString())));
 				factoryDAO.getAccesoDAOImpl().create(acc);
 			}
+			factoryDAO.getPermisoIndicadorDAOImpl().remove2(new PerfilDTO(Integer.valueOf(perfil.toString())));
+			for(IndicadorDTO ind:indicadorList)
+			{
+				perInd=new PermisoIndicadorDTO();
+				perInd.setIndPerfil(new PerfilDTO(Integer.valueOf(perfil.toString())));
+				perInd.setPeiIndicador(ind.getIndCodigo());
+				factoryDAO.getPermisoIndicadorDAOImpl().create(perInd);
+			}
+			
 		}
 		catch(Exception e)
 		{
 			log.info("Error al createUser" +e.toString());
 			throw new IndicadoresException("Error al createUser");
 		}
+	}
+	
+	@Override
+	public Boolean existsPermisoIndicador(IndicadorDTO indicador,PerfilDTO perfil) throws IndicadoresException
+	{
+		log.info("existsPermisoIndicador");
+		Boolean flag;
+		try{
+			flag=factoryDAO.getPermisoIndicadorDAOImpl().existe(indicador,perfil);
+			log.info("valor {}",flag);
+		}
+		catch(Exception e)
+		{
+			log.info("Error al existsPermisoIndicador" +e.toString());
+			throw new IndicadoresException("Error al existsPermisoIndicador");
+		}	
+		return flag;
 	}
 	
 	@Override

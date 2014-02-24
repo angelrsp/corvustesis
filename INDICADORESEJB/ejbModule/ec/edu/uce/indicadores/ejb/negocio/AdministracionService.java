@@ -7,6 +7,7 @@ import javax.ejb.Local;
 import ec.edu.uce.indicadores.commons.util.IndicadoresException;
 import ec.edu.uce.indicadores.ejb.persistence.entities.CatalogoDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.IndicadorDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.OpcionDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.PerfilDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.UsuarioDTO;
@@ -27,11 +28,14 @@ public interface AdministracionService {
 
 	List<OpcionDTO> readOpcion() throws IndicadoresException;
 
-	void createAcceso(List<String> option, Object perfil)
-			throws IndicadoresException;
-
 	UsuarioDTO createOrUpdateUser(UsuarioDTO user) throws IndicadoresException;
 
 	void deleteUsuario(UsuarioDTO user) throws IndicadoresException;
+
+	void createAcceso(List<String> option, Object perfil,
+			List<IndicadorDTO> indicadorList) throws IndicadoresException;
+
+	Boolean existsPermisoIndicador(IndicadorDTO indicador, PerfilDTO perfil)
+			throws IndicadoresException;
 
 }
