@@ -68,12 +68,15 @@ public class AccesoController extends SelectItemController implements Serializab
 	
 	private Boolean disabled;
 	
+	private List<IndicadorDTO> listIndicador;
+	
 	public AccesoController() {
 	}
 	
 	@PostConstruct
 	private void init()	{
 		indicadorDTO=new IndicadorDTO();
+		listIndicador=new ArrayList<IndicadorDTO>();
 		perfilList=new ArrayList<PerfilDTO>(); 
 		opcionCheck=new ArrayList<OpcionDTO>();
 		opcionSelect=new ArrayList<String>();
@@ -87,7 +90,7 @@ public class AccesoController extends SelectItemController implements Serializab
 			}
 		}
 		modelo=indicadorDataManager.getModelo();
-		obtenerArbol();
+		//obtenerArbol();
 		disabled=true;
 	}
 	
@@ -197,6 +200,14 @@ public class AccesoController extends SelectItemController implements Serializab
 		this.disabled = disabled;
 	}
 
+	public List<IndicadorDTO> getListIndicador() {
+		return listIndicador;
+	}
+
+	public void setListIndicador(List<IndicadorDTO> listIndicador) {
+		this.listIndicador = listIndicador;
+	}
+
 	public void readAcceso()
 	{
 		PerfilDTO perfil;
@@ -211,7 +222,7 @@ public class AccesoController extends SelectItemController implements Serializab
 			{
 				opcionSelect.add(opt.getOpcCodigo().toString());
 			}
-			
+			obtenerArbol();
 		} catch (IndicadoresException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
@@ -220,7 +231,16 @@ public class AccesoController extends SelectItemController implements Serializab
 	public void save()
 	{
 		try {
-			administracionService.createAcceso(opcionSelect, pefilSelect);
+			listIndicador=new ArrayList<IndicadorDTO>();
+			if(pefilSelect==null)
+			{
+				JsfUtil.addErrorMessage("Seleccione Perfil");
+				return;
+			}
+			for(TreeNode node : selectedNodes) {  
+				listIndicador.add((IndicadorDTO) node.getData());
+            }  
+			administracionService.createAcceso(opcionSelect, pefilSelect,listIndicador);
 			readAcceso();
 		} catch (IndicadoresException e) {
 			JsfUtil.addErrorMessage(e.toString());
@@ -256,20 +276,19 @@ public class AccesoController extends SelectItemController implements Serializab
 		}
 	}
 	
-	@SuppressWarnings("unused")
 	public TreeNode newNodeWithChildren(IndicadorDTO ttParent, TreeNode parent){
-		parent.setExpanded(true);
-        TreeNode newNode= new DefaultTreeNode(ttParent, parent);
-        for (IndicadorDTO tt : ttParent.getIndIndicadors()){
-             TreeNode newNode2= newNodeWithChildren(tt, newNode);
-        }
+		TreeNode newNode= new DefaultTreeNode(ttParent, parent);
+		try {
+			parent.setExpanded(true);
+			newNode.setSelected(administracionService.existsPermisoIndicador(ttParent,new PerfilDTO(Integer.valueOf(getPefilSelect().toString()))));
+	        for (IndicadorDTO tt : ttParent.getIndIndicadors()){
+	            TreeNode newNode2= newNodeWithChildren(tt, newNode);	             
+				newNode2.setSelected(administracionService.existsPermisoIndicador(tt,new PerfilDTO(Integer.valueOf(getPefilSelect().toString()))));
+	        }
+		} catch (IndicadoresException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
         return newNode;
    }
-	
-	
-	
-	
-	
-	
 	
 }
