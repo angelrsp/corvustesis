@@ -60,12 +60,6 @@
 			</tr>
 
 			<tr>
-				<td><h:outputText value="#{i18n['label.tipo']}:&#160;" /></td>
-				<td><p:selectOneMenu value="#{publicacionDataManager.tipoPublicacion}" required="true" requiredMessage="#{i18n['label.tipo']}&#160;#{i18n['label.requerido']}">
-						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
-						<f:selectItems value="#{publicacionController.catalogoTipoPublicacion}"/>	
-					</p:selectOneMenu></td>
-
 				<td><h:outputText value="#{i18n['label.campo.conocimiento']}:&#160;" /></td>
 				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.campo.conocimiento']}&#160;#{i18n['label.requerido']}" value="#{publicacionController.campoConocimiento}">
 						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
@@ -81,15 +75,26 @@
 			</tr>			
 			
 			<tr>
-				<td colspan="4" align="center"><p:commandButton value="#{i18n['boton.guardar']}" process="pnlDato" update="pnlDato,growl" actionListener="#{publicacionController.save}"/></td>
+				<td colspan="4" align="center">
+				<p:commandButton value="#{i18n['boton.guardar']}" process="pnlDato" update="pnlDato,growl" actionListener="#{publicacionController.save}"/>
+				<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update="pnlDato,growl" actionListener="#{publicacionController.cancel}"/></td>
 			</tr>				
 
 		</table>
 		
-		<p:dataTable value="#{publicacionDataManager.publicacionList}" var="pub">
+		<p:dataTable id="tblPublicacion" value="#{publicacionDataManager.publicacionList}" var="pub">
 		
 			<p:column headerText="#{i18n['label.titulo']}">
 				<h:outputText value="#{pub.pubTitulo}" />
+			</p:column>		
+		
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{publicacionController.edit(pub)}" icon="ui-icon-pencil" process=":contenido:tblPublicacion" update=":contenido:pnlDato"/>
+			</p:column>
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{publicacionController.delete(pub)}" icon="ui-icon-close" process=":contenido:tblPublicacion" update=":contenido:pnlDato,:contenido:growl">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
 			</p:column>		
 		
 		</p:dataTable>
