@@ -5,7 +5,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import net.ciespal.redxxi.ejb.negocio.AdministracionService;
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
+import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
@@ -21,6 +23,9 @@ public class PublicacionController extends SelectItemController {
 	@EJB
 	private AteneaService ateneaService;
 	
+	@EJB
+	private AdministracionService administracionService;
+
 	
 	@ManagedProperty(value="#{publicacionDataManager}")
 	private PublicacionDataManager publicacionDataManager;
@@ -89,4 +94,31 @@ public class PublicacionController extends SelectItemController {
 		}
 	}
 	
+	
+	public void cancel()
+	{
+		publicacionDataManager.setPublicacion(new PublicacionDTO());
+		publicacionDataManager.setTipoPublicacion(null);
+		setCampoConocimiento(null);
+		setSubCampoConocimiento(null);
+	}
+	
+	public void edit(PublicacionDTO publicacion)
+	{
+		CatalogoDTO campoConocimiento=new CatalogoDTO();
+		publicacionDataManager.setPublicacion(publicacion);
+		publicacionDataManager.setTipoPublicacion(publicacion.getPubTipo());
+		try {
+			campoConocimiento=administracionService.getCatalogo(publicacion.getPubCampoConocimiento()).getAteCatalogo();
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+		setCampoConocimiento(campoConocimiento.getCatCodigo());
+		setSubCampoConocimiento(publicacion.getPubCampoConocimiento());
+	}
+	
+	public void delete(PublicacionDTO publicacion)
+	{
+		
+	}
 }

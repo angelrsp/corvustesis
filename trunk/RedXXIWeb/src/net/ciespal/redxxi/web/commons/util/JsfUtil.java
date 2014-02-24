@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.corvustec.commons.util.CalendarUtil;
+import com.corvustec.commons.util.MessagesApplicacion;
 
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicException;
@@ -117,33 +118,33 @@ public class JsfUtil {
 	          getSession(false);
 	 }
 
-	 public static String saveToDisk(byte[] bytefile)
-		{
-			String file,path,date,pathAbs,pathSave = null;
-			try {
-				//mime=getTypeFile(bytefile);
-				//mime=mime.split("/")[1];
-				file= UUID.randomUUID().toString();
-				//path=FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
-				date=String.valueOf(CalendarUtil.getYear())+"\\"+String.valueOf(CalendarUtil.getMonth())+"\\"+String.valueOf(CalendarUtil.getDay());
-				
-				path=getRealPath()+"\\images\\tmp\\"+date;
-				File f= new File(path);
-				if(!f.exists())
-					f.mkdirs();
-				pathAbs=path+"\\"+file+".jpg";
-				pathSave="\\images\\tmp\\"+date+"\\"+file+".jpg";//+mime;
-				pathSave=pathSave.replace('\\', '/');
-				FileOutputStream fos=new FileOutputStream(pathAbs);
-				fos.write(bytefile);
-				fos.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			return pathSave;
+	public static String saveToDisk(byte[] bytefile)
+	{
+		String file,path,date,pathAbs,pathSave = null;
+		try {
+			//mime=getTypeFile(bytefile);
+			//mime=mime.split("/")[1];
+			file= UUID.randomUUID().toString();
+			//path=FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+			date=String.valueOf(CalendarUtil.getYear())+"\\"+String.valueOf(CalendarUtil.getMonth())+"\\"+String.valueOf(CalendarUtil.getDay());
+			
+			path=getRealPath()+"\\images\\tmp\\"+date;
+			File f= new File(path);
+			if(!f.exists())
+				f.mkdirs();
+			pathAbs=path+"\\"+file+".jpg";
+			pathSave="\\images\\tmp\\"+date+"\\"+file+".jpg";//+mime;
+			pathSave=pathSave.replace('\\', '/');
+			FileOutputStream fos=new FileOutputStream(pathAbs);
+			fos.write(bytefile);
+			fos.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		return pathSave;
+	}
 	 
 	public static String getTypeFile(byte[] content)
 	{
@@ -203,4 +204,36 @@ public class JsfUtil {
 		}
 		return flag;
 	}
+	
+	
+	public static String saveToDiskUpdload(byte[] bytefile,String fileName)
+	{
+		String pathDir,pathFile = null;
+		File f;
+		try {
+			//date=String.valueOf(CalendarUtil.getYear())+"\\"+String.valueOf(CalendarUtil.getMonth())+"\\"+String.valueOf(CalendarUtil.getDay());
+			
+			pathDir=MessagesApplicacion.getString("com.corvustec.redxxi.path.web")+"\\images\\tmp\\upload\\";
+			pathFile=pathDir+"\\"+fileName;
+			
+			f= new File(pathFile);
+			if(f.exists())
+				f.delete();
+			
+			f= new File(pathDir);
+			if(!f.exists())
+				f.mkdirs();
+			FileOutputStream fos=new FileOutputStream(pathFile);
+			fos.write(bytefile);
+			fos.close();
+			pathFile="\\images\\tmp\\upload\\"+fileName;
+			pathFile=pathFile.replace('\\', '/');
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return pathFile;
+	}
+	
 }

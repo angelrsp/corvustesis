@@ -21,12 +21,14 @@ public class NoticiaDataManager implements Serializable {
 
 	private NoticiaDTO noticia;
 	private List<NoticiaDTO> noticiaList;
+	private List<NoticiaDTO> noticiaPublicList;
 	
 	@PostConstruct
 	private void init()
 	{
 		noticia=new NoticiaDTO();
 		noticiaList=new ArrayList<NoticiaDTO>();
+		noticiaPublicList=new ArrayList<NoticiaDTO>();
 	}
 
 	public NoticiaDTO getNoticia() {
@@ -43,6 +45,14 @@ public class NoticiaDataManager implements Serializable {
 
 	public void setNoticiaList(List<NoticiaDTO> noticiaList) {
 		this.noticiaList = noticiaList;
+	}
+
+	public List<NoticiaDTO> getNoticiaPublicList() {
+		return noticiaPublicList;
+	}
+
+	public void setNoticiaPublicList(List<NoticiaDTO> noticiaPublicList) {
+		this.noticiaPublicList = noticiaPublicList;
 	}
 	
 	
