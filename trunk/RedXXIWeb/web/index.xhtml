@@ -28,12 +28,16 @@
 			<tr>
 				<td>
 					<h:dataTable value="#{indexController.catalogoDataManager.catalogoList}" var="cat">
+					
 		    			<h:column>
-
+		    				<p:graphicImage value="#{cat.catImagenPath}" height="30" width="50"/>
+		    			</h:column>
+		    													
+		    			<h:column>
 		    				<f:facet name="header">Paises</f:facet>
 		    				<h:commandLink actionListener="#{indexController.paises}" value="#{cat.catDescripcion}" />
-		    				
-		    			</h:column>					
+		    			</h:column>
+		    								
 					</h:dataTable>
 				</td>
 			</tr>
@@ -45,7 +49,7 @@
 		<table>
 			<tr>
 				<td>
-					<h:dataTable value="#{noticiaController.noticiaDataManager.noticiaList}" var="noti" width="100%">
+					<h:dataTable value="#{noticiaController.noticiaDataManager.noticiaPublicList}" var="noti" width="100%">
 					
 		    			<h:column>
 		    				<f:facet name="header">Noticias</f:facet>

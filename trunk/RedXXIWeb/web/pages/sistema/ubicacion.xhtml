@@ -24,20 +24,29 @@
 				</tr>
 
 				<tr>
-					<td><h:outputText value="#{i18n['label.imagen']}:&#160;" /></td>
-					<td><p:fileUpload fileUploadListener="#{ubicacionController.handleFileUpload}" mode="advanced" dragDropSupport="true"  
-                  		update="growl,image,image2" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" oncomplete="location.reload(true)" auto="true"/></td>
-					<td><p:graphicImage id="image" value="#{ubicacionController.image}" cache="false" height="80"/></td>
-					<td><p:graphicImage id="image2" value="#{ubicacionDataManager.pathPrueba}" height="80" cache="false"/></td>                  								
+					<td><h:outputText value="#{i18n['label.poblacion']}:&#160;" /></td>
+					<td><p:inputText required="true" requiredMessage="#{i18n['label.poblacion']}&#160;#{i18n['label.requerido']}" value="#{ubicacionDataManager.pais.catAuxiliar}" onkeypress="return isNumberKey(event);"/></td>
 				</tr>
 
 				<tr>
-					<td><h:outputText value="#{i18n['label.poblacion']}:&#160;" /></td>
-					<td><p:inputText required="true" requiredMessage="#{i18n['label.poblacion']}&#160;#{i18n['label.requerido']}" value="#{ubicacionDataManager.pais.catAuxiliar}"/></td>
+					<td><h:outputText value="#{i18n['label.imagen']}:&#160;" /></td>
+					<td><p:fileUpload fileUploadListener="#{ubicacionController.handleFileUpload}" mode="advanced" dragDropSupport="true"  
+<<<<<<< .mine
+                  		update="image" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" oncomplete="location.reload(true)" auto="true"/></td>
+					                  								
+=======
+                  		update="growl,image,image2" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" oncomplete="location.reload(true)" auto="true"/></td>
+					<td><p:graphicImage id="image" value="#{ubicacionController.image}" cache="false" height="80"/></td>
+					<td><p:graphicImage id="image2" value="#{ubicacionDataManager.pathPrueba}" height="80" cache="false"/></td>                  								
+>>>>>>> .r593
 				</tr>
-
+				<tr>
+					<td><p:graphicImage id="image" value="#{ubicacionDataManager.pathImage}" height="80" cache="false"/></td>
+				</tr>
+				
 			<tr>
-				<td colspan="4" align="center"><p:commandButton value="#{i18n['boton.guardar']}" process="pnlDato" update="pnlDato,growl" actionListener="#{ubicacionController.savePais}"/></td>
+				<td colspan="4" align="center"><p:commandButton value="#{i18n['boton.guardar']}" process="pnlDato" update="pnlDato,growl" actionListener="#{ubicacionController.savePais}"/>
+					<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update="pnlDato,growl" actionListener="#{ubicacionController.cancelPais}"/></td>
 			</tr>							
 
 								
@@ -56,6 +65,10 @@
 				<p:column headerText="#{i18n['label.poblacion']}">
 					<h:outputText value="#{pai.catAuxiliar}"/>
 				</p:column>					
+
+				<p:column headerText="#{i18n['label.imagen']}">
+					<p:graphicImage value="#{pai.catImagenPath}" height="50"/>
+				</p:column>					
 			
 				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
 					<p:commandButton actionListener="#{ubicacionController.editPais(pai)}" icon="ui-icon-pencil" process=":contenido:tblPais" update=":contenido:pnlDato"/>
@@ -65,10 +78,106 @@
 						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
 					</p:commandButton>
 				</p:column>
+
+				<p:column headerText="#{i18n['boton.provincia']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{ubicacionController.selectProcinvia(pai)}" icon="ui-icon-flag" process=":contenido:tblPais" update=":contenido:pnlProvincia" oncomplete="PF('dlgProvincia').show()"/>
+				</p:column>
+
 						
 			</p:dataTable>
 			
 		</p:panel>
+		
+		
+		<p:dialog widgetVar="dlgProvincia" modal="true" header="#{i18n['label.panel.provincia']}">
+
+		<p:ajax event="close" update="growl" listener="#{ubicacionController.cancelPais}"/>  
+
+
+		<p:panel id="pnlProvincia">		
+		
+			<table>
+				<tr>
+					<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
+					<td><p:inputText required="true" requiredMessage="#{i18n['label.nombre']}&#160;#{i18n['label.requerido']}" value="#{ubicacionDataManager.provincia.catDescripcion}"/></td>
+				</tr>
+				<tr>		
+					<td colspan="2" align="center"><p:commandButton value="#{i18n['boton.guardar']}" process="pnlProvincia" update="pnlProvincia,growl" actionListener="#{ubicacionController.saveProvincia}"/>
+						<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update="pnlProvincia,growl" actionListener="#{ubicacionController.cancelProvinvia}"/></td>
+				</tr>
+											
+			</table>
+		
+			<p:dataTable id="tblProvincia" value="#{ubicacionDataManager.provinciaList}" var="pro">
+			
+				<p:column headerText="#{i18n['label.nombre']}">
+					<h:outputText value="#{pro.catDescripcion}"/>
+				</p:column>					
+
+				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{ubicacionController.editProvincia(pro)}" icon="ui-icon-pencil" process=":contenido:tblProvincia" update=":contenido:pnlProvincia"/>
+				</p:column>
+				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{ubicacionController.deleteProvincia(pro)}" icon="ui-icon-close" process=":contenido:tblProvincia" update=":contenido:pnlProvincia,:contenido:growl">
+						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+					</p:commandButton>
+				</p:column>
+			
+				<p:column headerText="#{i18n['boton.ciudad']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{ubicacionController.selectCiudad(pro)}" icon="ui-icon-flag" process=":contenido:tblProvincia" update=":contenido:pnlCiudad" oncomplete="PF('dlgCiudad').show()"/>
+				</p:column>
+			
+			
+			</p:dataTable>		
+		
+		
+		</p:panel>
+		
+		</p:dialog>
+		
+		
+		<p:dialog widgetVar="dlgCiudad" modal="true" header="#{i18n['label.panel.ciudad']}">
+
+		<p:ajax event="close" update="growl" listener="#{ubicacionController.cancelProvinvia}"/>  
+
+
+		<p:panel id="pnlCiudad">		
+		
+			<table>
+				<tr>
+					<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
+					<td><p:inputText required="true" requiredMessage="#{i18n['label.nombre']}&#160;#{i18n['label.requerido']}" value="#{ubicacionDataManager.ciudad.catDescripcion}"/></td>
+				</tr>
+				<tr>		
+					<td colspan="2" align="center"><p:commandButton value="#{i18n['boton.guardar']}" process="pnlCiudad" update="pnlCiudad,growl" actionListener="#{ubicacionController.saveCiudad}"/>
+						<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update="pnlCiudad,growl" actionListener="#{ubicacionController.cancelCiudad}"/></td>
+				</tr>
+											
+			</table>
+		
+			<p:dataTable id="tblCiudad" value="#{ubicacionDataManager.ciudadList}" var="ciu">
+			
+				<p:column headerText="#{i18n['label.nombre']}">
+					<h:outputText value="#{ciu.catDescripcion}"/>
+				</p:column>					
+
+				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{ubicacionController.editCiudad(ciu)}" icon="ui-icon-pencil" process=":contenido:tblCiudad" update=":contenido:pnlCiudad"/>
+				</p:column>
+				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{ubicacionController.deleteCiudad(ciu)}" icon="ui-icon-close" process=":contenido:tblCiudad" update=":contenido:pnlCiudad,:contenido:growl">
+						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+					</p:commandButton>
+				</p:column>
+			
+			</p:dataTable>		
+		
+		
+		</p:panel>
+		
+		</p:dialog>
+		
+		
 	</ui:define>
 </ui:composition>
 		
