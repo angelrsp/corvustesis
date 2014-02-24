@@ -580,6 +580,18 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 
-	
+	@Override
+	public List<NoticiaDTO> readNoticiaPublic() throws CorvustecException
+	{
+		logger.info("readNoticia");
+		try{
+			return factoryDAO.getNoticiaDAOImpl().getAllPublic();
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readNoticia {}",e.toString());
+			throw new CorvustecException("Error al readNoticia");
+		}
+	}
 
 }

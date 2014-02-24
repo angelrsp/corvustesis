@@ -8,4 +8,5 @@ public interface CatalogoDAO extends AbstractFacade<CatalogoDTO> {
 
 	List<CatalogoDTO> getAll(CatalogoDTO catalogo);
 
+	void remove2(CatalogoDTO catalogo);
 }
