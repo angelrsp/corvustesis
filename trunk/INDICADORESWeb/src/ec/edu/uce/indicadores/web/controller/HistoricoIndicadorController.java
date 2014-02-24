@@ -27,12 +27,15 @@ import org.primefaces.model.chart.PieChartModel;
 import org.primefaces.model.chart.MeterGaugeChartModel; 
 
 import ec.edu.uce.indicadores.commons.util.IndicadoresException;
+import ec.edu.uce.indicadores.ejb.negocio.AdministracionService;
 import ec.edu.uce.indicadores.ejb.negocio.IndicadorService;
 import ec.edu.uce.indicadores.ejb.persistence.entities.EvidenciaDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.HistoricoIndicadorDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IndicadorDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ModeloDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.PerfilDTO;
+import ec.edu.uce.indicadores.ejb.persistence.entities.UsuarioDTO;
 import ec.edu.uce.indicadores.web.datamanager.IndicadorDataManager;
 import ec.edu.uce.indicadores.web.util.JsfUtil;
 
@@ -47,7 +50,10 @@ public class HistoricoIndicadorController extends SelectItemController implement
 
 	@EJB
 	private IndicadorService indicadorService;
-	
+
+	@EJB
+	private AdministracionService administracionService;
+
 	@ManagedProperty(value="#{indicadorDataManager}")
 	private IndicadorDataManager indicadorDataManager;
 
@@ -78,10 +84,15 @@ public class HistoricoIndicadorController extends SelectItemController implement
 	
 	private Boolean disabled;
 	
+	private UsuarioDTO user;
+	
+	private PerfilDTO perfil;
 	
 	@PostConstruct
 	private void init() throws IndicadoresException
 	{
+		user=(UsuarioDTO) JsfUtil.getObject("UsuarioDTO");
+		perfil=user.getIndUsuarioPerfils().get(0).getIndPerfil();
 		disabled=true;
 		indicadorDTO=new IndicadorDTO();
 		modelo=indicadorDataManager.getModelo();
@@ -292,7 +303,7 @@ public class HistoricoIndicadorController extends SelectItemController implement
 			setIndicadorDTO(indTemp);
 			RequestContext rc = RequestContext.getCurrentInstance();
 			if(ind.getIndIndicadors().isEmpty()){
-				disabledAddValue=false;
+				disabledAddValue=!administracionService.existsPermisoIndicador(ind, perfil);
 				historicoIndicadorList=indicadorService.obtenerValores(indTemp);
 				if(historicoIndicadorList!=null){
 					rc.execute("PF('dlgValorReporte').show();");
