@@ -30,7 +30,9 @@ public class UbicacionDataManager implements Serializable{
 
 	private byte[] imageBytePais;
 	
-	private String pathPrueba;
+	private String pathImage;
+	
+	private String nameImage;
 	
 	public UbicacionDataManager() {
 	}
@@ -103,12 +105,20 @@ public class UbicacionDataManager implements Serializable{
 		this.imageBytePais = imageBytePais;
 	}
 
-	public String getPathPrueba() {
-		return pathPrueba;
+	public String getPathImage() {
+		return pathImage;
 	}
 
-	public void setPathPrueba(String pathPrueba) {
-		this.pathPrueba = pathPrueba;
+	public void setPathImage(String pathImage) {
+		this.pathImage = pathImage;
+	}
+
+	public String getNameImage() {
+		return nameImage;
+	}
+
+	public void setNameImage(String nameImage) {
+		this.nameImage = nameImage;
 	}
 	
 }

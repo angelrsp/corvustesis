@@ -28,6 +28,7 @@ public class NoticiaController {
 	private void init()
 	{
 		readNoticia();
+		readNoticiaPublic();
 	}
 
 	public NoticiaDataManager getNoticiaDataManager() {
@@ -55,6 +56,15 @@ public class NoticiaController {
 	{
 		try {
 			noticiaDataManager.setNoticiaList(ateneaService.readNoticia());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	private void readNoticiaPublic()
+	{
+		try {
+			noticiaDataManager.setNoticiaPublicList(ateneaService.readNoticiaPublic());
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}

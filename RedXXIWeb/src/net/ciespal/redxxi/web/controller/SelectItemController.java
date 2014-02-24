@@ -249,8 +249,6 @@ public abstract class SelectItemController {
 
 	@SuppressWarnings("unchecked")
 	public List<SelectItem> getCatalogoSubCampoConocimiento() throws CorvustecException {
-		if(CollectionUtils.isEmpty(catalogoSubCampoConocimiento))
-		{
 			CatalogoDTO catalogo=new CatalogoDTO();
 			catalogo.setCatCodigo(campoConocimiento!=null?Integer.valueOf(campoConocimiento.toString()):-3);
 			if(administracionService.getCatalogo(catalogo)==null)
@@ -263,9 +261,7 @@ public abstract class SelectItemController {
 					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
 				}
 			});
-			
-		}		
-		
+					
 		return catalogoSubCampoConocimiento;
 	}
 
