@@ -33,16 +33,7 @@
 	<table width="100%" class="table">
 			<tr>
 				<td>
-					<h:dataTable value="#{noticiaController.noticiaDataManager.noticiaPublicList}" var="noti" width="100%">
-					
-		    			<h:column>
-		    				<f:facet name="header">Noticias</f:facet>
-		    				<h:commandLink value="#{noti.notTitulo}" actionListener="#{noticiaPublicController.readNoticia(noti)}"/><br />
-		    				<h:outputText value="#{noti.notResumen}" escape="false"/><br />
-		    				<h:commandLink value=" LEER MÁS..." actionListener="#{noticiaPublicController.readNoticia(noti)}"/>
-		    			</h:column>										
-					
-					</h:dataTable>
+					<h:outputText value="#{noticiaPublicController.noticiaPublicDataManager.noticia.notDescripcion}" escape="false"/>
 				</td>
 			</tr>
 		</table>

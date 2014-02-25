@@ -13,6 +13,11 @@
 		
 		<table>
 			<tr>
+				<td><h:outputText value="#{i18n['label.titulo']}:&#160;" /></td>
+				<td><p:inputText value="#{noticiaDataManager.noticia.notTitulo}" required="true" requiredMessage="#{i18n['label.titulo']}&#160;#{i18n['label.requerido']}"/></td>
+			</tr>
+		
+			<tr>
 				<td><h:outputText value="#{i18n['label.resumen']}:&#160;" /></td>
 				<td><p:editor value="#{noticiaDataManager.noticia.notResumen}" required="true" requiredMessage="#{i18n['label.resumen']}&#160;#{i18n['label.requerido']}"/></td>
 			</tr>
@@ -23,22 +28,34 @@
 			</tr>
 
 			<tr>
-				<td><h:outputText value="#{i18n['label.destacado']}:&#160;" /></td>
-				<td><p:selectBooleanButton value="#{noticiaDataManager.noticia.notDestacado}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/></td>
-			</tr>
-			<tr>	
-				<td><h:outputText value="#{i18n['label.activo']}:&#160;" /></td>
-				<td><p:selectBooleanButton value="#{noticiaDataManager.noticia.notActivo}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/></td>				
+				<td colspan="2">
+					<table>
+						<tr>
+							<td><h:outputText value="#{i18n['label.activo']}:&#160;" /></td>
+							<td><p:selectBooleanButton value="#{noticiaDataManager.noticia.notActivo}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/></td>				
+						
+							<td><h:outputText value="#{i18n['label.destacado']}:&#160;" /></td>
+							<td><p:selectBooleanButton value="#{noticiaDataManager.noticia.notDestacado}" onLabel="Si" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close"/></td>
+						</tr>					
+					</table>
+				</td>
 			</tr>
 			
 			<tr>
-				<td colspan="4" align="center"><p:commandButton value="#{i18n['boton.guardar']}" process="pnlDato" update="pnlDato,growl" actionListener="#{noticiaController.save}"/></td>
+				<td colspan="4" align="center">
+				<p:commandButton value="#{i18n['boton.guardar']}" process="pnlDato" update="pnlDato,growl" actionListener="#{noticiaController.save}"/>
+				<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update="pnlDato,growl" actionListener="#{noticiaController.cancel}"/>
+				</td>
 			</tr>							
 		</table>
 				
 		<p:dataTable id="tblNoticia" value="#{noticiaController.noticiaDataManager.noticiaList}" var="noti">
 
-			<p:column headerText="#{i18n['label.resumen']}">
+			<p:column headerText="#{i18n['label.titulo']}" style="vertical-align:top;">
+					<h:outputText value="#{noti.notTitulo}" escape="false"/>
+			</p:column>				
+
+			<p:column headerText="#{i18n['label.resumen']}" style="vertical-align:top;">
 					<h:outputText value="#{noti.notResumen}" escape="false"/>
 			</p:column>				
 		
@@ -46,18 +63,18 @@
 					<h:outputText value="#{noti.notDescripcion}" escape="false"/>
 			</p:column>		
 
-			<p:column headerText="#{i18n['label.activo']}">
+			<p:column headerText="#{i18n['label.activo']}" style="vertical-align:top;">
 					<h:outputText value="#{noti.notActivo?'Si':'No'}"/>
 			</p:column>		
 		
-			<p:column headerText="#{i18n['label.destacado']}">
+			<p:column headerText="#{i18n['label.destacado']}" style="vertical-align:top;">
 					<h:outputText value="#{noti.notDestacado?'Si':'No'}"/>
 			</p:column>		
 
-			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center;vertical-align:top;">
 				<p:commandButton actionListener="#{noticiaController.edit(noti)}" icon="ui-icon-pencil" process=":contenido:tblNoticia" update=":contenido:pnlDato"/>
 			</p:column>
-			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center;vertical-align:top;">
 				<p:commandButton actionListener="#{noticiaController.delete(noti)}" icon="ui-icon-close" process=":contenido:tblNoticia" update=":contenido:pnlDato">
 					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
 				</p:commandButton>
