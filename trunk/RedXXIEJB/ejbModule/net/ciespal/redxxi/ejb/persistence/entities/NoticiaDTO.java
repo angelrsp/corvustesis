@@ -38,13 +38,17 @@ public class NoticiaDTO implements Serializable {
 	
 	@Column(name="not_fecha")
 	private Timestamp notFecha;
-	
+
+	@Column(name="not_titulo")
+	private String notTitulo;
+
 
 	//bi-directional many-to-one association to EntidadDTO
 	@OneToMany(mappedBy="ateNoticia")
 	private List<EntidadDTO> ateEntidads;
 
 	public NoticiaDTO() {
+		this.notActivo=true;
 	}
 
 	public Integer getNotCodigo() {
@@ -93,6 +97,14 @@ public class NoticiaDTO implements Serializable {
 
 	public void setNotFecha(Timestamp notFecha) {
 		this.notFecha = notFecha;
+	}
+
+	public String getNotTitulo() {
+		return notTitulo;
+	}
+
+	public void setNotTitulo(String notTitulo) {
+		this.notTitulo = notTitulo;
 	}
 
 	public List<EntidadDTO> getAteEntidads() {

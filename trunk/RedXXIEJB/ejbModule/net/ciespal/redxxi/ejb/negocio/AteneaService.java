@@ -117,4 +117,6 @@ public interface AteneaService {
 
 	List<NoticiaDTO> readNoticiaPublic() throws CorvustecException;
 
+	List<PublicacionDTO> readPublicacion() throws CorvustecException;
+
 }
