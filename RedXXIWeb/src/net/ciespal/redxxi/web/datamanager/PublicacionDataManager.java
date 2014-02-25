@@ -21,6 +21,7 @@ public class PublicacionDataManager implements Serializable{
 
 	private PublicacionDTO publicacion;
 	private List<PublicacionDTO> publicacionList;
+	private List<PublicacionDTO> publicacionListPublic;
 
 	private Object tipoPublicacion;
 	
@@ -32,6 +33,7 @@ public class PublicacionDataManager implements Serializable{
 	{
 		publicacion=new PublicacionDTO();
 		publicacionList=new ArrayList<PublicacionDTO>();
+		publicacionListPublic=new ArrayList<PublicacionDTO>();
 	}
 	
 	public PublicacionDTO getPublicacion() {
@@ -48,6 +50,14 @@ public class PublicacionDataManager implements Serializable{
 
 	public void setPublicacionList(List<PublicacionDTO> publicacionList) {
 		this.publicacionList = publicacionList;
+	}
+
+	public List<PublicacionDTO> getPublicacionListPublic() {
+		return publicacionListPublic;
+	}
+
+	public void setPublicacionListPublic(List<PublicacionDTO> publicacionListPublic) {
+		this.publicacionListPublic = publicacionListPublic;
 	}
 
 	public Object getTipoPublicacion() {

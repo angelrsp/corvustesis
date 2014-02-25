@@ -86,4 +86,8 @@ public class NoticiaController {
 		}
 	}
 	
+	public void cancel()
+	{
+		noticiaDataManager.setNoticia(new NoticiaDTO());
+	}
 }
