@@ -1,5 +1,6 @@
 package net.ciespal.redxxi.web.controller;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -34,7 +35,16 @@ public class PublicacionController extends SelectItemController {
 	public PublicacionController() {
 	}
 	
+	@PostConstruct
+	private void init()
+	{
+		readPublicacionPublic();
+	}
 	
+	public PublicacionDataManager getPublicacionDataManager() {
+		return publicacionDataManager;
+	}
+
 	public void setPublicacionDataManager(PublicacionDataManager publicacionDataManager) {
 		this.publicacionDataManager = publicacionDataManager;
 	}
@@ -94,7 +104,14 @@ public class PublicacionController extends SelectItemController {
 		}
 	}
 	
-	
+	private void readPublicacionPublic()
+	{
+		try {
+			publicacionDataManager.setPublicacionListPublic(ateneaService.readPublicacion());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
 	public void cancel()
 	{
 		publicacionDataManager.setPublicacion(new PublicacionDTO());
