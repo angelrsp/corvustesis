@@ -18,14 +18,14 @@
 		<table>
 			<tr>
 				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{universidadController.pais}">
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{universidadController.pais}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
 						<f:selectItems value="#{pregradoController.catalogoPais}"/>
 						<p:ajax event="change" listener="#{universidadController.obtenerProvinciaChange}" process="@this" update="somProvinvia"/>						
 					</p:selectOneMenu></td>
 
 				<td><h:outputText value="#{i18n['label.provincia']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{universidadController.provincia}">
+				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{universidadController.provincia}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
 						<f:selectItems value="#{universidadController.catalogoProvincia}"/>
 						<p:ajax event="change" listener="#{universidadController.obtenerCiudadChange}" process="@this" update="somCiudad"/>
@@ -35,7 +35,7 @@
 			<tr>
 
 				<td><h:outputText value="#{i18n['label.ciudad']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somCiudad" value="#{universidadController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}">
+				<td><p:selectOneMenu id="somCiudad" value="#{universidadController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
 						<f:selectItems value="#{universidadController.catalogoCiudad}"/>
 					</p:selectOneMenu></td>
