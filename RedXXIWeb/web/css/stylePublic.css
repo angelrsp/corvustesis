@@ -8,3 +8,81 @@ body
 {
 	border:1px solid black;
 }
+
+
+.menudes {
+position: relative;
+overflow: hidden;
+width: 100%;
+margin: 10px auto 10px;
+border-radius: 8px;
+background: #025BA3;
+background-image:url('../images/dropline_bg.gif');
+text-align:center; 
+}
+.menudes a {
+display: inline-block;
+width: 23%; /* 100% dividido por el número de elementos del menú */
+box-sizing: border-box;
+padding: 5px 5px;
+color: #000;
+text-decoration: none;
+}
+.marca {
+position: absolute;
+bottom: 4px;
+left: -15%; /* Al menos 1/2 del ancho de cada enlace */
+width: 15%; /* 1/2 del ancho de cada enlace */
+height: 4px;
+background: #000;
+transition: 0.5s ease-in-out;
+}
+.menudes a:nth-child(1):hover ~ .marca {
+left: 6.25%; /* 1/4 Ancho del enlace */
+}
+.menudes a:nth-child(2):hover ~ .marca {
+left: 31.25%; /* 1/4 Ancho del enlace + 1 vez ancho enlace */
+}
+.menudes a:nth-child(3):hover ~ .marca {
+left: 56.25%; /* 1/4 Ancho del enlace + 2 veces ancho enlace */
+}
+.menudes a:nth-child(4):hover ~ .marca {
+left: 81.5%; /* 1/4 Ancho del enlace + 3 veces ancho enlace */
+}
+
+
+a.linkClass:link {color: #F57B20;text-decoration: none}
+a.linkClass:active {color: #000000;}
+a.linkClass:visited {color: #000000;}
+a.linkClass:hover {color: #FAA723; text-decoration: underline;}
+
+
+
+#footer_wrapper {
+    background: url("../images/borderbot.gif") repeat-x scroll center top rgba(0, 0, 0, 0);
+    height: 45px;
+    padding: 15px 10px 0;
+}
+#footer_left {
+    float: left;
+    width: 80%;
+}
+#footer_left img {
+    margin-right: 100px;
+}
+#footer_left div {
+    color: #666666;
+    font-size: 11px;
+    text-align: left;
+}
+#footer_left div a {
+    color: #FF9900;
+}
+#footer_right {
+    float: right;
+    margin-right: 0;
+    overflow: hidden;
+    padding-top: 5px;
+    text-align: right;
+    width: 60%;
+}

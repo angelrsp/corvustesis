@@ -26,21 +26,29 @@
 <table width="100%">
 
 <tr align="center">
-	<td colspan="3"><p:graphicImage value="/images/logociepalpublic.png" height="150"/> </td>
-	<td>
-		<div class="menutop" id="tp-menu-container">
-			<div id="tp-menu-nav">
-				<ul><li style="display:none"><a></a></li><li class="active"><a href="/ciespal/index.php?option=com_content&amp;view=frontpage&amp;Itemid=56" rel="relhide"><span>Inicio</span></a></li>
-					<li><a href="/ciespal/index.php?option=com_content&amp;view=article&amp;id=436&amp;Itemid=65" rel="qui�nessomos"><span>Quiénes somos</span></a></li>
-					<li><a href="/ciespal/index.php?option=com_content&amp;view=section&amp;layout=blog&amp;id=6&amp;Itemid=55" rel="capacitaci�n"><span>Capacitación</span></a></li>
-					<li><a href="/ciespal/index.php?option=com_content&amp;view=category&amp;layout=blog&amp;id=114&amp;Itemid=57" rel="investigaci�n"><span>Investigación</span></a></li>
-					<li class=""><a href="/ciespal/index.php?option=com_content&amp;view=section&amp;layout=blog&amp;id=13&amp;Itemid=74" rel="relhide"><span>Observatorio de Medios</span></a></li>
-					<li><a href="/ciespal/index.php?option=com_content&amp;view=article&amp;id=683&amp;Itemid=61" rel="publicaciones"><span>Publicaciones</span></a></li>
-					<li><a href="/ciespal/index.php?option=com_content&amp;view=article&amp;id=441&amp;Itemid=112" rel="centroaudiovisual"><span>Centro Audiovisual</span></a></li>
-				</ul>
-			</div>
-		</div>	
+
+
+	<td colspan="3">
+	
+	<table width="100%">
+		<tr align="center">
+			<td><p:graphicImage value="/images/logociepalpublic.png" height="150"/></td>
+		</tr>
+		<tr>
+		<td>
+			<div class="menudes">
+				<a href="#{request.contextPath}/index.jsf">Inicio</a>
+				<a href="">Portfolio</a>
+				<a href="">Acerca de</a>
+				<a href="">Contacto</a>
+				<div class="marca"></div>
+			</div>			
+		</td>
+		</tr>	 
+	</table>
 	</td>
+
+
 </tr>
 
 <tr>
@@ -62,7 +70,28 @@
 
 </table>
 
+
+
 </h:form>
+
+
+
+
+<footer id="footer" role="contentinfo" style="background-color:#D7D7D7">
+
+<div id="footer_wrapper">
+	<div id="footer_left">				
+		<div>
+			<div class="footimg">
+				<img src="#{request.contextPath}/images/logofooter.png" alt="logo footer" border="0" class="pngfix" width="77" height="41" align="left"/>
+			</div>
+			<a href="http://www.ciespal.net" target="_blank"><strong> CIESPAL 2011</strong></a>								Todos los derechos reservados <span class="textoamarillo">Quito - Ecuador</span><br />
+				Av. Diego de Almagro N32-133 y Andrade Marín <span class="textoamarillo">Telf.:</span>(+593-2) 254-8011 <a href="mailto:ciespal@ciespal.net">ciespal@ciespal.net</a>  /  <a href="mailto:info@ciespal.net">info@ciespal.net</a><br />
+			</div>
+	</div>
+</div>	
+
+</footer>
 
 </div>
 </div>
