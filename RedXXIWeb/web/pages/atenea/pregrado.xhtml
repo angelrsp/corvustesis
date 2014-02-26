@@ -40,7 +40,8 @@
 				<td><h:outputText value="#{i18n['label.escuela']}:&#160;" /></td>
 				<td><p:selectOneMenu id="somEscuela" value="#{universidadDataManager.escuelaCode}">
 						<f:selectItem itemLabel="--Seleccione--" itemValue="0"/>
-						<f:selectItems value="#{pregradoController.universidadDataManager.escuelaList}" var="fac" itemValue="#{fac.cenCodigo}" itemLabel="#{fac.cenNombre}"/>						
+						<f:selectItems value="#{pregradoController.universidadDataManager.escuelaList}" var="fac" itemValue="#{fac.cenCodigo}" itemLabel="#{fac.cenNombre}"/>
+						<p:ajax event="change" process="@this" listener="#{pregradoController.escuelaChange}" update="tblCarrera"/>						
 					</p:selectOneMenu></td>
 							
 			</tr>		
