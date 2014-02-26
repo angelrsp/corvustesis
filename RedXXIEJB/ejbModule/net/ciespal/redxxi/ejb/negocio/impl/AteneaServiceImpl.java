@@ -37,11 +37,16 @@ public class AteneaServiceImpl implements AteneaService{
 	
 	/* Centro */
 	@Override
-	public CentroDTO createCentro(CentroDTO centro) throws CorvustecException
+	public CentroDTO createOrUpdateCentro(CentroDTO centro) throws CorvustecException
 	{
 		logger.info("createCentro");
 		try{
-			return factoryDAO.getCentroDAOImpl().create(centro);
+			if(centro.getCenCodigo()!=null)
+				return factoryDAO.getCentroDAOImpl().edit(centro);
+			else
+			{
+				return factoryDAO.getCentroDAOImpl().create(centro);
+			}
 		}
 		catch(Exception e)
 		{
@@ -121,11 +126,17 @@ public class AteneaServiceImpl implements AteneaService{
 	
 	/* Carrera */
 	@Override
-	public CarreraDTO createCarrera(CarreraDTO carrera) throws CorvustecException
+	public CarreraDTO createOrUpdateCarrera(CarreraDTO carrera) throws CorvustecException
 	{
 		logger.info("createCarrera");
 		try{
-			return factoryDAO.getCarreraDAOImpl().create(carrera);
+			if(carrera.getCarCodigo()!=null)
+				return factoryDAO.getCarreraDAOImpl().edit(carrera);
+			else
+			{
+				carrera.addAteEntidad(new EntidadDTO());
+				return factoryDAO.getCarreraDAOImpl().create(carrera);
+			}
 		}
 		catch(Exception e)
 		{
