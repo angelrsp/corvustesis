@@ -146,7 +146,7 @@ public class PregradoController extends SelectItemController{
 		ModalidadDTO mod;
 		try {
 			carreraDataManager.getCarrera().setCarTipo(6);
-			
+			carreraDataManager.getCarrera().setAteModalidads(new ArrayList<ModalidadDTO>());
 			for(Object obj:carreraDataManager.getModalidadSelect()){
 				mod=new ModalidadDTO();
 				mod.setModModalidad(Integer.valueOf(obj.toString()));
@@ -170,6 +170,7 @@ public class PregradoController extends SelectItemController{
 			
 			carreraDataManager.setCarreraList(ateneaService.readCarrera(centro,6));
 			
+			cancelCarrera();
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
@@ -179,15 +180,21 @@ public class PregradoController extends SelectItemController{
 	public void editCarrera(CarreraDTO car)
 	{
 		carreraDataManager.setCarrera(car);
-		List<Object> modListObj=new ArrayList<Object>();
-		for(ModalidadDTO mod: car.getAteModalidads())
-			modListObj.add(mod.getModCodigo());
-		carreraDataManager.setModalidadSelect(modListObj);
+		List<Object> modListObj;
+		try {
+			modListObj=new ArrayList<Object>();
+			for(ModalidadDTO mod: ateneaService.readModalidad(car))
+				modListObj.add(mod.getModModalidad());
+			carreraDataManager.setModalidadSelect(modListObj);
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 	
 	public void cancelCarrera()
 	{
 		carreraDataManager.setCarrera(new CarreraDTO());
+		carreraDataManager.setModalidadSelect(new ArrayList<Object>());
 	}
 	
 	public void selectCarrera(CarreraDTO car)
