@@ -31,7 +31,7 @@
 				<tr>
 					<td><h:outputText value="#{i18n['label.imagen']}:&#160;" /></td>
 					<td><p:fileUpload fileUploadListener="#{ubicacionController.handleFileUpload}" mode="advanced" dragDropSupport="true"  
-                  		update="image" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" oncomplete="location.reload(true)" auto="true"/></td>
+                  		update="image" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" oncomplete="location.reload(true)" auto="true" process="@this"/></td>
 					                  								
 				</tr>
 				<tr>
