@@ -17,6 +17,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EventoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.ModalidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.NoticiaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
@@ -649,4 +650,19 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 
+	/*Nmodalidad*/
+	@Override
+	public List<ModalidadDTO> readModalidad(CarreraDTO carrera) throws CorvustecException
+	{
+		logger.info("readModalidad");
+		try{
+			return factoryDAO.getModalidadDAOImpl().getAll(carrera);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readModalidad {}",e.toString());
+			throw new CorvustecException("Error al readModalidad");
+		}
+	}
+	
 }
