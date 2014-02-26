@@ -39,6 +39,21 @@ public class CentroDAOImpl extends AbstractFacadeImpl<CentroDTO> implements Cent
 			return list;
 	}
 
+	@Override
+	public List<CentroDTO> findAllPather(Object ubicacion) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
+		Root<CentroDTO> from= cq.from(CentroDTO.class);
+		
+		cq.where(cb.and(cb.isNull(from.join("ateCentro",JoinType.LEFT)),cb.equal(from.get("cenUbicacion"), ubicacion)));
+		
+		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();	
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
 	
 	@Override
 	public List<CentroDTO> findAllChild(CentroDTO centro) throws CorvustecException

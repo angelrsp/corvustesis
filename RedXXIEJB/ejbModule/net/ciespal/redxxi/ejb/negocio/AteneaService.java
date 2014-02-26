@@ -119,4 +119,7 @@ public interface AteneaService {
 
 	List<PublicacionDTO> readPublicacion() throws CorvustecException;
 
+	List<CentroDTO> obtenerCentroPadre(Object ubicacion)
+			throws CorvustecException;
+
 }

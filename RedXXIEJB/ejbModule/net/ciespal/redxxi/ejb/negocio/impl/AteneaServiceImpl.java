@@ -76,6 +76,49 @@ public class AteneaServiceImpl implements AteneaService{
 		}		
 	}
 	
+	@Override
+	public List<CentroDTO> obtenerCentroPadre() throws CorvustecException
+	{
+		logger.info("obtenerCentroPadre");
+		try{
+			return factoryDAO.getCentroDAOImpl().findAllPather();
+		}
+		catch(Exception e)
+		{
+			logger.info("Error obtenerCentroPadre {}",e.toString());
+			throw new CorvustecException("Error al obtenerCentroPadre");
+		}
+	}
+
+	@Override
+	public List<CentroDTO> obtenerCentroPadre(Object ubicacion) throws CorvustecException
+	{
+		logger.info("obtenerCentroPadre");
+		try{
+			return factoryDAO.getCentroDAOImpl().findAllPather(ubicacion);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error obtenerCentroPadre {}",e.toString());
+			throw new CorvustecException("Error al obtenerCentroPadre");
+		}
+	}
+
+	
+	@Override
+	public List<CentroDTO> obtenerCentroHijo(CentroDTO centro) throws CorvustecException
+	{
+		logger.info("obtenerCentroHijo");
+		try{
+			return factoryDAO.getCentroDAOImpl().findAllChild(centro);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error obtenerCentroHijo {}",e.toString());
+			throw new CorvustecException("Error al obtenerCentroHijo");
+		}
+	}
+	
 	/* Carrera */
 	@Override
 	public CarreraDTO createCarrera(CarreraDTO carrera) throws CorvustecException
@@ -489,34 +532,7 @@ public class AteneaServiceImpl implements AteneaService{
 	}
 	
 	
-	/* Centro */
-	@Override
-	public List<CentroDTO> obtenerCentroPadre() throws CorvustecException
-	{
-		logger.info("obtenerCentroPadre");
-		try{
-			return factoryDAO.getCentroDAOImpl().findAllPather();
-		}
-		catch(Exception e)
-		{
-			logger.info("Error obtenerCentroPadre {}",e.toString());
-			throw new CorvustecException("Error al obtenerCentroPadre");
-		}
-	}
-	
-	@Override
-	public List<CentroDTO> obtenerCentroHijo(CentroDTO centro) throws CorvustecException
-	{
-		logger.info("obtenerCentroHijo");
-		try{
-			return factoryDAO.getCentroDAOImpl().findAllChild(centro);
-		}
-		catch(Exception e)
-		{
-			logger.info("Error obtenerCentroHijo {}",e.toString());
-			throw new CorvustecException("Error al obtenerCentroHijo");
-		}
-	}
+
 	
 	/* Doctor */
 	@Override
