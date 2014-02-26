@@ -58,10 +58,9 @@ public class UniversidadController extends SelectItemController implements Seria
 		try {
 			universidadDataManager.getUniversidad().setCenTipo(2);
 			universidadDataManager.getUniversidad().setCenUbicacion(Integer.valueOf(getCiudad().toString()));
-			if(universidadDataManager.getUniversidad().getCenCodigo()==null)
-				ateneaService.createCentro(universidadDataManager.getUniversidad());
-			else
-				ateneaService.updateCentro(universidadDataManager.getUniversidad());
+			
+			ateneaService.createOrUpdateCentro(universidadDataManager.getUniversidad());
+			
 			universidadDataManager.setUniversidad(new CentroDTO());
 			obtenerUniversidad();
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
@@ -83,10 +82,9 @@ public class UniversidadController extends SelectItemController implements Seria
 			universidadDataManager.getFacultad().setAteCentro(cen);
 			universidadDataManager.getFacultad().setCenTipo(3);
 			//universidadDataManager.getFacultad().setCenUbicacion(Integer.valueOf(getCiudad().toString()));
-			if(universidadDataManager.getFacultad().getCenCodigo()==null)
-				ateneaService.createCentro(universidadDataManager.getFacultad());
-			else
-				ateneaService.updateCentro(universidadDataManager.getFacultad());
+			
+			ateneaService.createOrUpdateCentro(universidadDataManager.getFacultad());
+				
 			universidadDataManager.setFacultad(new CentroDTO());
 			obtenerFacultad(universidadDataManager.getUniversidadSelect());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
@@ -110,7 +108,9 @@ public class UniversidadController extends SelectItemController implements Seria
 			universidadDataManager.getEscuela().setAteCentro(cen);
 			universidadDataManager.getEscuela().setCenTipo(4);
 			//universidadDataManager.getFacultad().setCenUbicacion(Integer.valueOf(getCiudad().toString()));
-			ateneaService.createCentro(universidadDataManager.getEscuela());
+			
+			ateneaService.createOrUpdateCentro(universidadDataManager.getEscuela());
+			
 			universidadDataManager.setEscuela(new CentroDTO());
 			obtenerEscuela(universidadDataManager.getFacultadSelect());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
