@@ -9,7 +9,6 @@ import javax.faces.bean.ViewScoped;
 import net.ciespal.redxxi.ejb.negocio.AdministracionService;
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
 import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.PublicacionDataManager;
@@ -82,7 +81,6 @@ public class PublicacionController extends SelectItemController {
 	public void save()
 	{
 		try {
-			publicacionDataManager.getPublicacion().addAteEntidad(new EntidadDTO());
 			publicacionDataManager.getPublicacion().setPubUbicacion(Integer.valueOf(getCiudad().toString()));
 			publicacionDataManager.getPublicacion().setPubCampoConocimiento(Integer.valueOf(getSubCampoConocimiento().toString()));
 			publicacionDataManager.getPublicacion().setPubTipo(Integer.valueOf(publicacionDataManager.getTipoPublicacion().toString()));

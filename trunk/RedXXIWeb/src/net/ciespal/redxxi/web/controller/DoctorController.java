@@ -1,6 +1,7 @@
 package net.ciespal.redxxi.web.controller;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -76,17 +77,30 @@ public class DoctorController extends SelectItemController{
 	public void save()
 	{
 		try {
-			doctorDataManager.getDoctor().addAteEntidad(new EntidadDTO());
 			doctorDataManager.getDoctor().setDocUbicacion(Integer.valueOf(getCiudad().toString()));
 			doctorDataManager.getDoctor().setDocFechaNacimiento(new Timestamp(doctorDataManager.getFechaNacimiento().getTime()));
 			doctorDataManager.getDoctor().setDocSexo(Integer.valueOf(doctorDataManager.getSexoSelect().toString()));
-			ateneaService.createDoctor(doctorDataManager.getDoctor());
+			ateneaService.createOrUpdateDoctor(doctorDataManager.getDoctor());
 			readDoctor();
 			doctorDataManager.setDoctor(new DoctorDTO());
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
+	}
+	
+	public void editDoctor(DoctorDTO doctor)
+	{
+		doctorDataManager.setDoctor(doctor);
+		doctorDataManager.setFechaNacimiento(new Date(doctor.getDocFechaNacimiento().getTime()));
+		doctorDataManager.setSexoSelect(doctor.getDocSexo());
+	}
+	
+	public void cancelDoctor()
+	{
+		doctorDataManager.setDoctor(new DoctorDTO());
+		doctorDataManager.setFechaNacimiento(new Date());
+		doctorDataManager.setSexoSelect(null);		
 	}
 	
 	public void doctorSelect(DoctorDTO doc)
