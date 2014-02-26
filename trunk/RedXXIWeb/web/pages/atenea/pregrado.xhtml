@@ -77,7 +77,10 @@
 			</tr>
 			
 			<tr>
-				<td colspan="9" align="center"><p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{pregradoController.guardar}" process="pnlDatos" update="pnlDatos,growl"/></td>
+				<td colspan="9" align="center">
+					<p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{pregradoController.guardar}" process="pnlDatos" update="pnlDatos,growl" icon="ui-icon-disk"/>
+					<p:commandButton value="#{i18n['boton.cancelar']}" actionListener="#{pregradoController.cancelCarrera}" process="@this" update="pnlDatos,growl" icon="ui-icon-cancel"/>
+				</td>
 			</tr>
 		</table>
 
@@ -86,6 +89,10 @@
 		
 			<p:column headerText="#{i18n['label.nombre.carrera']}">
 				<h:outputText value="#{car.carNombre}" />
+			</p:column>
+
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{pregradoController.editCarrera(car)}" icon="ui-icon-pencil" process=":contenido:tblCarrera" update=":contenido:pnlDatos"/>
 			</p:column>
 		
 			<p:column headerText="#{i18n['label.detalles']}" width="15" style="text-align: center">
