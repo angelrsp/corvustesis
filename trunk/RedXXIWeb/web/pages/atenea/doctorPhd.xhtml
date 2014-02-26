@@ -58,7 +58,10 @@
 			</tr>
 
 			<tr>
-				<td colspan="4" align="center"><p:commandButton value="#{i18n['boton.guardar']}" process="pnlDato" update="pnlDato,growl" actionListener="#{doctorController.save}"/></td>
+				<td colspan="4" align="center">
+					<p:commandButton value="#{i18n['boton.guardar']}" process="pnlDato" update="pnlDato,growl" actionListener="#{doctorController.save}" icon="ui-icon-disk"/>
+					<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update="pnlDato,growl" actionListener="#{doctorController.cancelDoctor}" icon="ui-icon-cancel"/>
+				</td>
 			</tr>				
 		</table>
 		
@@ -72,6 +75,11 @@
 			<p:column headerText="#{i18n['label.apellidos']}">
 				<h:outputText value="#{doc.docApellidos}" />
 			</p:column>		
+
+			<p:column headerText="#{i18n['boton.editar']}" width="15">
+				<p:commandButton actionListener="#{doctorController.editDoctor(doc)}" icon="ui-icon-pencil" 
+	               	update=":contenido:pnlDato,:contenido:growl" process="tblDoctor" title="#{i18n['boton.editar']}"/>    				
+			</p:column>
 
 			<p:column headerText="#{i18n['label.detalles']}" width="15" style="text-align: center">
 				<p:commandButton icon="ui-icon-newwin" actionListener="#{doctorController.doctorSelect(doc)}"

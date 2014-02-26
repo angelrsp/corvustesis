@@ -110,7 +110,9 @@
 				</tr>		
 
 				<tr>
-					<td colspan="4" align="center"><p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{universidadController.crearFacultad}" process="pnlFacultad" update="growl,pnlFacultad"/></td>
+					<td colspan="4" align="center">
+					<p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{universidadController.crearFacultad}" process="pnlFacultad" update="growl,pnlFacultad" icon="ui-icon-disk"/>
+					<p:commandButton value="#{i18n['boton.cancelar']}" actionListener="#{universidadController.cancelFacultad}" process="@this" update="growl,pnlFacultad" icon="ui-icon-cancel"/></td>
 				</tr>
 			
 			</table>
@@ -164,7 +166,11 @@
 				</tr>		
 
 				<tr>
-					<td colspan="4" align="center"><p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{universidadController.crearEscuela}" process="pnlEscuela" update="growl,pnlEscuela"/></td>
+					<td colspan="4" align="center">
+						<p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{universidadController.crearEscuela}" process="pnlEscuela" update="growl,pnlEscuela" icon="ui-icon-disk"/>
+						<p:commandButton value="#{i18n['boton.cancelar']}" actionListener="#{universidadController.cancelEscuela}" process="@this" update="growl,pnlEscuela" icon="ui-icon-cancel"/>
+					</td>
+					
 				</tr>
 			
 			</table>

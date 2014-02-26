@@ -53,7 +53,10 @@
 			</tr>
 
 			<tr>
-				<td colspan="9" align="center"><p:commandButton actionListener="#{organizacionController.save}" value="#{i18n['boton.guardar']}" process="pnlDato" update="pnlDato,growl"/></td>
+				<td colspan="9" align="center">
+					<p:commandButton actionListener="#{organizacionController.save}" value="#{i18n['boton.guardar']}" process="pnlDato" update="pnlDato,growl" icon="ui-icon-disk"/>
+					<p:commandButton actionListener="#{organizacionController.cancel}" value="#{i18n['boton.cancelar']}" process="@this" update="pnlDato,growl" icon="ui-icon-cancel"/>
+				</td>
 			</tr>
 			
 		</table>
@@ -63,6 +66,10 @@
 		
 			<p:column headerText="#{i18n['label.nombre']}">
 				<h:outputText value="#{org.orgNombre}" />
+			</p:column>
+		
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{organizacionController.edit(org)}" icon="ui-icon-pencil" process=":contenido:tblOrganizacion" update=":contenido:pnlDato"/>
 			</p:column>
 		
 			<p:column headerText="#{i18n['label.detalles']}" width="15" style="text-align: center">
