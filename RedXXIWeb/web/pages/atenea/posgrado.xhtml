@@ -59,10 +59,10 @@
 			<tr>
 			
 				<td><h:outputText value="#{i18n['label.nombre.carrera']}:&#160;" /></td>
-				<td><p:inputText required="true" requiredMessage="#{i18n['label.nombre.carrera']}&#160;#{i18n['label.requerido']}"/></td>
+				<td><p:inputText value="#{carreraDataManager.posgrado.carNombre}" required="true" requiredMessage="#{i18n['label.nombre.carrera']}&#160;#{i18n['label.requerido']}"/></td>
 			
 				<td><h:outputText value="#{i18n['label.perfil.carrera']}:&#160;" /></td>
-				<td><p:inputTextarea autoResize="false" required="true" requiredMessage="#{i18n['label.perfil.carrera']}&#160;#{i18n['label.requerido']}"/></td>
+				<td><p:inputTextarea value="#{carreraDataManager.posgrado.carPerfil}" autoResize="false" required="true" requiredMessage="#{i18n['label.perfil.carrera']}&#160;#{i18n['label.requerido']}"/></td>
 				
 			</tr>
 
@@ -80,27 +80,33 @@
 			
 			<tr>
 				<td><h:outputText value="#{i18n['label.cantidad.profesor']}:&#160;" /></td>
-				<td><p:inputText style="width:50px;" required="true" requiredMessage="#{i18n['label.cantidad.profesor']}&#160;#{i18n['label.requerido']}"/></td>	
+				<td><p:inputText value="#{carreraDataManager.posgrado.carProfesor}" style="width:50px;" required="true" requiredMessage="#{i18n['label.cantidad.profesor']}&#160;#{i18n['label.requerido']}"/></td>	
 				<td><h:outputText value="#{i18n['label.cantidad.estudiante']}:&#160;" /></td>
-				<td><p:inputText style="width:50px;" required="true" requiredMessage="#{i18n['label.cantidad.estudiante']}&#160;#{i18n['label.requerido']}"/></td>	
+				<td><p:inputText value="#{carreraDataManager.posgrado.carAlumno}" style="width:50px;" required="true" requiredMessage="#{i18n['label.cantidad.estudiante']}&#160;#{i18n['label.requerido']}"/></td>	
 			</tr>
 
 			
 			<tr>
-				<td colspan="9" align="center"><p:commandButton actionListener="#{posgradoController.guardar}" value="#{i18n['boton.guardar']}" process="pnlDatos" update="pnlDatos,growl"/>
-				<p:commandButton value="#{i18n['boton.nuevo']}" process="pnlDatos" update="pnlDatos,growl"/></td>
+				<td colspan="9" align="center">
+					<p:commandButton actionListener="#{posgradoController.guardar}" value="#{i18n['boton.guardar']}" process="pnlDatos" update="pnlDatos,growl" icon="ui-icon-disk"/>
+					<p:commandButton actionListener="#{posgradoController.cancelCarrera}" value="#{i18n['boton.cancelar']}" process="pnlDatos" update="pnlDatos,growl" icon="ui-icon-cancel"/>
+				</td>
 			</tr>
 			
 		</table>
 		
-		<p:dataTable id="tblCarrera" value="#{carreraDataManager.carreraList}" var="car">
+		<p:dataTable id="tblCarrera" value="#{carreraDataManager.posgradoList}" var="pos">
 		
 			<p:column headerText="#{i18n['label.nombre.carrera']}">
-				<h:outputText value="#{car.carNombre}" />
+				<h:outputText value="#{pos.carNombre}" />
 			</p:column>
 		
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{posgradoController.editCarrera(pos)}" icon="ui-icon-pencil" process=":contenido:tblCarrera" update=":contenido:pnlDatos"/>
+			</p:column>		
+		
 			<p:column headerText="#{i18n['label.detalles']}" width="15" style="text-align: center">
-				<p:commandButton actionListener="#{posgradoController.selectCarrera(car)}" icon="ui-icon-newwin" 
+				<p:commandButton actionListener="#{posgradoController.selectCarrera(pos)}" icon="ui-icon-newwin" 
 	               	update=":contenido:pnlDatos,:contenido:growl,:contenido:dlgDetalles" process="tblCarrera" oncomplete="PF('dlgDetalle').show()"/>    				
 			</p:column>
 		
@@ -113,7 +119,7 @@
 		<!-- Dialogo -->
 		<p:dialog id="dlgDetalles" widgetVar="dlgDetalle" modal="true" resizable="false" closeOnEscape="true">
 		
-		<p:ajax event="close" update=":contenido:pnlDatos" listener="#{posgradoController.resetCarrera}"/> 
+		<p:ajax event="close" update=":contenido:pnlDatos" listener="#{posgradoController.cancelCarrera}"/> 
 		
 		
 		<p:scrollPanel style="height:540px" mode="native">

@@ -16,6 +16,13 @@
 			<table>
 
 				<tr>
+					<td><h:outputText value="#{i18n['label.imagen']}:&#160;" /></td>
+					<td><p:fileUpload fileUploadListener="#{ubicacionController.handleFileUpload}" mode="advanced" dragDropSupport="true"  
+                  		update="image" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" oncomplete="location.reload(true)" auto="true" process="@this"/></td>
+					<td><p:graphicImage id="image" value="#{ubicacionDataManager.pathImage}" height="80" cache="false"/></td>                  								
+				</tr>
+
+				<tr>
 					<td><h:outputText value="#{i18n['label.nombre.completo']}:&#160;" /></td>
 					<td><p:inputText required="true" requiredMessage="#{i18n['label.nombre.completo']}&#160;#{i18n['label.requerido']}" value="#{ubicacionDataManager.pais.catDescripcion2}"/></td>
 					
@@ -26,16 +33,6 @@
 				<tr>
 					<td><h:outputText value="#{i18n['label.poblacion']}:&#160;" /></td>
 					<td><p:inputText required="true" requiredMessage="#{i18n['label.poblacion']}&#160;#{i18n['label.requerido']}" value="#{ubicacionDataManager.pais.catAuxiliar}" onkeypress="return isNumberKey(event);"/></td>
-				</tr>
-
-				<tr>
-					<td><h:outputText value="#{i18n['label.imagen']}:&#160;" /></td>
-					<td><p:fileUpload fileUploadListener="#{ubicacionController.handleFileUpload}" mode="advanced" dragDropSupport="true"  
-                  		update="image" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" oncomplete="location.reload(true)" auto="true" process="@this"/></td>
-					                  								
-				</tr>
-				<tr>
-					<td><p:graphicImage id="image" value="#{ubicacionDataManager.pathImage}" height="80" cache="false"/></td>
 				</tr>
 				
 			<tr>
