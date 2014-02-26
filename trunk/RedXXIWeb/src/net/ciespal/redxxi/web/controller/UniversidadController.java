@@ -1,6 +1,7 @@
 package net.ciespal.redxxi.web.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -45,7 +46,7 @@ public class UniversidadController extends SelectItemController implements Seria
 	@PostConstruct
 	private void init()
 	{
-		obtenerUniversidad();
+		universidadDataManager.setUniversidadList(new ArrayList<CentroDTO>());
 	}
 	
 	public void setUniversidadDataManager(UniversidadDataManager universidadDataManager) {
@@ -116,7 +117,7 @@ public class UniversidadController extends SelectItemController implements Seria
 	public void obtenerUniversidad()
 	{
 		try {
-			universidadDataManager.setUniversidadList(ateneaService.obtenerCentroPadre());
+			universidadDataManager.setUniversidadList(ateneaService.obtenerCentroPadre(getCiudad()));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
@@ -142,6 +143,11 @@ public class UniversidadController extends SelectItemController implements Seria
 		}	
 	}
 	
+	public void ciudadChange()
+	{
+		obtenerUniversidad();
+	}
+	
 	public void obtenerProvinciaChange() {
 		try {
 			getCatalogoProvincia();
@@ -153,6 +159,7 @@ public class UniversidadController extends SelectItemController implements Seria
 	public void obtenerCiudadChange() {
 		try {
 			getCatalogoCiudad();
+			obtenerUniversidad();
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}		
@@ -185,6 +192,7 @@ public class UniversidadController extends SelectItemController implements Seria
 	public void deleteFacultad(CentroDTO centro){
 		try {
 			ateneaService.deleteCentro(centro);
+			obtenerFacultad(universidadDataManager.getUniversidadSelect());
 			JsfUtil.addInfoMessage("Eliminado Exitosamente");
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
@@ -193,5 +201,19 @@ public class UniversidadController extends SelectItemController implements Seria
 	
 	public void editFacultad(CentroDTO centro){
 		universidadDataManager.setFacultad(centro);			 
+	}
+	
+	public void deleteEscuela(CentroDTO centro){
+		try {
+			ateneaService.deleteCentro(centro);
+			obtenerEscuela(universidadDataManager.getFacultadSelect());
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void editEscuela(CentroDTO centro){
+		universidadDataManager.setEscuela(centro);;			 
 	}
 }
