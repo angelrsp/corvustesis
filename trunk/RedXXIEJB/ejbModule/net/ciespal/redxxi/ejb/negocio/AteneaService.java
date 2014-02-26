@@ -58,9 +58,6 @@ public interface AteneaService {
 	List<ContactoListDTO> readContacto(CarreraDTO carrera)
 			throws CorvustecException;
 
-	OrganizacionDTO createOrganizacion(OrganizacionDTO organizacion)
-			throws CorvustecException;
-
 	List<OrganizacionDTO> readOrganizacion(Object ubicacion)
 			throws CorvustecException;
 
@@ -100,8 +97,6 @@ public interface AteneaService {
 
 	List<DoctorDTO> readDoctor(Object ubicacion) throws CorvustecException;
 
-	DoctorDTO createDoctor(DoctorDTO doctor) throws CorvustecException;
-
 	List<ContactoListDTO> readContacto(DoctorDTO doctor)
 			throws CorvustecException;
 
@@ -120,6 +115,11 @@ public interface AteneaService {
 	List<PublicacionDTO> readPublicacion() throws CorvustecException;
 
 	List<CentroDTO> obtenerCentroPadre(Object ubicacion)
+			throws CorvustecException;
+
+	DoctorDTO createOrUpdateDoctor(DoctorDTO doctor) throws CorvustecException;
+
+	OrganizacionDTO createOrUpdateOrganizacion(OrganizacionDTO organizacion)
 			throws CorvustecException;
 
 }
