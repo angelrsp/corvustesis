@@ -441,7 +441,10 @@ public class AteneaServiceImpl implements AteneaService{
 			if(publicacion.getPubCodigo()!=null)
 				return factoryDAO.getPublicacionDAOImpl().edit(publicacion);
 			else			
+			{
+				publicacion.addAteEntidad(new EntidadDTO());
 				return factoryDAO.getPublicacionDAOImpl().create(publicacion);
+			}
 		}
 		catch(Exception e){
 			logger.info("Error createOrUpdatePublicacion {}",e.toString());
@@ -506,11 +509,17 @@ public class AteneaServiceImpl implements AteneaService{
 	}
 	/* Organizacion */
 	@Override
-	public OrganizacionDTO createOrganizacion(OrganizacionDTO organizacion) throws CorvustecException
+	public OrganizacionDTO createOrUpdateOrganizacion(OrganizacionDTO organizacion) throws CorvustecException
 	{
 		logger.info("createOrganizacion");
 		try{
-			return factoryDAO.getOrganizacioDAOImpl().create(organizacion);
+			if(organizacion.getOrgCodigo()!=null)
+				return factoryDAO.getOrganizacioDAOImpl().edit(organizacion);
+			else
+			{
+				organizacion.addAteEntidad(new EntidadDTO());
+				return factoryDAO.getOrganizacioDAOImpl().create(organizacion);
+			}
 		}
 		catch(Exception e){
 			logger.info("Error createOrganizacion {}",e.toString());
@@ -536,15 +545,21 @@ public class AteneaServiceImpl implements AteneaService{
 	
 	/* Doctor */
 	@Override
-	public DoctorDTO createDoctor(DoctorDTO doctor) throws CorvustecException
+	public DoctorDTO createOrUpdateDoctor(DoctorDTO doctor) throws CorvustecException
 	{
-		logger.info("createOrganizacion");
+		logger.info("createOrUpdateDoctor");
 		try{
-			return factoryDAO.getDoctorDAOImpl().create(doctor);
+			if(doctor.getDocCodigo()!=null)
+				return factoryDAO.getDoctorDAOImpl().edit(doctor);
+			else
+			{
+				doctor.addAteEntidad(new EntidadDTO());
+				return factoryDAO.getDoctorDAOImpl().create(doctor);
+			}
 		}
 		catch(Exception e){
-			logger.info("Error createOrganizacion {}",e.toString());
-			throw new CorvustecException("Error al createOrganizacion");
+			logger.info("Error createOrUpdateDoctor {}",e.toString());
+			throw new CorvustecException("Error al createOrUpdateDoctor");
 		}
 	}
 	
