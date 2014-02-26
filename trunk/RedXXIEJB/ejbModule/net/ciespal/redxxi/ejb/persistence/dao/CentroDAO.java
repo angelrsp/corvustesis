@@ -13,4 +13,6 @@ public interface CentroDAO extends AbstractFacade<CentroDTO> {
 
 	List<CentroDTO> findAllPather() throws CorvustecException;
 
+	List<CentroDTO> findAllPather(Object ubicacio) throws CorvustecException;
+
 }
