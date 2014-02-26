@@ -101,7 +101,16 @@ public class PosgradoController extends SelectItemController {
 		}	
 	}
 	
-	
+	public void escuelaChange()
+	{
+		try {
+			CentroDTO centro=new CentroDTO();
+			centro.setCenCodigo(universidadDataManager.getEscuelaCode());
+			carreraDataManager.setCarreraList(ateneaService.readCarrera(centro,7));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}		
+	}
 	public void guardar()
 	{
 		CentroDTO centro;

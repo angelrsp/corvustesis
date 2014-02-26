@@ -125,6 +125,17 @@ public class PregradoController extends SelectItemController{
 		}	
 	}
 	
+	public void escuelaChange()
+	{
+		try {
+			CentroDTO centro=new CentroDTO();
+			centro.setCenCodigo(universidadDataManager.getEscuelaCode());
+			carreraDataManager.setCarreraList(ateneaService.readCarrera(centro,6));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}		
+	}
+	
 	public void guardar()
 	{
 		CentroDTO centro;
