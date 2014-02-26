@@ -62,7 +62,7 @@ public class CarreraDTO implements Serializable {
 	private List<MencionDTO> ateMencions;
 
 	//bi-directional many-to-one association to ModalidadDTO
-	@OneToMany(mappedBy="ateCarrera",cascade={CascadeType.PERSIST})
+	@OneToMany(mappedBy="ateCarrera",cascade={CascadeType.ALL,CascadeType.PERSIST})
 	private List<ModalidadDTO> ateModalidads;
 
 	public CarreraDTO() {
@@ -157,9 +157,13 @@ public class CarreraDTO implements Serializable {
 	}
 
 	public EntidadDTO addAteEntidad(EntidadDTO ateEntidad) {
-		getAteEntidads().add(ateEntidad);
-		ateEntidad.setAteCarrera(this);
-
+		if(ateEntidad!=null)
+		{
+			if(getAteEntidads()==null)
+				setAteEntidads(new ArrayList<EntidadDTO>());
+			getAteEntidads().add(ateEntidad);
+			ateEntidad.setAteCarrera(this);
+		}
 		return ateEntidad;
 	}
 

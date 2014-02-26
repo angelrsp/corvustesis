@@ -22,14 +22,10 @@ import com.corvustec.commons.util.CorvustecException;
 @Local
 public interface AteneaService {
 
-	CentroDTO createCentro(CentroDTO centro) throws CorvustecException;
-
 	List<CentroDTO> obtenerCentroPadre() throws CorvustecException;
 
 	List<CentroDTO> obtenerCentroHijo(CentroDTO centro)
 			throws CorvustecException;
-
-	CarreraDTO createCarrera(CarreraDTO carrera) throws CorvustecException;
 
 	EntidadDTO createEntidad(EntidadDTO entidad) throws CorvustecException;
 
@@ -120,6 +116,11 @@ public interface AteneaService {
 	DoctorDTO createOrUpdateDoctor(DoctorDTO doctor) throws CorvustecException;
 
 	OrganizacionDTO createOrUpdateOrganizacion(OrganizacionDTO organizacion)
+			throws CorvustecException;
+
+	CentroDTO createOrUpdateCentro(CentroDTO centro) throws CorvustecException;
+
+	CarreraDTO createOrUpdateCarrera(CarreraDTO carrera)
 			throws CorvustecException;
 
 }
