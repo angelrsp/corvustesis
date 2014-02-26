@@ -1,5 +1,8 @@
 package net.ciespal.redxxi.web.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -95,7 +98,7 @@ public class PosgradoController extends SelectItemController {
 			CentroDTO centro=new CentroDTO();
 			centro.setCenCodigo(universidadDataManager.getFacultadCode());
 			universidadDataManager.setEscuelaList(ateneaService.obtenerCentroHijo(centro));
-			carreraDataManager.setCarreraList(ateneaService.readCarrera(centro,7));
+			carreraDataManager.setPosgradoList(ateneaService.readCarrera(centro,7));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}	
@@ -106,7 +109,7 @@ public class PosgradoController extends SelectItemController {
 		try {
 			CentroDTO centro=new CentroDTO();
 			centro.setCenCodigo(universidadDataManager.getEscuelaCode());
-			carreraDataManager.setCarreraList(ateneaService.readCarrera(centro,7));
+			carreraDataManager.setPosgradoList(ateneaService.readCarrera(centro,7));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}		
@@ -114,21 +117,21 @@ public class PosgradoController extends SelectItemController {
 	public void guardar()
 	{
 		CentroDTO centro;
-		EntidadDTO entidad;
 		ModalidadDTO mod;
 		try {
-			carreraDataManager.getCarrera().setCarCodigo(null);
-			carreraDataManager.getCarrera().setCarTipo(7);
-			carreraDataManager.getCarrera().setCarTipoPosgrado(Integer.valueOf(carreraDataManager.getTipoPosgrado().toString()));
+			carreraDataManager.getPosgrado().setCarTipo(7);
+			carreraDataManager.getPosgrado().setCarTipoPosgrado(Integer.valueOf(carreraDataManager.getTipoPosgrado().toString()));
+			
+			carreraDataManager.getPosgrado().setAteModalidads(new ArrayList<ModalidadDTO>());
 			
 			for(Object obj:carreraDataManager.getModalidadSelect()){
 				mod=new ModalidadDTO();
 				mod.setModModalidad(Integer.valueOf(obj.toString()));
-				carreraDataManager.getCarrera().addAteModalidad(mod);
+				carreraDataManager.getPosgrado().addAteModalidad(mod);
 			}
 			
 			centro=new CentroDTO();
-			entidad=new EntidadDTO();
+			
 			if(universidadDataManager.getEscuelaCode()!=0)
 				centro.setCenCodigo(universidadDataManager.getEscuelaCode());
 			else if(universidadDataManager.getFacultadCode()!=0)
@@ -137,12 +140,37 @@ public class PosgradoController extends SelectItemController {
 				JsfUtil.addErrorMessage("Problemas para asignar centro de estudios");
 				return;
 			}
-			carreraDataManager.getCarrera().setAteCentro(centro);
+			carreraDataManager.getPosgrado().setAteCentro(centro);
 			
-			entidad.setAteCarrera(carreraDataManager.getCarrera());
-			carreraDataManager.setEntidad(ateneaService.createEntidad(entidad));
-			entidad.setAteCarrera(carreraDataManager.getEntidad().getAteCarrera());
+			ateneaService.createOrUpdateCarrera(carreraDataManager.getPosgrado());
+			
+			carreraDataManager.setPosgradoList(ateneaService.readCarrera(centro,7));
+			
+			cancelCarrera();
+			
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void cancelCarrera()
+	{
+		carreraDataManager.setPosgrado(new CarreraDTO());
+		carreraDataManager.setModalidadSelect(new ArrayList<Object>());
+		carreraDataManager.setTipoPosgrado(null);
+	}
+	
+	public void editCarrera(CarreraDTO car)
+	{
+		carreraDataManager.setPosgrado(car);
+		List<Object> modListObj;
+		try {
+			modListObj=new ArrayList<Object>();
+			for(ModalidadDTO mod: ateneaService.readModalidad(car))
+				modListObj.add(mod.getModModalidad());
+			carreraDataManager.setModalidadSelect(modListObj);
+			carreraDataManager.setTipoPosgrado(car.getCarTipoPosgrado());
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
@@ -150,7 +178,7 @@ public class PosgradoController extends SelectItemController {
 	
 	public void selectCarrera(CarreraDTO car)
 	{
-		carreraDataManager.setCarrera(car);
+		carreraDataManager.setPosgrado(car);
 		buscarContactos();
 		buscarMension();
 		buscarProyecto();
@@ -159,7 +187,7 @@ public class PosgradoController extends SelectItemController {
 	public void buscarContactos()
 	{
 		try {
-			contactoDataManager.setContactoList(ateneaService.readContacto(carreraDataManager.getCarrera()));
+			contactoDataManager.setContactoList(ateneaService.readContacto(carreraDataManager.getPosgrado()));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}		
@@ -168,11 +196,11 @@ public class PosgradoController extends SelectItemController {
 	public void crearContacto()
 	{
 		try {
-			if(carreraDataManager.getCarrera().getCarCodigo()==null || carreraDataManager.getCarrera().getCarCodigo()==0){
+			if(carreraDataManager.getPosgrado().getCarCodigo()==null || carreraDataManager.getPosgrado().getCarCodigo()==0){
 				JsfUtil.addErrorMessage("Debe guardar ");
 				return;
 			}
-			contactoDataManager.getContacto().setAteEntidad(carreraDataManager.getCarrera().getAteEntidads().get(0));
+			contactoDataManager.getContacto().setAteEntidad(carreraDataManager.getPosgrado().getAteEntidads().get(0));
 			contactoDataManager.getContacto().setConTipo(Integer.valueOf(contactoDataManager.getTipoContacto().toString()));
 			ateneaService.createOrUpdateContacto(contactoDataManager.getContacto());
 			buscarContactos();
@@ -206,7 +234,7 @@ public class PosgradoController extends SelectItemController {
 	public void crearMension()
 	{
 		try {
-			carreraDataManager.getMencion().setAteCarrera(carreraDataManager.getCarrera());
+			carreraDataManager.getMencion().setAteCarrera(carreraDataManager.getPosgrado());
 			ateneaService.createOrUpdateMencion(carreraDataManager.getMencion());
 			buscarMension();
 			carreraDataManager.setMencion(new MencionDTO());
@@ -219,7 +247,7 @@ public class PosgradoController extends SelectItemController {
 	public void buscarMension()
 	{
 		try {
-			carreraDataManager.setMencionList(ateneaService.readMencion(carreraDataManager.getCarrera()));
+			carreraDataManager.setMencionList(ateneaService.readMencion(carreraDataManager.getPosgrado()));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
@@ -247,7 +275,7 @@ public class PosgradoController extends SelectItemController {
 			ent=new EntidadDTO();
 			proyectoDataManager.getProyecto().addAteEntidad(ent);
 			ent=ateneaService.createOrUpdateProyectoInvestigacion(proyectoDataManager.getProyecto()).getAteEntidads().get(0);
-			ent.setAteCarrera(carreraDataManager.getCarrera());
+			ent.setAteCarrera(carreraDataManager.getPosgrado());
 			ateneaService.updateEntidad(ent);
 			buscarProyecto();
 			proyectoDataManager.setProyecto(new ProyectoInvestigacionDTO());
@@ -276,14 +304,10 @@ public class PosgradoController extends SelectItemController {
 	public void buscarProyecto()
 	{
 		try {
-			proyectoDataManager.setProyectoList(ateneaService.readProyectoInvestigacion(carreraDataManager.getCarrera()));
+			proyectoDataManager.setProyectoList(ateneaService.readProyectoInvestigacion(carreraDataManager.getPosgrado()));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
 	
-	public void resetCarrera()
-	{
-		carreraDataManager.setCarrera(new CarreraDTO());
-	}
 }

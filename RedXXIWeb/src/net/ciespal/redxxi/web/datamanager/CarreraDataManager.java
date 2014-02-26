@@ -33,6 +33,12 @@ public class CarreraDataManager implements Serializable{
 	private List<MencionDTO> mencionList;
 	
 	private List<CarreraDTO> carreraList;
+	private List<CarreraDTO> posgradoList;
+	
+	private CarreraDTO posgrado;
+	private CarreraDTO posgradoSelect;
+
+	
 	
 	public CarreraDataManager() {
 	}
@@ -40,12 +46,15 @@ public class CarreraDataManager implements Serializable{
 	@PostConstruct
 	private void init()
 	{
+		posgrado=new CarreraDTO();
+		posgradoSelect=new CarreraDTO();
 		carrera=new CarreraDTO();
 		carreraSelect=new CarreraDTO();
 		entidad=new EntidadDTO();
 		mencion=new MencionDTO();
 		mencionList=new ArrayList<MencionDTO>();
 		carreraList=new ArrayList<CarreraDTO>();
+		posgradoList=new ArrayList<CarreraDTO>();
 	}
 
 
@@ -119,6 +128,30 @@ public class CarreraDataManager implements Serializable{
 
 	public void setCarreraList(List<CarreraDTO> carreraList) {
 		this.carreraList = carreraList;
+	}
+
+	public CarreraDTO getPosgrado() {
+		return posgrado;
+	}
+
+	public void setPosgrado(CarreraDTO posgrado) {
+		this.posgrado = posgrado;
+	}
+
+	public CarreraDTO getPosgradoSelect() {
+		return posgradoSelect;
+	}
+
+	public void setPosgradoSelect(CarreraDTO posgradoSelect) {
+		this.posgradoSelect = posgradoSelect;
+	}
+
+	public List<CarreraDTO> getPosgradoList() {
+		return posgradoList;
+	}
+
+	public void setPosgradoList(List<CarreraDTO> posgradoList) {
+		this.posgradoList = posgradoList;
 	}
 
 
