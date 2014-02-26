@@ -1,5 +1,8 @@
 package net.ciespal.redxxi.web.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -139,11 +142,11 @@ public class PregradoController extends SelectItemController{
 	public void guardar()
 	{
 		CentroDTO centro;
-		EntidadDTO entidad;
+		
 		ModalidadDTO mod;
 		try {
-			carreraDataManager.getCarrera().setCarCodigo(null);
 			carreraDataManager.getCarrera().setCarTipo(6);
+			
 			for(Object obj:carreraDataManager.getModalidadSelect()){
 				mod=new ModalidadDTO();
 				mod.setModModalidad(Integer.valueOf(obj.toString()));
@@ -151,7 +154,7 @@ public class PregradoController extends SelectItemController{
 			}
 			
 			centro=new CentroDTO();
-			entidad=new EntidadDTO();
+			
 			if(universidadDataManager.getEscuelaCode()!=0)
 				centro.setCenCodigo(universidadDataManager.getEscuelaCode());
 			else if(universidadDataManager.getFacultadCode()!=0)
@@ -160,16 +163,31 @@ public class PregradoController extends SelectItemController{
 				JsfUtil.addErrorMessage("Problemas para asignar centro de estudios");
 				return;
 			}
+			
 			carreraDataManager.getCarrera().setAteCentro(centro);
 			
-			entidad.setAteCarrera(carreraDataManager.getCarrera());
-			carreraDataManager.setEntidad(ateneaService.createEntidad(entidad));
+			ateneaService.createOrUpdateCarrera(carreraDataManager.getCarrera());
+			
 			carreraDataManager.setCarreraList(ateneaService.readCarrera(centro,6));
-			entidad.setAteCarrera(carreraDataManager.getEntidad().getAteCarrera());
+			
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
+	}
+	
+	public void editCarrera(CarreraDTO car)
+	{
+		carreraDataManager.setCarrera(car);
+		List<Object> modListObj=new ArrayList<Object>();
+		for(ModalidadDTO mod: car.getAteModalidads())
+			modListObj.add(mod.getModCodigo());
+		carreraDataManager.setModalidadSelect(modListObj);
+	}
+	
+	public void cancelCarrera()
+	{
+		carreraDataManager.setCarrera(new CarreraDTO());
 	}
 	
 	public void selectCarrera(CarreraDTO car)
