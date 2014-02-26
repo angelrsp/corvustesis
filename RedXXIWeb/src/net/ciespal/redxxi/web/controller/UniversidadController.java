@@ -95,6 +95,12 @@ public class UniversidadController extends SelectItemController implements Seria
 		}
 	}
 
+	public void cancelFacultad()
+	{
+		universidadDataManager.setFacultad(new CentroDTO());
+	}
+	
+	
 	public void crearEscuela()
 	{
 		try {
@@ -113,7 +119,11 @@ public class UniversidadController extends SelectItemController implements Seria
 		}
 	}
 
-	
+	public void cancelEscuela()
+	{
+		universidadDataManager.setEscuela(new CentroDTO());
+	}
+
 	public void obtenerUniversidad()
 	{
 		try {

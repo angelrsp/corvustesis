@@ -84,14 +84,23 @@ public class OrganizacionController extends SelectItemController{
 	public void save()
 	{
 		try {
-			organizacionDataManager.getOrganizacion().addAteEntidad(new EntidadDTO());
 			organizacionDataManager.getOrganizacion().setOrgUbicacion(Integer.valueOf(getCiudad().toString()));
-			ateneaService.createOrganizacion(organizacionDataManager.getOrganizacion());
+			ateneaService.createOrUpdateOrganizacion(organizacionDataManager.getOrganizacion());
 			organizacionDataManager.setOrganizacion(new OrganizacionDTO());
 			readOrganizacion();
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
+	}
+	
+	public void edit(OrganizacionDTO orgnaizacion)
+	{
+		organizacionDataManager.setOrganizacion(orgnaizacion);
+	}
+	
+	public void cancel()
+	{
+		organizacionDataManager.setOrganizacion(new OrganizacionDTO());
 	}
 	
 	private void readOrganizacion()
