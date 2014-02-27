@@ -15,4 +15,6 @@ public interface IndicadorDAO extends AbstractFacade<IndicadorDTO>{
 
 	List<IndicadorDTO> getAll(ModeloDTO modeloDTO);
 
+	void remove2(IndicadorDTO indicador);
+
 }
