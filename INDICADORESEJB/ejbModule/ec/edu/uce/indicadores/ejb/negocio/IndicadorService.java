@@ -30,9 +30,6 @@ public interface IndicadorService {
 
 	List<ModeloDTO> obtenerModelo() throws IndicadoresException;
 
-	void agregarIndicador(IndicadorDTO indicadorDTO)
-			throws IndicadoresException;
-
 	List<IndicadorDTO> obtenerRaizIndicador(IndicadorDTO indicadorDTO)
 			throws IndicadoresException;
 
@@ -97,6 +94,11 @@ public interface IndicadorService {
 	void deleteRegistro(RegistroDTO registro) throws IndicadoresException;
 
 	void deleteModelo(ModeloDTO modeloDTO) throws IndicadoresException;
+
+	void createOrUpdateIndicador(IndicadorDTO indicadorDTO)
+			throws IndicadoresException;
+
+	void deleteIndicador(IndicadorDTO indicador) throws IndicadoresException;
 
 
 }

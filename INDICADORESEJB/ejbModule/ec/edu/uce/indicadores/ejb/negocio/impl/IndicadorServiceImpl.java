@@ -151,17 +151,34 @@ public class IndicadorServiceImpl implements IndicadorService {
 	
 	
 	@Override
-	public void agregarIndicador(IndicadorDTO indicadorDTO) throws IndicadoresException
+	public void createOrUpdateIndicador(IndicadorDTO indicadorDTO) throws IndicadoresException
 	{
-		log.info("agregarIndicador");
+		log.info("createOrUpdateIndicador");
 		try {
-			factoryDAO.getIndicadorDAOImpl().create(indicadorDTO);
+			if(indicadorDTO.getIndCodigo()!=null)
+				factoryDAO.getIndicadorDAOImpl().edit(indicadorDTO);
+			else
+				factoryDAO.getIndicadorDAOImpl().create(indicadorDTO);
 		} catch (Exception e) {
 			log.error(e.toString());
 			throw new IndicadoresException(e);
 		}
 	}
 
+	@Override
+	public void deleteIndicador(IndicadorDTO indicador) throws IndicadoresException
+	{
+		log.info("deleteIndicador");
+		try {
+			if(indicador.getIndHistoricoIndicadors()!=null)
+				factoryDAO.getIndicadorDAOImpl().remove2(indicador);
+			else
+				throw new IndicadoresException("No se puede eliminar revise las dependencias del indicador seleccionado");
+		} catch (Exception e) {
+			log.error(e.toString());
+			throw new IndicadoresException("No se puede eliminar revise las dependencias del indicador seleccionado");
+		}
+	}
 	
 	@Override
 	public List<RepresentanteLegalListDTO> obtenerRepresentantes() throws IndicadoresException

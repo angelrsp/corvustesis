@@ -3,6 +3,7 @@ package ec.edu.uce.indicadores.ejb.persistence.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
@@ -42,6 +43,8 @@ public class IndicadorDAOImpl extends AbstractFacadeImpl<IndicadorDTO> implement
 		
 		cq.where(cb.equal(join1.get("iesCodigo"), indicadorDTO.getIndy().getIesCodigo()), cb.equal(join2.get("modCodigo"), indicadorDTO.getIndModeloBean().getModCodigo()),cb.isNull(from.join("indIndicador",JoinType.LEFT)));
 		
+		cq.orderBy(cb.desc(from.get("indOrden")));
+		
 		List<IndicadorDTO> list=entityManager.createQuery(cq).getResultList();	
 		if(list.isEmpty())
 			return null;
@@ -58,6 +61,8 @@ public class IndicadorDAOImpl extends AbstractFacadeImpl<IndicadorDTO> implement
 		Root<IndicadorDTO> from= cq.from(IndicadorDTO.class);
 		
 		cq.where(cb.equal(from.get("indPredecesor"),indicadorDTO.getIndCodigo()));
+		
+		cq.orderBy(cb.desc(from.get("indOrden")));
 		
 		List<IndicadorDTO> list=entityManager.createQuery(cq).getResultList();	
 		if(list.isEmpty())
@@ -98,5 +103,14 @@ public class IndicadorDAOImpl extends AbstractFacadeImpl<IndicadorDTO> implement
 			return null;
 		else
 			return list;
+	}
+	
+	@Override
+	public void remove2(IndicadorDTO indicador)
+	{
+		Query query;
+		query=entityManager.createQuery("delete from IndicadorDTO ind where ind.indCodigo=:codigo");
+		query.setParameter("codigo", indicador.getIndCodigo());
+		query.executeUpdate();
 	}
 }
