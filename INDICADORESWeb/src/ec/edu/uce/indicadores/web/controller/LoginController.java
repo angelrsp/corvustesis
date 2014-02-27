@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import ec.edu.uce.indicadores.commons.dto.util.CredencialesDTO;
@@ -52,11 +53,15 @@ public class LoginController implements Serializable{
 	public void login()
 	{
 		try {
+			HttpServletRequest request = (HttpServletRequest) JsfUtil.getExternalContext().getRequest();
+
+			String path = request.getContextPath();
 			UsuarioDTO user = loginService.autenticarUsuario(credencialesDTO);
 			if (user != null) {
 				JsfUtil.addInfoMessage("bien");
 				JsfUtil.putObject("UsuarioDTO",user);
-				JsfUtil.redirect("home.jsf");
+				JsfUtil.redirect(path+"/pages/home.jsf");
+				
 			} else {
 				JsfUtil.addErrorMessage("Datos Tncorrectos");
 			}
