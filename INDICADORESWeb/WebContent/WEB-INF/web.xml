@@ -18,6 +18,16 @@
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 	
+<!-- Filter -->
+
+	<filter>
+		<filter-name>FiltroLogin</filter-name>
+		<filter-class>ec.edu.uce.indicadores.web.filtro.FiltroLogin</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FiltroLogin</filter-name>
+		<url-pattern>/paginas/*</url-pattern>
+	</filter-mapping>
 
 	<filter>
 	    <filter-name>PrimeFaces FileUpload Filter</filter-name>
