@@ -91,7 +91,7 @@ public class InicioController extends SelectItemController {
 	        
 	        for(OpcionDTO opt:listOption)
 	        {
-	        	DefaultMenuItem item = new DefaultMenuItem(opt.getOpcNombre());
+	        	DefaultMenuItem item = new DefaultMenuItem("  "+opt.getOpcNombre());
 		        item.setUrl(opt.getOpcUrl());
 		        item.setIcon(opt.getOpcIcono());
 

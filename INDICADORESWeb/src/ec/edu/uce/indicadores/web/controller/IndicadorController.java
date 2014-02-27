@@ -51,6 +51,8 @@ public class IndicadorController extends SelectItemController implements Seriali
 
 	private Boolean disabled;
 	
+	private TreeNode selectedNode;
+	
 	@PostConstruct
 	private void init() throws IndicadoresException
 	{
@@ -136,27 +138,35 @@ public class IndicadorController extends SelectItemController implements Seriali
 		this.disabled = disabled;
 	}
 
+	public TreeNode getSelectedNode() {
+		return selectedNode;
+	}
+
+	public void setSelectedNode(TreeNode selectedNode) {
+		this.selectedNode = selectedNode;
+	}
+
 	public void agregarIndicador()
 	{
 		try {
 			IesDTO iesDTO=new IesDTO();
 			ModeloDTO modeloDTO=new ModeloDTO();
 			IndicadorDTO predecesor=new IndicadorDTO();
-			if(getPredecesor()>0)
-			{
+			
+			if(getPredecesor()>0){
 				predecesor.setIndCodigo(getPredecesor());
 				getIndicadorDTO().setIndIndicador(predecesor);
 			}
+			
 			iesDTO.setIesCodigo(Integer.parseInt(getIes().toString()));
 			modeloDTO.setModCodigo(Integer.parseInt(getModelo().toString()));
 			getIndicadorDTO().setIndy(iesDTO);
 			getIndicadorDTO().setIndModeloBean(modeloDTO);
-			indicadorService.agregarIndicador(getIndicadorDTO());
+			indicadorService.createOrUpdateIndicador(getIndicadorDTO());
 			indicadorDTO=new IndicadorDTO();
 			obtenerArbol();
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 		} catch (IndicadoresException e) {
-			// TODO Auto-generated catch block
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
@@ -188,7 +198,6 @@ public class IndicadorController extends SelectItemController implements Seriali
 				}
 			}			
 		} catch (IndicadoresException e) {
-			// TODO Auto-generated catch block
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
@@ -203,5 +212,29 @@ public class IndicadorController extends SelectItemController implements Seriali
         return newNode;
    }
 
+	public void delete()
+	{
+		try {
+			if(getIndicadorDTO().getIndCodigo()!=null)
+				indicadorService.deleteIndicador(getIndicadorDTO());
+			else
+				JsfUtil.addErrorMessage("Selecione indicador a eliminar");
+			obtenerArbol();
+		} catch (IndicadoresException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
 
+	public void cancel()
+	{
+		setIndicadorDTO(new IndicadorDTO());
+		setPredecesor(0);
+	}
+	
+	public void onNodeSelect() {
+		IndicadorDTO ind=(IndicadorDTO) selectedNode.getData();
+		setIndicadorDTO(ind);
+		setPredecesor(ind.getIndIndicador().getIndCodigo());
+	}
+	
 }
