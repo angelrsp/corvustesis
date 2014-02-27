@@ -80,6 +80,13 @@
 					</tr>
 
 					<tr>
+						<td><h:outputLabel value="#{i18n['label.orden']}:&#160;" /> </td>
+						<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.orden']}&#160;#{i18n['label.requerido']}"
+									value="#{indicadorController.indicadorDTO.indOrden}" onkeypress="return isNumberKey(event);"/></td>
+					</tr>
+
+					<tr>
 						<td><h:outputLabel value="#{i18n['label.descriptor']}:&#160;" /> </td>
 						<td><p:editor required="true" requiredMessage="#{i18n['label.descriptor']}&#160;#{i18n['label.requerido']}"
 									value="#{indicadorController.indicadorDTO.indDescriptor}"/></td>
@@ -94,12 +101,16 @@
 					</tr>
 					<tr>
 						<td colspan="2" align="center">
-							<p:commandButton actionListener="#{indicadorController.agregarIndicador}" value="#{i18n['boton.guardar']}" process="pnlDatos" update="tree,pnlDatos,growl"/> </td>
+							<p:commandButton actionListener="#{indicadorController.agregarIndicador}" value="#{i18n['boton.guardar']}" process="pnlDatos" update="tree,pnlDatos,growl" icon="ui-icon-disk"/>
+							<p:commandButton actionListener="#{indicadorController.delete}" value="#{i18n['boton.eliminar']}" process="@this" update="tree,pnlDatos,growl" icon="ui-icon-close"/>
+							<p:commandButton actionListener="#{indicadorController.cancel}" value="#{i18n['boton.cancelar']}" process="@this" update="tree,pnlDatos,growl" icon="ui-icon-cancel"/> 
+							</td>
 					</tr>
 					
 				</table>	
 
-				<p:tree value="#{indicadorController.rootNode}" var="node" id="tree">  
+				<p:tree value="#{indicadorController.rootNode}" var="node" id="tree" selection="#{indicadorController.selectedNode}" selectionMode="single">
+					<p:ajax event="select" listener="#{indicadorController.onNodeSelect}" update=":contenido:growl,:contenido:pnlDatos"/>  
 			        <p:treeNode id="treeNode">  
 			            <h:outputText value="#{node.indNombreCorto}"/>  
 			        </p:treeNode>  
