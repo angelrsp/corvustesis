@@ -95,8 +95,8 @@
 				<p:commandButton actionListener="#{pregradoController.editCarrera(car)}" icon="ui-icon-pencil" process=":contenido:tblCarrera" update=":contenido:pnlDatos"/>
 			</p:column>
 		
-			<p:column headerText="#{i18n['label.detalles']}" width="15" style="text-align: center">
-				<p:commandButton actionListener="#{pregradoController.selectCarrera(car)}" icon="ui-icon-newwin" 
+			<p:column headerText="#{i18n['label.mas.datos']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{pregradoController.selectCarrera(car)}" icon="ui-icon-plus" 
 	               	update=":contenido:pnlDatos,:contenido:growl,:contenido:dlgDetalles" process="tblCarrera" oncomplete="PF('dlgDetalle').show()"/>    				
 			</p:column>
 		
