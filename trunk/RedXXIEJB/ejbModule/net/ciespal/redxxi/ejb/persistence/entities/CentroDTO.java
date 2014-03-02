@@ -36,8 +36,14 @@ public class CentroDTO implements Serializable {
 	@Column(name="cen_tipo")
 	private Integer cenTipo;
 
-	@Column(name="cen_ubicacion")
-	private Integer cenUbicacion;
+	@Column(name="cen_ciudad")
+	private Integer cenCiudad;
+
+	@Column(name="cen_provincia")
+	private Integer cenProvincia;
+
+	@Column(name="cen_pais")
+	private Integer cenPais;
 
 	//bi-directional many-to-one association to CarreraDTO
 	@OneToMany(mappedBy="ateCentro")
@@ -103,12 +109,29 @@ public class CentroDTO implements Serializable {
 		this.cenTipo = cenTipo;
 	}
 
-	public Integer getCenUbicacion() {
-		return this.cenUbicacion;
+
+	public Integer getCenCiudad() {
+		return cenCiudad;
 	}
 
-	public void setCenUbicacion(Integer cenUbicacion) {
-		this.cenUbicacion = cenUbicacion;
+	public void setCenCiudad(Integer cenCiudad) {
+		this.cenCiudad = cenCiudad;
+	}
+
+	public Integer getCenProvincia() {
+		return cenProvincia;
+	}
+
+	public void setCenProvincia(Integer cenProvincia) {
+		this.cenProvincia = cenProvincia;
+	}
+
+	public Integer getCenPais() {
+		return cenPais;
+	}
+
+	public void setCenPais(Integer cenPais) {
+		this.cenPais = cenPais;
 	}
 
 	public List<CarreraDTO> getAteCarreras() {
