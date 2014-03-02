@@ -46,7 +46,7 @@ public class CentroDAOImpl extends AbstractFacadeImpl<CentroDTO> implements Cent
 		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
 		Root<CentroDTO> from= cq.from(CentroDTO.class);
 		
-		cq.where(cb.and(cb.isNull(from.join("ateCentro",JoinType.LEFT)),cb.equal(from.get("cenUbicacion"), ubicacion)));
+		cq.where(cb.and(cb.isNull(from.join("ateCentro",JoinType.LEFT)),cb.equal(from.get("cenCiudad"), ubicacion)));
 		
 		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();	
 		if(list.isEmpty())
@@ -54,6 +54,57 @@ public class CentroDAOImpl extends AbstractFacadeImpl<CentroDTO> implements Cent
 		else
 			return list;
 	}
+
+	@Override
+	public List<CentroDTO> findAllPatherByCountry(Object ubicacion) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
+		Root<CentroDTO> from= cq.from(CentroDTO.class);
+		
+		cq.where(cb.and(cb.isNull(from.join("ateCentro",JoinType.LEFT)),cb.equal(from.get("cenPais"), ubicacion)));
+		
+		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();	
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
+
+	
+	@Override
+	public List<CentroDTO> findAllPatherByProvince(Object ubicacion) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
+		Root<CentroDTO> from= cq.from(CentroDTO.class);
+		
+		cq.where(cb.and(cb.isNull(from.join("ateCentro",JoinType.LEFT)),cb.equal(from.get("cenProvincia"), ubicacion)));
+		
+		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();	
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
+
+	
+	@Override
+	public List<CentroDTO> findAllPatherByCity(Object ubicacion) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
+		Root<CentroDTO> from= cq.from(CentroDTO.class);
+		
+		cq.where(cb.and(cb.isNull(from.join("ateCentro",JoinType.LEFT)),cb.equal(from.get("cenCiudad"), ubicacion)));
+		
+		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();	
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
+
 	
 	@Override
 	public List<CentroDTO> findAllChild(CentroDTO centro) throws CorvustecException
