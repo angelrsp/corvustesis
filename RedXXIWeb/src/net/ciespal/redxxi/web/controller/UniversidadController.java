@@ -9,14 +9,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import com.corvustec.commons.util.CorvustecException;
-
 import net.ciespal.redxxi.ejb.negocio.AdministracionService;
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
-import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.UniversidadDataManager;
+
+import com.corvustec.commons.util.CorvustecException;
 
 @ViewScoped
 @ManagedBean(name="universidadController")
@@ -57,7 +56,10 @@ public class UniversidadController extends SelectItemController implements Seria
 	{
 		try {
 			universidadDataManager.getUniversidad().setCenTipo(2);
-			universidadDataManager.getUniversidad().setCenUbicacion(Integer.valueOf(getCiudad().toString()));
+			
+			universidadDataManager.getUniversidad().setCenPais(getPais()!=null?Integer.valueOf(getPais().toString()):null);
+			universidadDataManager.getUniversidad().setCenProvincia(getProvincia()!=null?Integer.valueOf(getProvincia().toString()):null);
+			universidadDataManager.getUniversidad().setCenCiudad(getCiudad()!=null?Integer.valueOf(getCiudad().toString()):null);
 			
 			ateneaService.createOrUpdateCentro(universidadDataManager.getUniversidad());
 			
@@ -185,15 +187,13 @@ public class UniversidadController extends SelectItemController implements Seria
 	}
 	
 	public void editUniversidad(CentroDTO centro){
-		CatalogoDTO catProvincia;
+		
 		 try {
-			 catProvincia=new CatalogoDTO();
-			 catProvincia= administracionService.getCatalogo(centro.getCenUbicacion()).getAteCatalogo();
-			 setPais(catProvincia.getAteCatalogo().getCatCodigo());
-			 setProvincia(catProvincia.getCatCodigo());
-			 setCiudad(centro.getCenUbicacion());
+			 setPais(centro.getCenPais());
+			 setProvincia(centro.getCenProvincia());
+			 setCiudad(centro.getCenCiudad());
 			 universidadDataManager.setUniversidad(centro);
-		} catch (CorvustecException e) {
+		} catch (Exception e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
