@@ -48,8 +48,19 @@
 			</tr>
 
 			<tr>
+				<td><h:outputText value="#{i18n['label.institucion.superior']}:&#160;" /></td>
+				<td><p:inputText value="#{organizacionDataManager.organizacion.orgInstitucionSuperior}"/></td>			
+			
 				<td><h:outputText value="#{i18n['label.mision']}:&#160;" /></td>
-				<td colspan="2"><p:inputTextarea value="#{organizacionDataManager.organizacion.orgMision}" autoResize="false" counter="contMis" counterTemplate="{0}" maxlength="400"/><h:outputText id="contMis" /></td>			
+				<td><p:inputTextarea value="#{organizacionDataManager.organizacion.orgMision}" autoResize="false" counter="contMis" counterTemplate="{0}" maxlength="400"/><h:outputText id="contMis" /></td>			
+			</tr>
+
+			<tr>
+				<td><h:outputText value="#{i18n['label.anio.fundacion']}:&#160;" /></td>
+				<td><p:inputText value="#{organizacionDataManager.organizacion.orgAnioFundacion}" onkeypress="return isNumberKey(event);" maxlength="4"/></td>						
+			
+				<td><h:outputText value="#{i18n['label.miembros']}:&#160;" /></td>
+				<td><p:inputText value="#{organizacionDataManager.organizacion.orgMienbros}" onkeypress="return isNumberKey(event);"/></td>						
 			</tr>
 
 			<tr>
