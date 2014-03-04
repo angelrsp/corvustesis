@@ -33,7 +33,7 @@
 	<table width="100%" class="table">
 			<tr>
 				<td>
-					<h:dataTable value="#{noticiaController.noticiaDataManager.noticiaPublicList}" var="noti" width="100%">
+					<h:dataTable value="#{noticiaPublicDataManager.noticiaPublicList}" var="noti" width="100%">
 					
 		    			<h:column>
 		    				<f:facet name="header">Noticias</f:facet>
@@ -52,18 +52,14 @@
 		
 	<table width="100%" class="table">
 		<tr>
-			<td>Publicaciones</td>
+			<td>Atenea</td>
 		</tr>
 		<tr>
 			<td>
-				<h:dataTable value="#{publicacionController.publicacionDataManager.publicacionListPublic}" var="pub" width="100%">
-				
-	    			<h:column>
-	    				<f:facet name="header">Título</f:facet>
-	    				<h:outputText value="#{pub.pubTitulo}" escape="false"/>
-	    			</h:column>										
-				
-				</h:dataTable>
+				<h:outputText value="#{i18n['label.universidades']}:&#160;" />
+			</td>
+			<td>
+				<h:commandLink value="#{reportPublicDataManager.universidadNumber}" actionListener="#{reportPublicController.universidadSelect}" styleClass="linkClass"/>			
 			</td>
 		</tr>
 	</table>	
