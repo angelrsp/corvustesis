@@ -16,14 +16,14 @@
 		
 			<tr>
 				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{publicacionController.pais}">
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{publicacionController.pais}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
 						<f:selectItems value="#{publicacionController.catalogoPais}"/>
 						<p:ajax event="change" listener="#{publicacionController.obtenerProvinciaChange}" process="@this" update="somProvinvia"/>						
 					</p:selectOneMenu></td>
 
 				<td><h:outputText value="#{i18n['label.provincia']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{publicacionController.provincia}">
+				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{publicacionController.provincia}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
 						<f:selectItems value="#{publicacionController.catalogoProvincia}"/>
 						<p:ajax event="change" listener="#{publicacionController.obtenerCiudadChange}" process="@this" update="somCiudad"/>
@@ -33,7 +33,7 @@
 			<tr>
 
 				<td><h:outputText value="#{i18n['label.ciudad']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somCiudad" value="#{publicacionController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}">
+				<td><p:selectOneMenu id="somCiudad" value="#{publicacionController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
 						<f:selectItems value="#{publicacionController.catalogoCiudad}"/>
 						<p:ajax event="change" listener="#{publicacionController.ciudadChange}" process="@this" update="somCiudad,pnlDato"/>						
