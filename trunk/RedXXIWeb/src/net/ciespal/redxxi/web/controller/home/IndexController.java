@@ -1,4 +1,4 @@
-package net.ciespal.redxxi.web.controller;
+package net.ciespal.redxxi.web.controller.home;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 import net.ciespal.redxxi.ejb.negocio.AdministracionService;
 import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
+import net.ciespal.redxxi.web.controller.SelectItemController;
 import net.ciespal.redxxi.web.datamanager.CatalogoDataManager;
 
 import com.corvustec.commons.util.CorvustecException;
