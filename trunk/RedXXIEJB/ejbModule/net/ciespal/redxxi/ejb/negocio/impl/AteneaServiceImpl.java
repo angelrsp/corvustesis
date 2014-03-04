@@ -124,6 +124,20 @@ public class AteneaServiceImpl implements AteneaService{
 			throw new CorvustecException("Error al obtenerCentroHijo");
 		}
 	}
+
+	@Override
+	public List<CentroDTO> readCentroByType(Object type) throws CorvustecException
+	{
+		logger.info("readCentroByType");
+		try{
+			return factoryDAO.getCentroDAOImpl().findByType(type);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readCentroByType {}",e.toString());
+			throw new CorvustecException("Error al readCentroByType");
+		}
+	}
 	
 	/* Carrera */
 	@Override

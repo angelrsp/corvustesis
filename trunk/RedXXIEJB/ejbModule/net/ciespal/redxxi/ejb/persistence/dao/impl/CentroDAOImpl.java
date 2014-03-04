@@ -1,5 +1,6 @@
 package net.ciespal.redxxi.ejb.persistence.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -121,4 +122,21 @@ public class CentroDAOImpl extends AbstractFacadeImpl<CentroDTO> implements Cent
 		else
 			return list;
 	}
+	
+	@Override
+	public List<CentroDTO> findByType(Object type) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
+		Root<CentroDTO> from= cq.from(CentroDTO.class);
+		
+		cq.where(cb.equal(from.get("cenTipo"),type));
+		
+		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();	
+		if(list.isEmpty())
+			return new ArrayList<CentroDTO>();
+		else
+			return list;
+	}
+
 }
