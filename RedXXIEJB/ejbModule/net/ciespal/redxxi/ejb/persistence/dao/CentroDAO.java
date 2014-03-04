@@ -24,4 +24,6 @@ public interface CentroDAO extends AbstractFacade<CentroDTO> {
 	List<CentroDTO> findAllPatherByCountry(Object ubicacion)
 			throws CorvustecException;
 
+	List<CentroDTO> findByType(Object type) throws CorvustecException;
+
 }

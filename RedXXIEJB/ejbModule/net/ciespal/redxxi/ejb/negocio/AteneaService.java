@@ -127,4 +127,6 @@ public interface AteneaService {
 	List<ModalidadDTO> readModalidad(CarreraDTO carrera)
 			throws CorvustecException;
 
+	List<CentroDTO> readCentroByType(Object type) throws CorvustecException;
+
 }
