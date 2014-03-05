@@ -18,4 +18,6 @@ public interface ProyectoInvestigacionDAO extends AbstractFacade<ProyectoInvesti
 	List<ProyectoInvestigacionDTO> getAll(OrganizacionDTO org)
 			throws CorvustecException;
 
+	List<ProyectoInvestigacionDTO> getAll() throws CorvustecException;
+
 }

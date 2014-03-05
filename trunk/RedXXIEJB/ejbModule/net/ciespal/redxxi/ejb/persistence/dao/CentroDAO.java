@@ -5,6 +5,8 @@ import java.util.List;
 import com.corvustec.commons.util.CorvustecException;
 
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.FacultadListDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.UniversidadListDTO;
 
 public interface CentroDAO extends AbstractFacade<CentroDTO> {
 
@@ -25,5 +27,9 @@ public interface CentroDAO extends AbstractFacade<CentroDTO> {
 			throws CorvustecException;
 
 	List<CentroDTO> findByType(Object type) throws CorvustecException;
+
+	List<UniversidadListDTO> getUniversidad() throws CorvustecException;
+
+	List<FacultadListDTO> getFacultad() throws CorvustecException;
 
 }

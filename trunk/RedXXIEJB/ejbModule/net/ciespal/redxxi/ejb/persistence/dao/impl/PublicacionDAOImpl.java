@@ -1,5 +1,6 @@
 package net.ciespal.redxxi.ejb.persistence.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -72,6 +73,22 @@ public class PublicacionDAOImpl extends AbstractFacadeImpl<PublicacionDTO> imple
 		List<PublicacionDTO> list=entityManager.createQuery(cq).getResultList();
 		if(list.isEmpty())
 			return null;
+		else
+			return list;
+	}	
+	
+	@Override
+	public List<PublicacionDTO> getByType(Object type) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<PublicacionDTO> cq=cb.createQuery(PublicacionDTO.class);
+		Root<PublicacionDTO>from =cq.from(PublicacionDTO.class);
+		
+		cq.where(cb.equal(from.get("pubTipo"), type));
+		
+		List<PublicacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return new ArrayList<PublicacionDTO>();
 		else
 			return list;
 	}	

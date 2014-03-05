@@ -13,4 +13,6 @@ public interface CarreraDAO extends AbstractFacade<CarreraDTO> {
 	List<CarreraDTO> getAll(CentroDTO centro, Object tipo)
 			throws CorvustecException;
 
+	List<CarreraDTO> getByType(Object type) throws CorvustecException;
+
 }

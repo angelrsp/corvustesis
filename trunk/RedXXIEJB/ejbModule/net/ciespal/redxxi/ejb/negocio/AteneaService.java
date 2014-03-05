@@ -11,12 +11,14 @@ import net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EventoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.FacultadListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ModalidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.NoticiaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.UniversidadListDTO;
 
 import com.corvustec.commons.util.CorvustecException;
 
@@ -128,5 +130,23 @@ public interface AteneaService {
 			throws CorvustecException;
 
 	List<CentroDTO> readCentroByType(Object type) throws CorvustecException;
+
+	List<CarreraDTO> readCarrera(Object type) throws CorvustecException;
+
+	List<PublicacionDTO> readPublicacionByType(Object type)
+			throws CorvustecException;
+
+	List<EventoDTO> readEvento() throws CorvustecException;
+
+	List<ProyectoInvestigacionDTO> readProyectoInvestigacion()
+			throws CorvustecException;
+
+	List<OrganizacionDTO> readOrganizacion() throws CorvustecException;
+
+	List<DoctorDTO> readDoctor() throws CorvustecException;
+
+	List<UniversidadListDTO> readUniversidad() throws CorvustecException;
+
+	List<FacultadListDTO> readFacultad() throws CorvustecException;
 
 }

@@ -1,5 +1,6 @@
 package net.ciespal.redxxi.ejb.persistence.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -32,6 +33,20 @@ public class OrganizacioDAOImpl extends AbstractFacadeImpl<OrganizacionDTO> impl
 		List<OrganizacionDTO> list=entityManager.createQuery(cq).getResultList();
 		if(list.isEmpty())
 			return null;
+		else
+			return list;
+	}
+	
+	@Override
+	public List<OrganizacionDTO> getAll()
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<OrganizacionDTO> cq=cb.createQuery(OrganizacionDTO.class);
+		cq.from(OrganizacionDTO.class);
+				
+		List<OrganizacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return new ArrayList<OrganizacionDTO>();
 		else
 			return list;
 	}

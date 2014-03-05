@@ -1,5 +1,6 @@
 package net.ciespal.redxxi.ejb.persistence.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -59,6 +60,20 @@ public class EventoDAOImpl extends AbstractFacadeImpl<EventoDTO> implements Even
 		List<EventoDTO> list=entityManager.createQuery(cq).getResultList();
 		if(list.isEmpty())
 			return null;
+		else
+			return list;
+	}
+	
+	@Override
+	public List<EventoDTO> getAll() throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<EventoDTO> cq=cb.createQuery(EventoDTO.class);
+		cq.from(EventoDTO.class);
+		
+		List<EventoDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return new ArrayList<EventoDTO>();
 		else
 			return list;
 	}

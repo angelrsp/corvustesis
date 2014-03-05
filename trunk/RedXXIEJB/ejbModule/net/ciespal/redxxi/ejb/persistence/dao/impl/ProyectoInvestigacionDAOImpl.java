@@ -1,5 +1,6 @@
 package net.ciespal.redxxi.ejb.persistence.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -63,6 +64,20 @@ public class ProyectoInvestigacionDAOImpl extends AbstractFacadeImpl<ProyectoInv
 			return list;
 	}
 
+	@Override
+	public List<ProyectoInvestigacionDTO> getAll() throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<ProyectoInvestigacionDTO> cq=cb.createQuery(ProyectoInvestigacionDTO.class);
+		cq.from(ProyectoInvestigacionDTO.class);
+		
+		List<ProyectoInvestigacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return new ArrayList<ProyectoInvestigacionDTO>();
+		else
+			return list;
+	}
+	
 	@Override
 	public void remove2(ProyectoInvestigacionDTO pro)
 	{
