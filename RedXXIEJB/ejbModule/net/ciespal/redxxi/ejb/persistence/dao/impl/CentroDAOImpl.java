@@ -13,6 +13,8 @@ import com.corvustec.commons.util.CorvustecException;
 
 import net.ciespal.redxxi.ejb.persistence.dao.CentroDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.FacultadListDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.UniversidadListDTO;
 
 public class CentroDAOImpl extends AbstractFacadeImpl<CentroDTO> implements CentroDAO{
 
@@ -135,6 +137,38 @@ public class CentroDAOImpl extends AbstractFacadeImpl<CentroDTO> implements Cent
 		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();	
 		if(list.isEmpty())
 			return new ArrayList<CentroDTO>();
+		else
+			return list;
+	}
+
+	@Override
+	public List<UniversidadListDTO> getUniversidad() throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<UniversidadListDTO> cq=cb.createQuery(UniversidadListDTO.class);
+		Root<UniversidadListDTO> from= cq.from(UniversidadListDTO.class);
+		
+		cq.where(cb.equal(from.get("cenTipo"),2));
+		
+		List<UniversidadListDTO> list=entityManager.createQuery(cq).getResultList();	
+		if(list.isEmpty())
+			return new ArrayList<UniversidadListDTO>();
+		else
+			return list;
+	}
+	
+	@Override
+	public List<FacultadListDTO> getFacultad() throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<FacultadListDTO> cq=cb.createQuery(FacultadListDTO.class);
+		Root<FacultadListDTO> from= cq.from(FacultadListDTO.class);
+		
+		cq.where(cb.equal(from.get("cenTipo"),3));
+		
+		List<FacultadListDTO> list=entityManager.createQuery(cq).getResultList();	
+		if(list.isEmpty())
+			return new ArrayList<FacultadListDTO>();
 		else
 			return list;
 	}

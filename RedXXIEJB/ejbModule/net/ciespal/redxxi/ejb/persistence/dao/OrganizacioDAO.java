@@ -8,5 +8,7 @@ public interface OrganizacioDAO extends AbstractFacade<OrganizacionDTO> {
 
 	List<OrganizacionDTO> getAll(Object ubicacion);
 
+	List<OrganizacionDTO> getAll();
+
 	
 }

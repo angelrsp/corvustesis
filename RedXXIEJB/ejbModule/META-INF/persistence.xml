@@ -18,6 +18,8 @@
 	<class>net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.UniversidadListDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.FacultadListDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>		

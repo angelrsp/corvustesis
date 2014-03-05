@@ -1,5 +1,6 @@
 package net.ciespal.redxxi.ejb.persistence.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -37,4 +38,19 @@ public class DoctorDAOImpl extends AbstractFacadeImpl<DoctorDTO> implements Doct
 		else
 			return list;
 	}
+	
+	@Override
+	public List<DoctorDTO> getAll() throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<DoctorDTO> cq=cb.createQuery(DoctorDTO.class);
+		cq.from(DoctorDTO.class);
+				
+		List<DoctorDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return new ArrayList<DoctorDTO>();
+		else
+			return list;
+	}
+
 }

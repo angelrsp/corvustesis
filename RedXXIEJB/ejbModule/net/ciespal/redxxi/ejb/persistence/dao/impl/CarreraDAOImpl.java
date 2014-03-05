@@ -1,5 +1,6 @@
 package net.ciespal.redxxi.ejb.persistence.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -42,4 +43,21 @@ public class CarreraDAOImpl extends AbstractFacadeImpl<CarreraDTO> implements Ca
 			return list;
 	}
 
+	
+	@Override
+	public List<CarreraDTO> getByType(Object type) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CarreraDTO> cq=cb.createQuery(CarreraDTO.class);
+		Root<CarreraDTO> from = cq.from(CarreraDTO.class);
+		
+		
+		cq.where(cb.equal(from.get("carTipo"), type));
+		
+		List<CarreraDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return new ArrayList<CarreraDTO>();
+		else
+			return list;
+	}
 }
