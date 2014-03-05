@@ -1,5 +1,7 @@
 package net.ciespal.redxxi.web.controller.home;
 
+import java.io.IOException;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -31,6 +33,14 @@ public class ReportPublicController {
 	private void init()
 	{
 		universidadCount();
+		facultadCount();
+		pregradoCount();
+		posgradoCount();
+		revistaCount();
+		eventoCount();
+		proyectoCount();
+		organizacionCount();
+		doctorCount();
 	}
 	
 	public ReportPublicDataManager getReportPublicDataManager() {
@@ -51,9 +61,135 @@ public class ReportPublicController {
 		}
 	}
 	
+	public void facultadCount()
+	{
+		try {
+			reportPublicDataManager.setFacultadNumber(ateneaService.readCentroByType(3).size());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
+	public void pregradoCount()
+	{
+		try {
+			reportPublicDataManager.setPregradoNumber(ateneaService.readCarrera(6).size());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
+	public void posgradoCount()
+	{
+		try {
+			reportPublicDataManager.setPosgradoNumber(ateneaService.readCarrera(7).size());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
+	public void revistaCount()
+	{
+		try {
+			reportPublicDataManager.setRevistaNumber(ateneaService.readPublicacionByType(34).size());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
+	public void eventoCount()
+	{
+		try {
+			reportPublicDataManager.setEventoNumber(ateneaService.readEvento().size());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
+	public void proyectoCount()
+	{
+		try {
+			reportPublicDataManager.setProyectoNumber(ateneaService.readProyectoInvestigacion().size());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
+	public void organizacionCount()
+	{
+		try {
+			reportPublicDataManager.setOrganizacionNumber(ateneaService.readOrganizacion().size());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
+	public void doctorCount()
+	{
+		try {
+			reportPublicDataManager.setDoctorNumber(ateneaService.readDoctor().size());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
+	
 	public void universidadSelect()
+	{
+		try {
+			reportPublicDataManager.setUniversidadList(ateneaService.readUniversidad());
+			JsfUtil.redirect("/"+JsfUtil.getExternalContext().getContextName()+"/pages/home/universidad.xhtml");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		} catch (IOException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}		
+	}
+	
+	public void facultadSelect()
+	{
+		try {
+			reportPublicDataManager.setFacultadList(ateneaService.readFacultad());
+			JsfUtil.redirect("/"+JsfUtil.getExternalContext().getContextName()+"/pages/home/facultad.xhtml");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		} catch (IOException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
+	public void pregradoSelect()
+	{
+		
+	}
+
+	public void posgradoSelect()
 	{
 		
 	}
 	
+	public void revistaSelect()
+	{
+		
+	}
+
+	public void eventoSelect()
+	{
+		
+	}
+
+	public void proyectoSelect()
+	{
+		
+	}
+
+	public void organizacionSelect()
+	{
+		
+	}
+
+	public void doctorSelect()
+	{
+		
+	}
 }
