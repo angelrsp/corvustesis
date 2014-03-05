@@ -33,7 +33,7 @@
 	<table width="100%" class="table">
 			<tr>
 				<td>
-					<h:dataTable value="#{noticiaPublicDataManager.noticiaPublicList}" var="noti" width="100%">
+					<h:dataTable value="#{noticiaController.noticiaDataManager.noticiaPublicList}" var="noti" width="100%">
 					
 		    			<h:column>
 		    				<f:facet name="header">Noticias</f:facet>
@@ -56,12 +56,76 @@
 		</tr>
 		<tr>
 			<td>
-				<h:outputText value="#{i18n['label.universidades']}:&#160;" />
+				<h:commandLink value="#{i18n['label.universidades']}:&#160;" actionListener="#{reportPublicController.universidadSelect}" styleClass="linkClass"/>
 			</td>
 			<td>
-				<h:commandLink value="#{reportPublicDataManager.universidadNumber}" actionListener="#{reportPublicController.universidadSelect}" styleClass="linkClass"/>			
+				<h:commandLink value="#{reportPublicController.reportPublicDataManager.universidadNumber}" actionListener="#{reportPublicController.universidadSelect}" styleClass="linkClass"/>			
 			</td>
 		</tr>
+		<tr>
+			<td>
+				<h:commandLink value="#{i18n['label.facultades']}:&#160;" actionListener="#{reportPublicController.facultadSelect}" styleClass="linkClass"/>
+			</td>
+			<td>
+				<h:commandLink value="#{reportPublicController.reportPublicDataManager.facultadNumber}" actionListener="#{reportPublicController.facultadSelect}" styleClass="linkClass"/>			
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<h:commandLink value="#{i18n['label.carreras.pregrado']}:&#160;" actionListener="#{reportPublicController.pregradoSelect}" styleClass="linkClass"/>
+			</td>
+			<td>
+				<h:commandLink value="#{reportPublicController.reportPublicDataManager.pregradoNumber}" actionListener="#{reportPublicController.pregradoSelect}" styleClass="linkClass"/>			
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<h:commandLink value="#{i18n['label.carreras.posgrado']}:&#160;" actionListener="#{reportPublicController.posgradoSelect}" styleClass="linkClass"/>
+			</td>
+			<td>
+				<h:commandLink value="#{reportPublicController.reportPublicDataManager.posgradoNumber}" actionListener="#{reportPublicController.posgradoSelect}" styleClass="linkClass"/>			
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<h:commandLink value="#{i18n['label.revistas']}:&#160;" actionListener="#{reportPublicController.revistaSelect}" styleClass="linkClass"/>
+			</td>
+			<td>
+				<h:commandLink value="#{reportPublicController.reportPublicDataManager.revistaNumber}" actionListener="#{reportPublicController.revistaSelect}" styleClass="linkClass"/>			
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<h:commandLink value="#{i18n['label.eventos']}:&#160;" actionListener="#{reportPublicController.eventoSelect}" styleClass="linkClass"/>
+			</td>
+			<td>
+				<h:commandLink value="#{reportPublicController.reportPublicDataManager.eventoNumber}" actionListener="#{reportPublicController.eventoSelect}" styleClass="linkClass"/>			
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<h:commandLink value="#{i18n['label.proyectos.investigacion']}:&#160;" actionListener="#{reportPublicController.proyectoSelect}" styleClass="linkClass"/>
+			</td>
+			<td>
+				<h:commandLink value="#{reportPublicController.reportPublicDataManager.proyectoNumber}" actionListener="#{reportPublicController.proyectoSelect}" styleClass="linkClass"/>			
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<h:commandLink value="#{i18n['label.doctores.ciencias']}:&#160;" actionListener="#{reportPublicController.doctorSelect}" styleClass="linkClass"/>
+			</td>
+			<td>
+				<h:commandLink value="#{reportPublicController.reportPublicDataManager.doctorNumber}" actionListener="#{reportPublicController.doctorSelect}" styleClass="linkClass"/>			
+			</td>
+		</tr>
+
+		
 	</table>	
 </ui:define>
 

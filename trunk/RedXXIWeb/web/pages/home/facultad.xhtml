@@ -7,6 +7,7 @@
       template="/WEB-INF/template/public.xhtml">
 
 
+
 <ui:define name="left">
 	<table width="100%" class="table">
 			<tr>
@@ -33,11 +34,19 @@
 	<table width="100%" class="table">
 			<tr>
 				<td>
-					<h:outputText value="#{noticiaPublicController.noticiaPublicDataManager.noticia.notDescripcion}" escape="false"/>
+					<h:dataTable value="#{reportPublicController.reportPublicDataManager.facultadList}" var="fac" width="100%">
+					
+		    			<h:column>
+		    				<f:facet name="header">Facultades</f:facet>
+		    				<h:outputText value="#{fac.cenNombre}" /><br />
+		    				<h:outputText value="#{fac.cenDatoInstitucional}" escape="false"/><br />
+		    			</h:column>										
+					</h:dataTable>
 				</td>
 			</tr>
 		</table>
 </ui:define>
+
 
 <ui:define name="right">
 		
@@ -119,5 +128,7 @@
 		
 	</table>	
 </ui:define>
+
+
 
 </ui:composition>
