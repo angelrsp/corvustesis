@@ -19,4 +19,8 @@ public interface PublicacionDAO extends AbstractFacade<PublicacionDTO>{
 
 	List<PublicacionDTO> getByType(Object type) throws CorvustecException;
 
+	Integer getCountByType(Object type) throws CorvustecException;
+
+	Integer getCountByType(Object type, Object pais) throws CorvustecException;
+
 }

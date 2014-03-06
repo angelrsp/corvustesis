@@ -77,6 +77,41 @@ public class EventoDAOImpl extends AbstractFacadeImpl<EventoDTO> implements Even
 		else
 			return list;
 	}
+
+	@Override
+	public Integer getCount() throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<EventoDTO> cq=cb.createQuery(EventoDTO.class);
+		Root<EventoDTO> from= cq.from(EventoDTO.class);
+		
+		cq.multiselect(cb.count(from.get("eveCodigo")));
+		
+		List<EventoDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getEveCount();
+		else
+			return 0;
+	}
+	
+	@Override
+	public Integer getCount(Object pais) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<EventoDTO> cq=cb.createQuery(EventoDTO.class);
+		Root<EventoDTO> from= cq.from(EventoDTO.class);
+		
+		cq.multiselect(cb.count(from.get("eveCodigo")));
+		
+		cq.where(cb.equal(from.get("evePais"), pais));
+		
+		List<EventoDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getEveCount();
+		else
+			return 0;
+	}
+
 	
 	@Override
 	public void remove2(EventoDTO eve)

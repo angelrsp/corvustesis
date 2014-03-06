@@ -63,8 +63,18 @@ public class PublicacionDTO implements Serializable {
 	@Column(name="pub_campo_conocimiento")
 	private Integer pubCampoConocimiento;
 
-	@Column(name="pub_ubicacion")
-	private Integer pubUbicacion;
+	@Column(name="pub_ciudad")
+	private Integer pubCiudad;
+
+	@Column(name="pub_provincia")
+	private Integer pubProvincia;
+
+	@Column(name="pub_pais")
+	private Integer pubPais;
+
+	
+	@Transient
+	private Long pubCount;
 
 	
 	//bi-directional many-to-one association to EntidadDTO
@@ -72,6 +82,10 @@ public class PublicacionDTO implements Serializable {
 	private List<EntidadDTO> ateEntidads;
 
 	public PublicacionDTO() {
+	}
+
+	public PublicacionDTO(Long pubCount) {
+		this.pubCount=pubCount;
 	}
 
 	public Integer getPubCodigo() {
@@ -178,12 +192,36 @@ public class PublicacionDTO implements Serializable {
 		this.pubCampoConocimiento = pubCampoConocimiento;
 	}
 
-	public Integer getPubUbicacion() {
-		return pubUbicacion;
+	public Integer getPubCiudad() {
+		return pubCiudad;
 	}
 
-	public void setPubUbicacion(Integer pubUbicacion) {
-		this.pubUbicacion = pubUbicacion;
+	public void setPubCiudad(Integer pubCiudad) {
+		this.pubCiudad = pubCiudad;
+	}
+
+	public Integer getPubProvincia() {
+		return pubProvincia;
+	}
+
+	public void setPubProvincia(Integer pubProvincia) {
+		this.pubProvincia = pubProvincia;
+	}
+
+	public Integer getPubPais() {
+		return pubPais;
+	}
+
+	public void setPubPais(Integer pubPais) {
+		this.pubPais = pubPais;
+	}
+
+	public Long getPubCount() {
+		return pubCount;
+	}
+
+	public void setPubCount(Long pubCount) {
+		this.pubCount = pubCount;
 	}
 
 	public String getPubTituloPublicacion() {

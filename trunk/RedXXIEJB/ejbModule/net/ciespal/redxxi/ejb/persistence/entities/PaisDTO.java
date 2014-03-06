@@ -8,6 +8,8 @@ public class PaisDTO {
 	private String imagenPath;
 	private byte[] imagen;
 	private int count;
+	private int tipo;
+	
 	
 	public PaisDTO() {
 	
@@ -59,5 +61,13 @@ public class PaisDTO {
 
 	public void setCount(int count) {
 		this.count = count;
+	}
+
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 }

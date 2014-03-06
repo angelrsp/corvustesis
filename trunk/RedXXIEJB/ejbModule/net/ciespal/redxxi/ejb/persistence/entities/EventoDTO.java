@@ -33,14 +33,27 @@ public class EventoDTO implements Serializable {
 	@Column(name="eve_periocidad")
 	private String evePeriocidad;
 
-	@Column(name="eve_ubicacion")
-	private Integer eveUbicacion;
+	@Column(name="eve_ciudad")
+	private Integer eveCiudad;
 
+	@Column(name="eve_provincia")
+	private Integer eveProvincia;
+
+	@Column(name="eve_pais")
+	private Integer evePais;
+
+	@Transient
+	private Long eveCount;
+	
 	//bi-directional many-to-one association to EntidadDTO
 	@OneToMany(mappedBy="ateEvento",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<EntidadDTO> ateEntidads;
 
 	public EventoDTO() {
+	}
+
+	public EventoDTO(Long eveCount) {
+		this.eveCount=eveCount;
 	}
 
 	public Integer getEveCodigo() {
@@ -75,12 +88,36 @@ public class EventoDTO implements Serializable {
 		this.evePeriocidad = evePeriocidad;
 	}
 
-	public Integer getEveUbicacion() {
-		return this.eveUbicacion;
+	public Integer getEveCiudad() {
+		return eveCiudad;
 	}
 
-	public void setEveUbicacion(Integer eveUbicacion) {
-		this.eveUbicacion = eveUbicacion;
+	public void setEveCiudad(Integer eveCiudad) {
+		this.eveCiudad = eveCiudad;
+	}
+
+	public Integer getEveProvincia() {
+		return eveProvincia;
+	}
+
+	public void setEveProvincia(Integer eveProvincia) {
+		this.eveProvincia = eveProvincia;
+	}
+
+	public Integer getEvePais() {
+		return evePais;
+	}
+
+	public void setEvePais(Integer evePais) {
+		this.evePais = evePais;
+	}
+
+	public Long getEveCount() {
+		return eveCount;
+	}
+
+	public void setEveCount(Long eveCount) {
+		this.eveCount = eveCount;
 	}
 
 	public List<EntidadDTO> getAteEntidads() {

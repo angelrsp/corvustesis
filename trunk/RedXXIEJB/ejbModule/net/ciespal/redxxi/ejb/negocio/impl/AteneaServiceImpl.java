@@ -12,6 +12,7 @@ import net.ciespal.redxxi.ejb.negocio.AteneaService;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.AteneaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO;
@@ -23,6 +24,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ModalidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.NoticiaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.UniversidadListDTO;
@@ -46,20 +48,287 @@ public class AteneaServiceImpl implements AteneaService{
 	{
 		List<AteneaDTO> ateneaList=new ArrayList<AteneaDTO>();
 		AteneaDTO atenea;
+		CatalogoDTO cat;
 		if(pais==null)
 		{
 			atenea=new AteneaDTO();
 			atenea.setCodigo(1);
 			atenea.setDescripcion("Universidades: ");
 			atenea.setCount(factoryDAO.getCentroDAOImpl().getUniversidadCount());
+			atenea.setTipo(2);
+			ateneaList.add(atenea);
+			
+			atenea=new AteneaDTO();
+			atenea.setCodigo(2);
+			atenea.setDescripcion("Facultades: ");
+			atenea.setCount(factoryDAO.getCentroDAOImpl().getUniversidadCount());
+			atenea.setTipo(3);
+			ateneaList.add(atenea);
+
+			atenea=new AteneaDTO();
+			atenea.setCodigo(3);
+			atenea.setDescripcion("Carreras de Pregrado: ");
+			atenea.setCount(factoryDAO.getCarreraDAOImpl().getPregradoCount());
+			atenea.setTipo(6);
+			ateneaList.add(atenea);
+
+			atenea=new AteneaDTO();
+			atenea.setCodigo(4);
+			atenea.setDescripcion("Carreras de Posgrado: ");
+			atenea.setCount(factoryDAO.getCarreraDAOImpl().getPosgradoCount());
+			atenea.setTipo(7);
+			ateneaList.add(atenea);
+
+			atenea=new AteneaDTO();
+			atenea.setCodigo(5);
+			atenea.setDescripcion("Revistas Científicas: ");
+			atenea.setCount(factoryDAO.getPublicacionDAOImpl().getCountByType(34));
+			atenea.setTipo(34);
+			ateneaList.add(atenea);
+
+			atenea=new AteneaDTO();
+			atenea.setCodigo(6);
+			atenea.setDescripcion("Eventos Científicos: ");
+			atenea.setCount(factoryDAO.getEventoDAOImpl().getCount());
+			atenea.setTipo(101);
+			ateneaList.add(atenea);
+			
+			atenea=new AteneaDTO();
+			atenea.setCodigo(7);
+			atenea.setDescripcion("Proyectos de Investigación: ");
+			atenea.setCount(factoryDAO.getProyectoInvestigacionDAOImpl().getCount());
+			atenea.setTipo(102);
+			ateneaList.add(atenea);
+
+			atenea=new AteneaDTO();
+			atenea.setCodigo(8);
+			atenea.setDescripcion("Organizaciones Científicas: ");
+			atenea.setCount(factoryDAO.getOrganizacioDAOImpl().getCount());
+			atenea.setTipo(103);			
+			ateneaList.add(atenea);
+
+			atenea=new AteneaDTO();
+			atenea.setCodigo(9);
+			atenea.setDescripcion("Doctores en Ciencias: ");
+			atenea.setCount(factoryDAO.getDoctorDAOImpl().getCount());
+			atenea.setTipo(104);
 			ateneaList.add(atenea);
 		}
 		else
 		{
+			cat=new CatalogoDTO();
+			cat.setCatCodigo(Integer.valueOf(pais.toString()));
+			atenea=new AteneaDTO();
+			atenea.setCodigo(1);
+			atenea.setDescripcion("Universidades: ");
+			atenea.setCount(factoryDAO.getCentroDAOImpl().getUniversidadCount(cat.getCatCodigo()));
+			atenea.setTipo(2);
+			atenea.setPais(Integer.valueOf(pais.toString()));
+			ateneaList.add(atenea);
 			
+			atenea=new AteneaDTO();
+			atenea.setCodigo(2);
+			atenea.setDescripcion("Facultades: ");
+			atenea.setCount(factoryDAO.getCentroDAOImpl().getFacultadCount(cat.getCatCodigo()));
+			atenea.setTipo(3);
+			atenea.setPais(Integer.valueOf(pais.toString()));
+			ateneaList.add(atenea);
+
+			atenea=new AteneaDTO();
+			atenea.setCodigo(3);
+			atenea.setDescripcion("Carreras de Pregrado: ");
+			atenea.setCount(factoryDAO.getCarreraDAOImpl().getPregradoCount(cat.getCatCodigo()));
+			atenea.setTipo(6);
+			atenea.setPais(Integer.valueOf(pais.toString()));
+			ateneaList.add(atenea);
+
+			atenea=new AteneaDTO();
+			atenea.setCodigo(4);
+			atenea.setDescripcion("Carreras de Posgrado: ");
+			atenea.setCount(factoryDAO.getCarreraDAOImpl().getPosgradoCount(cat.getCatCodigo()));
+			atenea.setTipo(7);
+			atenea.setPais(Integer.valueOf(pais.toString()));
+			ateneaList.add(atenea);
+
+			atenea=new AteneaDTO();
+			atenea.setCodigo(5);
+			atenea.setDescripcion("Revistas Científicas: ");
+			atenea.setCount(factoryDAO.getPublicacionDAOImpl().getCountByType(34,cat.getCatCodigo()));
+			atenea.setTipo(34);
+			atenea.setPais(Integer.valueOf(pais.toString()));
+			ateneaList.add(atenea);
+
+			atenea=new AteneaDTO();
+			atenea.setCodigo(6);
+			atenea.setDescripcion("Eventos Científicos: ");
+			atenea.setCount(factoryDAO.getEventoDAOImpl().getCount(cat.getCatCodigo()));
+			atenea.setTipo(101);
+			atenea.setPais(Integer.valueOf(pais.toString()));
+			ateneaList.add(atenea);
+			
+			atenea=new AteneaDTO();
+			atenea.setCodigo(7);
+			atenea.setDescripcion("Proyectos de Investigación: ");
+			atenea.setCount(factoryDAO.getProyectoInvestigacionDAOImpl().getCount(cat.getCatCodigo()));
+			atenea.setTipo(102);
+			atenea.setPais(Integer.valueOf(pais.toString()));
+			ateneaList.add(atenea);
+
+			atenea=new AteneaDTO();
+			atenea.setCodigo(8);
+			atenea.setDescripcion("Organizaciones Científicas: ");
+			atenea.setCount(factoryDAO.getOrganizacioDAOImpl().getCount(cat.getCatCodigo()));
+			atenea.setTipo(103);			
+			atenea.setPais(Integer.valueOf(pais.toString()));
+			ateneaList.add(atenea);
+
+			atenea=new AteneaDTO();
+			atenea.setCodigo(9);
+			atenea.setDescripcion("Doctores en Ciencias: ");
+			atenea.setCount(factoryDAO.getDoctorDAOImpl().getCount(cat.getCatCodigo()));
+			atenea.setTipo(104);
+			atenea.setPais(Integer.valueOf(pais.toString()));
+			ateneaList.add(atenea);
 		}
 		return ateneaList;
 	}
+	
+	@Override
+	public List<PaisDTO> readPais(Object type) throws CorvustecException
+	{
+		List<PaisDTO> paisList=new ArrayList<PaisDTO>();
+		PaisDTO pais;
+		CatalogoDTO catalogo;
+
+		catalogo=new CatalogoDTO();
+		catalogo.setCatCodigo(13);
+		
+		if(type==null)
+		{
+			
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				paisList.add(pais);
+			}
+			
+		}
+		//Universidad
+		else if(type.equals(2))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getCentroDAOImpl().getUniversidadCount(cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}
+		}//Facultad
+		else if(type.equals(3))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getCentroDAOImpl().getFacultadCount(cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}			
+		}//Pregrado
+		else if(type.equals(6))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getCarreraDAOImpl().getPregradoCount(cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}			
+		}//Posgrado
+		else if(type.equals(7))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getCarreraDAOImpl().getPosgradoCount(cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}
+		}//Revista
+		else if(type.equals(34))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getPublicacionDAOImpl().getCountByType(34,cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}
+		}//Eventos
+		else if(type.equals(101))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getEventoDAOImpl().getCount(cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}
+		}//Proyectos de Investigacion
+		else if(type.equals(102))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getProyectoInvestigacionDAOImpl().getCount(cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}
+		}//Organizacion
+		else if(type.equals(103))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getOrganizacioDAOImpl().getCount(cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}
+		}//Doctor
+		else if(type.equals(104))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getDoctorDAOImpl().getCount(cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}
+		}
+
+		
+		return paisList;
+	}
+	
 	
 	/* Centro */
 	@Override

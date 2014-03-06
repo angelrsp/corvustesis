@@ -8,6 +8,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import com.corvustec.commons.util.CorvustecException;
+
 import net.ciespal.redxxi.ejb.persistence.dao.OrganizacioDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
 
@@ -50,4 +52,39 @@ public class OrganizacioDAOImpl extends AbstractFacadeImpl<OrganizacionDTO> impl
 		else
 			return list;
 	}
+	
+	@Override
+	public Integer getCount()
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<OrganizacionDTO> cq=cb.createQuery(OrganizacionDTO.class);
+		Root<OrganizacionDTO> from= cq.from(OrganizacionDTO.class);
+				
+		cq.multiselect(cb.count(from.get("orgCodigo")));
+		
+		List<OrganizacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getOrgCount();
+		else
+			return 0;
+	}
+
+	@Override
+	public Integer getCount(Object pais) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<OrganizacionDTO> cq=cb.createQuery(OrganizacionDTO.class);
+		Root<OrganizacionDTO> from= cq.from(OrganizacionDTO.class);
+				
+		cq.multiselect(cb.count(from.get("orgCodigo")));
+		
+		cq.where(cb.equal(from.get("orgPais"), pais));
+		
+		List<OrganizacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getOrgCount();
+		else
+			return 0;
+	}
+
 }

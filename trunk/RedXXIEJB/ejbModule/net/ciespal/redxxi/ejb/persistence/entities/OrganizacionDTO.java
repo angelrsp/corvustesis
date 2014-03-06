@@ -39,17 +39,30 @@ public class OrganizacionDTO implements Serializable {
 	@Column(name="org_nombre")
 	private String orgNombre;
 
-	@Column(name="org_ubicacion")
-	private Integer orgUbicacion;
-
 	@Column(name="org_institucion_superior")
 	private String orgInstitucionSuperior;
-	
+
+	@Column(name="org_ciudad")
+	private Integer orgCiudad;
+
+	@Column(name="org_provincia")
+	private Integer orgProvincia;
+
+	@Column(name="org_pais")
+	private Integer orgPais;
+
+	@Transient
+	private Long orgCount;
+
 	//bi-directional many-to-one association to EntidadDTO
 	@OneToMany(mappedBy="ateOrganizacion",cascade={CascadeType.ALL,CascadeType.PERSIST},fetch=FetchType.EAGER)
 	private List<EntidadDTO> ateEntidads;
 
 	public OrganizacionDTO() {
+	}
+
+	public OrganizacionDTO(Long orgCount) {
+		this.orgCount = orgCount;
 	}
 
 	public Integer getOrgCodigo() {
@@ -100,20 +113,44 @@ public class OrganizacionDTO implements Serializable {
 		this.orgNombre = orgNombre;
 	}
 
-	public Integer getOrgUbicacion() {
-		return orgUbicacion;
-	}
-
-	public void setOrgUbicacion(Integer orgUbicacion) {
-		this.orgUbicacion = orgUbicacion;
-	}
-
 	public String getOrgInstitucionSuperior() {
 		return orgInstitucionSuperior;
 	}
 
 	public void setOrgInstitucionSuperior(String orgInstitucionSuperior) {
 		this.orgInstitucionSuperior = orgInstitucionSuperior;
+	}
+
+	public Integer getOrgCiudad() {
+		return orgCiudad;
+	}
+
+	public void setOrgCiudad(Integer orgCiudad) {
+		this.orgCiudad = orgCiudad;
+	}
+
+	public Integer getOrgProvincia() {
+		return orgProvincia;
+	}
+
+	public void setOrgProvincia(Integer orgProvincia) {
+		this.orgProvincia = orgProvincia;
+	}
+
+	public Integer getOrgPais() {
+		return orgPais;
+	}
+
+	public void setOrgPais(Integer orgPais) {
+		this.orgPais = orgPais;
+	}
+
+	public Long getOrgCount() {
+		return orgCount;
+	}
+
+	public void setOrgCount(Long orgCount) {
+		this.orgCount = orgCount;
 	}
 
 	public List<EntidadDTO> getAteEntidads() {
