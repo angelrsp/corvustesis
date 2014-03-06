@@ -9,7 +9,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="vie_universidad")
+@Table(name="ate_universidad_vie")
 @NamedQuery(name="UniversidadListDTO.findAll", query="SELECT u FROM UniversidadListDTO u")
 public class UniversidadListDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,9 +22,6 @@ public class UniversidadListDTO implements Serializable {
 
 	@Column(name="cat_provincia")
 	private String catProvincia;
-
-	@Column(name="cat_tipo")
-	private String catTipo;
 
 	@Column(name="cen_anio_fundacion")
 	private Integer cenAnioFundacion;
@@ -82,14 +79,6 @@ public class UniversidadListDTO implements Serializable {
 
 	public void setCatProvincia(String catProvincia) {
 		this.catProvincia = catProvincia;
-	}
-
-	public String getCatTipo() {
-		return this.catTipo;
-	}
-
-	public void setCatTipo(String catTipo) {
-		this.catTipo = catTipo;
 	}
 
 	public Integer getCenAnioFundacion() {

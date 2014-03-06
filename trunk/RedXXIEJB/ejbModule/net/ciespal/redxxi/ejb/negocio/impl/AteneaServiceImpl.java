@@ -1,6 +1,7 @@
 package net.ciespal.redxxi.ejb.negocio.impl;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.ejb.Stateless;
 
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
+import net.ciespal.redxxi.ejb.persistence.entities.AteneaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
@@ -37,6 +39,27 @@ public class AteneaServiceImpl implements AteneaService{
 	
 	@EJB
 	private FactoryDAO factoryDAO;
+	
+	/* Atenea*/
+	@Override
+	public List<AteneaDTO> readAtenea(Object pais) throws CorvustecException	
+	{
+		List<AteneaDTO> ateneaList=new ArrayList<AteneaDTO>();
+		AteneaDTO atenea;
+		if(pais==null)
+		{
+			atenea=new AteneaDTO();
+			atenea.setCodigo(1);
+			atenea.setDescripcion("Universidades: ");
+			atenea.setCount(factoryDAO.getCentroDAOImpl().getUniversidadCount());
+			ateneaList.add(atenea);
+		}
+		else
+		{
+			
+		}
+		return ateneaList;
+	}
 	
 	/* Centro */
 	@Override
@@ -550,13 +573,13 @@ public class AteneaServiceImpl implements AteneaService{
 	@Override
 	public void deletePublicacion(PublicacionDTO publicacion) throws CorvustecException
 	{
-		logger.info("createOrUpdatePublicacion");
+		logger.info("deletePublicacion");
 		try{
 			factoryDAO.getPublicacionDAOImpl().remove2(publicacion);
 		}
 		catch(Exception e){
-			logger.info("Error createOrUpdatePublicacion {}",e.toString());
-			throw new CorvustecException("Error al createOrUpdatePublicacion");
+			logger.info("Error deletePublicacion {}",e.toString());
+			throw new CorvustecException("Error al deletePublicacion");
 		}
 	}
 	
@@ -685,8 +708,6 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 	
-	
-	
 	@Override
 	public List<DoctorDTO> readDoctor(Object ubicacion) throws CorvustecException
 	{
@@ -708,8 +729,7 @@ public class AteneaServiceImpl implements AteneaService{
 		try{
 			return factoryDAO.getDoctorDAOImpl().getAll();
 		}
-		catch(Exception e)
-		{
+		catch(Exception e){
 			logger.info("Error readDoctor {}",e.toString());
 			throw new CorvustecException("Error al readDoctor");
 		}
