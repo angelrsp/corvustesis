@@ -7,11 +7,12 @@
       template="/WEB-INF/template/public.xhtml">
 
 
+
 <ui:define name="left">
 	<table width="100%" class="table">
 			<tr>
 				<td>
-					<h:dataTable value="#{reportPublicController.reportPublicDataManager.paisList}" var="pai">
+					<h:dataTable value="#{reportPublicDataManager.paisList}" var="pai">
 					
 		    			<h:column>
 		    				<p:graphicImage value="#{pai.imagenPath}" height="30" width="50"/>
@@ -21,7 +22,11 @@
 		    				<f:facet name="header">Paises</f:facet>
 		    				<h:commandLink value="#{pai.nombre}" actionListener="#{reportPublicController.selectPais(pai)}" styleClass="linkClass"/>
 		    			</h:column>
-		    								
+		    			
+		    			<h:column>
+		    				<h:commandLink value="#{pai.count!=0?pai.count:null}" actionListener="#{reportPublicController.selectPais(pai)}" styleClass="linkClass"/>
+		    			</h:column>						
+		    					    							
 					</h:dataTable>
 				</td>
 			</tr>
@@ -33,26 +38,25 @@
 	<table width="100%" class="table">
 			<tr>
 				<td>
-					<h:dataTable value="#{noticiaController.noticiaDataManager.noticiaPublicList}" var="noti" width="100%">
+<!-- 					<h:dataTable value="#{reportPublicController.reportPublicDataManager.universidadList}" var="uni" width="100%"> -->
 					
-		    			<h:column>
-		    				<f:facet name="header">Noticias</f:facet>
-		    				<h:commandLink value="#{noti.notTitulo}" actionListener="#{noticiaPublicController.readNoticia(noti)}" styleClass="linkClass"/><br />
-		    				<h:outputText value="#{noti.notResumen}" escape="false"/><br />
-		    				<h:commandLink value=" LEER MÁS..." actionListener="#{noticiaPublicController.readNoticia(noti)}" styleClass="linkClass"/>
-		    			</h:column>										
-					
-					</h:dataTable>
+<!-- 		    			<h:column> -->
+<!-- 		    				<f:facet name="header">Universidades</f:facet> -->
+<!-- 		    				<h:outputText value="#{uni.cenNombre}" /><br /> -->
+<!-- 		    				<h:outputText value="#{uni.cenDatoInstitucional}" escape="false"/><br /> -->
+<!-- 		    			</h:column>										 -->
+<!-- 					</h:dataTable> -->
 				</td>
 			</tr>
 		</table>
 </ui:define>
 
+
 <ui:define name="right">
 		
 	<table width="100%" class="table">
 		<tr>
-			<td><h:dataTable value="#{reportPublicController.reportPublicDataManager.ateneaList}" var="ate" width="100%">
+			<td><h:dataTable value="#{reportPublicDataManager.ateneaList}" var="ate" width="100%">
 					
 	    			<h:column>
 	    				<f:facet name="header">Atenea</f:facet>
@@ -66,10 +70,10 @@
 					
 			</h:dataTable>
 			</td>
-		</tr>
-
-		
+		</tr>		
 	</table>	
 </ui:define>
+
+
 
 </ui:composition>
