@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import net.ciespal.redxxi.ejb.persistence.entities.AteneaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
@@ -148,5 +149,7 @@ public interface AteneaService {
 	List<UniversidadListDTO> readUniversidad() throws CorvustecException;
 
 	List<FacultadListDTO> readFacultad() throws CorvustecException;
+
+	List<AteneaDTO> readAtenea(Object pais) throws CorvustecException;
 
 }

@@ -51,7 +51,6 @@ public class CarreraDAOImpl extends AbstractFacadeImpl<CarreraDTO> implements Ca
 		CriteriaQuery<CarreraDTO> cq=cb.createQuery(CarreraDTO.class);
 		Root<CarreraDTO> from = cq.from(CarreraDTO.class);
 		
-		
 		cq.where(cb.equal(from.get("carTipo"), type));
 		
 		List<CarreraDTO> list=entityManager.createQuery(cq).getResultList();

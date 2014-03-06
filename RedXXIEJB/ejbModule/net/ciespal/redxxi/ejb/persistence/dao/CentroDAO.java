@@ -32,4 +32,6 @@ public interface CentroDAO extends AbstractFacade<CentroDTO> {
 
 	List<FacultadListDTO> getFacultad() throws CorvustecException;
 
+	Integer getUniversidadCount() throws CorvustecException;
+
 }

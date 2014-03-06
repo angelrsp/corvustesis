@@ -158,6 +158,24 @@ public class CentroDAOImpl extends AbstractFacadeImpl<CentroDTO> implements Cent
 	}
 	
 	@Override
+	public Integer getUniversidadCount() throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
+		Root<CentroDTO> from= cq.from(CentroDTO.class);
+		
+		cq.multiselect(cb.count(from.get("cenCodigo")));
+		
+		cq.where(cb.equal(from.get("cenTipo"),2));
+		
+		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getCenCount();
+		else
+			return 0;
+	}
+	
+	@Override
 	public List<FacultadListDTO> getFacultad() throws CorvustecException
 	{
 		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
@@ -173,4 +191,6 @@ public class CentroDAOImpl extends AbstractFacadeImpl<CentroDTO> implements Cent
 			return list;
 	}
 
+	
+	
 }
