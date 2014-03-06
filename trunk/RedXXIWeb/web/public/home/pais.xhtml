@@ -19,7 +19,7 @@
 		    													
 		    			<h:column>
 		    				<f:facet name="header">Paises</f:facet>
-		    				<h:commandLink actionListener="#{indexController.paises}" value="#{cat.catDescripcion}" styleClass="linkClass"/>
+		    				<h:commandLink actionListener="#{reportPublicController.paisSelect(cat)}" value="#{cat.catDescripcion}" styleClass="linkClass"/>
 		    			</h:column>
 		    								
 					</h:dataTable>
@@ -33,11 +33,19 @@
 	<table width="100%" class="table">
 			<tr>
 				<td>
-					<h:outputText value="#{noticiaPublicController.noticiaPublicDataManager.noticia.notDescripcion}" escape="false"/>
+					<h:outputText value="Pais" />
 				</td>
 			</tr>
+	
+			<tr>
+				<td>
+					<h:outputText value="Nombre: " /><h:outputText value="#{reportPublicDataManager.pais.catDescripcion}" />
+				</td>
+			</tr>
+			
 		</table>
 </ui:define>
+
 
 <ui:define name="right">
 		
@@ -109,6 +117,15 @@
 
 		<tr>
 			<td>
+				<h:commandLink value="#{i18n['label.organizaciones.cientificas']}:&#160;" actionListener="#{reportPublicController.organizacionSelect}" styleClass="linkClass"/>
+			</td>
+			<td>
+				<h:commandLink value="#{reportPublicController.reportPublicDataManager.organizacionNumber}" actionListener="#{reportPublicController.organizacionSelect}" styleClass="linkClass"/>			
+			</td>
+		</tr>
+
+		<tr>
+			<td>
 				<h:commandLink value="#{i18n['label.doctores.ciencias']}:&#160;" actionListener="#{reportPublicController.doctorSelect}" styleClass="linkClass"/>
 			</td>
 			<td>
@@ -119,5 +136,6 @@
 		
 	</table>	
 </ui:define>
+
 
 </ui:composition>

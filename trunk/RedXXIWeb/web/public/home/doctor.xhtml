@@ -7,7 +7,6 @@
       template="/WEB-INF/template/public.xhtml">
 
 
-
 <ui:define name="left">
 	<table width="100%" class="table">
 			<tr>
@@ -20,7 +19,7 @@
 		    													
 		    			<h:column>
 		    				<f:facet name="header">Paises</f:facet>
-		    				<h:commandLink actionListener="#{indexController.paises}" value="#{cat.catDescripcion}" styleClass="linkClass"/>
+		    				<h:commandLink  actionListener="#{reportPublicController.paisSelect(cat)}" value="#{cat.catDescripcion}" styleClass="linkClass"/>
 		    			</h:column>
 		    								
 					</h:dataTable>
@@ -34,13 +33,14 @@
 	<table width="100%" class="table">
 			<tr>
 				<td>
-					<h:dataTable value="#{reportPublicController.reportPublicDataManager.universidadList}" var="uni" width="100%">
-					
+					<h:dataTable value="#{reportPublicController.reportPublicDataManager.doctorList}" var="doc" width="100%">
+						
 		    			<h:column>
-		    				<f:facet name="header">Universidades</f:facet>
-		    				<h:outputText value="#{uni.cenNombre}" /><br />
-		    				<h:outputText value="#{uni.cenDatoInstitucional}" escape="false"/><br />
-		    			</h:column>										
+		    				<f:facet name="header">Doctores(Phd)</f:facet>
+		    				<h:outputText value="Apellidos: " /><h:outputText value="#{doc.docApellidos}" /><br />
+		    				<h:outputText value="Nombres: "/><h:outputText value="#{doc.docNombres}"/><br />
+		    			</h:column>
+		    			
 					</h:dataTable>
 				</td>
 			</tr>
@@ -113,6 +113,15 @@
 			</td>
 			<td>
 				<h:commandLink value="#{reportPublicController.reportPublicDataManager.proyectoNumber}" actionListener="#{reportPublicController.proyectoSelect}" styleClass="linkClass"/>			
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<h:commandLink value="#{i18n['label.organizaciones.cientificas']}:&#160;" actionListener="#{reportPublicController.organizacionSelect}" styleClass="linkClass"/>
+			</td>
+			<td>
+				<h:commandLink value="#{reportPublicController.reportPublicDataManager.organizacionNumber}" actionListener="#{reportPublicController.organizacionSelect}" styleClass="linkClass"/>			
 			</td>
 		</tr>
 
