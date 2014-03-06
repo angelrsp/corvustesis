@@ -49,7 +49,7 @@ public class NoticiaPublicController {
 	{
 		noticiaPublicDataManager.setNoticia(noticia);
 		try {
-			JsfUtil.redirect("pages/home/noticia.jsf");
+			JsfUtil.redirect("/"+JsfUtil.getExternalContext().getContextName()+"/public/home/noticia.xhtml");
 		} catch (IOException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
