@@ -20,7 +20,7 @@
 		    													
 		    			<h:column>
 		    				<f:facet name="header">Paises</f:facet>
-		    				<h:commandLink actionListener="#{indexController.paises}" value="#{cat.catDescripcion}" styleClass="linkClass"/>
+		    				<h:commandLink actionListener="#{reportPublicController.paisSelect(cat)}" value="#{cat.catDescripcion}" styleClass="linkClass"/>
 		    			</h:column>
 		    								
 					</h:dataTable>
@@ -34,12 +34,12 @@
 	<table width="100%" class="table">
 			<tr>
 				<td>
-					<h:dataTable value="#{reportPublicController.reportPublicDataManager.facultadList}" var="fac" width="100%">
+					<h:dataTable value="#{reportPublicController.reportPublicDataManager.posgradoList}" var="pos" width="100%">
 					
 		    			<h:column>
-		    				<f:facet name="header">Facultades</f:facet>
-		    				<h:outputText value="#{fac.cenNombre}" /><br />
-		    				<h:outputText value="#{fac.cenDatoInstitucional}" escape="false"/><br />
+		    				<f:facet name="header">Carreras de Posgrado</f:facet>
+		    				<h:outputText value="#{pos.carNombre}" /><br />
+		    				<h:outputText value="#{pos.carPerfil}" escape="false"/><br />
 		    			</h:column>										
 					</h:dataTable>
 				</td>
@@ -113,6 +113,15 @@
 			</td>
 			<td>
 				<h:commandLink value="#{reportPublicController.reportPublicDataManager.proyectoNumber}" actionListener="#{reportPublicController.proyectoSelect}" styleClass="linkClass"/>			
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<h:commandLink value="#{i18n['label.organizaciones.cientificas']}:&#160;" actionListener="#{reportPublicController.organizacionSelect}" styleClass="linkClass"/>
+			</td>
+			<td>
+				<h:commandLink value="#{reportPublicController.reportPublicDataManager.organizacionNumber}" actionListener="#{reportPublicController.organizacionSelect}" styleClass="linkClass"/>			
 			</td>
 		</tr>
 
