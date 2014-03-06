@@ -11,15 +11,15 @@
 	<table width="100%" class="table">
 			<tr>
 				<td>
-					<h:dataTable value="#{indexController.catalogoDataManager.catalogoList}" var="cat">
+					<h:dataTable value="#{reportPublicController.reportPublicDataManager.paisList}" var="cat">
 					
 		    			<h:column>
-		    				<p:graphicImage value="#{cat.catImagenPath}" height="30" width="50"/>
+		    				<p:graphicImage value="#{cat.nombre}" height="30" width="50"/>
 		    			</h:column>
 		    													
 		    			<h:column>
 		    				<f:facet name="header">Paises</f:facet>
-		    				<h:commandLink actionListener="#{reportPublicController.paisSelect(cat)}" value="#{cat.catDescripcion}" styleClass="linkClass"/>
+		    				<h:commandLink value="#{cat.imagenNombre}" styleClass="linkClass"/>
 		    			</h:column>
 		    								
 					</h:dataTable>
