@@ -3,8 +3,9 @@ package net.ciespal.redxxi.ejb.persistence.entities;
 public class PaisDTO {
 
 	private int codigo;
-	private int nombre;
-	private int imagenNombre;
+	private String nombre;
+	private String imagenNombre;
+	private String imagenPath;
 	private byte[] imagen;
 	private int count;
 	
@@ -20,20 +21,28 @@ public class PaisDTO {
 		this.codigo = codigo;
 	}
 
-	public int getNombre() {
+	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(int nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public int getImagenNombre() {
+	public String getImagenNombre() {
 		return imagenNombre;
 	}
 
-	public void setImagenNombre(int imagenNombre) {
+	public void setImagenNombre(String imagenNombre) {
 		this.imagenNombre = imagenNombre;
+	}
+
+	public String getImagenPath() {
+		return imagenPath;
+	}
+
+	public void setImagenPath(String imagenPath) {
+		this.imagenPath = imagenPath;
 	}
 
 	public byte[] getImagen() {
