@@ -81,7 +81,9 @@ public class PublicacionController extends SelectItemController {
 	public void save()
 	{
 		try {
-			publicacionDataManager.getPublicacion().setPubUbicacion(Integer.valueOf(getCiudad().toString()));
+			publicacionDataManager.getPublicacion().setPubPais(Integer.valueOf(getPais().toString()));
+			publicacionDataManager.getPublicacion().setPubProvincia(Integer.valueOf(getProvincia().toString()));
+			publicacionDataManager.getPublicacion().setPubCiudad(Integer.valueOf(getCiudad().toString()));
 			publicacionDataManager.getPublicacion().setPubCampoConocimiento(Integer.valueOf(getSubCampoConocimiento().toString()));
 			publicacionDataManager.getPublicacion().setPubTipo(Integer.valueOf(publicacionDataManager.getTipoPublicacion().toString()));
 			ateneaService.createOrUpdatePublicacion(publicacionDataManager.getPublicacion());

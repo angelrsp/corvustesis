@@ -77,7 +77,9 @@ public class DoctorController extends SelectItemController{
 	public void save()
 	{
 		try {
-			doctorDataManager.getDoctor().setDocUbicacion(Integer.valueOf(getCiudad().toString()));
+			doctorDataManager.getDoctor().setDocCiudad(Integer.valueOf(getCiudad().toString()));
+			doctorDataManager.getDoctor().setDocProvincia(Integer.valueOf(getProvincia().toString()));
+			doctorDataManager.getDoctor().setDocPais(Integer.valueOf(getPais().toString()));
 			doctorDataManager.getDoctor().setDocFechaNacimiento(new Timestamp(doctorDataManager.getFechaNacimiento().getTime()));
 			doctorDataManager.getDoctor().setDocSexo(Integer.valueOf(doctorDataManager.getSexoSelect().toString()));
 			ateneaService.createOrUpdateDoctor(doctorDataManager.getDoctor());

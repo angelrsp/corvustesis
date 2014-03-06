@@ -84,7 +84,9 @@ public class OrganizacionController extends SelectItemController{
 	public void save()
 	{
 		try {
-			organizacionDataManager.getOrganizacion().setOrgUbicacion(Integer.valueOf(getCiudad().toString()));
+			organizacionDataManager.getOrganizacion().setOrgCiudad(Integer.valueOf(getCiudad().toString()));
+			organizacionDataManager.getOrganizacion().setOrgProvincia(Integer.valueOf(getProvincia().toString()));
+			organizacionDataManager.getOrganizacion().setOrgPais(Integer.valueOf(getPais().toString()));
 			ateneaService.createOrUpdateOrganizacion(organizacionDataManager.getOrganizacion());
 			organizacionDataManager.setOrganizacion(new OrganizacionDTO());
 			readOrganizacion();
@@ -175,6 +177,9 @@ public class OrganizacionController extends SelectItemController{
 		try {
 			ent=new EntidadDTO();
 			eventoDataManager.getEvento().addAteEntidad(ent);
+			eventoDataManager.getEvento().setEveCiudad(Integer.parseInt(getCiudad().toString()));
+			eventoDataManager.getEvento().setEveProvincia(Integer.parseInt(getProvincia().toString()));
+			eventoDataManager.getEvento().setEvePais(Integer.parseInt(getPais().toString()));
 			ent= ateneaService.createOrUpdateEvento(eventoDataManager.getEvento()).getAteEntidads().get(0);
 			ent.setAteOrganizacion(organizacionDataManager.getOrganizacion());
 			ateneaService.updateEntidad(ent);
@@ -218,6 +223,7 @@ public class OrganizacionController extends SelectItemController{
 		try {
 			ent=new EntidadDTO();
 			proyectoDataManager.getProyecto().addAteEntidad(ent);
+			
 			ent=ateneaService.createOrUpdateProyectoInvestigacion(proyectoDataManager.getProyecto()).getAteEntidads().get(0);
 			
 			ent.setAteOrganizacion(organizacionDataManager.getOrganizacion());			
