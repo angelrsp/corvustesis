@@ -36,20 +36,35 @@ public class ProyectoInvestigacionDTO implements Serializable {
 	@Column(name="pin_tipo")
 	private Integer pinTipo;
 
-	@Column(name="pin_ubicacion")
-	private Integer pinUbicacion;
-
 	@Column(name="pin_anio_inicio")
 	private Integer pinAnioInicio;
 
 	@Column(name="pin_duracion")
 	private String pinDuracion;
 
+	@Column(name="pin_ciudad")
+	private Integer pinCiudad;
+	
+	@Column(name="pin_provincia")
+	private Integer pinProvincia;
+
+	@Column(name="pin_pais")
+	private Integer pinPais;
+
+	
+	
+	@Transient
+	private Long pinCount;
+
 	//bi-directional many-to-one association to EntidadDTO
 	@OneToMany(mappedBy="ateProyectoInvestigacion",cascade={CascadeType.ALL,CascadeType.PERSIST},fetch=FetchType.EAGER)
 	private List<EntidadDTO> ateEntidads;
 
 	public ProyectoInvestigacionDTO() {
+	}
+
+	public ProyectoInvestigacionDTO(Long pinCount) {
+		this.pinCount = pinCount;
 	}
 
 	public Integer getPinCodigo() {
@@ -92,14 +107,6 @@ public class ProyectoInvestigacionDTO implements Serializable {
 		this.pinTipo = pinTipo;
 	}
 
-	public Integer getPinUbicacion() {
-		return this.pinUbicacion;
-	}
-
-	public void setPinUbicacion(Integer pinUbicacion) {
-		this.pinUbicacion = pinUbicacion;
-	}
-
 	public Integer getPinAnioInicio() {
 		return pinAnioInicio;
 	}
@@ -114,6 +121,38 @@ public class ProyectoInvestigacionDTO implements Serializable {
 
 	public void setPinDuracion(String pinDuracion) {
 		this.pinDuracion = pinDuracion;
+	}
+
+	public Integer getPinCiudad() {
+		return pinCiudad;
+	}
+
+	public void setPinCiudad(Integer pinCiudad) {
+		this.pinCiudad = pinCiudad;
+	}
+
+	public Integer getPinProvincia() {
+		return pinProvincia;
+	}
+
+	public void setPinProvincia(Integer pinProvincia) {
+		this.pinProvincia = pinProvincia;
+	}
+
+	public Integer getPinPais() {
+		return pinPais;
+	}
+
+	public void setPinPais(Integer pinPais) {
+		this.pinPais = pinPais;
+	}
+
+	public Long getPinCount() {
+		return pinCount;
+	}
+
+	public void setPinCount(Long pinCount) {
+		this.pinCount = pinCount;
 	}
 
 	public List<EntidadDTO> getAteEntidads() {

@@ -59,4 +59,78 @@ public class CarreraDAOImpl extends AbstractFacadeImpl<CarreraDTO> implements Ca
 		else
 			return list;
 	}
+	
+	@Override
+	public Integer getPregradoCount() throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CarreraDTO> cq=cb.createQuery(CarreraDTO.class);
+		Root<CarreraDTO> from = cq.from(CarreraDTO.class);
+		
+		cq.multiselect(cb.count(from.get("carCodigo")));
+		
+		cq.where(cb.equal(from.get("carTipo"), 6));
+		
+		List<CarreraDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getCarCount();
+		else
+			return 0;
+	}
+
+	@Override
+	public Integer getPregradoCount(Object pais) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CarreraDTO> cq=cb.createQuery(CarreraDTO.class);
+		Root<CarreraDTO> from = cq.from(CarreraDTO.class);
+		Path<CentroDTO> join1=from.join("ateCentro");
+		
+		cq.multiselect(cb.count(from.get("carCodigo")));
+		
+		cq.where(cb.and(cb.equal(from.get("carTipo"), 6)),cb.equal(join1.get("cenPais"), pais));
+		
+		List<CarreraDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getCarCount();
+		else
+			return 0;
+	}
+	
+	@Override
+	public Integer getPosgradoCount() throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CarreraDTO> cq=cb.createQuery(CarreraDTO.class);
+		Root<CarreraDTO> from = cq.from(CarreraDTO.class);
+		
+		cq.multiselect(cb.count(from.get("carCodigo")));
+		
+		cq.where(cb.equal(from.get("carTipo"), 7));
+		
+		List<CarreraDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getCarCount();
+		else
+			return 0;
+	}
+	
+	@Override
+	public Integer getPosgradoCount(Object pais) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CarreraDTO> cq=cb.createQuery(CarreraDTO.class);
+		Root<CarreraDTO> from = cq.from(CarreraDTO.class);
+		Path<CentroDTO> join1=from.join("ateCentro");
+		
+		cq.multiselect(cb.count(from.get("carCodigo")));
+		
+		cq.where(cb.and(cb.equal(from.get("carTipo"), 7)),cb.equal(join1.get("cenPais"), pais));
+		
+		List<CarreraDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getCarCount();
+		else
+			return 0;
+	}
 }

@@ -53,4 +53,39 @@ public class DoctorDAOImpl extends AbstractFacadeImpl<DoctorDTO> implements Doct
 			return list;
 	}
 
+	@Override
+	public Integer getCount() throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<DoctorDTO> cq=cb.createQuery(DoctorDTO.class);
+		Root<DoctorDTO> from= cq.from(DoctorDTO.class);
+		
+		cq.multiselect(cb.count(from.get("docCodigo")));
+		
+		List<DoctorDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getDocCount();
+		else
+			return 0;
+	}
+
+	@Override
+	public Integer getCount(Object pais) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<DoctorDTO> cq=cb.createQuery(DoctorDTO.class);
+		Root<DoctorDTO> from= cq.from(DoctorDTO.class);
+		
+		cq.multiselect(cb.count(from.get("docCodigo")));
+		
+		cq.where(cb.equal(from.get("docPais"), pais));
+		
+		List<DoctorDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getDocCount();
+		else
+			return 0;
+	}
+
+	
 }

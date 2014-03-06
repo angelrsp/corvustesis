@@ -53,7 +53,7 @@ public class PublicacionDAOImpl extends AbstractFacadeImpl<PublicacionDTO> imple
 		CriteriaQuery<PublicacionDTO> cq=cb.createQuery(PublicacionDTO.class);
 		Root<PublicacionDTO> from = cq.from(PublicacionDTO.class);
 		
-		cq.where(cb.equal(from.get("pubUbicacion"),ubicacion));
+		cq.where(cb.equal(from.get("pubCiudad"),ubicacion));
 		
 		List<PublicacionDTO> list=entityManager.createQuery(cq).getResultList();
 		if(list.isEmpty())
@@ -92,6 +92,43 @@ public class PublicacionDAOImpl extends AbstractFacadeImpl<PublicacionDTO> imple
 		else
 			return list;
 	}	
+
+	@Override
+	public Integer getCountByType(Object type) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<PublicacionDTO> cq=cb.createQuery(PublicacionDTO.class);
+		Root<PublicacionDTO>from =cq.from(PublicacionDTO.class);
+		
+		cq.multiselect(cb.count(from.get("pubCodigo")));
+		
+		cq.where(cb.equal(from.get("pubTipo"), type));
+		
+		List<PublicacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getPubCount();
+		else
+			return 0;
+	}	
+
+	@Override
+	public Integer getCountByType(Object type,Object pais) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<PublicacionDTO> cq=cb.createQuery(PublicacionDTO.class);
+		Root<PublicacionDTO>from =cq.from(PublicacionDTO.class);
+		
+		cq.multiselect(cb.count(from.get("pubCodigo")));
+		
+		cq.where(cb.and(cb.equal(from.get("pubTipo"), type),cb.equal(from.get("pubPais"), pais)));
+		
+		List<PublicacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getPubCount();
+		else
+			return 0;
+	}	
+
 	
 	@Override
 	public void remove2(PublicacionDTO pub)

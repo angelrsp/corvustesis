@@ -176,6 +176,24 @@ public class CentroDAOImpl extends AbstractFacadeImpl<CentroDTO> implements Cent
 	}
 	
 	@Override
+	public Integer getUniversidadCount(Object pais) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
+		Root<CentroDTO> from= cq.from(CentroDTO.class);
+		
+		cq.multiselect(cb.count(from.get("cenCodigo")));
+		
+		cq.where(cb.and(cb.equal(from.get("cenTipo"),2),cb.equal(from.get("cenPais"), pais)));
+		
+		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getCenCount();
+		else
+			return 0;
+	}
+	
+	@Override
 	public List<FacultadListDTO> getFacultad() throws CorvustecException
 	{
 		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
@@ -191,6 +209,41 @@ public class CentroDAOImpl extends AbstractFacadeImpl<CentroDTO> implements Cent
 			return list;
 	}
 
+	@Override
+	public Integer getFacultadCount() throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
+		Root<CentroDTO> from= cq.from(CentroDTO.class);
+		
+		cq.multiselect(cb.count(from.get("cenCodigo")));
+		
+		cq.where(cb.equal(from.get("cenTipo"),3));
+		
+		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getCenCount();
+		else
+			return 0;
+	}
+	
+	@Override
+	public Integer getFacultadCount(Object pais) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
+		Root<CentroDTO> from= cq.from(CentroDTO.class);
+		
+		cq.multiselect(cb.count(from.get("cenCodigo")));
+		
+		cq.where(cb.and(cb.equal(from.get("cenTipo"),3),cb.equal(from.get("cenPais"), pais)));
+		
+		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getCenCount();
+		else
+			return 0;
+	}
 	
 	
 }

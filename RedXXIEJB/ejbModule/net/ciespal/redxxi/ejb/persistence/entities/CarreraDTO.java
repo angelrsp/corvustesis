@@ -48,6 +48,9 @@ public class CarreraDTO implements Serializable {
 	@Column(name="car_tipo_posgrado")
 	private Integer carTipoPosgrado;
 
+	@Transient
+	private Long carCount;
+
 	//bi-directional many-to-one association to CentroDTO
 	@ManyToOne
 	@JoinColumn(name="car_centro")
@@ -68,6 +71,11 @@ public class CarreraDTO implements Serializable {
 	public CarreraDTO() {
 	}
 
+	public CarreraDTO(Long carCount) {
+		this.carCount=carCount;
+	}
+
+	
 	public Integer getCarCodigo() {
 		return this.carCodigo;
 	}
@@ -138,6 +146,14 @@ public class CarreraDTO implements Serializable {
 
 	public void setCarTipoPosgrado(Integer carTipoPosgrado) {
 		this.carTipoPosgrado = carTipoPosgrado;
+	}
+
+	public Long getCarCount() {
+		return carCount;
+	}
+
+	public void setCarCount(Long carCount) {
+		this.carCount = carCount;
 	}
 
 	public CentroDTO getAteCentro() {

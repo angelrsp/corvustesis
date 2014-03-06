@@ -79,6 +79,41 @@ public class ProyectoInvestigacionDAOImpl extends AbstractFacadeImpl<ProyectoInv
 	}
 	
 	@Override
+	public Integer getCount() throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<ProyectoInvestigacionDTO> cq=cb.createQuery(ProyectoInvestigacionDTO.class);
+		Root<ProyectoInvestigacionDTO> from= cq.from(ProyectoInvestigacionDTO.class);
+		
+		cq.multiselect(cb.count(from.get("pinCodigo")));
+		
+		List<ProyectoInvestigacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getPinCount();
+		else
+			return 0;
+	}
+	
+	@Override
+	public Integer getCount(Object pais) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<ProyectoInvestigacionDTO> cq=cb.createQuery(ProyectoInvestigacionDTO.class);
+		Root<ProyectoInvestigacionDTO> from= cq.from(ProyectoInvestigacionDTO.class);
+		
+		cq.multiselect(cb.count(from.get("pinCodigo")));
+		
+		cq.where(cb.equal(from.get("pinPais"), pais));
+		
+		List<ProyectoInvestigacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return (int)(long)list.get(0).getPinCount();
+		else
+			return 0;
+	}
+	
+	
+	@Override
 	public void remove2(ProyectoInvestigacionDTO pro)
 	{
 		Query query;

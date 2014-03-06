@@ -17,6 +17,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ModalidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.NoticiaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.UniversidadListDTO;
@@ -151,5 +152,7 @@ public interface AteneaService {
 	List<FacultadListDTO> readFacultad() throws CorvustecException;
 
 	List<AteneaDTO> readAtenea(Object pais) throws CorvustecException;
+
+	List<PaisDTO> readPais(Object type) throws CorvustecException;
 
 }

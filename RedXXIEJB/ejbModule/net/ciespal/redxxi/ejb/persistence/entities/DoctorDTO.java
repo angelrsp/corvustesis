@@ -55,12 +55,21 @@ public class DoctorDTO implements Serializable {
 	@Column(name="doc_titulo_tesis")
 	private String docTituloTesis;
 
-	@Column(name="doc_ubicacion")
-	private Integer docUbicacion;
-
 	@Column(name="doc_sexo")
 	private Integer docSexo;
 
+	@Column(name="doc_ciudad")
+	private Integer docCiudad;
+
+	@Column(name="doc_provincia")
+	private Integer docProvincia;
+
+	@Column(name="doc_pais")
+	private Integer docPais;
+	
+	@Transient
+	private Long docCount;
+	
 	//bi-directional many-to-one association to EntidadDTO
 	@OneToMany(mappedBy="ateDoctor",cascade={CascadeType.ALL,CascadeType.PERSIST},fetch=FetchType.EAGER)
 	private List<EntidadDTO> ateEntidads;
@@ -70,6 +79,11 @@ public class DoctorDTO implements Serializable {
 	private List<EspecialidadDTO> ateEspecialidads;
 
 	public DoctorDTO() {
+	}
+
+	public DoctorDTO(Long docCount) {
+		super();
+		this.docCount = docCount;
 	}
 
 	public Integer getDocCodigo() {
@@ -160,20 +174,44 @@ public class DoctorDTO implements Serializable {
 		this.docTituloTesis = docTituloTesis;
 	}
 
-	public Integer getDocUbicacion() {
-		return docUbicacion;
-	}
-
-	public void setDocUbicacion(Integer docUbicacion) {
-		this.docUbicacion = docUbicacion;
-	}
-
 	public Integer getDocSexo() {
 		return docSexo;
 	}
 
 	public void setDocSexo(Integer docSexo) {
 		this.docSexo = docSexo;
+	}
+
+	public Integer getDocCiudad() {
+		return docCiudad;
+	}
+
+	public void setDocCiudad(Integer docCiudad) {
+		this.docCiudad = docCiudad;
+	}
+
+	public Integer getDocProvincia() {
+		return docProvincia;
+	}
+
+	public void setDocProvincia(Integer docProvincia) {
+		this.docProvincia = docProvincia;
+	}
+
+	public Integer getDocPais() {
+		return docPais;
+	}
+
+	public void setDocPais(Integer docPais) {
+		this.docPais = docPais;
+	}
+
+	public Long getDocCount() {
+		return docCount;
+	}
+
+	public void setDocCount(Long docCount) {
+		this.docCount = docCount;
 	}
 
 	public List<EntidadDTO> getAteEntidads() {

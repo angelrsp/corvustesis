@@ -10,6 +10,7 @@ public class AteneaDTO implements Serializable{
 	private int pais;
 	private String descripcion;
 	private int count;
+	private int tipo;
 	
 	public AteneaDTO() {
 
@@ -45,5 +46,13 @@ public class AteneaDTO implements Serializable{
 
 	public void setCount(int count) {
 		this.count = count;
+	}
+
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 }
