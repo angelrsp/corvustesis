@@ -83,8 +83,11 @@ public class UniversidadController extends SelectItemController implements Seria
 			cen.setCenCodigo(universidadDataManager.getUniversidadSelect().getCenCodigo());
 			universidadDataManager.getFacultad().setAteCentro(cen);
 			universidadDataManager.getFacultad().setCenTipo(3);
-			//universidadDataManager.getFacultad().setCenUbicacion(Integer.valueOf(getCiudad().toString()));
 			
+			universidadDataManager.getFacultad().setCenPais(getPais()!=null?Integer.valueOf(getPais().toString()):null);
+			universidadDataManager.getFacultad().setCenProvincia(getProvincia()!=null?Integer.valueOf(getProvincia().toString()):null);
+			universidadDataManager.getFacultad().setCenCiudad(getCiudad()!=null?Integer.valueOf(getCiudad().toString()):null);
+
 			ateneaService.createOrUpdateCentro(universidadDataManager.getFacultad());
 				
 			universidadDataManager.setFacultad(new CentroDTO());
@@ -110,6 +113,11 @@ public class UniversidadController extends SelectItemController implements Seria
 			universidadDataManager.getEscuela().setAteCentro(cen);
 			universidadDataManager.getEscuela().setCenTipo(4);
 			//universidadDataManager.getFacultad().setCenUbicacion(Integer.valueOf(getCiudad().toString()));
+			
+			universidadDataManager.getEscuela().setCenPais(getPais()!=null?Integer.valueOf(getPais().toString()):null);
+			universidadDataManager.getEscuela().setCenProvincia(getProvincia()!=null?Integer.valueOf(getProvincia().toString()):null);
+			universidadDataManager.getEscuela().setCenCiudad(getCiudad()!=null?Integer.valueOf(getCiudad().toString()):null);
+
 			
 			ateneaService.createOrUpdateCentro(universidadDataManager.getEscuela());
 			
