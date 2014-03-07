@@ -157,4 +157,6 @@ public interface AteneaService {
 
 	CentroDTO readCentro(Object id) throws CorvustecException;
 
+	String visor(AteneaDTO atenea) throws CorvustecException;
+
 }
