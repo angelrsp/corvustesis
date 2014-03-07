@@ -77,6 +77,7 @@ public class ReportPublicController {
 			}
 			else
 				reportPublicDataManager.setPaisList(ateneaService.readPais(atenea.getTipo()));
+			reportPublicDataManager.setVisor(ateneaService.visor(atenea));
 			JsfUtil.redirect("/"+JsfUtil.getExternalContext().getContextName()+"/public/home/ateneaVisor.xhtml");
 		} catch (IOException e) {
 			JsfUtil.addErrorMessage(e.toString());
