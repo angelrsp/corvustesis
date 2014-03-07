@@ -324,11 +324,129 @@ public class AteneaServiceImpl implements AteneaService{
 				paisList.add(pais);
 			}
 		}
-
-		
 		return paisList;
 	}
 	
+	@Override
+	public String visor(AteneaDTO atenea) throws CorvustecException
+	{
+		StringBuilder sb=new StringBuilder();
+		if(atenea.getTipo()==0)
+		{
+		}
+		//Universidad
+		else if(atenea.getTipo()==2)
+		{
+			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(2))
+			{
+				sb.append("<table>");
+				sb.append("<tr>");
+				sb.append("<td>");
+				sb.append(centro.getCenNombre());
+				sb.append("</td>");
+				sb.append("</tr>");
+				sb.append("</table>");
+			}
+		}//Facultad
+		else if(atenea.getTipo()==3)
+		{
+			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(3))
+			{
+				sb.append("<table>");
+				sb.append("<tr>");
+				sb.append("<td>");
+				sb.append(centro.getCenNombre());
+				sb.append("</td>");
+				sb.append("</tr>");
+				sb.append("</table>");
+			}		
+		}//Pregrado
+		else if(atenea.getTipo()==6)
+		{
+			for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getByType(6)){
+				sb.append("<table>");
+				sb.append("<tr>");
+				sb.append("<td>");
+				sb.append(car.getCarNombre());
+				sb.append("</td>");
+				sb.append("</tr>");
+				sb.append("</table>");
+			}			
+		}//Posgrado
+		else if(atenea.getTipo()==7)
+		{
+			for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getByType(7)){
+				sb.append("<table>");
+				sb.append("<tr>");
+				sb.append("<td>");
+				sb.append(car.getCarNombre());
+				sb.append("</td>");
+				sb.append("</tr>");
+				sb.append("</table>");
+			}			
+		}//Revista
+		else if(atenea.getTipo()==34)
+		{
+			for(PublicacionDTO pub: factoryDAO.getPublicacionDAOImpl().getByType(34)){
+				sb.append("<table>");
+				sb.append("<tr>");
+				sb.append("<td>");
+				sb.append(pub.getPubTitulo());
+				sb.append("</td>");
+				sb.append("</tr>");
+				sb.append("</table>");
+			}
+		}//Eventos
+		else if(atenea.getTipo()==101)
+		{
+			for(EventoDTO eve: factoryDAO.getEventoDAOImpl().getAll()){
+				sb.append("<table>");
+				sb.append("<tr>");
+				sb.append("<td>");
+				sb.append(eve.getEveNombre());
+				sb.append("</td>");
+				sb.append("</tr>");
+				sb.append("</table>");
+			}
+		}//Proyectos de Investigacion
+		else if(atenea.getTipo()==102)
+		{
+			for(ProyectoInvestigacionDTO pro: factoryDAO.getProyectoInvestigacionDAOImpl().getAll()){
+				sb.append("<table>");
+				sb.append("<tr>");
+				sb.append("<td>");
+				sb.append(pro.getPinNombre());
+				sb.append("</td>");
+				sb.append("</tr>");
+				sb.append("</table>");
+			}
+		}//Organizacion
+		else if(atenea.getTipo()==103)
+		{
+//			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+//				pais=new PaisDTO();
+//				pais.setCodigo(cat.getCatCodigo());
+//				pais.setImagenPath(cat.getCatImagenPath());
+//				pais.setNombre(cat.getCatDescripcion());
+//				pais.setCount(factoryDAO.getOrganizacioDAOImpl().getCount(cat.getCatCodigo()));
+//				pais.setTipo(Integer.valueOf(type.toString()));
+//				paisList.add(pais);
+//			}
+		}//Doctor
+		else if(atenea.getTipo()==104)
+		{
+//			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+//				pais=new PaisDTO();
+//				pais.setCodigo(cat.getCatCodigo());
+//				pais.setImagenPath(cat.getCatImagenPath());
+//				pais.setNombre(cat.getCatDescripcion());
+//				pais.setCount(factoryDAO.getDoctorDAOImpl().getCount(cat.getCatCodigo()));
+//				pais.setTipo(Integer.valueOf(type.toString()));
+//				paisList.add(pais);
+//			}
+		}
+		return sb.toString();
+	}
 	
 	/* Centro */
 	@Override
