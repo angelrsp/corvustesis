@@ -61,7 +61,7 @@ public class AteneaServiceImpl implements AteneaService{
 			atenea=new AteneaDTO();
 			atenea.setCodigo(2);
 			atenea.setDescripcion("Facultades: ");
-			atenea.setCount(factoryDAO.getCentroDAOImpl().getUniversidadCount());
+			atenea.setCount(factoryDAO.getCentroDAOImpl().getFacultadCount());
 			atenea.setTipo(3);
 			ateneaList.add(atenea);
 
@@ -460,7 +460,21 @@ public class AteneaServiceImpl implements AteneaService{
 			throw new CorvustecException("Error al readFacultad");
 		}
 	}
-	
+
+	@Override
+	public CentroDTO readCentro(Object id) throws CorvustecException
+	{
+		logger.info("readCentro");
+		try{
+			return factoryDAO.getCentroDAOImpl().find(Integer.valueOf(id.toString()));
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readCentro {}",e.toString());
+			throw new CorvustecException("Error al readCentro");
+		}
+	}
+
 	/* Carrera */
 	@Override
 	public CarreraDTO createOrUpdateCarrera(CarreraDTO carrera) throws CorvustecException
@@ -683,7 +697,10 @@ public class AteneaServiceImpl implements AteneaService{
 			if(proyecto.getPinCodigo()!=null)
 				return factoryDAO.getProyectoInvestigacionDAOImpl().edit(proyecto);
 			else	
+			{
+				proyecto.addAteEntidad(new EntidadDTO());
 				return factoryDAO.getProyectoInvestigacionDAOImpl().create(proyecto);
+			}
 		}
 		catch(Exception e){
 			logger.info("Error createOrUpdateProyectoInvestigacion {}",e.toString());
@@ -755,7 +772,10 @@ public class AteneaServiceImpl implements AteneaService{
 			if(evento.getEveCodigo()!=null)
 				return factoryDAO.getEventoDAOImpl().edit(evento);
 			else
+			{
+				evento.addAteEntidad(new EntidadDTO());
 				return factoryDAO.getEventoDAOImpl().create(evento);
+			}
 		}
 		catch(Exception e){
 			logger.info("Error createProyectoInvestigacion {}",e.toString());

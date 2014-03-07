@@ -30,7 +30,7 @@ public class OrganizacioDAOImpl extends AbstractFacadeImpl<OrganizacionDTO> impl
 		CriteriaQuery<OrganizacionDTO> cq=cb.createQuery(OrganizacionDTO.class);
 		Root<OrganizacionDTO> from = cq.from(OrganizacionDTO.class);
 				
-		cq.where(cb.equal(from.get("orgUbicacion"), ubicacion));
+		cq.where(cb.equal(from.get("orgCiudad"), ubicacion));
 		
 		List<OrganizacionDTO> list=entityManager.createQuery(cq).getResultList();
 		if(list.isEmpty())

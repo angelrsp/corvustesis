@@ -30,7 +30,7 @@ public class DoctorDAOImpl extends AbstractFacadeImpl<DoctorDTO> implements Doct
 		CriteriaQuery<DoctorDTO> cq=cb.createQuery(DoctorDTO.class);
 		Root<DoctorDTO> from = cq.from(DoctorDTO.class);
 				
-		cq.where(cb.equal(from.get("docUbicacion"), ubicacion));
+		cq.where(cb.equal(from.get("docCiudad"), ubicacion));
 		
 		List<DoctorDTO> list=entityManager.createQuery(cq).getResultList();
 		if(list.isEmpty())
