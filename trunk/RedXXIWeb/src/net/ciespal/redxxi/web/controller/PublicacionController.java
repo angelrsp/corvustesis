@@ -37,7 +37,7 @@ public class PublicacionController extends SelectItemController {
 	@PostConstruct
 	private void init()
 	{
-		readPublicacionPublic();
+		//readPublicacionPublic();
 	}
 	
 	public PublicacionDataManager getPublicacionDataManager() {
@@ -104,14 +104,15 @@ public class PublicacionController extends SelectItemController {
 		}
 	}
 	
-	private void readPublicacionPublic()
-	{
-		try {
-			publicacionDataManager.setPublicacionListPublic(ateneaService.readPublicacion());
-		} catch (CorvustecException e) {
-			JsfUtil.addErrorMessage(e.toString());
-		}
-	}
+//	private void readPublicacionPublic()
+//	{
+//		try {
+//			publicacionDataManager.setPublicacionListPublic(ateneaService.readPublicacion());
+//		} catch (CorvustecException e) {
+//			JsfUtil.addErrorMessage(e.toString());
+//		}
+//	}
+	
 	public void cancel()
 	{
 		publicacionDataManager.setPublicacion(new PublicacionDTO());
