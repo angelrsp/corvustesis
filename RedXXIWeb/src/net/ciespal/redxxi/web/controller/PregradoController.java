@@ -296,9 +296,12 @@ public class PregradoController extends SelectItemController{
 	{
 		EntidadDTO ent;
 		try {
-			proyectoDataManager.getProyecto().setPinCiudad(Integer.valueOf(getCiudad().toString()));
-			proyectoDataManager.getProyecto().setPinProvincia(Integer.valueOf(getProvincia().toString()));
-			proyectoDataManager.getProyecto().setPinPais(Integer.valueOf(getPais().toString()));
+			CentroDTO centro=ateneaService.readCentro(universidadDataManager.getUniversidadCode());
+			
+			proyectoDataManager.getProyecto().setPinCiudad(Integer.valueOf(centro.getCenCiudad().toString()));
+			proyectoDataManager.getProyecto().setPinProvincia(Integer.valueOf(centro.getCenProvincia().toString()));
+			proyectoDataManager.getProyecto().setPinPais(Integer.valueOf(centro.getCenPais().toString()));
+			
 			ent=ateneaService.createOrUpdateProyectoInvestigacion(proyectoDataManager.getProyecto()).getAteEntidads().get(0);
 			ent.setAteCarrera(carreraDataManager.getCarrera());
 			ateneaService.updateEntidad(ent);
@@ -340,7 +343,14 @@ public class PregradoController extends SelectItemController{
 		EntidadDTO ent;
 		try {
 			ent=new EntidadDTO();
-			publicacionDataManager.getPublicacion().addAteEntidad(ent);
+			publicacionDataManager.getPublicacion().setPubTipo(34);
+			
+			CentroDTO centro=ateneaService.readCentro(universidadDataManager.getUniversidadCode());
+			
+			publicacionDataManager.getPublicacion().setPubCiudad(Integer.valueOf(centro.getCenCiudad().toString()));
+			publicacionDataManager.getPublicacion().setPubProvincia(Integer.valueOf(centro.getCenProvincia().toString()));
+			publicacionDataManager.getPublicacion().setPubPais(Integer.valueOf(centro.getCenPais().toString()));
+
 			ent=ateneaService.createOrUpdatePublicacion(publicacionDataManager.getPublicacion()).getAteEntidads().get(0);
 			ent.setAteCarrera(carreraDataManager.getCarrera());
 			ateneaService.updateEntidad(ent);
@@ -382,10 +392,13 @@ public class PregradoController extends SelectItemController{
 		EntidadDTO ent;
 		try {
 			ent=new EntidadDTO();
-			eventoDataManager.getEvento().addAteEntidad(ent);
-			eventoDataManager.getEvento().setEveCiudad(Integer.parseInt(getCiudad().toString()));
-			eventoDataManager.getEvento().setEveProvincia(Integer.parseInt(getProvincia().toString()));
-			eventoDataManager.getEvento().setEvePais(Integer.parseInt(getPais().toString()));
+			
+			CentroDTO centro=ateneaService.readCentro(universidadDataManager.getUniversidadCode());
+			
+			eventoDataManager.getEvento().setEveCiudad(Integer.parseInt(centro.getCenCiudad().toString()));
+			eventoDataManager.getEvento().setEveProvincia(Integer.parseInt(centro.getCenProvincia().toString()));
+			eventoDataManager.getEvento().setEvePais(Integer.parseInt(centro.getCenPais().toString()));
+			
 			ent= ateneaService.createOrUpdateEvento(eventoDataManager.getEvento()).getAteEntidads().get(0);
 			ent.setAteCarrera(carreraDataManager.getCarrera());
 			ateneaService.updateEntidad(ent);

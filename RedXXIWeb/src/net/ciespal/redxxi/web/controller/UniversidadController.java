@@ -188,6 +188,7 @@ public class UniversidadController extends SelectItemController implements Seria
 	public void deleteUniversidad(CentroDTO centro){
 		try {
 			ateneaService.deleteCentro(centro);
+			obtenerUniversidad();			
 			JsfUtil.addInfoMessage("Eliminado Exitosamente");
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());

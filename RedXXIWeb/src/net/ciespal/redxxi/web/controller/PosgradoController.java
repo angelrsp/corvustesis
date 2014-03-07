@@ -273,7 +273,14 @@ public class PosgradoController extends SelectItemController {
 		EntidadDTO ent;
 		try {
 			ent=new EntidadDTO();
-			proyectoDataManager.getProyecto().addAteEntidad(ent);
+			
+			CentroDTO centro=ateneaService.readCentro(universidadDataManager.getUniversidadCode());
+			
+			proyectoDataManager.getProyecto().setPinCiudad(Integer.valueOf(centro.getCenCiudad().toString()));
+			proyectoDataManager.getProyecto().setPinProvincia(Integer.valueOf(centro.getCenProvincia().toString()));
+			proyectoDataManager.getProyecto().setPinPais(Integer.valueOf(centro.getCenPais().toString()));
+
+			
 			ent=ateneaService.createOrUpdateProyectoInvestigacion(proyectoDataManager.getProyecto()).getAteEntidads().get(0);
 			ent.setAteCarrera(carreraDataManager.getPosgrado());
 			ateneaService.updateEntidad(ent);

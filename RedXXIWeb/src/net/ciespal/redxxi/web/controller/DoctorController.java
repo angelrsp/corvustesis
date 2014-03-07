@@ -108,6 +108,7 @@ public class DoctorController extends SelectItemController{
 	public void doctorSelect(DoctorDTO doc)
 	{
 		doctorDataManager.setDoctor(doc);
+		buscarContactos();
 	}
 	
 	

@@ -119,6 +119,7 @@ public class OrganizacionController extends SelectItemController{
 		organizacionDataManager.setOrganizacion(org);
 		buscarContactos();
 		buscarEvento();
+		buscarProyecto();
 	}
 	
 	
@@ -176,10 +177,11 @@ public class OrganizacionController extends SelectItemController{
 		EntidadDTO ent;
 		try {
 			ent=new EntidadDTO();
-			eventoDataManager.getEvento().addAteEntidad(ent);
+			
 			eventoDataManager.getEvento().setEveCiudad(Integer.parseInt(getCiudad().toString()));
 			eventoDataManager.getEvento().setEveProvincia(Integer.parseInt(getProvincia().toString()));
 			eventoDataManager.getEvento().setEvePais(Integer.parseInt(getPais().toString()));
+			
 			ent= ateneaService.createOrUpdateEvento(eventoDataManager.getEvento()).getAteEntidads().get(0);
 			ent.setAteOrganizacion(organizacionDataManager.getOrganizacion());
 			ateneaService.updateEntidad(ent);
@@ -222,7 +224,10 @@ public class OrganizacionController extends SelectItemController{
 		EntidadDTO ent;
 		try {
 			ent=new EntidadDTO();
-			proyectoDataManager.getProyecto().addAteEntidad(ent);
+			
+			proyectoDataManager.getProyecto().setPinCiudad(Integer.parseInt(getCiudad().toString()));
+			proyectoDataManager.getProyecto().setPinProvincia(Integer.parseInt(getProvincia().toString()));
+			proyectoDataManager.getProyecto().setPinPais(Integer.parseInt(getPais().toString()));
 			
 			ent=ateneaService.createOrUpdateProyectoInvestigacion(proyectoDataManager.getProyecto()).getAteEntidads().get(0);
 			
