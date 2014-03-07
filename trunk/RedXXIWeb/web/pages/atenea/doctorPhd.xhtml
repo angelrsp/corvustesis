@@ -81,8 +81,8 @@
 	               	update=":contenido:pnlDato,:contenido:growl" process="tblDoctor" title="#{i18n['boton.editar']}"/>    				
 			</p:column>
 
-			<p:column headerText="#{i18n['label.detalles']}" width="15" style="text-align: center">
-				<p:commandButton icon="ui-icon-newwin" actionListener="#{doctorController.doctorSelect(doc)}"
+			<p:column headerText="#{i18n['label.mas.datos']}" width="15" style="text-align: center">
+				<p:commandButton icon="ui-icon-plus" actionListener="#{doctorController.doctorSelect(doc)}"
 	               	update=":contenido:pnlDato,:contenido:growl,:contenido:dlgDetalle" process="tblDoctor" oncomplete="PF('dlgDetalles').show()"/>    				
 			</p:column>
 		

@@ -16,29 +16,27 @@
 		<table>
 		
 			<tr>
-
 				<td><h:outputText value="#{i18n['label.universidad']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.universidad']}&#160;#{i18n['label.requerido']}" value="#{universidadDataManager.universidadCode}">
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.universidad']}&#160;#{i18n['label.requerido']}" value="#{universidadDataManager.universidadCode}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
 						<f:selectItems value="#{posgradoController.universidadDataManager.universidadList}" var="uni" itemValue="#{uni.cenCodigo}" itemLabel="#{uni.cenNombre}"/>
-						<p:ajax event="change" immediate="true" process="@this" listener="#{posgradoController.obtenerFacultad}" update="somFacultad"/>
-						<p:ajax event="change" immediate="true" process="@this" listener="#{posgradoController.obtenerFacultad}" update="somFacultad"/>
-						<p:ajax event="change" immediate="true" process="@this" listener="#{posgradoController.obtenerEscuela}" update="somEscuela"/>		
+						<p:ajax event="change" process="@this" listener="#{posgradoController.obtenerFacultad}" update="somFacultad"/>
+						<p:ajax event="change" process="@this" listener="#{posgradoController.obtenerEscuela}" update="somEscuela"/>		
 					</p:selectOneMenu></td>
-				
-				
+			</tr>
+			
+			<tr>	
 				<td><h:outputText value="#{i18n['label.facultad']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somFacultad" required="true" requiredMessage="#{i18n['label.facultad']}&#160;#{i18n['label.requerido']}" value="#{universidadDataManager.facultadCode}">
+				<td><p:selectOneMenu id="somFacultad" required="true" requiredMessage="#{i18n['label.facultad']}&#160;#{i18n['label.requerido']}" value="#{universidadDataManager.facultadCode}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
 						<f:selectItems value="#{posgradoController.universidadDataManager.facultadList}" var="fac" itemValue="#{fac.cenCodigo}" itemLabel="#{fac.cenNombre}"/>
-						<p:ajax event="change" immediate="true" process="@this" listener="#{posgradoController.obtenerEscuela}" update="somEscuela,tblCarrera"/>
-						<p:ajax event="change" immediate="true" process="@this" listener="#{posgradoController.obtenerEscuela}" update="somEscuela,tblCarrera"/>
+						<p:ajax event="change" process="@this" listener="#{posgradoController.obtenerEscuela}" update="somEscuela,tblCarrera"/>
 					</p:selectOneMenu></td>
 			</tr>
 			
 			<tr>
 				<td><h:outputText value="#{i18n['label.escuela']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somEscuela" value="#{universidadDataManager.escuelaCode}">
+				<td><p:selectOneMenu id="somEscuela" value="#{universidadDataManager.escuelaCode}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--" itemValue="0"/>
 						<f:selectItems value="#{posgradoController.universidadDataManager.escuelaList}" var="fac" itemValue="#{fac.cenCodigo}" itemLabel="#{fac.cenNombre}"/>
 						<p:ajax event="change" process="@this" listener="#{posgradoController.escuelaChange}" update="tblCarrera"/>												

@@ -79,7 +79,9 @@
 
 			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
 				<p:commandButton actionListener="#{universidadController.deleteUniversidad(uni)}" icon="ui-icon-close" 
-	               	update=":contenido:pnlDatos,:contenido:growl" process="tblUniversidad" title="#{i18n['boton.eliminar']}" onclick="return pregunta();" immediate="true"/>    				
+	               	update=":contenido:tblUniversidad,:contenido:growl" process="tblUniversidad" title="#{i18n['boton.eliminar']}">
+	               	<p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" />
+	             </p:commandButton>    				
 			</p:column>
 
 			<p:column headerText="#{i18n['label.facultad']}" width="15">
@@ -134,7 +136,9 @@
 	
 				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
 					<p:commandButton actionListener="#{universidadController.deleteFacultad(fac)}" icon="ui-icon-close" 
-		               	update=":contenido:pnlFacultad,:contenido:growl" process="tblFacultad" title="#{i18n['boton.eliminar']}" onclick="return pregunta();" immediate="true"/>    				
+		               	update=":contenido:tblFacultad,:contenido:growl" process="tblFacultad" title="#{i18n['boton.eliminar']}">
+		               	<p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" />
+	               	</p:commandButton>    				
 				</p:column>
 			
 				<p:column headerText="#{i18n['label.escuela']}" width="15">
@@ -188,8 +192,10 @@
 				</p:column>
 	
 				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
-					<p:commandButton actionListener="#{universidadController.deleteFacultad(esc)}" icon="ui-icon-close" 
-		               	update=":contenido:pnlEscuela,:contenido:growl" process="tblEscuela" title="#{i18n['boton.eliminar']}" onclick="return pregunta();" immediate="true"/>    				
+					<p:commandButton actionListener="#{universidadController.deleteEscuela(esc)}" icon="ui-icon-close" 
+		               	update=":contenido:pnlEscuela,:contenido:growl" process="tblEscuela" title="#{i18n['boton.eliminar']}">
+		               	<p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" />
+		            </p:commandButton>    				
 				</p:column>
 						
 			</p:dataTable>
