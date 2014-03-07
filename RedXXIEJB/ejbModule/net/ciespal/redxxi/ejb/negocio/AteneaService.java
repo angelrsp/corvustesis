@@ -155,4 +155,6 @@ public interface AteneaService {
 
 	List<PaisDTO> readPais(Object type) throws CorvustecException;
 
+	CentroDTO readCentro(Object id) throws CorvustecException;
+
 }
