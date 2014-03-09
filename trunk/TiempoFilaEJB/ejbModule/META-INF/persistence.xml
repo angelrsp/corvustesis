@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="tiempoFilaPU" transaction-type="JTA">
+	<jta-data-source>java:/tiempoFilaDS</jta-data-source>
+	<class>com.corvustec.tiempofila.ejb.persistence.entities.AgenciaDTO</class>
+	<class>com.corvustec.tiempofila.ejb.persistence.entities.AsesorDTO</class>
+	<class>com.corvustec.tiempofila.ejb.persistence.entities.CatalogoDTO</class>
+	<class>com.corvustec.tiempofila.ejb.persistence.entities.ClienteDTO</class>
+	<class>com.corvustec.tiempofila.ejb.persistence.entities.DispositivoDTO</class>
+	<class>com.corvustec.tiempofila.ejb.persistence.entities.ParametroDTO</class>
+	<class>com.corvustec.tiempofila.ejb.persistence.entities.TiempoDTO</class>
+	<properties>
+		<property name="hibernate.show_sql" value="true"/>
+	</properties>				
+	</persistence-unit>
+</persistence>
