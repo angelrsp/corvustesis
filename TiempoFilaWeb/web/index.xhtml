@@ -9,15 +9,23 @@
 
 <ui:define name="contenido">
 
+<p:growl id="growl"/>
 
 <table>
+
+	<tr>
+		<td><h:outputLink value="#{request.contextPath}/public/inicioToma.xhtml">
+			<h:outputText value="Ingresar Toma" />
+				</h:outputLink></td>	
+	</tr>
+	
 	<tr>
 		<td><h:outputText value="#{i18n['label.usuario']}:&#160;" /></td>
 		<td><p:inputText value="#{loginController.loginDataManager.credencialesDTO.user}" /></td>
 	</tr>
 	
 	<tr>
-		<td><p:commandButton value="prueba" type="button" onclick="aaaa();"/></td>
+		<td><p:commandButton value="#{i18n['boton.aceptar']}" actionListener="#{loginController.login}" update="growl"/></td>
 	</tr>
 
 </table>
