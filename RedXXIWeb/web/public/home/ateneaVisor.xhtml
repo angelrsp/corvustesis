@@ -20,7 +20,7 @@
 		    													
 		    			<h:column>
 		    				<f:facet name="header">Paises</f:facet>
-		    				<h:commandLink value="#{pai.nombre}" actionListener="#{reportPublicController.selectPais(pai)}" styleClass="linkClass"/>
+		    				<h:commandLink value="#{pai.nombre}" actionListener="#{ateneaVisorController.selectPais(pai)}" styleClass="linkClass"/>
 		    			</h:column>
 		    			
 		    			<h:column>
@@ -38,7 +38,7 @@
 	<table width="100%" class="table">
 			<tr>
 				<td>
-				<h:outputText value="#{reportPublicDataManager.visor}" escape="false"/>
+					<h:outputText id="visor" value="#{reportPublicDataManager.visor}" escape="false"/>
 				</td>
 			</tr>
 		</table>
@@ -49,20 +49,22 @@
 		
 	<table width="100%" class="table">
 		<tr>
-			<td><h:dataTable value="#{reportPublicDataManager.ateneaList}" var="ate" width="100%">
+		
+			<td><h:dataTable id="tblAtenea" value="#{reportPublicDataManager.ateneaList}" var="ate" width="100%">
 					
-	    			<h:column>
-	    				<f:facet name="header">Atenea</f:facet>
-	    				<h:commandLink value="#{ate.descripcion}" styleClass="linkClass" actionListener="#{reportPublicController.selectAtenea(ate)}"/>
-	    			</h:column>										
+    			<h:column>
+    				<f:facet name="header">Atenea</f:facet>
+    				<h:commandLink value="#{ate.descripcion}" styleClass="linkClass" actionListener="#{ateneaVisorController.selectAtenea(ate)}"/>
+    			</h:column>										
 
-	    			<h:column>
-						<h:commandLink value="#{ate.count}" styleClass="linkClass" actionListener="#{reportPublicController.selectAtenea(ate)}"/>
-	    			</h:column>										
+    			<h:column>
+					<h:commandLink value="#{ate.count}" styleClass="linkClass" actionListener="#{ateneaVisorController.selectAtenea(ate)}">
+						<p:ajax pro/>
+					</h:commandLink>
+    			</h:column>										
 
-					
-			</h:dataTable>
-			</td>
+			</h:dataTable></td>
+			
 		</tr>		
 	</table>	
 </ui:define>
