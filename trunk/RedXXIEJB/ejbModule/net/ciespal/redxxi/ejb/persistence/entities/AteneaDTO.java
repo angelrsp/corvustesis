@@ -8,12 +8,22 @@ public class AteneaDTO implements Serializable{
 
 	private int codigo;
 	private int pais;
+	private String paisNombre;
+	
 	private String descripcion;
 	private int count;
 	private int tipo;
 	
 	public AteneaDTO() {
 
+	}
+
+	public String getPaisNombre() {
+		return paisNombre;
+	}
+
+	public void setPaisNombre(String paisNombre) {
+		this.paisNombre = paisNombre;
 	}
 
 	public int getCodigo() {

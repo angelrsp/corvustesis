@@ -133,4 +133,62 @@ public class CarreraDAOImpl extends AbstractFacadeImpl<CarreraDTO> implements Ca
 		else
 			return 0;
 	}
+	
+	@Override
+	public List<CarreraDTO> getAll(Object type,Object pais) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CarreraDTO> cq=cb.createQuery(CarreraDTO.class);
+		Root<CarreraDTO> from = cq.from(CarreraDTO.class);
+		
+		Path<CentroDTO> join1=from.join("ateCentro");
+		
+		cq.where(cb.and(cb.equal(join1.get("cenPais"), pais),cb.equal(from.get("carTipo"), type)));
+		
+		List<CarreraDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return new ArrayList<CarreraDTO>();
+		else
+			return list;
+	}
+	
+	@Override
+	public List<CentroDTO> distinctPais(Object type,Object pais) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
+		Root<CentroDTO> from = cq.from(CentroDTO.class);
+		
+		Path<CarreraDTO> join1= from.join("ateCarreras");
+		
+		cq.multiselect(from.get("cenPais")).distinct(true);
+		
+		cq.where(cb.and(cb.equal(from.get("cenPais"), pais),cb.equal(join1.get("carTipo"), type)));
+		
+		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return new ArrayList<CentroDTO>();
+		else
+			return list;
+	}
+	
+	@Override
+	public List<CentroDTO> distinctPais(Object type) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
+		Root<CentroDTO> from = cq.from(CentroDTO.class);
+		
+		Path<CarreraDTO> join1= from.join("ateCarreras");
+		
+		cq.multiselect(from.get("cenPais")).distinct(true);
+		
+		cq.where(cb.equal(join1.get("carTipo"), type));
+		
+		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return new ArrayList<CentroDTO>();
+		else
+			return list;
+	}
 }
