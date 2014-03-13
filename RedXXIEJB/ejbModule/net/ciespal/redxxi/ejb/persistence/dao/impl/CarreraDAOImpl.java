@@ -191,4 +191,25 @@ public class CarreraDAOImpl extends AbstractFacadeImpl<CarreraDTO> implements Ca
 		else
 			return list;
 	}
+	
+	@Override
+	public List<CentroDTO> distinctUniversidad(Object type,Object pais) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
+		Root<CentroDTO> from = cq.from(CentroDTO.class);
+		
+		Path<CarreraDTO> join1= from.join("ateCarreras");
+		
+		cq.multiselect(from.get("cenCodigo")).distinct(true);
+		
+		cq.where(cb.and(cb.equal(join1.get("carTipo"), type),cb.equal(from.get("cenPais"), pais)));
+		
+		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return new ArrayList<CentroDTO>();
+		else
+			return list;
+	}
+	
 }

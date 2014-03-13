@@ -30,4 +30,7 @@ public interface CarreraDAO extends AbstractFacade<CarreraDTO> {
 
 	List<CentroDTO> distinctPais(Object type) throws CorvustecException;
 
+	List<CentroDTO> distinctUniversidad(Object type, Object pais)
+			throws CorvustecException;
+
 }
