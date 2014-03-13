@@ -70,13 +70,7 @@ public class ReportPublicController {
 	public void selectAtenea(AteneaDTO atenea)
 	{
 		try {
-			if(atenea.getPais()!=0)
-			{
-				reportPublicDataManager.setPaisList(ateneaService.readPais(null));
-				reportPublicDataManager.setAteneaList(ateneaService.readAtenea(atenea.getPais()));
-			}
-			else
-				reportPublicDataManager.setPaisList(ateneaService.readPais(atenea.getTipo()));
+			reportPublicDataManager.setPaisList(ateneaService.readPais(atenea.getTipo()));
 			reportPublicDataManager.setVisor(ateneaService.visor(atenea));
 			JsfUtil.redirect("/"+JsfUtil.getExternalContext().getContextName()+"/public/home/ateneaVisor.xhtml");
 		} catch (IOException e) {
@@ -90,7 +84,8 @@ public class ReportPublicController {
 	{
 		try {
 			reportPublicDataManager.setAteneaList(ateneaService.readAtenea(pais.getCodigo()));
-			JsfUtil.redirect("/"+JsfUtil.getExternalContext().getContextName()+"/public/home/ateneaVisor.xhtml");
+			reportPublicDataManager.setVisor(ateneaService.infoPais(pais));
+			JsfUtil.redirect("/"+JsfUtil.getExternalContext().getContextName()+"/public/home/paisVisor.xhtml");
 		} catch (IOException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		} catch (CorvustecException e) {
