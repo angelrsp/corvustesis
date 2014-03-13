@@ -5,18 +5,17 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import com.corvustec.commons.util.CorvustecException;
+
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
 import net.ciespal.redxxi.ejb.persistence.entities.AteneaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.home.ReportPublicDataManager;
 
-import com.corvustec.commons.util.CorvustecException;
-
-
 @ViewScoped
-@ManagedBean(name="ateneaVisorController")
-public class AteneaVisorController{
+@ManagedBean(name="paisVisorController")
+public class PaisVisorController {
 
 	@ManagedProperty(value="#{reportPublicDataManager}")
 	private ReportPublicDataManager reportPublicDataManager;
@@ -24,9 +23,10 @@ public class AteneaVisorController{
 	@EJB
 	private AteneaService ateneaService;
 	
-	public AteneaVisorController() {
+	public PaisVisorController() {
 	
 	}
+
 	
 	public ReportPublicDataManager getReportPublicDataManager() {
 		return reportPublicDataManager;
@@ -42,7 +42,7 @@ public class AteneaVisorController{
 	public void selectPais(PaisDTO pais)
 	{
 		try {
-			reportPublicDataManager.setVisor(ateneaService.visor(pais));
+			reportPublicDataManager.setAteneaList(ateneaService.readAtenea(pais.getCodigo()));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
@@ -53,10 +53,8 @@ public class AteneaVisorController{
 	{
 		try {
 			reportPublicDataManager.setVisor(ateneaService.visor(atenea));
-			reportPublicDataManager.setPaisList(ateneaService.readPais(atenea.getTipo()));
 		}catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
-	
 }
