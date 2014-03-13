@@ -7,42 +7,29 @@
       template="/WEB-INF/template/public.xhtml">
 
 
-
 <ui:define name="left">
 	<table width="100%" class="table">
-		<tr>
-			<td colspan="2" align="center">Paises</td>
-		</tr>
-		<tr>
-			<td>
-				<table>
-					<tr>
-						<td><p:graphicImage value="/images/america.png" height="40" width="50"/></td>
-						<td><a href="#{request.contextPath}/index.xhtml" class="linkClass">Todos</a></td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<h:dataTable value="#{reportPublicDataManager.paisList}" var="pai">
-				
-	    			<h:column>
-	    				<p:graphicImage value="#{pai.imagenPath}" height="30" width="50"/>
-	    			</h:column>
-	    													
-	    			<h:column>
-	    				<h:commandLink value="#{pai.nombre}" actionListener="#{ateneaVisorController.selectPais(pai)}" styleClass="linkClass"/>
-	    			</h:column>
-	    			
-	    			<h:column>
-	    				<h:commandLink value="#{pai.count!=0?pai.count:null}" actionListener="#{reportPublicController.selectPais(pai)}" styleClass="linkClass"/>
-	    			</h:column>						
-	    					    							
-				</h:dataTable>
-			</td>
-		</tr>
-	</table>
+			<tr>
+				<td>
+					<h:dataTable value="#{reportPublicDataManager.paisList}" var="pai">
+					
+		    			<h:column>
+		    				<p:graphicImage value="#{pai.imagenPath}" height="30" width="50"/>
+		    			</h:column>
+		    													
+		    			<h:column>
+		    				<f:facet name="header">Paises</f:facet>
+		    				<h:commandLink value="#{pai.nombre}" actionListener="#{paisVisorController.selectPais(pai)}" styleClass="linkClass"/>
+		    			</h:column>
+		    			
+		    			<h:column>
+		    				<h:commandLink value="#{pai.count!=0?pai.count:null}" actionListener="#{reportPublicController.selectPais(pai)}" styleClass="linkClass"/>
+		    			</h:column>						
+		    					    							
+					</h:dataTable>
+				</td>
+			</tr>
+		</table>
 </ui:define>
 
 
@@ -81,6 +68,4 @@
 	</table>	
 </ui:define>
 
-
-
-</ui:composition>
+</ui:composition>      

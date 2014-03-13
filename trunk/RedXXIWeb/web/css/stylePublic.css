@@ -52,8 +52,8 @@ left: 81.5%; /* 1/4 Ancho del enlace + 3 veces ancho enlace */
 
 
 a.linkClass:link {color: #F57B20;text-decoration: none}
-a.linkClass:active {color: #000000;}
-a.linkClass:visited {color: #000000;}
+a.linkClass:active {color: #F57B20;}
+a.linkClass:visited {color: #F57B20;}
 a.linkClass:hover {color: #FAA723; text-decoration: underline;}
 
 
