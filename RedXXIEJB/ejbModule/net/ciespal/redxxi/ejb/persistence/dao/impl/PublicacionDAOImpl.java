@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
@@ -62,6 +63,24 @@ public class PublicacionDAOImpl extends AbstractFacadeImpl<PublicacionDTO> imple
 			return list;
 	}
 	
+	
+	@Override
+	public List<PublicacionDTO> getAllNoEntity(Object ubicacion) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<PublicacionDTO> cq=cb.createQuery(PublicacionDTO.class);
+		Root<PublicacionDTO> from = cq.from(PublicacionDTO.class);
+		
+		Path<EntidadDTO> join1=from.join("ateEntidads",JoinType.LEFT);
+		
+		cq.where(cb.and(cb.equal(from.get("pubCiudad"),ubicacion),cb.isNull(join1.get("atePublicacion").get("pubCodigo"))));
+		
+		List<PublicacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}
 	
 	@Override
 	public List<PublicacionDTO> getAll() throws CorvustecException

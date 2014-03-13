@@ -737,13 +737,15 @@ public class AteneaServiceImpl implements AteneaService{
 		else if(atenea.getTipo()==34)
 		{
 			for(PublicacionDTO pub: factoryDAO.getPublicacionDAOImpl().getByType(34)){
+				
 				sb.append("<table>");
-				sb.append("<tr>");
-				sb.append("<td>");
-				sb.append(pub.getPubTitulo());
-				sb.append("</td>");
-				sb.append("</tr>");
+					sb.append("<tr>");
+						sb.append("<td>");
+						sb.append(pub.getPubTitulo());
+						sb.append("</td>");
+					sb.append("</tr>");
 				sb.append("</table>");
+				
 			}
 		}//Eventos
 		else if(atenea.getTipo()==101)
@@ -1774,7 +1776,7 @@ public class AteneaServiceImpl implements AteneaService{
 	
 	/* Publicacion */
 	@Override
-	public PublicacionDTO createOrUpdatePublicacion(PublicacionDTO publicacion) throws CorvustecException
+	public PublicacionDTO createOrUpdatePublicacion(PublicacionDTO publicacion,Boolean entidad) throws CorvustecException
 	{
 		logger.info("createOrUpdatePublicacion");
 		try{
@@ -1782,7 +1784,8 @@ public class AteneaServiceImpl implements AteneaService{
 				return factoryDAO.getPublicacionDAOImpl().edit(publicacion);
 			else			
 			{
-				publicacion.addAteEntidad(new EntidadDTO());
+				if(entidad)
+					publicacion.addAteEntidad(new EntidadDTO());
 				return factoryDAO.getPublicacionDAOImpl().create(publicacion);
 			}
 		}
@@ -1862,6 +1865,19 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 
+	@Override
+	public List<PublicacionDTO> readPublicacionNoEntity(Object ubicacion) throws CorvustecException
+	{
+		logger.info("readPublicacionNoEntity");
+		try{
+			return factoryDAO.getPublicacionDAOImpl().getAllNoEntity(ubicacion);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readPublicacionNoEntity {}",e.toString());
+			throw new CorvustecException("Error al readPublicacion");
+		}
+	}
 	
 	/* Organizacion */
 	@Override

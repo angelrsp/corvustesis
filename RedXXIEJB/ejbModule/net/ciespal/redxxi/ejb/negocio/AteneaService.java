@@ -81,9 +81,6 @@ public interface AteneaService {
 	void deleteProyectoInvestigacion(ProyectoInvestigacionDTO proyecto)
 			throws CorvustecException;
 
-	PublicacionDTO createOrUpdatePublicacion(PublicacionDTO publicacion)
-			throws CorvustecException;
-
 	void deletePublicacion(PublicacionDTO publicacion)
 			throws CorvustecException;
 
@@ -162,5 +159,11 @@ public interface AteneaService {
 	String visor(PaisDTO pais) throws CorvustecException;
 
 	String infoPais(PaisDTO pais);
+
+	PublicacionDTO createOrUpdatePublicacion(PublicacionDTO publicacion,
+			Boolean entidad) throws CorvustecException;
+
+	List<PublicacionDTO> readPublicacionNoEntity(Object ubicacion)
+			throws CorvustecException;
 
 }
