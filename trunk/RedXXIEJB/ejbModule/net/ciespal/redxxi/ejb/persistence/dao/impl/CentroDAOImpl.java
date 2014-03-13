@@ -120,7 +120,7 @@ public class CentroDAOImpl extends AbstractFacadeImpl<CentroDTO> implements Cent
 		
 		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();	
 		if(list.isEmpty())
-			return null;
+			return new ArrayList<CentroDTO>();
 		else
 			return list;
 	}
