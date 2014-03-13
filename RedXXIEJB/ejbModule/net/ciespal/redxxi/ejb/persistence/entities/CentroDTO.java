@@ -45,6 +45,10 @@ public class CentroDTO implements Serializable {
 	@Column(name="cen_pais")
 	private Integer cenPais;
 
+	@Column(name="cen_pagina_web")
+	private String cenPaginaWeb;
+
+	
 	@Transient
 	private Long cenCount;
 	
@@ -68,6 +72,9 @@ public class CentroDTO implements Serializable {
 		this.cenCount=cenCount;
 	}
 
+	public CentroDTO(Integer cenPais) {
+		this.cenPais=cenPais;
+	}
 	
 	public Integer getCenCodigo() {
 		return this.cenCodigo;
@@ -140,6 +147,14 @@ public class CentroDTO implements Serializable {
 
 	public void setCenPais(Integer cenPais) {
 		this.cenPais = cenPais;
+	}
+
+	public String getCenPaginaWeb() {
+		return cenPaginaWeb;
+	}
+
+	public void setCenPaginaWeb(String cenPaginaWeb) {
+		this.cenPaginaWeb = cenPaginaWeb;
 	}
 
 	public Long getCenCount() {

@@ -161,4 +161,6 @@ public interface AteneaService {
 
 	String visor(PaisDTO pais) throws CorvustecException;
 
+	String infoPais(PaisDTO pais);
+
 }

@@ -331,59 +331,505 @@ public class AteneaServiceImpl implements AteneaService{
 	public String visor(AteneaDTO atenea) throws CorvustecException
 	{
 		StringBuilder sb=new StringBuilder();
+		CatalogoDTO catalogo;
+		List<CentroDTO> listCentroChild;
+		List<CentroDTO> listPais;
+		
 		if(atenea.getTipo()==0)
 		{
 		}
 		//Universidad
 		else if(atenea.getTipo()==2)
 		{
-			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(2))
-			{
+			//Si en el objeto no esta el pais quiere decir que son todos
+			if(atenea.getPais()==0){
+				//Obtengo los paises para realizar el visor organizado por pais
+				listPais=factoryDAO.getCentroDAOImpl().distinctPais(atenea.getTipo());
 				sb.append("<table>");
-				sb.append("<tr>");
-				sb.append("<td>");
-				sb.append(centro.getCenNombre());
-				sb.append("</td>");
-				sb.append("</tr>");
+				
+				for(CentroDTO centroPais:listPais){
+					
+					catalogo=factoryDAO.getCatalogoImpl().find(centroPais.getCenPais());
+					
+					sb.append("<tr>");
+						sb.append("<td colspan='2' align='center'>");
+						sb.append("<img src='/RedXXIWeb"+catalogo.getCatImagenPath()+"' height='30' width='50'>");
+						sb.append("</td>");				
+					sb.append("</tr>");					
+					
+					sb.append("<tr>");				
+						sb.append("<td><b>");
+						sb.append("País: ");
+						sb.append("</b></td>");
+						
+						sb.append("<td>");
+						sb.append(catalogo.getCatDescripcion());
+						sb.append("</td>");
+					sb.append("</tr>");										
+					
+					for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(atenea.getTipo(),centroPais.getCenPais()))
+					{
+						listCentroChild= factoryDAO.getCentroDAOImpl().findAllChild(centro);
+						
+						sb.append("<tr>");
+							sb.append("<td>");
+							sb.append("Nombre: ");
+							sb.append("</td>");
+								
+							sb.append("<td>");
+							if(centro.getCenPaginaWeb()!=null)
+								sb.append("<a href='http://"+centro.getCenPaginaWeb()+"' target='_blank'>"+centro.getCenNombre()+"</a>");
+							else
+								sb.append(centro.getCenNombre());
+							sb.append("</td>");
+						sb.append("</tr>");
+	
+						if(listCentroChild!=null)
+							for(CentroDTO centroChild:listCentroChild)
+							{
+								sb.append("<tr>");
+								
+									sb.append("<td>");
+									sb.append("Facultad: ");
+									sb.append("</td>");
+		
+									sb.append("<td>");
+									sb.append(centroChild.getCenNombre());
+									sb.append("</td>");
+								
+								sb.append("</tr>");							
+								sb.append("<tr>");
+									
+									sb.append("<td>");
+									sb.append("Datos Institucionales: ");
+									sb.append("</td>");
+		
+									sb.append("<td>");
+									sb.append(centroChild.getCenDatoInstitucional());
+									sb.append("</td>");
+									
+								sb.append("</tr>");
+							}
+					}				
+				}
 				sb.append("</table>");
 			}
+			else
+			{
+				catalogo=factoryDAO.getCatalogoImpl().find(atenea.getPais());
+				
+				sb.append("<table>");
+				
+				sb.append("<tr>");				
+					sb.append("<td><b>");
+					sb.append("País: ");
+					sb.append("</b></td>");
+					
+					sb.append("<td>");
+					sb.append(catalogo.getCatDescripcion());
+					sb.append("</td>");
+				sb.append("</tr>");		
+				
+				for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(atenea.getTipo(),atenea.getPais()))
+				{
+					listCentroChild= factoryDAO.getCentroDAOImpl().findAllChild(centro);
+					
+					sb.append("<tr>");
+						sb.append("<td>");
+						sb.append("Nombre: ");
+						sb.append("</td>");
+							
+						sb.append("<td>");
+						if(centro.getCenPaginaWeb()!=null)
+							sb.append("<a href='http://"+centro.getCenPaginaWeb()+"' target='_blank'>"+centro.getCenNombre()+"</a>");
+						else
+							sb.append(centro.getCenNombre());
+						sb.append("</td>");
+					sb.append("</tr>");
+
+					if(listCentroChild!=null)
+						for(CentroDTO centroChild:listCentroChild)
+						{
+							sb.append("<tr>");
+								sb.append("<td>");
+								sb.append("Facultad: ");
+								sb.append("</td>");
+
+								sb.append("<td>");
+								sb.append(centroChild.getCenNombre());
+								sb.append("</td>");
+							sb.append("</tr>");			
+							
+							sb.append("<tr>");
+								sb.append("<td>");
+								sb.append("Datos Institucionales: ");
+								sb.append("</td>");
+
+								sb.append("<td>");
+								sb.append(centroChild.getCenDatoInstitucional());
+								sb.append("</td>");
+							sb.append("</tr>");
+						}
+				}
+				sb.append("</table>");			}
 		}//Facultad
 		else if(atenea.getTipo()==3)
 		{
-			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(3))
-			{
+			if(atenea.getPais()==0){
+				//Obtengo los paises para realizar el visor organizado por pais
+				listPais=factoryDAO.getCentroDAOImpl().distinctPais(atenea.getTipo());
 				sb.append("<table>");
-				sb.append("<tr>");
-				sb.append("<td>");
-				sb.append(centro.getCenNombre());
-				sb.append("</td>");
-				sb.append("</tr>");
+				
+				for(CentroDTO centroPais:listPais){
+					
+					catalogo=factoryDAO.getCatalogoImpl().find(centroPais.getCenPais());
+					
+					sb.append("<tr>");					
+						sb.append("<td colspan='2' align='center'>");
+						sb.append("<img src='/RedXXIWeb"+catalogo.getCatImagenPath()+"' height='30' width='50'>");
+						sb.append("</td>");
+					sb.append("</tr>");					
+					
+					sb.append("<tr>");				
+						sb.append("<td><b>");
+						sb.append("País: ");
+						sb.append("</b></td>");
+						
+						sb.append("<td>");
+						sb.append(catalogo.getCatDescripcion());
+						sb.append("</td>");
+					sb.append("</tr>");										
+					
+					for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(atenea.getTipo(),centroPais.getCenPais()))
+					{
+						
+						sb.append("<tr>");
+							sb.append("<td>");
+							sb.append("Universidad: ");
+							sb.append("</td>");
+								
+							sb.append("<td>");
+							sb.append(centro.getAteCentro().getCenNombre());
+							sb.append("</td>");
+						sb.append("</tr>");
+	
+						sb.append("<tr>");
+						
+							sb.append("<td>");
+							sb.append("Nombre: ");
+							sb.append("</td>");
+
+							sb.append("<td>");
+							sb.append(centro.getCenNombre());
+							sb.append("</td>");
+						
+						sb.append("</tr>");
+						
+						sb.append("<tr>");
+							
+							sb.append("<td>");
+							sb.append("Datos Institucionales: ");
+							sb.append("</td>");
+
+							sb.append("<td>");
+							sb.append(centro.getCenDatoInstitucional());
+							sb.append("</td>");
+							
+						sb.append("</tr>");
+					}								
+				}
 				sb.append("</table>");
-			}		
+			}
+			else
+			{
+				catalogo=factoryDAO.getCatalogoImpl().find(atenea.getPais());
+				
+				sb.append("<table>");
+				
+				sb.append("<tr>");
+				
+					sb.append("<td colspan='2' align='center'>");
+					sb.append("<img src='/RedXXIWeb"+catalogo.getCatImagenPath()+"' height='30' width='50'>");
+					sb.append("</td>");
+			
+				sb.append("</tr>");				
+				
+				sb.append("<tr>");				
+					sb.append("<td><b>");
+					sb.append("País: ");
+					sb.append("</b></td>");
+					
+					sb.append("<td>");
+					sb.append(catalogo.getCatDescripcion());
+					sb.append("</td>");
+				sb.append("</tr>");		
+				
+				for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(atenea.getTipo(),atenea.getPais()))
+				{
+					sb.append("<tr>");
+						sb.append("<td>");
+						sb.append("Universidad: ");
+						sb.append("</td>");
+							
+						sb.append("<td>");
+						sb.append(centro.getAteCentro().getCenNombre());
+						sb.append("</td>");
+					sb.append("</tr>");
+
+					sb.append("<tr>");
+					
+						sb.append("<td>");
+						sb.append("Nombre: ");
+						sb.append("</td>");
+
+						sb.append("<td>");
+						sb.append(centro.getCenNombre());
+						sb.append("</td>");
+					
+					sb.append("</tr>");							
+					sb.append("<tr>");
+						
+						sb.append("<td>");
+						sb.append("Datos Institucionales: ");
+						sb.append("</td>");
+
+						sb.append("<td>");
+						sb.append(centro.getCenDatoInstitucional());
+						sb.append("</td>");
+						
+					sb.append("</tr>");
+						
+				}
+				sb.append("</table>");			
+			}
 		}//Pregrado
 		else if(atenea.getTipo()==6)
 		{
-			for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getByType(6)){
+			if(atenea.getPais()==0)
+			{
+				listPais= factoryDAO.getCarreraDAOImpl().distinctPais(atenea.getTipo());
+				
 				sb.append("<table>");
-				sb.append("<tr>");
-				sb.append("<td>");
-				sb.append(car.getCarNombre());
-				sb.append("</td>");
-				sb.append("</tr>");
+								
+				for(CentroDTO cen:listPais)
+				{
+					catalogo=factoryDAO.getCatalogoImpl().find(cen.getCenPais());
+					
+					sb.append("<table>");
+					
+					sb.append("<tr>");
+					
+						sb.append("<td colspan='2' align='center'>");
+						sb.append("<img src='/RedXXIWeb"+catalogo.getCatImagenPath()+"' height='30' width='50'>");
+						sb.append("</td>");
+				
+					sb.append("</tr>");				
+					
+					sb.append("<tr>");				
+						sb.append("<td><b>");
+						sb.append("País: ");
+						sb.append("</b></td>");
+						
+						sb.append("<td>");
+						sb.append(catalogo.getCatDescripcion());
+						sb.append("</td>");
+					sb.append("</tr>");		
+					
+					
+					for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getAll(atenea.getTipo(),cen.getCenPais())){
+						
+						if(car.getAteCentro().getCenTipo()==4)
+						{
+							sb.append("<tr>");
+								sb.append("<td>");
+								sb.append("Universidad: ");
+								sb.append("</td>");
+							
+								sb.append("<td>");
+								sb.append(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
+								sb.append("</td>");
+							sb.append("</tr>");
+
+							sb.append("<tr>");							
+								sb.append("<td>");
+								sb.append("Facultad: ");
+								sb.append("</td>");
+								
+								sb.append("<td>");
+								sb.append(car.getAteCentro().getAteCentro().getCenNombre());
+								sb.append("</td>");
+							sb.append("</tr>");
+
+							sb.append("<tr>");							
+								sb.append("<td>");
+								sb.append("Escuela: ");
+								sb.append("</td>");
+								
+								sb.append("<td>");
+								sb.append(car.getAteCentro().getCenNombre());
+								sb.append("</td>");
+							sb.append("</tr>");							
+
+							sb.append("<tr>");							
+								sb.append("<td>");
+								sb.append("Carrera: ");
+								sb.append("</td>");
+								
+								sb.append("<td>");
+								sb.append(car.getCarNombre());
+								sb.append("</td>");
+							sb.append("</tr>");														
+						}
+						else{
+							
+							sb.append("<tr>");							
+								sb.append("<td>");
+								sb.append("Universidad: ");
+								sb.append("</td>");
+							
+								sb.append("<td>");
+								sb.append(car.getAteCentro().getAteCentro().getCenNombre());
+								sb.append("</td>");
+							sb.append("</tr>");
+
+							sb.append("<tr>");							
+								sb.append("<td>");
+								sb.append("Facultad: ");
+								sb.append("</td>");
+								
+								sb.append("<td>");
+								sb.append(car.getAteCentro().getCenNombre());
+								sb.append("</td>");
+							sb.append("</tr>");
+							
+							sb.append("<tr>");							
+								sb.append("<td>");
+								sb.append("Carrera: ");
+								sb.append("</td>");
+								
+								sb.append("<td>");
+								sb.append(car.getCarNombre());
+								sb.append("</td>");
+							sb.append("</tr>");							
+													
+						}
+					}			
+				}			
 				sb.append("</table>");
-			}			
+				
+			}else
+			{
+				for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getAll(atenea.getTipo(),atenea.getPais())){
+					
+					if(car.getAteCentro().getCenTipo()==4)
+					{
+						sb.append("<table>");
+						
+							sb.append("<tr>");
+								sb.append("<td>");
+								sb.append("Universidad: ");
+								sb.append("</td>");
+							
+								sb.append("<td>");
+								sb.append(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
+								sb.append("</td>");
+							sb.append("</tr>");
+
+							sb.append("<tr>");							
+								sb.append("<td>");
+								sb.append("Facultad: ");
+								sb.append("</td>");
+								
+								sb.append("<td>");
+								sb.append(car.getAteCentro().getAteCentro().getCenNombre());
+								sb.append("</td>");
+							sb.append("</tr>");
+
+							sb.append("<tr>");							
+								sb.append("<td>");
+								sb.append("Escuela: ");
+								sb.append("</td>");
+								
+								sb.append("<td>");
+								sb.append(car.getAteCentro().getCenNombre());
+								sb.append("</td>");
+							sb.append("</tr>");							
+
+							sb.append("<tr>");							
+								sb.append("<td>");
+								sb.append("Carrera: ");
+								sb.append("</td>");
+								
+								sb.append("<td>");
+								sb.append(car.getCarNombre());
+								sb.append("</td>");
+							sb.append("</tr>");							
+							
+							
+							
+						sb.append("</table>");
+					}
+					else{
+						sb.append("<table>");
+						
+						sb.append("<tr>");							
+							sb.append("<td>");
+							sb.append("Universidad: ");
+							sb.append("</td>");
+						
+							sb.append("<td>");
+							sb.append(car.getAteCentro().getAteCentro().getCenNombre());
+							sb.append("</td>");
+						sb.append("</tr>");
+
+						sb.append("<tr>");							
+							sb.append("<td>");
+							sb.append("Facultad: ");
+							sb.append("</td>");
+							
+							sb.append("<td>");
+							sb.append(car.getAteCentro().getCenNombre());
+							sb.append("</td>");
+						sb.append("</tr>");
+						
+						sb.append("<tr>");							
+							sb.append("<td>");
+							sb.append("Carrera: ");
+							sb.append("</td>");
+							
+							sb.append("<td>");
+							sb.append(car.getCarNombre());
+							sb.append("</td>");
+						sb.append("</tr>");							
+
+						
+						sb.append("</table>");						
+					}
+				}			
+			}
 		}//Posgrado
 		else if(atenea.getTipo()==7)
 		{
-			for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getByType(7)){
-				sb.append("<table>");
-				sb.append("<tr>");
-				sb.append("<td>");
-				sb.append(car.getCarNombre());
-				sb.append("</td>");
-				sb.append("</tr>");
-				sb.append("</table>");
-			}			
+			if(atenea.getPais()==0)
+				for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getByType(6)){
+					sb.append("<table>");
+					sb.append("<tr>");
+					sb.append("<td>");
+					sb.append(car.getCarNombre());
+					sb.append("</td>");
+					sb.append("</tr>");
+					sb.append("</table>");
+				}
+			else
+				for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getAll(atenea.getTipo(),atenea.getPais())){
+					sb.append("<table>");
+					sb.append("<tr>");
+					sb.append("<td>");
+					sb.append(car.getCarNombre());
+					sb.append("</td>");
+					sb.append("</tr>");
+					sb.append("</table>");
+				}		
 		}//Revista
 		else if(atenea.getTipo()==34)
 		{
@@ -452,51 +898,149 @@ public class AteneaServiceImpl implements AteneaService{
 	public String visor(PaisDTO pais) throws CorvustecException
 	{
 		StringBuilder sb=new StringBuilder();
+		CatalogoDTO catalogo;
+		List<CentroDTO> listCentroChild;
+		List<CentroDTO> listPais;
 		if(pais.getTipo()==0)
 		{
 		}
 		//Universidad
 		else if(pais.getTipo()==2)
 		{
-			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(2))
-			{
-				sb.append("<table>");
-				sb.append("<tr>");
-				sb.append("<td>");
-				sb.append(centro.getCenNombre());
+			catalogo=factoryDAO.getCatalogoImpl().find(pais.getCodigo());
+			
+			sb.append("<table>");
+			
+			sb.append("<tr>");
+			
+				sb.append("<td colspan='2' align='center'>");
+				sb.append("<img src='/RedXXIWeb"+catalogo.getCatImagenPath()+"' height='30' width='50'>");
 				sb.append("</td>");
+		
+			sb.append("</tr>");			
+			
+			sb.append("<tr>");				
+				sb.append("<td><b>");
+				sb.append("País: ");
+				sb.append("</b></td>");
+				
+				sb.append("<td>");
+				sb.append(catalogo.getCatDescripcion());
+				sb.append("</td>");
+			sb.append("</tr>");		
+			
+			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(pais.getTipo(),pais.getCodigo()))
+			{
+				listCentroChild= factoryDAO.getCentroDAOImpl().findAllChild(centro);
+				
+				sb.append("<tr>");
+					sb.append("<td>");
+					sb.append("Nombre: ");
+					sb.append("</td>");
+					sb.append("<td>");
+					if(centro.getCenPaginaWeb()!=null)
+						sb.append("<a href='http://"+centro.getCenPaginaWeb()+"' target='_blank'>"+centro.getCenNombre()+"</a>");
+					else
+						sb.append(centro.getCenNombre());
+					sb.append("</td>");
 				sb.append("</tr>");
-				sb.append("</table>");
+
+				if(listCentroChild!=null)
+					for(CentroDTO centroChild:listCentroChild)
+					{
+						sb.append("<tr>");
+							sb.append("<td>");
+							sb.append("Facultad: ");
+							sb.append("</td>");
+
+							sb.append("<td>");
+							sb.append(centroChild.getCenNombre());
+							sb.append("</td>");
+						sb.append("</tr>");			
+						
+						sb.append("<tr>");
+							sb.append("<td>");
+							sb.append("Datos Institucionales: ");
+							sb.append("</td>");
+
+							sb.append("<td>");
+							sb.append(centroChild.getCenDatoInstitucional());
+							sb.append("</td>");
+						sb.append("</tr>");
+					}
 			}
+			sb.append("</table>");
 		}//Facultad
 		else if(pais.getTipo()==3)
 		{
-			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(3))
-			{
-				sb.append("<table>");
-				sb.append("<tr>");
-				sb.append("<td>");
-				sb.append(centro.getCenNombre());
+			catalogo=factoryDAO.getCatalogoImpl().find(pais.getCodigo());
+			
+			sb.append("<table>");
+			
+			sb.append("<tr>");
+			
+				sb.append("<td colspan='2' align='center'>");
+				sb.append("<img src='/RedXXIWeb"+catalogo.getCatImagenPath()+"' height='30' width='50'>");
 				sb.append("</td>");
+			
+			sb.append("</tr>");
+			
+			sb.append("<tr>");				
+				sb.append("<td><b>");
+				sb.append("País: ");
+				sb.append("</b></td>");
+				
+				sb.append("<td>");
+				sb.append(catalogo.getCatDescripcion());
+				sb.append("</td>");
+			sb.append("</tr>");		
+			
+			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(pais.getTipo(),pais.getCodigo()))
+			{
+				sb.append("<tr>");
+					sb.append("<td>");
+					sb.append("Universidad: ");
+					sb.append("</td>");
+						
+					sb.append("<td>");
+					sb.append(centro.getAteCentro().getCenNombre());
+					sb.append("</td>");
 				sb.append("</tr>");
-				sb.append("</table>");
-			}		
+
+				sb.append("<tr>");
+				
+					sb.append("<td>");
+					sb.append("Nombre: ");
+					sb.append("</td>");
+
+					sb.append("<td>");
+					sb.append(centro.getCenNombre());
+					sb.append("</td>");
+				
+				sb.append("</tr>");							
+				sb.append("<tr>");
+					
+					sb.append("<td>");
+					sb.append("Datos Institucionales: ");
+					sb.append("</td>");
+
+					sb.append("<td>");
+					sb.append(centro.getCenDatoInstitucional());
+					sb.append("</td>");
+					
+				sb.append("</tr>");
+					
+			}
+			sb.append("</table>");
 		}//Pregrado
 		else if(pais.getTipo()==6)
 		{
-			for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getByType(6)){
-				sb.append("<table>");
-				sb.append("<tr>");
-				sb.append("<td>");
-				sb.append(car.getCarNombre());
-				sb.append("</td>");
-				sb.append("</tr>");
-				sb.append("</table>");
-			}			
+			
+			
 		}//Posgrado
 		else if(pais.getTipo()==7)
 		{
-			for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getByType(7)){
+			for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getAll(pais.getTipo(),pais.getCodigo())){
 				sb.append("<table>");
 				sb.append("<tr>");
 				sb.append("<td>");
@@ -569,7 +1113,50 @@ public class AteneaServiceImpl implements AteneaService{
 		return sb.toString();
 	}
 	
-	
+	@Override
+	public String infoPais(PaisDTO pais)
+	{
+		CatalogoDTO catalogo= factoryDAO.getCatalogoImpl().find(pais.getCodigo());
+		StringBuilder sb=new StringBuilder();
+		
+		sb.append("<table>");
+
+			sb.append("<tr>");
+						
+				sb.append("<td colspan='2' align='center'>");
+				sb.append("<img src='/RedXXIWeb"+catalogo.getCatImagenPath()+"' height='30' width='50'>");
+				sb.append("</td>");
+				
+			sb.append("</tr>");
+		
+			sb.append("<tr>");
+				
+				sb.append("<td>");
+				sb.append("Pais: ");
+				sb.append("</td>");
+				
+				sb.append("<td>");
+				sb.append(catalogo.getCatDescripcion());
+				sb.append("</td>");
+				
+			sb.append("</tr>");
+			
+			sb.append("<tr>");
+
+				sb.append("<td>");
+				sb.append("Pablación: ");
+				sb.append("</td>");
+
+				sb.append("<td>");
+				sb.append(catalogo.getCatAuxiliar());
+				sb.append("</td>");				
+				
+			sb.append("</tr>");
+		
+		sb.append("</table>");
+		
+		return sb.toString();
+	}
 	
 	/* Centro */
 	@Override

@@ -264,5 +264,38 @@ public class CentroDAOImpl extends AbstractFacadeImpl<CentroDTO> implements Cent
 			return 0;
 	}
 	
+	@Override
+	public List<CentroDTO> getCentro(Object type,Object pais) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
+		Root<CentroDTO> from= cq.from(CentroDTO.class);
+		
+		cq.where(cb.and(cb.equal(from.get("cenTipo"),type),cb.equal(from.get("cenPais"), pais)));
+		
+		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return list;
+		else
+			return new ArrayList<CentroDTO>();
+	}
 	
+	
+	@Override
+	public List<CentroDTO> distinctPais(Object type) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
+		Root<CentroDTO> from= cq.from(CentroDTO.class);
+		
+		cq.multiselect(from.get("cenPais")).distinct(true);
+		
+		cq.where(cb.equal(from.get("cenTipo"),type));
+		
+		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list!=null)
+			return list;
+		else
+			return new ArrayList<CentroDTO>();
+	}
 }

@@ -42,4 +42,9 @@ public interface CentroDAO extends AbstractFacade<CentroDTO> {
 
 	List<CentroDTO> getCentro(Object type) throws CorvustecException;
 
+	List<CentroDTO> getCentro(Object type, Object pais)
+			throws CorvustecException;
+
+	List<CentroDTO> distinctPais(Object type) throws CorvustecException;
+
 }
