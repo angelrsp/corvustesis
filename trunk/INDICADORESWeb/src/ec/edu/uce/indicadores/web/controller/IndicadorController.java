@@ -158,6 +158,13 @@ public class IndicadorController extends SelectItemController implements Seriali
 				getIndicadorDTO().setIndIndicador(predecesor);
 			}
 			
+			if(getIndicadorDTO().getIndValorIdeal().doubleValue()>getIndicadorDTO().getIndValorObjetivo().doubleValue())
+			{
+				JsfUtil.addErrorMessage("El valor Ideal no puede ser mayor al objetivo");
+				return;
+			}
+			
+			
 			iesDTO.setIesCodigo(Integer.parseInt(getIes().toString()));
 			modeloDTO.setModCodigo(Integer.parseInt(getModelo().toString()));
 			getIndicadorDTO().setIndy(iesDTO);
