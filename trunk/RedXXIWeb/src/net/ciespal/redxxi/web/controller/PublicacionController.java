@@ -86,7 +86,7 @@ public class PublicacionController extends SelectItemController {
 			publicacionDataManager.getPublicacion().setPubCiudad(Integer.valueOf(getCiudad().toString()));
 			publicacionDataManager.getPublicacion().setPubCampoConocimiento(Integer.valueOf(getSubCampoConocimiento().toString()));
 			publicacionDataManager.getPublicacion().setPubTipo(Integer.valueOf(publicacionDataManager.getTipoPublicacion().toString()));
-			ateneaService.createOrUpdatePublicacion(publicacionDataManager.getPublicacion());
+			ateneaService.createOrUpdatePublicacion(publicacionDataManager.getPublicacion(),false);
 			publicacionDataManager.setPublicacion(new PublicacionDTO());
 			readPublicacion();
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
@@ -98,7 +98,7 @@ public class PublicacionController extends SelectItemController {
 	private void readPublicacion()
 	{
 		try {
-			publicacionDataManager.setPublicacionList(ateneaService.readPublicacion(getCiudad()));
+			publicacionDataManager.setPublicacionList(ateneaService.readPublicacionNoEntity(getCiudad()));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
