@@ -313,7 +313,9 @@ public class HistoricoIndicadorController extends SelectItemController implement
 				}
 				else{
 					rc.execute("PF('dlgValorReporte').show();");
-					//JsfUtil.addErrorMessage("No existen datos en historial");
+					createMeterGaugeModel(indTemp);
+					initChart();
+					createPieModel();
 				}
 			}
 			else{
@@ -340,7 +342,10 @@ public class HistoricoIndicadorController extends SelectItemController implement
             add(ind.getIndValorObjetivo());  
         }};  
   
-        meterGaugeModel = new MeterGaugeChartModel(ind.getIndValorActual(), intervals);  
+        if(ind.getIndValorActual()!=null)
+        	meterGaugeModel = new MeterGaugeChartModel(ind.getIndValorActual(), intervals);
+        else
+        	meterGaugeModel = new MeterGaugeChartModel(0, intervals);
     }  	
 	
 	@SuppressWarnings("serial")
@@ -365,7 +370,7 @@ public class HistoricoIndicadorController extends SelectItemController implement
 	
 	      for(HistoricoIndicadorDTO his:list)
 	      {
-	          data1.set(his.getHinFecha().toString().substring(0, 10), his.getHinValor());
+	          data1.set(his.getHinFecha().toString(), his.getHinValor());
 	      }
 	     
 	      categoryModel.addSeries(data1);    
@@ -393,7 +398,7 @@ public class HistoricoIndicadorController extends SelectItemController implement
 		 
 		for(HistoricoIndicadorDTO his:list)
 		{
-			pieModel.set(his.getHinFecha().toString().substring(0, 10), his.getHinValor());
+			pieModel.set(his.getHinFecha().toString(), his.getHinValor());
 		}
 	 }  
 	
@@ -436,6 +441,8 @@ public class HistoricoIndicadorController extends SelectItemController implement
 			historicoIndicadorList=indicadorService.obtenerValores(indTemp);
 			historicoIndicadorDTO=new HistoricoIndicadorDTO();
 			createChartLine(historicoIndicadorList);
+			createPieModel(historicoIndicadorList);
+			createMeterGaugeModel(indTemp);
 			setIndicadorDTO(indicadorService.obtenerIndicador(indTemp.getIndCodigo()));
 		} catch (IndicadoresException e) {
 			JsfUtil.addErrorMessage(e.toString());
