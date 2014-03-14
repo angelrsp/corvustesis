@@ -35,7 +35,7 @@
 						</tr>
 					</table>
 					
-					<p:tree value="#{historicoIndicadorController.rootNode}" var="node" id="tree" selectionMode="single" selection="#{historicoIndicadorController.selectedNode}">
+					<p:tree value="#{historicoIndicadorController.rootNode}" var="node" id="tree" selectionMode="single" selection="#{historicoIndicadorController.selectedNode}" style="width:99%;">
 						<p:ajax event="select" listener="#{historicoIndicadorController.onNodeSelect}" update=":contenido:growl,:contenido:pnlValor,:contenido:pnlValorReporte,:contenido:pnlDescriptor"/>  
 				        <p:treeNode id="treeNode">  
 				            <h:outputText value="#{node.indNombreCorto}"/>  
@@ -135,7 +135,7 @@
 	
 					<tr>
 						<td colspan="2" align="center">
-							<p:commandButton actionListener="#{historicoIndicadorController.agregarValor}" value="#{i18n['boton.agregar']}" process="pnlValor" update="pnlValor,growl,pnlValorReporte"/> </td>
+							<p:commandButton actionListener="#{historicoIndicadorController.agregarValor}" value="#{i18n['boton.agregar']}" process="pnlValor" update="pnlValor,growl,pnlValorReporte,:contenido:sampleDash"/> </td>
 					</tr>
 						
 					</table>
