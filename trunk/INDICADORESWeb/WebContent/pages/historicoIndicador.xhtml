@@ -22,8 +22,7 @@
 							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.modelo']}:&#160;#{i18n['label.requerido']}" value="#{historicoIndicadorController.modelo}" disabled="#{historicoIndicadorController.disabled}">
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
 									<f:selectItems value="#{historicoIndicadorController.modeloList}"></f:selectItems>
-									<p:ajax event="change" process="@this" update="tree" listener="#{historicoIndicadorController.obtenerArbol}" immediate="true"></p:ajax>
-									<p:ajax event="change" process="@this" update="tree" listener="#{historicoIndicadorController.obtenerArbol}" immediate="true"></p:ajax>										
+									<p:ajax event="change" process="@this" update="tree" listener="#{historicoIndicadorController.obtenerArbol}"></p:ajax>
 							</p:selectOneMenu></td>
 						</tr>
 						<tr>
@@ -31,8 +30,7 @@
 							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{historicoIndicadorController.ies}" disabled="#{historicoIndicadorController.disabled}">
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
 									<f:selectItems value="#{historicoIndicadorController.iesList}"></f:selectItems>
-									<p:ajax event="change" process="@this" update="tree" listener="#{historicoIndicadorController.obtenerArbol}" immediate="true"></p:ajax>
-									<p:ajax event="change" process="@this" update="tree" listener="#{historicoIndicadorController.obtenerArbol}" immediate="true"></p:ajax>																			
+									<p:ajax event="change" process="@this" update="tree" listener="#{historicoIndicadorController.obtenerArbol}"></p:ajax>
 							</p:selectOneMenu></td>
 						</tr>
 					</table>
