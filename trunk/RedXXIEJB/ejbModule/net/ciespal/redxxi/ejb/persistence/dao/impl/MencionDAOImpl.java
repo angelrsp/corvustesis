@@ -9,12 +9,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
-import com.corvustec.commons.util.CorvustecException;
-
 import net.ciespal.redxxi.ejb.persistence.dao.MencionDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
+
+import com.corvustec.commons.util.CorvustecException;
 
 public class MencionDAOImpl extends AbstractFacadeImpl<MencionDTO> implements MencionDAO {
 
