@@ -351,7 +351,7 @@ public class PregradoController extends SelectItemController{
 			publicacionDataManager.getPublicacion().setPubProvincia(Integer.valueOf(centro.getCenProvincia().toString()));
 			publicacionDataManager.getPublicacion().setPubPais(Integer.valueOf(centro.getCenPais().toString()));
 
-			ent=ateneaService.createOrUpdatePublicacion(publicacionDataManager.getPublicacion(),true).getAteEntidads().get(0);
+			ent=ateneaService.createOrUpdatePublicacion(publicacionDataManager.getPublicacion()).getAteEntidads().get(0);
 			ent.setAteCarrera(carreraDataManager.getCarrera());
 			ateneaService.updateEntidad(ent);
 			buscarPublicacion();
@@ -440,4 +440,28 @@ public class PregradoController extends SelectItemController{
 		carreraDataManager.setCarrera(new CarreraDTO());
 	}
 
+	public void deleteCarrera(CarreraDTO carrera)
+	{
+		CentroDTO centro;
+		try {
+			centro=new CentroDTO();
+			
+			if(universidadDataManager.getEscuelaCode()!=0)
+				centro.setCenCodigo(universidadDataManager.getEscuelaCode());
+			else if(universidadDataManager.getFacultadCode()!=0)
+				centro.setCenCodigo(universidadDataManager.getFacultadCode());
+			else{
+				JsfUtil.addErrorMessage("Problemas para asignar centro de estudios");
+				return;
+			}
+			
+			ateneaService.deleteCarreraPregrado(carrera);
+			carreraDataManager.setCarreraList(ateneaService.readCarrera(centro,6));
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+		
+	}
+	
 }
