@@ -93,6 +93,12 @@
 				<p:commandButton actionListener="#{pregradoController.editCarrera(car)}" icon="ui-icon-pencil" process=":contenido:tblCarrera" update=":contenido:pnlDatos"/>
 			</p:column>
 		
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{pregradoController.deleteCarrera(car)}" icon="ui-icon-close" process=":contenido:tblCarrera" update="tblCarrera,:contenido:growl">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
+			</p:column>		
+		
 			<p:column headerText="#{i18n['label.mas.datos']}" width="15" style="text-align: center">
 				<p:commandButton actionListener="#{pregradoController.selectCarrera(car)}" icon="ui-icon-plus" 
 	               	update=":contenido:pnlDatos,:contenido:growl,:contenido:dlgDetalles" process="tblCarrera" oncomplete="PF('dlgDetalle').show()"/>    				
