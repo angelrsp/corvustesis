@@ -351,7 +351,7 @@ public class PregradoController extends SelectItemController{
 			publicacionDataManager.getPublicacion().setPubProvincia(Integer.valueOf(centro.getCenProvincia().toString()));
 			publicacionDataManager.getPublicacion().setPubPais(Integer.valueOf(centro.getCenPais().toString()));
 
-			ent=ateneaService.createOrUpdatePublicacion(publicacionDataManager.getPublicacion()).getAteEntidads().get(0);
+			ent=ateneaService.createOrUpdatePublicacion(publicacionDataManager.getPublicacion(),true).getAteEntidads().get(0);
 			ent.setAteCarrera(carreraDataManager.getCarrera());
 			ateneaService.updateEntidad(ent);
 			buscarPublicacion();
