@@ -11,4 +11,6 @@ public interface MencionDAO extends AbstractFacade<MencionDTO> {
 
 	List<MencionDTO> getAll(CarreraDTO carrera) throws CorvustecException;
 
+	void remove2(MencionDTO mencion) throws CorvustecException;
+
 }

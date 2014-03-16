@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
@@ -211,5 +212,13 @@ public class CarreraDAOImpl extends AbstractFacadeImpl<CarreraDTO> implements Ca
 		else
 			return list;
 	}
-	
+
+	@Override
+	public void remove2(CarreraDTO carrera) throws CorvustecException
+	{
+		Query query;
+		query=entityManager.createQuery("delete from CarreraDTO car where car.carCodigo=:codigo");
+		query.setParameter("codigo", carrera.getCarCodigo());
+		query.executeUpdate();
+	}
 }

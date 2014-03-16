@@ -160,10 +160,15 @@ public interface AteneaService {
 
 	String infoPais(PaisDTO pais);
 
+<<<<<<< .mine
+	void deleteCarreraPregrado(CarreraDTO carrera) throws CorvustecException;
+
+=======
 	PublicacionDTO createOrUpdatePublicacion(PublicacionDTO publicacion,
 			Boolean entidad) throws CorvustecException;
 
 	List<PublicacionDTO> readPublicacionNoEntity(Object ubicacion)
 			throws CorvustecException;
 
+>>>>>>> .r675
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
@@ -111,5 +112,14 @@ public class ContactoDAOImpl extends AbstractFacadeImpl<ContactoDTO> implements 
 			return null;
 		else
 			return list;
+	}
+	
+	@Override
+	public void remove2(ContactoDTO contacto) throws CorvustecException
+	{
+		Query query;
+		query=entityManager.createQuery("delete from ContactoDTO con where con.conCodigo=:codigo");
+		query.setParameter("codigo", contacto.getConCodigo());
+		query.executeUpdate();
 	}
 }
