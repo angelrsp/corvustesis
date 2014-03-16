@@ -24,5 +24,7 @@ public interface ContactoDAO extends AbstractFacade<ContactoDTO>{
 
 	List<ContactoListDTO> getAll(DoctorDTO doctor) throws CorvustecException;
 
+	void remove2(ContactoDTO contacto) throws CorvustecException;
+
 	
 }

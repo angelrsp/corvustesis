@@ -3,6 +3,7 @@ package net.ciespal.redxxi.ejb.persistence.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
@@ -12,6 +13,7 @@ import com.corvustec.commons.util.CorvustecException;
 
 import net.ciespal.redxxi.ejb.persistence.dao.MencionDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
 
 public class MencionDAOImpl extends AbstractFacadeImpl<MencionDTO> implements MencionDAO {
@@ -42,5 +44,13 @@ public class MencionDAOImpl extends AbstractFacadeImpl<MencionDTO> implements Me
 		else
 			return list;
 	}
-	
+
+	@Override
+	public void remove2(MencionDTO mencion) throws CorvustecException
+	{
+		Query query;
+		query=entityManager.createQuery("delete from MencionDTO men where men.menCodigo=:codigo");
+		query.setParameter("codigo", mencion.getMenCodigo());
+		query.executeUpdate();
+	}
 }

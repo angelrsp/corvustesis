@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
+
+import com.corvustec.commons.util.CorvustecException;
 
 import net.ciespal.redxxi.ejb.persistence.dao.ModalidadDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
@@ -39,6 +42,15 @@ public class ModalidadDAOImpl extends AbstractFacadeImpl<ModalidadDTO> implement
 			return new ArrayList<ModalidadDTO>();
 		else
 			return list;
+	}
+	
+	@Override
+	public void remove2(ModalidadDTO moda) throws CorvustecException
+	{
+		Query query;
+		query=entityManager.createQuery("delete from ModalidadDTO mod where mod.modCodigo=:codigo");
+		query.setParameter("codigo", moda.getModCodigo());
+		query.executeUpdate();
 	}
 	
 }
