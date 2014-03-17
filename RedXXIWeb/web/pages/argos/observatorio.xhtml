@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"      
+	template="/WEB-INF/template/privado.xhtml">
+
+
+	<ui:define name="contenido">
+	
+		<p:growl id="growl"></p:growl>
+		
+		<p:panel id="pnlDatos" header="#{i18n['label.panel.observatorio']}">
+
+		<table>
+			<tr>
+				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{universidadController.pais}" filter="true">
+						<f:selectItem itemLabel="--Seleccione--"/>
+						<f:selectItems value="#{pregradoController.catalogoPais}"/>
+						<p:ajax event="change" listener="#{universidadController.obtenerProvinciaChange}" process="@this" update="somProvinvia"/>						
+					</p:selectOneMenu></td>
+
+				<td><h:outputText value="#{i18n['label.provincia']}:&#160;" /></td>
+				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{universidadController.provincia}" filter="true">
+						<f:selectItem itemLabel="--Seleccione--"/>
+						<f:selectItems value="#{universidadController.catalogoProvincia}"/>
+						<p:ajax event="change" listener="#{universidadController.obtenerCiudadChange}" process="@this" update="somCiudad"/>
+					</p:selectOneMenu></td>
+
+			</tr>
+			<tr>
+
+				<td><h:outputText value="#{i18n['label.ciudad']}:&#160;" /></td>
+				<td><p:selectOneMenu id="somCiudad" value="#{universidadController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
+						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
+						<f:selectItems value="#{universidadController.catalogoCiudad}"/>
+						<p:ajax event="change" listener="#{universidadController.obtenerCiudadChange}" process="@this"/>
+					</p:selectOneMenu></td>
+			</tr>
+
+			<tr>
+				<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
+				<td><p:inputText/></td>
+			</tr>
+			
+			<tr>	
+				<td><h:outputText value="#{i18n['label.datos.institucionales']}:&#160;"/></td>
+				<td><p:inputTextarea autoResize="false"/></td>				
+			</tr>
+
+			<tr>	
+				<td><h:outputText value="#{i18n['label.institucion.patrocinadora']}:&#160;"/></td>
+				<td><p:inputTextarea autoResize="false"/></td>				
+			</tr>
+
+			<tr>	
+				<td><h:outputText value="#{i18n['label.anio.fundacion']}:&#160;"/></td>
+				<td><p:inputText/></td>				
+			</tr>
+
+			<tr>	
+				<td><h:outputText value="#{i18n['label.mision']}:&#160;"/></td>
+				<td><p:inputText/></td>				
+			</tr>
+
+			<tr>	
+				<td><h:outputText value="#{i18n['label.lineas.tematicas']}:&#160;"/></td>
+				<td><p:inputText/></td>				
+			</tr>
+
+			<tr>	
+				<td><h:outputText value="#{i18n['label.actividades.principales']}:&#160;"/></td>
+				<td><p:inputText/></td>				
+			</tr>
+
+
+
+			</table>
+
+		</p:panel>	
+	
+	</ui:define>
+
+
+</ui:composition>
+
+
