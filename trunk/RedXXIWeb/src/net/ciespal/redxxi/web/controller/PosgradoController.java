@@ -317,4 +317,27 @@ public class PosgradoController extends SelectItemController {
 		}
 	}
 	
+	
+	public void deletePosgrado(CarreraDTO carrera)
+	{
+		CentroDTO centro;
+		try {
+			centro=new CentroDTO();
+			
+			if(universidadDataManager.getEscuelaCode()!=0)
+				centro.setCenCodigo(universidadDataManager.getEscuelaCode());
+			else if(universidadDataManager.getFacultadCode()!=0)
+				centro.setCenCodigo(universidadDataManager.getFacultadCode());
+			else{
+				JsfUtil.addErrorMessage("Problemas para asignar centro de estudios");
+				return;
+			}
+
+			ateneaService.deleteCarreraPosgrado(carrera);
+			carreraDataManager.setPosgradoList(ateneaService.readCarrera(centro,7));
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
 }
