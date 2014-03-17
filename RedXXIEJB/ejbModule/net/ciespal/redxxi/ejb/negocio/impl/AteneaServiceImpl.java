@@ -1540,6 +1540,68 @@ public class AteneaServiceImpl implements AteneaService{
 	}	
 
 	
+	@Override
+	public void deleteCarreraPosgrado(CarreraDTO carrera) throws CorvustecException
+	{
+		logger.info("deleteCarreraPosgrado");
+		List<ContactoListDTO> contactoList;
+		List<MencionDTO> mencionList;
+		List<ProyectoInvestigacionDTO> proyectoList;
+		List<EntidadDTO> entidadList;
+		List<ModalidadDTO> modalidadList;
+		ContactoDTO contacto;
+		try{
+			contactoList= factoryDAO.getContactoDAOImpl().getAll(carrera);
+			if(contactoList!=null)
+			{
+				for(ContactoListDTO conLis:contactoList)
+				{
+					contacto=new ContactoDTO(conLis.getConCodigo());
+					factoryDAO.getContactoDAOImpl().remove2(contacto);
+				}
+			}
+			mencionList=factoryDAO.getMencionDAOImpl().getAll(carrera);
+			if(mencionList!=null)
+			{
+				for(MencionDTO men:mencionList)
+				{
+					factoryDAO.getMencionDAOImpl().remove2(men);
+				}
+			}
+			proyectoList= factoryDAO.getProyectoInvestigacionDAOImpl().getAll(carrera);
+			if(proyectoList!=null)
+			{
+				for(ProyectoInvestigacionDTO pro:proyectoList)
+				{
+					factoryDAO.getProyectoInvestigacionDAOImpl().remove2(pro);
+				}
+			}
+			
+			
+			modalidadList=factoryDAO.getModalidadDAOImpl().getAll(carrera);
+			
+			if(modalidadList!=null)
+			{
+				for(ModalidadDTO moda:modalidadList)
+				{
+					factoryDAO.getModalidadDAOImpl().remove2(moda);
+				}
+			}
+			
+			entidadList= factoryDAO.getEntidadDAOImpl().getAll(carrera);
+			for(EntidadDTO ent:entidadList)
+			{
+				factoryDAO.getEntidadDAOImpl().remove2(ent);
+			}
+			factoryDAO.getCarreraDAOImpl().remove2(carrera);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error deleteCarreraPosgrado {}",e.toString());
+			throw new CorvustecException("Error al deleteCarreraPosgrado");
+		}
+	}		
+	
 	/* Entidad */
 	@Override
 	public EntidadDTO createEntidad(EntidadDTO entidad) throws CorvustecException

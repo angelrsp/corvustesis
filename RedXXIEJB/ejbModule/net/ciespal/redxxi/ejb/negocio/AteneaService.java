@@ -170,5 +170,7 @@ public interface AteneaService {
 	List<PublicacionDTO> readPublicacionNoEntity(Object ubicacion)
 			throws CorvustecException;
 
+	void deleteCarreraPosgrado(CarreraDTO carrera) throws CorvustecException;
+
 
 }
