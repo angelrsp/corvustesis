@@ -30,7 +30,6 @@
 
 			</tr>
 			<tr>
-
 				<td><h:outputText value="#{i18n['label.ciudad']}:&#160;" /></td>
 				<td><p:selectOneMenu id="somCiudad" value="#{doctorController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
@@ -56,6 +55,12 @@
 					<f:selectItems value="#{doctorController.catalogoSexo}"/>
 				</p:selectOneRadio></td>
 			</tr>
+
+			<tr>
+				<td><h:outputText value="#{i18n['label.fecha.nacimiento']}:&#160;" /></td>
+							
+			</tr>
+
 
 			<tr>
 				<td colspan="4" align="center">
@@ -131,9 +136,6 @@
 		</p:dataTable>
 		
 		</p:panel>
-		
-		
-		
 		
 		
 		</p:dialog>
