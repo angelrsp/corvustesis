@@ -12,7 +12,7 @@
 		<p:panel id="pnlDato" header="#{i18n['label.panel.doctor']}">
 		
 		<table>
-		
+				
 			<tr>
 				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
 				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{doctorController.pais}" filter="true">
@@ -38,6 +38,13 @@
 					</p:selectOneMenu></td>
 			</tr>
 			
+			<tr>					
+				<td><h:outputText value="#{i18n['label.foto']}:&#160;" /></td>
+				<td><p:fileUpload fileUploadListener="#{doctorController.handleFileUpload}" mode="advanced" dragDropSupport="true"  
+                 		sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" auto="true" process="@this" update="image"/></td>
+                <td><p:graphicImage id="image" value="#{doctorDataManager.doctor.docFotoPath}" height="80" cache="false"/></td> 		
+			</tr>					
+			
 			<tr>
 				<td><h:outputText value="#{i18n['label.nombres']}:&#160;" /></td>
 				<td><p:inputText value="#{doctorDataManager.doctor.docNombres}"/></td>
@@ -57,10 +64,25 @@
 			</tr>
 
 			<tr>
-				<td><h:outputText value="#{i18n['label.fecha.nacimiento']}:&#160;" /></td>
-							
+				<td><h:outputText value="#{i18n['label.institucion.trabajo']}:&#160;" /></td>
+				<td><p:inputText value="#{doctorDataManager.doctor.docInstitucionTrabajo}"/></td>				
 			</tr>
 
+			<tr>
+				<td><h:outputText value="#{i18n['label.institucion.titulacion']}:&#160;" /></td>
+				<td><p:inputText value="#{doctorDataManager.doctor.docInstitucionTitulacion}"/></td>
+				
+				<td><h:outputText value="#{i18n['label.anio.titulacion']}:&#160;" /></td>
+				<td><p:inputText value="#{doctorDataManager.doctor.docAnioTitulacion}" onkeypress="return isNumberKey(event)"/></td>				
+			</tr>
+
+			<tr>
+				<td><h:outputText value="#{i18n['label.titulo.tesis']}:&#160;" /></td>
+				<td><p:inputText value="#{doctorDataManager.doctor.docTituloTesis}"/></td>
+				
+				<td><h:outputText value="#{i18n['label.resumen.tesis']}:&#160;" /></td>
+				<td><p:inputTextarea value="#{doctorDataManager.doctor.docResumenTesis}" autoResize="false"/></td>										
+			</tr>
 
 			<tr>
 				<td colspan="4" align="center">
@@ -84,6 +106,12 @@
 			<p:column headerText="#{i18n['boton.editar']}" width="15">
 				<p:commandButton actionListener="#{doctorController.editDoctor(doc)}" icon="ui-icon-pencil" 
 	               	update=":contenido:pnlDato,:contenido:growl" process="tblDoctor" title="#{i18n['boton.editar']}"/>    				
+			</p:column>
+
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{doctorController.deleteDoctor(doc)}" icon="ui-icon-close" process=":contenido:tblDoctor" update=":contenido:tblDoctor,:contenido:growl">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
 			</p:column>
 
 			<p:column headerText="#{i18n['label.mas.datos']}" width="15" style="text-align: center">
