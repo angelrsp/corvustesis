@@ -37,8 +37,8 @@ public class DoctorDTO implements Serializable {
 	@Column(name="doc_fecha_nacimiento")
 	private Timestamp docFechaNacimiento;
 
-	@Column(name="doc_foto")
-	private String docFoto;
+	@Column(name="doc_foto_nombre")
+	private String docFotoNombre;
 
 	@Column(name="doc_institucion_titulacion")
 	private String docInstitucionTitulacion;
@@ -66,6 +66,12 @@ public class DoctorDTO implements Serializable {
 
 	@Column(name="doc_pais")
 	private Integer docPais;
+	
+	@Column(name="doc_foto_byte")
+	private byte[] docFotoByte;
+	
+	@Transient
+	private String docFotoPath;
 	
 	@Transient
 	private Long docCount;
@@ -126,12 +132,12 @@ public class DoctorDTO implements Serializable {
 		this.docFechaNacimiento = docFechaNacimiento;
 	}
 
-	public String getDocFoto() {
-		return this.docFoto;
+	public String getDocFotoNombre() {
+		return this.docFotoNombre;
 	}
 
-	public void setDocFoto(String docFoto) {
-		this.docFoto = docFoto;
+	public void setDocFotoNombre(String docFotoNombre) {
+		this.docFotoNombre = docFotoNombre;
 	}
 
 	public String getDocInstitucionTitulacion() {
@@ -212,6 +218,22 @@ public class DoctorDTO implements Serializable {
 
 	public void setDocCount(Long docCount) {
 		this.docCount = docCount;
+	}
+
+	public byte[] getDocFotoByte() {
+		return docFotoByte;
+	}
+
+	public void setDocFotoByte(byte[] docFotoByte) {
+		this.docFotoByte = docFotoByte;
+	}
+
+	public String getDocFotoPath() {
+		return docFotoPath;
+	}
+
+	public void setDocFotoPath(String docFotoPath) {
+		this.docFotoPath = docFotoPath;
 	}
 
 	public List<EntidadDTO> getAteEntidads() {
