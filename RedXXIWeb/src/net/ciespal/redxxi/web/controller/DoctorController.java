@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.event.FileUploadEvent;
+
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO;
@@ -158,6 +160,20 @@ public class DoctorController extends SelectItemController{
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
+	}
+	
+	public void handleFileUpload(FileUploadEvent event)
+	{
+		JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+		doctorDataManager.getDoctor().setDocFotoByte(event.getFile().getContents());
+		doctorDataManager.getDoctor().setDocFotoNombre(event.getFile().getFileName());
+		doctorDataManager.getDoctor().setDocFotoPath(JsfUtil.saveToDiskUpdload(event.getFile().getContents(), event.getFile().getFileName()));
+	}
+
+	
+	public void deleteDoctor(DoctorDTO doc)
+	{
+		
 	}
 
 }
