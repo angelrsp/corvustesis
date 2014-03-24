@@ -158,9 +158,9 @@ public class IndicadorController extends SelectItemController implements Seriali
 				getIndicadorDTO().setIndIndicador(predecesor);
 			}
 			
-			if(getIndicadorDTO().getIndValorIdeal().doubleValue()>getIndicadorDTO().getIndValorObjetivo().doubleValue())
+			if(getIndicadorDTO().getIndValorIdeal().doubleValue()<getIndicadorDTO().getIndValorObjetivo().doubleValue())
 			{
-				JsfUtil.addErrorMessage("El valor Ideal no puede ser mayor al objetivo");
+				JsfUtil.addErrorMessage("El valor ideal no puede ser menor al valor objetivo");
 				return;
 			}
 			
