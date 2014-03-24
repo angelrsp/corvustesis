@@ -337,9 +337,9 @@ public class HistoricoIndicadorController extends SelectItemController implement
 	@SuppressWarnings("serial")
 	private void createMeterGaugeModel(final IndicadorDTO ind) {  
 		  
-        List<Number> intervals = new ArrayList<Number>(){{  
+        List<Number> intervals = new ArrayList<Number>(){{
+        	add(ind.getIndValorObjetivo());
             add(ind.getIndValorIdeal());  
-            add(ind.getIndValorObjetivo());  
         }};  
   
         if(ind.getIndValorActual()!=null)
@@ -442,8 +442,8 @@ public class HistoricoIndicadorController extends SelectItemController implement
 			historicoIndicadorDTO=new HistoricoIndicadorDTO();
 			createChartLine(historicoIndicadorList);
 			createPieModel(historicoIndicadorList);
-			createMeterGaugeModel(indTemp);
 			setIndicadorDTO(indicadorService.obtenerIndicador(indTemp.getIndCodigo()));
+			createMeterGaugeModel(getIndicadorDTO());
 		} catch (IndicadoresException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
