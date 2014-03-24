@@ -38,7 +38,7 @@ public interface IndicadorService {
 
 	List<IndicadorDTO> obtenerIndicador() throws IndicadoresException;
 
-	void agregarValor(HistoricoIndicadorDTO historicoIndicadorDTO)
+	IndicadorDTO agregarValor(HistoricoIndicadorDTO historicoIndicadorDTO)
 			throws IndicadoresException;
 
 	List<HistoricoIndicadorDTO> obtenerValores(IndicadorDTO indicadorDTO)
