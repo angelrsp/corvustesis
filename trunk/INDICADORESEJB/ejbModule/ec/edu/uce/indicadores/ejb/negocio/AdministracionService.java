@@ -22,8 +22,6 @@ public interface AdministracionService {
 
 	List<PerfilDTO> readPerfil() throws IndicadoresException;
 
-	PerfilDTO createPerfil(PerfilDTO perfil) throws IndicadoresException;
-
 	List<OpcionDTO> readOpcion(PerfilDTO perfil) throws IndicadoresException;
 
 	List<OpcionDTO> readOpcion() throws IndicadoresException;
@@ -36,6 +34,9 @@ public interface AdministracionService {
 			List<IndicadorDTO> indicadorList) throws IndicadoresException;
 
 	Boolean existsPermisoIndicador(IndicadorDTO indicador, PerfilDTO perfil)
+			throws IndicadoresException;
+
+	PerfilDTO createOrUpdatePerfil(PerfilDTO perfil)
 			throws IndicadoresException;
 
 }

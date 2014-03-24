@@ -289,12 +289,13 @@ public class IndicadorServiceImpl implements IndicadorService {
 
 	
 	@Override
-	public void agregarValor(HistoricoIndicadorDTO historicoIndicadorDTO) throws IndicadoresException
+	public IndicadorDTO agregarValor(HistoricoIndicadorDTO historicoIndicadorDTO) throws IndicadoresException
 	{
 		log.info("agregarValor");
+		IndicadorDTO ind;
 		try {
 			
-			IndicadorDTO ind= factoryDAO.getIndicadorDAOImpl().find(historicoIndicadorDTO.getIndIndicador().getIndCodigo());
+			ind= factoryDAO.getIndicadorDAOImpl().find(historicoIndicadorDTO.getIndIndicador().getIndCodigo());
 			if(ind.getIndValorInicial()==null)
 				ind.setIndValorInicial(historicoIndicadorDTO.getHinValor());				
 			ind.setIndValorActual(historicoIndicadorDTO.getHinValor());
@@ -304,6 +305,7 @@ public class IndicadorServiceImpl implements IndicadorService {
 			log.error(e.toString());
 			throw new IndicadoresException(e);
 		}
+		return ind;
 	}
 	
 	

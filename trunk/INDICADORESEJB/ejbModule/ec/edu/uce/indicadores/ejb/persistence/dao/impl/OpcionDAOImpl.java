@@ -36,6 +36,8 @@ public class OpcionDAOImpl extends AbstractFacadeImpl<OpcionDTO> implements Opci
 		
 		cq.where(cb.equal(join1.get("indPerfil").get("perCodigo"),perfil.getPerCodigo()));
 		
+		cq.orderBy(cb.asc(from.get("opcOrden")));
+		
 		List<OpcionDTO> list=entityManager.createQuery(cq).getResultList();	
 		if(list.isEmpty())
 			return new ArrayList<OpcionDTO>();

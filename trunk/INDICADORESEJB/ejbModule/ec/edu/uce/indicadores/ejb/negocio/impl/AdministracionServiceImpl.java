@@ -130,11 +130,14 @@ public class AdministracionServiceImpl implements AdministracionService{
 	}
 
 	@Override
-	public PerfilDTO createPerfil(PerfilDTO perfil) throws IndicadoresException
+	public PerfilDTO createOrUpdatePerfil(PerfilDTO perfil) throws IndicadoresException
 	{
 		log.info("createPerfil");
 		try{
-			return factoryDAO.getPerfilDAOImpl().create(perfil);
+			if(perfil.getPerCodigo()!=null)
+				return factoryDAO.getPerfilDAOImpl().edit(perfil);
+			else
+				return factoryDAO.getPerfilDAOImpl().create(perfil);
 		}
 		catch(Exception e)
 		{
