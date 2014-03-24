@@ -56,7 +56,7 @@
 					
 						<div align="center">
 						<p:pieChart id="sample" value="#{historicoIndicadorController.pieModel}" legendPosition="w"  
-                			title="Historial" style="width:400px;height:300px" showDataLabels="true" /> 					
+                			title="Historial" style="width:400px;height:300px;" showDataLabels="true" /> 					
 						</div>
 						
 						<br/>
@@ -72,33 +72,42 @@
 						<p:meterGaugeChart id="sampleDash" value="#{historicoIndicadorController.meterGaugeModel}" 
 							style="width:400px;height:250px" title="Ideal / Objetivo" label="%"/>  						
 						</div>
+						
 					<table width="100%">
 						<tr>
 							<td><h:outputLabel value="Valor Inicial:" style="font-weight:bold" /></td>
 							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorInicial}" /></td>
 							
-							<td><h:outputLabel value="Brecha Ideal:" style="font-weight:bold"/></td>
-							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>						
 						</tr>
 						<tr>	
 							<td><h:outputLabel value="Valor Actual:" style="font-weight:bold"/></td>
 							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorActual}" /></td>
 							
-							<td><h:outputLabel value="Brecha Objetivo:" style="font-weight:bold"/></td>
-							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorObjetivo - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>						
 						</tr>
-						<tr>
-							<td><h:outputLabel value="Valor Ideal:" style="font-weight:bold"/></td>
-							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal}" /></td>												
-						</tr>							
 						<tr>
 							<td><h:outputLabel value="Valor Objetivo:" style="font-weight:bold"/></td>
 							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorObjetivo}" /></td>
+
+							<td><h:outputLabel value="Brecha Objetivo:" style="font-weight:bold"/></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorObjetivo - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>													
 						</tr>
+						<tr>
+							<td><h:outputLabel value="Valor Ideal:" style="font-weight:bold"/></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal}" /></td>
+																			
+							<td><h:outputLabel value="Brecha Ideal:" style="font-weight:bold"/></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>																									
+						</tr>							
 						
 						<tr>
 							<td colspan="4" align="center"><p:commandButton value="Registro Valor Actual" type="button" onclick="PF('dlgValor').show();" disabled="#{historicoIndicadorController.disabledAddValue}"/> 
-							<p:commandButton value="Ver Descriptor" type="button" onclick="PF('dlgDescriptor').show();"/> </td>						
+							<p:commandButton value="Ver Descriptor" type="button" onclick="PF('dlgDescriptor').show();"/> 
+<!-- 						    <p:commandButton value="Imprimir" type="button" icon="ui-icon-print">   -->
+<!-- 						        <p:printer target="pnlValorReporte" />   -->
+<!-- 						    </p:commandButton>   -->
+							
+							
+							</td>						
 						</tr>
 					</table>
 					
