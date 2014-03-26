@@ -15,5 +15,8 @@ public interface FactoryDAO {
 	DoctorDAO getDoctorDAOImpl();
 	NoticiaDAO getNoticiaDAOImpl();
 	ModalidadDAO getModalidadDAOImpl();
+	RedDAO getRedDAOImpl();
+	ObservatorioDAO getObservatorioDAOImpl();
+	VeeduriaDAO getVeeduriaDAOImpl();
 
 }

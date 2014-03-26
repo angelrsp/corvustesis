@@ -15,7 +15,7 @@ public class LeyDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ESP_LEY_LEYCODIGO_GENERATOR", sequenceName="ESP_LEY_LEY_CODIGO_SEQ")
+	@SequenceGenerator(name="ESP_LEY_LEYCODIGO_GENERATOR", sequenceName="ESP_LEY_LEY_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESP_LEY_LEYCODIGO_GENERATOR")
 	@Column(name="ley_codigo")
 	private Integer leyCodigo;

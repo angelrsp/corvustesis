@@ -15,7 +15,7 @@ public class EticaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ESP_ETICA_ETICODIGO_GENERATOR", sequenceName="ESP_ETICA_ETI_CODIGO_SEQ")
+	@SequenceGenerator(name="ESP_ETICA_ETICODIGO_GENERATOR", sequenceName="ESP_ETICA_ETI_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESP_ETICA_ETICODIGO_GENERATOR")
 	@Column(name="eti_codigo")
 	private Integer etiCodigo;

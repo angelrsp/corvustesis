@@ -15,7 +15,7 @@ public class PremioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ESP_PREMIO_PRECODIGO_GENERATOR", sequenceName="ESP_PREMIO_PRE_CODIGO_SEQ")
+	@SequenceGenerator(name="ESP_PREMIO_PRECODIGO_GENERATOR", sequenceName="ESP_PREMIO_PRE_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESP_PREMIO_PRECODIGO_GENERATOR")
 	@Column(name="pre_codigo")
 	private Integer preCodigo;

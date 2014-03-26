@@ -15,7 +15,7 @@ public class NoticiaArgosDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ARG_NOTICIA_NOTCODIGO_GENERATOR", sequenceName="ARG_NOTICIA_NOT_CODIGO_SEQ")
+	@SequenceGenerator(name="ARG_NOTICIA_NOTCODIGO_GENERATOR", sequenceName="ARG_NOTICIA_NOT_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ARG_NOTICIA_NOTCODIGO_GENERATOR")
 	@Column(name="not_codigo")
 	private Integer notCodigo;

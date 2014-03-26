@@ -16,7 +16,7 @@ public class MaestroCiespalDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ESP_MAESTRO_CIESPAL_MCICODIGO_GENERATOR", sequenceName="ESP_MAESTRO_CIESPAL_MCI_CODIGO_SEQ")
+	@SequenceGenerator(name="ESP_MAESTRO_CIESPAL_MCICODIGO_GENERATOR", sequenceName="ESP_MAESTRO_CIESPAL_MCI_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESP_MAESTRO_CIESPAL_MCICODIGO_GENERATOR")
 	@Column(name="mci_codigo")
 	private Integer mciCodigo;

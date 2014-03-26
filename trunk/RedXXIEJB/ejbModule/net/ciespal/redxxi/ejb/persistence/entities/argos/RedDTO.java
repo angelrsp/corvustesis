@@ -1,7 +1,9 @@
 package net.ciespal.redxxi.ejb.persistence.entities.argos;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -16,7 +18,7 @@ public class RedDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ARG_RED_REDCODIGO_GENERATOR", sequenceName="ARG_RED_RED_CODIGO_SEQ")
+	@SequenceGenerator(name="ARG_RED_REDCODIGO_GENERATOR", sequenceName="ARG_RED_RED_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ARG_RED_REDCODIGO_GENERATOR")
 	@Column(name="red_codigo")
 	private Integer redCodigo;
@@ -29,6 +31,10 @@ public class RedDTO implements Serializable {
 	private List<ObservatorioDTO> argObservatorios;
 
 	public RedDTO() {
+	}
+	
+	public RedDTO(Integer redCodigo) {
+		this.redCodigo = redCodigo;
 	}
 
 	public Integer getRedCodigo() {

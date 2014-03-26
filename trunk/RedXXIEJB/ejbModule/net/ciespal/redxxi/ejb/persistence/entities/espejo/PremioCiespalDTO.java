@@ -15,7 +15,7 @@ public class PremioCiespalDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ESP_PREMIO_CIESPAL_PCICODIGO_GENERATOR", sequenceName="ESP_PREMIO_CIESPAL_PCI_CODIGO_SEQ")
+	@SequenceGenerator(name="ESP_PREMIO_CIESPAL_PCICODIGO_GENERATOR", sequenceName="ESP_PREMIO_CIESPAL_PCI_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESP_PREMIO_CIESPAL_PCICODIGO_GENERATOR")
 	@Column(name="pci_codigo")
 	private Integer pciCodigo;
