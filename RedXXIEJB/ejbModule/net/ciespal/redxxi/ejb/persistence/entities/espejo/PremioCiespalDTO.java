@@ -59,7 +59,7 @@ public class PremioCiespalDTO implements Serializable {
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne
 	@JoinColumn(name="pci_entidad")
-	private EntidadDTO espEntidad;
+	private EntidadEspejoDTO espEntidad;
 
 	public PremioCiespalDTO() {
 	}
@@ -168,11 +168,11 @@ public class PremioCiespalDTO implements Serializable {
 		this.pciTitulo = pciTitulo;
 	}
 
-	public EntidadDTO getEspEntidad() {
+	public EntidadEspejoDTO getEspEntidad() {
 		return this.espEntidad;
 	}
 
-	public void setEspEntidad(EntidadDTO espEntidad) {
+	public void setEspEntidad(EntidadEspejoDTO espEntidad) {
 		this.espEntidad = espEntidad;
 	}
 

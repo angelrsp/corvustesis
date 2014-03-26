@@ -10,8 +10,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="esp_obra")
-@NamedQuery(name="ObraDTO.findAll", query="SELECT o FROM ObraDTO o")
-public class ObraDTO implements Serializable {
+@NamedQuery(name="ObraEspejoDTO.findAll", query="SELECT o FROM ObraDTO o")
+public class ObraEspejoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -32,9 +32,9 @@ public class ObraDTO implements Serializable {
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne
 	@JoinColumn(name="obr_entidad")
-	private EntidadDTO espEntidad;
+	private EntidadEspejoDTO espEntidad;
 
-	public ObraDTO() {
+	public ObraEspejoDTO() {
 	}
 
 	public Integer getObrCodigo() {
@@ -69,11 +69,11 @@ public class ObraDTO implements Serializable {
 		this.obrTitulo = obrTitulo;
 	}
 
-	public EntidadDTO getEspEntidad() {
+	public EntidadEspejoDTO getEspEntidad() {
 		return this.espEntidad;
 	}
 
-	public void setEspEntidad(EntidadDTO espEntidad) {
+	public void setEspEntidad(EntidadEspejoDTO espEntidad) {
 		this.espEntidad = espEntidad;
 	}
 

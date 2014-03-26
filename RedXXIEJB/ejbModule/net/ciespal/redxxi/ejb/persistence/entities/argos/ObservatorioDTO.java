@@ -53,7 +53,7 @@ public class ObservatorioDTO implements Serializable {
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne
 	@JoinColumn(name="obs_entidad")
-	private EntidadDTO argEntidad;
+	private EntidadArgosDTO argEntidad;
 
 	//bi-directional many-to-one association to RedDTO
 	@ManyToOne
@@ -151,11 +151,11 @@ public class ObservatorioDTO implements Serializable {
 		this.obsProvincia = obsProvincia;
 	}
 
-	public EntidadDTO getArgEntidad() {
+	public EntidadArgosDTO getArgEntidad() {
 		return this.argEntidad;
 	}
 
-	public void setArgEntidad(EntidadDTO argEntidad) {
+	public void setArgEntidad(EntidadArgosDTO argEntidad) {
 		this.argEntidad = argEntidad;
 	}
 

@@ -51,7 +51,7 @@ public class MaestroCiespalDTO implements Serializable {
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne
 	@JoinColumn(name="mci_entidad")
-	private EntidadDTO espEntidad;
+	private EntidadEspejoDTO espEntidad;
 
 	public MaestroCiespalDTO() {
 	}
@@ -136,11 +136,11 @@ public class MaestroCiespalDTO implements Serializable {
 		this.mciProvincia = mciProvincia;
 	}
 
-	public EntidadDTO getEspEntidad() {
+	public EntidadEspejoDTO getEspEntidad() {
 		return this.espEntidad;
 	}
 
-	public void setEspEntidad(EntidadDTO espEntidad) {
+	public void setEspEntidad(EntidadEspejoDTO espEntidad) {
 		this.espEntidad = espEntidad;
 	}
 

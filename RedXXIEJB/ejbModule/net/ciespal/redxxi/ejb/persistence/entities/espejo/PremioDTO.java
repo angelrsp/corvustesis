@@ -50,7 +50,7 @@ public class PremioDTO implements Serializable {
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne
 	@JoinColumn(name="pre_entidad")
-	private EntidadDTO espEntidad;
+	private EntidadEspejoDTO espEntidad;
 
 	public PremioDTO() {
 	}
@@ -135,11 +135,11 @@ public class PremioDTO implements Serializable {
 		this.preTitulo = preTitulo;
 	}
 
-	public EntidadDTO getEspEntidad() {
+	public EntidadEspejoDTO getEspEntidad() {
 		return this.espEntidad;
 	}
 
-	public void setEspEntidad(EntidadDTO espEntidad) {
+	public void setEspEntidad(EntidadEspejoDTO espEntidad) {
 		this.espEntidad = espEntidad;
 	}
 

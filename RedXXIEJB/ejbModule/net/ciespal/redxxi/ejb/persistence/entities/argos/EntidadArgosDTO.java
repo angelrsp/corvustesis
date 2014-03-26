@@ -11,8 +11,8 @@ import java.util.List;
  */
 @Entity
 @Table(name="arg_entidad")
-@NamedQuery(name="EntidadDTO.findAll", query="SELECT e FROM EntidadDTO e")
-public class EntidadDTO implements Serializable {
+@NamedQuery(name="EntidadArgosDTO.findAll", query="SELECT e FROM EntidadDTO e")
+public class EntidadArgosDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -26,7 +26,7 @@ public class EntidadDTO implements Serializable {
 
 	//bi-directional many-to-one association to ContactoDTO
 	@OneToMany(mappedBy="argEntidad")
-	private List<ContactoDTO> argContactos;
+	private List<ContactoArgosDTO> argContactos;
 
 	//bi-directional many-to-one association to DefensorDTO
 	@OneToMany(mappedBy="argEntidad")
@@ -34,7 +34,7 @@ public class EntidadDTO implements Serializable {
 
 	//bi-directional many-to-one association to NoticiaDTO
 	@OneToMany(mappedBy="argEntidad")
-	private List<NoticiaDTO> argNoticias;
+	private List<NoticiaArgosDTO> argNoticias;
 
 	//bi-directional many-to-one association to ObservatorioDTO
 	@OneToMany(mappedBy="argEntidad")
@@ -44,7 +44,7 @@ public class EntidadDTO implements Serializable {
 	@OneToMany(mappedBy="argEntidad")
 	private List<VeeduriaDTO> argVeedurias;
 
-	public EntidadDTO() {
+	public EntidadArgosDTO() {
 	}
 
 	public Integer getEntCodigo() {
@@ -63,22 +63,22 @@ public class EntidadDTO implements Serializable {
 		this.entTipo = entTipo;
 	}
 
-	public List<ContactoDTO> getArgContactos() {
+	public List<ContactoArgosDTO> getArgContactos() {
 		return this.argContactos;
 	}
 
-	public void setArgContactos(List<ContactoDTO> argContactos) {
+	public void setArgContactos(List<ContactoArgosDTO> argContactos) {
 		this.argContactos = argContactos;
 	}
 
-	public ContactoDTO addArgContacto(ContactoDTO argContacto) {
+	public ContactoArgosDTO addArgContacto(ContactoArgosDTO argContacto) {
 		getArgContactos().add(argContacto);
 		argContacto.setArgEntidad(this);
 
 		return argContacto;
 	}
 
-	public ContactoDTO removeArgContacto(ContactoDTO argContacto) {
+	public ContactoArgosDTO removeArgContacto(ContactoArgosDTO argContacto) {
 		getArgContactos().remove(argContacto);
 		argContacto.setArgEntidad(null);
 
@@ -107,22 +107,22 @@ public class EntidadDTO implements Serializable {
 		return argDefensor;
 	}
 
-	public List<NoticiaDTO> getArgNoticias() {
+	public List<NoticiaArgosDTO> getArgNoticias() {
 		return this.argNoticias;
 	}
 
-	public void setArgNoticias(List<NoticiaDTO> argNoticias) {
+	public void setArgNoticias(List<NoticiaArgosDTO> argNoticias) {
 		this.argNoticias = argNoticias;
 	}
 
-	public NoticiaDTO addArgNoticia(NoticiaDTO argNoticia) {
+	public NoticiaArgosDTO addArgNoticia(NoticiaArgosDTO argNoticia) {
 		getArgNoticias().add(argNoticia);
 		argNoticia.setArgEntidad(this);
 
 		return argNoticia;
 	}
 
-	public NoticiaDTO removeArgNoticia(NoticiaDTO argNoticia) {
+	public NoticiaArgosDTO removeArgNoticia(NoticiaArgosDTO argNoticia) {
 		getArgNoticias().remove(argNoticia);
 		argNoticia.setArgEntidad(null);
 

@@ -56,7 +56,7 @@ public class EticaDTO implements Serializable {
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne
 	@JoinColumn(name="eti_entidad")
-	private EntidadDTO espEntidad;
+	private EntidadEspejoDTO espEntidad;
 
 	public EticaDTO() {
 	}
@@ -157,11 +157,11 @@ public class EticaDTO implements Serializable {
 		this.etiTituloObra = etiTituloObra;
 	}
 
-	public EntidadDTO getEspEntidad() {
+	public EntidadEspejoDTO getEspEntidad() {
 		return this.espEntidad;
 	}
 
-	public void setEspEntidad(EntidadDTO espEntidad) {
+	public void setEspEntidad(EntidadEspejoDTO espEntidad) {
 		this.espEntidad = espEntidad;
 	}
 

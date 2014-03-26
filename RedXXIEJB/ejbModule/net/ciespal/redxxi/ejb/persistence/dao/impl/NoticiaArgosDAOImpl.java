@@ -3,9 +3,9 @@ package net.ciespal.redxxi.ejb.persistence.dao.impl;
 import javax.persistence.EntityManager;
 
 import net.ciespal.redxxi.ejb.persistence.dao.NoticiaArgosDAO;
-import net.ciespal.redxxi.ejb.persistence.entities.argos.NoticiaDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.NoticiaArgosDTO;
 
-public class NoticiaArgosDAOImpl extends AbstractFacadeImpl<NoticiaDTO> implements NoticiaArgosDAO {
+public class NoticiaArgosDAOImpl extends AbstractFacadeImpl<NoticiaArgosDTO> implements NoticiaArgosDAO {
 
 	public NoticiaArgosDAOImpl() {
 		super();

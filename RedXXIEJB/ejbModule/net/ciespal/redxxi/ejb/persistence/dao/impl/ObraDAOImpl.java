@@ -3,9 +3,9 @@ package net.ciespal.redxxi.ejb.persistence.dao.impl;
 import javax.persistence.EntityManager;
 
 import net.ciespal.redxxi.ejb.persistence.dao.ObraDAO;
-import net.ciespal.redxxi.ejb.persistence.entities.espejo.ObraDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.ObraEspejoDTO;
 
-public class ObraDAOImpl extends AbstractFacadeImpl<ObraDTO> implements ObraDAO {
+public class ObraDAOImpl extends AbstractFacadeImpl<ObraEspejoDTO> implements ObraDAO {
 
 	public ObraDAOImpl() {
 		super();

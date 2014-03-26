@@ -20,20 +20,20 @@
 	<class>net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.UniversidadListDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.FacultadListDTO</class>
-	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.DefensorDTO</class>
-	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.EntidadDTO</class>
-	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.NoticiaDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.EntidadArgosDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.NoticiaArgosDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.RedDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.VeeduriaDTO</class>
-	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.EntidadDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.EntidadEspejoDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.LeyDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalDTO</class>
-	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaDTO</class>
-	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.ObraDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.ObraEspejoDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioCiespalDTO</class>
 		<properties>
