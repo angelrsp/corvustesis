@@ -9,75 +9,100 @@
 
 	<ui:define name="contenido">
 	
-		<p:growl id="growl"></p:growl>
+		<p:growl id="growl"/>
 		
-		<p:panel id="pnlDatos" header="#{i18n['label.panel.observatorio']}">
+		<p:panel id="pnlDatos" header="#{i18n['label.panel.veeduria']}">
 
 		<table>
 			<tr>
 				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{universidadController.pais}" filter="true">
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{veeduriaController.pais}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
-						<f:selectItems value="#{pregradoController.catalogoPais}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerProvinciaChange}" process="@this" update="somProvinvia"/>						
+						<f:selectItems value="#{veeduriaController.catalogoPais}"/>
+						<p:ajax event="change" listener="#{veeduriaController.obtenerProvinciaChange}" process="@this" update="somProvinvia"/>						
 					</p:selectOneMenu></td>
 
 				<td><h:outputText value="#{i18n['label.provincia']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{universidadController.provincia}" filter="true">
+				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{veeduriaController.provincia}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
-						<f:selectItems value="#{universidadController.catalogoProvincia}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerCiudadChange}" process="@this" update="somCiudad"/>
+						<f:selectItems value="#{veeduriaController.catalogoProvincia}"/>
+						<p:ajax event="change" listener="#{veeduriaController.obtenerCiudadChange}" process="@this" update="somCiudad"/>
 					</p:selectOneMenu></td>
 
 			</tr>
+			
 			<tr>
-
 				<td><h:outputText value="#{i18n['label.ciudad']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somCiudad" value="#{universidadController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
+				<td><p:selectOneMenu id="somCiudad" value="#{veeduriaController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
-						<f:selectItems value="#{universidadController.catalogoCiudad}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerCiudadChange}" process="@this"/>
+						<f:selectItems value="#{veeduriaController.catalogoCiudad}"/>
+						<p:ajax event="change" listener="#{veeduriaController.obtenerCiudadChange}" process="@this" update="tblVeeduria"/>
 					</p:selectOneMenu></td>
 			</tr>
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><p:inputText value="#{veeduriaDataManager.veeduria.veeNombre}" required="true" requiredMessage="#{i18n['label.nombre']}&#160;#{i18n['label.requerido']}"/></td>
 			</tr>
 			
 			<tr>	
 				<td><h:outputText value="#{i18n['label.datos.institucionales']}:&#160;"/></td>
-				<td><p:inputTextarea autoResize="false"/></td>				
+				<td><p:inputTextarea autoResize="false" value="#{veeduriaDataManager.veeduria.veeDatoInstitucional}" required="true" requiredMessage="#{i18n['label.datos.institucionales']}&#160;#{i18n['label.requerido']}"/></td>				
 			</tr>
 
 			<tr>	
 				<td><h:outputText value="#{i18n['label.institucion.patrocinadora']}:&#160;"/></td>
-				<td><p:inputTextarea autoResize="false"/></td>				
+				<td><p:inputTextarea autoResize="false" value="#{veeduriaDataManager.veeduria.veeInstitucionPatrocinadora}" required="true" requiredMessage="#{i18n['label.institucion.patrocinadora']}&#160;#{i18n['label.requerido']}"/></td>				
 			</tr>
 
 			<tr>	
 				<td><h:outputText value="#{i18n['label.anio.fundacion']}:&#160;"/></td>
-				<td><p:inputText/></td>				
+				<td><p:inputText value="#{veeduriaDataManager.veeduria.veeAnioFundacion}" onkeypress="return isNumberKey(event)" required="true" requiredMessage="#{i18n['label.anio.fundacion']}&#160;#{i18n['label.requerido']}"/></td>				
 			</tr>
 
 			<tr>	
 				<td><h:outputText value="#{i18n['label.mision']}:&#160;"/></td>
-				<td><p:inputText/></td>				
+				<td><p:inputText value="#{veeduriaDataManager.veeduria.veeMision}" required="true" requiredMessage="#{i18n['label.mision']}&#160;#{i18n['label.requerido']}"/></td>				
 			</tr>
 
 			<tr>	
 				<td><h:outputText value="#{i18n['label.lineas.tematicas']}:&#160;"/></td>
-				<td><p:inputText/></td>				
+				<td><p:inputText value="#{veeduriaDataManager.veeduria.veeLineaTematica}" required="true" requiredMessage="#{i18n['label.lineas.tematicas']}&#160;#{i18n['label.requerido']}"/></td>				
 			</tr>
 
 			<tr>	
 				<td><h:outputText value="#{i18n['label.actividades.principales']}:&#160;"/></td>
-				<td><p:inputText/></td>				
+				<td><p:inputText value="#{veeduriaDataManager.veeduria.veeActividadPrinciapl}" required="true" requiredMessage="#{i18n['label.actividades.principales']}&#160;#{i18n['label.requerido']}"/></td>				
 			</tr>
 
-
+			<tr>
+				<td colspan="9" align="center">
+					<p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{veeduriaController.save}" process="pnlDatos" update="pnlDatos,growl" icon="ui-icon-disk"/>
+					<p:commandButton value="#{i18n['boton.cancelar']}" actionListener="#{veeduriaController.cancel}" process="@this" update="pnlDatos,growl" icon="ui-icon-cancel"/>
+				</td>
+			</tr>
 
 			</table>
+
+
+			<p:dataTable id="tblVeeduria" emptyMessage="#{i18n['table.vacio']}" value="#{veeduriaDataManager.veeduriaList}" var="vee">
+	
+				<p:column headerText="#{i18n['label.nombre']}">
+					<h:outputText value="#{vee.veeNombre}" />
+				</p:column>		
+	
+				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{veeduriaController.edit(vee)}" icon="ui-icon-pencil" process=":contenido:tblVeeduria" update=":contenido:pnlDatos"/>
+				</p:column>
+			
+				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{veeduriaController.delete(vee)}" icon="ui-icon-close" process=":contenido:tblVeeduria" update="tblVeeduria,:contenido:growl">
+						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+					</p:commandButton>
+				</p:column>		
+	
+			</p:dataTable>
+
 
 		</p:panel>	
 	
