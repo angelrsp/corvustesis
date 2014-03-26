@@ -1,7 +1,7 @@
 package net.ciespal.redxxi.ejb.persistence.dao;
 
-import net.ciespal.redxxi.ejb.persistence.entities.espejo.EntidadDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.EntidadEspejoDTO;
 
-public interface EntidadEspejoDAO extends AbstractFacade<EntidadDTO>{
+public interface EntidadEspejoDAO extends AbstractFacade<EntidadEspejoDTO>{
 
 }

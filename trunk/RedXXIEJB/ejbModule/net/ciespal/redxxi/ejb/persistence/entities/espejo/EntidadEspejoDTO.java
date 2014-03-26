@@ -11,8 +11,8 @@ import java.util.List;
  */
 @Entity
 @Table(name="esp_entidad")
-@NamedQuery(name="EntidadDTO.findAll", query="SELECT e FROM EntidadDTO e")
-public class EntidadDTO implements Serializable {
+@NamedQuery(name="EntidadEspejoDTO.findAll", query="SELECT e FROM EntidadDTO e")
+public class EntidadEspejoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -42,11 +42,11 @@ public class EntidadDTO implements Serializable {
 
 	//bi-directional many-to-one association to NoticiaDTO
 	@OneToMany(mappedBy="espEntidad")
-	private List<NoticiaDTO> espNoticias;
+	private List<NoticiaEspejoDTO> espNoticias;
 
 	//bi-directional many-to-one association to ObraDTO
 	@OneToMany(mappedBy="espEntidad")
-	private List<ObraDTO> espObras;
+	private List<ObraEspejoDTO> espObras;
 
 	//bi-directional many-to-one association to PremioDTO
 	@OneToMany(mappedBy="espEntidad")
@@ -56,7 +56,7 @@ public class EntidadDTO implements Serializable {
 	@OneToMany(mappedBy="espEntidad")
 	private List<PremioCiespalDTO> espPremioCiespals;
 
-	public EntidadDTO() {
+	public EntidadEspejoDTO() {
 	}
 
 	public Integer getEntCodigo() {
@@ -163,44 +163,44 @@ public class EntidadDTO implements Serializable {
 		return espMaestroCiespal;
 	}
 
-	public List<NoticiaDTO> getEspNoticias() {
+	public List<NoticiaEspejoDTO> getEspNoticias() {
 		return this.espNoticias;
 	}
 
-	public void setEspNoticias(List<NoticiaDTO> espNoticias) {
+	public void setEspNoticias(List<NoticiaEspejoDTO> espNoticias) {
 		this.espNoticias = espNoticias;
 	}
 
-	public NoticiaDTO addEspNoticia(NoticiaDTO espNoticia) {
+	public NoticiaEspejoDTO addEspNoticia(NoticiaEspejoDTO espNoticia) {
 		getEspNoticias().add(espNoticia);
 		espNoticia.setEspEntidad(this);
 
 		return espNoticia;
 	}
 
-	public NoticiaDTO removeEspNoticia(NoticiaDTO espNoticia) {
+	public NoticiaEspejoDTO removeEspNoticia(NoticiaEspejoDTO espNoticia) {
 		getEspNoticias().remove(espNoticia);
 		espNoticia.setEspEntidad(null);
 
 		return espNoticia;
 	}
 
-	public List<ObraDTO> getEspObras() {
+	public List<ObraEspejoDTO> getEspObras() {
 		return this.espObras;
 	}
 
-	public void setEspObras(List<ObraDTO> espObras) {
+	public void setEspObras(List<ObraEspejoDTO> espObras) {
 		this.espObras = espObras;
 	}
 
-	public ObraDTO addEspObra(ObraDTO espObra) {
+	public ObraEspejoDTO addEspObra(ObraEspejoDTO espObra) {
 		getEspObras().add(espObra);
 		espObra.setEspEntidad(this);
 
 		return espObra;
 	}
 
-	public ObraDTO removeEspObra(ObraDTO espObra) {
+	public ObraEspejoDTO removeEspObra(ObraEspejoDTO espObra) {
 		getEspObras().remove(espObra);
 		espObra.setEspEntidad(null);
 

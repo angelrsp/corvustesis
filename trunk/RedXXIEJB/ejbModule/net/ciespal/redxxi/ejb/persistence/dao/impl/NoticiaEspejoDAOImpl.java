@@ -3,9 +3,9 @@ package net.ciespal.redxxi.ejb.persistence.dao.impl;
 import javax.persistence.EntityManager;
 
 import net.ciespal.redxxi.ejb.persistence.dao.NoticiaEspejoDAO;
-import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
 
-public class NoticiaEspejoDAOImpl extends AbstractFacadeImpl<NoticiaDTO> implements NoticiaEspejoDAO{
+public class NoticiaEspejoDAOImpl extends AbstractFacadeImpl<NoticiaEspejoDTO> implements NoticiaEspejoDAO{
 
 	public NoticiaEspejoDAOImpl() {
 		super();

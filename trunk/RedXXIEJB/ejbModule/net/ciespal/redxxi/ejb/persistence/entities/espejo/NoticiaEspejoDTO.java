@@ -1,22 +1,22 @@
-package net.ciespal.redxxi.ejb.persistence.entities.argos;
+package net.ciespal.redxxi.ejb.persistence.entities.espejo;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
 
 /**
- * The persistent class for the arg_noticia database table.
+ * The persistent class for the esp_noticia database table.
  * 
  */
 @Entity
-@Table(name="arg_noticia")
-@NamedQuery(name="NoticiaDTO.findAll", query="SELECT n FROM NoticiaDTO n")
-public class NoticiaDTO implements Serializable {
+@Table(name="esp_noticia")
+@NamedQuery(name="NoticiaEspejoDTO.findAll", query="SELECT n FROM NoticiaDTO n")
+public class NoticiaEspejoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ARG_NOTICIA_NOTCODIGO_GENERATOR", sequenceName="ARG_NOTICIA_NOT_CODIGO_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ARG_NOTICIA_NOTCODIGO_GENERATOR")
+	@SequenceGenerator(name="ESP_NOTICIA_NOTCODIGO_GENERATOR", sequenceName="ESP_NOTICIA_NOT_CODIGO_SEQ")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESP_NOTICIA_NOTCODIGO_GENERATOR")
 	@Column(name="not_codigo")
 	private Integer notCodigo;
 
@@ -32,9 +32,9 @@ public class NoticiaDTO implements Serializable {
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne
 	@JoinColumn(name="not_entidad")
-	private EntidadDTO argEntidad;
+	private EntidadEspejoDTO espEntidad;
 
-	public NoticiaDTO() {
+	public NoticiaEspejoDTO() {
 	}
 
 	public Integer getNotCodigo() {
@@ -69,12 +69,12 @@ public class NoticiaDTO implements Serializable {
 		this.notTitulo = notTitulo;
 	}
 
-	public EntidadDTO getArgEntidad() {
-		return this.argEntidad;
+	public EntidadEspejoDTO getEspEntidad() {
+		return this.espEntidad;
 	}
 
-	public void setArgEntidad(EntidadDTO argEntidad) {
-		this.argEntidad = argEntidad;
+	public void setEspEntidad(EntidadEspejoDTO espEntidad) {
+		this.espEntidad = espEntidad;
 	}
 
 }

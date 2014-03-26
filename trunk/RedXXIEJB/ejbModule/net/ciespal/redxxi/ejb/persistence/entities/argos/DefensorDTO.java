@@ -38,7 +38,7 @@ public class DefensorDTO implements Serializable {
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne
 	@JoinColumn(name="def_entidad")
-	private EntidadDTO argEntidad;
+	private EntidadArgosDTO argEntidad;
 
 	public DefensorDTO() {
 	}
@@ -91,11 +91,11 @@ public class DefensorDTO implements Serializable {
 		this.defUsuario = defUsuario;
 	}
 
-	public EntidadDTO getArgEntidad() {
+	public EntidadArgosDTO getArgEntidad() {
 		return this.argEntidad;
 	}
 
-	public void setArgEntidad(EntidadDTO argEntidad) {
+	public void setArgEntidad(EntidadArgosDTO argEntidad) {
 		this.argEntidad = argEntidad;
 	}
 

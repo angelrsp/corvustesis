@@ -10,8 +10,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="arg_contacto")
-@NamedQuery(name="ContactoDTO.findAll", query="SELECT c FROM ContactoDTO c")
-public class ContactoDTO implements Serializable {
+@NamedQuery(name="ContactoArgosDTO.findAll", query="SELECT c FROM ContactoDTO c")
+public class ContactoArgosDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -29,9 +29,9 @@ public class ContactoDTO implements Serializable {
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne
 	@JoinColumn(name="con_entidad")
-	private EntidadDTO argEntidad;
+	private EntidadArgosDTO argEntidad;
 
-	public ContactoDTO() {
+	public ContactoArgosDTO() {
 	}
 
 	public Integer getConCodigo() {
@@ -58,11 +58,11 @@ public class ContactoDTO implements Serializable {
 		this.conTipo = conTipo;
 	}
 
-	public EntidadDTO getArgEntidad() {
+	public EntidadArgosDTO getArgEntidad() {
 		return this.argEntidad;
 	}
 
-	public void setArgEntidad(EntidadDTO argEntidad) {
+	public void setArgEntidad(EntidadArgosDTO argEntidad) {
 		this.argEntidad = argEntidad;
 	}
 

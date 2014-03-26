@@ -53,7 +53,7 @@ public class VeeduriaDTO implements Serializable {
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne
 	@JoinColumn(name="vee_entidad")
-	private EntidadDTO argEntidad;
+	private EntidadArgosDTO argEntidad;
 
 	public VeeduriaDTO() {
 	}
@@ -146,11 +146,11 @@ public class VeeduriaDTO implements Serializable {
 		this.veeProvincia = veeProvincia;
 	}
 
-	public EntidadDTO getArgEntidad() {
+	public EntidadArgosDTO getArgEntidad() {
 		return this.argEntidad;
 	}
 
-	public void setArgEntidad(EntidadDTO argEntidad) {
+	public void setArgEntidad(EntidadArgosDTO argEntidad) {
 		this.argEntidad = argEntidad;
 	}
 
