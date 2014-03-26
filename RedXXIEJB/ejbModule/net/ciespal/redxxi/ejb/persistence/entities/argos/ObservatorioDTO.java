@@ -15,7 +15,7 @@ public class ObservatorioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ARG_OBSERVATORIO_OBSCODIGO_GENERATOR", sequenceName="ARG_OBSERVATORIO_OBS_CODIGO_SEQ")
+	@SequenceGenerator(name="ARG_OBSERVATORIO_OBSCODIGO_GENERATOR", sequenceName="ARG_OBSERVATORIO_OBS_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ARG_OBSERVATORIO_OBSCODIGO_GENERATOR")
 	@Column(name="obs_codigo")
 	private Integer obsCodigo;
@@ -51,7 +51,7 @@ public class ObservatorioDTO implements Serializable {
 	private Integer obsProvincia;
 
 	//bi-directional many-to-one association to EntidadDTO
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="obs_entidad")
 	private EntidadArgosDTO argEntidad;
 

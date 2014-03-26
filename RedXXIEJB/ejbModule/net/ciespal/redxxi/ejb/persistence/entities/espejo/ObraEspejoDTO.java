@@ -15,7 +15,7 @@ public class ObraEspejoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ESP_OBRA_OBRCODIGO_GENERATOR", sequenceName="ESP_OBRA_OBR_CODIGO_SEQ")
+	@SequenceGenerator(name="ESP_OBRA_OBRCODIGO_GENERATOR", sequenceName="ESP_OBRA_OBR_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESP_OBRA_OBRCODIGO_GENERATOR")
 	@Column(name="obr_codigo")
 	private Integer obrCodigo;

@@ -15,9 +15,12 @@ import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.MencionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ModalidadDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.NoticiaDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.ObservatorioDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.OrganizacioDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ProyectoInvestigacionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PublicacionDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.RedDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.VeeduriaDAO;
 
 
 @Stateless
@@ -39,6 +42,11 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private DoctorDAO doctorDAO;
 	private NoticiaDAO noticiaDAO;
 	private ModalidadDAO modalidadDAO;
+	
+	private RedDAO redDAO; 
+	private ObservatorioDAO observatorioDAO;
+	private VeeduriaDAO veeduriaDAO;
+	
 	
 	@Override
 	public CatalogoDAO getCatalogoImpl() {
@@ -143,4 +151,29 @@ public class FactoryDAOImpl implements FactoryDAO{
 		}
 		return modalidadDAO;
 	}
+	
+	@Override
+	public RedDAO getRedDAOImpl() {
+		if (redDAO == null) {
+			redDAO = new RedDAOImpl(entityManager);
+		}
+		return redDAO;
+	}
+
+	@Override
+	public ObservatorioDAO getObservatorioDAOImpl() {
+		if (observatorioDAO == null) {
+			observatorioDAO = new ObservatorioDAOImpl(entityManager);
+		}
+		return observatorioDAO;
+	}
+
+	@Override
+	public VeeduriaDAO getVeeduriaDAOImpl() {
+		if (veeduriaDAO == null) {
+			veeduriaDAO = new VeeduriaDAOImpl(entityManager);
+		}
+		return veeduriaDAO;
+	}
+
 }

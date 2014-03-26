@@ -16,7 +16,7 @@ public class EntidadEspejoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ESP_ENTIDAD_ENTCODIGO_GENERATOR", sequenceName="ESP_ENTIDAD_ENT_CODIGO_SEQ")
+	@SequenceGenerator(name="ESP_ENTIDAD_ENTCODIGO_GENERATOR", sequenceName="ESP_ENTIDAD_ENT_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESP_ENTIDAD_ENTCODIGO_GENERATOR")
 	@Column(name="ent_codigo")
 	private Integer entCodigo;

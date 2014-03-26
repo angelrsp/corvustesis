@@ -16,7 +16,7 @@ public class GranMaestroDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ESP_GRAN_MAESTRO_GMACODIGO_GENERATOR", sequenceName="ESP_GRAN_MAESTRO_GMA_CODIGO_SEQ")
+	@SequenceGenerator(name="ESP_GRAN_MAESTRO_GMACODIGO_GENERATOR", sequenceName="ESP_GRAN_MAESTRO_GMA_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESP_GRAN_MAESTRO_GMACODIGO_GENERATOR")
 	@Column(name="gma_codigo")
 	private Integer gmaCodigo;

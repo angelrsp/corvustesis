@@ -15,7 +15,7 @@ public class VeeduriaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ARG_VEEDURIA_VEECODIGO_GENERATOR", sequenceName="ARG_VEEDURIA_VEE_CODIGO_SEQ")
+	@SequenceGenerator(name="ARG_VEEDURIA_VEECODIGO_GENERATOR", sequenceName="ARG_VEEDURIA_VEE_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ARG_VEEDURIA_VEECODIGO_GENERATOR")
 	@Column(name="vee_codigo")
 	private Integer veeCodigo;
@@ -51,7 +51,7 @@ public class VeeduriaDTO implements Serializable {
 	private Integer veeProvincia;
 
 	//bi-directional many-to-one association to EntidadDTO
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="vee_entidad")
 	private EntidadArgosDTO argEntidad;
 
