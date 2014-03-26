@@ -9,75 +9,107 @@
 
 	<ui:define name="contenido">
 	
-		<p:growl id="growl"></p:growl>
+		<p:growl id="growl"/>
 		
 		<p:panel id="pnlDatos" header="#{i18n['label.panel.observatorio']}">
 
 		<table>
 			<tr>
 				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{universidadController.pais}" filter="true">
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{observatorioController.pais}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
-						<f:selectItems value="#{pregradoController.catalogoPais}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerProvinciaChange}" process="@this" update="somProvinvia"/>						
+						<f:selectItems value="#{observatorioController.catalogoPais}"/>
+						<p:ajax event="change" listener="#{observatorioController.obtenerProvinciaChange}" process="@this" update="somProvinvia"/>						
 					</p:selectOneMenu></td>
 
 				<td><h:outputText value="#{i18n['label.provincia']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{universidadController.provincia}" filter="true">
+				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{observatorioController.provincia}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
-						<f:selectItems value="#{universidadController.catalogoProvincia}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerCiudadChange}" process="@this" update="somCiudad"/>
+						<f:selectItems value="#{observatorioController.catalogoProvincia}"/>
+						<p:ajax event="change" listener="#{observatorioController.obtenerCiudadChange}" process="@this" update="somCiudad"/>
 					</p:selectOneMenu></td>
 
 			</tr>
 			<tr>
 
 				<td><h:outputText value="#{i18n['label.ciudad']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somCiudad" value="#{universidadController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
+				<td><p:selectOneMenu id="somCiudad" value="#{observatorioController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
-						<f:selectItems value="#{universidadController.catalogoCiudad}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerCiudadChange}" process="@this"/>
+						<f:selectItems value="#{observatorioController.catalogoCiudad}"/>
+						<p:ajax event="change" listener="#{observatorioController.ciudadChange}" process="@this" update="tblObservatorio"/>
 					</p:selectOneMenu></td>
 			</tr>
 
 			<tr>
+				<td><h:outputText value="#{i18n['label.red']}:&#160;" /></td>
+				<td><p:selectOneMenu value="#{observatorioDataManager.redValue}" required="true" requiredMessage="#{i18n['label.red']}&#160;#{i18n['label.requerido']}" filter="true">
+						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
+						<f:selectItems value="#{observatorioController.observatorioDataManager.redList}" var="red" itemValue="#{red.redCodigo}" itemLabel="#{red.redNombre}"/>
+					</p:selectOneMenu></td>				
+			</tr>
+
+			<tr>
 				<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><p:inputText value="#{observatorioDataManager.observatorio.obsNombre}" required="true" requiredMessage="#{i18n['label.nombre']}&#160;#{i18n['label.requerido']}"/></td>
 			</tr>
 			
 			<tr>	
 				<td><h:outputText value="#{i18n['label.datos.institucionales']}:&#160;"/></td>
-				<td><p:inputTextarea autoResize="false"/></td>				
+				<td><p:inputTextarea autoResize="false" value="#{observatorioDataManager.observatorio.obsDatosInstitucionales}" required="true" requiredMessage="#{i18n['label.datos.institucionales']}&#160;#{i18n['label.requerido']}"/></td>				
 			</tr>
 
 			<tr>	
 				<td><h:outputText value="#{i18n['label.institucion.patrocinadora']}:&#160;"/></td>
-				<td><p:inputTextarea autoResize="false"/></td>				
+				<td><p:inputTextarea autoResize="false" value="#{observatorioDataManager.observatorio.obsInstitucionPatrocinadora}" required="true" requiredMessage="#{i18n['label.institucion.patrocinadora']}&#160;#{i18n['label.requerido']}"/></td>				
 			</tr>
 
 			<tr>	
 				<td><h:outputText value="#{i18n['label.anio.fundacion']}:&#160;"/></td>
-				<td><p:inputText/></td>				
+				<td><p:inputText value="#{observatorioDataManager.observatorio.obsAnioFundacion}" onkeypress="return isNumberKey(event)" required="true" requiredMessage="#{i18n['label.anio.fundacion']}&#160;#{i18n['label.requerido']}"/></td>				
 			</tr>
 
 			<tr>	
 				<td><h:outputText value="#{i18n['label.mision']}:&#160;"/></td>
-				<td><p:inputText/></td>				
+				<td><p:inputText value="#{observatorioDataManager.observatorio.obsMision}" required="true" requiredMessage="#{i18n['label.mision']}&#160;#{i18n['label.requerido']}"/></td>				
 			</tr>
 
 			<tr>	
 				<td><h:outputText value="#{i18n['label.lineas.tematicas']}:&#160;"/></td>
-				<td><p:inputText/></td>				
+				<td><p:inputText value="#{observatorioDataManager.observatorio.obsLineaTematica}" required="true" requiredMessage="#{i18n['label.lineas.tematicas']}&#160;#{i18n['label.requerido']}"/></td>				
 			</tr>
 
 			<tr>	
 				<td><h:outputText value="#{i18n['label.actividades.principales']}:&#160;"/></td>
-				<td><p:inputText/></td>				
+				<td><p:inputText value="#{observatorioDataManager.observatorio.obsActividadesPrincipales}" required="true" requiredMessage="#{i18n['label.actividades.principales']}&#160;#{i18n['label.requerido']}"/></td>				
 			</tr>
 
-
+			<tr>
+				<td colspan="9" align="center">
+					<p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{observatorioController.save}" process="pnlDatos" update="pnlDatos,growl" icon="ui-icon-disk"/>
+					<p:commandButton value="#{i18n['boton.cancelar']}" actionListener="#{observatorioController.cancel}" process="@this" update="pnlDatos,growl" icon="ui-icon-cancel"/>
+				</td>
+			</tr>
 
 		</table>
+
+		<p:dataTable id="tblObservatorio" emptyMessage="#{i18n['table.vacio']}" value="#{observatorioDataManager.observatorioList}" var="obs">
+
+			<p:column headerText="#{i18n['label.nombre']}">
+				<h:outputText value="#{obs.obsNombre}" />
+			</p:column>		
+
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{observatorioController.edit(obs)}" icon="ui-icon-pencil" process=":contenido:tblObservatorio" update=":contenido:pnlDatos"/>
+			</p:column>
+		
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{observatorioController.delete(obs)}" icon="ui-icon-close" process=":contenido:tblObservatorio" update="tblObservatorio,:contenido:growl">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
+			</p:column>		
+
+		</p:dataTable>
+
 
 		</p:panel>	
 	
