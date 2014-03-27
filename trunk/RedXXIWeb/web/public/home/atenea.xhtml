@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" 
+      template="/WEB-INF/template/public.xhtml">
+
+
+<ui:define name="left">
+	<table width="100%">
+			<tr>
+				<td>
+					<h:outputText value="ATENEA" styleClass="descripcion"/>
+					<div class="line-separator"></div>
+			
+						<h:dataTable value="#{reportPublicController.reportPublicDataManager.ateneaList}" var="ate" width="100%">
+						
+							<h:column>			    			
+			    				<h:commandLink value="#{ate.descripcion}" styleClass="linkClass2"/>
+			    			</h:column>
+			    			<h:column>	
+								<h:commandLink value="#{ate.count}" styleClass="linkClass"/><br />			    			
+							</h:column>
+						</h:dataTable>
+
+											
+					<div class="line-separator"></div>
+				</td>
+			</tr>
+		</table>
+</ui:define>
+
+<ui:define name="right">
+		
+	<table width="100%">
+		<tr>
+			<td>
+				<h:outputText value="Consulta por paises" styleClass="descripcion"/>
+				<div class="line-separator"></div>		
+
+				<p:dataGrid value="#{reportPublicController.reportPublicDataManager.paisList}" var="pai" columns="6">
+					<table>
+						<tr align="center">
+							<td>
+								<p:graphicImage value="#{pai.imagenPath}" height="35" width="60"/>
+			    				
+		    				</td>
+		    			</tr>
+		    			<tr align="center">
+		    				<td>
+		    				<h:commandLink value="#{pai.nombre}" actionListener="#{reportPublicController.selectPais(pai)}" styleClass="linkClass"/>
+		    				</td>
+		    			</tr>
+					</table>
+				</p:dataGrid>
+				<div class="line-separator"></div>							
+			</td>
+		</tr>
+		
+	</table>	
+	
+</ui:define>
+
+</ui:composition>
