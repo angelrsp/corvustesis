@@ -15,80 +15,110 @@
 		<table>
 			<tr>
 				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{universidadController.pais}" filter="true">
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{premioCiespalController.pais}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
-						<f:selectItems value="#{pregradoController.catalogoPais}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerProvinciaChange}" process="@this" update="somProvinvia"/>						
+						<f:selectItems value="#{premioCiespalController.catalogoPais}"/>
+						<p:ajax event="change" listener="#{premioCiespalController.obtenerProvinciaChange()}" process="@this" update="somProvinvia"/>						
 					</p:selectOneMenu></td>
 
 				<td><h:outputText value="#{i18n['label.provincia']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{universidadController.provincia}" filter="true">
+				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{premioCiespalController.provincia}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
-						<f:selectItems value="#{universidadController.catalogoProvincia}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerCiudadChange}" process="@this" update="somCiudad"/>
+						<f:selectItems value="#{premioCiespalController.catalogoProvincia}"/>
+						<p:ajax event="change" listener="#{premioCiespalController.obtenerCiudadChange()}" process="@this" update="somCiudad"/>
 					</p:selectOneMenu></td>
 
 			</tr>
 			<tr>
 
 				<td><h:outputText value="#{i18n['label.ciudad']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somCiudad" value="#{universidadController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
+				<td><p:selectOneMenu id="somCiudad" value="#{premioCiespalController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
-						<f:selectItems value="#{universidadController.catalogoCiudad}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerCiudadChange}" process="@this"/>
+						<f:selectItems value="#{premioCiespalController.catalogoCiudad}"/>
+						<p:ajax event="change" listener="#{premioCiespalController.obtenerCiudadChange()}" process="@this"/>
 					</p:selectOneMenu></td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Premio Instituido:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><h:outputText value="#{i18n['label.premio.instituido']}:&#160;" /></td>
+				<td><p:inputText value="#{premioCiespalDataManager.premioCiespalDTO.pciPremioInstituido}" /></td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Obra y autor(es) premiados:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><h:outputText value="#{i18n['label.obra.autor.premiados']}:&#160;" /></td>
+				<td><p:inputText   value="#{premioCiespalDataManager.premioCiespalDTO.pciObraAutor}"/></td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Año Otorgamiento:&#160;" /></td>
-				<td><p:inputText onkeypress="return isNumberKey(event);"/></td>
+				<td><h:outputText value="#{i18n['label.anio.otorgamiento']}:&#160;"/></td>
+				<td><p:inputText  value="#{premioCiespalDataManager.premioCiespalDTO.pciAnio}" onkeypress="return isNumberKey(event);"/></td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Título:&#160;" /></td>
-				<td><p:inputText/></td>			
+				<td><h:outputText value="#{i18n['label.genero']}:&#160;" /></td>
+				<td><p:inputText value="#{premioCiespalDataManager.premioCiespalDTO.pciTitulo}" /></td>			
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Género:&#160;" /></td>
+				<td><h:outputText value="#{i18n['label.genero']}:&#160;" /></td>
 				<td><p:selectOneMenu>
 					<f:selectItem itemLabel="--Seleccione--"/>
+					<f:selectItem  value="#{premioCiespalDataManager.premioCiespalDTO.pciGenero}"/>
 				</p:selectOneMenu></td>			
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Medio de Comunicación:&#160;" /></td>
+				<td><h:outputText value="#{i18n['label.tipo.medio.comunicacion']}:&#160;"/></td>
 				<td><p:selectOneMenu>
 					<f:selectItem itemLabel="--Seleccione--"/>
+					<f:selectItem  value="#{premioCiespalDataManager.premioCiespalDTO.pciMedio}"/>
 				</p:selectOneMenu></td>			
 			</tr>
 
 			
 			<tr>
-				<td><h:outputText value="Nombre del Autor Principal:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><h:outputText value="#{i18n['label.nombre.autor.principal']}:&#160;" /></td>
+				<td><p:inputText  value="#{premioCiespalDataManager.premioCiespalDTO.pciNombreAutor}" /></td>
 				
-				<td><h:outputText value="Apellido del Autor Principal:&#160;" /></td>
-				<td><p:inputText/></td>				
+				<td><h:outputText value="#{i18n['label.apellido.autor.principal']}:&#160;" /></td>
+				<td><p:inputText  value="#{premioCiespalDataManager.premioCiespalDTO.pciApellidoAutor}"/></td>				
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Muestra de la Obra:&#160;" /></td>
-				<td><p:inputText/></td>		
+				<td><h:outputText value="#{i18n['label.muestra.obra']}:&#160;" /></td>
+				<td><p:inputText  value="#{premioCiespalDataManager.premioCiespalDTO.pciMuestraObra}"/></td>		
 			</tr>			
 			
+			<tr>
+				<td colspan="9" align="center">
+					<p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{premioCiespalController.save}" process="pnlDatos" update="pnlDatos,growl" icon="ui-icon-disk"/>
+					<p:commandButton value="#{i18n['boton.cancelar']}" actionListener="#{premioCiespalController.cancel}" process="@this" update="pnlDatos,growl" icon="ui-icon-cancel"/>
+				</td>
+			</tr>	
+			
 		</table>
-
+	
+	<p:dataTable id="tblPremioCiespal" emptyMessage="#{i18n['table.vacio']}" value="#{premioCiespalDataManager.premioCiespalList}" var="preC">
+	
+				<p:column headerText="#{i18n['label.titulo']}">
+					<h:outputText value="#{preC.pciTitulo}" />
+				</p:column>		
+	
+				<p:column headerText="#{i18n['label.institucion']}">
+					<h:outputText value="#{preC.pciPremioInstituido}" />
+				</p:column>		
+	
+				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{premioCiespalController.edit(preC)}" icon="ui-icon-pencil" process=":contenido:tblPremioCiespal" update=":contenido:pnlDatos"/>
+				</p:column>
+			
+				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{premioCiespalController.delete(pre)}" icon="ui-icon-close" process=":contenido:tblPremioCiespal" update="tblPremioCiespal,:contenido:growl">
+						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+					</p:commandButton>
+				</p:column>
+	
+			</p:dataTable>
 
 		</p:panel>
 	
