@@ -20,6 +20,8 @@ import net.ciespal.redxxi.ejb.persistence.dao.ModalidadDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.NoticiaDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ObservatorioDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.OrganizacioDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.PremioCiespalDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.PremioDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ProyectoInvestigacionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PublicacionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.RedDAO;
@@ -54,6 +56,8 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private EticaDAO eticaDAO;
 	private GranMaestroDAO granMaestroDAO;
 	private MaestroCiespalDAO maestroCiespalDAO;
+	private PremioDAO premioDAO;
+	private PremioCiespalDAO premioCiespalDAO;
 	
 	@Override
 	public CatalogoDAO getCatalogoImpl() {
@@ -206,5 +210,21 @@ public class FactoryDAOImpl implements FactoryDAO{
 		}
 		return maestroCiespalDAO;
 	}
+	
+	@Override
+	public PremioDAO getPremioDAOImpl() {
+		if (premioDAO == null) {
+			premioDAO = new PremioDAOImpl(entityManager);
+		}
+		return premioDAO;
+	}
 
+	
+	@Override
+	public PremioCiespalDAO getPremioCiespalDAOImpl() {
+		if (premioCiespalDAO == null) {
+			premioCiespalDAO = new PremioCiespalDAOImpl(entityManager);
+		}
+		return premioCiespalDAO;
+	}
 }

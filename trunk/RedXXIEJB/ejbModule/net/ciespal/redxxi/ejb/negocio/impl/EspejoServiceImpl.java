@@ -11,6 +11,8 @@ import net.ciespal.redxxi.ejb.persistence.entities.espejo.EntidadEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioCiespalDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -127,5 +129,72 @@ public class EspejoServiceImpl implements EspejoService{
 		}
 	}
 
+	/*Premio Periodistico*/
+	@Override
+	public PremioDTO createOrUpdatePremio(PremioDTO premio) throws CorvustecException
+	{
+		logger.info("createOrUpdatePremio");
+		try{
+			if(premio.getPreCodigo()!=null)
+				return factoryDAO.getPremioDAOImpl().edit(premio);
+			else			
+			{
+				premio.setEspEntidad(new EntidadEspejoDTO());
+				return factoryDAO.getPremioDAOImpl().create(premio);
+			}
+		}
+		catch(Exception e){
+			logger.info("Error createOrUpdatePremio {}",e.toString());
+			throw new CorvustecException("Error al createOrUpdateMaestroCiespal");
+		}
+	}
+
+	@Override
+	public List<PremioDTO> readPremio(Object ciudad) throws CorvustecException
+	{
+		logger.info("readPremio");
+		try{
+			return factoryDAO.getPremioDAOImpl().findAll(ciudad);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readPremio {}",e.toString());
+			throw new CorvustecException("Error al readPremio");
+		}
+	}
 	
+	
+	/*Premio Ciespal*/
+	@Override
+	public PremioCiespalDTO createOrUpdatepremioCiespal(PremioCiespalDTO premioCiespal) throws CorvustecException
+	{
+		logger.info("createOrUpdatepremioCiespal");
+		try{
+			if(premioCiespal.getPciCodigo()!=null)
+				return factoryDAO.getPremioCiespalDAOImpl().edit(premioCiespal);
+			else			
+			{
+				premioCiespal.setEspEntidad(new EntidadEspejoDTO());
+				return factoryDAO.getPremioCiespalDAOImpl().create(premioCiespal);
+			}
+		}
+		catch(Exception e){
+			logger.info("Error createOrUpdatepremioCiespal {}",e.toString());
+			throw new CorvustecException("Error al createOrUpdatepremioCiespal");
+		}
+	}
+
+	@Override
+	public List<PremioCiespalDTO> readPremioCiespal(Object ciudad) throws CorvustecException
+	{
+		logger.info("readPremioCiespal");
+		try{
+			return factoryDAO.getPremioCiespalDAOImpl().findAll(ciudad);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readPremio {}",e.toString());
+			throw new CorvustecException("Error al readPremio");
+		}
+	}
 }
