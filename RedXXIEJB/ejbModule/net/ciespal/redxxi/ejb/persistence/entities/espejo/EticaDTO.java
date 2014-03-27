@@ -54,7 +54,7 @@ public class EticaDTO implements Serializable {
 	private String etiTituloObra;
 
 	//bi-directional many-to-one association to EntidadDTO
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="eti_entidad")
 	private EntidadEspejoDTO espEntidad;
 

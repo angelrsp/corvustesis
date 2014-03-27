@@ -6,11 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
-import com.corvustec.commons.util.CorvustecException;
-
 import net.ciespal.redxxi.ejb.persistence.dao.RedDAO;
-import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.RedDTO;
+
+import com.corvustec.commons.util.CorvustecException;
 
 public class RedDAOImpl extends AbstractFacadeImpl<RedDTO> implements RedDAO {
 
