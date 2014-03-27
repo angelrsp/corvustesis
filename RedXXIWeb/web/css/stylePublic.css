@@ -56,6 +56,10 @@ a.linkClass:active {color: #F57B20;}
 a.linkClass:visited {color: #F57B20;}
 a.linkClass:hover {color: #FAA723; text-decoration: underline;}
 
+a.linkClass2:link {color: #000000;text-decoration: none}
+a.linkClass2:active {color: #F57B20;}
+a.linkClass2:visited {color: #F57B20;}
+a.linkClass2:hover {color: #FAA723; text-decoration: underline;}
 
 
 #footer_wrapper {
@@ -86,3 +90,20 @@ a.linkClass:hover {color: #FAA723; text-decoration: underline;}
     text-align: right;
     width: 60%;
 }
+
+.descripcion{
+	color: #BBBBBB;
+	font-size: 20px;
+}
+
+.line-separator{
+	height:1px;
+	background:#BBBBBB;
+	border-bottom:1px solid #BBBBBB;
+}
+
+.ui-datagrid-content {
+   border: none;
+   background-color: white;
+   background: white;
+}  

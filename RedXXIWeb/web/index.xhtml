@@ -7,42 +7,62 @@
       template="/WEB-INF/template/public.xhtml">
 
 
-<ui:define name="left">
-	<table width="100%" class="table">
-			<tr>
-				<td>
-					<h:dataTable value="#{reportPublicController.reportPublicDataManager.paisList}" var="pai">
+<!-- <ui:define name="left"> -->
+<!-- 	<table width="100%" class="table"> -->
+<!-- 			<tr> -->
+<!-- 				<td> -->
+<!-- 					<h:dataTable value="#{reportPublicController.reportPublicDataManager.paisList}" var="pai"> -->
 					
-		    			<h:column>
-		    				<p:graphicImage value="#{pai.imagenPath}" height="30" width="50"/>
-		    			</h:column>
+<!-- 		    			<h:column> -->
+<!-- 		    				<p:graphicImage value="#{pai.imagenPath}" height="30" width="50"/> -->
+<!-- 		    			</h:column> -->
 		    													
-		    			<h:column>
-		    				<f:facet name="header">Paises</f:facet>
-		    				<h:commandLink value="#{pai.nombre}" actionListener="#{reportPublicController.selectPais(pai)}" styleClass="linkClass"/>
-		    			</h:column>
+<!-- 		    			<h:column> -->
+<!-- 		    				<f:facet name="header">Paises</f:facet> -->
+<!-- 		    				<h:commandLink value="#{pai.nombre}" actionListener="#{reportPublicController.selectPais(pai)}" styleClass="linkClass"/> -->
+<!-- 		    			</h:column> -->
 		    								
-					</h:dataTable>
-				</td>
-			</tr>
-		</table>
-</ui:define>
+<!-- 					</h:dataTable> -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
+<!-- 		</table> -->
+<!-- </ui:define> -->
 
 
-<ui:define name="center">
-	<table width="100%" class="table">
+<ui:define name="left">
+	<table width="100%">
 			<tr>
 				<td>
+					<h:outputText value="Noticias" styleClass="descripcion"/>
+					<div class="line-separator"></div>
+					<div style="overflow-y: scroll; width: 100%; height: 100px;">
 					<h:dataTable value="#{noticiaController.noticiaDataManager.noticiaPublicList}" var="noti" width="100%">
 					
 		    			<h:column>
-		    				<f:facet name="header">Noticias</f:facet>
+		    		
 		    				<h:commandLink value="#{noti.notTitulo}" actionListener="#{noticiaPublicController.readNoticia(noti)}" styleClass="linkClass"/><br />
 		    				<h:outputText value="#{noti.notResumen}" escape="false"/><br />
-		    				<h:commandLink value=" LEER MÁS..." actionListener="#{noticiaPublicController.readNoticia(noti)}" styleClass="linkClass"/>
 		    			</h:column>										
 					
 					</h:dataTable>
+					</div>
+					<div class="line-separator"></div>
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<table>
+						<tr align="center">
+							<td rowspan="3" width="30%"><h:outputText value="Datos alojados en nuestras bases" styleClass="descripcion"/></td>
+							<td><h:outputText value="Atenea"/></td>
+						</tr>
+						<tr align="center">								
+							<td><h:outputText value="Argos"/></td>
+						</tr>	
+						<tr align="center">	
+							<td><h:outputText value="Espejo"/></td>						
+						</tr>
+					</table>
 				</td>
 			</tr>
 		</table>
@@ -50,21 +70,11 @@
 
 <ui:define name="right">
 		
-	<table width="100%" class="table">
+	<table width="100%">
 		<tr>
-			<td><h:dataTable value="#{reportPublicController.reportPublicDataManager.ateneaList}" var="ate" width="100%">
-					
-	    			<h:column>
-	    				<f:facet name="header">Atenea</f:facet>
-	    				<h:commandLink value="#{ate.descripcion}" styleClass="linkClass" actionListener="#{reportPublicController.selectAtenea(ate)}"/>
-	    			</h:column>										
-
-	    			<h:column>
-						<h:commandLink value="#{ate.count}" styleClass="linkClass" actionListener="#{reportPublicController.selectAtenea(ate)}"/>
-	    			</h:column>										
-
-					
-			</h:dataTable>
+			<td>
+				<h:outputText value="Guía de Usuario" styleClass="descripcion"/>
+				<div class="line-separator"></div>				
 			</td>
 		</tr>
 

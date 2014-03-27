@@ -5,14 +5,14 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-<head>
+<h:head>
 	<title>Ciespal - Red Siglo XXI</title>
 		<link rel="stylesheet" type="text/css"
 		href="#{request.contextPath}/css/stylePublic.css" />
-</head>
+</h:head>
 
 
-<body>
+<h:body>
 
 <div align="center">
 	<div style="width: 1000px; box-shadow: 0 0 20px #2E2D32; background-color: white;">
@@ -38,7 +38,7 @@
 		<td>
 			<div class="menudes">
 				<a href="#{request.contextPath}/index.xhtml">Inicio</a>
-				<a href="">Opción</a>
+				<a href="#{request.contextPath}/public/home/atenea.xhtml">Atenea</a>
 				<a href="">Opción</a>
 				<a href="">Opción</a>
 				<div class="marca"></div>
@@ -53,17 +53,12 @@
 
 <tr>
 
-	<td width="30%" align="left" valign="top">
+	<td width="50%" align="left" valign="top">
 		<ui:insert name="left"/>
 	</td>
 	
-	<td width="40%" align="center" valign="top">
-		<ui:insert name="center"/>		
-	</td>
 	
-	
-	
-	<td width="30%" align="right" valign="top">
+	<td width="50%" align="right" valign="top">
 		<ui:insert name="right"/>	
 	</td>
 </tr>
@@ -96,6 +91,6 @@
 </div>
 </div>
 
-</body>
+</h:body>
 
 </html>
