@@ -10,68 +10,91 @@
 	
 		<p:growl id="growl"></p:growl>
 		
-		<p:panel id="pnlDatos" header="Premio Periodístico CIESPAL XXI">
+		<p:panel id="pnlDatos" header="Leyes y Códigos de Ética del Periodísmo y la Comunicación">
 
 		<table>
 			<tr>
 				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{universidadController.pais}" filter="true">
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{leyCodigoController.pais}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
-						<f:selectItems value="#{pregradoController.catalogoPais}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerProvinciaChange}" process="@this" update="somProvinvia"/>						
+						<f:selectItems value="#{leyCodigoController.catalogoPais}"/>
+						<p:ajax event="change" listener="#{leyCodigoController.obtenerProvinciaChange()}" process="@this" update="somProvinvia"/>						
 					</p:selectOneMenu></td>
 
 				<td><h:outputText value="#{i18n['label.provincia']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{universidadController.provincia}" filter="true">
+				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{leyCodigoController.provincia}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
-						<f:selectItems value="#{universidadController.catalogoProvincia}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerCiudadChange}" process="@this" update="somCiudad"/>
+						<f:selectItems value="#{leyCodigoController.catalogoProvincia}"/>
+						<p:ajax event="change" listener="#{leyCodigoController.obtenerCiudadChange()}" process="@this" update="somCiudad"/>
 					</p:selectOneMenu></td>
 
 			</tr>
 			<tr>
 
 				<td><h:outputText value="#{i18n['label.ciudad']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somCiudad" value="#{universidadController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
+				<td><p:selectOneMenu id="somCiudad" value="#{leyCodigoController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
-						<f:selectItems value="#{universidadController.catalogoCiudad}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerCiudadChange}" process="@this"/>
+						<f:selectItems value="#{leyCodigoController.catalogoCiudad}"/>
+						<p:ajax event="change" listener="#{leyCodigoController.obtenerCiudadChange()}" process="@this"/>
 					</p:selectOneMenu></td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Título:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><h:outputText value="#{i18n['label.titulo']}:&#160;" /></td>
+				<td><p:inputText value="#{leyCodigoDataManager.leyDTO.leytitulo}"  /></td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Tipo de Documento:&#160;" /></td>
+				<td><h:outputText value="#{i18n['label.tipo.documento']}:&#160;" /></td>
 				<td><p:selectOneMenu>
 					<f:selectItem itemLabel="--Seleccione--"/>
+					<f:selectItem  value="#{leyCodigoDataManager.leyDTO.leyTipo}"/>
 				</p:selectOneMenu></td>			
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Institucion Emisora:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><h:outputText value="#{i18n['label.institucion.emisora']}:&#160;" /></td>
+				<td><p:inputText value="#{leyCodigoDataManager.leyDTO.leyEntidadEmisora}"/></td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Año:&#160;" /></td>
-				<td><p:inputText onkeypress="return isNumberKey(event);"/></td>			
+				<td><h:outputText value="#{i18n['label.anio']}:&#160;" /></td>
+				<td><p:inputText onkeypress="return isNumberKey(event);" value="#{leyCodigoDataManager.leyDTO.leyAnio}" /></td>			
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Documento:&#160;" /></td>
-				<td><p:inputText/></td>			
+				<td><h:outputText value="#{i18n['label.documento']}:&#160;" /></td>
+				<td><p:inputText /></td>			
 			</tr>
-
 			<tr>
-				<td><h:outputText value="Noticias:&#160;" /></td>
-				<td><p:inputText/></td>			
-			</tr>
-			
+				<td colspan="9" align="center">
+					<p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{leyCodigoController.save}" process="pnlDatos" update="pnlDatos,growl" icon="ui-icon-disk"/>
+					<p:commandButton value="#{i18n['boton.cancelar']}" actionListener="#{leyCodigoController.cancel}" process="@this" update="pnlDatos,growl" icon="ui-icon-cancel"/>
+				</td>
+			</tr>	
+						
 		</table>
+	<p:dataTable id="tblLeyCodigo" emptyMessage="#{i18n['table.vacio']}" value="#{leyCodigoDataManager.leyList}" var="ley">
+	
+				<p:column headerText="#{i18n['label.titulo']}">
+					<h:outputText value="#{ley.leytitulo}" />
+				</p:column>		
+	
+				<p:column headerText="#{i18n['label.institucion.emisora']}">
+					<h:outputText value="#{ley.leyEntidadEmisora}" />
+				</p:column>		
+	
+				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{leyCodigoController.edit(ley)}" icon="ui-icon-pencil" process=":contenido:tblLeyCodigo" update=":contenido:pnlDatos"/>
+				</p:column>
+			
+				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{leyCodigoController.delete(ley)}" icon="ui-icon-close" process=":contenido:tblLeyCodigo" update="tblLeyCodigo,:contenido:growl">
+						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+					</p:commandButton>
+				</p:column>
+	
+			</p:dataTable>
 
 
 		</p:panel>
