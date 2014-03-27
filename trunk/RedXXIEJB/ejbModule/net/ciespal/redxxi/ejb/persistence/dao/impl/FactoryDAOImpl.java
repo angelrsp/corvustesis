@@ -10,8 +10,10 @@ import net.ciespal.redxxi.ejb.persistence.dao.CentroDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ContactoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.DoctorDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.EntidadDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.EticaDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.EventoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.GranMaestroDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.MencionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ModalidadDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.NoticiaDAO;
@@ -47,6 +49,9 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private ObservatorioDAO observatorioDAO;
 	private VeeduriaDAO veeduriaDAO;
 	
+	
+	private EticaDAO eticaDAO;
+	private GranMaestroDAO granMaestroDAO;
 	
 	@Override
 	public CatalogoDAO getCatalogoImpl() {
@@ -174,6 +179,22 @@ public class FactoryDAOImpl implements FactoryDAO{
 			veeduriaDAO = new VeeduriaDAOImpl(entityManager);
 		}
 		return veeduriaDAO;
+	}
+
+	@Override
+	public EticaDAO getEticaDAOImpl() {
+		if (eticaDAO == null) {
+			eticaDAO = new EticaDAOImpl(entityManager);
+		}
+		return eticaDAO;
+	}
+
+	@Override
+	public GranMaestroDAO getGranMaestroDAOImpl() {
+		if (granMaestroDAO == null) {
+			granMaestroDAO = new GranMaestroDAOImpl(entityManager);
+		}
+		return granMaestroDAO;
 	}
 
 }

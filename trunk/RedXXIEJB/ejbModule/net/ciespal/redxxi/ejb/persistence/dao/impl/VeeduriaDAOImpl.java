@@ -7,11 +7,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import com.corvustec.commons.util.CorvustecException;
-
 import net.ciespal.redxxi.ejb.persistence.dao.VeeduriaDAO;
-import net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.VeeduriaDTO;
+
+import com.corvustec.commons.util.CorvustecException;
 
 public class VeeduriaDAOImpl extends AbstractFacadeImpl<VeeduriaDTO> implements VeeduriaDAO {
 

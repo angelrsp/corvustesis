@@ -18,5 +18,7 @@ public interface FactoryDAO {
 	RedDAO getRedDAOImpl();
 	ObservatorioDAO getObservatorioDAOImpl();
 	VeeduriaDAO getVeeduriaDAOImpl();
+	EticaDAO getEticaDAOImpl();
+	GranMaestroDAO getGranMaestroDAOImpl();
 
 }

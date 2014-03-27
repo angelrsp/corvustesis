@@ -24,8 +24,8 @@ public class GranMaestroDTO implements Serializable {
 	@Column(name="gma_apellidos")
 	private String gmaApellidos;
 
-	@Column(name="gma_estado")
-	private Integer gmaEstado;
+	@Column(name="gma_ciudad")
+	private Integer gmaCiudad;
 
 	@Column(name="gma_fecha_fallecimiento")
 	private Timestamp gmaFechaFallecimiento;
@@ -49,7 +49,7 @@ public class GranMaestroDTO implements Serializable {
 	private Integer gmaProvincia;
 
 	//bi-directional many-to-one association to EntidadDTO
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="gma_entidad")
 	private EntidadEspejoDTO espEntidad;
 
@@ -72,12 +72,12 @@ public class GranMaestroDTO implements Serializable {
 		this.gmaApellidos = gmaApellidos;
 	}
 
-	public Integer getGmaEstado() {
-		return this.gmaEstado;
+	public Integer getGmaCiudad() {
+		return this.gmaCiudad;
 	}
 
-	public void setGmaEstado(Integer gmaEstado) {
-		this.gmaEstado = gmaEstado;
+	public void setGmaCiudad(Integer gmaCiudad) {
+		this.gmaCiudad = gmaCiudad;
 	}
 
 	public Timestamp getGmaFechaFallecimiento() {
