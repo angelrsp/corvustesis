@@ -49,7 +49,7 @@ public class MaestroCiespalDTO implements Serializable {
 	private Integer mciProvincia;
 
 	//bi-directional many-to-one association to EntidadDTO
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="mci_entidad")
 	private EntidadEspejoDTO espEntidad;
 

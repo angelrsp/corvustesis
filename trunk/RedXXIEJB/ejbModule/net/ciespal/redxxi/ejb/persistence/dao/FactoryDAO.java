@@ -20,5 +20,6 @@ public interface FactoryDAO {
 	VeeduriaDAO getVeeduriaDAOImpl();
 	EticaDAO getEticaDAOImpl();
 	GranMaestroDAO getGranMaestroDAOImpl();
+	MaestroCiespalDAO getMaestroCiespalDAOImpl();
 
 }

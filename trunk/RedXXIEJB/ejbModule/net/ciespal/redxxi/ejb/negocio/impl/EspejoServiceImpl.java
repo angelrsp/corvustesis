@@ -10,6 +10,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EntidadEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,6 +90,40 @@ public class EspejoServiceImpl implements EspejoService{
 		{
 			logger.info("Error readMaestroPeriodismo {}",e.toString());
 			throw new CorvustecException("Error al readMaestroPeriodismo");
+		}
+	}
+
+	/*Maestro Ciespal*/
+	@Override
+	public MaestroCiespalDTO createOrUpdateMaestroCiespal(MaestroCiespalDTO maestro) throws CorvustecException
+	{
+		logger.info("createOrUpdateMaestroCiespal");
+		try{
+			if(maestro.getMciCodigo()!=null)
+				return factoryDAO.getMaestroCiespalDAOImpl().edit(maestro);
+			else			
+			{
+				maestro.setEspEntidad(new EntidadEspejoDTO());
+				return factoryDAO.getMaestroCiespalDAOImpl().create(maestro);
+			}
+		}
+		catch(Exception e){
+			logger.info("Error createOrUpdateMaestroCiespal {}",e.toString());
+			throw new CorvustecException("Error al createOrUpdateMaestroCiespal");
+		}
+	}
+
+	@Override
+	public List<MaestroCiespalDTO> readMaestroCiespal(Object ciudad) throws CorvustecException
+	{
+		logger.info("readMaestroCiespal");
+		try{
+			return factoryDAO.getMaestroCiespalDAOImpl().findAll(ciudad);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readMaestroCiespal {}",e.toString());
+			throw new CorvustecException("Error al readMaestroCiespal");
 		}
 	}
 
