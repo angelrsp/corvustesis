@@ -15,70 +15,100 @@
 		<table>
 			<tr>
 				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{universidadController.pais}" filter="true">
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{premioPeriodisticoController.pais}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
-						<f:selectItems value="#{pregradoController.catalogoPais}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerProvinciaChange}" process="@this" update="somProvinvia"/>						
+						<f:selectItems value="#{premioPeriodisticoController.catalogoPais}"/>
+						<p:ajax event="change" listener="#{premioPeriodisticoController.obtenerProvinciaChange()}" process="@this" update="somProvinvia"/>						
 					</p:selectOneMenu></td>
 
 				<td><h:outputText value="#{i18n['label.provincia']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{universidadController.provincia}" filter="true">
+				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{premioPeriodisticoController.provincia}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
-						<f:selectItems value="#{universidadController.catalogoProvincia}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerCiudadChange}" process="@this" update="somCiudad"/>
+						<f:selectItems value="#{premioPeriodisticoController.catalogoProvincia}"/>
+						<p:ajax event="change" listener="#{premioPeriodisticoController.obtenerCiudadChange()}" process="@this" update="somCiudad"/>
 					</p:selectOneMenu></td>
 
 			</tr>
 			<tr>
 
 				<td><h:outputText value="#{i18n['label.ciudad']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somCiudad" value="#{universidadController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
+				<td><p:selectOneMenu id="somCiudad" value="#{premioPeriodisticoController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
-						<f:selectItems value="#{universidadController.catalogoCiudad}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerCiudadChange}" process="@this"/>
+						<f:selectItems value="#{premioPeriodisticoController.catalogoCiudad}"/>
+						<p:ajax event="change" listener="#{premioPeriodisticoController.obtenerCiudadChange()}" process="@this"/>
 					</p:selectOneMenu></td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Título:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><h:outputText value="#{i18n['label.titulo']}:&#160;" /></td>
+				<td><p:inputText  value="#{premioPeriodisticoDataManager.premioDTO.preTitulo}"  /> </td>  
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Institución:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><h:outputText value="#{i18n['label.institucion']}:&#160;" /></td>
+				<td><p:inputText/> </td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Periodicidad:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><h:outputText value="#{i18n['label.periodicidad']}:&#160;" /></td>
+				<td><p:inputText  value="#{premioPeriodisticoDataManager.premioDTO.prePeriodicidad}" /></td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Nivel Geográfico:&#160;" /></td>
+				<td><h:outputText value="#{i18n['label.nivel.geografico']}:&#160;" /></td>
 				<td><p:selectOneMenu>
-					<f:selectItem itemLabel="--Seleccione--"/>
-				</p:selectOneMenu></td>
+					<f:selectItem itemLabel="--Seleccione--" />
+					<f:selectItem  value="#{premioPeriodisticoDataManager.premioDTO.preNivelGeografico}"/>
+				</p:selectOneMenu    ></td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Descripción del Premio:&#160;" /></td>
-				<td><p:inputTextarea autoResize="false"/></td>
+				<td><h:outputText value="#{i18n['label.descripcion']}:&#160;"  /></td>
+				<td><p:inputTextarea autoResize="false"   value="#{premioPeriodisticoDataManager.premioDTO.preDescripcion}" /></td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Tipo de Medio de Comunicación:&#160;" /></td>
+				<td><h:outputText value="#{i18n['label.tipo.medio.comunicacion']}:&#160;" /></td>
 				<td><p:selectOneMenu>
-					<f:selectItem itemLabel="--Seleccione--"/>
-				</p:selectOneMenu></td>
+					<f:selectItem itemLabel="--Seleccione--" />
+					<f:selectItem value="#{premioPeriodisticoDataManager.premioDTO.preTipoMedio}"/>
+				</p:selectOneMenu    ></td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Noticias:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><h:outputText value="#{i18n['label.noticias']}:&#160;"  /></td>
+				<td><p:inputText  /></td>
 			</tr>
 			
+			<tr>
+				<td colspan="9" align="center">
+					<p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{premioPeriodisticoController.save}" process="pnlDatos" update="pnlDatos,growl" icon="ui-icon-disk"/>
+					<p:commandButton value="#{i18n['boton.cancelar']}" actionListener="#{premioPeriodisticoController.cancel}" process="@this" update="pnlDatos,growl" icon="ui-icon-cancel"/>
+				</td>
+			</tr>	
+			
 		</table>
+		<p:dataTable id="tblPremioPeriodistico" emptyMessage="#{i18n['table.vacio']}" value="#{premioPeriodisticoDataManager.premioList}" var="pre">
+	
+				<p:column headerText="#{i18n['label.titulo']}">
+					<h:outputText value="#{pre.preTitulo}" />
+				</p:column>		
+	
+				<p:column headerText="#{i18n['label.institucion']}">
+					<h:outputText value="#{pre.preInstitucion}" />
+				</p:column>		
+	
+				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{premioPeriodisticoController.edit(pre)}" icon="ui-icon-pencil" process=":contenido:tblPremioPeriodistico" update=":contenido:pnlDatos"/>
+				</p:column>
+			
+				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{premioPeriodisticoController.delete(pre)}" icon="ui-icon-close" process=":contenido:tblPremioPeriodistico" update="tblPremioPeriodistico,:contenido:growl">
+						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+					</p:commandButton>
+				</p:column>
+	
+			</p:dataTable>
 
 
 		</p:panel>
