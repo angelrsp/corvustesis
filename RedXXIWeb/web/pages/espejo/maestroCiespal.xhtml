@@ -15,27 +15,27 @@
 		<table>
 			<tr>
 				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>
-				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{universidadController.pais}" filter="true">
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{maestroCiespalController.pais}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
-						<f:selectItems value="#{pregradoController.catalogoPais}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerProvinciaChange}" process="@this" update="somProvinvia"/>						
+						<f:selectItems value="#{maestroCiespalController.catalogoPais}"/>
+						<p:ajax event="change" listener="#{maestroCiespalController.obtenerProvinciaChange}" process="@this" update="somProvinvia"/>						
 					</p:selectOneMenu></td>
 
 				<td><h:outputText value="#{i18n['label.provincia']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{universidadController.provincia}" filter="true">
+				<td><p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{maestroCiespalController.provincia}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--"/>
-						<f:selectItems value="#{universidadController.catalogoProvincia}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerCiudadChange}" process="@this" update="somCiudad"/>
+						<f:selectItems value="#{maestroCiespalController.catalogoProvincia}"/>
+						<p:ajax event="change" listener="#{maestroCiespalController.obtenerCiudadChange}" process="@this" update="somCiudad"/>
 					</p:selectOneMenu></td>
 
 			</tr>
 			<tr>
 
 				<td><h:outputText value="#{i18n['label.ciudad']}:&#160;" /></td>
-				<td><p:selectOneMenu id="somCiudad" value="#{universidadController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
+				<td><p:selectOneMenu id="somCiudad" value="#{maestroCiespalController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
-						<f:selectItems value="#{universidadController.catalogoCiudad}"/>
-						<p:ajax event="change" listener="#{universidadController.obtenerCiudadChange}" process="@this"/>
+						<f:selectItems value="#{maestroCiespalController.catalogoCiudad}"/>
+						<p:ajax event="change" listener="#{maestroCiespalController.ciudadChange}" process="@this" update="tblMaestroCiespal"/>
 					</p:selectOneMenu></td>
 			</tr>
 
@@ -47,44 +47,63 @@
 			</tr>					
 
 			<tr>
-				<td><h:outputText value="Nombres:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><h:outputText value="#{i18n['label.nombres']}:&#160;" /></td>
+				<td><p:inputText value="#{maestroCiespalDataManager.maestroCiespalDTO.mciNombre}" required="true" requiredMessage="#{i18n['label.nombres']}&#160;#{i18n['label.requerido']}"/></td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Apellidos:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><h:outputText value="#{i18n['label.apellidos']}:&#160;" /></td>
+				<td><p:inputText value="#{maestroCiespalDataManager.maestroCiespalDTO.mciApellido}" required="true" requiredMessage="#{i18n['label.apellidos']}&#160;#{i18n['label.requerido']}"/></td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Perfil Biográfico:&#160;" /></td>
-				<td><p:inputText/></td>
+				<td><h:outputText value="#{i18n['label.perfil.biografico']}:&#160;" /></td>
+				<td><p:inputText value="#{maestroCiespalDataManager.maestroCiespalDTO.mciPerfilBiografico}" required="true" requiredMessage="#{i18n['label.perfil.biografico']}&#160;#{i18n['label.requerido']}"/></td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Año de Nacimiento:&#160;" /></td>
-				<td><p:inputText onkeypress="return isNumberKey(event);"/></td>
+				<td><h:outputText value="#{i18n['label.fecha.nacimiento']}:&#160;" /></td>
+				<td><p:calendar navigator="true" showOn="button" value="#{maestroCiespalDataManager.fechaNacimiento}" required="true" requiredMessage="#{i18n['label.fecha.nacimiento']}&#160;#{i18n['label.requerido']}"/></td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="Area o campo disciplinario:&#160;" /></td>
+				<td><h:outputText value="#{i18n['label.area.campo.disciplinario']}:&#160;" /></td>
 				<td><p:selectOneMenu>
 					<f:selectItem itemLabel="--Seleccione--"/>
 				</p:selectOneMenu></td>
 			</tr>
-
+			
 			<tr>
-				<td><h:outputText value="Obras Publicadas:&#160;" /></td>
-				<td><p:inputText/></td>
-			</tr>
-
-			<tr>
-				<td><h:outputText value="Noticias:&#160;" /></td>
-				<td><p:inputText/></td>
-			</tr>
+				<td colspan="9" align="center">
+					<p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{maestroCiespalController.save}" process="pnlDatos" update="pnlDatos,growl" icon="ui-icon-disk"/>
+					<p:commandButton value="#{i18n['boton.cancelar']}" actionListener="#{maestroCiespalController.cancel}" process="@this" update="pnlDatos,growl" icon="ui-icon-cancel"/>
+				</td>
+			</tr>			
 			
 		</table>
 
+
+			<p:dataTable id="tblMaestroCiespal" emptyMessage="#{i18n['table.vacio']}" value="#{maestroCiespalDataManager.maestroCiespalList}" var="mae">
+	
+				<p:column headerText="#{i18n['label.nombres']}">
+					<h:outputText value="#{mae.mciNombre}" />
+				</p:column>		
+	
+				<p:column headerText="#{i18n['label.apellidos']}">
+					<h:outputText value="#{mae.mciApellido}" />
+				</p:column>		
+	
+				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{maestroCiespalController.edit(mae)}" icon="ui-icon-pencil" process=":contenido:tblMaestroCiespal" update=":contenido:pnlDatos"/>
+				</p:column>
+			
+				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{maestroCiespalController.delete(mae)}" icon="ui-icon-close" process=":contenido:tblMaestroCiespal" update="tblMaestroCiespal,:contenido:growl">
+						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+					</p:commandButton>
+				</p:column>
+	
+			</p:dataTable>
 
 		</p:panel>
 	
