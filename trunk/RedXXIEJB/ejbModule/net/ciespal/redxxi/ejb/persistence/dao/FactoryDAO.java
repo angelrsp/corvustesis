@@ -27,6 +27,7 @@ public interface FactoryDAO {
 	MaestroCiespalDAO getMaestroCiespalDAOImpl();
 	PremioDAO getPremioDAOImpl();
 	PremioCiespalDAO getPremioCiespalDAOImpl();
+	LeyDAO getLeyDAOImpl();
 	
 	
 

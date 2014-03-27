@@ -10,6 +10,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EntidadEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.LeyDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioCiespalDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioDTO;
@@ -195,6 +196,41 @@ public class EspejoServiceImpl implements EspejoService{
 		{
 			logger.info("Error readPremio {}",e.toString());
 			throw new CorvustecException("Error al readPremio");
+		}
+	}
+	
+	
+	/*LeyCodigo */
+	@Override
+	public LeyDTO createOrUpdateley(LeyDTO leyDTO) throws CorvustecException
+	{
+		logger.info("createOrUpdateley");
+		try{
+			if(leyDTO.getLeyCodigo()!=null)
+				return factoryDAO.getLeyDAOImpl().edit(leyDTO);
+			else			
+			{
+				leyDTO.setEspEntidad(new EntidadEspejoDTO());
+				return factoryDAO.getLeyDAOImpl().create(leyDTO);
+			}
+		}
+		catch(Exception e){
+			logger.info("Error createOrUpdateley {}",e.toString());
+			throw new CorvustecException("Error al createOrUpdateley");
+		}
+	}
+
+	@Override
+	public List<LeyDTO> readLey(Object ciudad) throws CorvustecException
+	{
+		logger.info("readLey");
+		try{
+			return factoryDAO.getLeyDAOImpl().findAll(ciudad);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readLey {}",e.toString());
+			throw new CorvustecException("Error al readLey");
 		}
 	}
 }

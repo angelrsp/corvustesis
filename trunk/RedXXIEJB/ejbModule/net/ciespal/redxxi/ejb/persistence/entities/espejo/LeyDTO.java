@@ -1,6 +1,7 @@
 package net.ciespal.redxxi.ejb.persistence.entities.espejo;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -29,8 +30,8 @@ public class LeyDTO implements Serializable {
 	@Column(name="ley_entidad_emisora")
 	private String leyEntidadEmisora;
 
-	@Column(name="ley_estado")
-	private Integer leyEstado;
+	@Column(name="ley_ciudad")
+	private Integer leyCiudad;
 
 	@Column(name="ley_pais")
 	private Integer leyPais;
@@ -43,9 +44,14 @@ public class LeyDTO implements Serializable {
 
 	@Column(name="ley_tipo")
 	private Integer leyTipo;
+	
+	@Column(name="ley_titulo")
+	private String leytitulo;
+
+	
 
 	//bi-directional many-to-one association to EntidadDTO
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="ley_entidad")
 	private EntidadEspejoDTO espEntidad;
 
@@ -84,12 +90,12 @@ public class LeyDTO implements Serializable {
 		this.leyEntidadEmisora = leyEntidadEmisora;
 	}
 
-	public Integer getLeyEstado() {
-		return this.leyEstado;
+	public Integer getLeyCiudad() {
+		return this.leyCiudad;
 	}
 
-	public void setLeyEstado(Integer leyEstado) {
-		this.leyEstado = leyEstado;
+	public void setLeyCiudad(Integer leyCiudad) {
+		this.leyCiudad = leyCiudad;
 	}
 
 	public Integer getLeyPais() {
@@ -131,5 +137,12 @@ public class LeyDTO implements Serializable {
 	public void setEspEntidad(EntidadEspejoDTO espEntidad) {
 		this.espEntidad = espEntidad;
 	}
+	public String getLeytitulo() {
+		return leytitulo;
+	}
 
+	public void setLeytitulo(String leytitulo) {
+		this.leytitulo = leytitulo;
+	}
+	
 }

@@ -4,8 +4,11 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+
+
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.LeyDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioCiespalDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioDTO;
@@ -40,5 +43,11 @@ public interface EspejoService {
 
 	List<PremioCiespalDTO> readPremioCiespal(Object ciudad)
 			throws CorvustecException;
+
+	LeyDTO createOrUpdateley(LeyDTO leyDTO) throws CorvustecException;
+
+	List<LeyDTO> readLey(Object ciudad) throws CorvustecException;
+
+	
 
 }
