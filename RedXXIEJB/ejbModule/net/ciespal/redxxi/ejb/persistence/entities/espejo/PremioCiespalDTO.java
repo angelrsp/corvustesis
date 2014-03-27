@@ -1,6 +1,7 @@
 package net.ciespal.redxxi.ejb.persistence.entities.espejo;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -57,7 +58,8 @@ public class PremioCiespalDTO implements Serializable {
 	private String pciTitulo;
 
 	//bi-directional many-to-one association to EntidadDTO
-	@ManyToOne
+	
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="pci_entidad")
 	private EntidadEspejoDTO espEntidad;
 

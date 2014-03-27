@@ -1,5 +1,9 @@
 package net.ciespal.redxxi.ejb.persistence.dao;
 
+
+
+
+
 public interface FactoryDAO {
 
 	CatalogoDAO getCatalogoImpl();
@@ -21,5 +25,9 @@ public interface FactoryDAO {
 	EticaDAO getEticaDAOImpl();
 	GranMaestroDAO getGranMaestroDAOImpl();
 	MaestroCiespalDAO getMaestroCiespalDAOImpl();
+	PremioDAO getPremioDAOImpl();
+	PremioCiespalDAO getPremioCiespalDAOImpl();
+	
+	
 
 }
