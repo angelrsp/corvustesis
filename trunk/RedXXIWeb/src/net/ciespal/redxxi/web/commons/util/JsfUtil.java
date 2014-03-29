@@ -18,14 +18,14 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.corvustec.commons.util.CalendarUtil;
-import com.corvustec.commons.util.MessagesApplicacion;
-
 import net.sf.jmimemagic.Magic;
 import net.sf.jmimemagic.MagicException;
 import net.sf.jmimemagic.MagicMatch;
 import net.sf.jmimemagic.MagicMatchNotFoundException;
 import net.sf.jmimemagic.MagicParseException;
+
+import com.corvustec.commons.util.CalendarUtil;
+import com.corvustec.commons.util.MessagesApplicacion;
 
 public class JsfUtil {
 
@@ -170,7 +170,12 @@ public class JsfUtil {
 		return deploymentDirectoryPath;
 	}
 	
-	
+	public static String getContextPath()
+	{
+		ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance()
+				.getExternalContext().getContext();
+		return ctx.getContextPath();
+	}
 	
 	public static Boolean descargarArchivo(byte[] fileArray)
 	{
@@ -226,7 +231,10 @@ public class JsfUtil {
 			FileOutputStream fos=new FileOutputStream(pathFile);
 			fos.write(bytefile);
 			fos.close();
-			pathFile="\\images\\tmp\\upload\\"+fileName;
+			if(fileName.split("\\.")[1].equals("pdf"))
+				pathFile=getContextPath()+"\\images\\tmp\\upload\\"+fileName;
+			else
+				pathFile="\\images\\tmp\\upload\\"+fileName;
 			pathFile=pathFile.replace('\\', '/');
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
