@@ -100,6 +100,8 @@ public class DoctorController extends SelectItemController{
 		doctorDataManager.setSexoSelect(doctor.getDocSexo());
 		if(doctor.getDocFotoByte()!=null)
 			doctorDataManager.getDoctor().setDocFotoPath(JsfUtil.saveToDiskUpdload(doctor.getDocFotoByte(), doctor.getDocFotoNombre()));
+		if(doctor.getDocArchivoTesis()!=null)
+			doctorDataManager.getDoctor().setDocArchivoTesisPath(JsfUtil.saveToDiskUpdload(doctor.getDocArchivoTesis(), doctor.getDocArchivoTesisNombre()));
 	}
 	
 	public void cancelDoctor()

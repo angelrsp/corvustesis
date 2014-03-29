@@ -24,6 +24,7 @@ public class DoctorDataManager implements Serializable {
 	private List<DoctorDTO> doctorList;
 	private Date fechaNacimiento;
 	private Object sexoSelect;
+	private Object tipoPublicacion;
 	
 	public DoctorDataManager() {
 		doctorList=new ArrayList<DoctorDTO>();
@@ -65,6 +66,14 @@ public class DoctorDataManager implements Serializable {
 
 	public void setSexoSelect(Object sexoSelect) {
 		this.sexoSelect = sexoSelect;
+	}
+
+	public Object getTipoPublicacion() {
+		return tipoPublicacion;
+	}
+
+	public void setTipoPublicacion(Object tipoPublicacion) {
+		this.tipoPublicacion = tipoPublicacion;
 	}
 	
 	
