@@ -1,12 +1,22 @@
 package net.ciespal.redxxi.ejb.persistence.entities;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 /**
@@ -32,7 +42,7 @@ public class DoctorDTO implements Serializable {
 	private String docApellidos;
 
 	@Column(name="doc_archivo_tesis")
-	private String docArchivoTesis;
+	private byte[] docArchivoTesis;
 
 	@Column(name="doc_fecha_nacimiento")
 	private Timestamp docFechaNacimiento;
@@ -69,6 +79,12 @@ public class DoctorDTO implements Serializable {
 	
 	@Column(name="doc_foto_byte")
 	private byte[] docFotoByte;
+	
+	@Column(name="doc_archivo_tesis_nombre")
+	private String docArchivoTesisNombre;
+	
+	@Transient
+	private String docArchivoTesisPath;
 	
 	@Transient
 	private String docFotoPath;
@@ -116,11 +132,11 @@ public class DoctorDTO implements Serializable {
 		this.docApellidos = docApellidos;
 	}
 
-	public String getDocArchivoTesis() {
+	public byte[] getDocArchivoTesis() {
 		return this.docArchivoTesis;
 	}
 
-	public void setDocArchivoTesis(String docArchivoTesis) {
+	public void setDocArchivoTesis(byte[] docArchivoTesis) {
 		this.docArchivoTesis = docArchivoTesis;
 	}
 
@@ -242,6 +258,22 @@ public class DoctorDTO implements Serializable {
 
 	public void setAteEntidads(List<EntidadDTO> ateEntidads) {
 		this.ateEntidads = ateEntidads;
+	}
+
+	public String getDocArchivoTesisNombre() {
+		return docArchivoTesisNombre;
+	}
+
+	public void setDocArchivoTesisNombre(String docArchivoTesisNombre) {
+		this.docArchivoTesisNombre = docArchivoTesisNombre;
+	}
+
+	public String getDocArchivoTesisPath() {
+		return docArchivoTesisPath;
+	}
+
+	public void setDocArchivoTesisPath(String docArchivoTesisPath) {
+		this.docArchivoTesisPath = docArchivoTesisPath;
 	}
 
 	public EntidadDTO addAteEntidad(EntidadDTO ateEntidad) {

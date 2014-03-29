@@ -31,7 +31,7 @@ public class PublicacionDTO implements Serializable {
 	private String pubApellidos;
 
 	@Column(name="pub_archivo")
-	private String pubArchivo;
+	private byte[] pubArchivo;
 
 	@Column(name="pub_nombres")
 	private String pubNombres;
@@ -112,11 +112,11 @@ public class PublicacionDTO implements Serializable {
 		this.pubApellidos = pubApellidos;
 	}
 
-	public String getPubArchivo() {
+	public byte[] getPubArchivo() {
 		return this.pubArchivo;
 	}
 
-	public void setPubArchivo(String pubArchivo) {
+	public void setPubArchivo(byte[] pubArchivo) {
 		this.pubArchivo = pubArchivo;
 	}
 
