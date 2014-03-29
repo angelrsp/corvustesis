@@ -98,6 +98,8 @@ public class DoctorController extends SelectItemController{
 		doctorDataManager.setDoctor(doctor);
 		doctorDataManager.setFechaNacimiento(new Date(doctor.getDocFechaNacimiento().getTime()));
 		doctorDataManager.setSexoSelect(doctor.getDocSexo());
+		if(doctor.getDocFotoByte()!=null)
+			doctorDataManager.getDoctor().setDocFotoPath(JsfUtil.saveToDiskUpdload(doctor.getDocFotoByte(), doctor.getDocFotoNombre()));
 	}
 	
 	public void cancelDoctor()
@@ -149,6 +151,7 @@ public class DoctorController extends SelectItemController{
 		contactoDataManager.getContacto().setConValor(con.getConValor());
 		contactoDataManager.getContacto().setAteEntidad(new EntidadDTO(con.getEntCodigo()));
 		contactoDataManager.setTipoContacto(con.getConTipo());
+		
 	}
 	
 	public void deleteContacto(ContactoListDTO con)
@@ -168,6 +171,14 @@ public class DoctorController extends SelectItemController{
 		doctorDataManager.getDoctor().setDocFotoByte(event.getFile().getContents());
 		doctorDataManager.getDoctor().setDocFotoNombre(event.getFile().getFileName());
 		doctorDataManager.getDoctor().setDocFotoPath(JsfUtil.saveToDiskUpdload(event.getFile().getContents(), event.getFile().getFileName()));
+	}
+
+	public void handleFileUploadTesis(FileUploadEvent event)
+	{
+		JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+		doctorDataManager.getDoctor().setDocArchivoTesis(event.getFile().getContents());
+		doctorDataManager.getDoctor().setDocArchivoTesisNombre(event.getFile().getFileName());
+		doctorDataManager.getDoctor().setDocArchivoTesisPath(JsfUtil.saveToDiskUpdload(event.getFile().getContents(), event.getFile().getFileName()));
 	}
 
 	
