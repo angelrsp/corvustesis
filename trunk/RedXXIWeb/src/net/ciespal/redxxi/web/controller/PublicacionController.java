@@ -6,6 +6,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.event.FileUploadEvent;
+
 import net.ciespal.redxxi.ejb.negocio.AdministracionService;
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
 import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
@@ -133,7 +135,19 @@ public class PublicacionController extends SelectItemController {
 		}
 		setCampoConocimiento(campoConocimiento.getCatCodigo());
 		setSubCampoConocimiento(publicacion.getPubCampoConocimiento());
+		
+		if(publicacion.getPubArchivo()!=null)
+			publicacionDataManager.getPublicacion().setPubArchivoPath(JsfUtil.saveToDiskUpdload(publicacion.getPubArchivo(), publicacion.getPubArchivoNombre()));
 	}
+	
+	public void handleFileUploadArchivo(FileUploadEvent event)
+	{
+		JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+		publicacionDataManager.getPublicacion().setPubArchivo(event.getFile().getContents());
+		publicacionDataManager.getPublicacion().setPubArchivoNombre(event.getFile().getFileName());
+		publicacionDataManager.getPublicacion().setPubArchivoPath(JsfUtil.saveToDiskUpdload(event.getFile().getContents(), event.getFile().getFileName()));
+	}
+
 	
 	public void delete(PublicacionDTO publicacion)
 	{
