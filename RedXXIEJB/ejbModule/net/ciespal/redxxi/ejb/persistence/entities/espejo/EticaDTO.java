@@ -47,9 +47,15 @@ public class EticaDTO implements Serializable {
 	@Column(name="eti_texto")
 	private String etiTexto;
 
-	@Column(name="eti_texto_archivo")
-	private byte[] etiTextoArchivo;
+	@Column(name="eti_archivo")
+	private byte[] etiArchivo;
 
+	@Column(name="eti_archivo_nombre")
+	private String etiArchivoNombre;
+	
+	@Transient
+	private String etiArchivoPath;
+	
 	@Column(name="eti_titulo_obra")
 	private String etiTituloObra;
 
@@ -141,12 +147,28 @@ public class EticaDTO implements Serializable {
 		this.etiTexto = etiTexto;
 	}
 
-	public byte[] getEtiTextoArchivo() {
-		return this.etiTextoArchivo;
+	public byte[] getEtiArchivo() {
+		return this.etiArchivo;
 	}
 
-	public void setEtiTextoArchivo(byte[] etiTextoArchivo) {
-		this.etiTextoArchivo = etiTextoArchivo;
+	public void setEtiArchivo(byte[] etiArchivo) {
+		this.etiArchivo = etiArchivo;
+	}
+
+	public String getEtiArchivoNombre() {
+		return etiArchivoNombre;
+	}
+
+	public void setEtiArchivoNombre(String etiArchivoNombre) {
+		this.etiArchivoNombre = etiArchivoNombre;
+	}
+
+	public String getEtiArchivoPath() {
+		return etiArchivoPath;
+	}
+
+	public void setEtiArchivoPath(String etiArchivoPath) {
+		this.etiArchivoPath = etiArchivoPath;
 	}
 
 	public String getEtiTituloObra() {

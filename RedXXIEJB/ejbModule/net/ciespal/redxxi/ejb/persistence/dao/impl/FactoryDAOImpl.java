@@ -19,6 +19,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.MaestroCiespalDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.MencionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ModalidadDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.NoticiaDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.NoticiaEspejoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ObraDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ObraEspejoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ObservatorioDAO;
@@ -64,6 +65,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private PremioCiespalDAO premioCiespalDAO;
 	private LeyDAO leyDAO;
 	private ObraEspejoDAO obraEspejoDAO;
+	private NoticiaEspejoDAO noticiaEspejoDAO;
 	
 	@Override
 	public CatalogoDAO getCatalogoImpl() {
@@ -256,6 +258,14 @@ public class FactoryDAOImpl implements FactoryDAO{
 			obraDAO = new ObraDAOImpl(entityManager);
 		}
 		return obraDAO;
+	}
+
+	@Override
+	public NoticiaEspejoDAO getNoticiaEspejoDAOImpl() {
+		if (noticiaEspejoDAO == null) {
+			noticiaEspejoDAO = new NoticiaEspejoDAOImpl(entityManager);
+		}
+		return noticiaEspejoDAO;
 	}
 
 }
