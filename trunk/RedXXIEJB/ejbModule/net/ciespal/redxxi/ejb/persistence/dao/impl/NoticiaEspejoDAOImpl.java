@@ -1,20 +1,61 @@
 package net.ciespal.redxxi.ejb.persistence.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import net.ciespal.redxxi.ejb.persistence.dao.NoticiaEspejoDAO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.EntidadEspejoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
+
+import com.corvustec.commons.util.CorvustecException;
 
 public class NoticiaEspejoDAOImpl extends AbstractFacadeImpl<NoticiaEspejoDTO> implements NoticiaEspejoDAO{
 
 	public NoticiaEspejoDAOImpl() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public NoticiaEspejoDAOImpl(EntityManager entityManager) {
 		super(entityManager);
-		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public List<NoticiaEspejoDTO> findAll(NoticiaEspejoDTO noticia) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<NoticiaEspejoDTO> cq=cb.createQuery(NoticiaEspejoDTO.class);
+		Root<NoticiaEspejoDTO> from= cq.from(NoticiaEspejoDTO.class);
+		
+		cq.where(cb.equal(from.get("espEntidad"), noticia.getEspEntidad()));
+		
+		List<NoticiaEspejoDTO> list=entityManager.createQuery(cq).getResultList();	
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+
+	}
+
+	@Override
+	public List<NoticiaEspejoDTO> findAll(EticaDTO etica) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<NoticiaEspejoDTO> cq=cb.createQuery(NoticiaEspejoDTO.class);
+		Root<NoticiaEspejoDTO> from= cq.from(NoticiaEspejoDTO.class);
+		
+		cq.where(cb.equal(from.get("espEntidad"), etica.getEspEntidad()));
+		
+		List<NoticiaEspejoDTO> list=entityManager.createQuery(cq).getResultList();	
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+
 	}
 
 }

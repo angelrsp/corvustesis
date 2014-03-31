@@ -251,4 +251,33 @@ public class EspejoServiceImpl implements EspejoService{
 			throw new CorvustecException("Error al createOrUpdateNoticia");
 		}		
 	}
+	
+	@Override
+	public List<NoticiaEspejoDTO> readNoticia(NoticiaEspejoDTO noticia) throws CorvustecException
+	{
+		logger.info("readNoticia");
+		try{
+			return factoryDAO.getNoticiaEspejoDAOImpl().findAll(noticia);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readNoticia {}",e.toString());
+			throw new CorvustecException("Error al readNoticia");
+		}
+	}
+
+	@Override
+	public List<NoticiaEspejoDTO> readNoticia(EticaDTO etica) throws CorvustecException
+	{
+		logger.info("readNoticia");
+		try{
+			return factoryDAO.getNoticiaEspejoDAOImpl().findAll(etica);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readNoticia {}",e.toString());
+			throw new CorvustecException("Error al readNoticia");
+		}
+	}
+
 }

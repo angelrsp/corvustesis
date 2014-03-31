@@ -52,6 +52,12 @@ public interface EspejoService {
 
 	NoticiaEspejoDTO createOrUpdateNoticia(NoticiaEspejoDTO noticia) throws CorvustecException;
 
+	List<NoticiaEspejoDTO> readNoticia(NoticiaEspejoDTO noticia)
+			throws CorvustecException;
+
+	List<NoticiaEspejoDTO> readNoticia(EticaDTO etica)
+			throws CorvustecException;
+
 	
 
 }
