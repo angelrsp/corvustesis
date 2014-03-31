@@ -16,6 +16,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.FacultadListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ModalidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.NoticiaDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.ObraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
@@ -171,6 +172,19 @@ public interface AteneaService {
 			throws CorvustecException;
 
 	void deleteCarreraPosgrado(CarreraDTO carrera) throws CorvustecException;
+
+	List<PublicacionDTO> readPublicacion(DoctorDTO doctor)
+			throws CorvustecException;
+
+	EntidadDTO readEntidad(DoctorDTO doctor) throws CorvustecException;
+
+	ObraDTO createOrUpdateObra(ObraDTO obra) throws CorvustecException;
+
+	void deleteObra(ObraDTO obra) throws CorvustecException;
+
+	List<ObraDTO> readObra(DoctorDTO doctor) throws CorvustecException;
+
+	EntidadDTO readEntidad(ObraDTO obra) throws CorvustecException;
 
 
 }

@@ -13,6 +13,7 @@ import javax.persistence.criteria.Root;
 
 import net.ciespal.redxxi.ejb.persistence.dao.PublicacionDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 
@@ -164,4 +165,24 @@ public class PublicacionDAOImpl extends AbstractFacadeImpl<PublicacionDTO> imple
 		query.setParameter("codigo", pub.getPubCodigo());
 		query.executeUpdate();
 	}
+	
+	@Override
+	public List<PublicacionDTO> getAll(DoctorDTO doctor)
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<PublicacionDTO> cq=cb.createQuery(PublicacionDTO.class);
+		Root<PublicacionDTO> from = cq.from(PublicacionDTO.class);
+		
+		Path<CarreraDTO> join1=from.join("ateEntidads");
+		
+		cq.where(cb.equal(join1.get("ateDoctor"), doctor.getDocCodigo()));
+		
+		List<PublicacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}	
+
+
 }

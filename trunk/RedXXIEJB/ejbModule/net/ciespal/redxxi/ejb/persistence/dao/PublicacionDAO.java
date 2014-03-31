@@ -5,6 +5,7 @@ import java.util.List;
 import com.corvustec.commons.util.CorvustecException;
 
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 
 public interface PublicacionDAO extends AbstractFacade<PublicacionDTO>{
@@ -25,5 +26,7 @@ public interface PublicacionDAO extends AbstractFacade<PublicacionDTO>{
 
 	List<PublicacionDTO> getAllNoEntity(Object ubicacion)
 			throws CorvustecException;
+
+	List<PublicacionDTO> getAll(DoctorDTO doctor);
 
 }

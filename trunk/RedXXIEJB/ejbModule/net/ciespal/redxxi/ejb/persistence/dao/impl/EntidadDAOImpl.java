@@ -12,7 +12,9 @@ import javax.persistence.criteria.Root;
 
 import net.ciespal.redxxi.ejb.persistence.dao.EntidadDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.ObraDTO;
 
 import com.corvustec.commons.util.CorvustecException;
 
@@ -52,4 +54,43 @@ public class EntidadDAOImpl extends AbstractFacadeImpl<EntidadDTO> implements En
 		query.setParameter("codigo", entidad.getEntCodigo());
 		query.executeUpdate();
 	}
+	
+	@Override
+	public EntidadDTO get(DoctorDTO doctor)
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<EntidadDTO> cq=cb.createQuery(EntidadDTO.class);
+		Root<EntidadDTO> from = cq.from(EntidadDTO.class);
+		
+		Path<DoctorDTO> join1=from.join("ateDoctor");
+		
+		cq.where(cb.equal(join1.get("docCodigo"),doctor.getDocCodigo()));
+		
+		List<EntidadDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return null;
+		else
+			return list.get(0);		
+	}
+
+	@Override
+	public EntidadDTO get(ObraDTO obra)
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<EntidadDTO> cq=cb.createQuery(EntidadDTO.class);
+		Root<EntidadDTO> from = cq.from(EntidadDTO.class);
+		
+		Path<ObraDTO> join1=from.join("ateObra");
+		
+		cq.where(cb.equal(join1.get("obrCodigo"),obra.getObrCodigo()));
+		
+		List<EntidadDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return null;
+		else
+			return list.get(0);		
+	}
+
+	
+	
 }

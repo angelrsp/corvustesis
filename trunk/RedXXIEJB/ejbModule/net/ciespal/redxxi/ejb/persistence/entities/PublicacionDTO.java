@@ -72,10 +72,14 @@ public class PublicacionDTO implements Serializable {
 	@Column(name="pub_pais")
 	private Integer pubPais;
 
+	@Column(name="pub_archivo_nombre")
+	private String pubArchivoNombre;
 	
 	@Transient
 	private Long pubCount;
 
+	@Transient
+	private String pubArchivoPath;
 	
 	//bi-directional many-to-one association to EntidadDTO
 	@OneToMany(mappedBy="atePublicacion",fetch=FetchType.EAGER,cascade=CascadeType.PERSIST)
@@ -216,12 +220,28 @@ public class PublicacionDTO implements Serializable {
 		this.pubPais = pubPais;
 	}
 
+	public String getPubArchivoNombre() {
+		return pubArchivoNombre;
+	}
+
+	public void setPubArchivoNombre(String pubArchivoNombre) {
+		this.pubArchivoNombre = pubArchivoNombre;
+	}
+
 	public Long getPubCount() {
 		return pubCount;
 	}
 
 	public void setPubCount(Long pubCount) {
 		this.pubCount = pubCount;
+	}
+
+	public String getPubArchivoPath() {
+		return pubArchivoPath;
+	}
+
+	public void setPubArchivoPath(String pubArchivoPath) {
+		this.pubArchivoPath = pubArchivoPath;
 	}
 
 	public String getPubTituloPublicacion() {

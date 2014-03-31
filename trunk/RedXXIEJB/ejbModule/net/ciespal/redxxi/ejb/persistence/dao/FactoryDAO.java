@@ -28,6 +28,8 @@ public interface FactoryDAO {
 	PremioDAO getPremioDAOImpl();
 	PremioCiespalDAO getPremioCiespalDAOImpl();
 	LeyDAO getLeyDAOImpl();
+	ObraEspejoDAO getObraEspejoDAOImpl();
+	ObraDAO getObraDAOImpl();
 	
 	
 
