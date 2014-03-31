@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.ObraDTO;
 
 @ViewScoped
 @ManagedBean(name="doctorDataManager")
@@ -26,8 +27,14 @@ public class DoctorDataManager implements Serializable {
 	private Object sexoSelect;
 	private Object tipoPublicacion;
 	
+	private ObraDTO obra;
+	private List<ObraDTO> obraList;
+	
+	
 	public DoctorDataManager() {
 		doctorList=new ArrayList<DoctorDTO>();
+		obra=new ObraDTO();
+		obraList=new ArrayList<ObraDTO>();
 	}
 	
 	@PostConstruct
@@ -75,6 +82,23 @@ public class DoctorDataManager implements Serializable {
 	public void setTipoPublicacion(Object tipoPublicacion) {
 		this.tipoPublicacion = tipoPublicacion;
 	}
+
+	public ObraDTO getObra() {
+		return obra;
+	}
+
+	public void setObra(ObraDTO obra) {
+		this.obra = obra;
+	}
+
+	public List<ObraDTO> getObraList() {
+		return obraList;
+	}
+
+	public void setObraList(List<ObraDTO> obraList) {
+		this.obraList = obraList;
+	}
+
 	
 	
 }
