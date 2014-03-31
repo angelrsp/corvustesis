@@ -67,6 +67,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private ObraEspejoDAO obraEspejoDAO;
 	private NoticiaEspejoDAO noticiaEspejoDAO;
 	
+	
 	@Override
 	public CatalogoDAO getCatalogoImpl() {
 		if (catalogoDAO == null) {
