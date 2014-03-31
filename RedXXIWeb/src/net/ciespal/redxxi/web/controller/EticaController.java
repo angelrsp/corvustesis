@@ -10,6 +10,7 @@ import org.primefaces.event.FileUploadEvent;
 
 import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.EticaDataManager;
 
@@ -117,17 +118,24 @@ public class EticaController extends SelectItemController{
 	public void eticaSelect(EticaDTO etica)
 	{
 		eticaDataManager.setEticaDTO(etica);
+		readNoticia();
 	}
 	
 	public void createNoticia()
 	{
 		try {
-			eticaDataManager.getEticaDTO().setEspEntidad(eticaDataManager.getEticaDTO().getEspEntidad());
+			eticaDataManager.getNoticia().setEspEntidad(eticaDataManager.getEticaDTO().getEspEntidad());
 			espejoService.createOrUpdateNoticia(eticaDataManager.getNoticia());
 			readNoticia();
+			cancelNoticia();
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
+	}
+	
+	public void cancelNoticia()
+	{
+		eticaDataManager.setNoticia(new NoticiaEspejoDTO());
 	}
 	
 	private void readNoticia()
@@ -138,4 +146,15 @@ public class EticaController extends SelectItemController{
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
+	
+	public void editNoticia(NoticiaEspejoDTO noticia)
+	{
+		eticaDataManager.setNoticia(noticia);
+	}
+	
+	public void deleteNoticia(NoticiaEspejoDTO noticia)
+	{
+		
+	}
+
 }
