@@ -132,6 +132,9 @@
 		
 		<p:dialog id="dlgDetalle" widgetVar="dlgDetalles" modal="true" closeOnEscape="true">
 		<p:ajax event="close" update=":contenido:pnlDato" listener="#{doctorController.cancelDoctor}"/>
+		
+		<p:scrollPanel style="height:600px" mode="native">
+		
 		<!-- Contactos -->
 		<p:panel id="pnlContacto" header="#{i18n['label.panel.contacto']}">
 				
@@ -172,8 +175,7 @@
 		</p:panel>
 		
 		
-		<p:panel header="Obras">	
-			
+		<p:panel id="pnlObra" header="Obras">	
 			
 			<table>
 			
@@ -187,12 +189,60 @@
 
 				<tr>
 					<td><h:outputText value="#{i18n['label.titulo']}:&#160;" /></td>
-					<td><p:inputText value=""/></td>	
+					<td><p:inputText value="#{doctorDataManager.obra.obrTitulo}" required="true" requiredMessage="#{i18n['label.titulo']}&#160;#{i18n['label.requerido']}"/></td>	
 				</tr>			
-			
+
+
+				<tr>
+					<td><h:outputText value="#{i18n['label.campo.conocimiento']}:&#160;" /></td>
+					<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.campo.conocimiento']}&#160;#{i18n['label.requerido']}" value="#{doctorController.campoConocimiento}">
+							<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
+							<f:selectItems value="#{doctorController.catalogoCampoConocimiento}"/>	
+							<p:ajax event="change" listener="#{publicacionController.obtenerSubcampoChange}" process="@this" update="somSubcampo"/>						
+						</p:selectOneMenu></td>
+	
+					<td><p:selectOneMenu id="somSubcampo" value="#{doctorController.subCampoConocimiento}" required="true" requiredMessage="#{i18n['label.campo.conocimiento']}&#160;#{i18n['label.requerido']}">
+							<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
+							<f:selectItems value="#{doctorController.catalogoSubCampoConocimiento}"/>	
+						</p:selectOneMenu></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="#{i18n['label.resumen']}:&#160;" /></td>
+					<td><p:inputTextarea value="#{doctorDataManager.obra.obrResumen}" required="true" requiredMessage="#{i18n['label.resumen']}&#160;#{i18n['label.requerido']}" autoResize="false"/></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="#{i18n['label.archivo']}:&#160;" /></td>
+					<td><p:fileUpload fileUploadListener="#{doctorController.handleFileUploadArchivo}" mode="advanced" dragDropSupport="true"  
+	                 		sizeLimit="10000000" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" auto="true" process="@this" update="growl,enlacePublicacion"/></td>
+	                <td><h:outputLink id="enlacePublicacion" value="#{doctorDataManager.obra.obrArchivoPath}" target="_blank">#{doctorDataManager.obra.obrArchivoNombre}</h:outputLink></td>		                
+				</tr>
+
+				<tr>
+					<td><p:commandButton value="#{i18n['boton.agregar']}" actionListener="#{doctorController.createObra}" process="pnlObra" update="pnlObra,growl"/></td>
+				</tr>				
 			</table>
+
+		<p:dataTable id="tblObra" emptyMessage="#{i18n['table.vacio']}" value="#{doctorDataManager.obraList}" var="obr">
+
+			<p:column headerText="#{i18n['label.titulo']}">
+				<h:outputText value="#{obr.obrTitulo}" />
+			</p:column>
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{doctorController.editObra(obr)}" icon="ui-icon-pencil" process=":contenido:tblObra" update=":contenido:pnlObra"/>
+			</p:column>
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{doctorController.deleteObra(obr)}" icon="ui-icon-close" process=":contenido:tblObra" update=":contenido:pnlObra">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+
 							
 		</p:panel>		
+
+		</p:scrollPanel>
 
 		</p:dialog>
 		

@@ -73,6 +73,19 @@
 					</p:selectOneMenu></td>
 								
 			</tr>			
+
+			<tr>
+				<td><h:outputText value="#{i18n['label.resumen']}:&#160;" /></td>
+				<td><p:inputTextarea value="#{publicacionDataManager.publicacion.pubResumen}" required="true" requiredMessage="#{i18n['label.anio.publicacion']}&#160;#{i18n['label.requerido']}" autoResize="false"/></td>
+			</tr>
+								
+			<tr>
+				<td><h:outputText value="#{i18n['label.archivo']}:&#160;" /></td>
+				<td><p:fileUpload fileUploadListener="#{publicacionController.handleFileUploadArchivo}" mode="advanced" dragDropSupport="true"  
+                 		sizeLimit="10000000" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" auto="true" process="@this" update="growl,enlacePublicacion"/></td>
+                <td><h:outputLink id="enlacePublicacion" value="#{publicacionDataManager.publicacion.pubArchivoPath}" target="_blank">#{publicacionDataManager.publicacion.pubArchivoNombre}</h:outputLink></td>		                
+			</tr>
+
 			
 			<tr>
 				<td colspan="4" align="center">
