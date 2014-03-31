@@ -23,6 +23,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.FacultadListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ModalidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.NoticiaDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.ObraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
@@ -1933,6 +1934,7 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 		catch(Exception e){
 			logger.info("Error createOrUpdatePublicacion {}",e.toString());
+
 			throw new CorvustecException("Error al createOrUpdatePublicacion");
 		}
 	}
@@ -1965,6 +1967,21 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 
+	@Override
+	public List<PublicacionDTO> readPublicacion(DoctorDTO doctor) throws CorvustecException
+	{
+		logger.info("readPublicacion");
+		try{
+			return factoryDAO.getPublicacionDAOImpl().getAll(doctor);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readPublicacion {}",e.toString());
+			throw new CorvustecException("Error al readPublicacion");
+		}
+	}
+
+	
 	@Override
 	public List<PublicacionDTO> readPublicacion(Object ubicacion) throws CorvustecException
 	{
@@ -2175,7 +2192,7 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 
-	/*Nmodalidad*/
+	/*Modalidad*/
 	@Override
 	public List<ModalidadDTO> readModalidad(CarreraDTO carrera) throws CorvustecException
 	{
@@ -2190,4 +2207,82 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 	
+	/*Entidad*/
+	@Override
+	public EntidadDTO readEntidad(DoctorDTO doctor) throws CorvustecException
+	{
+		logger.info("readEntidad");
+		try{
+			return factoryDAO.getEntidadDAOImpl().get(doctor);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readModalidad {}",e.toString());
+			throw new CorvustecException("Error al readModalidad");
+		}		
+	}
+
+	@Override
+	public EntidadDTO readEntidad(ObraDTO obra) throws CorvustecException
+	{
+		logger.info("readEntidad");
+		try{
+			return factoryDAO.getEntidadDAOImpl().get(obra);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readModalidad {}",e.toString());
+			throw new CorvustecException("Error al readModalidad");
+		}		
+	}
+
+	/* Obra */
+	@Override
+	public ObraDTO createOrUpdateObra(ObraDTO obra) throws CorvustecException
+	{
+		logger.info("createOrUpdateObra");
+		try{
+			if(obra.getObrCodigo()!=null)
+				return factoryDAO.getObraDAOImpl().edit(obra);
+			else
+			{
+				obra.addAteEntidad(new EntidadDTO());
+				return factoryDAO.getObraDAOImpl().create(obra);
+			}
+		}
+		catch(Exception e){
+			logger.info("Error createOrUpdateObra {}",e.toString());
+			throw new CorvustecException("Error al createOrUpdateObra");
+		}
+	}
+
+	
+	@Override
+	public void deleteObra(ObraDTO obra) throws CorvustecException
+	{
+		logger.info("deleteObra");
+		try{
+			factoryDAO.getObraDAOImpl().remove2(obra);
+		}
+		catch(Exception e){
+			logger.info("Error deleteObra {}",e.toString());
+			throw new CorvustecException("Error al deleteObra");
+		}
+	}
+	
+	@Override
+	public List<ObraDTO> readObra(DoctorDTO doctor) throws CorvustecException
+	{
+		logger.info("readObra");
+		try{
+			return factoryDAO.getObraDAOImpl().getAll(doctor);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readObra {}",e.toString());
+			throw new CorvustecException("Error al readObra");
+		}
+	}
+
+
 }
