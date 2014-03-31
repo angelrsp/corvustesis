@@ -12,6 +12,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.LeyDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioCiespalDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioDTO;
 
@@ -232,5 +233,22 @@ public class EspejoServiceImpl implements EspejoService{
 			logger.info("Error readLey {}",e.toString());
 			throw new CorvustecException("Error al readLey");
 		}
+	}
+	
+	/*Noticia*/
+	@Override
+	public NoticiaEspejoDTO createOrUpdateNoticia(NoticiaEspejoDTO noticia) throws CorvustecException
+	{
+		logger.info("createOrUpdateNoticia");
+		try{
+			if(noticia.getNotCodigo()!=null)
+				return factoryDAO.getNoticiaEspejoDAOImpl().edit(noticia);
+			else			
+				return factoryDAO.getNoticiaEspejoDAOImpl().create(noticia);
+		}
+		catch(Exception e){
+			logger.info("Error createOrUpdateNoticia {}",e.toString());
+			throw new CorvustecException("Error al createOrUpdateNoticia");
+		}		
 	}
 }
