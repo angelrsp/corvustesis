@@ -6,6 +6,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.event.FileUploadEvent;
+
 import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
@@ -81,6 +83,8 @@ public class EticaController extends SelectItemController{
 	public void edit(EticaDTO etica)
 	{
 		eticaDataManager.setEticaDTO(etica);
+		if(etica.getEtiArchivo()!=null)
+			eticaDataManager.getEticaDTO().setEtiArchivoPath(JsfUtil.saveToDiskUpdload(etica.getEtiArchivo(), etica.getEtiArchivoNombre()));
 	}
 
 	public void delete(EticaDTO etica)
@@ -102,5 +106,36 @@ public class EticaController extends SelectItemController{
 		}
 	}
 
+	public void handleFileUpload(FileUploadEvent event)
+	{
+		JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+		eticaDataManager.getEticaDTO().setEtiArchivo(event.getFile().getContents());
+		eticaDataManager.getEticaDTO().setEtiArchivoNombre(event.getFile().getFileName());
+		eticaDataManager.getEticaDTO().setEtiArchivoPath(JsfUtil.saveToDiskUpdload(event.getFile().getContents(), event.getFile().getFileName()));
+	}
+
+	public void eticaSelect(EticaDTO etica)
+	{
+		eticaDataManager.setEticaDTO(etica);
+	}
 	
+	public void createNoticia()
+	{
+		try {
+			eticaDataManager.getEticaDTO().setEspEntidad(eticaDataManager.getEticaDTO().getEspEntidad());
+			espejoService.createOrUpdateNoticia(eticaDataManager.getNoticia());
+			readNoticia();
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	private void readNoticia()
+	{
+		try {
+			eticaDataManager.setNoticiaList(espejoService.readNoticia(eticaDataManager.getEticaDTO()));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
 }

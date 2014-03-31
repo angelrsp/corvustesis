@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
 
 @ViewScoped
 @ManagedBean(name = "eticaDataManager")
@@ -21,10 +22,16 @@ public class EticaDataManager implements Serializable{
 	
 	private EticaDTO eticaDTO;
 	private List<EticaDTO> eticaList;
+
+	private NoticiaEspejoDTO noticia;
+	private List<NoticiaEspejoDTO> noticiaList;
 	
 	public EticaDataManager() {
 		eticaDTO=new EticaDTO();
 		eticaList=new ArrayList<EticaDTO>();
+		
+		noticia=new NoticiaEspejoDTO();
+		noticiaList=new ArrayList<NoticiaEspejoDTO>();
 	}
 
 	
@@ -42,6 +49,26 @@ public class EticaDataManager implements Serializable{
 
 	public void setEticaList(List<EticaDTO> eticaList) {
 		this.eticaList = eticaList;
+	}
+
+
+	public NoticiaEspejoDTO getNoticia() {
+		return noticia;
+	}
+
+
+	public void setNoticia(NoticiaEspejoDTO noticia) {
+		this.noticia = noticia;
+	}
+
+
+	public List<NoticiaEspejoDTO> getNoticiaList() {
+		return noticiaList;
+	}
+
+
+	public void setNoticiaList(List<NoticiaEspejoDTO> noticiaList) {
+		this.noticiaList = noticiaList;
 	}
 	
 	
