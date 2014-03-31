@@ -66,12 +66,19 @@
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.texto.obra']}:&#160;" /></td>
-				<td><p:inputText value="#{eticaDataManager.eticaDTO.etiTexto}" required="true" requiredMessage="#{i18n['label.texto.obra']}&#160;#{i18n['label.requerido']}"/></td>
+				<td><p:inputTextarea value="#{eticaDataManager.eticaDTO.etiTexto}" required="true" requiredMessage="#{i18n['label.texto.obra']}&#160;#{i18n['label.requerido']}"/></td>
+			</tr>
+
+			<tr>
+				<td><h:outputText value="#{i18n['label.archivo']}:&#160;" /></td>
+				<td><p:fileUpload fileUploadListener="#{eticaController.handleFileUpload}" mode="advanced" dragDropSupport="true"  
+                 		sizeLimit="10000000" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" auto="true" process="@this" update="growl,enlaceArchivo"/></td>
+                <td><h:outputLink id="enlaceArchivo" value="#{eticaDataManager.eticaDTO.etiArchivoPath}" target="_blank">#{eticaDataManager.eticaDTO.etiArchivoNombre}</h:outputLink></td>		                
 			</tr>
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.biografia']}:&#160;" /></td>
-				<td><p:inputText value="#{eticaDataManager.eticaDTO.etiBiografia}" required="true" requiredMessage="#{i18n['label.biografia']}&#160;#{i18n['label.requerido']}"/></td>
+				<td><p:inputTextarea value="#{eticaDataManager.eticaDTO.etiBiografia}" required="true" requiredMessage="#{i18n['label.biografia']}&#160;#{i18n['label.requerido']}"/></td>
 			</tr>
 
 			<tr>
@@ -99,11 +106,18 @@
 						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
 					</p:commandButton>
 				</p:column>		
+
+				<p:column headerText="#{i18n['label.mas.datos']}" width="15" style="text-align: center">
+					<p:commandButton icon="ui-icon-plus" actionListener="#{eticaController.eticaSelect(eti)}"
+		               	update=":contenido:pnlDato,:contenido:growl,:contenido:dlgDetalle" process="tblDoctor" oncomplete="PF('dlgDetalles').show()"/>    				
+				</p:column>
+
 	
 			</p:dataTable>
 
-
 		</p:panel>
+
+		
 	
 	</ui:define>
 	
