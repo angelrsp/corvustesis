@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioCiespalDTO;
 
 @ViewScoped
@@ -21,10 +22,15 @@ public class PremioCiespalDataManager implements Serializable {
 	private PremioCiespalDTO premioCiespalDTO;
 	private List<PremioCiespalDTO> premioCiespalList;
 	
+	private NoticiaEspejoDTO noticia;
+	private List<NoticiaEspejoDTO> noticiaList;
 	
 	public PremioCiespalDataManager() {
 		premioCiespalDTO=new PremioCiespalDTO();
 		premioCiespalList=new ArrayList<PremioCiespalDTO>();
+		
+		noticia=new NoticiaEspejoDTO();
+		noticiaList=new ArrayList<NoticiaEspejoDTO>();
 	}
 
 
@@ -45,6 +51,22 @@ public class PremioCiespalDataManager implements Serializable {
 
 	public void setPremioCiespalList(List<PremioCiespalDTO> premioCiespalList) {
 		this.premioCiespalList = premioCiespalList;
+	}
+
+	public NoticiaEspejoDTO getNoticia() {
+		return noticia;
+	}
+
+	public void setNoticia(NoticiaEspejoDTO noticia) {
+		this.noticia = noticia;
+	}
+
+	public List<NoticiaEspejoDTO> getNoticiaList() {
+		return noticiaList;
+	}
+
+	public void setNoticiaList(List<NoticiaEspejoDTO> noticiaList) {
+		this.noticiaList = noticiaList;
 	}
 
 
