@@ -36,6 +36,9 @@ public class GranMaestroDTO implements Serializable {
 	@Column(name="gma_foto")
 	private byte[] gmaFoto;
 
+	@Column(name="gma_foto_nombre")
+	private String gmaFotoNombre;
+	
 	@Column(name="gma_nombres")
 	private String gmaNombres;
 
@@ -48,6 +51,9 @@ public class GranMaestroDTO implements Serializable {
 	@Column(name="gma_provincia")
 	private Integer gmaProvincia;
 
+	@Transient
+	private String gmaFotoPath;
+	
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="gma_entidad")
@@ -104,6 +110,14 @@ public class GranMaestroDTO implements Serializable {
 		this.gmaFoto = gmaFoto;
 	}
 
+	public String getGmaFotoNombre() {
+		return gmaFotoNombre;
+	}
+
+	public void setGmaFotoNombre(String gmaFotoNombre) {
+		this.gmaFotoNombre = gmaFotoNombre;
+	}
+
 	public String getGmaNombres() {
 		return this.gmaNombres;
 	}
@@ -134,6 +148,14 @@ public class GranMaestroDTO implements Serializable {
 
 	public void setGmaProvincia(Integer gmaProvincia) {
 		this.gmaProvincia = gmaProvincia;
+	}
+
+	public String getGmaFotoPath() {
+		return gmaFotoPath;
+	}
+
+	public void setGmaFotoPath(String gmaFotoPath) {
+		this.gmaFotoPath = gmaFotoPath;
 	}
 
 	public EntidadEspejoDTO getEspEntidad() {

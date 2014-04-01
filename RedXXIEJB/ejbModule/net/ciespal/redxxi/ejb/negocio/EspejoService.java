@@ -58,6 +58,9 @@ public interface EspejoService {
 	List<NoticiaEspejoDTO> readNoticia(EticaDTO etica)
 			throws CorvustecException;
 
+	List<NoticiaEspejoDTO> readNoticia(GranMaestroDTO maestro)
+			throws CorvustecException;
+
 	
 
 }
