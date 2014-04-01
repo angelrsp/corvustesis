@@ -35,7 +35,7 @@
 				<td><p:selectOneMenu id="somCiudad" value="#{premioCiespalController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
 						<f:selectItems value="#{premioCiespalController.catalogoCiudad}"/>
-						<p:ajax event="change" listener="#{premioCiespalController.obtenerCiudadChange()}" process="@this"/>
+						<p:ajax event="change" listener="#{premioCiespalController.ciudadChange}" process="@this" update="tblPremioCiespal"/>
 					</p:selectOneMenu></td>
 			</tr>
 
@@ -46,12 +46,12 @@
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.obra.autor.premiados']}:&#160;" /></td>
-				<td><p:inputText   value="#{premioCiespalDataManager.premioCiespalDTO.pciObraAutor}"/></td>
+				<td><p:inputText value="#{premioCiespalDataManager.premioCiespalDTO.pciObraAutor}"/></td>
 			</tr>
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.anio.otorgamiento']}:&#160;"/></td>
-				<td><p:inputText  value="#{premioCiespalDataManager.premioCiespalDTO.pciAnio}" onkeypress="return isNumberKey(event);"/></td>
+				<td><p:inputText value="#{premioCiespalDataManager.premioCiespalDTO.pciAnio}" onkeypress="return isNumberKey(event);" maxlength="4"/></td>
 			</tr>
 
 			<tr>
@@ -60,21 +60,11 @@
 			</tr>
 
 			<tr>
-				<td><h:outputText value="#{i18n['label.genero']}:&#160;" /></td>
-				<td><p:selectOneMenu>
-					<f:selectItem itemLabel="--Seleccione--"/>
-					<f:selectItem  value="#{premioCiespalDataManager.premioCiespalDTO.pciGenero}"/>
-				</p:selectOneMenu></td>			
-			</tr>
-
-			<tr>
 				<td><h:outputText value="#{i18n['label.tipo.medio.comunicacion']}:&#160;"/></td>
 				<td><p:selectOneMenu>
 					<f:selectItem itemLabel="--Seleccione--"/>
-					<f:selectItem  value="#{premioCiespalDataManager.premioCiespalDTO.pciMedio}"/>
 				</p:selectOneMenu></td>			
 			</tr>
-
 			
 			<tr>
 				<td><h:outputText value="#{i18n['label.nombre.autor.principal']}:&#160;" /></td>
@@ -98,7 +88,7 @@
 			
 		</table>
 	
-	<p:dataTable id="tblPremioCiespal" emptyMessage="#{i18n['table.vacio']}" value="#{premioCiespalDataManager.premioCiespalList}" var="preC">
+		<p:dataTable id="tblPremioCiespal" emptyMessage="#{i18n['table.vacio']}" value="#{premioCiespalDataManager.premioCiespalList}" var="preC">
 	
 				<p:column headerText="#{i18n['label.titulo']}">
 					<h:outputText value="#{preC.pciTitulo}" />
@@ -113,14 +103,93 @@
 				</p:column>
 			
 				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
-					<p:commandButton actionListener="#{premioCiespalController.delete(pre)}" icon="ui-icon-close" process=":contenido:tblPremioCiespal" update="tblPremioCiespal,:contenido:growl">
+					<p:commandButton actionListener="#{premioCiespalController.delete(preC)}" icon="ui-icon-close" process=":contenido:tblPremioCiespal" update="tblPremioCiespal,:contenido:growl">
 						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
 					</p:commandButton>
+				</p:column>
+
+				<p:column headerText="#{i18n['label.mas.datos']}" width="15" style="text-align: center">
+					<p:commandButton icon="ui-icon-plus" actionListener="#{premioCiespalController.premioSelect(preC)}"
+	               		update=":contenido:pnlDatos,:contenido:growl,:contenido:dlgDetalle" process="tblPremioCiespal" oncomplete="PF('dlgDetalles').show()"/>    				
 				</p:column>
 	
 			</p:dataTable>
 
 		</p:panel>
+	
+		<p:dialog id="dlgDetalle" widgetVar="dlgDetalles" modal="true">
+		
+		<p:ajax event="close" update=":contenido:pnlDatos" listener="#{premioCiespalController.cancel}"/>
+		
+		<p:scrollPanel style="height:600px" mode="native">
+		
+			<p:panel id="pnlNoticia" header="#{i18n['label.noticias']}">
+			
+				<table>
+
+					<tr>
+						<td><h:outputText value="#{i18n['label.titulo']}:&#160;" /></td>
+						<td><p:inputText value="#{premioCiespalDataManager.noticia.notTitulo}" required="true" requiredMessage="#{i18n['label.titulo']}&#160;#{i18n['label.requerido']}"/></td>
+					</tr>
+				
+					<tr>
+						<td><h:outputText value="#{i18n['label.resumen']}:&#160;" /></td>
+						<td><p:editor value="#{premioCiespalDataManager.noticia.notResumen}" required="true" requiredMessage="#{i18n['label.resumen']}&#160;#{i18n['label.requerido']}"/></td>
+					</tr>
+				
+					<tr>
+						<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>
+						<td><p:editor value="#{premioCiespalDataManager.noticia.notNoticia}" required="true" requiredMessage="#{i18n['label.descripcion']}&#160;#{i18n['label.requerido']}"/></td>
+					</tr>
+
+					<tr>
+						<td colspan="4" align="center">
+							<p:commandButton value="#{i18n['boton.guardar']}" process="pnlNoticia" update="pnlNoticia,:contenido:growl" actionListener="#{premioCiespalController.createNoticia}" icon="ui-icon-disk"/>
+							<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update="pnlNoticia,:contenido:growl" actionListener="#{premioCiespalController.cancelNoticia}" icon="ui-icon-cancel"/>
+						</td>
+					</tr>							
+
+				</table>
+			
+				<p:dataTable id="tblNoticia" value="#{premioCiespalDataManager.noticiaList}" var="noti">
+
+					<p:column headerText="#{i18n['label.titulo']}" style="vertical-align:top;">
+							<h:outputText value="#{noti.notTitulo}" escape="false"/>
+					</p:column>				
+		
+					<p:column headerText="#{i18n['label.resumen']}" style="vertical-align:top;">
+							<h:outputText value="#{noti.notResumen}" escape="false"/>
+					</p:column>				
+				
+					<p:column headerText="#{i18n['label.descripcion']}">
+							<h:outputText value="#{noti.notNoticia}" escape="false"/>
+					</p:column>		
+		
+<!-- 					<p:column headerText="#{i18n['label.activo']}" style="vertical-align:top;"> -->
+<!-- 							<h:outputText value="#{noti.notActivo?'Si':'No'}"/> -->
+<!-- 					</p:column>		 -->
+				
+<!-- 					<p:column headerText="#{i18n['label.destacado']}" style="vertical-align:top;"> -->
+<!-- 							<h:outputText value="#{noti.notDestacado?'Si':'No'}"/> -->
+<!-- 					</p:column>		 -->
+		
+					<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center;vertical-align:top;">
+						<p:commandButton actionListener="#{premioCiespalController.editNoticia(noti)}" icon="ui-icon-pencil" process=":contenido:tblNoticia" update=":contenido:pnlNoticia"/>
+					</p:column>
+					<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center;vertical-align:top;">
+						<p:commandButton actionListener="#{premioCiespalController.deleteNoticia(noti)}" icon="ui-icon-close" process=":contenido:tblNoticia" update=":contenido:pnlNoticia">
+							 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+						</p:commandButton>
+					</p:column>
+								
+				</p:dataTable>					
+			
+			
+			</p:panel>
+		
+		</p:scrollPanel>
+		
+		</p:dialog>		
 	
 	</ui:define>
 	
