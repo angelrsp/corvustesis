@@ -280,4 +280,18 @@ public class EspejoServiceImpl implements EspejoService{
 		}
 	}
 
+	@Override
+	public List<NoticiaEspejoDTO> readNoticia(GranMaestroDTO maestro) throws CorvustecException
+	{
+		logger.info("readNoticia");
+		try{
+			return factoryDAO.getNoticiaEspejoDAOImpl().findAll(maestro);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readNoticia {}",e.toString());
+			throw new CorvustecException("Error al readNoticia");
+		}
+	}
+
 }
