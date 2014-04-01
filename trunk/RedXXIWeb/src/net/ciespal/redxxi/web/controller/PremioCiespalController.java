@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.negocio.EspejoService;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioCiespalDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.PremioCiespalDataManager;
@@ -101,5 +102,47 @@ public class PremioCiespalController extends SelectItemController{
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
+	}
+	
+	public void premioSelect(PremioCiespalDTO premio)
+	{
+		premioCiespalDataManager.setPremioCiespalDTO(premio);
+		readNoticia();
+	}
+	
+	public void createNoticia()
+	{
+		try {
+			premioCiespalDataManager.getNoticia().setEspEntidad(premioCiespalDataManager.getPremioCiespalDTO().getEspEntidad());
+			espejoService.createOrUpdateNoticia(premioCiespalDataManager.getNoticia());
+			readNoticia();
+			cancelNoticia();
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void cancelNoticia()
+	{
+		premioCiespalDataManager.setNoticia(new NoticiaEspejoDTO());
+	}
+	
+	private void readNoticia()
+	{
+		try {
+			premioCiespalDataManager.setNoticiaList(espejoService.readNoticia(premioCiespalDataManager.getPremioCiespalDTO()));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void editNoticia(NoticiaEspejoDTO noticia)
+	{
+		premioCiespalDataManager.setNoticia(noticia);
+	}
+	
+	public void deleteNoticia(NoticiaEspejoDTO noticia)
+	{
+		
 	}
 }

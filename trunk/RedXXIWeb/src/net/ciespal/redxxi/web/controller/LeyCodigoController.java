@@ -8,6 +8,7 @@ import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.LeyDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.LeyCodigoDataManager;
 
@@ -99,6 +100,49 @@ public class LeyCodigoController extends SelectItemController {
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
+	}
+	
+	
+	public void leySelect(LeyDTO ley)
+	{
+		leyCodigoDataManager.setLeyDTO(ley);
+		readNoticia();
+	}
+	
+	public void createNoticia()
+	{
+		try {
+			leyCodigoDataManager.getNoticia().setEspEntidad(leyCodigoDataManager.getLeyDTO().getEspEntidad());
+			espejoService.createOrUpdateNoticia(leyCodigoDataManager.getNoticia());
+			readNoticia();
+			cancelNoticia();
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void cancelNoticia()
+	{
+		leyCodigoDataManager.setNoticia(new NoticiaEspejoDTO());
+	}
+	
+	private void readNoticia()
+	{
+		try {
+			leyCodigoDataManager.setNoticiaList(espejoService.readNoticia(leyCodigoDataManager.getLeyDTO()));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void editNoticia(NoticiaEspejoDTO noticia)
+	{
+		leyCodigoDataManager.setNoticia(noticia);
+	}
+	
+	public void deleteNoticia(NoticiaEspejoDTO noticia)
+	{
+		
 	}
 
 }

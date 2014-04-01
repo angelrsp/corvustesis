@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.MaestroCiespalDataManager;
 
@@ -107,6 +108,47 @@ public class MaestroCiespalController extends SelectItemController{
 		}
 	}
 
+	public void maestroSelect(MaestroCiespalDTO maestro)
+	{
+		maestroCiespalDataManager.setMaestroCiespalDTO(maestro);
+		readNoticia();
+	}
+	
+	public void createNoticia()
+	{
+		try {
+			maestroCiespalDataManager.getNoticia().setEspEntidad(maestroCiespalDataManager.getMaestroCiespalDTO().getEspEntidad());
+			espejoService.createOrUpdateNoticia(maestroCiespalDataManager.getNoticia());
+			readNoticia();
+			cancelNoticia();
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void cancelNoticia()
+	{
+		maestroCiespalDataManager.setNoticia(new NoticiaEspejoDTO());
+	}
+	
+	private void readNoticia()
+	{
+		try {
+			maestroCiespalDataManager.setNoticiaList(espejoService.readNoticia(maestroCiespalDataManager.getMaestroCiespalDTO()));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void editNoticia(NoticiaEspejoDTO noticia)
+	{
+		maestroCiespalDataManager.setNoticia(noticia);
+	}
+	
+	public void deleteNoticia(NoticiaEspejoDTO noticia)
+	{
+		
+	}
 
 	
 }

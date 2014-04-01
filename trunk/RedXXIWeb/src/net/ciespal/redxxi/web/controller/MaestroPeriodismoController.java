@@ -118,6 +118,12 @@ public class MaestroPeriodismoController extends SelectItemController {
 		maestroPeriodismoDataManager.getGranMaestroDTO().setGmaFotoPath(JsfUtil.saveToDiskUpdload(event.getFile().getContents(), event.getFile().getFileName()));
 	}
 
+	public void maestroSelect(GranMaestroDTO maestro)
+	{
+		maestroPeriodismoDataManager.setGranMaestroDTO(maestro);
+		readNoticia();
+	}
+	
 	public void createNoticia()
 	{
 		try {
