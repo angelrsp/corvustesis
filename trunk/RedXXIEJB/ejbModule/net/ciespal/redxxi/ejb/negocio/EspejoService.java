@@ -61,6 +61,17 @@ public interface EspejoService {
 	List<NoticiaEspejoDTO> readNoticia(GranMaestroDTO maestro)
 			throws CorvustecException;
 
+	List<NoticiaEspejoDTO> readNoticia(MaestroCiespalDTO maestro)
+			throws CorvustecException;
+
+	List<NoticiaEspejoDTO> readNoticia(PremioDTO premio)
+			throws CorvustecException;
+
+	List<NoticiaEspejoDTO> readNoticia(PremioCiespalDTO premio)
+			throws CorvustecException;
+
+	List<NoticiaEspejoDTO> readNoticia(LeyDTO ley) throws CorvustecException;
+
 	
 
 }
