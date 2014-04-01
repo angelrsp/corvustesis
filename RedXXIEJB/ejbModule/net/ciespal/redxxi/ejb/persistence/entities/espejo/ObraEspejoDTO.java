@@ -29,6 +29,9 @@ public class ObraEspejoDTO implements Serializable {
 	@Column(name="obr_titulo")
 	private String obrTitulo;
 
+	@Column(name="obr_tipo")
+	private Integer obrTipo;
+	
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne
 	@JoinColumn(name="obr_entidad")
@@ -67,6 +70,14 @@ public class ObraEspejoDTO implements Serializable {
 
 	public void setObrTitulo(String obrTitulo) {
 		this.obrTitulo = obrTitulo;
+	}
+
+	public Integer getObrTipo() {
+		return obrTipo;
+	}
+
+	public void setObrTipo(Integer obrTipo) {
+		this.obrTipo = obrTipo;
 	}
 
 	public EntidadEspejoDTO getEspEntidad() {

@@ -294,4 +294,61 @@ public class EspejoServiceImpl implements EspejoService{
 		}
 	}
 
+	@Override
+	public List<NoticiaEspejoDTO> readNoticia(MaestroCiespalDTO maestro) throws CorvustecException
+	{
+		logger.info("readNoticia");
+		try{
+			return factoryDAO.getNoticiaEspejoDAOImpl().findAll(maestro);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readNoticia {}",e.toString());
+			throw new CorvustecException("Error al readNoticia");
+		}
+	}
+
+	@Override
+	public List<NoticiaEspejoDTO> readNoticia(PremioDTO premio) throws CorvustecException
+	{
+		logger.info("readNoticia");
+		try{
+			return factoryDAO.getNoticiaEspejoDAOImpl().findAll(premio);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readNoticia {}",e.toString());
+			throw new CorvustecException("Error al readNoticia");
+		}
+	}
+
+	@Override
+	public List<NoticiaEspejoDTO> readNoticia(PremioCiespalDTO premio) throws CorvustecException
+	{
+		logger.info("readNoticia");
+		try{
+			return factoryDAO.getNoticiaEspejoDAOImpl().findAll(premio);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readNoticia {}",e.toString());
+			throw new CorvustecException("Error al readNoticia");
+		}
+	}
+
+	@Override
+	public List<NoticiaEspejoDTO> readNoticia(LeyDTO ley) throws CorvustecException
+	{
+		logger.info("readNoticia");
+		try{
+			return factoryDAO.getNoticiaEspejoDAOImpl().findAll(ley);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readNoticia {}",e.toString());
+			throw new CorvustecException("Error al readNoticia");
+		}
+	}
+
+	/*Obra*/
 }
