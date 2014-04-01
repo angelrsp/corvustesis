@@ -35,7 +35,7 @@
 				<td><p:selectOneMenu id="somCiudad" value="#{leyCodigoController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}" filter="true">
 						<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
 						<f:selectItems value="#{leyCodigoController.catalogoCiudad}"/>
-						<p:ajax event="change" listener="#{leyCodigoController.obtenerCiudadChange()}" process="@this"/>
+						<p:ajax event="change" listener="#{leyCodigoController.ciudadChange}" process="@this" update="tblLeyCodigo"/>
 					</p:selectOneMenu></td>
 			</tr>
 
@@ -48,7 +48,6 @@
 				<td><h:outputText value="#{i18n['label.tipo.documento']}:&#160;" /></td>
 				<td><p:selectOneMenu>
 					<f:selectItem itemLabel="--Seleccione--"/>
-					<f:selectItem  value="#{leyCodigoDataManager.leyDTO.leyTipo}"/>
 				</p:selectOneMenu></td>			
 			</tr>
 
@@ -59,7 +58,7 @@
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.anio']}:&#160;" /></td>
-				<td><p:inputText onkeypress="return isNumberKey(event);" value="#{leyCodigoDataManager.leyDTO.leyAnio}" /></td>			
+				<td><p:inputText onkeypress="return isNumberKey(event);" value="#{leyCodigoDataManager.leyDTO.leyAnio}" maxlength="4"/></td>			
 			</tr>
 
 			<tr>
@@ -74,30 +73,111 @@
 			</tr>	
 						
 		</table>
-	<p:dataTable id="tblLeyCodigo" emptyMessage="#{i18n['table.vacio']}" value="#{leyCodigoDataManager.leyList}" var="ley">
-	
-				<p:column headerText="#{i18n['label.titulo']}">
-					<h:outputText value="#{ley.leytitulo}" />
-				</p:column>		
-	
-				<p:column headerText="#{i18n['label.institucion.emisora']}">
-					<h:outputText value="#{ley.leyEntidadEmisora}" />
-				</p:column>		
-	
-				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
-					<p:commandButton actionListener="#{leyCodigoController.edit(ley)}" icon="ui-icon-pencil" process=":contenido:tblLeyCodigo" update=":contenido:pnlDatos"/>
-				</p:column>
-			
-				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
-					<p:commandButton actionListener="#{leyCodigoController.delete(ley)}" icon="ui-icon-close" process=":contenido:tblLeyCodigo" update="tblLeyCodigo,:contenido:growl">
-						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
-					</p:commandButton>
-				</p:column>
-	
-			</p:dataTable>
+		
+		<p:dataTable id="tblLeyCodigo" emptyMessage="#{i18n['table.vacio']}" value="#{leyCodigoDataManager.leyList}" var="ley">
 
+			<p:column headerText="#{i18n['label.titulo']}">
+				<h:outputText value="#{ley.leytitulo}" />
+			</p:column>		
+
+			<p:column headerText="#{i18n['label.institucion.emisora']}">
+				<h:outputText value="#{ley.leyEntidadEmisora}" />
+			</p:column>		
+
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{leyCodigoController.edit(ley)}" icon="ui-icon-pencil" process=":contenido:tblLeyCodigo" update=":contenido:pnlDatos"/>
+			</p:column>
+		
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{leyCodigoController.delete(ley)}" icon="ui-icon-close" process=":contenido:tblLeyCodigo" update="tblLeyCodigo,:contenido:growl">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
+			</p:column>
+	
+			<p:column headerText="#{i18n['label.mas.datos']}" width="15" style="text-align: center">
+				<p:commandButton icon="ui-icon-plus" actionListener="#{leyCodigoController.leySelect(ley)}"
+               		update=":contenido:pnlDatos,:contenido:growl,:contenido:dlgDetalle" process="tblLeyCodigo" oncomplete="PF('dlgDetalles').show()"/>    				
+			</p:column>	
+
+		</p:dataTable>
 
 		</p:panel>
+	
+	
+	
+		<p:dialog id="dlgDetalle" widgetVar="dlgDetalles" modal="true">
+		
+		<p:ajax event="close" update=":contenido:pnlDatos" listener="#{leyCodigoController.cancel}"/>
+		
+		<p:scrollPanel style="height:600px" mode="native">
+		
+			<p:panel id="pnlNoticia" header="#{i18n['label.noticias']}">
+			
+				<table>
+
+					<tr>
+						<td><h:outputText value="#{i18n['label.titulo']}:&#160;" /></td>
+						<td><p:inputText value="#{leyCodigoDataManager.noticia.notTitulo}" required="true" requiredMessage="#{i18n['label.titulo']}&#160;#{i18n['label.requerido']}"/></td>
+					</tr>
+				
+					<tr>
+						<td><h:outputText value="#{i18n['label.resumen']}:&#160;" /></td>
+						<td><p:editor value="#{leyCodigoDataManager.noticia.notResumen}" required="true" requiredMessage="#{i18n['label.resumen']}&#160;#{i18n['label.requerido']}"/></td>
+					</tr>
+				
+					<tr>
+						<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>
+						<td><p:editor value="#{leyCodigoDataManager.noticia.notNoticia}" required="true" requiredMessage="#{i18n['label.descripcion']}&#160;#{i18n['label.requerido']}"/></td>
+					</tr>
+
+					<tr>
+						<td colspan="4" align="center">
+							<p:commandButton value="#{i18n['boton.guardar']}" process="pnlNoticia" update="pnlNoticia,:contenido:growl" actionListener="#{leyCodigoController.createNoticia}" icon="ui-icon-disk"/>
+							<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update="pnlNoticia,:contenido:growl" actionListener="#{leyCodigoController.cancelNoticia}" icon="ui-icon-cancel"/>
+						</td>
+					</tr>							
+
+				</table>
+			
+				<p:dataTable id="tblNoticia" value="#{leyCodigoDataManager.noticiaList}" var="noti">
+
+					<p:column headerText="#{i18n['label.titulo']}" style="vertical-align:top;">
+							<h:outputText value="#{noti.notTitulo}" escape="false"/>
+					</p:column>				
+		
+					<p:column headerText="#{i18n['label.resumen']}" style="vertical-align:top;">
+							<h:outputText value="#{noti.notResumen}" escape="false"/>
+					</p:column>				
+				
+					<p:column headerText="#{i18n['label.descripcion']}">
+							<h:outputText value="#{noti.notNoticia}" escape="false"/>
+					</p:column>		
+		
+<!-- 					<p:column headerText="#{i18n['label.activo']}" style="vertical-align:top;"> -->
+<!-- 							<h:outputText value="#{noti.notActivo?'Si':'No'}"/> -->
+<!-- 					</p:column>		 -->
+				
+<!-- 					<p:column headerText="#{i18n['label.destacado']}" style="vertical-align:top;"> -->
+<!-- 							<h:outputText value="#{noti.notDestacado?'Si':'No'}"/> -->
+<!-- 					</p:column>		 -->
+		
+					<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center;vertical-align:top;">
+						<p:commandButton actionListener="#{leyCodigoController.editNoticia(noti)}" icon="ui-icon-pencil" process=":contenido:tblNoticia" update=":contenido:pnlNoticia"/>
+					</p:column>
+					<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center;vertical-align:top;">
+						<p:commandButton actionListener="#{leyCodigoController.deleteNoticia(noti)}" icon="ui-icon-close" process=":contenido:tblNoticia" update=":contenido:pnlNoticia">
+							 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+						</p:commandButton>
+					</p:column>
+								
+				</p:dataTable>					
+			
+			
+			</p:panel>
+		
+		</p:scrollPanel>
+		
+		</p:dialog>			
 	
 	</ui:define>
 	
