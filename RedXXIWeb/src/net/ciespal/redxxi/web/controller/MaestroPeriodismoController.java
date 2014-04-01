@@ -6,9 +6,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.event.FileUploadEvent;
+
 import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.MaestroPeriodismoDataManager;
 
@@ -84,6 +87,8 @@ public class MaestroPeriodismoController extends SelectItemController {
 	public void edit(GranMaestroDTO maestro)
 	{
 		maestroPeriodismoDataManager.setGranMaestroDTO(maestro);
+		if(maestro.getGmaFoto()!=null)
+			maestroPeriodismoDataManager.getGranMaestroDTO().setGmaFotoPath(JsfUtil.saveToDiskUpdload(maestro.getGmaFoto(), maestro.getGmaFotoNombre()));
 	}
 
 	public void delete(EticaDTO etica)
@@ -106,4 +111,47 @@ public class MaestroPeriodismoController extends SelectItemController {
 	}
 
 	
+	public void handleFileUploadFoto(FileUploadEvent event)
+	{
+		maestroPeriodismoDataManager.getGranMaestroDTO().setGmaFoto(event.getFile().getContents());
+		maestroPeriodismoDataManager.getGranMaestroDTO().setGmaFotoNombre(event.getFile().getFileName());
+		maestroPeriodismoDataManager.getGranMaestroDTO().setGmaFotoPath(JsfUtil.saveToDiskUpdload(event.getFile().getContents(), event.getFile().getFileName()));
+	}
+
+	public void createNoticia()
+	{
+		try {
+			maestroPeriodismoDataManager.getNoticia().setEspEntidad(maestroPeriodismoDataManager.getGranMaestroDTO().getEspEntidad());
+			espejoService.createOrUpdateNoticia(maestroPeriodismoDataManager.getNoticia());
+			readNoticia();
+			cancelNoticia();
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void cancelNoticia()
+	{
+		maestroPeriodismoDataManager.setNoticia(new NoticiaEspejoDTO());
+	}
+	
+	private void readNoticia()
+	{
+		try {
+			maestroPeriodismoDataManager.setNoticiaList(espejoService.readNoticia(maestroPeriodismoDataManager.getGranMaestroDTO()));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void editNoticia(NoticiaEspejoDTO noticia)
+	{
+		maestroPeriodismoDataManager.setNoticia(noticia);
+	}
+	
+	public void deleteNoticia(NoticiaEspejoDTO noticia)
+	{
+		
+	}
+
 }

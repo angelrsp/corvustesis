@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
 
 @ViewScoped
 @ManagedBean(name = "maestroPeriodismoDataManager")
@@ -24,10 +25,14 @@ public class MaestroPeriodismoDataManager implements Serializable{
 	private Date fechaNacimiento;
 	private Date fechaFallecimiento;
 	
+	private NoticiaEspejoDTO noticia;
+	private List<NoticiaEspejoDTO> noticiaList;
 	
 	public MaestroPeriodismoDataManager() {
 		granMaestroDTO=new GranMaestroDTO();
 		granMaestroList=new ArrayList<GranMaestroDTO>();
+		noticia=new NoticiaEspejoDTO();
+		noticiaList=new ArrayList<NoticiaEspejoDTO>();
 	}
 
 	public GranMaestroDTO getGranMaestroDTO() {
@@ -60,6 +65,22 @@ public class MaestroPeriodismoDataManager implements Serializable{
 
 	public void setFechaFallecimiento(Date fechaFallecimiento) {
 		this.fechaFallecimiento = fechaFallecimiento;
+	}
+
+	public NoticiaEspejoDTO getNoticia() {
+		return noticia;
+	}
+
+	public void setNoticia(NoticiaEspejoDTO noticia) {
+		this.noticia = noticia;
+	}
+
+	public List<NoticiaEspejoDTO> getNoticiaList() {
+		return noticiaList;
+	}
+
+	public void setNoticiaList(List<NoticiaEspejoDTO> noticiaList) {
+		this.noticiaList = noticiaList;
 	}
 	
 	
