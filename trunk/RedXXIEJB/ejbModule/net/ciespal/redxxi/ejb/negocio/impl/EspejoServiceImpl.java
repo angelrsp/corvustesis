@@ -13,6 +13,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.LeyDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.ObraEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioCiespalDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioDTO;
 
@@ -351,4 +352,48 @@ public class EspejoServiceImpl implements EspejoService{
 	}
 
 	/*Obra*/
+	@Override
+	public ObraEspejoDTO createOrUpdateObra(ObraEspejoDTO obra) throws CorvustecException
+	{
+		logger.info("createOrUpdateObra");
+		try{
+			if(obra.getObrCodigo()!=null)
+				return factoryDAO.getObraEspejoDAOImpl().edit(obra);
+			else			
+				return factoryDAO.getObraEspejoDAOImpl().create(obra);
+		}
+		catch(Exception e){
+			logger.info("Error createOrUpdateObra {}",e.toString());
+			throw new CorvustecException("Error al createOrUpdateObra");
+		}		
+	}
+	
+	@Override
+	public List<ObraEspejoDTO> readObra(GranMaestroDTO maestro, Object type) throws CorvustecException
+	{
+		logger.info("readObra");
+		try{
+			return factoryDAO.getObraEspejoDAOImpl().findAll(maestro, type);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readObra {}",e.toString());
+			throw new CorvustecException("Error al readObra");
+		}
+	}
+
+	@Override
+	public List<ObraEspejoDTO> readObra(MaestroCiespalDTO maestro, Object type) throws CorvustecException
+	{
+		logger.info("readObra");
+		try{
+			return factoryDAO.getObraEspejoDAOImpl().findAll(maestro, type);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readObra {}",e.toString());
+			throw new CorvustecException("Error al readObra");
+		}
+	}
+
 }

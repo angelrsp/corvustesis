@@ -7,11 +7,15 @@ import javax.ejb.Local;
 
 
 
+
+
+
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.LeyDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.ObraEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioCiespalDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioDTO;
 
@@ -71,6 +75,15 @@ public interface EspejoService {
 			throws CorvustecException;
 
 	List<NoticiaEspejoDTO> readNoticia(LeyDTO ley) throws CorvustecException;
+
+	ObraEspejoDTO createOrUpdateObra(ObraEspejoDTO obra)
+			throws CorvustecException;
+
+	List<ObraEspejoDTO> readObra(GranMaestroDTO maestro, Object type)
+			throws CorvustecException;
+
+	List<ObraEspejoDTO> readObra(MaestroCiespalDTO maestro, Object type)
+			throws CorvustecException;
 
 	
 

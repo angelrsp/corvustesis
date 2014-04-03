@@ -23,6 +23,9 @@ public class ObraEspejoDTO implements Serializable {
 	@Column(name="obr_archivo")
 	private byte[] obrArchivo;
 
+	@Column(name="obr_archivo_nombre")
+	private String obrArchivoNombre;
+	
 	@Column(name="obr_texto")
 	private String obrTexto;
 
@@ -31,6 +34,9 @@ public class ObraEspejoDTO implements Serializable {
 
 	@Column(name="obr_tipo")
 	private Integer obrTipo;
+	
+	@Transient
+	private String obrArchivoPath;	
 	
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne
@@ -86,6 +92,22 @@ public class ObraEspejoDTO implements Serializable {
 
 	public void setEspEntidad(EntidadEspejoDTO espEntidad) {
 		this.espEntidad = espEntidad;
+	}
+
+	public String getObrArchivoNombre() {
+		return obrArchivoNombre;
+	}
+
+	public void setObrArchivoNombre(String obrArchivoNombre) {
+		this.obrArchivoNombre = obrArchivoNombre;
+	}
+
+	public String getObrArchivoPath() {
+		return obrArchivoPath;
+	}
+
+	public void setObrArchivoPath(String obrArchivoPath) {
+		this.obrArchivoPath = obrArchivoPath;
 	}
 
 }

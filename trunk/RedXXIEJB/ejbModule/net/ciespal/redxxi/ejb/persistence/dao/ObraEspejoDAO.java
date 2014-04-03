@@ -2,13 +2,19 @@ package net.ciespal.redxxi.ejb.persistence.dao;
 
 import java.util.List;
 
-import com.corvustec.commons.util.CorvustecException;
-
-import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.ObraDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.ObraEspejoDTO;
 
+import com.corvustec.commons.util.CorvustecException;
+
 public interface ObraEspejoDAO extends AbstractFacade<ObraEspejoDTO> {
+
+	List<ObraEspejoDTO> findAll(GranMaestroDTO mestro, Object type)
+			throws CorvustecException;
+
+	List<ObraEspejoDTO> findAll(MaestroCiespalDTO mestro, Object type)
+			throws CorvustecException;
 
 
 }

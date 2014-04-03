@@ -33,6 +33,9 @@ public class PremioCiespalDTO implements Serializable {
 	@Column(name="pci_genero")
 	private String pciGenero;
 
+	@Column(name="pci_titulo")
+	private String pciTitulo;
+
 	@Column(name="pci_medio")
 	private Integer pciMedio;
 
@@ -54,9 +57,15 @@ public class PremioCiespalDTO implements Serializable {
 	@Column(name="pci_provincia")
 	private Integer pciProvincia;
 
-	@Column(name="pci_titulo")
-	private String pciTitulo;
+	@Column(name="pci_archivo")
+	private byte[] pciArchivo;
 
+	@Column(name="pci_archivo_nombre")
+	private String pciArchivoNombre;
+	
+	@Transient
+	private String pciArchivoPath;
+	
 	//bi-directional many-to-one association to EntidadDTO
 	
 	@ManyToOne(cascade=CascadeType.PERSIST)
@@ -160,6 +169,30 @@ public class PremioCiespalDTO implements Serializable {
 
 	public void setPciProvincia(Integer pciProvincia) {
 		this.pciProvincia = pciProvincia;
+	}
+
+	public byte[] getPciArchivo() {
+		return pciArchivo;
+	}
+
+	public void setPciArchivo(byte[] pciArchivo) {
+		this.pciArchivo = pciArchivo;
+	}
+
+	public String getPciArchivoNombre() {
+		return pciArchivoNombre;
+	}
+
+	public void setPciArchivoNombre(String pciArchivoNombre) {
+		this.pciArchivoNombre = pciArchivoNombre;
+	}
+
+	public String getPciArchivoPath() {
+		return pciArchivoPath;
+	}
+
+	public void setPciArchivoPath(String pciArchivoPath) {
+		this.pciArchivoPath = pciArchivoPath;
 	}
 
 	public String getPciTitulo() {

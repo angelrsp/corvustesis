@@ -27,6 +27,12 @@ public class LeyDTO implements Serializable {
 	@Column(name="ley_archivo")
 	private byte[] leyArchivo;
 
+	@Column(name="ley_archivo_nombre")
+	private String leyArchivoNombre;	
+
+	@Transient
+	private String leyArchivoPath;	
+	
 	@Column(name="ley_entidad_emisora")
 	private String leyEntidadEmisora;
 
@@ -143,6 +149,22 @@ public class LeyDTO implements Serializable {
 
 	public void setLeytitulo(String leytitulo) {
 		this.leytitulo = leytitulo;
+	}
+
+	public String getLeyArchivoNombre() {
+		return leyArchivoNombre;
+	}
+
+	public void setLeyArchivoNombre(String leyArchivoNombre) {
+		this.leyArchivoNombre = leyArchivoNombre;
+	}
+
+	public String getLeyArchivoPath() {
+		return leyArchivoPath;
+	}
+
+	public void setLeyArchivoPath(String leyArchivoPath) {
+		this.leyArchivoPath = leyArchivoPath;
 	}
 	
 }
