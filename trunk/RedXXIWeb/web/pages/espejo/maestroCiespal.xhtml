@@ -63,14 +63,12 @@
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.fecha.nacimiento']}:&#160;" /></td>
-				<td><p:calendar navigator="true" showOn="button" value="#{maestroCiespalDataManager.fechaNacimiento}" required="true" requiredMessage="#{i18n['label.fecha.nacimiento']}&#160;#{i18n['label.requerido']}"/></td>
+				<td><p:calendar navigator="true" showOn="button" value="#{maestroCiespalDataManager.fechaNacimiento}" required="true" requiredMessage="#{i18n['label.fecha.nacimiento']}&#160;#{i18n['label.requerido']}" pattern="#{i18n['pattern.fecha']}"/></td>
 			</tr>
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.area.campo.disciplinario']}:&#160;" /></td>
-				<td><p:selectOneMenu>
-					<f:selectItem itemLabel="--Seleccione--"/>
-				</p:selectOneMenu></td>
+				<td><p:inputText value="#{maestroCiespalDataManager.maestroCiespalDTO.mciCampoConocimiento}" required="true" requiredMessage="#{i18n['label.area.campo.disciplinario']}&#160;#{i18n['label.requerido']}"/></td>			
 			</tr>
 			
 			<tr>
@@ -118,6 +116,60 @@
 		<p:ajax event="close" update=":contenido:pnlDatos" listener="#{maestroCiespalController.cancel}"/>
 		
 		<p:scrollPanel style="height:600px" mode="native">
+		
+
+		<p:panel id="pnlObra" header="Obras">
+			
+			<table>
+				<tr>
+					<td><h:outputText value="#{i18n['label.titulo']}:&#160;" /></td>
+					<td><p:inputText value="#{maestroCiespalDataManager.obra.obrTitulo}" required="true" requiredMessage="#{i18n['label.titulo']}&#160;#{i18n['label.requerido']}"/></td>	
+				</tr>						
+			
+				<tr>
+					<td><h:outputText value="#{i18n['label.resumen']}:&#160;" /></td>
+					<td><p:inputTextarea value="#{maestroCiespalDataManager.obra.obrTexto}" required="true" requiredMessage="#{i18n['label.resumen']}&#160;#{i18n['label.requerido']}" autoResize="false"/></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="#{i18n['label.archivo']}:&#160;" /></td>
+					<td><p:fileUpload fileUploadListener="#{maestroCiespalController.handleFileUploadArchivo}" mode="advanced" dragDropSupport="true"  
+	                 		sizeLimit="10000000" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" auto="true" process="@this" update="growl,enlacePublicacion"/></td>
+	                <td><h:outputLink id="enlacePublicacion" value="#{maestroCiespalDataManager.obra.obrArchivoPath}" target="_blank">#{maestroCiespalDataManager.obra.obrArchivoNombre}</h:outputLink></td>		                
+				</tr>			
+				
+				<tr>
+					<td colspan="4" align="center">
+						<p:commandButton value="#{i18n['boton.guardar']}" process="pnlObra" update="pnlObra,:contenido:growl" actionListener="#{maestroCiespalController.createObra}" icon="ui-icon-disk"/>
+						<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update="pnlObra,:contenido:growl" actionListener="#{maestroCiespalController.cancelObra}" icon="ui-icon-cancel"/>
+					</td>
+				</tr>											
+				
+			</table>			
+			
+			<p:dataTable id="tblObra" value="#{maestroCiespalDataManager.obraList}" var="obr">
+
+				<p:column headerText="#{i18n['label.titulo']}">
+						<h:outputText value="#{obr.obrTitulo}"/>
+				</p:column>				
+	
+				<p:column headerText="#{i18n['label.resumen']}">
+						<h:outputText value="#{obr.obrTexto}" escape="false"/>
+				</p:column>				
+					
+				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center;vertical-align:top;">
+					<p:commandButton actionListener="#{maestroCiespalController.editObra(obr)}" icon="ui-icon-pencil" process=":contenido:tblObra" update=":contenido:pnlObra"/>
+				</p:column>
+				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center;vertical-align:top;">
+					<p:commandButton actionListener="#{maestroCiespalController.deleteObra(obr)}" icon="ui-icon-close" process=":contenido:tblObra" update=":contenido:pnlObra">
+						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+					</p:commandButton>
+				</p:column>
+							
+			</p:dataTable>								
+			
+			
+			</p:panel>		
 		
 			<p:panel id="pnlNoticia" header="#{i18n['label.noticias']}">
 			

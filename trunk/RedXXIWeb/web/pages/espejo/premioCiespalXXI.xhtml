@@ -56,13 +56,14 @@
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.genero']}:&#160;" /></td>
-				<td><p:inputText value="#{premioCiespalDataManager.premioCiespalDTO.pciTitulo}" /></td>			
+				<td><p:inputText value="#{premioCiespalDataManager.premioCiespalDTO.pciGenero}" /></td>			
 			</tr>
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.tipo.medio.comunicacion']}:&#160;"/></td>
-				<td><p:selectOneMenu>
+				<td><p:selectOneMenu value="#{premioCiespalDataManager.tipoMedio}">
 					<f:selectItem itemLabel="--Seleccione--"/>
+					<f:selectItems value="#{premioPeriodisticoController.catalogoTipoMedioComunicacion}"/>					
 				</p:selectOneMenu></td>			
 			</tr>
 			
@@ -80,6 +81,15 @@
 			</tr>			
 			
 			<tr>
+				<td><h:outputText value="#{i18n['label.archivo']}:&#160;" /></td>
+				<td><p:fileUpload fileUploadListener="#{premioCiespalController.handleFileUploadArchivo}" mode="advanced" dragDropSupport="true"  
+                 		sizeLimit="10000000" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" auto="true" process="@this" update="growl,enlaceArchivo"/></td>
+                <td><h:outputLink id="enlaceArchivo" value="#{premioCiespalDataManager.premioCiespalDTO.pciArchivoPath}" target="_blank">#{premioCiespalDataManager.premioCiespalDTO.pciArchivoNombre}</h:outputLink></td>		                
+			</tr>
+			
+			
+			
+			<tr>
 				<td colspan="9" align="center">
 					<p:commandButton value="#{i18n['boton.guardar']}" actionListener="#{premioCiespalController.save}" process="pnlDatos" update="pnlDatos,growl" icon="ui-icon-disk"/>
 					<p:commandButton value="#{i18n['boton.cancelar']}" actionListener="#{premioCiespalController.cancel}" process="@this" update="pnlDatos,growl" icon="ui-icon-cancel"/>
@@ -90,8 +100,8 @@
 	
 		<p:dataTable id="tblPremioCiespal" emptyMessage="#{i18n['table.vacio']}" value="#{premioCiespalDataManager.premioCiespalList}" var="preC">
 	
-				<p:column headerText="#{i18n['label.titulo']}">
-					<h:outputText value="#{preC.pciTitulo}" />
+				<p:column headerText="#{i18n['label.premio.instituido']}">
+					<h:outputText value="#{preC.pciPremioInstituido}" />
 				</p:column>		
 	
 				<p:column headerText="#{i18n['label.institucion']}">

@@ -58,12 +58,12 @@
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.fecha.nacimiento']}:&#160;" /></td>
-				<td><p:calendar showOn="button" navigator="true" value="#{maestroPeriodismoDataManager.fechaNacimiento}" required="true" requiredMessage="#{i18n['label.fecha.nacimiento']}&#160;#{i18n['label.requerido']}"/></td>
+				<td><p:calendar showOn="button" navigator="true" value="#{maestroPeriodismoDataManager.fechaNacimiento}" required="true" requiredMessage="#{i18n['label.fecha.nacimiento']}&#160;#{i18n['label.requerido']}" pattern="#{i18n['pattern.fecha']}"/></td>
 			</tr>
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.fecha.fallecimiento']}:&#160;" /></td>
-				<td><p:calendar showOn="button" navigator="true" value="#{maestroPeriodismoDataManager.fechaFallecimiento}"/></td>
+				<td><p:calendar showOn="button" navigator="true" value="#{maestroPeriodismoDataManager.fechaFallecimiento}" pattern="#{i18n['pattern.fecha']}"/></td>
 			</tr>
 
 			<tr>
@@ -102,7 +102,7 @@
 
 			<p:column headerText="#{i18n['label.mas.datos']}" width="15" style="text-align: center">
 				<p:commandButton icon="ui-icon-plus" actionListener="#{maestroPeriodismoController.maestroSelect(mae)}"
-	               	update=":contenido:pnlDatos,:contenido:growl,:contenido:dlgDetalle" process="tblMaestro" oncomplete="PF('dlgDetalles').show()"/>    				
+	               	update=":contenido:growl,:contenido:dlgDetalle" process="tblMaestro" oncomplete="PF('dlgDetalles').show()"/>    				
 			</p:column>
 	
 	
@@ -120,6 +120,7 @@
 		
 			<p:panel id="pnlObra" header="Obras del Maestro">
 			
+			<table>
 				<tr>
 					<td><h:outputText value="#{i18n['label.titulo']}:&#160;" /></td>
 					<td><p:inputText value="#{maestroPeriodismoDataManager.obra.obrTitulo}" required="true" requiredMessage="#{i18n['label.titulo']}&#160;#{i18n['label.requerido']}"/></td>	
@@ -132,14 +133,95 @@
 
 				<tr>
 					<td><h:outputText value="#{i18n['label.archivo']}:&#160;" /></td>
-					<td><p:fileUpload fileUploadListener="#{maestroPeriodismoDataManager.handleFileUploadArchivo}" mode="advanced" dragDropSupport="true"  
+					<td><p:fileUpload fileUploadListener="#{maestroPeriodismoController.handleFileUploadArchivo}" mode="advanced" dragDropSupport="true"  
 	                 		sizeLimit="10000000" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" auto="true" process="@this" update="growl,enlacePublicacion"/></td>
 	                <td><h:outputLink id="enlacePublicacion" value="#{maestroPeriodismoDataManager.obra.obrArchivoPath}" target="_blank">#{maestroPeriodismoDataManager.obra.obrArchivoNombre}</h:outputLink></td>		                
-				</tr>				
+				</tr>			
+				
+				<tr>
+					<td colspan="4" align="center">
+						<p:commandButton value="#{i18n['boton.guardar']}" process="pnlObra" update="pnlObra,:contenido:growl" actionListener="#{maestroPeriodismoController.createObra}" icon="ui-icon-disk"/>
+						<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update="pnlObra,:contenido:growl" actionListener="#{maestroPeriodismoController.cancelObra}" icon="ui-icon-cancel"/>
+					</td>
+				</tr>											
+				
+			</table>			
+			
+			<p:dataTable id="tblObra" value="#{maestroPeriodismoDataManager.obraList}" var="obr">
+
+				<p:column headerText="#{i18n['label.titulo']}">
+						<h:outputText value="#{obr.obrTitulo}"/>
+				</p:column>				
+	
+				<p:column headerText="#{i18n['label.resumen']}">
+						<h:outputText value="#{obr.obrTexto}" escape="false"/>
+				</p:column>				
+					
+				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center;vertical-align:top;">
+					<p:commandButton actionListener="#{maestroPeriodismoController.editObra(obr)}" icon="ui-icon-pencil" process=":contenido:tblObra" update=":contenido:pnlObra"/>
+				</p:column>
+				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center;vertical-align:top;">
+					<p:commandButton actionListener="#{maestroPeriodismoController.deleteObra(obr)}" icon="ui-icon-close" process=":contenido:tblObra" update=":contenido:pnlObra">
+						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+					</p:commandButton>
+				</p:column>
+							
+			</p:dataTable>								
+			
 			
 			</p:panel>
 
+
+
 			<p:panel id="pnlObraSobre" header="Obras sobre el Maestro">
+
+			<table>
+				<tr>
+					<td><h:outputText value="#{i18n['label.titulo']}:&#160;" /></td>
+					<td><p:inputText value="#{maestroPeriodismoDataManager.obraSobre.obrTitulo}" required="true" requiredMessage="#{i18n['label.titulo']}&#160;#{i18n['label.requerido']}"/></td>	
+				</tr>						
+			
+				<tr>
+					<td><h:outputText value="#{i18n['label.resumen']}:&#160;" /></td>
+					<td><p:inputTextarea value="#{maestroPeriodismoDataManager.obraSobre.obrTexto}" required="true" requiredMessage="#{i18n['label.resumen']}&#160;#{i18n['label.requerido']}" autoResize="false"/></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="#{i18n['label.archivo']}:&#160;" /></td>
+					<td><p:fileUpload fileUploadListener="#{maestroPeriodismoController.handleFileUploadArchivoSobre}" mode="advanced" dragDropSupport="true"  
+	                 		sizeLimit="10000000" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" auto="true" process="@this" update="growl,enlacePublicacionSobre"/></td>
+	                <td><h:outputLink id="enlacePublicacionSobre" value="#{maestroPeriodismoDataManager.obraSobre.obrArchivoPath}" target="_blank">#{maestroPeriodismoDataManager.obraSobre.obrArchivoNombre}</h:outputLink></td>		                
+				</tr>			
+				
+				<tr>
+					<td colspan="4" align="center">
+						<p:commandButton value="#{i18n['boton.guardar']}" process="pnlObraSobre" update=":contenido:pnlObraSobre,:contenido:growl" actionListener="#{maestroPeriodismoController.createObraSobre}" icon="ui-icon-disk"/>
+						<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update=":contenido:pnlObraSobre,:contenido:growl" actionListener="#{maestroPeriodismoController.cancelObraSobre}" icon="ui-icon-cancel"/>
+					</td>
+				</tr>											
+				
+			</table>			
+			
+			<p:dataTable id="tblObraSobre" value="#{maestroPeriodismoDataManager.obraSobreList}" var="obr">
+
+				<p:column headerText="#{i18n['label.titulo']}">
+						<h:outputText value="#{obr.obrTitulo}"/>
+				</p:column>				
+	
+				<p:column headerText="#{i18n['label.resumen']}">
+						<h:outputText value="#{obr.obrTexto}" escape="false"/>
+				</p:column>				
+					
+				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center;vertical-align:top;">
+					<p:commandButton actionListener="#{maestroPeriodismoController.editObraSobre(obr)}" icon="ui-icon-pencil" process=":contenido:tblObraSobre" update=":contenido:pnlObraSobre"/>
+				</p:column>
+				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center;vertical-align:top;">
+					<p:commandButton actionListener="#{maestroPeriodismoController.deleteObraSobre(obr)}" icon="ui-icon-close" process=":contenido:tblObraSobre" update=":contenido:pnlObraSobre">
+						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+					</p:commandButton>
+				</p:column>
+							
+			</p:dataTable>		
 			
 			</p:panel>
 		
@@ -205,7 +287,7 @@
 								
 				</p:dataTable>					
 			
-			
+
 			</p:panel>
 		
 		</p:scrollPanel>

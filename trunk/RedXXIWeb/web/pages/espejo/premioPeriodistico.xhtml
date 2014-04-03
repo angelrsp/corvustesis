@@ -46,7 +46,7 @@
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.institucion']}:&#160;" /></td>
-				<td><p:inputText/> </td>
+				<td><p:inputText value="#{premioPeriodisticoDataManager.premioDTO.preInstitucion}"/> </td>
 			</tr>
 
 			<tr>
@@ -56,8 +56,9 @@
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.nivel.geografico']}:&#160;" /></td>
-				<td><p:selectOneMenu>
+				<td><p:selectOneMenu value="#{premioPeriodisticoDataManager.nivelGeografico}">
 					<f:selectItem itemLabel="--Seleccione--" />
+					<f:selectItems value="#{premioPeriodisticoController.catalogoNivelGeografico}"/>
 				</p:selectOneMenu></td>
 			</tr>
 
@@ -68,8 +69,9 @@
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.tipo.medio.comunicacion']}:&#160;" /></td>
-				<td><p:selectOneMenu>
+				<td><p:selectOneMenu value="#{premioPeriodisticoDataManager.tipoMedioComunicacion}">
 					<f:selectItem itemLabel="--Seleccione--" />
+					<f:selectItems value="#{premioPeriodisticoController.catalogoTipoMedioComunicacion}"/>										
 				</p:selectOneMenu></td>
 			</tr>
 			
