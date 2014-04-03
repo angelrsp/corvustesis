@@ -12,6 +12,7 @@ import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.ObraEspejoDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.MaestroPeriodismoDataManager;
 
@@ -122,6 +123,8 @@ public class MaestroPeriodismoController extends SelectItemController {
 	{
 		maestroPeriodismoDataManager.setGranMaestroDTO(maestro);
 		readNoticia();
+		readObra();
+		readObraSobre();
 	}
 	
 	public void createNoticia()
@@ -160,4 +163,99 @@ public class MaestroPeriodismoController extends SelectItemController {
 		
 	}
 
+
+	public void handleFileUploadArchivo(FileUploadEvent event)
+	{
+		JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+		maestroPeriodismoDataManager.getObra().setObrArchivo(event.getFile().getContents());
+		maestroPeriodismoDataManager.getObra().setObrArchivoNombre(event.getFile().getFileName());
+		maestroPeriodismoDataManager.getObra().setObrArchivoPath(JsfUtil.saveToDiskUpdload(event.getFile().getContents(), event.getFile().getFileName()));
+	}
+	
+	public void createObra()
+	{
+		try {
+			maestroPeriodismoDataManager.getObra().setEspEntidad(maestroPeriodismoDataManager.getGranMaestroDTO().getEspEntidad());
+			maestroPeriodismoDataManager.getObra().setObrTipo(1);
+			espejoService.createOrUpdateObra(maestroPeriodismoDataManager.getObra());
+			readObra();
+			cancelObra();
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
+	public void cancelObra()
+	{
+		maestroPeriodismoDataManager.setObra(new ObraEspejoDTO());
+	}
+
+	public void editObra(ObraEspejoDTO obra)
+	{
+		maestroPeriodismoDataManager.setObra(obra);
+	}
+	
+	public void deleteObra(ObraEspejoDTO obra)
+	{
+		
+	}
+	
+	private void readObra()
+	{
+		try {
+			maestroPeriodismoDataManager.setObraList(espejoService.readObra(maestroPeriodismoDataManager.getGranMaestroDTO(), 1));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	
+	
+	public void handleFileUploadArchivoSobre(FileUploadEvent event)
+	{
+		JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+		maestroPeriodismoDataManager.getObraSobre().setObrArchivo(event.getFile().getContents());
+		maestroPeriodismoDataManager.getObraSobre().setObrArchivoNombre(event.getFile().getFileName());
+		maestroPeriodismoDataManager.getObraSobre().setObrArchivoPath(JsfUtil.saveToDiskUpdload(event.getFile().getContents(), event.getFile().getFileName()));
+	}
+	
+	public void createObraSobre()
+	{
+		try {
+			maestroPeriodismoDataManager.getObraSobre().setEspEntidad(maestroPeriodismoDataManager.getGranMaestroDTO().getEspEntidad());
+			maestroPeriodismoDataManager.getObraSobre().setObrTipo(2);
+			espejoService.createOrUpdateObra(maestroPeriodismoDataManager.getObraSobre());
+			readObraSobre();
+			cancelObraSobre();
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
+	public void cancelObraSobre()
+	{
+		maestroPeriodismoDataManager.setObraSobre(new ObraEspejoDTO());
+	}
+
+	public void editObraSobre(ObraEspejoDTO obra)
+	{
+		maestroPeriodismoDataManager.setObra(obra);
+	}
+	
+	public void deleteObraSobre(ObraEspejoDTO obra)
+	{
+		
+	}
+	
+	private void readObraSobre()
+	{
+		try {
+			maestroPeriodismoDataManager.setObraSobreList(espejoService.readObra(maestroPeriodismoDataManager.getGranMaestroDTO(), 2));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
 }

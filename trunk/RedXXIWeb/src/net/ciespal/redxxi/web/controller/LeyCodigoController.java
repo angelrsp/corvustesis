@@ -6,6 +6,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.event.FileUploadEvent;
+
 import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.LeyDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
@@ -63,6 +65,7 @@ public class LeyCodigoController extends SelectItemController {
 			leyCodigoDataManager.getLeyDTO().setLeyPais(Integer.valueOf(getPais().toString()));
 			leyCodigoDataManager.getLeyDTO().setLeyProvincia(Integer.valueOf(getProvincia().toString()));
 			leyCodigoDataManager.getLeyDTO().setLeyCiudad(Integer.valueOf(getCiudad().toString()));
+			leyCodigoDataManager.getLeyDTO().setLeyTipo(Integer.valueOf(leyCodigoDataManager.getTipoDocumento().toString()));
 			espejoService.createOrUpdateley(leyCodigoDataManager.getLeyDTO());
 			read();
 			cancel();
@@ -76,11 +79,13 @@ public class LeyCodigoController extends SelectItemController {
 	public void cancel()
 	{
 		leyCodigoDataManager.setLeyDTO(new LeyDTO());
+		leyCodigoDataManager.setTipoDocumento(null);
 	}
 	
 	public void edit(LeyDTO ley)
 	{
 		leyCodigoDataManager.setLeyDTO(ley);
+		leyCodigoDataManager.setTipoDocumento(ley.getLeyTipo());
 	}
 
 	public void delete(LeyDTO ley)
@@ -143,6 +148,14 @@ public class LeyCodigoController extends SelectItemController {
 	public void deleteNoticia(NoticiaEspejoDTO noticia)
 	{
 		
+	}
+
+	public void handleFileUploadArchivo(FileUploadEvent event)
+	{
+		JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+		leyCodigoDataManager.getLeyDTO().setLeyArchivo(event.getFile().getContents());
+		leyCodigoDataManager.getLeyDTO().setLeyArchivoNombre(event.getFile().getFileName());
+		leyCodigoDataManager.getLeyDTO().setLeyArchivoPath(JsfUtil.saveToDiskUpdload(event.getFile().getContents(), event.getFile().getFileName()));
 	}
 
 }

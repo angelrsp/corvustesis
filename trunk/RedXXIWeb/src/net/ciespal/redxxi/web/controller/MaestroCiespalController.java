@@ -8,9 +8,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.event.FileUploadEvent;
+
 import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.ObraEspejoDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.MaestroCiespalDataManager;
 
@@ -150,5 +153,50 @@ public class MaestroCiespalController extends SelectItemController{
 		
 	}
 
+	public void handleFileUploadArchivo(FileUploadEvent event)
+	{
+		JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+		maestroCiespalDataManager.getObra().setObrArchivo(event.getFile().getContents());
+		maestroCiespalDataManager.getObra().setObrArchivoNombre(event.getFile().getFileName());
+		maestroCiespalDataManager.getObra().setObrArchivoPath(JsfUtil.saveToDiskUpdload(event.getFile().getContents(), event.getFile().getFileName()));
+	}
+	
+	public void createObra()
+	{
+		try {
+			maestroCiespalDataManager.getObra().setEspEntidad(maestroCiespalDataManager.getMaestroCiespalDTO().getEspEntidad());
+			maestroCiespalDataManager.getObra().setObrTipo(1);
+			espejoService.createOrUpdateObra(maestroCiespalDataManager.getObra());
+			readObra();
+			cancelObra();
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
+	public void cancelObra()
+	{
+		maestroCiespalDataManager.setObra(new ObraEspejoDTO());
+	}
+
+	public void editObra(ObraEspejoDTO obra)
+	{
+		maestroCiespalDataManager.setObra(obra);
+	}
+	
+	public void deleteObra(ObraEspejoDTO obra)
+	{
+		
+	}
+	
+	private void readObra()
+	{
+		try {
+			maestroCiespalDataManager.setObraList(espejoService.readObra(maestroCiespalDataManager.getMaestroCiespalDTO(), 1));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
 	
 }

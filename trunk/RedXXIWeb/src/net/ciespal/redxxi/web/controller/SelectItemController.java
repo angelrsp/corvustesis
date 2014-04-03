@@ -32,6 +32,9 @@ public abstract class SelectItemController {
 	private List<SelectItem> catalogoTipoPublicacion;
 	private List<SelectItem> catalogoCampoConocimiento;
 	private List<SelectItem> catalogoSubCampoConocimiento;
+	private List<SelectItem> catalogoNivelGeografico;
+	private List<SelectItem> catalagoTipoMedioComunicacion;
+	private List<SelectItem> catalagoTipoDcoumentoLey;
 	
 	private Object pais;
 	private Object provincia;
@@ -53,7 +56,10 @@ public abstract class SelectItemController {
 		catalogoProvincia=new ArrayList<SelectItem>();
 		catalogoCiudad=new ArrayList<SelectItem>();
 		catalogoCampoConocimiento=new ArrayList<SelectItem>();
-		catalogoSubCampoConocimiento=new ArrayList<SelectItem>();				
+		catalogoSubCampoConocimiento=new ArrayList<SelectItem>();	
+		catalogoNivelGeografico=new ArrayList<SelectItem>();
+		catalagoTipoMedioComunicacion=new ArrayList<SelectItem>();
+		catalagoTipoDcoumentoLey=new ArrayList<SelectItem>();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -265,6 +271,56 @@ public abstract class SelectItemController {
 		return catalogoSubCampoConocimiento;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getCatalogoNivelGeografico() throws CorvustecException {
+			CatalogoDTO catalogo=new CatalogoDTO();
+			catalogo.setCatCodigo(622);
+			if(administracionService.getCatalogo(catalogo)==null)
+				return new ArrayList<SelectItem>();
+			 catalogoNivelGeografico=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					CatalogoDTO cat=(CatalogoDTO)arg0;
+					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
+				}
+			});
+		return catalogoNivelGeografico;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getCatalogoTipoMedioComunicacion() throws CorvustecException {
+			CatalogoDTO catalogo=new CatalogoDTO();
+			catalogo.setCatCodigo(626);
+			if(administracionService.getCatalogo(catalogo)==null)
+				return new ArrayList<SelectItem>();
+			catalagoTipoMedioComunicacion=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					CatalogoDTO cat=(CatalogoDTO)arg0;
+					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
+				}
+			});
+		return catalagoTipoMedioComunicacion;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getCatalogoTipoTipoDcoumentoLey() throws CorvustecException {
+			CatalogoDTO catalogo=new CatalogoDTO();
+			catalogo.setCatCodigo(631);
+			if(administracionService.getCatalogo(catalogo)==null)
+				return new ArrayList<SelectItem>();
+			catalagoTipoDcoumentoLey=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					CatalogoDTO cat=(CatalogoDTO)arg0;
+					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
+				}
+			});
+		return catalagoTipoDcoumentoLey;
+	}
 
 	
 	

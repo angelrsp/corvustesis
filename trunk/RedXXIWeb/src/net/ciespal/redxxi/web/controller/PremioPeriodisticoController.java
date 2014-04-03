@@ -65,6 +65,8 @@ public class PremioPeriodisticoController extends SelectItemController {
 			premioPeriodisticoDataManager.getPremioDTO().setPrePais(Integer.valueOf(getPais().toString()));
 			premioPeriodisticoDataManager.getPremioDTO().setPreProvincia(Integer.valueOf(getProvincia().toString()));
 			premioPeriodisticoDataManager.getPremioDTO().setPreCiudad(Integer.valueOf(getCiudad().toString()));
+			premioPeriodisticoDataManager.getPremioDTO().setPreTipoMedio(Integer.valueOf(premioPeriodisticoDataManager.getTipoMedioComunicacion().toString()));
+			premioPeriodisticoDataManager.getPremioDTO().setPreNivelGeografico(Integer.valueOf(premioPeriodisticoDataManager.getNivelGeografico().toString()));
 			espejoService.createOrUpdatePremio(premioPeriodisticoDataManager.getPremioDTO());
 			read();
 			cancel();
@@ -78,11 +80,15 @@ public class PremioPeriodisticoController extends SelectItemController {
 	public void cancel()
 	{
 		premioPeriodisticoDataManager.setPremioDTO(new PremioDTO());
+		premioPeriodisticoDataManager.setNivelGeografico(null);
+		premioPeriodisticoDataManager.setTipoMedioComunicacion(null);
 	}
 	
 	public void edit(PremioDTO premio)
 	{
 		premioPeriodisticoDataManager.setPremioDTO(premio);
+		premioPeriodisticoDataManager.setNivelGeografico(premio.getPreNivelGeografico());
+		premioPeriodisticoDataManager.setTipoMedioComunicacion(premio.getPreTipoMedio());
 	}
 
 	public void delete(PremioDTO premio)

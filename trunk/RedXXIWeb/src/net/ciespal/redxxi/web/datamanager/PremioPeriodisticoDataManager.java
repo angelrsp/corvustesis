@@ -25,6 +25,9 @@ public class PremioPeriodisticoDataManager implements Serializable {
 	private NoticiaEspejoDTO noticia;
 	private List<NoticiaEspejoDTO> noticiaList;
 	
+	private Object nivelGeografico;
+	private Object tipoMedioComunicacion;
+	
 	public PremioPeriodisticoDataManager() {
 		premioDTO=new PremioDTO();
 		premioList=new ArrayList<PremioDTO>();
@@ -67,6 +70,26 @@ public class PremioPeriodisticoDataManager implements Serializable {
 
 	public void setNoticiaList(List<NoticiaEspejoDTO> noticiaList) {
 		this.noticiaList = noticiaList;
+	}
+
+
+	public Object getNivelGeografico() {
+		return nivelGeografico;
+	}
+
+
+	public void setNivelGeografico(Object nivelGeografico) {
+		this.nivelGeografico = nivelGeografico;
+	}
+
+
+	public Object getTipoMedioComunicacion() {
+		return tipoMedioComunicacion;
+	}
+
+
+	public void setTipoMedioComunicacion(Object tipoMedioComunicacion) {
+		this.tipoMedioComunicacion = tipoMedioComunicacion;
 	}
 
 }
