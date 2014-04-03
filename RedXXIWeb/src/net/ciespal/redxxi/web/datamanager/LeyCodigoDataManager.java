@@ -25,6 +25,8 @@ public class LeyCodigoDataManager implements Serializable{
 	private NoticiaEspejoDTO noticia;
 	private List<NoticiaEspejoDTO> noticiaList;
 	
+	private Object tipoDocumento;
+	
 	public LeyCodigoDataManager() {
 		leyDTO=new LeyDTO();
 		leyList=new ArrayList<LeyDTO>();
@@ -71,6 +73,16 @@ public class LeyCodigoDataManager implements Serializable{
 
 	public void setNoticiaList(List<NoticiaEspejoDTO> noticiaList) {
 		this.noticiaList = noticiaList;
+	}
+
+
+	public Object getTipoDocumento() {
+		return tipoDocumento;
+	}
+
+
+	public void setTipoDocumento(Object tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
 	}
 
 

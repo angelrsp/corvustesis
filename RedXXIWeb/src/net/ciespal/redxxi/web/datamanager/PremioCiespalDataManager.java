@@ -25,6 +25,8 @@ public class PremioCiespalDataManager implements Serializable {
 	private NoticiaEspejoDTO noticia;
 	private List<NoticiaEspejoDTO> noticiaList;
 	
+	private Object tipoMedio;
+	
 	public PremioCiespalDataManager() {
 		premioCiespalDTO=new PremioCiespalDTO();
 		premioCiespalList=new ArrayList<PremioCiespalDTO>();
@@ -67,6 +69,16 @@ public class PremioCiespalDataManager implements Serializable {
 
 	public void setNoticiaList(List<NoticiaEspejoDTO> noticiaList) {
 		this.noticiaList = noticiaList;
+	}
+
+
+	public Object getTipoMedio() {
+		return tipoMedio;
+	}
+
+
+	public void setTipoMedio(Object tipoMedio) {
+		this.tipoMedio = tipoMedio;
 	}
 
 

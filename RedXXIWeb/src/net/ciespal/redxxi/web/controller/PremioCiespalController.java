@@ -6,6 +6,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.event.FileUploadEvent;
+
 import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioCiespalDTO;
@@ -65,6 +67,7 @@ public class PremioCiespalController extends SelectItemController{
 			premioCiespalDataManager.getPremioCiespalDTO().setPciPais(Integer.valueOf(getPais().toString()));
 			premioCiespalDataManager.getPremioCiespalDTO().setPciProvincia(Integer.valueOf(getProvincia().toString()));
 			premioCiespalDataManager.getPremioCiespalDTO().setPciCiudad(Integer.valueOf(getCiudad().toString()));
+			premioCiespalDataManager.getPremioCiespalDTO().setPciMedio(Integer.valueOf(premioCiespalDataManager.getTipoMedio().toString()));
 			espejoService.createOrUpdatepremioCiespal(premioCiespalDataManager.getPremioCiespalDTO());
 			read();
 			cancel();
@@ -78,11 +81,13 @@ public class PremioCiespalController extends SelectItemController{
 	public void cancel()
 	{
 		premioCiespalDataManager.setPremioCiespalDTO(new PremioCiespalDTO());
+		premioCiespalDataManager.setTipoMedio(null);
 	}
 	
 	public void edit(PremioCiespalDTO premioCiespal)
 	{
 		premioCiespalDataManager.setPremioCiespalDTO(premioCiespal);
+		premioCiespalDataManager.setTipoMedio(premioCiespal.getPciMedio());
 	}
 
 	public void delete(PremioCiespalDTO premioCiespal)
@@ -145,4 +150,13 @@ public class PremioCiespalController extends SelectItemController{
 	{
 		
 	}
+	
+	public void handleFileUploadArchivo(FileUploadEvent event)
+	{
+		JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+		premioCiespalDataManager.getPremioCiespalDTO().setPciArchivo(event.getFile().getContents());
+		premioCiespalDataManager.getPremioCiespalDTO().setPciArchivoNombre(event.getFile().getFileName());
+		premioCiespalDataManager.getPremioCiespalDTO().setPciArchivoPath(JsfUtil.saveToDiskUpdload(event.getFile().getContents(), event.getFile().getFileName()));
+	}
+
 }
