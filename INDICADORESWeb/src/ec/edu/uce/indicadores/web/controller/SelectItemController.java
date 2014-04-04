@@ -73,7 +73,7 @@ public abstract class SelectItemController {
 				@Override
 				public Object transform(Object arg0) {
 					ModeloDTO modelo=(ModeloDTO) arg0;
-					return new SelectItem(modelo.getModCodigo(), modelo.getModDescripcion());
+					return new SelectItem(modelo.getModCodigo(), modelo.getModDescripcion()+" - "+modelo.getModVersion());
 				}
 			});
 		}
