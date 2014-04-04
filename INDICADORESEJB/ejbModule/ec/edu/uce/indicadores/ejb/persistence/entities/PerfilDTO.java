@@ -58,11 +58,14 @@ public class PerfilDTO implements Serializable {
 	}
 
 	public String getPerDescripcion() {
-		return this.perDescripcion;
+		if(this.perDescripcion!=null)
+			return this.perDescripcion.toUpperCase();
+		else
+			return this.perDescripcion;
 	}
 
 	public void setPerDescripcion(String perDescripcion) {
-		this.perDescripcion = perDescripcion;
+		this.perDescripcion = perDescripcion.toUpperCase();
 	}
 
 	public List<AccesoDTO> getIndAccesos() {

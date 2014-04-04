@@ -478,4 +478,6 @@ public class IndicadorServiceImpl implements IndicadorService {
 		}
 
 	}
+	
+	
 }

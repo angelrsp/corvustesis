@@ -39,4 +39,6 @@ public interface AdministracionService {
 	PerfilDTO createOrUpdatePerfil(PerfilDTO perfil)
 			throws IndicadoresException;
 
+	void deletePerfil(PerfilDTO perfil) throws IndicadoresException;
+
 }

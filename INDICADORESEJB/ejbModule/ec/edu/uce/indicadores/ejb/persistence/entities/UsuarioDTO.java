@@ -35,6 +35,9 @@ public class UsuarioDTO implements Serializable {
 	@Column(name="usu_nombre")
 	private String usuNombre;
 
+	@Column(name="usu_apellido")
+	private String usuApellido;
+	
 	//bi-directional many-to-one association to IesDTO
 	@ManyToOne
 	@JoinColumn(name="usu_ies")
@@ -93,6 +96,14 @@ public class UsuarioDTO implements Serializable {
 
 	public void setIndy(IesDTO indy) {
 		this.indy = indy;
+	}
+
+	public String getUsuApellido() {
+		return usuApellido;
+	}
+
+	public void setUsuApellido(String usuApellido) {
+		this.usuApellido = usuApellido;
 	}
 
 	public List<UsuarioPerfilDTO> getIndUsuarioPerfils() {
