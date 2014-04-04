@@ -11,14 +11,14 @@
 		<ui:define name="contenido">
 		<h:form id="contenido">
 		
-	<p:growl id="growl"></p:growl>
+		<p:growl id="growl"/>
 		
 		<p:panel id="pnlPerfil" header="#{i18n['label.titulo.pantalla.perfil']}">
 		
 		<table>
 			<tr>
 				<td><h:outputLabel value="#{i18n['label.nombre']}:&#160;" /></td>
-				<td><p:inputText value="#{perfilController.perfil.perDescripcion}" required="true" requiredMessage="#{i18n['label.nombre']}:&#160;#{i18n['label.requerido']}" disabled="false"/><span class="red">*</span></td>
+				<td><p:inputText value="#{perfilController.perfil.perDescripcion}" required="true" requiredMessage="#{i18n['label.nombre']}:&#160;#{i18n['label.requerido']}" disabled="false" style="text-transform:uppercase;"/><span class="red">*</span></td>
 			</tr>
 		
 			<tr>
@@ -30,7 +30,7 @@
 		
 		<p:spacer height="5"/>
 		
-		<p:dataTable id="tblPerfil" value="#{perfilController.perfilList}" var="per">
+		<p:dataTable id="tblPerfil" value="#{perfilController.perfilList}" var="per" style="width:50%;">
 		
 			<p:column headerText="#{i18n['label.nombre']}">
 				<h:outputText value="#{per.perDescripcion}" />
