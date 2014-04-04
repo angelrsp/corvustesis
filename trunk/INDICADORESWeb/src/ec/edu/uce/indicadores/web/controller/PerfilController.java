@@ -1,6 +1,7 @@
 package ec.edu.uce.indicadores.web.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -34,7 +35,8 @@ public class PerfilController implements Serializable{
 	@PostConstruct
 	private void init()
 	{
-		
+		perfil=new PerfilDTO();
+		perfilList=new ArrayList<PerfilDTO>();
 	}
 	
 	public PerfilDTO getPerfil() {
@@ -75,7 +77,12 @@ public class PerfilController implements Serializable{
 	
 	public void delete(PerfilDTO perfil)
 	{
-		
+		try {
+			administracionService.deletePerfil(perfil);
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (IndicadoresException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 	
 }

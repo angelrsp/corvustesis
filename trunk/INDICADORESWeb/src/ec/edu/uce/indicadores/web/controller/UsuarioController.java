@@ -45,6 +45,8 @@ public class UsuarioController extends SelectItemController implements Serializa
 	
 	private Boolean disabledIes;
 	
+	private Boolean requerido=true;
+	
 	public UsuarioController() {
 	}
 
@@ -124,6 +126,14 @@ public class UsuarioController extends SelectItemController implements Serializa
 		this.perfilSelect = perfilSelect;
 	}
 
+	public Boolean getRequerido() {
+		return requerido;
+	}
+
+	public void setRequerido(Boolean requerido) {
+		this.requerido = requerido;
+	}
+
 	public void createUser() {
 		UsuarioPerfilDTO up;
 		try {
@@ -138,6 +148,7 @@ public class UsuarioController extends SelectItemController implements Serializa
 			setUser(new UsuarioDTO());
 			readUser();
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
+			setRequerido(true);
 		} catch (IndicadoresException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
@@ -159,6 +170,7 @@ public class UsuarioController extends SelectItemController implements Serializa
 	{
 		setUser(user);
 		setPerfilSelect(user.getIndUsuarioPerfils().get(0).getIndPerfil().getPerCodigo());
+		setRequerido(false);
 	}
 	
 	public void deleteUser(UsuarioDTO user)
@@ -176,6 +188,7 @@ public class UsuarioController extends SelectItemController implements Serializa
 	{
 		setUser(new UsuarioDTO());
 		setPerfilSelect(null);
+		setRequerido(true);
 	}
 	
 
