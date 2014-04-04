@@ -200,4 +200,18 @@ public class AdministracionServiceImpl implements AdministracionService{
 		}
 	}
 
+	@Override
+	public void deletePerfil(PerfilDTO perfil) throws IndicadoresException
+	{
+		try {
+			List<OpcionDTO> opt= factoryDAO.getOpcionDAOImpl().getAll(perfil);
+			if(opt.isEmpty())			
+				factoryDAO.getPerfilDAOImpl().remove2(perfil);
+			else
+				throw new IndicadoresException("No se puede eliminar existen dependencias");
+		} catch (IndicadoresException e) {
+			log.error("Error agregarModelo {}",e.toString());
+			throw new IndicadoresException(e);
+		}
+	}
 }
