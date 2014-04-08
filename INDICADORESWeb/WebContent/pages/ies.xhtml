@@ -35,23 +35,17 @@
 	
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.ruc']}:&#160;" /> </td>
-							<td><p:inputText required="true"
-										requiredMessage="#{i18n['label.ruc']}&#160;#{i18n['label.requerido']}"
-										value="#{iesController.iesDTO.iesRuc}" maxlength="13" onkeypress="return isNumberKey(event);"/><span class="red">*</span></td>						
+							<td><p:inputText value="#{iesController.iesDTO.iesRuc}" maxlength="13" onkeypress="return isNumberKey(event);"/></td>						
 						</tr>
 	
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.fecha.creacion']}:&#160;" /> </td>
-							<td><p:calendar required="true"
-										requiredMessage="#{i18n['label.fecha.creacion']}&#160;#{i18n['label.requerido']}"
-										value="#{iesController.fechaCreacion}" pattern="#{i18n['pattern.fecha']}" placeholder="#{i18n['label.fecha.placeholder']}" showOn="button" navigator="true"></p:calendar><span class="red">*</span></td>						
+							<td><p:calendar value="#{iesController.fechaCreacion}" pattern="#{i18n['pattern.fecha']}" placeholder="#{i18n['label.fecha.placeholder']}" showOn="button" navigator="true"></p:calendar><span class="red">*</span></td>						
 						</tr>
 
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.ley.creacion']}:&#160;" /> </td>
-							<td><p:inputText required="true"
-										requiredMessage="#{i18n['label.ley.creacion']}&#160;#{i18n['label.requerido']}"
-										value="#{iesController.iesDTO.iesLeyCreacion}"/><span class="red">*</span></td>
+							<td><p:inputText value="#{iesController.iesDTO.iesLeyCreacion}"/></td>
 						</tr>
 
 						<tr>

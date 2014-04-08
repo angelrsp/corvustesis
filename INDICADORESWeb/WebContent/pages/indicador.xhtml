@@ -55,28 +55,40 @@
 						<td><h:outputLabel value="#{i18n['label.peso']}:&#160;" /> </td>
 						<td><p:inputText required="true"
 									requiredMessage="#{i18n['label.peso']}&#160;#{i18n['label.requerido']}"
-									value="#{indicadorController.indicadorDTO.indPeso}"/></td>
+									value="#{indicadorController.indicadorDTO.indPeso}"/>
+									<p:button id="helpPeso" style="width: 15px; height: 15px" icon="ui-icon-help" onclick="return false;"/>
+									<p:tooltip for="helpPeso" value="Ayuda" showEffect="fade" hideEffect="fade" />  
+						</td>
 					</tr>
 
 					<tr>
 						<td><h:outputLabel value="#{i18n['label.utilidad']}:&#160;" /> </td>
 						<td><p:inputText required="true"
 									requiredMessage="#{i18n['label.utilidad']}&#160;#{i18n['label.requerido']}"
-									value="#{indicadorController.indicadorDTO.indUtilidad}"/></td>
+									value="#{indicadorController.indicadorDTO.indUtilidad}"/>
+									<p:button id="helpUtilidad" style="width: 15px; height: 15px" icon="ui-icon-help" onclick="return false;"/>
+									<p:tooltip for="helpUtilidad" value="Ayuda" showEffect="fade" hideEffect="fade" />  									
+						</td>
 					</tr>
 					
 					<tr>
 						<td><h:outputLabel value="#{i18n['label.valor.objetivo']}:&#160;" /> </td>
 						<td><p:inputText required="true"
 									requiredMessage="#{i18n['label.valor.objetivo']}&#160;#{i18n['label.requerido']}"
-									value="#{indicadorController.indicadorDTO.indValorObjetivo}" onkeypress="return isDecimalKey(event);"/></td>
+									value="#{indicadorController.indicadorDTO.indValorObjetivo}" onkeypress="return isDecimalKey(event);"/>
+									<p:button id="helpObjetivo" style="width: 15px; height: 15px" icon="ui-icon-help" onclick="return false;"/>
+									<p:tooltip for="helpObjetivo" value="Ayuda" showEffect="fade" hideEffect="fade" />  																		
+						</td>
 					</tr>
 
 					<tr>
 						<td><h:outputLabel value="#{i18n['label.valor.ideal']}:&#160;" /> </td>
 						<td><p:inputText required="true"
 									requiredMessage="#{i18n['label.valor.ideal']}&#160;#{i18n['label.requerido']}"
-									value="#{indicadorController.indicadorDTO.indValorIdeal}" onkeypress="return isDecimalKey(event);"/></td>
+									value="#{indicadorController.indicadorDTO.indValorIdeal}" onkeypress="return isDecimalKey(event);"/>
+									<p:button id="helpIdeal" style="width: 15px; height: 15px" icon="ui-icon-help" onclick="return false;"/>
+									<p:tooltip for="helpIdeal" value="Ayuda" showEffect="fade" hideEffect="fade" />  																											
+						</td>
 					</tr>
 
 					<tr>
