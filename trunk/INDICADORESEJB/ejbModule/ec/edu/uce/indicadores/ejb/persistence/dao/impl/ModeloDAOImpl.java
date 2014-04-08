@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,9 +35,10 @@ public class ModeloDAOImpl extends AbstractFacadeImpl<ModeloDTO> implements Mode
 		log.info("getAll");
 		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
 		CriteriaQuery<ModeloDTO> cq=cb.createQuery(ModeloDTO.class);
-		cq.from(ModeloDTO.class);
+		Root<ModeloDTO> from= cq.from(ModeloDTO.class);
 		
 		//cq.where(cb.greaterThan(from.get("iesCodigo").as(Integer.class), 1));
+		cq.orderBy(cb.asc(from.get("modVersion")));
 		
 		List<ModeloDTO> list=entityManager.createQuery(cq).getResultList();	
 		if(list.isEmpty())
