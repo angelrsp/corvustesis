@@ -49,7 +49,6 @@ public class IesController extends SelectItemController implements Serializable{
 	{
 		iesDTO=new IesDTO();
 		iesListDTO=new ArrayList<IesDTO>();
-		fechaCreacion=new Date();
 		registroList=new ArrayList<RegistroDTO>();
 	}
 
@@ -106,7 +105,8 @@ public class IesController extends SelectItemController implements Serializable{
 	public void guardarIes()
 	{
 		try {
-			getIesDTO().setIesFechaCreacion(new Timestamp(fechaCreacion.getTime()));
+			if(fechaCreacion!=null)
+				getIesDTO().setIesFechaCreacion(new Timestamp(fechaCreacion.getTime()));
 			indicadorService.createOrUpdateIes(getIesDTO());
 			getIesList();
 			iesDTO=new IesDTO();
