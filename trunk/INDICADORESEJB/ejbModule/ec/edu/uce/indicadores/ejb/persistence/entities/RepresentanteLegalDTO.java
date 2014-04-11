@@ -33,6 +33,15 @@ public class RepresentanteLegalDTO implements Serializable {
 	@Column(name="rle_tipo")
 	private Integer rleTipo;
 
+	@Column(name="rle_foto")
+	private byte[] rleFoto;
+
+	@Column(name="rle_foto_nombre")
+	private String rleFotoNombre;
+	
+	@Transient
+	private String rlePathFoto;
+	
 	//bi-directional many-to-one association to ContactoDTO
 	@OneToMany(mappedBy="indRepresentanteLegal")
 	private List<ContactoDTO> indContactos;
@@ -90,6 +99,30 @@ public class RepresentanteLegalDTO implements Serializable {
 
 	public void setIndContactos(List<ContactoDTO> indContactos) {
 		this.indContactos = indContactos;
+	}
+
+	public byte[] getRleFoto() {
+		return rleFoto;
+	}
+
+	public void setRleFoto(byte[] rleFoto) {
+		this.rleFoto = rleFoto;
+	}
+
+	public String getRleFotoNombre() {
+		return rleFotoNombre;
+	}
+
+	public void setRleFotoNombre(String rleFotoNombre) {
+		this.rleFotoNombre = rleFotoNombre;
+	}
+
+	public String getRlePathFoto() {
+		return rlePathFoto;
+	}
+
+	public void setRlePathFoto(String rlePathFoto) {
+		this.rlePathFoto = rlePathFoto;
 	}
 
 	public ContactoDTO addIndContacto(ContactoDTO indContacto) {
