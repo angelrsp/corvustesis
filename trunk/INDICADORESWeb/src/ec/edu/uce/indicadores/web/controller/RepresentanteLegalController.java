@@ -10,6 +10,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.event.FileUploadEvent;
+
 import ec.edu.uce.indicadores.commons.util.IndicadoresException;
 import ec.edu.uce.indicadores.ejb.negocio.IndicadorService;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ContactoDTO;
@@ -118,7 +120,6 @@ public class RepresentanteLegalController extends SelectItemController implement
 				}
 			}
 			getRepresentanteLegalDTO().setRleTipo(Integer.valueOf(tipoDocumento.toString()));
-			getRepresentanteLegalDTO().setRleCodigo(null);
 			indicadorService.createOrUpdateRepresentanteLegal(getRepresentanteLegalDTO());
 			getRepresentanteList();
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
@@ -131,13 +132,14 @@ public class RepresentanteLegalController extends SelectItemController implement
 	
 	public void editRepresentante(RepresentanteLegalListDTO representante)
 	{
-		RepresentanteLegalDTO rep=new RepresentanteLegalDTO();
-		rep.setRleApellidos(representante.getRleApellidos());
-		rep.setRleNombres(representante.getRleNombres());
-		rep.setRleCodigo(representante.getRleCodigo());
-		rep.setRleDi(representante.getRleDi());
-		setTipoDocumento(representante.getRleTipo());
-		setRepresentanteLegalDTO(rep);
+		try {
+			setTipoDocumento(representante.getRleTipo());
+			setRepresentanteLegalDTO(indicadorService.readRepresentante(representante.getRleCodigo()));
+			if(getRepresentanteLegalDTO().getRleFoto()!=null)
+				getRepresentanteLegalDTO().setRlePathFoto(JsfUtil.saveToDiskUpdload(getRepresentanteLegalDTO().getRleFoto(), getRepresentanteLegalDTO().getRleFotoNombre()));
+		} catch (IndicadoresException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 
 	public void cancel()
@@ -219,6 +221,12 @@ public class RepresentanteLegalController extends SelectItemController implement
 	{
 		setContactoDTO(new ContactoDTO());
 		setTipoContacto(null);
+	}
+
+	public void handleFileUpload(FileUploadEvent event)	{
+		getRepresentanteLegalDTO().setRleFoto(event.getFile().getContents());
+		getRepresentanteLegalDTO().setRleFotoNombre(event.getFile().getFileName());
+		getRepresentanteLegalDTO().setRlePathFoto(JsfUtil.saveToDiskUpdload(event.getFile().getContents(), event.getFile().getFileName()));
 	}
 
 }
