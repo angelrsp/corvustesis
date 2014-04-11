@@ -7,8 +7,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.negocio.ArgosService;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.argos.RedDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.ObservatorioDataManager;
 
@@ -65,7 +65,7 @@ public class ObservatorioController extends SelectItemController{
 			observatorioDataManager.getObservatorio().setObsPais(Integer.valueOf(getPais().toString()));
 			observatorioDataManager.getObservatorio().setObsProvincia(Integer.valueOf(getProvincia().toString()));
 			observatorioDataManager.getObservatorio().setObsCiudad(Integer.valueOf(getCiudad().toString()));
-			observatorioDataManager.getObservatorio().setArgRed(new RedDTO(observatorioDataManager.getRedValue()));
+			//observatorioDataManager.getObservatorio().setArgRed(new RedDTO(observatorioDataManager.getRedValue()));
 			argosService.createOrUpdateObservatorio(observatorioDataManager.getObservatorio());
 			read();
 			cancel();
@@ -113,4 +113,34 @@ public class ObservatorioController extends SelectItemController{
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
+	
+	public void selectObservatorio(ObservatorioDTO observatorio)
+	{
+		observatorioDataManager.setObservatorio(observatorio);
+	}
+	
+	public void createContacto()
+	{
+		try {
+			argosService.createOrUpdateContacto(observatorioDataManager.getContacto());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void readContacto()
+	{
+		
+	}
+	
+	public void editContacto(ContactoArgosDTO contacto)
+	{
+		
+	}
+	
+	public void deleteContacto(ContactoArgosDTO contacto)
+	{
+		
+	}
+
 }
