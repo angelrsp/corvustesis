@@ -77,6 +77,17 @@ public class IndicadorServiceImpl implements IndicadorService {
 	}
 
 	@Override
+	public RepresentanteLegalDTO readRepresentante(Object id) throws IndicadoresException
+	{
+		log.info("readRepresentante");
+		try {
+			return factoryDAO.getRepresentanteLegalDAOImpl().find(id);
+		} catch (Exception e) {
+			throw new IndicadoresException(e);
+		}		
+	}
+	
+	@Override
 	public void deleteRegistro(RegistroDTO registro) throws IndicadoresException
 	{
 		log.info("deleteRegistro");

@@ -12,7 +12,6 @@ import ec.edu.uce.indicadores.ejb.persistence.entities.HistoricoIndicadorDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IndicadorDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.ModeloDTO;
-import ec.edu.uce.indicadores.ejb.persistence.entities.PerfilDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.RegistroDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.RepresentanteLegalListDTO;
@@ -100,6 +99,9 @@ public interface IndicadorService {
 			throws IndicadoresException;
 
 	void deleteIndicador(IndicadorDTO indicador) throws IndicadoresException;
+
+	RepresentanteLegalDTO readRepresentante(Object id)
+			throws IndicadoresException;
 
 
 }
