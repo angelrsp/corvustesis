@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import net.ciespal.redxxi.ejb.persistence.dao.CarreraDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.CatalogoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.CentroDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.ContactoArgosDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ContactoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.DoctorDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.EntidadDAO;
@@ -56,7 +57,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private RedDAO redDAO; 
 	private ObservatorioDAO observatorioDAO;
 	private VeeduriaDAO veeduriaDAO;
-	
+	private ContactoArgosDAO contactoArgosDAO;
 	
 	private EticaDAO eticaDAO;
 	private GranMaestroDAO granMaestroDAO;
@@ -267,6 +268,14 @@ public class FactoryDAOImpl implements FactoryDAO{
 			noticiaEspejoDAO = new NoticiaEspejoDAOImpl(entityManager);
 		}
 		return noticiaEspejoDAO;
+	}
+
+	@Override
+	public ContactoArgosDAO getContactoArgosDAOImpl() {
+		if (contactoArgosDAO == null) {
+			contactoArgosDAO = new ContactoArgosDAOImpl(entityManager);
+		}
+		return contactoArgosDAO;
 	}
 
 }

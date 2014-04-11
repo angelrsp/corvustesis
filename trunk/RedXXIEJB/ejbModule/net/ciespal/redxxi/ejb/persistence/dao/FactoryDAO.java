@@ -31,6 +31,7 @@ public interface FactoryDAO {
 	ObraEspejoDAO getObraEspejoDAOImpl();
 	ObraDAO getObraDAOImpl();
 	NoticiaEspejoDAO getNoticiaEspejoDAOImpl();
+	ContactoArgosDAO getContactoArgosDAOImpl();
 	
 	
 

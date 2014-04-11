@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import com.corvustec.commons.util.CorvustecException;
-
 import net.ciespal.redxxi.ejb.persistence.dao.OrganizacioDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
+
+import com.corvustec.commons.util.CorvustecException;
 
 public class OrganizacioDAOImpl extends AbstractFacadeImpl<OrganizacionDTO> implements OrganizacioDAO {
 
@@ -85,6 +86,15 @@ public class OrganizacioDAOImpl extends AbstractFacadeImpl<OrganizacionDTO> impl
 			return (int)(long)list.get(0).getOrgCount();
 		else
 			return 0;
+	}
+
+	@Override
+	public void remove2(OrganizacionDTO organizacion) throws CorvustecException
+	{
+		Query query;
+		query=entityManager.createQuery("delete from OrganizacionDTO org where org.orgCodigo=:codigo");
+		query.setParameter("codigo", organizacion.getOrgCodigo());
+		query.executeUpdate();
 	}
 
 }
