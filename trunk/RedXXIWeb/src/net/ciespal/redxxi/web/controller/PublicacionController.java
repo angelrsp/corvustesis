@@ -151,6 +151,12 @@ public class PublicacionController extends SelectItemController {
 	
 	public void delete(PublicacionDTO publicacion)
 	{
-		
+		try {
+			ateneaService.deletePublicacion(publicacion);
+			readPublicacion();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 }

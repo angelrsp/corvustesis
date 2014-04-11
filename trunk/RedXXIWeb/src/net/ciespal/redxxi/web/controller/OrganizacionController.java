@@ -100,6 +100,19 @@ public class OrganizacionController extends SelectItemController{
 		organizacionDataManager.setOrganizacion(orgnaizacion);
 	}
 	
+	
+	public void delete(OrganizacionDTO orgnaizacion)
+	{
+		try {
+			ateneaService.deleteOrganizacion(orgnaizacion);
+			readOrganizacion();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	
 	public void cancel()
 	{
 		organizacionDataManager.setOrganizacion(new OrganizacionDTO());
