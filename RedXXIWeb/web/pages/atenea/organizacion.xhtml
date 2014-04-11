@@ -8,7 +8,7 @@
 	<ui:composition template="/WEB-INF/template/privado.xhtml">
 
 		<ui:define name="contenido">
-		<p:growl id="growl"></p:growl>
+		<p:growl id="growl"/>
 		
 		<p:panel id="pnlDato" header="#{i18n['label.panel.organizacion']}">
 		
@@ -42,7 +42,7 @@
 			
 			<tr>
 				<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
-				<td><p:inputText value="#{organizacionDataManager.organizacion.orgNombre}"/></td>
+				<td><p:inputText value="#{organizacionDataManager.organizacion.orgNombre}" required="true" requiredMessage="#{i18n['label.nombre']}&#160;#{i18n['label.requerido']}"/></td>
 				<td><h:outputText value="#{i18n['label.datos.institucionales']}:&#160;" /></td>
 				<td colspan="2"><p:inputTextarea value="#{organizacionDataManager.organizacion.orgDatosInstitucionales}" autoResize="false" maxlength="200" counterTemplate="{0}" counter="contDat"/><h:outputText id="contDat" /></td>			
 			</tr>
@@ -78,10 +78,16 @@
 			<p:column headerText="#{i18n['label.nombre']}">
 				<h:outputText value="#{org.orgNombre}" />
 			</p:column>
-		
+
 			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
 				<p:commandButton actionListener="#{organizacionController.edit(org)}" icon="ui-icon-pencil" process=":contenido:tblOrganizacion" update=":contenido:pnlDato"/>
 			</p:column>
+		
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{organizacionController.delete(org)}" icon="ui-icon-close" process=":contenido:tblOrganizacion" update=":contenido:tblOrganizacion,:contenido:growl">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
+			</p:column>					
 		
 			<p:column headerText="#{i18n['label.mas.datos']}" width="15" style="text-align: center">
 				<p:commandButton icon="ui-icon-plus" actionListener="#{organizacionController.organizacionSelect(org)}"
@@ -128,6 +134,7 @@
 			<p:column headerText="#{i18n['label.valor']}">
 				<h:outputText value="#{con.conValor}" />
 			</p:column>
+			
 			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
 				<p:commandButton actionListener="#{organizacionController.editContacto(con)}" icon="ui-icon-pencil" process=":contenido:tblContacto" update=":contenido:pnlContacto"/>
 			</p:column>
@@ -230,6 +237,12 @@
 					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
 				</p:commandButton>
 			</p:column>
+			
+			<p:column headerText="#{i18n['label.mas.datos']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{pregradoController.selectCarrera(car)}" icon="ui-icon-plus" 
+	               	update=":contenido:pnlDatos,:contenido:growl,:contenido:dlgDetalles" process="tblCarrera" oncomplete="PF('dlgDetalle').show()"/>    				
+			</p:column>
+			
 				
 		</p:dataTable>
 		
