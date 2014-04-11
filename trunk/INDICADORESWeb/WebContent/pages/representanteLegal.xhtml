@@ -47,6 +47,17 @@
 									value="#{representanteLegalController.representanteLegalDTO.rleDi}" onkeypress="return isNumberKey(event)"/><span class="red">*</span></td>						
 					</tr>
 
+					<tr>
+						<td><h:outputLabel value="#{i18n['label.foto']}:&#160;" /> </td>						
+						<td colspan="2"><p:fileUpload fileUploadListener="#{representanteLegalController.handleFileUpload}" mode="advanced" dragDropSupport="true" auto="true"  
+                 				update="growl,image" sizeLimit="1000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar"/>
+                 				</td>
+					</tr>
+					
+					<tr>
+						<td><p:graphicImage id="image" value="#{representanteLegalController.representanteLegalDTO.rlePathFoto}" height="100"/></td>
+					</tr>
+
 
 					<tr>
 						<td colspan="2" align="center">
