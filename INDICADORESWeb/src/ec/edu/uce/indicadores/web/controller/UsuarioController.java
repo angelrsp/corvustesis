@@ -11,6 +11,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import org.apache.commons.lang3.StringUtils;
+
 import ec.edu.uce.indicadores.commons.util.IndicadoresException;
 import ec.edu.uce.indicadores.ejb.negocio.AdministracionService;
 import ec.edu.uce.indicadores.ejb.persistence.entities.IesDTO;
@@ -46,6 +48,8 @@ public class UsuarioController extends SelectItemController implements Serializa
 	private Boolean disabledIes;
 	
 	private Boolean requerido=true;
+	
+	private String pass;
 	
 	public UsuarioController() {
 	}
@@ -134,6 +138,14 @@ public class UsuarioController extends SelectItemController implements Serializa
 		this.requerido = requerido;
 	}
 
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
 	public void createUser() {
 		UsuarioPerfilDTO up;
 		try {
@@ -143,6 +155,8 @@ public class UsuarioController extends SelectItemController implements Serializa
 			getUser().setIndUsuarioPerfils(new ArrayList<UsuarioPerfilDTO>());
 			getUser().addIndUsuarioPerfil(up);
 			
+			if(!StringUtils.isEmpty(pass))
+				getUser().setUsuClave(pass);
 			administracionService.createOrUpdateUser(getUser());
 			
 			setUser(new UsuarioDTO());
@@ -171,6 +185,7 @@ public class UsuarioController extends SelectItemController implements Serializa
 		setUser(user);
 		setPerfilSelect(user.getIndUsuarioPerfils().get(0).getIndPerfil().getPerCodigo());
 		setRequerido(false);
+		setPass(user.getUsuClave());
 	}
 	
 	public void deleteUser(UsuarioDTO user)
