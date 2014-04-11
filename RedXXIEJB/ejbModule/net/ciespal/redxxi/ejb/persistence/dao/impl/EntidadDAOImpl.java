@@ -15,6 +15,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ObraDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
 
 import com.corvustec.commons.util.CorvustecException;
 
@@ -91,6 +92,23 @@ public class EntidadDAOImpl extends AbstractFacadeImpl<EntidadDTO> implements En
 			return list.get(0);		
 	}
 
-	
+	@Override
+	public List<EntidadDTO> getAll(OrganizacionDTO organizacion) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<EntidadDTO> cq=cb.createQuery(EntidadDTO.class);
+		Root<EntidadDTO> from = cq.from(EntidadDTO.class);
+		
+		Path<OrganizacionDTO> join1=from.join("ateOrganizacion");
+		
+		cq.where(cb.equal(join1.get("orgCodigo"),organizacion.getOrgCodigo()));
+		
+		List<EntidadDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return new ArrayList<EntidadDTO>();
+		else
+			return list;
+	}
+
 	
 }

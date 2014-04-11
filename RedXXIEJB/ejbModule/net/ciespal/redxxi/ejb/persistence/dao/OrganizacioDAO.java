@@ -16,5 +16,7 @@ public interface OrganizacioDAO extends AbstractFacade<OrganizacionDTO> {
 
 	Integer getCount(Object pais) throws CorvustecException;
 
+	void remove2(OrganizacionDTO organizacion) throws CorvustecException;
+
 	
 }

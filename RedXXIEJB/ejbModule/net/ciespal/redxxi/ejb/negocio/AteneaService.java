@@ -186,5 +186,8 @@ public interface AteneaService {
 
 	EntidadDTO readEntidad(ObraDTO obra) throws CorvustecException;
 
+	void deleteOrganizacion(OrganizacionDTO organizacion)
+			throws CorvustecException;
+
 
 }
