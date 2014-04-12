@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.RedDTO;
 
@@ -28,6 +29,7 @@ public class ObservatorioDataManager implements Serializable{
 	private Integer redValue;
 	
 	private ContactoArgosDTO contacto;
+	private List<ContactoArgosListDTO> contactoList;
 	
 	private Object tipoContacto;
 	
@@ -36,6 +38,7 @@ public class ObservatorioDataManager implements Serializable{
 		observatorioList=new ArrayList<ObservatorioDTO>();
 		redList=new ArrayList<RedDTO>();
 		contacto=new ContactoArgosDTO();
+		contactoList=new ArrayList<ContactoArgosListDTO>();
 	}
 
 	public ObservatorioDTO getObservatorio() {
@@ -84,6 +87,14 @@ public class ObservatorioDataManager implements Serializable{
 
 	public void setContacto(ContactoArgosDTO contacto) {
 		this.contacto = contacto;
+	}
+
+	public List<ContactoArgosListDTO> getContactoList() {
+		return contactoList;
+	}
+
+	public void setContactoList(List<ContactoArgosListDTO> contactoList) {
+		this.contactoList = contactoList;
 	}
 	
 	
