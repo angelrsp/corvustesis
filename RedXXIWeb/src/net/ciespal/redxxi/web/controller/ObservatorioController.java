@@ -8,6 +8,7 @@ import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.negocio.ArgosService;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.ObservatorioDataManager;
@@ -117,25 +118,47 @@ public class ObservatorioController extends SelectItemController{
 	public void selectObservatorio(ObservatorioDTO observatorio)
 	{
 		observatorioDataManager.setObservatorio(observatorio);
+		readContacto();
 	}
 	
 	public void createContacto()
 	{
 		try {
+			observatorioDataManager.getContacto().setConTipo(Integer.valueOf(observatorioDataManager.getTipoContacto().toString()));
+			observatorioDataManager.getContacto().setArgEntidad(observatorioDataManager.getObservatorio().getArgEntidad());
 			argosService.createOrUpdateContacto(observatorioDataManager.getContacto());
+			readContacto();
+			cancelContacto();
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
 	
-	public void readContacto()
+	private void readContacto()
 	{
-		
+		try {
+			observatorioDataManager.setContactoList(argosService.readContacto(observatorioDataManager.getObservatorio().getArgEntidad()));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+
 	}
 	
-	public void editContacto(ContactoArgosDTO contacto)
+	public void cancelContacto()
 	{
-		
+		observatorioDataManager.setContacto(new ContactoArgosDTO());
+		observatorioDataManager.setTipoContacto(null);
+	}
+	
+	public void editContacto(ContactoArgosListDTO contacto)
+	{
+		try {
+			observatorioDataManager.setContacto(argosService.readContacto(contacto.getConCodigo()));
+			observatorioDataManager.setTipoContacto(contacto.getConTipo());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 	
 	public void deleteContacto(ContactoArgosDTO contacto)
