@@ -10,10 +10,14 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="arg_contacto_vie")
-@NamedQuery(name="ContactoArgosListVie.findAll", query="SELECT c FROM ContactoArgosListVie c")
+@NamedQuery(name="ContactoArgosListDTO.findAll", query="SELECT c FROM ContactoArgosListDTO c")
 public class ContactoArgosListDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Column(name="cat_tipo")
+	private String catTipo;
+
+	@Id
 	@Column(name="con_codigo")
 	private Integer conCodigo;
 
@@ -33,6 +37,14 @@ public class ContactoArgosListDTO implements Serializable {
 	private Integer entTipo;
 
 	public ContactoArgosListDTO() {
+	}
+
+	public String getCatTipo() {
+		return this.catTipo;
+	}
+
+	public void setCatTipo(String catTipo) {
+		this.catTipo = catTipo;
 	}
 
 	public Integer getConCodigo() {

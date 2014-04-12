@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import net.ciespal.redxxi.ejb.negocio.ArgosService;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.EntidadArgosDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.RedDTO;
@@ -140,5 +141,32 @@ public class ArgosServiceImpl implements ArgosService{
 			logger.info("Error createOrUpdateContacto {}",e.toString());
 			throw new CorvustecException("Error al createOrUpdateContacto");
 		}
+	}
+	
+	@Override
+	public List<ContactoArgosListDTO> readContacto(EntidadArgosDTO entidad) throws CorvustecException
+	{
+		logger.info("createOrUpdateContacto");
+		try{
+			return factoryDAO.getContactoArgosDAOImpl().getAll(entidad);
+		}
+		catch(Exception e){
+			logger.info("Error createOrUpdateContacto {}",e.toString());
+			throw new CorvustecException("Error al createOrUpdateContacto");
+		}		
+	}
+	
+	@Override
+	public ContactoArgosDTO readContacto(Object id) throws CorvustecException
+	{
+		logger.info("createOrUpdateContacto");
+		try{
+			return factoryDAO.getContactoArgosDAOImpl().find(id);
+		}
+		catch(Exception e){
+			logger.info("Error createOrUpdateContacto {}",e.toString());
+			throw new CorvustecException("Error al createOrUpdateContacto");
+		}		
+		
 	}
 }

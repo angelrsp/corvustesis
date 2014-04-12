@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Local;
 
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosListDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.EntidadArgosDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.RedDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.VeeduriaDTO;
@@ -24,5 +26,7 @@ public interface ArgosService {
 			throws CorvustecException;
 	List<VeeduriaDTO> readVeeduria(Object ciudad) throws CorvustecException;
 	ContactoArgosDTO createOrUpdateContacto(ContactoArgosDTO contacto) throws CorvustecException;
+	List<ContactoArgosListDTO> readContacto(EntidadArgosDTO entidad) throws CorvustecException;
+	ContactoArgosDTO readContacto(Object id) throws CorvustecException;
 
 }
