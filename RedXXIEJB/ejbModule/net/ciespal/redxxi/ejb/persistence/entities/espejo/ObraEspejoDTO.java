@@ -34,6 +34,12 @@ public class ObraEspejoDTO implements Serializable {
 
 	@Column(name="obr_tipo")
 	private Integer obrTipo;
+
+	@Column(name="obr_tipo2")
+	private Integer obrTipo2;
+
+	@Column(name="obr_autores")
+	private String obrAutores;
 	
 	@Transient
 	private String obrArchivoPath;	
@@ -84,6 +90,22 @@ public class ObraEspejoDTO implements Serializable {
 
 	public void setObrTipo(Integer obrTipo) {
 		this.obrTipo = obrTipo;
+	}
+
+	public Integer getObrTipo2() {
+		return obrTipo2;
+	}
+
+	public void setObrTipo2(Integer obrTipo2) {
+		this.obrTipo2 = obrTipo2;
+	}
+
+	public String getObrAutores() {
+		return obrAutores;
+	}
+
+	public void setObrAutores(String obrAutores) {
+		this.obrAutores = obrAutores;
 	}
 
 	public EntidadEspejoDTO getEspEntidad() {
