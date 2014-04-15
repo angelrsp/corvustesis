@@ -106,4 +106,31 @@ a.linkClass2:hover {color: #FAA723; text-decoration: underline;}
    border: none;
    background-color: white;
    background: white;
-}  
+}
+
+/*Menu Principal*/
+
+#navlist{position:relative;top: -17px;left: 15px;}
+#navlist li{margin:0;padding:0;list-style:none;position:absolute;top:0;}
+#navlist li, #navlist a{height:44px;display:block;}
+
+
+#home{left:0px;width:64px;}
+#home{background:url('../images/menutrans.png') 0 0;}
+
+#home:hover{left:0px;width:64px; height: 30px;}
+#home:hover{background:url('../images/menutrans.png') 0 -445px;}
+
+#home:active{left:0px;width:64px; height: 30px;}
+#home:active {background:url('../images/menutrans.png') 0 -445px;}
+
+
+
+
+
+#atenea{left:65px;width:68px;}
+#atenea{background:url('../images/menutrans.png') -232px 0;}
+
+#atenea:hover{left:65px;width:68px; height: 30px;}
+#atenea:hover{background:url('../images/menutrans.png') -232px -445px;}
+
