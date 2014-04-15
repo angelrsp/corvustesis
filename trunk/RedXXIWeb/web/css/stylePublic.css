@@ -125,12 +125,15 @@ a.linkClass2:hover {color: #FAA723; text-decoration: underline;}
 #home:active {background:url('../images/menutrans.png') 0 -445px;}
 
 
-
-
-
 #atenea{left:65px;width:68px;}
 #atenea{background:url('../images/menutrans.png') -232px 0;}
 
 #atenea:hover{left:65px;width:68px; height: 30px;}
 #atenea:hover{background:url('../images/menutrans.png') -232px -445px;}
+
+
+#argos{left:133px;width:68px;}
+#argos{background:url('../images/menutrans.png') -150px 0;}
+
+
 
