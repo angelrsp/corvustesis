@@ -22,55 +22,57 @@
 
 
 
-
 <table width="100%">
 
-<tr align="center">
-
-
-	<td colspan="3">
+	<tr align="center">
 	
-	<table width="100%">
-		<tr align="center">
-			<td>
-			
-			<p:graphicImage value="/images/fondosuperiorLogo.jpg" height="112" width="950"/>
-			
-			</td>
-		</tr>
-		<tr>
-		<td>
-			<div class="line-separator"></div>
-			<div style="width: 100%; height: 16px;">
+		<td colspan="3">
 		
-			<ul id="navlist">
-			  <li id="home"><a href="#{request.contextPath}/index.xhtml"></a></li>
-			  <li id="atenea"><a href="#{request.contextPath}/index.xhtml"></a></li>
-			  <li id="argos"><a href="#{request.contextPath}/index.xhtml"></a></li>
-			  <li id="espejo"><a href="#{request.contextPath}/index.xhtml"></a></li>
-			</ul>
+			<table width="100%">
+				<tr align="center">
+					<td>
+						<p:graphicImage value="/images/fondosuperiorLogo.jpg" height="112" width="950"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="line-separator"></div>
+						
+						<div style="width: 100%; height: 16px;">
+							<ul id="navlist">
+							  <li id="home"><a href="#{request.contextPath}/index.xhtml"></a></li>
+							  <li id="atenea"><a href="#{request.contextPath}/atenea.xhtml"></a></li>
+							  <li id="argos"><a href="#{request.contextPath}/argos.xhtml"></a></li>
+							  <li id="espejo"><a href="#{request.contextPath}/espejo.xhtml"></a></li>
+							  <li id="somos"><a href="#{request.contextPath}/quienesSomos.xhtml"></a></li>
+							</ul>
+						</div>
+						
+						<div class="line-separator"></div>	
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div style="height: 20px;"></div>
+					</td>
+				</tr>	 
+			</table>
 			
-			</div>
-		<div class="line-separator"></div>	
 		</td>
-		</tr>	 
-	</table>
-	</td>
-
-
-</tr>
-
-<tr>
-
-	<td width="45%" align="left" valign="top" style="padding-left:30px;">
-		<ui:insert name="left"/>
-	</td>
 	
+	</tr>
+
+	<tr>
 	
-	<td width="45%" align="right" valign="top" style="padding-right:30px;">
-		<ui:insert name="right"/>	
-	</td>
-</tr>
+		<td width="45%" align="left" valign="top" style="padding-left:30px;">
+			<ui:insert name="left"/>
+		</td>
+		
+		
+		<td width="45%" align="right" valign="top" style="padding-right:30px;">
+			<ui:insert name="right"/>	
+		</td>
+	</tr>
 
 </table>
 

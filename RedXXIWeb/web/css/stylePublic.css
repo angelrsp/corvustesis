@@ -121,19 +121,27 @@ a.linkClass2:hover {color: #FAA723; text-decoration: underline;}
 #home:hover{left:0px;width:64px; height: 30px;}
 #home:hover{background:url('../images/menutrans.png') 0 -445px;}
 
-#home:active{left:0px;width:64px; height: 30px;}
-#home:active {background:url('../images/menutrans.png') 0 -445px;}
-
-
 #atenea{left:65px;width:68px;}
 #atenea{background:url('../images/menutrans.png') -232px 0;}
 
 #atenea:hover{left:65px;width:68px; height: 30px;}
 #atenea:hover{background:url('../images/menutrans.png') -232px -445px;}
 
+#argos{left:132px;width:66px;}
+#argos{background:url('../images/menutrans.png') -152px 0;}
 
-#argos{left:133px;width:68px;}
-#argos{background:url('../images/menutrans.png') -150px 0;}
+#argos:hover{left:132px; width:66px; height: 30px;}
+#argos:hover{background:url('../images/menutrans.png') -152px -445px;}
 
+#espejo{left:196px; width:72px;}
+#espejo{background:url('../images/menutrans.png') -75px 0;}
 
+#espejo:hover{left:196px; width:72px; height: 30px;}
+#espejo:hover{background:url('../images/menutrans.png') -75px -445px;}
+
+#somos{left:262px; width:130px; height: 31px;}
+#somos{background:url('../images/menutrans.png') -408px -1px;}
+
+#somos:hover{left:262px; width:130px; height: 30px;}
+#somos:hover{background:url('../images/menutrans.png') -408px -445px;}
 
