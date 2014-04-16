@@ -40,16 +40,15 @@
 				<div class="line-separator"></div>		
 
 				<p:dataGrid value="#{reportPublicController.reportPublicDataManager.paisList}" var="pai" columns="6">
-					<table>
-						<tr align="center">
+					<table align="center">
+						<tr>
 							<td>
 								<p:graphicImage value="#{pai.imagenPath}" height="35" width="60"/>
-			    				
 		    				</td>
 		    			</tr>
-		    			<tr align="center">
+		    			<tr>
 		    				<td>
-		    				<h:commandLink value="#{pai.nombre}" actionListener="#{reportPublicController.selectPais(pai)}" styleClass="linkClass"/>
+		    					<h:commandLink value="#{pai.nombre}" actionListener="#{reportPublicController.selectPais(pai)}" styleClass="linkClass"/>
 		    				</td>
 		    			</tr>
 					</table>

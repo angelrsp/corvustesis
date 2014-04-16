@@ -9,6 +9,15 @@ body
 	border:1px solid black;
 }
 
+.ui-datagrid-column{
+	vertical-align: top;
+	text-align: center;
+}
+
+.typeLetter{
+font-family: Segoe UI,Arial,sans-serif;
+    font-size: 1.1em;
+}
 
 .menudes {
 position: relative;
@@ -51,15 +60,15 @@ left: 81.5%; /* 1/4 Ancho del enlace + 3 veces ancho enlace */
 }
 
 
-a.linkClass:link {color: #F57B20;text-decoration: none}
-a.linkClass:active {color: #F57B20;}
-a.linkClass:visited {color: #F57B20;}
-a.linkClass:hover {color: #FAA723; text-decoration: underline;}
+a.linkClass:link {color: #F57B20;text-decoration: none;font-family: Segoe UI,Arial,sans-serif;}
+a.linkClass:active {color: #F57B20;font-family: Segoe UI,Arial,sans-serif;}
+a.linkClass:visited {color: #F57B20;font-family: Segoe UI,Arial,sans-serif;}
+a.linkClass:hover {color: #FAA723; text-decoration: underline;font-family: Segoe UI,Arial,sans-serif;}
 
-a.linkClass2:link {color: #000000;text-decoration: none}
-a.linkClass2:active {color: #F57B20;}
-a.linkClass2:visited {color: #F57B20;}
-a.linkClass2:hover {color: #FAA723; text-decoration: underline;}
+a.linkClass2:link {color: #000000;text-decoration: none;font-family: Segoe UI,Arial,sans-serif;}
+a.linkClass2:active {color: #F57B20;font-family: Segoe UI,Arial,sans-serif;}
+a.linkClass2:visited {color: #F57B20;font-family: Segoe UI,Arial,sans-serif;}
+a.linkClass2:hover {color: #FAA723; text-decoration: underline;font-family: Segoe UI,Arial,sans-serif;}
 
 
 #footer_wrapper {
