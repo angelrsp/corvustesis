@@ -669,7 +669,13 @@ public class AteneaServiceImpl implements AteneaService{
 		}//Revista
 		else if(atenea.getTipo()==34)
 		{
-			for(PublicacionDTO pub: factoryDAO.getPublicacionDAOImpl().getByType(34)){
+			List<PublicacionDTO> listPublicacion=new ArrayList<PublicacionDTO>();
+			if(atenea.getPais()==0)
+				listPublicacion=factoryDAO.getPublicacionDAOImpl().getByType(34);
+			else
+				listPublicacion=factoryDAO.getPublicacionDAOImpl().getByType(34,atenea.getPais());
+
+			for(PublicacionDTO pub: listPublicacion){
 				
 				sb.append("<table>");
 					sb.append("<tr>");
@@ -683,7 +689,13 @@ public class AteneaServiceImpl implements AteneaService{
 		}//Eventos
 		else if(atenea.getTipo()==101)
 		{
-			for(EventoDTO eve: factoryDAO.getEventoDAOImpl().getAll()){
+			List<EventoDTO> listEvento=new ArrayList<EventoDTO>();
+			if(atenea.getPais()==0)
+				listEvento=factoryDAO.getEventoDAOImpl().getAll();
+			else
+				listEvento=factoryDAO.getEventoDAOImpl().getAll(atenea.getPais());
+			
+			for(EventoDTO eve: listEvento){
 				sb.append("<table>");
 				sb.append("<tr>");
 				sb.append("<td>");
@@ -695,7 +707,13 @@ public class AteneaServiceImpl implements AteneaService{
 		}//Proyectos de Investigacion
 		else if(atenea.getTipo()==102)
 		{
-			for(ProyectoInvestigacionDTO pro: factoryDAO.getProyectoInvestigacionDAOImpl().getAll()){
+			List<ProyectoInvestigacionDTO> listProyecto=new ArrayList<ProyectoInvestigacionDTO>();
+			if(atenea.getPais()==0)
+				listProyecto=factoryDAO.getProyectoInvestigacionDAOImpl().getAll();
+			else
+				listProyecto=factoryDAO.getProyectoInvestigacionDAOImpl().getAll(atenea.getPais());
+			
+			for(ProyectoInvestigacionDTO pro: listProyecto){
 				sb.append("<table>");
 				sb.append("<tr>");
 				sb.append("<td>");
@@ -707,27 +725,45 @@ public class AteneaServiceImpl implements AteneaService{
 		}//Organizacion
 		else if(atenea.getTipo()==103)
 		{
-//			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
-//				pais=new PaisDTO();
-//				pais.setCodigo(cat.getCatCodigo());
-//				pais.setImagenPath(cat.getCatImagenPath());
-//				pais.setNombre(cat.getCatDescripcion());
-//				pais.setCount(factoryDAO.getOrganizacioDAOImpl().getCount(cat.getCatCodigo()));
-//				pais.setTipo(Integer.valueOf(type.toString()));
-//				paisList.add(pais);
-//			}
+			List<OrganizacionDTO> listOrg=new ArrayList<OrganizacionDTO>();
+			if(atenea.getPais()==0)
+				listOrg=factoryDAO.getOrganizacioDAOImpl().getAll();
+			else
+				listOrg=factoryDAO.getOrganizacioDAOImpl().getAll2(atenea.getPais());
+			
+			for(OrganizacionDTO org: listOrg){
+				sb.append("<table>");
+				sb.append("<tr>");
+				sb.append("<td>");
+				sb.append(org.getOrgNombre());
+				sb.append("</td>");
+				sb.append("</tr>");
+				sb.append("</table>");
+			}
 		}//Doctor
 		else if(atenea.getTipo()==104)
 		{
-//			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
-//				pais=new PaisDTO();
-//				pais.setCodigo(cat.getCatCodigo());
-//				pais.setImagenPath(cat.getCatImagenPath());
-//				pais.setNombre(cat.getCatDescripcion());
-//				pais.setCount(factoryDAO.getDoctorDAOImpl().getCount(cat.getCatCodigo()));
-//				pais.setTipo(Integer.valueOf(type.toString()));
-//				paisList.add(pais);
-//			}
+			List<DoctorDTO> listDoc=new ArrayList<DoctorDTO>();
+			if(atenea.getPais()==0)
+				listDoc=factoryDAO.getDoctorDAOImpl().getAll();
+			else
+				listDoc=factoryDAO.getDoctorDAOImpl().getAll2(atenea.getPais());
+			
+			for(DoctorDTO doc: listDoc){
+				sb.append("<table>");
+				sb.append("<tr>");
+				
+					sb.append("<td>");
+					sb.append(doc.getDocApellidos());
+					sb.append("</td>");
+				
+					sb.append("<td>");
+					sb.append(doc.getDocNombres());
+					sb.append("</td>");
+
+				sb.append("</tr>");
+				sb.append("</table>");
+			}
 		}
 		return sb.toString();
 	}

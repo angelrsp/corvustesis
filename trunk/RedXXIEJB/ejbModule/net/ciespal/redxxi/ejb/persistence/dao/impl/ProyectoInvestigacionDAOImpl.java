@@ -111,7 +111,24 @@ public class ProyectoInvestigacionDAOImpl extends AbstractFacadeImpl<ProyectoInv
 		else
 			return 0;
 	}
+
 	
+	@Override
+	public List<ProyectoInvestigacionDTO> getAll(Object pais) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<ProyectoInvestigacionDTO> cq=cb.createQuery(ProyectoInvestigacionDTO.class);
+		Root<ProyectoInvestigacionDTO> from= cq.from(ProyectoInvestigacionDTO.class);
+		
+		cq.where(cb.equal(from.get("pinPais"), pais));
+		
+		List<ProyectoInvestigacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return new ArrayList<ProyectoInvestigacionDTO>();
+		else
+			return list;
+	}
+
 	
 	@Override
 	public void remove2(ProyectoInvestigacionDTO pro)

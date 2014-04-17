@@ -86,6 +86,22 @@ public class DoctorDAOImpl extends AbstractFacadeImpl<DoctorDTO> implements Doct
 		else
 			return 0;
 	}
+	
+	@Override
+	public List<DoctorDTO> getAll2(Object pais) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<DoctorDTO> cq=cb.createQuery(DoctorDTO.class);
+		Root<DoctorDTO> from= cq.from(DoctorDTO.class);
+		
+		cq.where(cb.equal(from.get("docPais"), pais));
+		
+		List<DoctorDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return new ArrayList<DoctorDTO>();
+		else
+			return list;
+	}
 
 	
 }
