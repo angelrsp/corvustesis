@@ -332,7 +332,7 @@ public class AteneaServiceImpl implements AteneaService{
 	public String visor(AteneaDTO atenea) throws CorvustecException
 	{
 		StringBuilder sb=new StringBuilder();
-		CatalogoDTO catalogo;
+		//CatalogoDTO catalogo;
 		List<CentroDTO> listCentroChild;
 		List<CentroDTO> listPais;
 		
@@ -355,24 +355,8 @@ public class AteneaServiceImpl implements AteneaService{
 			
 			for(CentroDTO centroPais:listPais){
 				
-				catalogo=factoryDAO.getCatalogoImpl().find(centroPais.getCenPais());
-				
-				sb.append("<tr>");
-					sb.append("<td colspan='2' align='center'>");
-					sb.append("<img src='/RedXXIWeb"+catalogo.getCatImagenPath()+"' height='30' width='50'>");
-					sb.append("</td>");				
-				sb.append("</tr>");					
-				
-				sb.append("<tr>");				
-					sb.append("<td><b>");
-					sb.append("País: ");
-					sb.append("</b></td>");
-					
-					sb.append("<td>");
-					sb.append(catalogo.getCatDescripcion());
-					sb.append("</td>");
-				sb.append("</tr>");										
-				
+				//catalogo=factoryDAO.getCatalogoImpl().find(centroPais.getCenPais());
+								
 				for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(atenea.getTipo(),centroPais.getCenPais()))
 				{
 					listCentroChild= factoryDAO.getCentroDAOImpl().findAllChild(centro);
@@ -436,24 +420,8 @@ public class AteneaServiceImpl implements AteneaService{
 			
 			for(CentroDTO centroPais:listPais){
 				
-				catalogo=factoryDAO.getCatalogoImpl().find(centroPais.getCenPais());
-				
-				sb.append("<tr>");
-					sb.append("<td colspan='2' align='center'>");
-					sb.append("<img src='/RedXXIWeb"+catalogo.getCatImagenPath()+"' height='30' width='50'>");
-					sb.append("</td>");				
-				sb.append("</tr>");					
-				
-				sb.append("<tr>");				
-					sb.append("<td><b>");
-					sb.append("País: ");
-					sb.append("</b></td>");
-					
-					sb.append("<td>");
-					sb.append(catalogo.getCatDescripcion());
-					sb.append("</td>");
-				sb.append("</tr>");										
-				
+				//catalogo=factoryDAO.getCatalogoImpl().find(centroPais.getCenPais());
+								
 				for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(atenea.getTipo(),centroPais.getCenPais()))
 				{	
 					sb.append("<tr>");
@@ -514,28 +482,10 @@ public class AteneaServiceImpl implements AteneaService{
 							
 			for(CentroDTO cen:listPais)
 			{
-				catalogo=factoryDAO.getCatalogoImpl().find(cen.getCenPais());
+				//catalogo=factoryDAO.getCatalogoImpl().find(cen.getCenPais());
 				
 				sb.append("<table>");
-				
-				sb.append("<tr>");
-				
-					sb.append("<td colspan='2' align='center'>");
-					sb.append("<img src='/RedXXIWeb"+catalogo.getCatImagenPath()+"' height='30' width='50'>");
-					sb.append("</td>");
-			
-				sb.append("</tr>");				
-				
-				sb.append("<tr>");				
-					sb.append("<td><b>");
-					sb.append("País: ");
-					sb.append("</b></td>");
-					
-					sb.append("<td>");
-					sb.append(catalogo.getCatDescripcion());
-					sb.append("</td>");
-				sb.append("</tr>");		
-				
+								
 				for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getAll(atenea.getTipo(),cen.getCenPais())){
 					
 					if(car.getAteCentro().getCenTipo()==4)
@@ -632,28 +582,10 @@ public class AteneaServiceImpl implements AteneaService{
 							
 			for(CentroDTO cen:listPais)
 			{
-				catalogo=factoryDAO.getCatalogoImpl().find(cen.getCenPais());
+				//catalogo=factoryDAO.getCatalogoImpl().find(cen.getCenPais());
 				
 				sb.append("<table>");
-				
-				sb.append("<tr>");
-				
-					sb.append("<td colspan='2' align='center'>");
-					sb.append("<img src='/RedXXIWeb"+catalogo.getCatImagenPath()+"' height='30' width='50'>");
-					sb.append("</td>");
-			
-				sb.append("</tr>");				
-				
-				sb.append("<tr>");				
-					sb.append("<td><b>");
-					sb.append("País: ");
-					sb.append("</b></td>");
-					
-					sb.append("<td>");
-					sb.append(catalogo.getCatDescripcion());
-					sb.append("</td>");
-				sb.append("</tr>");		
-				
+								
 				for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getAll(atenea.getTipo(),cen.getCenPais())){
 					
 					if(car.getAteCentro().getCenTipo()==4)
@@ -804,7 +736,7 @@ public class AteneaServiceImpl implements AteneaService{
 	public String visor(PaisDTO pais) throws CorvustecException
 	{
 		StringBuilder sb=new StringBuilder();
-		CatalogoDTO catalogo;
+		//CatalogoDTO catalogo=new CatalogoDTO();
 		List<CentroDTO> listCentroChild;
 		if(pais.getTipo()==0)
 		{
@@ -812,28 +744,8 @@ public class AteneaServiceImpl implements AteneaService{
 		//Universidad
 		else if(pais.getTipo()==2)
 		{
-			catalogo=factoryDAO.getCatalogoImpl().find(pais.getCodigo());
-			
 			sb.append("<table>");
-			
-			sb.append("<tr>");
-			
-				sb.append("<td colspan='2' align='center'>");
-				sb.append("<img src='/RedXXIWeb"+catalogo.getCatImagenPath()+"' height='30' width='50'>");
-				sb.append("</td>");
-		
-			sb.append("</tr>");			
-			
-			sb.append("<tr>");				
-				sb.append("<td><b>");
-				sb.append("País: ");
-				sb.append("</b></td>");
-				
-				sb.append("<td>");
-				sb.append(catalogo.getCatDescripcion());
-				sb.append("</td>");
-			sb.append("</tr>");		
-			
+									
 			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(pais.getTipo(),pais.getCodigo()))
 			{
 				listCentroChild= factoryDAO.getCentroDAOImpl().findAllChild(centro);
@@ -879,28 +791,8 @@ public class AteneaServiceImpl implements AteneaService{
 		}//Facultad
 		else if(pais.getTipo()==3)
 		{
-			catalogo=factoryDAO.getCatalogoImpl().find(pais.getCodigo());
-			
 			sb.append("<table>");
-			
-			sb.append("<tr>");
-			
-				sb.append("<td colspan='2' align='center'>");
-				sb.append("<img src='/RedXXIWeb"+catalogo.getCatImagenPath()+"' height='30' width='50'>");
-				sb.append("</td>");
-			
-			sb.append("</tr>");
-			
-			sb.append("<tr>");				
-				sb.append("<td><b>");
-				sb.append("País: ");
-				sb.append("</b></td>");
-				
-				sb.append("<td>");
-				sb.append(catalogo.getCatDescripcion());
-				sb.append("</td>");
-			sb.append("</tr>");		
-			
+						
 			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(pais.getTipo(),pais.getCodigo()))
 			{
 				sb.append("<tr>");
@@ -943,26 +835,8 @@ public class AteneaServiceImpl implements AteneaService{
 		}//Pregrado
 		else if(pais.getTipo()==6)
 		{			
-			catalogo=factoryDAO.getCatalogoImpl().find(pais.getCodigo());
-			
 			sb.append("<table>");
-			
-			sb.append("<tr>");
-				sb.append("<td colspan='2' align='center'>");
-				sb.append("<img src='/RedXXIWeb"+catalogo.getCatImagenPath()+"' height='30' width='50'>");
-				sb.append("</td>");		
-			sb.append("</tr>");				
-			
-			sb.append("<tr>");				
-				sb.append("<td><b>");
-				sb.append("País: ");
-				sb.append("</b></td>");
-				
-				sb.append("<td>");
-				sb.append(catalogo.getCatDescripcion());
-				sb.append("</td>");
-			sb.append("</tr>");		
-				
+							
 			for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getAll(pais.getTipo(),pais.getCodigo())){
 				
 				if(car.getAteCentro().getCenTipo()==4)
@@ -1047,26 +921,8 @@ public class AteneaServiceImpl implements AteneaService{
 		}//Posgrado
 		else if(pais.getTipo()==7)
 		{
-			catalogo=factoryDAO.getCatalogoImpl().find(pais.getCodigo());
-			
 			sb.append("<table>");
-			
-			sb.append("<tr>");
-				sb.append("<td colspan='2' align='center'>");
-				sb.append("<img src='/RedXXIWeb"+catalogo.getCatImagenPath()+"' height='30' width='50'>");
-				sb.append("</td>");		
-			sb.append("</tr>");				
-			
-			sb.append("<tr>");				
-				sb.append("<td><b>");
-				sb.append("País: ");
-				sb.append("</b></td>");
-				
-				sb.append("<td>");
-				sb.append(catalogo.getCatDescripcion());
-				sb.append("</td>");
-			sb.append("</tr>");		
-				
+							
 			for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getAll(pais.getTipo(),pais.getCodigo())){
 				
 				if(car.getAteCentro().getCenTipo()==4)
