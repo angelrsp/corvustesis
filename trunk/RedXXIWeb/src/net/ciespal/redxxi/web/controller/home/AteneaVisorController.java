@@ -52,6 +52,7 @@ public class AteneaVisorController{
 	public void selectAtenea(AteneaDTO atenea)
 	{
 		try {
+			atenea.setPais(reportPublicDataManager.getPais().getCodigo());
 			reportPublicDataManager.setVisor(ateneaService.visor(atenea));
 			//reportPublicDataManager.setPaisList(ateneaService.readPais(atenea.getTipo()));
 		}catch (CorvustecException e) {
