@@ -71,10 +71,8 @@ public class ReportPublicController {
 	{
 		try {
 			reportPublicDataManager.setPaisList(ateneaService.readPais(atenea.getTipo()));
-			reportPublicDataManager.setVisor(ateneaService.visor(atenea));
-			JsfUtil.redirect("/"+JsfUtil.getExternalContext().getContextName()+"/public/home/ateneaVisor.xhtml");
-		} catch (IOException e) {
-			JsfUtil.addErrorMessage(e.toString());
+			//reportPublicDataManager.setVisor(ateneaService.visor(atenea));
+			//JsfUtil.redirect("/"+JsfUtil.getExternalContext().getContextName()+"/public/home/ateneaVisor.xhtml");
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
@@ -83,9 +81,12 @@ public class ReportPublicController {
 	public void selectPais(PaisDTO pais)
 	{
 		try {
+			reportPublicDataManager.setPais(pais);
 			reportPublicDataManager.setAteneaList(ateneaService.readAtenea(pais.getCodigo()));
-			reportPublicDataManager.setVisor(ateneaService.infoPais(pais));
-			JsfUtil.redirect("/"+JsfUtil.getExternalContext().getContextName()+"/public/home/paisVisor.xhtml");
+			//reportPublicDataManager.setVisor(ateneaService.infoPais(pais));
+			pais.setTipo(2);
+			reportPublicDataManager.setVisor(ateneaService.visor(pais));
+			JsfUtil.redirect("/"+JsfUtil.getExternalContext().getContextName()+"/public/home/ateneaVisor.xhtml");
 		} catch (IOException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		} catch (CorvustecException e) {

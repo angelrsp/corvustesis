@@ -53,7 +53,7 @@ public class AteneaVisorController{
 	{
 		try {
 			reportPublicDataManager.setVisor(ateneaService.visor(atenea));
-			reportPublicDataManager.setPaisList(ateneaService.readPais(atenea.getTipo()));
+			//reportPublicDataManager.setPaisList(ateneaService.readPais(atenea.getTipo()));
 		}catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}

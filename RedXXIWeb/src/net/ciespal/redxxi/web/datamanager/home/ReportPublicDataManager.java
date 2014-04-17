@@ -25,9 +25,13 @@ public class ReportPublicDataManager implements Serializable{
 	
 	private String visor;
 	
+	private PaisDTO pais;
+	
+	
 	public ReportPublicDataManager() {
 		paisList=new ArrayList<PaisDTO>();
 		ateneaList=new ArrayList<AteneaDTO>();
+		pais=new PaisDTO();
 	}
 
 	public List<PaisDTO> getPaisList() {
@@ -52,6 +56,14 @@ public class ReportPublicDataManager implements Serializable{
 
 	public void setVisor(String visor) {
 		this.visor = visor;
+	}
+
+	public PaisDTO getPais() {
+		return pais;
+	}
+
+	public void setPais(PaisDTO pais) {
+		this.pais = pais;
 	}
 
 	
