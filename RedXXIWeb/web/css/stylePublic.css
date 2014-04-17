@@ -6,7 +6,7 @@ body
 }
 .table
 {
-	border:1px solid black;
+	border:1px solid #BBBBBB;
 }
 
 .ui-datagrid-column{
@@ -15,48 +15,8 @@ body
 }
 
 .typeLetter{
-font-family: Segoe UI,Arial,sans-serif;
+	font-family: Segoe UI,Arial,sans-serif;
     font-size: 1.1em;
-}
-
-.menudes {
-position: relative;
-overflow: hidden;
-width: 100%;
-margin: 10px auto 10px;
-border-radius: 8px;
-background: #025BA3;
-background-image:url('../images/dropline_bg.gif');
-text-align:center; 
-}
-.menudes a {
-display: inline-block;
-width: 23%; /* 100% dividido por el número de elementos del menú */
-box-sizing: border-box;
-padding: 5px 5px;
-color: #000;
-text-decoration: none;
-}
-.marca {
-position: absolute;
-bottom: 4px;
-left: -15%; /* Al menos 1/2 del ancho de cada enlace */
-width: 15%; /* 1/2 del ancho de cada enlace */
-height: 4px;
-background: #000;
-transition: 0.5s ease-in-out;
-}
-.menudes a:nth-child(1):hover ~ .marca {
-left: 6.25%; /* 1/4 Ancho del enlace */
-}
-.menudes a:nth-child(2):hover ~ .marca {
-left: 31.25%; /* 1/4 Ancho del enlace + 1 vez ancho enlace */
-}
-.menudes a:nth-child(3):hover ~ .marca {
-left: 56.25%; /* 1/4 Ancho del enlace + 2 veces ancho enlace */
-}
-.menudes a:nth-child(4):hover ~ .marca {
-left: 81.5%; /* 1/4 Ancho del enlace + 3 veces ancho enlace */
 }
 
 
@@ -103,6 +63,13 @@ a.linkClass2:hover {color: #FAA723; text-decoration: underline;font-family: Sego
 .descripcion{
 	color: #BBBBBB;
 	font-size: 20px;
+	font-family: Segoe UI,Arial,sans-serif;
+}
+
+.descripcionLetter{
+	color: #F57B20;
+	font-size: 20px;
+	font-family: Segoe UI,Arial,sans-serif;
 }
 
 .line-separator{

@@ -11,17 +11,18 @@
 	<table width="100%">
 			<tr>
 				<td>
-					<h:outputText value="ATENEA" styleClass="descripcion"/>
+					<h:outputText value="A" styleClass="descripcionLetter"/><h:outputText value="TENEA" styleClass="descripcion"/>
 					<div class="line-separator"></div>
 			
 						<h:dataTable value="#{reportPublicController.reportPublicDataManager.ateneaList}" var="ate" width="100%">
 						
 							<h:column>			    			
-			    				<h:commandLink value="#{ate.descripcion}" styleClass="linkClass2"/>
+			    				<h:commandLink value="#{ate.descripcion}" styleClass="linkClass2" actionListener="#{reportPublicController.selectAtenea(ate)}"/>
 			    			</h:column>
 			    			<h:column>	
-								<h:commandLink value="#{ate.count}" styleClass="linkClass"/><br />			    			
+								<h:commandLink value="#{ate.count}" styleClass="linkClass" actionListener="#{reportPublicController.selectAtenea(ate)}"/><br />			    			
 							</h:column>
+							
 						</h:dataTable>
 
 											
@@ -49,6 +50,7 @@
 		    			<tr>
 		    				<td>
 		    					<h:commandLink value="#{pai.nombre}" actionListener="#{reportPublicController.selectPais(pai)}" styleClass="linkClass"/>
+		    					<h:commandLink value=" #{pai.count!=0?pai.count:null}" actionListener="#{reportPublicController.selectPais(pai)}" styleClass="linkClass"/>
 		    				</td>
 		    			</tr>
 					</table>
