@@ -16,5 +16,7 @@ public interface DoctorDAO extends AbstractFacade<DoctorDTO>{
 
 	Integer getCount(Object pais) throws CorvustecException;
 
+	List<DoctorDTO> getAll2(Object pais) throws CorvustecException;
+
 	
 }

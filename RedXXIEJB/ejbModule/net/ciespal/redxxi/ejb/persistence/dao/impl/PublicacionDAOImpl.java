@@ -131,6 +131,7 @@ public class PublicacionDAOImpl extends AbstractFacadeImpl<PublicacionDTO> imple
 			return 0;
 	}	
 
+	
 	@Override
 	public Integer getCountByType(Object type,Object pais) throws CorvustecException
 	{
@@ -149,6 +150,23 @@ public class PublicacionDAOImpl extends AbstractFacadeImpl<PublicacionDTO> imple
 			return 0;
 	}	
 
+	
+	@Override
+	public List<PublicacionDTO> getByType(Object type,Object pais) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<PublicacionDTO> cq=cb.createQuery(PublicacionDTO.class);
+		Root<PublicacionDTO>from =cq.from(PublicacionDTO.class);
+		
+		cq.where(cb.and(cb.equal(from.get("pubTipo"), type),cb.equal(from.get("pubPais"), pais)));
+		
+		List<PublicacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return new ArrayList<PublicacionDTO>();
+		else
+			return list;
+	}
+	
 	
 	@Override
 	public void remove2(PublicacionDTO pub)

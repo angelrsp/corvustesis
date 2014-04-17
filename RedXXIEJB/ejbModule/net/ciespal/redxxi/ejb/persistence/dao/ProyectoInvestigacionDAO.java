@@ -24,4 +24,7 @@ public interface ProyectoInvestigacionDAO extends AbstractFacade<ProyectoInvesti
 
 	Integer getCount(Object pais) throws CorvustecException;
 
+	List<ProyectoInvestigacionDTO> getAll(Object pais)
+			throws CorvustecException;
+
 }

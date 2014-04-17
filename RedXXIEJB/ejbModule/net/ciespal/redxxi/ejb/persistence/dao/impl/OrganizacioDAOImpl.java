@@ -88,6 +88,24 @@ public class OrganizacioDAOImpl extends AbstractFacadeImpl<OrganizacionDTO> impl
 			return 0;
 	}
 
+	
+	@Override
+	public List<OrganizacionDTO> getAll2(Object pais)
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<OrganizacionDTO> cq=cb.createQuery(OrganizacionDTO.class);
+		Root<OrganizacionDTO> from= cq.from(OrganizacionDTO.class);
+				
+		cq.where(cb.equal(from.get("orgPais"), pais));
+		
+		List<OrganizacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return new ArrayList<OrganizacionDTO>();
+		else
+			return list;
+	}
+	
+	
 	@Override
 	public void remove2(OrganizacionDTO organizacion) throws CorvustecException
 	{
