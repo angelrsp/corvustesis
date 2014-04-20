@@ -32,6 +32,16 @@ html, body {
      font-size: 30pt;
 }
 
+
+.deepsea
+{
+	background-image: url('../images/fondo.jpg');
+	width: 1128px;
+	height: 705px;
+}
+
+
+
 .ies {
 	background-image: url("../images/ies.png") !important;
 }

@@ -12,18 +12,19 @@
 		<ui:define name="contenido">
 			<h:form id="contenido">
 				<p:growl id="growl" showDetail="false" />
+				
 				<p:panel id="pnlDatos" styleClass="tabla"
 					header="Inicio" visible="#{inicioController.visible}">
 					
-					<table>
-						<tr>
-							<td><h:outputLabel value="#{i18n['label.modelo']}:&#160;" /> </td>
+					<table class="deepsea">
+						<tr valign="top" style="height: 10px;">
+							<td width="30%"><h:outputLabel value="#{i18n['label.modelo']}:&#160;" /> </td>
 							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.modelo']}:&#160;#{i18n['label.requerido']}" value="#{indicadorDataManager.modelo}">
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
 									<f:selectItems value="#{inicioController.modeloList}"></f:selectItems>
 							</p:selectOneMenu></td>
 						</tr>
-						<tr>
+						<tr valign="top" style="height: 10px;">
 							<td><h:outputLabel value="#{i18n['label.ies']}:&#160;" /> </td>
 							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{indicadorDataManager.ies}">
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
@@ -31,7 +32,7 @@
 							</p:selectOneMenu></td>
 						</tr>
 						
-						<tr>
+						<tr valign="top">
 							<td>
 								<p:commandButton value="#{i18n['boton.aceptar']}" actionListener="#{inicioController.aceptar}" oncomplete="PF('dglMensaje').show();" process="pnlDatos" update="pnlDatos,mensaje"/>
 							</td>
@@ -41,6 +42,10 @@
 					
 											
 				</p:panel>
+
+
+				<table style="background-image: url('../images/fondo2.jpg')">
+				</table>
 
 				<p:dialog id="mensaje" widgetVar="dglMensaje" header="Mensaje" modal="true" closeOnEscape="true">
 					<table width="100%">
