@@ -181,7 +181,7 @@ public class IndicadorServiceImpl implements IndicadorService {
 	{
 		log.info("deleteIndicador");
 		try {
-			if(indicador.getIndHistoricoIndicadors()!=null)
+			if(factoryDAO.getIndicadorDAOImpl().getChildren(indicador).isEmpty())
 				factoryDAO.getIndicadorDAOImpl().remove2(indicador);
 			else
 				throw new IndicadoresException("No se puede eliminar revise las dependencias del indicador seleccionado");
@@ -363,7 +363,7 @@ public class IndicadorServiceImpl implements IndicadorService {
 		}
 		else
 		{
-			for(IndicadorDTO indi: ind.getIndIndicadors())
+			for(IndicadorDTO indi: factoryDAO.getIndicadorDAOImpl().getChildren(ind))
 			{
 				listValTemp=valor(indi);
 				listVal.set(0, BigDecimal.valueOf(inicial.doubleValue()+ listValTemp.get(0).doubleValue()));
@@ -372,7 +372,7 @@ public class IndicadorServiceImpl implements IndicadorService {
 				inicial=listVal.get(0);
 				actual=listVal.get(1);				
 			}
-			if(ind.getIndIndicadors().size()>0)
+			if(factoryDAO.getIndicadorDAOImpl().getChildren(ind).size()>0)
 			{
 				ind.setIndValorInicial(inicial);
 				ind.setIndValorActual(actual);

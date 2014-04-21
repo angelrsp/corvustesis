@@ -1,5 +1,6 @@
 package ec.edu.uce.indicadores.ejb.persistence.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -43,7 +44,7 @@ public class IndicadorDAOImpl extends AbstractFacadeImpl<IndicadorDTO> implement
 		
 		cq.where(cb.equal(join1.get("iesCodigo"), indicadorDTO.getIndy().getIesCodigo()), cb.equal(join2.get("modCodigo"), indicadorDTO.getIndModeloBean().getModCodigo()),cb.isNull(from.join("indIndicador",JoinType.LEFT)));
 		
-		cq.orderBy(cb.desc(from.get("indOrden")));
+		cq.orderBy(cb.asc(from.get("indOrden")));
 		
 		List<IndicadorDTO> list=entityManager.createQuery(cq).getResultList();	
 		if(list.isEmpty())
@@ -60,13 +61,13 @@ public class IndicadorDAOImpl extends AbstractFacadeImpl<IndicadorDTO> implement
 		CriteriaQuery<IndicadorDTO> cq=cb.createQuery(IndicadorDTO.class);
 		Root<IndicadorDTO> from= cq.from(IndicadorDTO.class);
 		
-		cq.where(cb.equal(from.get("indPredecesor"),indicadorDTO.getIndCodigo()));
+		cq.where(cb.equal(from.get("indIndicador"),indicadorDTO));
 		
-		cq.orderBy(cb.desc(from.get("indOrden")));
+		cq.orderBy(cb.asc(from.get("indOrden")));
 		
 		List<IndicadorDTO> list=entityManager.createQuery(cq).getResultList();	
 		if(list.isEmpty())
-			return null;
+			return new ArrayList<IndicadorDTO>();
 		else
 			return list;
 	}
