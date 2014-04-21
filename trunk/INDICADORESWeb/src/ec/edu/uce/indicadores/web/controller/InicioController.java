@@ -96,6 +96,7 @@ public class InicioController extends SelectItemController {
 			
 			menuModel.getElements().clear();
 	        
+			
 	        for(OpcionDTO opt:listOption)
 	        {
 	        	DefaultMenuItem item = new DefaultMenuItem("  "+opt.getOpcNombre());

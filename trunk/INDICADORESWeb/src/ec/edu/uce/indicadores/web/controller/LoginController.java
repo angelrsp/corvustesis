@@ -2,6 +2,10 @@ package ec.edu.uce.indicadores.web.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -12,7 +16,9 @@ import javax.servlet.http.HttpSession;
 
 import ec.edu.uce.indicadores.commons.dto.util.CredencialesDTO;
 import ec.edu.uce.indicadores.commons.util.IndicadoresException;
+import ec.edu.uce.indicadores.ejb.negocio.AdministracionService;
 import ec.edu.uce.indicadores.ejb.negocio.LoginService;
+import ec.edu.uce.indicadores.ejb.persistence.entities.OpcionDTO;
 import ec.edu.uce.indicadores.ejb.persistence.entities.UsuarioDTO;
 import ec.edu.uce.indicadores.web.util.JsfUtil;
 
@@ -29,6 +35,9 @@ public class LoginController implements Serializable{
 	@EJB
 	private LoginService loginService;
 
+	@EJB
+	private AdministracionService administracionService;
+	
 	private CredencialesDTO credencialesDTO;
 
 
@@ -61,6 +70,17 @@ public class LoginController implements Serializable{
 				JsfUtil.addInfoMessage("bien");
 				JsfUtil.putObject("UsuarioDTO",user);
 				JsfUtil.redirect(path+"/pages/home.xhtml");
+				
+				List<OpcionDTO> listOption;
+				listOption=new ArrayList<OpcionDTO>();
+				listOption= administracionService.readOpcion(user.getIndUsuarioPerfils().get(0).getIndPerfil());
+
+				Map<Integer, String> mapMenuUsuario = new HashMap<Integer, String>();
+				
+		        for(OpcionDTO opt:listOption)
+			        mapMenuUsuario.put(opt.getOpcCodigo(), opt.getOpcUrl());
+		        
+		        JsfUtil.getExternalContext().getSessionMap().put("menuUsuario", mapMenuUsuario);
 				
 			} else {
 				JsfUtil.addErrorMessage("Datos Tncorrectos");
