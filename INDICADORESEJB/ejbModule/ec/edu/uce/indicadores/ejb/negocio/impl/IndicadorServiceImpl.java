@@ -259,7 +259,6 @@ public class IndicadorServiceImpl implements IndicadorService {
 		try {
 			return factoryDAO.getIndicadorDAOImpl().getAll();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			throw new IndicadoresException(e);
 		}
 	}
@@ -271,7 +270,6 @@ public class IndicadorServiceImpl implements IndicadorService {
 		try {
 			return factoryDAO.getIndicadorDAOImpl().find(id);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			throw new IndicadoresException(e);
 		}
 	}
@@ -282,7 +280,6 @@ public class IndicadorServiceImpl implements IndicadorService {
 		try {
 			return factoryDAO.getIndicadorDAOImpl().getRoot(indicadorDTO);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			throw new IndicadoresException(e);
 		}
 	}
@@ -293,7 +290,6 @@ public class IndicadorServiceImpl implements IndicadorService {
 		try {
 			return factoryDAO.getIndicadorDAOImpl().getChildren(indicadorDTO);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			throw new IndicadoresException(e);
 		}
 	}
@@ -405,7 +401,6 @@ public class IndicadorServiceImpl implements IndicadorService {
 		try {
 			return factoryDAO.getEvidenciaDAOImpl().getAll(historicoIndicadorDTO);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			throw new IndicadoresException(e);
 		}
 	}
@@ -433,7 +428,6 @@ public class IndicadorServiceImpl implements IndicadorService {
 		try {
 			return factoryDAO.getRegistroDAOImpl().getAll(representanteLegalDTO, iesDTO);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			throw new IndicadoresException(e);
 		}
 	}
@@ -444,7 +438,6 @@ public class IndicadorServiceImpl implements IndicadorService {
 		try {
 			return factoryDAO.getRegistroDAOImpl().getAll(iesDTO);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			throw new IndicadoresException(e);
 		}
 	}
@@ -484,7 +477,6 @@ public class IndicadorServiceImpl implements IndicadorService {
 		try {
 			return factoryDAO.getIndicadorDAOImpl().getAll(modelo);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			throw new IndicadoresException(e);
 		}
 
