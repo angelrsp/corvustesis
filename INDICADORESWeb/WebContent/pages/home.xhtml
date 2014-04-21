@@ -26,7 +26,7 @@
 						</tr>
 						<tr valign="top" style="height: 10px;">
 							<td><h:outputLabel value="#{i18n['label.ies']}:&#160;" /> </td>
-							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{indicadorDataManager.ies}">
+							<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.ies']}:&#160;#{i18n['label.requerido']}" value="#{indicadorDataManager.ies}" disabled="true">
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
 									<f:selectItems value="#{inicioController.iesList}"></f:selectItems>
 							</p:selectOneMenu></td>
