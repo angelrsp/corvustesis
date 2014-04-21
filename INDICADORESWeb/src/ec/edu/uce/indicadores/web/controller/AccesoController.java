@@ -281,7 +281,7 @@ public class AccesoController extends SelectItemController implements Serializab
 		try {
 			parent.setExpanded(true);
 			newNode.setSelected(administracionService.existsPermisoIndicador(ttParent,new PerfilDTO(Integer.valueOf(getPefilSelect().toString()))));
-	        for (IndicadorDTO tt : ttParent.getIndIndicadors()){
+	        for (IndicadorDTO tt : indicadorService.obtenerHijosIndicador(ttParent)){
 	            TreeNode newNode2= newNodeWithChildren(tt, newNode);	             
 				newNode2.setSelected(administracionService.existsPermisoIndicador(tt,new PerfilDTO(Integer.valueOf(getPefilSelect().toString()))));
 	        }
