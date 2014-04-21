@@ -453,6 +453,23 @@ public class HistoricoIndicadorController extends SelectItemController implement
 		}
 	}
 	
+	
+	public void deleteHistoricoIndicador(HistoricoIndicadorDTO his)
+	{
+		try {
+			indicadorService.deleteHistoricoIndicador(his);
+			historicoIndicadorList=indicadorService.obtenerValores(indTemp);
+			historicoIndicadorDTO=new HistoricoIndicadorDTO();
+			createChartLine(historicoIndicadorList);
+			createPieModel(historicoIndicadorList);
+			setIndicadorDTO(indicadorService.obtenerIndicador(indTemp.getIndCodigo()));
+			createMeterGaugeModel(getIndicadorDTO());
+		} catch (IndicadoresException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+
+	}
+	
 	public void buscarEvidencias(HistoricoIndicadorDTO his)
 	{
 		try {
