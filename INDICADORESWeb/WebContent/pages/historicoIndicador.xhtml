@@ -164,6 +164,12 @@
 							<h:outputText value="#{his.hinObservacion}" />
 						</p:column>
 					
+						<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+							<p:commandButton actionListener="#{historicoIndicadorController.deleteHistoricoIndicador(his)}" icon="ui-icon-close" process="tblValor" update=":contenido:pnlValor,:contenido:growl,:contenido:pnlValorReporte,:contenido:sampleDash">
+								 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+							</p:commandButton>
+						</p:column>		
+											
 						<p:column style="width:8%" headerText="#{i18n['label.evidencia']}">  
 			                <p:commandButton actionListener="#{historicoIndicadorController.buscarEvidencias(his)}" oncomplete="PF('dlgEvidencia').show()" icon="ui-icon-document" 
 			                	update=":contenido:pnlEvidencia,:contenido:growl" process="tblValor" title="#{i18n['label.evidencia']}">    
@@ -261,6 +267,11 @@
 					</p:panel>
 					
 				</p:dialog>
+		
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
+		        	<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+		        	<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+	    		</p:confirmDialog>  
 		
 			
 			</h:form>		
