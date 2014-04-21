@@ -41,11 +41,11 @@
 				</tr>
 				<tr>	
 					<td><h:outputLabel value="Contraseña:&#160;" /> </td>
-					<td><p:password id="pass1" value="#{usuarioController.pass}" required="#{usuarioController.requerido}" feedback="true" match="pass2"/></td>
+					<td><p:password id="pass1" value="#{usuarioController.pass}" required="#{usuarioController.requerido}" feedback="true" match="pass2" goodLabel="Bueno" strongLabel="Fuerte" weakLabel="Débil"/></td>
 				</tr>
 				<tr>	
 					<td><h:outputLabel value="Confirmar Contraseña:&#160;" /> </td>
-					<td><p:password id="pass2" value="#{usuarioController.pass}" required="#{usuarioController.requerido}" feedback="true"/></td>		
+					<td><p:password id="pass2" value="#{usuarioController.pass}" required="#{usuarioController.requerido}" feedback="true" goodLabel="Bueno" strongLabel="Fuerte" weakLabel="Débil"/></td>		
 				</tr>
 				
 				<tr>
