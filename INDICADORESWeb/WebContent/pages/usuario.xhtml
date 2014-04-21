@@ -37,7 +37,7 @@
 			
 				<tr>
 					<td><h:outputText value="Usuario:" /></td>
-					<td><p:inputText value="#{usuarioController.user.usuLogin}" required="true"/></td>
+					<td><p:inputText value="#{usuarioController.user.usuLogin}" required="true" onkeypress="return isLetter(event)"/></td>
 				</tr>
 				<tr>	
 					<td><h:outputLabel value="Contraseña:&#160;" /> </td>
