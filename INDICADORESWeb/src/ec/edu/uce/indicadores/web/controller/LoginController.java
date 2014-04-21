@@ -60,15 +60,15 @@ public class LoginController implements Serializable{
 			if (user != null) {
 				JsfUtil.addInfoMessage("bien");
 				JsfUtil.putObject("UsuarioDTO",user);
-				JsfUtil.redirect(path+"/pages/home.jsf");
+				JsfUtil.redirect(path+"/pages/home.xhtml");
 				
 			} else {
 				JsfUtil.addErrorMessage("Datos Tncorrectos");
 			}
 		} catch (IOException e) {
-			JsfUtil.addErrorMessage("mal");
+			JsfUtil.addErrorMessage("Datos Incorrectos");
 		} catch (IndicadoresException e) {
-			JsfUtil.addErrorMessage("mal");
+			JsfUtil.addErrorMessage("Datos Incorrectos");
 		}
 	}
 	
@@ -78,7 +78,7 @@ public class LoginController implements Serializable{
 	      try {
 			HttpSession session = JsfUtil.getSession();
 		      session.invalidate();
-			JsfUtil.redirect("/INDICADORESWeb/pages/index.jsf");
+			JsfUtil.redirect("/INDICADORESWeb/pages/index.xhtml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
