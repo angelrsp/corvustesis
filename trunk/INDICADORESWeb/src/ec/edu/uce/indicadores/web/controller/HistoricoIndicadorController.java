@@ -263,12 +263,15 @@ public class HistoricoIndicadorController extends SelectItemController implement
 	
 	@SuppressWarnings("unused")
 	public TreeNode newNodeWithChildren(IndicadorDTO ttParent, TreeNode parent){
-		parent.setExpanded(true);
         TreeNode newNode= new DefaultTreeNode(ttParent, parent);
-        for (IndicadorDTO tt : ttParent.getIndIndicadors()){
-             TreeNode newNode2= newNodeWithChildren(tt, newNode);
-             
-        }
+        try {
+        	parent.setExpanded(true);
+			for (IndicadorDTO tt : indicadorService.obtenerHijosIndicador(ttParent)){
+			     TreeNode newNode2= newNodeWithChildren(tt, newNode);
+			}
+		} catch (IndicadoresException e) {
+			e.printStackTrace();
+		}
         return newNode;
    }
 
@@ -302,7 +305,7 @@ public class HistoricoIndicadorController extends SelectItemController implement
 			setIndicadorDTO(new IndicadorDTO());
 			setIndicadorDTO(indTemp);
 			RequestContext rc = RequestContext.getCurrentInstance();
-			if(ind.getIndIndicadors().isEmpty()){
+			if(indicadorService.obtenerHijosIndicador(ind).isEmpty()){
 				disabledAddValue=!administracionService.existsPermisoIndicador(ind, perfil);
 				historicoIndicadorList=indicadorService.obtenerValores(indTemp);
 				if(historicoIndicadorList!=null){
@@ -323,8 +326,9 @@ public class HistoricoIndicadorController extends SelectItemController implement
 				indicadorService.actualizarValores(indTemp);
 				rc.execute("PF('dlgValorReporte').show();");
 				indTemp=indicadorService.obtenerIndicador(indTemp.getIndCodigo());
-				createChartLinePatern(indTemp.getIndIndicadors());
-				createPieModelPatern(indTemp.getIndIndicadors());
+				List<IndicadorDTO> listChildren=indicadorService.obtenerHijosIndicador(indTemp);
+				createChartLinePatern(listChildren);
+				createPieModelPatern(listChildren);
 				createMeterGaugeModel(indTemp);
 			}
 		}

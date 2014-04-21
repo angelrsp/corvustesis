@@ -192,7 +192,7 @@ public class IndicadorController extends SelectItemController implements Seriali
 				modeloDTO.setModCodigo(Integer.parseInt(getModelo().toString()));
 			else
 				return;
-			indicadorList=indicadorService.obtenerIndicador();
+			indicadorList=indicadorService.obtenerIndicador(modeloDTO);
 			getIndicadorDTO().setIndy(iesDTO);
 			getIndicadorDTO().setIndModeloBean(modeloDTO);
 			List<IndicadorDTO> indicaList=indicadorService.obtenerRaizIndicador(getIndicadorDTO());
@@ -211,11 +211,15 @@ public class IndicadorController extends SelectItemController implements Seriali
 	
 	@SuppressWarnings("unused")
 	public TreeNode newNodeWithChildren(IndicadorDTO ttParent, TreeNode parent){
-		parent.setExpanded(true);
-        TreeNode newNode= new DefaultTreeNode(ttParent, parent);
-        for (IndicadorDTO tt : ttParent.getIndIndicadors()){
-             TreeNode newNode2= newNodeWithChildren(tt, newNode);
-        }
+		TreeNode newNode= new DefaultTreeNode(ttParent, parent);
+        try {
+    		parent.setExpanded(true);
+			for (IndicadorDTO tt : indicadorService.obtenerHijosIndicador(ttParent)){
+			     TreeNode newNode2= newNodeWithChildren(tt, newNode);
+			}
+		} catch (IndicadoresException e) {
+			e.printStackTrace();
+		}
         return newNode;
    }
 
