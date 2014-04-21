@@ -58,6 +58,7 @@ public class InicioController extends SelectItemController {
 		menuModel=new DefaultMenuModel();
 		desactivado=false;
 		visible=true;
+		indicadorDataManager.setIes(indicadorDataManager.getUser().getIndy().getIesCodigo());
 	}
 	
 	public void aceptar()
