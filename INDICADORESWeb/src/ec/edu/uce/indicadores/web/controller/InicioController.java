@@ -45,6 +45,9 @@ public class InicioController extends SelectItemController {
 	
 	private Boolean desactivado;
 	
+	private Boolean desactivarIes;
+	
+	
 	private Boolean visible;
 	
 	public InicioController() {
@@ -54,11 +57,14 @@ public class InicioController extends SelectItemController {
 	@PostConstruct
 	private void init()
 	{
+		desactivarIes=true;
 		indicadorDataManager.setUser((UsuarioDTO)JsfUtil.getObject("UsuarioDTO"));		
 		menuModel=new DefaultMenuModel();
 		desactivado=false;
 		visible=true;
 		indicadorDataManager.setIes(indicadorDataManager.getUser().getIndy().getIesCodigo());
+		if(indicadorDataManager.getUser().getUsuCodigo()==1)
+			desactivarIes=false;
 	}
 	
 	public void aceptar()
@@ -147,6 +153,14 @@ public class InicioController extends SelectItemController {
 
 	public void setVisible(Boolean visible) {
 		this.visible = visible;
+	}
+
+	public Boolean getDesactivarIes() {
+		return desactivarIes;
+	}
+
+	public void setDesactivarIes(Boolean desactivarIes) {
+		this.desactivarIes = desactivarIes;
 	}
 	
 }
