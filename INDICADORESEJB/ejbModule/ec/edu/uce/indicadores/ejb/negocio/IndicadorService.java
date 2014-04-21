@@ -103,5 +103,8 @@ public interface IndicadorService {
 	RepresentanteLegalDTO readRepresentante(Object id)
 			throws IndicadoresException;
 
+	List<IndicadorDTO> obtenerIndicador(ModeloDTO modelo)
+			throws IndicadoresException;
+
 
 }
