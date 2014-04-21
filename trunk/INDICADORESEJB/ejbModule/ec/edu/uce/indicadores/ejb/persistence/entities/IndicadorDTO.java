@@ -69,7 +69,7 @@ public class IndicadorDTO implements Serializable {
 	private IndicadorDTO indIndicador;
 
 	//bi-directional many-to-one association to IndicadorDTO
-	@OneToMany(mappedBy="indIndicador",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="indIndicador")
 	@OrderBy("indOrden")
 	private List<IndicadorDTO> indIndicadors;
 
