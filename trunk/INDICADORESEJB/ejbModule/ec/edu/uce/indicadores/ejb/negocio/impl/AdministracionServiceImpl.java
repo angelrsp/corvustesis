@@ -128,40 +128,6 @@ public class AdministracionServiceImpl implements AdministracionService{
 			throw new IndicadoresException("Error al readUser");
 		}		
 	}
-
-	@Override
-	public PerfilDTO createOrUpdatePerfil(PerfilDTO perfil) throws IndicadoresException
-	{
-		log.info("createPerfil");
-		try{
-			if(perfil.getPerCodigo()!=null)
-				return factoryDAO.getPerfilDAOImpl().edit(perfil);
-			else
-				return factoryDAO.getPerfilDAOImpl().create(perfil);
-		}
-		catch(Exception e)
-		{
-			log.info("Error al createPerfil" +e.toString());
-			throw new IndicadoresException("Error al createPerfil");
-		}		
-		
-	}
-	
-	
-	@Override
-	public List<PerfilDTO> readPerfil() throws IndicadoresException
-	{
-		log.info("readUser");
-		try{
-			return factoryDAO.getPerfilDAOImpl().findAll();
-		}
-		catch(Exception e)
-		{
-			log.info("Error al readUser" +e.toString());
-			throw new IndicadoresException("Error al readUser");
-		}		
-	}
-
 	
 	@Override
 	public List<OpcionDTO> readOpcion(PerfilDTO perfil) throws IndicadoresException
@@ -200,6 +166,32 @@ public class AdministracionServiceImpl implements AdministracionService{
 		}
 	}
 
+	/*Perfil*/
+	@Override
+	public PerfilDTO createOrUpdatePerfil(PerfilDTO perfil) throws IndicadoresException
+	{
+		log.info("createPerfil");
+		try{
+			if(factoryDAO.getPerfilDAOImpl().getByName(perfil)!=null)
+			{
+				if(perfil.getPerCodigo()!=null)
+					return factoryDAO.getPerfilDAOImpl().edit(perfil);
+				else
+					return factoryDAO.getPerfilDAOImpl().create(perfil);
+			}
+			else
+			{
+				throw new IndicadoresException("Ya existe el nombre");
+			}
+		}
+		catch(Exception e)
+		{
+			log.info("Error al createPerfil" +e.toString());
+			throw new IndicadoresException(e.toString());
+		}		
+		
+	}
+	
 	@Override
 	public void deletePerfil(PerfilDTO perfil) throws IndicadoresException
 	{
@@ -213,5 +205,19 @@ public class AdministracionServiceImpl implements AdministracionService{
 			log.error("Error agregarModelo {}",e.toString());
 			throw new IndicadoresException(e);
 		}
+	}
+	
+	@Override
+	public List<PerfilDTO> readPerfil() throws IndicadoresException
+	{
+		log.info("readUser");
+		try{
+			return factoryDAO.getPerfilDAOImpl().findAll();
+		}
+		catch(Exception e)
+		{
+			log.info("Error al readUser" +e.toString());
+			throw new IndicadoresException("Error al readUser");
+		}		
 	}
 }
