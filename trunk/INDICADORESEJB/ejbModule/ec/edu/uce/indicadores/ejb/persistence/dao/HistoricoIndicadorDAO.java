@@ -11,4 +11,6 @@ public interface HistoricoIndicadorDAO extends AbstractFacade<HistoricoIndicador
 	List<HistoricoIndicadorDTO> getAll(IndicadorDTO indicadorDTO)
 			throws IndicadoresException;
 
+	void remove2(HistoricoIndicadorDTO historicoIndicadorDTO);
+
 }
