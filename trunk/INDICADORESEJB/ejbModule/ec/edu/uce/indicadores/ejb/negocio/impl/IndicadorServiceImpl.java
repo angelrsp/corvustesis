@@ -472,6 +472,7 @@ public class IndicadorServiceImpl implements IndicadorService {
 		}
 	}
 	
+	@Override
 	public List<IndicadorDTO> obtenerIndicador(ModeloDTO modelo) throws IndicadoresException
 	{
 		try {
