@@ -106,5 +106,8 @@ public interface IndicadorService {
 	List<IndicadorDTO> obtenerIndicador(ModeloDTO modelo)
 			throws IndicadoresException;
 
+	void deleteHistoricoIndicador(HistoricoIndicadorDTO his)
+			throws IndicadoresException;
+
 
 }

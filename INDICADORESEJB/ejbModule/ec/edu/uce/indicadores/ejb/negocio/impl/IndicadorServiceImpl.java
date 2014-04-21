@@ -483,5 +483,13 @@ public class IndicadorServiceImpl implements IndicadorService {
 
 	}
 	
-	
+	@Override
+	public void deleteHistoricoIndicador(HistoricoIndicadorDTO his) throws IndicadoresException
+	{
+		try {
+			factoryDAO.getHistoricoIndicadorDAOImpl().remove2(his);
+		} catch (Exception e) {
+			throw new IndicadoresException(e);
+		}		
+	}
 }
