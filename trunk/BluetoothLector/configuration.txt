@@ -4,4 +4,4 @@ com.corvustec.rtoqab.jdbc.connection.url = jdbc:postgresql://localhost:5432/bp_t
 com.corvustec.rtoqab.jdbc.connection.user = postgres
 com.corvustec.rtoqab.jdbc.connection.pass = desarrollo
 com.corvustec.rtoqab.jdbc.connection.class = org.postgresql.Driver
-com.corvustec.rtoqab.jdbc.path.in = E:\\tiempos\\
+com.corvustec.rtoqab.jdbc.path.in = D:\\TiempoFila\\
