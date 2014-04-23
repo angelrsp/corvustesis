@@ -24,53 +24,31 @@
 
 <table width="100%">
 
-	<tr align="center">
-	
+	<tr align="center">	
 		<td colspan="3">
-		
-			<table width="100%">
-				<tr align="center">
-					<td>
-						<p:graphicImage value="/images/fondosuperiorLogo.jpg" height="112" width="950"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="line-separator"></div>
-						
-						<div style="width: 100%; height: 16px;">
-							<ul id="navlist">
-							  <li id="home"><a href="#{request.contextPath}/index.xhtml"></a></li>
-							  <li id="atenea"><a href="#{request.contextPath}/public/home/atenea.xhtml"></a></li>
-							  <li id="argos"><a href="#{request.contextPath}/argos.xhtml"></a></li>
-							  <li id="espejo"><a href="#{request.contextPath}/espejo.xhtml"></a></li>
-							  <li id="somos"><a href="#{request.contextPath}/quienesSomos.xhtml"></a></li>
-							  <li id="ingreso"><a href="#{request.contextPath}/ingreso.xhtml"></a></li>
-							</ul>
-						</div>
-						
-						<div class="line-separator"></div>	
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div style="height: 20px;"></div>
-					</td>
-				</tr>	 
-			</table>
-			
+			<div align="center" style="height: 112px;">
+				<p:graphicImage value="/images/fondosuperiorLogo.jpg" height="112" width="950"/>
+			</div>
+
+			<div align="center">
+				<div class="line-separator"></div>
+				
+				<div style="width: 100%; height: 16px;">
+					<ui:insert name="menu"/>
+				</div>
+										
+				<div class="line-separator"></div>	
+			</div>
 		</td>
-	
 	</tr>
 
-	<tr>
+	<tr style="width: 1000px;">
 	
-		<td width="45%" align="left" valign="top" style="padding-left:30px;">
+		<td width="500px" align="left" valign="top" style="padding-left:30px;">
 			<ui:insert name="left"/>
 		</td>
 		
-		
-		<td width="45%" align="right" valign="top" style="padding-right:30px;">
+		<td width="500px" align="right" valign="top" style="padding-right:30px;">
 			<ui:insert name="right"/>	
 		</td>
 	</tr>
@@ -83,22 +61,28 @@
 
 
 
+<div class="line-separator"></div>
 
-<footer id="footer" role="contentinfo" style="background-color:#D7D7D7">
+	<div align="center" class="footerdiv">
+	<h:form>
+<!-- 		<img src="#{request.contextPath}/images/fondoinferior.jpg" alt="logo footer" border="0" class="pngfix" width="77" height="41" align="left"/> -->
 
-<div id="footer_wrapper">
-	<div id="footer_left">				
+		<div style="height: 40px;"></div>
+		
 		<div>
-			<div class="footimg">
-				<img src="#{request.contextPath}/images/logofooter.png" alt="logo footer" border="0" class="pngfix" width="77" height="41" align="left"/>
-			</div>
-			<a href="http://www.ciespal.net" target="_blank"><strong> CIESPAL 2011</strong></a>								Todos los derechos reservados <span class="textoamarillo">Quito - Ecuador</span><br />
-				Av. Diego de Almagro N32-133 y Andrade Marín <span class="textoamarillo">Telf.:</span>(+593-2) 254-8011 <a href="mailto:ciespal@ciespal.net">ciespal@ciespal.net</a>  /  <a href="mailto:info@ciespal.net">info@ciespal.net</a><br />
-			</div>
-	</div>
-</div>	
+			<table>
+				<tr>
+					<td><h:commandLink value="Archivo Noticias" styleClass="linkClass2" actionListener="#{noticiaPublicController.readArchivo}"/></td>
+					<td><h:commandLink value="Equipo Técnico" styleClass="linkClass2" actionListener="#{noticiaPublicController.readArchivo}"/></td>
+					<td><h:commandLink value="Datos y Colaboradores" styleClass="linkClass2" actionListener="#{noticiaPublicController.readArchivo}"/></td>
+					<td><h:commandLink value="Datos del Sitio" styleClass="linkClass2" actionListener="#{noticiaPublicController.readArchivo}"/></td>
+				</tr>	
+			</table>	
+		</div>
+		
+	</h:form>
+	</div>	
 
-</footer>
 
 </div>
 </div>

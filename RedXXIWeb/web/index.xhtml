@@ -7,27 +7,16 @@
       template="/WEB-INF/template/public.xhtml">
 
 
-<!-- <ui:define name="left"> -->
-<!-- 	<table width="100%" class="table"> -->
-<!-- 			<tr> -->
-<!-- 				<td> -->
-<!-- 					<h:dataTable value="#{reportPublicController.reportPublicDataManager.paisList}" var="pai"> -->
-					
-<!-- 		    			<h:column> -->
-<!-- 		    				<p:graphicImage value="#{pai.imagenPath}" height="30" width="50"/> -->
-<!-- 		    			</h:column> -->
-		    													
-<!-- 		    			<h:column> -->
-<!-- 		    				<f:facet name="header">Paises</f:facet> -->
-<!-- 		    				<h:commandLink value="#{pai.nombre}" actionListener="#{reportPublicController.selectPais(pai)}" styleClass="linkClass"/> -->
-<!-- 		    			</h:column> -->
-		    								
-<!-- 					</h:dataTable> -->
-<!-- 				</td> -->
-<!-- 			</tr> -->
-<!-- 		</table> -->
-<!-- </ui:define> -->
-
+	<ui:define name="menu">
+		<ul id="navlist">
+		  <li id="home2"><a href="#{request.contextPath}/index.xhtml"></a></li>
+		  <li id="atenea"><a href="#{request.contextPath}/public/home/atenea.xhtml"></a></li>
+		  <li id="argos"><a href="#{request.contextPath}/argos.xhtml"></a></li>
+		  <li id="espejo"><a href="#{request.contextPath}/espejo.xhtml"></a></li>
+		  <li id="somos"><a href="#{request.contextPath}/quienesSomos.xhtml"></a></li>
+		  <li id="ingreso"><a href="#{request.contextPath}/ingreso.xhtml"></a></li>
+		</ul>
+	</ui:define>
 
 <ui:define name="left">
 	<table width="100%">
@@ -40,8 +29,9 @@
 					
 		    			<h:column>
 		    		
-		    				<h:commandLink value="#{noti.notTitulo}" actionListener="#{noticiaPublicController.readNoticia(noti)}" styleClass="linkClass"/><br />
+		    				<h:commandLink value="#{noti.notTitulo}" actionListener="#{noticiaPublicController.readNoticia(noti)}" styleClass="linkClassNoticia"/><br />
 		    				<h:outputText value="#{noti.notResumen}" escape="false"/><br />
+		    				
 		    			</h:column>										
 					
 					</h:dataTable>
@@ -54,13 +44,13 @@
 					<table>
 						<tr align="center">
 							<td rowspan="3" width="30%"><h:outputText value="Datos alojados en nuestras bases" styleClass="descripcion"/></td>
-							<td><h:outputText value="Atenea"/></td>
+							<td><h:outputText value="Atenea" styleClass="descripcionBlack"/></td>
 						</tr>
 						<tr align="center">								
-							<td><h:outputText value="Argos"/></td>
+							<td><h:outputText value="Argos" styleClass="descripcionBlack"/></td>
 						</tr>	
 						<tr align="center">	
-							<td><h:outputText value="Espejo"/></td>						
+							<td><h:outputText value="Espejo" styleClass="descripcionBlack"/></td>						
 						</tr>
 					</table>
 				</td>
