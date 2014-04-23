@@ -13,8 +13,17 @@
 		
 		<table>
 			<tr>
+				<td><h:outputText value="#{i18n['label.pais']}:&#160;" /></td>				
+				<td><p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{noticiaDataManager.pais}" filter="true">
+					<f:selectItem itemLabel="--Seleccione--"/>
+					<f:selectItems value="#{noticiaController.catalogoPais}"/>						
+				</p:selectOneMenu></td>
+				
+			</tr>
+			<tr>
 				<td><h:outputText value="#{i18n['label.titulo']}:&#160;" /></td>
 				<td><p:inputText value="#{noticiaDataManager.noticia.notTitulo}" required="true" requiredMessage="#{i18n['label.titulo']}&#160;#{i18n['label.requerido']}"/></td>
+				
 			</tr>
 		
 			<tr>
