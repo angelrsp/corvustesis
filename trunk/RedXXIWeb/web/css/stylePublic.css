@@ -1,7 +1,7 @@
 body
 {
 	/*background-image: url('../images/bgbody-9.jpg');*/
-	background-color: #322724;
+	/*background-color: #322724;
 	/*background-repeat:no-repeat;*/
 }
 .table
@@ -30,34 +30,24 @@ a.linkClass2:active {color: #F57B20;font-family: Segoe UI,Arial,sans-serif;}
 a.linkClass2:visited {color: #F57B20;font-family: Segoe UI,Arial,sans-serif;}
 a.linkClass2:hover {color: #FAA723; text-decoration: underline;font-family: Segoe UI,Arial,sans-serif;}
 
+a.linkClassNoticia:link {color: #F57B20;text-decoration: none;font-family: Segoe UI,Arial,sans-serif;font-size: 1.2em;}
+a.linkClassNoticia:active {color: #F57B20;font-family: Segoe UI,Arial,sans-serif;font-size: 1.2em;}
+a.linkClassNoticia:visited {color: #F57B20;font-family: Segoe UI,Arial,sans-serif;font-size: 1.2em;}
+a.linkClassNoticia:hover {color: #FAA723; text-decoration: underline;font-family: Segoe UI,Arial,sans-serif;font-size: 1.2em;}
+
 
 #footer_wrapper {
     background: url("../images/borderbot.gif") repeat-x scroll center top rgba(0, 0, 0, 0);
     height: 45px;
     padding: 15px 10px 0;
 }
-#footer_left {
-    float: left;
-    width: 80%;
-}
-#footer_left img {
-    margin-right: 100px;
-}
-#footer_left div {
-    color: #666666;
-    font-size: 11px;
-    text-align: left;
-}
-#footer_left div a {
-    color: #FF9900;
-}
-#footer_right {
-    float: right;
-    margin-right: 0;
-    overflow: hidden;
-    padding-top: 5px;
-    text-align: right;
-    width: 60%;
+
+.footerdiv
+{
+	background-image: url("../images/fondoinferior.jpg");
+	background-size: 100%;
+	width: 1000px;
+	height: 160px;
 }
 
 .descripcion{
@@ -71,6 +61,20 @@ a.linkClass2:hover {color: #FAA723; text-decoration: underline;font-family: Sego
 	font-size: 20px;
 	font-family: Segoe UI,Arial,sans-serif;
 }
+
+
+.descripcionBlack{
+	color: #000000;
+	font-size: 16px;
+	font-family: Segoe UI,Arial,sans-serif;
+}
+
+.descripcionBlack2{
+	color: #000000;
+	font-size: 12px;
+	font-family: Segoe UI,Arial,sans-serif;
+}
+
 
 .line-separator{
 	height:1px;
@@ -88,36 +92,46 @@ a.linkClass2:hover {color: #FAA723; text-decoration: underline;font-family: Sego
 
 #navlist{position:relative;top: -17px;left: 15px;}
 #navlist li{margin:0;padding:0;list-style:none;position:absolute;top:0;}
-#navlist li, #navlist a{height:44px;display:block;}
+#navlist li, #navlist a{height:33px;display:block;}
 
 
 #home{left:0px;width:64px;}
-#home{background:url('../images/menutrans.png') 0 0;}
+#home{background:url('../images/menutrans.png') 0 -445px;}
 
-#home:hover{left:0px;width:64px; height: 30px;}
-#home:hover{background:url('../images/menutrans.png') 0 -445px;}
+#home:hover{left:0px;width:64px;}
+#home:hover{background:url('../images/menutrans.png') 0 0;}
 
-#atenea{left:65px;width:68px;}
-#atenea{background:url('../images/menutrans.png') -232px 0;}
+#home2{left:0px;width:64px;}
+#home2{background:url('../images/menutrans.png') 0 0;}
 
-#atenea:hover{left:65px;width:68px; height: 30px;}
-#atenea:hover{background:url('../images/menutrans.png') -232px -445px;}
+#atenea{left:64px;width:68px;}
+#atenea{background:url('../images/menutrans.png') -232px -445px;}
+
+#atenea:hover{left:65px;width:68px;}
+#atenea:hover{background:url('../images/menutrans.png') -232px 0;}
+
+#atenea2{left:65px;width:68px;}
+#atenea2{background:url('../images/menutrans.png') -232px 0;}
 
 #argos{left:132px;width:66px;}
-#argos{background:url('../images/menutrans.png') -152px 0;}
+#argos{background:url('../images/menutrans.png') -152px -445px;}
 
-#argos:hover{left:132px; width:66px; height: 30px;}
-#argos:hover{background:url('../images/menutrans.png') -152px -445px;}
+#argos:hover{left:132px; width:66px;}
+#argos:hover{background:url('../images/menutrans.png') -152px 0;}
+
+#argos2{left:132px; width:66px;}
+#argos2{background:url('../images/menutrans.png') -152px 0;}
+
 
 #espejo{left:196px; width:72px;}
-#espejo{background:url('../images/menutrans.png') -75px 0;}
+#espejo{background:url('../images/menutrans.png') -75px -445px;}
 
-#espejo:hover{left:196px; width:72px; height: 30px;}
-#espejo:hover{background:url('../images/menutrans.png') -75px -445px;}
+#espejo:hover{left:196px; width:72px;}
+#espejo:hover{background:url('../images/menutrans.png') -75px 0;}
 
-#somos{left:262px; width:130px; height: 31px;}
-#somos{background:url('../images/menutrans.png') -408px -1px;}
+#somos{left:262px; width:130px;}
+#somos{background:url('../images/menutrans.png') -408px -445px;}
 
-#somos:hover{left:262px; width:130px; height: 30px;}
-#somos:hover{background:url('../images/menutrans.png') -408px -445px;}
+#somos:hover{left:262px; width:130px;}
+#somos:hover{background:url('../images/menutrans.png') -408px -1px;}
 
