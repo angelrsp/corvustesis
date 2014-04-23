@@ -50,6 +50,14 @@ a.linkClassNoticia:hover {color: #FAA723; text-decoration: underline;font-family
 	height: 160px;
 }
 
+.headdiv{
+	background-image: url("../images/fondosuperiorLogo.jpg");
+	background-size: 100%;
+	width: 950px;
+	height: 112px;
+}
+
+
 .descripcion{
 	color: #BBBBBB;
 	font-size: 20px;
@@ -87,6 +95,18 @@ a.linkClassNoticia:hover {color: #FAA723; text-decoration: underline;font-family
    background-color: white;
    background: white;
 }
+
+
+#navSocial{position:absolute;left: 980px;}
+#navSocial li{margin:0;padding:0;list-style:none;position:absolute;top:-10px;}
+#navSocial li, #navSocial a{height:40px;display:block;}
+
+#facebook{width:60px;height: 70px;}
+#facebook{background:url('../images/logoysocial.png') -260px -30px;}
+
+#facebook:hover{width:40px;height: 70px;left: 60px;}
+#facebook:hover{background:url('../images/logoysocial.png')-323px -30px;}
+
 
 /*Menu Principal*/
 
