@@ -23,6 +23,8 @@ public class NoticiaDataManager implements Serializable {
 	private List<NoticiaDTO> noticiaList;
 	private List<NoticiaDTO> noticiaPublicList;
 	
+	private Object pais;
+	
 	@PostConstruct
 	private void init()
 	{
@@ -53,6 +55,14 @@ public class NoticiaDataManager implements Serializable {
 
 	public void setNoticiaPublicList(List<NoticiaDTO> noticiaPublicList) {
 		this.noticiaPublicList = noticiaPublicList;
+	}
+
+	public Object getPais() {
+		return pais;
+	}
+
+	public void setPais(Object pais) {
+		this.pais = pais;
 	}
 	
 	
