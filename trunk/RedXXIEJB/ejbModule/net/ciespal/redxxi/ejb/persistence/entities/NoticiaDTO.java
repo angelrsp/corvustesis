@@ -42,6 +42,9 @@ public class NoticiaDTO implements Serializable {
 	@Column(name="not_titulo")
 	private String notTitulo;
 
+	@Column(name="not_pais")
+	private Integer notPais;
+
 
 	//bi-directional many-to-one association to EntidadDTO
 	@OneToMany(mappedBy="ateNoticia")
@@ -105,6 +108,14 @@ public class NoticiaDTO implements Serializable {
 
 	public void setNotTitulo(String notTitulo) {
 		this.notTitulo = notTitulo;
+	}
+
+	public Integer getNotPais() {
+		return notPais;
+	}
+
+	public void setNotPais(Integer notPais) {
+		this.notPais = notPais;
 	}
 
 	public List<EntidadDTO> getAteEntidads() {
