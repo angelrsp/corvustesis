@@ -43,6 +43,7 @@ public class NoticiaController extends SelectItemController{
 	public void save()
 	{
 		try {
+			noticiaDataManager.getNoticia().setNotPais(Integer.valueOf(noticiaDataManager.getPais().toString()));
 			ateneaService.createOrUpdateNoticia(noticiaDataManager.getNoticia());
 			readNoticia();
 			noticiaDataManager.setNoticia(new NoticiaDTO());
