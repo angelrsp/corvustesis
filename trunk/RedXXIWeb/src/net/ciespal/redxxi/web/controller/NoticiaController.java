@@ -15,7 +15,7 @@ import net.ciespal.redxxi.web.datamanager.NoticiaDataManager;
 
 @ViewScoped
 @ManagedBean(name = "noticiaController")
-public class NoticiaController {
+public class NoticiaController extends SelectItemController{
 
 	@EJB
 	private AteneaService ateneaService;
