@@ -97,7 +97,7 @@ a.linkClassNoticia:hover {color: #FAA723; text-decoration: underline;font-family
 }
 
 
-#navSocial{position:absolute;left: 60%;}
+#navSocial{position:absolute;left: 65%;}
 #navSocial li{margin:0;padding:0;list-style:none;position:absolute;top:-10px;}
 #navSocial li, #navSocial a{height:40px;display:block;}
 
