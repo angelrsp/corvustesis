@@ -2108,8 +2108,26 @@ public class AteneaServiceImpl implements AteneaService{
 	public List<NoticiaDTO> readNoticia() throws CorvustecException
 	{
 		logger.info("readNoticia");
+		List<NoticiaDTO> notiList=new ArrayList<NoticiaDTO>();
 		try{
-			return factoryDAO.getNoticiaDAOImpl().getAll();
+			List<NoticiaDTO> notiListAux=factoryDAO.getNoticiaDAOImpl().getAll();
+			CatalogoDTO catalogoDTO;
+			if(notiListAux!=null)
+			{
+				for(NoticiaDTO noticia:notiListAux)
+				{
+					if(noticia.getNotPais()!=null)
+					{
+						catalogoDTO=factoryDAO.getCatalogoImpl().find(noticia.getNotPais());
+						if(catalogoDTO!=null)
+						{
+							noticia.setNotPaisPath(catalogoDTO.getCatImagenPath());
+						}
+					}
+					notiList.add(noticia);
+				}
+			}
+			return notiList;
 		}
 		catch(Exception e)
 		{
@@ -2122,8 +2140,26 @@ public class AteneaServiceImpl implements AteneaService{
 	public List<NoticiaDTO> readNoticiaPublic() throws CorvustecException
 	{
 		logger.info("readNoticia");
+		List<NoticiaDTO> notiList=new ArrayList<NoticiaDTO>();
 		try{
-			return factoryDAO.getNoticiaDAOImpl().getAllPublic();
+			List<NoticiaDTO> notiListAux=factoryDAO.getNoticiaDAOImpl().getAllPublic();
+			CatalogoDTO catalogoDTO;
+			if(notiListAux!=null)
+			{
+				for(NoticiaDTO noticia:notiListAux)
+				{
+					if(noticia.getNotPais()!=null)
+					{
+						catalogoDTO=factoryDAO.getCatalogoImpl().find(noticia.getNotPais());
+						if(catalogoDTO!=null)
+						{
+							noticia.setNotPaisPath(catalogoDTO.getCatImagenPath());
+						}
+					}
+					notiList.add(noticia);
+				}
+			}
+			return notiList;
 		}
 		catch(Exception e)
 		{
