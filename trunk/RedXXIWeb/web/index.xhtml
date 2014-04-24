@@ -24,14 +24,13 @@
 				<td>
 					<h:outputText value="Noticias" styleClass="descripcion"/>
 					<div class="line-separator"></div>
-					<div style="overflow-y: scroll; width: 100%; height: 100px;">
+					<div style="overflow-y: scroll; width: 100%; height: 300px;">
 					<h:dataTable value="#{noticiaController.noticiaDataManager.noticiaPublicList}" var="noti" width="100%">
 					
 		    			<h:column>
-		    		
+		    				<p:graphicImage value="#{noti.notPaisPath}" height="25" width="40"/>		
 		    				<h:commandLink value="#{noti.notTitulo}" actionListener="#{noticiaPublicController.readNoticia(noti)}" styleClass="linkClassNoticia"/><br />
 		    				<h:outputText value="#{noti.notResumen}" escape="false"/><br />
-		    				
 		    			</h:column>										
 					
 					</h:dataTable>

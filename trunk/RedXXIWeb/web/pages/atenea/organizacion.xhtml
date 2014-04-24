@@ -232,16 +232,13 @@
 			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
 				<p:commandButton actionListener="#{organizacionController.editProyecto(pro)}" icon="ui-icon-pencil" process=":contenido:tblProyecto" update=":contenido:pnlProyecto"/>
 			</p:column>
+			
 			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
 				<p:commandButton actionListener="#{organizacionController.deleteProyecto(pro)}" icon="ui-icon-close" process=":contenido:tblProyecto" update=":contenido:tblProyecto,:contenido:growl">
 					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
 				</p:commandButton>
 			</p:column>
 			
-			<p:column headerText="#{i18n['label.mas.datos']}" width="15" style="text-align: center">
-				<p:commandButton actionListener="#{pregradoController.selectCarrera(car)}" icon="ui-icon-plus" 
-	               	update=":contenido:pnlDatos,:contenido:growl,:contenido:dlgDetalles" process="tblCarrera" oncomplete="PF('dlgDetalle').show()"/>    				
-			</p:column>
 			
 				
 		</p:dataTable>
