@@ -189,5 +189,7 @@ public interface AteneaService {
 	void deleteOrganizacion(OrganizacionDTO organizacion)
 			throws CorvustecException;
 
+	DoctorDTO getRandomDoctor() throws CorvustecException;
+
 
 }

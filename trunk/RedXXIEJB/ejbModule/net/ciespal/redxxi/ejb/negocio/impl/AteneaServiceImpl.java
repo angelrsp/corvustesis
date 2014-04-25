@@ -2073,6 +2073,22 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 	
+	@Override
+	public DoctorDTO getRandomDoctor() throws CorvustecException
+	{
+		logger.info("readDoctor");
+		try{
+			if(!factoryDAO.getDoctorDAOImpl().getAll().isEmpty())
+				return factoryDAO.getDoctorDAOImpl().getAll().get(0);
+			else
+				return new DoctorDTO();
+		}
+		catch(Exception e){
+			logger.info("Error readDoctor {}",e.toString());
+			throw new CorvustecException("Error al readDoctor");
+		}		
+	}
+	
 	/* Noticia */	
 	@Override
 	public NoticiaDTO createOrUpdateNoticia(NoticiaDTO noticia) throws CorvustecException
