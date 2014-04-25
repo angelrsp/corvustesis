@@ -106,6 +106,7 @@
 		
 		<p:ajax event="close" update=":contenido:pnlDato" listener="#{organizacionController.cancel}"/>
 		
+		<p:scrollPanel style="height:540px" mode="native">
 		
 		<!-- Contactos -->
 		<p:panel id="pnlContacto" header="#{i18n['label.panel.contacto']}">
@@ -244,6 +245,8 @@
 		</p:dataTable>
 		
 	</p:panel>		
+
+	</p:scrollPanel>
 
 	</p:dialog>
 		
