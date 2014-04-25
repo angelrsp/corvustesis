@@ -74,6 +74,7 @@ public class NoticiaController extends SelectItemController{
 	public void edit(NoticiaDTO noti)
 	{
 		noticiaDataManager.setNoticia(noti);
+		noticiaDataManager.setPais(noti.getNotPais());
 	}
 	
 	public void delete(NoticiaDTO noti)
@@ -90,5 +91,6 @@ public class NoticiaController extends SelectItemController{
 	public void cancel()
 	{
 		noticiaDataManager.setNoticia(new NoticiaDTO());
+		noticiaDataManager.setPais(null);
 	}
 }
