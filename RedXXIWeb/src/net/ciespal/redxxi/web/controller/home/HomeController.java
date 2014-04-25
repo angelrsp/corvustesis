@@ -44,9 +44,14 @@ public class HomeController {
 	{
 		try {
 			homeDataManager.setDoctorDTO(ateneaService.getRandomDoctor());
+			if(homeDataManager.getDoctorDTO().getDocFotoByte()!=null)
+				homeDataManager.setFotoPhdPath(JsfUtil.saveToDiskUpdload(homeDataManager.getDoctorDTO().getDocFotoByte(), homeDataManager.getDoctorDTO().getDocFotoNombre()));
+			else
+				homeDataManager.setFotoPhdPath(null);
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
+	
 	
 }
