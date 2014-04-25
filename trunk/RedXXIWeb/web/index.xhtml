@@ -61,11 +61,23 @@
 <ui:define name="right">
 		
 	<table width="100%">
-	
+
 		<tr>
 			<td>
 				<h:outputText value="Atenea" styleClass="descripcion"/>
 				<div class="line-separator"></div>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<h:outputText value="#{homeController.homeDataManager.doctorDTO.docNombres}" />
+			</td>		
+		</tr>
+	
+		<tr>
+		
+			<td>
 				<h:outputText value="Argos" styleClass="descripcion"/>
 				<div class="line-separator"></div>				
 				<h:outputText value="Espejo" styleClass="descripcion"/>
