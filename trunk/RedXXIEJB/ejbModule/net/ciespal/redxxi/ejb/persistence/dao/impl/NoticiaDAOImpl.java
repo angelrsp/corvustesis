@@ -4,17 +4,18 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
-import com.corvustec.commons.util.CorvustecException;
-
 import net.ciespal.redxxi.ejb.persistence.dao.NoticiaDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.NoticiaDTO;
+
+import com.corvustec.commons.util.CorvustecException;
 
 public class NoticiaDAOImpl extends AbstractFacadeImpl<NoticiaDTO> implements NoticiaDAO{
 
@@ -53,13 +54,21 @@ public class NoticiaDAOImpl extends AbstractFacadeImpl<NoticiaDTO> implements No
 		CriteriaQuery<NoticiaDTO> cq=cb.createQuery(NoticiaDTO.class);
 		Root<NoticiaDTO> from = cq.from(NoticiaDTO.class);
 		
+		
+		
 		Path<CarreraDTO> join1=from.join("ateEntidads",JoinType.LEFT);
 		
 		cq.where(cb.equal(from.get("notActivo"), true),cb.isNull(join1.get("entCodigo")));
 		
 		cq.orderBy(cb.desc(from.get("notDestacado")),cb.desc(from.get("notFecha")));
 		
-		List<NoticiaDTO> list=entityManager.createQuery(cq).getResultList();
+		
+		
+		TypedQuery<NoticiaDTO> typedQuery=entityManager.createQuery(cq);
+		
+		typedQuery.setMaxResults(3);
+		
+		List<NoticiaDTO> list=typedQuery.getResultList();
 		if(list.isEmpty())
 			return null;
 		else
