@@ -21,6 +21,7 @@ public class HomeDataManager implements Serializable{
 	
 	private DoctorDTO doctorDTO;
 
+	private String fotoPhdPath;
 	
 	public HomeDataManager() {
 		doctorDTO=new DoctorDTO();
@@ -34,6 +35,16 @@ public class HomeDataManager implements Serializable{
 
 	public void setDoctorDTO(DoctorDTO doctorDTO) {
 		this.doctorDTO = doctorDTO;
+	}
+
+
+	public String getFotoPhdPath() {
+		return fotoPhdPath;
+	}
+
+
+	public void setFotoPhdPath(String fotoPhdPath) {
+		this.fotoPhdPath = fotoPhdPath;
 	}
 	
 	
