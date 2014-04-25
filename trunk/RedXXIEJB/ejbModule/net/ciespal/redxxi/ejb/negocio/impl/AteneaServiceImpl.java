@@ -2077,9 +2077,14 @@ public class AteneaServiceImpl implements AteneaService{
 	public DoctorDTO getRandomDoctor() throws CorvustecException
 	{
 		logger.info("readDoctor");
+		int ran;
 		try{
-			if(!factoryDAO.getDoctorDAOImpl().getAll().isEmpty())
-				return factoryDAO.getDoctorDAOImpl().getAll().get(0);
+			List<DoctorDTO> doctorList=factoryDAO.getDoctorDAOImpl().getAll(); 
+			if(!doctorList.isEmpty())
+			{
+				ran = (int) (Math.random () * doctorList.size());
+				return factoryDAO.getDoctorDAOImpl().getAll().get(ran);
+			}
 			else
 				return new DoctorDTO();
 		}
