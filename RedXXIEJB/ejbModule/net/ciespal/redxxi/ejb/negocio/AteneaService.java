@@ -191,5 +191,8 @@ public interface AteneaService {
 
 	DoctorDTO getRandomDoctor() throws CorvustecException;
 
+	List<PublicacionDTO> readPublicacion(OrganizacionDTO organizacion)
+			throws CorvustecException;
+
 
 }
