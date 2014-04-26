@@ -240,9 +240,51 @@
 				</p:commandButton>
 			</p:column>
 			
-			
-				
 		</p:dataTable>
+		
+		
+	<!-- Revista  Publicacion -->	
+	<p:panel id="pnlPublicacion" header="#{i18n['label.panel.revista']}">
+	
+		<table>
+			<tr>
+				<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
+				<td><p:inputText value="#{organizacionDataManager.publicacion.pubTitulo}"/></td>
+				<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
+				<td><p:inputText value="#{organizacionDataManager.publicacion.pubResumen}"/></td>
+				<td><h:outputText value="#{i18n['label.isbn']}:&#160;" /></td>
+				<td><p:inputText value="#{organizacionDataManager.publicacion.pubIsbn}"/></td>				
+				<td><p:commandButton value="#{i18n['boton.agregar']}" process="pnlPublicacion" update="pnlPublicacion,growl" actionListener="#{organizacionController.createPublicacion}"/></td>
+			</tr>
+		</table>
+
+		<p:dataTable id="tblPublicacion" emptyMessage="#{i18n['table.vacio']}" value="#{organizacionDataManager.publicacionList}" var="pub">
+		
+			<p:column headerText="#{i18n['label.nombre']}">
+				<h:outputText value="#{pub.pubTitulo}" />
+			</p:column>
+
+			<p:column headerText="#{i18n['label.perfil']}">
+				<h:outputText value="#{pub.pubResumen}" />
+			</p:column>
+
+			<p:column headerText="#{i18n['label.isbn']}">
+				<h:outputText value="#{pub.pubIsbn}" />
+			</p:column>
+
+			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{organizacionController.editPublicacion(pub)}" icon="ui-icon-pencil" process=":contenido:tblPublicacion" update=":contenido:pnlPublicacion"/>
+			</p:column>
+			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:commandButton actionListener="#{organizacionController.deletePublicacion(pub)}" icon="ui-icon-close" process=":contenido:tblPublicacion" update=":contenido:tblPublicacion,:contenido:growl">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
+			</p:column>
+					
+		</p:dataTable>
+		
+	</p:panel>		
+		
 		
 	</p:panel>		
 
