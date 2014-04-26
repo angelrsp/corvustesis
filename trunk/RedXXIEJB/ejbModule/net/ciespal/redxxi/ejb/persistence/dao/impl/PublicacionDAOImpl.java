@@ -15,6 +15,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.PublicacionDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 
 import com.corvustec.commons.util.CorvustecException;
@@ -203,4 +204,21 @@ public class PublicacionDAOImpl extends AbstractFacadeImpl<PublicacionDTO> imple
 	}	
 
 
+	@Override
+	public List<PublicacionDTO> getAll(OrganizacionDTO organizacion)
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<PublicacionDTO> cq=cb.createQuery(PublicacionDTO.class);
+		Root<PublicacionDTO> from = cq.from(PublicacionDTO.class);
+		
+		Path<CarreraDTO> join1=from.join("ateEntidads");
+		
+		cq.where(cb.equal(join1.get("ateOrganizacion"), organizacion.getOrgCodigo()));
+		
+		List<PublicacionDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return null;
+		else
+			return list;
+	}	
 }

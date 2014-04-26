@@ -1873,6 +1873,20 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 
+	@Override
+	public List<PublicacionDTO> readPublicacion(OrganizacionDTO organizacion) throws CorvustecException
+	{
+		logger.info("readPublicacion");
+		try{
+			return factoryDAO.getPublicacionDAOImpl().getAll(organizacion);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readPublicacion {}",e.toString());
+			throw new CorvustecException("Error al readPublicacion");
+		}
+	}
+
 	
 	@Override
 	public List<PublicacionDTO> readPublicacion(Object ubicacion) throws CorvustecException

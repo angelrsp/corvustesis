@@ -6,6 +6,7 @@ import com.corvustec.commons.util.CorvustecException;
 
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 
 public interface PublicacionDAO extends AbstractFacade<PublicacionDTO>{
@@ -31,5 +32,7 @@ public interface PublicacionDAO extends AbstractFacade<PublicacionDTO>{
 
 	List<PublicacionDTO> getByType(Object type, Object pais)
 			throws CorvustecException;
+
+	List<PublicacionDTO> getAll(OrganizacionDTO organizacion);
 
 }
