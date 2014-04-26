@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 
 
 @ViewScoped
@@ -23,6 +24,10 @@ public class OrganizacionDataManager implements Serializable{
 	private OrganizacionDTO organizacion;
 	private List<OrganizacionDTO> organizacionList;
 	
+	private PublicacionDTO publicacion;
+	private List<PublicacionDTO> publicacionList;
+	
+	
 	public OrganizacionDataManager() {
 	}
 
@@ -31,6 +36,8 @@ public class OrganizacionDataManager implements Serializable{
 	{
 		organizacion=new OrganizacionDTO();
 		organizacionList=new ArrayList<OrganizacionDTO>();
+		publicacion=new PublicacionDTO();
+		publicacionList=new ArrayList<PublicacionDTO>();
 	}
 	
 	public OrganizacionDTO getOrganizacion() {
@@ -48,6 +55,23 @@ public class OrganizacionDataManager implements Serializable{
 	public void setOrganizacionList(List<OrganizacionDTO> organizacionList) {
 		this.organizacionList = organizacionList;
 	}
+
+	public PublicacionDTO getPublicacion() {
+		return publicacion;
+	}
+
+	public void setPublicacion(PublicacionDTO publicacion) {
+		this.publicacion = publicacion;
+	}
+
+	public List<PublicacionDTO> getPublicacionList() {
+		return publicacionList;
+	}
+
+	public void setPublicacionList(List<PublicacionDTO> publicacionList) {
+		this.publicacionList = publicacionList;
+	}
+
 	
 	
 }

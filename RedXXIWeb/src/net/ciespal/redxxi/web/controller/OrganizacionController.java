@@ -12,6 +12,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EventoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.ContactoDataManager;
 import net.ciespal.redxxi.web.datamanager.EventoDataManager;
@@ -133,6 +134,7 @@ public class OrganizacionController extends SelectItemController{
 		buscarContactos();
 		buscarEvento();
 		buscarProyecto();
+		buscarPublicacion();
 	}
 	
 	
@@ -274,6 +276,55 @@ public class OrganizacionController extends SelectItemController{
 	{
 		try {
 			proyectoDataManager.setProyectoList(ateneaService.readProyectoInvestigacion(organizacionDataManager.getOrganizacion()));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	
+	
+	public void createPublicacion()
+	{
+		EntidadDTO ent;
+		try {
+			ent=new EntidadDTO();
+			organizacionDataManager.getPublicacion().setPubTipo(34);
+			
+			organizacionDataManager.getPublicacion().setPubCiudad(Integer.valueOf(organizacionDataManager.getOrganizacion().getOrgCiudad().toString()));
+			organizacionDataManager.getPublicacion().setPubProvincia(Integer.valueOf(organizacionDataManager.getOrganizacion().getOrgProvincia().toString()));
+			organizacionDataManager.getPublicacion().setPubPais(Integer.valueOf(organizacionDataManager.getOrganizacion().getOrgPais().toString()));
+
+			ent=ateneaService.createOrUpdatePublicacion(organizacionDataManager.getPublicacion(),true).getAteEntidads().get(0);
+			ent.setAteOrganizacion(organizacionDataManager.getOrganizacion());
+			ateneaService.updateEntidad(ent);
+			buscarPublicacion();
+			organizacionDataManager.setPublicacion(new PublicacionDTO());
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void editPublicacion(PublicacionDTO pub)
+	{
+		organizacionDataManager.setPublicacion(pub);
+	}
+	
+	public void deletePublicacion(PublicacionDTO pub)
+	{
+		try {
+			ateneaService.deletePublicacion(pub);
+			buscarPublicacion();
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	
+	public void buscarPublicacion()
+	{
+		try {
+			organizacionDataManager.setPublicacionList(ateneaService.readPublicacion(organizacionDataManager.getOrganizacion()));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
