@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
  */
 public final class MessagesApplicacion {
 	
-	private static final String BUNDLE_NAME = "com.corvustec.rtoqab.commons.resources.ApplicationResources";
+	private static final String BUNDLE_NAME = "com.corvustec.rtoqab.process.commons.resources.ApplicationResources";
 	private static ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 	
 	private MessagesApplicacion () {}
