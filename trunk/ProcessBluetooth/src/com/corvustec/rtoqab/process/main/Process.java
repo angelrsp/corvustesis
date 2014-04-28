@@ -2,7 +2,9 @@ package com.corvustec.rtoqab.process.main;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -15,9 +17,20 @@ import com.corvustec.rtoqab.process.util.UtilApplication;
 public class Process {
 
 	public static void main(String[] args) {
+		
+		long start, end,diff;
+		start = System.currentTimeMillis();
+		
 		//insertValue();
 		//processOne();
-		generateInterval();
+		processTwo();
+		//generateIntervalSecond();
+		//generateIntervalMinute();		
+		
+		end = System.currentTimeMillis();
+		diff=end-start;
+		diff=(long) (diff* 0.001);
+		System.out.println("Procesado en: "+ ( diff ) +" segundos");				
 	}
 
 	
@@ -84,42 +97,139 @@ public class Process {
 		ConnectionJDBC.close();
 	}	
 	
-	private void processTwo()
+	private static void processTwo()
 	{
-		
+		ConnectionJDBC.init();
+		StringBuilder sb;
+		ResultSet rs;
+		try {
+			sb=new StringBuilder();
+			
+			sb.append("select * from tfi_intervalo where int_tipo=1");
+			
+			rs= ConnectionJDBC.executeSelect(sb.toString());
+			
+			while(rs.next())
+			{
+				sb=new StringBuilder();
+				sb.append("update tfi_valido ");
+				sb.append("set val_intervalo_segundo='");
+				sb.append(rs.getString("int_hasta"));
+				sb.append("'");
+				sb.append("where val_fecha::time >'");
+				sb.append(rs.getString("int_desde"));
+				sb.append("' and val_fecha::time<='");
+				sb.append(rs.getString("int_hasta"));
+				sb.append("'");
+
+				ConnectionJDBC.executeSql(sb.toString());
+			}
+			
+			rs.close();
+
+			
+			
+			sb=new StringBuilder();
+			
+			sb.append("select * from tfi_intervalo where int_tipo=2");
+			
+			rs= ConnectionJDBC.executeSelect(sb.toString());
+			
+			while(rs.next())
+			{
+				sb=new StringBuilder();
+				sb.append("update tfi_valido ");
+				sb.append("set val_intervalo_minuto='");
+				sb.append(rs.getString("int_hasta"));
+				sb.append("'");
+				sb.append("where val_fecha::time >'");
+				sb.append(rs.getString("int_desde"));
+				sb.append("' and val_fecha::time<='");
+				sb.append(rs.getString("int_hasta"));
+				sb.append("'");
+
+				ConnectionJDBC.executeSql(sb.toString());
+			}
+
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		ConnectionJDBC.close();
+
 	}
 	
 	
-	private static void generateInterval()
+	public static void generateIntervalSecond()
 	{
 		ConnectionJDBC.init();
-		String desde,hasta,incremento;
+		Time desde,hasta;
+		String incremento;
 		StringBuilder sb;
+		
 		try {
-			desde="08:00:00";
-			hasta= "17:00:00";
+			desde=Time.valueOf("08:00:00");
+			hasta= Time.valueOf("17:00:00");
 			
-			while(UtilApplication.convertTimetoDate(hasta).before(UtilApplication.convertTimetoDate(desde)))
+			while(desde.before(hasta))
 			{
-				incremento=UtilApplication.addSecond(desde, 15);
+				incremento= UtilApplication.addSecond(desde.toString(), 15);
 				
 				sb=new StringBuilder();
-				sb.append("insert into tfi_intervalo(insert into tfi_intervalo(int_agencia,int_tipo,int_desde,int_hasta) ");
+				sb.append("insert into tfi_intervalo(int_agencia,int_tipo,int_desde,int_hasta) ");
 				sb.append("values(1,1,'");
 				sb.append(desde);
 				sb.append("','");
 				sb.append(incremento);
 				sb.append("')");
 				
-				desde=UtilApplication.addSecond(desde, 15);
+				desde=Time.valueOf(UtilApplication.addSecond(desde.toString(), 15));
 				
 				ConnectionJDBC.executeSql(sb.toString());
 			}
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		ConnectionJDBC.close();		
 	}
+	
+
+	
+	public static void generateIntervalMinute()
+	{
+		ConnectionJDBC.init();
+		Time desde,hasta;
+		String incremento;
+		StringBuilder sb;
+		
+		try {
+			desde=Time.valueOf("08:00:00");
+			hasta= Time.valueOf("17:00:00");
+			
+			while(desde.before(hasta))
+			{
+				incremento= UtilApplication.addMinute(desde.toString(), 15);
+				
+				sb=new StringBuilder();
+				sb.append("insert into tfi_intervalo(int_agencia,int_tipo,int_desde,int_hasta) ");
+				sb.append("values(1,2,'");
+				sb.append(desde);
+				sb.append("','");
+				sb.append(incremento);
+				sb.append("')");
+				
+				desde=Time.valueOf(UtilApplication.addMinute(desde.toString(), 15));
+				
+				ConnectionJDBC.executeSql(sb.toString());
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ConnectionJDBC.close();		
+	}
+
+	
 }
