@@ -2202,7 +2202,21 @@ public class AteneaServiceImpl implements AteneaService{
 			throw new CorvustecException("Error al readNoticia");
 		}
 	}
-
+	
+	@Override
+	public NoticiaDTO readNoticia(NoticiaDTO noticia) throws CorvustecException
+	{
+		logger.info("readNoticia");
+		try{
+			return factoryDAO.getNoticiaDAOImpl().find(noticia.getNotCodigo());
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readNoticia {}",e.toString());
+			throw new CorvustecException("Error al readNoticia");
+		}
+	}
+	
 	/*Modalidad*/
 	@Override
 	public List<ModalidadDTO> readModalidad(CarreraDTO carrera) throws CorvustecException
