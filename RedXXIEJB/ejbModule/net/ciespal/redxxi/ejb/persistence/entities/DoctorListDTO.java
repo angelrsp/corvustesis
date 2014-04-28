@@ -48,6 +48,7 @@ public class DoctorListDTO implements Serializable {
 	@Column(name="doc_ciudad")
 	private Integer docCiudad;
 
+	@Id
 	@Column(name="doc_codigo")
 	private Integer docCodigo;
 

@@ -46,10 +46,17 @@ public class ObraDAOImpl extends AbstractFacadeImpl<ObraDTO> implements ObraDAO{
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public void remove2(ObraDTO obra) throws CorvustecException
 	{
 		Query query;
-		for(EntidadDTO ent:obra.getAteEntidads())
+		
+		query=entityManager.createQuery("select ent from EntidadDTO ent inner join ent.ateObra obr where obr.obrCodigo=:codigo");
+		query.setParameter("codigo", obra.getObrCodigo());
+		
+		List<EntidadDTO> entList=query.getResultList();
+		
+		for(EntidadDTO ent:entList)
 		{	 
 			query= entityManager.createQuery("delete from EntidadDTO where entCodigo=:codigo");
 			query.setParameter("codigo", ent.getEntCodigo());
