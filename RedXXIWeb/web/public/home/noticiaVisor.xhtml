@@ -4,7 +4,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui" 
-      template="/WEB-INF/template/public.xhtml">
+      template="/WEB-INF/template/public2.xhtml">
 
 
 	<ui:define name="menu">
@@ -20,10 +20,15 @@
 	</ui:define>
 
 
-	<ui:define name="left">
-		<table>
+	<ui:define name="center">
+		<table width="80%">
+			<tr align="center">
+				<td><h:outputText value="#{noticiaVisorDataManager.noticiaDTO.notTitulo}" styleClass="titleNoticia"/></td>
+			</tr>
+			
 			<tr>
 				<td>
+				
 					<h:outputText value="#{noticiaVisorDataManager.noticiaDTO.notDescripcion}" escape="false"/>
 				</td>
 			</tr>

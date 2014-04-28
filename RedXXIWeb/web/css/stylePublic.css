@@ -59,6 +59,12 @@ a.linkClassNoticia:hover {color: #FAA723; text-decoration: underline;font-family
 	height: 112px;
 }
 
+.titleNoticia
+{
+	color: #F57B20;
+	font-size: 25px;
+	font-family: Segoe UI,Arial,sans-serif;
+}
 
 .descripcion{
 	color: #BBBBBB;
