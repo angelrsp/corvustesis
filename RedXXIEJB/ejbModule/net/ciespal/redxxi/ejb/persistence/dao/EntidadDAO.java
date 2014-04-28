@@ -23,4 +23,6 @@ public interface EntidadDAO extends AbstractFacade<EntidadDTO> {
 	List<EntidadDTO> getAll(OrganizacionDTO organizacion)
 			throws CorvustecException;
 
+	List<EntidadDTO> getAll(DoctorDTO doctor) throws CorvustecException;
+
 }

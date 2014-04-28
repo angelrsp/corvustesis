@@ -199,5 +199,7 @@ public interface AteneaService {
 
 	List<DoctorListDTO> readDoctorList(Object codigo) throws CorvustecException;
 
+	void deleteDoctor(DoctorDTO doctor) throws CorvustecException;
+
 
 }
