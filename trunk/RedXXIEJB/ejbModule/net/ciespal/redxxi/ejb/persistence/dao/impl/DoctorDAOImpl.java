@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -122,5 +123,13 @@ public class DoctorDAOImpl extends AbstractFacadeImpl<DoctorDTO> implements Doct
 			return list;
 	}
 
+	@Override
+	public void remove2(DoctorDTO doctor)
+	{
+		Query query;
+		query=entityManager.createQuery("delete from DoctorDTO doc where doc.docCodigo=:codigo");
+		query.setParameter("codigo", doctor.getDocCodigo());
+		query.executeUpdate();
+	}
 
 }

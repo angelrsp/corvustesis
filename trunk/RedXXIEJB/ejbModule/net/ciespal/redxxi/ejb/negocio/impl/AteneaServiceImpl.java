@@ -2124,6 +2124,51 @@ public class AteneaServiceImpl implements AteneaService{
 		}		
 	}
 	
+	
+	@Override
+	public void deleteDoctor(DoctorDTO doctor) throws CorvustecException
+	{
+		List<ContactoListDTO> contactoList;
+		List<ObraDTO> obraList;
+		
+		List<EntidadDTO> entidadList;
+		
+		ContactoDTO contacto;
+		try{
+			contactoList= factoryDAO.getContactoDAOImpl().getAll(doctor);
+			if(contactoList!=null)
+			{
+				for(ContactoListDTO conLis:contactoList)
+				{
+					contacto=new ContactoDTO(conLis.getConCodigo());
+					factoryDAO.getContactoDAOImpl().remove2(contacto);
+				}
+			}
+
+			obraList= factoryDAO.getObraDAOImpl().getAll(doctor);
+			if(obraList!=null)
+			{
+				for(ObraDTO obr:obraList)
+				{
+					factoryDAO.getObraDAOImpl().remove2(obr);
+				}
+			}
+			
+			entidadList= factoryDAO.getEntidadDAOImpl().getAll(doctor);
+			for(EntidadDTO ent:entidadList)
+			{
+				factoryDAO.getEntidadDAOImpl().remove2(ent);
+			}
+			factoryDAO.getDoctorDAOImpl().remove2(doctor);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error deleteCarreraPregrado {}",e.toString());
+			throw new CorvustecException("Error al deleteCarreraPregrado");
+		}
+
+	}
+	
 	/* Noticia */	
 	@Override
 	public NoticiaDTO createOrUpdateNoticia(NoticiaDTO noticia) throws CorvustecException

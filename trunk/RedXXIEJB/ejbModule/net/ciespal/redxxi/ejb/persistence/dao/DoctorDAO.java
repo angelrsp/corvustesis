@@ -21,5 +21,7 @@ public interface DoctorDAO extends AbstractFacade<DoctorDTO>{
 
 	List<DoctorListDTO> get(Object codigo) throws CorvustecException;
 
+	void remove2(DoctorDTO doctor);
+
 	
 }

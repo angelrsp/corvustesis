@@ -110,5 +110,23 @@ public class EntidadDAOImpl extends AbstractFacadeImpl<EntidadDTO> implements En
 			return list;
 	}
 
-	
+
+	@Override
+	public List<EntidadDTO> getAll(DoctorDTO doctor) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<EntidadDTO> cq=cb.createQuery(EntidadDTO.class);
+		Root<EntidadDTO> from = cq.from(EntidadDTO.class);
+		
+		Path<DoctorDTO> join1=from.join("ateDoctor");
+		
+		cq.where(cb.equal(join1.get("docCodigo"),doctor.getDocCodigo()));
+		
+		List<EntidadDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return new ArrayList<EntidadDTO>();
+		else
+			return list;
+	}
+
 }
