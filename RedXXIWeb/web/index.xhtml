@@ -31,7 +31,7 @@
 					
 		    			<h:column>
 		    				<p:graphicImage value="#{noti.notPaisPath}" height="25" width="40"/>		
-		    				<h:commandLink value="#{noti.notTitulo}" actionListener="#{noticiaPublicController.readNoticia(noti)}" styleClass="linkClassNoticia"/><br />
+		    				<h:commandLink value="#{noti.notTitulo}" actionListener="#{noticiaVisorController.find(noti)}" styleClass="linkClassNoticia"/><br />
 		    				<h:outputText value="#{noti.notResumen}" escape="false"/><br />
 		    			</h:column>										
 					
