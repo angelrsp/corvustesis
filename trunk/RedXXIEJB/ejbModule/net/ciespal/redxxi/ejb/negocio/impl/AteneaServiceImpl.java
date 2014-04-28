@@ -17,6 +17,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.DoctorListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EventoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.FacultadListDTO;
@@ -2086,6 +2087,21 @@ public class AteneaServiceImpl implements AteneaService{
 			throw new CorvustecException("Error al readDoctor");
 		}
 	}
+
+	@Override
+	public List<DoctorListDTO> readDoctorList(Object codigo) throws CorvustecException
+	{
+		logger.info("readDoctor");
+		try{
+			return factoryDAO.getDoctorDAOImpl().get(codigo);
+		}
+		catch(Exception e){
+			logger.info("Error readDoctor {}",e.toString());
+			throw new CorvustecException("Error al readDoctor");
+		}
+	}
+
+	
 	
 	@Override
 	public DoctorDTO getRandomDoctor() throws CorvustecException
