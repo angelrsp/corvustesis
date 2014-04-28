@@ -36,6 +36,25 @@ public class UtilApplication {
 		} 
 		 return newTime;
 	}
+
+	public static String addMinute(String time,int minuto)
+	{
+		String newTime = null;
+		 SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+		 Date d;
+		try {
+			d = df.parse(time);
+			 Calendar cal = Calendar.getInstance();
+			 cal.setTime(d);
+			 cal.add(Calendar.MINUTE, minuto);
+			 newTime = df.format(cal.getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} 
+		 return newTime;
+	}
+
+	
 	
 	public static Date convertTimetoDate(String time)
 	{
