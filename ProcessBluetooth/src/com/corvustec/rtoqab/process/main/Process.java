@@ -10,11 +10,14 @@ import org.apache.commons.io.FileUtils;
 
 import com.corvustec.rtoqab.process.jdbc.ConnectionJDBC;
 import com.corvustec.rtoqab.process.util.ReadAgencia;
+import com.corvustec.rtoqab.process.util.UtilApplication;
 
 public class Process {
 
 	public static void main(String[] args) {
-		insertValue();
+		//insertValue();
+		//processOne();
+		generateInterval();
 	}
 
 	
@@ -59,4 +62,64 @@ public class Process {
 		}
 	}
 	
+	private static void processOne()
+	{
+		ConnectionJDBC.init();
+		try {
+			StringBuilder sb=new StringBuilder();
+			
+			sb.append("insert into tfi_valido(val_agencia,val_fecha,val_mac,val_rssi) ");
+			sb.append("select dat_agencia,dat_fecha,dat_mac,dat_rssi ");
+			sb.append("from tfi_dato ");
+			sb.append("where dat_mac in( ");
+			sb.append("select dat_mac ");
+			sb.append("from tfi_dato ");
+			sb.append("group by dat_mac ");
+			sb.append("having max(dat_rssi)<=-65);");
+			
+			ConnectionJDBC.executeSql(sb.toString());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		ConnectionJDBC.close();
+	}	
+	
+	private void processTwo()
+	{
+		
+	}
+	
+	
+	private static void generateInterval()
+	{
+		ConnectionJDBC.init();
+		String desde,hasta,incremento;
+		StringBuilder sb;
+		try {
+			desde="08:00:00";
+			hasta= "17:00:00";
+			
+			while(UtilApplication.convertTimetoDate(hasta).before(UtilApplication.convertTimetoDate(desde)))
+			{
+				incremento=UtilApplication.addSecond(desde, 15);
+				
+				sb=new StringBuilder();
+				sb.append("insert into tfi_intervalo(insert into tfi_intervalo(int_agencia,int_tipo,int_desde,int_hasta) ");
+				sb.append("values(1,1,'");
+				sb.append(desde);
+				sb.append("','");
+				sb.append(incremento);
+				sb.append("')");
+				
+				desde=UtilApplication.addSecond(desde, 15);
+				
+				ConnectionJDBC.executeSql(sb.toString());
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ConnectionJDBC.close();		
+	}
 }
