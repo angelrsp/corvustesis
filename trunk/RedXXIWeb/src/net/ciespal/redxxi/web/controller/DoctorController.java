@@ -160,7 +160,6 @@ public class DoctorController extends SelectItemController{
 		contactoDataManager.getContacto().setConValor(con.getConValor());
 		contactoDataManager.getContacto().setAteEntidad(new EntidadDTO(con.getEntCodigo()));
 		contactoDataManager.setTipoContacto(con.getConTipo());
-		
 	}
 	
 	public void deleteContacto(ContactoListDTO con)
