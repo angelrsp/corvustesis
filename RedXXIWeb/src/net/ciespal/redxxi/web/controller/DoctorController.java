@@ -259,7 +259,13 @@ public class DoctorController extends SelectItemController{
 	
 	public void deleteDoctor(DoctorDTO doc)
 	{
-		
+		try {
+			ateneaService.deleteDoctor(doc);
+			readDoctor();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 
 }
