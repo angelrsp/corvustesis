@@ -10,6 +10,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.DoctorListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EntidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.EventoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.FacultadListDTO;
@@ -195,6 +196,8 @@ public interface AteneaService {
 			throws CorvustecException;
 
 	NoticiaDTO readNoticia(NoticiaDTO noticia) throws CorvustecException;
+
+	List<DoctorListDTO> readDoctorList(Object codigo) throws CorvustecException;
 
 
 }

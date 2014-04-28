@@ -10,6 +10,7 @@ import javax.persistence.criteria.Root;
 
 import net.ciespal.redxxi.ejb.persistence.dao.DoctorDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.DoctorListDTO;
 
 import com.corvustec.commons.util.CorvustecException;
 
@@ -103,5 +104,23 @@ public class DoctorDAOImpl extends AbstractFacadeImpl<DoctorDTO> implements Doct
 			return list;
 	}
 
+
 	
+	@Override
+	public List<DoctorListDTO> get(Object codigo) throws CorvustecException
+	{
+		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
+		CriteriaQuery<DoctorListDTO> cq=cb.createQuery(DoctorListDTO.class);
+		Root<DoctorListDTO> from= cq.from(DoctorListDTO.class);
+		
+		cq.where(cb.equal(from.get("docCodigo"), codigo));
+		
+		List<DoctorListDTO> list=entityManager.createQuery(cq).getResultList();
+		if(list.isEmpty())
+			return new ArrayList<DoctorListDTO>();
+		else
+			return list;
+	}
+
+
 }

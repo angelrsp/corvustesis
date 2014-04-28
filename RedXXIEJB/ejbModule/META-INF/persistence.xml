@@ -37,6 +37,7 @@
 	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioCiespalDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosListDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.DoctorListDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>		
