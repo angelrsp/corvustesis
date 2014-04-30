@@ -1119,6 +1119,9 @@ public class AteneaServiceImpl implements AteneaService{
 	
 	
 	public List<AteneaVisorDTO> visorList()
+	{
+		return null;
+	}
 	
 	
 	@Override
