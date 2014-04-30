@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import net.ciespal.redxxi.ejb.persistence.entities.AteneaDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.AteneaVisorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ContactoDTO;
@@ -200,6 +201,10 @@ public interface AteneaService {
 	List<DoctorListDTO> readDoctorList(Object codigo) throws CorvustecException;
 
 	void deleteDoctor(DoctorDTO doctor) throws CorvustecException;
+
+	List<AteneaVisorDTO> visorList(PaisDTO pais) throws CorvustecException;
+
+	List<AteneaVisorDTO> visorList(AteneaDTO atenea) throws CorvustecException;
 
 
 }
