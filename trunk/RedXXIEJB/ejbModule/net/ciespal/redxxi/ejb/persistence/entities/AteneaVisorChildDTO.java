@@ -1,16 +1,15 @@
 package net.ciespal.redxxi.ejb.persistence.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-public class AteneaVisorDTO implements Serializable{
+public class AteneaVisorChildDTO implements Serializable{
 
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	
 	private int codigo;
 	private int tipo;
@@ -20,12 +19,9 @@ public class AteneaVisorDTO implements Serializable{
 	private String descripcion2;
 	private String descripcion3;
 	private String descripcion4;
+
 	
-	
-	private List<AteneaVisorChildDTO> ateneaChildList;
-	
-	public AteneaVisorDTO() {
-		ateneaChildList=new ArrayList<AteneaVisorChildDTO>();
+	public AteneaVisorChildDTO() {
 	}
 
 
@@ -97,14 +93,6 @@ public class AteneaVisorDTO implements Serializable{
 	public void setDescripcion4(String descripcion4) {
 		this.descripcion4 = descripcion4;
 	}
-
-
-	public List<AteneaVisorChildDTO> getAteneaChildList() {
-		return ateneaChildList;
-	}
-
-
-	public void setAteneaChildList(List<AteneaVisorChildDTO> ateneaChildList) {
-		this.ateneaChildList = ateneaChildList;
-	}
+	
+	
 }

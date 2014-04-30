@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.AteneaDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.AteneaVisorChildDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.AteneaVisorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
@@ -1116,11 +1117,464 @@ public class AteneaServiceImpl implements AteneaService{
 		return sb.toString();
 	}
 	
-	
-	
-	public List<AteneaVisorDTO> visorList()
+
+	@Override
+	public List<AteneaVisorDTO> visorList(AteneaDTO atenea) throws CorvustecException
 	{
-		return null;
+		List<AteneaVisorDTO> ateneaVisorList=new ArrayList<AteneaVisorDTO>();
+		List<AteneaVisorChildDTO> ateneaChildList=new ArrayList<AteneaVisorChildDTO>();
+		AteneaVisorDTO ateneaVisor;
+		AteneaVisorChildDTO ateneaChild;		
+		
+		//CatalogoDTO catalogo;
+		List<CentroDTO> listCentroChild;
+		List<CentroDTO> listPais;
+		
+		if(atenea.getTipo()==0)
+		{
+		}
+		//Universidad
+		else if(atenea.getTipo()==2)
+		{
+			//Si en el objeto no esta el pais quiere decir que son todos
+			//Obtengo los paises para realizar el visor organizado por pais	
+			if(atenea.getPais()==0)
+				listPais=factoryDAO.getCentroDAOImpl().distinctPais(atenea.getTipo());
+			else
+			{
+				listPais=new ArrayList<CentroDTO>();
+				listPais.add(new CentroDTO(atenea.getPais()));
+			}
+			
+			for(CentroDTO centroPais:listPais){
+				
+				for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(atenea.getTipo(),centroPais.getCenPais()))
+				{
+					listCentroChild= factoryDAO.getCentroDAOImpl().findAllChild(centro);
+					
+					ateneaVisor=new AteneaVisorDTO();
+					ateneaVisor.setCodigo(centro.getCenCodigo());
+					ateneaVisor.setTitulo(centro.getCenNombre());
+					ateneaVisor.setTipo(atenea.getTipo());
+										
+					for(CentroDTO centroChild:listCentroChild)
+					{
+						ateneaChild=new AteneaVisorChildDTO();
+						
+						ateneaChild.setCodigo(centroChild.getCenCodigo());
+						ateneaChild.setTitulo(centroChild.getCenNombre());
+						ateneaChild.setDescripcion1(centroChild.getCenDatoInstitucional());
+
+						ateneaChildList.add(ateneaChild);
+					}
+					ateneaVisor.setAteneaChildList(ateneaChildList);
+					ateneaVisorList.add(ateneaVisor);
+				}
+				
+			}
+			
+		}//Facultad
+		else if(atenea.getTipo()==3)
+		{
+			//Si en el objeto no esta el pais quiere decir que son todos
+			//Obtengo los paises para realizar el visor organizado por pais	
+			if(atenea.getPais()==0)
+				listPais=factoryDAO.getCentroDAOImpl().distinctPais(atenea.getTipo());
+			else
+			{
+				listPais=new ArrayList<CentroDTO>();
+				listPais.add(new CentroDTO(atenea.getPais()));
+			}	
+			
+			for(CentroDTO centroPais:listPais){
+				
+				for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(atenea.getTipo(),centroPais.getCenPais()))
+				{	
+					ateneaVisor=new AteneaVisorDTO();
+					ateneaVisor.setCodigo(centro.getCenCodigo());
+					ateneaVisor.setTitulo(centro.getCenNombre());
+					ateneaVisor.setTipo(atenea.getTipo());
+
+					ateneaVisorList.add(ateneaVisor);
+				}
+				
+			}
+			
+		}//Pregrado
+		else if(atenea.getTipo()==6)
+		{
+			
+			if(atenea.getPais()==0)
+				listPais= factoryDAO.getCarreraDAOImpl().distinctPais(atenea.getTipo());
+			else
+			{
+				listPais=new ArrayList<CentroDTO>();
+				listPais.add(new CentroDTO(atenea.getPais()));
+			}
+			
+			for(CentroDTO cen:listPais)
+			{
+								
+				for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getAll(atenea.getTipo(),cen.getCenPais())){
+					
+					if(car.getAteCentro().getCenTipo()==4)
+					{
+						ateneaVisor=new AteneaVisorDTO();
+						
+						ateneaVisor.setCodigo(car.getCarCodigo());
+						ateneaVisor.setTitulo(car.getCarNombre());
+						ateneaVisor.setTipo(atenea.getTipo());
+						ateneaVisor.setDescripcion1(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
+						ateneaVisor.setDescripcion2(car.getAteCentro().getAteCentro().getCenNombre());
+						ateneaVisor.setDescripcion3(car.getAteCentro().getCenNombre());
+						
+						ateneaVisorList.add(ateneaVisor);
+						
+					}
+					else{
+						ateneaVisor=new AteneaVisorDTO();
+						
+						ateneaVisor.setCodigo(car.getCarCodigo());
+						ateneaVisor.setTitulo(car.getCarNombre());
+						ateneaVisor.setTipo(atenea.getTipo());
+						ateneaVisor.setDescripcion1(car.getAteCentro().getAteCentro().getCenNombre());
+						ateneaVisor.setDescripcion2(car.getAteCentro().getCenNombre());
+						
+						ateneaVisorList.add(ateneaVisor);
+												
+					}
+										
+				}
+			}			
+			
+		}//Posgrado
+		else if(atenea.getTipo()==7)
+		{
+			if(atenea.getPais()==0)
+				listPais= factoryDAO.getCarreraDAOImpl().distinctPais(atenea.getTipo());
+			else
+			{
+				listPais=new ArrayList<CentroDTO>();
+				listPais.add(new CentroDTO(atenea.getPais()));
+			}
+							
+			for(CentroDTO cen:listPais)
+			{
+								
+				for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getAll(atenea.getTipo(),cen.getCenPais())){
+					
+					if(car.getAteCentro().getCenTipo()==4)
+					{
+						ateneaVisor=new AteneaVisorDTO();
+						
+						ateneaVisor.setCodigo(car.getCarCodigo());
+						ateneaVisor.setTitulo(car.getCarNombre());
+						ateneaVisor.setTipo(atenea.getTipo());
+						ateneaVisor.setDescripcion1(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
+						ateneaVisor.setDescripcion2(car.getAteCentro().getAteCentro().getCenNombre());
+						ateneaVisor.setDescripcion3(car.getAteCentro().getCenNombre());
+						
+						ateneaVisorList.add(ateneaVisor);
+						
+					}
+					else{
+						
+						ateneaVisor=new AteneaVisorDTO();
+						ateneaVisor.setCodigo(car.getCarCodigo());
+						ateneaVisor.setTitulo(car.getCarNombre());
+						ateneaVisor.setTipo(atenea.getTipo());
+						ateneaVisor.setDescripcion1(car.getAteCentro().getAteCentro().getCenNombre());
+						ateneaVisor.setDescripcion2(car.getAteCentro().getCenNombre());
+						
+						ateneaVisorList.add(ateneaVisor);
+					}
+				}
+			}			
+
+		}//Revista
+		else if(atenea.getTipo()==34)
+		{
+			List<PublicacionDTO> listPublicacion=new ArrayList<PublicacionDTO>();
+			if(atenea.getPais()==0)
+				listPublicacion=factoryDAO.getPublicacionDAOImpl().getByType(34);
+			else
+				listPublicacion=factoryDAO.getPublicacionDAOImpl().getByType(34,atenea.getPais());
+
+			for(PublicacionDTO pub: listPublicacion){
+				
+				ateneaVisor=new AteneaVisorDTO();
+				ateneaVisor.setCodigo(pub.getPubCodigo());
+				ateneaVisor.setTitulo(pub.getPubTitulo());
+				ateneaVisor.setTipo(atenea.getTipo());
+				
+				ateneaVisorList.add(ateneaVisor);
+				
+			}
+		}//Eventos
+		else if(atenea.getTipo()==101)
+		{
+			List<EventoDTO> listEvento=new ArrayList<EventoDTO>();
+			if(atenea.getPais()==0)
+				listEvento=factoryDAO.getEventoDAOImpl().getAll();
+			else
+				listEvento=factoryDAO.getEventoDAOImpl().getAll(atenea.getPais());
+			
+			for(EventoDTO eve: listEvento){
+
+				ateneaVisor=new AteneaVisorDTO();
+				ateneaVisor.setCodigo(eve.getEveCodigo());
+				ateneaVisor.setTitulo(eve.getEveNombre());
+				ateneaVisor.setTipo(atenea.getTipo());
+				
+				ateneaVisorList.add(ateneaVisor);
+
+			}
+		}//Proyectos de Investigacion
+		else if(atenea.getTipo()==102)
+		{
+			List<ProyectoInvestigacionDTO> listProyecto=new ArrayList<ProyectoInvestigacionDTO>();
+			if(atenea.getPais()==0)
+				listProyecto=factoryDAO.getProyectoInvestigacionDAOImpl().getAll();
+			else
+				listProyecto=factoryDAO.getProyectoInvestigacionDAOImpl().getAll(atenea.getPais());
+			
+			for(ProyectoInvestigacionDTO pro: listProyecto){
+
+				ateneaVisor=new AteneaVisorDTO();
+				ateneaVisor.setCodigo(pro.getPinCodigo());
+				ateneaVisor.setTitulo(pro.getPinNombre());
+				ateneaVisor.setTipo(atenea.getTipo());
+				
+				ateneaVisorList.add(ateneaVisor);
+			}
+		}//Organizacion
+		else if(atenea.getTipo()==103)
+		{
+			List<OrganizacionDTO> listOrg=new ArrayList<OrganizacionDTO>();
+			if(atenea.getPais()==0)
+				listOrg=factoryDAO.getOrganizacioDAOImpl().getAll();
+			else
+				listOrg=factoryDAO.getOrganizacioDAOImpl().getAll2(atenea.getPais());
+			
+			for(OrganizacionDTO org: listOrg){
+
+				ateneaVisor=new AteneaVisorDTO();
+				ateneaVisor.setCodigo(org.getOrgCodigo());
+				ateneaVisor.setTitulo(org.getOrgNombre());
+				ateneaVisor.setTipo(atenea.getTipo());
+				
+				ateneaVisorList.add(ateneaVisor);
+			}
+		}//Doctor
+		else if(atenea.getTipo()==104)
+		{
+			List<DoctorDTO> listDoc=new ArrayList<DoctorDTO>();
+			if(atenea.getPais()==0)
+				listDoc=factoryDAO.getDoctorDAOImpl().getAll();
+			else
+				listDoc=factoryDAO.getDoctorDAOImpl().getAll2(atenea.getPais());
+			
+			for(DoctorDTO doc: listDoc){
+				ateneaVisor=new AteneaVisorDTO();
+				ateneaVisor.setCodigo(doc.getDocCodigo());
+				ateneaVisor.setTitulo(doc.getDocFotoNombre()+" "+doc.getDocApellidos());
+				ateneaVisor.setTipo(atenea.getTipo());
+				
+				ateneaVisorList.add(ateneaVisor);
+			}
+		}
+		return ateneaVisorList;
+	}
+
+	
+	@Override	
+	public List<AteneaVisorDTO> visorList(PaisDTO pais) throws CorvustecException
+	{
+		List<CentroDTO> listCentroChild;
+		List<AteneaVisorDTO> ateneaVisorList=new ArrayList<AteneaVisorDTO>();
+		List<AteneaVisorChildDTO> ateneaChildList=new ArrayList<AteneaVisorChildDTO>();
+		AteneaVisorDTO ateneaVisor;
+		AteneaVisorChildDTO ateneaChild;
+		if(pais.getTipo()==0)
+		{
+		}
+		//Universidad
+		else if(pais.getTipo()==2)
+		{
+									
+			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(pais.getTipo(),pais.getCodigo()))
+			{
+				listCentroChild= factoryDAO.getCentroDAOImpl().findAllChild(centro);
+
+				ateneaVisor=new AteneaVisorDTO();
+				
+				ateneaVisor.setCodigo(centro.getCenCodigo());
+				ateneaVisor.setTitulo(centro.getCenNombre());
+				ateneaVisor.setTipo(centro.getCenTipo());
+				
+				for(CentroDTO centroChild:listCentroChild)
+				{
+					ateneaChild=new AteneaVisorChildDTO();
+					
+					ateneaChild.setCodigo(centroChild.getCenCodigo());
+					ateneaChild.setTipo(centroChild.getCenTipo());
+					ateneaChild.setTitulo(centroChild.getCenNombre());
+					
+					ateneaChildList.add(ateneaChild);
+				}
+				ateneaVisor.setAteneaChildList(ateneaChildList);
+				ateneaVisorList.add(ateneaVisor);
+			}
+			
+			
+		}//Facultad
+		else if(pais.getTipo()==3)
+		{
+						
+			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(pais.getTipo(),pais.getCodigo()))
+			{
+				ateneaVisor=new AteneaVisorDTO();
+				
+				ateneaVisor.setCodigo(centro.getCenCodigo());
+				ateneaVisor.setTitulo(centro.getCenNombre());
+				ateneaVisor.setTipo(centro.getCenTipo());				
+				ateneaVisor.setDescripcion1(centro.getCenDatoInstitucional());
+				ateneaVisor.setDescripcion2(centro.getAteCentro().getCenNombre());
+			
+				ateneaVisorList.add(ateneaVisor);
+			}
+			
+			
+		}//Pregrado
+		else if(pais.getTipo()==6)
+		{			
+			for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getAll(pais.getTipo(),pais.getCodigo())){
+				
+				ateneaVisor=new AteneaVisorDTO();
+				
+				if(car.getAteCentro().getCenTipo()==4)
+				{
+					
+					ateneaVisor.setCodigo(car.getCarCodigo());
+					ateneaVisor.setTitulo(car.getCarNombre());
+					ateneaVisor.setTipo(car.getCarTipo());				
+					ateneaVisor.setDescripcion1(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion2(car.getAteCentro().getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion3(car.getAteCentro().getCenNombre());
+
+				}
+				else{
+
+					ateneaVisor.setCodigo(car.getCarCodigo());
+					ateneaVisor.setTitulo(car.getCarNombre());
+					ateneaVisor.setTipo(car.getCarTipo());				
+					ateneaVisor.setDescripcion1(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion2(car.getAteCentro().getAteCentro().getCenNombre());
+				}
+				ateneaVisorList.add(ateneaVisor);	
+			}
+					
+		}//Posgrado
+		else if(pais.getTipo()==7)
+		{
+							
+			for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getAll(pais.getTipo(),pais.getCodigo())){
+				
+				ateneaVisor=new AteneaVisorDTO();
+				
+				if(car.getAteCentro().getCenTipo()==4)
+				{
+					ateneaVisor.setCodigo(car.getCarCodigo());
+					ateneaVisor.setTitulo(car.getCarNombre());
+					ateneaVisor.setTipo(car.getCarTipo());				
+					ateneaVisor.setDescripcion1(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion2(car.getAteCentro().getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion3(car.getAteCentro().getCenNombre());
+
+				}
+				else{
+
+					ateneaVisor.setCodigo(car.getCarCodigo());
+					ateneaVisor.setTitulo(car.getCarNombre());
+					ateneaVisor.setTipo(car.getCarTipo());				
+					ateneaVisor.setDescripcion1(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion2(car.getAteCentro().getAteCentro().getCenNombre());
+				}
+				ateneaVisorList.add(ateneaVisor);	
+			}
+				
+		}//Revista
+		else if(pais.getTipo()==34)
+		{
+			for(PublicacionDTO pub: factoryDAO.getPublicacionDAOImpl().getByType(34)){
+				
+				ateneaVisor=new AteneaVisorDTO();
+				
+				ateneaVisor.setCodigo(pub.getPubCodigo());
+				ateneaVisor.setTitulo(pub.getPubTitulo());
+				ateneaVisor.setTipo(34);
+			
+				ateneaVisorList.add(ateneaVisor);
+			}
+			
+		}//Eventos
+		else if(pais.getTipo()==101)
+		{
+			for(EventoDTO eve: factoryDAO.getEventoDAOImpl().getAll(pais.getCodigo())){
+				
+				ateneaVisor=new AteneaVisorDTO();
+				
+				ateneaVisor.setCodigo(eve.getEveCodigo());
+				ateneaVisor.setTitulo(eve.getEveNombre());				
+				ateneaVisor.setTipo(101);
+				
+				ateneaVisorList.add(ateneaVisor);
+
+			}
+		}//Proyectos de Investigacion
+		else if(pais.getTipo()==102)
+		{
+			for(ProyectoInvestigacionDTO pro: factoryDAO.getProyectoInvestigacionDAOImpl().getAll(pais.getCodigo())){
+
+				ateneaVisor=new AteneaVisorDTO();
+				
+				ateneaVisor.setCodigo(pro.getPinCodigo());
+				ateneaVisor.setTitulo(pro.getPinNombre());				
+				ateneaVisor.setTipo(102);
+				
+				ateneaVisorList.add(ateneaVisor);				
+			}
+		}//Organizacion
+		else if(pais.getTipo()==103)
+		{
+			
+			for(OrganizacionDTO org: factoryDAO.getOrganizacioDAOImpl().getAll2(pais.getCodigo())){
+				
+				ateneaVisor=new AteneaVisorDTO();
+				ateneaVisor.setCodigo(ateneaVisor.getCodigo());
+				ateneaVisor.setTipo(103);
+				ateneaVisor.setTitulo(org.getOrgNombre());
+				
+				ateneaVisorList.add(ateneaVisor);
+				
+			}
+			
+		}//Doctor
+		else if(pais.getTipo()==104)
+		{
+			
+			for(DoctorDTO doc: factoryDAO.getDoctorDAOImpl().getAll2(pais.getCodigo())){
+				
+				ateneaVisor=new AteneaVisorDTO();
+				ateneaVisor.setCodigo(ateneaVisor.getCodigo());
+				ateneaVisor.setTipo(103);
+				ateneaVisor.setTitulo(doc.getDocNombres()+" "+doc.getDocApellidos());
+				
+				ateneaVisorList.add(ateneaVisor);
+			}			
+		}
+
+		return ateneaVisorList;
 	}
 	
 	
