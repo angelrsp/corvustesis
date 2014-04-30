@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import net.ciespal.redxxi.ejb.persistence.entities.AteneaDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.AteneaVisorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
 
 
@@ -22,6 +23,10 @@ public class ReportPublicDataManager implements Serializable{
 
 	private List<PaisDTO> paisList;
 	private List<AteneaDTO> ateneaList;
+	private List<AteneaVisorDTO> ateneaVisorList;
+	
+	
+	private AteneaDTO atenea;
 	
 	private String visor;
 	
@@ -32,6 +37,8 @@ public class ReportPublicDataManager implements Serializable{
 		paisList=new ArrayList<PaisDTO>();
 		ateneaList=new ArrayList<AteneaDTO>();
 		pais=new PaisDTO();
+		atenea=new AteneaDTO();
+		ateneaVisorList=new ArrayList<AteneaVisorDTO>();
 	}
 
 	public List<PaisDTO> getPaisList() {
@@ -62,8 +69,24 @@ public class ReportPublicDataManager implements Serializable{
 		return pais;
 	}
 
+	public AteneaDTO getAtenea() {
+		return atenea;
+	}
+
+	public void setAtenea(AteneaDTO atenea) {
+		this.atenea = atenea;
+	}
+
 	public void setPais(PaisDTO pais) {
 		this.pais = pais;
+	}
+
+	public List<AteneaVisorDTO> getAteneaVisorList() {
+		return ateneaVisorList;
+	}
+
+	public void setAteneaVisorList(List<AteneaVisorDTO> ateneaVisorList) {
+		this.ateneaVisorList = ateneaVisorList;
 	}
 
 	

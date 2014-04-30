@@ -48,7 +48,6 @@ public class ReportPublicController {
 		this.reportPublicDataManager = reportPublicDataManager;
 	}
 	
-
 	private void readAtenea()
 	{
 		try {
@@ -71,6 +70,7 @@ public class ReportPublicController {
 	{
 		try {
 			reportPublicDataManager.setPaisList(ateneaService.readPais(atenea.getTipo()));
+			reportPublicDataManager.setAtenea(atenea);
 			//reportPublicDataManager.setVisor(ateneaService.visor(atenea));
 			//JsfUtil.redirect("/"+JsfUtil.getExternalContext().getContextName()+"/public/home/ateneaVisor.xhtml");
 		} catch (CorvustecException e) {
@@ -84,8 +84,12 @@ public class ReportPublicController {
 			reportPublicDataManager.setPais(pais);
 			reportPublicDataManager.setAteneaList(ateneaService.readAtenea(pais.getCodigo()));
 			//reportPublicDataManager.setVisor(ateneaService.infoPais(pais));
-			pais.setTipo(2);
+			if(reportPublicDataManager.getAtenea().getTipo()!=0)
+				pais.setTipo(reportPublicDataManager.getAtenea().getTipo());
+			else
+				pais.setTipo(2);
 			reportPublicDataManager.setVisor(ateneaService.visor(pais));
+			reportPublicDataManager.getAtenea().setTipo(0);
 			JsfUtil.redirect("/"+JsfUtil.getExternalContext().getContextName()+"/public/home/ateneaVisor.xhtml");
 		} catch (IOException e) {
 			JsfUtil.addErrorMessage(e.toString());
