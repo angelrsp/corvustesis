@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.AteneaDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.AteneaVisorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
@@ -1114,6 +1115,11 @@ public class AteneaServiceImpl implements AteneaService{
 		sb.append("</tr>");
 		return sb.toString();
 	}
+	
+	
+	
+	public List<AteneaVisorDTO> visorList()
+	
 	
 	@Override
 	public String infoPais(PaisDTO pais)
