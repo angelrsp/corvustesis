@@ -89,6 +89,7 @@ public class ReportPublicController {
 			else
 				pais.setTipo(2);
 			reportPublicDataManager.setVisor(ateneaService.visor(pais));
+			reportPublicDataManager.setAteneaVisorList(ateneaService.visorList(pais));
 			reportPublicDataManager.getAtenea().setTipo(0);
 			JsfUtil.redirect("/"+JsfUtil.getExternalContext().getContextName()+"/public/home/ateneaVisor.xhtml");
 		} catch (IOException e) {

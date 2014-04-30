@@ -20,6 +20,7 @@ public class AteneaVisorController{
 
 	@ManagedProperty(value="#{reportPublicDataManager}")
 	private ReportPublicDataManager reportPublicDataManager;
+
 	
 	@EJB
 	private AteneaService ateneaService;
@@ -54,6 +55,7 @@ public class AteneaVisorController{
 		try {
 			atenea.setPais(reportPublicDataManager.getPais().getCodigo());
 			reportPublicDataManager.setVisor(ateneaService.visor(atenea));
+			reportPublicDataManager.setAteneaVisorList(ateneaService.visorList(atenea));
 			//reportPublicDataManager.setPaisList(ateneaService.readPais(atenea.getTipo()));
 		}catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
