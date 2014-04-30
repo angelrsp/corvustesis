@@ -57,7 +57,9 @@
 					<table align="center">
 						<tr>
 							<td>
-								<p:graphicImage value="#{pai.imagenPath}" height="35" width="60"/>
+								<h:commandLink action="#{reportPublicController.selectPais(pai)}">
+									<p:graphicImage value="#{pai.imagenPath}" height="35" width="60"/>
+								</h:commandLink>
 		    				</td>
 		    			</tr>
 		    			<tr>
