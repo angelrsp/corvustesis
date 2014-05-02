@@ -51,10 +51,10 @@ public class PaisVisorController {
 	
 	public void selectAtenea(AteneaDTO atenea)
 	{
-		try {
-			reportPublicDataManager.setVisor(ateneaService.visor(atenea));
-		}catch (CorvustecException e) {
-			JsfUtil.addErrorMessage(e.toString());
-		}
+//		try {
+//			reportPublicDataManager.setVisor(ateneaService.visor(atenea));
+//		}catch (CorvustecException e) {
+//			JsfUtil.addErrorMessage(e.toString());
+//		}
 	}
 }
