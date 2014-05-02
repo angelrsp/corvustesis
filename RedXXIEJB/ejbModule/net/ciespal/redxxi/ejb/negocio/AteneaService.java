@@ -157,9 +157,6 @@ public interface AteneaService {
 
 	CentroDTO readCentro(Object id) throws CorvustecException;
 
-	String visor(AteneaDTO atenea) throws CorvustecException;
-
-	String visor(PaisDTO pais) throws CorvustecException;
 
 	String infoPais(PaisDTO pais);
 
@@ -205,6 +202,8 @@ public interface AteneaService {
 	List<AteneaVisorDTO> visorList(PaisDTO pais) throws CorvustecException;
 
 	List<AteneaVisorDTO> visorList(AteneaDTO atenea) throws CorvustecException;
+
+	int rearAteneaCount() throws CorvustecException;
 
 
 }
