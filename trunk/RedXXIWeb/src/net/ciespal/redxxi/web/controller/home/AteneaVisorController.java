@@ -42,11 +42,11 @@ public class AteneaVisorController{
 
 	public void selectPais(PaisDTO pais)
 	{
-		try {
-			reportPublicDataManager.setVisor(ateneaService.visor(pais));
-		} catch (CorvustecException e) {
-			JsfUtil.addErrorMessage(e.toString());
-		}
+//		try {
+//			//reportPublicDataManager.setVisor(ateneaService.visor(pais));
+//		} catch (CorvustecException e) {
+//			JsfUtil.addErrorMessage(e.toString());
+//		}
 	}
 	
 	
@@ -54,7 +54,7 @@ public class AteneaVisorController{
 	{
 		try {
 			atenea.setPais(reportPublicDataManager.getPais().getCodigo());
-			reportPublicDataManager.setVisor(ateneaService.visor(atenea));
+			//reportPublicDataManager.setVisor(ateneaService.visor(atenea));
 			reportPublicDataManager.setAteneaVisorList(ateneaService.visorList(atenea));
 			//reportPublicDataManager.setPaisList(ateneaService.readPais(atenea.getTipo()));
 		}catch (CorvustecException e) {

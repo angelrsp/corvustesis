@@ -33,6 +33,8 @@ public class ReportPublicDataManager implements Serializable{
 	private PaisDTO pais;
 	
 	
+	private int ateneaCount;
+	
 	public ReportPublicDataManager() {
 		paisList=new ArrayList<PaisDTO>();
 		ateneaList=new ArrayList<AteneaDTO>();
@@ -87,6 +89,14 @@ public class ReportPublicDataManager implements Serializable{
 
 	public void setAteneaVisorList(List<AteneaVisorDTO> ateneaVisorList) {
 		this.ateneaVisorList = ateneaVisorList;
+	}
+
+	public int getAteneaCount() {
+		return ateneaCount;
+	}
+
+	public void setAteneaCount(int ateneaCount) {
+		this.ateneaCount = ateneaCount;
 	}
 
 	
