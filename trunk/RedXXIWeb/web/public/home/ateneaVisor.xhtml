@@ -78,21 +78,24 @@
 		<h:dataTable value="#{reportPublicDataManager.ateneaVisorList}" var="ate" width="100%">
 		
 			<h:column>
-				<h:outputText value="#{ate.titulo}" styleClass="descripcionBlack2"/>
+				<h:outputText value="#{ate.titulo}" styleClass="descripcionBlack2"/><br/>
+				<h:outputText value="#{ate.descripcion1}" styleClass="descripcionBlack2"/><br/>
+				<h:outputText value="#{ate.descripcion2}" styleClass="descripcionBlack2"/><br/>
+				<h:outputText value="----" styleClass="descripcionBlack2"/>
 			</h:column>
 		
 		</h:dataTable>
 	</div>
 	
-	<table width="100%" class="table">
-		<tr>
-			<td>				
-				<div style="overflow-y: scroll; width: 100%; height: 300px;">
-					<h:outputText id="visor" value="#{reportPublicDataManager.visor}" escape="false"/>
-				</div>
-			</td>
-		</tr>
-	</table>
+<!-- 	<table width="100%" class="table"> -->
+<!-- 		<tr> -->
+<!-- 			<td>				 -->
+<!-- 				<div style="overflow-y: scroll; width: 100%; height: 300px;"> -->
+<!-- 					<h:outputText id="visor" value="#{reportPublicDataManager.visor}" escape="false"/> -->
+<!-- 				</div> -->
+<!-- 			</td> -->
+<!-- 		</tr> -->
+<!-- 	</table> -->
 </ui:define>
 
 
