@@ -75,7 +75,7 @@ public class AteneaServiceImpl implements AteneaService{
 			atenea.setCount(factoryDAO.getCarreraDAOImpl().getPregradoCount());
 			atenea.setTipo(6);
 			ateneaList.add(atenea);
-
+			
 			atenea=new AteneaDTO();
 			atenea.setCodigo(4);
 			atenea.setDescripcion("Carreras de Posgrado: ");
@@ -83,13 +83,14 @@ public class AteneaServiceImpl implements AteneaService{
 			atenea.setTipo(7);
 			ateneaList.add(atenea);
 
+						
 			atenea=new AteneaDTO();
 			atenea.setCodigo(5);
 			atenea.setDescripcion("Revistas Científicas: ");
 			atenea.setCount(factoryDAO.getPublicacionDAOImpl().getCountByType(34));
 			atenea.setTipo(34);
 			ateneaList.add(atenea);
-
+			
 			atenea=new AteneaDTO();
 			atenea.setCodigo(6);
 			atenea.setDescripcion("Eventos Científicos: ");
@@ -103,7 +104,7 @@ public class AteneaServiceImpl implements AteneaService{
 			atenea.setCount(factoryDAO.getProyectoInvestigacionDAOImpl().getCount());
 			atenea.setTipo(102);
 			ateneaList.add(atenea);
-
+			
 			atenea=new AteneaDTO();
 			atenea.setCodigo(8);
 			atenea.setDescripcion("Organizaciones Científicas: ");
@@ -111,6 +112,7 @@ public class AteneaServiceImpl implements AteneaService{
 			atenea.setTipo(103);			
 			ateneaList.add(atenea);
 
+			
 			atenea=new AteneaDTO();
 			atenea.setCodigo(9);
 			atenea.setDescripcion("Doctores en Ciencias: ");
@@ -195,6 +197,28 @@ public class AteneaServiceImpl implements AteneaService{
 			ateneaList.add(atenea);
 		}
 		return ateneaList;
+	}
+	
+	@Override
+	public int rearAteneaCount() throws CorvustecException
+	{
+		int total;
+		try {
+			total = factoryDAO.getCentroDAOImpl().getUniversidadCount()+
+			factoryDAO.getCentroDAOImpl().getFacultadCount()+
+			factoryDAO.getCarreraDAOImpl().getPregradoCount()+
+			factoryDAO.getCarreraDAOImpl().getPosgradoCount()+
+			factoryDAO.getPublicacionDAOImpl().getCountByType(34)+
+			factoryDAO.getEventoDAOImpl().getCount()+
+			factoryDAO.getProyectoInvestigacionDAOImpl().getCount()+
+			factoryDAO.getOrganizacioDAOImpl().getCount()+
+			factoryDAO.getDoctorDAOImpl().getCount();
+		}catch(Exception e)
+		{
+			logger.info("Error createCentro {}",e.toString());
+			throw new CorvustecException("Error al createCentro");
+		}
+		return total;
 	}
 	
 	@Override
@@ -330,793 +354,7 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 		return paisList;
 	}
-	
-	@Override
-	public String visor(AteneaDTO atenea) throws CorvustecException
-	{
-		StringBuilder sb=new StringBuilder();
-		//CatalogoDTO catalogo;
-		List<CentroDTO> listCentroChild;
-		List<CentroDTO> listPais;
 		
-		if(atenea.getTipo()==0)
-		{
-		}
-		//Universidad
-		else if(atenea.getTipo()==2)
-		{
-			//Si en el objeto no esta el pais quiere decir que son todos
-			//Obtengo los paises para realizar el visor organizado por pais	
-			if(atenea.getPais()==0)
-				listPais=factoryDAO.getCentroDAOImpl().distinctPais(atenea.getTipo());
-			else
-			{
-				listPais=new ArrayList<CentroDTO>();
-				listPais.add(new CentroDTO(atenea.getPais()));
-			}
-			sb.append("<table>");
-			
-			for(CentroDTO centroPais:listPais){
-				
-				//catalogo=factoryDAO.getCatalogoImpl().find(centroPais.getCenPais());
-								
-				for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(atenea.getTipo(),centroPais.getCenPais()))
-				{
-					listCentroChild= factoryDAO.getCentroDAOImpl().findAllChild(centro);
-					
-					sb.append("<tr>");
-						sb.append("<td>");
-						sb.append("Nombre: ");
-						sb.append("</td>");
-							
-						sb.append("<td>");
-						if(centro.getCenPaginaWeb()!=null)
-							sb.append("<a href='"+centro.getCenPaginaWeb()+"' target='_blank'>"+centro.getCenNombre()+"</a>");
-						else
-							sb.append(centro.getCenNombre());
-						sb.append("</td>");
-					sb.append("</tr>");
-					
-					for(CentroDTO centroChild:listCentroChild)
-					{
-						sb.append("<tr>");
-						
-							sb.append("<td>");
-							sb.append("Facultad: ");
-							sb.append("</td>");
-
-							sb.append("<td>");
-							sb.append(centroChild.getCenNombre());
-							sb.append("</td>");
-						
-						sb.append("</tr>");							
-						sb.append("<tr>");
-							
-							sb.append("<td>");
-							sb.append("Datos Institucionales: ");
-							sb.append("</td>");
-
-							sb.append("<td>");
-							sb.append(centroChild.getCenDatoInstitucional());
-							sb.append("</td>");
-							
-						sb.append("</tr>");
-					}					
-					sb.append(spacer());												
-				}				
-			}
-			sb.append("</table>");
-		}//Facultad
-		else if(atenea.getTipo()==3)
-		{
-			//Si en el objeto no esta el pais quiere decir que son todos
-			//Obtengo los paises para realizar el visor organizado por pais	
-			if(atenea.getPais()==0)
-				listPais=factoryDAO.getCentroDAOImpl().distinctPais(atenea.getTipo());
-			else
-			{
-				listPais=new ArrayList<CentroDTO>();
-				listPais.add(new CentroDTO(atenea.getPais()));
-			}	
-			
-			sb.append("<table>");
-			
-			for(CentroDTO centroPais:listPais){
-				
-				//catalogo=factoryDAO.getCatalogoImpl().find(centroPais.getCenPais());
-								
-				for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(atenea.getTipo(),centroPais.getCenPais()))
-				{	
-					sb.append("<tr>");
-						sb.append("<td>");
-						sb.append("Universidad: ");
-						sb.append("</td>");
-							
-						sb.append("<td>");
-						if(centro.getAteCentro().getCenPaginaWeb()!=null)
-							sb.append("<a href='"+centro.getAteCentro().getCenPaginaWeb()+"' target='_blank'>"+centro.getAteCentro().getCenNombre()+"</a>");
-						else
-							sb.append(centro.getAteCentro().getCenNombre());
-						sb.append("</td>");
-					sb.append("</tr>");
-					
-					sb.append("<tr>");
-					
-						sb.append("<td>");
-						sb.append("Nombre: ");
-						sb.append("</td>");
-
-						sb.append("<td>");
-						sb.append(centro.getCenNombre());
-						sb.append("</td>");
-					
-					sb.append("</tr>");							
-					sb.append("<tr>");
-						
-						sb.append("<td>");
-						sb.append("Datos Institucionales: ");
-						sb.append("</td>");
-
-						sb.append("<td>");
-						sb.append(centro.getCenDatoInstitucional());
-						sb.append("</td>");
-						
-					sb.append("</tr>");
-					
-					sb.append(spacer());					
-					
-				}					
-				
-			}
-			sb.append("</table>");
-		}//Pregrado
-		else if(atenea.getTipo()==6)
-		{
-			
-			if(atenea.getPais()==0)
-				listPais= factoryDAO.getCarreraDAOImpl().distinctPais(atenea.getTipo());
-			else
-			{
-				listPais=new ArrayList<CentroDTO>();
-				listPais.add(new CentroDTO(atenea.getPais()));
-			}
-			
-			sb.append("<table>");
-							
-			for(CentroDTO cen:listPais)
-			{
-				//catalogo=factoryDAO.getCatalogoImpl().find(cen.getCenPais());
-				
-				sb.append("<table>");
-								
-				for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getAll(atenea.getTipo(),cen.getCenPais())){
-					
-					if(car.getAteCentro().getCenTipo()==4)
-					{
-						sb.append("<tr>");
-							sb.append("<td>");
-							sb.append("Universidad: ");
-							sb.append("</td>");
-						
-							sb.append("<td>");
-							sb.append(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
-							sb.append("</td>");
-						sb.append("</tr>");
-
-						sb.append("<tr>");							
-							sb.append("<td>");
-							sb.append("Facultad: ");
-							sb.append("</td>");
-							
-							sb.append("<td>");
-							sb.append(car.getAteCentro().getAteCentro().getCenNombre());
-							sb.append("</td>");
-						sb.append("</tr>");
-
-						sb.append("<tr>");							
-							sb.append("<td>");
-							sb.append("Escuela: ");
-							sb.append("</td>");
-							
-							sb.append("<td>");
-							sb.append(car.getAteCentro().getCenNombre());
-							sb.append("</td>");
-						sb.append("</tr>");							
-
-						sb.append("<tr>");							
-							sb.append("<td>");
-							sb.append("Carrera: ");
-							sb.append("</td>");
-							
-							sb.append("<td>");
-							sb.append(car.getCarNombre());
-							sb.append("</td>");
-						sb.append("</tr>");														
-					}
-					else{
-						
-						sb.append("<tr>");							
-							sb.append("<td>");
-							sb.append("Universidad: ");
-							sb.append("</td>");
-						
-							sb.append("<td>");
-							sb.append(car.getAteCentro().getAteCentro().getCenNombre());
-							sb.append("</td>");
-						sb.append("</tr>");
-
-						sb.append("<tr>");							
-							sb.append("<td>");
-							sb.append("Facultad: ");
-							sb.append("</td>");
-							
-							sb.append("<td>");
-							sb.append(car.getAteCentro().getCenNombre());
-							sb.append("</td>");
-						sb.append("</tr>");
-						
-						sb.append("<tr>");							
-							sb.append("<td>");
-							sb.append("Carrera: ");
-							sb.append("</td>");
-							
-							sb.append("<td>");
-							sb.append(car.getCarNombre());
-							sb.append("</td>");
-						sb.append("</tr>");							
-												
-					}
-					sb.append(spacer());					
-				}
-			}			
-			sb.append("</table>");
-		}//Posgrado
-		else if(atenea.getTipo()==7)
-		{
-			if(atenea.getPais()==0)
-				listPais= factoryDAO.getCarreraDAOImpl().distinctPais(atenea.getTipo());
-			else
-			{
-				listPais=new ArrayList<CentroDTO>();
-				listPais.add(new CentroDTO(atenea.getPais()));
-			}
-			
-			sb.append("<table>");
-							
-			for(CentroDTO cen:listPais)
-			{
-				//catalogo=factoryDAO.getCatalogoImpl().find(cen.getCenPais());
-				
-				sb.append("<table>");
-								
-				for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getAll(atenea.getTipo(),cen.getCenPais())){
-					
-					if(car.getAteCentro().getCenTipo()==4)
-					{
-						sb.append("<tr>");
-							sb.append("<td>");
-							sb.append("Universidad: ");
-							sb.append("</td>");
-						
-							sb.append("<td>");
-							sb.append(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
-							sb.append("</td>");
-						sb.append("</tr>");
-
-						sb.append("<tr>");							
-							sb.append("<td>");
-							sb.append("Facultad: ");
-							sb.append("</td>");
-							
-							sb.append("<td>");
-							sb.append(car.getAteCentro().getAteCentro().getCenNombre());
-							sb.append("</td>");
-						sb.append("</tr>");
-
-						sb.append("<tr>");							
-							sb.append("<td>");
-							sb.append("Escuela: ");
-							sb.append("</td>");
-							
-							sb.append("<td>");
-							sb.append(car.getAteCentro().getCenNombre());
-							sb.append("</td>");
-						sb.append("</tr>");							
-
-						sb.append("<tr>");							
-							sb.append("<td>");
-							sb.append("Carrera: ");
-							sb.append("</td>");
-							
-							sb.append("<td>");
-							sb.append(car.getCarNombre());
-							sb.append("</td>");
-						sb.append("</tr>");														
-					}
-					else{
-						sb.append("<tr>");							
-							sb.append("<td>");
-							sb.append("Universidad: ");
-							sb.append("</td>");
-						
-							sb.append("<td>");
-							sb.append(car.getAteCentro().getAteCentro().getCenNombre());
-							sb.append("</td>");
-						sb.append("</tr>");
-
-						sb.append("<tr>");							
-							sb.append("<td>");
-							sb.append("Facultad: ");
-							sb.append("</td>");
-							
-							sb.append("<td>");
-							sb.append(car.getAteCentro().getCenNombre());
-							sb.append("</td>");
-						sb.append("</tr>");
-						
-						sb.append("<tr>");							
-							sb.append("<td>");
-							sb.append("Carrera: ");
-							sb.append("</td>");
-							
-							sb.append("<td>");
-							sb.append(car.getCarNombre());
-							sb.append("</td>");
-						sb.append("</tr>");							
-												
-					}
-					sb.append(spacer());					
-				}
-			}			
-			sb.append("</table>");
-		}//Revista
-		else if(atenea.getTipo()==34)
-		{
-			List<PublicacionDTO> listPublicacion=new ArrayList<PublicacionDTO>();
-			if(atenea.getPais()==0)
-				listPublicacion=factoryDAO.getPublicacionDAOImpl().getByType(34);
-			else
-				listPublicacion=factoryDAO.getPublicacionDAOImpl().getByType(34,atenea.getPais());
-
-			for(PublicacionDTO pub: listPublicacion){
-				
-				sb.append("<table>");
-					sb.append("<tr>");
-						sb.append("<td>");
-						sb.append(pub.getPubTitulo());
-						sb.append("</td>");
-					sb.append("</tr>");
-				sb.append("</table>");
-				
-			}
-		}//Eventos
-		else if(atenea.getTipo()==101)
-		{
-			List<EventoDTO> listEvento=new ArrayList<EventoDTO>();
-			if(atenea.getPais()==0)
-				listEvento=factoryDAO.getEventoDAOImpl().getAll();
-			else
-				listEvento=factoryDAO.getEventoDAOImpl().getAll(atenea.getPais());
-			
-			for(EventoDTO eve: listEvento){
-				sb.append("<table>");
-				sb.append("<tr>");
-				sb.append("<td>");
-				sb.append(eve.getEveNombre());
-				sb.append("</td>");
-				sb.append("</tr>");
-				sb.append("</table>");
-			}
-		}//Proyectos de Investigacion
-		else if(atenea.getTipo()==102)
-		{
-			List<ProyectoInvestigacionDTO> listProyecto=new ArrayList<ProyectoInvestigacionDTO>();
-			if(atenea.getPais()==0)
-				listProyecto=factoryDAO.getProyectoInvestigacionDAOImpl().getAll();
-			else
-				listProyecto=factoryDAO.getProyectoInvestigacionDAOImpl().getAll(atenea.getPais());
-			
-			for(ProyectoInvestigacionDTO pro: listProyecto){
-				sb.append("<table>");
-				sb.append("<tr>");
-				sb.append("<td>");
-				sb.append(pro.getPinNombre());
-				sb.append("</td>");
-				sb.append("</tr>");
-				sb.append("</table>");
-			}
-		}//Organizacion
-		else if(atenea.getTipo()==103)
-		{
-			List<OrganizacionDTO> listOrg=new ArrayList<OrganizacionDTO>();
-			if(atenea.getPais()==0)
-				listOrg=factoryDAO.getOrganizacioDAOImpl().getAll();
-			else
-				listOrg=factoryDAO.getOrganizacioDAOImpl().getAll2(atenea.getPais());
-			
-			for(OrganizacionDTO org: listOrg){
-				sb.append("<table>");
-				sb.append("<tr>");
-				sb.append("<td>");
-				sb.append(org.getOrgNombre());
-				sb.append("</td>");
-				sb.append("</tr>");
-				sb.append("</table>");
-			}
-		}//Doctor
-		else if(atenea.getTipo()==104)
-		{
-			List<DoctorDTO> listDoc=new ArrayList<DoctorDTO>();
-			if(atenea.getPais()==0)
-				listDoc=factoryDAO.getDoctorDAOImpl().getAll();
-			else
-				listDoc=factoryDAO.getDoctorDAOImpl().getAll2(atenea.getPais());
-			
-			for(DoctorDTO doc: listDoc){
-				sb.append("<table>");
-				sb.append("<tr>");
-				
-					sb.append("<td>");
-					sb.append(doc.getDocApellidos());
-					sb.append("</td>");
-				
-					sb.append("<td>");
-					sb.append(doc.getDocNombres());
-					sb.append("</td>");
-
-				sb.append("</tr>");
-				sb.append("</table>");
-			}
-		}
-		return sb.toString();
-	}
-	
-	@Override
-	public String visor(PaisDTO pais) throws CorvustecException
-	{
-		StringBuilder sb=new StringBuilder();
-		//CatalogoDTO catalogo=new CatalogoDTO();
-		List<CentroDTO> listCentroChild;
-		if(pais.getTipo()==0)
-		{
-		}
-		//Universidad
-		else if(pais.getTipo()==2)
-		{
-			sb.append("<table>");
-									
-			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(pais.getTipo(),pais.getCodigo()))
-			{
-				listCentroChild= factoryDAO.getCentroDAOImpl().findAllChild(centro);
-				
-				sb.append("<tr>");
-					sb.append("<td>");
-					sb.append("Nombre: ");
-					sb.append("</td>");
-					sb.append("<td>");
-					if(centro.getCenPaginaWeb()!=null)
-						sb.append("<a href='http://"+centro.getCenPaginaWeb()+"' target='_blank'>"+centro.getCenNombre()+"</a>");
-					else
-						sb.append(centro.getCenNombre());
-					sb.append("</td>");
-				sb.append("</tr>");
-				
-				for(CentroDTO centroChild:listCentroChild)
-				{
-					sb.append("<tr>");
-						sb.append("<td>");
-						sb.append("Facultad: ");
-						sb.append("</td>");
-
-						sb.append("<td>");
-						sb.append(centroChild.getCenNombre());
-						sb.append("</td>");
-					sb.append("</tr>");			
-					
-					sb.append("<tr>");
-						sb.append("<td>");
-						sb.append("Datos Institucionales: ");
-						sb.append("</td>");
-
-						sb.append("<td>");
-						sb.append(centroChild.getCenDatoInstitucional());
-						sb.append("</td>");
-					sb.append("</tr>");
-				}
-				
-				sb.append(spacer());				
-			}
-			sb.append("</table>");
-		}//Facultad
-		else if(pais.getTipo()==3)
-		{
-			sb.append("<table>");
-						
-			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(pais.getTipo(),pais.getCodigo()))
-			{
-				sb.append("<tr>");
-					sb.append("<td>");
-					sb.append("Universidad: ");
-					sb.append("</td>");
-						
-					sb.append("<td>");
-					sb.append(centro.getAteCentro().getCenNombre());
-					sb.append("</td>");
-				sb.append("</tr>");
-
-				sb.append("<tr>");
-				
-					sb.append("<td>");
-					sb.append("Nombre: ");
-					sb.append("</td>");
-
-					sb.append("<td>");
-					sb.append(centro.getCenNombre());
-					sb.append("</td>");
-				
-				sb.append("</tr>");							
-				sb.append("<tr>");
-					
-					sb.append("<td>");
-					sb.append("Datos Institucionales: ");
-					sb.append("</td>");
-
-					sb.append("<td>");
-					sb.append(centro.getCenDatoInstitucional());
-					sb.append("</td>");
-					
-				sb.append("</tr>");
-				
-				sb.append(spacer());
-					
-			}
-			sb.append("</table>");
-		}//Pregrado
-		else if(pais.getTipo()==6)
-		{			
-			sb.append("<table>");
-							
-			for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getAll(pais.getTipo(),pais.getCodigo())){
-				
-				if(car.getAteCentro().getCenTipo()==4)
-				{
-					sb.append("<tr>");
-						sb.append("<td>");
-						sb.append("Universidad: ");
-						sb.append("</td>");
-					
-						sb.append("<td>");
-						sb.append(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
-						sb.append("</td>");
-					sb.append("</tr>");
-
-					sb.append("<tr>");							
-						sb.append("<td>");
-						sb.append("Facultad: ");
-						sb.append("</td>");
-						
-						sb.append("<td>");
-						sb.append(car.getAteCentro().getAteCentro().getCenNombre());
-						sb.append("</td>");
-					sb.append("</tr>");
-
-					sb.append("<tr>");							
-						sb.append("<td>");
-						sb.append("Escuela: ");
-						sb.append("</td>");
-						
-						sb.append("<td>");
-						sb.append(car.getAteCentro().getCenNombre());
-						sb.append("</td>");
-					sb.append("</tr>");							
-
-					sb.append("<tr>");							
-						sb.append("<td>");
-						sb.append("Carrera: ");
-						sb.append("</td>");
-						
-						sb.append("<td>");
-						sb.append(car.getCarNombre());
-						sb.append("</td>");
-					sb.append("</tr>");														
-				}
-				else{
-					
-					sb.append("<tr>");							
-						sb.append("<td>");
-						sb.append("Universidad: ");
-						sb.append("</td>");
-					
-						sb.append("<td>");
-						sb.append(car.getAteCentro().getAteCentro().getCenNombre());
-						sb.append("</td>");
-					sb.append("</tr>");
-
-					sb.append("<tr>");							
-						sb.append("<td>");
-						sb.append("Facultad: ");
-						sb.append("</td>");
-						
-						sb.append("<td>");
-						sb.append(car.getAteCentro().getCenNombre());
-						sb.append("</td>");
-					sb.append("</tr>");
-					
-					sb.append("<tr>");							
-						sb.append("<td>");
-						sb.append("Carrera: ");
-						sb.append("</td>");
-						
-						sb.append("<td>");
-						sb.append(car.getCarNombre());
-						sb.append("</td>");
-					sb.append("</tr>");							
-											
-				}
-				sb.append(spacer());					
-			}
-		
-			sb.append("</table>");			
-		}//Posgrado
-		else if(pais.getTipo()==7)
-		{
-			sb.append("<table>");
-							
-			for(CarreraDTO car: factoryDAO.getCarreraDAOImpl().getAll(pais.getTipo(),pais.getCodigo())){
-				
-				if(car.getAteCentro().getCenTipo()==4)
-				{
-					sb.append("<tr>");
-						sb.append("<td>");
-						sb.append("Universidad: ");
-						sb.append("</td>");
-					
-						sb.append("<td>");
-						sb.append(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
-						sb.append("</td>");
-					sb.append("</tr>");
-
-					sb.append("<tr>");							
-						sb.append("<td>");
-						sb.append("Facultad: ");
-						sb.append("</td>");
-						
-						sb.append("<td>");
-						sb.append(car.getAteCentro().getAteCentro().getCenNombre());
-						sb.append("</td>");
-					sb.append("</tr>");
-
-					sb.append("<tr>");							
-						sb.append("<td>");
-						sb.append("Escuela: ");
-						sb.append("</td>");
-						
-						sb.append("<td>");
-						sb.append(car.getAteCentro().getCenNombre());
-						sb.append("</td>");
-					sb.append("</tr>");							
-
-					sb.append("<tr>");							
-						sb.append("<td>");
-						sb.append("Carrera: ");
-						sb.append("</td>");
-						
-						sb.append("<td>");
-						sb.append(car.getCarNombre());
-						sb.append("</td>");
-					sb.append("</tr>");														
-				}
-				else{
-					
-					sb.append("<tr>");							
-						sb.append("<td>");
-						sb.append("Universidad: ");
-						sb.append("</td>");
-					
-						sb.append("<td>");
-						sb.append(car.getAteCentro().getAteCentro().getCenNombre());
-						sb.append("</td>");
-					sb.append("</tr>");
-
-					sb.append("<tr>");							
-						sb.append("<td>");
-						sb.append("Facultad: ");
-						sb.append("</td>");
-						
-						sb.append("<td>");
-						sb.append(car.getAteCentro().getCenNombre());
-						sb.append("</td>");
-					sb.append("</tr>");
-					
-					sb.append("<tr>");							
-						sb.append("<td>");
-						sb.append("Carrera: ");
-						sb.append("</td>");
-						
-						sb.append("<td>");
-						sb.append(car.getCarNombre());
-						sb.append("</td>");
-					sb.append("</tr>");							
-											
-				}
-				sb.append(spacer());					
-			}
-			sb.append("</table>");				
-		}//Revista
-		else if(pais.getTipo()==34)
-		{
-			for(PublicacionDTO pub: factoryDAO.getPublicacionDAOImpl().getByType(34)){
-				sb.append("<table>");
-				sb.append("<tr>");
-				sb.append("<td>");
-				sb.append(pub.getPubTitulo());
-				sb.append("</td>");
-				sb.append("</tr>");
-				sb.append("</table>");
-			}
-		}//Eventos
-		else if(pais.getTipo()==101)
-		{
-			for(EventoDTO eve: factoryDAO.getEventoDAOImpl().getAll()){
-				sb.append("<table>");
-				sb.append("<tr>");
-				sb.append("<td>");
-				sb.append(eve.getEveNombre());
-				sb.append("</td>");
-				sb.append("</tr>");
-				sb.append("</table>");
-			}
-		}//Proyectos de Investigacion
-		else if(pais.getTipo()==102)
-		{
-			for(ProyectoInvestigacionDTO pro: factoryDAO.getProyectoInvestigacionDAOImpl().getAll()){
-				sb.append("<table>");
-				sb.append("<tr>");
-				sb.append("<td>");
-				sb.append(pro.getPinNombre());
-				sb.append("</td>");
-				sb.append("</tr>");
-				sb.append("</table>");
-			}
-		}//Organizacion
-		else if(pais.getTipo()==103)
-		{
-//			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
-//				pais=new PaisDTO();
-//				pais.setCodigo(cat.getCatCodigo());
-//				pais.setImagenPath(cat.getCatImagenPath());
-//				pais.setNombre(cat.getCatDescripcion());
-//				pais.setCount(factoryDAO.getOrganizacioDAOImpl().getCount(cat.getCatCodigo()));
-//				pais.setTipo(Integer.valueOf(type.toString()));
-//				paisList.add(pais);
-//			}
-		}//Doctor
-		else if(pais.getTipo()==104)
-		{
-//			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
-//				pais=new PaisDTO();
-//				pais.setCodigo(cat.getCatCodigo());
-//				pais.setImagenPath(cat.getCatImagenPath());
-//				pais.setNombre(cat.getCatDescripcion());
-//				pais.setCount(factoryDAO.getDoctorDAOImpl().getCount(cat.getCatCodigo()));
-//				pais.setTipo(Integer.valueOf(type.toString()));
-//				paisList.add(pais);
-//			}
-		}
-		return sb.toString();
-	}
-	
-	private static String spacer()
-	{
-		StringBuilder sb=new StringBuilder();
-		sb.append("<tr>");												
-			sb.append("<td colspan='2' align='center'>");
-			sb.append("---");
-			sb.append("</td>");
-		sb.append("</tr>");
-		return sb.toString();
-	}
-	
 
 	@Override
 	public List<AteneaVisorDTO> visorList(AteneaDTO atenea) throws CorvustecException
@@ -1139,38 +377,54 @@ public class AteneaServiceImpl implements AteneaService{
 			//Si en el objeto no esta el pais quiere decir que son todos
 			//Obtengo los paises para realizar el visor organizado por pais	
 			if(atenea.getPais()==0)
-				listPais=factoryDAO.getCentroDAOImpl().distinctPais(atenea.getTipo());
+				listPais=factoryDAO.getCentroDAOImpl().distinctPais(3);
 			else
 			{
 				listPais=new ArrayList<CentroDTO>();
 				listPais.add(new CentroDTO(atenea.getPais()));
 			}
 			
+//			for(CentroDTO centroPais:listPais){
+//				
+//				for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(atenea.getTipo(),centroPais.getCenPais()))
+//				{
+//					listCentroChild= factoryDAO.getCentroDAOImpl().findAllChild(centro);
+//					
+//					ateneaVisor=new AteneaVisorDTO();
+//					ateneaVisor.setCodigo(centro.getCenCodigo());
+//					ateneaVisor.setTitulo(centro.getCenNombre());
+//					ateneaVisor.setTipo(atenea.getTipo());
+//										
+//					for(CentroDTO centroChild:listCentroChild)
+//					{
+//						ateneaChild=new AteneaVisorChildDTO();
+//						
+//						ateneaChild.setCodigo(centroChild.getCenCodigo());
+//						ateneaChild.setTitulo(centroChild.getCenNombre());
+//						ateneaChild.setDescripcion1(centroChild.getCenDatoInstitucional());
+//
+//						ateneaChildList.add(ateneaChild);
+//					}
+//					ateneaVisor.setAteneaChildList(ateneaChildList);
+//					ateneaVisorList.add(ateneaVisor);
+//				}
+//				
+//			}
+			
+			
 			for(CentroDTO centroPais:listPais){
-				
-				for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(atenea.getTipo(),centroPais.getCenPais()))
-				{
-					listCentroChild= factoryDAO.getCentroDAOImpl().findAllChild(centro);
-					
+				for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(3,centroPais.getCenPais()))
+				{	
 					ateneaVisor=new AteneaVisorDTO();
 					ateneaVisor.setCodigo(centro.getCenCodigo());
-					ateneaVisor.setTitulo(centro.getCenNombre());
+					
+					ateneaVisor.setTitulo(centro.getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion1(centro.getCenNombre());
+					ateneaVisor.setDescripcion2(centro.getCenDatoInstitucional());
 					ateneaVisor.setTipo(atenea.getTipo());
-										
-					for(CentroDTO centroChild:listCentroChild)
-					{
-						ateneaChild=new AteneaVisorChildDTO();
-						
-						ateneaChild.setCodigo(centroChild.getCenCodigo());
-						ateneaChild.setTitulo(centroChild.getCenNombre());
-						ateneaChild.setDescripcion1(centroChild.getCenDatoInstitucional());
 
-						ateneaChildList.add(ateneaChild);
-					}
-					ateneaVisor.setAteneaChildList(ateneaChildList);
 					ateneaVisorList.add(ateneaVisor);
 				}
-				
 			}
 			
 		}//Facultad
@@ -1192,7 +446,9 @@ public class AteneaServiceImpl implements AteneaService{
 				{	
 					ateneaVisor=new AteneaVisorDTO();
 					ateneaVisor.setCodigo(centro.getCenCodigo());
-					ateneaVisor.setTitulo(centro.getCenNombre());
+					ateneaVisor.setTitulo(centro.getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion1(centro.getCenNombre());
+					ateneaVisor.setDescripcion2(centro.getAteCentro().getCenDatoInstitucional());
 					ateneaVisor.setTipo(atenea.getTipo());
 
 					ateneaVisorList.add(ateneaVisor);
@@ -1343,6 +599,7 @@ public class AteneaServiceImpl implements AteneaService{
 				ateneaVisor=new AteneaVisorDTO();
 				ateneaVisor.setCodigo(pro.getPinCodigo());
 				ateneaVisor.setTitulo(pro.getPinNombre());
+				ateneaVisor.setDescripcion1(pro.getPinPerfil());
 				ateneaVisor.setTipo(atenea.getTipo());
 				
 				ateneaVisorList.add(ateneaVisor);
@@ -1402,29 +659,44 @@ public class AteneaServiceImpl implements AteneaService{
 		else if(pais.getTipo()==2)
 		{
 									
-			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(pais.getTipo(),pais.getCodigo()))
-			{
-				listCentroChild= factoryDAO.getCentroDAOImpl().findAllChild(centro);
+//			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(pais.getTipo(),pais.getCodigo()))
+//			{
+//				listCentroChild= factoryDAO.getCentroDAOImpl().findAllChild(centro);
+//
+//				ateneaVisor=new AteneaVisorDTO();
+//				
+//				ateneaVisor.setCodigo(centro.getCenCodigo());
+//				ateneaVisor.setTitulo(centro.getCenNombre());
+//				ateneaVisor.setTipo(centro.getCenTipo());
+//				
+//				for(CentroDTO centroChild:listCentroChild)
+//				{
+//					ateneaChild=new AteneaVisorChildDTO();
+//					
+//					ateneaChild.setCodigo(centroChild.getCenCodigo());
+//					ateneaChild.setTipo(centroChild.getCenTipo());
+//					ateneaChild.setTitulo(centroChild.getCenNombre());
+//					
+//					ateneaChildList.add(ateneaChild);
+//				}
+//				ateneaVisor.setAteneaChildList(ateneaChildList);
+//				ateneaVisorList.add(ateneaVisor);
+//			}
 
+			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(3,pais.getCodigo()))
+			{
 				ateneaVisor=new AteneaVisorDTO();
 				
 				ateneaVisor.setCodigo(centro.getCenCodigo());
-				ateneaVisor.setTitulo(centro.getCenNombre());
+				ateneaVisor.setTitulo(centro.getAteCentro().getCenNombre());
 				ateneaVisor.setTipo(centro.getCenTipo());
+				ateneaVisor.setDescripcion1(centro.getCenNombre());
+				ateneaVisor.setDescripcion2(centro.getCenDatoInstitucional());
 				
-				for(CentroDTO centroChild:listCentroChild)
-				{
-					ateneaChild=new AteneaVisorChildDTO();
-					
-					ateneaChild.setCodigo(centroChild.getCenCodigo());
-					ateneaChild.setTipo(centroChild.getCenTipo());
-					ateneaChild.setTitulo(centroChild.getCenNombre());
-					
-					ateneaChildList.add(ateneaChild);
-				}
-				ateneaVisor.setAteneaChildList(ateneaChildList);
+			
 				ateneaVisorList.add(ateneaVisor);
 			}
+
 			
 			
 		}//Facultad
@@ -1436,10 +708,10 @@ public class AteneaServiceImpl implements AteneaService{
 				ateneaVisor=new AteneaVisorDTO();
 				
 				ateneaVisor.setCodigo(centro.getCenCodigo());
-				ateneaVisor.setTitulo(centro.getCenNombre());
+				ateneaVisor.setTitulo(centro.getAteCentro().getCenNombre());
+				ateneaVisor.setDescripcion1(centro.getCenNombre());
+				ateneaVisor.setDescripcion2(centro.getCenDatoInstitucional());
 				ateneaVisor.setTipo(centro.getCenTipo());				
-				ateneaVisor.setDescripcion1(centro.getCenDatoInstitucional());
-				ateneaVisor.setDescripcion2(centro.getAteCentro().getCenNombre());
 			
 				ateneaVisorList.add(ateneaVisor);
 			}
