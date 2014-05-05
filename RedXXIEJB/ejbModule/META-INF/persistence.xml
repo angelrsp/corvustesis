@@ -19,7 +19,6 @@
 	<class>net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.UniversidadListDTO</class>
-	<class>net.ciespal.redxxi.ejb.persistence.entities.FacultadListDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.DefensorDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.EntidadArgosDTO</class>
@@ -38,6 +37,7 @@
 	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioCiespalDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosListDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.DoctorListDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.FacultadListDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>		

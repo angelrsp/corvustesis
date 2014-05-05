@@ -418,9 +418,9 @@ public class AteneaServiceImpl implements AteneaService{
 					ateneaVisor=new AteneaVisorDTO();
 					ateneaVisor.setCodigo(centro.getCenCodigo());
 					
-					ateneaVisor.setTitulo(centro.getAteCentro().getCenNombre());
-					ateneaVisor.setDescripcion1(centro.getCenNombre());
-					ateneaVisor.setDescripcion2(centro.getCenDatoInstitucional());
+					ateneaVisor.setTitulo("Universidad: " +centro.getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion1("Facultad :"+centro.getCenNombre());
+					ateneaVisor.setDescripcion2("Datos Institucionales: "+centro.getCenDatoInstitucional());
 					ateneaVisor.setTipo(atenea.getTipo());
 
 					ateneaVisorList.add(ateneaVisor);
@@ -446,9 +446,9 @@ public class AteneaServiceImpl implements AteneaService{
 				{	
 					ateneaVisor=new AteneaVisorDTO();
 					ateneaVisor.setCodigo(centro.getCenCodigo());
-					ateneaVisor.setTitulo(centro.getAteCentro().getCenNombre());
-					ateneaVisor.setDescripcion1(centro.getCenNombre());
-					ateneaVisor.setDescripcion2(centro.getAteCentro().getCenDatoInstitucional());
+					ateneaVisor.setTitulo("Universidad:" +centro.getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion1("Facultad: "+centro.getCenNombre());
+					ateneaVisor.setDescripcion2("Datos Institucionales:"+ centro.getAteCentro().getCenDatoInstitucional());
 					ateneaVisor.setTipo(atenea.getTipo());
 
 					ateneaVisorList.add(ateneaVisor);
@@ -478,26 +478,25 @@ public class AteneaServiceImpl implements AteneaService{
 						ateneaVisor=new AteneaVisorDTO();
 						
 						ateneaVisor.setCodigo(car.getCarCodigo());
-						ateneaVisor.setTitulo(car.getCarNombre());
+
 						ateneaVisor.setTipo(atenea.getTipo());
-						ateneaVisor.setDescripcion1(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
-						ateneaVisor.setDescripcion2(car.getAteCentro().getAteCentro().getCenNombre());
-						ateneaVisor.setDescripcion3(car.getAteCentro().getCenNombre());
+						ateneaVisor.setTitulo("Universidad: "+car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
+						ateneaVisor.setDescripcion1("Facultad: "+car.getAteCentro().getAteCentro().getCenNombre());
+						ateneaVisor.setDescripcion2("Carrera:" +car.getAteCentro().getCenNombre());
 						
 						ateneaVisorList.add(ateneaVisor);
-						
 					}
 					else{
 						ateneaVisor=new AteneaVisorDTO();
 						
 						ateneaVisor.setCodigo(car.getCarCodigo());
-						ateneaVisor.setTitulo(car.getCarNombre());
-						ateneaVisor.setTipo(atenea.getTipo());
-						ateneaVisor.setDescripcion1(car.getAteCentro().getAteCentro().getCenNombre());
-						ateneaVisor.setDescripcion2(car.getAteCentro().getCenNombre());
 						
+						ateneaVisor.setTitulo("Universidad:"+car.getAteCentro().getAteCentro().getCenNombre());
+						ateneaVisor.setDescripcion1("Facultad: "+car.getAteCentro().getCenNombre());
+						ateneaVisor.setDescripcion2("Carrera: "+car.getCarNombre());						
+						
+						ateneaVisor.setTipo(atenea.getTipo());
 						ateneaVisorList.add(ateneaVisor);
-												
 					}
 										
 				}
@@ -524,23 +523,22 @@ public class AteneaServiceImpl implements AteneaService{
 						ateneaVisor=new AteneaVisorDTO();
 						
 						ateneaVisor.setCodigo(car.getCarCodigo());
-						ateneaVisor.setTitulo(car.getCarNombre());
 						ateneaVisor.setTipo(atenea.getTipo());
-						ateneaVisor.setDescripcion1(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
-						ateneaVisor.setDescripcion2(car.getAteCentro().getAteCentro().getCenNombre());
-						ateneaVisor.setDescripcion3(car.getAteCentro().getCenNombre());
+						ateneaVisor.setTitulo("Universidad: "+car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
+						ateneaVisor.setDescripcion1("Facultad: "+car.getAteCentro().getAteCentro().getCenNombre());
+						ateneaVisor.setDescripcion2("Carrera: "+car.getCarNombre());
 						
 						ateneaVisorList.add(ateneaVisor);
-						
 					}
 					else{
 						
 						ateneaVisor=new AteneaVisorDTO();
 						ateneaVisor.setCodigo(car.getCarCodigo());
-						ateneaVisor.setTitulo(car.getCarNombre());
+						
 						ateneaVisor.setTipo(atenea.getTipo());
-						ateneaVisor.setDescripcion1(car.getAteCentro().getAteCentro().getCenNombre());
-						ateneaVisor.setDescripcion2(car.getAteCentro().getCenNombre());
+						ateneaVisor.setTitulo("Universidad: "+car.getAteCentro().getAteCentro().getCenNombre());
+						ateneaVisor.setDescripcion2("Facultad: "+car.getAteCentro().getCenNombre());
+						ateneaVisor.setDescripcion2("Carrera: "+car.getCarNombre());
 						
 						ateneaVisorList.add(ateneaVisor);
 					}
@@ -617,7 +615,8 @@ public class AteneaServiceImpl implements AteneaService{
 
 				ateneaVisor=new AteneaVisorDTO();
 				ateneaVisor.setCodigo(org.getOrgCodigo());
-				ateneaVisor.setTitulo(org.getOrgNombre());
+				ateneaVisor.setTitulo("Nombre: "+ org.getOrgNombre());
+				ateneaVisor.setDescripcion1("Datos Institucionales: "+org.getOrgDatosInstitucionales());
 				ateneaVisor.setTipo(atenea.getTipo());
 				
 				ateneaVisorList.add(ateneaVisor);
@@ -634,7 +633,8 @@ public class AteneaServiceImpl implements AteneaService{
 			for(DoctorDTO doc: listDoc){
 				ateneaVisor=new AteneaVisorDTO();
 				ateneaVisor.setCodigo(doc.getDocCodigo());
-				ateneaVisor.setTitulo(doc.getDocFotoNombre()+" "+doc.getDocApellidos());
+				ateneaVisor.setTitulo("Nombres: "+doc.getDocNombres()+" "+doc.getDocApellidos());
+				ateneaVisor.setDescripcion1("Fecha de Nacimiento: "+doc.getDocFechaNacimiento().toString().substring(0, 10));
 				ateneaVisor.setTipo(atenea.getTipo());
 				
 				ateneaVisorList.add(ateneaVisor);
@@ -686,13 +686,13 @@ public class AteneaServiceImpl implements AteneaService{
 			for(CentroDTO centro: factoryDAO.getCentroDAOImpl().getCentro(3,pais.getCodigo()))
 			{
 				ateneaVisor=new AteneaVisorDTO();
+
+				ateneaVisor.setTitulo("Universidad: " +centro.getAteCentro().getCenNombre());
+				ateneaVisor.setDescripcion1("Facultad :"+centro.getCenNombre());
+				ateneaVisor.setDescripcion2("Datos Institucionales: "+centro.getCenDatoInstitucional());
 				
 				ateneaVisor.setCodigo(centro.getCenCodigo());
-				ateneaVisor.setTitulo(centro.getAteCentro().getCenNombre());
-				ateneaVisor.setTipo(centro.getCenTipo());
-				ateneaVisor.setDescripcion1(centro.getCenNombre());
-				ateneaVisor.setDescripcion2(centro.getCenDatoInstitucional());
-				
+				ateneaVisor.setTipo(centro.getCenTipo());				
 			
 				ateneaVisorList.add(ateneaVisor);
 			}
@@ -708,9 +708,9 @@ public class AteneaServiceImpl implements AteneaService{
 				ateneaVisor=new AteneaVisorDTO();
 				
 				ateneaVisor.setCodigo(centro.getCenCodigo());
-				ateneaVisor.setTitulo(centro.getAteCentro().getCenNombre());
-				ateneaVisor.setDescripcion1(centro.getCenNombre());
-				ateneaVisor.setDescripcion2(centro.getCenDatoInstitucional());
+				ateneaVisor.setTitulo("Universidad: "+centro.getAteCentro().getCenNombre());
+				ateneaVisor.setDescripcion1("Facultad: "+centro.getCenNombre());
+				ateneaVisor.setDescripcion2("Datos Institucionales: "+centro.getCenDatoInstitucional());
 				ateneaVisor.setTipo(centro.getCenTipo());				
 			
 				ateneaVisorList.add(ateneaVisor);
@@ -726,22 +726,19 @@ public class AteneaServiceImpl implements AteneaService{
 				
 				if(car.getAteCentro().getCenTipo()==4)
 				{
-					
 					ateneaVisor.setCodigo(car.getCarCodigo());
-					ateneaVisor.setTitulo(car.getCarNombre());
+					ateneaVisor.setTitulo("Universidad: "+car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion1("Facultad: "+car.getAteCentro().getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion2("Carrera: "+car.getCarNombre());
 					ateneaVisor.setTipo(car.getCarTipo());				
-					ateneaVisor.setDescripcion1(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
-					ateneaVisor.setDescripcion2(car.getAteCentro().getAteCentro().getCenNombre());
-					ateneaVisor.setDescripcion3(car.getAteCentro().getCenNombre());
-
 				}
 				else{
 
 					ateneaVisor.setCodigo(car.getCarCodigo());
-					ateneaVisor.setTitulo(car.getCarNombre());
-					ateneaVisor.setTipo(car.getCarTipo());				
-					ateneaVisor.setDescripcion1(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
-					ateneaVisor.setDescripcion2(car.getAteCentro().getAteCentro().getCenNombre());
+					ateneaVisor.setTipo(car.getCarTipo());
+					ateneaVisor.setTitulo("Universidad: "+car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion1("Facultad: "+car.getAteCentro().getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion2("Carrera: "+car.getCarNombre());
 				}
 				ateneaVisorList.add(ateneaVisor);	
 			}
@@ -757,20 +754,17 @@ public class AteneaServiceImpl implements AteneaService{
 				if(car.getAteCentro().getCenTipo()==4)
 				{
 					ateneaVisor.setCodigo(car.getCarCodigo());
-					ateneaVisor.setTitulo(car.getCarNombre());
+					ateneaVisor.setTitulo("Universidad: "+car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion1("Facultad: "+car.getAteCentro().getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion2("Carrera: "+car.getCarNombre());
 					ateneaVisor.setTipo(car.getCarTipo());				
-					ateneaVisor.setDescripcion1(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
-					ateneaVisor.setDescripcion2(car.getAteCentro().getAteCentro().getCenNombre());
-					ateneaVisor.setDescripcion3(car.getAteCentro().getCenNombre());
-
 				}
 				else{
-
 					ateneaVisor.setCodigo(car.getCarCodigo());
-					ateneaVisor.setTitulo(car.getCarNombre());
-					ateneaVisor.setTipo(car.getCarTipo());				
-					ateneaVisor.setDescripcion1(car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
-					ateneaVisor.setDescripcion2(car.getAteCentro().getAteCentro().getCenNombre());
+					ateneaVisor.setTipo(car.getCarTipo());
+					ateneaVisor.setTitulo("Universidad: " +car.getAteCentro().getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion2("Facultad:"+car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
+					ateneaVisor.setDescripcion1("Carrera:" +car.getCarNombre());
 				}
 				ateneaVisorList.add(ateneaVisor);	
 			}
@@ -811,7 +805,7 @@ public class AteneaServiceImpl implements AteneaService{
 				ateneaVisor=new AteneaVisorDTO();
 				
 				ateneaVisor.setCodigo(pro.getPinCodigo());
-				ateneaVisor.setTitulo(pro.getPinNombre());				
+				ateneaVisor.setTitulo(pro.getPinNombre());	
 				ateneaVisor.setTipo(102);
 				
 				ateneaVisorList.add(ateneaVisor);				

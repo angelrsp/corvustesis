@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the vie_facultad database table.
+ * The persistent class for the ate_facultad_vie database table.
  * 
  */
 @Entity
@@ -14,8 +14,8 @@ import javax.persistence.*;
 public class FacultadListDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="cat_ciudad")
-	private String catCiudad;
+	@Column(name="cat_cuidad")
+	private String catCuidad;
 
 	@Column(name="cat_pais")
 	private String catPais;
@@ -42,6 +42,9 @@ public class FacultadListDTO implements Serializable {
 	@Column(name="cen_nombre")
 	private String cenNombre;
 
+	@Column(name="cen_pagina_web")
+	private String cenPaginaWeb;
+
 	@Column(name="cen_pais")
 	private Integer cenPais;
 
@@ -54,18 +57,15 @@ public class FacultadListDTO implements Serializable {
 	@Column(name="cen_tipo")
 	private Integer cenTipo;
 
-	@Column(name="cen_universidad")
-	private String cenUniversidad;
-
 	public FacultadListDTO() {
 	}
 
-	public String getCatCiudad() {
-		return this.catCiudad;
+	public String getCatCuidad() {
+		return this.catCuidad;
 	}
 
-	public void setCatCiudad(String catCiudad) {
-		this.catCiudad = catCiudad;
+	public void setCatCuidad(String catCuidad) {
+		this.catCuidad = catCuidad;
 	}
 
 	public String getCatPais() {
@@ -132,6 +132,14 @@ public class FacultadListDTO implements Serializable {
 		this.cenNombre = cenNombre;
 	}
 
+	public String getCenPaginaWeb() {
+		return this.cenPaginaWeb;
+	}
+
+	public void setCenPaginaWeb(String cenPaginaWeb) {
+		this.cenPaginaWeb = cenPaginaWeb;
+	}
+
 	public Integer getCenPais() {
 		return this.cenPais;
 	}
@@ -162,14 +170,6 @@ public class FacultadListDTO implements Serializable {
 
 	public void setCenTipo(Integer cenTipo) {
 		this.cenTipo = cenTipo;
-	}
-
-	public String getCenUniversidad() {
-		return this.cenUniversidad;
-	}
-
-	public void setCenUniversidad(String cenUniversidad) {
-		this.cenUniversidad = cenUniversidad;
 	}
 
 }
