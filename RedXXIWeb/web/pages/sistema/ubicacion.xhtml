@@ -83,7 +83,7 @@
 		<p:dialog widgetVar="dlgProvincia" modal="true" header="#{i18n['label.panel.provincia']}">
 
 		<p:ajax event="close" update="growl" listener="#{ubicacionController.cancelPais}"/>  
-
+		<p:scrollPanel style="height:400px" mode="native">
 
 		<p:panel id="pnlProvincia">		
 		
@@ -123,13 +123,16 @@
 		
 		
 		</p:panel>
-		
+		</p:scrollPanel>
+				
 		</p:dialog>
 		
 		
 		<p:dialog widgetVar="dlgCiudad" modal="true" header="#{i18n['label.panel.ciudad']}">
 
-		<p:ajax event="close" update="growl" listener="#{ubicacionController.cancelProvinvia}"/>  
+		<p:ajax event="close" update="growl" listener="#{ubicacionController.cancelProvinvia}"/>
+
+		<p:scrollPanel style="height:200px" mode="native">
 
 
 		<p:panel id="pnlCiudad">		
@@ -165,6 +168,8 @@
 		
 		
 		</p:panel>
+
+		</p:scrollPanel>
 		
 		</p:dialog>
 		
