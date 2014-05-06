@@ -3,77 +3,47 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui" 
-      template="/WEB-INF/template/public.xhtml">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core" 
+      template="/WEB-INF/template/public2.xhtml">
 
 
+	<ui:define name="menu">
+		<ul id="navlist">
+		  <li id="home2"><a href="#{request.contextPath}/index.xhtml"></a></li>
+		  <li id="atenea"><a href="#{request.contextPath}/public/home/atenea.xhtml"></a></li>
+		  <li id="argos"><a href="#{request.contextPath}/argos.xhtml"></a></li>
+		  <li id="espejo"><a href="#{request.contextPath}/espejo.xhtml"></a></li>
+		  <li id="somos"><a href="#{request.contextPath}/quienesSomos.xhtml"></a></li>
+		  <li id="ingreso"><a href="#{request.contextPath}/ingreso.xhtml"></a></li>
+		  <li id="usuario"><a href="#{request.contextPath}/pages/home.xhtml"></a></li>
+		</ul>
+	</ui:define>
 
-<ui:define name="left">
-	<table width="100%" class="table">
+
+	<ui:define name="center">
+		<table width="80%">
 			<tr>
-				<td>
-					<h:dataTable value="#{reportPublicDataManager.paisList}" var="pai">
-					
-		    			<h:column>
-		    				<p:graphicImage value="#{pai.imagenPath}" height="30" width="50"/>
-		    			</h:column>
-		    													
-		    			<h:column>
-		    				<f:facet name="header">Paises</f:facet>
-		    				<h:commandLink value="#{pai.nombre}" styleClass="linkClass"/>
-		    			</h:column>
-		    			
-		    			<h:column>
-		    				<h:commandLink value="#{pai.count}" styleClass="linkClass"/>
-		    			</h:column>						
-		    					    							
-					</h:dataTable>
-				</td>
-			</tr>
-		</table>
-</ui:define>
-
-
-<ui:define name="center">
-	<table width="100%" class="table">
+				<td><h:outputText value="Universidad: " styleClass="descripcionBlack2" /></td>
+				<td><h:outputText value="#{ateneaVisorDataManager.facultadList.cenUniversidad}" styleClass="descripcionBlack2" /></td>
+			</tr>			
 			<tr>
-				<td>
-<!-- 					<h:dataTable value="#{reportPublicController.reportPublicDataManager.universidadList}" var="uni" width="100%"> -->
-					
-<!-- 		    			<h:column> -->
-<!-- 		    				<f:facet name="header">Universidades</f:facet> -->
-<!-- 		    				<h:outputText value="#{uni.cenNombre}" /><br /> -->
-<!-- 		    				<h:outputText value="#{uni.cenDatoInstitucional}" escape="false"/><br /> -->
-<!-- 		    			</h:column>										 -->
-<!-- 					</h:dataTable> -->
-				</td>
+				<td><h:outputText value="Facultad: " styleClass="descripcionBlack2" /></td>
+				<td><h:outputText value="#{ateneaVisorDataManager.facultadList.cenNombre}" styleClass="descripcionBlack2" /></td>
 			</tr>
+						
+	 		<c:forEach var="pre" items="#{ateneaVisorDataManager.pregradoList}" varStatus="estado">
+		 		<tr>
+		 			<c:if test="#{estado.index==0}">
+		 				<td rowspan="#{ateneaVisorDataManager.pregradoList.size()}" valign="top">
+		 				<h:outputText value="Carrera: " styleClass="descripcionBlack2"/></td>
+		 			</c:if>
+		 			<td><h:outputText value="#{pre.carNombre}" styleClass="descripcionBlack2"/></td>
+		        </tr>
+	        </c:forEach>
+			
 		</table>
-</ui:define>
 
+	</ui:define>
 
-<ui:define name="right">
-		
-	<table width="100%" class="table">
-		<tr>
-			<td><h:dataTable value="#{reportPublicController.reportPublicDataManager.ateneaList}" var="ate" width="100%">
-					
-	    			<h:column>
-	    				<f:facet name="header">Atenea</f:facet>
-	    				<h:commandLink value="#{ate.descripcion}" styleClass="linkClass" actionListener="#{reportPublicController.selectAtenea(ate)}"/>
-	    			</h:column>										
-
-	    			<h:column>
-						<h:commandLink value="#{ate.count}" styleClass="linkClass" actionListener="#{reportPublicController.selectAtenea(ate)}"/>
-	    			</h:column>										
-
-					
-			</h:dataTable>
-			</td>
-		</tr>		
-	</table>	
-</ui:define>
-
-
-
-</ui:composition>
+</ui:composition>	

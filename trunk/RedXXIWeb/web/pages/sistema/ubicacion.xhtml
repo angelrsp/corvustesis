@@ -80,7 +80,7 @@
 		</p:panel>
 		
 		
-		<p:dialog widgetVar="dlgProvincia" modal="true" header="#{i18n['label.panel.provincia']}">
+		<p:dialog widgetVar="dlgProvincia" modal="true" header="#{i18n['label.panel.provincia']}" closeOnEscape="true">
 
 		<p:ajax event="close" update="growl" listener="#{ubicacionController.cancelPais}"/>  
 		<p:scrollPanel style="height:400px" mode="native">
@@ -128,7 +128,7 @@
 		</p:dialog>
 		
 		
-		<p:dialog widgetVar="dlgCiudad" modal="true" header="#{i18n['label.panel.ciudad']}">
+		<p:dialog widgetVar="dlgCiudad" modal="true" header="#{i18n['label.panel.ciudad']}" closeOnEscape="true">
 
 		<p:ajax event="close" update="growl" listener="#{ubicacionController.cancelProvinvia}"/>
 
