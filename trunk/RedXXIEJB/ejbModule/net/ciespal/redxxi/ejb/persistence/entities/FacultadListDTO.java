@@ -57,6 +57,10 @@ public class FacultadListDTO implements Serializable {
 	@Column(name="cen_tipo")
 	private Integer cenTipo;
 
+	@Column(name="cen_universidad")
+	private String cenUniversidad;
+
+	
 	public FacultadListDTO() {
 	}
 
@@ -170,6 +174,14 @@ public class FacultadListDTO implements Serializable {
 
 	public void setCenTipo(Integer cenTipo) {
 		this.cenTipo = cenTipo;
+	}
+
+	public String getCenUniversidad() {
+		return cenUniversidad;
+	}
+
+	public void setCenUniversidad(String cenUniversidad) {
+		this.cenUniversidad = cenUniversidad;
 	}
 
 }

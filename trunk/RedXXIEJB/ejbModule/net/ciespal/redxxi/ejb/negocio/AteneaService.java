@@ -205,5 +205,8 @@ public interface AteneaService {
 
 	int rearAteneaCount() throws CorvustecException;
 
+	List<FacultadListDTO> readUniversidadComplete(Object code)
+			throws CorvustecException;
+
 
 }
