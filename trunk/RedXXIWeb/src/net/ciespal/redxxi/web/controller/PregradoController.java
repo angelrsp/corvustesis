@@ -91,6 +91,10 @@ public class PregradoController extends SelectItemController{
 		this.publicacionDataManager = publicacionDataManager;
 	}
 
+	public PublicacionDataManager getPublicacionDataManager() {
+		return publicacionDataManager;
+	}
+
 	public void setEventoDataManager(EventoDataManager eventoDataManager) {
 		this.eventoDataManager = eventoDataManager;
 	}
