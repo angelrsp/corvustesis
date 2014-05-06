@@ -1034,6 +1034,17 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 
+	@Override
+	public List<FacultadListDTO> readUniversidadComplete(Object code) throws CorvustecException
+	{
+		try {
+			return factoryDAO.getCentroDAOImpl().getUniversidad(code);
+		} catch (CorvustecException e) {
+			logger.info("Error readCentro {}",e.toString());
+			throw new CorvustecException("Error al readCentro");
+		}
+	}
+	
 	/* Carrera */
 	@Override
 	public CarreraDTO createOrUpdateCarrera(CarreraDTO carrera) throws CorvustecException
