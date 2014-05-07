@@ -316,4 +316,5 @@ public class CentroDAOImpl extends AbstractFacadeImpl<CentroDTO> implements Cent
 		else
 			return new ArrayList<CentroDTO>();
 	}
+		
 }

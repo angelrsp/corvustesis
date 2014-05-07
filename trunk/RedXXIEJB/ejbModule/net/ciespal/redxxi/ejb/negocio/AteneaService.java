@@ -208,5 +208,7 @@ public interface AteneaService {
 	List<FacultadListDTO> readUniversidadComplete(Object code)
 			throws CorvustecException;
 
+	void deleteUniversidad(CentroDTO universidad) throws CorvustecException;
+
 
 }
