@@ -921,6 +921,50 @@ public class AteneaServiceImpl implements AteneaService{
 			throw new CorvustecException("Error al eliminarCentro");
 		}
 	}
+
+	@Override
+	public void deleteUniversidad(CentroDTO universidad) throws CorvustecException
+	{
+		logger.info("deleteCentro");
+		try{
+			List<CarreraDTO> pregradoList=factoryDAO.getCarreraDAOImpl().getAll(universidad, 6);
+			List<CarreraDTO> posgradoList=factoryDAO.getCarreraDAOImpl().getAll(universidad, 7);
+			
+			if(pregradoList!=null)
+			{
+				for(CarreraDTO carrera:pregradoList)
+					deleteCarreraPregrado(carrera);	
+			}
+
+			if(posgradoList!=null)
+			{
+				for(CarreraDTO carrera:posgradoList)
+					deleteCarreraPosgrado(carrera);	
+			}
+			
+			List<CentroDTO> listFacultad= factoryDAO.getCentroDAOImpl().findAllChild(universidad);
+			List<CentroDTO> listEscuela;
+			if(listFacultad!=null)
+			{
+				for(CentroDTO facultad:listFacultad)
+				{
+					listEscuela= factoryDAO.getCentroDAOImpl().findAllChild(facultad);
+					if(listEscuela!=null)
+					{
+						for(CentroDTO escuela:listEscuela)
+							factoryDAO.getCentroDAOImpl().remove(escuela);							
+					}
+					factoryDAO.getCentroDAOImpl().remove(facultad);
+				}
+			}
+			factoryDAO.getCentroDAOImpl().remove(universidad);
+		}
+		catch(Exception e){
+			logger.info("Error eliminarCentro {}",e.toString());
+			throw new CorvustecException("Error al eliminarCentro");
+		}
+	}
+
 	
 	@Override
 	public void updateCentro(CentroDTO centro) throws CorvustecException

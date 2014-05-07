@@ -3,6 +3,7 @@ package net.ciespal.redxxi.ejb.persistence.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -36,5 +37,12 @@ public class ObservatorioDAOImpl extends AbstractFacadeImpl<ObservatorioDTO> imp
 			return null;
 		else
 			return list;
+	}
+	
+	
+	private void remove2(ObservatorioDTO observatorio)
+	{
+		Query query;
+		query=entityManager.createQuery("delete from ");
 	}
 }
