@@ -21,8 +21,12 @@ public class Process {
 	private static void outTxt()
 	{
 		String month=String.valueOf(CalendarUtil.getMonth());
+		String day=String.valueOf(CalendarUtil.getDay());
+		
+		day=day.length()==1?"0"+day:day;
 		month=month.length()==1?"0"+month:month;
-		String fileNameIn=String.valueOf(CalendarUtil.getYear())+month+String.valueOf(CalendarUtil.getDay());
+				
+		String fileNameIn=String.valueOf(CalendarUtil.getYear())+month+day;
 		
 		File fileIn=new File(ReadConfiguration.readValue("com.corvustec.rtoqab.jdbc.path.in")+fileNameIn+".txt");
 		File fileOut=new File(ReadConfiguration.readValue("com.corvustec.rtoqab.jdbc.path.out")+fileNameIn+".txt");
