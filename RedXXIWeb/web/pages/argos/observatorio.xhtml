@@ -114,6 +114,8 @@
 	
 		<p:dialog id="dlgDetalles" widgetVar="dlgDetalle" modal="true">
 
+		<p:ajax event="close" update=":contenido:pnlDatos" listener="#{observatorioController.cancel}"/>
+
 <!-- 		<p:scrollPanel style="height:600px" mode="native"> -->
 		
 		<!-- Contactos -->
