@@ -92,6 +92,28 @@ public class ArgosServiceImpl implements ArgosService{
 		}
 	}
 	
+	@Override
+	public void deleteObservatorio(ObservatorioDTO observatorio) throws CorvustecException
+	{
+		logger.info("deleteObservatorio");
+		try{
+			List<ContactoArgosListDTO> contactoList=factoryDAO.getContactoArgosDAOImpl().getAll(observatorio.getArgEntidad());
+			if(contactoList!=null)
+			{
+				for(ContactoArgosListDTO con:contactoList)
+					factoryDAO.getContactoArgosDAOImpl().remove(factoryDAO.getContactoArgosDAOImpl().find(con.getConCodigo()));		
+			}
+			factoryDAO.getObservatorioDAOImpl().remove(observatorio);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readObservatorio {}",e.toString());
+			throw new CorvustecException("Error al readObservatorio");
+		}
+		
+	}
+	
+	
 	/*Veeduria*/
 	@Override
 	public VeeduriaDTO createOrUpdateVeeduria(VeeduriaDTO veeduria) throws CorvustecException
@@ -168,5 +190,18 @@ public class ArgosServiceImpl implements ArgosService{
 			throw new CorvustecException("Error al createOrUpdateContacto");
 		}		
 		
+	}
+	
+	@Override
+	public void deleteContacto(ContactoArgosListDTO contactoList) throws CorvustecException
+	{
+		logger.info("createOrUpdateContacto");
+		try{
+			 factoryDAO.getContactoArgosDAOImpl().remove(factoryDAO.getContactoArgosDAOImpl().find(contactoList.getConCodigo()));
+		}
+		catch(Exception e){
+			logger.info("Error createOrUpdateContacto {}",e.toString());
+			throw new CorvustecException("Error al deleteContacto");
+		}				
 	}
 }
