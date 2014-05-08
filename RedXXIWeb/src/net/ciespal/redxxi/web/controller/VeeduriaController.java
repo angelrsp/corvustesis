@@ -7,6 +7,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.negocio.ArgosService;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.VeeduriaDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.VeeduriaDataManager;
@@ -85,7 +87,12 @@ public class VeeduriaController extends SelectItemController{
 
 	public void delete(VeeduriaDTO veeduria)
 	{
-		
+		try {
+			argosService.deleteVeeduria(veeduria);
+			read();
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 
 	public void ciudadChange()
@@ -101,5 +108,66 @@ public class VeeduriaController extends SelectItemController{
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
+	
+	public void selectVeeduria(VeeduriaDTO veeduria)
+	{
+		veeduriaDataManager.setVeeduria(veeduria);
+		readContacto();
+	}
 
+
+	private void readContacto()
+	{
+		try {
+			veeduriaDataManager.setContactoList(argosService.readContacto(veeduriaDataManager.getVeeduria().getArgEntidad()));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+
+	}
+
+	
+	public void createContacto()
+	{
+		try {
+			veeduriaDataManager.getContacto().setConTipo(Integer.valueOf(veeduriaDataManager.getTipoContacto().toString()));
+			veeduriaDataManager.getContacto().setArgEntidad(veeduriaDataManager.getVeeduria().getArgEntidad());
+			argosService.createOrUpdateContacto(veeduriaDataManager.getContacto());
+			readContacto();
+			cancelContacto();
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	
+	public void cancelContacto()
+	{
+		veeduriaDataManager.setContacto(new ContactoArgosDTO());
+		veeduriaDataManager.setTipoContacto(null);
+	}
+	
+	public void editContacto(ContactoArgosListDTO contacto)
+	{
+		try {
+			veeduriaDataManager.setContacto(argosService.readContacto(contacto.getConCodigo()));
+			veeduriaDataManager.setTipoContacto(contacto.getConTipo());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void deleteContacto(ContactoArgosListDTO contacto)
+	{
+		try {
+			argosService.deleteContacto(contacto);
+			readContacto();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
+	
 }

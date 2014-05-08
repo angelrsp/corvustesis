@@ -85,7 +85,7 @@ public class ObservatorioController extends SelectItemController{
 	public void edit(ObservatorioDTO observatorio)
 	{
 		observatorioDataManager.setObservatorio(observatorio);
-		observatorioDataManager.setRedValue(observatorio.getArgRed().getRedCodigo());
+		//observatorioDataManager.setRedValue(observatorio.getArgRed().getRedCodigo());
 	}
 
 	public void delete(ObservatorioDTO observatorio)
