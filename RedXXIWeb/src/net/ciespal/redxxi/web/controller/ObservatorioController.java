@@ -90,7 +90,13 @@ public class ObservatorioController extends SelectItemController{
 
 	public void delete(ObservatorioDTO observatorio)
 	{
-		
+		try {
+			argosService.deleteObservatorio(observatorio);
+			read();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 
 	public void ciudadChange()
@@ -161,9 +167,15 @@ public class ObservatorioController extends SelectItemController{
 		}
 	}
 	
-	public void deleteContacto(ContactoArgosDTO contacto)
+	public void deleteContacto(ContactoArgosListDTO contacto)
 	{
-		
+		try {
+			argosService.deleteContacto(contacto);
+			readContacto();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 
 }
