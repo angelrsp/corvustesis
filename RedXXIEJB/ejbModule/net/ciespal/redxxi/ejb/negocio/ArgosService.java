@@ -28,5 +28,9 @@ public interface ArgosService {
 	ContactoArgosDTO createOrUpdateContacto(ContactoArgosDTO contacto) throws CorvustecException;
 	List<ContactoArgosListDTO> readContacto(EntidadArgosDTO entidad) throws CorvustecException;
 	ContactoArgosDTO readContacto(Object id) throws CorvustecException;
+	void deleteObservatorio(ObservatorioDTO observatorio)
+			throws CorvustecException;
+	void deleteContacto(ContactoArgosListDTO contactoList)
+			throws CorvustecException;
 
 }
