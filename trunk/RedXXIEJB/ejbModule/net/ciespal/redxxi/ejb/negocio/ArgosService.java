@@ -32,5 +32,6 @@ public interface ArgosService {
 			throws CorvustecException;
 	void deleteContacto(ContactoArgosListDTO contactoList)
 			throws CorvustecException;
+	void deleteVeeduria(VeeduriaDTO veeduria) throws CorvustecException;
 
 }
