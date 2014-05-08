@@ -927,20 +927,8 @@ public class AteneaServiceImpl implements AteneaService{
 	{
 		logger.info("deleteCentro");
 		try{
-			List<CarreraDTO> pregradoList=factoryDAO.getCarreraDAOImpl().getAll(universidad, 6);
-			List<CarreraDTO> posgradoList=factoryDAO.getCarreraDAOImpl().getAll(universidad, 7);
-			
-			if(pregradoList!=null)
-			{
-				for(CarreraDTO carrera:pregradoList)
-					deleteCarreraPregrado(carrera);	
-			}
-
-			if(posgradoList!=null)
-			{
-				for(CarreraDTO carrera:posgradoList)
-					deleteCarreraPosgrado(carrera);	
-			}
+			List<CarreraDTO> pregradoList;
+			List<CarreraDTO> posgradoList;
 			
 			List<CentroDTO> listFacultad= factoryDAO.getCentroDAOImpl().findAllChild(universidad);
 			List<CentroDTO> listEscuela;
@@ -952,7 +940,34 @@ public class AteneaServiceImpl implements AteneaService{
 					if(listEscuela!=null)
 					{
 						for(CentroDTO escuela:listEscuela)
-							factoryDAO.getCentroDAOImpl().remove(escuela);							
+						{
+							pregradoList=factoryDAO.getCarreraDAOImpl().getAll(escuela, 6);
+							posgradoList=factoryDAO.getCarreraDAOImpl().getAll(escuela, 7);
+							if(pregradoList!=null)
+							{
+								for(CarreraDTO carrera:pregradoList)
+									deleteCarreraPregrado(carrera);	
+							}
+							if(posgradoList!=null)
+							{
+								for(CarreraDTO carrera:posgradoList)
+									deleteCarreraPosgrado(carrera);	
+							}
+							factoryDAO.getCentroDAOImpl().remove(escuela);
+						}
+					}
+					
+					pregradoList=factoryDAO.getCarreraDAOImpl().getAll(facultad, 6);
+					posgradoList=factoryDAO.getCarreraDAOImpl().getAll(facultad, 7);
+					if(pregradoList!=null)
+					{
+						for(CarreraDTO carrera:pregradoList)
+							deleteCarreraPregrado(carrera);	
+					}
+					if(posgradoList!=null)
+					{
+						for(CarreraDTO carrera:posgradoList)
+							deleteCarreraPosgrado(carrera);	
 					}
 					factoryDAO.getCentroDAOImpl().remove(facultad);
 				}
