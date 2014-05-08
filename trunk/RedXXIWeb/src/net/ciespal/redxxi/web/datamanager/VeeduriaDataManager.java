@@ -7,6 +7,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.VeeduriaDTO;
 
 @ViewScoped
@@ -21,9 +23,18 @@ public class VeeduriaDataManager implements Serializable{
 	private VeeduriaDTO veeduria;
 	private List<VeeduriaDTO> veeduriaList;
 	
+	private ContactoArgosDTO contacto;
+	private List<ContactoArgosListDTO> contactoList;
+
+	private Object tipoContacto;
+	
+	
 	public VeeduriaDataManager() {
 		veeduria=new VeeduriaDTO();
 		veeduriaList=new ArrayList<VeeduriaDTO>();
+		
+		contacto=new ContactoArgosDTO();
+		contactoList=new ArrayList<ContactoArgosListDTO>();
 	}
 
 	public VeeduriaDTO getVeeduria() {
@@ -40,5 +51,29 @@ public class VeeduriaDataManager implements Serializable{
 
 	public void setVeeduriaList(List<VeeduriaDTO> veeduriaList) {
 		this.veeduriaList = veeduriaList;
+	}
+
+	public ContactoArgosDTO getContacto() {
+		return contacto;
+	}
+
+	public void setContacto(ContactoArgosDTO contacto) {
+		this.contacto = contacto;
+	}
+
+	public List<ContactoArgosListDTO> getContactoList() {
+		return contactoList;
+	}
+
+	public void setContactoList(List<ContactoArgosListDTO> contactoList) {
+		this.contactoList = contactoList;
+	}
+
+	public Object getTipoContacto() {
+		return tipoContacto;
+	}
+
+	public void setTipoContacto(Object tipoContacto) {
+		this.tipoContacto = tipoContacto;
 	}
 }
