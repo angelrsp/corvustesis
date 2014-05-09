@@ -85,9 +85,14 @@ public class UbicacionController implements Serializable{
 	public void editPais(CatalogoDTO pais)
 	{
 		ubicacionDataManager.setPais(pais);
-		ubicacionDataManager.setImageBytePais(pais.getCatImagen());
-		ubicacionDataManager.setNameImage(pais.getCatImagenNombre());
-		ubicacionDataManager.setPathImage(JsfUtil.saveToDiskUpdload(pais.getCatImagen(), pais.getCatImagenNombre()));
+		if(pais.getCatImagen()!=null)
+		{
+			ubicacionDataManager.setImageBytePais(pais.getCatImagen());
+			ubicacionDataManager.setNameImage(pais.getCatImagenNombre());
+			ubicacionDataManager.setPathImage(JsfUtil.saveToDiskUpdload(pais.getCatImagen(), pais.getCatImagenNombre()));
+		}
+		else
+			ubicacionDataManager.setPathImage(null);
 	}
 
 	public void deletePais(CatalogoDTO pais)
