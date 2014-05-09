@@ -104,4 +104,7 @@ public class CatalogoDAOImpl extends AbstractFacadeImpl<CatalogoDTO> implements 
 		return month;
 	}
 
+	
+
+	
 }
