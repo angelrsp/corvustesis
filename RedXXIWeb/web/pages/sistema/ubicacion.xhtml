@@ -62,16 +62,19 @@
 				</p:column>					
 			
 				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
-					<p:commandButton actionListener="#{ubicacionController.editPais(pai)}" icon="ui-icon-pencil" process=":contenido:tblPais" update=":contenido:pnlDato"/>
+					<p:commandButton id="editCountry" actionListener="#{ubicacionController.editPais(pai)}" icon="ui-icon-pencil" process=":contenido:tblPais" update=":contenido:pnlDato"/>
+					<p:tooltip for="editCountry" value="#{i18n['boton.editar']}" />
 				</p:column>
 				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
-					<p:commandButton actionListener="#{ubicacionController.deletePais(pai)}" icon="ui-icon-close" process=":contenido:tblPais" update=":contenido:pnlDato">
-						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+					<p:commandButton id="deleteCountry" actionListener="#{ubicacionController.deletePais(pai)}" icon="ui-icon-close" process=":contenido:tblPais" update=":contenido:pnlDato">
+						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" />
+						 <p:tooltip for="deleteCountry" value="#{i18n['boton.eliminar']}" /> 
 					</p:commandButton>
 				</p:column>
 
 				<p:column headerText="#{i18n['boton.provincia']}" width="15" style="text-align: center">
-					<p:commandButton actionListener="#{ubicacionController.selectProcinvia(pai)}" icon="ui-icon-flag" process=":contenido:tblPais" update=":contenido:pnlProvincia" oncomplete="PF('dlgProvincia').show()"/>
+					<p:commandButton id="btnProvincia" actionListener="#{ubicacionController.selectProcinvia(pai)}" icon="ui-icon-flag" process=":contenido:tblPais" update=":contenido:pnlProvincia" oncomplete="PF('dlgProvincia').show()"/>
+					<p:tooltip for="btnProvincia" value="#{i18n['boton.provincia']}" />
 				</p:column>
 
 						
@@ -82,7 +85,8 @@
 		
 		<p:dialog widgetVar="dlgProvincia" modal="true" header="#{i18n['label.panel.provincia']}" closeOnEscape="true">
 
-		<p:ajax event="close" update="growl" listener="#{ubicacionController.cancelPais}"/>  
+		<p:ajax event="close" update="growl,pnlDato" listener="#{ubicacionController.cancelPais}"/>
+		  
 		<p:scrollPanel style="height:400px" mode="native">
 
 		<p:panel id="pnlProvincia">		
