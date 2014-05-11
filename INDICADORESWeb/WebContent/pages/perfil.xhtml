@@ -18,7 +18,7 @@
 		<table>
 			<tr>
 				<td><h:outputLabel value="#{i18n['label.nombre']}:&#160;" /></td>
-				<td><p:inputText value="#{perfilController.perfil.perDescripcion}" required="true" requiredMessage="#{i18n['label.nombre']}:&#160;#{i18n['label.requerido']}" disabled="false" style="text-transform:uppercase;"/><span class="red">*</span></td>
+				<td><p:inputText value="#{perfilController.perfil.perDescripcion}" onkeypress="return isLetter(event);" required="true" requiredMessage="#{i18n['label.nombre']}:&#160;#{i18n['label.requerido']}" disabled="false" style="text-transform:uppercase;"/><span class="red">*</span></td>
 			</tr>
 		
 			<tr>
