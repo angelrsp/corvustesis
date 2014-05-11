@@ -47,6 +47,8 @@ public class UsuarioController extends SelectItemController implements Serializa
 	
 	private Boolean disabledIes;
 	
+	private Boolean disableUser;
+	
 	private Boolean requerido=true;
 	
 	private String pass;
@@ -71,10 +73,20 @@ public class UsuarioController extends SelectItemController implements Serializa
 		perfilList=new ArrayList<PerfilDTO>();
 		readUser();
 		disabledIes=true;
+		disableUser=false;
 	}
 	
 	public void setIndicadorDataManager(IndicadorDataManager indicadorDataManager) {
 		this.indicadorDataManager = indicadorDataManager;
+	}
+
+	
+	public Boolean getDisableUser() {
+		return disableUser;
+	}
+
+	public void setDisableUser(Boolean disableUser) {
+		this.disableUser = disableUser;
 	}
 
 	
@@ -163,6 +175,7 @@ public class UsuarioController extends SelectItemController implements Serializa
 			readUser();
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
 			setRequerido(true);
+			disableUser=false;
 		} catch (IndicadoresException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
@@ -186,6 +199,7 @@ public class UsuarioController extends SelectItemController implements Serializa
 		setPerfilSelect(user.getIndUsuarioPerfils().get(0).getIndPerfil().getPerCodigo());
 		setRequerido(false);
 		setPass(user.getUsuClave());
+		disableUser=true;
 	}
 	
 	public void deleteUser(UsuarioDTO user)
@@ -204,6 +218,7 @@ public class UsuarioController extends SelectItemController implements Serializa
 		setUser(new UsuarioDTO());
 		setPerfilSelect(null);
 		setRequerido(true);
+		disableUser=false;
 	}
 	
 

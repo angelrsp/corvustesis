@@ -441,6 +441,11 @@ public class HistoricoIndicadorController extends SelectItemController implement
 		try {
 			getHistoricoIndicadorDTO().setHinFecha(new Timestamp(new Date().getTime()));
 			getHistoricoIndicadorDTO().setIndIndicador(indTemp);
+			if(getHistoricoIndicadorDTO().getHinValor().doubleValue()>getHistoricoIndicadorDTO().getIndIndicador().getIndValorObjetivo().doubleValue())
+			{
+				JsfUtil.addErrorMessage("El valor no puede superar valor Objetivo");
+				return;
+			}
 			indicadorService.agregarValor(getHistoricoIndicadorDTO());
 			historicoIndicadorList=indicadorService.obtenerValores(indTemp);
 			historicoIndicadorDTO=new HistoricoIndicadorDTO();
