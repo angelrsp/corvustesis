@@ -55,14 +55,19 @@ public class AdministracionServiceImpl implements AdministracionService{
 				return factoryDAO.getUsuarioDAOImpl().edit(user);
 			}
 			else
+			{
+				if(factoryDAO.getUsuarioDAOImpl().buscarUsuario(user)!=null)
+					throw new IndicadoresException("El usuario ya existe");
 				return factoryDAO.getUsuarioDAOImpl().create(user);
+			}
 		}
 		catch(Exception e)
 		{
 			log.info("Error al createOrUpdateUser" +e.toString());
-			throw new IndicadoresException("Error al createOrUpdateUser");
+			throw new IndicadoresException("Error al crear o acualizar usuario "+e.toString());
 		}		
 	}
+	
 	
 	@Override
 	public void createAcceso(List<String> option,Object perfil,List<IndicadorDTO> indicadorList) throws IndicadoresException

@@ -16,5 +16,7 @@ public interface UsuarioDAO extends AbstractFacade<UsuarioDTO>{
 
 	void remove2(UsuarioDTO user);
 
+	UsuarioDTO buscarUsuario(UsuarioDTO user) throws IndicadoresException;
+
 
 }

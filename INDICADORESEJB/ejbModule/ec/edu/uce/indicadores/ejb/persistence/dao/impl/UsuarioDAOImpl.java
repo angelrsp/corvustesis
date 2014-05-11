@@ -47,7 +47,7 @@ public class UsuarioDAOImpl extends AbstractFacadeImpl<UsuarioDTO> implements Us
 			query.setParameter(1, credencialesDTO.getUsername());
 			query.setParameter(2, credencialesDTO.getPassword());
 			List<UsuarioDTO> usuariosEncontrados = query.getResultList();
-			usuarioLogin=usuariosEncontrados.get(0);
+			usuarioLogin=usuariosEncontrados.size()!=0? usuariosEncontrados.get(0):null;
 
 		} catch (Exception e) {
 			log.info("Error al autenticar el usuario {}", e.toString());
@@ -85,5 +85,26 @@ public class UsuarioDAOImpl extends AbstractFacadeImpl<UsuarioDTO> implements Us
 		query.setParameter("codigo", user.getUsuCodigo());
 		query.executeUpdate();
 
+	}
+	
+	
+	
+	@SuppressWarnings({ "unchecked" })
+	@Override
+	public UsuarioDTO buscarUsuario(UsuarioDTO user) throws IndicadoresException
+	 {
+		UsuarioDTO usuarioLogin = null;
+		try {
+			Query query = entityManager
+					.createQuery("select u from UsuarioDTO u where u.usuLogin=?");
+			query.setParameter(1, user.getUsuLogin());
+			List<UsuarioDTO> usuariosEncontrados = query.getResultList();
+			usuarioLogin=usuariosEncontrados.size()!=0? usuariosEncontrados.get(0):null;
+
+		} catch (Exception e) {
+			log.info("Error al autenticar el usuario {}", e.toString());
+			throw new IndicadoresException("Error al autenticar el usuario" + e);
+		}
+		return usuarioLogin;
 	}
 }
