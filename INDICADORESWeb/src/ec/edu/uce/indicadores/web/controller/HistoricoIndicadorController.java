@@ -307,6 +307,7 @@ public class HistoricoIndicadorController extends SelectItemController implement
 			RequestContext rc = RequestContext.getCurrentInstance();
 			if(indicadorService.obtenerHijosIndicador(ind).isEmpty()){
 				disabledAddValue=!administracionService.existsPermisoIndicador(ind, perfil);
+				indicadorService.actualizarValores(indTemp);
 				historicoIndicadorList=indicadorService.obtenerValores(indTemp);
 				if(historicoIndicadorList!=null){
 					rc.execute("PF('dlgValorReporte').show();");
@@ -441,14 +442,22 @@ public class HistoricoIndicadorController extends SelectItemController implement
 		try {
 			getHistoricoIndicadorDTO().setHinFecha(new Timestamp(new Date().getTime()));
 			getHistoricoIndicadorDTO().setIndIndicador(indTemp);
-			if(getHistoricoIndicadorDTO().getHinValor().doubleValue()>getHistoricoIndicadorDTO().getIndIndicador().getIndValorObjetivo().doubleValue())
+			
+			if(getHistoricoIndicadorDTO().getHinValor().doubleValue()<1)
 			{
-				JsfUtil.addErrorMessage("El valor no puede superar valor Objetivo");
+				JsfUtil.addErrorMessage("El valor no puede ser menor que 1");
+				return;				
+			}
+			
+			if(getHistoricoIndicadorDTO().getHinValor().doubleValue()>getHistoricoIndicadorDTO().getIndIndicador().getIndValorIdeal().doubleValue())
+			{
+				JsfUtil.addErrorMessage("El valor no puede superar valor Ideal");
 				return;
 			}
 			indicadorService.agregarValor(getHistoricoIndicadorDTO());
 			historicoIndicadorList=indicadorService.obtenerValores(indTemp);
 			historicoIndicadorDTO=new HistoricoIndicadorDTO();
+			indicadorService.actualizarValores(indTemp);
 			createChartLine(historicoIndicadorList);
 			createPieModel(historicoIndicadorList);
 			setIndicadorDTO(indicadorService.obtenerIndicador(indTemp.getIndCodigo()));
@@ -464,6 +473,7 @@ public class HistoricoIndicadorController extends SelectItemController implement
 		try {
 			indicadorService.deleteHistoricoIndicador(his);
 			historicoIndicadorList=indicadorService.obtenerValores(indTemp);
+			indicadorService.actualizarValores(indTemp);
 			historicoIndicadorDTO=new HistoricoIndicadorDTO();
 			createChartLine(historicoIndicadorList);
 			createPieModel(historicoIndicadorList);
