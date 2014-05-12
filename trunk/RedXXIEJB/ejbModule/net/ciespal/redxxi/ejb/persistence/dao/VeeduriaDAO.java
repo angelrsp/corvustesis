@@ -10,4 +10,6 @@ public interface VeeduriaDAO extends AbstractFacade<VeeduriaDTO>{
 
 	List<VeeduriaDTO> findAll(Object ubicacion) throws CorvustecException;
 
+	int count(Object pais) throws CorvustecException;
+
 }

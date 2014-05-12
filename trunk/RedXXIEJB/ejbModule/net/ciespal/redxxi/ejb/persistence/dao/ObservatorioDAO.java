@@ -10,4 +10,6 @@ public interface ObservatorioDAO extends AbstractFacade<ObservatorioDTO> {
 
 	List<ObservatorioDTO> findAll(Object ubicacion) throws CorvustecException;
 
+	int count(Object pais) throws CorvustecException;
+
 }

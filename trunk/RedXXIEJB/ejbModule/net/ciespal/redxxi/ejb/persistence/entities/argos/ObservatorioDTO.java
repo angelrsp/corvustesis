@@ -1,6 +1,7 @@
 package net.ciespal.redxxi.ejb.persistence.entities.argos;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -50,6 +51,10 @@ public class ObservatorioDTO implements Serializable {
 	@Column(name="obs_provincia")
 	private Integer obsProvincia;
 
+	@Transient
+	private Long obsCount;
+
+	
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="obs_entidad")
@@ -63,6 +68,11 @@ public class ObservatorioDTO implements Serializable {
 	public ObservatorioDTO() {
 	}
 
+	public ObservatorioDTO(Long obsCount)
+	{
+		this.obsCount=obsCount;
+	}
+	
 	public Integer getObsCodigo() {
 		return this.obsCodigo;
 	}
@@ -161,6 +171,14 @@ public class ObservatorioDTO implements Serializable {
 
 	public RedDTO getArgRed() {
 		return this.argRed;
+	}
+
+	public Long getObsCount() {
+		return obsCount;
+	}
+
+	public void setObsCount(Long obsCount) {
+		this.obsCount = obsCount;
 	}
 
 	public void setArgRed(RedDTO argRed) {
