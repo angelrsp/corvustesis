@@ -158,7 +158,6 @@ public interface AteneaService {
 	CentroDTO readCentro(Object id) throws CorvustecException;
 
 
-	String infoPais(PaisDTO pais);
 
 
 	void deleteCarreraPregrado(CarreraDTO carrera) throws CorvustecException;
@@ -198,8 +197,6 @@ public interface AteneaService {
 	List<DoctorListDTO> readDoctorList(Object codigo) throws CorvustecException;
 
 	void deleteDoctor(DoctorDTO doctor) throws CorvustecException;
-
-	List<AteneaVisorDTO> visorList(PaisDTO pais) throws CorvustecException;
 
 	List<AteneaVisorDTO> visorList(AteneaDTO atenea) throws CorvustecException;
 

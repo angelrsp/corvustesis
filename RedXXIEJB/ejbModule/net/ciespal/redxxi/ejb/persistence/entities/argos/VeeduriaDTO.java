@@ -50,6 +50,9 @@ public class VeeduriaDTO implements Serializable {
 	@Column(name="vee_provincia")
 	private Integer veeProvincia;
 
+	@Transient
+	private Long veeCount;
+	
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="vee_entidad")
@@ -58,6 +61,11 @@ public class VeeduriaDTO implements Serializable {
 	public VeeduriaDTO() {
 	}
 
+	public VeeduriaDTO(Long veeCount) {
+		this.veeCount=veeCount;
+	}
+
+	
 	public Integer getVeeCodigo() {
 		return this.veeCodigo;
 	}
@@ -152,6 +160,14 @@ public class VeeduriaDTO implements Serializable {
 
 	public void setArgEntidad(EntidadArgosDTO argEntidad) {
 		this.argEntidad = argEntidad;
+	}
+
+	public Long getVeeCount() {
+		return veeCount;
+	}
+
+	public void setVeeCount(Long veeCount) {
+		this.veeCount = veeCount;
 	}
 
 }

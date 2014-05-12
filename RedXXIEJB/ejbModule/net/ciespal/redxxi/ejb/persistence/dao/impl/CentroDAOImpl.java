@@ -4,20 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
-import com.corvustec.commons.util.CorvustecException;
 
 import net.ciespal.redxxi.ejb.persistence.dao.CentroDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.FacultadListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.UniversidadListDTO;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.corvustec.commons.util.CorvustecException;
+
 public class CentroDAOImpl extends AbstractFacadeImpl<CentroDTO> implements CentroDAO{
 
+	private static final Logger logger = LoggerFactory.getLogger(CentroDAOImpl.class);
+	
+	
 	public CentroDAOImpl() {
 		super();
 	}
@@ -173,43 +181,52 @@ public class CentroDAOImpl extends AbstractFacadeImpl<CentroDTO> implements Cent
 			return new ArrayList<CentroDTO>();
 	}
 
-	
-	
-	
-	@Override
-	public Integer getUniversidadCount() throws CorvustecException
-	{
-		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
-		Root<CentroDTO> from= cq.from(CentroDTO.class);
 		
-		cq.multiselect(cb.count(from.get("cenCodigo")));
-		
-		cq.where(cb.equal(from.get("cenTipo"),2));
-		
-		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();
-		if(list!=null)
-			return (int)(long)list.get(0).getCenCount();
-		else
-			return 0;
-	}
-	
 	@Override
 	public Integer getUniversidadCount(Object pais) throws CorvustecException
 	{
-		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
-		Root<CentroDTO> from= cq.from(CentroDTO.class);
-		
-		cq.multiselect(cb.count(from.get("cenCodigo")));
-		
-		cq.where(cb.and(cb.equal(from.get("cenTipo"),2),cb.equal(from.get("cenPais"), pais)));
-		
-		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();
-		if(list!=null)
-			return (int)(long)list.get(0).getCenCount();
-		else
-			return 0;
+		CriteriaBuilder cb;
+		CriteriaQuery<CentroDTO> cq;
+		Root<CentroDTO> from;
+		List<CentroDTO> list;
+		Predicate predicate;
+		List<Predicate> predicateList = null;
+		try{
+			cb=entityManager.getCriteriaBuilder();
+			cq=cb.createQuery(CentroDTO.class);
+			
+			from= cq.from(CentroDTO.class);
+			
+			cq.multiselect(cb.count(from.get("cenCodigo")));
+			
+			predicateList=new ArrayList<Predicate>();
+			
+			predicate= cb.equal(from.get("cenTipo"),2);
+			predicateList.add(predicate);
+			
+			if(pais!=null)
+			{
+				predicate=cb.equal(from.get("cenPais"),pais);
+				predicateList.add(predicate);
+			}
+			
+			cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
+			
+			TypedQuery<CentroDTO> tq=entityManager.createQuery(cq);
+			list=tq.getResultList();
+			
+			if(!list.isEmpty())
+				return (int)(long)list.get(0).getCenCount();
+			else
+				return 0;
+			
+		}catch(Exception e){
+			logger.info(e.toString());
+			throw new CorvustecException(e);
+		}finally{
+			predicate=null;
+			predicateList=null;
+		}		
 	}
 	
 	@Override
@@ -245,42 +262,54 @@ public class CentroDAOImpl extends AbstractFacadeImpl<CentroDTO> implements Cent
 			return list;
 	}
 
-	
-	@Override
-	public Integer getFacultadCount() throws CorvustecException
-	{
-		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
-		Root<CentroDTO> from= cq.from(CentroDTO.class);
 		
-		cq.multiselect(cb.count(from.get("cenCodigo")));
-		
-		cq.where(cb.equal(from.get("cenTipo"),3));
-		
-		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();
-		if(list!=null)
-			return (int)(long)list.get(0).getCenCount();
-		else
-			return 0;
-	}
-	
 	@Override
 	public Integer getFacultadCount(Object pais) throws CorvustecException
 	{
-		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-		CriteriaQuery<CentroDTO> cq=cb.createQuery(CentroDTO.class);
-		Root<CentroDTO> from= cq.from(CentroDTO.class);
-		
-		cq.multiselect(cb.count(from.get("cenCodigo")));
-		
-		cq.where(cb.and(cb.equal(from.get("cenTipo"),3),cb.equal(from.get("cenPais"), pais)));
-		
-		List<CentroDTO> list=entityManager.createQuery(cq).getResultList();
-		if(list!=null)
-			return (int)(long)list.get(0).getCenCount();
-		else
-			return 0;
+		CriteriaBuilder cb;
+		CriteriaQuery<CentroDTO> cq;
+		Root<CentroDTO> from;
+		List<CentroDTO> list;
+		Predicate predicate;
+		List<Predicate> predicateList = null;
+		try{
+			cb=entityManager.getCriteriaBuilder();
+			cq=cb.createQuery(CentroDTO.class);
+			
+			from= cq.from(CentroDTO.class);
+			
+			cq.multiselect(cb.count(from.get("cenCodigo")));
+			
+			predicateList=new ArrayList<Predicate>();
+			
+			predicate= cb.equal(from.get("cenTipo"),3);
+			predicateList.add(predicate);
+			
+			if(pais!=null)
+			{
+				predicate=cb.equal(from.get("cenPais"),pais);
+				predicateList.add(predicate);
+			}
+			
+			cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
+			
+			TypedQuery<CentroDTO> tq=entityManager.createQuery(cq);
+			list=tq.getResultList();
+			
+			if(!list.isEmpty())
+				return (int)(long)list.get(0).getCenCount();
+			else
+				return 0;
+			
+		}catch(Exception e){
+			logger.info(e.toString());
+			throw new CorvustecException(e);
+		}finally{
+			predicate=null;
+			predicateList=null;
+		}		
 	}
+	
 	
 	@Override
 	public List<CentroDTO> getCentro(Object type,Object pais) throws CorvustecException

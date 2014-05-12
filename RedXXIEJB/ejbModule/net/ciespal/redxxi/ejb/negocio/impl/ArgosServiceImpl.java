@@ -1,5 +1,6 @@
 package net.ciespal.redxxi.ejb.negocio.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -7,6 +8,7 @@ import javax.ejb.Stateless;
 
 import net.ciespal.redxxi.ejb.negocio.ArgosService;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
+import net.ciespal.redxxi.ejb.persistence.entities.ArgosDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.EntidadArgosDTO;
@@ -27,6 +29,38 @@ public class ArgosServiceImpl implements ArgosService{
 	@EJB
 	private FactoryDAO factoryDAO;
 
+	/*Argos*/
+	@Override
+	public List<ArgosDTO> readArgos(Object pais) throws CorvustecException
+	{
+		List<ArgosDTO> argosList;
+		ArgosDTO argos;
+		logger.info("createOrUpdateRed");
+		try{
+			argosList=new ArrayList<ArgosDTO>();
+
+			//Observatorios
+			argos=new ArgosDTO();
+			argos.setTipo(1);
+			argos.setCount(factoryDAO.getObservatorioDAOImpl().count(pais));
+			argos.setDescripcion("Observatorios: ");
+			argosList.add(argos);
+
+			//Veedurias
+			argos=new ArgosDTO();
+			argos.setTipo(1);
+			argos.setCount(factoryDAO.getObservatorioDAOImpl().count(pais));
+			argos.setDescripcion("Veedurías: ");
+			argosList.add(argos);			
+			
+		}
+		catch(Exception e){
+			logger.info("Error createOrUpdateRed {}",e.toString());
+			throw new CorvustecException("Error al createOrUpdateRed");
+		}
+		return argosList;
+	}
+	
 	/*Red*/
 	@Override
 	public RedDTO createOrUpdateRed(RedDTO red) throws CorvustecException

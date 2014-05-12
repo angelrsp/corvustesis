@@ -5,19 +5,26 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import net.ciespal.redxxi.ejb.persistence.dao.CarreraDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.corvustec.commons.util.CorvustecException;
 
 public class CarreraDAOImpl extends AbstractFacadeImpl<CarreraDTO> implements CarreraDAO{
 
+	private static final Logger logger = LoggerFactory.getLogger(CarreraDAOImpl.class);
+	
 	public CarreraDAOImpl() {
 		super();
 	}
@@ -61,78 +68,106 @@ public class CarreraDAOImpl extends AbstractFacadeImpl<CarreraDTO> implements Ca
 			return list;
 	}
 	
-	@Override
-	public Integer getPregradoCount() throws CorvustecException
-	{
-		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-		CriteriaQuery<CarreraDTO> cq=cb.createQuery(CarreraDTO.class);
-		Root<CarreraDTO> from = cq.from(CarreraDTO.class);
-		
-		cq.multiselect(cb.count(from.get("carCodigo")));
-		
-		cq.where(cb.equal(from.get("carTipo"), 6));
-		
-		List<CarreraDTO> list=entityManager.createQuery(cq).getResultList();
-		if(list!=null)
-			return (int)(long)list.get(0).getCarCount();
-		else
-			return 0;
-	}
 
 	@Override
 	public Integer getPregradoCount(Object pais) throws CorvustecException
 	{
-		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-		CriteriaQuery<CarreraDTO> cq=cb.createQuery(CarreraDTO.class);
-		Root<CarreraDTO> from = cq.from(CarreraDTO.class);
-		Path<CentroDTO> join1=from.join("ateCentro");
+		CriteriaBuilder cb;
+		CriteriaQuery<CarreraDTO> cq;
+		Root<CarreraDTO> from;
+		List<CarreraDTO> list;
+		Predicate predicate;
+		List<Predicate> predicateList = null;
+		try{
 		
-		cq.multiselect(cb.count(from.get("carCodigo")));
+			cb=entityManager.getCriteriaBuilder();
+			cq=cb.createQuery(CarreraDTO.class);
 		
-		cq.where(cb.and(cb.equal(from.get("carTipo"), 6)),cb.equal(join1.get("cenPais"), pais));
-		
-		List<CarreraDTO> list=entityManager.createQuery(cq).getResultList();
-		if(list!=null)
-			return (int)(long)list.get(0).getCarCount();
-		else
-			return 0;
+			from= cq.from(CarreraDTO.class);
+			Path<CentroDTO> join1=from.join("ateCentro");
+			
+			cq.multiselect(cb.count(from.get("carCodigo")));
+			
+			predicateList=new ArrayList<Predicate>();
+			
+			predicate=cb.equal(from.get("carTipo"), 6);
+			predicateList.add(predicate);
+			
+			if(pais!=null)
+			{
+				predicate=cb.equal(join1.get("cenPais"), pais);
+				predicateList.add(predicate);
+			}
+			
+			cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
+			
+			TypedQuery<CarreraDTO> tq=entityManager.createQuery(cq);
+			
+			list=tq.getResultList();
+			
+			if(!list.isEmpty())
+				return (int)(long)list.get(0).getCarCount();
+			else
+				return 0;
+			
+		}catch(Exception e){
+			logger.info(e.toString());
+			throw new CorvustecException(e);
+		}finally{
+			predicate=null;
+			predicateList=null;
+		}
 	}
 	
-	@Override
-	public Integer getPosgradoCount() throws CorvustecException
-	{
-		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-		CriteriaQuery<CarreraDTO> cq=cb.createQuery(CarreraDTO.class);
-		Root<CarreraDTO> from = cq.from(CarreraDTO.class);
-		
-		cq.multiselect(cb.count(from.get("carCodigo")));
-		
-		cq.where(cb.equal(from.get("carTipo"), 7));
-		
-		List<CarreraDTO> list=entityManager.createQuery(cq).getResultList();
-		if(list!=null)
-			return (int)(long)list.get(0).getCarCount();
-		else
-			return 0;
-	}
 	
 	@Override
 	public Integer getPosgradoCount(Object pais) throws CorvustecException
 	{
-		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-		CriteriaQuery<CarreraDTO> cq=cb.createQuery(CarreraDTO.class);
-		Root<CarreraDTO> from = cq.from(CarreraDTO.class);
-		Path<CentroDTO> join1=from.join("ateCentro");
+		CriteriaBuilder cb;
+		CriteriaQuery<CarreraDTO> cq;
+		Root<CarreraDTO> from;
+		List<CarreraDTO> list;
+		Predicate predicate;
+		List<Predicate> predicateList = null;
+		try{
 		
-		cq.multiselect(cb.count(from.get("carCodigo")));
+			cb=entityManager.getCriteriaBuilder();
+			cq=cb.createQuery(CarreraDTO.class);
 		
-		cq.where(cb.and(cb.equal(from.get("carTipo"), 7)),cb.equal(join1.get("cenPais"), pais));
-		
-		List<CarreraDTO> list=entityManager.createQuery(cq).getResultList();
-		if(list!=null)
-			return (int)(long)list.get(0).getCarCount();
-		else
-			return 0;
+			from= cq.from(CarreraDTO.class);
+			Path<CentroDTO> join1=from.join("ateCentro");
+			
+			cq.multiselect(cb.count(from.get("carCodigo")));
+			
+			predicateList=new ArrayList<Predicate>();
+			
+			predicate=cb.equal(from.get("carTipo"), 7);
+			predicateList.add(predicate);
+			
+			if(pais!=null)
+			{
+				predicate=cb.equal(join1.get("cenPais"), pais);
+				predicateList.add(predicate);
+			}
+			
+			cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
+			
+			TypedQuery<CarreraDTO> tq=entityManager.createQuery(cq);
+			
+			list=tq.getResultList();
+			
+			if(!list.isEmpty())
+				return (int)(long)list.get(0).getCarCount();
+			else
+				return 0;
+			
+		}catch(Exception e){
+			logger.info(e.toString());
+			throw new CorvustecException(e);
+		}finally{
+			predicate=null;
+			predicateList=null;
+		}
 	}
 	
 	@Override

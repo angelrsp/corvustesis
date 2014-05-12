@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import net.ciespal.redxxi.ejb.persistence.entities.ArgosDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.EntidadArgosDTO;
@@ -33,5 +34,6 @@ public interface ArgosService {
 	void deleteContacto(ContactoArgosListDTO contactoList)
 			throws CorvustecException;
 	void deleteVeeduria(VeeduriaDTO veeduria) throws CorvustecException;
+	List<ArgosDTO> readArgos(Object pais) throws CorvustecException;
 
 }

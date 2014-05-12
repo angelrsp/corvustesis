@@ -15,10 +15,6 @@ public interface CarreraDAO extends AbstractFacade<CarreraDTO> {
 
 	List<CarreraDTO> getByType(Object type) throws CorvustecException;
 
-	Integer getPosgradoCount() throws CorvustecException;
-
-	Integer getPregradoCount() throws CorvustecException;
-
 	Integer getPregradoCount(Object pais) throws CorvustecException;
 
 	Integer getPosgradoCount(Object pais) throws CorvustecException;
