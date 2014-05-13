@@ -10,8 +10,8 @@
 	<ui:define name="menu">
 		<ul id="navlist">
 		  <li id="home"><a href="#{request.contextPath}/index.xhtml"></a></li>
-		  <li id="atenea2"><a href="#{request.contextPath}/public/home/atenea.xhtml"></a></li>
-		  <li id="argos"><a href="#{request.contextPath}/public/home/argos.xhtml"></a></li>
+		  <li id="atenea"><a href="#{request.contextPath}/public/home/atenea.xhtml"></a></li>
+		  <li id="argos2"><a href="#{request.contextPath}/public/home/argos.xhtml"></a></li>
 		  <li id="espejo"><a href="#{request.contextPath}/espejo.xhtml"></a></li>
 		  <li id="somos"><a href="#{request.contextPath}/quienesSomos.xhtml"></a></li>
 		  <li id="ingreso"><a href="#{request.contextPath}/ingreso.xhtml"></a></li>
@@ -24,16 +24,16 @@
 	<table width="100%">
 			<tr>
 				<td>
-					<h:outputText value="A" styleClass="descripcionLetter"/><h:outputText value="TENEA" styleClass="descripcion"/>
+					<h:outputText value="A" styleClass="descripcionLetter"/><h:outputText value="RGOS" styleClass="descripcion"/>
 					<div class="line-separator"></div>
 			
-						<h:dataTable value="#{reportPublicController.reportPublicDataManager.ateneaList}" var="ate" width="100%">
+						<h:dataTable value="#{argosController.argosDataManager.argosList}" var="arg" width="100%">
 						
 							<h:column>			    			
-			    				<h:commandLink value="#{ate.descripcion}" styleClass="linkClass2" actionListener="#{reportPublicController.selectAtenea(ate)}"/>
+			    				<h:commandLink value="#{arg.descripcion}" styleClass="linkClass2" actionListener="#{reportPublicController.selectAtenea(ate)}"/>
 			    			</h:column>
 			    			<h:column>	
-								<h:commandLink value="#{ate.count}" styleClass="linkClass" actionListener="#{reportPublicController.selectAtenea(ate)}"/><br />			    			
+								<h:commandLink value="#{arg.count}" styleClass="linkClass" actionListener="#{reportPublicController.selectAtenea(ate)}"/><br />			    			
 							</h:column>
 							
 						</h:dataTable>

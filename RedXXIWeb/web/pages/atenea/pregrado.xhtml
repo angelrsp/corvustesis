@@ -245,12 +245,13 @@
 		<table>
 			<tr>
 				<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
-				<td><p:inputText value="#{publicacionDataManager.publicacion.pubTitulo}"/></td>
+				<td><p:inputText value="#{publicacionDataManager.publicacion.pubTitulo}" required="true"/></td>
 				<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
 				<td><p:inputText value="#{publicacionDataManager.publicacion.pubResumen}"/></td>
 				<td><h:outputText value="#{i18n['label.isbn']}:&#160;" /></td>
 				<td><p:inputText value="#{publicacionDataManager.publicacion.pubIsbn}"/></td>				
 				<td><p:commandButton value="#{i18n['boton.agregar']}" process="pnlPublicacion" update="pnlPublicacion,growl" actionListener="#{pregradoController.createPublicacion}"/></td>
+				<td><p:commandButton value="#{i18n['boton.cancelar']}" process="pnlPublicacion" update="pnlPublicacion,growl" actionListener="#{pregradoController.cancelPublicacion}"/></td>
 			</tr>
 		</table>
 
