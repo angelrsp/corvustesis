@@ -1,5 +1,6 @@
 package ec.edu.uce.indicadores.ejb.negocio;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -108,6 +109,8 @@ public interface IndicadorService {
 
 	void deleteHistoricoIndicador(HistoricoIndicadorDTO his)
 			throws IndicadoresException;
+
+	BigDecimal sumarIdeal(IndicadorDTO indicadorDTO);
 
 
 }

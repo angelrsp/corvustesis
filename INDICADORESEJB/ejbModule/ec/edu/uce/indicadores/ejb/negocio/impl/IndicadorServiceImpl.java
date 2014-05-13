@@ -339,8 +339,36 @@ public class IndicadorServiceImpl implements IndicadorService {
 		actual=valor(indicadorDTO).get(1);
 		indicadorDTO.setIndValorInicial(inicial);
 		indicadorDTO.setIndValorActual(actual);
+		
+		BigDecimal sumaIdeal=sumarIdeal(indicadorDTO);
+		
+		if(sumaIdeal.doubleValue()>indicadorDTO.getIndValorIdeal().doubleValue())
+		{
+			indicadorDTO.setIndValorIdeal(sumaIdeal);
+		}
 		factoryDAO.getIndicadorDAOImpl().edit(indicadorDTO);
 	}
+	
+	
+	@Override
+	public BigDecimal sumarIdeal(IndicadorDTO indicadorDTO)
+	{
+		BigDecimal ideal=BigDecimal.ZERO;
+		if(!factoryDAO.getIndicadorDAOImpl().getChildren(indicadorDTO).isEmpty())
+		{
+			for(IndicadorDTO ind: factoryDAO.getIndicadorDAOImpl().getChildren(indicadorDTO))
+			{
+				ideal=BigDecimal.valueOf(sumarIdeal(ind).doubleValue()+ideal.doubleValue());
+			}
+		}
+		else
+		{
+			ideal=indicadorDTO.getIndValorIdeal();
+		}
+		return ideal;
+	}
+	
+	
 	
 	private List<BigDecimal> valor(IndicadorDTO ind) throws IndicadoresException
 	{
@@ -351,7 +379,7 @@ public class IndicadorServiceImpl implements IndicadorService {
 		
 		listVal.add(0, BigDecimal.ZERO);
 		listVal.add(1, BigDecimal.ZERO);
-		
+				
 		int tam;
 		//IndicadorDTO indTemp;
 		BigDecimal inicial = BigDecimal.ZERO,actual=BigDecimal.ZERO;
