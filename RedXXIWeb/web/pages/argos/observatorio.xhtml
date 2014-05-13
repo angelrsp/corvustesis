@@ -47,12 +47,15 @@
 			
 			<tr>	
 				<td><h:outputText value="#{i18n['label.datos.institucionales']}:&#160;"/></td>
-				<td><p:inputTextarea autoResize="false" value="#{observatorioDataManager.observatorio.obsDatosInstitucionales}" required="true" requiredMessage="#{i18n['label.datos.institucionales']}&#160;#{i18n['label.requerido']}"/></td>				
+				<td colspan="3"><p:inputTextarea autoResize="false" value="#{observatorioDataManager.observatorio.obsDatosInstitucionales}" required="true" requiredMessage="#{i18n['label.datos.institucionales']}&#160;#{i18n['label.requerido']}" counter="counterDaI" maxlength="300" counterTemplate="{0}" style="width:100%;"/>
+				<h:outputText id="counterDaI" />
+				</td>				
 			</tr>
 
 			<tr>	
 				<td><h:outputText value="#{i18n['label.institucion.patrocinadora']}:&#160;"/></td>
-				<td><p:inputTextarea autoResize="false" value="#{observatorioDataManager.observatorio.obsInstitucionPatrocinadora}" required="true" requiredMessage="#{i18n['label.institucion.patrocinadora']}&#160;#{i18n['label.requerido']}"/></td>				
+				<td colspan="3"><p:inputTextarea autoResize="false" value="#{observatorioDataManager.observatorio.obsInstitucionPatrocinadora}" required="true" requiredMessage="#{i18n['label.institucion.patrocinadora']}&#160;#{i18n['label.requerido']}" counter="counterInP" counterTemplate="{0}" maxlength="300" style="width:100%;"/>
+				<h:outputText id="counterInP" /></td>			
 			</tr>
 
 			<tr>	
@@ -62,17 +65,21 @@
 
 			<tr>	
 				<td><h:outputText value="#{i18n['label.mision']}:&#160;"/></td>
-				<td><p:inputText value="#{observatorioDataManager.observatorio.obsMision}" required="true" requiredMessage="#{i18n['label.mision']}&#160;#{i18n['label.requerido']}"/></td>				
+				<td colspan="3"><p:inputTextarea value="#{observatorioDataManager.observatorio.obsMision}" required="true" requiredMessage="#{i18n['label.mision']}&#160;#{i18n['label.requerido']}" autoResize="false" counter="counterMis" counterTemplate="{0}" maxlength="300" style="width:100%;"/>
+				<h:outputText id="counterMis" /></td>				
 			</tr>
 
 			<tr>	
 				<td><h:outputText value="#{i18n['label.lineas.tematicas']}:&#160;"/></td>
-				<td><p:inputText value="#{observatorioDataManager.observatorio.obsLineaTematica}" required="true" requiredMessage="#{i18n['label.lineas.tematicas']}&#160;#{i18n['label.requerido']}"/></td>				
+				<td colspan="4"><p:inputTextarea value="#{observatorioDataManager.observatorio.obsLineaTematica}" required="true" requiredMessage="#{i18n['label.lineas.tematicas']}&#160;#{i18n['label.requerido']}" autoResize="false" counter="counterTem" counterTemplate="{0}" maxlength="300" style="width:100%;"/>
+				<h:outputText id="counterTem" /></td>				
 			</tr>
 
 			<tr>	
 				<td><h:outputText value="#{i18n['label.actividades.principales']}:&#160;"/></td>
-				<td><p:inputText value="#{observatorioDataManager.observatorio.obsActividadesPrincipales}" required="true" requiredMessage="#{i18n['label.actividades.principales']}&#160;#{i18n['label.requerido']}"/></td>				
+				<td colspan="4"><p:inputTextarea value="#{observatorioDataManager.observatorio.obsActividadesPrincipales}" required="true" requiredMessage="#{i18n['label.actividades.principales']}&#160;#{i18n['label.requerido']}" autoResize="false" counter="counterAct" counterTemplate="{0}" maxlength="300" style="width:100%;"/>
+				<h:outputText id="counterAct" />
+				</td>				
 			</tr>
 
 			<tr>
@@ -89,6 +96,31 @@
 			<p:column headerText="#{i18n['label.nombre']}">
 				<h:outputText value="#{obs.obsNombre}" />
 			</p:column>		
+
+			<p:column headerText="#{i18n['label.datos.institucionales']}">
+				<h:outputText value="#{obs.obsDatosInstitucionales}" />
+			</p:column>		
+
+			<p:column headerText="#{i18n['label.institucion.patrocinadora']}">
+				<h:outputText value="#{obs.obsInstitucionPatrocinadora}" />
+			</p:column>		
+
+			<p:column headerText="#{i18n['label.anio.fundacion']}">
+				<h:outputText value="#{obs.obsAnioFundacion}" />
+			</p:column>		
+
+			<p:column headerText="#{i18n['label.mision']}">
+				<h:outputText value="#{obs.obsMision}" />
+			</p:column>		
+
+			<p:column headerText="#{i18n['label.lineas.tematicas']}">
+				<h:outputText value="#{obs.obsLineaTematica}" />
+			</p:column>		
+
+			<p:column headerText="#{i18n['label.actividades.principales']}">
+				<h:outputText value="#{obs.obsActividadesPrincipales}" />
+			</p:column>		
+
 
 			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
 				<p:commandButton actionListener="#{observatorioController.edit(obs)}" icon="ui-icon-pencil" process=":contenido:tblObservatorio" update=":contenido:pnlDatos"/>
