@@ -381,6 +381,11 @@ public class PregradoController extends SelectItemController{
 		}
 	}
 	
+	public void cancelPublicacion()
+	{
+		publicacionDataManager.setPublicacion(new PublicacionDTO());
+	}
+	
 	
 	public void buscarPublicacion()
 	{
