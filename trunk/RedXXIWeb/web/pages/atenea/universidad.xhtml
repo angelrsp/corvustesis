@@ -114,7 +114,8 @@
 				</tr>
 				<tr>
 					<td><h:outputText value="#{i18n['label.datos.institucionales']}:&#160;" /></td>
-					<td><p:inputTextarea value="#{universidadDataManager.facultad.cenDatoInstitucional}" autoResize="false" required="true" requiredMessage="#{i18n['label.datos.institucionales']}&#160;#{i18n['label.requerido']}"/></td>								
+					<td><p:inputTextarea value="#{universidadDataManager.facultad.cenDatoInstitucional}" autoResize="false" required="true" requiredMessage="#{i18n['label.datos.institucionales']}&#160;#{i18n['label.requerido']}" maxlength="255" counter="counterIns" counterTemplate="{0}"/>
+					<h:outputText id="counterIns" /></td>								
 				</tr>		
 
 				<tr>
