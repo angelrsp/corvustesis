@@ -108,17 +108,43 @@ public class PublicacionDAOImpl extends AbstractFacadeImpl<PublicacionDTO> imple
 	@Override
 	public List<PublicacionDTO> getByType(Object type) throws CorvustecException
 	{
-		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-		CriteriaQuery<PublicacionDTO> cq=cb.createQuery(PublicacionDTO.class);
-		Root<PublicacionDTO>from =cq.from(PublicacionDTO.class);
+		CriteriaBuilder cb;
+		CriteriaQuery<PublicacionDTO> cq;
+		Root<PublicacionDTO> from;
+		List<PublicacionDTO> list;
+		Predicate predicate;
+		List<Predicate> predicateList = null;
+		try{
 		
-		cq.where(cb.equal(from.get("pubTipo"), type));
+			cb=entityManager.getCriteriaBuilder();
+			cq=cb.createQuery(PublicacionDTO.class);
+			
+			from= cq.from(PublicacionDTO.class);
+			
+			predicateList=new ArrayList<Predicate>();
+			
+			if(type!=null)
+			{
+				predicate=cb.equal(from.get("pubTipo"),type);
+				predicateList.add(predicate);
+			}
+			
+			cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
+			
+			TypedQuery<PublicacionDTO> tq=entityManager.createQuery(cq);
+			
+			list=tq.getResultList();
+			return list;			
+		}catch(Exception e){
+			logger.info(e.toString());
+			throw new CorvustecException(e);
+		}finally{
+			predicate=null;
+			predicateList=null;
+		}
+
 		
-		List<PublicacionDTO> list=entityManager.createQuery(cq).getResultList();
-		if(list.isEmpty())
-			return new ArrayList<PublicacionDTO>();
-		else
-			return list;
+		
 	}	
 
 	@Override
@@ -141,8 +167,12 @@ public class PublicacionDAOImpl extends AbstractFacadeImpl<PublicacionDTO> imple
 			
 			predicateList=new ArrayList<Predicate>();
 			
-			predicate=cb.equal(from.get("pubTipo"),type);
-			predicateList.add(predicate);
+			if(type!=null)
+			{
+				predicate=cb.equal(from.get("pubTipo"),type);
+				predicateList.add(predicate);
+			}
+			
 			if(pais!=null)
 			{
 				predicate=cb.equal(from.get("pubPais"),pais);
@@ -173,17 +203,47 @@ public class PublicacionDAOImpl extends AbstractFacadeImpl<PublicacionDTO> imple
 	@Override
 	public List<PublicacionDTO> getByType(Object type,Object pais) throws CorvustecException
 	{
-		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-		CriteriaQuery<PublicacionDTO> cq=cb.createQuery(PublicacionDTO.class);
-		Root<PublicacionDTO>from =cq.from(PublicacionDTO.class);
+		CriteriaBuilder cb;
+		CriteriaQuery<PublicacionDTO> cq;
+		Root<PublicacionDTO> from;
+		List<PublicacionDTO> list;
+		Predicate predicate;
+		List<Predicate> predicateList = null;
+		try{
 		
-		cq.where(cb.and(cb.equal(from.get("pubTipo"), type),cb.equal(from.get("pubPais"), pais)));
-		
-		List<PublicacionDTO> list=entityManager.createQuery(cq).getResultList();
-		if(list.isEmpty())
-			return new ArrayList<PublicacionDTO>();
-		else
-			return list;
+			cb=entityManager.getCriteriaBuilder();
+			cq=cb.createQuery(PublicacionDTO.class);
+			
+			from= cq.from(PublicacionDTO.class);
+			
+			predicateList=new ArrayList<Predicate>();
+			
+			if(type!=null)
+			{
+				predicate=cb.equal(from.get("pubTipo"),type);
+				predicateList.add(predicate);
+			}
+			
+			if(pais!=null)
+			{
+				predicate=cb.equal(from.get("pubPais"),pais);
+				predicateList.add(predicate);
+			}
+			
+			cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
+			
+			TypedQuery<PublicacionDTO> tq=entityManager.createQuery(cq);
+			
+			list=tq.getResultList();
+			
+			return list;			
+		}catch(Exception e){
+			logger.info(e.toString());
+			throw new CorvustecException(e);
+		}finally{
+			predicate=null;
+			predicateList=null;
+		}
 	}
 	
 	
