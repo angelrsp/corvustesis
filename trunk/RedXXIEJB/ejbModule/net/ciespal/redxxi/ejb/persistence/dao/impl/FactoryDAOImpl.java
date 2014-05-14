@@ -10,6 +10,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.CentroDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ContactoArgosDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ContactoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.DoctorDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.DoctorVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.EntidadDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.EticaDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.EventoDAO;
@@ -29,6 +30,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.PremioCiespalDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PremioDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ProyectoInvestigacionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PublicacionDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.PublicacionVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.RedDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.VeeduriaDAO;
 
@@ -53,6 +55,8 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private NoticiaDAO noticiaDAO;
 	private ModalidadDAO modalidadDAO;
 	private ObraDAO obraDAO;
+	private DoctorVieDAO doctorVieDAO;
+	private PublicacionVieDAO publicacionVieDAO;
 	
 	private RedDAO redDAO; 
 	private ObservatorioDAO observatorioDAO;
@@ -276,6 +280,22 @@ public class FactoryDAOImpl implements FactoryDAO{
 			contactoArgosDAO = new ContactoArgosDAOImpl(entityManager);
 		}
 		return contactoArgosDAO;
+	}
+
+	@Override
+	public DoctorVieDAO getDoctorVieDAOImpl() {
+		if (doctorVieDAO == null) {
+			doctorVieDAO = new DoctorVieDAOImpl(entityManager);
+		}
+		return doctorVieDAO;
+	}
+
+	@Override
+	public PublicacionVieDAO getPublicacionVieDAOImpl() {
+		if (publicacionVieDAO == null) {
+			publicacionVieDAO = new PublicacionVieDAOImpl(entityManager);
+		}
+		return publicacionVieDAO;
 	}
 
 }

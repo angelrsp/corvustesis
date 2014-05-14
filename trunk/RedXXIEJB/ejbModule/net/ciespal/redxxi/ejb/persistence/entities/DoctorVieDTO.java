@@ -11,15 +11,9 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="ate_doctor_vie")
-@NamedQuery(name="DoctorListDTO.findAll", query="SELECT d FROM DoctorListDTO d")
-public class DoctorListDTO implements Serializable {
+@NamedQuery(name="DoctorVieDTO.findAll", query="SELECT d FROM DoctorVieDTO d")
+public class DoctorVieDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Column(name="cat_bandera_byte")
-	private byte[] catBanderaByte;
-
-	@Column(name="cat_bandera_nombre")
-	private String catBanderaNombre;
 
 	@Column(name="cat_ciudad")
 	private String catCiudad;
@@ -29,9 +23,6 @@ public class DoctorListDTO implements Serializable {
 
 	@Column(name="cat_provincia")
 	private String catProvincia;
-
-	@Column(name="cat_sexo")
-	private String catSexo;
 
 	@Column(name="doc_anio_titulacion")
 	private Integer docAnioTitulacion;
@@ -88,26 +79,7 @@ public class DoctorListDTO implements Serializable {
 	@Column(name="doc_titulo_tesis")
 	private String docTituloTesis;
 
-	@Column(name="ent_codigo")
-	private Integer entCodigo;
-
-	public DoctorListDTO() {
-	}
-
-	public byte[] getCatBanderaByte() {
-		return this.catBanderaByte;
-	}
-
-	public void setCatBanderaByte(byte[] catBanderaByte) {
-		this.catBanderaByte = catBanderaByte;
-	}
-
-	public String getCatBanderaNombre() {
-		return this.catBanderaNombre;
-	}
-
-	public void setCatBanderaNombre(String catBanderaNombre) {
-		this.catBanderaNombre = catBanderaNombre;
+	public DoctorVieDTO() {
 	}
 
 	public String getCatCiudad() {
@@ -132,14 +104,6 @@ public class DoctorListDTO implements Serializable {
 
 	public void setCatProvincia(String catProvincia) {
 		this.catProvincia = catProvincia;
-	}
-
-	public String getCatSexo() {
-		return this.catSexo;
-	}
-
-	public void setCatSexo(String catSexo) {
-		this.catSexo = catSexo;
 	}
 
 	public Integer getDocAnioTitulacion() {
@@ -284,14 +248,6 @@ public class DoctorListDTO implements Serializable {
 
 	public void setDocTituloTesis(String docTituloTesis) {
 		this.docTituloTesis = docTituloTesis;
-	}
-
-	public Integer getEntCodigo() {
-		return this.entCodigo;
-	}
-
-	public void setEntCodigo(Integer entCodigo) {
-		this.entCodigo = entCodigo;
 	}
 
 }
