@@ -30,6 +30,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.PublicacionVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.UniversidadListDTO;
 
 import org.slf4j.Logger;
@@ -569,17 +570,17 @@ public class AteneaServiceImpl implements AteneaService{
 		}//Doctor
 		else if(atenea.getTipo()==104)
 		{
-			List<DoctorDTO> listDoc=new ArrayList<DoctorDTO>();
-			if(atenea.getPais()==0)
-				listDoc=factoryDAO.getDoctorDAOImpl().getAll();
-			else
-				listDoc=factoryDAO.getDoctorDAOImpl().getAll2(atenea.getPais());
+			List<DoctorVieDTO> listDoc=new ArrayList<DoctorVieDTO>();
+			DoctorVieDTO doctorVieDTO=new DoctorVieDTO();
+			doctorVieDTO.setDocPais(atenea.getPais());
+			listDoc=factoryDAO.getDoctorVieDAOImpl().get(doctorVieDTO);
 			
-			for(DoctorDTO doc: listDoc){
+			for(DoctorVieDTO doc: listDoc){
 				ateneaVisor=new AteneaVisorDTO();
 				ateneaVisor.setCodigo(doc.getDocCodigo());
 				ateneaVisor.setTitulo("Nombres: "+doc.getDocNombres()+" "+doc.getDocApellidos());
 				ateneaVisor.setDescripcion1("Fecha de Nacimiento: "+doc.getDocFechaNacimiento().toString().substring(0, 10));
+				ateneaVisor.setDescripcion2("Ciudad de Nacimiento: "+doc.getCatCiudad());
 				ateneaVisor.setTipo(atenea.getTipo());
 				
 				ateneaVisorList.add(ateneaVisor);
@@ -587,22 +588,24 @@ public class AteneaServiceImpl implements AteneaService{
 		}//Articulo libros revistas
 		else if(atenea.getTipo()==105)
 		{
-			List<PublicacionDTO> listPublicacion=new ArrayList<PublicacionDTO>();
-			if(atenea.getPais()==0)
-				listPublicacion=factoryDAO.getPublicacionDAOImpl().getByType(null);
-			else
-				listPublicacion=factoryDAO.getPublicacionDAOImpl().getByType(null,atenea.getPais());
+			List<PublicacionVieDTO> listPublicacion=new ArrayList<PublicacionVieDTO>();
+			PublicacionVieDTO publicacionVieDTO=new PublicacionVieDTO();
+			publicacionVieDTO.setPubTipo(null);
+			publicacionVieDTO.setPubPais(atenea.getPais());
 
-			for(PublicacionDTO pub: listPublicacion){
+			listPublicacion=factoryDAO.getPublicacionVieDAOImpl().get(publicacionVieDTO);
+
+			for(PublicacionVieDTO pub: listPublicacion){
 				
 				ateneaVisor=new AteneaVisorDTO();
 				ateneaVisor.setCodigo(pub.getPubCodigo());
 				ateneaVisor.setTitulo("Titulo: "+pub.getPubTitulo());
+				ateneaVisor.setDescripcion1("Autor: "+pub.getPubAutor());
+				ateneaVisor.setDescripcion2("Temática: "+pub.getCatSubCampo());
 				
 				ateneaVisor.setTipo(atenea.getTipo());
 				
 				ateneaVisorList.add(ateneaVisor);
-				
 			}
 		}		
 		return ateneaVisorList;

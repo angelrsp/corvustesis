@@ -26,6 +26,9 @@ public class PublicacionVieDTO implements Serializable {
 	@Column(name="cat_tipo")
 	private String catTipo;
 
+	@Column(name="cat_sub_campo")
+	private String catSubCampo;
+	
 	@Column(name="pub_anio_publicacion")
 	private Integer pubAnioPublicacion;
 
@@ -258,6 +261,14 @@ public class PublicacionVieDTO implements Serializable {
 
 	public void setPubTituloPublicacion(String pubTituloPublicacion) {
 		this.pubTituloPublicacion = pubTituloPublicacion;
+	}
+
+	public String getCatSubCampo() {
+		return catSubCampo;
+	}
+
+	public void setCatSubCampo(String catSubCampo) {
+		this.catSubCampo = catSubCampo;
 	}
 
 }
