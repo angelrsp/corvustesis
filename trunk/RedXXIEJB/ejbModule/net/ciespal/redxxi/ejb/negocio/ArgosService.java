@@ -35,5 +35,6 @@ public interface ArgosService {
 			throws CorvustecException;
 	void deleteVeeduria(VeeduriaDTO veeduria) throws CorvustecException;
 	List<ArgosDTO> readArgos(Object pais) throws CorvustecException;
+	Integer countArgos() throws CorvustecException;
 
 }
