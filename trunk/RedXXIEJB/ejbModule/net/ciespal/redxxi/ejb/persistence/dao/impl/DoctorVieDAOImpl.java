@@ -52,6 +52,13 @@ public class DoctorVieDAOImpl extends AbstractFacadeImpl<DoctorVieDTO> implement
 				predicate=cb.equal(from.get("docCodigo"),doctorVieDTO.getDocCodigo());
 				predicateList.add(predicate);
 			}
+
+			if(doctorVieDTO.getDocPais()!=null && doctorVieDTO.getDocPais()!=0)
+			{
+				predicate=cb.equal(from.get("docPais"),doctorVieDTO.getDocPais());
+				predicateList.add(predicate);
+			}
+
 			
 			cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
 			
