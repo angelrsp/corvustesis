@@ -50,8 +50,6 @@ public class ProyectoInvestigacionDTO implements Serializable {
 
 	@Column(name="pin_pais")
 	private Integer pinPais;
-
-	
 	
 	@Transient
 	private Long pinCount;
