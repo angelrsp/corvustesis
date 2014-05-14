@@ -42,15 +42,15 @@ public class ArgosServiceImpl implements ArgosService{
 			//Observatorios
 			argos=new ArgosDTO();
 			argos.setTipo(1);
-			argos.setCount(factoryDAO.getObservatorioDAOImpl().count(pais));
 			argos.setDescripcion("Observatorios: ");
+			argos.setCount(factoryDAO.getObservatorioDAOImpl().count(pais));
 			argosList.add(argos);
 
 			//Veedurias
 			argos=new ArgosDTO();
-			argos.setTipo(1);
-			argos.setCount(factoryDAO.getObservatorioDAOImpl().count(pais));
+			argos.setTipo(2);
 			argos.setDescripcion("Veedurías: ");
+			argos.setCount(factoryDAO.getVeeduriaDAOImpl().count(pais));
 			argosList.add(argos);			
 			
 		}
@@ -60,6 +60,23 @@ public class ArgosServiceImpl implements ArgosService{
 		}
 		return argosList;
 	}
+
+	
+	@Override
+	public Integer countArgos() throws CorvustecException
+	{
+		logger.info("createOrUpdateRed");
+		Integer count;
+		try{
+			count=factoryDAO.getObservatorioDAOImpl().count(null)+factoryDAO.getVeeduriaDAOImpl().count(null);			
+		}
+		catch(Exception e){
+			logger.info("Error createOrUpdateRed {}",e.toString());
+			throw new CorvustecException("Error al createOrUpdateRed");
+		}
+		return count;
+	}
+
 	
 	/*Red*/
 	@Override
