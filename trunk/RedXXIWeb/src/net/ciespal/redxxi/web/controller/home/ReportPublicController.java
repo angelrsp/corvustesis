@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import net.ciespal.redxxi.ejb.negocio.ArgosService;
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
 import net.ciespal.redxxi.ejb.persistence.entities.AteneaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
@@ -24,6 +25,9 @@ public class ReportPublicController {
 	@EJB
 	private AteneaService ateneaService;
 
+	@EJB
+	private ArgosService argosService;
+
 	
 	@ManagedProperty(value="#{reportPublicDataManager}")
 	private ReportPublicDataManager reportPublicDataManager;
@@ -38,6 +42,7 @@ public class ReportPublicController {
 		readAtenea();
 		readPais();
 		readAteneaCount();
+		readArgosCount();
 	}
 	
 	public ReportPublicDataManager getReportPublicDataManager() {
@@ -114,4 +119,14 @@ public class ReportPublicController {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
+	
+	private void readArgosCount()
+	{
+		try {
+			reportPublicDataManager.setArgosCount(argosService.countArgos());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
 }
