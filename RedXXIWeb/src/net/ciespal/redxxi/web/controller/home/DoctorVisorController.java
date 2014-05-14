@@ -8,13 +8,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import com.corvustec.commons.util.CorvustecException;
-
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
 import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.DoctorListDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.DoctorVieDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.home.DoctorVisorDataManager;
+
+import com.corvustec.commons.util.CorvustecException;
 
 @ViewScoped
 @ManagedBean(name = "doctorVisorController")
@@ -45,8 +45,11 @@ public class DoctorVisorController {
 	
 	public void readDoctor(DoctorDTO doctor)
 	{
+		DoctorVieDTO docVie;
 		try {
-			List<DoctorListDTO> doctorList=ateneaService.readDoctorList(doctor.getDocCodigo());
+			docVie=new DoctorVieDTO();
+			docVie.setDocCodigo(doctor.getDocCodigo());
+			List<DoctorVieDTO> doctorList=ateneaService.readDoctorList(docVie);
 			if(doctorList.size()>0)
 			{
 				doctorVisorDataManager.setDoctor(doctorList.get(0));
