@@ -72,11 +72,12 @@ public class Process2 {
 		List<DataDTO> dataList;
 		DataDTO data;
 		
-		List<DataDTO> dataListDistinct;
-		
 		FileWriter writer;
 		
+		List<DataDTO> dataListDistinct;
 		List<DataDTO> baliza;
+		List<DataDTO> dataMac;
+		List<DataDTO> dataMax;
 		
 		int balizaSum;
 		float balizaAvg;
@@ -87,6 +88,8 @@ public class Process2 {
 			baliza=new ArrayList<DataDTO>();
 			writer=new FileWriter(fileOut);
 			dataList=new ArrayList<DataDTO>();
+			dataMac=new ArrayList<DataDTO>();
+			dataMax=new ArrayList<DataDTO>();
 			
 			lines = FileUtils.readLines(fileIn);
 
@@ -134,15 +137,19 @@ public class Process2 {
 			}
 			dataListDistinct = new ArrayList<DataDTO>(map.values());
 			
-			HasArgumentWithValue<Object, Integer> aa;
 			
 			for(DataDTO dat:dataListDistinct)
 			{
-				aa=max(dataListDistinct, having(on(DataDTO.class).getRssi(), equalTo(dat.getMac())));
-				
+				 dataMac= select(dataList, having(on(DataDTO.class).getMac(), equalTo(dat.getMac())));
+				 data=new DataDTO();
+				 data.setRssi(min(dataMac, on(DataDTO.class).getRssi()));
+				 data.setMac(dat.getMac());
+				 data.setFecha(dat.getFecha());
+				 
+				 dataMax.add(data);
 			}
 
-
+		
 			
 			
 //			dataList= (List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
@@ -159,7 +166,7 @@ public class Process2 {
 			
 			
 			
-			for(DataDTO dat:dataListDistinct)
+			for(DataDTO dat:dataMax)
 			{				
 				System.out.print(dat.getFecha()+"|");
 				System.out.print(dat.getMac()+"|");
