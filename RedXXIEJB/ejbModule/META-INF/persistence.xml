@@ -39,6 +39,15 @@
 	<class>net.ciespal.redxxi.ejb.persistence.entities.FacultadListDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.DoctorVieDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.PublicacionVieDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.security.AccesoDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteMenuDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.security.EmpresaDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.security.MenuDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioPerfilDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.OpinionDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>		

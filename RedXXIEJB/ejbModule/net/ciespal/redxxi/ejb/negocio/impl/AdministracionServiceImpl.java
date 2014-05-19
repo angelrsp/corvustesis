@@ -5,12 +5,14 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.ciespal.redxxi.ejb.negocio.AdministracionService;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.util.dto.CredencialesDTO;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.corvustec.commons.util.ApplicationUtil;
 import com.corvustec.commons.util.CorvustecException;
@@ -87,4 +89,30 @@ public class AdministracionServiceImpl implements AdministracionService{
 			throw new CorvustecException("Error al deleteCatalogo");
 		}
 	}
+	
+	
+	/*Usuario*/
+	@Override
+	public UsuarioDTO userAuthentication(CredencialesDTO credenciales) throws CorvustecException
+	{
+		logger.info("userAuthentication");
+		UsuarioDTO usuario;
+		List<UsuarioDTO> userList;
+		try{
+			usuario=new UsuarioDTO();
+			usuario.setUsuLogin(credenciales.getUser());
+			usuario.setUsuClave(credenciales.getPassword());
+			userList= factoryDAO.getUsuarioDAOImpl().getByAnd(usuario);
+			if(!userList.isEmpty())
+				return userList.get(0);
+			else
+				return null;
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al userAuthentication" +e.toString());
+			throw new CorvustecException("Error al userAuthentication "+e.toString());
+		}		
+	}
+	
 }

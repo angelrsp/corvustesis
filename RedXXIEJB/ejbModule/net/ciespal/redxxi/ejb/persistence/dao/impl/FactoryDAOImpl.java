@@ -32,6 +32,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.ProyectoInvestigacionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PublicacionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PublicacionVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.RedDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.UsuarioDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.VeeduriaDAO;
 
 
@@ -41,6 +42,9 @@ public class FactoryDAOImpl implements FactoryDAO{
 	@PersistenceContext(unitName = "redXXIPU")
 	private EntityManager entityManager;
 
+	private UsuarioDAO usuarioDAO;
+	
+	
 	private CatalogoDAO catalogoDAO;
 	private CentroDAO centroDAO;
 	private CarreraDAO carreraDAO;
@@ -296,6 +300,14 @@ public class FactoryDAOImpl implements FactoryDAO{
 			publicacionVieDAO = new PublicacionVieDAOImpl(entityManager);
 		}
 		return publicacionVieDAO;
+	}
+
+	@Override
+	public UsuarioDAO getUsuarioDAOImpl() {
+		if (usuarioDAO == null) {
+			usuarioDAO = new UsuarioDAOImpl(entityManager);
+		}
+		return usuarioDAO;
 	}
 
 }
