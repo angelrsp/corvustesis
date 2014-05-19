@@ -11,6 +11,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.AbstractFacade;
 
 
 public abstract class AbstractFacadeImpl<T> implements AbstractFacade<T>{
+
 	
 //	@PersistenceContext(unitName = "silsaePU")
 	protected EntityManager entityManager;
@@ -60,7 +61,67 @@ public abstract class AbstractFacadeImpl<T> implements AbstractFacade<T>{
 		else
 			return list;
 	}
+	
+	
+//	public List<T> getByAnd(T entity) throws CorvustecException
+//	{
+//		CriteriaBuilder cb;
+//		CriteriaQuery<T> cq;
+//		Root<T> from;
+//		List<T> list;
+//		Predicate predicate;
+//		List<Predicate> predicateList = null;
+//		String fieldName;
+//		Method getter;
+//		Object value;
+//		Field[] fields;
+//		try{
+//			cb=entityManager.getCriteriaBuilder();
+//			cq=cb.createQuery(entityClass);
+//			
+//			from= cq.from(entityClass);
+//			
+//			predicateList=new ArrayList<Predicate>();
+//			
+//			fields = entityClass.getClass().getDeclaredFields();
 //
+//	        for(Field f : fields){
+//	            fieldName = f.getName();
+//				if(!fieldName.equals("serialVersionUID")&&!fieldName.equals("ANNOTATION")&&!fieldName.equals("ENUM"))
+//				{
+//				    getter = entityClass.getClass().getMethod("get" + String.valueOf(fieldName.charAt(0)).toUpperCase() +
+//				            fieldName.substring(1));
+//				    
+//				    value = getter.invoke(entityClass, new Object[0]);
+//				
+//				    if(value!=null)
+//				    {
+//				    	predicate=cb.equal(from.get(fieldName), value);
+//				    	predicateList.add(predicate);                	
+//				    }
+//				}
+//	        }
+//			
+//			cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
+//			
+//			TypedQuery<T> tq=entityManager.createQuery(cq);
+//			list=tq.getResultList();
+//			
+//			return list;
+//			
+//		}catch(Exception e){
+//			//logger.info(e.toString());
+//			throw new CorvustecException(e);
+//		}finally{
+//			predicate=null;
+//			predicateList=null;
+//		}		
+//	}
+
+	
+	
+//
+	
 //	public List<T> findRange(int[] range) {
 //		javax.persistence.criteria.CriteriaQuery cq = getEntityManager()
 //				.getCriteriaBuilder().createQuery();

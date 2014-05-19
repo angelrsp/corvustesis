@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Local;
 
 import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.util.dto.CredencialesDTO;
 
 import com.corvustec.commons.util.CorvustecException;
 
@@ -20,5 +22,8 @@ public interface AdministracionService {
 			throws CorvustecException;
 
 	void deleteCatalogo(CatalogoDTO catalogo) throws CorvustecException;
+
+	UsuarioDTO userAuthentication(CredencialesDTO credenciales)
+			throws CorvustecException;
 
 }

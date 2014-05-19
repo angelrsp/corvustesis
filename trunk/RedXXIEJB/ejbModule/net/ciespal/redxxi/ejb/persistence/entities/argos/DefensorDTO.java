@@ -1,6 +1,8 @@
 package net.ciespal.redxxi.ejb.persistence.entities.argos;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -34,6 +36,11 @@ public class DefensorDTO implements Serializable {
 
 	@Column(name="def_usuario")
 	private Integer defUsuario;
+
+	
+	//bi-directional many-to-one association to ContactoDTO
+	@OneToMany(mappedBy="argDefensor")
+	private List<OpinionDTO> argOpinions;
 
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne
@@ -89,6 +96,14 @@ public class DefensorDTO implements Serializable {
 
 	public void setDefUsuario(Integer defUsuario) {
 		this.defUsuario = defUsuario;
+	}
+
+	public List<OpinionDTO> getArgOpinions() {
+		return argOpinions;
+	}
+
+	public void setArgOpinions(List<OpinionDTO> argOpinions) {
+		this.argOpinions = argOpinions;
 	}
 
 	public EntidadArgosDTO getArgEntidad() {

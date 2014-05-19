@@ -1,5 +1,7 @@
 package net.ciespal.redxxi.ejb.persistence.dao;
 
+
+
 public interface AbstractFacade<T> {
 	
 	T create(T entity);
@@ -10,4 +12,5 @@ public interface AbstractFacade<T> {
 	
 	T find(Object id);
 
+	//List<T> getByAnd(T entity) throws CorvustecException;
 }
