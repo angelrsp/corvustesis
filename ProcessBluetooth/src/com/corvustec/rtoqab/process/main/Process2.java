@@ -1,40 +1,26 @@
 package com.corvustec.rtoqab.process.main;
 
+import static ch.lambdaj.Lambda.having;
+import static ch.lambdaj.Lambda.min;
+import static ch.lambdaj.Lambda.on;
+import static ch.lambdaj.Lambda.select;
+import static ch.lambdaj.Lambda.sumFrom;
+import static ch.lambdaj.Lambda.sort;
+import static org.hamcrest.Matchers.equalTo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.channels.SelectableChannel;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-
-
-
-
-
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.Predicate;
-import org.apache.commons.collections.PredicateUtils;
-import org.apache.commons.collections.functors.EqualPredicate;
 import org.apache.commons.io.FileUtils;
-
-import ch.lambdaj.function.matcher.HasArgumentWithValue;
 
 import com.corvustec.rtoqab.process.util.ReadAgencia;
 import com.corvustec.rtoqad.process.dto.DataDTO;
-
-import static ch.lambdaj.Lambda.*;
-import static org.hamcrest.Matchers.*;
 
 
 public class Process2 {
@@ -150,6 +136,8 @@ public class Process2 {
 			}
 
 		
+			dataList= sort(dataList, on(DataDTO.class).getFecha());
+					
 			
 			
 //			dataList= (List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
