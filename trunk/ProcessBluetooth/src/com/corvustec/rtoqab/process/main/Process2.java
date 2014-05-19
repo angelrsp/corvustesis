@@ -7,6 +7,7 @@ import java.nio.channels.SelectableChannel;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -16,16 +17,23 @@ import java.util.List;
 import java.util.Map;
 
 
+
+
+
+
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
+import org.apache.commons.collections.PredicateUtils;
 import org.apache.commons.collections.functors.EqualPredicate;
 import org.apache.commons.io.FileUtils;
+
+import ch.lambdaj.function.matcher.HasArgumentWithValue;
 
 import com.corvustec.rtoqab.process.util.ReadAgencia;
 import com.corvustec.rtoqad.process.dto.DataDTO;
 
 import static ch.lambdaj.Lambda.*;
-
 import static org.hamcrest.Matchers.*;
 
 
@@ -54,9 +62,9 @@ public class Process2 {
 	@SuppressWarnings("unchecked")
 	private static void processOne()
 	{
-		File fileIn=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0016")+"20140424.txt");
+		File fileIn=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0036")+"20140510.txt");
 		
-		File fileOut=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0016")+"20140424Out.txt");
+		File fileOut=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0036")+"20140510Final.txt");
 		
 		List<String> lines;
 		String line[];
@@ -64,11 +72,19 @@ public class Process2 {
 		List<DataDTO> dataList;
 		DataDTO data;
 		
-		List<DataDTO> dataListMenor=new ArrayList<DataDTO>();
+		List<DataDTO> dataListDistinct;
 		
 		FileWriter writer;
 		
-		try{
+		List<DataDTO> baliza;
+		
+		int balizaSum;
+		float balizaAvg;
+		double varianza= 0.0,desviacion = 0.0;
+		
+		try{			
+			dataListDistinct =new ArrayList<DataDTO>();
+			baliza=new ArrayList<DataDTO>();
 			writer=new FileWriter(fileOut);
 			dataList=new ArrayList<DataDTO>();
 			
@@ -84,28 +100,74 @@ public class Process2 {
 				dataList.add(data);
 			}
 			
+			lines=null;
+			
 			//dataListMenor=select(dataList, having(on(DataDTO.class).getRssi(),lessThan(-65)));
 			
-			dataList= (List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
-				@Override
-				public boolean evaluate(Object arg0) {
-                     DataDTO dat= (DataDTO)arg0;
-                     if(dat.getRssi()>=-65)
-                    	 return true;
-                     else
-                    	 return false;
-				}
-			});
+			baliza.addAll(select(dataList, having(on(DataDTO.class).getMac(), equalTo("00:68:58:09:15:33"))));
+			baliza.addAll(select(dataList, having(on(DataDTO.class).getMac(), equalTo("2C:44:01:B3:F9:DD"))));
+			baliza.addAll(select(dataList, having(on(DataDTO.class).getMac(), equalTo("F8:5F:2A:79:66:8F"))));
+			baliza.addAll(select(dataList, having(on(DataDTO.class).getMac(), equalTo("40:BA:61:5B:31:E9"))));
+					
+			balizaSum=sumFrom(baliza).getRssi();
 			
+			balizaAvg=(float)balizaSum/(baliza.size());
 			
-			for(DataDTO dat:dataList)
+			for(DataDTO dat:baliza)
 			{
+			   double rango;
+			   rango = Math.pow(dat.getRssi()-balizaAvg,2);
+			   varianza = varianza + rango;				
+			}
+			
+			varianza=varianza/baliza.size();
+			desviacion=Math.sqrt(varianza);
+			
+			varianza=0.0;
+			
+
+			Map<String, DataDTO> map = new HashMap<String, DataDTO>();
+			for (DataDTO p : dataList) {
+			    if (!map.containsKey(p.getMac())) {
+			        map.put(p.getMac(), p);
+			    }
+			}
+			dataListDistinct = new ArrayList<DataDTO>(map.values());
+			
+			HasArgumentWithValue<Object, Integer> aa;
+			
+			for(DataDTO dat:dataListDistinct)
+			{
+				aa=max(dataListDistinct, having(on(DataDTO.class).getRssi(), equalTo(dat.getMac())));
 				
-				System.out.print(dat.getFecha());
-				System.out.print(dat.getMac());
+			}
+
+
+			
+			
+//			dataList= (List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
+//				@Override
+//				public boolean evaluate(Object arg0) {
+//                     DataDTO dat= (DataDTO)arg0;
+//                     if(dat.getRssi()>=-65)
+//                    	 return true;
+//                     else
+//                    	 return false;
+//				}
+//			});
+			
+			
+			
+			
+			for(DataDTO dat:dataListDistinct)
+			{				
+				System.out.print(dat.getFecha()+"|");
+				System.out.print(dat.getMac()+"|");
 				System.out.println(dat.getRssi());
 			}
 
+			
+			
 			
 //	
 //			List<DataDTO> all = new ArrayList<DataDTO>();
@@ -148,8 +210,12 @@ public class Process2 {
 		} catch (IOException e) {
 			System.out.println("Error linea: "+linea);
 			e.printStackTrace();
-	
 		}
 	}
+	
+	
+	
+	
+
 	
 }
