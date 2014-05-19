@@ -91,6 +91,12 @@ a.linkClassNoticia:hover {color: #FAA723; text-decoration: underline;font-family
 	font-family: Segoe UI,Arial,sans-serif;
 }
 
+.descripcionLogin{
+	color: #000000;
+	font-size: 15px;
+	font-family: Segoe UI,Arial,sans-serif;
+}
+
 
 .line-separator{
 	height:1px;
