@@ -11,11 +11,13 @@ import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.util.dto.CredencialesDTO;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.corvustec.commons.util.ApplicationUtil;
 import com.corvustec.commons.util.CorvustecException;
+import com.corvustec.commons.util.EncryptionUtil;
 
 
 @Stateless
@@ -101,7 +103,7 @@ public class AdministracionServiceImpl implements AdministracionService{
 		try{
 			usuario=new UsuarioDTO();
 			usuario.setUsuLogin(credenciales.getUser());
-			usuario.setUsuClave(credenciales.getPassword());
+			usuario.setUsuClave(EncryptionUtil.getInstancia().encriptar(credenciales.getPassword()));
 			userList= factoryDAO.getUsuarioDAOImpl().getByAnd(usuario);
 			if(!userList.isEmpty())
 				return userList.get(0);
@@ -115,4 +117,51 @@ public class AdministracionServiceImpl implements AdministracionService{
 		}		
 	}
 	
+	@Override
+	public UsuarioDTO createOrUpdateUsuario(UsuarioDTO usuarioDTO) throws CorvustecException
+	{
+		logger.info("createOrUpdateUsuario");
+		try{
+			if(StringUtils.isNoneBlank(usuarioDTO.getUsuClave()))
+				usuarioDTO.setUsuClave(EncryptionUtil.getInstancia().encriptar(usuarioDTO.getUsuClave()));
+			if(usuarioDTO.getUsuCodigo()!=null)
+				return factoryDAO.getUsuarioDAOImpl().edit(usuarioDTO);
+			else
+				return factoryDAO.getUsuarioDAOImpl().create(usuarioDTO);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al createOrupdateCatalogo" +e.toString());
+			throw new CorvustecException("Error al createOrupdateCatalogo");
+		}
+	}
+	
+	@Override
+	public List<UsuarioDTO> readUser(UsuarioDTO usuarioDTO) throws CorvustecException
+	{
+		logger.info("readUser");
+		try{
+			return factoryDAO.getUsuarioDAOImpl().getByAnd(usuarioDTO);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al createOrupdateCatalogo" +e.toString());
+			throw new CorvustecException("Error al createOrupdateCatalogo");
+		}		
+	}
+
+	@Override
+	public List<UsuarioDTO> readAllUser() throws CorvustecException
+	{
+		logger.info("readUser");
+		try{
+			return factoryDAO.getUsuarioDAOImpl().getByAnd(new UsuarioDTO());
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al createOrupdateCatalogo" +e.toString());
+			throw new CorvustecException("Error al createOrupdateCatalogo");
+		}		
+	}
+
 }
