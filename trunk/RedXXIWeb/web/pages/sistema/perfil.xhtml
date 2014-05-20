@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/privado.xhtml">
+
+	<ui:define name="contenido">
+	
+			<p:growl id="growl"></p:growl>
+			
+			<p:panel id="pnlDato" header="Perfiles">
+	
+				<table>
+				
+					<tr>
+						<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
+						<td><p:inputText value="#{userDataManager.user.usuNombres}" required="true"/></td>
+					</tr>
+				
+					<tr>
+						<td><h:outputText value="#{i18n['label.apellidos']}:&#160;" /></td>
+						<td><p:inputText value="#{userDataManager.user.usuApellidos}" required="true"/></td>
+					</tr>
+				
+					<tr>
+						<td><h:outputText value="#{i18n['label.usuario']}:&#160;" /></td>
+						<td><p:inputText value="#{userDataManager.user.usuLogin}" required="true" disabled="#{userDataManager.disabled}"/></td>
+					</tr>
+	
+					<tr>
+						<td><h:outputText value="#{i18n['label.password']}:&#160;" /></td>
+						<td><p:password value="#{userDataManager.pass}" feedback="true" match="pwdConfirm" required="#{userDataManager.required}" weakLabel="Débil" goodLabel="Buena" strongLabel="Fuerte" promptLabel="Por favor ingrese una contraseña" validatorMessage="Las contraseñas no coinciden"/></td>
+					</tr>
+	
+					<tr>
+						<td><h:outputText value="#{i18n['label.password.confirm']}:&#160;" /></td>
+						<td><p:password id="pwdConfirm" value="#{userDataManager.pass}" required="#{userDataManager.required}" feedback="true" weakLabel="Débil" goodLabel="Buena" strongLabel="Fuerte" promptLabel="Por favor ingrese una contraseña"/></td>
+					</tr>
+					
+					<tr>
+						<td colspan="4" align="center">
+							<p:commandButton value="#{i18n['boton.guardar']}" process="pnlDato" update="pnlDato,growl" 
+								actionListener="#{userController.save}" icon="ui-icon-disk"/>
+							<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update="pnlDato,growl" 
+								actionListener="#{userController.cancel}" icon="ui-icon-cancel"/>
+						</td>
+					</tr>							
+					
+				</table>
+	
+				<p:dataTable id="tblUser" value="#{userController.userDataManager.userList}" var="user">
+	
+					<p:column headerText="#{i18n['label.apellidos']}">
+						<h:outputText value="#{user.usuApellidos}"/>
+					</p:column>					
+				
+					<p:column headerText="#{i18n['label.nombres']}">
+						<h:outputText value="#{user.usuNombres}"/>
+					</p:column>					
+				
+					<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+						<p:commandButton actionListener="#{userController.edit(user)}" icon="ui-icon-pencil" process=":contenido:tblUser" update=":contenido:pnlDato"/>
+					</p:column>
+					
+	<!-- 				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center"> -->
+	<!-- 					<p:commandButton actionListener="#{ubicacionController.deleteCiudad(ciu)}" icon="ui-icon-close" process=":contenido:tblCiudad" update=":contenido:pnlCiudad,:contenido:growl"> -->
+	<!-- 						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" />  -->
+	<!-- 					</p:commandButton> -->
+	<!-- 				</p:column> -->
+				
+							
+				</p:dataTable>
+	
+			</p:panel>
+	
+	</ui:define>
+
+
+</ui:composition>
