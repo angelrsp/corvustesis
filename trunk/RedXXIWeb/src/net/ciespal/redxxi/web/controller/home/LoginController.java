@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 import javax.servlet.http.HttpSession;
 
 import net.ciespal.redxxi.ejb.negocio.AdministracionService;
+import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.home.LoginDataManager;
 
@@ -40,14 +41,21 @@ public class LoginController {
 
 	public void intro()
 	{
-		
+		UsuarioDTO usuario;
 		try {
-			if(administracionService.userAuthentication(loginDataManager.getCredencialesDTO())!=null)
-				JsfUtil.addInfoMessage("Bien");
+			usuario=administracionService.userAuthentication(loginDataManager.getCredencialesDTO());
+			if(usuario!=null)
+			{
+				JsfUtil.addInfoMessage("Redireccionar...");
+				JsfUtil.putObject("UsuarioDTO", usuario);
+				JsfUtil.redirect("/RedXXIWeb/pages/home.xhtml");
+			}
 			else
-				JsfUtil.addInfoMessage("Mal");
+				JsfUtil.addErrorMessage("Usuario o contraseña no válida");
 			
 		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		} catch (IOException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
@@ -58,7 +66,7 @@ public class LoginController {
 	      try {
 			HttpSession session = JsfUtil.getSession();
 		      session.invalidate();
-			JsfUtil.redirect("/RedXXIWeb/index.jsf");
+			JsfUtil.redirect("/RedXXIWeb/index.xhtml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
