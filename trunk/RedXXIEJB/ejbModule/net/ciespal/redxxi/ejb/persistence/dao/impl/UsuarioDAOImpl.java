@@ -71,8 +71,9 @@ public class UsuarioDAOImpl extends AbstractFacadeImpl<UsuarioDTO> implements Us
 				    }
 				}
 	        }
-			
-			cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
+	
+	        if(!predicateList.isEmpty())
+	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
 			
 			TypedQuery<UsuarioDTO> tq=entityManager.createQuery(cq);
 			list=tq.getResultList();

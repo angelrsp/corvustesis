@@ -26,4 +26,11 @@ public interface AdministracionService {
 	UsuarioDTO userAuthentication(CredencialesDTO credenciales)
 			throws CorvustecException;
 
+	UsuarioDTO createOrUpdateUsuario(UsuarioDTO usuarioDTO)
+			throws CorvustecException;
+
+	List<UsuarioDTO> readUser(UsuarioDTO usuarioDTO) throws CorvustecException;
+
+	List<UsuarioDTO> readAllUser() throws CorvustecException;
+
 }
