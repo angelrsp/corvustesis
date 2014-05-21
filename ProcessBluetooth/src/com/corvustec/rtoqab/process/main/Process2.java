@@ -125,14 +125,7 @@ public class Process2 {
 			
 			varianza=0.0;
 			
-
-			Map<String, DataDTO> map = new HashMap<String, DataDTO>();
-			for (DataDTO p : dataList) {
-			    if (!map.containsKey(p.getMac())) {
-			        map.put(p.getMac(), p);
-			    }
-			}
-			dataListDistinct = new ArrayList<DataDTO>(map.values());
+			dataListDistinct = getDistinct(dataList);
 			
 			
 			for(DataDTO dat:dataListDistinct)
@@ -146,9 +139,11 @@ public class Process2 {
 				 dataMax.add(data);
 			}
 
+			//Libero memoria lista
+			dataListDistinct=null;
 			
 			/*
-			 * Se descartan las señales menores a a la sua entre la media y desv. estandar por un factor.
+			 * Se descartan las señales menores entre la media y desv. estandar por un factor.
 			 */
 			for(DataDTO dat:dataMax)
 			{
@@ -162,12 +157,12 @@ public class Process2 {
 			
 			
 			//Todavia es el Paso 1
-			List<IntervaloTiempoDTO> intervaloMinuto,intervaloSegundo;
+			List<IntervaloTiempoDTO> intervaloSegundo;
 			
 			List<DataDTO> temp=new ArrayList<DataDTO>();
 			List<DataDTO> temp2=new ArrayList<DataDTO>();
-			List<DataDTO> temp3=new ArrayList<DataDTO>();
-			intervaloMinuto=generateMinute();
+			
+			
 			intervaloSegundo=generateIntervalSecond();
 			
 			DataDTO datoTemp;
@@ -193,31 +188,14 @@ public class Process2 {
 				}
 			}
 			
-			
-//			for(final IntervaloTiempoDTO interM:intervaloMinuto)
-//			{
-//				temp= (List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
-//				@Override
-//				public boolean evaluate(Object arg0) {
-//                     DataDTO dat= (DataDTO)arg0;
-//                     if(dat.getMinuto().getTime()>interM.getTimeDesde().getTime()&&dat.getMinuto().getTime()<=interM.getTimeHasta().getTime())
-//                    	 return true;
-//                     else
-//                    	 return false;
-//				}
-//				});
-//				for(DataDTO dato: temp)
-//				{
-//					datoTemp=dato;
-//					datoTemp.setIntervaloSegundoDesde(interM.getTimeDesde());
-//					datoTemp.setIntervaloSegundoHasta(interM.getTimeHasta());
-//					temp3.add(datoTemp);
-//				}
-//			}
-//			
+			//Paso los datos con intervalos a dataList			
 			dataList=temp2;
 			
-			for(DataDTO dat:dataList){
+			//Obtengo los distintos por mac
+			dataListDistinct=getDistinct(dataList);
+			
+			
+			for(DataDTO dat:dataListDistinct){
 				System.out.print(dat.getRssi()+" ");
 				System.out.print(dat.getMac()+" ");
 				System.out.print(dat.getMinuto()+" ");
@@ -368,6 +346,17 @@ public class Process2 {
 		return intervaloTiempo;		
 	}
 	
-	
+	public static List<DataDTO> getDistinct(List<DataDTO> dataList)
+	{
+		List<DataDTO> list;
+		Map<String, DataDTO> map = new HashMap<String, DataDTO>();
+		for (DataDTO p : dataList) {
+		    if (!map.containsKey(p.getMac())) {
+		        map.put(p.getMac(), p);
+		    }
+		}
+		list= new ArrayList<DataDTO>(map.values());
+		return list;
+	}
 
 }
