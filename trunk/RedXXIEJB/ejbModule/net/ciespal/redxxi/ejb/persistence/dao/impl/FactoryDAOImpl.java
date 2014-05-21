@@ -19,6 +19,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.GranMaestroDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.LeyDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.MaestroCiespalDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.MencionDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.MenuDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ModalidadDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.NoticiaDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.NoticiaEspejoDAO;
@@ -45,6 +46,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 
 	private UsuarioDAO usuarioDAO;
 	private PerfilDAO perfilDAO;
+	private MenuDAO menuDAO;
 	
 	private CatalogoDAO catalogoDAO;
 	private CentroDAO centroDAO;
@@ -317,6 +319,14 @@ public class FactoryDAOImpl implements FactoryDAO{
 			perfilDAO = new PerfilDAOImpl(entityManager);
 		}
 		return perfilDAO;
+	}
+
+	@Override
+	public MenuDAO getMenuDAOImpl() {
+		if (menuDAO == null) {
+			menuDAO = new MenuDAOImpl(entityManager);
+		}
+		return menuDAO;
 	}
 
 }

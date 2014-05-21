@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import net.ciespal.redxxi.ejb.negocio.AdministracionService;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.MenuDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.util.dto.CredencialesDTO;
@@ -196,5 +197,52 @@ public class AdministracionServiceImpl implements AdministracionService{
 			throw new CorvustecException("Error al createOrupdateCatalogo");
 		}
 	}
+
+	/*Menu*/
+	@Override
+	public MenuDTO menuCreateOrUpdate(MenuDTO menuDTO) throws CorvustecException
+	{
+		logger.info("menuCreateOrUpdate");
+		try{
+			if(menuDTO.getMenCodigo()!=null)
+				return factoryDAO.getMenuDAOImpl().edit(menuDTO);
+			else
+				return factoryDAO.getMenuDAOImpl().create(menuDTO);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al createOrupdateCatalogo" +e.toString());
+			throw new CorvustecException("Error al createOrupdateCatalogo");
+		}
+	}
+
+
+	@Override
+	public List<MenuDTO> menuRootRead() throws CorvustecException
+	{
+		logger.info("menuRootRead");
+		try{
+			return factoryDAO.getMenuDAOImpl().getRoot();
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al menuRootRead" +e.toString());
+			throw new CorvustecException("Error al menuRootRead");
+		}		
+	}
+
+	@Override
+	public List<MenuDTO> menuReadAll() throws CorvustecException {
+		logger.info("menuReadAll");
+		try{
+			return factoryDAO.getMenuDAOImpl().getByAnd(new MenuDTO());
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al menuReadAll" +e.toString());
+			throw new CorvustecException("Error al menuReadAll");
+		}		
+	}
+
 
 }
