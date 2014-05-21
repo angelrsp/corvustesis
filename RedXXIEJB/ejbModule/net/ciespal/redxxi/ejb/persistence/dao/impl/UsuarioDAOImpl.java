@@ -18,7 +18,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.corvustec.commons.util.CorvustecException;
+import com.corvustec.commons.util.CorvustecException;;
 
 public class UsuarioDAOImpl extends AbstractFacadeImpl<UsuarioDTO> implements UsuarioDAO{
 
