@@ -16,7 +16,7 @@ public class UsuarioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SEG_USUARIO_USUCODIGO_GENERATOR", sequenceName="SEG_USUARIO_USU_CODIGO_SEQ")
+	@SequenceGenerator(name="SEG_USUARIO_USUCODIGO_GENERATOR", sequenceName="SEG_USUARIO_USU_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEG_USUARIO_USUCODIGO_GENERATOR")
 	@Column(name="usu_codigo")
 	private Integer usuCodigo;

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.util.dto.CredencialesDTO;
 
@@ -32,5 +33,10 @@ public interface AdministracionService {
 	List<UsuarioDTO> readUser(UsuarioDTO usuarioDTO) throws CorvustecException;
 
 	List<UsuarioDTO> readAllUser() throws CorvustecException;
+
+	List<PerfilDTO> perfilReadAll() throws CorvustecException;
+
+	PerfilDTO perfilCreateOrUpdate(PerfilDTO perfilDTO)
+			throws CorvustecException;
 
 }

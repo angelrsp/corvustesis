@@ -16,7 +16,7 @@ public class PerfilDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SEG_PERFIL_PERCODIGO_GENERATOR", sequenceName="SEG_PERFIL_PER_CODIGO_SEQ")
+	@SequenceGenerator(name="SEG_PERFIL_PERCODIGO_GENERATOR", sequenceName="SEG_PERFIL_PER_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEG_PERFIL_PERCODIGO_GENERATOR")
 	@Column(name="per_codigo")
 	private Integer perCodigo;

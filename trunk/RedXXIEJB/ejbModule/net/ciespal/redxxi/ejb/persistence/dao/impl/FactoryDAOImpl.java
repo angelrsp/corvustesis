@@ -26,6 +26,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.ObraDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ObraEspejoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ObservatorioDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.OrganizacioDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.PerfilDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PremioCiespalDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PremioDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ProyectoInvestigacionDAO;
@@ -43,7 +44,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private EntityManager entityManager;
 
 	private UsuarioDAO usuarioDAO;
-	
+	private PerfilDAO perfilDAO;
 	
 	private CatalogoDAO catalogoDAO;
 	private CentroDAO centroDAO;
@@ -308,6 +309,14 @@ public class FactoryDAOImpl implements FactoryDAO{
 			usuarioDAO = new UsuarioDAOImpl(entityManager);
 		}
 		return usuarioDAO;
+	}
+
+	@Override
+	public PerfilDAO getPerfilDAOImpl() {
+		if (perfilDAO == null) {
+			perfilDAO = new PerfilDAOImpl(entityManager);
+		}
+		return perfilDAO;
 	}
 
 }
