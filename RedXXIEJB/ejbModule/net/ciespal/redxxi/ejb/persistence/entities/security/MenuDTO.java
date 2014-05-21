@@ -16,7 +16,7 @@ public class MenuDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SEG_MENU_MENCODIGO_GENERATOR", sequenceName="SEG_MENU_MEN_CODIGO_SEQ")
+	@SequenceGenerator(name="SEG_MENU_MENCODIGO_GENERATOR", sequenceName="SEG_MENU_MEN_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEG_MENU_MENCODIGO_GENERATOR")
 	@Column(name="men_codigo")
 	private Integer menCodigo;
@@ -30,12 +30,24 @@ public class MenuDTO implements Serializable {
 	@Column(name="men_nombre")
 	private String menNombre;
 
+	@Column(name="men_orden")
+	private Integer menOrden;
+
 	@Column(name="men_url")
 	private String menUrl;
 
 	//bi-directional many-to-one association to ComponenteMenuDTO
 	@OneToMany(mappedBy="segMenu")
 	private List<ComponenteMenuDTO> segComponenteMenus;
+
+	//bi-directional many-to-one association to MenuDTO
+	@ManyToOne
+	@JoinColumn(name="men_predecesor")
+	private MenuDTO segMenu;
+
+	//bi-directional many-to-one association to MenuDTO
+	@OneToMany(mappedBy="segMenu")
+	private List<MenuDTO> segMenus;
 
 	public MenuDTO() {
 	}
@@ -72,6 +84,14 @@ public class MenuDTO implements Serializable {
 		this.menNombre = menNombre;
 	}
 
+	public Integer getMenOrden() {
+		return this.menOrden;
+	}
+
+	public void setMenOrden(Integer menOrden) {
+		this.menOrden = menOrden;
+	}
+
 	public String getMenUrl() {
 		return this.menUrl;
 	}
@@ -100,6 +120,36 @@ public class MenuDTO implements Serializable {
 		segComponenteMenus.setSegMenu(null);
 
 		return segComponenteMenus;
+	}
+
+	public MenuDTO getSegMenu() {
+		return this.segMenu;
+	}
+
+	public void setSegMenu(MenuDTO segMenu) {
+		this.segMenu = segMenu;
+	}
+
+	public List<MenuDTO> getSegMenus() {
+		return this.segMenus;
+	}
+
+	public void setSegMenus(List<MenuDTO> segMenus) {
+		this.segMenus = segMenus;
+	}
+
+	public MenuDTO addSegMenus(MenuDTO segMenus) {
+		getSegMenus().add(segMenus);
+		segMenus.setSegMenu(this);
+
+		return segMenus;
+	}
+
+	public MenuDTO removeSegMenus(MenuDTO segMenus) {
+		getSegMenus().remove(segMenus);
+		segMenus.setSegMenu(null);
+
+		return segMenus;
 	}
 
 }

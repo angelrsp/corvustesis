@@ -35,6 +35,7 @@ public interface FactoryDAO {
 	DoctorVieDAO getDoctorVieDAOImpl();
 	PublicacionVieDAO getPublicacionVieDAOImpl();
 	UsuarioDAO getUsuarioDAOImpl();
+	PerfilDAO getPerfilDAOImpl();
 	
 	
 

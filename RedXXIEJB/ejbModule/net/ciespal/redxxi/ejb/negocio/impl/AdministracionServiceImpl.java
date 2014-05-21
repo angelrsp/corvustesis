@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import net.ciespal.redxxi.ejb.negocio.AdministracionService;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.util.dto.CredencialesDTO;
 
@@ -162,6 +163,38 @@ public class AdministracionServiceImpl implements AdministracionService{
 			logger.info("Error al createOrupdateCatalogo" +e.toString());
 			throw new CorvustecException("Error al createOrupdateCatalogo");
 		}		
+	}
+
+	/*Perfil*/
+	@Override
+	public List<PerfilDTO> perfilReadAll() throws CorvustecException
+	{
+		logger.info("readUser");
+		try{
+			return factoryDAO.getPerfilDAOImpl().getByAnd(new PerfilDTO());
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al perfilReadAll" +e.toString());
+			throw new CorvustecException("Error al perfilReadAll");
+		}		
+	}
+
+	@Override
+	public PerfilDTO perfilCreateOrUpdate(PerfilDTO perfilDTO) throws CorvustecException
+	{
+		logger.info("createOrUpdateUsuario");
+		try{
+			if(perfilDTO.getPerCodigo()!=null)
+				return factoryDAO.getPerfilDAOImpl().edit(perfilDTO);
+			else
+				return factoryDAO.getPerfilDAOImpl().create(perfilDTO);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al createOrupdateCatalogo" +e.toString());
+			throw new CorvustecException("Error al createOrupdateCatalogo");
+		}
 	}
 
 }
