@@ -1,6 +1,8 @@
 package net.ciespal.redxxi.web.datamanager;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -18,8 +20,11 @@ public class PerfilDataManager implements Serializable{
 	
 	private PerfilDTO perfil;
 	
+	private List<PerfilDTO> perfilList;
+	
 	public PerfilDataManager() {
 		perfil=new PerfilDTO();
+		perfilList=new ArrayList<PerfilDTO>();
 	}
 
 	public PerfilDTO getPerfil() {
@@ -28,6 +33,14 @@ public class PerfilDataManager implements Serializable{
 
 	public void setPerfil(PerfilDTO perfil) {
 		this.perfil = perfil;
+	}
+
+	public List<PerfilDTO> getPerfilList() {
+		return perfilList;
+	}
+
+	public void setPerfilList(List<PerfilDTO> perfilList) {
+		this.perfilList = perfilList;
 	}
 	
 }
