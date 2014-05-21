@@ -1,26 +1,36 @@
 package com.corvustec.rtoqab.process.main;
 
 import static ch.lambdaj.Lambda.having;
-import static ch.lambdaj.Lambda.min;
+import static ch.lambdaj.Lambda.max;
 import static ch.lambdaj.Lambda.on;
 import static ch.lambdaj.Lambda.select;
 import static ch.lambdaj.Lambda.sumFrom;
 import static ch.lambdaj.Lambda.sort;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.lessThan;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
 import org.apache.commons.io.FileUtils;
 
+import com.corvustec.rtoqab.process.jdbc.ConnectionJDBC;
 import com.corvustec.rtoqab.process.util.ReadAgencia;
+import com.corvustec.rtoqab.process.util.UtilApplication;
 import com.corvustec.rtoqad.process.dto.DataDTO;
+import com.corvustec.rtoqad.process.dto.IntervaloTiempoDTO;
 
 
 public class Process2 {
@@ -84,6 +94,7 @@ public class Process2 {
 				line=lines.get(i).split("\\|");
 				data=new DataDTO();
 				data.setFecha(Timestamp.valueOf(line[0]));
+				data.setMinuto(Time.valueOf(line[0].substring(11, 19)));
 				data.setMac(line[1]);
 				data.setRssi(Integer.valueOf(line[2]));
 				dataList.add(data);
@@ -128,15 +139,95 @@ public class Process2 {
 			{
 				 dataMac= select(dataList, having(on(DataDTO.class).getMac(), equalTo(dat.getMac())));
 				 data=new DataDTO();
-				 data.setRssi(min(dataMac, on(DataDTO.class).getRssi()));
+				 data.setRssi(max(dataMac, on(DataDTO.class).getRssi()));
 				 data.setMac(dat.getMac());
 				 data.setFecha(dat.getFecha());
 				 
 				 dataMax.add(data);
 			}
 
-		
-			dataList= sort(dataList, on(DataDTO.class).getFecha());
+			
+			/*
+			 * Se descartan las señales menores a a la sua entre la media y desv. estandar por un factor.
+			 */
+			for(DataDTO dat:dataMax)
+			{
+				//El numero 1 debe ser dinamico (pendiente por analizar)
+				if(dat.getRssi()<(balizaAvg-(desviacion*1)))
+				{
+					dataList.removeAll(select(dataList, having(on(DataDTO.class).getMac(), equalTo(dat.getMac()))));
+				}
+			}		
+			//Fin paso 			
+			
+			
+			//Todavia es el Paso 1
+			List<IntervaloTiempoDTO> intervaloMinuto,intervaloSegundo;
+			
+			List<DataDTO> temp=new ArrayList<DataDTO>();
+			List<DataDTO> temp2=new ArrayList<DataDTO>();
+			List<DataDTO> temp3=new ArrayList<DataDTO>();
+			intervaloMinuto=generateMinute();
+			intervaloSegundo=generateIntervalSecond();
+			
+			DataDTO datoTemp;
+			
+			for(final IntervaloTiempoDTO inter:intervaloSegundo)
+			{
+				temp= (List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
+				@Override
+				public boolean evaluate(Object arg0) {
+                     DataDTO dat= (DataDTO)arg0;
+                     if(dat.getMinuto().getTime()>inter.getTimeDesde().getTime()&&dat.getMinuto().getTime()<=inter.getTimeHasta().getTime())
+                    	 return true;
+                     else
+                    	 return false;
+				}
+				});
+				for(DataDTO dato: temp)
+				{
+					datoTemp=dato;
+					datoTemp.setIntervaloSegundoDesde(inter.getTimeDesde());
+					datoTemp.setIntervaloSegundoHasta(inter.getTimeHasta());
+					temp2.add(datoTemp);
+				}
+			}
+			
+			
+//			for(final IntervaloTiempoDTO interM:intervaloMinuto)
+//			{
+//				temp= (List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
+//				@Override
+//				public boolean evaluate(Object arg0) {
+//                     DataDTO dat= (DataDTO)arg0;
+//                     if(dat.getMinuto().getTime()>interM.getTimeDesde().getTime()&&dat.getMinuto().getTime()<=interM.getTimeHasta().getTime())
+//                    	 return true;
+//                     else
+//                    	 return false;
+//				}
+//				});
+//				for(DataDTO dato: temp)
+//				{
+//					datoTemp=dato;
+//					datoTemp.setIntervaloSegundoDesde(interM.getTimeDesde());
+//					datoTemp.setIntervaloSegundoHasta(interM.getTimeHasta());
+//					temp3.add(datoTemp);
+//				}
+//			}
+//			
+			dataList=temp2;
+			
+			for(DataDTO dat:dataList){
+				System.out.print(dat.getRssi()+" ");
+				System.out.print(dat.getMac()+" ");
+				System.out.print(dat.getMinuto()+" ");
+				System.out.print(dat.getIntervaloSegundoDesde()+" ");
+				System.out.println(dat.getIntervaloSegundoHasta());
+			}
+
+
+			
+			//dataList= sort(dataList, on(DataDTO.class).getFecha());
 					
 			
 			
@@ -144,7 +235,7 @@ public class Process2 {
 //				@Override
 //				public boolean evaluate(Object arg0) {
 //                     DataDTO dat= (DataDTO)arg0;
-//                     if(dat.getRssi()>=-65)
+//                     if(dat.getRssi()>=balizaAvg-desviacion)
 //                    	 return true;
 //                     else
 //                    	 return false;
@@ -152,17 +243,27 @@ public class Process2 {
 //			});
 			
 			
-			
-			
-			for(DataDTO dat:dataMax)
-			{				
-				System.out.print(dat.getFecha()+"|");
-				System.out.print(dat.getMac()+"|");
-				System.out.println(dat.getRssi());
-			}
+//			map = new HashMap<String, DataDTO>();
+//			for (DataDTO p : dataList) {
+//			    if (!map.containsKey(p.getMac())) {
+//			        map.put(p.getMac(), p);
+//			    }
+//			}
+//			dataListDistinct = new ArrayList<DataDTO>(map.values());
+//
+//			for(DataDTO dat:dataList)
+//			{				
+//				writer.write(dat.getFecha()+"|"+dat.getMac()+"|"+dat.getRssi()+"\n");
+//			}
+//			writer.close();
+//			
+//			for(DataDTO dat:dataListDistinct)
+//			{
+//				System.out.print(dat.getFecha());
+//				System.out.print(dat.getMac());
+//				System.out.println(dat.getRssi());
+//			}
 
-			
-			
 			
 //	
 //			List<DataDTO> all = new ArrayList<DataDTO>();
@@ -209,8 +310,64 @@ public class Process2 {
 	}
 	
 	
+	public static List<IntervaloTiempoDTO> generateIntervalSecond()
+	{
+		Time desde,hasta;
+		String incremento;
+		List<IntervaloTiempoDTO> intervaloTiempo = null;
+		IntervaloTiempoDTO intervalo;
+		try {
+			intervaloTiempo=new ArrayList<IntervaloTiempoDTO>();
+			desde=Time.valueOf("08:00:00");
+			hasta= Time.valueOf("17:00:00");
+			
+			while(desde.before(hasta))
+			{
+				incremento= UtilApplication.addSecond(desde.toString(), 15);
+
+				intervalo= new IntervaloTiempoDTO();
+				intervalo.setTimeDesde(desde);
+				intervalo.setTimeHasta(Time.valueOf(incremento));
+				intervaloTiempo.add(intervalo);
+				
+				desde=Time.valueOf(UtilApplication.addSecond(desde.toString(), 15));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return intervaloTiempo;		
+	}
+	
+	public static List<IntervaloTiempoDTO> generateMinute()
+	{
+		Time desde,hasta;
+		String incremento;
+		List<IntervaloTiempoDTO> intervaloTiempo = null;
+		IntervaloTiempoDTO intervalo;
+		try {
+			intervaloTiempo=new ArrayList<IntervaloTiempoDTO>();
+			desde=Time.valueOf("08:00:00");
+			hasta= Time.valueOf("17:00:00");
+			
+			while(desde.before(hasta))
+			{
+				incremento= UtilApplication.addMinute(desde.toString(), 15);
+
+				intervalo= new IntervaloTiempoDTO();
+				intervalo.setTimeDesde(desde);
+				intervalo.setTimeHasta(Time.valueOf(incremento));
+				intervaloTiempo.add(intervalo);
+				
+				desde=Time.valueOf(UtilApplication.addMinute(desde.toString(), 15));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return intervaloTiempo;		
+	}
 	
 	
 
-	
 }

@@ -67,4 +67,18 @@ public class UtilApplication {
 		}
 		return d;
 	}
+	
+	
+	public static Date convertStringtoDate(String time)
+	{
+		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		java.util.Date d = null;
+		try {
+			d = df.parse(time);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return d;
+	}
+
 }
