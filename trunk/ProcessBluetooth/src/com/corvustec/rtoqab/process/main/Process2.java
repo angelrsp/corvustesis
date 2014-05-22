@@ -228,7 +228,7 @@ public class Process2 {
 			        @Override
 			        public int compare(DataDTO  dato1, DataDTO  dato2)
 			        {
-			            return  dato1.getNumeroIntervalo()> dato2.getNumeroIntervalo()?1:-1;
+			            return dato1.getNumeroIntervalo()> dato2.getNumeroIntervalo()?1:-1;
 			        }
 			    });
 				
@@ -262,7 +262,6 @@ public class Process2 {
 			dataListDistinct=getDistinct(dataList);
 			
 			//Suavizar la curso con limites
-			
 			temp2=new ArrayList<DataDTO>();
 			
 			for(final DataDTO dato:dataListDistinct)
