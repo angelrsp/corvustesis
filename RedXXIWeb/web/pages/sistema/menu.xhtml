@@ -8,17 +8,94 @@
 
 	<ui:define name="contenido">
 	
-			<p:growl id="growl"></p:growl>
+			<p:growl id="growl" autoUpdate="true"/>
 			
 			<p:panel id="pnlDato" header="Menú">
 
 				<table>
 					<tr>
-						
-					
+						<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>						
+						<td><p:inputText value="#{menuDataManager.menu.menNombre}" required="true"/></td>
 					</tr>
-				
+
+					<tr>
+						<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>						
+						<td><p:inputTextarea value="#{menuDataManager.menu.menDescripcion}" autoResize="false" counter="countDescrip" counterTemplate="{0}" maxlength="255"/><h:outputText id="countDescrip"/></td>
+					</tr>
+
+					<tr>
+						<td><h:outputText value="#{i18n['label.url']}:&#160;" /></td>						
+						<td><p:inputText value="#{menuDataManager.menu.menUrl}"/></td>
+					</tr>
+					
+					<tr>
+						<td><h:outputText value="#{i18n['label.icono']}:&#160;" /></td>						
+						<td><p:inputText value="#{menuDataManager.menu.menIcono}"/></td>
+					</tr>
+
+					<tr>
+						<td><h:outputText value="#{i18n['label.orden']}:&#160;" /></td>						
+						<td><p:inputText value="#{menuDataManager.menu.menOrden}" onkeypress="return isNumberKey(event);" required="true"/></td>
+					</tr>
+
+					<tr>
+						<td><h:outputText value="#{i18n['label.predecesor']}:&#160;" /></td>						
+						<td><p:selectOneMenu filter="true" value="#{menuDataManager.predecesorCode}">
+							<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
+							<f:selectItems value="#{menuDataManager.menuListPredecesor}" var="men" itemValue="#{men.menCodigo}" itemLabel="#{men.menNombre}"/>
+						</p:selectOneMenu></td>
+					</tr>
+					
+					<tr>
+						<td colspan="4" align="center">
+							<p:commandButton value="#{i18n['boton.guardar']}" process="pnlDato" update="pnlDato" 
+								actionListener="#{menuController.save}" icon="ui-icon-disk"/>
+							<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update="pnlDato" 
+								actionListener="#{menuController.cancel}" icon="ui-icon-cancel"/>
+						</td>
+					</tr>					
+														
 				</table>
+
+				<p:dataTable id="tblMenu" value="#{menuController.menuDataManager.menuList}" var="men">
+					
+					<p:column headerText="#{i18n['label.nombre']}">
+						<h:outputText value="#{men.menNombre}"/>
+					</p:column>					
+
+					<p:column headerText="#{i18n['label.descripcion']}">
+						<h:outputText value="#{men.menDescripcion}"/>
+					</p:column>					
+
+					<p:column headerText="#{i18n['label.url']}">
+						<h:outputText value="#{men.menUrl}"/>
+					</p:column>					
+
+					<p:column headerText="#{i18n['label.icono']}">
+						<h:outputText value="#{men.menIcono}"/>
+					</p:column>					
+
+					<p:column headerText="#{i18n['label.orden']}">
+						<h:outputText value="#{men.menOrden}"/>
+					</p:column>					
+
+					<p:column headerText="#{i18n['label.predecesor']}">
+						<h:outputText value="#{men.segMenu.menNombre}"/>
+					</p:column>					
+
+				
+					<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+						<p:commandButton actionListener="#{menuController.edit(men)}" icon="ui-icon-pencil" process=":contenido:tblMenu" update=":contenido:pnlDato"/>
+					</p:column>
+					
+	<!-- 				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center"> -->
+	<!-- 					<p:commandButton actionListener="#{ubicacionController.deleteCiudad(ciu)}" icon="ui-icon-close" process=":contenido:tblCiudad" update=":contenido:pnlCiudad"> -->
+	<!-- 						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" />  -->
+	<!-- 					</p:commandButton> -->
+	<!-- 				</p:column> -->			
+							
+				</p:dataTable>
+
 
 			</p:panel>
 	</ui:define>

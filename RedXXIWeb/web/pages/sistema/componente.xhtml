@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/privado.xhtml">
+
+
+	<ui:define name="contenido">
+	
+		<p:growl id="growl"/>
+		
+		<p:panel id="pnlDato" header="Componente">
+
+				<table>
+				
+					<tr>
+						<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
+						<td><p:inputText value="#{componenteDataManager.componente.comDescripcion}" required="true"/></td>
+					</tr>
+									
+					<tr>
+						<td colspan="4" align="center">
+							<p:commandButton value="#{i18n['boton.guardar']}" process="pnlDato" update="pnlDato,growl" 
+								actionListener="#{componenteController.save}" icon="ui-icon-disk"/>
+							<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update="pnlDato,growl" 
+								actionListener="#{componenteController.cancel}" icon="ui-icon-cancel"/>
+						</td>
+					</tr>							
+					
+				</table>
+	
+				<p:dataTable id="tblComponente" value="#{componenteController.componenteDataManager.componenteList}" var="com">
+	
+					<p:column headerText="#{i18n['label.nombre']}">
+						<h:outputText value="#{com.comDescripcion}"/>
+					</p:column>					
+				
+					<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+						<p:commandButton actionListener="#{componenteController.edit(com)}" icon="ui-icon-pencil" process=":contenido:tblComponente" update=":contenido:pnlDato"/>
+					</p:column>
+					
+	<!-- 				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center"> -->
+	<!-- 					<p:commandButton actionListener="#{ubicacionController.deleteCiudad(ciu)}" icon="ui-icon-close" process=":contenido:tblCiudad" update=":contenido:pnlCiudad,:contenido:growl"> -->
+	<!-- 						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" />  -->
+	<!-- 					</p:commandButton> -->
+	<!-- 				</p:column> -->
+				
+							
+				</p:dataTable>
+
+
+		</p:panel>
+
+	</ui:define>
+</ui:composition>	
