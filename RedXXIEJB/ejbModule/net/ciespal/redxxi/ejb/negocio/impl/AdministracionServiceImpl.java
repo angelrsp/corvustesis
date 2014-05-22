@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import net.ciespal.redxxi.ejb.negocio.AdministracionService;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.MenuDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
@@ -244,5 +245,35 @@ public class AdministracionServiceImpl implements AdministracionService{
 		}		
 	}
 
+	/*Componente*/
+	@Override
+	public ComponenteDTO componenteCreateOrUpdate(ComponenteDTO componenteDTO) throws CorvustecException
+	{
+		logger.info("componenteCreateOrUpdate");
+		try{
+			if(componenteDTO.getComCodigo()!=null)
+				return factoryDAO.getComponenteDAOImpl().edit(componenteDTO);
+			else
+				return factoryDAO.getComponenteDAOImpl().create(componenteDTO);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al componenteCreateOrUpdate" +e.toString());
+			throw new CorvustecException("Error al componenteCreateOrUpdate");
+		}
+	}
+
+	@Override
+	public List<ComponenteDTO> componenteReadAll() throws CorvustecException {
+		logger.info("perfilReadAll");
+		try{
+			return factoryDAO.getComponenteDAOImpl().getByAnd(new ComponenteDTO());
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al perfilReadAll" +e.toString());
+			throw new CorvustecException("Error al perfilReadAll");
+		}		
+	}
 
 }
