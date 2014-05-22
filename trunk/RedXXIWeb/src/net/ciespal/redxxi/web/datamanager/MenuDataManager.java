@@ -22,9 +22,14 @@ public class MenuDataManager implements Serializable{
 	
 	private List<MenuDTO> menuList;
 	
+	private List<MenuDTO> menuListPredecesor;
+	
+	private int predecesorCode;
+	
 	public MenuDataManager() {
 		menu=new MenuDTO();
 		menuList=new ArrayList<MenuDTO>();
+		menuListPredecesor=new ArrayList<MenuDTO>();
 	}
 
 	public MenuDTO getMenu() {
@@ -41,6 +46,22 @@ public class MenuDataManager implements Serializable{
 
 	public void setMenuList(List<MenuDTO> menuList) {
 		this.menuList = menuList;
+	}
+
+	public List<MenuDTO> getMenuListPredecesor() {
+		return menuListPredecesor;
+	}
+
+	public void setMenuListPredecesor(List<MenuDTO> menuListPredecesor) {
+		this.menuListPredecesor = menuListPredecesor;
+	}
+
+	public int getPredecesorCode() {
+		return predecesorCode;
+	}
+
+	public void setPredecesorCode(int predecesorCode) {
+		this.predecesorCode = predecesorCode;
 	}
 	
 }
