@@ -9,15 +9,15 @@ import static ch.lambdaj.Lambda.sort;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +26,6 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.io.FileUtils;
 
-import com.corvustec.rtoqab.process.jdbc.ConnectionJDBC;
 import com.corvustec.rtoqab.process.util.ReadAgencia;
 import com.corvustec.rtoqab.process.util.UtilApplication;
 import com.corvustec.rtoqad.process.dto.DataDTO;
@@ -75,17 +74,21 @@ public class Process2 {
 		List<DataDTO> dataMac;
 		List<DataDTO> dataMax;
 		
-		int balizaSum;
+		int balizaSum,index;
 		float balizaAvg;
-		double varianza= 0.0,desviacion = 0.0;
+		double varianza= 0.0,desviacion = 0.0,rango=0.0,balizaSumDbl,balizaAvgDbl,limiteSuperior,limiteInferior;
 		
 		try{			
+			
 			dataListDistinct =new ArrayList<DataDTO>();
 			baliza=new ArrayList<DataDTO>();
 			writer=new FileWriter(fileOut);
+			
 			dataList=new ArrayList<DataDTO>();
 			dataMac=new ArrayList<DataDTO>();
 			dataMax=new ArrayList<DataDTO>();
+			
+			 
 			
 			lines = FileUtils.readLines(fileIn);
 
@@ -115,7 +118,6 @@ public class Process2 {
 			
 			for(DataDTO dat:baliza)
 			{
-			   double rango;
 			   rango = Math.pow(dat.getRssi()-balizaAvg,2);
 			   varianza = varianza + rango;				
 			}
@@ -152,58 +154,135 @@ public class Process2 {
 				{
 					dataList.removeAll(select(dataList, having(on(DataDTO.class).getMac(), equalTo(dat.getMac()))));
 				}
-			}		
-			//Fin paso 			
+			}		 			
 			
+			dataList.removeAll(baliza);
+			//Obtengo los distintos por mac
+			dataListDistinct=getDistinct(dataList);
 			
 			//Todavia es el Paso 1
 			List<IntervaloTiempoDTO> intervaloSegundo;
 			
 			List<DataDTO> temp=new ArrayList<DataDTO>();
 			List<DataDTO> temp2=new ArrayList<DataDTO>();
-			
+			StringBuilder sb=new StringBuilder();
 			
 			intervaloSegundo=generateIntervalSecond();
 			
 			DataDTO datoTemp;
-			
-			for(final IntervaloTiempoDTO inter:intervaloSegundo)
+
+			for(final DataDTO dato:dataListDistinct)
 			{
-				temp= (List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
-				@Override
-				public boolean evaluate(Object arg0) {
-                     DataDTO dat= (DataDTO)arg0;
-                     if(dat.getMinuto().getTime()>inter.getTimeDesde().getTime()&&dat.getMinuto().getTime()<=inter.getTimeHasta().getTime())
-                    	 return true;
-                     else
-                    	 return false;
-				}
-				});
-				for(DataDTO dato: temp)
+				//selecciona solo intervalos necesarios
+				for(final IntervaloTiempoDTO inter:intervaloSegundo)
 				{
-					datoTemp=dato;
-					datoTemp.setIntervaloSegundoDesde(inter.getTimeDesde());
-					datoTemp.setIntervaloSegundoHasta(inter.getTimeHasta());
-					temp2.add(datoTemp);
+					temp= (List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
+						@Override
+						public boolean evaluate(Object arg0) {
+	                     DataDTO dat= (DataDTO)arg0;
+	                     if(dat.getMinuto().getTime()>=inter.getTimeDesde().getTime()
+	                    		 &&dat.getMinuto().getTime()<inter.getTimeHasta().getTime()
+	                    		 &&dat.getMac().equals(dato.getMac()))
+	                    	 return true;
+	                     else
+	                    	 return false;
+						}
+					});
+				
+					if(temp.size()>0)
+					{
+						balizaSum=sumFrom(temp).getRssi();
+						balizaAvg=(float)balizaSum/(temp.size());
+						
+						datoTemp=temp.get(0);
+						datoTemp.setIntervaloSegundoDesde(inter.getTimeDesde());
+						datoTemp.setIntervaloSegundoHasta(inter.getTimeHasta());
+						datoTemp.setMedia(balizaAvg);
+						datoTemp.setMinuto(temp.get(0).getMinuto());
+						datoTemp.setNumeroIntervalo(temp.size());
+											
+						temp2.add(datoTemp);
+					}
 				}
 			}
 			
 			//Paso los datos con intervalos a dataList			
 			dataList=temp2;
 			
-			//Obtengo los distintos por mac
 			dataListDistinct=getDistinct(dataList);
 			
+			temp2=new ArrayList<DataDTO>();
 			
-			for(DataDTO dat:dataListDistinct){
-				System.out.print(dat.getRssi()+" ");
-				System.out.print(dat.getMac()+" ");
-				System.out.print(dat.getMinuto()+" ");
-				System.out.print(dat.getIntervaloSegundoDesde()+" ");
-				System.out.println(dat.getIntervaloSegundoHasta());
+			for(final DataDTO dato:dataListDistinct)
+			{
+				temp=(List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
+					@Override
+					public boolean evaluate(Object arg0) {
+                     DataDTO dat= (DataDTO)arg0;
+                     if(dat.getMac().equals(dato.getMac()))
+                    	 return true;
+                     else
+                    	 return false;
+					}
+				});
+				balizaSumDbl=sumFrom(temp).getMedia();
+				balizaAvgDbl=balizaSumDbl/(temp.size());
+				
+				varianza=0.0;
+				
+				for(DataDTO dat:temp)
+				{
+				   rango = Math.pow(dat.getMedia()-balizaAvgDbl,2);
+				   varianza = varianza + rango;				
+				}
+				varianza=varianza/(temp.size());
+				desviacion=Math.sqrt(varianza);
+				
+				//3 es el numero de sigmas
+				limiteSuperior=balizaAvgDbl+(desviacion*1);
+				limiteInferior=balizaAvgDbl-(desviacion*1);
+				
+				
+				index=0;
+				for(DataDTO dat:temp)
+				{
+					
+					System.out.print(dat.getMac()+" ");
+					System.out.print(dat.getIntervaloSegundoDesde()+" ");
+					System.out.print(dat.getIntervaloSegundoHasta()+" ");
+					System.out.print(dat.getMedia()+" ");
+					System.out.print(balizaAvgDbl+ " ");
+					System.out.print(desviacion+ " ");
+					System.out.print(limiteSuperior+" ");
+					System.out.println(limiteInferior);
+					
+					datoTemp=new DataDTO();
+					datoTemp=dat;
+					
+					if(!(dat.getMedia()>=limiteInferior&&dat.getMedia()<=limiteSuperior))
+						if((index-1)>=0&&index+1<temp.size())
+							datoTemp.setMedia(temp.get(index-1).getMedia()+temp.get(index+1).getMedia());
+					
+					index=index+1;
+					temp2.add(datoTemp);
+				}
 			}
+			
+			
+			dataList=temp2;
+			
+			for(DataDTO dat:dataList){
+				sb.append(dat.getMac()+" ");
+				sb.append(dat.getMinuto()+" ");
+				sb.append(dat.getIntervaloSegundoDesde()+" ");
+				sb.append(dat.getIntervaloSegundoHasta()+" ");
+				sb.append(dat.getMedia()+"\n");
+				writer.write(sb.toString());
+				sb=new StringBuilder();
+			}
+			writer.close();
 
-
+			
 			
 			//dataList= sort(dataList, on(DataDTO.class).getFecha());
 					
