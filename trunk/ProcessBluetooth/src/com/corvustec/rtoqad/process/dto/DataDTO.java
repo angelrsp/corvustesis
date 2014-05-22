@@ -15,11 +15,16 @@ public class DataDTO implements Serializable{
 	private Time minuto;
 	private String mac;
 	private int rssi;
+	
 	private Time intervaloSegundoDesde;
 	private Time intervaloSegundoHasta;
 	private Time intervaloMinutoDesde;
 	private Time intervaloMinutoHasta;
 	
+	private double media;
+	private double desviacion;
+	
+	private int numeroIntervalo;
 	
 	public DataDTO() {
 	
@@ -87,6 +92,30 @@ public class DataDTO implements Serializable{
 
 	public void setMinuto(Time minuto) {
 		this.minuto = minuto;
+	}
+
+	public double getMedia() {
+		return media;
+	}
+
+	public void setMedia(double media) {
+		this.media = media;
+	}
+
+	public double getDesviacion() {
+		return desviacion;
+	}
+
+	public void setDesviacion(double desviacion) {
+		this.desviacion = desviacion;
+	}
+
+	public int getNumeroIntervalo() {
+		return numeroIntervalo;
+	}
+
+	public void setNumeroIntervalo(int numeroIntervalo) {
+		this.numeroIntervalo = numeroIntervalo;
 	}
 
 	
