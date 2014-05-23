@@ -25,9 +25,11 @@ public class DataDTO implements Serializable{
 	private double desviacion;
 	
 	private int numeroIntervalo;
+	//1 in 0 out
+	private int estado;
 	
 	public DataDTO() {
-	
+		estado=-1;
 	}
 
 	public String getMac() {
@@ -116,6 +118,14 @@ public class DataDTO implements Serializable{
 
 	public void setNumeroIntervalo(int numeroIntervalo) {
 		this.numeroIntervalo = numeroIntervalo;
+	}
+
+	public int getEstado() {
+		return estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 
 	

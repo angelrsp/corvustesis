@@ -152,11 +152,7 @@ public class Process2 {
 					dataList.removeAll(select(dataList, having(on(DataDTO.class).getMac(), equalTo(dat.getMac()))));
 				}
 			}		 			
-			
-			//Eliminano las balizas de referencia
-			//dataList.removeAll(baliza);
-			//Obtengo los distintos por mac
-			dataListDistinct=getDistinct(dataList);
+			dataMax=null;
 			
 			//Todavia es el Paso 1
 			List<IntervaloTiempoDTO> intervaloSegundo;
@@ -226,8 +222,7 @@ public class Process2 {
 				//Sorting
 				Collections.sort(temp2, new Comparator<DataDTO>() {
 			        @Override
-			        public int compare(DataDTO  dato1, DataDTO  dato2)
-			        {
+			        public int compare(DataDTO  dato1, DataDTO  dato2){
 			            return dato1.getNumeroIntervalo()> dato2.getNumeroIntervalo()?1:-1;
 			        }
 			    });
@@ -293,41 +288,109 @@ public class Process2 {
 				limiteSuperior=balizaAvgDbl+(desviacion*1);
 				limiteInferior=balizaAvgDbl-(desviacion*1);
 				
-				
 				index=0;
 				for(DataDTO dat:temp)
 				{
-					
-					System.out.print(dat.getMac()+" ");
-					System.out.print(dat.getIntervaloSegundoDesde()+" ");
-					System.out.print(dat.getIntervaloSegundoHasta()+" ");
-					System.out.print(dat.getMedia()+" ");
-					System.out.print(balizaAvgDbl+ " ");
-					System.out.print(desviacion+ " ");
-					System.out.print(limiteSuperior+" ");
-					System.out.println(limiteInferior);
-					
+										
 					datoTemp=new DataDTO();
 					datoTemp=dat;
 					
 					if(!(dat.getMedia()>=limiteInferior&&dat.getMedia()<=limiteSuperior))
 						if((index-1)>=0&&index+1<temp.size())
-							datoTemp.setMedia(temp.get(index-1).getMedia()+temp.get(index+1).getMedia());
+							datoTemp.setMedia((temp.get(index-1).getMedia()+temp.get(index+1).getMedia())/2);
 					
 					index=index+1;
 					temp2.add(datoTemp);
 				}
 			}
 			
-			
 			dataList=temp2;
+
+			
+			//Obtengo la media de las balizas en grupo para cada intervalo
+			baliza=(List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
+				@Override
+				public boolean evaluate(Object arg0) {
+                 DataDTO dat= (DataDTO)arg0;
+                 if(dat.getMac().equals("00:68:58:09:15:33")
+                		 ||dat.getMac().equals("2C:44:01:B3:F9:DD")
+                		 ||dat.getMac().equals("F8:5F:2A:79:66:8F")
+                		 ||dat.getMac().equals("40:BA:61:5B:31:E9"))
+                	 return true;
+                 else
+                	 return false;
+				}
+			});
+			
+
+			temp=getDistinctByNumeroIntervalo(baliza);
+			
+			temp3=new ArrayList<DataDTO>();
+			
+			for(final DataDTO dato:temp)
+			{
+				temp2=(List<DataDTO>) CollectionUtils.select(baliza, new Predicate() {
+					@Override
+					public boolean evaluate(Object arg0) {
+	                 DataDTO dat= (DataDTO)arg0;
+	                 if(dat.getNumeroIntervalo()==dato.getNumeroIntervalo())
+	                	 return true;
+	                 else
+	                	 return false;
+					}
+				});				
+
+				if(temp2.size()>0)
+				{
+					datoTemp=temp2.get(0);
+					balizaSum=sumFrom(temp2).getRssi();
+					balizaAvg=(float)balizaSum/temp2.size();
+					datoTemp.setMedia(balizaAvg);
+					temp3.add(datoTemp);
+				}
+			}
+			
+			baliza=temp3;
+			temp3=new ArrayList<DataDTO>();
+			//Comparcion con balizas
+			for(final DataDTO dato:dataList)
+			{
+				temp2=(List<DataDTO>) CollectionUtils.select(baliza, new Predicate() {
+					@Override
+					public boolean evaluate(Object arg0) {
+	                 DataDTO dat= (DataDTO)arg0;
+	                 if(dat.getNumeroIntervalo()==dato.getNumeroIntervalo())
+	                	 return true;
+	                 else
+	                	 return false;
+					}
+				});
+				if(temp2.size()>0)
+				{
+					datoTemp=new DataDTO();
+					if(dato.getMedia()<temp2.get(0).getMedia())
+					{
+						datoTemp=dato;
+						datoTemp.setEstado(0);
+					}
+					else
+					{
+						datoTemp=dato;
+						datoTemp.setEstado(1);					
+					}
+					temp3.add(datoTemp);
+				}
+			}
+
+			dataList=temp3;
 			
 			for(DataDTO dat:dataList){
-				sb.append(dat.getMac()+" ");
-				sb.append(dat.getMinuto()+" ");
-				sb.append(dat.getNumeroIntervalo()+" ");
-				sb.append(dat.getIntervaloSegundoDesde()+" ");
-				sb.append(dat.getIntervaloSegundoHasta()+" ");
+				sb.append(dat.getMac()+"|");
+				sb.append(dat.getMinuto()+"|");
+				sb.append(dat.getNumeroIntervalo()+"|");
+				sb.append(dat.getIntervaloSegundoDesde()+"|");
+				sb.append(dat.getIntervaloSegundoHasta()+"|");
+				sb.append(dat.getEstado()+"|");
 				sb.append(dat.getMedia()+"\n");
 				writer.write(sb.toString());
 				sb=new StringBuilder();
