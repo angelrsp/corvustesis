@@ -9,6 +9,7 @@ import net.ciespal.redxxi.ejb.negocio.AdministracionService;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteMenuDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.MenuDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
@@ -265,15 +266,46 @@ public class AdministracionServiceImpl implements AdministracionService{
 
 	@Override
 	public List<ComponenteDTO> componenteReadAll() throws CorvustecException {
-		logger.info("perfilReadAll");
+		logger.info("componenteReadAll");
 		try{
 			return factoryDAO.getComponenteDAOImpl().getByAnd(new ComponenteDTO());
 		}
 		catch(Exception e)
 		{
-			logger.info("Error al perfilReadAll" +e.toString());
-			throw new CorvustecException("Error al perfilReadAll");
+			logger.info("Error al componenteReadAll" +e.toString());
+			throw new CorvustecException("Error al componenteReadAll");
 		}		
+	}
+
+	/*Componente Menu*/
+	@Override
+	public ComponenteMenuDTO componenteMenuCreateOrUpdate(ComponenteMenuDTO componenteDTO) throws CorvustecException
+	{
+		logger.info("componenteMenuCreateOrUpdate");
+		try{
+			if(componenteDTO.getCmeCodigo()!=null)
+				return factoryDAO.getComponenteMenuDAOImpl().edit(componenteDTO);
+			else
+				return factoryDAO.getComponenteMenuDAOImpl().create(componenteDTO);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al componenteMenuCreateOrUpdate" +e.toString());
+			throw new CorvustecException("Error al componenteMenuCreateOrUpdate "+e.toString());
+		}
+	}
+
+	@Override
+	public List<ComponenteMenuDTO> componenteMenuReadAll() throws CorvustecException {
+		logger.info("componenteMenuReadAll");
+		try{
+			return factoryDAO.getComponenteMenuDAOImpl().getByAnd(new ComponenteMenuDTO());
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al componenteMenuReadAll" +e.toString());
+			throw new CorvustecException("Error al componenteMenuReadAll "+e.toString());
+		}
 	}
 
 }

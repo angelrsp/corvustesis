@@ -8,6 +8,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.CarreraDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.CatalogoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.CentroDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ComponenteDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.ComponenteMenuDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ContactoArgosDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ContactoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.DoctorDAO;
@@ -49,6 +50,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private PerfilDAO perfilDAO;
 	private MenuDAO menuDAO;
 	private ComponenteDAO componenteDAO;
+	private ComponenteMenuDAO componenteMenuDAO;
 	
 	private CatalogoDAO catalogoDAO;
 	private CentroDAO centroDAO;
@@ -337,6 +339,14 @@ public class FactoryDAOImpl implements FactoryDAO{
 			componenteDAO = new ComponenteDAOImpl(entityManager);
 		}
 		return componenteDAO;
+	}
+
+	@Override
+	public ComponenteMenuDAO getComponenteMenuDAOImpl() {
+		if (componenteMenuDAO == null) {
+			componenteMenuDAO = new ComponenteMenuDAOImpl(entityManager);
+		}
+		return componenteMenuDAO;
 	}
 
 }

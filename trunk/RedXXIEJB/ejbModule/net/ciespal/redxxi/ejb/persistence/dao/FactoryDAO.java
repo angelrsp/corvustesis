@@ -38,6 +38,7 @@ public interface FactoryDAO {
 	PerfilDAO getPerfilDAOImpl();
 	MenuDAO getMenuDAOImpl();
 	ComponenteDAO getComponenteDAOImpl();
+	ComponenteMenuDAO getComponenteMenuDAOImpl();
 	
 	
 
