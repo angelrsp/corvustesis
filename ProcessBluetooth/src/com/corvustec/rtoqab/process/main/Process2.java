@@ -10,6 +10,7 @@ import static org.hamcrest.Matchers.equalTo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.io.FileUtils;
@@ -291,14 +293,27 @@ public class Process2 {
 				index=0;
 				for(DataDTO dat:temp)
 				{
-										
-					datoTemp=new DataDTO();
-					datoTemp=dat;
+					datoTemp=null;
+					try {
+						datoTemp=(DataDTO) BeanUtils.cloneBean(dat);
+					} catch (IllegalAccessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InstantiationException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InvocationTargetException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (NoSuchMethodException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}					
 					
 					if(!(dat.getMedia()>=limiteInferior&&dat.getMedia()<=limiteSuperior))
-						if((index-1)>=0&&index+1<temp.size())
-							datoTemp.setMedia((temp.get(index-1).getMedia()+temp.get(index+1).getMedia())/2);
-					
+						if((index-1)>=0&&(index+1)<temp.size())
+							datoTemp.setMedia((temp.get(index-1).getMedia()+dat.getMedia()+temp.get(index+1).getMedia())/3);
+
 					index=index+1;
 					temp2.add(datoTemp);
 				}
@@ -352,6 +367,8 @@ public class Process2 {
 			
 			baliza=temp3;
 			temp3=new ArrayList<DataDTO>();
+			
+			
 			//Comparcion con balizas
 			for(final DataDTO dato:dataList)
 			{
