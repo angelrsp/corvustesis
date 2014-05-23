@@ -6,6 +6,7 @@ import javax.ejb.Local;
 
 import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteMenuDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.MenuDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
@@ -51,5 +52,10 @@ public interface AdministracionService {
 
 	ComponenteDTO componenteCreateOrUpdate(ComponenteDTO componenteDTO)
 			throws CorvustecException;
+
+	List<ComponenteMenuDTO> componenteMenuReadAll() throws CorvustecException;
+
+	ComponenteMenuDTO componenteMenuCreateOrUpdate(
+			ComponenteMenuDTO componenteDTO) throws CorvustecException;
 
 }
