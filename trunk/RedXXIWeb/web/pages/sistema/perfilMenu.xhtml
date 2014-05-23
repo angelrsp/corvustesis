@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/privado.xhtml">
+
+
+	<ui:define name="contenido">
+	
+		<p:growl id="growl" autoUpdate="true"/>
+		
+		<p:panel id="pnlDato" header="Perfil Menú">
+
+			<table>
+				<tr>
+					<td>
+ 					</td>
+				</tr>
+			
+			</table>
+
+		   <p:pickList id="PojoPickList" value="#{perf}" var="theme" effect="bounce"
+		                itemValue="#{theme}" itemLabel="#{theme.displayName}" showSourceControls="true" showTargetControls="true" showCheckbox="true"
+		                showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" converter="theme">
+		 
+		        <f:facet name="sourceCaption">Control</f:facet>
+		        <f:facet name="targetCaption">Asigando</f:facet>
+		 
+		        <p:ajax event="transfer" listener="#{pickListView.onTransfer}" update="msg" />
+		 
+		        <p:column style="width:25%">
+		            <h:outputText styleClass="ui-theme ui-theme-#{theme.name}" />
+		        </p:column>
+		 
+		        <p:column style="width:75%;">
+		            <h:outputText value="#{theme.displayName}" />
+		        </p:column>
+		    </p:pickList>					
+
+
+		</p:panel>
+		
+	</ui:define>
+
+</ui:composition>		

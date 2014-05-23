@@ -82,10 +82,9 @@
 					<p:column headerText="#{i18n['label.predecesor']}">
 						<h:outputText value="#{men.segMenu.menNombre}"/>
 					</p:column>					
-
 				
 					<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
-						<p:commandButton actionListener="#{menuController.edit(men)}" icon="ui-icon-pencil" process=":contenido:tblMenu" update=":contenido:pnlDato"/>
+						<p:commandButton actionListener="#{componenteMenuController.edit(men)}" icon="ui-icon-pencil" process=":contenido:tblMenu" update=":contenido:pnlDato"/>
 					</p:column>
 					
 	<!-- 				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center"> -->

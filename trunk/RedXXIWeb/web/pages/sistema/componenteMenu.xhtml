@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/privado.xhtml">
+
+
+	<ui:define name="contenido">
+	
+		<p:growl id="growl" autoUpdate="true"/>
+		
+		<p:panel id="pnlDato" header="Componente">
+
+			<table>
+				<tr>
+					<td><h:outputText value="#{i18n['label.menu']}:&#160;" /></td>
+					<td><p:selectOneMenu value="#{componenteMenuDataManager.menuCode}" required="true">
+						<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
+						<f:selectItems value="#{componenteMenuController.componenteMenuDataManager.menuList}" var="men" itemValue="#{men.menCodigo}" itemLabel="#{men.menNombre}" />
+					</p:selectOneMenu></td>
+				</tr>
+				
+				<tr>
+					<td><h:outputText value="#{i18n['label.componente']}:&#160;" /></td>
+					<td><p:selectOneMenu value="#{componenteMenuDataManager.componenteCode}" required="true">
+						<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
+						<f:selectItems value="#{componenteMenuDataManager.componenteList}" var="com" itemValue="#{com.comCodigo}" itemLabel="#{com.comDescripcion}" />						
+					</p:selectOneMenu></td>
+				</tr>
+
+				<tr>
+					<td colspan="4" align="center">
+						<p:commandButton value="#{i18n['boton.guardar']}" process="pnlDato" update="pnlDato" 
+							actionListener="#{componenteMenuController.save}" icon="ui-icon-disk"/>
+						<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update="pnlDato" 
+							actionListener="#{componenteMenuController.cancel}" icon="ui-icon-cancel"/>
+					</td>
+				</tr>					
+				
+			</table>
+
+			<p:dataTable id="tblComponenteMenu" value="#{componenteMenuDataManager.componenteMenuList}" var="cmn">
+				
+				<p:column headerText="#{i18n['label.menu']}">
+					<h:outputText value="#{cmn.segMenu.menNombre}"/>
+				</p:column>					
+
+				<p:column headerText="#{i18n['label.componente']}">
+					<h:outputText value="#{cmn.segComponente.comDescripcion}"/>
+				</p:column>					
+
+			
+				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+					<p:commandButton actionListener="#{componenteMenuController.edit(cmn)}" icon="ui-icon-pencil" process=":contenido:tblComponenteMenu" update=":contenido:pnlDato"/>
+				</p:column>
+				
+<!-- 				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center"> -->
+<!-- 					<p:commandButton actionListener="#{ubicacionController.deleteCiudad(ciu)}" icon="ui-icon-close" process=":contenido:tblCiudad" update=":contenido:pnlCiudad"> -->
+<!-- 						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" />  -->
+<!-- 					</p:commandButton> -->
+<!-- 				</p:column> -->			
+						
+			</p:dataTable>
+
+
+
+		</p:panel>
+		
+	</ui:define>
+	
+</ui:composition>		
