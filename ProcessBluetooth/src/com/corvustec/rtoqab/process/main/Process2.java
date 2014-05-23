@@ -365,21 +365,16 @@ public class Process2 {
 	                	 return false;
 					}
 				});
+				datoTemp=new DataDTO();
+				datoTemp=dato;
 				if(temp2.size()>0)
 				{
-					datoTemp=new DataDTO();
 					if(dato.getMedia()<temp2.get(0).getMedia())
-					{
-						datoTemp=dato;
 						datoTemp.setEstado(0);
-					}
 					else
-					{
-						datoTemp=dato;
 						datoTemp.setEstado(1);					
-					}
-					temp3.add(datoTemp);
 				}
+				temp3.add(datoTemp);
 			}
 
 			dataList=temp3;
