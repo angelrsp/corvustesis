@@ -14,5 +14,9 @@ public interface NoticiaDAO extends AbstractFacade<NoticiaDTO>{
 
 	List<NoticiaDTO> getAllPublic();
 
+	List<NoticiaDTO> getAllPublic(int star, int end);
+
+	List<NoticiaDTO> getAllPublic(int result);
+
 	
 }

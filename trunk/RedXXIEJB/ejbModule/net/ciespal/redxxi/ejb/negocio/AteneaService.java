@@ -208,5 +208,10 @@ public interface AteneaService {
 	List<DoctorVieDTO> readDoctorList(DoctorVieDTO doctor)
 			throws CorvustecException;
 
+	List<NoticiaDTO> readNoticiaPublic(int number) throws CorvustecException;
+
+	DoctorVieDTO doctorVieRead(DoctorVieDTO doctorVieDTO)
+			throws CorvustecException;
+
 
 }
