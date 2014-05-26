@@ -97,6 +97,38 @@
 				<div class="line-separator"></div>												
 			</td>
 		</tr>
+
+		<tr>
+			<td colspan="2">
+				<h:commandLink value="Grandes Maestros del Periodismo" actionListener="#{noticiaPublicController.readNoticia(noti)}" styleClass="linkClassNoticia"/><br />
+			</td>		
+		</tr>
+
+		<tr>
+			<td width="45" height="40"><p:graphicImage value="#{homeDataManager.fotoGranMaestroPath}" height="40" width="45" cache="false"/></td>
+			<td valign="top">
+				<h:outputText value="Ciencias de la Comunicación al servicio del Hombre." styleClass="descripcionBlack2"/><br/>
+				<h:outputText value="#{homeDataManager.granMaestroDTO.gmaNombres} #{homeDataManager.granMaestroDTO.gmaApellidos}" styleClass="descripcionBlack2"/>
+			</td>		
+		</tr>
+
+		<tr>
+			<td colspan="2">
+				<h:commandLink value="Maestros de la Comunicación (CIESPAL)" actionListener="#{noticiaPublicController.readNoticia(noti)}" styleClass="linkClassNoticia"/><br />
+			</td>		
+		</tr>
+
+		<tr>
+			<td width="45" height="40"><p:graphicImage value="#{homeDataManager.fotoMaestroCiespalPath}" height="40" width="45" cache="false"/></td>
+			<td valign="top">
+				<h:outputText value="Ciencias de la Comunicación al servicio del Hombre." styleClass="descripcionBlack2"/><br/>
+				<h:outputText value="#{homeDataManager.maestroCiespalDTO.mciNombre} #{homeDataManager.maestroCiespalDTO.mciApellido}" styleClass="descripcionBlack2"/>
+			</td>		
+		</tr>
+
+		<tr>
+			<td height="40" colspan="2"><div class="line-separator"></div></td>
+		</tr>
 		
 	</table>	
 </ui:define>
