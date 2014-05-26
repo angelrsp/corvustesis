@@ -1636,7 +1636,7 @@ public class AteneaServiceImpl implements AteneaService{
 			if(!doctorList.isEmpty())
 			{
 				ran = (int) (Math.random () * doctorList.size());
-				return factoryDAO.getDoctorDAOImpl().getAll().get(ran);
+				return doctorList.get(ran);
 			}
 			else
 				return new DoctorDTO();

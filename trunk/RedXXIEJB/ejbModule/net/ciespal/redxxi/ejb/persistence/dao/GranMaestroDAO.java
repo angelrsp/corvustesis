@@ -10,4 +10,7 @@ public interface GranMaestroDAO extends AbstractFacade<GranMaestroDTO> {
 
 	List<GranMaestroDTO> findAll(Object ciudad) throws CorvustecException;
 
+	List<GranMaestroDTO> getByAnd(GranMaestroDTO granMaestroDTO)
+			throws CorvustecException;
+
 }

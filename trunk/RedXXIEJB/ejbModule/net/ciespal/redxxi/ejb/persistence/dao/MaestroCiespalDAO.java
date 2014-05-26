@@ -10,4 +10,7 @@ public interface MaestroCiespalDAO extends AbstractFacade<MaestroCiespalDTO> {
 
 	List<MaestroCiespalDTO> findAll(Object ciudad) throws CorvustecException;
 
+	List<MaestroCiespalDTO> getByAnd(MaestroCiespalDTO maestroCiespalDTO)
+			throws CorvustecException;
+
 }

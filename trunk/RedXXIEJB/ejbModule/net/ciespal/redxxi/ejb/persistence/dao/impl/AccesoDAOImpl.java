@@ -12,50 +12,34 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import net.ciespal.redxxi.ejb.persistence.dao.MaestroCiespalDAO;
-import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalDTO;
+import net.ciespal.redxxi.ejb.persistence.dao.AccesoDAO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.AccesoDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.corvustec.commons.util.CorvustecException;
 
-public class MaestroCiespalDAOImpl extends AbstractFacadeImpl<MaestroCiespalDTO> implements MaestroCiespalDAO {
+public class AccesoDAOImpl extends AbstractFacadeImpl<AccesoDTO> implements AccesoDAO{
 
-	private static final Logger logger = LoggerFactory.getLogger(MaestroCiespalDAOImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(AccesoDAOImpl.class);
 	
-	public MaestroCiespalDAOImpl() {
+	public AccesoDAOImpl() {
 		super();
 	}
 
-	public MaestroCiespalDAOImpl(EntityManager entityManager) {
+	public AccesoDAOImpl(EntityManager entityManager) {
 		super(entityManager);
 	}
 
-	@Override
-	public List<MaestroCiespalDTO> findAll(Object ciudad) throws CorvustecException
-	{
-		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
-		CriteriaQuery<MaestroCiespalDTO> cq=cb.createQuery(MaestroCiespalDTO.class);
-		Root<MaestroCiespalDTO> from= cq.from(MaestroCiespalDTO.class);
-		
-		cq.where(cb.equal(from.get("mciCiudad"), ciudad));
-		
-		List<MaestroCiespalDTO> list=entityManager.createQuery(cq).getResultList();	
-		if(list.isEmpty())
-			return null;
-		else
-			return list;
-	}
-	
 	
 	@Override
-	public List<MaestroCiespalDTO> getByAnd(MaestroCiespalDTO maestroCiespalDTO) throws CorvustecException
+	public List<AccesoDTO> getByAnd(AccesoDTO objetoDTO) throws CorvustecException
 	{
 		CriteriaBuilder cb;
-		CriteriaQuery<MaestroCiespalDTO> cq;
-		Root<MaestroCiespalDTO> from;
-		List<MaestroCiespalDTO> list;
+		CriteriaQuery<AccesoDTO> cq;
+		Root<AccesoDTO> from;
+		List<AccesoDTO> list;
 		Predicate predicate;
 		List<Predicate> predicateList = null;
 		String fieldName;
@@ -64,22 +48,22 @@ public class MaestroCiespalDAOImpl extends AbstractFacadeImpl<MaestroCiespalDTO>
 		Field[] fields;
 		try{
 			cb=entityManager.getCriteriaBuilder();
-			cq=cb.createQuery(MaestroCiespalDTO.class);
+			cq=cb.createQuery(AccesoDTO.class);
 			
-			from= cq.from(MaestroCiespalDTO.class);
+			from= cq.from(AccesoDTO.class);
 			
 			predicateList=new ArrayList<Predicate>();
 			
-			fields = maestroCiespalDTO.getClass().getDeclaredFields();
+			fields = objetoDTO.getClass().getDeclaredFields();
 
 	        for(Field f : fields){
 	            fieldName = f.getName();
 				if(!fieldName.equals("serialVersionUID"))
 				{
-				    getter = maestroCiespalDTO.getClass().getMethod("get" + String.valueOf(fieldName.charAt(0)).toUpperCase() +
+				    getter = objetoDTO.getClass().getMethod("get" + String.valueOf(fieldName.charAt(0)).toUpperCase() +
 				            fieldName.substring(1));
 				    
-				    value = getter.invoke(maestroCiespalDTO, new Object[0]);
+				    value = getter.invoke(objetoDTO, new Object[0]);
 				
 				    if(value!=null)
 				    {
@@ -92,7 +76,7 @@ public class MaestroCiespalDAOImpl extends AbstractFacadeImpl<MaestroCiespalDTO>
 	        if(!predicateList.isEmpty())
 	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
 			
-			TypedQuery<MaestroCiespalDTO> tq=entityManager.createQuery(cq);
+			TypedQuery<AccesoDTO> tq=entityManager.createQuery(cq);
 			list=tq.getResultList();
 			
 			return list;
@@ -103,6 +87,7 @@ public class MaestroCiespalDAOImpl extends AbstractFacadeImpl<MaestroCiespalDTO>
 		}finally{
 			predicate=null;
 			predicateList=null;
-		}			}
-
+		}		
+	}
+	
 }

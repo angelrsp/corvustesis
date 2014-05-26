@@ -11,10 +11,13 @@ import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.ArgosDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosListDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.DefensorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.EntidadArgosDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.RedDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.VeeduriaDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
+import net.ciespal.redxxi.ejb.persistence.vo.DefensorVO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -277,5 +280,21 @@ public class ArgosServiceImpl implements ArgosService{
 			logger.info("Error createOrUpdateContacto {}",e.toString());
 			throw new CorvustecException("Error al deleteContacto");
 		}				
+	}
+	
+	@Override
+	public DefensorDTO defensorCreateOrUpdate(DefensorVO defensor) throws CorvustecException
+	{
+		logger.info("createOrUpdateContacto");
+		try{
+			UsuarioDTO usr=factoryDAO.getUsuarioDAOImpl().create(defensor.getUser());
+			defensor.getDefensor().setDefUsuario(usr.getUsuCodigo());
+			return factoryDAO.getDefensorDAOImpl().create(defensor.getDefensor());
+		}
+		catch(Exception e){
+			logger.info("Error createOrUpdateContacto {}",e.toString());
+			throw new CorvustecException("Error al deleteContacto");
+		}				
+
 	}
 }

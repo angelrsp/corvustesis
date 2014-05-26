@@ -36,6 +36,9 @@ public class MaestroCiespalDTO implements Serializable {
 	@Column(name="mci_foto")
 	private byte[] mciFoto;
 
+	@Column(name="mci_foto_nombre")
+	private String mciFotoNombre;
+	
 	@Column(name="mci_nombre")
 	private String mciNombre;
 
@@ -102,6 +105,14 @@ public class MaestroCiespalDTO implements Serializable {
 
 	public void setMciFoto(byte[] mciFoto) {
 		this.mciFoto = mciFoto;
+	}
+
+	public String getMciFotoNombre() {
+		return mciFotoNombre;
+	}
+
+	public void setMciFotoNombre(String mciFotoNombre) {
+		this.mciFotoNombre = mciFotoNombre;
 	}
 
 	public String getMciNombre() {
