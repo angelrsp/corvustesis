@@ -21,21 +21,24 @@
 
 
 	<ui:define name="center">
-
-	<p:panel>
-		<table>
-			<tr>
-				<td>
-					<h:outputText value="#{i18n['label.nombres']}" />
-				</td>
-			</tr>	
-		</table>
-	</p:panel>
-	<h:dataTable>
 	
-	</h:dataTable>
-
+	<table width="80%">
+			<tr align="center">
+				<td class="tituloSomos">Archivo Noticias</td>
+			</tr>
+		<tr>
+			<td>
+				<h:dataTable value="#{historialNoticiaController.historialNoticiaDataManager.noticiaList}" var="noti">
+					<h:column>
+		    			<p:graphicImage value="#{noti.notPaisPath}" height="25" width="40"/>
+		    			<h:commandLink value="#{noti.notTitulo}" actionListener="#{historialNoticiaController.find(noti)}" styleClass="linkClassNoticia"/><br />
+		    			<h:outputText value="#{noti.notResumen}" escape="false"/>
+		    		</h:column>				
+				</h:dataTable>
+			</td>
+		</tr>
+	</table>
+	
 	</ui:define>
-	
-	
+
 </ui:composition>	
