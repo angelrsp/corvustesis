@@ -14,28 +14,37 @@
 		<p:panel id="pnlDato" header="Perfil Menú">
 
 			<table>
+			
 				<tr>
-					<td>
- 					</td>
+					<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
+					<td><p:selectOneMenu value="#{perfilMenuDataManager.perfilCode}" required="true">
+						<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
+						<f:selectItems value="#{perfilMenuController.perfilMenuDataManager.perfilList}" var="per" itemValue="#{per.perCodigo}" itemLabel="#{per.perNombre}"/>
+					</p:selectOneMenu></td>
+				</tr>
+			
+			
+				<tr>
+					<td><h:outputText value="#{i18n['label.menu']}:&#160;" /></td>
+					<td><p:selectOneMenu value="#{perfilMenuDataManager.menuCode}" required="true">
+						<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
+						<f:selectItems value="#{perfilMenuDataManager.menuList}" var="men" itemValue="#{men.menCodigo}" itemLabel="#{men.menNombre}" />
+					</p:selectOneMenu></td>
 				</tr>
 			
 			</table>
 
-		   <p:pickList id="PojoPickList" value="#{perf}" var="theme" effect="bounce"
-		                itemValue="#{theme}" itemLabel="#{theme.displayName}" showSourceControls="true" showTargetControls="true" showCheckbox="true"
-		                showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" converter="theme">
+		   <p:pickList id="PojoPickList" value="#{perfilMenuDataManager.dualListModel}" var="acceso" effect="bounce"
+		                itemValue="#{acceso}" itemLabel="#{acceso}" showSourceControls="true" showTargetControls="true" showCheckbox="true"
+		                showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" converter="#{dualListModel}">
 		 
 		        <f:facet name="sourceCaption">Control</f:facet>
 		        <f:facet name="targetCaption">Asigando</f:facet>
 		 
-		        <p:ajax event="transfer" listener="#{pickListView.onTransfer}" update="msg" />
+		        <p:ajax event="transfer" listener="#{perfilMenuController.onTransfer}" />
 		 
-		        <p:column style="width:25%">
-		            <h:outputText styleClass="ui-theme ui-theme-#{theme.name}" />
-		        </p:column>
-		 
-		        <p:column style="width:75%;">
-		            <h:outputText value="#{theme.displayName}" />
+		        <p:column>
+		            <h:outputText value="#{acc}" />
 		        </p:column>
 		    </p:pickList>					
 

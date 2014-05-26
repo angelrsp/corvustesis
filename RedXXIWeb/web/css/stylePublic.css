@@ -97,6 +97,12 @@ a.linkClassNoticia:hover {color: #FAA723; text-decoration: underline;font-family
 	font-family: Segoe UI,Arial,sans-serif;
 }
 
+.descripcionBlack3{
+	color: #000000;
+	font-size: 15px;
+	font-family: Segoe UI,Arial,sans-serif;
+}
+
 
 .line-separator{
 	height:1px;
@@ -188,3 +194,15 @@ a.linkClassNoticia:hover {color: #FAA723; text-decoration: underline;font-family
 	background:url('../images/logoysocial.png') -150px 0;
 }
 
+/*Quienes somos*/
+.tituloSomos{
+	color: #F57B20;
+	font-size: 20px;
+	font-family: Segoe UI,Arial,sans-serif;
+}
+
+.tituloRed{
+	color: #000000;
+	font-size: 18px;
+	font-family: Segoe UI,Arial,sans-serif;
+}
