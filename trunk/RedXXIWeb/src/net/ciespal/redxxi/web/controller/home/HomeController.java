@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 import com.corvustec.commons.util.CorvustecException;
 
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
+import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.home.HomeDataManager;
 
@@ -21,6 +22,9 @@ public class HomeController {
 
 	@EJB
 	private AteneaService ateneaService;
+
+	@EJB
+	private EspejoService espejoService;
 	
 	public HomeDataManager getHomeDataManager() {
 		return homeDataManager;
@@ -38,6 +42,8 @@ public class HomeController {
 	private void init()
 	{
 		readDoctor();
+		granMaestroRead();
+		maestroCiespalRead();
 	}
 	
 	private void readDoctor()
@@ -52,6 +58,32 @@ public class HomeController {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
-	
+
+	private void granMaestroRead()
+	{
+		try {
+			homeDataManager.setGranMaestroDTO(espejoService.getRandomGranMaesto());
+			if(homeDataManager.getGranMaestroDTO().getGmaFoto()!=null)
+				homeDataManager.setFotoGranMaestroPath(JsfUtil.saveToDiskUpdload(homeDataManager.getGranMaestroDTO().getGmaFoto(), homeDataManager.getGranMaestroDTO().getGmaFotoNombre()));
+			else
+				homeDataManager.setFotoGranMaestroPath(null);
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
+	private void maestroCiespalRead()
+	{
+		try {
+			homeDataManager.setMaestroCiespalDTO(espejoService.getRandomMaestoCiespal());
+			if(homeDataManager.getMaestroCiespalDTO().getMciFoto()!=null)
+				homeDataManager.setFotoMaestroCiespalPath(JsfUtil.saveToDiskUpdload(homeDataManager.getMaestroCiespalDTO().getMciFoto(), homeDataManager.getMaestroCiespalDTO().getMciFotoNombre()));
+			else
+				homeDataManager.setFotoMaestroCiespalPath(null);
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
 	
 }
