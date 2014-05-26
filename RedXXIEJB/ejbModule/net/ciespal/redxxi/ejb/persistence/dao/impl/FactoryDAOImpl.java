@@ -4,6 +4,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import net.ciespal.redxxi.ejb.persistence.dao.AccesoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.CarreraDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.CatalogoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.CentroDAO;
@@ -11,6 +12,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.ComponenteDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ComponenteMenuDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ContactoArgosDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ContactoDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.DefensorDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.DoctorDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.DoctorVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.EntidadDAO;
@@ -51,6 +53,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private MenuDAO menuDAO;
 	private ComponenteDAO componenteDAO;
 	private ComponenteMenuDAO componenteMenuDAO;
+	private AccesoDAO accesoDAO;
 	
 	private CatalogoDAO catalogoDAO;
 	private CentroDAO centroDAO;
@@ -73,6 +76,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private ObservatorioDAO observatorioDAO;
 	private VeeduriaDAO veeduriaDAO;
 	private ContactoArgosDAO contactoArgosDAO;
+	private DefensorDAO defensorDAO;
 	
 	private EticaDAO eticaDAO;
 	private GranMaestroDAO granMaestroDAO;
@@ -347,6 +351,22 @@ public class FactoryDAOImpl implements FactoryDAO{
 			componenteMenuDAO = new ComponenteMenuDAOImpl(entityManager);
 		}
 		return componenteMenuDAO;
+	}
+
+	@Override
+	public AccesoDAO getAccesoDAOImpl() {
+		if (accesoDAO == null) {
+			accesoDAO = new AccesoDAOImpl(entityManager);
+		}
+		return accesoDAO;
+	}
+
+	@Override
+	public DefensorDAO getDefensorDAOImpl() {
+		if (defensorDAO == null) {
+			defensorDAO = new DefensorDAOImpl(entityManager);
+		}
+		return defensorDAO;
 	}
 
 }

@@ -98,6 +98,28 @@ public class EspejoServiceImpl implements EspejoService{
 		}
 	}
 
+	
+	@Override
+	public GranMaestroDTO getRandomGranMaesto() throws CorvustecException
+	{
+		logger.info("getRandomGranMaesto");
+		int ran;
+		try{
+			List<GranMaestroDTO> list=factoryDAO.getGranMaestroDAOImpl().getByAnd(new GranMaestroDTO());
+			if(!list.isEmpty())
+			{
+				ran = (int) (Math.random () * list.size());
+				return list.get(ran);
+			}
+			else
+				return new GranMaestroDTO();
+		}
+		catch(Exception e){
+			logger.info("Error readDoctor {}",e.toString());
+			throw new CorvustecException("Error al readDoctor");
+		}		
+	}
+	
 	/*Maestro Ciespal*/
 	@Override
 	public MaestroCiespalDTO createOrUpdateMaestroCiespal(MaestroCiespalDTO maestro) throws CorvustecException
@@ -132,6 +154,27 @@ public class EspejoServiceImpl implements EspejoService{
 		}
 	}
 
+	@Override
+	public MaestroCiespalDTO getRandomMaestoCiespal() throws CorvustecException
+	{
+		logger.info("getRandomMaestoCiespal");
+		int ran;
+		try{
+			List<MaestroCiespalDTO> list=factoryDAO.getMaestroCiespalDAOImpl().getByAnd(new MaestroCiespalDTO());
+			if(!list.isEmpty())
+			{
+				ran = (int) (Math.random () * list.size());
+				return list.get(ran);
+			}
+			else
+				return new MaestroCiespalDTO();
+		}
+		catch(Exception e){
+			logger.info("Error getRandomMaestoCiespal {}",e.toString());
+			throw new CorvustecException("Error al getRandomMaestoCiespal "+e.toString());
+		}		
+	}
+	
 	/*Premio Periodistico*/
 	@Override
 	public PremioDTO createOrUpdatePremio(PremioDTO premio) throws CorvustecException

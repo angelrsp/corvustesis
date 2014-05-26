@@ -85,6 +85,10 @@ public interface EspejoService {
 	List<ObraEspejoDTO> readObra(MaestroCiespalDTO maestro, Object type)
 			throws CorvustecException;
 
+	GranMaestroDTO getRandomGranMaesto() throws CorvustecException;
+
+	MaestroCiespalDTO getRandomMaestoCiespal() throws CorvustecException;
+
 	
 
 }
