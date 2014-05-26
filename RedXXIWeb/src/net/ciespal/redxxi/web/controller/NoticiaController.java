@@ -65,7 +65,7 @@ public class NoticiaController extends SelectItemController{
 	private void readNoticiaPublic()
 	{
 		try {
-			noticiaDataManager.setNoticiaPublicList(ateneaService.readNoticiaPublic());
+			noticiaDataManager.setNoticiaPublicList(ateneaService.readNoticiaPublic(3));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}

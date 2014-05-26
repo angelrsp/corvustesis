@@ -58,7 +58,7 @@ public class NoticiaPublicController {
 	private void readNoticiaPublic()
 	{
 		try {
-			noticiaPublicDataManager.setNoticiaPublicList(ateneaService.readNoticiaPublic());
+			noticiaPublicDataManager.setNoticiaPublicList(ateneaService.readNoticiaPublic(3));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
