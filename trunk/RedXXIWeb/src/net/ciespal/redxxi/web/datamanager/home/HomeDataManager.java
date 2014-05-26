@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import net.ciespal.redxxi.ejb.persistence.entities.DoctorDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.DoctorVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalDTO;
 
@@ -22,6 +23,8 @@ public class HomeDataManager implements Serializable{
 	
 	
 	private DoctorDTO doctorDTO;
+	
+	private DoctorVieDTO doctorVieDTO;
 
 	private MaestroCiespalDTO maestroCiespalDTO;
 	
@@ -36,6 +39,7 @@ public class HomeDataManager implements Serializable{
 		doctorDTO=new DoctorDTO();
 		maestroCiespalDTO=new MaestroCiespalDTO();
 		granMaestroDTO=new GranMaestroDTO();
+		doctorVieDTO=new DoctorVieDTO();
 	}
 
 
@@ -96,6 +100,16 @@ public class HomeDataManager implements Serializable{
 
 	public void setFotoMaestroCiespalPath(String fotoMaestroCiespalPath) {
 		this.fotoMaestroCiespalPath = fotoMaestroCiespalPath;
+	}
+
+
+	public DoctorVieDTO getDoctorVieDTO() {
+		return doctorVieDTO;
+	}
+
+
+	public void setDoctorVieDTO(DoctorVieDTO doctorVieDTO) {
+		this.doctorVieDTO = doctorVieDTO;
 	}
 	
 	
