@@ -3,6 +3,7 @@ body
 	/*background-image: url('../images/bgbody-9.jpg');*/
 	/*background-color: #322724;
 	/*background-repeat:no-repeat;*/
+	font-family: Segoe UI,Arial,sans-serif;
 }
 .table
 {
@@ -33,7 +34,7 @@ a.linkClass2:hover {color: #FAA723; text-decoration: underline;font-family: Sego
 
 a.linkClass3:link {color: #000000;text-decoration: none;font-family: Segoe UI,Arial,sans-serif;}
 a.linkClass3:active {color: #FFFFFF;font-family: Segoe UI,Arial,sans-serif;}
-a.linkClass3:visited {color: #F57B20;font-family: Segoe UI,Arial,sans-serif;}
+a.linkClass3:visited {color: #000000;text-decoration: none;font-family: Segoe UI,Arial,sans-serif;}
 a.linkClass3:hover {color: #FFFFFF; text-decoration: underline;font-family: Segoe UI,Arial,sans-serif;}
 
 
@@ -72,9 +73,16 @@ a.linkClassNoticia:hover {color: #FAA723; text-decoration: underline;font-family
 	font-family: Segoe UI,Arial,sans-serif;
 }
 
+
 .descripcionLetter{
 	color: #F57B20;
 	font-size: 20px;
+	font-family: Segoe UI,Arial,sans-serif;
+}
+
+.descripcionNumber{
+	color: #F57B20;
+	font-size: 16px;
 	font-family: Segoe UI,Arial,sans-serif;
 }
 

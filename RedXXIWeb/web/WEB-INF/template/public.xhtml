@@ -82,10 +82,11 @@
 		<div>
 			<table cellspacing="20">
 				<tr>
-					<td><h:commandLink value="Archivo Noticias" styleClass="linkClass3" actionListener="#{noticiaPublicController.readArchivo}"/></td>
+					<td><h:outputLink value="#{request.contextPath}/public/home/historialNoticia.xhtml" styleClass="linkClass3"><h:outputText value="Archivo Noticias"/></h:outputLink></td>
 					<td><h:commandLink value="Equipo Técnico" styleClass="linkClass3" actionListener="#{noticiaPublicController.readArchivo}"/></td>
 					<td><h:commandLink value="Datos y Colaboradores" styleClass="linkClass3" actionListener="#{noticiaPublicController.readArchivo}"/></td>
 					<td><h:commandLink value="Datos del Sitio" styleClass="linkClass3" actionListener="#{noticiaPublicController.readArchivo}"/></td>
+					
 				</tr>	
 			</table>	
 		</div>

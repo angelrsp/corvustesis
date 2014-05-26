@@ -46,13 +46,13 @@
 						<tr align="center">
 							<td rowspan="3" width="40%"><h:outputText value="Datos alojados en nuestras bases" styleClass="descripcion"/></td>
 							<td><h:outputText value="Atenea" styleClass="descripcionBlack"/></td>
-							<td><h:outputText value="#{reportPublicController.reportPublicDataManager.ateneaCount}" styleClass="descripcionBlack"/></td>
+							<td><h:outputText value="#{reportPublicController.reportPublicDataManager.ateneaCount}" styleClass="descripcionNumber"/></td>
 						</tr>
 						<tr align="center">								
 							<td><h:outputText value="Argos" styleClass="descripcionBlack"/></td>
-							<td><h:outputText value="#{reportPublicDataManager.argosCount}" styleClass="descripcionBlack"/></td>
+							<td><h:outputText value="#{reportPublicDataManager.argosCount}" styleClass="descripcionNumber"/></td>
 						</tr>	
-						<tr align="center">	
+						<tr align="center">
 							<td><h:outputText value="Espejo" styleClass="descripcionBlack"/></td>						
 						</tr>
 					</table>
@@ -74,14 +74,14 @@
 
 		<tr>
 			<td colspan="2">
-				<h:commandLink value="Nuestros Doctores en Ciencias (PhD)" actionListener="#{noticiaPublicController.readNoticia(noti)}" styleClass="linkClassNoticia"/><br />
+				<h:commandLink value="Nuestros Doctores en Ciencias (PhD)" actionListener="#{homeController.readDoctorVie}" styleClass="linkClassNoticia"/><br />
 			</td>		
 		</tr>
 
 		<tr>
 			<td width="45" height="40"><p:graphicImage value="#{homeController.homeDataManager.fotoPhdPath}" height="40" width="45" cache="false"/></td>
 			<td valign="top">
-				<h:outputText value="Ciencias de la Comunicación al servicio del Hombre." styleClass="descripcionBlack2"/><br/>
+				<h:outputText value="Ciencias de la comunicación al servicio del hombre." styleClass="descripcionBlack2"/><br/>
 				<h:outputText value="#{homeDataManager.doctorDTO.docNombres} #{homeDataManager.doctorDTO.docApellidos}" styleClass="descripcionBlack2"/>
 			</td>		
 		</tr>
@@ -107,21 +107,21 @@
 		<tr>
 			<td width="45" height="40"><p:graphicImage value="#{homeDataManager.fotoGranMaestroPath}" height="40" width="45" cache="false"/></td>
 			<td valign="top">
-				<h:outputText value="Ciencias de la Comunicación al servicio del Hombre." styleClass="descripcionBlack2"/><br/>
+				<h:outputText value="Paradigmas de todos los tiempos." styleClass="descripcionBlack2"/><br/>
 				<h:outputText value="#{homeDataManager.granMaestroDTO.gmaNombres} #{homeDataManager.granMaestroDTO.gmaApellidos}" styleClass="descripcionBlack2"/>
 			</td>		
 		</tr>
 
 		<tr>
 			<td colspan="2">
-				<h:commandLink value="Maestros de la Comunicación (CIESPAL)" actionListener="#{noticiaPublicController.readNoticia(noti)}" styleClass="linkClassNoticia"/><br />
+				<h:commandLink value="Maestros de la Comunicación" actionListener="#{noticiaPublicController.readNoticia(noti)}" styleClass="linkClassNoticia"/><br />
 			</td>		
 		</tr>
 
 		<tr>
 			<td width="45" height="40"><p:graphicImage value="#{homeDataManager.fotoMaestroCiespalPath}" height="40" width="45" cache="false"/></td>
 			<td valign="top">
-				<h:outputText value="Ciencias de la Comunicación al servicio del Hombre." styleClass="descripcionBlack2"/><br/>
+				<h:outputText value="Constructores de la Escuela Latinoamericana." styleClass="descripcionBlack2"/><br/>
 				<h:outputText value="#{homeDataManager.maestroCiespalDTO.mciNombre} #{homeDataManager.maestroCiespalDTO.mciApellido}" styleClass="descripcionBlack2"/>
 			</td>		
 		</tr>
