@@ -1,5 +1,7 @@
 package net.ciespal.redxxi.ejb.persistence.dao.impl;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +41,10 @@ public class DoctorVieDAOImpl extends AbstractFacadeImpl<DoctorVieDTO> implement
 		List<DoctorVieDTO> list;
 		Predicate predicate;
 		List<Predicate> predicateList = null;
+		String fieldName;
+		Method getter;
+		Object value;
+		Field[] fields;
 		try{
 			cb=entityManager.getCriteriaBuilder();
 			cq=cb.createQuery(DoctorVieDTO.class);
@@ -46,21 +52,28 @@ public class DoctorVieDAOImpl extends AbstractFacadeImpl<DoctorVieDTO> implement
 			from= cq.from(DoctorVieDTO.class);
 			
 			predicateList=new ArrayList<Predicate>();
-						
-			if(doctorVieDTO.getDocCodigo()!=null && doctorVieDTO.getDocCodigo()!=0)
-			{
-				predicate=cb.equal(from.get("docCodigo"),doctorVieDTO.getDocCodigo());
-				predicateList.add(predicate);
-			}
-
-			if(doctorVieDTO.getDocPais()!=null && doctorVieDTO.getDocPais()!=0)
-			{
-				predicate=cb.equal(from.get("docPais"),doctorVieDTO.getDocPais());
-				predicateList.add(predicate);
-			}
-
 			
-			cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
+			fields = doctorVieDTO.getClass().getDeclaredFields();
+
+	        for(Field f : fields){
+	            fieldName = f.getName();
+				if(!fieldName.equals("serialVersionUID"))
+				{
+				    getter = doctorVieDTO.getClass().getMethod("get" + String.valueOf(fieldName.charAt(0)).toUpperCase() +
+				            fieldName.substring(1));
+				    
+				    value = getter.invoke(doctorVieDTO, new Object[0]);
+				
+				    if(value!=null)
+				    {
+				    	predicate=cb.equal(from.get(fieldName), value);
+				    	predicateList.add(predicate);                	
+				    }
+				}
+	        }
+	
+	        if(!predicateList.isEmpty())
+	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
 			
 			TypedQuery<DoctorVieDTO> tq=entityManager.createQuery(cq);
 			list=tq.getResultList();
@@ -76,6 +89,5 @@ public class DoctorVieDAOImpl extends AbstractFacadeImpl<DoctorVieDTO> implement
 		}		
 	}
 		
-	
 	
 }

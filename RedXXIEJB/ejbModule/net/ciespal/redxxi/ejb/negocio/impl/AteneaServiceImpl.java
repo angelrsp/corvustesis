@@ -1624,7 +1624,20 @@ public class AteneaServiceImpl implements AteneaService{
 		}
 	}
 
-	
+
+	@Override
+	public DoctorVieDTO doctorVieRead(DoctorVieDTO doctorVieDTO) throws CorvustecException
+	{
+		logger.info("doctorVieRead");
+		try{
+			return factoryDAO.getDoctorVieDAOImpl().get(doctorVieDTO).get(0);
+		}
+		catch(Exception e){
+			logger.info("Error doctorVieRead {}",e.toString());
+			throw new CorvustecException("Error al doctorVieRead" + e.toString());
+		}
+	}
+
 	
 	@Override
 	public DoctorDTO getRandomDoctor() throws CorvustecException
@@ -1786,6 +1799,40 @@ public class AteneaServiceImpl implements AteneaService{
 			throw new CorvustecException("Error al readNoticia");
 		}
 	}
+
+	
+	@Override
+	public List<NoticiaDTO> readNoticiaPublic(int number) throws CorvustecException
+	{
+		logger.info("readNoticia");
+		List<NoticiaDTO> notiList=new ArrayList<NoticiaDTO>();
+		try{
+			List<NoticiaDTO> notiListAux=factoryDAO.getNoticiaDAOImpl().getAllPublic(number);
+			CatalogoDTO catalogoDTO;
+			if(notiListAux!=null)
+			{
+				for(NoticiaDTO noticia:notiListAux)
+				{
+					if(noticia.getNotPais()!=null)
+					{
+						catalogoDTO=factoryDAO.getCatalogoImpl().find(noticia.getNotPais());
+						if(catalogoDTO!=null)
+						{
+							noticia.setNotPaisPath(catalogoDTO.getCatImagenPath());
+						}
+					}
+					notiList.add(noticia);
+				}
+			}
+			return notiList;
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readNoticia {}",e.toString());
+			throw new CorvustecException("Error al readNoticia");
+		}
+	}
+
 	
 	@Override
 	public NoticiaDTO readNoticia(NoticiaDTO noticia) throws CorvustecException
