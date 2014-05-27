@@ -21,10 +21,33 @@
 
 
 	<ui:define name="center">
+	
 		<table>
 			<tr>
-				<td><h:outputText value="#{i18n['label.comentario']}" /></td>
+				<td><h:outputText value="#{i18n['label.medio.comunicacion']}:&#160;" /></td>
+				<td><p:inputText/></td>
 			</tr>
+
+			<tr>
+				<td><h:outputText value="#{i18n['label.tema.referencia']}:&#160;" /></td>
+				<td><p:inputText/></td>
+			</tr>
+
+			<tr>
+				<td><h:outputText value="#{i18n['label.fecha.referencia']}:&#160;" /></td>
+				<td><p:inputText /></td>
+			</tr>
+				
+			<tr>
+				<td><h:outputText value="#{i18n['label.comentario']}:&#160;" /></td>
+				<td><p:inputTextarea autoResize="false" /></td>
+			</tr>
+			
+			<tr align="center">
+				<td colspan="2"><p:commandButton value="#{i18n['boton.enviar']}"/></td>
+			</tr>
+			
 		</table>
+		
 	</ui:define>      
 </ui:composition> 
