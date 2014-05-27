@@ -10,8 +10,10 @@ import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.DefensorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.EntidadArgosDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.OpinionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.RedDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.VeeduriaDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
 import net.ciespal.redxxi.ejb.persistence.vo.DefensorVO;
 
 import com.corvustec.commons.util.CorvustecException;
@@ -38,7 +40,11 @@ public interface ArgosService {
 	void deleteVeeduria(VeeduriaDTO veeduria) throws CorvustecException;
 	List<ArgosDTO> readArgos(Object pais) throws CorvustecException;
 	Integer countArgos() throws CorvustecException;
-	DefensorDTO defensorCreateOrUpdate(DefensorVO defensor)
+	UsuarioDTO defensorCreateOrUpdate(DefensorVO defensor)
+			throws CorvustecException;
+	
+	List<DefensorDTO> defensorRead(DefensorDTO defensor) throws CorvustecException;
+	OpinionDTO opinionCreateOrUpdate(OpinionDTO opinionDTO)
 			throws CorvustecException;
 
 }

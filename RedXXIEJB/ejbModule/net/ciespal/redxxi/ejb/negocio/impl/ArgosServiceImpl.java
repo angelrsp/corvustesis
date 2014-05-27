@@ -14,15 +14,19 @@ import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.DefensorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.EntidadArgosDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.OpinionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.RedDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.VeeduriaDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioPerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.vo.DefensorVO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.corvustec.commons.util.CorvustecException;
+import com.corvustec.commons.util.EncryptionUtil;
 
 @Stateless
 public class ArgosServiceImpl implements ArgosService{
@@ -283,18 +287,64 @@ public class ArgosServiceImpl implements ArgosService{
 	}
 	
 	@Override
-	public DefensorDTO defensorCreateOrUpdate(DefensorVO defensor) throws CorvustecException
+	public UsuarioDTO defensorCreateOrUpdate(DefensorVO defensor) throws CorvustecException
 	{
-		logger.info("createOrUpdateContacto");
+		logger.info("defensorCreateOrUpdate");
+		UsuarioDTO login;
+		UsuarioPerfilDTO usrPerfil;
+		PerfilDTO perfil;
 		try{
+			login=new UsuarioDTO();
+			perfil=new PerfilDTO();
+			//Perfil de Defensor
+			perfil.setPerCodigo(-1);
+			usrPerfil=new UsuarioPerfilDTO();
+			usrPerfil.setSegUsuario(defensor.getUser());
+			usrPerfil.setSegPerfil(perfil);
+			login.setUsuLogin(defensor.getUser().getUsuLogin());
+			if(factoryDAO.getUsuarioDAOImpl().getByAnd(login).size()>0)
+				throw new CorvustecException("El correo electrónico ya esta registrado");
+			defensor.getUser().setUsuClave(EncryptionUtil.getInstancia().encriptar(defensor.getUser().getUsuClave()));
 			UsuarioDTO usr=factoryDAO.getUsuarioDAOImpl().create(defensor.getUser());
 			defensor.getDefensor().setDefUsuario(usr.getUsuCodigo());
-			return factoryDAO.getDefensorDAOImpl().create(defensor.getDefensor());
+			factoryDAO.getDefensorDAOImpl().create(defensor.getDefensor());
+			factoryDAO.getUsuarioPerfilDAOImpl().create(usrPerfil);
+			return usr;
 		}
 		catch(Exception e){
-			logger.info("Error createOrUpdateContacto {}",e.toString());
-			throw new CorvustecException("Error al deleteContacto");
+			logger.info("Error {}",e.toString());
+			throw new CorvustecException("Error "+e.toString());
+		}				
+	}
+	
+	
+	@Override
+	public List<DefensorDTO> defensorRead(DefensorDTO defensor) throws CorvustecException
+	{
+		try{
+			return factoryDAO.getDefensorDAOImpl().getByAnd(defensor);
+		}catch(Exception e){
+			logger.info("Error {}",e.toString());
+			throw new CorvustecException("Error "+e.toString());
 		}				
 
 	}
+	
+	/*Opinion*/
+	@Override
+	public OpinionDTO opinionCreateOrUpdate(OpinionDTO opinionDTO) throws CorvustecException
+	{
+		logger.info("opinionCreateOrUpdate");
+		try{
+			if(opinionDTO.getOpiCodigo()!=null)
+				return factoryDAO.getOpinionDAOImpl().edit(opinionDTO);
+			else
+				return factoryDAO.getOpinionDAOImpl().create(opinionDTO);
+		}
+		catch(Exception e){
+			logger.info("Error {}",e.toString());
+			throw new CorvustecException("Error "+e.toString());
+		}				
+	}
+	
 }

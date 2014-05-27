@@ -37,6 +37,15 @@ public class DefensorDTO implements Serializable {
 	@Column(name="def_usuario")
 	private Integer defUsuario;
 
+	@Column(name="def_pais")
+	private Integer defPais;
+
+	@Column(name="def_provincia")
+	private Integer defProvincia;
+
+	@Column(name="def_ciudad")
+	private Integer defCiudad;
+
 	
 	//bi-directional many-to-one association to ContactoDTO
 	@OneToMany(mappedBy="argDefensor")
@@ -112,6 +121,30 @@ public class DefensorDTO implements Serializable {
 
 	public void setArgEntidad(EntidadArgosDTO argEntidad) {
 		this.argEntidad = argEntidad;
+	}
+
+	public Integer getDefPais() {
+		return defPais;
+	}
+
+	public void setDefPais(Integer defPais) {
+		this.defPais = defPais;
+	}
+
+	public Integer getDefProvincia() {
+		return defProvincia;
+	}
+
+	public void setDefProvincia(Integer defProvincia) {
+		this.defProvincia = defProvincia;
+	}
+
+	public Integer getDefCiudad() {
+		return defCiudad;
+	}
+
+	public void setDefCiudad(Integer defCiudad) {
+		this.defCiudad = defCiudad;
 	}
 
 }
