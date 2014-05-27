@@ -30,7 +30,9 @@ public class OpinionController {
 	public void save()
 	{
 		try {
+			
 			argosService.opinionCreateOrUpdate(opinionDataManager.getOpinionDTO());
+			JsfUtil.addInfoMessage("Su comentario ingresara a lista de validación sera aprobado en poco tiempo");
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
