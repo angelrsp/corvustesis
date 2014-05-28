@@ -37,18 +37,26 @@
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.fecha.referencia']}:&#160;" /></td>
-				<td><p:inputMask mask="9999-99-99" placeholder="aaaa-mm-dd" required="true"/></td>
+				<td><p:inputMask mask="9999-99-99" placeholder="aaaa-mm-dd" required="true" value="#{opinionDataManager.fecha}">
+					<p:ajax listener="#{opinionController.verificarFecha}" process="@this" event="blur"/>
+				</p:inputMask>
+				</td>
 			</tr>
 				
 			<tr>
 				<td><h:outputText value="#{i18n['label.comentario']}:&#160;" /></td>
 				<td><p:inputTextarea id="txtComentario" autoResize="false" value="#{opinionDataManager.opinionDTO.opiComentario}" style="width:500px;heigth:350px;" required="true"/>
-				<p:tooltip id="toolTipFocus" for="txtComentario" showEvent="focus" hideEvent="blur" value="No se publicará comentario contrario a la ética de esta plataforma"/>
+				<p:tooltip id="toolTipFocus" for="txtComentario" showEvent="focus" hideEvent="blur">
+					<h:panelGroup>
+				        <h:outputText value="No se publicará comentario contrario" /><br />
+				        <h:outputText value="A la ética de esta plataforma" /><br />
+				    </h:panelGroup>
+				</p:tooltip>
 				</td>
 			</tr>
 			
 			<tr align="center">
-				<td colspan="2"><p:commandButton value="#{i18n['boton.enviar']}" /></td>
+				<td colspan="2"><p:commandButton value="#{i18n['boton.enviar']}" actionListener="#{opinionController.save}"/></td>
 			</tr>
 			
 		</table>
