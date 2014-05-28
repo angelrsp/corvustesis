@@ -30,10 +30,10 @@
 						<h:dataTable value="#{argosController.argosDataManager.argosList}" var="arg" width="100%">
 						
 							<h:column>			    			
-			    				<h:commandLink value="#{arg.descripcion}" styleClass="linkClass2" actionListener="#{reportPublicController.selectAtenea(ate)}"/>
+			    				<h:commandLink value="#{arg.descripcion}" styleClass="linkClass2" actionListener="#{argosController.selectArgos(arg)}"/>
 			    			</h:column>
 			    			<h:column>	
-								<h:commandLink value="#{arg.count}" styleClass="linkClass" actionListener="#{reportPublicController.selectAtenea(ate)}"/><br />			    			
+								<h:commandLink value="#{arg.count}" styleClass="linkClass" actionListener="#{argosController.selectArgos(arg)}"/><br />			    			
 							</h:column>
 							
 						</h:dataTable>
@@ -53,19 +53,19 @@
 				<h:outputText value="Consulta por paises" styleClass="descripcion"/>
 				<div class="line-separator"></div>		
 
-				<p:dataGrid value="#{reportPublicController.reportPublicDataManager.paisList}" var="pai" columns="6">
+				<p:dataGrid value="#{argosDataManager.paisList}" var="pai" columns="6">
 					<table align="center">
 						<tr>
 							<td>
-								<h:commandLink action="#{reportPublicController.selectPais(pai)}">
+								<h:commandLink action="#{argosController.selectPais(pai)}">
 									<p:graphicImage value="#{pai.imagenPath}" height="35" width="60"/>
 								</h:commandLink>
 		    				</td>
 		    			</tr>
 		    			<tr>
 		    				<td>
-		    					<h:commandLink value="#{pai.nombre}" actionListener="#{reportPublicController.selectPais(pai)}" styleClass="linkClass"/>
-		    					<h:commandLink value=" #{pai.count!=0?pai.count:null}" actionListener="#{reportPublicController.selectPais(pai)}" styleClass="linkClass"/>
+		    					<h:commandLink value="#{pai.nombre}" actionListener="#{argosController.selectPais(pai)}" styleClass="linkClass"/>
+		    					<h:commandLink value=" #{pai.count!=0?pai.count:null}" actionListener="#{argosController.selectPais(pai)}" styleClass="linkClass"/>
 		    				</td>
 		    			</tr>
 					</table>
