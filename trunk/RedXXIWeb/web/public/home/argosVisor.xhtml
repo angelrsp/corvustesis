@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" 
+      template="/WEB-INF/template/public.xhtml">
+
+
+	<ui:define name="menu">
+		<ul id="navlist">
+		  <li id="home"><a href="#{request.contextPath}/index.xhtml"></a></li>
+		  <li id="atenea"><a href="#{request.contextPath}/public/home/atenea.xhtml"></a></li>
+		  <li id="argos2"><a href="#{request.contextPath}/public/home/argos.xhtml"></a></li>
+		  <li id="espejo"><a href="#{request.contextPath}/espejo.xhtml"></a></li>
+		  <li id="somos"><a href="#{request.contextPath}/quienesSomos.xhtml"></a></li>
+		  <li id="ingreso"><a href="#{request.contextPath}/ingreso.xhtml"></a></li>
+		  <li id="usuario"><a href="#{request.contextPath}/pages/home.xhtml"></a></li>
+		</ul>
+	</ui:define>
+
+
+
+<ui:define name="left">
+	<table width="100%">
+		<tr>
+			<td>
+				<h:outputText value="A" styleClass="descripcionLetter"/><h:outputText value="TENEA" styleClass="descripcion"/>
+				<div class="line-separator"></div>
+		
+				<table width="100%">
+
+					<tr>
+						<td>
+							<p:graphicImage value="#{argosDataManager.pais.imagenPath}" height="35" width="60"/>
+						</td>
+					</tr>
+	    			<tr>
+	    				<td>
+	    					<h:outputText value="#{argosDataManager.pais.nombre}" styleClass="descripcion"/>
+	    				</td>
+	    			</tr>
+
+					<tr>
+						<td>
+							
+							<h:dataTable id="tblAtenea" value="#{argosDataManager.argosList}" var="ate" width="100%">
+								
+				    			<h:column>
+				    				<h:commandLink value="#{ate.descripcion}" styleClass="linkClass2" actionListener="#{argosVisorController.selectArgos(ate)}"/>
+				    			</h:column>										
+				
+				    			<h:column>
+									<h:commandLink value="#{ate.count}" styleClass="linkClass" actionListener="#{argosVisorController.selectArgos(ate)}"/><br />
+				    			</h:column>										
+				
+							</h:dataTable>
+						</td>
+					</tr>
+				</table>
+										
+			</td>
+		</tr>
+	</table>
+</ui:define>
+
+
+<ui:define name="center">
+</ui:define>
+
+
+<ui:define name="right">
+	<div style="height: 30px;">
+	</div>
+	
+	
+	<div style="overflow-y: scroll; width: 100%; height: 300px;">
+		<h:dataTable value="#{argosDataManager.argosVisorList}" var="ate" width="100%">
+		
+			<h:column>
+				<h:outputText value="#{ate.titulo}" styleClass="descripcionBlack2"/><br/>
+				<h:outputText value="#{ate.descripcion1}" styleClass="descripcionBlack2"/><br/>
+				<h:outputText value="#{ate.descripcion2}" styleClass="descripcionBlack2"/><br/>
+				<h:commandButton value="Ver mas" actionListener="#{ateneaVisorController.selectItem(ate)}" /><br/>
+				<h:outputText value="----" styleClass="descripcionBlack2"/>
+			</h:column>
+		
+		</h:dataTable>
+	</div>
+	
+</ui:define>
+
+</ui:composition>
