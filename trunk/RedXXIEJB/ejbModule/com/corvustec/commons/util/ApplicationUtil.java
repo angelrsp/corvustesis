@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -86,6 +88,27 @@ public class ApplicationUtil {
 			f.delete();
 		}	
 	}
+	
+	
+	public static boolean validarFecha(String fecha) 
+	{  
+		if (fecha == null)  
+		return false;  
+		  
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); //año-mes-dia  
+		  
+		if (fecha.trim().length() != dateFormat.toPattern().length())  
+			return false;  
+		dateFormat.setLenient(false);  		  
+		try {
+			dateFormat.parse(fecha.trim());
+			
+		} catch (ParseException e) {
+			return false;
+		}  	
+		return true;
+	}
+	
 	
 //	public static String getTypeFile(byte[] content)
 //	{
