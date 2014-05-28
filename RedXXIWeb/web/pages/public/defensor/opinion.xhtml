@@ -22,7 +22,9 @@
 
 	<ui:define name="center">
 
-	<p:growl autoUpdate="true"/>
+		<p:growl autoUpdate="true"/>
+	
+		<h:panelGroup id="grpDatos">
 	
 		<table>
 			<tr>
@@ -56,10 +58,11 @@
 			</tr>
 			
 			<tr align="center">
-				<td colspan="2"><p:commandButton value="#{i18n['boton.enviar']}" actionListener="#{opinionController.save}"/></td>
+				<td colspan="2"><p:commandButton value="#{i18n['boton.enviar']}" actionListener="#{opinionController.save}" update="grpDatos"/></td>
 			</tr>
 			
 		</table>
-		
+
+		</h:panelGroup>		
 	</ui:define>      
 </ui:composition> 
