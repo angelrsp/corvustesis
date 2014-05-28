@@ -13,6 +13,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.ComponenteMenuDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ContactoArgosDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ContactoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.DefensorDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.DefensorVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.DoctorDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.DoctorVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.EntidadDAO;
@@ -80,6 +81,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private VeeduriaDAO veeduriaDAO;
 	private ContactoArgosDAO contactoArgosDAO;
 	private DefensorDAO defensorDAO;
+	private DefensorVieDAO defensorVieDAO;
 	private OpinionDAO opinionDAO;
 	
 	private EticaDAO eticaDAO;
@@ -387,6 +389,14 @@ public class FactoryDAOImpl implements FactoryDAO{
 			opinionDAO = new OpinionDAOImpl(entityManager);
 		}
 		return opinionDAO;
+	}
+
+	@Override
+	public DefensorVieDAO getDefensorVieDAOImpl() {
+		if (defensorVieDAO == null) {
+			defensorVieDAO = new DefensorVieDAOImpl(entityManager);
+		}
+		return defensorVieDAO;
 	}
 
 }

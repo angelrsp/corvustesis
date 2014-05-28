@@ -1,4 +1,4 @@
-package net.ciespal.redxxi.ejb.persistence.entities;
+package net.ciespal.redxxi.ejb.persistence.entities.argos;
 
 import java.io.Serializable;
 
@@ -12,6 +12,7 @@ public class ArgosDTO implements Serializable{
 	private int codigo;
 	private int count;
 	private int tipo;
+	private int pais;
 	private String descripcion;
 	
 	public ArgosDTO() {
@@ -48,5 +49,13 @@ public class ArgosDTO implements Serializable{
 
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
+	}
+
+	public int getPais() {
+		return pais;
+	}
+
+	public void setPais(int pais) {
+		this.pais = pais;
 	}
 }

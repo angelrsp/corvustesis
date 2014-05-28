@@ -50,6 +50,9 @@ public class OpinionDTO implements Serializable {
 	@Column(name="opi_tema_referencia")
 	private String opiTemaReferencia;
 
+	@Transient
+	private long opiCount;
+	
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne
 	@JoinColumn(name="opi_defesor")
@@ -58,6 +61,11 @@ public class OpinionDTO implements Serializable {
 	public OpinionDTO() {
 	}
 
+	public OpinionDTO(long opiCount) {
+		this.opiCount=opiCount;
+	}
+
+	
 	public Integer getOpiCodigo() {
 		return this.opiCodigo;
 	}
@@ -136,6 +144,14 @@ public class OpinionDTO implements Serializable {
 
 	public void setOpiTemaReferencia(String opiTemaReferencia) {
 		this.opiTemaReferencia = opiTemaReferencia;
+	}
+
+	public long getOpiCount() {
+		return opiCount;
+	}
+
+	public void setOpiCount(long opiCount) {
+		this.opiCount = opiCount;
 	}
 
 	public DefensorDTO getArgDefensor() {
