@@ -10,4 +10,8 @@ public interface EticaDAO extends AbstractFacade<EticaDTO>{
 
 	List<EticaDTO> findAll(Object ciudad) throws CorvustecException;
 
+	List<EticaDTO> getByAnd(EticaDTO objetoDTO) throws CorvustecException;
+
+	int count(Object pais) throws CorvustecException;
+
 }

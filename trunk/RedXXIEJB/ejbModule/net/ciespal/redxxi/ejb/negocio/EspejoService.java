@@ -10,6 +10,8 @@ import javax.ejb.Local;
 
 
 
+
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.LeyDTO;
@@ -88,6 +90,8 @@ public interface EspejoService {
 	GranMaestroDTO getRandomGranMaesto() throws CorvustecException;
 
 	MaestroCiespalDTO getRandomMaestoCiespal() throws CorvustecException;
+
+	List<EspejoDTO> readEspejo(Object pais) throws CorvustecException;
 
 	
 
