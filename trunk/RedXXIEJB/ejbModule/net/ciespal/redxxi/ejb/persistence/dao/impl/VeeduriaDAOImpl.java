@@ -13,7 +13,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import net.ciespal.redxxi.ejb.persistence.dao.VeeduriaDAO;
-import net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.VeeduriaDTO;
 
 import org.slf4j.Logger;
