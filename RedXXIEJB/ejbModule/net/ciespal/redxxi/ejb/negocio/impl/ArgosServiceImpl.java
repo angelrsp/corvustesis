@@ -1,6 +1,8 @@
 package net.ciespal.redxxi.ejb.negocio.impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -336,6 +338,7 @@ public class ArgosServiceImpl implements ArgosService{
 	{
 		logger.info("opinionCreateOrUpdate");
 		try{
+			opinionDTO.setOpiFecha(new Timestamp(new Date().getTime()));
 			if(opinionDTO.getOpiCodigo()!=null)
 				return factoryDAO.getOpinionDAOImpl().edit(opinionDTO);
 			else

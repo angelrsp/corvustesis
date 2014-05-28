@@ -35,6 +35,9 @@ public class OpinionDTO implements Serializable {
 	@Column(name="opi_fecha")
 	private Timestamp opiFecha;
 
+	@Column(name="opi_fecha_referencia")
+	private Timestamp opiFechaRefenrencia;
+	
 	@Column(name="opi_medio")
 	private String opiMedio;
 
@@ -93,6 +96,14 @@ public class OpinionDTO implements Serializable {
 
 	public void setOpiFecha(Timestamp opiFecha) {
 		this.opiFecha = opiFecha;
+	}
+
+	public Timestamp getOpiFechaRefenrencia() {
+		return opiFechaRefenrencia;
+	}
+
+	public void setOpiFechaRefenrencia(Timestamp opiFechaRefenrencia) {
+		this.opiFechaRefenrencia = opiFechaRefenrencia;
 	}
 
 	public String getOpiMedio() {
