@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" 
+      template="/WEB-INF/template/public.xhtml">
+
+
+	<ui:define name="menu">
+		<ul id="navlist">
+		  <li id="home"><a href="#{request.contextPath}/index.xhtml"></a></li>
+		  <li id="atenea"><a href="#{request.contextPath}/public/home/atenea.xhtml"></a></li>
+		  <li id="argos"><a href="#{request.contextPath}/public/home/argos.xhtml"></a></li>
+		  <li id="espejo2"><a href="#{request.contextPath}/public/home/espejo.xhtml"></a></li>
+		  <li id="somos"><a href="#{request.contextPath}/quienesSomos.xhtml"></a></li>
+		  <li id="ingreso"><a href="#{request.contextPath}/ingreso.xhtml"></a></li>
+		  <li id="usuario"><a href="#{request.contextPath}/pages/home.xhtml"></a></li>
+		</ul>
+	</ui:define>
+
+
+<ui:define name="left">
+	<table width="100%">
+			<tr>
+				<td>
+					<h:outputText value="A" styleClass="descripcionLetter"/><h:outputText value="RGOS" styleClass="descripcion"/>
+					<div class="line-separator"></div>
+			
+						<h:dataTable value="#{argosController.argosDataManager.argosList}" var="arg" width="100%">
+						
+							<h:column>			    			
+			    				<h:commandLink value="#{arg.descripcion}" styleClass="linkClass2" actionListener="#{argosController.selectArgos(arg)}"/>
+			    			</h:column>
+			    			<h:column>	
+								<h:commandLink value="#{arg.count}" styleClass="linkClass" actionListener="#{argosController.selectArgos(arg)}"/><br />			    			
+							</h:column>
+							
+						</h:dataTable>
+
+											
+					<div class="line-separator"></div>
+				</td>
+			</tr>
+		</table>
+</ui:define>
+
+<ui:define name="right">
+		
+	<table width="100%">
+		<tr>
+			<td>
+				<h:outputText value="Consulta por paises" styleClass="descripcion"/>
+				<div class="line-separator"></div>		
+
+				<p:dataGrid value="#{argosDataManager.paisList}" var="pai" columns="6">
+					<table align="center">
+						<tr>
+							<td>
+								<h:commandLink action="#{argosController.selectPais(pai)}">
+									<p:graphicImage value="#{pai.imagenPath}" height="35" width="60"/>
+								</h:commandLink>
+		    				</td>
+		    			</tr>
+		    			<tr>
+		    				<td>
+		    					<h:commandLink value="#{pai.nombre}" actionListener="#{argosController.selectPais(pai)}" styleClass="linkClass"/>
+		    					<h:commandLink value=" #{pai.count!=0?pai.count:null}" actionListener="#{argosController.selectPais(pai)}" styleClass="linkClass"/>
+		    				</td>
+		    			</tr>
+					</table>
+				</p:dataGrid>
+				<div class="line-separator"></div>							
+			</td>
+		</tr>
+		
+	</table>	
+	
+</ui:define>
+
+</ui:composition>
