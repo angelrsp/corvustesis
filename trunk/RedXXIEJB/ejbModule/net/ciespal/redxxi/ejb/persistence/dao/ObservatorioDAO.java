@@ -12,4 +12,7 @@ public interface ObservatorioDAO extends AbstractFacade<ObservatorioDTO> {
 
 	int count(Object pais) throws CorvustecException;
 
+	List<ObservatorioDTO> getByAnd(ObservatorioDTO objetoDTO)
+			throws CorvustecException;
+
 }

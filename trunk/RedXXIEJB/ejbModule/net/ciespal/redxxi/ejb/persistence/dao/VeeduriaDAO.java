@@ -12,4 +12,6 @@ public interface VeeduriaDAO extends AbstractFacade<VeeduriaDTO>{
 
 	int count(Object pais) throws CorvustecException;
 
+	List<VeeduriaDTO> getByAnd(VeeduriaDTO objetoDTO) throws CorvustecException;
+
 }

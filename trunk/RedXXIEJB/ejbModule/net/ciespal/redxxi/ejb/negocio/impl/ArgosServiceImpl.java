@@ -10,10 +10,14 @@ import javax.ejb.Stateless;
 
 import net.ciespal.redxxi.ejb.negocio.ArgosService;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
-import net.ciespal.redxxi.ejb.persistence.entities.ArgosDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ArgosDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ArgosVisorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.DefensorDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.DefensorVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.EntidadArgosDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.OpinionDTO;
@@ -44,7 +48,7 @@ public class ArgosServiceImpl implements ArgosService{
 	{
 		List<ArgosDTO> argosList;
 		ArgosDTO argos;
-		logger.info("createOrUpdateRed");
+		logger.info("readArgos");
 		try{
 			argosList=new ArrayList<ArgosDTO>();
 
@@ -61,11 +65,18 @@ public class ArgosServiceImpl implements ArgosService{
 			argos.setDescripcion("Veedurías: ");
 			argos.setCount(factoryDAO.getVeeduriaDAOImpl().count(pais));
 			argosList.add(argos);			
-			
+
+			//Defensores de Audiencia
+			argos=new ArgosDTO();
+			argos.setTipo(3);
+			argos.setDescripcion("Defensores de Audiencia: ");
+			argos.setCount(factoryDAO.getOpinionDAOImpl().count(pais));
+			argosList.add(argos);			
+
 		}
 		catch(Exception e){
-			logger.info("Error createOrUpdateRed {}",e.toString());
-			throw new CorvustecException("Error al createOrUpdateRed");
+			logger.info("Error readArgos {}",e.toString());
+			throw new CorvustecException("Error al readArgos "+e.toString());
 		}
 		return argosList;
 	}
@@ -74,19 +85,160 @@ public class ArgosServiceImpl implements ArgosService{
 	@Override
 	public Integer countArgos() throws CorvustecException
 	{
-		logger.info("createOrUpdateRed");
+		logger.info("countArgos");
 		Integer count;
 		try{
-			count=factoryDAO.getObservatorioDAOImpl().count(null)+factoryDAO.getVeeduriaDAOImpl().count(null);			
+			count=factoryDAO.getObservatorioDAOImpl().count(null)+factoryDAO.getVeeduriaDAOImpl().count(null)+factoryDAO.getOpinionDAOImpl().count(null);			
 		}
 		catch(Exception e){
-			logger.info("Error createOrUpdateRed {}",e.toString());
-			throw new CorvustecException("Error al createOrUpdateRed");
+			logger.info("Error countArgos {}",e.toString());
+			throw new CorvustecException("Error al countArgos "+e.toString());
 		}
 		return count;
 	}
 
 	
+	@Override
+	public List<PaisDTO> readPais(Object type) throws CorvustecException
+	{
+		List<PaisDTO> paisList=new ArrayList<PaisDTO>();
+		PaisDTO pais;
+		CatalogoDTO catalogo;
+
+		catalogo=new CatalogoDTO();
+		catalogo.setCatCodigo(13);
+		
+		if(type==null)
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				paisList.add(pais);
+			}
+			
+		}
+		//Observatorios
+		else if(type.equals(1))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getObservatorioDAOImpl().count(cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}
+		}//Veedurias
+		else if(type.equals(2))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getVeeduriaDAOImpl().count(cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}			
+		}//Defensores
+		else if(type.equals(3))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getOpinionDAOImpl().count(cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}			
+		}
+		return paisList;
+	}
+	
+	@Override
+	public List<ArgosVisorDTO> visorList(ArgosDTO argos) throws CorvustecException
+	{
+		List<ArgosVisorDTO> argosVisorList=new ArrayList<ArgosVisorDTO>();
+		ArgosVisorDTO argosVisor;
+
+		
+		if(argos.getTipo()==0)
+		{
+		}
+		//Observatorio
+		else if(argos.getTipo()==1)
+		{
+			ObservatorioDTO obs=new ObservatorioDTO();
+			obs.setObsPais(argos.getPais());
+			List<ObservatorioDTO> listObservatorio=new ArrayList<ObservatorioDTO>();
+			
+			listObservatorio=factoryDAO.getObservatorioDAOImpl().getByAnd(obs);
+			
+			for(ObservatorioDTO objeto:listObservatorio){
+					
+				argosVisor=new ArgosVisorDTO();
+				argosVisor.setCodigo(objeto.getObsCodigo());
+				
+				argosVisor.setTitulo("Observatorio: " +objeto.getObsNombre());
+				argosVisor.setDescripcion1("Datos Institucionales :"+objeto.getObsDatosInstitucionales());
+				argosVisor.setTipo(argos.getTipo());
+
+				argosVisorList.add(argosVisor);
+				
+			}
+			
+		}//Veeduria
+		else if(argos.getTipo()==2)
+		{
+			VeeduriaDTO vee=new VeeduriaDTO();
+			vee.setVeePais(argos.getPais());
+			List<VeeduriaDTO> list=new ArrayList<VeeduriaDTO>();
+			
+			list=factoryDAO.getVeeduriaDAOImpl().getByAnd(vee);
+			
+			for(VeeduriaDTO objeto:list){
+					
+				argosVisor=new ArgosVisorDTO();
+				argosVisor.setCodigo(objeto.getVeeCodigo());
+				
+				argosVisor.setTitulo("Veeduria: " +objeto.getVeeNombre());
+				argosVisor.setDescripcion1("Datos Institucionales :"+objeto.getVeeDatoInstitucional());
+				argosVisor.setTipo(argos.getTipo());
+
+				argosVisorList.add(argosVisor);
+				
+			}			
+		}//Defensores de Audiencia
+		else if(argos.getTipo()==3)
+		{
+			DefensorVieDTO def=new DefensorVieDTO();
+			def.setOpiPais(argos.getPais());
+			List<DefensorVieDTO> list=new ArrayList<DefensorVieDTO>();
+			
+			list=factoryDAO.getDefensorVieDAOImpl().getByAnd(def);
+			
+			for(DefensorVieDTO objeto:list){
+					
+				argosVisor=new ArgosVisorDTO();
+				argosVisor.setCodigo(objeto.getOpiCodigo());
+				
+				argosVisor.setTitulo("Nombres y Apellidos: " +objeto.getUsuNombres()+" "+objeto.getUsuApellidos());
+				argosVisor.setDescripcion1("Fecha :"+objeto.getOpiFechaReferencia().toString().substring(0, 10));
+				argosVisor.setDescripcion2("Medio de Comunicación :"+objeto.getOpiMedio());
+				argosVisor.setDescripcion3("Tema de referencia :"+objeto.getOpiTemaReferencia());
+				argosVisor.setTipo(argos.getTipo());
+
+				argosVisorList.add(argosVisor);
+			}			
+		}
+		return argosVisorList;
+	}
+
+		
 	/*Red*/
 	@Override
 	public RedDTO createOrUpdateRed(RedDTO red) throws CorvustecException

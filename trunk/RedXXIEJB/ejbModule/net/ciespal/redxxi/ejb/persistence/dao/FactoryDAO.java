@@ -43,6 +43,7 @@ public interface FactoryDAO {
 	DefensorDAO getDefensorDAOImpl();
 	UsuarioPerfilDAO getUsuarioPerfilDAOImpl();
 	OpinionDAO getOpinionDAOImpl();
+	DefensorVieDAO getDefensorVieDAOImpl();
 	
 	
 

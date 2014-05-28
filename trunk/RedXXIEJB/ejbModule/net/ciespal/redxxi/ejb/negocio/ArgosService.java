@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import net.ciespal.redxxi.ejb.persistence.entities.ArgosDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ArgosDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ArgosVisorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.DefensorDTO;
@@ -46,5 +48,7 @@ public interface ArgosService {
 	List<DefensorDTO> defensorRead(DefensorDTO defensor) throws CorvustecException;
 	OpinionDTO opinionCreateOrUpdate(OpinionDTO opinionDTO)
 			throws CorvustecException;
+	List<PaisDTO> readPais(Object type) throws CorvustecException;
+	List<ArgosVisorDTO> visorList(ArgosDTO argos) throws CorvustecException;
 
 }
