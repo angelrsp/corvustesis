@@ -1,6 +1,8 @@
 package com.corvustec.commons.util;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -102,4 +104,15 @@ public class CalendarUtil {
 		return monthName;
 	}
 
+	public static Calendar converStringToCalendar(String date,String format) throws ParseException
+	{
+		Calendar cal = null;
+	    SimpleDateFormat sdf;
+	    
+	    	sdf= new SimpleDateFormat(format);
+	    	cal = Calendar.getInstance();
+			cal.setTime(sdf.parse(date));
+			
+	    return cal;
+	}
 }
