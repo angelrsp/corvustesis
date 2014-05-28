@@ -1,5 +1,6 @@
 package net.ciespal.redxxi.ejb.negocio.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -8,6 +9,7 @@ import javax.ejb.Stateless;
 import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EntidadEspejoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.LeyDTO;
@@ -30,6 +32,46 @@ public class EspejoServiceImpl implements EspejoService{
 	@EJB
 	private FactoryDAO factoryDAO;
 
+	@Override
+	public List<EspejoDTO> readEspejo(Object pais) throws CorvustecException
+	{
+		List<EspejoDTO> espejoList;
+		EspejoDTO espejo;
+		logger.info("readEspejo");
+		try{
+			espejoList=new ArrayList<EspejoDTO>();
+
+			//Etica y Deontologia
+			espejo=new EspejoDTO();
+			espejo.setTipo(1);
+			espejo.setDescripcion("Etica y Deontologia: ");
+			espejo.setCount(factoryDAO.getEticaDAOImpl().count(pais));
+			espejoList.add(espejo);
+
+			//Veedurias
+//			argos=new ArgosDTO();
+//			argos.setTipo(2);
+//			argos.setDescripcion("Veedurías: ");
+//			argos.setCount(factoryDAO.getVeeduriaDAOImpl().count(pais));
+//			argosList.add(argos);			
+//
+//			//Defensores de Audiencia
+//			argos=new ArgosDTO();
+//			argos.setTipo(3);
+//			argos.setDescripcion("Defensores de Audiencia: ");
+//			argos.setCount(factoryDAO.getOpinionDAOImpl().count(pais));
+//			argosList.add(argos);			
+
+		}
+		catch(Exception e){
+			logger.info("Error readEspejo {}",e.toString());
+			throw new CorvustecException("Error al readEspejo "+e.toString());
+		}
+		return espejoList;
+	}
+
+	
+	
 	/*Etica*/
 	@Override
 	public EticaDTO createOrUpdateEtica(EticaDTO etica) throws CorvustecException

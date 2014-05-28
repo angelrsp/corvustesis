@@ -56,6 +56,9 @@ public class EticaDTO implements Serializable {
 	@Transient
 	private String etiArchivoPath;
 	
+	@Transient
+	private long etiCount;
+	
 	@Column(name="eti_titulo_obra")
 	private String etiTituloObra;
 
@@ -65,6 +68,10 @@ public class EticaDTO implements Serializable {
 	private EntidadEspejoDTO espEntidad;
 
 	public EticaDTO() {
+	}
+	
+	public EticaDTO(long etiCount){
+		this.etiCount=etiCount;
 	}
 
 	public Integer getEtiCodigo() {
@@ -169,6 +176,14 @@ public class EticaDTO implements Serializable {
 
 	public void setEtiArchivoPath(String etiArchivoPath) {
 		this.etiArchivoPath = etiArchivoPath;
+	}
+
+	public long getEtiCount() {
+		return etiCount;
+	}
+
+	public void setEtiCount(long etiCount) {
+		this.etiCount = etiCount;
 	}
 
 	public String getEtiTituloObra() {
