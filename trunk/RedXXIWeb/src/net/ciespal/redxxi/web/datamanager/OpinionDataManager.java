@@ -18,6 +18,7 @@ public class OpinionDataManager implements Serializable{
 
 	private OpinionDTO opinionDTO;
 	
+	private String fecha;
 	
 	public OpinionDataManager() {
 		opinionDTO=new OpinionDTO();
@@ -29,6 +30,14 @@ public class OpinionDataManager implements Serializable{
 
 	public void setOpinionDTO(OpinionDTO opinionDTO) {
 		this.opinionDTO = opinionDTO;
+	}
+
+	public String getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
 	}
 	
 }
