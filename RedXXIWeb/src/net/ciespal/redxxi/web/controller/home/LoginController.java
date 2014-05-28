@@ -9,6 +9,8 @@ import javax.faces.bean.ViewScoped;
 import javax.servlet.http.HttpSession;
 
 import net.ciespal.redxxi.ejb.negocio.AdministracionService;
+import net.ciespal.redxxi.ejb.negocio.ArgosService;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.DefensorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.home.LoginDataManager;
@@ -25,6 +27,9 @@ public class LoginController {
 
 	@EJB
 	private AdministracionService administracionService;
+
+	@EJB
+	private ArgosService argosService;
 
 
 	public LoginController() {
@@ -48,7 +53,17 @@ public class LoginController {
 			{
 				JsfUtil.addInfoMessage("Redireccionar...");
 				JsfUtil.putObject("UsuarioDTO", usuario);
-				JsfUtil.redirect("/RedXXIWeb/pages/home.xhtml");
+				if(usuario.getSegUsuarioPerfils().get(0).getSegPerfil().getPerCodigo()==-1)
+				{
+					JsfUtil.redirect(JsfUtil.getContextPath()+"/pages/public/defensor/opinion.xhtml");
+					DefensorDTO def=new DefensorDTO();
+					def.setDefUsuario(usuario.getUsuCodigo());
+					JsfUtil.getExternalContext().getSessionMap().put("DefensorDTO", argosService.defensorRead(def).get(0));
+				}
+				else
+				{
+					JsfUtil.redirect(JsfUtil.getContextPath()+"/pages/home.xhtml");	
+				}
 			}
 			else
 				JsfUtil.addErrorMessage("Usuario o contraseña no válida");
