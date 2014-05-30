@@ -13,9 +13,12 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +40,8 @@ public class Process2 {
 	
 	public static void main(String[] args) {
 		
-		long start, end,diff;
+		long start, end;
+		Double diff;
 		start = System.currentTimeMillis();
 		
 		//insertValue();
@@ -47,8 +51,8 @@ public class Process2 {
 		//generateIntervalMinute();		
 		
 		end = System.currentTimeMillis();
-		diff=end-start;
-		diff=(long) (diff* 0.001);
+		diff=(double) (end-start);
+		diff= diff* 0.001;
 		System.out.println("Procesado en: "+ ( diff ) +" segundos");				
 	}
 
@@ -56,9 +60,12 @@ public class Process2 {
 	@SuppressWarnings("unchecked")
 	private static void processOne()
 	{
-		File fileIn=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0036")+"20140510.txt");
-		
-		File fileOut=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0036")+"20140510Final.txt");
+		File fileIn=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0016")+"20140514.txt");		
+		File fileOut=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0016")+"20140514Final.txt");
+
+//		File fileIn=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0036")+"20140510.txt");		
+//		File fileOut=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0036")+"20140510Final.txt");
+
 		
 		List<String> lines;
 		String line[];
@@ -74,8 +81,20 @@ public class Process2 {
 		List<DataDTO> dataMax;
 		
 		int balizaSum,index;
-		float balizaAvg;
+		float balizaAvg,balizaAvgDia;
 		double varianza= 0.0,desviacion = 0.0,rango=0.0,balizaSumDbl,balizaAvgDbl,limiteSuperior,limiteInferior;
+		
+		final String baliza1="00:15:83:0C:BF:EB";
+		final String baliza2="00:15:83:44:38:46";
+		final String baliza3="00:15:83:45:32:D3";
+		final String baliza4="00:15:83:4C:27:69";			
+
+		
+//		final String baliza1="00:68:58:09:15:33";
+//		final String baliza2="2C:44:01:B3:F9:DD";
+//		final String baliza3="F8:5F:2A:79:66:8F";
+//		final String baliza4="40:BA:61:5B:31:E9";			
+
 		
 		try{			
 			
@@ -85,8 +104,7 @@ public class Process2 {
 			
 			dataList=new ArrayList<DataDTO>();
 			dataMac=new ArrayList<DataDTO>();
-			dataMax=new ArrayList<DataDTO>();
-			
+			dataMax=new ArrayList<DataDTO>();			
 			 
 			
 			lines = FileUtils.readLines(fileIn);
@@ -106,14 +124,16 @@ public class Process2 {
 			
 			//dataListMenor=select(dataList, having(on(DataDTO.class).getRssi(),lessThan(-65)));
 			
-			baliza.addAll(select(dataList, having(on(DataDTO.class).getMac(), equalTo("00:68:58:09:15:33"))));
-			baliza.addAll(select(dataList, having(on(DataDTO.class).getMac(), equalTo("2C:44:01:B3:F9:DD"))));
-			baliza.addAll(select(dataList, having(on(DataDTO.class).getMac(), equalTo("F8:5F:2A:79:66:8F"))));
-			baliza.addAll(select(dataList, having(on(DataDTO.class).getMac(), equalTo("40:BA:61:5B:31:E9"))));
+			baliza.addAll(select(dataList, having(on(DataDTO.class).getMac(), equalTo(baliza1))));
+			baliza.addAll(select(dataList, having(on(DataDTO.class).getMac(), equalTo(baliza2))));
+			baliza.addAll(select(dataList, having(on(DataDTO.class).getMac(), equalTo(baliza3))));
+			baliza.addAll(select(dataList, having(on(DataDTO.class).getMac(), equalTo(baliza4))));
 					
 			balizaSum=sumFrom(baliza).getRssi();
 			
 			balizaAvg=(float)balizaSum/(baliza.size());
+			
+			balizaAvgDia=balizaAvg;
 			
 			for(DataDTO dat:baliza)
 			{
@@ -148,7 +168,7 @@ public class Process2 {
 			 */
 			for(DataDTO dat:dataMax)
 			{
-				//El numero 1 debe ser dinamico (pendiente por analizar)
+				//El numero 1 debe ser dinamico (pendiente por analizar) Fctor del maximo
 				if(dat.getRssi()<(balizaAvg-(desviacion*1)))
 				{
 					dataList.removeAll(select(dataList, having(on(DataDTO.class).getMac(), equalTo(dat.getMac()))));
@@ -297,16 +317,12 @@ public class Process2 {
 					try {
 						datoTemp=(DataDTO) BeanUtils.cloneBean(dat);
 					} catch (IllegalAccessException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (InstantiationException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (InvocationTargetException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (NoSuchMethodException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}					
 					
@@ -327,10 +343,10 @@ public class Process2 {
 				@Override
 				public boolean evaluate(Object arg0) {
                  DataDTO dat= (DataDTO)arg0;
-                 if(dat.getMac().equals("00:68:58:09:15:33")
-                		 ||dat.getMac().equals("2C:44:01:B3:F9:DD")
-                		 ||dat.getMac().equals("F8:5F:2A:79:66:8F")
-                		 ||dat.getMac().equals("40:BA:61:5B:31:E9"))
+                 if(dat.getMac().equals(baliza1)
+                		 ||dat.getMac().equals(baliza2)
+                		 ||dat.getMac().equals(baliza3)
+                		 ||dat.getMac().equals(baliza4))
                 	 return true;
                  else
                 	 return false;
@@ -359,13 +375,15 @@ public class Process2 {
 				{
 					datoTemp=temp2.get(0);
 					balizaSum=sumFrom(temp2).getRssi();
-					balizaAvg=(float)balizaSum/temp2.size();
-					datoTemp.setMedia(balizaAvg);
+					balizaAvg=balizaSum/(temp2.size());
+					datoTemp.setMedia((float) (balizaAvg-(desviacion*2)));//Factor de ajuste
+										
 					temp3.add(datoTemp);
 				}
 			}
 			
 			baliza=temp3;
+			
 			temp3=new ArrayList<DataDTO>();
 			
 			
@@ -391,24 +409,145 @@ public class Process2 {
 					else
 						datoTemp.setEstado(1);					
 				}
+				else
+				{
+					if(dato.getMedia()<balizaAvgDia)
+						datoTemp.setEstado(0);
+					else
+						datoTemp.setEstado(1);
+				}
 				temp3.add(datoTemp);
 			}
 
 			dataList=temp3;
 			
+			
+			dataListDistinct=getDistinct(dataList);
+			
+			temp2=new ArrayList<DataDTO>();
+			
+			
+			//Moda
+			for(final DataDTO dato:dataListDistinct)
+			{
+				temp=(List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
+					@Override
+					public boolean evaluate(Object arg0) {
+	                 DataDTO dat= (DataDTO)arg0;
+	                 if(dat.getMac().endsWith(dato.getMac()))
+	                	 return true;
+	                 else
+	                	 return false;
+					}
+				});
+
+				
+				temp.get(0).setEstado(0);
+				temp.get(temp.size()-1).setEstado(0);
+				
+				for(int i=0;i<temp.size();i++)
+				{
+					if(temp.get(i).getEstado()==1)
+					{
+						if((i-2)>=0&&(i-1)>=0&&(i+1)<temp.size()&&(i+2)<temp.size())
+						{
+							if(temp.get(i-2).getEstado()==0&&temp.get(i-1).getEstado()==0&&temp.get(i+1).getEstado()==0&&temp.get(i+2).getEstado()==0)
+							{
+								temp.get(i).setEstado(0);	
+							}
+						}
+					}
+				}
+				
+				temp2.addAll(temp);
+			}
+			
+			dataList=temp2;
+			
+			temp3=new ArrayList<DataDTO>();
+			//Diferencia de tiempos
+			for(final DataDTO dato:dataListDistinct)
+			{
+				temp=(List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
+					@Override
+					public boolean evaluate(Object arg0) {
+	                 DataDTO dat= (DataDTO)arg0;
+	                 if(dat.getMac().endsWith(dato.getMac()))
+	                	 return true;
+	                 else
+	                	 return false;
+					}
+				});
+				
+				//Dato de tiempos
+				DataDTO dataDTO=new DataDTO();
+				
+				if(temp.size()>0)
+				{
+					dataDTO.setEntradaAgencia(temp.get(0).getIntervaloSegundoDesde());
+					dataDTO.setMac(temp.get(0).getMac());
+					dataDTO.setSalidaAgencia(temp.get(temp.size()-1).getIntervaloSegundoDesde());
+				}
+				
+				for(int i=0;i<temp.size();i++)
+				{
+					if(temp.get(i).getEstado()==1)
+					{
+						dataDTO.setEntradaFila(temp.get(i).getIntervaloSegundoDesde());
+						break;
+					}
+				}
+				
+				for(int j=temp.size()-1;j>=0;j--)
+				{
+					if(temp.get(j).getEstado()==1)
+					{
+						dataDTO.setSalidaFila(temp.get(j).getIntervaloSegundoDesde());
+						break;
+					}			
+				}
+				
+				temp3.add(dataDTO);
+			}
+			
+			dataList=temp3;
+			
+			temp=new ArrayList<DataDTO>();
+			
+			for(DataDTO dat:dataList)
+			{
+				if(dat.getEntradaAgencia()!=null&&dat.getSalidaAgencia()!=null)
+				{
+					dat.setTiempoAgencia(timeDiff(dat.getEntradaAgencia().toString(), dat.getSalidaAgencia().toString())*0.0000166666);
+				}
+				if(dat.getEntradaFila()!=null&&dat.getSalidaFila()!=null)
+				{
+					dat.setTiempoFila(timeDiff(dat.getEntradaFila().toString(), dat.getSalidaFila().toString())*0.0000166666);
+				}	
+				temp.add(dat);
+			}
+			
+			dataList=temp;
+			
 			for(DataDTO dat:dataList){
 				sb.append(dat.getMac()+"|");
-				sb.append(dat.getMinuto()+"|");
-				sb.append(dat.getNumeroIntervalo()+"|");
-				sb.append(dat.getIntervaloSegundoDesde()+"|");
-				sb.append(dat.getIntervaloSegundoHasta()+"|");
-				sb.append(dat.getEstado()+"|");
-				sb.append(dat.getMedia()+"\n");
+//				sb.append(dat.getIntervaloSegundoDesde()+"|");
+//				sb.append(dat.getIntervaloSegundoHasta()+"|");
+				sb.append(dat.getEntradaAgencia()+"|");
+				sb.append(dat.getEntradaFila()+"|");
+				sb.append(dat.getSalidaFila()+"|");
+				sb.append(dat.getSalidaAgencia()+"|");
+				sb.append(dat.getTiempoFila()+"|");
+				sb.append(dat.getTiempoAgencia()+"\n");
+//				sb.append(dat.getEstado()+"|");
+//				sb.append(dat.getMedia()+"\n");
 				writer.write(sb.toString());
 				sb=new StringBuilder();
 			}
 			writer.close();
 
+						
+			
 			
 			
 			//dataList= sort(dataList, on(DataDTO.class).getFecha());
@@ -579,4 +718,18 @@ public class Process2 {
 		return list;
 	}
 
+	public static long timeDiff(String timeStart,String timeEnd)
+	{
+
+		SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+		Date date1 = null,date2 = null;
+		try {
+			date1 = format.parse(timeStart);
+			date2 = format.parse(timeEnd);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return date2.getTime() - date1.getTime(); 
+	}
 }

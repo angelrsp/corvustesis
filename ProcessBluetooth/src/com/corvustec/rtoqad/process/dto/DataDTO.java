@@ -28,6 +28,15 @@ public class DataDTO implements Serializable{
 	//1 in 0 out
 	private int estado;
 	
+	private Time entradaAgencia;
+	private Time salidaAgencia;
+	private Time entradaFila;
+	private Time salidaFila;
+	
+	private Double tiempoAgencia;
+	private Double tiempoFila;
+	
+	
 	public DataDTO() {
 		estado=-1;
 	}
@@ -127,6 +136,55 @@ public class DataDTO implements Serializable{
 	public void setMedia(float media) {
 		this.media = media;
 	}
+
+	public Time getEntradaAgencia() {
+		return entradaAgencia;
+	}
+
+	public void setEntradaAgencia(Time entradaAgencia) {
+		this.entradaAgencia = entradaAgencia;
+	}
+
+	public Time getSalidaAgencia() {
+		return salidaAgencia;
+	}
+
+	public void setSalidaAgencia(Time salidaAgencia) {
+		this.salidaAgencia = salidaAgencia;
+	}
+
+	public Time getEntradaFila() {
+		return entradaFila;
+	}
+
+	public void setEntradaFila(Time entradaFila) {
+		this.entradaFila = entradaFila;
+	}
+
+	public Time getSalidaFila() {
+		return salidaFila;
+	}
+
+	public void setSalidaFila(Time salidaFila) {
+		this.salidaFila = salidaFila;
+	}
+
+	public Double getTiempoAgencia() {
+		return tiempoAgencia;
+	}
+
+	public void setTiempoAgencia(Double tiempoAgencia) {
+		this.tiempoAgencia = tiempoAgencia;
+	}
+
+	public Double getTiempoFila() {
+		return tiempoFila;
+	}
+
+	public void setTiempoFila(Double tiempoFila) {
+		this.tiempoFila = tiempoFila;
+	}
+
 
 	
 	
