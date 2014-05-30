@@ -376,7 +376,7 @@ public class Process2 {
 					datoTemp=temp2.get(0);
 					balizaSum=sumFrom(temp2).getRssi();
 					balizaAvg=balizaSum/(temp2.size());
-					datoTemp.setMedia((float) (balizaAvg-(desviacion*2)));//Factor de ajuste
+					datoTemp.setMedia((float) (balizaAvg-(desviacion*1.65)));//Factor de ajuste
 										
 					temp3.add(datoTemp);
 				}
