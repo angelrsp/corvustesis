@@ -11,7 +11,11 @@ import javax.ejb.Local;
 
 
 
+
+
+import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoVisorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.LeyDTO;
@@ -92,6 +96,12 @@ public interface EspejoService {
 	MaestroCiespalDTO getRandomMaestoCiespal() throws CorvustecException;
 
 	List<EspejoDTO> readEspejo(Object pais) throws CorvustecException;
+
+	int readEspejoCount() throws CorvustecException;
+
+	List<PaisDTO> readPais(Object type) throws CorvustecException;
+
+	List<EspejoVisorDTO> visorList(EspejoDTO espejo) throws CorvustecException;
 
 	
 

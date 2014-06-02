@@ -8,8 +8,16 @@ import javax.ejb.Stateless;
 
 import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
+import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ArgosDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ArgosVisorDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.DefensorVieDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.VeeduriaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EntidadEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoVisorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.LeyDTO;
@@ -68,6 +76,99 @@ public class EspejoServiceImpl implements EspejoService{
 			throw new CorvustecException("Error al readEspejo "+e.toString());
 		}
 		return espejoList;
+	}
+
+	
+	@Override
+	public int readEspejoCount() throws CorvustecException
+	{
+		int total;
+		try {
+			total = factoryDAO.getEticaDAOImpl().count(null);
+			//factoryDAO.getCentroDAOImpl().getFacultadCount(null)+
+//			factoryDAO.getCarreraDAOImpl().getPregradoCount(null)+
+//			factoryDAO.getCarreraDAOImpl().getPosgradoCount(null)+
+//			factoryDAO.getPublicacionDAOImpl().getCountByType(null,null)+
+			//factoryDAO.getEventoDAOImpl().getCount(null)+
+			//factoryDAO.getProyectoInvestigacionDAOImpl().getCount(null)+
+//			factoryDAO.getOrganizacioDAOImpl().getCount(null)+
+//			factoryDAO.getDoctorDAOImpl().getCount(null);
+		}catch(Exception e)
+		{
+			logger.info("Error readEspejoCount {}",e.toString());
+			throw new CorvustecException("Error al readEspejoCount " + e.toString());
+		}
+		return total;
+	}
+
+	@Override
+	public List<PaisDTO> readPais(Object type) throws CorvustecException
+	{
+		List<PaisDTO> paisList=new ArrayList<PaisDTO>();
+		PaisDTO pais;
+		CatalogoDTO catalogo;
+
+		catalogo=new CatalogoDTO();
+		catalogo.setCatCodigo(13);
+		
+		if(type==null)
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				paisList.add(pais);
+			}
+		}
+		//Etica
+		else if(type.equals(1))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getEticaDAOImpl().count(cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}
+		}
+		return paisList;
+	}
+	
+	@Override
+	public List<EspejoVisorDTO> visorList(EspejoDTO espejo) throws CorvustecException
+	{
+		List<EspejoVisorDTO> espejoVisorList=new ArrayList<EspejoVisorDTO>();
+		EspejoVisorDTO espejoVisor;
+		
+		if(espejo.getTipo()==0)
+		{
+		}
+		//Etica
+		else if(espejo.getTipo()==1)
+		{
+			EticaDTO eti=new EticaDTO();
+			eti.setEtiPais(espejo.getPais());
+			List<EticaDTO> listEtica=new ArrayList<EticaDTO>();
+			
+			listEtica=factoryDAO.getEticaDAOImpl().getByAnd(eti);
+			
+			for(EticaDTO objeto:listEtica){
+					
+				espejoVisor=new EspejoVisorDTO();
+				espejoVisor.setCodigo(objeto.getEtiCodigo());
+				
+				espejoVisor.setTitulo("Etica y Deodologia: " +objeto.getEtiAutorNombre());
+				espejoVisor.setDescripcion1("Datos Institucionales :"+objeto.getObsDatosInstitucionales());
+				espejoVisor.setTipo(espejo.getTipo());
+
+				espejoVisorList.add(espejoVisor);
+				
+			}	
+		}
+		return espejoVisorList;
 	}
 
 	
