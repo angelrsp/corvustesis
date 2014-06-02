@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.negocio.ArgosService;
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
+import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.ejb.persistence.entities.AteneaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
@@ -28,6 +29,9 @@ public class ReportPublicController {
 	@EJB
 	private ArgosService argosService;
 
+	@EJB
+	private EspejoService espejoService;
+
 	
 	@ManagedProperty(value="#{reportPublicDataManager}")
 	private ReportPublicDataManager reportPublicDataManager;
@@ -43,6 +47,7 @@ public class ReportPublicController {
 		readPais();
 		readAteneaCount();
 		readArgosCount();
+		readEspejoCount();
 	}
 	
 	public ReportPublicDataManager getReportPublicDataManager() {
@@ -124,6 +129,15 @@ public class ReportPublicController {
 	{
 		try {
 			reportPublicDataManager.setArgosCount(argosService.countArgos());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
+	private void readEspejoCount()
+	{
+		try {
+			reportPublicDataManager.setEspejoCount(espejoService.readEspejoCount());
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
