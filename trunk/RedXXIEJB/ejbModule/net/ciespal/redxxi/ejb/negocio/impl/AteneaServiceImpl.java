@@ -427,7 +427,7 @@ public class AteneaServiceImpl implements AteneaService{
 						ateneaVisor.setTipo(atenea.getTipo());
 						ateneaVisor.setTitulo("Universidad: "+car.getAteCentro().getAteCentro().getAteCentro().getCenNombre());
 						ateneaVisor.setDescripcion1("Facultad: "+car.getAteCentro().getAteCentro().getCenNombre());
-						ateneaVisor.setDescripcion2("Carrera:" +car.getAteCentro().getCenNombre());
+						ateneaVisor.setDescripcion2("Carrera:" +car.getCarNombre());
 						
 						ateneaVisorList.add(ateneaVisor);
 					}
