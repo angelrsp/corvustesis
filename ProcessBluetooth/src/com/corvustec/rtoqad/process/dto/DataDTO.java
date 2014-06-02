@@ -21,7 +21,7 @@ public class DataDTO implements Serializable{
 	private Time intervaloMinutoDesde;
 	private Time intervaloMinutoHasta;
 	
-	private float media;
+	private double media;
 	private double desviacion;
 	
 	private int numeroIntervalo;
@@ -129,14 +129,6 @@ public class DataDTO implements Serializable{
 		this.estado = estado;
 	}
 
-	public float getMedia() {
-		return media;
-	}
-
-	public void setMedia(float media) {
-		this.media = media;
-	}
-
 	public Time getEntradaAgencia() {
 		return entradaAgencia;
 	}
@@ -183,6 +175,14 @@ public class DataDTO implements Serializable{
 
 	public void setTiempoFila(Double tiempoFila) {
 		this.tiempoFila = tiempoFila;
+	}
+
+	public double getMedia() {
+		return media;
+	}
+
+	public void setMedia(double media) {
+		this.media = media;
 	}
 
 
