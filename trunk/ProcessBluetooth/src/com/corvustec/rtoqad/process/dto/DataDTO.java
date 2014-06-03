@@ -25,6 +25,7 @@ public class DataDTO implements Serializable{
 	private double desviacion;
 	
 	private int numeroIntervalo;
+	private int numeroIntervaloMinuto;
 	//1 in 0 out
 	private int estado;
 	
@@ -183,6 +184,14 @@ public class DataDTO implements Serializable{
 
 	public void setMedia(double media) {
 		this.media = media;
+	}
+
+	public int getNumeroIntervaloMinuto() {
+		return numeroIntervaloMinuto;
+	}
+
+	public void setNumeroIntervaloMinuto(int numeroIntervaloMinuto) {
+		this.numeroIntervaloMinuto = numeroIntervaloMinuto;
 	}
 
 

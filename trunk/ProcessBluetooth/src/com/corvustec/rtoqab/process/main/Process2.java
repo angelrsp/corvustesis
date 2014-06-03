@@ -57,8 +57,8 @@ public class Process2 {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String codigoAgencia="0016";
 		String fechaCorte=formatter.format(new Date());
-		File fileIn=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0016")+"INQ 14-MAY.txt");		
-		File fileOut=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0016")+"INQ 14-MAYFinal.txt");
+		File fileIn=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0016")+"INAQUITO 14-ABR.txt");		
+		File fileOut=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0016")+"INAQUITO 14-ABRFinal.txt");
 
 //		File fileIn=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0036")+"20140510.txt");		
 //		File fileOut=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0036")+"20140510Final.txt");
@@ -79,7 +79,7 @@ public class Process2 {
 		
 		int balizaSum,index;
 		double balizaAvg,balizaAvgDia;
-		double varianza= 0.0,desviacion = 0.0,rango=0.0,balizaSumDbl,balizaAvgDbl,limiteSuperior,limiteInferior;
+		double varianza= 0.0,desviacion = 0.0,rango=0.0,balizaSumDbl,balizaAvgDbl,limiteSuperior,limiteInferior,limiteSuperiorDia,limiteInferiorDia,limiteSuperiorInt,limiteInferiorInt;
 		
 		double diaSum,diaAvg;
 		
@@ -211,6 +211,7 @@ public class Process2 {
 			
 			//Todavia es el Paso 1
 			List<IntervaloTiempoDTO> intervaloSegundo;
+			List<IntervaloTiempoDTO> intervaloMinuto;
 			
 			List<DataDTO> temp=new ArrayList<DataDTO>();
 			List<DataDTO> temp2=new ArrayList<DataDTO>();
@@ -544,6 +545,8 @@ public class Process2 {
 			}
 			
 			dataList=temp3;
+			////////////////////////////Fin data tiempos
+			
 			
 			temp=new ArrayList<DataDTO>();
 			
@@ -559,6 +562,8 @@ public class Process2 {
 			}
 			
 			dataList=temp;
+			
+			System.out.println("Antes de limites tiempo fila "+dataList.size());
 			
 			///Tiempo en fila
 			dataListDistinct=getDistinct(dataList);
@@ -579,7 +584,7 @@ public class Process2 {
 				{
 					if(temp.get(0).getTiempoFila()!=null)
 					{
-						if(temp.get(0).getTiempoFila()<1||temp.get(0).getTiempoFila()>55)//1 y 55 deben ser parametrizables
+						if(temp.get(0).getTiempoFila()<1||temp.get(0).getTiempoFila()>60)//1 y 55 deben ser parametrizables
 						{
 							dataList.remove(temp.get(0));
 						}
@@ -589,7 +594,7 @@ public class Process2 {
 				}
 			}
 			
-			
+			System.out.println("Antes de limites tiempo agencia "+dataList.size());
 			//Tiempo en agencia
 			for(final DataDTO dato:dataListDistinct)
 			{
@@ -617,6 +622,17 @@ public class Process2 {
 				}
 			}
 			
+			
+			System.out.println("Despues de limites tiempo agencia "+dataList.size());
+			
+			if(dataList.size()<=0)
+			{
+				System.out.println("Sin datos posible dia no atención");
+				writer.close();
+				return;
+			}
+			
+			///Promedio dia....
 			diaSum=sumFrom(dataList).getTiempoFila();
 			diaAvg=diaSum/dataList.size();
 			
@@ -632,19 +648,122 @@ public class Process2 {
 			desviacion=Math.sqrt(varianza);
 
 			//parametrizable.
-			limiteSuperior=diaAvg+(desviacion*1.2);
-			limiteInferior=diaAvg-(desviacion*1.2);
+			limiteSuperiorDia=diaAvg+desviacion*1.5;
+			limiteInferiorDia=diaAvg-desviacion*1.5;
 
-			temp=new ArrayList<DataDTO>();
+			System.out.println("Avg: "+diaAvg);
+			System.out.println("Des: "+desviacion);
+			System.out.println("Sup: "+limiteSuperiorDia);
+			System.out.println("Inf: "+limiteInferiorDia);
 			
-			for(DataDTO dat:dataList)
+			///Aplico rangos de 15 min....
+			intervaloMinuto=generateMinute();
+			for(final IntervaloTiempoDTO inter:intervaloMinuto)
 			{
-				if(dat.getTiempoFila()>=limiteInferior&&dat.getTiempoFila()<=limiteSuperior)
-					temp.add(dat);
+				temp= (List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
+					@Override
+					public boolean evaluate(Object arg0) {
+                     DataDTO dat= (DataDTO)arg0;
+                     if(dat.getEntradaFila().getTime()>=inter.getTimeDesde().getTime()
+                    		 &&dat.getEntradaFila().getTime()<inter.getTimeHasta().getTime())
+                    	 return true;
+                     else
+                    	 return false;
+					}
+				});
+				
+				if(temp.size()>0)
+				{
+					for(DataDTO dat:temp)
+					{
+						//datoTemp=dat;
+						dat.setIntervaloMinutoDesde(inter.getTimeDesde());
+						dat.setIntervaloMinutoHasta(inter.getTimeHasta());
+						dat.setNumeroIntervaloMinuto(index);
+						temp2.add(dat);
+					}
+					index=index+1;
+				}
 			}
 			
-			dataList=temp;
+			System.out.println("En intervalos quedan: "+ dataList.size());
 			
+			dataListDistinct=getDistinctByNumeroIntervaloMinuto(dataList);
+			
+			//Sorting
+			Collections.sort(dataListDistinct, new Comparator<DataDTO>() {
+		        @Override
+		        public int compare(DataDTO  dato1, DataDTO  dato2){
+		            return dato1.getNumeroIntervaloMinuto()> dato2.getNumeroIntervaloMinuto()?1:-1;
+		        }
+		    });
+			
+			temp2=new ArrayList<DataDTO>();
+			
+			for(final DataDTO inter:dataListDistinct)
+			{
+				temp=(List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
+					@Override
+					public boolean evaluate(Object arg0) {
+                     DataDTO dat= (DataDTO)arg0;
+                     if(dat.getNumeroIntervaloMinuto()==inter.getNumeroIntervaloMinuto())
+                    	 return true;
+                     else
+                    	 return false;
+					}
+				});
+				
+				
+				if(temp.size()>=3)
+				{
+					///Promedio
+					balizaAvg=(sumFrom(temp).getTiempoFila())/temp.size();
+					
+					varianza=0.0;
+					
+					for(DataDTO dat:temp)
+					{
+					   rango = Math.pow(dat.getTiempoFila()-balizaAvg,2);
+					   varianza = varianza + rango;				
+					}
+					
+					varianza=varianza/temp.size();
+					desviacion=Math.sqrt(varianza);
+
+					//parametrizable.
+					limiteSuperiorInt=balizaAvg+(desviacion*1);
+					limiteInferiorInt=balizaAvg-(desviacion*1);
+					
+					
+					
+					for(DataDTO d:temp)
+					{
+						System.out.print("Mac : "+d.getMac()+"|");
+						System.out.print("Tiempo : "+d.getTiempoFila()+"|");
+						System.out.print("Media : "+balizaAvg+"|");
+						System.out.print("Desviacion : "+desviacion+"|");
+						System.out.print("Intervalo : "+d.getNumeroIntervaloMinuto()+"|");
+						System.out.print("Limite Inferior : "+limiteInferiorInt+"|");
+						System.out.println("Limite Superior : "+limiteSuperiorInt+"|");
+						if(d.getTiempoFila()>=limiteInferiorInt&&d.getTiempoFila()<=limiteSuperiorInt)
+							temp2.add(d);
+					}
+				}
+				if(temp.size()==2)
+				{
+					if(temp.get(0).getTiempoFila()>=limiteInferiorDia&&temp.get(0).getTiempoFila()<=limiteSuperiorDia)
+						temp2.add(temp.get(0));
+					if(temp.get(1).getTiempoFila()>=limiteInferiorDia&&temp.get(1).getTiempoFila()<=limiteSuperiorDia)
+						temp2.add(temp.get(1));
+				}
+				if(temp.size()==1)
+				{
+					if(temp.get(0).getTiempoFila()>=limiteInferiorDia&&temp.get(0).getTiempoFila()<=limiteSuperiorDia)
+						temp2.add(temp.get(0));
+				}
+			}
+			
+			dataList=temp2;
 			
 			for(DataDTO dat:dataList){
 				sb.append(codigoAgencia+"|");
@@ -656,6 +775,9 @@ public class Process2 {
 				sb.append(dat.getEntradaFila()+"|");
 				sb.append(dat.getSalidaFila()+"|");
 				sb.append(dat.getSalidaAgencia()+"|");
+//				sb.append(dat.getIntervaloMinutoDesde()+"|");
+//				sb.append(dat.getIntervaloMinutoHasta()+"|");
+				sb.append(dat.getNumeroIntervaloMinuto()+"|");
 				sb.append(dat.getTiempoFila().toString().replace('.', ',')+"|");
 				sb.append(dat.getTiempoAgencia().toString().replace('.', ',')+"\n");
 //				sb.append(dat.getRssi()+"|");				
@@ -764,6 +886,19 @@ public class Process2 {
 		return list;
 	}
 
+	public static List<DataDTO> getDistinctByNumeroIntervaloMinuto(List<DataDTO> dataList)
+	{
+		List<DataDTO> list;
+		Map<Integer, DataDTO> map = new HashMap<Integer, DataDTO>();
+		for (DataDTO p : dataList) {
+		    if (!map.containsKey(p.getNumeroIntervaloMinuto())) {
+		        map.put(p.getNumeroIntervaloMinuto(), p);
+		    }
+		}
+		list= new ArrayList<DataDTO>(map.values());
+		return list;
+	}
+	
 	public static long timeDiff(String timeStart,String timeEnd)
 	{
 
