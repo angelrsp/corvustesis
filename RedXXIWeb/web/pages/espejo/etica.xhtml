@@ -8,7 +8,7 @@
 
 	<ui:define name="contenido">
 	
-		<p:growl id="growl"></p:growl>
+		<p:growl id="growl" autoUpdate="true"/>
 		
 		<p:panel id="pnlDatos" header="Etica y Deontología del Periodismo y la Comunicación">
 
@@ -144,8 +144,8 @@
 
 					<tr>
 						<td colspan="4" align="center">
-							<p:commandButton value="#{i18n['boton.guardar']}" process="pnlNoticia" update="pnlNoticia,:contenido:growl" actionListener="#{eticaController.createNoticia}" icon="ui-icon-disk"/>
-							<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update="pnlNoticia,:contenido:growl" actionListener="#{eticaController.cancelNoticia}" icon="ui-icon-cancel"/>
+							<p:commandButton value="#{i18n['boton.guardar']}" process="pnlNoticia" update="pnlNoticia" actionListener="#{eticaController.createNoticia}" icon="ui-icon-disk"/>
+							<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update="pnlNoticia" actionListener="#{eticaController.cancelNoticia}" icon="ui-icon-cancel"/>
 						</td>
 					</tr>							
 

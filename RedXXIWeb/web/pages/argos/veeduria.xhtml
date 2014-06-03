@@ -57,7 +57,9 @@
 
 			<tr>	
 				<td><h:outputText value="#{i18n['label.anio.fundacion']}:&#160;"/></td>
-				<td><p:inputText value="#{veeduriaDataManager.veeduria.veeAnioFundacion}" onkeypress="return isNumberKey(event)" required="true" requiredMessage="#{i18n['label.anio.fundacion']}&#160;#{i18n['label.requerido']}"/></td>				
+				<td><p:inputText value="#{veeduriaDataManager.veeduria.veeAnioFundacion}" onkeypress="return isNumberKey(event)" required="true" requiredMessage="#{i18n['label.anio.fundacion']}&#160;#{i18n['label.requerido']}" validatorMessage="Año longitud no válida">
+					<f:validateLength maximum="4" minimum="4"/>
+				</p:inputText></td>				
 			</tr>
 
 			<tr>	
