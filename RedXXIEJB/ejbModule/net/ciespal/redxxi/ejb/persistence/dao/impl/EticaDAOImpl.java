@@ -12,12 +12,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import net.ciespal.redxxi.ejb.persistence.dao.EticaDAO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.ciespal.redxxi.ejb.persistence.dao.EticaDAO;
-import net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 
 import com.corvustec.commons.util.CorvustecException;
 
@@ -88,7 +87,7 @@ public class EticaDAOImpl extends AbstractFacadeImpl<EticaDTO> implements EticaD
 				return 0;
 			
 		}catch(Exception e){
-			logger.info(e.toString());
+			logger.info("count"+ e.toString());
 			throw new CorvustecException(e);
 		}finally{
 			predicate=null;
@@ -122,7 +121,7 @@ public class EticaDAOImpl extends AbstractFacadeImpl<EticaDTO> implements EticaD
 
 	        for(Field f : fields){
 	            fieldName = f.getName();
-				if(!fieldName.equals("serialVersionUID"))
+				if(!fieldName.equals("serialVersionUID")&&!fieldName.equals("etiCount"))
 				{
 				    getter = objetoDTO.getClass().getMethod("get" + String.valueOf(fieldName.charAt(0)).toUpperCase() +
 				            fieldName.substring(1));
@@ -146,7 +145,7 @@ public class EticaDAOImpl extends AbstractFacadeImpl<EticaDTO> implements EticaD
 			return list;
 			
 		}catch(Exception e){
-			logger.info(e.toString());
+			logger.info("getByAnd "+e.toString());
 			throw new CorvustecException(e);
 		}finally{
 			predicate=null;

@@ -10,11 +10,6 @@ import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.argos.ArgosDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.argos.ArgosVisorDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.argos.DefensorVieDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.argos.VeeduriaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EntidadEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoVisorDTO;
@@ -160,8 +155,8 @@ public class EspejoServiceImpl implements EspejoService{
 				espejoVisor=new EspejoVisorDTO();
 				espejoVisor.setCodigo(objeto.getEtiCodigo());
 				
-				espejoVisor.setTitulo("Etica y Deodologia: " +objeto.getEtiAutorNombre());
-				espejoVisor.setDescripcion1("Datos Institucionales :"+objeto.getObsDatosInstitucionales());
+				espejoVisor.setTitulo("Nombres y Apellidos: " +objeto.getEtiAutorNombre()+" "+objeto.getEtiAutorApellido());
+				espejoVisor.setDescripcion1("Título de la Obra :"+objeto.getEtiTituloObra());
 				espejoVisor.setTipo(espejo.getTipo());
 
 				espejoVisorList.add(espejoVisor);
