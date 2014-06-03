@@ -90,6 +90,7 @@ public class VeeduriaController extends SelectItemController{
 		try {
 			argosService.deleteVeeduria(veeduria);
 			read();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}

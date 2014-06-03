@@ -66,7 +66,7 @@ public class EticaController extends SelectItemController{
 			eticaDataManager.getEticaDTO().setEtiPais(Integer.valueOf(getPais().toString()));
 			eticaDataManager.getEticaDTO().setEtiProvincia(Integer.valueOf(getProvincia().toString()));
 			eticaDataManager.getEticaDTO().setEtiCiudad(Integer.valueOf(getCiudad().toString()));
-			espejoService.createOrUpdateEtica(eticaDataManager.getEticaDTO());
+			eticaDataManager.setEticaDTO(espejoService.createOrUpdateEtica(eticaDataManager.getEticaDTO()));
 			read();
 			cancel();
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
@@ -90,6 +90,13 @@ public class EticaController extends SelectItemController{
 
 	public void delete(EticaDTO etica)
 	{
+		try {
+			espejoService.deleteEtica(etica);
+			read();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 		
 	}
 
@@ -154,6 +161,13 @@ public class EticaController extends SelectItemController{
 	
 	public void deleteNoticia(NoticiaEspejoDTO noticia)
 	{
+		try {
+			espejoService.deleteNoticia(noticia);
+			readNoticia();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 		
 	}
 
