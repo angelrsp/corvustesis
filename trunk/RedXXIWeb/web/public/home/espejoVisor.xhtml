@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" 
+      template="/WEB-INF/template/public.xhtml">
+
+
+	<ui:define name="menu">
+		<ul id="navlist">
+		  <li id="home"><a href="#{request.contextPath}/index.xhtml"></a></li>
+		  <li id="atenea"><a href="#{request.contextPath}/public/home/atenea.xhtml"></a></li>
+		  <li id="argos"><a href="#{request.contextPath}/public/home/argos.xhtml"></a></li>
+		  <li id="espejo2"><a href="#{request.contextPath}/public/home/espejo.xhtml"></a></li>
+		  <li id="somos"><a href="#{request.contextPath}/quienesSomos.xhtml"></a></li>
+		  <li id="ingreso"><a href="#{request.contextPath}/ingreso.xhtml"></a></li>
+		  <li id="usuario"><a href="#{request.contextPath}/pages/home.xhtml"></a></li>
+		</ul>
+	</ui:define>
+
+
+
+<ui:define name="left">
+	<table width="100%">
+		<tr>
+			<td>
+				<h:outputText value="E" styleClass="descripcionLetter"/><h:outputText value="SPEJO" styleClass="descripcion"/>
+				<div class="line-separator"></div>
+		
+				<table width="100%">
+
+					<tr>
+						<td>
+							<p:graphicImage value="#{espejoDataManager.pais.imagenPath}" height="35" width="60"/>
+						</td>
+					</tr>
+	    			<tr>
+	    				<td>
+	    					<h:outputText value="#{espejoDataManager.pais.nombre}" styleClass="descripcion"/>
+	    				</td>
+	    			</tr>
+
+					<tr>
+						<td>
+							
+							<h:dataTable id="tblAtenea" value="#{espejoDataManager.espejoList}" var="esp" width="100%">
+								
+				    			<h:column>
+				    				<h:commandLink value="#{esp.descripcion}" styleClass="linkClass2" actionListener="#{espejoVisorController.selectEspejo(esp)}"/>
+				    			</h:column>										
+				
+				    			<h:column>
+									<h:commandLink value="#{ate.count}" styleClass="linkClass" actionListener="#{espejoVisorController.selectEspejo(esp)}"/><br />
+				    			</h:column>										
+				
+							</h:dataTable>
+						</td>
+					</tr>
+				</table>
+										
+			</td>
+		</tr>
+	</table>
+</ui:define>
+
+
+<ui:define name="center">
+</ui:define>
+
+
+<ui:define name="right">
+	<div style="height: 30px;">
+	</div>
+	
+	
+	<div style="overflow-y: scroll; width: 100%; height: 300px;">
+		<h:dataTable value="#{espejoDataManager.espejoVisorList}" var="esp" width="100%">
+		
+			<h:column>
+				<h:outputText value="#{esp.titulo}" styleClass="descripcionBlack2"/><br/>
+				<h:outputText value="#{esp.descripcion1}" styleClass="descripcionBlack2"/><br/>
+				<h:outputText value="#{esp.descripcion2}" styleClass="descripcionBlack2"/><br/>
+				<h:commandButton value="Ver mas" actionListener="#{espejoVisorController.selectItem(esp)}" /><br/>
+				<h:outputText value="----" styleClass="descripcionBlack2"/>
+			</h:column>
+		
+		</h:dataTable>
+	</div>
+	
+</ui:define>
+
+</ui:composition>

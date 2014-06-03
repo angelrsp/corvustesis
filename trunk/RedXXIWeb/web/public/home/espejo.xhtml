@@ -27,13 +27,13 @@
 					<h:outputText value="A" styleClass="descripcionLetter"/><h:outputText value="RGOS" styleClass="descripcion"/>
 					<div class="line-separator"></div>
 			
-						<h:dataTable value="#{argosController.argosDataManager.argosList}" var="arg" width="100%">
+						<h:dataTable value="#{espejoController.espejoDataManager.espejoList}" var="esp" width="100%">
 						
 							<h:column>			    			
-			    				<h:commandLink value="#{arg.descripcion}" styleClass="linkClass2" actionListener="#{argosController.selectArgos(arg)}"/>
+			    				<h:commandLink value="#{esp.descripcion}" styleClass="linkClass2" actionListener="#{espejoController.selectEspejo(esp)}"/>
 			    			</h:column>
 			    			<h:column>	
-								<h:commandLink value="#{arg.count}" styleClass="linkClass" actionListener="#{argosController.selectArgos(arg)}"/><br />			    			
+								<h:commandLink value="#{esp.count}" styleClass="linkClass" actionListener="#{espejoController.selectEspejo(esp)}"/><br />			    			
 							</h:column>
 							
 						</h:dataTable>
@@ -53,19 +53,19 @@
 				<h:outputText value="Consulta por paises" styleClass="descripcion"/>
 				<div class="line-separator"></div>		
 
-				<p:dataGrid value="#{argosDataManager.paisList}" var="pai" columns="6">
+				<p:dataGrid value="#{espejoDataManager.paisList}" var="pai" columns="6">
 					<table align="center">
 						<tr>
 							<td>
-								<h:commandLink action="#{argosController.selectPais(pai)}">
+								<h:commandLink action="#{espejoController.selectPais(pai)}">
 									<p:graphicImage value="#{pai.imagenPath}" height="35" width="60"/>
 								</h:commandLink>
 		    				</td>
 		    			</tr>
 		    			<tr>
 		    				<td>
-		    					<h:commandLink value="#{pai.nombre}" actionListener="#{argosController.selectPais(pai)}" styleClass="linkClass"/>
-		    					<h:commandLink value=" #{pai.count!=0?pai.count:null}" actionListener="#{argosController.selectPais(pai)}" styleClass="linkClass"/>
+		    					<h:commandLink value="#{pai.nombre}" actionListener="#{espejoController.selectPais(pai)}" styleClass="linkClass"/>
+		    					<h:commandLink value=" #{pai.count!=0?pai.count:null}" actionListener="#{espejoController.selectPais(pai)}" styleClass="linkClass"/>
 		    				</td>
 		    			</tr>
 					</table>
