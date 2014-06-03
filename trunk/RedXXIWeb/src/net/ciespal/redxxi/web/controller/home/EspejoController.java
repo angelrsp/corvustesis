@@ -8,20 +8,16 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import com.corvustec.commons.util.CorvustecException;
-
 import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.argos.ArgosDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
-import net.ciespal.redxxi.web.datamanager.home.ArgosDataManager;
 import net.ciespal.redxxi.web.datamanager.home.EspejoDataManager;
 
-
+import com.corvustec.commons.util.CorvustecException;
 
 @ViewScoped
-@ManagedBean(name = "espejoDataManager")
+@ManagedBean(name = "espejoController")
 public class EspejoController {
 
 	
@@ -40,7 +36,7 @@ public class EspejoController {
 	@PostConstruct
 	private void init()
 	{
-		readArgos();
+		readEspejo();
 		readPais();
 	}
 
@@ -54,7 +50,7 @@ public class EspejoController {
 
 
 
-	private void readArgos()
+	private void readEspejo()
 	{
 		try {
 			espejoDataManager.setEspejoList(espejoService.readEspejo(null));
@@ -73,7 +69,7 @@ public class EspejoController {
 	}
 
 	
-	public void selectArgos(EspejoDTO espejo)
+	public void selectEspejo(EspejoDTO espejo)
 	{
 		try {		
 			espejoDataManager.setPaisList(espejoService.readPais(espejo.getTipo()));
