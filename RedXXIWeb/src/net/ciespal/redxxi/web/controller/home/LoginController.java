@@ -53,17 +53,20 @@ public class LoginController {
 			{
 				JsfUtil.addInfoMessage("Redireccionar...");
 				JsfUtil.putObject("UsuarioDTO", usuario);
-				if(usuario.getSegUsuarioPerfils().get(0).getSegPerfil().getPerCodigo()==-1)
+				if(usuario.getSegUsuarioPerfils().size()>0)
 				{
-					JsfUtil.redirect(JsfUtil.getContextPath()+"/pages/public/defensor/opinion.xhtml");
-					DefensorDTO def=new DefensorDTO();
-					def.setDefUsuario(usuario.getUsuCodigo());
-					JsfUtil.getExternalContext().getSessionMap().put("DefensorDTO", argosService.defensorRead(def).get(0));
+					if(usuario.getSegUsuarioPerfils().get(0).getSegPerfil().getPerCodigo()==-1)
+					{
+						JsfUtil.redirect(JsfUtil.getContextPath()+"/pages/public/defensor/opinion.xhtml");
+						DefensorDTO def=new DefensorDTO();
+						def.setDefUsuario(usuario.getUsuCodigo());
+						JsfUtil.getExternalContext().getSessionMap().put("DefensorDTO", argosService.defensorRead(def).get(0));
+					}
+					else
+						JsfUtil.redirect(JsfUtil.getContextPath()+"/pages/home.xhtml");	
 				}
 				else
-				{
 					JsfUtil.redirect(JsfUtil.getContextPath()+"/pages/home.xhtml");	
-				}
 			}
 			else
 				JsfUtil.addErrorMessage("Usuario o contraseña no válida");
@@ -72,7 +75,10 @@ public class LoginController {
 			JsfUtil.addErrorMessage(e.toString());
 		} catch (IOException e) {
 			JsfUtil.addErrorMessage(e.toString());
+		} catch (Exception e) {
+			JsfUtil.addErrorMessage(e.toString());
 		}
+
 	}
 
 	
