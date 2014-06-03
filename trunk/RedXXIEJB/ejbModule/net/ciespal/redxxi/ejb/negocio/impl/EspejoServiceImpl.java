@@ -202,6 +202,28 @@ public class EspejoServiceImpl implements EspejoService{
 		}
 	}
 
+	@Override
+	public void deleteEtica(EticaDTO etica) throws CorvustecException
+	{
+		logger.info("deleteEtica");
+		List<NoticiaEspejoDTO> listNoticia;
+		try{
+			listNoticia=factoryDAO.getNoticiaEspejoDAOImpl().findAll(etica);
+			if(listNoticia!=null)
+			{
+				for(NoticiaEspejoDTO noti:listNoticia)
+					factoryDAO.getNoticiaEspejoDAOImpl().remove(noti);
+			}
+			factoryDAO.getEticaDAOImpl().remove(etica);
+		}
+		catch(Exception e){
+			logger.info("Error deleteEtica {}",e.toString());
+			throw new CorvustecException("Error al deleteEtica " + e.toString());
+		}
+	}
+
+	
+	
 	/*Maestro Periodismo*/
 	@Override
 	public GranMaestroDTO createOrUpdateMaestroPeriodismo(GranMaestroDTO granMaestro) throws CorvustecException
@@ -532,6 +554,20 @@ public class EspejoServiceImpl implements EspejoService{
 		}
 	}
 
+	@Override
+	public void deleteNoticia(NoticiaEspejoDTO noti) throws CorvustecException
+	{
+		logger.info("deleteNoticia");
+		try{
+			factoryDAO.getNoticiaEspejoDAOImpl().remove(noti);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error deleteNoticia {}",e.toString());
+			throw new CorvustecException("Error al deleteNoticia "+e.toString());
+		}		
+	}
+	
 	/*Obra*/
 	@Override
 	public ObraEspejoDTO createOrUpdateObra(ObraEspejoDTO obra) throws CorvustecException

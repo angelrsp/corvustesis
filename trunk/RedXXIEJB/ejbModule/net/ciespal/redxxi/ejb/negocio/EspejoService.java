@@ -103,6 +103,10 @@ public interface EspejoService {
 
 	List<EspejoVisorDTO> visorList(EspejoDTO espejo) throws CorvustecException;
 
+	void deleteEtica(EticaDTO etica) throws CorvustecException;
+
+	void deleteNoticia(NoticiaEspejoDTO noti) throws CorvustecException;
+
 	
 
 }
