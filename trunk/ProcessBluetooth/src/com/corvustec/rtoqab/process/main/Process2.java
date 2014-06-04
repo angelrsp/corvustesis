@@ -57,8 +57,8 @@ public class Process2 {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String codigoAgencia="0016";
 		String fechaCorte=formatter.format(new Date());
-		File fileIn=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0016")+"INAQUITO 14-ABR.txt");		
-		File fileOut=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0016")+"INAQUITO 14-ABRFinal.txt");
+		File fileIn=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0016")+"INAQUITO 3-JUN.txt");		
+		File fileOut=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0016")+"INAQUITO 3-JUNFinal.txt");
 
 //		File fileIn=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0036")+"20140510.txt");		
 //		File fileOut=new File(ReadAgencia.readValue("com.corvustec.rtoqab.process.0036")+"20140510Final.txt");
@@ -83,10 +83,10 @@ public class Process2 {
 		
 		double diaSum,diaAvg;
 		
-		final String baliza1="00:15:83:0C:BF:EB";
-		final String baliza2="00:15:83:44:38:46";
-		final String baliza3="00:15:83:45:32:D3";///esta no esta
-		final String baliza4="00:15:83:4C:27:69";			
+		final String baliza1="1470";
+		final String baliza2="2057";
+		final String baliza3="1437";///esta no esta
+		final String baliza4="1451";			
 
 		
 //		final String baliza1="00:68:58:09:15:33";
@@ -658,6 +658,7 @@ public class Process2 {
 			
 			///Aplico rangos de 15 min....
 			intervaloMinuto=generateMinute();
+			index=1;
 			for(final IntervaloTiempoDTO inter:intervaloMinuto)
 			{
 				temp= (List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
@@ -743,6 +744,7 @@ public class Process2 {
 						System.out.print("Media : "+balizaAvg+"|");
 						System.out.print("Desviacion : "+desviacion+"|");
 						System.out.print("Intervalo : "+d.getNumeroIntervaloMinuto()+"|");
+						System.out.print("Inicio Fila : "+d.getEntradaFila()+"|");
 						System.out.print("Limite Inferior : "+limiteInferiorInt+"|");
 						System.out.println("Limite Superior : "+limiteSuperiorInt+"|");
 						if(d.getTiempoFila()>=limiteInferiorInt&&d.getTiempoFila()<=limiteSuperiorInt)
