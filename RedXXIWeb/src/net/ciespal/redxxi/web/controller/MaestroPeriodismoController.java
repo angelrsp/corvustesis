@@ -6,15 +6,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import org.primefaces.event.FileUploadEvent;
-
 import net.ciespal.redxxi.ejb.negocio.EspejoService;
-import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.ObraEspejoDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.MaestroPeriodismoDataManager;
+
+import org.primefaces.event.FileUploadEvent;
 
 import com.corvustec.commons.util.CorvustecException;
 
@@ -92,11 +91,6 @@ public class MaestroPeriodismoController extends SelectItemController {
 			maestroPeriodismoDataManager.getGranMaestroDTO().setGmaFotoPath(JsfUtil.saveToDiskUpdload(maestro.getGmaFoto(), maestro.getGmaFotoNombre()));
 	}
 
-	public void delete(EticaDTO etica)
-	{
-		
-	}
-
 	public void ciudadChange()
 	{
 		read();
@@ -160,7 +154,13 @@ public class MaestroPeriodismoController extends SelectItemController {
 	
 	public void deleteNoticia(NoticiaEspejoDTO noticia)
 	{
-		
+		try {
+			espejoService.deleteNoticia(noticia);
+			readNoticia();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}	
 	}
 
 
@@ -198,7 +198,13 @@ public class MaestroPeriodismoController extends SelectItemController {
 	
 	public void deleteObra(ObraEspejoDTO obra)
 	{
-		
+		try {
+			espejoService.deleteObra(obra);
+			readObra();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 	
 	private void readObra()
@@ -241,12 +247,18 @@ public class MaestroPeriodismoController extends SelectItemController {
 
 	public void editObraSobre(ObraEspejoDTO obra)
 	{
-		maestroPeriodismoDataManager.setObra(obra);
+		maestroPeriodismoDataManager.setObraSobre(obra);
 	}
 	
 	public void deleteObraSobre(ObraEspejoDTO obra)
 	{
-		
+		try {
+			espejoService.deleteObra(obra);
+			readObraSobre();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 	
 	private void readObraSobre()
@@ -258,4 +270,14 @@ public class MaestroPeriodismoController extends SelectItemController {
 		}
 	}
 	
+	public void delete(GranMaestroDTO granMaestro)
+	{
+		try {
+			espejoService.deleteMaestroPeriodismo(granMaestro);
+			read();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
 }

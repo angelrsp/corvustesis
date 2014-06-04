@@ -8,14 +8,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import org.primefaces.event.FileUploadEvent;
-
 import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.ObraEspejoDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.MaestroCiespalDataManager;
+
+import org.primefaces.event.FileUploadEvent;
 
 import com.corvustec.commons.util.CorvustecException;
 
@@ -94,7 +94,13 @@ public class MaestroCiespalController extends SelectItemController{
 
 	public void delete(MaestroCiespalDTO maestro)
 	{
-		
+		try {
+			espejoService.deleteMaestroCiespal(maestro);
+			read();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}	
 	}
 
 	public void ciudadChange()
@@ -115,6 +121,7 @@ public class MaestroCiespalController extends SelectItemController{
 	{
 		maestroCiespalDataManager.setMaestroCiespalDTO(maestro);
 		readNoticia();
+		readObra();
 	}
 	
 	public void createNoticia()
@@ -150,7 +157,13 @@ public class MaestroCiespalController extends SelectItemController{
 	
 	public void deleteNoticia(NoticiaEspejoDTO noticia)
 	{
-		
+		try {
+			espejoService.deleteNoticia(noticia);
+			readNoticia();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 
 	public void handleFileUploadArchivo(FileUploadEvent event)
@@ -187,7 +200,13 @@ public class MaestroCiespalController extends SelectItemController{
 	
 	public void deleteObra(ObraEspejoDTO obra)
 	{
-		
+		try {
+			espejoService.deleteObra(obra);
+			readObra();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 	
 	private void readObra()
