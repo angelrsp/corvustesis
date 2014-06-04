@@ -258,6 +258,40 @@ public class EspejoServiceImpl implements EspejoService{
 		}
 	}
 
+	@Override
+	public void deleteMaestroPeriodismo(GranMaestroDTO granMaestro) throws CorvustecException
+	{
+		logger.info("deleteMaestroPeriodismo");
+		List<NoticiaEspejoDTO> listNoti;
+		List<ObraEspejoDTO> listObra;
+		try{
+			listNoti= factoryDAO.getNoticiaEspejoDAOImpl().findAll(granMaestro);
+			if(listNoti!=null)
+			{
+				for(NoticiaEspejoDTO not:listNoti)
+					factoryDAO.getNoticiaEspejoDAOImpl().remove(not);
+			}
+			listObra= factoryDAO.getObraEspejoDAOImpl().findAll(granMaestro, 1);
+			if(listObra!=null)
+			{
+				for(ObraEspejoDTO obr:listObra)
+					factoryDAO.getObraEspejoDAOImpl().remove(obr);
+			}
+			listObra= factoryDAO.getObraEspejoDAOImpl().findAll(granMaestro, 2);
+			if(listObra!=null)
+			{
+				for(ObraEspejoDTO obr:listObra)
+					factoryDAO.getObraEspejoDAOImpl().remove(obr);
+			}			
+			factoryDAO.getGranMaestroDAOImpl().remove(granMaestro);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error readMaestroPeriodismo {}",e.toString());
+			throw new CorvustecException("Error al readMaestroPeriodismo");
+		}
+	}
+
 	
 	@Override
 	public GranMaestroDTO getRandomGranMaesto() throws CorvustecException
@@ -300,6 +334,35 @@ public class EspejoServiceImpl implements EspejoService{
 		}
 	}
 
+	@Override
+	public void deleteMaestroCiespal(MaestroCiespalDTO maestro) throws CorvustecException
+	{
+		logger.info("deleteMaestroCiespal");
+		List<NoticiaEspejoDTO> listNoti;
+		List<ObraEspejoDTO> listObra;
+		try{
+			listNoti= factoryDAO.getNoticiaEspejoDAOImpl().findAll(maestro);
+			if(listNoti!=null)
+			{
+				for(NoticiaEspejoDTO not:listNoti)
+					factoryDAO.getNoticiaEspejoDAOImpl().remove(not);
+			}
+			listObra= factoryDAO.getObraEspejoDAOImpl().findAll(maestro, 1);
+			if(listObra!=null)
+			{
+				for(ObraEspejoDTO obr:listObra)
+					factoryDAO.getObraEspejoDAOImpl().remove(obr);
+			}
+			factoryDAO.getMaestroCiespalDAOImpl().remove(maestro);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error deleteMaestroCiespal {}",e.toString());
+			throw new CorvustecException("Error al deleteMaestroCiespal "+e.toString());
+		}
+	}
+
+	
 	@Override
 	public List<MaestroCiespalDTO> readMaestroCiespal(Object ciudad) throws CorvustecException
 	{
@@ -611,6 +674,19 @@ public class EspejoServiceImpl implements EspejoService{
 			logger.info("Error readObra {}",e.toString());
 			throw new CorvustecException("Error al readObra");
 		}
+	}
+
+	@Override
+	public void deleteObra(ObraEspejoDTO obra) throws CorvustecException
+	{
+		logger.info("deleteObra");
+		try{
+			factoryDAO.getObraEspejoDAOImpl().remove(obra);
+		}
+		catch(Exception e){
+			logger.info("Error deleteObra {}",e.toString());
+			throw new CorvustecException("Error al deleteObra "+e.toString());
+		}		
 	}
 
 }
