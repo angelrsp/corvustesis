@@ -64,10 +64,10 @@
 				<td><p:inputText onkeypress="return isNumberKey(event);" value="#{eticaDataManager.eticaDTO.etiAnio}" required="true" requiredMessage="#{i18n['label.anio']}&#160;#{i18n['label.requerido']}"/></td>
 			</tr>
 
-			<tr>
-				<td><h:outputText value="#{i18n['label.texto.obra']}:&#160;" /></td>
-				<td><p:inputTextarea value="#{eticaDataManager.eticaDTO.etiTexto}" required="true" requiredMessage="#{i18n['label.texto.obra']}&#160;#{i18n['label.requerido']}"/></td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<td><h:outputText value="#{i18n['label.texto.obra']}:&#160;" /></td> -->
+<!-- 				<td><p:inputTextarea value="#{eticaDataManager.eticaDTO.etiTexto}" required="true" requiredMessage="#{i18n['label.texto.obra']}&#160;#{i18n['label.requerido']}"/></td> -->
+<!-- 			</tr> -->
 
 			<tr>
 				<td><h:outputText value="#{i18n['label.archivo']}:&#160;" /></td>
@@ -134,12 +134,12 @@
 				
 					<tr>
 						<td><h:outputText value="#{i18n['label.resumen']}:&#160;" /></td>
-						<td><p:editor value="#{eticaDataManager.noticia.notResumen}" required="true" requiredMessage="#{i18n['label.resumen']}&#160;#{i18n['label.requerido']}"/></td>
+						<td><p:editor value="#{eticaDataManager.noticia.notResumen}" required="true" requiredMessage="#{i18n['label.resumen']}&#160;#{i18n['label.requerido']}" height="200"/></td>
 					</tr>
 				
 					<tr>
 						<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>
-						<td><p:editor value="#{eticaDataManager.noticia.notNoticia}" required="true" requiredMessage="#{i18n['label.descripcion']}&#160;#{i18n['label.requerido']}"/></td>
+						<td><p:editor value="#{eticaDataManager.noticia.notNoticia}" required="true" requiredMessage="#{i18n['label.descripcion']}&#160;#{i18n['label.requerido']}" height="200"/></td>
 					</tr>
 
 					<tr>

@@ -200,16 +200,16 @@
 				<td><p:inputText value="#{proyectoDataManager.proyecto.pinNombre}" required="true" requiredMessage="#{i18n['label.titulo']}&#160;#{i18n['label.requerido']}"/></td>
 				
 				<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
-				<td><p:inputText value="#{proyectoDataManager.proyecto.pinPerfil}" required="true" requiredMessage="#{i18n['label.perfil']}&#160;#{i18n['label.requerido']}"/></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinPerfil}"/></td>
 				
 				<td><h:outputText value="#{i18n['label.coordinador']}:&#160;" /></td>
-				<td><p:inputText value="#{proyectoDataManager.proyecto.pinCoordinador}" required="true" requiredMessage="#{i18n['label.coordinador']}&#160;#{i18n['label.requerido']}"/></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinCoordinador}"/></td>
 			</tr>	
 			<tr>
 				<td><h:outputText value="#{i18n['label.anio.inicio']}:&#160;" /></td>
-				<td><p:inputText value="#{proyectoDataManager.proyecto.pinAnioInicio}" required="true" requiredMessage="#{i18n['label.anio.inicio']}&#160;#{i18n['label.requerido']}" onkeypress="return isNumberKey(event)"/></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinAnioInicio}" onkeypress="return isNumberKey(event)"/></td>
 				<td><h:outputText value="#{i18n['label.duracion.aproximada']}:&#160;" /></td>
-				<td><p:inputText value="#{proyectoDataManager.proyecto.pinDuracion}" required="true" requiredMessage="#{i18n['label.duracion.aproximada']}&#160;#{i18n['label.requerido']}"/></td>
+				<td><p:inputText value="#{proyectoDataManager.proyecto.pinDuracion}"/></td>
 				
 				<td><p:commandButton actionListener="#{organizacionController.createProyecto}" value="#{i18n['boton.agregar']}" process="pnlProyecto" update="pnlProyecto,growl"/></td>
 			</tr>
@@ -241,7 +241,8 @@
 			</p:column>
 			
 		</p:dataTable>
-		
+
+		</p:panel>		
 		
 	<!-- Revista  Publicacion -->	
 	<p:panel id="pnlPublicacion" header="#{i18n['label.panel.revista']}">
@@ -249,11 +250,12 @@
 		<table>
 			<tr>
 				<td><h:outputText value="#{i18n['label.nombre']}:&#160;" /></td>
-				<td><p:inputText value="#{organizacionDataManager.publicacion.pubTitulo}"/></td>
+				<td><p:inputText value="#{organizacionDataManager.publicacion.pubTitulo}" required="true" requiredMessage="#{i18n['label.nombre']}&#160;#{i18n['label.requerido']}"/></td>
 				<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
-				<td><p:inputText value="#{organizacionDataManager.publicacion.pubResumen}"/></td>
+				<td><p:inputText value="#{organizacionDataManager.publicacion.pubResumen}" required="true" requiredMessage="#{i18n['label.perfil']}&#160;#{i18n['label.requerido']}"/></td>
 				<td><h:outputText value="#{i18n['label.isbn']}:&#160;" /></td>
-				<td><p:inputText value="#{organizacionDataManager.publicacion.pubIsbn}"/></td>				
+				<td><p:inputText value="#{organizacionDataManager.publicacion.pubIsbn}"/></td>
+								
 				<td><p:commandButton value="#{i18n['boton.agregar']}" process="pnlPublicacion" update="pnlPublicacion,growl" actionListener="#{organizacionController.createPublicacion}"/></td>
 			</tr>
 		</table>
@@ -285,8 +287,7 @@
 		
 	</p:panel>		
 		
-		
-	</p:panel>		
+				
 
 	</p:scrollPanel>
 
