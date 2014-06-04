@@ -107,6 +107,14 @@ public interface EspejoService {
 
 	void deleteNoticia(NoticiaEspejoDTO noti) throws CorvustecException;
 
+	void deleteMaestroPeriodismo(GranMaestroDTO granMaestro)
+			throws CorvustecException;
+
+	void deleteObra(ObraEspejoDTO obra) throws CorvustecException;
+
+	void deleteMaestroCiespal(MaestroCiespalDTO maestro)
+			throws CorvustecException;
+
 	
 
 }
