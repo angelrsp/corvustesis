@@ -115,6 +115,11 @@ public interface EspejoService {
 	void deleteMaestroCiespal(MaestroCiespalDTO maestro)
 			throws CorvustecException;
 
+	void deletePremio(PremioDTO premio) throws CorvustecException;
+
+	void deletePremioCiespal(PremioCiespalDTO premioCiespal)
+			throws CorvustecException;
+
 	
 
 }
