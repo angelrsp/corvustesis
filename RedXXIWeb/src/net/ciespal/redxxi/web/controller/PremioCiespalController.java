@@ -92,7 +92,13 @@ public class PremioCiespalController extends SelectItemController{
 
 	public void delete(PremioCiespalDTO premioCiespal)
 	{
-		
+		try {
+			espejoService.deletePremioCiespal(premioCiespal);
+			read();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 
 	public void ciudadChange()
@@ -148,7 +154,13 @@ public class PremioCiespalController extends SelectItemController{
 	
 	public void deleteNoticia(NoticiaEspejoDTO noticia)
 	{
-		
+		try {
+			espejoService.deleteNoticia(noticia);
+			readNoticia();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 	
 	public void handleFileUploadArchivo(FileUploadEvent event)

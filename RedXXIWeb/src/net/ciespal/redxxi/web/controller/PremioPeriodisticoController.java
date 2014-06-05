@@ -93,6 +93,13 @@ public class PremioPeriodisticoController extends SelectItemController {
 
 	public void delete(PremioDTO premio)
 	{
+		try {
+			espejoService.deletePremio(premio);
+			read();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 		
 	}
 
@@ -149,6 +156,12 @@ public class PremioPeriodisticoController extends SelectItemController {
 	
 	public void deleteNoticia(NoticiaEspejoDTO noticia)
 	{
-		
+		try {
+			espejoService.deleteNoticia(noticia);
+			readNoticia();
+			JsfUtil.addErrorMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 }

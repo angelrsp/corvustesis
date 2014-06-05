@@ -75,10 +75,10 @@
 				<td><p:inputText  value="#{premioCiespalDataManager.premioCiespalDTO.pciApellidoAutor}"/></td>				
 			</tr>
 
-			<tr>
-				<td><h:outputText value="#{i18n['label.muestra.obra']}:&#160;" /></td>
-				<td><p:inputText  value="#{premioCiespalDataManager.premioCiespalDTO.pciMuestraObra}"/></td>		
-			</tr>			
+<!-- 			<tr> -->
+<!-- 				<td><h:outputText value="#{i18n['label.muestra.obra']}:&#160;" /></td> -->
+<!-- 				<td><p:inputText  value="#{premioCiespalDataManager.premioCiespalDTO.pciMuestraObra}"/></td>		 -->
+<!-- 			</tr>			 -->
 			
 			<tr>
 				<td><h:outputText value="#{i18n['label.archivo']}:&#160;" /></td>
@@ -104,8 +104,8 @@
 					<h:outputText value="#{preC.pciPremioInstituido}" />
 				</p:column>		
 	
-				<p:column headerText="#{i18n['label.institucion']}">
-					<h:outputText value="#{preC.pciPremioInstituido}" />
+				<p:column headerText="#{i18n['label.obra.autor.premiados']}">
+					<h:outputText value="#{preC.pciObraAutor}" />
 				</p:column>		
 	
 				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
@@ -144,12 +144,12 @@
 				
 					<tr>
 						<td><h:outputText value="#{i18n['label.resumen']}:&#160;" /></td>
-						<td><p:editor value="#{premioCiespalDataManager.noticia.notResumen}" required="true" requiredMessage="#{i18n['label.resumen']}&#160;#{i18n['label.requerido']}"/></td>
+						<td><p:editor value="#{premioCiespalDataManager.noticia.notResumen}" required="true" requiredMessage="#{i18n['label.resumen']}&#160;#{i18n['label.requerido']}" height="200"/></td>
 					</tr>
 				
 					<tr>
 						<td><h:outputText value="#{i18n['label.descripcion']}:&#160;" /></td>
-						<td><p:editor value="#{premioCiespalDataManager.noticia.notNoticia}" required="true" requiredMessage="#{i18n['label.descripcion']}&#160;#{i18n['label.requerido']}"/></td>
+						<td><p:editor value="#{premioCiespalDataManager.noticia.notNoticia}" required="true" requiredMessage="#{i18n['label.descripcion']}&#160;#{i18n['label.requerido']}" height="200"/></td>
 					</tr>
 
 					<tr>
