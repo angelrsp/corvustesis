@@ -51,13 +51,13 @@ public class EspejoServiceImpl implements EspejoService{
 			espejo.setCount(factoryDAO.getEticaDAOImpl().count(pais));
 			espejoList.add(espejo);
 
-			//Veedurias
-//			argos=new ArgosDTO();
-//			argos.setTipo(2);
-//			argos.setDescripcion("Veedurías: ");
-//			argos.setCount(factoryDAO.getVeeduriaDAOImpl().count(pais));
-//			argosList.add(argos);			
-//
+			//Grandes maestros del periodismo
+			espejo=new EspejoDTO();
+			espejo.setTipo(2);
+			espejo.setDescripcion("Grandes maestros del periodismo: ");
+			espejo.setCount(factoryDAO.getGranMaestroDAOImpl().count(pais));
+			espejoList.add(espejo);
+
 //			//Defensores de Audiencia
 //			argos=new ArgosDTO();
 //			argos.setTipo(3);
@@ -79,8 +79,8 @@ public class EspejoServiceImpl implements EspejoService{
 	{
 		int total;
 		try {
-			total = factoryDAO.getEticaDAOImpl().count(null);
-			//factoryDAO.getCentroDAOImpl().getFacultadCount(null)+
+			total = factoryDAO.getEticaDAOImpl().count(null)+
+			factoryDAO.getGranMaestroDAOImpl().count(null);
 //			factoryDAO.getCarreraDAOImpl().getPregradoCount(null)+
 //			factoryDAO.getCarreraDAOImpl().getPosgradoCount(null)+
 //			factoryDAO.getPublicacionDAOImpl().getCountByType(null,null)+
@@ -129,7 +129,21 @@ public class EspejoServiceImpl implements EspejoService{
 				paisList.add(pais);
 			}
 		}
+		//Gran Maestro
+		else if(type.equals(2))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getGranMaestroDAOImpl().count(cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}
+		}
 		return paisList;
+		
 	}
 	
 	@Override
@@ -157,6 +171,29 @@ public class EspejoServiceImpl implements EspejoService{
 				
 				espejoVisor.setTitulo("Nombres y Apellidos: " +objeto.getEtiAutorNombre()+" "+objeto.getEtiAutorApellido());
 				espejoVisor.setDescripcion1("Título de la Obra :"+objeto.getEtiTituloObra());
+				espejoVisor.setTipo(espejo.getTipo());
+
+				espejoVisorList.add(espejoVisor);
+				
+			}	
+		}
+		//Gran Maestro
+		else if(espejo.getTipo()==2)
+		{
+			GranMaestroDTO gma=new GranMaestroDTO();
+			gma.setGmaPais(espejo.getPais());
+			List<GranMaestroDTO> listGma=new ArrayList<GranMaestroDTO>();
+			
+			listGma=factoryDAO.getGranMaestroDAOImpl().getByAnd(gma);
+			
+			for(GranMaestroDTO objeto:listGma){
+					
+				espejoVisor=new EspejoVisorDTO();
+				espejoVisor.setCodigo(objeto.getGmaCodigo());
+				
+				espejoVisor.setTitulo("Nombres y Apellidos: " +objeto.getGmaNombres()+" "+objeto.getGmaApellidos());
+				espejoVisor.setDescripcion1("Fecha de Nacimiento :"+objeto.getGmaFechaNacimiento());
+				
 				espejoVisor.setTipo(espejo.getTipo());
 
 				espejoVisorList.add(espejoVisor);
