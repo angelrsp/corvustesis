@@ -13,4 +13,6 @@ public interface GranMaestroDAO extends AbstractFacade<GranMaestroDTO> {
 	List<GranMaestroDTO> getByAnd(GranMaestroDTO granMaestroDTO)
 			throws CorvustecException;
 
+	int count(Object pais) throws CorvustecException;
+
 }
