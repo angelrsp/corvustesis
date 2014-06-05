@@ -419,6 +419,27 @@ public class EspejoServiceImpl implements EspejoService{
 	}
 
 	@Override
+	public void deletePremio(PremioDTO premio) throws CorvustecException
+	{
+		logger.info("deletePremio");
+		List<NoticiaEspejoDTO> listNoticia;
+		try{
+			listNoticia= factoryDAO.getNoticiaEspejoDAOImpl().findAll(premio);
+			if(listNoticia!=null)
+			{
+				for(NoticiaEspejoDTO not:listNoticia)
+					factoryDAO.getNoticiaEspejoDAOImpl().remove(not);
+			}
+			factoryDAO.getPremioDAOImpl().remove(premio);
+		}
+		catch(Exception e){
+			logger.info("Error createOrUpdatePremio {}",e.toString());
+			throw new CorvustecException("Error al createOrUpdateMaestroCiespal");
+		}
+	}
+
+	
+	@Override
 	public List<PremioDTO> readPremio(Object ciudad) throws CorvustecException
 	{
 		logger.info("readPremio");
@@ -466,7 +487,27 @@ public class EspejoServiceImpl implements EspejoService{
 			throw new CorvustecException("Error al readPremio");
 		}
 	}
-	
+
+	@Override
+	public void deletePremioCiespal(PremioCiespalDTO premioCiespal) throws CorvustecException
+	{
+		logger.info("deletePremioCiespal");
+		List<NoticiaEspejoDTO> listNoticia;
+		try{
+			listNoticia= factoryDAO.getNoticiaEspejoDAOImpl().findAll(premioCiespal);
+			if(listNoticia!=null)
+			{
+				for(NoticiaEspejoDTO not:listNoticia)
+					factoryDAO.getNoticiaEspejoDAOImpl().remove(not);
+			}
+			factoryDAO.getPremioCiespalDAOImpl().remove(premioCiespal);
+		}
+		catch(Exception e){
+			logger.info("Error deletePremioCiespal {}",e.toString());
+			throw new CorvustecException("Error al deletePremioCiespal "+e.toString());
+		}
+	}
+
 	
 	/*LeyCodigo */
 	@Override
