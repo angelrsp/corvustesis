@@ -54,7 +54,8 @@ public class LeyDTO implements Serializable {
 	@Column(name="ley_titulo")
 	private String leytitulo;
 
-	
+	@Transient
+	private long leyCount;
 
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne(cascade=CascadeType.PERSIST)
@@ -62,6 +63,10 @@ public class LeyDTO implements Serializable {
 	private EntidadEspejoDTO espEntidad;
 
 	public LeyDTO() {
+	}
+
+	public LeyDTO(long leyCount) {
+		this.leyCount = leyCount;
 	}
 
 	public Integer getLeyCodigo() {
@@ -149,6 +154,14 @@ public class LeyDTO implements Serializable {
 
 	public void setLeytitulo(String leytitulo) {
 		this.leytitulo = leytitulo;
+	}
+
+	public long getLeyCount() {
+		return leyCount;
+	}
+
+	public void setLeyCount(long leyCount) {
+		this.leyCount = leyCount;
 	}
 
 	public String getLeyArchivoNombre() {
