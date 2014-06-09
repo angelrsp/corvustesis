@@ -13,4 +13,6 @@ public interface MaestroCiespalDAO extends AbstractFacade<MaestroCiespalDTO> {
 	List<MaestroCiespalDTO> getByAnd(MaestroCiespalDTO maestroCiespalDTO)
 			throws CorvustecException;
 
+	int count(Object pais) throws CorvustecException;
+
 }

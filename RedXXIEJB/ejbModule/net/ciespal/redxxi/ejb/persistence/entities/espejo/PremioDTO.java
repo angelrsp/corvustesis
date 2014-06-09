@@ -48,12 +48,20 @@ public class PremioDTO implements Serializable {
 	@Column(name="pre_titulo")
 	private String preTitulo;
 
+	@Transient
+	private long preCount;
+	
+
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="pre_entidad")
 	private EntidadEspejoDTO espEntidad;
 
 	public PremioDTO() {
+	}
+
+	public PremioDTO(long preCount) {
+		this.preCount = preCount;
 	}
 
 	public Integer getPreCodigo() {
@@ -126,6 +134,14 @@ public class PremioDTO implements Serializable {
 
 	public void setPreTipoMedio(Integer preTipoMedio) {
 		this.preTipoMedio = preTipoMedio;
+	}
+
+	public long getPreCount() {
+		return preCount;
+	}
+
+	public void setPreCount(long preCount) {
+		this.preCount = preCount;
 	}
 
 	public String getPreTitulo() {
