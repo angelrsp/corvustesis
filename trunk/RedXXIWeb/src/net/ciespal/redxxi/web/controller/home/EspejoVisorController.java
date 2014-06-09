@@ -7,6 +7,7 @@ import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoVisorDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.home.EspejoDataManager;
 import net.ciespal.redxxi.web.datamanager.home.EspejoVisorDataManager;
@@ -59,5 +60,9 @@ public class EspejoVisorController {
 		}
 	}
 
+	public void selectItem(EspejoVisorDTO espejoVisor)
+	{
+		
+	}
 	
 }

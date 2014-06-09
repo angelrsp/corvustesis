@@ -14,6 +14,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.AteneaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.AteneaVisorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CarreraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.CentroDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.ContactoListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.home.AteneaVisorDataManager;
@@ -97,15 +98,22 @@ public class AteneaVisorController{
 				 {
 					 List<CentroDTO> escuelaList=ateneaService.obtenerCentroHijo(centro);
 					 List<CarreraDTO> pregradoList=new ArrayList<CarreraDTO>();
+					 List<ContactoListDTO> contactoList=new ArrayList<ContactoListDTO>(); 
 					 for(CentroDTO esc:escuelaList)
 					 {
-						 	for(CarreraDTO pre:ateneaService.readCarrera(esc, 6))
-						 	{
-						 		pregradoList.add(pre);
-						 	}
+						for(CarreraDTO pre:ateneaService.readCarrera(esc, 6))
+						{
+							pregradoList.add(pre);
+							for(ContactoListDTO con:ateneaService.readContacto(pre))
+							{
+								contactoList.add(con);
+							}
+						}
 					 }
 					 ateneaVisorDataManager.setPregradoList(pregradoList);
+					 
 				 }
+				 
 				 JsfUtil.redirect("/"+JsfUtil.getExternalContext().getContextName()+"/public/home/universidad.xhtml");
 			}
 		}catch (CorvustecException e) {
