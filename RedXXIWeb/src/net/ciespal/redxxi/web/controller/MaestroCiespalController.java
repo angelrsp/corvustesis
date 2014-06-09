@@ -71,7 +71,8 @@ public class MaestroCiespalController extends SelectItemController{
 			maestroCiespalDataManager.getMaestroCiespalDTO().setMciPais(Integer.valueOf(getPais().toString()));
 			maestroCiespalDataManager.getMaestroCiespalDTO().setMciProvincia(Integer.valueOf(getProvincia().toString()));
 			maestroCiespalDataManager.getMaestroCiespalDTO().setMciCiudad(Integer.valueOf(getCiudad().toString()));
-			maestroCiespalDataManager.getMaestroCiespalDTO().setMciFechaNacimiento(new Timestamp(maestroCiespalDataManager.getFechaNacimiento().getTime()));
+			if(maestroCiespalDataManager.getFechaNacimiento()!=null)
+				maestroCiespalDataManager.getMaestroCiespalDTO().setMciFechaNacimiento(new Timestamp(maestroCiespalDataManager.getFechaNacimiento().getTime()));
 			espejoService.createOrUpdateMaestroCiespal(maestroCiespalDataManager.getMaestroCiespalDTO());
 			read();
 			cancel();
@@ -79,7 +80,6 @@ public class MaestroCiespalController extends SelectItemController{
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
-		
 	}
 
 	public void cancel()
