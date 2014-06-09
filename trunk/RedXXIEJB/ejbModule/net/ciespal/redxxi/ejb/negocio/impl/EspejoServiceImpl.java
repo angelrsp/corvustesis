@@ -319,7 +319,6 @@ public class EspejoServiceImpl implements EspejoService{
 				
 			}	
 		}
-
 		return espejoVisorList;
 	}
 
