@@ -74,7 +74,7 @@ public class MaestroCiespalDAOImpl extends AbstractFacadeImpl<MaestroCiespalDTO>
 
 	        for(Field f : fields){
 	            fieldName = f.getName();
-				if(!fieldName.equals("serialVersionUID"))
+				if(!fieldName.equals("serialVersionUID")&&!fieldName.equals("mciCount"))
 				{
 				    getter = maestroCiespalDTO.getClass().getMethod("get" + String.valueOf(fieldName.charAt(0)).toUpperCase() +
 				            fieldName.substring(1));
@@ -103,6 +103,53 @@ public class MaestroCiespalDAOImpl extends AbstractFacadeImpl<MaestroCiespalDTO>
 		}finally{
 			predicate=null;
 			predicateList=null;
-		}			}
+		}			
+	}
+	
+	@Override	
+	public int count(Object pais) throws CorvustecException
+	{
+		CriteriaBuilder cb;
+		CriteriaQuery<MaestroCiespalDTO> cq;
+		Root<MaestroCiespalDTO> from;
+		List<MaestroCiespalDTO> list;
+		Predicate predicate;
+		List<Predicate> predicateList = null;
+		try{
+		
+			cb=entityManager.getCriteriaBuilder();
+			cq=cb.createQuery(MaestroCiespalDTO.class);
+			
+			from= cq.from(MaestroCiespalDTO.class);
+			
+			cq.multiselect(cb.count(from.get("mciCodigo")));
+			
+			predicateList=new ArrayList<Predicate>();
+			if(pais!=null)
+			{
+				predicate=cb.equal(from.get("mciPais"),pais);
+				predicateList.add(predicate);
+			}
+			if(predicateList.size()>0)
+				cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
+			
+			TypedQuery<MaestroCiespalDTO> tq=entityManager.createQuery(cq);
+			
+			list=tq.getResultList();
+			
+			if(!list.isEmpty())
+				return (int)(long)list.get(0).getMciCount();
+			else
+				return 0;
+			
+		}catch(Exception e){
+			logger.info("count"+ e.toString());
+			throw new CorvustecException(e);
+		}finally{
+			predicate=null;
+			predicateList=null;
+		}
+	}
+
 
 }

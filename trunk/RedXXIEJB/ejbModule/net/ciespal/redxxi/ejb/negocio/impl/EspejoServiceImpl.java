@@ -54,16 +54,30 @@ public class EspejoServiceImpl implements EspejoService{
 			//Grandes maestros del periodismo
 			espejo=new EspejoDTO();
 			espejo.setTipo(2);
-			espejo.setDescripcion("Grandes maestros del periodismo: ");
+			espejo.setDescripcion("Grandes Maestros del Periodismo: ");
 			espejo.setCount(factoryDAO.getGranMaestroDAOImpl().count(pais));
 			espejoList.add(espejo);
 
-//			//Defensores de Audiencia
-//			argos=new ArgosDTO();
-//			argos.setTipo(3);
-//			argos.setDescripcion("Defensores de Audiencia: ");
-//			argos.setCount(factoryDAO.getOpinionDAOImpl().count(pais));
-//			argosList.add(argos);			
+			//Maestros Ciespal
+			espejo=new EspejoDTO();
+			espejo.setTipo(3);
+			espejo.setDescripcion("Grandes Maestros de la Comunicación: ");
+			espejo.setCount(factoryDAO.getMaestroCiespalDAOImpl().count(pais));
+			espejoList.add(espejo);
+
+			//Premios periodisticos
+			espejo=new EspejoDTO();
+			espejo.setTipo(4);
+			espejo.setDescripcion("Premios Periodísticos: ");
+			espejo.setCount(factoryDAO.getMaestroCiespalDAOImpl().count(pais));
+			espejoList.add(espejo);
+
+			//Codigo etica leyes y comunicacion
+			espejo=new EspejoDTO();
+			espejo.setTipo(4);
+			espejo.setDescripcion("Premios Periodísticos: ");
+			espejo.setCount(factoryDAO.getMaestroCiespalDAOImpl().count(pais));
+			espejoList.add(espejo);
 
 		}
 		catch(Exception e){
@@ -80,9 +94,9 @@ public class EspejoServiceImpl implements EspejoService{
 		int total;
 		try {
 			total = factoryDAO.getEticaDAOImpl().count(null)+
-			factoryDAO.getGranMaestroDAOImpl().count(null);
-//			factoryDAO.getCarreraDAOImpl().getPregradoCount(null)+
-//			factoryDAO.getCarreraDAOImpl().getPosgradoCount(null)+
+			factoryDAO.getGranMaestroDAOImpl().count(null)+
+			factoryDAO.getMaestroCiespalDAOImpl().count(null)+
+			factoryDAO.getPremioDAOImpl().count(null);
 //			factoryDAO.getPublicacionDAOImpl().getCountByType(null,null)+
 			//factoryDAO.getEventoDAOImpl().getCount(null)+
 			//factoryDAO.getProyectoInvestigacionDAOImpl().getCount(null)+
@@ -142,6 +156,33 @@ public class EspejoServiceImpl implements EspejoService{
 				paisList.add(pais);
 			}
 		}
+		//Maestros ciespal (Maestros del periodismo)
+		else if(type.equals(3))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getMaestroCiespalDAOImpl().count(cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}
+		}
+		//Precioms Perdiodisticos
+		else if(type.equals(4))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getPremioDAOImpl().count(cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}
+		}
+
 		return paisList;
 		
 	}
@@ -200,6 +241,53 @@ public class EspejoServiceImpl implements EspejoService{
 				
 			}	
 		}
+		//Gran Periodismo
+		else if(espejo.getTipo()==3)
+		{
+			MaestroCiespalDTO mci=new MaestroCiespalDTO();
+			mci.setMciPais(espejo.getPais());
+			List<MaestroCiespalDTO> listMci=new ArrayList<MaestroCiespalDTO>();
+			
+			listMci=factoryDAO.getMaestroCiespalDAOImpl().getByAnd(mci);
+			
+			for(MaestroCiespalDTO objeto:listMci){
+					
+				espejoVisor=new EspejoVisorDTO();
+				espejoVisor.setCodigo(objeto.getMciCodigo());
+				
+				espejoVisor.setTitulo("Nombres y Apellidos: " +objeto.getMciNombre()+" "+objeto.getMciApellido());
+				espejoVisor.setDescripcion1("Fecha de Nacimiento :"+objeto.getMciFechaNacimiento());
+				
+				espejoVisor.setTipo(espejo.getTipo());
+
+				espejoVisorList.add(espejoVisor);
+				
+			}	
+		}
+		//Gran Periodismo
+		else if(espejo.getTipo()==4)
+		{
+			PremioDTO pre=new PremioDTO();
+			pre.setPrePais(espejo.getPais());
+			List<PremioDTO> listPre=new ArrayList<PremioDTO>();
+			
+			listPre=factoryDAO.getPremioDAOImpl().getByAnd(pre);
+			
+			for(PremioDTO objeto:listPre){
+					
+				espejoVisor=new EspejoVisorDTO();
+				espejoVisor.setCodigo(objeto.getPreCodigo());
+				
+				espejoVisor.setTitulo("Nombre del Premio: " +objeto.getPreTitulo());
+				espejoVisor.setDescripcion1("Institucion Otorga :"+objeto.getPreInstitucion());
+				
+				espejoVisor.setTipo(espejo.getTipo());
+
+				espejoVisorList.add(espejoVisor);
+				
+			}	
+		}
+
 		return espejoVisorList;
 	}
 

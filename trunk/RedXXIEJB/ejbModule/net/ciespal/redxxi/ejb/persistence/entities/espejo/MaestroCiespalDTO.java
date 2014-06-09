@@ -51,6 +51,9 @@ public class MaestroCiespalDTO implements Serializable {
 	@Column(name="mci_provincia")
 	private Integer mciProvincia;
 
+	@Transient
+	private long mciCount;
+	
 	//bi-directional many-to-one association to EntidadDTO
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="mci_entidad")
@@ -59,6 +62,10 @@ public class MaestroCiespalDTO implements Serializable {
 	public MaestroCiespalDTO() {
 	}
 
+	public MaestroCiespalDTO(long mciCount) {
+		this.mciCount=mciCount;
+	}
+	
 	public Integer getMciCodigo() {
 		return this.mciCodigo;
 	}
@@ -129,6 +136,14 @@ public class MaestroCiespalDTO implements Serializable {
 
 	public void setMciPais(Integer mciPais) {
 		this.mciPais = mciPais;
+	}
+
+	public long getMciCount() {
+		return mciCount;
+	}
+
+	public void setMciCount(long mciCount) {
+		this.mciCount = mciCount;
 	}
 
 	public String getMciPerfilBiografico() {
