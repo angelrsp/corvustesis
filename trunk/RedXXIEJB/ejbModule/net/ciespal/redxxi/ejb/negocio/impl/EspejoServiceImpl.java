@@ -69,14 +69,14 @@ public class EspejoServiceImpl implements EspejoService{
 			espejo=new EspejoDTO();
 			espejo.setTipo(4);
 			espejo.setDescripcion("Premios Periodísticos: ");
-			espejo.setCount(factoryDAO.getMaestroCiespalDAOImpl().count(pais));
+			espejo.setCount(factoryDAO.getPremioDAOImpl().count(pais));
 			espejoList.add(espejo);
 
 			//Codigo etica leyes y comunicacion
 			espejo=new EspejoDTO();
-			espejo.setTipo(4);
-			espejo.setDescripcion("Premios Periodísticos: ");
-			espejo.setCount(factoryDAO.getMaestroCiespalDAOImpl().count(pais));
+			espejo.setTipo(5);
+			espejo.setDescripcion("Códigos de Ética y Leyes de Comunicación: ");
+			espejo.setCount(factoryDAO.getLeyDAOImpl().count(pais));
 			espejoList.add(espejo);
 
 		}
@@ -96,12 +96,8 @@ public class EspejoServiceImpl implements EspejoService{
 			total = factoryDAO.getEticaDAOImpl().count(null)+
 			factoryDAO.getGranMaestroDAOImpl().count(null)+
 			factoryDAO.getMaestroCiespalDAOImpl().count(null)+
-			factoryDAO.getPremioDAOImpl().count(null);
-//			factoryDAO.getPublicacionDAOImpl().getCountByType(null,null)+
-			//factoryDAO.getEventoDAOImpl().getCount(null)+
-			//factoryDAO.getProyectoInvestigacionDAOImpl().getCount(null)+
-//			factoryDAO.getOrganizacioDAOImpl().getCount(null)+
-//			factoryDAO.getDoctorDAOImpl().getCount(null);
+			factoryDAO.getPremioDAOImpl().count(null)+
+			factoryDAO.getLeyDAOImpl().count(null);
 		}catch(Exception e)
 		{
 			logger.info("Error readEspejoCount {}",e.toString());
@@ -169,7 +165,7 @@ public class EspejoServiceImpl implements EspejoService{
 				paisList.add(pais);
 			}
 		}
-		//Precioms Perdiodisticos
+		//Premios Perdiodisticos
 		else if(type.equals(4))
 		{
 			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
@@ -182,7 +178,19 @@ public class EspejoServiceImpl implements EspejoService{
 				paisList.add(pais);
 			}
 		}
-
+		//Leyes
+		else if(type.equals(5))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getLeyDAOImpl().count(cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}
+		}
 		return paisList;
 		
 	}
@@ -264,7 +272,7 @@ public class EspejoServiceImpl implements EspejoService{
 				
 			}	
 		}
-		//Gran Periodismo
+		//Premio
 		else if(espejo.getTipo()==4)
 		{
 			PremioDTO pre=new PremioDTO();
@@ -280,6 +288,30 @@ public class EspejoServiceImpl implements EspejoService{
 				
 				espejoVisor.setTitulo("Nombre del Premio: " +objeto.getPreTitulo());
 				espejoVisor.setDescripcion1("Institucion Otorga :"+objeto.getPreInstitucion());
+				
+				espejoVisor.setTipo(espejo.getTipo());
+
+				espejoVisorList.add(espejoVisor);
+				
+			}	
+		}
+		//Leyes
+		else if(espejo.getTipo()==5)
+		{
+			LeyDTO ley=new LeyDTO();
+			ley.setLeyPais(espejo.getPais());
+			List<LeyDTO> listPre=new ArrayList<LeyDTO>();
+			
+			listPre=factoryDAO.getLeyDAOImpl().getByAnd(ley);
+			
+			for(LeyDTO objeto:listPre){
+					
+				espejoVisor=new EspejoVisorDTO();
+				espejoVisor.setCodigo(objeto.getLeyCodigo());
+				
+				espejoVisor.setTitulo("Título: " +objeto.getLeytitulo());
+				espejoVisor.setDescripcion1("Año de Emisión :"+objeto.getLeyAnio());
+				espejoVisor.setDescripcion2("Institución :"+objeto.getLeyEntidadEmisora());
 				
 				espejoVisor.setTipo(espejo.getTipo());
 

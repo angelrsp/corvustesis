@@ -10,4 +10,8 @@ public interface LeyDAO extends AbstractFacade<LeyDTO> {
 
 	List<LeyDTO> findAll(Object ciudad) throws CorvustecException;
 
+	int count(Object pais) throws CorvustecException;
+
+	List<LeyDTO> getByAnd(LeyDTO objetoDTO) throws CorvustecException;
+
 }
