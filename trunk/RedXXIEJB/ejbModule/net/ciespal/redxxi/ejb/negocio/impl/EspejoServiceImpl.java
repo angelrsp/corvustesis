@@ -322,7 +322,12 @@ public class EspejoServiceImpl implements EspejoService{
 		return espejoVisorList;
 	}
 
-	
+
+	public String espejoResult(EspejoVisorDTO espejo)
+	{
+		
+		return "";
+	}
 	
 	/*Etica*/
 	@Override
