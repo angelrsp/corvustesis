@@ -134,7 +134,7 @@
 				<tr>
 					<td><h:outputText value="#{i18n['label.archivo']}:&#160;" /></td>
 					<td><p:fileUpload fileUploadListener="#{maestroCiespalController.handleFileUploadArchivo}" mode="advanced" dragDropSupport="true"  
-	                 		sizeLimit="10000000" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" auto="true" process="@this" update="growl,enlacePublicacion"/></td>
+	                 		sizeLimit="100000000" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" auto="true" process="@this" update="growl,enlacePublicacion"/></td>
 	                <td><h:outputLink id="enlacePublicacion" value="#{maestroCiespalDataManager.obra.obrArchivoPath}" target="_blank">#{maestroCiespalDataManager.obra.obrArchivoNombre}</h:outputLink></td>		                
 				</tr>			
 				
