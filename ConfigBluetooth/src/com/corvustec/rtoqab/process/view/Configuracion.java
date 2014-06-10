@@ -14,6 +14,7 @@ import com.corvustec.rtoqab.process.util.Const;
 import com.corvustec.rtoqab.process.util.MessagesApplicacion;
 import com.corvustec.rtoqab.process.util.ReadConfiguration;
 import com.corvustec.rtoqab.process.view.util.MessageBox;
+import javax.swing.UIManager;
 
 public class Configuracion extends JInternalFrame {
 
@@ -21,6 +22,7 @@ public class Configuracion extends JInternalFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private JTextField txtCodigoAgencia;
 	private JTextField txtRecolector;
 	private JTextField txtProcesado;
@@ -41,6 +43,11 @@ public class Configuracion extends JInternalFrame {
 	private final String factorPromedioDia=Const.FACTOR_PROMEDIO_DIA;
 	private final String factorIntervalo3=Const.FACTOR_INTERVALO3;
 	
+	private final String horaInicio=Const.HORA_INICIO;
+	private final String horaFin=Const.HORA_FIN;
+	private final String comprobarInicio=Const.COMPROBAR_INICIO;
+	private final String comprobarFin=Const.COMPROBAR_FIN;
+	
 	private JTextField txtBaliza1;
 	private JTextField txtBaliza2;
 	private JTextField txtBaliza3;
@@ -51,6 +58,10 @@ public class Configuracion extends JInternalFrame {
 	private JTextField txtFactorMaximo;
 	private JTextField txtFactorPromedioDia;
 	private JTextField txtFactorIntervalo3;
+	private JTextField txtHoraInicio;
+	private JTextField txtHoraFin;
+	private JTextField txtComprobacionInicio;
+	private JTextField txtComprobacionFin;
 	
 
 	/**
@@ -63,7 +74,7 @@ public class Configuracion extends JInternalFrame {
 		setIconifiable(true);
 		setMaximizable(true);
 		setClosable(true);
-		setBounds(100, 100, 569, 570);
+		setBounds(100, 100, 863, 538);
 		getContentPane().setLayout(null);
 		
 		JButton btnGuardar = new JButton("Guardar");
@@ -72,147 +83,189 @@ public class Configuracion extends JInternalFrame {
 				btnGuardarActionPerformed(arg0);
 			}
 		});
-		btnGuardar.setBounds(215, 507, 89, 23);
+		btnGuardar.setBounds(212, 467, 89, 23);
 		getContentPane().add(btnGuardar);
 		
 		JPanel pnlRuta = new JPanel();
-		pnlRuta.setBounds(10, 11, 533, 148);
+		pnlRuta.setBounds(10, 11, 479, 148);
 		getContentPane().add(pnlRuta);
 		pnlRuta.setLayout(null);
 		pnlRuta.setBorder(new TitledBorder(null, "Ruta Archivos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		
 		JLabel lblRutaArchivoRecolector = new JLabel("Ruta archivo recolector:");
-		lblRutaArchivoRecolector.setBounds(32, 35, 201, 14);
+		lblRutaArchivoRecolector.setBounds(24, 35, 201, 14);
 		pnlRuta.add(lblRutaArchivoRecolector);
 		
 		
 		txtRecolector = new JTextField();
-		txtRecolector.setBounds(243, 29, 195, 20);
+		txtRecolector.setBounds(235, 29, 229, 20);
 		pnlRuta.add(txtRecolector);
 		txtRecolector.setColumns(10);
 		
 		JLabel lblRutaArchivoProcesado = new JLabel("Ruta archivo procesado:");
-		lblRutaArchivoProcesado.setBounds(32, 59, 201, 14);
+		lblRutaArchivoProcesado.setBounds(24, 59, 201, 14);
 		pnlRuta.add(lblRutaArchivoProcesado);
 		
 		txtProcesado = new JTextField();
-		txtProcesado.setBounds(243, 53, 195, 20);
+		txtProcesado.setBounds(235, 53, 229, 20);
 		pnlRuta.add(txtProcesado);
 		txtProcesado.setColumns(10);
 		
 		JLabel lblRutaArchivoFinal = new JLabel("Ruta archivo final:");
-		lblRutaArchivoFinal.setBounds(32, 83, 201, 14);
+		lblRutaArchivoFinal.setBounds(24, 83, 201, 14);
 		pnlRuta.add(lblRutaArchivoFinal);
 		
 		txtFinal = new JTextField();
-		txtFinal.setBounds(243, 77, 195, 20);
+		txtFinal.setBounds(235, 77, 229, 20);
 		pnlRuta.add(txtFinal);
 		txtFinal.setColumns(10);
 		
 		JLabel lblRutaArchivoEjecutable = new JLabel("Ruta archivo ejecutable:");
-		lblRutaArchivoEjecutable.setBounds(32, 109, 201, 14);
+		lblRutaArchivoEjecutable.setBounds(24, 109, 201, 14);
 		pnlRuta.add(lblRutaArchivoEjecutable);
 		
 		txtPathEjecutable = new JTextField();
 		txtPathEjecutable.setColumns(10);
-		txtPathEjecutable.setBounds(243, 103, 195, 20);
+		txtPathEjecutable.setBounds(235, 103, 229, 20);
 		pnlRuta.add(txtPathEjecutable);
 		
 		JPanel pnlProceso = new JPanel();
 		pnlProceso.setBorder(new TitledBorder(null, "Proceso", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlProceso.setBounds(10, 177, 533, 319);
+		pnlProceso.setBounds(10, 177, 479, 279);
 		getContentPane().add(pnlProceso);
 		pnlProceso.setLayout(null);
 		
 		JLabel lblCdigoDeAgencia = new JLabel("C\u00F3digo de agencia:");
-		lblCdigoDeAgencia.setBounds(38, 64, 157, 14);
+		lblCdigoDeAgencia.setBounds(26, 62, 157, 14);
 		pnlProceso.add(lblCdigoDeAgencia);
 		
 		txtCodigoAgencia = new JTextField();
-		txtCodigoAgencia.setBounds(245, 61, 195, 20);
+		txtCodigoAgencia.setBounds(233, 59, 229, 20);
 		pnlProceso.add(txtCodigoAgencia);
 		txtCodigoAgencia.setColumns(10);
 		
 		txtBaliza1 = new JTextField();
-		txtBaliza1.setBounds(245, 85, 195, 20);
+		txtBaliza1.setBounds(233, 81, 229, 20);
 		pnlProceso.add(txtBaliza1);
 		txtBaliza1.setColumns(10);
 		
 		JLabel lblBaliza = new JLabel("Baliza 1:");
-		lblBaliza.setBounds(38, 89, 157, 14);
+		lblBaliza.setBounds(26, 84, 157, 14);
 		pnlProceso.add(lblBaliza);
 		
 		JLabel lblBaliza_1 = new JLabel("Baliza 2:");
-		lblBaliza_1.setBounds(38, 113, 157, 14);
+		lblBaliza_1.setBounds(26, 106, 157, 14);
 		pnlProceso.add(lblBaliza_1);
 		
 		txtBaliza2 = new JTextField();
 		txtBaliza2.setColumns(10);
-		txtBaliza2.setBounds(245, 110, 195, 20);
+		txtBaliza2.setBounds(233, 103, 229, 20);
 		pnlProceso.add(txtBaliza2);
 		
 		txtBaliza3 = new JTextField();
 		txtBaliza3.setColumns(10);
-		txtBaliza3.setBounds(245, 135, 195, 20);
+		txtBaliza3.setBounds(233, 125, 229, 20);
 		pnlProceso.add(txtBaliza3);
 		
 		JLabel lblBaliza_2 = new JLabel("Baliza 3:");
-		lblBaliza_2.setBounds(38, 138, 157, 14);
+		lblBaliza_2.setBounds(26, 128, 157, 14);
 		pnlProceso.add(lblBaliza_2);
 		
 		JLabel lblBaliza_3 = new JLabel("Baliza 4:");
-		lblBaliza_3.setBounds(38, 163, 157, 14);
+		lblBaliza_3.setBounds(26, 150, 157, 14);
 		pnlProceso.add(lblBaliza_3);
 		
 		txtBaliza4 = new JTextField();
 		txtBaliza4.setColumns(10);
-		txtBaliza4.setBounds(245, 160, 195, 20);
+		txtBaliza4.setBounds(233, 147, 229, 20);
 		pnlProceso.add(txtBaliza4);
 		
-		JLabel lblTiempoDeComprobacin = new JLabel("Minuto de comprobaci\u00F3n:");
-		lblTiempoDeComprobacin.setBounds(38, 40, 157, 14);
+		JLabel lblTiempoDeComprobacin = new JLabel("Intervalo comprobaci\u00F3n (min):");
+		lblTiempoDeComprobacin.setBounds(26, 40, 157, 14);
 		pnlProceso.add(lblTiempoDeComprobacin);
 		
 		txtMinutoComprobacion = new JTextField();
 		txtMinutoComprobacion.setColumns(10);
-		txtMinutoComprobacion.setBounds(245, 37, 195, 20);
+		txtMinutoComprobacion.setBounds(233, 37, 229, 20);
 		pnlProceso.add(txtMinutoComprobacion);
 		
 		JLabel lblFactorDeAjuste = new JLabel("Factor de Ajuste:");
-		lblFactorDeAjuste.setBounds(38, 191, 157, 14);
+		lblFactorDeAjuste.setBounds(26, 172, 157, 14);
 		pnlProceso.add(lblFactorDeAjuste);
 		
 		txtFactorAjuste = new JTextField();
 		txtFactorAjuste.setColumns(10);
-		txtFactorAjuste.setBounds(245, 185, 195, 20);
+		txtFactorAjuste.setBounds(233, 169, 229, 20);
 		pnlProceso.add(txtFactorAjuste);
 		
 		txtFactorMaximo = new JTextField();
 		txtFactorMaximo.setColumns(10);
-		txtFactorMaximo.setBounds(245, 208, 195, 20);
+		txtFactorMaximo.setBounds(233, 191, 229, 20);
 		pnlProceso.add(txtFactorMaximo);
 		
 		JLabel lblFactorDeMaximo = new JLabel("Factor de Maximo:");
-		lblFactorDeMaximo.setBounds(38, 214, 157, 14);
+		lblFactorDeMaximo.setBounds(26, 194, 157, 14);
 		pnlProceso.add(lblFactorDeMaximo);
 		
 		txtFactorPromedioDia = new JTextField();
 		txtFactorPromedioDia.setColumns(10);
-		txtFactorPromedioDia.setBounds(245, 231, 195, 20);
+		txtFactorPromedioDia.setBounds(233, 214, 229, 20);
 		pnlProceso.add(txtFactorPromedioDia);
 		
 		JLabel lblFactorPromedioDia = new JLabel("Factor Promedio Dia:");
-		lblFactorPromedioDia.setBounds(38, 237, 157, 14);
+		lblFactorPromedioDia.setBounds(26, 217, 157, 14);
 		pnlProceso.add(lblFactorPromedioDia);
 		
 		JLabel lblFactorIntervalo = new JLabel("Factor Intervalo 3:");
-		lblFactorIntervalo.setBounds(38, 260, 157, 14);
+		lblFactorIntervalo.setBounds(26, 240, 157, 14);
 		pnlProceso.add(lblFactorIntervalo);
 		
 		txtFactorIntervalo3 = new JTextField();
 		txtFactorIntervalo3.setColumns(10);
-		txtFactorIntervalo3.setBounds(245, 254, 195, 20);
+		txtFactorIntervalo3.setBounds(233, 237, 229, 20);
 		pnlProceso.add(txtFactorIntervalo3);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Tiempo (Servicio)", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(488, 11, 350, 148);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		txtHoraInicio = new JTextField();
+		txtHoraInicio.setColumns(10);
+		txtHoraInicio.setBounds(181, 30, 159, 20);
+		panel.add(txtHoraInicio);
+		
+		JLabel lblHoraInicio = new JLabel("Hora Inicio:");
+		lblHoraInicio.setBounds(10, 33, 101, 14);
+		panel.add(lblHoraInicio);
+		
+		txtHoraFin = new JTextField();
+		txtHoraFin.setColumns(10);
+		txtHoraFin.setBounds(181, 54, 159, 20);
+		panel.add(txtHoraFin);
+		
+		JLabel lblHoraFin = new JLabel("Hora Fin:");
+		lblHoraFin.setBounds(10, 57, 101, 14);
+		panel.add(lblHoraFin);
+		
+		JLabel lblComprobacionIniciom = new JLabel("Comprobacion Inicio (min):");
+		lblComprobacionIniciom.setBounds(10, 83, 161, 14);
+		panel.add(lblComprobacionIniciom);
+		
+		txtComprobacionInicio = new JTextField();
+		txtComprobacionInicio.setColumns(10);
+		txtComprobacionInicio.setBounds(181, 80, 159, 20);
+		panel.add(txtComprobacionInicio);
+		
+		JLabel lblComprobacionFinm = new JLabel("Comprobacion Fin (min):");
+		lblComprobacionFinm.setBounds(10, 108, 161, 14);
+		panel.add(lblComprobacionFinm);
+		
+		txtComprobacionFin = new JTextField();
+		txtComprobacionFin.setColumns(10);
+		txtComprobacionFin.setBounds(181, 105, 159, 20);
+		panel.add(txtComprobacionFin);
 
 		setTxtValues();
 	}
@@ -235,6 +288,12 @@ public class Configuracion extends JInternalFrame {
 			ReadConfiguration.getInstance().replaceValue(factorMaximoKey, txtFactorMaximo.getText());
 			ReadConfiguration.getInstance().replaceValue(factorPromedioDia, txtFactorPromedioDia.getText());
 			ReadConfiguration.getInstance().replaceValue(factorIntervalo3, txtFactorIntervalo3.getText());
+
+			ReadConfiguration.getInstance().replaceValue(horaInicio, txtHoraInicio.getText());
+			ReadConfiguration.getInstance().replaceValue(horaFin, txtHoraFin.getText());
+			ReadConfiguration.getInstance().replaceValue(comprobarInicio, txtComprobacionInicio.getText());
+			ReadConfiguration.getInstance().replaceValue(comprobarFin, txtComprobacionFin.getText());
+
 			
 			setTxtValues();
 			
@@ -263,6 +322,11 @@ public class Configuracion extends JInternalFrame {
 			txtFactorMaximo.setText(ReadConfiguration.getInstance().readValue(factorMaximoKey));
 			txtFactorPromedioDia.setText(ReadConfiguration.getInstance().readValue(factorPromedioDia));
 			txtFactorIntervalo3.setText(ReadConfiguration.getInstance().readValue(factorIntervalo3));
+			
+			txtHoraInicio.setText(ReadConfiguration.getInstance().readValue(horaInicio));
+			txtHoraFin.setText(ReadConfiguration.getInstance().readValue(horaFin));
+			txtComprobacionInicio.setText(ReadConfiguration.getInstance().readValue(comprobarInicio));
+			txtComprobacionFin.setText(ReadConfiguration.getInstance().readValue(comprobarFin));
 		}
 		catch (Exception e)
 		{
