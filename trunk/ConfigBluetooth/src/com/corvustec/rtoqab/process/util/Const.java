@@ -31,4 +31,13 @@ public class Const {
 	public static final String FACTOR_PROMEDIO_DIA = "com.corvustec.rtoqab.factor.promedio.dia";
 	
 	public static final String FACTOR_INTERVALO3 = "com.corvustec.rtoqab.factor.intervalo.3";
+	
+	public static final String HORA_INICIO = "com.corvustec.rtoqab.tiempo.inicio";
+	
+	public static final String HORA_FIN = "com.corvustec.rtoqab.tiempo.fin";
+	
+	public static final String COMPROBAR_INICIO = "com.corvustec.rtoqab.tiempo.comprobacion.inicio";
+	
+	public static final String COMPROBAR_FIN = "com.corvustec.rtoqab.tiempo.comprobacion.fin";
+	
 }
