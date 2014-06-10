@@ -18,7 +18,7 @@ public class ReadConfiguration {
 	}
 	
 	
-	public String readValue(String key)
+	public String readValue(String key) throws Exception
 	{
 		String pathConfiguration=MessagesApplicacion.getString("com.corvustec.rtoqab.configurarion.file.path");
 		String value = null;
@@ -32,11 +32,7 @@ public class ReadConfiguration {
 			linesDecryp = FileUtils.readLines(file);
 			for(int i=0;i<linesDecryp.size();i++)
 			{
-				try {
-					lines.add(Cryptography.getInstance().decrypt(linesDecryp.get(i)));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				lines.add(Cryptography.getInstance().decrypt(linesDecryp.get(i)));
 			}
 			
 			for(int i=0;i<lines.size();i++)
@@ -90,7 +86,7 @@ public class ReadConfiguration {
 		return value;
 	}
 	
-	public String replaceValue(String key,String val)
+	public String replaceValue(String key,String val) throws Exception
 	{
 		String pathConfiguration=MessagesApplicacion.getString("com.corvustec.rtoqab.configurarion.file.path");
 		String value = null;
@@ -104,11 +100,7 @@ public class ReadConfiguration {
 			lines = FileUtils.readLines(file);
 			for(int i=0;i<lines.size();i++)
 			{
-				try {
-					linesDecryp.add(Cryptography.getInstance().decrypt(lines.get(i)));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				linesDecryp.add(Cryptography.getInstance().decrypt(lines.get(i)));
 			}
 			for(int i=0;i<linesDecryp.size();i++)
 			{
@@ -121,11 +113,8 @@ public class ReadConfiguration {
 			if(indexLine!=null)
 			{
 				line=key+" = "+val;
-				try {
-					lines.set(indexLine, Cryptography.getInstance().encrypt(line));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				
+				lines.set(indexLine, Cryptography.getInstance().encrypt(line));
 			}
 			FileUtils.writeLines(file, lines);
 		} catch (IOException e) {
