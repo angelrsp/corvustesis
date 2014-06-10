@@ -2,24 +2,50 @@ package com.corvustec.rtoqab.process.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
 public class ReadConfiguration {
 
+	private static ReadConfiguration instance;
 	
-	public static String readValue(String key)
+	private List<String> linesEncryp,linesDecrypt;
+	private String pathConfiguration=MessagesApplicacion.getString("com.corvustec.rtoqab.configurarion.file.path");
+	
+	
+	public static ReadConfiguration getInstance() {
+		if(instance==null)
+			instance=new ReadConfiguration();
+		return instance;
+	}
+
+	public ReadConfiguration() {
+		File file;
+		try {
+			file=new File(pathConfiguration);
+			linesEncryp=FileUtils.readLines(file);
+			linesDecrypt=new ArrayList<String>();
+			for(int i=0;i<linesEncryp.size();i++)
+			{
+				linesDecrypt.add(Cryptography.getInstance().decrypt(linesEncryp.get(i)));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String readValue(String key)
 	{
-		String pathConfiguration=MessagesApplicacion.getString("com.corvustec.rtoqab.configurarion.file.path");
 		String value = null;
-		File file=new File(pathConfiguration);
 		List<String> lines;
 		Integer indexBase;
 		String[] words;
 		try {
-			lines = FileUtils.readLines(file);
-			
+			lines=linesDecrypt;
 			for(int i=0;i<lines.size();i++)
 			{
 				indexBase= lines.get(i).indexOf(key);
@@ -30,10 +56,11 @@ public class ReadConfiguration {
 					value=value.trim();
 				}
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}		
 		return value;
 	}
+	
 	
 }

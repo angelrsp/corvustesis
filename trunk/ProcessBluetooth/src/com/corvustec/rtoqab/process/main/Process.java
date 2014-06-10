@@ -35,7 +35,8 @@ public class Process {
 
 	private static Process instance;
 	
-	
+	private static String horaInicio=Const.HORA_INICIO;
+	private static String horaFin=Const.HORA_FIN;
 	
 	public static Process getInstance()
 	{
@@ -816,8 +817,8 @@ public class Process {
 		IntervaloTiempoDTO intervalo;
 		try {
 			intervaloTiempo=new ArrayList<IntervaloTiempoDTO>();
-			desde=Time.valueOf("08:00:00");
-			hasta= Time.valueOf("17:00:00");
+			desde=Time.valueOf(horaInicio);
+			hasta= Time.valueOf(horaFin);
 			
 			while(desde.before(hasta))
 			{
@@ -845,8 +846,8 @@ public class Process {
 		IntervaloTiempoDTO intervalo;
 		try {
 			intervaloTiempo=new ArrayList<IntervaloTiempoDTO>();
-			desde=Time.valueOf("08:00:00");
-			hasta= Time.valueOf("17:00:00");
+			desde=Time.valueOf(horaInicio);
+			hasta= Time.valueOf(horaFin);
 			
 			while(desde.before(hasta))
 			{
