@@ -14,6 +14,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.espejo.EntidadEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoVisorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.LeyDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalDTO;
@@ -322,11 +323,30 @@ public class EspejoServiceImpl implements EspejoService{
 		return espejoVisorList;
 	}
 
-
-	public String espejoResult(EspejoVisorDTO espejo)
+	@Override
+	public String espejoItem(EspejoVisorDTO espejo) throws CorvustecException
 	{
-		
-		return "";
+		StringBuilder sb;
+		try{
+			sb=new StringBuilder();
+			sb.append("<table>");
+			if(espejo.getTipo()==1)
+			{
+				EticaVieDTO eti=new EticaVieDTO();
+				eti.setEtiCodigo(espejo.getCodigo());
+				eti= factoryDAO.getEticaVieDAOImpl().getByAnd(eti).get(0);
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
+					sb.append("<td>");sb.append(eti.getCatPais());sb.append("</td>");
+				sb.append("</tr>");
+			}
+			sb.append("</table>");
+		}
+		catch(Exception e){
+			logger.info("Error createOrUpdateRed {}",e.toString());
+			throw new CorvustecException("Error espejoResult "+e.toString());
+		}
+		return sb.toString();
 	}
 	
 	/*Etica*/

@@ -49,6 +49,7 @@
 	<class>net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioPerfilDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.DefensorVieDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaVieDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>		

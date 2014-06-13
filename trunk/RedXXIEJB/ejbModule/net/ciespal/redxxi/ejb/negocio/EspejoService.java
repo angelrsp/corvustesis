@@ -13,6 +13,7 @@ import javax.ejb.Local;
 
 
 
+
 import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoVisorDTO;
@@ -119,6 +120,8 @@ public interface EspejoService {
 
 	void deletePremioCiespal(PremioCiespalDTO premioCiespal)
 			throws CorvustecException;
+
+	String espejoItem(EspejoVisorDTO espejo) throws CorvustecException;
 
 	
 
