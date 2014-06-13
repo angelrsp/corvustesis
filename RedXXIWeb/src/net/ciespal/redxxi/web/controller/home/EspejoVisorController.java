@@ -1,5 +1,7 @@
 package net.ciespal.redxxi.web.controller.home;
 
+import java.io.IOException;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -62,7 +64,14 @@ public class EspejoVisorController {
 
 	public void selectItem(EspejoVisorDTO espejoVisor)
 	{
-		
+		try {
+			espejoVisorDataManager.setItem(espejoService.espejoItem(espejoVisor));
+			JsfUtil.redirect(JsfUtil.getContextPath()+"/public/home/espejoItem.xhtml");
+		} catch (IOException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 	
 }

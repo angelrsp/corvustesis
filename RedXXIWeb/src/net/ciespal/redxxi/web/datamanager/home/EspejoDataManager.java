@@ -28,6 +28,8 @@ public class EspejoDataManager implements Serializable{
 	
 	private EspejoDTO espejo;
 
+	private String item;
+	
 	public EspejoDataManager() {
 		espejoList=new ArrayList<EspejoDTO>();
 		paisList=new ArrayList<PaisDTO>();
@@ -76,6 +78,14 @@ public class EspejoDataManager implements Serializable{
 
 	public void setEspejo(EspejoDTO espejo) {
 		this.espejo = espejo;
+	}
+
+	public String getItem() {
+		return item;
+	}
+
+	public void setItem(String item) {
+		this.item = item;
 	}
 	
 }
