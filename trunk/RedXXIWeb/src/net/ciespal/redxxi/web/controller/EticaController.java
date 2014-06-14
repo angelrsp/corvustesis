@@ -97,7 +97,6 @@ public class EticaController extends SelectItemController{
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
-		
 	}
 
 	public void ciudadChange()
