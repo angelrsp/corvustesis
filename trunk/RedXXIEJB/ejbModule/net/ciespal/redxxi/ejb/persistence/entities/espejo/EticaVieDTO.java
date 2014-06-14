@@ -14,8 +14,14 @@ import javax.persistence.*;
 public class EticaVieDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Column(name="cat_ciudad")
+	private String catCiudad;
+
 	@Column(name="cat_pais")
 	private String catPais;
+
+	@Column(name="cat_provincia")
+	private String catProvincia;
 
 	@Column(name="eti_anio")
 	private Integer etiAnio;
@@ -63,12 +69,28 @@ public class EticaVieDTO implements Serializable {
 	public EticaVieDTO() {
 	}
 
+	public String getCatCiudad() {
+		return this.catCiudad;
+	}
+
+	public void setCatCiudad(String catCiudad) {
+		this.catCiudad = catCiudad;
+	}
+
 	public String getCatPais() {
 		return this.catPais;
 	}
 
 	public void setCatPais(String catPais) {
 		this.catPais = catPais;
+	}
+
+	public String getCatProvincia() {
+		return this.catProvincia;
+	}
+
+	public void setCatProvincia(String catProvincia) {
+		this.catProvincia = catProvincia;
 	}
 
 	public Integer getEtiAnio() {

@@ -45,6 +45,7 @@ public interface FactoryDAO {
 	OpinionDAO getOpinionDAOImpl();
 	DefensorVieDAO getDefensorVieDAOImpl();
 	EticaVieDAO getEticaVieDAOImpl();
+	GranMaestroVieDAO getGranMaestroVieDAOImpl();
 	
 	
 
