@@ -22,6 +22,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.EticaVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.EventoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.GranMaestroDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.GranMaestroVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.LeyDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.MaestroCiespalDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.MencionDAO;
@@ -88,6 +89,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private EticaDAO eticaDAO;
 	private EticaVieDAO eticaVieDAO;
 	private GranMaestroDAO granMaestroDAO;
+	private GranMaestroVieDAO granMaestroVieDAO;
 	private MaestroCiespalDAO maestroCiespalDAO;
 	private PremioDAO premioDAO;
 	private PremioCiespalDAO premioCiespalDAO;
@@ -409,4 +411,11 @@ public class FactoryDAOImpl implements FactoryDAO{
 		return eticaVieDAO;
 	}
 
+	@Override
+	public GranMaestroVieDAO getGranMaestroVieDAOImpl() {
+		if (granMaestroVieDAO == null) {
+			granMaestroVieDAO = new GranMaestroVieDAOImpl(entityManager);
+		}
+		return granMaestroVieDAO;
+	}
 }

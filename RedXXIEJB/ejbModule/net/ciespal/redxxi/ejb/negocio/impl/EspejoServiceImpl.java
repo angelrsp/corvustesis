@@ -16,6 +16,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoVisorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.LeyDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
@@ -26,6 +27,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.corvustec.commons.util.ApplicationUtil;
 import com.corvustec.commons.util.CorvustecException;
 
 @Stateless
@@ -335,11 +337,88 @@ public class EspejoServiceImpl implements EspejoService{
 				EticaVieDTO eti=new EticaVieDTO();
 				eti.setEtiCodigo(espejo.getCodigo());
 				eti= factoryDAO.getEticaVieDAOImpl().getByAnd(eti).get(0);
+				
 				sb.append("<tr>");
 					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
 					sb.append("<td>");sb.append(eti.getCatPais());sb.append("</td>");
 				sb.append("</tr>");
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Estado/Provincia: ");sb.append("</td>");
+					sb.append("<td>");sb.append(eti.getCatProvincia());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Ciudad: ");sb.append("</td>");
+					sb.append("<td>");sb.append(eti.getCatCiudad());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Título de la Obra: ");sb.append("</td>");
+					sb.append("<td>");sb.append(eti.getEtiTituloObra());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Género de la Obra: ");sb.append("</td>");
+					sb.append("<td>");sb.append(eti.getEtiGeneroObra());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Autor(a) Nombres: ");sb.append("</td>");
+					sb.append("<td>");sb.append(eti.getEtiAutorNombre());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Año: ");sb.append("</td>");
+					sb.append("<td>");sb.append(eti.getEtiAnio());sb.append("</td>");
+				sb.append("</tr>");
+
+				if(eti.getEtiArchivo()!=null)
+				{				
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Archivo: ");sb.append("</td>");
+						sb.append("<td>");
+						sb.append("<a href='");
+						sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(eti.getEtiArchivoNombre(),eti.getEtiArchivo()).replace('\\', '/'));
+						sb.append("' target='_blank'>");
+						sb.append(eti.getEtiArchivoNombre());
+						sb.append("</a>");
+						sb.append("</td>");
+					sb.append("</tr>");
+				}
 			}
+			else if(espejo.getTipo()==2)
+			{
+				GranMaestroVieDTO gma=new GranMaestroVieDTO();
+				gma.setGmaCodigo(espejo.getCodigo());
+				gma=factoryDAO.getGranMaestroVieDAOImpl().getByAnd(gma).get(0);
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
+					sb.append("<td>");sb.append(gma.getCatPais());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Provincia/Estado: ");sb.append("</td>");
+					sb.append("<td>");sb.append(gma.getCatProvincia());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Ciudad: ");sb.append("</td>");
+					sb.append("<td>");sb.append(gma.getCatCiudad());sb.append("</td>");
+				sb.append("</tr>");
+
+				if(gma.getGmaFoto()!=null)
+				{
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Foto: ");sb.append("</td>");
+						sb.append("<td>");sb.append(gma.getCatCiudad());sb.append("</td>");
+					sb.append("</tr>");
+				}
+				
+			}
+			
+			
 			sb.append("</table>");
 		}
 		catch(Exception e){

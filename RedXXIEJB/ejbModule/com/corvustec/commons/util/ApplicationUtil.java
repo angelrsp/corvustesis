@@ -48,20 +48,23 @@ public class ApplicationUtil {
 		try {
 			//date=String.valueOf(CalendarUtil.getYear())+"\\"+String.valueOf(CalendarUtil.getMonth())+"\\"+String.valueOf(CalendarUtil.getDay());
 			
-			pathDir=MessagesApplicacion.getString("com.corvustec.redxxi.path.web")+"\\images\\tmp\\";
+			pathDir=MessagesApplicacion.getString("com.corvustec.redxxi.path.web")+"\\images\\tmp\\upload\\";
 			pathFile=pathDir+"\\"+fileName;
 			
 			f= new File(pathFile);
+			if(f.exists())
+				f.delete();
+			
+			f= new File(pathDir);
 			if(!f.exists())
-			{
-				f= new File(pathDir);
-				if(!f.exists())
-					f.mkdirs();
-				FileOutputStream fos=new FileOutputStream(pathFile);
-				fos.write(bytefile);
-				fos.close();
-			}	
-			pathFile="\\images\\tmp\\"+fileName;
+				f.mkdirs();
+			FileOutputStream fos=new FileOutputStream(pathFile);
+			fos.write(bytefile);
+			fos.close();
+			if(fileName.split("\\.")[1].equals("pdf"))
+				pathFile="\\images\\tmp\\upload\\"+fileName;
+			else
+				pathFile="\\images\\tmp\\upload\\"+fileName;
 			pathFile=pathFile.replace('\\', '/');
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -110,19 +113,24 @@ public class ApplicationUtil {
 	}
 	
 	
-//	public static String getTypeFile(byte[] content)
-//	{
-//		String mimeType = null;
-//		try {		
-//			MagicMatch match = Magic.getMagicMatch(content);
-//			mimeType = match.getMimeType();
-//		} catch (MagicParseException e) {
-//			e.printStackTrace();
-//		} catch (MagicMatchNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (MagicException e) {
-//			e.printStackTrace();
-//		}
-//		return mimeType;
-//	}
+	public static Boolean exitsFile(String fileName)
+	{
+		String pathDir=MessagesApplicacion.getString("com.corvustec.redxxi.path.web")+"\\images\\tmp\\upload\\"+fileName;
+		File file =new File(pathDir);
+		if(file.exists())
+			return Boolean.TRUE;
+		else
+			return Boolean.FALSE;
+	}
+	
+	public static String getPathFile(String fileName,byte[] fileArray)
+	{
+		if(exitsFile(fileName))
+			return "\\images\\tmp\\upload\\"+fileName;
+		else
+		{
+			saveToDisk(fileArray, fileName);
+			return "\\images\\tmp\\upload\\"+fileName;
+		}
+	}
 }
