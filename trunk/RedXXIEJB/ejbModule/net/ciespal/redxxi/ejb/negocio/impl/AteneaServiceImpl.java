@@ -37,6 +37,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.UniversidadVieDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.corvustec.commons.util.ApplicationUtil;
 import com.corvustec.commons.util.CorvustecException;
 
 @Stateless
@@ -666,6 +667,43 @@ public class AteneaServiceImpl implements AteneaService{
 					}
 				}
 			}
+			else if(atenea.getTipo()==104)
+			{
+				DoctorVieDTO doc=new DoctorVieDTO();
+				doc.setDocCodigo(atenea.getCodigo());
+				doc=factoryDAO.getDoctorVieDAOImpl().get(doc).get(0);
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
+					sb.append("<td>");sb.append(doc.getCatPais());sb.append("</td>");
+				sb.append("</tr>");
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Estado/Provincia: ");sb.append("</td>");
+					sb.append("<td>");sb.append(doc.getCatProvincia());sb.append("</td>");
+				sb.append("</tr>");
+	
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Ciudad: ");sb.append("</td>");
+					sb.append("<td>");sb.append(doc.getCatCiudad());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Nombres: ");sb.append("</td>");
+					sb.append("<td>");sb.append(doc.getDocNombres());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Apellidos: ");sb.append("</td>");
+					sb.append("<td>");sb.append(doc.getDocApellidos());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Fecha de Nacimiento: ");sb.append("</td>");
+					sb.append("<td>");sb.append(doc.getDocFechaNacimiento());sb.append("</td>");
+				sb.append("</tr>");
+
+			}
 			else if(atenea.getTipo()==105)
 			{
 				PublicacionVieDTO pub=new PublicacionVieDTO();
@@ -698,10 +736,44 @@ public class AteneaServiceImpl implements AteneaService{
 				sb.append("</tr>");
 				
 				sb.append("<tr>");
-					sb.append("<td>");sb.append("Tipo: ");sb.append("</td>");
-					sb.append("<td>");sb.append(pub.getCatTipo());sb.append("</td>");
+					sb.append("<td>");sb.append("Autor: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pub.getPubAutor());sb.append("</td>");
 				sb.append("</tr>");
 
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Año Publicación: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pub.getPubAnioPublicacion());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Campo Conocimiento: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pub.getCatSubCampo());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Tema: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pub.getPubTematica());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Resumen de la obra: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pub.getPubResumen());sb.append("</td>");
+				sb.append("</tr>");
+
+				if(pub.getPubArchivo()!=null)
+				{				
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Archivo: ");sb.append("</td>");
+						sb.append("<td>");
+						sb.append("<a href='");
+						sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(pub.getPubArchivoNombre(),pub.getPubArchivo()).replace('\\', '/'));
+						sb.append("' target='_blank'>");
+						sb.append(pub.getPubArchivoNombre());
+						sb.append("</a>");
+						sb.append("</td>");
+					sb.append("</tr>");
+				}
+				
 			}
 			sb.append("</table>");
 		}

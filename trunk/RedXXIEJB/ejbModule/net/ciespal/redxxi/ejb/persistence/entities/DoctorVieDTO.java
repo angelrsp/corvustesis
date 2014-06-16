@@ -24,6 +24,9 @@ public class DoctorVieDTO implements Serializable {
 	@Column(name="cat_provincia")
 	private String catProvincia;
 
+	@Column(name="cat_sexo")
+	private String catSexo;
+
 	@Column(name="doc_anio_titulacion")
 	private Integer docAnioTitulacion;
 
@@ -104,6 +107,14 @@ public class DoctorVieDTO implements Serializable {
 
 	public void setCatProvincia(String catProvincia) {
 		this.catProvincia = catProvincia;
+	}
+
+	public String getCatSexo() {
+		return this.catSexo;
+	}
+
+	public void setCatSexo(String catSexo) {
+		this.catSexo = catSexo;
 	}
 
 	public Integer getDocAnioTitulacion() {
