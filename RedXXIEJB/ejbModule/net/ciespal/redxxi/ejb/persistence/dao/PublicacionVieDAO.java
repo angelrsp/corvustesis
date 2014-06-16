@@ -11,4 +11,7 @@ public interface PublicacionVieDAO {
 	List<PublicacionVieDTO> get(PublicacionVieDTO publicacion)
 			throws CorvustecException;
 
+	List<PublicacionVieDTO> getByAnd(PublicacionVieDTO objetoDTO)
+			throws CorvustecException;
+
 }
