@@ -1,5 +1,7 @@
 package net.ciespal.redxxi.web.controller.home;
 
+import java.io.IOException;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -7,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.negocio.ArgosService;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ArgosDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ArgosVisorDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.home.ArgosDataManager;
 import net.ciespal.redxxi.web.datamanager.home.ArgosVisorDataManager;
@@ -57,5 +60,18 @@ public class ArgosVisorController {
 		}
 	}
 
+
+	public void selectItem(ArgosVisorDTO item)
+	{
+		try {
+			argosVisorDataManager.setItem(argosService.argosItem(item));
+			JsfUtil.redirect(JsfUtil.getContextPath()+"/public/home/argosItem.xhtml");
+		} catch (IOException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+
+	}
 	
 }

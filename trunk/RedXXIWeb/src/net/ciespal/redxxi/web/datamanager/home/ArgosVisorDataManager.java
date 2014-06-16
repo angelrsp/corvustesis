@@ -14,6 +14,19 @@ public class ArgosVisorDataManager implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private String item;
+	
+	public ArgosVisorDataManager() {
+	
+	}
+
+	public String getItem() {
+		return item;
+	}
+
+	public void setItem(String item) {
+		this.item = item;
+	}
 	
 	
 }
