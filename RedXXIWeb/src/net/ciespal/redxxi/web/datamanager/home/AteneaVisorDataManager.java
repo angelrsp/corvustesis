@@ -32,6 +32,9 @@ public class AteneaVisorDataManager implements Serializable{
 	
 	private List<ContactoListDTO> contactoList;
 	
+	private String item;
+	
+	
 	public AteneaVisorDataManager() {
 		ateneaVistorList=new ArrayList<AteneaVisorDTO>();
 		facultadList=new FacultadListDTO();
@@ -78,6 +81,14 @@ public class AteneaVisorDataManager implements Serializable{
 
 	public void setContactoList(List<ContactoListDTO> contactoList) {
 		this.contactoList = contactoList;
+	}
+
+	public String getItem() {
+		return item;
+	}
+
+	public void setItem(String item) {
+		this.item = item;
 	}
 	
 	
