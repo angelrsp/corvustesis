@@ -49,6 +49,8 @@ public interface FactoryDAO {
 	MaestroCiespalVieDAO getMaestroCiespalVieDAOImpl();
 	PremioVieDAO getPremioVieDAOImpl();
 	LeyVieDAO getLeyVieDAOImpl();
+	ObservatorioVieDAO getObservatorioVieDAOImpl();
+	VeeduriaVieDAO getVeeduriaVieDAOImpl();
 	
 	
 

@@ -20,9 +20,11 @@ import net.ciespal.redxxi.ejb.persistence.entities.argos.DefensorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.DefensorVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.EntidadArgosDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.OpinionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.RedDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.argos.VeeduriaDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.VeeduriaVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioPerfilDTO;
@@ -227,7 +229,8 @@ public class ArgosServiceImpl implements ArgosService{
 				argosVisor.setCodigo(objeto.getOpiCodigo());
 				
 				argosVisor.setTitulo("Nombres y Apellidos: " +objeto.getUsuNombres()+" "+objeto.getUsuApellidos());
-				argosVisor.setDescripcion1("Fecha :"+objeto.getOpiFechaReferencia().toString().substring(0, 10));
+				if(objeto.getOpiFechaReferencia().toString().length()>10)
+					argosVisor.setDescripcion1("Fecha :"+objeto.getOpiFechaReferencia().toString().substring(0, 10));
 				argosVisor.setDescripcion2("Medio de Comunicación :"+objeto.getOpiMedio());
 				argosVisor.setDescripcion3("Tema de referencia :"+objeto.getOpiTemaReferencia());
 				argosVisor.setTipo(argos.getTipo());
@@ -238,6 +241,205 @@ public class ArgosServiceImpl implements ArgosService{
 		return argosVisorList;
 	}
 
+	@Override
+	public String argosItem(ArgosVisorDTO argos) throws CorvustecException
+	{
+		StringBuilder sb;
+		try{
+			sb=new StringBuilder();
+			sb.append("<table>");
+			
+			if(argos.getTipo()==1)
+			{
+				ObservatorioVieDTO obs=new ObservatorioVieDTO();
+				obs.setObsCodigo(argos.getCodigo());
+				obs= factoryDAO.getObservatorioVieDAOImpl().getByAnd(obs).get(0);
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
+					sb.append("<td>");sb.append(obs.getCatPais());sb.append("</td>");
+				sb.append("</tr>");
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Estado/Provincia: ");sb.append("</td>");
+					sb.append("<td>");sb.append(obs.getCatProvincia());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Ciudad: ");sb.append("</td>");
+					sb.append("<td>");sb.append(obs.getCatCiudad());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Nombre del Observatorio: ");sb.append("</td>");
+					sb.append("<td>");sb.append(obs.getObsNombre());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Organización(es) patrocinadora(s): ");sb.append("</td>");
+					sb.append("<td>");sb.append(obs.getObsInstitucionPatrocinadora());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Año de Fundación: ");sb.append("</td>");
+					sb.append("<td>");sb.append(obs.getObsAnioFundacion());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Misión: ");sb.append("</td>");
+					sb.append("<td>");sb.append(obs.getObsMision());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Líneas Temáticas: ");sb.append("</td>");
+					sb.append("<td>");sb.append(obs.getObsLineaTematica());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Actividades Principales: ");sb.append("</td>");
+					sb.append("<td>");sb.append(obs.getObsActividadesPrincipales());sb.append("</td>");
+				sb.append("</tr>");
+				
+				ObservatorioDTO o=factoryDAO.getObservatorioDAOImpl().find(obs.getObsCodigo());
+				List<ContactoArgosListDTO> listContacto=factoryDAO.getContactoArgosDAOImpl().getAll(o.getArgEntidad());
+				
+				if(listContacto!=null)
+				{
+					sb.append("<tr>");
+						sb.append("<td colspan='2'>");sb.append("Contactos: ");sb.append("</td>");
+					sb.append("</tr>");
+					for(ContactoArgosListDTO con:listContacto)
+					{
+						sb.append("<tr>");
+							sb.append("<td>");sb.append(con.getCatTipo());sb.append("</td>");
+							sb.append("<td>");sb.append(con.getConDescripcion());sb.append("</td>");
+						sb.append("</tr>");						
+					}
+				}
+			}
+			else if(argos.getTipo()==2)
+			{
+				VeeduriaVieDTO vee=new VeeduriaVieDTO();
+				vee.setVeeCodigo(argos.getCodigo());
+				vee= factoryDAO.getVeeduriaVieDAOImpl().getByAnd(vee).get(0);
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
+					sb.append("<td>");sb.append(vee.getCatPais());sb.append("</td>");
+				sb.append("</tr>");
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Estado/Provincia: ");sb.append("</td>");
+					sb.append("<td>");sb.append(vee.getCatProvincia());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Ciudad: ");sb.append("</td>");
+					sb.append("<td>");sb.append(vee.getCatCiudad());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Nombre de la Veeduría: ");sb.append("</td>");
+					sb.append("<td>");sb.append(vee.getVeeNombre());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Organización(es) patrocinadora(s): ");sb.append("</td>");
+					sb.append("<td>");sb.append(vee.getVeeInstitucionPatrocinadora());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Año de Fundación: ");sb.append("</td>");
+					sb.append("<td>");sb.append(vee.getVeeAnioFundacion());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Misión: ");sb.append("</td>");
+					sb.append("<td>");sb.append(vee.getVeeMision());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Líneas Temáticas: ");sb.append("</td>");
+					sb.append("<td>");sb.append(vee.getVeeLineaTematica());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Actividades Principales: ");sb.append("</td>");
+					sb.append("<td>");sb.append(vee.getVeeActividadPrinciapl());sb.append("</td>");
+				sb.append("</tr>");
+				
+				VeeduriaDTO v=factoryDAO.getVeeduriaDAOImpl().find(vee.getVeeCodigo());
+				List<ContactoArgosListDTO> listContacto=factoryDAO.getContactoArgosDAOImpl().getAll(v.getArgEntidad());
+				
+				if(listContacto!=null)
+				{
+					sb.append("<tr>");
+						sb.append("<td colspan='2'>");sb.append("Contactos: ");sb.append("</td>");
+					sb.append("</tr>");
+					for(ContactoArgosListDTO con:listContacto)
+					{
+						sb.append("<tr>");
+							sb.append("<td>");sb.append(con.getCatTipo());sb.append("</td>");
+							sb.append("<td>");sb.append(con.getConDescripcion());sb.append("</td>");
+						sb.append("</tr>");						
+					}
+				}				
+			}
+			else if(argos.getTipo()==3)
+			{
+				DefensorVieDTO def=new DefensorVieDTO();
+				def.setOpiCodigo(argos.getCodigo());
+				def= factoryDAO.getDefensorVieDAOImpl().getByAnd(def).get(0);
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
+					sb.append("<td>");sb.append(def.getCatPais());sb.append("</td>");
+				sb.append("</tr>");
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Estado/Provincia: ");sb.append("</td>");
+					sb.append("<td>");sb.append(def.getCatProvincia());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Ciudad: ");sb.append("</td>");
+					sb.append("<td>");sb.append(def.getCatCiudad());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Nombres: ");sb.append("</td>");
+					sb.append("<td>");sb.append(def.getUsuNombres());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Apellidos: ");sb.append("</td>");
+					sb.append("<td>");sb.append(def.getUsuApellidos());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Medio de Comunicación: ");sb.append("</td>");
+					sb.append("<td>");sb.append(def.getOpiMedio());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Tema de Referencia: ");sb.append("</td>");
+					sb.append("<td>");sb.append(def.getOpiTemaReferencia());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Opinión: ");sb.append("</td>");
+					sb.append("<td>");sb.append(def.getOpiComentario());sb.append("</td>");
+				sb.append("</tr>");
+
+			}
+			sb.append("</table>");
+		}
+		catch(Exception e){
+			logger.info("Error argosResult {}",e.toString());
+			throw new CorvustecException("Error argosResult "+e.toString());
+		}
+		return sb.toString();
+	}
 		
 	/*Red*/
 	@Override

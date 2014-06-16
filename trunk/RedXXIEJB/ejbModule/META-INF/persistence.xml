@@ -48,12 +48,14 @@
 	<class>net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioPerfilDTO</class>
-	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.DefensorVieDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaVieDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroVieDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalVieDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioVieDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.LeyVieDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.ObservatorioVieDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.VeeduriaVieDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.argos.DefensorVieDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>		
