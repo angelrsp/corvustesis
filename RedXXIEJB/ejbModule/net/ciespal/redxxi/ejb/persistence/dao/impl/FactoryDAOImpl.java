@@ -35,6 +35,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.NoticiaEspejoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ObraDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ObraEspejoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ObservatorioDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.ObservatorioVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.OpinionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.OrganizacioDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PerfilDAO;
@@ -48,6 +49,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.RedDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.UsuarioDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.UsuarioPerfilDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.VeeduriaDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.VeeduriaVieDAO;
 
 
 @Stateless
@@ -83,7 +85,9 @@ public class FactoryDAOImpl implements FactoryDAO{
 	
 	private RedDAO redDAO; 
 	private ObservatorioDAO observatorioDAO;
+	private ObservatorioVieDAO observatorioVieDAO;
 	private VeeduriaDAO veeduriaDAO;
+	private VeeduriaVieDAO veeduriaVieDAO;
 	private ContactoArgosDAO contactoArgosDAO;
 	private DefensorDAO defensorDAO;
 	private DefensorVieDAO defensorVieDAO;
@@ -447,6 +451,22 @@ public class FactoryDAOImpl implements FactoryDAO{
 			leyVieDAO = new LeyVieDAOImpl(entityManager);
 		}
 		return leyVieDAO;
+	}
+
+	@Override
+	public ObservatorioVieDAO getObservatorioVieDAOImpl() {
+		if (observatorioVieDAO == null) {
+			observatorioVieDAO = new ObservatorioVieDAOImpl(entityManager);
+		}
+		return observatorioVieDAO;
+	}
+
+	@Override
+	public VeeduriaVieDAO getVeeduriaVieDAOImpl() {
+		if (veeduriaVieDAO == null) {
+			veeduriaVieDAO = new VeeduriaVieDAOImpl(entityManager);
+		}
+		return veeduriaVieDAO;
 	}
 
 }

@@ -50,5 +50,6 @@ public interface ArgosService {
 			throws CorvustecException;
 	List<PaisDTO> readPais(Object type) throws CorvustecException;
 	List<ArgosVisorDTO> visorList(ArgosDTO argos) throws CorvustecException;
+	String argosItem(ArgosVisorDTO argos) throws CorvustecException;
 
 }
