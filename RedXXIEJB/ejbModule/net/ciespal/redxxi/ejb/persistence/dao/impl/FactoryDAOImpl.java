@@ -24,7 +24,9 @@ import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.GranMaestroDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.GranMaestroVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.LeyDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.LeyVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.MaestroCiespalDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.MaestroCiespalVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.MencionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.MenuDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ModalidadDAO;
@@ -38,6 +40,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.OrganizacioDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PerfilDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PremioCiespalDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PremioDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.PremioVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ProyectoInvestigacionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PublicacionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PublicacionVieDAO;
@@ -91,9 +94,12 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private GranMaestroDAO granMaestroDAO;
 	private GranMaestroVieDAO granMaestroVieDAO;
 	private MaestroCiespalDAO maestroCiespalDAO;
+	private MaestroCiespalVieDAO maestroCiespalVieDAO;
 	private PremioDAO premioDAO;
+	private PremioVieDAO premioVieDAO;
 	private PremioCiespalDAO premioCiespalDAO;
 	private LeyDAO leyDAO;
+	private LeyVieDAO leyVieDAO;
 	private ObraEspejoDAO obraEspejoDAO;
 	private NoticiaEspejoDAO noticiaEspejoDAO;
 	
@@ -418,4 +424,29 @@ public class FactoryDAOImpl implements FactoryDAO{
 		}
 		return granMaestroVieDAO;
 	}
+	
+	@Override
+	public MaestroCiespalVieDAO getMaestroCiespalVieDAOImpl() {
+		if (maestroCiespalVieDAO == null) {
+			maestroCiespalVieDAO = new MaestroCiespalVieDAOImpl(entityManager);
+		}
+		return maestroCiespalVieDAO;
+	}
+
+	@Override
+	public PremioVieDAO getPremioVieDAOImpl() {
+		if (premioVieDAO == null) {
+			premioVieDAO = new PremioVieDAOImpl(entityManager);
+		}
+		return premioVieDAO;
+	}
+
+	@Override
+	public LeyVieDAO getLeyVieDAOImpl() {
+		if (leyVieDAO == null) {
+			leyVieDAO = new LeyVieDAOImpl(entityManager);
+		}
+		return leyVieDAO;
+	}
+
 }

@@ -46,6 +46,9 @@ public interface FactoryDAO {
 	DefensorVieDAO getDefensorVieDAOImpl();
 	EticaVieDAO getEticaVieDAOImpl();
 	GranMaestroVieDAO getGranMaestroVieDAOImpl();
+	MaestroCiespalVieDAO getMaestroCiespalVieDAOImpl();
+	PremioVieDAO getPremioVieDAOImpl();
+	LeyVieDAO getLeyVieDAOImpl();
 	
 	
 
