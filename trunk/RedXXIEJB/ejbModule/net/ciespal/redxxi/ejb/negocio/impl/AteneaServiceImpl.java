@@ -32,6 +32,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.UniversidadListDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.UniversidadVieDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -593,7 +594,7 @@ public class AteneaServiceImpl implements AteneaService{
 			publicacionVieDTO.setPubTipo(null);
 			publicacionVieDTO.setPubPais(atenea.getPais());
 
-			listPublicacion=factoryDAO.getPublicacionVieDAOImpl().get(publicacionVieDTO);
+			listPublicacion=factoryDAO.getPublicacionVieDAOImpl().getByAnd(publicacionVieDTO);
 
 			for(PublicacionVieDTO pub: listPublicacion){
 				
@@ -611,7 +612,106 @@ public class AteneaServiceImpl implements AteneaService{
 		return ateneaVisorList;
 	}
 
+	@Override
+	public String ateneaItem(AteneaVisorDTO atenea) throws CorvustecException
+	{
+		StringBuilder sb;
+		try{
+			sb=new StringBuilder();
+			sb.append("<table>");
+			if(atenea.getTipo()==2)
+			{
+				
+				CentroDTO facultad=factoryDAO.getCentroDAOImpl().find(atenea.getCodigo());
+				
+				UniversidadVieDTO uni=new UniversidadVieDTO();
+				uni.setCenCodigo(facultad.getAteCentro().getCenCodigo());
+				uni= factoryDAO.getUniversidadVieDAOImpl().getByAnd(uni).get(0);
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
+					sb.append("<td>");sb.append(uni.getCatPais());sb.append("</td>");
+				sb.append("</tr>");
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Estado/Provincia: ");sb.append("</td>");
+					sb.append("<td>");sb.append(uni.getCatProvincia());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Ciudad: ");sb.append("</td>");
+					sb.append("<td>");sb.append(uni.getCatCiudad());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Nombre de la Universidad: ");sb.append("</td>");
+					sb.append("<td>");sb.append(uni.getCenNombre());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Pagina Web: ");sb.append("</td>");
+					sb.append("<td>");sb.append(uni.getCenPaginaWeb());sb.append("</td>");
+				sb.append("</tr>");
+				
+				CentroDTO universidad=factoryDAO.getCentroDAOImpl().find(uni.getCenCodigo());
+				List<CentroDTO> faculList=factoryDAO.getCentroDAOImpl().findAllChild(universidad);
+				if(faculList!=null)
+				{
+					for(CentroDTO fac:faculList)
+					{
+						sb.append("<tr>");
+							sb.append("<td>");sb.append("Nombre de la Facultad: ");sb.append("</td>");
+							sb.append("<td>");sb.append(fac.getCenNombre());sb.append("</td>");
+						sb.append("</tr>");
+					}
+				}
+			}
+			else if(atenea.getTipo()==105)
+			{
+				PublicacionVieDTO pub=new PublicacionVieDTO();
+				pub.setPubCodigo(atenea.getCodigo());
+				pub=factoryDAO.getPublicacionVieDAOImpl().getByAnd(pub).get(0);
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pub.getCatPais());sb.append("</td>");
+				sb.append("</tr>");
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Estado/Provincia: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pub.getCatProvincia());sb.append("</td>");
+				sb.append("</tr>");
 	
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Ciudad: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pub.getCatCiudad());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Título: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pub.getPubTitulo());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Tipo: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pub.getCatTipo());sb.append("</td>");
+				sb.append("</tr>");
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Tipo: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pub.getCatTipo());sb.append("</td>");
+				sb.append("</tr>");
+
+			}
+			sb.append("</table>");
+		}
+		catch(Exception e){
+			logger.info("Error ateneaItem {}",e.toString());
+			throw new CorvustecException("Error ateneaItem "+e.toString());
+		}
+		return sb.toString();
+
+	}
 	
 	/* Centro */
 	@Override

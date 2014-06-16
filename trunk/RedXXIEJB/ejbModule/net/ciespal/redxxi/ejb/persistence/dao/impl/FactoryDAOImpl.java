@@ -46,6 +46,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.ProyectoInvestigacionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PublicacionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PublicacionVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.RedDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.UniversidadVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.UsuarioDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.UsuarioPerfilDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.VeeduriaDAO;
@@ -82,6 +83,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private ObraDAO obraDAO;
 	private DoctorVieDAO doctorVieDAO;
 	private PublicacionVieDAO publicacionVieDAO;
+	private UniversidadVieDAO universidadVieDAO;
 	
 	private RedDAO redDAO; 
 	private ObservatorioDAO observatorioDAO;
@@ -467,6 +469,14 @@ public class FactoryDAOImpl implements FactoryDAO{
 			veeduriaVieDAO = new VeeduriaVieDAOImpl(entityManager);
 		}
 		return veeduriaVieDAO;
+	}
+
+	@Override
+	public UniversidadVieDAO getUniversidadVieDAOImpl() {
+		if (universidadVieDAO == null) {
+			universidadVieDAO = new UniversidadVieDAOImpl(entityManager);
+		}
+		return universidadVieDAO;
 	}
 
 }
