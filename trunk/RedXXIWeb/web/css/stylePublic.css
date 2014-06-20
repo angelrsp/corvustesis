@@ -60,6 +60,14 @@ a.linkClassNoticia:hover {color: #FAA723; text-decoration: underline;font-family
 	height: 112px;
 }
 
+.defensordiv{
+	background-image: url("../images/defensores-banner.gif");
+	background-repeat:no-repeat;
+	background-size: 100%;
+	width: 300px;
+	height: 100px;
+}
+
 .titleNoticia
 {
 	color: #F57B20;
