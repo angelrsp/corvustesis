@@ -33,6 +33,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.UniversidadListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.UniversidadVieDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosListDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -703,6 +704,89 @@ public class AteneaServiceImpl implements AteneaService{
 					sb.append("<td>");sb.append(doc.getDocFechaNacimiento());sb.append("</td>");
 				sb.append("</tr>");
 
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Sexo: ");sb.append("</td>");
+					sb.append("<td>");sb.append(doc.getCatSexo());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Institución de Trabajo: ");sb.append("</td>");
+					sb.append("<td>");sb.append(doc.getDocInstitucionTrabajo());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Institución de Titulación (PHD): ");sb.append("</td>");
+					sb.append("<td>");sb.append(doc.getDocInstitucionTitulacion());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Título Tesis: ");sb.append("</td>");
+					sb.append("<td>");sb.append(doc.getDocTituloTesis());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Resumen de Tesis: ");sb.append("</td>");
+					sb.append("<td>");sb.append(doc.getDocResumenTesis());sb.append("</td>");
+				sb.append("</tr>");
+
+				if(doc.getDocArchivoTesis()!=null)
+				{				
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Archivo: ");sb.append("</td>");
+						sb.append("<td>");
+						sb.append("<a href='");
+						sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(doc.getDocArchivoTesisNombre(),doc.getDocArchivoTesis()).replace('\\', '/'));
+						sb.append("' target='_blank'>");
+						sb.append(doc.getDocArchivoTesisNombre());
+						sb.append("</a>");
+						sb.append("</td>");
+					sb.append("</tr>");
+				}
+
+				sb.append("<tr>");
+					sb.append("<td colspan='2'>");sb.append("Obras: ");sb.append("</td>");
+				sb.append("</tr>");
+				
+				DoctorDTO d=new DoctorDTO();
+				doc.setDocCodigo(doc.getDocCodigo());
+				List<PublicacionDTO> pubList= factoryDAO.getPublicacionDAOImpl().getAll(d);
+				if(pubList!=null)
+				{
+					for(PublicacionDTO pub:pubList)
+					{
+						if(pub.getPubArchivo()!=null)
+						{				
+							sb.append("<tr>");
+								sb.append("<td>");sb.append("Archivo: ");sb.append("</td>");
+								sb.append("<td>");
+								sb.append("<a href='");
+								sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(pub.getPubArchivoNombre(),pub.getPubArchivo()).replace('\\', '/'));
+								sb.append("' target='_blank'>");
+								sb.append(pub.getPubArchivoNombre());
+								sb.append("</a>");
+								sb.append("</td>");
+							sb.append("</tr>");
+						}
+					}
+				}
+				
+				List<ContactoListDTO> listContacto=factoryDAO.getContactoDAOImpl().getAll(d);
+				
+				if(listContacto!=null)
+				{
+					sb.append("<tr>");
+						sb.append("<td colspan='2'>");sb.append("Contactos: ");sb.append("</td>");
+					sb.append("</tr>");
+					for(ContactoListDTO con:listContacto)
+					{
+						sb.append("<tr>");
+							sb.append("<td>");sb.append(con.getCatTipo());sb.append("</td>");
+							sb.append("<td>");sb.append(con.getConValor());sb.append("</td>");
+						sb.append("</tr>");						
+					}
+				}
+
+				
 			}
 			else if(atenea.getTipo()==105)
 			{
