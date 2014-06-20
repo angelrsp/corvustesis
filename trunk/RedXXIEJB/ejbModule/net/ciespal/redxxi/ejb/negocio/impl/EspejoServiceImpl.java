@@ -1077,6 +1077,27 @@ public class EspejoServiceImpl implements EspejoService{
 		}
 	}
 	
+	@Override
+	public void deleteLeyCodigo(LeyDTO ley) throws CorvustecException
+	{
+		logger.info("deleteLeyCodigo");
+		List<NoticiaEspejoDTO> listNoticia;
+		try{
+			listNoticia= factoryDAO.getNoticiaEspejoDAOImpl().findAll(ley);
+			if(listNoticia!=null)
+			{
+				for(NoticiaEspejoDTO not:listNoticia)
+					factoryDAO.getNoticiaEspejoDAOImpl().remove(not);
+			}
+			factoryDAO.getLeyDAOImpl().remove(ley);
+		}
+		catch(Exception e){
+			logger.info("Error deletePremioCiespal {}",e.toString());
+			throw new CorvustecException("Error al deletePremioCiespal "+e.toString());
+		}
+	}
+	
+	
 	/*Noticia*/
 	@Override
 	public NoticiaEspejoDTO createOrUpdateNoticia(NoticiaEspejoDTO noticia) throws CorvustecException

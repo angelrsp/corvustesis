@@ -123,6 +123,8 @@ public interface EspejoService {
 
 	String espejoItem(EspejoVisorDTO espejo) throws CorvustecException;
 
+	void deleteLeyCodigo(LeyDTO ley) throws CorvustecException;
+
 	
 
 }

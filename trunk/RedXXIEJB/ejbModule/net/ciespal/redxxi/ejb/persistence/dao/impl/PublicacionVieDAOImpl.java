@@ -111,7 +111,11 @@ public class PublicacionVieDAOImpl extends AbstractFacadeImpl<PublicacionVieDTO>
 				    }
 				}
 	        }
-	
+
+	    	predicate=cb.isNull(from.get("entCodigo"));
+	    	predicateList.add(predicate);                	
+	        
+	        
 	        if(!predicateList.isEmpty())
 	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
 			

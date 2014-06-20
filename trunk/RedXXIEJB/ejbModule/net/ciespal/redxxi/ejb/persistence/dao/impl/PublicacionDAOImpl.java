@@ -142,9 +142,6 @@ public class PublicacionDAOImpl extends AbstractFacadeImpl<PublicacionDTO> imple
 			predicate=null;
 			predicateList=null;
 		}
-
-		
-		
 	}	
 
 	@Override
@@ -163,6 +160,8 @@ public class PublicacionDAOImpl extends AbstractFacadeImpl<PublicacionDTO> imple
 			
 			from= cq.from(PublicacionDTO.class);
 			
+			Path<EntidadDTO> join1=from.join("ateEntidads",JoinType.LEFT);
+			
 			cq.multiselect(cb.count(from.get("pubCodigo")));
 			
 			predicateList=new ArrayList<Predicate>();
@@ -178,6 +177,9 @@ public class PublicacionDAOImpl extends AbstractFacadeImpl<PublicacionDTO> imple
 				predicate=cb.equal(from.get("pubPais"),pais);
 				predicateList.add(predicate);
 			}
+			
+			predicate=cb.isNull(join1.get("atePublicacion").get("pubCodigo"));
+			predicateList.add(predicate);
 			
 			cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
 			
@@ -197,7 +199,7 @@ public class PublicacionDAOImpl extends AbstractFacadeImpl<PublicacionDTO> imple
 			predicate=null;
 			predicateList=null;
 		}
-	}	
+	}
 
 	
 	@Override
