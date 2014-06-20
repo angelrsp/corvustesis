@@ -90,7 +90,14 @@ public class LeyCodigoController extends SelectItemController {
 
 	public void delete(LeyDTO ley)
 	{
-		
+		try {
+			espejoService.deleteLeyCodigo(ley);
+			read();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+
 	}
 
 	public void ciudadChange()
@@ -147,7 +154,13 @@ public class LeyCodigoController extends SelectItemController {
 	
 	public void deleteNoticia(NoticiaEspejoDTO noticia)
 	{
-		
+		try {
+			espejoService.deleteNoticia(noticia);
+			readNoticia();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
 	}
 
 	public void handleFileUploadArchivo(FileUploadEvent event)
