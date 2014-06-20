@@ -27,13 +27,13 @@ import net.ciespal.redxxi.ejb.persistence.entities.ModalidadDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.NoticiaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ObraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ProyectoInvestigacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.PublicacionVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.UniversidadListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.UniversidadVieDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.argos.ContactoArgosListDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -668,6 +668,73 @@ public class AteneaServiceImpl implements AteneaService{
 					}
 				}
 			}
+		
+			else if(atenea.getTipo()==103)
+			{
+				OrganizacionVieDTO org=new OrganizacionVieDTO();
+				org.setOrgCodigo(atenea.getCodigo());
+				org=factoryDAO.getOrganizacionVieDAOImpl().getByAnd(org).get(0);
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
+					sb.append("<td>");sb.append(org.getCatPais());sb.append("</td>");
+				sb.append("</tr>");
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Estado/Provincia: ");sb.append("</td>");
+					sb.append("<td>");sb.append(org.getCatProvincia());sb.append("</td>");
+				sb.append("</tr>");
+	
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Ciudad: ");sb.append("</td>");
+					sb.append("<td>");sb.append(org.getCatCiudad());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Nombre de la Organización: ");sb.append("</td>");
+					sb.append("<td>");sb.append(org.getOrgNombre());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Año de su Fundación: ");sb.append("</td>");
+					sb.append("<td>");sb.append(org.getOrgAnioFundacion());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Filiación (institución superior): ");sb.append("</td>");
+					sb.append("<td>");sb.append(org.getOrgInstitucionSuperior());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Misión: ");sb.append("</td>");
+					sb.append("<td>");sb.append(org.getOrgMision());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Datos Institucionales: ");sb.append("</td>");
+					sb.append("<td>");sb.append(org.getOrgDatosInstitucionales());sb.append("</td>");
+				sb.append("</tr>");
+
+				OrganizacionDTO o=new OrganizacionDTO();
+				o.setOrgCodigo(org.getOrgCodigo());
+				
+				List<ContactoListDTO> listContacto=factoryDAO.getContactoDAOImpl().getAll(o);
+				
+				if(listContacto!=null)
+				{
+					sb.append("<tr>");
+						sb.append("<td colspan='2'>");sb.append("Contactos: ");sb.append("</td>");
+					sb.append("</tr>");
+					for(ContactoListDTO con:listContacto)
+					{
+						sb.append("<tr>");
+							sb.append("<td>");sb.append(con.getCatTipo());sb.append("</td>");
+							sb.append("<td>");sb.append(con.getConValor());sb.append("</td>");
+						sb.append("</tr>");						
+					}
+				}
+			}		
+			
 			else if(atenea.getTipo()==104)
 			{
 				DoctorVieDTO doc=new DoctorVieDTO();
