@@ -53,6 +53,7 @@ public interface FactoryDAO {
 	VeeduriaVieDAO getVeeduriaVieDAOImpl();
 	UniversidadVieDAO getUniversidadVieDAOImpl();
 	OrganizacionVieDAO getOrganizacionVieDAOImpl();
+	ModalidadVieDAO getModalidadVieDAOImpl();
 	
 	
 
