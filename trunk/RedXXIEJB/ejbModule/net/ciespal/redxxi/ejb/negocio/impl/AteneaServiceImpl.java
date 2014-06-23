@@ -24,6 +24,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.EventoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.FacultadListDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.MencionDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ModalidadDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.ModalidadVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.NoticiaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.ObraDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.OrganizacionDTO;
@@ -665,10 +666,331 @@ public class AteneaServiceImpl implements AteneaService{
 							sb.append("<td>");sb.append("Nombre de la Facultad: ");sb.append("</td>");
 							sb.append("<td>");sb.append(fac.getCenNombre());sb.append("</td>");
 						sb.append("</tr>");
+						
+						List<CentroDTO> escuelaList=factoryDAO.getCentroDAOImpl().findAllChild(fac);
+						if(escuelaList!=null)
+						{
+							for(CentroDTO esc:escuelaList)
+							{
+								sb.append("<tr>");
+									sb.append("<td>");sb.append("Nombre de la Escuela: ");sb.append("</td>");
+									sb.append("<td>");sb.append(esc.getCenNombre());sb.append("</td>");
+								sb.append("</tr>");
+								List<CarreraDTO> pregradoList=factoryDAO.getCarreraDAOImpl().getAll(esc, 6);
+								if(pregradoList!=null)
+								{
+									for(CarreraDTO pre:pregradoList)
+									{
+										sb.append("<tr>");
+											sb.append("<td>");sb.append("Carrera Pregrado: ");sb.append("</td>");
+											sb.append("<td>");sb.append(pre.getCarNombre());sb.append("</td>");
+										sb.append("</tr>");
+																				
+										List<ContactoListDTO> listContacto=factoryDAO.getContactoDAOImpl().getAll(pre);
+										
+										if(listContacto!=null)
+										{
+											sb.append("<tr>");
+												sb.append("<td colspan='2'>");sb.append("Contactos: ");sb.append("</td>");
+											sb.append("</tr>");
+											for(ContactoListDTO con:listContacto)
+											{
+												sb.append("<tr>");
+													sb.append("<td>");sb.append(con.getCatTipo());sb.append("</td>");
+													sb.append("<td>");sb.append(con.getConValor());sb.append("</td>");
+												sb.append("</tr>");						
+											}
+										}
+									}
+								}
+								List<CarreraDTO> posgradoList=factoryDAO.getCarreraDAOImpl().getAll(esc, 7);
+								if(posgradoList!=null)
+								{
+									for(CarreraDTO pos:posgradoList)
+									{
+										sb.append("<tr>");
+											sb.append("<td>");sb.append("Carrera de Posgrado: ");sb.append("</td>");
+											sb.append("<td>");sb.append(pos.getCarNombre());sb.append("</td>");
+										sb.append("</tr>");
+																				
+										List<ContactoListDTO> listContacto=factoryDAO.getContactoDAOImpl().getAll(pos);
+										
+										if(listContacto!=null)
+										{
+											sb.append("<tr>");
+												sb.append("<td colspan='2'>");sb.append("Contactos: ");sb.append("</td>");
+											sb.append("</tr>");
+											for(ContactoListDTO con:listContacto)
+											{
+												sb.append("<tr>");
+													sb.append("<td>");sb.append(con.getCatTipo());sb.append("</td>");
+													sb.append("<td>");sb.append(con.getConValor());sb.append("</td>");
+												sb.append("</tr>");						
+											}
+										}
+									}
+								}									
+							}
+						}
+						else
+						{
+							List<CarreraDTO> pregradoList=factoryDAO.getCarreraDAOImpl().getAll(fac, 6);
+							if(pregradoList!=null)
+							{
+								for(CarreraDTO pre:pregradoList)
+								{
+									sb.append("<tr>");
+										sb.append("<td>");sb.append("Carrera Pregrado: ");sb.append("</td>");
+										sb.append("<td>");sb.append(pre.getCarNombre());sb.append("</td>");
+									sb.append("</tr>");
+																			
+									List<ContactoListDTO> listContacto=factoryDAO.getContactoDAOImpl().getAll(pre);
+									
+									if(listContacto!=null)
+									{
+										sb.append("<tr>");
+											sb.append("<td colspan='2'>");sb.append("Contactos: ");sb.append("</td>");
+										sb.append("</tr>");
+										for(ContactoListDTO con:listContacto)
+										{
+											sb.append("<tr>");
+												sb.append("<td>");sb.append(con.getCatTipo());sb.append("</td>");
+												sb.append("<td>");sb.append(con.getConValor());sb.append("</td>");
+											sb.append("</tr>");						
+										}
+									}
+								}
+							}
+							List<CarreraDTO> posgradoList=factoryDAO.getCarreraDAOImpl().getAll(fac, 7);
+							if(posgradoList!=null)
+							{
+								for(CarreraDTO pos:posgradoList)
+								{
+									sb.append("<tr>");
+										sb.append("<td>");sb.append("Carrera Posgrado: ");sb.append("</td>");
+										sb.append("<td>");sb.append(pos.getCarNombre());sb.append("</td>");
+									sb.append("</tr>");
+																			
+									List<ContactoListDTO> listContacto=factoryDAO.getContactoDAOImpl().getAll(pos);
+									
+									if(listContacto!=null)
+									{
+										sb.append("<tr>");
+											sb.append("<td colspan='2'>");sb.append("Contactos: ");sb.append("</td>");
+										sb.append("</tr>");
+										for(ContactoListDTO con:listContacto)
+										{
+											sb.append("<tr>");
+												sb.append("<td>");sb.append(con.getCatTipo());sb.append("</td>");
+												sb.append("<td>");sb.append(con.getConValor());sb.append("</td>");
+											sb.append("</tr>");						
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				
+			}
+			else if(atenea.getTipo()==6)
+			{
+				CarreraDTO pre=new CarreraDTO();
+				pre.setCarCodigo(atenea.getCodigo());
+				pre=factoryDAO.getCarreraDAOImpl().find(pre.getCarCodigo());
+				
+				UniversidadVieDTO uni=new UniversidadVieDTO();
+				if(pre.getAteCentro().getAteCentro().getAteCentro()!=null)
+					uni.setCenCodigo(pre.getAteCentro().getAteCentro().getAteCentro().getCenCodigo());	
+				else
+					uni.setCenCodigo(pre.getAteCentro().getAteCentro().getCenCodigo());
+				
+				uni= factoryDAO.getUniversidadVieDAOImpl().getByAnd(uni).get(0);
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
+					sb.append("<td>");sb.append(uni.getCatPais());sb.append("</td>");
+				sb.append("</tr>");
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Estado/Provincia: ");sb.append("</td>");
+					sb.append("<td>");sb.append(uni.getCatProvincia());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Ciudad: ");sb.append("</td>");
+					sb.append("<td>");sb.append(uni.getCatCiudad());sb.append("</td>");
+				sb.append("</tr>");
+
+				
+				if(pre.getAteCentro().getAteCentro().getAteCentro()!=null)
+				{
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Nombre de la Universidad: ");sb.append("</td>");
+						sb.append("<td>");sb.append(pre.getAteCentro().getAteCentro().getAteCentro().getCenNombre());sb.append("</td>");
+					sb.append("</tr>");
+					
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Nombre de la Facultad: ");sb.append("</td>");
+						sb.append("<td>");sb.append(pre.getAteCentro().getAteCentro().getCenNombre());sb.append("</td>");
+					sb.append("</tr>");
+				}
+				else
+				{
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Nombre de la Universidad: ");sb.append("</td>");
+						sb.append("<td>");sb.append(pre.getAteCentro().getAteCentro().getCenNombre());sb.append("</td>");
+					sb.append("</tr>");
+					
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Nombre de la Facultad: ");sb.append("</td>");
+						sb.append("<td>");sb.append(pre.getAteCentro().getCenNombre());sb.append("</td>");
+					sb.append("</tr>");
+				}
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Nombre de la Carrera: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pre.getCarNombre());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td colspan='2'>");sb.append("Modalidades: ");sb.append("</td>");
+				sb.append("</tr>");
+
+				ModalidadVieDTO mod=new ModalidadVieDTO();
+				mod.setModCarrera(pre.getCarCodigo());
+				List<ModalidadVieDTO> modalidadList=factoryDAO.getModalidadVieDAOImpl().getByAnd(mod);
+				for(ModalidadVieDTO m: modalidadList)
+				{
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Modalidad: ");sb.append("</td>");
+						sb.append("<td>");sb.append(m.getCatModalidad());sb.append("</td>");
+					sb.append("</tr>");					
+				}
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Perfil: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pre.getCarPerfil());sb.append("</td>");
+				sb.append("</tr>");
+
+				List<MencionDTO> mencionList=factoryDAO.getMencionDAOImpl().getAll(pre);
+				for(MencionDTO me:mencionList)
+				{
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Mención: ");sb.append("</td>");
+						sb.append("<td>");sb.append(me.getMenNombre());sb.append("</td>");
+					sb.append("</tr>");
+				}
+				
+				List<ContactoListDTO> listContacto=factoryDAO.getContactoDAOImpl().getAll(pre);
+				
+				if(listContacto!=null)
+				{
+					sb.append("<tr>");
+						sb.append("<td colspan='2'>");sb.append("Contactos: ");sb.append("</td>");
+					sb.append("</tr>");
+					for(ContactoListDTO con:listContacto)
+					{
+						sb.append("<tr>");
+							sb.append("<td>");sb.append(con.getCatTipo());sb.append("</td>");
+							sb.append("<td>");sb.append(con.getConValor());sb.append("</td>");
+						sb.append("</tr>");						
+					}
+				}
+
+				
+			}
+			else if(atenea.getTipo()==7)
+			{
+				CarreraDTO pos=new CarreraDTO();
+				pos.setCarCodigo(atenea.getCodigo());
+				pos=factoryDAO.getCarreraDAOImpl().find(pos.getCarCodigo());
+				
+				UniversidadVieDTO uni=new UniversidadVieDTO();
+				if(pos.getAteCentro().getAteCentro().getAteCentro()!=null)
+					uni.setCenCodigo(pos.getAteCentro().getAteCentro().getAteCentro().getCenCodigo());	
+				else
+					uni.setCenCodigo(pos.getAteCentro().getAteCentro().getCenCodigo());
+				
+				uni= factoryDAO.getUniversidadVieDAOImpl().getByAnd(uni).get(0);
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
+					sb.append("<td>");sb.append(uni.getCatPais());sb.append("</td>");
+				sb.append("</tr>");
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Estado/Provincia: ");sb.append("</td>");
+					sb.append("<td>");sb.append(uni.getCatProvincia());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Ciudad: ");sb.append("</td>");
+					sb.append("<td>");sb.append(uni.getCatCiudad());sb.append("</td>");
+				sb.append("</tr>");
+
+				if(pos.getAteCentro().getAteCentro().getAteCentro()!=null)
+				{
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Nombre de la Universidad: ");sb.append("</td>");
+						sb.append("<td>");sb.append(pos.getAteCentro().getAteCentro().getAteCentro().getCenNombre());sb.append("</td>");
+					sb.append("</tr>");
+					
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Nombre de la Facultad: ");sb.append("</td>");
+						sb.append("<td>");sb.append(pos.getAteCentro().getAteCentro().getCenNombre());sb.append("</td>");
+					sb.append("</tr>");
+				}
+				else
+				{
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Nombre de la Universidad: ");sb.append("</td>");
+						sb.append("<td>");sb.append(pos.getAteCentro().getAteCentro().getCenNombre());sb.append("</td>");
+					sb.append("</tr>");
+					
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Nombre de la Facultad: ");sb.append("</td>");
+						sb.append("<td>");sb.append(pos.getAteCentro().getCenNombre());sb.append("</td>");
+					sb.append("</tr>");
+				}
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Nombre de la Carrera: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pos.getCarNombre());sb.append("</td>");
+				sb.append("</tr>");
+
+				ModalidadVieDTO mod=new ModalidadVieDTO();
+				mod.setModCarrera(pos.getCarCodigo());
+				List<ModalidadVieDTO> modalidadList=factoryDAO.getModalidadVieDAOImpl().getByAnd(mod);
+				for(ModalidadVieDTO m: modalidadList)
+				{
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Modalidad: ");sb.append("</td>");
+						sb.append("<td>");sb.append(m.getCatModalidad());sb.append("</td>");
+					sb.append("</tr>");					
+				}
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Perfil: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pos.getCarPerfil());sb.append("</td>");
+				sb.append("</tr>");
+
+				List<ContactoListDTO> listContacto=factoryDAO.getContactoDAOImpl().getAll(pos);
+				
+				if(listContacto!=null)
+				{
+					sb.append("<tr>");
+						sb.append("<td colspan='2'>");sb.append("Contactos: ");sb.append("</td>");
+					sb.append("</tr>");
+					for(ContactoListDTO con:listContacto)
+					{
+						sb.append("<tr>");
+							sb.append("<td>");sb.append(con.getCatTipo());sb.append("</td>");
+							sb.append("<td>");sb.append(con.getConValor());sb.append("</td>");
+						sb.append("</tr>");						
 					}
 				}
 			}
-		
 			else if(atenea.getTipo()==103)
 			{
 				OrganizacionVieDTO org=new OrganizacionVieDTO();
@@ -1156,7 +1478,14 @@ public class AteneaServiceImpl implements AteneaService{
 	public CarreraDTO createOrUpdateCarrera(CarreraDTO carrera) throws CorvustecException
 	{
 		logger.info("createCarrera");
+		List<ModalidadDTO> modalidadList;
 		try{
+			modalidadList=factoryDAO.getModalidadDAOImpl().getAll(carrera);
+			if(modalidadList!=null)
+			{
+				for(ModalidadDTO moda:modalidadList)
+					factoryDAO.getModalidadDAOImpl().remove2(moda);
+			}
 			if(carrera.getCarCodigo()!=null)
 				return factoryDAO.getCarreraDAOImpl().edit(carrera);
 			else

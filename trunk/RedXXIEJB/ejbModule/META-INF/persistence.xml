@@ -58,6 +58,7 @@
 	<class>net.ciespal.redxxi.ejb.persistence.entities.DoctorVieDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.PublicacionVieDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.OrganizacionVieDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.ModalidadVieDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>		

@@ -30,6 +30,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.MaestroCiespalVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.MencionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.MenuDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ModalidadDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.ModalidadVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.NoticiaDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.NoticiaEspejoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ObraDAO;
@@ -82,6 +83,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private DoctorDAO doctorDAO;
 	private NoticiaDAO noticiaDAO;
 	private ModalidadDAO modalidadDAO;
+	private ModalidadVieDAO modalidadVieDAO;
 	private ObraDAO obraDAO;
 	private DoctorVieDAO doctorVieDAO;
 	private PublicacionVieDAO publicacionVieDAO;
@@ -487,6 +489,14 @@ public class FactoryDAOImpl implements FactoryDAO{
 			organizacionVieDAO = new OrganizacionVieDAOImpl(entityManager);
 		}
 		return organizacionVieDAO;
+	}
+
+	@Override
+	public ModalidadVieDAO getModalidadVieDAOImpl() {
+		if (modalidadVieDAO == null) {
+			modalidadVieDAO = new ModalidadVieDAOImpl(entityManager);
+		}
+		return modalidadVieDAO;
 	}
 
 }
