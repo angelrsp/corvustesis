@@ -191,11 +191,18 @@ a.linkClassNoticia:hover {color: #FAA723; text-decoration: underline;font-family
 #espejo:hover{left:196px; width:72px;}
 #espejo:hover{background:url('../images/menutrans.png') -75px 0;}
 
+#espejo2{left:196px; width:72px;}
+#espejo2{background:url('../images/menutrans.png') -75px 0;}
+
 #somos{left:262px; width:130px;}
 #somos{background:url('../images/menutrans.png') -408px -445px;}
 
 #somos:hover{left:262px; width:130px;}
 #somos:hover{background:url('../images/menutrans.png') -408px -1px;}
+
+#somos2{left:262px; width:130px;}
+#somos2{background:url('../images/menutrans.png') -408px 0;}
+
 
 #usuario{left:750px; width:205px;}
 #usuario{background:url('../images/menutrans.png') -530px -445px;}
