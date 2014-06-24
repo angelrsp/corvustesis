@@ -13,6 +13,8 @@ public interface AccesoDAO extends AbstractFacade<AccesoDTO>{
 	List<AccesoDTO> getByAndDistinctMenu(AccesoDTO objetoDTO)
 			throws CorvustecException;
 
+	void remove2(AccesoDTO acceso);
+
 	
 	
 }

@@ -13,7 +13,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import net.ciespal.redxxi.ejb.persistence.dao.AccesoVieDAO;
-import net.ciespal.redxxi.ejb.persistence.entities.security.AccesoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.AccesoVieDTO;
 
 import org.slf4j.Logger;
