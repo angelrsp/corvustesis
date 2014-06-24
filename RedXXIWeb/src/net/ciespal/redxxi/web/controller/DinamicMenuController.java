@@ -15,8 +15,10 @@ import net.ciespal.redxxi.web.commons.util.JsfUtil;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
+import org.apache.commons.lang3.StringUtils;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
+import org.primefaces.model.menu.DefaultSubMenu;
 import org.primefaces.model.menu.MenuModel;
 
 import com.corvustec.commons.util.CorvustecException;
@@ -60,7 +62,8 @@ public class DinamicMenuController implements Serializable{
 	private void menuConstruct()
 	{
 		UsuarioDTO user;
-		DefaultMenuItem subMenu;
+		DefaultMenuItem menuItem;
+		DefaultSubMenu subMenu;
 		try {
 			user=(UsuarioDTO) JsfUtil.getObject("UsuarioDTO");
 			List<MenuVieDTO> menuAutorizadoList= administracionService.menuReadAuthorized(user.getSegUsuarioPerfils().get(0).getSegPerfil());
@@ -78,10 +81,20 @@ public class DinamicMenuController implements Serializable{
 			
 			for(MenuVieDTO men: menuRoot)
 			{
-				subMenu=new DefaultMenuItem();
-				subMenu.setUrl(men.getMenUrl());
-				subMenu.setValue(men.getMenNombre());
-				menuModel.addElement(subMenu);
+				if(StringUtils.isNotBlank(men.getMenUrl())&&StringUtils.isNotEmpty(men.getMenUrl()))
+				{
+					menuItem=new DefaultMenuItem();
+					menuItem.setUrl(men.getMenUrl());
+					menuItem.setValue(men.getMenNombre());
+					menuModel.addElement(menuItem);
+				}
+				else
+				{
+					subMenu=new DefaultSubMenu();
+					subMenu.setLabel(men.getMenNombre());
+					
+					menuModel.addElement(subMenu);
+				}
 			}
 			
 		} catch (CorvustecException e) {
@@ -89,4 +102,45 @@ public class DinamicMenuController implements Serializable{
 		}
 	}
 	
+	private DefaultSubMenu subMenu(MenuVieDTO menu,List<MenuVieDTO> list)
+	{
+		DefaultSubMenu subMenu=new DefaultSubMenu();
+		DefaultMenuItem menuItem=new DefaultMenuItem();
+		subMenu.setLabel(menu.getMenNombre());
+		List<MenuVieDTO> listChild=	getChildren(menu, list);
+		for(MenuVieDTO m:listChild)
+		{
+			if(StringUtils.isNotBlank(m.getMenUrl())&&StringUtils.isNotEmpty(m.getMenUrl()))
+			{
+				menuItem=new DefaultMenuItem();
+				menuItem.setUrl(m.getMenUrl());
+				menuItem.setValue(m.getMenNombre());
+				menuModel.addElement(menuItem);
+			}
+			else
+			{
+				subMenu=new DefaultSubMenu();
+				subMenu.setLabel(m.getMenNombre());
+				subMenu.
+				menuModel.addElement(subMenu);
+			}
+		}
+		return subMenu;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<MenuVieDTO> getChildren(final MenuVieDTO men,List<MenuVieDTO> list)
+	{
+		return (List<MenuVieDTO>) CollectionUtils.select(list, new Predicate() {
+			@Override
+			public boolean evaluate(Object obj) {
+				MenuVieDTO m=(MenuVieDTO)obj;
+				if(m.getMenPredecesor().equals(men.getMenCodigo()))
+					return true;
+				else
+					return false;
+			}
+		});
+	}
 }
+

@@ -31,11 +31,12 @@ public class PerfilMenuController implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@ManagedProperty(value="#{perfilMenuDataManager}")
-	private PerfilMenuDataManager perfilMenuDataManager;
 
 	@EJB
 	private AdministracionService administracionService;
+
+	@ManagedProperty(value="#{perfilMenuDataManager}")
+	private PerfilMenuDataManager perfilMenuDataManager;
 
 	
 	public PerfilMenuController() {
