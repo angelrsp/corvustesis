@@ -17,26 +17,28 @@
 			
 				<tr>
 					<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
-					<td><p:selectOneMenu value="#{perfilMenuDataManager.perfilCode}" required="true">
+					<td><p:selectOneMenu value="#{perfilMenuDataManager.perfilCode}">
 						<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
 						<f:selectItems value="#{perfilMenuController.perfilMenuDataManager.perfilList}" var="per" itemValue="#{per.perCodigo}" itemLabel="#{per.perNombre}"/>
+						<p:ajax listener="#{perfilMenuController.accesoRead}" update="pojoPickList" event="change" process="@this"/>
 					</p:selectOneMenu></td>
 				</tr>
 			
 			
 				<tr>
 					<td><h:outputText value="#{i18n['label.menu']}:&#160;" /></td>
-					<td><p:selectOneMenu value="#{perfilMenuDataManager.menuCode}" required="true">
+					<td><p:selectOneMenu value="#{perfilMenuDataManager.menuCode}">
 						<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
 						<f:selectItems value="#{perfilMenuDataManager.menuList}" var="men" itemValue="#{men.menCodigo}" itemLabel="#{men.menNombre}" />
+						<p:ajax listener="#{perfilMenuController.accesoRead}" update="pojoPickList" event="change" process="@this"/>
 					</p:selectOneMenu></td>
 				</tr>
 			
 			</table>
 
-		   <p:pickList id="PojoPickList" value="#{perfilMenuDataManager.dualListModel}" var="acceso" effect="bounce"
-		                itemValue="#{acceso}" itemLabel="#{acceso}" showSourceControls="true" showTargetControls="true" showCheckbox="true"
-		                showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" converter="#{dualListModel}">
+		   <p:pickList id="pojoPickList" value="#{perfilMenuDataManager.dualListModel}" var="acc" effect="bounce"
+		                itemValue="#{acc.codigo}" itemLabel="#{acc.descripcion}" showSourceControls="true" showTargetControls="true"
+		                showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" converter="#{acc}">
 		 
 		        <f:facet name="sourceCaption">Control</f:facet>
 		        <f:facet name="targetCaption">Asigando</f:facet>
@@ -44,7 +46,7 @@
 		        <p:ajax event="transfer" listener="#{perfilMenuController.onTransfer}" />
 		 
 		        <p:column>
-		            <h:outputText value="#{acc}" />
+		            <h:outputText value="#{acc.descripcion}" />
 		        </p:column>
 		    </p:pickList>					
 
