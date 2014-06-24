@@ -8,12 +8,15 @@ import javax.ejb.Stateless;
 import net.ciespal.redxxi.ejb.negocio.AdministracionService;
 import net.ciespal.redxxi.ejb.persistence.dao.FactoryDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.AccesoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.AccesoVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteMenuDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.MenuDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.util.dto.CredencialesDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.vo.AccesoVO;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -308,4 +311,86 @@ public class AdministracionServiceImpl implements AdministracionService{
 		}
 	}
 
+	/*Acceso*/
+	@Override
+	public List<AccesoVieDTO> accesoVieRead(AccesoVieDTO acceso) throws CorvustecException {
+		logger.info("accesoVieRead");
+		try{
+			return factoryDAO.getAccesoVieDAOImpl().getByAnd(acceso);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al accesoVieRead" +e.toString());
+			throw new CorvustecException("Error al accesoVieRead "+e.toString());
+		}
+	}
+
+	@Override
+	public List<AccesoVieDTO> accesoVieReadPerfilIsNull(AccesoVieDTO acceso) throws CorvustecException {
+		logger.info("accesoVieRead");
+		try{
+			return factoryDAO.getAccesoVieDAOImpl().getByAndPerfilIsNull(acceso);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al accesoVieRead" +e.toString());
+			throw new CorvustecException("Error al accesoVieRead "+e.toString());
+		}
+	}
+
+	@Override
+	public void accesoCreateOrUpdate(AccesoVO acceso) throws CorvustecException {
+		logger.info("accesoCreateOrUpdate");
+		AccesoDTO acc;
+		ComponenteMenuDTO cme;
+		try{
+			acc=new AccesoDTO();
+			acc.setSegPerfil(acceso.getPerfil());
+			
+			List<AccesoDTO> accList= factoryDAO.getAccesoDAOImpl().getByAnd(acc);
+
+			for(AccesoDTO a:accList)
+				factoryDAO.getAccesoDAOImpl().remove(a);
+			
+			for(AccesoVieDTO a:acceso.getAccesoList())
+			{
+				cme=new ComponenteMenuDTO();
+				cme.setCmeCodigo(a.getCmeCodigo());
+				acc.setSegComponenteMenu(cme);
+				factoryDAO.getAccesoDAOImpl().create(acc);				
+			}
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al accesoCreateOrUpdate" +e.toString());
+			throw new CorvustecException("Error al accesoCreateOrUpdate "+e.toString());
+		}
+	}
+
+	@Override
+	public void accesoDelete(AccesoVO acceso) throws CorvustecException {
+		logger.info("accesoCreateOrUpdate");
+		AccesoDTO acc;
+		ComponenteMenuDTO cme;
+		try{
+			for(AccesoVieDTO a:acceso.getAccesoList())
+			{
+				cme=new ComponenteMenuDTO();
+				acc=new AccesoDTO();
+				acc.setSegPerfil(acceso.getPerfil());
+				cme.setCmeCodigo(a.getCmeCodigo());
+				acc.setSegComponenteMenu(cme);
+				
+				acc=factoryDAO.getAccesoDAOImpl().getByAnd(acc).get(0);
+				
+				factoryDAO.getAccesoDAOImpl().remove(acc);
+			}
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al accesoCreateOrUpdate" +e.toString());
+			throw new CorvustecException("Error al accesoCreateOrUpdate "+e.toString());
+		}
+	}
+	
 }

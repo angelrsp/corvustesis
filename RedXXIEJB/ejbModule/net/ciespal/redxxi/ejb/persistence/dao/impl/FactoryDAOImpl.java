@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import net.ciespal.redxxi.ejb.persistence.dao.AccesoDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.AccesoVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.CarreraDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.CatalogoDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.CentroDAO;
@@ -67,6 +68,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private ComponenteDAO componenteDAO;
 	private ComponenteMenuDAO componenteMenuDAO;
 	private AccesoDAO accesoDAO;
+	private AccesoVieDAO accesoVieDAO;
 	private UsuarioPerfilDAO usuarioPerfilDAO;
 	
 	private CatalogoDAO catalogoDAO;
@@ -497,6 +499,14 @@ public class FactoryDAOImpl implements FactoryDAO{
 			modalidadVieDAO = new ModalidadVieDAOImpl(entityManager);
 		}
 		return modalidadVieDAO;
+	}
+
+	@Override
+	public AccesoVieDAO getAccesoVieDAOImpl() {
+		if (accesoVieDAO == null) {
+			accesoVieDAO = new AccesoVieDAOImpl(entityManager);
+		}
+		return accesoVieDAO;
 	}
 
 }
