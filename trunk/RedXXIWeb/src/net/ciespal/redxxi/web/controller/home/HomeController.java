@@ -1,6 +1,7 @@
 package net.ciespal.redxxi.web.controller.home;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -19,7 +20,12 @@ import com.corvustec.commons.util.CorvustecException;
 
 @ViewScoped
 @ManagedBean(name = "homeController")
-public class HomeController {
+public class HomeController implements Serializable{
+
+		
+	private static final long serialVersionUID = 1L;
+	
+	
 
 	@ManagedProperty(value="#{homeDataManager}")
 	private HomeDataManager homeDataManager;

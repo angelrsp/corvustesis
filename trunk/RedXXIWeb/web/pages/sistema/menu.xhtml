@@ -42,7 +42,7 @@
 						<td><h:outputText value="#{i18n['label.predecesor']}:&#160;" /></td>						
 						<td><p:selectOneMenu filter="true" value="#{menuDataManager.predecesorCode}">
 							<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
-							<f:selectItems value="#{menuDataManager.menuListPredecesor}" var="men" itemValue="#{men.menCodigo}" itemLabel="#{men.menNombre}"/>
+							<f:selectItems value="#{menuController.menuDataManager.menuListPredecesor}" var="men" itemValue="#{men.menCodigo}" itemLabel="#{men.menNombre}"/>
 						</p:selectOneMenu></td>
 					</tr>
 					
@@ -53,11 +53,11 @@
 							<p:commandButton value="#{i18n['boton.cancelar']}" process="@this" update="pnlDato" 
 								actionListener="#{menuController.cancel}" icon="ui-icon-cancel"/>
 						</td>
-					</tr>					
+					</tr>
 														
 				</table>
 
-				<p:dataTable id="tblMenu" value="#{menuController.menuDataManager.menuList}" var="men">
+				<p:dataTable id="tblMenu" value="#{menuDataManager.menuList}" var="men">
 					
 					<p:column headerText="#{i18n['label.nombre']}">
 						<h:outputText value="#{men.menNombre}"/>
