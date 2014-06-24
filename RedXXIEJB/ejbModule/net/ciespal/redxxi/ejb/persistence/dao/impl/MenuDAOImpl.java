@@ -93,6 +93,7 @@ public class MenuDAOImpl extends AbstractFacadeImpl<MenuDTO> implements MenuDAO{
 		}
 	}
 
+	
 
 	@Override
 	public List<MenuDTO> getRoot() throws CorvustecException
@@ -121,5 +122,6 @@ public class MenuDAOImpl extends AbstractFacadeImpl<MenuDTO> implements MenuDAO{
 		}finally{
 		}		
 	}
-
+	
+	
 }

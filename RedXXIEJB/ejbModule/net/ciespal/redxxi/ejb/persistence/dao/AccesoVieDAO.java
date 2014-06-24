@@ -13,6 +13,9 @@ public interface AccesoVieDAO extends AbstractFacade<AccesoVieDTO>{
 	List<AccesoVieDTO> getByAndPerfilIsNull(AccesoVieDTO objetoDTO)
 			throws CorvustecException;
 
+	List<AccesoVieDTO> getByAndDistinctMenu(AccesoVieDTO objetoDTO)
+			throws CorvustecException;
+
 	
 	
 }

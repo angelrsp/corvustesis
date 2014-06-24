@@ -55,6 +55,7 @@ public interface FactoryDAO {
 	OrganizacionVieDAO getOrganizacionVieDAOImpl();
 	ModalidadVieDAO getModalidadVieDAOImpl();
 	AccesoVieDAO getAccesoVieDAOImpl();
+	MenuVieDAO getMenuVieDAOImpl();
 	
 	
 

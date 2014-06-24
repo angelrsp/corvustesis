@@ -13,6 +13,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.security.AccesoVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteMenuDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.MenuDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.MenuVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.util.dto.CredencialesDTO;
@@ -249,6 +250,25 @@ public class AdministracionServiceImpl implements AdministracionService{
 		}		
 	}
 
+	@Override
+	public List<MenuVieDTO> menuReadAuthorized(PerfilDTO perfil) throws CorvustecException {
+		logger.info("menuReadAuthorized");
+		MenuVieDTO menu;
+		try{
+			menu=new MenuVieDTO();
+			menu.setAccPerfil(perfil.getPerCodigo());
+			menu.setCmeComponente(1);
+			return factoryDAO.getMenuVieDAOImpl().getByAnd(menu);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al menuReadAuthorized" +e.toString());
+			throw new CorvustecException("Error al menuReadAuthorized "+e.toString());
+		}		
+	}
+
+	
+	
 	/*Componente*/
 	@Override
 	public ComponenteDTO componenteCreateOrUpdate(ComponenteDTO componenteDTO) throws CorvustecException
@@ -338,6 +358,20 @@ public class AdministracionServiceImpl implements AdministracionService{
 		}
 	}
 
+	@Override
+	public List<AccesoDTO> accesoReadDistinctMenu(AccesoDTO acceso) throws CorvustecException {
+		logger.info("accesoReadDistinctMenu");
+		try{
+			return factoryDAO.getAccesoDAOImpl().getByAndDistinctMenu(acceso);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al accesoReadDistinctMenu" +e.toString());
+			throw new CorvustecException("Error al accesoReadDistinctMenu "+e.toString());
+		}
+	}
+
+	
 	@Override
 	public void accesoCreateOrUpdate(AccesoVO acceso) throws CorvustecException {
 		logger.info("accesoCreateOrUpdate");
