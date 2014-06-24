@@ -72,6 +72,9 @@ public class PerfilDAOImpl extends AbstractFacadeImpl<PerfilDTO> implements Perf
 				    }
 				}
 	        }
+	        
+	    	predicate=cb.greaterThan(from.get("perCodigo").as(Integer.class), 0);
+	    	predicateList.add(predicate);                		        
 	
 	        if(!predicateList.isEmpty())
 	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		

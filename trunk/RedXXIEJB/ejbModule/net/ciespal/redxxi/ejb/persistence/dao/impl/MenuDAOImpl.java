@@ -73,6 +73,8 @@ public class MenuDAOImpl extends AbstractFacadeImpl<MenuDTO> implements MenuDAO{
 				    }
 				}
 	        }
+	    	predicate=cb.greaterThan(from.get("menCodigo").as(Integer.class), 0);
+	    	predicateList.add(predicate);                					    
 	
 	        if(!predicateList.isEmpty())
 	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
