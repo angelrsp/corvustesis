@@ -5,10 +5,12 @@ import java.util.List;
 import javax.ejb.Local;
 
 import net.ciespal.redxxi.ejb.persistence.entities.CatalogoDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.AccesoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.AccesoVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteMenuDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.MenuDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.MenuVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.util.dto.CredencialesDTO;
@@ -69,5 +71,11 @@ public interface AdministracionService {
 			throws CorvustecException;
 
 	void accesoDelete(AccesoVO acceso) throws CorvustecException;
+
+	List<AccesoDTO> accesoReadDistinctMenu(AccesoDTO acceso)
+			throws CorvustecException;
+
+	List<MenuVieDTO> menuReadAuthorized(PerfilDTO perfil)
+			throws CorvustecException;
 
 }

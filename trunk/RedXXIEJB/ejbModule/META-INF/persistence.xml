@@ -60,6 +60,7 @@
 	<class>net.ciespal.redxxi.ejb.persistence.entities.OrganizacionVieDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.ModalidadVieDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.security.AccesoVieDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.security.MenuVieDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>		

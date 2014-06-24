@@ -12,34 +12,36 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import net.ciespal.redxxi.ejb.persistence.dao.AccesoVieDAO;
-import net.ciespal.redxxi.ejb.persistence.entities.security.AccesoDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.security.AccesoVieDTO;
+import net.ciespal.redxxi.ejb.persistence.dao.MenuVieDAO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.MenuVieDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.corvustec.commons.util.CorvustecException;
 
-public class AccesoVieDAOImpl extends AbstractFacadeImpl<AccesoVieDTO> implements AccesoVieDAO{
+public class MenuVieDAOImpl extends AbstractFacadeImpl<MenuVieDTO> implements MenuVieDAO{
 
-	private static final Logger logger = LoggerFactory.getLogger(AccesoVieDAOImpl.class);
 	
-	public AccesoVieDAOImpl() {
+	private static final Logger logger = LoggerFactory.getLogger(MenuVieDAOImpl.class);
+	
+	public MenuVieDAOImpl() {
 		super();
 	}
 
-	public AccesoVieDAOImpl(EntityManager entityManager) {
+	public MenuVieDAOImpl(EntityManager entityManager) {
 		super(entityManager);
 	}
 
+	
+	
 	@Override
-	public List<AccesoVieDTO> getByAnd(AccesoVieDTO objetoDTO) throws CorvustecException
+	public List<MenuVieDTO> getByAnd(MenuVieDTO objetoDTO) throws CorvustecException
 	{
 		CriteriaBuilder cb;
-		CriteriaQuery<AccesoVieDTO> cq;
-		Root<AccesoVieDTO> from;
-		List<AccesoVieDTO> list;
+		CriteriaQuery<MenuVieDTO> cq;
+		Root<MenuVieDTO> from;
+		List<MenuVieDTO> list;
 		Predicate predicate;
 		List<Predicate> predicateList = null;
 		String fieldName;
@@ -48,9 +50,9 @@ public class AccesoVieDAOImpl extends AbstractFacadeImpl<AccesoVieDTO> implement
 		Field[] fields;
 		try{
 			cb=entityManager.getCriteriaBuilder();
-			cq=cb.createQuery(AccesoVieDTO.class);
+			cq=cb.createQuery(MenuVieDTO.class);
 			
-			from= cq.from(AccesoVieDTO.class);
+			from= cq.from(MenuVieDTO.class);
 			
 			predicateList=new ArrayList<Predicate>();
 			
@@ -76,7 +78,7 @@ public class AccesoVieDAOImpl extends AbstractFacadeImpl<AccesoVieDTO> implement
 	        if(!predicateList.isEmpty())
 	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
 			
-			TypedQuery<AccesoVieDTO> tq=entityManager.createQuery(cq);
+			TypedQuery<MenuVieDTO> tq=entityManager.createQuery(cq);
 			list=tq.getResultList();
 			
 			return list;
@@ -90,13 +92,14 @@ public class AccesoVieDAOImpl extends AbstractFacadeImpl<AccesoVieDTO> implement
 		}
 	}
 
+	
 	@Override
-	public List<AccesoVieDTO> getByAndPerfilIsNull(AccesoVieDTO objetoDTO) throws CorvustecException
+	public List<MenuVieDTO> getByAndPredecesorIsNull(MenuVieDTO objetoDTO) throws CorvustecException
 	{
 		CriteriaBuilder cb;
-		CriteriaQuery<AccesoVieDTO> cq;
-		Root<AccesoVieDTO> from;
-		List<AccesoVieDTO> list;
+		CriteriaQuery<MenuVieDTO> cq;
+		Root<MenuVieDTO> from;
+		List<MenuVieDTO> list;
 		Predicate predicate;
 		List<Predicate> predicateList = null;
 		String fieldName;
@@ -105,9 +108,9 @@ public class AccesoVieDAOImpl extends AbstractFacadeImpl<AccesoVieDTO> implement
 		Field[] fields;
 		try{
 			cb=entityManager.getCriteriaBuilder();
-			cq=cb.createQuery(AccesoVieDTO.class);
+			cq=cb.createQuery(MenuVieDTO.class);
 			
-			from= cq.from(AccesoVieDTO.class);
+			from= cq.from(MenuVieDTO.class);
 			
 			predicateList=new ArrayList<Predicate>();
 			
@@ -129,14 +132,13 @@ public class AccesoVieDAOImpl extends AbstractFacadeImpl<AccesoVieDTO> implement
 				    }
 				}
 	        }
+	    	predicate=cb.isNull(from.get("menPredecesor").as(Integer.class));
+	    	predicateList.add(predicate);                					    
 	
-	    	predicate=cb.isNull(from.get("accPerfil"));
-	    	predicateList.add(predicate);                	
-	        
 	        if(!predicateList.isEmpty())
 	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
 			
-			TypedQuery<AccesoVieDTO> tq=entityManager.createQuery(cq);
+			TypedQuery<MenuVieDTO> tq=entityManager.createQuery(cq);
 			list=tq.getResultList();
 			
 			return list;
@@ -149,64 +151,7 @@ public class AccesoVieDAOImpl extends AbstractFacadeImpl<AccesoVieDTO> implement
 			predicateList=null;
 		}
 	}
-	
-	
-	@Override
-	public List<AccesoVieDTO> getByAndDistinctMenu(AccesoVieDTO objetoDTO) throws CorvustecException
-	{
-		CriteriaBuilder cb;
-		CriteriaQuery<AccesoVieDTO> cq;
-		Root<AccesoVieDTO> from;
-		List<AccesoVieDTO> list;
-		Predicate predicate;
-		List<Predicate> predicateList = null;
-		String fieldName;
-		Method getter;
-		Object value;
-		Field[] fields;
-		try{
-			cb=entityManager.getCriteriaBuilder();
-			cq=cb.createQuery(AccesoVieDTO.class);
-			
-			from= cq.from(AccesoVieDTO.class);
-			
-			cq.multiselect(from.get("cmeMenu")).distinct(true);
-			
-			predicateList=new ArrayList<Predicate>();
-			
-			fields = objetoDTO.getClass().getDeclaredFields();
 
-	        for(Field f : fields){
-	            fieldName = f.getName();
-				if(!fieldName.equals("serialVersionUID"))
-				{
-				    getter = objetoDTO.getClass().getMethod("get" + String.valueOf(fieldName.charAt(0)).toUpperCase() +
-				            fieldName.substring(1));
-				    
-				    value = getter.invoke(objetoDTO, new Object[0]);
-				
-				    if(value!=null)
-				    {
-				    	predicate=cb.equal(from.get(fieldName), value);
-				    	predicateList.add(predicate);                	
-				    }
-				}
-	        }
 	
-	        if(!predicateList.isEmpty())
-	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
-			
-			TypedQuery<AccesoVieDTO> tq=entityManager.createQuery(cq);
-			list=tq.getResultList();
-			
-			return list;
-			
-		}catch(Exception e){
-			logger.info(e.toString());
-			throw new CorvustecException(e);
-		}finally{
-			predicate=null;
-			predicateList=null;
-		}		
-	}
+	
 }

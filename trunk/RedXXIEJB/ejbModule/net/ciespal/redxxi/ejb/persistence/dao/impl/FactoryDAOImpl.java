@@ -30,6 +30,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.MaestroCiespalDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.MaestroCiespalVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.MencionDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.MenuDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.MenuVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ModalidadDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ModalidadVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.NoticiaDAO;
@@ -65,6 +66,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private UsuarioDAO usuarioDAO;
 	private PerfilDAO perfilDAO;
 	private MenuDAO menuDAO;
+	private MenuVieDAO menuVieDAO;
 	private ComponenteDAO componenteDAO;
 	private ComponenteMenuDAO componenteMenuDAO;
 	private AccesoDAO accesoDAO;
@@ -507,6 +509,14 @@ public class FactoryDAOImpl implements FactoryDAO{
 			accesoVieDAO = new AccesoVieDAOImpl(entityManager);
 		}
 		return accesoVieDAO;
+	}
+
+	@Override
+	public MenuVieDAO getMenuVieDAOImpl() {
+		if (menuVieDAO == null) {
+			menuVieDAO = new MenuVieDAOImpl(entityManager);
+		}
+		return menuVieDAO;
 	}
 
 }
