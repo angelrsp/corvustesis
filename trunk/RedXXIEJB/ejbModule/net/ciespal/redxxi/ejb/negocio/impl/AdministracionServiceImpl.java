@@ -381,16 +381,28 @@ public class AdministracionServiceImpl implements AdministracionService{
 			acc=new AccesoDTO();
 			acc.setSegPerfil(acceso.getPerfil());
 			
-			List<AccesoDTO> accList= factoryDAO.getAccesoDAOImpl().getByAnd(acc);
-
-			for(AccesoDTO a:accList)
-				factoryDAO.getAccesoDAOImpl().remove(a);
-			
 			for(AccesoVieDTO a:acceso.getAccesoList())
 			{
 				cme=new ComponenteMenuDTO();
+				acc=new AccesoDTO();
+				acc.setSegPerfil(acceso.getPerfil());
 				cme.setCmeCodigo(a.getCmeCodigo());
 				acc.setSegComponenteMenu(cme);
+				
+				if(factoryDAO.getAccesoDAOImpl().getByAnd(acc).size()>0)
+				{
+					acc=factoryDAO.getAccesoDAOImpl().getByAnd(acc).get(0);					
+					factoryDAO.getAccesoDAOImpl().remove2(acc);
+				}
+			}
+			
+			for(AccesoVieDTO ac:acceso.getAccesoList())
+			{
+				acc=new AccesoDTO();
+				cme=new ComponenteMenuDTO();
+				cme.setCmeCodigo(ac.getCmeCodigo());
+				acc.setSegComponenteMenu(cme);
+				acc.setSegPerfil(acceso.getPerfil());
 				factoryDAO.getAccesoDAOImpl().create(acc);				
 			}
 		}

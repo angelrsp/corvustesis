@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -147,5 +148,17 @@ public class AccesoDAOImpl extends AbstractFacadeImpl<AccesoDTO> implements Acce
 			predicate=null;
 			predicateList=null;
 		}		
+	}
+	
+	@Override
+	public void remove2(AccesoDTO acceso)
+	{
+		if(acceso.getAccCodigo()!=null)
+		{
+			Query query;
+			query=entityManager.createQuery("delete from ContactoDTO con where con.conCodigo=:codigo");
+			query.setParameter("codigo", acceso.getAccCodigo());
+			query.executeUpdate();
+		}
 	}
 }
