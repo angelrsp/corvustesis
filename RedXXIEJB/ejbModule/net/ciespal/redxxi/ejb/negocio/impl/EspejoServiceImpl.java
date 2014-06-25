@@ -60,7 +60,7 @@ public class EspejoServiceImpl implements EspejoService{
 			//Grandes maestros del periodismo
 			espejo=new EspejoDTO();
 			espejo.setTipo(2);
-			espejo.setDescripcion("Grandes Maestros del Periodismo: ");
+			espejo.setDescripcion("Maestros del Periodismo: ");
 			espejo.setCount(factoryDAO.getGranMaestroDAOImpl().count(pais));
 			espejoList.add(espejo);
 
@@ -247,7 +247,7 @@ public class EspejoServiceImpl implements EspejoService{
 				espejoVisor.setCodigo(objeto.getGmaCodigo());
 				
 				espejoVisor.setTitulo("Nombres y Apellidos: " +objeto.getGmaNombres()+" "+objeto.getGmaApellidos());
-				espejoVisor.setDescripcion1("Fecha de Nacimiento :"+objeto.getGmaFechaNacimiento());
+				espejoVisor.setDescripcion1("Fecha de Nacimiento :"+(objeto.getGmaFechaNacimiento()!=null?objeto.getGmaFechaNacimiento().toString().substring(0, 10):""));
 				
 				espejoVisor.setTipo(espejo.getTipo());
 
@@ -433,11 +433,14 @@ public class EspejoServiceImpl implements EspejoService{
 					sb.append("<td>");sb.append(gma.getGmaApellidos());sb.append("</td>");
 				sb.append("</tr>");
 
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Fecha de Nacimiento: ");sb.append("</td>");
-					sb.append("<td>");sb.append(gma.getGmaFechaNacimiento());sb.append("</td>");
-				sb.append("</tr>");
-
+				if(gma.getGmaFechaNacimiento()!=null)
+				{
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Fecha de Nacimiento: ");sb.append("</td>");
+						sb.append("<td>");sb.append(gma.getGmaFechaNacimiento().toString().substring(0, 10));sb.append("</td>");
+					sb.append("</tr>");
+				}
+				
 				sb.append("<tr>");
 					sb.append("<td>");sb.append("Perfil Bliográfico: ");sb.append("</td>");
 					sb.append("<td style='text-align: justify;'>");sb.append(gma.getGmaPerfilBiografico());sb.append("</td>");
@@ -548,11 +551,14 @@ public class EspejoServiceImpl implements EspejoService{
 					sb.append("<td>");sb.append(mci.getMciApellido());sb.append("</td>");
 				sb.append("</tr>");
 
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Fecha de Nacimiento: ");sb.append("</td>");
-					sb.append("<td>");sb.append(mci.getMciFechaNacimiento());sb.append("</td>");
-				sb.append("</tr>");
-
+				if(mci.getMciFechaNacimiento()!=null)
+				{
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Fecha de Nacimiento: ");sb.append("</td>");
+						sb.append("<td>");sb.append(mci.getMciFechaNacimiento().toString().substring(0, 10));sb.append("</td>");
+					sb.append("</tr>");
+				}
+				
 				sb.append("<tr>");
 					sb.append("<td>");sb.append("Perfil Bliográfico: ");sb.append("</td>");
 					sb.append("<td style='text-align: justify;'>");sb.append(mci.getMciPerfilBiografico());sb.append("</td>");
