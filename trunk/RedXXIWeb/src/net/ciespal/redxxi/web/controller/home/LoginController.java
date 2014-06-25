@@ -63,7 +63,9 @@ public class LoginController {
 						JsfUtil.getExternalContext().getSessionMap().put("DefensorDTO", argosService.defensorRead(def).get(0));
 					}
 					else
-						JsfUtil.redirect(JsfUtil.getContextPath()+"/pages/home.xhtml");	
+					{
+						JsfUtil.redirect(JsfUtil.getContextPath()+"/pages/home.xhtml");
+					}
 				}
 				else
 					JsfUtil.redirect(JsfUtil.getContextPath()+"/pages/home.xhtml");	

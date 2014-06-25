@@ -63,7 +63,6 @@ public class DinamicMenuController implements Serializable{
 	{
 		UsuarioDTO user;
 		DefaultMenuItem menuItem;
-		DefaultSubMenu subMenu;
 		try {
 			user=(UsuarioDTO) JsfUtil.getObject("UsuarioDTO");
 			List<MenuVieDTO> menuAutorizadoList= administracionService.menuReadAuthorized(user.getSegUsuarioPerfils().get(0).getSegPerfil());
@@ -89,24 +88,25 @@ public class DinamicMenuController implements Serializable{
 					menuModel.addElement(menuItem);
 				}
 				else
-				{
-					subMenu=new DefaultSubMenu();
-					subMenu.setLabel(men.getMenNombre());
-					
-					menuModel.addElement(subMenu);
-				}
+					menuModel.addElement(getSubMenu(men, menuAutorizadoList));
 			}
+
+			menuItem=new DefaultMenuItem();
+			menuItem.setValue("Salir");
+			menuItem.setIcon("ui-icon-close");
+			menuItem.setCommand("#{loginController.logout}");
+			menuModel.addElement(menuItem);
 			
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
 	
-	private DefaultSubMenu subMenu(MenuVieDTO menu,List<MenuVieDTO> list)
+	private DefaultSubMenu getSubMenu(MenuVieDTO menu,List<MenuVieDTO> list)
 	{
 		DefaultSubMenu subMenu=new DefaultSubMenu();
-		DefaultMenuItem menuItem=new DefaultMenuItem();
 		subMenu.setLabel(menu.getMenNombre());
+		DefaultMenuItem menuItem;
 		List<MenuVieDTO> listChild=	getChildren(menu, list);
 		for(MenuVieDTO m:listChild)
 		{
@@ -115,14 +115,11 @@ public class DinamicMenuController implements Serializable{
 				menuItem=new DefaultMenuItem();
 				menuItem.setUrl(m.getMenUrl());
 				menuItem.setValue(m.getMenNombre());
-				menuModel.addElement(menuItem);
+				subMenu.getElements().add(menuItem);
 			}
 			else
 			{
-				subMenu=new DefaultSubMenu();
-				subMenu.setLabel(m.getMenNombre());
-				subMenu.
-				menuModel.addElement(subMenu);
+				subMenu.getElements().add(getSubMenu(m, list));
 			}
 		}
 		return subMenu;
@@ -135,8 +132,13 @@ public class DinamicMenuController implements Serializable{
 			@Override
 			public boolean evaluate(Object obj) {
 				MenuVieDTO m=(MenuVieDTO)obj;
-				if(m.getMenPredecesor().equals(men.getMenCodigo()))
-					return true;
+				if(m.getMenPredecesor()!=null)
+				{
+					if(m.getMenPredecesor().equals(men.getMenCodigo()))
+						return true;
+					else
+						return false;
+				}
 				else
 					return false;
 			}
