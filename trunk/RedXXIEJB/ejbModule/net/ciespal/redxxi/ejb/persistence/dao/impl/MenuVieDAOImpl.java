@@ -78,6 +78,8 @@ public class MenuVieDAOImpl extends AbstractFacadeImpl<MenuVieDTO> implements Me
 	        if(!predicateList.isEmpty())
 	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
 			
+	        cq.orderBy(cb.asc(from.get("menOrden").as(Integer.class)));
+	        
 			TypedQuery<MenuVieDTO> tq=entityManager.createQuery(cq);
 			list=tq.getResultList();
 			
