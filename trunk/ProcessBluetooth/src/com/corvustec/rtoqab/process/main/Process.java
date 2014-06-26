@@ -24,6 +24,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.corvustec.rtoqab.process.util.Const;
 import com.corvustec.rtoqab.process.util.UtilApplication;
@@ -38,6 +39,7 @@ public class Process {
 	private static String horaInicio=Const.HORA_INICIO;
 	private static String horaFin=Const.HORA_FIN;
 	
+	//Singleton
 	public static Process getInstance()
 	{
 		if(instance==null)
@@ -51,8 +53,12 @@ public class Process {
 		Double diff;
 		start = System.currentTimeMillis();
 		
-		//insertValue();
-		Process.getInstance().processOne();
+		File[] files=Process.getInstance().getFiles(Const.PATH_RECOLECTOR);
+		if(files!=null)
+		{
+			for(File file:files)
+				Process.getInstance().processOne(file.getAbsolutePath());
+		}
 		
 		end = System.currentTimeMillis();
 		diff=(double) (end-start);
@@ -62,28 +68,22 @@ public class Process {
 
 	
 	@SuppressWarnings("unchecked")
-	private void processOne()
+	private void processOne(String pathFile)
 	{
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String codigoAgencia,fechaCorte;
 
-		String codigoAgencia=Const.CODIGO_AGENCIA;
-		String fechaCorte=formatter.format(new Date());
-
-		File fileIn=new File(Const.PATH_RECOLECTOR+fechaCorte.replace("-", "")+".txt");		
-		File fileOut=new File(Const.PATH_FINAL+fechaCorte.replace("-", "")+".txt");
+		File fileIn;		
+		File fileOut;
 		
 		List<String> lines;
 		String line[];
 		Integer linea = null;
-		List<DataDTO> dataList;
+
 		DataDTO data;
 		
 		FileWriter writer;
 		
-		List<DataDTO> dataListDistinct;
-		List<DataDTO> baliza;
-		List<DataDTO> dataMac;
-		List<DataDTO> dataMax;
+		List<DataDTO> dataList,dataListDistinct,baliza,dataMac,dataMax;
 		
 		int balizaSum,index;
 		double balizaAvg,balizaAvgDia;
@@ -91,42 +91,54 @@ public class Process {
 		
 		double diaSum,diaAvg;
 		
-		final String baliza1=Const.BALIZA1;
-		final String baliza2=Const.BALIZA2;
-		final String baliza3=Const.BALIZA3;
-		final String baliza4=Const.BALIZA4;			
+		final String baliza1,baliza2, baliza3,baliza4;			
 
-		double factorMaximo=Double.valueOf(Const.FACTOR_MAXIMO);
-		double factorAjuste=Double.valueOf(Const.FACTOR_AJUSTE);
-		double factorPromedioDia=Double.valueOf(Const.FACTOR_PROMEDIO_DIA);
-		double factorIntervaloTiempo3=Double.valueOf(Const.FACTOR_INTERVALO3);
+		double factorMaximo, factorAjuste,factorPromedioDia,factorIntervaloTiempo3;
 		
 		try{			
+			fileIn=new File(pathFile);
+			
+			codigoAgencia=Const.CODIGO_AGENCIA;
+
+			factorMaximo=Double.valueOf(Const.FACTOR_MAXIMO);
+			factorAjuste=Double.valueOf(Const.FACTOR_AJUSTE);
+			factorPromedioDia=Double.valueOf(Const.FACTOR_PROMEDIO_DIA);
+			factorIntervaloTiempo3=Double.valueOf(Const.FACTOR_INTERVALO3);
+
+			baliza1=Const.BALIZA1;
+			baliza2=Const.BALIZA2;
+			baliza3=Const.BALIZA3;
+			baliza4=Const.BALIZA4;
 			
 			dataListDistinct =new ArrayList<DataDTO>();
 			baliza=new ArrayList<DataDTO>();
-			writer=new FileWriter(fileOut);
 			
 			dataList=new ArrayList<DataDTO>();
 			dataMac=new ArrayList<DataDTO>();
 			dataMax=new ArrayList<DataDTO>();			
 			 
-			
 			lines = FileUtils.readLines(fileIn);
 
+			line=lines.get(0).split("\\|");
+			fechaCorte=getFechaCorte(line[0]);
+			fileOut=new File(Const.PATH_FINAL+fechaCorte.replace("-", "")+".txt");
+			writer=new FileWriter(fileOut);
+			
+			//Establezo los datos en la lista de objetos
 			for(int i=0;i<lines.size();i++)
 			{
 				line=lines.get(i).split("\\|");
 				data=new DataDTO();
 				data.setFecha(Timestamp.valueOf(line[0]));
 				data.setMinuto(Time.valueOf(line[0].substring(11, 19)));
-				data.setMac(line[1]);
-				data.setRssi(Integer.valueOf(line[2]));
+				data.setMac(line[2]);
+				data.setRssi(Integer.valueOf(line[3]));
 				dataList.add(data);
 			}
-			
+			//vacio el arreglo
 			lines=null;
 			
+			//pbtengo las balizas
 			baliza.addAll((List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
 				@Override
 				public boolean evaluate(Object arg0) {
@@ -795,8 +807,6 @@ public class Process {
 				sb=new StringBuilder();
 			}
 			writer.close();
-
-
 			
 		} catch (IOException e) {
 			System.out.println("Error linea: "+linea);
@@ -919,5 +929,36 @@ public class Process {
 			e.printStackTrace();
 		}		
 		return date2.getTime() - date1.getTime(); 
+	}
+	
+	public File[] getFiles(String path)
+	{
+		File file;
+		File[] files=null;
+		try{
+			file=new File(path);
+			if(file.exists())
+			{
+				files=file.listFiles();
+			}
+		}
+		catch(Exception e){
+			
+		}
+		return files;
+	}
+	
+	private String getFechaCorte(String fechaArchivo)
+	{
+		String result=null;
+		try{
+			if(StringUtils.isNotBlank(fechaArchivo)&&StringUtils.isNotEmpty(fechaArchivo))
+				result=fechaArchivo.substring(0, 10);
+		}
+		catch(Exception e)
+		{
+			
+		}
+		return result;
 	}
 }
