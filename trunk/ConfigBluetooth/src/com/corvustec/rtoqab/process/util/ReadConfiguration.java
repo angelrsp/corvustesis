@@ -27,7 +27,7 @@ public class ReadConfiguration {
 		Integer indexBase;
 		String[] words;
 		List<String> linesDecryp;
-		try {
+
 			lines=new ArrayList<String>();
 			linesDecryp = FileUtils.readLines(file);
 			for(int i=0;i<linesDecryp.size();i++)
@@ -45,9 +45,6 @@ public class ReadConfiguration {
 					value=value.trim();
 				}
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}		
 		return value;
 	}
 	
@@ -86,7 +83,7 @@ public class ReadConfiguration {
 		return value;
 	}
 	
-	public String replaceValue(String key,String val) throws Exception
+	public String replaceValue(String key,String val) throws Exception 
 	{
 		String pathConfiguration=MessagesApplicacion.getString("com.corvustec.rtoqab.configurarion.file.path");
 		String value = null;
@@ -95,7 +92,7 @@ public class ReadConfiguration {
 		List<String> linesDecryp;
 		Integer indexBase,indexLine = null;
 		String line;
-		try {
+
 			linesDecryp=new ArrayList<String>();
 			lines = FileUtils.readLines(file);
 			for(int i=0;i<lines.size();i++)
@@ -117,9 +114,6 @@ public class ReadConfiguration {
 				lines.set(indexLine, Cryptography.getInstance().encrypt(line));
 			}
 			FileUtils.writeLines(file, lines);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}		
 		return value;
 	}
 }
