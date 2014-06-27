@@ -7,12 +7,12 @@ import static ch.lambdaj.Lambda.sumFrom;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -25,6 +25,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.corvustec.rtoqab.process.util.Const;
 import com.corvustec.rtoqab.process.util.UtilApplication;
@@ -34,6 +36,10 @@ import com.corvustec.rtoqad.process.dto.IntervaloTiempoDTO;
 
 public class Process {
 
+	private final static Logger logger = LoggerFactory.getLogger(Process.class);
+	
+	
+	private FileWriter writerBitacora;
 	private static Process instance;
 	
 	private static String horaInicio=Const.HORA_INICIO;
@@ -46,6 +52,20 @@ public class Process {
 			instance=new Process();
 		return instance;
 	}
+	
+	public Process() {
+		File fileBitacora;
+		try {
+			fileBitacora=new File(Const.PATH_BITACORA+"bitacora.txt");
+			if(fileBitacora.exists())
+				writerBitacora=new FileWriter(fileBitacora,true);
+			else
+				writerBitacora=new FileWriter(fileBitacora);
+		} catch (IOException e) {
+			logger.info("Error {}",e.toString());
+		}
+	}
+	
 	
 	public static void main(String[] args) {
 		
@@ -63,7 +83,8 @@ public class Process {
 		end = System.currentTimeMillis();
 		diff=(double) (end-start);
 		diff= diff* 0.001;
-		System.out.println("Procesado en: "+ ( diff ) +" segundos");				
+		logger.info("Procesado en: "+ ( diff ) +" segundos");
+		
 	}
 
 	
@@ -77,7 +98,6 @@ public class Process {
 		
 		List<String> lines;
 		String line[];
-		Integer linea = null;
 
 		DataDTO data;
 		
@@ -91,7 +111,7 @@ public class Process {
 		
 		double diaSum,diaAvg;
 		
-		final String baliza1,baliza2, baliza3,baliza4;			
+		final String balizas[];			
 
 		double factorMaximo, factorAjuste,factorPromedioDia,factorIntervaloTiempo3;
 		
@@ -105,10 +125,7 @@ public class Process {
 			factorPromedioDia=Double.valueOf(Const.FACTOR_PROMEDIO_DIA);
 			factorIntervaloTiempo3=Double.valueOf(Const.FACTOR_INTERVALO3);
 
-			baliza1=Const.BALIZA1;
-			baliza2=Const.BALIZA2;
-			baliza3=Const.BALIZA3;
-			baliza4=Const.BALIZA4;
+			balizas=Const.BALIZAS;
 			
 			dataListDistinct =new ArrayList<DataDTO>();
 			baliza=new ArrayList<DataDTO>();
@@ -131,7 +148,7 @@ public class Process {
 				data=new DataDTO();
 				data.setFecha(Timestamp.valueOf(line[0]));
 				data.setMinuto(Time.valueOf(line[0].substring(11, 19)));
-				data.setMac(line[2]);
+				data.setMac(line[1]);
 				data.setRssi(Integer.valueOf(line[3]));
 				dataList.add(data);
 			}
@@ -143,10 +160,7 @@ public class Process {
 				@Override
 				public boolean evaluate(Object arg0) {
                  DataDTO dat= (DataDTO)arg0;
-                 if(dat.getMac().equals(baliza1)
-                		 ||dat.getMac().equals(baliza2)
-                		 ||dat.getMac().equals(baliza3)
-                		 ||dat.getMac().equals(baliza4))
+                 if(Arrays.asList(balizas).contains(dat.getMac()))
                 	 return true;
                  else
                 	 return false;
@@ -155,7 +169,8 @@ public class Process {
 
 			if(baliza.size()<=0)
 			{
-				System.out.println("No se encontraron balizas de referencia");
+				logger.info("No se encontraron balizas de referencia");
+				writerBitacora.write("No se encontraron balizas de referencia "+fechaCorte);
 				writer.close();
 				return;
 			}
@@ -179,7 +194,7 @@ public class Process {
 			
 			dataListDistinct = getDistinct(dataList);
 			
-			System.out.println("Se encontraron "+dataListDistinct.size());
+			logger.info("Se encontraron "+dataListDistinct.size());
 			
 			for(final DataDTO dat:dataListDistinct)
 			{				
@@ -276,7 +291,7 @@ public class Process {
 						
 			dataListDistinct=getDistinct(dataList);
 
-			System.out.println("Se encontraron "+dataListDistinct.size());
+			logger.info("Se encontraron "+dataListDistinct.size());
 			
 			//Encuentro promedio por intervalos
 			for(final DataDTO dato:dataListDistinct)
@@ -323,7 +338,6 @@ public class Process {
 						datoTemp.setMedia(balizaAvg);
 						temp4.add(datoTemp);
 					}
-										
 				}
 			}
 
@@ -367,17 +381,8 @@ public class Process {
 				for(DataDTO dat:temp)
 				{
 					datoTemp=null;
-					try {
+					
 						datoTemp=(DataDTO) BeanUtils.cloneBean(dat);
-					} catch (IllegalAccessException e) {
-						e.printStackTrace();
-					} catch (InstantiationException e) {
-						e.printStackTrace();
-					} catch (InvocationTargetException e) {
-						e.printStackTrace();
-					} catch (NoSuchMethodException e) {
-						e.printStackTrace();
-					}					
 					
 					if(!(dat.getMedia()>=limiteInferior&&dat.getMedia()<=limiteSuperior))
 						if((index-1)>=0&&(index+1)<temp.size())
@@ -396,10 +401,7 @@ public class Process {
 				@Override
 				public boolean evaluate(Object arg0) {
                  DataDTO dat= (DataDTO)arg0;
-                 if(dat.getMac().equals(baliza1)
-                		 ||dat.getMac().equals(baliza2)
-                		 ||dat.getMac().equals(baliza3)
-                		 ||dat.getMac().equals(baliza4))
+                 if(Arrays.asList(balizas).contains(dat.getMac()))
                 	 return true;
                  else
                 	 return false;
@@ -581,7 +583,7 @@ public class Process {
 			
 			dataList=temp;
 			
-			System.out.println("Antes de limites tiempo fila "+dataList.size());
+			logger.info("Antes de limites tiempo fila "+dataList.size());
 			
 			///Tiempo en fila
 			dataListDistinct=getDistinct(dataList);
@@ -612,7 +614,7 @@ public class Process {
 				}
 			}
 			
-			System.out.println("Antes de limites tiempo agencia "+dataList.size());
+			logger.info("Antes de limites tiempo agencia "+dataList.size());
 			//Tiempo en agencia
 			for(final DataDTO dato:dataListDistinct)
 			{
@@ -641,11 +643,12 @@ public class Process {
 			}
 			
 			
-			System.out.println("Despues de limites tiempo agencia "+dataList.size());
+			logger.info("Despues de limites tiempo agencia "+dataList.size());
 			
 			if(dataList.size()<=0)
 			{
-				System.out.println("Sin datos posible dia no atención");
+				logger.info("Sin datos posible dia no atención");
+				writerBitacora.write("Sin datos posible dia no atención "+fechaCorte);
 				writer.close();
 				return;
 			}
@@ -669,10 +672,10 @@ public class Process {
 			limiteSuperiorDia=diaAvg+desviacion*factorPromedioDia;
 			limiteInferiorDia=diaAvg-desviacion*factorPromedioDia;
 
-			System.out.println("Avg: "+diaAvg);
-			System.out.println("Des: "+desviacion);
-			System.out.println("Sup: "+limiteSuperiorDia);
-			System.out.println("Inf: "+limiteInferiorDia);
+			logger.info("Avg: "+diaAvg);
+			logger.info("Des: "+desviacion);
+			logger.info("Sup: "+limiteSuperiorDia);
+			logger.info("Inf: "+limiteInferiorDia);
 			
 			///Aplico rangos de 15 min....
 			intervaloMinuto=generateMinute();
@@ -705,7 +708,7 @@ public class Process {
 				}
 			}
 			
-			System.out.println("En intervalos quedan: "+ dataList.size());
+			logger.info("En intervalos quedan: "+ dataList.size());
 			
 			dataListDistinct=getDistinctByNumeroIntervaloMinuto(dataList);
 			
@@ -757,14 +760,6 @@ public class Process {
 					
 					for(DataDTO d:temp)
 					{
-//						System.out.print("Mac : "+d.getMac()+"|");
-//						System.out.print("Tiempo : "+d.getTiempoFila()+"|");
-//						System.out.print("Media : "+balizaAvg+"|");
-//						System.out.print("Desviacion : "+desviacion+"|");
-//						System.out.print("Intervalo : "+d.getNumeroIntervaloMinuto()+"|");
-//						System.out.print("Inicio Fila : "+d.getEntradaFila()+"|");
-//						System.out.print("Limite Inferior : "+limiteInferiorInt+"|");
-//						System.out.println("Limite Superior : "+limiteSuperiorInt+"|");
 						if(d.getTiempoFila()>=limiteInferiorInt&&d.getTiempoFila()<=limiteSuperiorInt)
 							temp2.add(d);
 					}
@@ -808,13 +803,13 @@ public class Process {
 			}
 			writer.close();
 			
+			writerBitacora.write("Proceso Exitoso Fecha: "+fechaCorte+" Agencia "+codigoAgencia);
+			
 		} catch (IOException e) {
-			System.out.println("Error linea: "+linea);
-			e.printStackTrace();
+			logger.info("Error {}",e.toString());
 		}
 		catch (Exception e) {
-			System.out.println("Se produjo un error: "+e.toString());
-			e.printStackTrace();
+			logger.info("Error {}",e.toString());
 		}
 	}
 	
@@ -843,7 +838,7 @@ public class Process {
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.info("Error {}",e.toString());
 		}
 		return intervaloTiempo;		
 	}
@@ -872,7 +867,7 @@ public class Process {
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.info("Error {}",e.toString());
 		}
 		return intervaloTiempo;		
 	}
@@ -943,7 +938,7 @@ public class Process {
 			}
 		}
 		catch(Exception e){
-			
+			logger.info("Error {}",e.toString());
 		}
 		return files;
 	}
@@ -957,7 +952,7 @@ public class Process {
 		}
 		catch(Exception e)
 		{
-			
+			logger.info("Error {}",e.toString());	
 		}
 		return result;
 	}

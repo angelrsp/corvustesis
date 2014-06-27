@@ -11,17 +11,7 @@ public class Const {
 	
 	public static final String PATH_FINAL = ReadConfiguration.getInstance().readValue("com.corvustec.rtoqab.path.out");
 	
-	public static final String BALIZA1 = ReadConfiguration.getInstance().readValue("com.corvustec.rtoqab.baliza1");
-	
-	public static final String BALIZA2 = ReadConfiguration.getInstance().readValue("com.corvustec.rtoqab.baliza2");
-	
-	public static final String BALIZA3 = ReadConfiguration.getInstance().readValue("com.corvustec.rtoqab.baliza3");
-	
-	public static final String BALIZA4 = ReadConfiguration.getInstance().readValue("com.corvustec.rtoqab.baliza4");
-	
-	public static final String PATH_EJECUTABLE = ReadConfiguration.getInstance().readValue("com.corvustec.rtoqab.path.exe");
-	
-	public static final String MINUTO_COMPROBACION = ReadConfiguration.getInstance().readValue("com.corvustec.rtoqab.minuto.comprobacion");
+	public static final String BALIZAS[] = ReadConfiguration.getInstance().readValue("com.corvustec.rtoqab.baliza").split("\\|");
 	
 	public static final String FACTOR_AJUSTE = ReadConfiguration.getInstance().readValue("com.corvustec.rtoqab.factor.ajuste");
 	
@@ -34,5 +24,7 @@ public class Const {
 	public static final String HORA_INICIO = ReadConfiguration.getInstance().readValue("com.corvustec.rtoqab.tiempo.inicio");
 	
 	public static final String HORA_FIN = ReadConfiguration.getInstance().readValue("com.corvustec.rtoqab.tiempo.fin");
+	
+	public static final String PATH_BITACORA = ReadConfiguration.getInstance().readValue("com.corvustec.rtoqab.path.bitacora");
 	
 }
