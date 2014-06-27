@@ -46,6 +46,7 @@ public class Configuracion extends JInternalFrame {
 	private JTextField txtNoProcesado;
 	private JTextField txtBaliza;
 	private JTextField txtMaximoArchivo;
+	private JTextField txtTiempoCenso;
 	
 	private JList<String> jlistBaliza;
 	private DefaultListModel<String> defaultListModel;
@@ -68,6 +69,8 @@ public class Configuracion extends JInternalFrame {
 	private final String horaInicio=Const.HORA_INICIO_KEY;
 	private final String horaFin=Const.HORA_FIN_KEY;
 	private final String tiempoMaximoArchivo=Const.TIEMPO_MAXIMO_ARCHIVO_KEY;
+	private final String tiempoCenso=Const.TIEMPO_CENSO_KEY;
+	
 	
 
 	/**
@@ -208,7 +211,7 @@ public class Configuracion extends JInternalFrame {
 		
 		JPanel pnlServicio = new JPanel();
 		pnlServicio.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Tiempo (Servicio)", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlServicio.setBounds(488, 11, 393, 115);
+		pnlServicio.setBounds(488, 11, 393, 142);
 		getContentPane().add(pnlServicio);
 		pnlServicio.setLayout(null);
 		
@@ -239,10 +242,20 @@ public class Configuracion extends JInternalFrame {
 		txtTiempoComprobacion.setBounds(181, 80, 202, 20);
 		pnlServicio.add(txtTiempoComprobacion);
 		
+		txtTiempoCenso = new JTextField();
+		txtTiempoCenso.setText("300");
+		txtTiempoCenso.setColumns(10);
+		txtTiempoCenso.setBounds(181, 105, 202, 20);
+		pnlServicio.add(txtTiempoCenso);
+		
+		JLabel lblCensoseg = new JLabel("Censo (6-15 seg):");
+		lblCensoseg.setBounds(10, 108, 161, 14);
+		pnlServicio.add(lblCensoseg);
+		
 		JPanel pnlBaliza = new JPanel();
 		pnlBaliza.setLayout(null);
 		pnlBaliza.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Balizas de Referencia", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlBaliza.setBounds(488, 137, 393, 216);
+		pnlBaliza.setBounds(488, 164, 393, 228);
 		getContentPane().add(pnlBaliza);
 		
 		JLabel lblBaliza = new JLabel("Baliza (mac):");
@@ -266,7 +279,7 @@ public class Configuracion extends JInternalFrame {
 		pnlBaliza.add(btnAgregarBaliza);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 98, 373, 107);
+		scrollPane.setBounds(10, 104, 373, 113);
 		pnlBaliza.add(scrollPane);
 		
 		jlistBaliza = new JList<String>();
@@ -368,6 +381,7 @@ public class Configuracion extends JInternalFrame {
 			ReadConfiguration.getInstance().replaceValue(horaInicio, txtHoraInicio.getText());
 			ReadConfiguration.getInstance().replaceValue(horaFin, txtHoraFin.getText());
 			ReadConfiguration.getInstance().replaceValue(tiempoMaximoArchivo, txtMaximoArchivo.getText());
+			ReadConfiguration.getInstance().replaceValue(tiempoCenso, txtTiempoCenso.getText());
 			
 			for(int i=0;i< defaultListModel.getSize();i++)
 			{
@@ -403,6 +417,7 @@ public class Configuracion extends JInternalFrame {
 			txtHoraFin.setText(ReadConfiguration.getInstance().readValue(horaFin));
 			txtTiempoComprobacion.setText(ReadConfiguration.getInstance().readValue(tiempoComprobacionKey));
 			txtMaximoArchivo.setText(ReadConfiguration.getInstance().readValue(tiempoMaximoArchivo));
+			txtTiempoCenso.setText(ReadConfiguration.getInstance().readValue(tiempoCenso));
 			
 			
 			balizas=ReadConfiguration.getInstance().readValue(balizaKey).split("\\|");

@@ -32,4 +32,6 @@ public class Const {
 	
 	public static final String TIEMPO_MAXIMO_ARCHIVO_KEY = "com.corvustec.rtoqab.tiempo.borrado.archivo";
 	
+	public static final String TIEMPO_CENSO_KEY = "com.corvustec.rtoqab.tiempo.censo";
+	
 }
