@@ -7,17 +7,17 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 import com.corvustec.rtoqab.process.util.Const;
 import com.corvustec.rtoqab.process.util.MessagesApplicacion;
 import com.corvustec.rtoqab.process.util.ReadConfiguration;
 import com.corvustec.rtoqab.process.view.util.MessageBox;
-
-import javax.swing.UIManager;
-import javax.swing.JList;
 
 public class Configuracion extends JInternalFrame {
 
@@ -242,6 +242,7 @@ public class Configuracion extends JInternalFrame {
 		
 		jlistBaliza = new JList<String>();
 		jlistBaliza.setBounds(10, 98, 373, 107);
+		jlistBaliza.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		pnlBaliza.add(jlistBaliza);
 		
 		JButton btnAgregarBaliza = new JButton("Agregar");
@@ -260,8 +261,14 @@ public class Configuracion extends JInternalFrame {
 	
 	private void btnAgregarBalizaActionPerformed(ActionEvent event)
 	{
-		defaultListModel.addElement(txtBaliza.getText());
-		jlistBaliza.setModel(defaultListModel);
+		try{
+			defaultListModel.addElement(txtBaliza.getText());
+			jlistBaliza.setModel(defaultListModel);
+			txtBaliza.setText(null);
+		}
+		catch(Exception e){
+			MessageBox.error(e.toString());
+		}
 	}
 	
 	
