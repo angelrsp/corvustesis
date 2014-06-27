@@ -2,6 +2,8 @@ package com.corvustec.rtoqab.process.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -9,10 +11,13 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.corvustec.rtoqab.process.util.Const;
 import com.corvustec.rtoqab.process.util.MessagesApplicacion;
@@ -40,7 +45,8 @@ public class Configuracion extends JInternalFrame {
 	private JTextField txtTiempoComprobacion;
 	private JTextField txtNoProcesado;
 	private JTextField txtBaliza;
-
+	private JTextField txtMaximoArchivo;
+	
 	private JList<String> jlistBaliza;
 	private DefaultListModel<String> defaultListModel;
 	
@@ -61,8 +67,7 @@ public class Configuracion extends JInternalFrame {
 	
 	private final String horaInicio=Const.HORA_INICIO_KEY;
 	private final String horaFin=Const.HORA_FIN_KEY;
-	
-	
+	private final String tiempoMaximoArchivo=Const.TIEMPO_MAXIMO_ARCHIVO_KEY;
 	
 
 	/**
@@ -75,7 +80,7 @@ public class Configuracion extends JInternalFrame {
 		setIconifiable(true);
 		setMaximizable(true);
 		setClosable(true);
-		setBounds(100, 100, 907, 431);
+		setBounds(100, 100, 907, 466);
 		getContentPane().setLayout(null);
 		
 		JButton btnGuardar = new JButton("Guardar");
@@ -84,7 +89,7 @@ public class Configuracion extends JInternalFrame {
 				btnGuardarActionPerformed(arg0);
 			}
 		});
-		btnGuardar.setBounds(404, 368, 89, 23);
+		btnGuardar.setBounds(400, 403, 89, 23);
 		getContentPane().add(btnGuardar);
 		
 		JPanel pnlRuta = new JPanel();
@@ -142,7 +147,7 @@ public class Configuracion extends JInternalFrame {
 		
 		JPanel pnlProceso = new JPanel();
 		pnlProceso.setBorder(new TitledBorder(null, "Proceso", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlProceso.setBounds(10, 182, 479, 171);
+		pnlProceso.setBounds(10, 182, 479, 210);
 		getContentPane().add(pnlProceso);
 		pnlProceso.setLayout(null);
 		
@@ -190,6 +195,16 @@ public class Configuracion extends JInternalFrame {
 		txtFactorIntervalo3.setColumns(10);
 		txtFactorIntervalo3.setBounds(233, 128, 229, 20);
 		pnlProceso.add(txtFactorIntervalo3);
+		
+		txtMaximoArchivo = new JTextField();
+		txtMaximoArchivo.setText("1");
+		txtMaximoArchivo.setColumns(10);
+		txtMaximoArchivo.setBounds(233, 154, 229, 20);
+		pnlProceso.add(txtMaximoArchivo);
+		
+		JLabel lblTiempoMaximoArchivos = new JLabel("Tiempo Maximo Archivos (d\u00EDa):");
+		lblTiempoMaximoArchivos.setBounds(26, 157, 157, 14);
+		pnlProceso.add(lblTiempoMaximoArchivos);
 		
 		JPanel pnlServicio = new JPanel();
 		pnlServicio.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Tiempo (Servicio)", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -240,11 +255,6 @@ public class Configuracion extends JInternalFrame {
 		txtBaliza.setBounds(181, 26, 202, 20);
 		pnlBaliza.add(txtBaliza);
 		
-		jlistBaliza = new JList<String>();
-		jlistBaliza.setBounds(10, 98, 373, 107);
-		jlistBaliza.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		pnlBaliza.add(jlistBaliza);
-		
 		JButton btnAgregarBaliza = new JButton("Agregar");
 		btnAgregarBaliza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -252,19 +262,78 @@ public class Configuracion extends JInternalFrame {
 			}
 		});
 		
-		btnAgregarBaliza.setBounds(140, 57, 89, 23);
+		btnAgregarBaliza.setBounds(68, 57, 89, 23);
 		pnlBaliza.add(btnAgregarBaliza);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 98, 373, 107);
+		pnlBaliza.add(scrollPane);
+		
+		jlistBaliza = new JList<String>();
+		scrollPane.setViewportView(jlistBaliza);
+		jlistBaliza.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				jlistBalizaMouseListener(arg0);
+			}
+		});
+		jlistBaliza.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		JButton btnResetBaliza = new JButton("Reset");
+		btnResetBaliza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnResetBalizaActionPerformed(arg0);
+			}
+		});
+		btnResetBaliza.setBounds(167, 57, 89, 23);
+		pnlBaliza.add(btnResetBaliza);
+		
+		JButton btnEliminarBaliza = new JButton("Eliminar");
+		btnEliminarBaliza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnEliminarBalizaActionPerformed(arg0);
+			}
+		});
+		btnEliminarBaliza.setBounds(266, 57, 89, 23);
+		pnlBaliza.add(btnEliminarBaliza);
 
-		//setTxtValues();
-		defaultListModel=new DefaultListModel<String>();
+		setTxtValues();
+	}
+	
+	private void btnEliminarBalizaActionPerformed(ActionEvent event)
+	{
+		defaultListModel.removeElement(jlistBaliza.getSelectedValue());
+		jlistBaliza.setModel(defaultListModel);
+	}
+
+	private void btnResetBalizaActionPerformed(ActionEvent event)
+	{
+		jlistBaliza.clearSelection();
+		txtBaliza.setText(null);
+	}
+
+	
+	private void jlistBalizaMouseListener(MouseEvent event)
+	{
+		if(event.getClickCount()==2)
+		{
+			txtBaliza.setText(jlistBaliza.getSelectedValue());
+		}
 	}
 	
 	private void btnAgregarBalizaActionPerformed(ActionEvent event)
 	{
 		try{
-			defaultListModel.addElement(txtBaliza.getText());
-			jlistBaliza.setModel(defaultListModel);
-			txtBaliza.setText(null);
+			if(StringUtils.isNotBlank(txtBaliza.getText())&&StringUtils.isNotEmpty(txtBaliza.getText())){
+				if(jlistBaliza.isSelectionEmpty()){
+					defaultListModel.addElement(txtBaliza.getText());
+				}
+				else{
+					defaultListModel.set(jlistBaliza.getSelectedIndex(), txtBaliza.getText());
+				}
+				jlistBaliza.setModel(defaultListModel);
+				txtBaliza.setText(null);
+			}
 		}
 		catch(Exception e){
 			MessageBox.error(e.toString());
@@ -274,7 +343,15 @@ public class Configuracion extends JInternalFrame {
 	
 	private void btnGuardarActionPerformed(ActionEvent event)
 	{
+		String balizasValue="";
 		try{
+			
+			if(defaultListModel.getSize()<=0)
+			{
+				MessageBox.error("Debe agregar balizas de referencia");
+				return;
+			}
+			
 			ReadConfiguration.getInstance().replaceValue(codigoAgenciaKey, txtCodigoAgencia.getText());
 			ReadConfiguration.getInstance().replaceValue(recolectorKey, txtRecolector.getText());
 			ReadConfiguration.getInstance().replaceValue(procesadoKey, txtProcesado.getText());
@@ -285,10 +362,19 @@ public class Configuracion extends JInternalFrame {
 			ReadConfiguration.getInstance().replaceValue(factorMaximoKey, txtFactorMaximo.getText());
 			ReadConfiguration.getInstance().replaceValue(factorPromedioDia, txtFactorPromedioDia.getText());
 			ReadConfiguration.getInstance().replaceValue(factorIntervalo3, txtFactorIntervalo3.getText());
+			ReadConfiguration.getInstance().replaceValue(bitacoraKey, txtBitacora.getText());
+			ReadConfiguration.getInstance().replaceValue(noProcesadoKey, txtNoProcesado.getText());
 
 			ReadConfiguration.getInstance().replaceValue(horaInicio, txtHoraInicio.getText());
 			ReadConfiguration.getInstance().replaceValue(horaFin, txtHoraFin.getText());
+			ReadConfiguration.getInstance().replaceValue(tiempoMaximoArchivo, txtMaximoArchivo.getText());
 			
+			for(int i=0;i< defaultListModel.getSize();i++)
+			{
+				balizasValue=defaultListModel.get(i)+"|"+balizasValue;
+			}
+			
+			ReadConfiguration.getInstance().replaceValue(balizaKey, balizasValue);
 			setTxtValues();
 			
 			MessageBox.info(MessagesApplicacion.getString("com.corvustec.rtoqab.change.ok"));
@@ -301,6 +387,7 @@ public class Configuracion extends JInternalFrame {
 	
 	private void setTxtValues()
 	{
+		String[] balizas;
 		try{
 			txtCodigoAgencia.setText(ReadConfiguration.getInstance().readValue(codigoAgenciaKey));
 			txtRecolector.setText(ReadConfiguration.getInstance().readValue(recolectorKey));
@@ -315,6 +402,16 @@ public class Configuracion extends JInternalFrame {
 			txtHoraInicio.setText(ReadConfiguration.getInstance().readValue(horaInicio));
 			txtHoraFin.setText(ReadConfiguration.getInstance().readValue(horaFin));
 			txtTiempoComprobacion.setText(ReadConfiguration.getInstance().readValue(tiempoComprobacionKey));
+			txtMaximoArchivo.setText(ReadConfiguration.getInstance().readValue(tiempoMaximoArchivo));
+			
+			
+			balizas=ReadConfiguration.getInstance().readValue(balizaKey).split("\\|");
+			defaultListModel=new DefaultListModel<String>();
+			for(int i=0;i<balizas.length;i++)
+			{
+				defaultListModel.addElement(balizas[i]);
+			}
+			jlistBaliza.setModel(defaultListModel);
 		}
 		catch (Exception e)
 		{

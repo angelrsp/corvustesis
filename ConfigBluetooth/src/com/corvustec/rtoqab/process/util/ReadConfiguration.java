@@ -108,6 +108,7 @@ public class ReadConfiguration {
 			{
 				line=key+" = "+val;				
 				lines.set(indexLine, Cryptography.getInstance().encrypt(line));
+				//lines.set(indexLine, line);//Sin cifrar
 			}
 			FileUtils.writeLines(file, lines);
 		}
@@ -121,11 +122,14 @@ public class ReadConfiguration {
 	{
 		File file;
 		try{
+			linesDecryp=new ArrayList<String>();
 			file=new File(pathConfiguration);
 			linesEncryp = FileUtils.readLines(file);
 			
 			for(int i=0;i<linesEncryp.size();i++)
 				linesDecryp.add(Cryptography.getInstance().decrypt(linesEncryp.get(i)));
+			
+			//linesDecryp=linesEncryp;//Sin cifrar
 		}
 		catch(Exception e){
 			logger.info("Error {}",e.toString());
