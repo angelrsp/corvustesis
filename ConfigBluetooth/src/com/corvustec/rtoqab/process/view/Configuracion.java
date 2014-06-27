@@ -203,7 +203,7 @@ public class Configuracion extends JInternalFrame {
 		pnlProceso.add(txtMaximoArchivo);
 		
 		JLabel lblTiempoMaximoArchivos = new JLabel("Tiempo Maximo Archivos (d\u00EDa):");
-		lblTiempoMaximoArchivos.setBounds(26, 157, 157, 14);
+		lblTiempoMaximoArchivos.setBounds(26, 157, 197, 14);
 		pnlProceso.add(lblTiempoMaximoArchivos);
 		
 		JPanel pnlServicio = new JPanel();
