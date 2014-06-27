@@ -27,4 +27,6 @@ public class Const {
 	
 	public static final String PATH_BITACORA = ReadConfiguration.getInstance().readValue("com.corvustec.rtoqab.path.bitacora");
 	
+	public static final String PATH_NOPROCESADO = ReadConfiguration.getInstance().readValue("com.corvustec.rtoqab.path.no.process");
+	
 }

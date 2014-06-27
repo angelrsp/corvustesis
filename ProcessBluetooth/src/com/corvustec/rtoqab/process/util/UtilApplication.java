@@ -1,13 +1,21 @@
 package com.corvustec.rtoqab.process.util;
 
+import java.io.File;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class UtilApplication {
 
+	private final static Logger logger = LoggerFactory.getLogger(UtilApplication.class);
+	
+	
 	public static Timestamp stringToTimestamp(String stringDate){
 		Timestamp timestamp = null;
 		try{
@@ -81,4 +89,24 @@ public class UtilApplication {
 		return d;
 	}
 
+	
+	public static void moverArchivo(File fileOrigen, String pathDestino){
+		File fdest;
+		try {
+			fdest = new File(pathDestino);
+			FileUtils.moveFile(fileOrigen, fdest);
+		} catch (Exception e) {
+			logger.info("Error al mover el archivo {}", e.getCause().toString());
+		}
+	}
+
+	public static void eliminarArchivo(File file){
+		try {
+			file.delete();
+		} catch (Exception e) {
+			logger.info("Error al mover el archivo {}", e.getCause().toString());
+		}
+	}
+
+	
 }

@@ -38,12 +38,12 @@ public class Process {
 
 	private final static Logger logger = LoggerFactory.getLogger(Process.class);
 	
-	
-	private FileWriter writerBitacora;
 	private static Process instance;
 	
 	private static String horaInicio=Const.HORA_INICIO;
 	private static String horaFin=Const.HORA_FIN;
+	private static String pathProcesado=Const.PATH_PROCESADO;
+	private static String pathNoProcesado=Const.PATH_NOPROCESADO;
 	
 	//Singleton
 	public static Process getInstance()
@@ -53,18 +53,6 @@ public class Process {
 		return instance;
 	}
 	
-	public Process() {
-		File fileBitacora;
-		try {
-			fileBitacora=new File(Const.PATH_BITACORA+"bitacora.txt");
-			if(fileBitacora.exists())
-				writerBitacora=new FileWriter(fileBitacora,true);
-			else
-				writerBitacora=new FileWriter(fileBitacora);
-		} catch (IOException e) {
-			logger.info("Error {}",e.toString());
-		}
-	}
 	
 	
 	public static void main(String[] args) {
@@ -84,7 +72,6 @@ public class Process {
 		diff=(double) (end-start);
 		diff= diff* 0.001;
 		logger.info("Procesado en: "+ ( diff ) +" segundos");
-		
 	}
 
 	
@@ -93,7 +80,7 @@ public class Process {
 	{
 		String codigoAgencia,fechaCorte;
 
-		File fileIn;		
+		File fileIn = null;		
 		File fileOut;
 		
 		List<String> lines;
@@ -170,8 +157,10 @@ public class Process {
 			if(baliza.size()<=0)
 			{
 				logger.info("No se encontraron balizas de referencia");
-				writerBitacora.write("No se encontraron balizas de referencia "+fechaCorte);
+				writeBitacora("No se encontraron balizas de referencia "+fechaCorte);
 				writer.close();
+				UtilApplication.moverArchivo(fileIn, pathNoProcesado+fileIn.getName());
+				UtilApplication.eliminarArchivo(fileOut);
 				return;
 			}
 			
@@ -648,8 +637,10 @@ public class Process {
 			if(dataList.size()<=0)
 			{
 				logger.info("Sin datos posible dia no atención");
-				writerBitacora.write("Sin datos posible dia no atención "+fechaCorte);
+				writeBitacora("Sin datos posible dia no atención "+fechaCorte);
+				UtilApplication.moverArchivo(fileIn, pathNoProcesado+fileIn.getName());
 				writer.close();
+				UtilApplication.eliminarArchivo(fileOut);
 				return;
 			}
 			
@@ -803,12 +794,16 @@ public class Process {
 			}
 			writer.close();
 			
-			writerBitacora.write("Proceso Exitoso Fecha: "+fechaCorte+" Agencia "+codigoAgencia);
+			UtilApplication.moverArchivo(fileIn, pathProcesado+fileIn.getName());
+			
+			writeBitacora("Proceso Exitoso Fecha: "+fechaCorte+" Agencia "+codigoAgencia);
 			
 		} catch (IOException e) {
+			UtilApplication.moverArchivo(fileIn, pathNoProcesado+fileIn.getName());
 			logger.info("Error {}",e.toString());
 		}
 		catch (Exception e) {
+			UtilApplication.moverArchivo(fileIn, pathNoProcesado+fileIn.getName());
 			logger.info("Error {}",e.toString());
 		}
 	}
@@ -955,5 +950,23 @@ public class Process {
 			logger.info("Error {}",e.toString());	
 		}
 		return result;
+	}
+	
+	private void writeBitacora(String mensaje)
+	{
+		File fileBitacora;
+		FileWriter writerBitacora;
+		try {
+			fileBitacora=new File(Const.PATH_BITACORA+"bitacora.txt");
+			if(fileBitacora.exists())
+				writerBitacora=new FileWriter(fileBitacora,true);
+			else
+				writerBitacora=new FileWriter(fileBitacora);
+			
+			writerBitacora.write(mensaje+"\n");
+			writerBitacora.close();
+		} catch (IOException e) {
+			logger.info("Error {}",e.toString());
+		}
 	}
 }
