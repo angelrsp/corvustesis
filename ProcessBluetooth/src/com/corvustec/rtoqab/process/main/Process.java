@@ -53,8 +53,6 @@ public class Process {
 		return instance;
 	}
 	
-	
-	
 	public static void main(String[] args) {
 		
 		long start, end;
