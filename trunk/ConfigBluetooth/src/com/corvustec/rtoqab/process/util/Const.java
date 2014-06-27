@@ -30,4 +30,6 @@ public class Const {
 	
 	public static final String BALIZA_KEY = "com.corvustec.rtoqab.baliza";
 	
+	public static final String TIEMPO_MAXIMO_ARCHIVO_KEY = "com.corvustec.rtoqab.tiempo.borrado.archivo";
+	
 }
