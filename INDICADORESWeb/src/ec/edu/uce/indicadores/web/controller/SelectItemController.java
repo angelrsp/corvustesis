@@ -25,6 +25,7 @@ public abstract class SelectItemController {
 	private List<SelectItem> representanteLegalList;
 	private List<SelectItem> catalogoTipoContacto;
 	private List<SelectItem> catalogoTipoDocumento;
+	private List<SelectItem> catalogoTipoIndicador;
 	
 	@EJB
 	private IndicadorService indicadorService;
@@ -135,4 +136,24 @@ public abstract class SelectItemController {
 		}
 		return catalogoTipoDocumento;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<SelectItem> getCatalogoTipoIndicador() throws IndicadoresException {
+		if(CollectionUtils.isEmpty(catalogoTipoIndicador))
+		{
+			CatalogoDTO catalogo=new CatalogoDTO();
+			catalogo.setCatCodigo(8);
+			catalogoTipoIndicador=(List<SelectItem>)CollectionUtils.collect(administracionService.getCatalogo(catalogo), new Transformer() {
+				
+				@Override
+				public Object transform(Object arg0) {
+					CatalogoDTO cat=(CatalogoDTO)arg0;
+					return new SelectItem(cat.getCatCodigo(), cat.getCatDescripcion());
+				}
+			});
+			
+		}
+		return catalogoTipoIndicador;
+	}
+
 }

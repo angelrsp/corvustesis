@@ -36,7 +36,7 @@
 					</table>
 					
 					<p:tree value="#{historicoIndicadorController.rootNode}" var="node" id="tree" selectionMode="single" selection="#{historicoIndicadorController.selectedNode}" style="width:99%;">
-						<p:ajax event="select" listener="#{historicoIndicadorController.onNodeSelect}" update=":contenido:growl,:contenido:pnlValor,:contenido:pnlValorReporte,:contenido:pnlDescriptor"/>  
+						<p:ajax event="select" listener="#{historicoIndicadorController.onNodeSelect}" update=":contenido:growl,:contenido:pnlValor,:contenido:pnlValorReporte,:contenido:pnlDescriptor,:contenido:pnlValorReporte2"/>  
 				        <p:treeNode id="treeNode">  
 				            <h:outputText value="#{node.indNombreCorto}"/>  
 				        </p:treeNode>  
@@ -55,22 +55,22 @@
 						</table>
 					
 						<div align="center">
-						<p:pieChart id="sample" value="#{historicoIndicadorController.pieModel}" legendPosition="w"  
-                			title="Historial" style="width:400px;height:300px;" showDataLabels="true" /> 					
+							<p:pieChart id="sample" value="#{historicoIndicadorController.pieModel}" legendPosition="w"  
+	                			title="Historial" style="width:400px;height:300px;" showDataLabels="true"/> 					
 						</div>
 						
 						<br/>
 						
 						<div>
-						<p:lineChart id="lineChart" value="#{historicoIndicadorController.categoryModel}" legendPosition="ne"   
-			             title="Historial" style="height:300px;margin-top:20px" xaxisLabel="" yaxisLabel="Valor" animate="true"  /> 
+							<p:lineChart id="lineChart" value="#{historicoIndicadorController.categoryModel}" legendPosition="ne"   
+				             	title="Historial" style="height:300px;margin-top:20px" xaxisLabel="" yaxisLabel="Valor" animate="true"  /> 
 						</div>
 						
 						<br/>
 						
 						<div align="center">
-						<p:meterGaugeChart id="sampleDash" value="#{historicoIndicadorController.meterGaugeModel}" 
-							style="width:400px;height:250px" title="Ideal / Objetivo" label="%"/>  						
+							<p:meterGaugeChart id="sampleDash" value="#{historicoIndicadorController.meterGaugeModel}" 
+								style="width:400px;height:250px" title="Ideal / Objetivo" label="%"/>  						
 						</div>
 						
 					<table width="100%">
@@ -117,6 +117,80 @@
 				</p:scrollPanel>	
 				</p:dialog>				
 				
+
+				<p:dialog id="reporte2" widgetVar="dlgValorReporteLogico" modal="true" header="#{historicoIndicadorController.indicadorDTO.indNombreCorto}" closeOnEscape="true" width="950" height="500" resizable="false">
+				
+				<p:scrollPanel>
+					<p:panel id="pnlValorReporte2">
+					
+						<table>
+						<tr><td><h:outputText value="Indicador: #{historicoIndicadorController.indicadorDTO.indNombreCorto}" style="font-weight:bold" /></td></tr>	
+						</table>
+					
+<!-- 						<div align="center"> -->
+<!-- 							<p:pieChart id="sample2" value="#{historicoIndicadorController.pieModel}" legendPosition="w"   -->
+<!-- 	                			title="Historial" style="width:400px;height:300px;" showDataLabels="true" seriesColors="FB5E09, CA04F1, 5EDD03"/> 					 -->
+<!-- 						</div> -->
+						
+<!-- 						<br/> -->
+						
+<!-- 						<div> -->
+<!-- 							<p:lineChart id="lineChart2" value="#{historicoIndicadorController.categoryModel}" legendPosition="ne"    -->
+<!-- 				             	title="Historial" style="height:300px;margin-top:20px" xaxisLabel="" yaxisLabel="Valor" animate="true"  />  -->
+<!-- 						</div> -->
+						
+						<br/>
+						
+						<div align="center">
+							<p:meterGaugeChart id="sampleDash2" value="#{historicoIndicadorController.meterGaugeModel}" 
+								style="width:400px;height:250px" title="Ideal / Objetivo" label="%"/>  						
+						</div>
+						
+					<table width="100%">
+						<tr>
+							<td><h:outputLabel value="Valor Inicial:" style="font-weight:bold" /></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorInicial}" /></td>
+							
+						</tr>
+						<tr>	
+							<td><h:outputLabel value="Valor Actual:" style="font-weight:bold"/></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorActual}" /></td>
+							
+						</tr>
+						<tr>
+							<td><h:outputLabel value="Valor Objetivo:" style="font-weight:bold"/></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorObjetivo}" /></td>
+
+							<td><h:outputLabel value="Brecha Objetivo:" style="font-weight:bold"/></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorObjetivo - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>													
+						</tr>
+						<tr>
+							<td><h:outputLabel value="Valor Ideal:" style="font-weight:bold"/></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal}" /></td>
+																			
+							<td><h:outputLabel value="Brecha Ideal:" style="font-weight:bold"/></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>																									
+						</tr>							
+						
+						<tr>
+							<td colspan="4" align="center"><p:commandButton value="Registro Valor Actual" type="button" onclick="PF('dlgValor').show();" disabled="#{historicoIndicadorController.disabledAddValue}"/> 
+							<p:commandButton value="Ver Descriptor" type="button" onclick="PF('dlgDescriptor').show();"/> 
+<!-- 						    <p:commandButton value="Imprimir" type="button" icon="ui-icon-print">   -->
+<!-- 						        <p:printer target="pnlValorReporte" />   -->
+<!-- 						    </p:commandButton>   -->
+							
+							
+							</td>						
+						</tr>
+					</table>
+					
+					</p:panel>
+					
+					
+				</p:scrollPanel>	
+				</p:dialog>				
+
+
 				
 				<p:dialog id="dlgValor" widgetVar="dlgValor" modal="true" header="Valores" closeOnEscape="true" resizable="false">
 				

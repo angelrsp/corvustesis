@@ -107,7 +107,6 @@ public class HistoricoIndicadorController extends SelectItemController implement
 			}
 		}
 
-		
 		obtenerArbol();
 		historicoIndicadorList=new ArrayList<HistoricoIndicadorDTO>();
 		historicoIndicadorDTO=new HistoricoIndicadorDTO();
@@ -310,13 +309,21 @@ public class HistoricoIndicadorController extends SelectItemController implement
 				indicadorService.actualizarValores(indTemp);
 				historicoIndicadorList=indicadorService.obtenerValores(indTemp);
 				if(historicoIndicadorList!=null){
-					rc.execute("PF('dlgValorReporte').show();");
+					if(indTemp.getIndTipo()==10)
+						rc.execute("PF('dlgValorReporteLogico').show();");
+					else
+						rc.execute("PF('dlgValorReporte').show();");
+					
 					createChartLine(historicoIndicadorList);
-					createPieModel(historicoIndicadorList);
+					createPieModel(historicoIndicadorList);											
 					createMeterGaugeModel(indTemp);
 				}
 				else{
-					rc.execute("PF('dlgValorReporte').show();");
+					if(indTemp.getIndTipo()==10)
+						rc.execute("PF('dlgValorReporteLogico').show();");
+					else
+						rc.execute("PF('dlgValorReporte').show();");
+
 					createMeterGaugeModel(indTemp);
 					initChart();
 					createPieModel();
@@ -325,7 +332,10 @@ public class HistoricoIndicadorController extends SelectItemController implement
 			else{
 				disabledAddValue=true;
 				indicadorService.actualizarValores(indTemp);
-				rc.execute("PF('dlgValorReporte').show();");
+				if(indTemp.getIndTipo()==10)
+					rc.execute("PF('dlgValorReporteLogico').show();");
+				else
+					rc.execute("PF('dlgValorReporte').show();");
 				indTemp=indicadorService.obtenerIndicador(indTemp.getIndCodigo());
 				List<IndicadorDTO> listChildren=indicadorService.obtenerHijosIndicador(indTemp);
 				createChartLinePatern(listChildren);
