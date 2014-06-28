@@ -53,6 +53,8 @@ public class IndicadorController extends SelectItemController implements Seriali
 	
 	private TreeNode selectedNode;
 	
+	private Object tipoIndicador;
+	
 	@PostConstruct
 	private void init() throws IndicadoresException
 	{
@@ -113,7 +115,6 @@ public class IndicadorController extends SelectItemController implements Seriali
 		this.rootNode = rootNode;
 	}
 
-	
 	public List<IndicadorDTO> getIndicadorList() {
 		return indicadorList;
 	}
@@ -128,6 +129,14 @@ public class IndicadorController extends SelectItemController implements Seriali
 
 	public void setPredecesor(int predecesor) {
 		this.predecesor = predecesor;
+	}
+
+	public Object getTipoIndicador() {
+		return tipoIndicador;
+	}
+
+	public void setTipoIndicador(Object tipoIndicador) {
+		this.tipoIndicador = tipoIndicador;
 	}
 
 	public Boolean getDisabled() {
@@ -169,6 +178,7 @@ public class IndicadorController extends SelectItemController implements Seriali
 			modeloDTO.setModCodigo(Integer.parseInt(getModelo().toString()));
 			getIndicadorDTO().setIndy(iesDTO);
 			getIndicadorDTO().setIndModeloBean(modeloDTO);
+			getIndicadorDTO().setIndTipo(Integer.valueOf(getTipoIndicador().toString()));
 			indicadorService.createOrUpdateIndicador(getIndicadorDTO());
 			indicadorDTO=new IndicadorDTO();
 			obtenerArbol();
@@ -246,6 +256,7 @@ public class IndicadorController extends SelectItemController implements Seriali
 		IndicadorDTO ind=(IndicadorDTO) selectedNode.getData();
 		setIndicadorDTO(ind);
 		setPredecesor(ind.getIndIndicador().getIndCodigo());
+		setTipoIndicador(ind.getIndTipo());
 	}
 	
 }
