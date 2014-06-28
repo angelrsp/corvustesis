@@ -53,7 +53,10 @@ public class IndicadorDTO implements Serializable {
 
 	@Column(name="ind_orden")
 	private Integer indOrden;
-	
+
+	@Column(name="ind_tipo")
+	private Integer indTipo;
+
 	//bi-directional many-to-one association to HistoricoIndicadorDTO
 	@OneToMany(mappedBy="indIndicador")
 	private List<HistoricoIndicadorDTO> indHistoricoIndicadors;
@@ -175,6 +178,14 @@ public class IndicadorDTO implements Serializable {
 
 	public void setIndOrden(Integer indOrden) {
 		this.indOrden = indOrden;
+	}
+
+	public Integer getIndTipo() {
+		return indTipo;
+	}
+
+	public void setIndTipo(Integer indTipo) {
+		this.indTipo = indTipo;
 	}
 
 	public HistoricoIndicadorDTO addIndHistoricoIndicador(HistoricoIndicadorDTO indHistoricoIndicador) {
