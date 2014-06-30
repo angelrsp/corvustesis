@@ -464,6 +464,16 @@ public class HistoricoIndicadorController extends SelectItemController implement
 				JsfUtil.addErrorMessage("El valor no puede superar valor Ideal");
 				return;
 			}
+			
+			if(indTemp.getIndTipo()==10)
+			{
+				if(!(getHistoricoIndicadorDTO().getHinValor().doubleValue()==1||getHistoricoIndicadorDTO().getHinValor().doubleValue()==100))
+				{
+					JsfUtil.addErrorMessage("El valor logico debe ser 1 o 100");
+					return;					
+				}
+			}
+			
 			indicadorService.agregarValor(getHistoricoIndicadorDTO());
 			historicoIndicadorList=indicadorService.obtenerValores(indTemp);
 			historicoIndicadorDTO=new HistoricoIndicadorDTO();
