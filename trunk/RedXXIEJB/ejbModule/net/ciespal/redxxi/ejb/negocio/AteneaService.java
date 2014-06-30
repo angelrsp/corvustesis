@@ -215,5 +215,7 @@ public interface AteneaService {
 
 	String ateneaItem(AteneaVisorDTO atenea) throws CorvustecException;
 
+	String readDoctorItem(DoctorVieDTO doc) throws CorvustecException;
+
 
 }

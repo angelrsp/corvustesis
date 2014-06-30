@@ -14,13 +14,19 @@ import javax.ejb.Local;
 
 
 
+
+
+
+
 import net.ciespal.redxxi.ejb.persistence.entities.PaisDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EspejoVisorDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.EticaDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.LeyDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.ObraEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioCiespalDTO;
@@ -124,6 +130,19 @@ public interface EspejoService {
 	String espejoItem(EspejoVisorDTO espejo) throws CorvustecException;
 
 	void deleteLeyCodigo(LeyDTO ley) throws CorvustecException;
+
+	List<GranMaestroVieDTO> readMaestroPeriodismo(
+			GranMaestroVieDTO granMaestroVieDTO) throws CorvustecException;
+
+	List<MaestroCiespalVieDTO> readMaestroCiespal(
+			MaestroCiespalVieDTO maestroCiespalVieDTO)
+			throws CorvustecException;
+
+	String readMaestroPeriodismoItem(GranMaestroVieDTO gma)
+			throws CorvustecException;
+
+	String readMaestroCiespalItem(MaestroCiespalVieDTO mci)
+			throws CorvustecException;
 
 	
 

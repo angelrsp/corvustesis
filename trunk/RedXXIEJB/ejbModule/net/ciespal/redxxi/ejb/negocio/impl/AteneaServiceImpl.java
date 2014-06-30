@@ -2283,6 +2283,137 @@ public class AteneaServiceImpl implements AteneaService{
 
 
 	@Override
+	public String readDoctorItem(DoctorVieDTO doc) throws CorvustecException
+	{
+		StringBuilder sb;
+		try{
+			sb=new StringBuilder();
+			doc=factoryDAO.getDoctorVieDAOImpl().get(doc).get(0);
+
+			sb.append("<table>");
+			
+			sb.append("<tr>");
+				sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
+				sb.append("<td>");sb.append(doc.getCatPais());sb.append("</td>");
+			sb.append("</tr>");
+			
+			sb.append("<tr>");
+				sb.append("<td>");sb.append("Estado/Provincia: ");sb.append("</td>");
+				sb.append("<td>");sb.append(doc.getCatProvincia());sb.append("</td>");
+			sb.append("</tr>");
+	
+			sb.append("<tr>");
+				sb.append("<td>");sb.append("Ciudad: ");sb.append("</td>");
+				sb.append("<td>");sb.append(doc.getCatCiudad());sb.append("</td>");
+			sb.append("</tr>");
+	
+			sb.append("<tr>");
+				sb.append("<td>");sb.append("Nombres: ");sb.append("</td>");
+				sb.append("<td>");sb.append(doc.getDocNombres());sb.append("</td>");
+			sb.append("</tr>");
+	
+			sb.append("<tr>");
+				sb.append("<td>");sb.append("Apellidos: ");sb.append("</td>");
+				sb.append("<td>");sb.append(doc.getDocApellidos());sb.append("</td>");
+			sb.append("</tr>");
+	
+			sb.append("<tr>");
+				sb.append("<td>");sb.append("Fecha de Nacimiento: ");sb.append("</td>");
+				sb.append("<td>");sb.append(doc.getDocFechaNacimiento());sb.append("</td>");
+			sb.append("</tr>");
+	
+			sb.append("<tr>");
+				sb.append("<td>");sb.append("Sexo: ");sb.append("</td>");
+				sb.append("<td>");sb.append(doc.getCatSexo());sb.append("</td>");
+			sb.append("</tr>");
+	
+			sb.append("<tr>");
+				sb.append("<td>");sb.append("Institución de Trabajo: ");sb.append("</td>");
+				sb.append("<td>");sb.append(doc.getDocInstitucionTrabajo());sb.append("</td>");
+			sb.append("</tr>");
+	
+			sb.append("<tr>");
+				sb.append("<td>");sb.append("Institución de Titulación (PHD): ");sb.append("</td>");
+				sb.append("<td>");sb.append(doc.getDocInstitucionTitulacion());sb.append("</td>");
+			sb.append("</tr>");
+	
+			sb.append("<tr>");
+				sb.append("<td>");sb.append("Título Tesis: ");sb.append("</td>");
+				sb.append("<td>");sb.append(doc.getDocTituloTesis());sb.append("</td>");
+			sb.append("</tr>");
+	
+			sb.append("<tr>");
+				sb.append("<td>");sb.append("Resumen de Tesis: ");sb.append("</td>");
+				sb.append("<td>");sb.append(doc.getDocResumenTesis());sb.append("</td>");
+			sb.append("</tr>");
+	
+			if(doc.getDocArchivoTesis()!=null)
+			{				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Archivo: ");sb.append("</td>");
+					sb.append("<td>");
+					sb.append("<a href='");
+					sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(doc.getDocArchivoTesisNombre(),doc.getDocArchivoTesis()).replace('\\', '/'));
+					sb.append("' target='_blank'>");
+					sb.append(doc.getDocArchivoTesisNombre());
+					sb.append("</a>");
+					sb.append("</td>");
+				sb.append("</tr>");
+			}
+	
+			sb.append("<tr>");
+				sb.append("<td colspan='2'>");sb.append("Obras: ");sb.append("</td>");
+			sb.append("</tr>");
+			
+			DoctorDTO d=new DoctorDTO();
+			doc.setDocCodigo(doc.getDocCodigo());
+			List<PublicacionDTO> pubList= factoryDAO.getPublicacionDAOImpl().getAll(d);
+			if(pubList!=null)
+			{
+				for(PublicacionDTO pub:pubList)
+				{
+					if(pub.getPubArchivo()!=null)
+					{				
+						sb.append("<tr>");
+							sb.append("<td>");sb.append("Archivo: ");sb.append("</td>");
+							sb.append("<td>");
+							sb.append("<a href='");
+							sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(pub.getPubArchivoNombre(),pub.getPubArchivo()).replace('\\', '/'));
+							sb.append("' target='_blank'>");
+							sb.append(pub.getPubArchivoNombre());
+							sb.append("</a>");
+							sb.append("</td>");
+						sb.append("</tr>");
+					}
+				}
+			}
+			
+			List<ContactoListDTO> listContacto=factoryDAO.getContactoDAOImpl().getAll(d);
+			
+			if(listContacto!=null)
+			{
+				sb.append("<tr>");
+					sb.append("<td colspan='2'>");sb.append("Contactos: ");sb.append("</td>");
+				sb.append("</tr>");
+				for(ContactoListDTO con:listContacto)
+				{
+					sb.append("<tr>");
+						sb.append("<td>");sb.append(con.getCatTipo());sb.append("</td>");
+						sb.append("<td>");sb.append(con.getConValor());sb.append("</td>");
+					sb.append("</tr>");						
+				}
+			}
+			sb.append("</table>");
+		}
+		catch(Exception e){
+			logger.info("Error doctorVieRead {}",e.toString());
+			throw new CorvustecException("Error al doctorVieRead" + e.toString());
+		}
+		return sb.toString();
+	}
+	
+
+	@Override
 	public DoctorVieDTO doctorVieRead(DoctorVieDTO doctorVieDTO) throws CorvustecException
 	{
 		logger.info("doctorVieRead");
