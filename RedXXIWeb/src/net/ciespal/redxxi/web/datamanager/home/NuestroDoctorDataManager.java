@@ -18,6 +18,7 @@ public class NuestroDoctorDataManager implements Serializable{
 
 	
 	private DoctorVieDTO doctorVieDTO;
+	private String item;
 	
 	public NuestroDoctorDataManager() {
 		doctorVieDTO=new DoctorVieDTO();
@@ -29,6 +30,14 @@ public class NuestroDoctorDataManager implements Serializable{
 
 	public void setDoctorVieDTO(DoctorVieDTO doctorVieDTO) {
 		this.doctorVieDTO = doctorVieDTO;
+	}
+
+	public String getItem() {
+		return item;
+	}
+
+	public void setItem(String item) {
+		this.item = item;
 	}
 	
 	

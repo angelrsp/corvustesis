@@ -12,8 +12,12 @@ import javax.faces.bean.ViewScoped;
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
 import net.ciespal.redxxi.ejb.negocio.EspejoService;
 import net.ciespal.redxxi.ejb.persistence.entities.DoctorVieDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.GranMaestroVieDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalVieDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
+import net.ciespal.redxxi.web.datamanager.home.GrandesMaestrosHomeDataManager;
 import net.ciespal.redxxi.web.datamanager.home.HomeDataManager;
+import net.ciespal.redxxi.web.datamanager.home.MaestroCiespalHomeDataManager;
 import net.ciespal.redxxi.web.datamanager.home.NuestroDoctorDataManager;
 
 import com.corvustec.commons.util.CorvustecException;
@@ -32,13 +36,20 @@ public class HomeController implements Serializable{
 
 	@ManagedProperty(value="#{nuestroDoctorDataManager}")
 	private NuestroDoctorDataManager nuestroDoctorDataManager;
-	
-	@EJB
-	private AteneaService ateneaService;
 
+	@ManagedProperty(value="#{grandesMaestrosHomeDataManager}")
+	private GrandesMaestrosHomeDataManager grandesMaestrosHomeDataManager;
+	
+	@ManagedProperty(value="#{maestroCiespalHomeDataManager}")
+	private MaestroCiespalHomeDataManager maestroCiespalHomeDataManager;
+	
+	
 	@EJB
 	private EspejoService espejoService;
-	
+
+	@EJB
+	private AteneaService ateneaService;;
+
 
 	public HomeController() {
 		
@@ -62,6 +73,24 @@ public class HomeController implements Serializable{
 	}
 	
 	
+	public GrandesMaestrosHomeDataManager getGrandesMaestrosHomeDataManager() {
+		return grandesMaestrosHomeDataManager;
+	}
+
+	public void setGrandesMaestrosHomeDataManager(
+			GrandesMaestrosHomeDataManager grandesMaestrosHomeDataManager) {
+		this.grandesMaestrosHomeDataManager = grandesMaestrosHomeDataManager;
+	}
+
+	public MaestroCiespalHomeDataManager getMaestroCiespalHomeDataManager() {
+		return maestroCiespalHomeDataManager;
+	}
+
+	public void setMaestroCiespalHomeDataManager(
+			MaestroCiespalHomeDataManager maestroCiespalHomeDataManager) {
+		this.maestroCiespalHomeDataManager = maestroCiespalHomeDataManager;
+	}
+
 	@PostConstruct
 	private void init()
 	{
@@ -89,10 +118,12 @@ public class HomeController implements Serializable{
 	{
 		DoctorVieDTO doc;
 		try {
-			doc=new DoctorVieDTO();
-			doc.setDocCodigo(homeDataManager.getDoctorDTO().getDocCodigo());
-			nuestroDoctorDataManager.setDoctorVieDTO(ateneaService.doctorVieRead(doc));
-			JsfUtil.redirect(JsfUtil.getContextPath()+"/public/home/nuestrosDoctores.xhtml");
+			if(homeDataManager.getDoctorDTO().getDocCodigo()!=null)
+			{
+				doc=new DoctorVieDTO();
+				nuestroDoctorDataManager.setItem(ateneaService.readDoctorItem(doc));
+				JsfUtil.redirect(JsfUtil.getContextPath()+"/public/home/nuestrosDoctores.xhtml");
+			}
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		} catch (IOException e) {
@@ -114,6 +145,25 @@ public class HomeController implements Serializable{
 		}
 	}
 
+	public void granMaestroReadVie()
+	{
+		GranMaestroVieDTO g;
+		try {
+			if(homeDataManager.getGranMaestroDTO().getGmaCodigo()!=null)
+			{
+				g=new GranMaestroVieDTO();
+				g.setGmaCodigo(homeDataManager.getGranMaestroDTO().getGmaCodigo());
+				grandesMaestrosHomeDataManager.setItem(espejoService.readMaestroPeriodismoItem(g));				
+				JsfUtil.redirect(JsfUtil.getContextPath()+"/public/home/grandesMaestrosHome.xhtml");
+			}
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		} catch (IOException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
+	
 	private void maestroCiespalRead()
 	{
 		try {
@@ -128,5 +178,24 @@ public class HomeController implements Serializable{
 	}
 
 	
+	public void maestroCiespalReadVie()
+	{
+		MaestroCiespalVieDTO m;
+		try {
+			if(homeDataManager.getMaestroCiespalDTO().getMciCodigo()!=null)
+			{
+				m=new MaestroCiespalVieDTO();
+				m.setMciCodigo(homeDataManager.getMaestroCiespalDTO().getMciCodigo());
+				maestroCiespalHomeDataManager.setItem(espejoService.readMaestroCiespalItem(m));
+								
+				JsfUtil.redirect(JsfUtil.getContextPath()+"/public/home/maestroCiespalHome.xhtml");
+			}
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		} catch (IOException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+
 	
 }
