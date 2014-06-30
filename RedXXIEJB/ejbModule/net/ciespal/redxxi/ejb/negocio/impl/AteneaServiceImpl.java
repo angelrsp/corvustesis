@@ -860,26 +860,31 @@ public class AteneaServiceImpl implements AteneaService{
 				ModalidadVieDTO mod=new ModalidadVieDTO();
 				mod.setModCarrera(pre.getCarCodigo());
 				List<ModalidadVieDTO> modalidadList=factoryDAO.getModalidadVieDAOImpl().getByAnd(mod);
-				for(ModalidadVieDTO m: modalidadList)
+				if(modalidadList!=null)
 				{
-					sb.append("<tr>");
-						sb.append("<td>");sb.append("Modalidad: ");sb.append("</td>");
-						sb.append("<td>");sb.append(m.getCatModalidad());sb.append("</td>");
-					sb.append("</tr>");					
-				}
-				
+					for(ModalidadVieDTO m: modalidadList)
+					{
+						sb.append("<tr>");
+							sb.append("<td>");sb.append("Modalidad: ");sb.append("</td>");
+							sb.append("<td>");sb.append(m.getCatModalidad());sb.append("</td>");
+						sb.append("</tr>");					
+					}
+				}				
 				sb.append("<tr>");
 					sb.append("<td>");sb.append("Perfil: ");sb.append("</td>");
 					sb.append("<td>");sb.append(pre.getCarPerfil());sb.append("</td>");
 				sb.append("</tr>");
 
 				List<MencionDTO> mencionList=factoryDAO.getMencionDAOImpl().getAll(pre);
-				for(MencionDTO me:mencionList)
+				if(mencionList!=null)
 				{
-					sb.append("<tr>");
-						sb.append("<td>");sb.append("Mención: ");sb.append("</td>");
-						sb.append("<td>");sb.append(me.getMenNombre());sb.append("</td>");
-					sb.append("</tr>");
+					for(MencionDTO me:mencionList)
+					{
+						sb.append("<tr>");
+							sb.append("<td>");sb.append("Mención: ");sb.append("</td>");
+							sb.append("<td>");sb.append(me.getMenNombre());sb.append("</td>");
+						sb.append("</tr>");
+					}
 				}
 				
 				List<ContactoListDTO> listContacto=factoryDAO.getContactoDAOImpl().getAll(pre);
