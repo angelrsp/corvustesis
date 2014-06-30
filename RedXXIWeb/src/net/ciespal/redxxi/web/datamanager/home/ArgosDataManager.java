@@ -28,6 +28,9 @@ public class ArgosDataManager implements Serializable{
 	
 	private ArgosDTO argos;
 	
+	private String tipoConsulta;
+	
+	
 	public ArgosDataManager() {
 		argosList=new ArrayList<ArgosDTO>();
 		paisList=new ArrayList<PaisDTO>();
@@ -74,6 +77,14 @@ public class ArgosDataManager implements Serializable{
 
 	public void setArgosVisorList(List<ArgosVisorDTO> argosVisorList) {
 		this.argosVisorList = argosVisorList;
+	}
+
+	public String getTipoConsulta() {
+		return tipoConsulta;
+	}
+
+	public void setTipoConsulta(String tipoConsulta) {
+		this.tipoConsulta = tipoConsulta;
 	}
 
 }
