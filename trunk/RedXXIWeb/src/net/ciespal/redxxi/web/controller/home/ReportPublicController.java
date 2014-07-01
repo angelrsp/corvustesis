@@ -84,6 +84,20 @@ public class ReportPublicController {
 			reportPublicDataManager.setAtenea(atenea);
 			//reportPublicDataManager.setVisor(ateneaService.visor(atenea));
 			//JsfUtil.redirect("/"+JsfUtil.getExternalContext().getContextName()+"/public/home/ateneaVisor.xhtml");
+			
+			if(atenea.getTipo()==2)
+				reportPublicDataManager.setTipoConsulta("Universidades");
+			else if(atenea.getTipo()==6)
+				reportPublicDataManager.setTipoConsulta("Carreras de Pregrado");
+			else if(atenea.getTipo()==7)
+				reportPublicDataManager.setTipoConsulta("Carreras de Posgrado");
+			else if(atenea.getTipo()==103)
+				reportPublicDataManager.setTipoConsulta("Organizaciones Científicas");
+			else if(atenea.getTipo()==104)
+				reportPublicDataManager.setTipoConsulta("Doctores en Ciencias");
+			else if(atenea.getTipo()==105)
+				reportPublicDataManager.setTipoConsulta("Articulos, Monografías, Tesis, Libros");
+			
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}

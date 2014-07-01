@@ -30,6 +30,8 @@ public class EspejoDataManager implements Serializable{
 
 	private String item;
 	
+	private String tipoConsulta;
+	
 	public EspejoDataManager() {
 		espejoList=new ArrayList<EspejoDTO>();
 		paisList=new ArrayList<PaisDTO>();
@@ -86,6 +88,14 @@ public class EspejoDataManager implements Serializable{
 
 	public void setItem(String item) {
 		this.item = item;
+	}
+
+	public String getTipoConsulta() {
+		return tipoConsulta;
+	}
+
+	public void setTipoConsulta(String tipoConsulta) {
+		this.tipoConsulta = tipoConsulta;
 	}
 	
 }
