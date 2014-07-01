@@ -55,6 +55,13 @@ public class ArgosVisorController {
 		try {
 			argos.setPais(argosDataManager.getPais().getCodigo());
 			argosDataManager.setArgosVisorList(argosService.visorList(argos));
+			if(argos.getTipo()==1)
+				argosDataManager.setTipoConsulta("Observatorios");
+			else if(argos.getTipo()==2)
+				argosDataManager.setTipoConsulta("Veedurías");
+			else if(argos.getTipo()==3)
+				argosDataManager.setTipoConsulta("Defensores de Audiencia");
+
 		}catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}

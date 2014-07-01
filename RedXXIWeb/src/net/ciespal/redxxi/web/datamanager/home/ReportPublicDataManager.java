@@ -37,6 +37,7 @@ public class ReportPublicDataManager implements Serializable{
 	private int argosCount;
 	private int espejoCount;
 	
+	private String tipoConsulta;
 	
 	public ReportPublicDataManager() {
 		paisList=new ArrayList<PaisDTO>();
@@ -116,6 +117,14 @@ public class ReportPublicDataManager implements Serializable{
 
 	public void setEspejoCount(int espejoCount) {
 		this.espejoCount = espejoCount;
+	}
+
+	public String getTipoConsulta() {
+		return tipoConsulta;
+	}
+
+	public void setTipoConsulta(String tipoConsulta) {
+		this.tipoConsulta = tipoConsulta;
 	}
 
 	

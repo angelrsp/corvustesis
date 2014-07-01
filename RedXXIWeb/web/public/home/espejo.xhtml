@@ -50,7 +50,7 @@
 	<table width="100%">
 		<tr>
 			<td>
-				<h:outputText value="Consulta por paises" styleClass="descripcion"/>
+				<h:outputText value="Consulta por paises " styleClass="descripcion"/><h:outputText value="#{espejoDataManager.tipoConsulta}" styleClass="descripcion"/>
 				<div class="line-separator"></div>		
 
 				<p:dataGrid value="#{espejoDataManager.paisList}" var="pai" columns="6">

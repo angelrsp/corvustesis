@@ -11,10 +11,10 @@
 		<ul id="navlist">
 		  <li id="home"><a href="#{request.contextPath}/index.xhtml"></a></li>
 		  <li id="atenea2"><a href="#{request.contextPath}/public/home/atenea.xhtml"></a></li>
-		  <li id="argos"><a href="#{request.contextPath}/argos.xhtml"></a></li>
-		  <li id="espejo"><a href="#{request.contextPath}/espejo.xhtml"></a></li>
-		  <li id="somos"><a href="#{request.contextPath}/quienesSomos.xhtml"></a></li>
-		  <li id="ingreso"><a href="#{request.contextPath}/ingreso.xhtml"></a></li>
+		  <li id="argos"><a href="#{request.contextPath}/public/home/argos.xhtml"></a></li>
+		  <li id="espejo"><a href="#{request.contextPath}/public/home/espejo.xhtml"></a></li>
+		  <li id="somos"><a href="#{request.contextPath}/public/home/quienesSomos.xhtml"></a></li>
+		  <li id="ingreso"><a href="#{request.contextPath}/public/home/ingreso.xhtml"></a></li>
 		  <li id="usuario"><a href="#{request.contextPath}/pages/home.xhtml"></a></li>
 		</ul>
 	</ui:define>
@@ -70,9 +70,11 @@
 
 
 <ui:define name="right">
-	<div style="height: 30px;">
+	<div style="height: 2px;">
 	</div>
 	
+	<h:outputText value="#{reportPublicDataManager.tipoConsulta}" styleClass="descripcion"/>
+	<div class="line-separator"></div>
 	
 	<div style="overflow-y: scroll; width: 100%; height: 300px;">
 		<h:dataTable value="#{reportPublicDataManager.ateneaVisorList}" var="ate" width="100%">

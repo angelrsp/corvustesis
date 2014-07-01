@@ -74,6 +74,18 @@ public class EspejoController {
 		try {		
 			espejoDataManager.setPaisList(espejoService.readPais(espejo.getTipo()));
 			espejoDataManager.setEspejo(espejo);
+			
+			if(espejo.getTipo()==1)
+				espejoDataManager.setTipoConsulta("Etica y Deontologia");
+			else if(espejo.getTipo()==2)
+				espejoDataManager.setTipoConsulta("Maestros del Periodismo");
+			else if(espejo.getTipo()==3)
+				espejoDataManager.setTipoConsulta("Grandes Maestros de la Comunicación");
+			else if(espejo.getTipo()==4)
+				espejoDataManager.setTipoConsulta("Premios Periodísticos");
+			else if(espejo.getTipo()==5)
+				espejoDataManager.setTipoConsulta("Códigos de Ética y Leyes de Comunicación");			
+			
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
