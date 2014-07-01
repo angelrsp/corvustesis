@@ -49,6 +49,7 @@ public class UserController {
 		try {
 			if(!StringUtil.isNullOrEmpty(userDataManager.getPass()))
 				userDataManager.getUser().setUsuClave(userDataManager.getPass());
+			userDataManager.getUser().setUsuTipo(1);
 			administracionService.createOrUpdateUsuario(userDataManager.getUser());
 			read();
 			cancel();
@@ -68,8 +69,11 @@ public class UserController {
 	
 	private void read()
 	{
+		UsuarioDTO user;
 		try {
-			userDataManager.setUserList(administracionService.readAllUser());
+			user=new UsuarioDTO();
+			user.setUsuTipo(1);
+			userDataManager.setUserList(administracionService.readAllUser(user));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
