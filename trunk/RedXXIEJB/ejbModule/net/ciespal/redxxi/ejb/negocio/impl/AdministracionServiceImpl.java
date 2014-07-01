@@ -159,11 +159,11 @@ public class AdministracionServiceImpl implements AdministracionService{
 	}
 
 	@Override
-	public List<UsuarioDTO> readAllUser() throws CorvustecException
+	public List<UsuarioDTO> readAllUser(UsuarioDTO user) throws CorvustecException
 	{
 		logger.info("readUser");
 		try{
-			return factoryDAO.getUsuarioDAOImpl().getByAnd(new UsuarioDTO());
+			return factoryDAO.getUsuarioDAOImpl().getByAnd(user);
 		}
 		catch(Exception e)
 		{

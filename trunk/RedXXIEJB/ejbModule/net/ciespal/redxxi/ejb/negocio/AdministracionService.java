@@ -39,8 +39,6 @@ public interface AdministracionService {
 
 	List<UsuarioDTO> readUser(UsuarioDTO usuarioDTO) throws CorvustecException;
 
-	List<UsuarioDTO> readAllUser() throws CorvustecException;
-
 	List<PerfilDTO> perfilReadAll() throws CorvustecException;
 
 	PerfilDTO perfilCreateOrUpdate(PerfilDTO perfilDTO)
@@ -77,5 +75,7 @@ public interface AdministracionService {
 
 	List<MenuVieDTO> menuReadAuthorized(PerfilDTO perfil)
 			throws CorvustecException;
+
+	List<UsuarioDTO> readAllUser(UsuarioDTO user) throws CorvustecException;
 
 }

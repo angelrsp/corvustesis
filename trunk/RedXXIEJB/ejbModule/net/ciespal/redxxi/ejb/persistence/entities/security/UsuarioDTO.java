@@ -33,6 +33,9 @@ public class UsuarioDTO implements Serializable {
 	@Column(name="usu_nombres")
 	private String usuNombres;
 
+	@Column(name="usu_tipo")
+	private Integer usuTipo;
+	
 	//bi-directional many-to-one association to EmpresaDTO
 	@ManyToOne
 	@JoinColumn(name="usu_empresa")
@@ -83,6 +86,14 @@ public class UsuarioDTO implements Serializable {
 
 	public void setUsuNombres(String usuNombres) {
 		this.usuNombres = usuNombres;
+	}
+
+	public Integer getUsuTipo() {
+		return usuTipo;
+	}
+
+	public void setUsuTipo(Integer usuTipo) {
+		this.usuTipo = usuTipo;
 	}
 
 	public EmpresaDTO getSegEmpresa() {
