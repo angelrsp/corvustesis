@@ -23,6 +23,7 @@ import com.corvustec.rtoqab.process.util.Const;
 import com.corvustec.rtoqab.process.util.MessagesApplicacion;
 import com.corvustec.rtoqab.process.util.ReadConfiguration;
 import com.corvustec.rtoqab.process.view.util.MessageBox;
+import javax.swing.JCheckBox;
 
 public class Configuracion extends JInternalFrame {
 
@@ -51,6 +52,7 @@ public class Configuracion extends JInternalFrame {
 	private JList<String> jlistBaliza;
 	private DefaultListModel<String> defaultListModel;
 	
+	private JCheckBox chbAplicarIntervalo;
 
 	private final String codigoAgenciaKey=Const.CODIGO_AGENCIA_KEY;
 	private final String recolectorKey=Const.RECOLECTOR_KEY;
@@ -70,6 +72,7 @@ public class Configuracion extends JInternalFrame {
 	private final String horaFin=Const.HORA_FIN_KEY;
 	private final String tiempoMaximoArchivo=Const.TIEMPO_MAXIMO_ARCHIVO_KEY;
 	private final String tiempoCenso=Const.TIEMPO_CENSO_KEY;
+	private final String aplicarIntervaslo=Const.APLICAR_INTERVALO_KEY;
 	
 	
 
@@ -211,7 +214,7 @@ public class Configuracion extends JInternalFrame {
 		
 		JPanel pnlServicio = new JPanel();
 		pnlServicio.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Tiempo (Servicio)", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlServicio.setBounds(488, 11, 393, 142);
+		pnlServicio.setBounds(488, 11, 393, 171);
 		getContentPane().add(pnlServicio);
 		pnlServicio.setLayout(null);
 		
@@ -245,27 +248,31 @@ public class Configuracion extends JInternalFrame {
 		txtTiempoCenso = new JTextField();
 		txtTiempoCenso.setText("300");
 		txtTiempoCenso.setColumns(10);
-		txtTiempoCenso.setBounds(181, 105, 202, 20);
+		txtTiempoCenso.setBounds(181, 133, 202, 20);
 		pnlServicio.add(txtTiempoCenso);
 		
 		JLabel lblCensoseg = new JLabel("Censo (6-15 seg):");
-		lblCensoseg.setBounds(10, 108, 161, 14);
+		lblCensoseg.setBounds(10, 136, 161, 14);
 		pnlServicio.add(lblCensoseg);
+		
+		chbAplicarIntervalo = new JCheckBox("Aplicar Intervalo");
+		chbAplicarIntervalo.setBounds(181, 105, 202, 23);
+		pnlServicio.add(chbAplicarIntervalo);
 		
 		JPanel pnlBaliza = new JPanel();
 		pnlBaliza.setLayout(null);
 		pnlBaliza.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Balizas de Referencia", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlBaliza.setBounds(488, 164, 393, 228);
+		pnlBaliza.setBounds(488, 182, 393, 210);
 		getContentPane().add(pnlBaliza);
 		
 		JLabel lblBaliza = new JLabel("Baliza (mac):");
-		lblBaliza.setBounds(10, 32, 161, 14);
+		lblBaliza.setBounds(10, 24, 161, 14);
 		pnlBaliza.add(lblBaliza);
 		
 		txtBaliza = new JTextField();
 		txtBaliza.setText((String) null);
 		txtBaliza.setColumns(10);
-		txtBaliza.setBounds(181, 26, 202, 20);
+		txtBaliza.setBounds(181, 21, 202, 20);
 		pnlBaliza.add(txtBaliza);
 		
 		JButton btnAgregarBaliza = new JButton("Agregar");
@@ -275,11 +282,11 @@ public class Configuracion extends JInternalFrame {
 			}
 		});
 		
-		btnAgregarBaliza.setBounds(68, 57, 89, 23);
+		btnAgregarBaliza.setBounds(67, 52, 89, 23);
 		pnlBaliza.add(btnAgregarBaliza);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 104, 373, 113);
+		scrollPane.setBounds(10, 86, 373, 113);
 		pnlBaliza.add(scrollPane);
 		
 		jlistBaliza = new JList<String>();
@@ -298,7 +305,7 @@ public class Configuracion extends JInternalFrame {
 				btnResetBalizaActionPerformed(arg0);
 			}
 		});
-		btnResetBaliza.setBounds(167, 57, 89, 23);
+		btnResetBaliza.setBounds(166, 52, 89, 23);
 		pnlBaliza.add(btnResetBaliza);
 		
 		JButton btnEliminarBaliza = new JButton("Eliminar");
@@ -307,7 +314,7 @@ public class Configuracion extends JInternalFrame {
 				btnEliminarBalizaActionPerformed(arg0);
 			}
 		});
-		btnEliminarBaliza.setBounds(266, 57, 89, 23);
+		btnEliminarBaliza.setBounds(265, 52, 89, 23);
 		pnlBaliza.add(btnEliminarBaliza);
 
 		setTxtValues();
@@ -383,6 +390,12 @@ public class Configuracion extends JInternalFrame {
 			ReadConfiguration.getInstance().replaceValue(tiempoMaximoArchivo, txtMaximoArchivo.getText());
 			ReadConfiguration.getInstance().replaceValue(tiempoCenso, txtTiempoCenso.getText());
 			
+			if(chbAplicarIntervalo.isSelected())
+				ReadConfiguration.getInstance().replaceValue(aplicarIntervaslo, String.valueOf(1));
+			else
+				ReadConfiguration.getInstance().replaceValue(aplicarIntervaslo, String.valueOf(0));
+			
+			
 			for(int i=0;i< defaultListModel.getSize();i++)
 			{
 				balizasValue=defaultListModel.get(i)+"|"+balizasValue;
@@ -419,6 +432,10 @@ public class Configuracion extends JInternalFrame {
 			txtMaximoArchivo.setText(ReadConfiguration.getInstance().readValue(tiempoMaximoArchivo));
 			txtTiempoCenso.setText(ReadConfiguration.getInstance().readValue(tiempoCenso));
 			
+			if(Integer.valueOf(ReadConfiguration.getInstance().readValue(aplicarIntervaslo))==1)
+				chbAplicarIntervalo.setSelected(true);
+			else
+				chbAplicarIntervalo.setSelected(false);
 			
 			balizas=ReadConfiguration.getInstance().readValue(balizaKey).split("\\|");
 			defaultListModel=new DefaultListModel<String>();
