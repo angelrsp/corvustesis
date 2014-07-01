@@ -34,4 +34,6 @@ public class Const {
 	
 	public static final String TIEMPO_CENSO_KEY = "com.corvustec.rtoqab.tiempo.censo";
 	
+	public static final String APLICAR_INTERVALO_KEY = "com.corvustec.rtoqab.aplicar.intervalo";
+	
 }
