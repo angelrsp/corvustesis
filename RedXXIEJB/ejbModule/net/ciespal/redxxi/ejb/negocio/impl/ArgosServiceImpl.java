@@ -661,6 +661,7 @@ public class ArgosServiceImpl implements ArgosService{
 			if(factoryDAO.getUsuarioDAOImpl().getByAnd(login).size()>0)
 				throw new CorvustecException("El correo electrónico ya esta registrado");
 			defensor.getUser().setUsuClave(EncryptionUtil.getInstancia().encriptar(defensor.getUser().getUsuClave()));
+			defensor.getUser().setUsuTipo(2);
 			UsuarioDTO usr=factoryDAO.getUsuarioDAOImpl().create(defensor.getUser());
 			defensor.getDefensor().setDefUsuario(usr.getUsuCodigo());
 			factoryDAO.getDefensorDAOImpl().create(defensor.getDefensor());
