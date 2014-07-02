@@ -11,7 +11,10 @@ import org.picketbox.util.StringUtil;
 import com.corvustec.commons.util.CorvustecException;
 
 import net.ciespal.redxxi.ejb.negocio.AdministracionService;
+import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioPerfilDTO;
+import net.ciespal.redxxi.ejb.persistence.vo.UsuarioVO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.UserDataManager;
 
@@ -41,16 +44,23 @@ public class UserController {
 	private void init()
 	{
 		read();
+		perfilRead();
 		userDataManager.setRequired(true);
 	}
 	
 	public void save()
 	{
+		UsuarioVO usuarioVO;
+		PerfilDTO perfil;
 		try {
+			usuarioVO=new UsuarioVO();
 			if(!StringUtil.isNullOrEmpty(userDataManager.getPass()))
 				userDataManager.getUser().setUsuClave(userDataManager.getPass());
 			userDataManager.getUser().setUsuTipo(1);
-			administracionService.createOrUpdateUsuario(userDataManager.getUser());
+			perfil=new PerfilDTO();
+			perfil.setPerCodigo(userDataManager.getPerfilCode());
+			usuarioVO.setUser(userDataManager.getUser());
+			administracionService.createOrUpdateUsuario(usuarioVO);
 			read();
 			cancel();
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
@@ -74,6 +84,15 @@ public class UserController {
 			user=new UsuarioDTO();
 			user.setUsuTipo(1);
 			userDataManager.setUserList(administracionService.readAllUser(user));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	private void perfilRead()
+	{
+		try {
+			userDataManager.setPerfilList(administracionService.perfilReadAll());
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}

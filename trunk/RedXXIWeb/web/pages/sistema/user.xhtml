@@ -39,6 +39,16 @@
 					<td><h:outputText value="#{i18n['label.password.confirm']}:&#160;" /></td>
 					<td><p:password id="pwdConfirm" value="#{userDataManager.pass}" required="#{userDataManager.required}" feedback="true" weakLabel="Débil" goodLabel="Buena" strongLabel="Fuerte" promptLabel="Por favor ingrese una contraseña"/></td>
 				</tr>
+
+				<tr>
+					<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
+					<td><p:selectOneMenu>
+							<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
+							<f:selectItems value="#{userController.userDataManager.perfilList}" var="per" itemValue="#{per.perCodigo}" itemLabel="#{per.perNombre}"/>
+						</p:selectOneMenu>
+					</td>
+				</tr>
+
 				
 				<tr>
 					<td colspan="4" align="center">
@@ -51,7 +61,7 @@
 				
 			</table>
 
-			<p:dataTable id="tblUser" value="#{userController.userDataManager.userList}" var="user">
+			<p:dataTable id="tblUser" value="#{userDataManager.userList}" var="user">
 
 				<p:column headerText="#{i18n['label.apellidos']}">
 					<h:outputText value="#{user.usuApellidos}"/>

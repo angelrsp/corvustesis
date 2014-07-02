@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
 
 @ViewScoped
@@ -27,10 +28,15 @@ public class UserDataManager implements Serializable{
 	
 	private String pass;
 	
+	private List<PerfilDTO> perfilList;
+	
+	private Integer perfilCode;
+	
 	public UserDataManager() {
 		user=new UsuarioDTO();
 		userList=new ArrayList<UsuarioDTO>();
 		required=true;
+		perfilList=new ArrayList<PerfilDTO>();
 	}
 
 	public UsuarioDTO getUser() {
@@ -71,6 +77,22 @@ public class UserDataManager implements Serializable{
 
 	public void setPass(String pass) {
 		this.pass = pass;
+	}
+
+	public List<PerfilDTO> getPerfilList() {
+		return perfilList;
+	}
+
+	public void setPerfilList(List<PerfilDTO> perfilList) {
+		this.perfilList = perfilList;
+	}
+
+	public Integer getPerfilCode() {
+		return perfilCode;
+	}
+
+	public void setPerfilCode(Integer perfilCode) {
+		this.perfilCode = perfilCode;
 	}
 
 	
