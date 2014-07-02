@@ -15,6 +15,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.util.dto.CredencialesDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.vo.AccesoVO;
+import net.ciespal.redxxi.ejb.persistence.vo.UsuarioVO;
 
 import com.corvustec.commons.util.CorvustecException;
 
@@ -32,9 +33,6 @@ public interface AdministracionService {
 	void deleteCatalogo(CatalogoDTO catalogo) throws CorvustecException;
 
 	UsuarioDTO userAuthentication(CredencialesDTO credenciales)
-			throws CorvustecException;
-
-	UsuarioDTO createOrUpdateUsuario(UsuarioDTO usuarioDTO)
 			throws CorvustecException;
 
 	List<UsuarioDTO> readUser(UsuarioDTO usuarioDTO) throws CorvustecException;
@@ -77,5 +75,7 @@ public interface AdministracionService {
 			throws CorvustecException;
 
 	List<UsuarioDTO> readAllUser(UsuarioDTO user) throws CorvustecException;
+
+	UsuarioDTO createOrUpdateUsuario(UsuarioVO user) throws CorvustecException;
 
 }
