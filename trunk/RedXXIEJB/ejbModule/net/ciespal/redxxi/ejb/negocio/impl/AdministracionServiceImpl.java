@@ -16,8 +16,10 @@ import net.ciespal.redxxi.ejb.persistence.entities.security.MenuDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.MenuVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioPerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.util.dto.CredencialesDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.vo.AccesoVO;
+import net.ciespal.redxxi.ejb.persistence.vo.UsuarioVO;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -126,16 +128,28 @@ public class AdministracionServiceImpl implements AdministracionService{
 	}
 	
 	@Override
-	public UsuarioDTO createOrUpdateUsuario(UsuarioDTO usuarioDTO) throws CorvustecException
+	public UsuarioDTO createOrUpdateUsuario(UsuarioVO user) throws CorvustecException
 	{
+		UsuarioDTO usuario;
+		UsuarioPerfilDTO userPerfil;
 		logger.info("createOrUpdateUsuario");
 		try{
-			if(StringUtils.isNoneBlank(usuarioDTO.getUsuClave()))
-				usuarioDTO.setUsuClave(EncryptionUtil.getInstancia().encriptar(usuarioDTO.getUsuClave()));
-			if(usuarioDTO.getUsuCodigo()!=null)
-				return factoryDAO.getUsuarioDAOImpl().edit(usuarioDTO);
+			usuario=user.getUser();
+			userPerfil=new UsuarioPerfilDTO();
+			if(StringUtils.isNoneBlank(usuario.getUsuClave()))
+				user.getUser().setUsuClave(EncryptionUtil.getInstancia().encriptar(usuario.getUsuClave()));
+			if(usuario.getUsuCodigo()!=null)
+			{
+				return factoryDAO.getUsuarioDAOImpl().edit(user.getUser());
+			}
 			else
-				return factoryDAO.getUsuarioDAOImpl().create(usuarioDTO);
+			{
+				usuario=factoryDAO.getUsuarioDAOImpl().create(user.getUser());
+				userPerfil.setSegPerfil(user.getPerfil());
+				userPerfil.setSegUsuario(usuario);
+				factoryDAO.getUsuarioPerfilDAOImpl().create(userPerfil);
+				return usuario;
+			}
 		}
 		catch(Exception e)
 		{
