@@ -9,7 +9,7 @@
 
 <ui:define name="contenido">
 
-		<p:growl id="growl"></p:growl>
+		<p:growl id="growl"/>
 		
 		<p:panel id="pnlDato" header="Usuarios">
 
@@ -42,7 +42,7 @@
 
 				<tr>
 					<td><h:outputText value="#{i18n['label.perfil']}:&#160;" /></td>
-					<td><p:selectOneMenu>
+					<td><p:selectOneMenu value="#{userDataManager.perfilCode}" required="true" requiredMessage="#{i18n['label.perfil']}:&#160;#{i18n['label.requerido']}">
 							<f:selectItem itemLabel="#{i18n['label.seleccione']}"/>
 							<f:selectItems value="#{userController.userDataManager.perfilList}" var="per" itemValue="#{per.perCodigo}" itemLabel="#{per.perNombre}"/>
 						</p:selectOneMenu>
