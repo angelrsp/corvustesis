@@ -12,14 +12,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import net.ciespal.redxxi.ejb.persistence.dao.UsuarioPerfilDAO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioPerfilDTO;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.corvustec.commons.util.CorvustecException;
-
-import net.ciespal.redxxi.ejb.persistence.dao.UsuarioPerfilDAO;
-import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioPerfilDTO;
 
 public class UsuarioPerfilDAOImpl extends AbstractFacadeImpl<UsuarioPerfilDTO> implements UsuarioPerfilDAO {
 

@@ -200,6 +200,7 @@ public class AccesoVieDAOImpl extends AbstractFacadeImpl<AccesoVieDTO> implement
 			
 			return list;
 			
+			
 		}catch(Exception e){
 			logger.info(e.toString());
 			throw new CorvustecException(e);
