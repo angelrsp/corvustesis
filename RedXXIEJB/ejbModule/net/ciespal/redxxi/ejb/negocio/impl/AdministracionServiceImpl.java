@@ -140,6 +140,14 @@ public class AdministracionServiceImpl implements AdministracionService{
 				user.getUser().setUsuClave(EncryptionUtil.getInstancia().encriptar(usuario.getUsuClave()));
 			if(usuario.getUsuCodigo()!=null)
 			{
+				
+				userPerfil.setSegUsuario(user.getUser());
+				List<UsuarioPerfilDTO> listPer= factoryDAO.getUsuarioPerfilDAOImpl().getByAnd(userPerfil);
+				for(UsuarioPerfilDTO u:listPer)
+					factoryDAO.getUsuarioPerfilDAOImpl().remove(u);
+				listPer=null;
+				userPerfil.setSegPerfil(user.getPerfil());
+				factoryDAO.getUsuarioPerfilDAOImpl().create(userPerfil);
 				return factoryDAO.getUsuarioDAOImpl().edit(user.getUser());
 			}
 			else
