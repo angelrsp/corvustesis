@@ -1,26 +1,34 @@
 package net.ciespal.redxxi.web.controller;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import org.picketbox.util.StringUtil;
-
-import com.corvustec.commons.util.CorvustecException;
-
 import net.ciespal.redxxi.ejb.negocio.AdministracionService;
 import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
-import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioPerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.vo.UsuarioVO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.UserDataManager;
 
+import org.picketbox.util.StringUtil;
+
+import com.corvustec.commons.util.CorvustecException;
+
 @ViewScoped
 @ManagedBean(name = "userController")
-public class UserController {
+public class UserController implements Serializable{
+
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@ManagedProperty(value="#{userDataManager}")
 	private UserDataManager userDataManager;
@@ -60,6 +68,7 @@ public class UserController {
 			perfil=new PerfilDTO();
 			perfil.setPerCodigo(userDataManager.getPerfilCode());
 			usuarioVO.setUser(userDataManager.getUser());
+			usuarioVO.setPerfil(perfil);
 			administracionService.createOrUpdateUsuario(usuarioVO);
 			read();
 			cancel();
@@ -75,6 +84,7 @@ public class UserController {
 		read();
 		userDataManager.setDisabled(false);
 		userDataManager.setRequired(true);
+		userDataManager.setPerfilCode(null);
 	}
 	
 	private void read()
@@ -103,6 +113,7 @@ public class UserController {
 		userDataManager.setUser(user);
 		userDataManager.setDisabled(true);
 		userDataManager.setRequired(false);
+		userDataManager.setPerfilCode(user.getSegUsuarioPerfils().get(0).getSegPerfil().getPerCodigo());
 	}
 	
 }
