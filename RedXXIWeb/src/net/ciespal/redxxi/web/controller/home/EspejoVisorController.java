@@ -61,9 +61,9 @@ public class EspejoVisorController {
 			if(espejo.getTipo()==1)
 				espejoDataManager.setTipoConsulta("Etica y Deontologia");
 			else if(espejo.getTipo()==2)
-				espejoDataManager.setTipoConsulta("Maestros del Periodismo");
+				espejoDataManager.setTipoConsulta("Grandes Maestros del Periodismo");
 			else if(espejo.getTipo()==3)
-				espejoDataManager.setTipoConsulta("Grandes Maestros de la Comunicación");
+				espejoDataManager.setTipoConsulta("Maestros de la Comunicación");
 			else if(espejo.getTipo()==4)
 				espejoDataManager.setTipoConsulta("Premios Periodísticos");
 			else if(espejo.getTipo()==5)
