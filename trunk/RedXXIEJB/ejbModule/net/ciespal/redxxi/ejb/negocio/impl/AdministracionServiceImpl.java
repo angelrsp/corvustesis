@@ -353,6 +353,20 @@ public class AdministracionServiceImpl implements AdministracionService{
 		}
 	}
 
+	@Override
+	public List<ComponenteMenuDTO> componenteMenuReadAll() throws CorvustecException {
+		logger.info("componenteMenuReadAll");
+		try{
+			return factoryDAO.getComponenteMenuDAOImpl().getByAnd(new ComponenteMenuDTO());
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al componenteMenuReadAll" +e.toString());
+			throw new CorvustecException("Error al componenteMenuReadAll "+e.toString());
+		}
+	}
+
+	
 	/*Acceso*/
 	@Override
 	public List<AccesoVieDTO> accesoVieRead(AccesoVieDTO acceso) throws CorvustecException {
@@ -368,6 +382,21 @@ public class AdministracionServiceImpl implements AdministracionService{
 	}
 
 	@Override
+	public List<AccesoVieDTO> accesoVieReadSubquery(AccesoVieDTO acceso) throws CorvustecException {
+		logger.info("accesoVieRead");
+		try{
+			return factoryDAO.getAccesoVieDAOImpl().getBySubquery(acceso);
+		}
+		catch(Exception e)
+		{
+			logger.info("Error al accesoVieRead" +e.toString());
+			throw new CorvustecException("Error al accesoVieRead "+e.toString());
+		}
+	}
+
+	
+	
+	@Override
 	public List<AccesoVieDTO> accesoVieReadPerfilIsNull(AccesoVieDTO acceso) throws CorvustecException {
 		logger.info("accesoVieRead");
 		try{
@@ -379,7 +408,8 @@ public class AdministracionServiceImpl implements AdministracionService{
 			throw new CorvustecException("Error al accesoVieRead "+e.toString());
 		}
 	}
-
+	
+	
 	@Override
 	public List<AccesoDTO> accesoReadDistinctMenu(AccesoDTO acceso) throws CorvustecException {
 		logger.info("accesoReadDistinctMenu");

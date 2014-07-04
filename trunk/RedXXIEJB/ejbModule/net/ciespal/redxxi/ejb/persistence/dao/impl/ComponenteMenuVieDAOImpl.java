@@ -13,58 +13,63 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Subquery;
 
-import net.ciespal.redxxi.ejb.persistence.dao.UsuarioPerfilDAO;
-import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioPerfilDTO;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.corvustec.commons.util.CorvustecException;
 
-public class UsuarioPerfilDAOImpl extends AbstractFacadeImpl<UsuarioPerfilDTO> implements UsuarioPerfilDAO {
+import net.ciespal.redxxi.ejb.persistence.dao.ComponenteMenuVieDAO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.AccesoVieDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteMenuDTO;
 
-	private static final Logger logger = LoggerFactory.getLogger(UsuarioDAOImpl.class);
+public class ComponenteMenuVieDAOImpl extends AbstractFacadeImpl<ComponenteMenuDTO> implements ComponenteMenuVieDAO{
 
-	public UsuarioPerfilDAOImpl() {
+	private static final Logger logger = LoggerFactory.getLogger(AccesoVieDAOImpl.class);
+	
+	public ComponenteMenuVieDAOImpl() {
 		super();
 	}
-	
-	public UsuarioPerfilDAOImpl(EntityManager entityManager) {
+
+	public ComponenteMenuVieDAOImpl(EntityManager entityManager) {
 		super(entityManager);
 	}
 
 
 	@Override
-	public List<UsuarioPerfilDTO> getByAnd(UsuarioPerfilDTO objetoDTO) throws CorvustecException
+	public List<ComponenteMenuDTO> getBySubquery(AccesoVieDTO objetoDTO,ComponenteMenuDTO componenteMenuDTO) throws CorvustecException
 	{
 		CriteriaBuilder cb;
-		CriteriaQuery<UsuarioPerfilDTO> cq;
-		Root<UsuarioPerfilDTO> from;
-		List<UsuarioPerfilDTO> list;
+		CriteriaQuery<ComponenteMenuDTO> cq;
+		Root<ComponenteMenuDTO> from;
+		List<ComponenteMenuDTO> list;
+		
+		
 		Predicate predicate;
 		List<Predicate> predicateList = null;
 		String fieldName;
 		Method getter;
 		Object value;
 		Field[] fields;
+
+		
 		try{
 			cb=entityManager.getCriteriaBuilder();
-			cq=cb.createQuery(UsuarioPerfilDTO.class);
+			cq=cb.createQuery(ComponenteMenuDTO.class);
 			
-			from= cq.from(UsuarioPerfilDTO.class);
-			
+			from=cq.from(ComponenteMenuDTO.class);
+
 			predicateList=new ArrayList<Predicate>();
 			
-			fields = objetoDTO.getClass().getDeclaredFields();
+			fields = componenteMenuDTO.getClass().getDeclaredFields();
 
 	        for(Field f : fields){
 	            fieldName = f.getName();
 				if(!fieldName.equals("serialVersionUID"))
 				{
-				    getter = objetoDTO.getClass().getMethod("get" + String.valueOf(fieldName.charAt(0)).toUpperCase() +
+				    getter = componenteMenuDTO.getClass().getMethod("get" + String.valueOf(fieldName.charAt(0)).toUpperCase() +
 				            fieldName.substring(1));
 				    
-				    value = getter.invoke(objetoDTO, new Object[0]);
+				    value = getter.invoke(componenteMenuDTO, new Object[0]);
 				
 				    if(value!=null)
 				    {
@@ -73,11 +78,14 @@ public class UsuarioPerfilDAOImpl extends AbstractFacadeImpl<UsuarioPerfilDTO> i
 				    }
 				}
 	        }
-	
+			
+			predicate=from.get("cmeCodigo").in(getSubquery(objetoDTO)).not();
+			predicateList.add(predicate);
+			
 	        if(!predicateList.isEmpty())
 	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
-			
-			TypedQuery<UsuarioPerfilDTO> tq=entityManager.createQuery(cq);
+	        				
+			TypedQuery<ComponenteMenuDTO> tq=entityManager.createQuery(cq);
 			list=tq.getResultList();
 			
 			return list;
@@ -86,57 +94,17 @@ public class UsuarioPerfilDAOImpl extends AbstractFacadeImpl<UsuarioPerfilDTO> i
 			logger.info(e.toString());
 			throw new CorvustecException(e);
 		}finally{
-			predicate=null;
-			predicateList=null;
-		}		
+			
+		}
 	}
 
-	
-	
-	@Override
-	public List<UsuarioPerfilDTO> getBySubquery(UsuarioPerfilDTO objetoDTO) throws CorvustecException
+	@SuppressWarnings({"rawtypes", "unchecked" })
+	private Subquery<AccesoVieDTO> getSubquery(AccesoVieDTO objetoDTO) throws CorvustecException
 	{
 		CriteriaBuilder cb;
-		CriteriaQuery<UsuarioPerfilDTO> cq;
-		//Root<UsuarioPerfilDTO> from;
-		List<UsuarioPerfilDTO> list;
-		Predicate predicate;
-		List<Predicate> predicateList = null;
-		try{
-			cb=entityManager.getCriteriaBuilder();
-			cq=cb.createQuery(UsuarioPerfilDTO.class);
-			
-			cq.from(UsuarioPerfilDTO.class);
-			
-			predicateList=new ArrayList<Predicate>();
-			
-	        predicate=cb.not(cb.exists(getSubquery(objetoDTO)));
-	        predicateList.add(predicate);
-	        
-	        if(!predicateList.isEmpty())
-	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
-			
-			TypedQuery<UsuarioPerfilDTO> tq=entityManager.createQuery(cq);
-			list=tq.getResultList();
-			
-			return list;
-			
-		}catch(Exception e){
-			logger.info(e.toString());
-			throw new CorvustecException(e);
-		}finally{
-			predicate=null;
-			predicateList=null;
-		}		
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private Subquery<UsuarioPerfilDTO> getSubquery(UsuarioPerfilDTO objetoDTO) throws CorvustecException
-	{
-		CriteriaBuilder cb;
-		CriteriaQuery<UsuarioPerfilDTO> cq;
+		CriteriaQuery<AccesoVieDTO> cq;
 		
-		Subquery<UsuarioPerfilDTO> subquery;
+		Subquery<AccesoVieDTO> subquery;
 		Root from ;
 
 		Predicate predicate;
@@ -147,10 +115,10 @@ public class UsuarioPerfilDAOImpl extends AbstractFacadeImpl<UsuarioPerfilDTO> i
 		Field[] fields;
 		try{
 			cb=entityManager.getCriteriaBuilder();
-			cq=cb.createQuery(UsuarioPerfilDTO.class);
+			cq=cb.createQuery(AccesoVieDTO.class);
 			
-			subquery=cq.subquery(UsuarioPerfilDTO.class);
-			from = subquery.from(UsuarioPerfilDTO.class);
+			subquery=cq.subquery(AccesoVieDTO.class);
+			from = subquery.from(AccesoVieDTO.class);
 			
 			subquery.select(from.get("cmeCodigo"));
 			
@@ -188,4 +156,7 @@ public class UsuarioPerfilDAOImpl extends AbstractFacadeImpl<UsuarioPerfilDTO> i
 			predicateList=null;
 		}				
 	}
+
+	
+	
 }

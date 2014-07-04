@@ -121,12 +121,12 @@ public class AteneaServiceImpl implements AteneaService{
 			atenea.setTipo(104);
 			ateneaList.add(atenea);
 						
-			atenea=new AteneaDTO();
-			atenea.setCodigo(10);
-			atenea.setDescripcion("Articulos, Monografías, Tesis, Libros, Revistas: ");
-			atenea.setCount(factoryDAO.getPublicacionDAOImpl().getCountByType(null,pais));
-			atenea.setTipo(105);
-			ateneaList.add(atenea);
+//			atenea=new AteneaDTO();
+//			atenea.setCodigo(10);
+//			atenea.setDescripcion("Articulos, Monografías, Tesis, Libros, Revistas: ");
+//			atenea.setCount(factoryDAO.getPublicacionDAOImpl().getCountByType(null,pais));
+//			atenea.setTipo(105);
+//			ateneaList.add(atenea);
 
 		}catch(Exception e)
 		{
@@ -289,18 +289,18 @@ public class AteneaServiceImpl implements AteneaService{
 				paisList.add(pais);
 			}
 		}//articulos revistas tesis libros
-		else if(type.equals(105))
-		{
-			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
-				pais=new PaisDTO();
-				pais.setCodigo(cat.getCatCodigo());
-				pais.setImagenPath(cat.getCatImagenPath());
-				pais.setNombre(cat.getCatDescripcion());
-				pais.setCount(factoryDAO.getPublicacionDAOImpl().getCountByType(null,cat.getCatCodigo()));
-				pais.setTipo(Integer.valueOf(type.toString()));
-				paisList.add(pais);
-			}
-		}
+//		else if(type.equals(105))
+//		{
+//			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+//				pais=new PaisDTO();
+//				pais.setCodigo(cat.getCatCodigo());
+//				pais.setImagenPath(cat.getCatImagenPath());
+//				pais.setNombre(cat.getCatDescripcion());
+//				pais.setCount(factoryDAO.getPublicacionDAOImpl().getCountByType(null,cat.getCatCodigo()));
+//				pais.setTipo(Integer.valueOf(type.toString()));
+//				paisList.add(pais);
+//			}
+//		}
 		return paisList;
 	}
 		

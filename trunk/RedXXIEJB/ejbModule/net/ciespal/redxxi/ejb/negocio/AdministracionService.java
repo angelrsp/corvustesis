@@ -78,4 +78,7 @@ public interface AdministracionService {
 
 	UsuarioDTO createOrUpdateUsuario(UsuarioVO user) throws CorvustecException;
 
+	List<AccesoVieDTO> accesoVieReadSubquery(AccesoVieDTO acceso)
+			throws CorvustecException;
+
 }

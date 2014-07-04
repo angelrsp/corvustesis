@@ -16,6 +16,9 @@ public interface AccesoVieDAO extends AbstractFacade<AccesoVieDTO>{
 	List<AccesoVieDTO> getByAndDistinctMenu(AccesoVieDTO objetoDTO)
 			throws CorvustecException;
 
+	List<AccesoVieDTO> getBySubquery(AccesoVieDTO objetoDTO)
+			throws CorvustecException;
+
 	
 	
 }

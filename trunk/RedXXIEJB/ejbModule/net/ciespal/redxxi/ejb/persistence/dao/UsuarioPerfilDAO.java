@@ -11,6 +11,9 @@ public interface UsuarioPerfilDAO extends AbstractFacade<UsuarioPerfilDTO>{
 	List<UsuarioPerfilDTO> getByAnd(UsuarioPerfilDTO objetoDTO)
 			throws CorvustecException;
 
+	List<UsuarioPerfilDTO> getBySubquery(UsuarioPerfilDTO objetoDTO)
+			throws CorvustecException;
+
 	
 	
 }
