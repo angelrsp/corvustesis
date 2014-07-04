@@ -12,6 +12,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.security.AccesoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.AccesoVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteMenuDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteMenuVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.MenuDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.MenuVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
@@ -354,10 +355,10 @@ public class AdministracionServiceImpl implements AdministracionService{
 	}
 
 	@Override
-	public List<ComponenteMenuDTO> componenteMenuReadAll() throws CorvustecException {
+	public List<ComponenteMenuVieDTO> componenteMenuVieRead(ComponenteMenuVieDTO componenteMenuVieDTO, AccesoVieDTO accesoVieDTO) throws CorvustecException {
 		logger.info("componenteMenuReadAll");
 		try{
-			return factoryDAO.getComponenteMenuDAOImpl().getByAnd(new ComponenteMenuDTO());
+			return factoryDAO.getComponenteMenuVieDAOImpl().getBySubquery(accesoVieDTO, componenteMenuVieDTO);
 		}
 		catch(Exception e)
 		{

@@ -9,6 +9,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.security.AccesoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.AccesoVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteMenuDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteMenuVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.MenuDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.MenuVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
@@ -79,6 +80,10 @@ public interface AdministracionService {
 	UsuarioDTO createOrUpdateUsuario(UsuarioVO user) throws CorvustecException;
 
 	List<AccesoVieDTO> accesoVieReadSubquery(AccesoVieDTO acceso)
+			throws CorvustecException;
+
+	List<ComponenteMenuVieDTO> componenteMenuVieRead(
+			ComponenteMenuVieDTO componenteMenuVieDTO, AccesoVieDTO accesoVieDTO)
 			throws CorvustecException;
 
 }
