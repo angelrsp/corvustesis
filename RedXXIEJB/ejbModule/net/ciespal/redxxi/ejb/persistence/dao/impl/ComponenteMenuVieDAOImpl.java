@@ -21,6 +21,7 @@ import com.corvustec.commons.util.CorvustecException;
 import net.ciespal.redxxi.ejb.persistence.dao.ComponenteMenuVieDAO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.AccesoVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteMenuDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteMenuVieDTO;
 
 public class ComponenteMenuVieDAOImpl extends AbstractFacadeImpl<ComponenteMenuDTO> implements ComponenteMenuVieDAO{
 
@@ -36,12 +37,12 @@ public class ComponenteMenuVieDAOImpl extends AbstractFacadeImpl<ComponenteMenuD
 
 
 	@Override
-	public List<ComponenteMenuDTO> getBySubquery(AccesoVieDTO objetoDTO,ComponenteMenuDTO componenteMenuDTO) throws CorvustecException
+	public List<ComponenteMenuVieDTO> getBySubquery(AccesoVieDTO objetoDTO,ComponenteMenuVieDTO componenteMenuDTO) throws CorvustecException
 	{
 		CriteriaBuilder cb;
-		CriteriaQuery<ComponenteMenuDTO> cq;
-		Root<ComponenteMenuDTO> from;
-		List<ComponenteMenuDTO> list;
+		CriteriaQuery<ComponenteMenuVieDTO> cq;
+		Root<ComponenteMenuVieDTO> from;
+		List<ComponenteMenuVieDTO> list;
 		
 		
 		Predicate predicate;
@@ -54,9 +55,9 @@ public class ComponenteMenuVieDAOImpl extends AbstractFacadeImpl<ComponenteMenuD
 		
 		try{
 			cb=entityManager.getCriteriaBuilder();
-			cq=cb.createQuery(ComponenteMenuDTO.class);
+			cq=cb.createQuery(ComponenteMenuVieDTO.class);
 			
-			from=cq.from(ComponenteMenuDTO.class);
+			from=cq.from(ComponenteMenuVieDTO.class);
 
 			predicateList=new ArrayList<Predicate>();
 			
@@ -85,7 +86,7 @@ public class ComponenteMenuVieDAOImpl extends AbstractFacadeImpl<ComponenteMenuD
 	        if(!predicateList.isEmpty())
 	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
 	        				
-			TypedQuery<ComponenteMenuDTO> tq=entityManager.createQuery(cq);
+			TypedQuery<ComponenteMenuVieDTO> tq=entityManager.createQuery(cq);
 			list=tq.getResultList();
 			
 			return list;
