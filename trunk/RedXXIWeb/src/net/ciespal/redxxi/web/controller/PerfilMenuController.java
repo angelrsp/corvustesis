@@ -12,6 +12,7 @@ import javax.faces.bean.ViewScoped;
 
 import net.ciespal.redxxi.ejb.negocio.AdministracionService;
 import net.ciespal.redxxi.ejb.persistence.entities.security.AccesoVieDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteMenuVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.util.dto.ObjetoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.vo.AccesoVO;
@@ -84,19 +85,23 @@ public class PerfilMenuController implements Serializable{
 	{
 		AccesoVieDTO acc;
 		ObjetoDTO obj;
+		ComponenteMenuVieDTO cme;
 		List<ObjetoDTO> accesoList;
 		List<ObjetoDTO> autorizadoList;
 		List<AccesoVieDTO> accList;
+		List<ComponenteMenuVieDTO> cmeList;
 		try {
 			acc=new AccesoVieDTO();
+			cme=new ComponenteMenuVieDTO();
 			accesoList=new ArrayList<ObjetoDTO>();
 			autorizadoList=new ArrayList<ObjetoDTO>();
 	
 			acc.setAccPerfil(perfilMenuDataManager.getPerfilCode());
-			acc.setCmeMenu(perfilMenuDataManager.getMenuCode());
 			
-			accList=administracionService.accesoVieReadSubquery(acc);
-			for(AccesoVieDTO a: accList)
+			cme.setCmeMenu(perfilMenuDataManager.getMenuCode());
+			
+			cmeList=administracionService.componenteMenuVieRead(cme, acc);
+			for(ComponenteMenuVieDTO a: cmeList)
 			{
 				obj=new ObjetoDTO();
 				obj.setCodigo(a.getCmeCodigo());
