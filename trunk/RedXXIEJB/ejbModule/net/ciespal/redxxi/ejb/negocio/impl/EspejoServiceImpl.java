@@ -60,14 +60,14 @@ public class EspejoServiceImpl implements EspejoService{
 			//Grandes maestros del periodismo
 			espejo=new EspejoDTO();
 			espejo.setTipo(2);
-			espejo.setDescripcion("Maestros del Periodismo: ");
+			espejo.setDescripcion("Grandes Maestros del Periodismo: ");
 			espejo.setCount(factoryDAO.getGranMaestroDAOImpl().count(pais));
 			espejoList.add(espejo);
 
 			//Maestros Ciespal
 			espejo=new EspejoDTO();
 			espejo.setTipo(3);
-			espejo.setDescripcion("Grandes Maestros de la Comunicación: ");
+			espejo.setDescripcion("Maestros de la Comunicación: ");
 			espejo.setCount(factoryDAO.getMaestroCiespalDAOImpl().count(pais));
 			espejoList.add(espejo);
 
