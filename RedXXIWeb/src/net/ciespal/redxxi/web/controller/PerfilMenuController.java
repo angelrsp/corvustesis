@@ -92,9 +92,10 @@ public class PerfilMenuController implements Serializable{
 			accesoList=new ArrayList<ObjetoDTO>();
 			autorizadoList=new ArrayList<ObjetoDTO>();
 	
+			acc.setAccPerfil(perfilMenuDataManager.getPerfilCode());
 			acc.setCmeMenu(perfilMenuDataManager.getMenuCode());
-		
-			accList=administracionService.accesoVieReadPerfilIsNull(acc);
+			
+			accList=administracionService.accesoVieReadSubquery(acc);
 			for(AccesoVieDTO a: accList)
 			{
 				obj=new ObjetoDTO();
