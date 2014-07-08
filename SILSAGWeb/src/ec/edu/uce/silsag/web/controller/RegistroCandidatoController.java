@@ -77,6 +77,15 @@ public class RegistroCandidatoController extends SelectItemController implements
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
+	
+	public void atras()
+	{
+		try {
+			JsfUtil.redirect("/SILSAGWeb/index.xhtml");
+		} catch (IOException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
 
 	public CandidatoDTO getCandidatoRegistro() {
 		return candidatoRegistro;
