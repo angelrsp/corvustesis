@@ -69,11 +69,9 @@ public class RegistroCandidatoController extends SelectItemController implements
 			JsfUtil.putObject("UsuarioDTO",user);
 			JsfUtil.redirect("dato.jsf");
 		} catch (SilsagException e) {
-			// TODO Auto-generated catch block
 			JsfUtil.addErrorMessage("El número de identificación ingresado ya existe en el sistema");
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
