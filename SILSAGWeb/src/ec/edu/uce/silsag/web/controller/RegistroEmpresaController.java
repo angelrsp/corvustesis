@@ -29,7 +29,7 @@ public class RegistroEmpresaController extends SelectItemController implements
 	private static final long serialVersionUID = 1L;
 
 	private static final Logger log = LoggerFactory
-			.getLogger(RegistroCandidatoController.class);
+			.getLogger(RegistroEmpresaController.class);
 
 	private EmpresaDTO empresa;
 	private UsuarioDTO usuarioRegistro;
