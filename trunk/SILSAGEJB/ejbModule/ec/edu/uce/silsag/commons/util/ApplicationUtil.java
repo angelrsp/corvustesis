@@ -43,7 +43,7 @@ public class ApplicationUtil {
     }
 	
     
-	public static String saveToDisk(byte[] bytefile)
+	public static String saveToDiskBin(byte[] bytefile)
 	{
 		String file,path,date,pathAbs,pathSave = null;
 		try {
