@@ -36,4 +36,6 @@ public class Const {
 	
 	public static final String APLICAR_INTERVALO_KEY = "com.corvustec.rtoqab.aplicar.intervalo";
 	
+	public static final String APLICAR_AUTOENCENDER_KEY = "com.corvustec.rtoqab.aplicar.autencendido";
+	
 }

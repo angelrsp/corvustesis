@@ -53,6 +53,7 @@ public class Configuracion extends JInternalFrame {
 	private DefaultListModel<String> defaultListModel;
 	
 	private JCheckBox chbAplicarIntervalo;
+	private JCheckBox chbAutoencender;
 
 	private final String codigoAgenciaKey=Const.CODIGO_AGENCIA_KEY;
 	private final String recolectorKey=Const.RECOLECTOR_KEY;
@@ -73,6 +74,7 @@ public class Configuracion extends JInternalFrame {
 	private final String tiempoMaximoArchivo=Const.TIEMPO_MAXIMO_ARCHIVO_KEY;
 	private final String tiempoCenso=Const.TIEMPO_CENSO_KEY;
 	private final String aplicarIntervaslo=Const.APLICAR_INTERVALO_KEY;
+	private final String aplicarAutoencender=Const.APLICAR_AUTOENCENDER_KEY;
 	
 	
 
@@ -86,7 +88,7 @@ public class Configuracion extends JInternalFrame {
 		setIconifiable(true);
 		setMaximizable(true);
 		setClosable(true);
-		setBounds(100, 100, 907, 466);
+		setBounds(100, 100, 907, 471);
 		getContentPane().setLayout(null);
 		
 		JButton btnGuardar = new JButton("Guardar");
@@ -95,7 +97,7 @@ public class Configuracion extends JInternalFrame {
 				btnGuardarActionPerformed(arg0);
 			}
 		});
-		btnGuardar.setBounds(400, 403, 89, 23);
+		btnGuardar.setBounds(400, 408, 89, 23);
 		getContentPane().add(btnGuardar);
 		
 		JPanel pnlRuta = new JPanel();
@@ -153,7 +155,7 @@ public class Configuracion extends JInternalFrame {
 		
 		JPanel pnlProceso = new JPanel();
 		pnlProceso.setBorder(new TitledBorder(null, "Proceso", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlProceso.setBounds(10, 182, 479, 210);
+		pnlProceso.setBounds(10, 182, 479, 215);
 		getContentPane().add(pnlProceso);
 		pnlProceso.setLayout(null);
 		
@@ -211,6 +213,10 @@ public class Configuracion extends JInternalFrame {
 		JLabel lblTiempoMaximoArchivos = new JLabel("Tiempo Maximo Archivos (d\u00EDa):");
 		lblTiempoMaximoArchivos.setBounds(26, 157, 197, 14);
 		pnlProceso.add(lblTiempoMaximoArchivos);
+		
+		chbAutoencender = new JCheckBox("Autoencender");
+		chbAutoencender.setBounds(230, 180, 148, 23);
+		pnlProceso.add(chbAutoencender);
 		
 		JPanel pnlServicio = new JPanel();
 		pnlServicio.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Tiempo (Servicio)", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -394,7 +400,11 @@ public class Configuracion extends JInternalFrame {
 				ReadConfiguration.getInstance().replaceValue(aplicarIntervaslo, String.valueOf(1));
 			else
 				ReadConfiguration.getInstance().replaceValue(aplicarIntervaslo, String.valueOf(0));
-			
+
+			if(chbAutoencender.isSelected())
+				ReadConfiguration.getInstance().replaceValue(aplicarAutoencender, String.valueOf(1));
+			else
+				ReadConfiguration.getInstance().replaceValue(aplicarAutoencender, String.valueOf(0));			
 			
 			for(int i=0;i< defaultListModel.getSize();i++)
 			{
@@ -436,6 +446,12 @@ public class Configuracion extends JInternalFrame {
 				chbAplicarIntervalo.setSelected(true);
 			else
 				chbAplicarIntervalo.setSelected(false);
+			
+			if(Integer.valueOf(ReadConfiguration.getInstance().readValue(aplicarAutoencender))==1)
+				chbAutoencender.setSelected(true);
+			else
+				chbAutoencender.setSelected(false);
+			
 			
 			balizas=ReadConfiguration.getInstance().readValue(balizaKey).split("\\|");
 			defaultListModel=new DefaultListModel<String>();
