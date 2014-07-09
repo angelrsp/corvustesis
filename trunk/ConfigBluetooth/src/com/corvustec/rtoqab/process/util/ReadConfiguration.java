@@ -34,7 +34,7 @@ public class ReadConfiguration {
 		}
 	}
 	
-	public String readValue(String key) throws Exception
+	public String readValue(String key) 
 	{
 		String value = null;
 		List<String> lines;
