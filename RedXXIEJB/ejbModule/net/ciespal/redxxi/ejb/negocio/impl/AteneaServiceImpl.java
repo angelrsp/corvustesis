@@ -583,7 +583,7 @@ public class AteneaServiceImpl implements AteneaService{
 				ateneaVisor=new AteneaVisorDTO();
 				ateneaVisor.setCodigo(doc.getDocCodigo());
 				ateneaVisor.setTitulo("Nombres: "+doc.getDocNombres()+" "+doc.getDocApellidos());
-				ateneaVisor.setDescripcion1("Fecha de Nacimiento: "+doc.getDocFechaNacimiento().toString().substring(0, 10));
+				ateneaVisor.setDescripcion1("Fecha de Nacimiento: "+doc.getDocFechaNacimiento()!=null?doc.getDocFechaNacimiento().toString().substring(0, 10):"");
 				ateneaVisor.setDescripcion2("Ciudad de Nacimiento: "+doc.getCatCiudad());
 				ateneaVisor.setTipo(atenea.getTipo());
 				
@@ -1095,7 +1095,7 @@ public class AteneaServiceImpl implements AteneaService{
 
 				sb.append("<tr>");
 					sb.append("<td>");sb.append("Fecha de Nacimiento: ");sb.append("</td>");
-					sb.append("<td>");sb.append(doc.getDocFechaNacimiento());sb.append("</td>");
+					sb.append("<td>");sb.append(doc.getDocFechaNacimiento()!=null?doc.getDocFechaNacimiento().toString().substring(0, 10):"");sb.append("</td>");
 				sb.append("</tr>");
 
 				sb.append("<tr>");
