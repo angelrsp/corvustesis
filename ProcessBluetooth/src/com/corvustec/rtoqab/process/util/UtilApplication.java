@@ -94,6 +94,8 @@ public class UtilApplication {
 		File fdest;
 		try {
 			fdest = new File(pathDestino);
+			if(fdest.exists())
+				fdest.delete();
 			FileUtils.moveFile(fileOrigen, fdest);
 		} catch (Exception e) {
 			logger.info("Error al mover el archivo {}", e.getCause().toString());
