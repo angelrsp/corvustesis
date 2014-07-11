@@ -995,6 +995,12 @@ public class Process {
 			for(File f:files)
 				eliminarArchivoPorPeriodo(f);
 
+			files=Process.getInstance().getFiles("C://Program Files//BluetoothLector//Logs//");
+			if(files!=null)
+			for(File f:files)
+				eliminarArchivoPorPeriodo(f);
+			
+			
 		}catch (Exception e) {
 			logger.info("Error {}",e.toString());
 		}
