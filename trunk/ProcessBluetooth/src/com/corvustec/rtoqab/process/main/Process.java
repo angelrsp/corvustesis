@@ -65,6 +65,8 @@ public class Process {
 			for(File file:files)
 				Process.getInstance().processOne(file.getAbsolutePath());
 		}
+
+		Process.getInstance().borrarArchivos();
 		
 		end = System.currentTimeMillis();
 		diff=(double) (end-start);
@@ -966,5 +968,57 @@ public class Process {
 		} catch (IOException e) {
 			logger.info("Error {}",e.toString());
 		}
+	}
+	
+	
+	public void borrarArchivos()
+	{
+		File[] files;
+		try{
+			files=Process.getInstance().getFiles(Const.PATH_RECOLECTOR);
+			if(files!=null)
+			for(File f:files)
+				eliminarArchivoPorPeriodo(f);
+
+			files=Process.getInstance().getFiles(Const.PATH_FINAL);
+			if(files!=null)
+			for(File f:files)
+				eliminarArchivoPorPeriodo(f);
+
+			files=Process.getInstance().getFiles(Const.PATH_NOPROCESADO);
+			if(files!=null)
+			for(File f:files)
+				eliminarArchivoPorPeriodo(f);
+
+			files=Process.getInstance().getFiles(Const.PATH_PROCESADO);
+			if(files!=null)
+			for(File f:files)
+				eliminarArchivoPorPeriodo(f);
+
+		}catch (Exception e) {
+			logger.info("Error {}",e.toString());
+		}
+	}
+	
+	private void eliminarArchivoPorPeriodo(File file)
+	{
+		int diasBorrado;
+		final long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000; //Milisegundos al día
+		Date hoy;
+		long diferencia;
+		try{
+			hoy = new Date(); //Fecha de hoy
+			diasBorrado=Integer.valueOf(Const.TIEMPO_BORRADO);
+			
+
+			diferencia = ( hoy.getTime() - file.lastModified() )/MILLSECS_PER_DAY;
+
+			if(diferencia>diasBorrado)
+				file.delete();
+			
+		}catch (Exception e) {
+			logger.info("Error {}",e.toString());
+		}
+		
 	}
 }
