@@ -465,7 +465,7 @@ public class EspejoServiceImpl implements EspejoService{
 						sb.append("<td>");					
 							sb.append("<img src='");
 							sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(gma.getGmaFotoNombre(),gma.getGmaFoto()).replace('\\', '/'));
-							sb.append("height='42' width='42'>");
+							sb.append("' height='42' width='42'>");
 						sb.append("</td>");
 					sb.append("</tr>");
 				}
@@ -583,7 +583,7 @@ public class EspejoServiceImpl implements EspejoService{
 						sb.append("<td>");					
 							sb.append("<img src='");
 							sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(mci.getMciFotoNombre(),mci.getMciFoto()).replace('\\', '/'));
-							sb.append("height='42' width='42'>");
+							sb.append("' height='42' width='42'>");
 						sb.append("</td>");
 					sb.append("</tr>");
 				}
@@ -918,7 +918,7 @@ public class EspejoServiceImpl implements EspejoService{
 					sb.append("<td>");					
 						sb.append("<img src='");
 						sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(gma.getGmaFotoNombre(),gma.getGmaFoto()).replace('\\', '/'));
-						sb.append("height='42' width='42'>");
+						sb.append("' height='42' width='42'>");
 					sb.append("</td>");
 				sb.append("</tr>");
 			}
@@ -1183,7 +1183,7 @@ public class EspejoServiceImpl implements EspejoService{
 					sb.append("<td>");					
 						sb.append("<img src='");
 						sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(mci.getMciFotoNombre(),mci.getMciFoto()).replace('\\', '/'));
-						sb.append("height='42' width='42'>");
+						sb.append("' height='42' width='42'>");
 					sb.append("</td>");
 				sb.append("</tr>");
 			}
