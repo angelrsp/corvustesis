@@ -45,6 +45,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.OrganizacioDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.OrganizacionVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PerfilDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PremioCiespalDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.PremioCiespalVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PremioDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.PremioVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.ProyectoInvestigacionDAO;
@@ -114,6 +115,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private PremioDAO premioDAO;
 	private PremioVieDAO premioVieDAO;
 	private PremioCiespalDAO premioCiespalDAO;
+	private PremioCiespalVieDAO premioCiespalVieDAO;
 	private LeyDAO leyDAO;
 	private LeyVieDAO leyVieDAO;
 	private ObraEspejoDAO obraEspejoDAO;
@@ -527,6 +529,14 @@ public class FactoryDAOImpl implements FactoryDAO{
 			componenteMenuVieDAO = new ComponenteMenuVieDAOImpl(entityManager);
 		}
 		return componenteMenuVieDAO;
+	}
+
+	@Override
+	public PremioCiespalVieDAO getPremioCiespalVieDAOImpl() {
+		if (premioCiespalVieDAO == null) {
+			premioCiespalVieDAO = new PremioCiespalVieDAOImpl(entityManager);
+		}
+		return premioCiespalVieDAO;
 	}
 
 }

@@ -24,6 +24,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.espejo.MaestroCiespalVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.NoticiaEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.ObraEspejoDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioCiespalDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioCiespalVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioVieDTO;
 
@@ -78,9 +79,17 @@ public class EspejoServiceImpl implements EspejoService{
 			espejo.setCount(factoryDAO.getPremioDAOImpl().count(pais));
 			espejoList.add(espejo);
 
-			//Codigo etica leyes y comunicacion
+			//Premios ciespal
 			espejo=new EspejoDTO();
 			espejo.setTipo(5);
+			espejo.setDescripcion("Premios Ciespal: ");
+			espejo.setCount(factoryDAO.getPremioCiespalDAOImpl().count(pais));
+			espejoList.add(espejo);
+
+			
+			//Codigo etica leyes y comunicacion
+			espejo=new EspejoDTO();
+			espejo.setTipo(6);
 			espejo.setDescripcion("Códigos de Ética y Leyes de Comunicación: ");
 			espejo.setCount(factoryDAO.getLeyDAOImpl().count(pais));
 			espejoList.add(espejo);
@@ -103,6 +112,7 @@ public class EspejoServiceImpl implements EspejoService{
 			factoryDAO.getGranMaestroDAOImpl().count(null)+
 			factoryDAO.getMaestroCiespalDAOImpl().count(null)+
 			factoryDAO.getPremioDAOImpl().count(null)+
+			factoryDAO.getPremioCiespalDAOImpl().count(null)+
 			factoryDAO.getLeyDAOImpl().count(null);
 		}catch(Exception e)
 		{
@@ -184,8 +194,21 @@ public class EspejoServiceImpl implements EspejoService{
 				paisList.add(pais);
 			}
 		}
-		//Leyes
+		//Premios Ciespal
 		else if(type.equals(5))
+		{
+			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
+				pais=new PaisDTO();
+				pais.setCodigo(cat.getCatCodigo());
+				pais.setImagenPath(cat.getCatImagenPath());
+				pais.setNombre(cat.getCatDescripcion());
+				pais.setCount(factoryDAO.getPremioCiespalDAOImpl().count(cat.getCatCodigo()));
+				pais.setTipo(Integer.valueOf(type.toString()));
+				paisList.add(pais);
+			}
+		}
+		//Leyes
+		else if(type.equals(6))
 		{
 			for(CatalogoDTO cat: factoryDAO.getCatalogoImpl().getAll(catalogo)){
 				pais=new PaisDTO();
@@ -197,6 +220,7 @@ public class EspejoServiceImpl implements EspejoService{
 				paisList.add(pais);
 			}
 		}
+
 		return paisList;
 		
 	}
@@ -301,8 +325,31 @@ public class EspejoServiceImpl implements EspejoService{
 				
 			}	
 		}
-		//Leyes
+		//Premio
 		else if(espejo.getTipo()==5)
+		{
+			PremioCiespalDTO pre=new PremioCiespalDTO();
+			pre.setPciPais(espejo.getPais());
+			List<PremioCiespalDTO> listPre=new ArrayList<PremioCiespalDTO>();
+			
+			listPre=factoryDAO.getPremioCiespalDAOImpl().getByAnd(pre);
+			
+			for(PremioCiespalDTO objeto:listPre){
+					
+				espejoVisor=new EspejoVisorDTO();
+				espejoVisor.setCodigo(objeto.getPciCodigo());
+				
+				espejoVisor.setTitulo("Nombre del Premio: " +objeto.getPciPremioInstituido());
+				espejoVisor.setDescripcion1("Autor :"+objeto.getPciNombreAutor()+" "+objeto.getPciApellidoAutor());
+				
+				espejoVisor.setTipo(espejo.getTipo());
+
+				espejoVisorList.add(espejoVisor);
+				
+			}	
+		}
+		//Leyes
+		else if(espejo.getTipo()==6)
 		{
 			LeyDTO ley=new LeyDTO();
 			ley.setLeyPais(espejo.getPais());
@@ -643,8 +690,34 @@ public class EspejoServiceImpl implements EspejoService{
 					sb.append("<td>");sb.append(pre.getCatTipoMedio());sb.append("</td>");
 				sb.append("</tr>");
 
-			}else if(espejo.getTipo()==5)
-			{
+			}else if(espejo.getTipo()==5){
+				
+				PremioCiespalVieDTO pci=new PremioCiespalVieDTO();
+				pci.setPciCodigo(espejo.getCodigo());
+				pci= factoryDAO.getPremioCiespalVieDAOImpl().getByAnd(pci).get(0);
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pci.getCatPais());sb.append("</td>");
+				sb.append("</tr>");
+				
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Estado/Provincia: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pci.getCatProvincia());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Ciudad: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pci.getCatCiudad());sb.append("</td>");
+				sb.append("</tr>");
+
+				
+			}
+			
+			
+			
+			else if(espejo.getTipo()==6){
+				
 				LeyVieDTO ley=new LeyVieDTO();
 				ley.setLeyCodigo(espejo.getCodigo());
 				ley= factoryDAO.getLeyVieDAOImpl().getByAnd(ley).get(0);
