@@ -294,7 +294,7 @@ public class EspejoServiceImpl implements EspejoService{
 				espejoVisor.setCodigo(objeto.getMciCodigo());
 				
 				espejoVisor.setTitulo("Nombres y Apellidos: " +objeto.getMciNombre()+" "+objeto.getMciApellido());
-				espejoVisor.setDescripcion1("Fecha de Nacimiento :"+objeto.getMciFechaNacimiento());
+				espejoVisor.setDescripcion1("Fecha de Nacimiento :"+(objeto.getMciFechaNacimiento()!=null?objeto.getMciFechaNacimiento().toString().substring(0, 10):""));
 				
 				espejoVisor.setTipo(espejo.getTipo());
 
