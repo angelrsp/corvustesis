@@ -10,4 +10,9 @@ public interface PremioCiespalDAO extends AbstractFacade<PremioCiespalDTO>{
 
 	List<PremioCiespalDTO> findAll(Object ciudad) throws CorvustecException;
 
+	int count(Object pais) throws CorvustecException;
+
+	List<PremioCiespalDTO> getByAnd(PremioCiespalDTO objetoDTO)
+			throws CorvustecException;
+
 }
