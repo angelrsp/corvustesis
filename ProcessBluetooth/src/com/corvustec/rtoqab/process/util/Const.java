@@ -29,4 +29,6 @@ public class Const {
 	
 	public static final String PATH_NOPROCESADO = ReadConfiguration.getInstance().readValue("com.corvustec.rtoqab.path.no.process");
 	
+	public static final String TIEMPO_BORRADO = ReadConfiguration.getInstance().readValue("com.corvustec.rtoqab.tiempo.borrado.archivo");
+	
 }
