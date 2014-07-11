@@ -621,10 +621,10 @@ public class AteneaServiceImpl implements AteneaService{
 		StringBuilder sb;
 		try{
 			sb=new StringBuilder();
-			sb.append("<table>");
+			
 			if(atenea.getTipo()==2)
 			{
-				
+				sb.append("<table>");
 				CentroDTO facultad=factoryDAO.getCentroDAOImpl().find(atenea.getCodigo());
 				
 				UniversidadVieDTO uni=new UniversidadVieDTO();
@@ -791,10 +791,11 @@ public class AteneaServiceImpl implements AteneaService{
 						}
 					}
 				}
-				
+				sb.append("</table>");
 			}
 			else if(atenea.getTipo()==6)
 			{
+				sb.append("<table>");
 				CarreraDTO pre=new CarreraDTO();
 				pre.setCarCodigo(atenea.getCodigo());
 				pre=factoryDAO.getCarreraDAOImpl().find(pre.getCarCodigo());
@@ -903,10 +904,11 @@ public class AteneaServiceImpl implements AteneaService{
 					}
 				}
 
-				
+				sb.append("</table>");
 			}
 			else if(atenea.getTipo()==7)
 			{
+				sb.append("<table>");
 				CarreraDTO pos=new CarreraDTO();
 				pos.setCarCodigo(atenea.getCodigo());
 				pos=factoryDAO.getCarreraDAOImpl().find(pos.getCarCodigo());
@@ -995,9 +997,11 @@ public class AteneaServiceImpl implements AteneaService{
 						sb.append("</tr>");						
 					}
 				}
+				sb.append("</table>");
 			}
 			else if(atenea.getTipo()==103)
 			{
+				sb.append("<table>");
 				OrganizacionVieDTO org=new OrganizacionVieDTO();
 				org.setOrgCodigo(atenea.getCodigo());
 				org=factoryDAO.getOrganizacionVieDAOImpl().getByAnd(org).get(0);
@@ -1060,130 +1064,19 @@ public class AteneaServiceImpl implements AteneaService{
 						sb.append("</tr>");						
 					}
 				}
+				sb.append("</table>");
 			}		
 			
 			else if(atenea.getTipo()==104)
 			{
 				DoctorVieDTO doc=new DoctorVieDTO();
 				doc.setDocCodigo(atenea.getCodigo());
-				doc=factoryDAO.getDoctorVieDAOImpl().get(doc).get(0);
-
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
-					sb.append("<td>");sb.append(doc.getCatPais());sb.append("</td>");
-				sb.append("</tr>");
 				
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Estado/Provincia: ");sb.append("</td>");
-					sb.append("<td>");sb.append(doc.getCatProvincia());sb.append("</td>");
-				sb.append("</tr>");
-	
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Ciudad: ");sb.append("</td>");
-					sb.append("<td>");sb.append(doc.getCatCiudad());sb.append("</td>");
-				sb.append("</tr>");
-
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Nombres: ");sb.append("</td>");
-					sb.append("<td>");sb.append(doc.getDocNombres());sb.append("</td>");
-				sb.append("</tr>");
-
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Apellidos: ");sb.append("</td>");
-					sb.append("<td>");sb.append(doc.getDocApellidos());sb.append("</td>");
-				sb.append("</tr>");
-
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Fecha de Nacimiento: ");sb.append("</td>");
-					sb.append("<td>");sb.append(doc.getDocFechaNacimiento()!=null?doc.getDocFechaNacimiento().toString().substring(0, 10):"");sb.append("</td>");
-				sb.append("</tr>");
-
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Sexo: ");sb.append("</td>");
-					sb.append("<td>");sb.append(doc.getCatSexo());sb.append("</td>");
-				sb.append("</tr>");
-
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Institución de Trabajo: ");sb.append("</td>");
-					sb.append("<td>");sb.append(doc.getDocInstitucionTrabajo());sb.append("</td>");
-				sb.append("</tr>");
-
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Institución de Titulación (PHD): ");sb.append("</td>");
-					sb.append("<td>");sb.append(doc.getDocInstitucionTitulacion());sb.append("</td>");
-				sb.append("</tr>");
-
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Título Tesis: ");sb.append("</td>");
-					sb.append("<td>");sb.append(doc.getDocTituloTesis());sb.append("</td>");
-				sb.append("</tr>");
-
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Resumen de Tesis: ");sb.append("</td>");
-					sb.append("<td>");sb.append(doc.getDocResumenTesis());sb.append("</td>");
-				sb.append("</tr>");
-
-				if(doc.getDocArchivoTesis()!=null)
-				{				
-					sb.append("<tr>");
-						sb.append("<td>");sb.append("Archivo: ");sb.append("</td>");
-						sb.append("<td>");
-						sb.append("<a href='");
-						sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(doc.getDocArchivoTesisNombre(),doc.getDocArchivoTesis()).replace('\\', '/'));
-						sb.append("' target='_blank'>");
-						sb.append(doc.getDocArchivoTesisNombre());
-						sb.append("</a>");
-						sb.append("</td>");
-					sb.append("</tr>");
-				}
-
-				sb.append("<tr>");
-					sb.append("<td colspan='2'>");sb.append("Obras: ");sb.append("</td>");
-				sb.append("</tr>");
-				
-				DoctorDTO d=new DoctorDTO();
-				doc.setDocCodigo(doc.getDocCodigo());
-				List<PublicacionDTO> pubList= factoryDAO.getPublicacionDAOImpl().getAll(d);
-				if(pubList!=null)
-				{
-					for(PublicacionDTO pub:pubList)
-					{
-						if(pub.getPubArchivo()!=null)
-						{				
-							sb.append("<tr>");
-								sb.append("<td>");sb.append("Archivo: ");sb.append("</td>");
-								sb.append("<td>");
-								sb.append("<a href='");
-								sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(pub.getPubArchivoNombre(),pub.getPubArchivo()).replace('\\', '/'));
-								sb.append("' target='_blank'>");
-								sb.append(pub.getPubArchivoNombre());
-								sb.append("</a>");
-								sb.append("</td>");
-							sb.append("</tr>");
-						}
-					}
-				}
-				
-				List<ContactoListDTO> listContacto=factoryDAO.getContactoDAOImpl().getAll(d);
-				
-				if(listContacto!=null)
-				{
-					sb.append("<tr>");
-						sb.append("<td colspan='2'>");sb.append("Contactos: ");sb.append("</td>");
-					sb.append("</tr>");
-					for(ContactoListDTO con:listContacto)
-					{
-						sb.append("<tr>");
-							sb.append("<td>");sb.append(con.getCatTipo());sb.append("</td>");
-							sb.append("<td>");sb.append(con.getConValor());sb.append("</td>");
-						sb.append("</tr>");						
-					}
-				}
-
-				
+				sb.append(readDoctorItem(doc));
 			}
 			else if(atenea.getTipo()==105)
 			{
+				sb.append("<table>");
 				PublicacionVieDTO pub=new PublicacionVieDTO();
 				pub.setPubCodigo(atenea.getCodigo());
 				pub=factoryDAO.getPublicacionVieDAOImpl().getByAnd(pub).get(0);
@@ -1251,9 +1144,9 @@ public class AteneaServiceImpl implements AteneaService{
 						sb.append("</td>");
 					sb.append("</tr>");
 				}
-				
+				sb.append("</table>");	
 			}
-			sb.append("</table>");
+			
 		}
 		catch(Exception e){
 			logger.info("Error ateneaItem {}",e.toString());
@@ -2292,6 +2185,19 @@ public class AteneaServiceImpl implements AteneaService{
 
 			sb.append("<table>");
 			
+			if(doc.getDocFotoByte()!=null)
+			{
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Foto: ");sb.append("</td>");
+					sb.append("<td>");					
+						sb.append("<img src='");
+						sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(doc.getDocFotoNombre(),doc.getDocFotoByte()).replace('\\', '/'));
+						sb.append("' height='42' width='42'>");
+					sb.append("</td>");
+				sb.append("</tr>");
+			}
+			
+			
 			sb.append("<tr>");
 				sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
 				sb.append("<td>");sb.append(doc.getCatPais());sb.append("</td>");
@@ -2306,7 +2212,7 @@ public class AteneaServiceImpl implements AteneaService{
 				sb.append("<td>");sb.append("Ciudad: ");sb.append("</td>");
 				sb.append("<td>");sb.append(doc.getCatCiudad());sb.append("</td>");
 			sb.append("</tr>");
-	
+						
 			sb.append("<tr>");
 				sb.append("<td>");sb.append("Nombres: ");sb.append("</td>");
 				sb.append("<td>");sb.append(doc.getDocNombres());sb.append("</td>");
@@ -2319,7 +2225,7 @@ public class AteneaServiceImpl implements AteneaService{
 	
 			sb.append("<tr>");
 				sb.append("<td>");sb.append("Fecha de Nacimiento: ");sb.append("</td>");
-				sb.append("<td>");sb.append(doc.getDocFechaNacimiento());sb.append("</td>");
+				sb.append("<td>");sb.append(doc.getDocFechaNacimiento()!=null?doc.getDocFechaNacimiento().toString().substring(0, 10):"");sb.append("</td>");
 			sb.append("</tr>");
 	
 			sb.append("<tr>");
