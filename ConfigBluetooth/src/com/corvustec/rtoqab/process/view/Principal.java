@@ -16,6 +16,8 @@ public class Principal extends JFrame {
     private javax.swing.JMenu menuOpciones;
     private javax.swing.JMenuItem menuItemConfiguracion;
     private javax.swing.JMenuItem menuItemFactorAjuste;
+    private javax.swing.JMenuItem menuItemConfiguracionSftp;
+    
 	/**
 	 * Launch the application.
 	 */
@@ -42,6 +44,7 @@ public class Principal extends JFrame {
         menuOpciones = new javax.swing.JMenu();
         menuItemConfiguracion = new javax.swing.JMenuItem();
         menuItemFactorAjuste=new javax.swing.JMenuItem();
+        menuItemConfiguracionSftp=new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,10 +63,18 @@ public class Principal extends JFrame {
             	factorAjusteActionPerformed(evt);
             }
         });
-        
+
+        menuItemConfiguracionSftp.setText("Configuración Sftp");
+        menuItemConfiguracionSftp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	configuracionSftActionPerformed(evt);
+            }
+        });
+
         
         menuOpciones.add(menuItemConfiguracion);
         menuOpciones.add(menuItemFactorAjuste);
+        menuOpciones.add(menuItemConfiguracionSftp);
 
         menuBar.add(menuOpciones);
 
@@ -102,4 +113,14 @@ public class Principal extends JFrame {
         h1.show();    	
     }
 
+    private void configuracionSftActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        ConfiguracionSftp h1 = new ConfiguracionSftp();
+        // se añade al jDesktopPane
+        jDesktopPane1.add(h1);
+        //se muestra en pantalla
+        h1.show();    	
+    }
+
+    
 }

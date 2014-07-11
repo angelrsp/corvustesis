@@ -38,4 +38,23 @@ public class Const {
 	
 	public static final String APLICAR_AUTOENCENDER_KEY = "com.corvustec.rtoqab.aplicar.autencendido";
 	
+	
+	
+	//SFTP
+	public static final String SERVIDOR_KEY = "com.corvustec.rtoqab.sftp.servidor";
+	
+	public static final String PUERTO_KEY = "com.corvustec.rtoqab.sftp.puerto";
+	
+	public static final String USUARIO_KEY = "com.corvustec.rtoqab.sftp.usuario";
+	
+	public static final String CLAVE_KEY = "com.corvustec.rtoqab.sftp.clave";
+	
+	public static final String CLAVE_ARCHIVO_KEY = "com.corvustec.rtoqab.sftp.archivo.clave";
+	
+	public static final String APLICAR_CLAVE_ARCHIVO_KEY = "com.corvustec.rtoqab.sftp.aplicar.clave.archivo";
+	
+	public static final String PATH_LOCAL_KEY = "com.corvustec.rtoqab.sftp.path.local";
+	
+	public static final String PATH_REMOTO_KEY = "com.corvustec.rtoqab.sftp.path.remoto";
+	
 }
