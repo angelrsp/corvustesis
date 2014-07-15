@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -23,7 +24,6 @@ import com.corvustec.rtoqab.process.util.Const;
 import com.corvustec.rtoqab.process.util.MessagesApplicacion;
 import com.corvustec.rtoqab.process.util.ReadConfiguration;
 import com.corvustec.rtoqab.process.view.util.MessageBox;
-import javax.swing.JCheckBox;
 
 public class Configuracion extends JInternalFrame {
 
@@ -62,6 +62,7 @@ public class Configuracion extends JInternalFrame {
 	private final String finalKey=Const.FINAL_KEY;
 	private final String balizaKey=Const.BALIZA_KEY;
 	private final String bitacoraKey=Const.BITACORA_KEY;
+	private final String analiticaKey=Const.ANALITICA_KEY;
 	
 	private final String tiempoComprobacionKey=Const.TIEMPO_COMPROBACION_KEY;
 	private final String factorAjusteKey=Const.FACTOR_AJUSTE_KEY;
@@ -75,6 +76,7 @@ public class Configuracion extends JInternalFrame {
 	private final String tiempoCenso=Const.TIEMPO_CENSO_KEY;
 	private final String aplicarIntervaslo=Const.APLICAR_INTERVALO_KEY;
 	private final String aplicarAutoencender=Const.APLICAR_AUTOENCENDER_KEY;
+	private JTextField txtArchivoAnalitica;
 	
 	
 
@@ -88,7 +90,7 @@ public class Configuracion extends JInternalFrame {
 		setIconifiable(true);
 		setMaximizable(true);
 		setClosable(true);
-		setBounds(100, 100, 907, 471);
+		setBounds(100, 100, 907, 510);
 		getContentPane().setLayout(null);
 		
 		JButton btnGuardar = new JButton("Guardar");
@@ -97,11 +99,11 @@ public class Configuracion extends JInternalFrame {
 				btnGuardarActionPerformed(arg0);
 			}
 		});
-		btnGuardar.setBounds(400, 408, 89, 23);
+		btnGuardar.setBounds(400, 447, 89, 23);
 		getContentPane().add(btnGuardar);
 		
 		JPanel pnlRuta = new JPanel();
-		pnlRuta.setBounds(10, 11, 479, 171);
+		pnlRuta.setBounds(10, 11, 479, 184);
 		getContentPane().add(pnlRuta);
 		pnlRuta.setLayout(null);
 		pnlRuta.setBorder(new TitledBorder(null, "Ruta Archivos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -153,9 +155,18 @@ public class Configuracion extends JInternalFrame {
 		lblRutaArchivoNo.setBounds(24, 131, 201, 14);
 		pnlRuta.add(lblRutaArchivoNo);
 		
+		JLabel lblRutaArchivoAnalitica = new JLabel("Ruta archivo analitica:");
+		lblRutaArchivoAnalitica.setBounds(24, 156, 147, 14);
+		pnlRuta.add(lblRutaArchivoAnalitica);
+		
+		txtArchivoAnalitica = new JTextField();
+		txtArchivoAnalitica.setBounds(235, 153, 229, 20);
+		pnlRuta.add(txtArchivoAnalitica);
+		txtArchivoAnalitica.setColumns(10);
+		
 		JPanel pnlProceso = new JPanel();
 		pnlProceso.setBorder(new TitledBorder(null, "Proceso", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlProceso.setBounds(10, 182, 479, 215);
+		pnlProceso.setBounds(10, 201, 479, 215);
 		getContentPane().add(pnlProceso);
 		pnlProceso.setLayout(null);
 		
@@ -220,7 +231,7 @@ public class Configuracion extends JInternalFrame {
 		
 		JPanel pnlServicio = new JPanel();
 		pnlServicio.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Tiempo (Servicio)", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlServicio.setBounds(488, 11, 393, 171);
+		pnlServicio.setBounds(488, 11, 393, 184);
 		getContentPane().add(pnlServicio);
 		pnlServicio.setLayout(null);
 		
@@ -268,7 +279,7 @@ public class Configuracion extends JInternalFrame {
 		JPanel pnlBaliza = new JPanel();
 		pnlBaliza.setLayout(null);
 		pnlBaliza.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Balizas de Referencia", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlBaliza.setBounds(488, 182, 393, 210);
+		pnlBaliza.setBounds(488, 206, 393, 210);
 		getContentPane().add(pnlBaliza);
 		
 		JLabel lblBaliza = new JLabel("Baliza (mac):");
@@ -382,6 +393,7 @@ public class Configuracion extends JInternalFrame {
 			ReadConfiguration.getInstance().replaceValue(recolectorKey, txtRecolector.getText());
 			ReadConfiguration.getInstance().replaceValue(procesadoKey, txtProcesado.getText());
 			ReadConfiguration.getInstance().replaceValue(finalKey, txtFinal.getText());
+			ReadConfiguration.getInstance().replaceValue(analiticaKey, txtArchivoAnalitica.getText());
 			
 			ReadConfiguration.getInstance().replaceValue(tiempoComprobacionKey, txtTiempoComprobacion.getText());
 			ReadConfiguration.getInstance().replaceValue(factorAjusteKey, txtFactorAjuste.getText());
@@ -441,6 +453,7 @@ public class Configuracion extends JInternalFrame {
 			txtTiempoComprobacion.setText(ReadConfiguration.getInstance().readValue(tiempoComprobacionKey));
 			txtMaximoArchivo.setText(ReadConfiguration.getInstance().readValue(tiempoMaximoArchivo));
 			txtTiempoCenso.setText(ReadConfiguration.getInstance().readValue(tiempoCenso));
+			txtArchivoAnalitica.setText(ReadConfiguration.getInstance().readValue(analiticaKey));
 			
 			if(Integer.valueOf(ReadConfiguration.getInstance().readValue(aplicarIntervaslo))==1)
 				chbAplicarIntervalo.setSelected(true);
