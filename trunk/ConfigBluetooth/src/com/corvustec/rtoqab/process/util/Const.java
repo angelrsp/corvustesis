@@ -38,7 +38,7 @@ public class Const {
 	
 	public static final String APLICAR_AUTOENCENDER_KEY = "com.corvustec.rtoqab.aplicar.autencendido";
 	
-	
+	public static final String ANALITICA_KEY = "com.corvustec.rtoqab.path.analitica.jar";
 	
 	//SFTP
 	public static final String SERVIDOR_KEY = "com.corvustec.rtoqab.sftp.servidor";
