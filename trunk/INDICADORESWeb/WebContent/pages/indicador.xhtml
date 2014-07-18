@@ -132,7 +132,7 @@
 				<p:tree value="#{indicadorController.rootNode}" var="node" id="tree" selection="#{indicadorController.selectedNode}" selectionMode="single" style="width:99%;">
 					<p:ajax event="select" listener="#{indicadorController.onNodeSelect}" update=":contenido:growl,:contenido:pnlDatos"/>  
 			        <p:treeNode id="treeNode">  
-			            <h:outputText value="#{node.indNombreCorto}"/>  
+			            <h:outputText value="#{node.indNombreCorto}"/>
 			        </p:treeNode>  
 			    </p:tree>  
 						
