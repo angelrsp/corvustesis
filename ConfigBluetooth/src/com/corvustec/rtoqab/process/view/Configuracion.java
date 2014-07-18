@@ -48,6 +48,7 @@ public class Configuracion extends JInternalFrame {
 	private JTextField txtBaliza;
 	private JTextField txtMaximoArchivo;
 	private JTextField txtTiempoCenso;
+	private JTextField txtArchivoAnalitica;
 	
 	private JList<String> jlistBaliza;
 	private DefaultListModel<String> defaultListModel;
@@ -76,7 +77,7 @@ public class Configuracion extends JInternalFrame {
 	private final String tiempoCenso=Const.TIEMPO_CENSO_KEY;
 	private final String aplicarIntervaslo=Const.APLICAR_INTERVALO_KEY;
 	private final String aplicarAutoencender=Const.APLICAR_AUTOENCENDER_KEY;
-	private JTextField txtArchivoAnalitica;
+	
 	
 	
 
