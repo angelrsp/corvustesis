@@ -312,17 +312,17 @@ public class HistoricoIndicadorController extends SelectItemController implement
 					if(indTemp.getIndTipo()==10)
 						rc.execute("PF('dlgValorReporteLogico').show();");
 					else
-						rc.execute("PF('dlgValorReporte').show();");
+						rc.execute("PF('dlgValorReporteSub').show();");
 					
 					createChartLine(historicoIndicadorList);
-					createPieModel(historicoIndicadorList);											
+					//createPieModel(historicoIndicadorList);											
 					createMeterGaugeModel(indTemp);
 				}
 				else{
 					if(indTemp.getIndTipo()==10)
 						rc.execute("PF('dlgValorReporteLogico').show();");
 					else
-						rc.execute("PF('dlgValorReporte').show();");
+						rc.execute("PF('dlgValorReporteSub').show();");
 
 					createMeterGaugeModel(indTemp);
 					initChart();
@@ -422,7 +422,7 @@ public class HistoricoIndicadorController extends SelectItemController implement
 		 
 		for(IndicadorDTO ind:list)
 		{
-			pieModel.set(ind.getIndNombreCorto(), ind.getIndValorActual());
+			pieModel.set(ind.getIndNombreCorto()+" "+ind.getIndPeso(),  Double.valueOf(ind.getIndPeso()));
 		}
 	 } 
 	
