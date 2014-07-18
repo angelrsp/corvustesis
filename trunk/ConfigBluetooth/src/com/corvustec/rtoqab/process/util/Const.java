@@ -57,4 +57,8 @@ public class Const {
 	
 	public static final String PATH_REMOTO_KEY = "com.corvustec.rtoqab.sftp.path.remoto";
 	
+	
+	//Cambiar Clave
+	public static final String PASSWORD_KEY = "com.corvustec.rtoqab.config.password";
+	
 }
