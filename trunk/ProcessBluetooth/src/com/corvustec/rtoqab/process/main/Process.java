@@ -63,7 +63,7 @@ public class Process {
 		if(files!=null)
 		{
 			for(File file:files)
-				Process.getInstance().processOne(file.getAbsolutePath());
+				Process.getInstance().processOne(file);
 		}
 
 		Process.getInstance().borrarArchivos();
@@ -76,11 +76,10 @@ public class Process {
 
 	
 	@SuppressWarnings("unchecked")
-	private void processOne(String pathFile)
+	private void processOne(File fileIn)
 	{
 		String codigoAgencia,fechaCorte;
 
-		File fileIn = null;		
 		File fileOut;
 		
 		List<String> lines;
@@ -103,7 +102,6 @@ public class Process {
 		double factorMaximo, factorAjuste,factorPromedioDia,factorIntervaloTiempo3;
 		
 		try{			
-			fileIn=new File(pathFile);
 			
 			codigoAgencia=Const.CODIGO_AGENCIA;
 
@@ -125,7 +123,7 @@ public class Process {
 
 			line=lines.get(0).split("\\|");
 			fechaCorte=getFechaCorte(line[0]);
-			fileOut=new File(Const.PATH_FINAL+fechaCorte.replace("-", "")+".txt");
+			fileOut=new File(Const.PATH_FINAL+fileIn.getName());
 			writer=new FileWriter(fileOut);
 			
 			//Establezo los datos en la lista de objetos
