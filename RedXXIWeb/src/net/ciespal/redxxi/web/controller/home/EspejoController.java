@@ -87,6 +87,8 @@ public class EspejoController implements Serializable{
 			else if(espejo.getTipo()==4)
 				espejoDataManager.setTipoConsulta("Premios Periodísticos");
 			else if(espejo.getTipo()==5)
+				espejoDataManager.setTipoConsulta("Premio Ciespal");			
+			else if(espejo.getTipo()==6)
 				espejoDataManager.setTipoConsulta("Códigos de Ética y Leyes de Comunicación");			
 			
 		} catch (CorvustecException e) {
