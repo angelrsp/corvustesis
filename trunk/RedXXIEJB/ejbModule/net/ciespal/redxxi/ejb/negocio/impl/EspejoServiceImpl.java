@@ -325,7 +325,7 @@ public class EspejoServiceImpl implements EspejoService{
 				
 			}	
 		}
-		//Premio
+		//Premio Ciespal
 		else if(espejo.getTipo()==5)
 		{
 			PremioCiespalDTO pre=new PremioCiespalDTO();
@@ -381,12 +381,14 @@ public class EspejoServiceImpl implements EspejoService{
 		StringBuilder sb;
 		try{
 			sb=new StringBuilder();
-			sb.append("<table>");
+			
 			if(espejo.getTipo()==1)
 			{
 				EticaVieDTO eti=new EticaVieDTO();
 				eti.setEtiCodigo(espejo.getCodigo());
 				eti= factoryDAO.getEticaVieDAOImpl().getByAnd(eti).get(0);
+				
+				sb.append("<table>");
 				
 				sb.append("<tr>");
 					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
@@ -436,124 +438,18 @@ public class EspejoServiceImpl implements EspejoService{
 						sb.append("</td>");
 					sb.append("</tr>");
 				}
+				
+				sb.append("</table>");
 			}
 			else if(espejo.getTipo()==2)
 			{
 				GranMaestroVieDTO gma=new GranMaestroVieDTO();
+				
 				gma.setGmaCodigo(espejo.getCodigo());
 				gma=factoryDAO.getGranMaestroVieDAOImpl().getByAnd(gma).get(0);
 
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
-					sb.append("<td>");sb.append(gma.getCatPais());sb.append("</td>");
-				sb.append("</tr>");
-
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Provincia/Estado: ");sb.append("</td>");
-					sb.append("<td>");sb.append(gma.getCatProvincia());sb.append("</td>");
-				sb.append("</tr>");
-
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Ciudad: ");sb.append("</td>");
-					sb.append("<td>");sb.append(gma.getCatCiudad());sb.append("</td>");
-				sb.append("</tr>");
-
-				if(gma.getGmaFoto()!=null)
-				{
-					sb.append("<tr>");
-						sb.append("<td>");sb.append("Foto: ");sb.append("</td>");
-						sb.append("<td>");					
-							sb.append("<img src='");
-							sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(gma.getGmaFotoNombre(),gma.getGmaFoto()).replace('\\', '/'));
-							sb.append("' height='42' width='42'>");
-						sb.append("</td>");
-					sb.append("</tr>");
-				}
-
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Nombres: ");sb.append("</td>");
-					sb.append("<td>");sb.append(gma.getGmaNombres());sb.append("</td>");
-				sb.append("</tr>");
-
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Apellidos: ");sb.append("</td>");
-					sb.append("<td>");sb.append(gma.getGmaApellidos());sb.append("</td>");
-				sb.append("</tr>");
-
-				if(gma.getGmaFechaNacimiento()!=null)
-				{
-					sb.append("<tr>");
-						sb.append("<td>");sb.append("Fecha de Nacimiento: ");sb.append("</td>");
-						sb.append("<td>");sb.append(gma.getGmaFechaNacimiento().toString().substring(0, 10));sb.append("</td>");
-					sb.append("</tr>");
-				}
+				sb.append(readMaestroPeriodismoItem(gma));
 				
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Perfil Bliográfico: ");sb.append("</td>");
-					sb.append("<td style='text-align: justify;'>");sb.append(gma.getGmaPerfilBiografico());sb.append("</td>");
-				sb.append("</tr>");
-
-				GranMaestroDTO g=factoryDAO.getGranMaestroDAOImpl().find(gma.getGmaCodigo());
-				
-				List<ObraEspejoDTO> obraDel=factoryDAO.getObraEspejoDAOImpl().findAll(g, 1);
-				if(obraDel!=null)
-				{
-					sb.append("<tr>");
-					sb.append("<td colspan='2'>");sb.append("Obras del Maestro: ");sb.append("</td>");
-					sb.append("</tr>");
-
-					for(ObraEspejoDTO obr:obraDel)
-					{					
-						sb.append("<tr>");
-							sb.append("<td>");sb.append("Titulo: ");sb.append("</td>");
-							sb.append("<td>");sb.append(obr.getObrTitulo());sb.append("</td>");
-						sb.append("</tr>");
-						
-						if(obr.getObrArchivo()!=null)
-						{
-							sb.append("<tr>");
-								sb.append("<td>");sb.append("Archivo: ");sb.append("</td>");
-								sb.append("<td>");
-								sb.append("<a href='");
-								sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(obr.getObrArchivoNombre(),obr.getObrArchivo()).replace('\\', '/'));
-								sb.append("' target='_blank'>");
-								sb.append(obr.getObrArchivoNombre());
-								sb.append("</a>");
-								sb.append("</td>");
-							sb.append("</tr>");
-						}						
-					}
-				}
-				obraDel=null;
-				List<ObraEspejoDTO> obraSobre=factoryDAO.getObraEspejoDAOImpl().findAll(g, 2);
-				if(obraSobre!=null)
-				{
-					sb.append("<tr>");
-						sb.append("<td colspan='2'>");sb.append("Obras sobre el Maestro: ");sb.append("</td>");
-					sb.append("</tr>");
-
-					for(ObraEspejoDTO obr:obraSobre)
-					{					
-						sb.append("<tr>");
-							sb.append("<td>");sb.append("Titulo: ");sb.append("</td>");
-							sb.append("<td>");sb.append(obr.getObrTitulo());sb.append("</td>");
-						sb.append("</tr>");
-						
-						if(obr.getObrArchivo()!=null)
-						{
-							sb.append("<tr>");
-								sb.append("<td>");sb.append("Archivo: ");sb.append("</td>");
-								sb.append("<td>");
-								sb.append("<a href='");
-								sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(obr.getObrArchivoNombre(),obr.getObrArchivo()).replace('\\', '/'));
-								sb.append("' target='_blank'>");
-								sb.append(obr.getObrArchivoNombre());
-								sb.append("</a>");
-								sb.append("</td>");
-							sb.append("</tr>");
-						}						
-					}
-				}
 			}
 			else if(espejo.getTipo()==3)
 			{
@@ -561,94 +457,15 @@ public class EspejoServiceImpl implements EspejoService{
 				mci.setMciCodigo(espejo.getCodigo());
 				mci=factoryDAO.getMaestroCiespalVieDAOImpl().getByAnd(mci).get(0);
 
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
-					sb.append("<td>");sb.append(mci.getCatPais());sb.append("</td>");
-				sb.append("</tr>");
-
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Provincia/Estado: ");sb.append("</td>");
-					sb.append("<td>");sb.append(mci.getCatProvincia());sb.append("</td>");
-				sb.append("</tr>");
-
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Ciudad: ");sb.append("</td>");
-					sb.append("<td>");sb.append(mci.getCatCiudad());sb.append("</td>");
-				sb.append("</tr>");
-
-				if(mci.getMciFoto()!=null)
-				{
-					sb.append("<tr>");
-						sb.append("<td>");sb.append("Foto: ");sb.append("</td>");
-						sb.append("<td>");					
-							sb.append("<img src='");
-							sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(mci.getMciFotoNombre(),mci.getMciFoto()).replace('\\', '/'));
-							sb.append("' height='42' width='42'>");
-						sb.append("</td>");
-					sb.append("</tr>");
-				}
-
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Nombres: ");sb.append("</td>");
-					sb.append("<td>");sb.append(mci.getMciNombre());sb.append("</td>");
-				sb.append("</tr>");
-
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Apellidos: ");sb.append("</td>");
-					sb.append("<td>");sb.append(mci.getMciApellido());sb.append("</td>");
-				sb.append("</tr>");
-
-				if(mci.getMciFechaNacimiento()!=null)
-				{
-					sb.append("<tr>");
-						sb.append("<td>");sb.append("Fecha de Nacimiento: ");sb.append("</td>");
-						sb.append("<td>");sb.append(mci.getMciFechaNacimiento().toString().substring(0, 10));sb.append("</td>");
-					sb.append("</tr>");
-				}
-				
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Perfil Bliográfico: ");sb.append("</td>");
-					sb.append("<td style='text-align: justify;'>");sb.append(mci.getMciPerfilBiografico());sb.append("</td>");
-				sb.append("</tr>");
-
-				MaestroCiespalDTO m=factoryDAO.getMaestroCiespalDAOImpl().find(mci.getMciCodigo());
-				
-				List<ObraEspejoDTO> obraDel=factoryDAO.getObraEspejoDAOImpl().findAll(m, 1);
-				if(obraDel!=null)
-				{
-					sb.append("<tr>");
-					sb.append("<td colspan='2'>");sb.append("Obras del Maestro: ");sb.append("</td>");
-					sb.append("</tr>");
-
-					for(ObraEspejoDTO obr:obraDel)
-					{					
-						sb.append("<tr>");
-							sb.append("<td>");sb.append("Titulo: ");sb.append("</td>");
-							sb.append("<td>");sb.append(obr.getObrTitulo());sb.append("</td>");
-						sb.append("</tr>");
-						
-						if(obr.getObrArchivo()!=null)
-						{
-							sb.append("<tr>");
-								sb.append("<td>");sb.append("Archivo: ");sb.append("</td>");
-								sb.append("<td>");
-								sb.append("<a href='");
-								sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(obr.getObrArchivoNombre(),obr.getObrArchivo()).replace('\\', '/'));
-								sb.append("' target='_blank'>");
-								sb.append(obr.getObrArchivoNombre());
-								sb.append("</a>");
-								sb.append("</td>");
-							sb.append("</tr>");
-						}						
-					}
-				}
-				obraDel=null;	
+				sb.append(readMaestroCiespalItem(mci));
 			}
 			else if(espejo.getTipo()==4)
 			{
 				PremioVieDTO pre=new PremioVieDTO();
 				pre.setPreCodigo(espejo.getCodigo());
 				pre= factoryDAO.getPremioVieDAOImpl().getByAnd(pre).get(0);
+			
+				sb.append("<table>");
 				
 				sb.append("<tr>");
 					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
@@ -689,12 +506,16 @@ public class EspejoServiceImpl implements EspejoService{
 					sb.append("<td>");sb.append("Tipo de Medio de Comunicación: ");sb.append("</td>");
 					sb.append("<td>");sb.append(pre.getCatTipoMedio());sb.append("</td>");
 				sb.append("</tr>");
+				
+				sb.append("</table>");
 
 			}else if(espejo.getTipo()==5){
 				
 				PremioCiespalVieDTO pci=new PremioCiespalVieDTO();
 				pci.setPciCodigo(espejo.getCodigo());
 				pci= factoryDAO.getPremioCiespalVieDAOImpl().getByAnd(pci).get(0);
+				
+				sb.append("<table>");
 				
 				sb.append("<tr>");
 					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
@@ -711,16 +532,60 @@ public class EspejoServiceImpl implements EspejoService{
 					sb.append("<td>");sb.append(pci.getCatCiudad());sb.append("</td>");
 				sb.append("</tr>");
 
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Título: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pci.getPciTitulo());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Obra y autor(es) premiados: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pci.getPciObraAutor());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Año Otorgamiento: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pci.getPciAnio());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Género: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pci.getPciGenero());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Tipo de Medio de Comunicacion: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pci.getCatMedio());sb.append("</td>");
+				sb.append("</tr>");
+
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Autor Principal: ");sb.append("</td>");
+					sb.append("<td>");sb.append(pci.getPciNombreAutor()+" "+pci.getPciApellidoAutor());sb.append("</td>");
+				sb.append("</tr>");
+
+				if(pci.getPciArchivo()!=null)
+				{				
+					sb.append("<tr>");
+						sb.append("<td>");sb.append("Archivo: ");sb.append("</td>");
+						sb.append("<td>");
+						sb.append("<a href='");
+						sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(pci.getPciArchivoNombre(),pci.getPciArchivo()).replace('\\', '/'));
+						sb.append("' target='_blank'>");
+						sb.append(pci.getPciArchivoNombre());
+						sb.append("</a>");
+						sb.append("</td>");
+					sb.append("</tr>");
+				}
 				
+				sb.append("</table>");
 			}
-			
-			
 			
 			else if(espejo.getTipo()==6){
 				
 				LeyVieDTO ley=new LeyVieDTO();
 				ley.setLeyCodigo(espejo.getCodigo());
 				ley= factoryDAO.getLeyVieDAOImpl().getByAnd(ley).get(0);
+				
+				sb.append("<table>");
 				
 				sb.append("<tr>");
 					sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
@@ -770,9 +635,10 @@ public class EspejoServiceImpl implements EspejoService{
 						sb.append("</td>");
 					sb.append("</tr>");
 				}
+				sb.append("</table>");
 			}
 			
-			sb.append("</table>");
+			
 		}
 		catch(Exception e){
 			logger.info("Error createOrUpdateRed {}",e.toString());
@@ -895,7 +761,19 @@ public class EspejoServiceImpl implements EspejoService{
 			gma=factoryDAO.getGranMaestroVieDAOImpl().getByAnd(gma).get(0);
 	
 			sb.append("<table>");
-			
+
+			if(gma.getGmaFoto()!=null)
+			{
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Foto: ");sb.append("</td>");
+					sb.append("<td>");					
+						sb.append("<img src='");
+						sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(gma.getGmaFotoNombre(),gma.getGmaFoto()).replace('\\', '/'));
+						sb.append("' height='42' width='42'>");
+					sb.append("</td>");
+				sb.append("</tr>");
+			}
+						
 			sb.append("<tr>");
 				sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
 				sb.append("<td>");sb.append(gma.getCatPais());sb.append("</td>");
@@ -911,17 +789,6 @@ public class EspejoServiceImpl implements EspejoService{
 				sb.append("<td>");sb.append(gma.getCatCiudad());sb.append("</td>");
 			sb.append("</tr>");
 	
-			if(gma.getGmaFoto()!=null)
-			{
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Foto: ");sb.append("</td>");
-					sb.append("<td>");					
-						sb.append("<img src='");
-						sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(gma.getGmaFotoNombre(),gma.getGmaFoto()).replace('\\', '/'));
-						sb.append("' height='42' width='42'>");
-					sb.append("</td>");
-				sb.append("</tr>");
-			}
 	
 			sb.append("<tr>");
 				sb.append("<td>");sb.append("Nombres: ");sb.append("</td>");
@@ -940,7 +807,15 @@ public class EspejoServiceImpl implements EspejoService{
 					sb.append("<td>");sb.append(gma.getGmaFechaNacimiento().toString().substring(0, 10));sb.append("</td>");
 				sb.append("</tr>");
 			}
-			
+
+			if(gma.getGmaFechaFallecimiento()!=null)
+			{
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Fecha de Fallecimiento: ");sb.append("</td>");
+					sb.append("<td>");sb.append(gma.getGmaFechaFallecimiento().toString().substring(0, 10));sb.append("</td>");
+				sb.append("</tr>");
+			}
+						
 			sb.append("<tr>");
 				sb.append("<td>");sb.append("Perfil Bliográfico: ");sb.append("</td>");
 				sb.append("<td style='text-align: justify;'>");sb.append(gma.getGmaPerfilBiografico());sb.append("</td>");
@@ -1161,6 +1036,18 @@ public class EspejoServiceImpl implements EspejoService{
 
 			sb.append("<table>");
 			
+			if(mci.getMciFoto()!=null)
+			{
+				sb.append("<tr>");
+					sb.append("<td>");sb.append("Foto: ");sb.append("</td>");
+					sb.append("<td>");					
+						sb.append("<img src='");
+						sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(mci.getMciFotoNombre(),mci.getMciFoto()).replace('\\', '/'));
+						sb.append("' height='42' width='42'>");
+					sb.append("</td>");
+				sb.append("</tr>");
+			}
+						
 			sb.append("<tr>");
 				sb.append("<td>");sb.append("Pais: ");sb.append("</td>");
 				sb.append("<td>");sb.append(mci.getCatPais());sb.append("</td>");
@@ -1176,17 +1063,6 @@ public class EspejoServiceImpl implements EspejoService{
 				sb.append("<td>");sb.append(mci.getCatCiudad());sb.append("</td>");
 			sb.append("</tr>");
 	
-			if(mci.getMciFoto()!=null)
-			{
-				sb.append("<tr>");
-					sb.append("<td>");sb.append("Foto: ");sb.append("</td>");
-					sb.append("<td>");					
-						sb.append("<img src='");
-						sb.append("/RedXXIWeb"+ApplicationUtil.getPathFile(mci.getMciFotoNombre(),mci.getMciFoto()).replace('\\', '/'));
-						sb.append("' height='42' width='42'>");
-					sb.append("</td>");
-				sb.append("</tr>");
-			}
 	
 			sb.append("<tr>");
 				sb.append("<td>");sb.append("Nombres: ");sb.append("</td>");
