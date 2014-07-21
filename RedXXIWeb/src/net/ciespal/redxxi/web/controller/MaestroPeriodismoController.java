@@ -1,5 +1,8 @@
 package net.ciespal.redxxi.web.controller;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -69,6 +72,8 @@ public class MaestroPeriodismoController extends SelectItemController {
 			maestroPeriodismoDataManager.getGranMaestroDTO().setGmaPais(Integer.valueOf(getPais().toString()));
 			maestroPeriodismoDataManager.getGranMaestroDTO().setGmaProvincia(Integer.valueOf(getProvincia().toString()));
 			maestroPeriodismoDataManager.getGranMaestroDTO().setGmaCiudad(Integer.valueOf(getCiudad().toString()));
+			maestroPeriodismoDataManager.getGranMaestroDTO().setGmaFechaNacimiento(new Timestamp(maestroPeriodismoDataManager.getFechaNacimiento().getTime()));
+			maestroPeriodismoDataManager.getGranMaestroDTO().setGmaFechaFallecimiento(new Timestamp(maestroPeriodismoDataManager.getFechaFallecimiento().getTime()));
 			espejoService.createOrUpdateMaestroPeriodismo(maestroPeriodismoDataManager.getGranMaestroDTO());
 			read();
 			cancel();
@@ -87,6 +92,10 @@ public class MaestroPeriodismoController extends SelectItemController {
 	public void edit(GranMaestroDTO maestro)
 	{
 		maestroPeriodismoDataManager.setGranMaestroDTO(maestro);
+		if(maestro.getGmaFechaNacimiento()!=null)
+			maestroPeriodismoDataManager.setFechaNacimiento(new Date(maestro.getGmaFechaNacimiento().getTime()));
+		if(maestro.getGmaFechaFallecimiento()!=null)
+			maestroPeriodismoDataManager.setFechaFallecimiento(new Date(maestro.getGmaFechaFallecimiento().getTime()));
 		if(maestro.getGmaFoto()!=null)
 			maestroPeriodismoDataManager.getGranMaestroDTO().setGmaFotoPath(JsfUtil.saveToDiskUpdload(maestro.getGmaFoto(), maestro.getGmaFotoNombre()));
 	}
