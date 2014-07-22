@@ -1,6 +1,7 @@
 package net.ciespal.redxxi.web.controller.home;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -11,8 +12,15 @@ import net.ciespal.redxxi.web.datamanager.home.RegistroOpcionDataManager;
 
 @ViewScoped
 @ManagedBean (name = "registroOpcionController")
-public class RegistroOpcionController {
+public class RegistroOpcionController implements Serializable{
 
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	
 	@ManagedProperty(value="#{registroOpcionDataManager}")
 	private RegistroOpcionDataManager registroOpcionDataManager;
