@@ -35,6 +35,15 @@ public class UsuarioDTO implements Serializable {
 
 	@Column(name="usu_tipo")
 	private Integer usuTipo;
+
+	@Column(name="usu_pais")
+	private Integer usuPais;
+
+	@Column(name="usu_provincia")
+	private Integer usuProvincia;
+
+	@Column(name="usu_ciudad")
+	private Integer usuCiudad;
 	
 	//bi-directional many-to-one association to EmpresaDTO
 	@ManyToOne
@@ -90,6 +99,30 @@ public class UsuarioDTO implements Serializable {
 
 	public Integer getUsuTipo() {
 		return usuTipo;
+	}
+
+	public Integer getUsuPais() {
+		return usuPais;
+	}
+
+	public void setUsuPais(Integer usuPais) {
+		this.usuPais = usuPais;
+	}
+
+	public Integer getUsuProvincia() {
+		return usuProvincia;
+	}
+
+	public void setUsuProvincia(Integer usuProvincia) {
+		this.usuProvincia = usuProvincia;
+	}
+
+	public Integer getUsuCiudad() {
+		return usuCiudad;
+	}
+
+	public void setUsuCiudad(Integer usuCiudad) {
+		this.usuCiudad = usuCiudad;
 	}
 
 	public void setUsuTipo(Integer usuTipo) {
