@@ -59,47 +59,47 @@
 			<h:panelGrid columns="2" id="datos">
 					
 				<h:outputText value="#{i18n['label.pais']}:&#160;" />
-				<p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{registroDefensorController.pais}">
+				<p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{registroSuscriptorController.pais}">
 					<f:selectItem itemLabel="--Seleccione--"/>
-					<f:selectItems value="#{registroDefensorController.catalogoPais}"/>
-					<p:ajax event="change" listener="#{registroDefensorController.obtenerProvinciaChange}" process="@this" update="somProvinvia"/>						
+					<f:selectItems value="#{registroSuscriptorController.catalogoPais}"/>
+					<p:ajax event="change" listener="#{registroSuscriptorController.obtenerProvinciaChange}" process="@this" update="somProvinvia"/>						
 				</p:selectOneMenu>
 	
 				<h:outputText value="#{i18n['label.provincia']}:&#160;" />
-				<p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{registroDefensorController.provincia}">
+				<p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{registroSuscriptorController.provincia}">
 					<f:selectItem itemLabel="--Seleccione--"/>
-					<f:selectItems value="#{registroDefensorController.catalogoProvincia}"/>
-					<p:ajax event="change" listener="#{registroDefensorController.obtenerCiudadChange}" process="@this" update="somCiudad"/>
+					<f:selectItems value="#{registroSuscriptorController.catalogoProvincia}"/>
+					<p:ajax event="change" listener="#{registroSuscriptorController.obtenerCiudadChange}" process="@this" update="somCiudad"/>
 				</p:selectOneMenu>
 	
 				<h:outputText value="#{i18n['label.ciudad']}:&#160;" />
-				<p:selectOneMenu id="somCiudad" value="#{registroDefensorController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}">
+				<p:selectOneMenu id="somCiudad" value="#{registroSuscriptorController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}">
 					<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
-					<f:selectItems value="#{registroDefensorController.catalogoCiudad}"/>
+					<f:selectItems value="#{registroSuscriptorController.catalogoCiudad}"/>
 				</p:selectOneMenu>
 						
 				<h:outputText value="#{i18n['label.nombres']}:&#160;" styleClass="descripcionBlack3"/>
-				<p:inputText required="true" value="#{registroDefensorDataManager.user.usuNombres}"/>
+				<p:inputText required="true" value="#{registroSuscriptorDataManager.user.usuNombres}"/>
 				
 				<h:outputText value="#{i18n['label.apellidos']}:&#160;" styleClass="descripcionBlack3"/>
-				<p:inputText required="true" value="#{registroDefensorDataManager.user.usuApellidos}"/>
+				<p:inputText required="true" value="#{registroSuscriptorDataManager.user.usuApellidos}"/>
 							
 				<h:outputText value="#{i18n['label.correo.electronico']}:&#160;" styleClass="descripcionBlack3"/>
-				<p:inputText required="true" value="#{registroDefensorDataManager.user.usuLogin}">
+				<p:inputText required="true" value="#{registroSuscriptorDataManager.user.usuLogin}">
 					<f:validateLength minimum="3"/>
 					<f:validator validatorId="com.corvustec.web.validator.EmailValidator"/>
-					<p:ajax process="@this" listener="#{registroDefensorController.verificarMail}" event="blur"/>
+					<p:ajax process="@this" listener="#{registroSuscriptorController.verificarMail}" event="blur"/>
 				</p:inputText>
 				
 				<h:outputText value="#{i18n['label.password']}:&#160;" styleClass="descripcionBlack3"/>
-				<p:password value="#{registroDefensorDataManager.user.usuClave}" feedback="true" match="pwdConfirm" required="#{userDataManager.required}" weakLabel="Débil" goodLabel="Buena" strongLabel="Fuerte" promptLabel="Por favor ingrese una contraseña" validatorMessage="Las contraseñas no coinciden"/>
+				<p:password value="#{registroSuscriptorDataManager.user.usuClave}" feedback="true" match="pwdConfirm" required="#{userDataManager.required}" weakLabel="Débil" goodLabel="Buena" strongLabel="Fuerte" promptLabel="Por favor ingrese una contraseña" validatorMessage="Las contraseñas no coinciden"/>
 				
 				<h:outputText value="#{i18n['label.password.confirm']}:&#160;" styleClass="descripcionBlack3"/>
-				<p:password id="pwdConfirm" value="#{registroDefensorDataManager.user.usuClave}" required="#{userDataManager.required}" feedback="true" weakLabel="Débil" goodLabel="Buena" strongLabel="Fuerte" promptLabel="Por favor ingrese una contraseña"/>
+				<p:password id="pwdConfirm" value="#{registroSuscriptorDataManager.user.usuClave}" required="#{userDataManager.required}" feedback="true" weakLabel="Débil" goodLabel="Buena" strongLabel="Fuerte" promptLabel="Por favor ingrese una contraseña"/>
 	
 				<f:facet name="footer">
 				<h:panelGroup style="display:block; text-align:center">
-	               <p:commandButton value="#{i18n['label.registro']}" actionListener="#{registroDefensorController.registrar}" process="datos"/>
+	               <p:commandButton value="#{i18n['label.registro']}" actionListener="#{registroSuscriptorController.registrar}" process="datos"/>
 	            </h:panelGroup>
 	            </f:facet>
 			</h:panelGrid>
