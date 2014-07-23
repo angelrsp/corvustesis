@@ -14,6 +14,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.security.MenuDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.MenuVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.util.dto.CredencialesDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.vo.AccesoVO;
 import net.ciespal.redxxi.ejb.persistence.vo.UsuarioVO;
@@ -84,6 +85,9 @@ public interface AdministracionService {
 
 	List<ComponenteMenuVieDTO> componenteMenuVieRead(
 			ComponenteMenuVieDTO componenteMenuVieDTO, AccesoVieDTO accesoVieDTO)
+			throws CorvustecException;
+
+	List<UsuarioVieDTO> readAllUserVie(UsuarioVieDTO user)
 			throws CorvustecException;
 
 }

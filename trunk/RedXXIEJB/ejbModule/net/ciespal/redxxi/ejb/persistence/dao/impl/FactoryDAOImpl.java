@@ -55,6 +55,7 @@ import net.ciespal.redxxi.ejb.persistence.dao.RedDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.UniversidadVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.UsuarioDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.UsuarioPerfilDAO;
+import net.ciespal.redxxi.ejb.persistence.dao.UsuarioVieDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.VeeduriaDAO;
 import net.ciespal.redxxi.ejb.persistence.dao.VeeduriaVieDAO;
 
@@ -75,6 +76,7 @@ public class FactoryDAOImpl implements FactoryDAO{
 	private AccesoDAO accesoDAO;
 	private AccesoVieDAO accesoVieDAO;
 	private UsuarioPerfilDAO usuarioPerfilDAO;
+	private UsuarioVieDAO usuarioVieDAO;
 	
 	private CatalogoDAO catalogoDAO;
 	private CentroDAO centroDAO;
@@ -537,6 +539,14 @@ public class FactoryDAOImpl implements FactoryDAO{
 			premioCiespalVieDAO = new PremioCiespalVieDAOImpl(entityManager);
 		}
 		return premioCiespalVieDAO;
+	}
+
+	@Override
+	public UsuarioVieDAO getUsuarioVieDAOImpl() {
+		if (usuarioVieDAO == null) {
+			usuarioVieDAO = new UsuarioVieDAOImpl(entityManager);
+		}
+		return usuarioVieDAO;
 	}
 
 }

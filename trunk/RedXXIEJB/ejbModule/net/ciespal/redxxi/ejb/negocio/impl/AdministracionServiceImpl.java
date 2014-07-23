@@ -18,6 +18,7 @@ import net.ciespal.redxxi.ejb.persistence.entities.security.MenuVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.PerfilDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioPerfilDTO;
+import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioVieDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.util.dto.CredencialesDTO;
 import net.ciespal.redxxi.ejb.persistence.entities.vo.AccesoVO;
 import net.ciespal.redxxi.ejb.persistence.vo.UsuarioVO;
@@ -192,6 +193,19 @@ public class AdministracionServiceImpl implements AdministracionService{
 		{
 			logger.info("Error al createOrupdateCatalogo" +e.toString());
 			throw new CorvustecException("Error al createOrupdateCatalogo");
+		}		
+	}
+	
+	@Override
+	public List<UsuarioVieDTO> readAllUserVie(UsuarioVieDTO user) throws CorvustecException
+	{
+		logger.info("readAllUserVie");
+		try{
+			return factoryDAO.getUsuarioVieDAOImpl().getByAnd(user);
+		}
+		catch(Exception e){
+			logger.info("Error al readAllUserVie" +e.toString());
+			throw new CorvustecException("Error al readAllUserVie");
 		}		
 	}
 
