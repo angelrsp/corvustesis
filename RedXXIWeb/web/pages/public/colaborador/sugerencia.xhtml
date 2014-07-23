@@ -30,7 +30,7 @@
 				
 			<tr>
 				<td><h:outputText value="#{i18n['label.sugerencia']}:&#160;" /></td>
-				<td><p:inputTextarea id="txtComentario" autoResize="false" value="#{opinionDataManager.opinionDTO.opiComentario}" style="width:500px;heigth:350px;" required="true"/>
+				<td><p:inputTextarea id="txtComentario" autoResize="false" value="#{sugerenciaDataManager.comentario.comDescripcion}" style="width:500px;heigth:350px;" required="true"/>
 				<p:tooltip id="toolTipFocus" for="txtComentario" showEvent="focus" hideEvent="blur">
 					<h:panelGroup>
 				        <h:outputText value="No se publicará comentario contrario" /><br />
@@ -41,7 +41,7 @@
 			</tr>
 			
 			<tr align="center">
-				<td colspan="2"><p:commandButton value="#{i18n['boton.enviar']}" actionListener="#{opinionController.save}" update="grpDatos"/></td>
+				<td colspan="2"><p:commandButton value="#{i18n['boton.enviar']}" actionListener="#{sugerenciaController.save}" update="grpDatos"/></td>
 			</tr>
 			
 		</table>
