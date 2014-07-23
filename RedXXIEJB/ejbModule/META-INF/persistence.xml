@@ -63,6 +63,7 @@
 	<class>net.ciespal.redxxi.ejb.persistence.entities.security.MenuVieDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.security.ComponenteMenuVieDTO</class>
 	<class>net.ciespal.redxxi.ejb.persistence.entities.espejo.PremioCiespalVieDTO</class>
+	<class>net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioVieDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>		

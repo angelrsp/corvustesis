@@ -58,6 +58,7 @@ public interface FactoryDAO {
 	MenuVieDAO getMenuVieDAOImpl();
 	ComponenteMenuVieDAO getComponenteMenuVieDAOImpl();
 	PremioCiespalVieDAO getPremioCiespalVieDAOImpl();
+	UsuarioVieDAO getUsuarioVieDAOImpl();
 	
 	
 
