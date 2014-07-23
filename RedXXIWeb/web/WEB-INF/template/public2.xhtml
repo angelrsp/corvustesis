@@ -102,7 +102,7 @@
 				<tr>
 					<td><h:outputLink value="#{request.contextPath}/public/home/historialNoticia.xhtml" styleClass="linkClass3"><h:outputText value="Archivo Noticias"/></h:outputLink></td>
 					<td><h:commandLink value="Equipo Técnico" styleClass="linkClass3" actionListener="#{noticiaPublicController.readArchivo}"/></td>
-					<td><h:commandLink value="Expertos y Colaboradores" styleClass="linkClass3" actionListener="#{noticiaPublicController.readArchivo}"/></td>
+					<td><h:outputLink value="#{request.contextPath}/public/home/expertosColaboradores.xhtml" styleClass="linkClass3"><h:outputText value="Expertos y Colaboradores"/></h:outputLink></td>
 					<td><h:commandLink id="fade" value="Datos del Sitio" styleClass="linkClass3" actionListener="#{noticiaPublicController.readArchivo}"/>
 						<p:tooltip id="toolTipFade" for="fade">
 							<h:panelGroup>

@@ -15,37 +15,36 @@
 		  <li id="espejo"><a href="#{request.contextPath}/public/home/espejo.xhtml"></a></li>
 		  <li id="somos"><a href="#{request.contextPath}/public/home/quienesSomos.xhtml"></a></li>
 		  <li id="ingreso"><a href="#{request.contextPath}/ingreso.xhtml"></a></li>
-		  <li id="usuario"><a href="#{request.contextPath}login.xhtml"></a></li>
+		  <li id="usuario"><a href="#{request.contextPath}/login.xhtml"></a></li>
 		</ul>
 	</ui:define>
 
 
 	<ui:define name="center">
-
-		<p:growl autoUpdate="true"/>
 	
-		<h:panelGroup id="grpDatos">
-	
-		<table>
-				
-			<tr>
-				<td><h:outputText value="#{i18n['label.sugerencia']}:&#160;" /></td>
-				<td><p:inputTextarea id="txtComentario" autoResize="false" value="#{opinionDataManager.opinionDTO.opiComentario}" style="width:500px;heigth:350px;" required="true"/>
-				<p:tooltip id="toolTipFocus" for="txtComentario" showEvent="focus" hideEvent="blur">
-					<h:panelGroup>
-				        <h:outputText value="No se publicará comentario contrario" /><br />
-				        <h:outputText value="A la ética de esta plataforma" /><br />
-				    </h:panelGroup>
-				</p:tooltip>
-				</td>
-			</tr>
-			
+	<table width="80%">
 			<tr align="center">
-				<td colspan="2"><p:commandButton value="#{i18n['boton.enviar']}" actionListener="#{opinionController.save}" update="grpDatos"/></td>
+				<td class="tituloSomos">Expertos y Colaboradores</td>
 			</tr>
-			
-		</table>
+		<tr>
+			<td align="center">
+				<h:dataTable value="#{expertosColaboradoresController.expertosColaboradoresDataManager.userVieList}" var="usu">
+								
+					<h:column>
+						<f:facet name="header">Nombres</f:facet>
+		    			<h:outputText value="#{usu.usuNombres}" />
+		    		</h:column>
+		    		
+		    		<h:column>
+		    			<f:facet name="header">Apellidos</f:facet>
+		    			<h:outputText value="#{usu.usuApellidos}" />
+		    		</h:column>				
+		    						
+				</h:dataTable>
+			</td>
+		</tr>
+	</table>
+	
+	</ui:define>
 
-		</h:panelGroup>		
-	</ui:define>      
-</ui:composition> 
+</ui:composition>	

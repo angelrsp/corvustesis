@@ -108,7 +108,7 @@
 				<tr>
 					<td><h:outputLink value="#{request.contextPath}/public/home/historialNoticia.xhtml" styleClass="linkClass3"><h:outputText value="Archivo Noticias"/></h:outputLink></td>
 					<td><h:commandLink value="Equipo Técnico" styleClass="linkClass3" actionListener="#{noticiaPublicController.readArchivo}"/></td>
-					<td><h:commandLink value="Expertos y Colaboradores" styleClass="linkClass3" actionListener="#{noticiaPublicController.readArchivo}"/></td>
+					<td><h:outputLink value="#{request.contextPath}/public/home/expertosColaboradores.xhtml" styleClass="linkClass3"><h:outputText value="Expertos y Colaboradores"/></h:outputLink></td>
 					<td><h:commandLink id="fade" value="Datos del Sitio" styleClass="linkClass3"/>
 						<p:tooltip id="toolTipFade" for="fade">
 							<h:panelGroup>
@@ -117,7 +117,7 @@
 						        <h:outputText value="Desarrollador de Software: Fernando Pulupa Pasquel from Corvustec" /><br />
 						        <h:outputText value="Av. D. Almagro N32-133 y A. Marín, Quito, Ecuador. Tel. 2548011/2567966/2506132." /><br />
 					    	</h:panelGroup>
-						</p:tooltip>
+						</p:tooltip>					
 					</td>
 					
 				</tr>	
