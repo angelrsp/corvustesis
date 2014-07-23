@@ -1,6 +1,7 @@
 package net.ciespal.redxxi.web.controller.home;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -8,19 +9,28 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import com.corvustec.commons.util.CorvustecException;
-
 import net.ciespal.redxxi.ejb.negocio.AteneaService;
 import net.ciespal.redxxi.ejb.persistence.entities.NoticiaDTO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.datamanager.home.HistorialNoticiaDataManager;
 import net.ciespal.redxxi.web.datamanager.home.NoticiaVisorDataManager;
 
+import com.corvustec.commons.util.CorvustecException;
+
 @ViewScoped
 @ManagedBean(name = "historialNoticiaController")
-public class HistorialNoticiaController {
+public class HistorialNoticiaController implements Serializable{
 
 	
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
+
 	@ManagedProperty(value="#{historialNoticiaDataManager}")
 	private HistorialNoticiaDataManager historialNoticiaDataManager;
 

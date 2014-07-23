@@ -42,6 +42,9 @@ public class RegistroSuscriptorController extends SelectItemController implement
 			perfil=new PerfilDTO();
 			perfil.setPerCodigo(-2);
 			registroSuscriptorDataManager.getUser().setUsuTipo(2);
+			registroSuscriptorDataManager.getUser().setUsuPais(Integer.valueOf(getPais().toString()));
+			registroSuscriptorDataManager.getUser().setUsuProvincia(Integer.valueOf(getProvincia().toString()));
+			registroSuscriptorDataManager.getUser().setUsuCiudad(Integer.valueOf(getCiudad().toString()));
 			userVo.setPerfil(perfil);
 			userVo.setUser(registroSuscriptorDataManager.getUser());
 			administracionService.createOrUpdateUsuario(userVo);

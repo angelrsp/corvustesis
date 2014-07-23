@@ -56,6 +56,9 @@ public class RegistroColaboradorController extends SelectItemController implemen
 			perfil=new PerfilDTO();
 			perfil.setPerCodigo(-3);
 			registroColaboradorDataManager.getUser().setUsuTipo(3);
+			registroColaboradorDataManager.getUser().setUsuPais(Integer.valueOf(getPais().toString()));
+			registroColaboradorDataManager.getUser().setUsuProvincia(Integer.valueOf(getProvincia().toString()));
+			registroColaboradorDataManager.getUser().setUsuCiudad(Integer.valueOf(getCiudad().toString()));
 			userVo.setPerfil(perfil);
 			userVo.setUser(registroColaboradorDataManager.getUser());
 			administracionService.createOrUpdateUsuario(userVo);
