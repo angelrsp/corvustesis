@@ -1,5 +1,6 @@
 package net.ciespal.redxxi.web.controller.home;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.ejb.EJB;
@@ -54,13 +55,16 @@ public class RegistroColaboradorController extends SelectItemController implemen
 			userVo=new UsuarioVO();
 			perfil=new PerfilDTO();
 			perfil.setPerCodigo(-3);
-			registroColaboradorDataManager.getUser().setUsuTipo(2);
+			registroColaboradorDataManager.getUser().setUsuTipo(3);
 			userVo.setPerfil(perfil);
 			userVo.setUser(registroColaboradorDataManager.getUser());
 			administracionService.createOrUpdateUsuario(userVo);
 			registroColaboradorDataManager.setUser(new UsuarioDTO());
+			JsfUtil.redirect(JsfUtil.getContextPath()+"/pages/public/colaborador/sugerencia.xhtml");
 			JsfUtil.addInfoMessage("Registrado Exitosamente");
 		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		} catch (IOException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}		
 	}
