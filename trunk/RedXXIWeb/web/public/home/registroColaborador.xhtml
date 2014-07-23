@@ -1,9 +1,119 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" 
+      template="/WEB-INF/template/public2.xhtml">
 
-	<ui:composition template="">
-	</ui:composition>
-</html>
+
+	<ui:define name="menu">
+		<ul id="navlist">
+		  <li id="home2"><a href="#{request.contextPath}/index.xhtml"></a></li>
+		  <li id="atenea"><a href="#{request.contextPath}/public/home/atenea.xhtml"></a></li>
+		  <li id="argos"><a href="#{request.contextPath}/public/home/argos.xhtml"></a></li>
+		  <li id="espejo"><a href="#{request.contextPath}/public/home/espejo.xhtml"></a></li>
+		  <li id="somos"><a href="#{request.contextPath}/public/home/quienesSomos.xhtml"></a></li>
+		  <li id="ingreso"><a href="#{request.contextPath}/ingreso.xhtml"></a></li>
+		  <li id="usuario"><a href="#{request.contextPath}/login.xhtml"></a></li>
+		</ul>
+	</ui:define>
+
+
+	<ui:define name="center">
+
+
+	<p:growl id="growl" autoUpdate="true"/>
+	
+	<table>
+	
+	<tr>
+		<td>
+			<h:form id="formLogin">
+			
+				<p:growl id="growl"/>
+			
+				<table>
+				
+					<tr>	
+						<td><h:outputText value="#{i18n['label.usuario']}:&#160;" styleClass="descripcionLogin"/></td>
+						<td><p:inputText id="txtUser" value="#{loginDataManager.credencialesDTO.user}" required="true"/></td>
+					</tr>
+			
+					<tr>	
+						<td><h:outputText value="#{i18n['label.password']}:&#160;" styleClass="descripcionLogin"/></td>
+						<td><p:password id="pwdPassword" value="#{loginDataManager.credencialesDTO.password}" required="true"/> </td>
+					</tr>
+		
+					<tr align="center">
+						<td colspan="2"><p:commandButton value="#{i18n['boton.entrar']}" actionListener="#{loginController.intro}" process="formLogin"/></td>			
+					</tr>
+					
+				</table>
+		
+			</h:form>
+		
+		</td>
+	
+		<td>
+			<h:panelGrid columns="2" id="datos">
+					
+				<h:outputText value="#{i18n['label.pais']}:&#160;" />
+				<p:selectOneMenu required="true" requiredMessage="#{i18n['label.pais']}&#160;#{i18n['label.requerido']}" value="#{registroColaboradorController.pais}">
+					<f:selectItem itemLabel="--Seleccione--"/>
+					<f:selectItems value="#{registroColaboradorController.catalogoPais}"/>
+					<p:ajax event="change" listener="#{registroColaboradorController.obtenerProvinciaChange}" process="@this" update="somProvinvia"/>						
+				</p:selectOneMenu>
+	
+				<h:outputText value="#{i18n['label.provincia']}:&#160;" />
+				<p:selectOneMenu id="somProvinvia" required="true" requiredMessage="#{i18n['label.provincia']}&#160;#{i18n['label.requerido']}" value="#{registroColaboradorController.provincia}">
+					<f:selectItem itemLabel="--Seleccione--"/>
+					<f:selectItems value="#{registroColaboradorController.catalogoProvincia}"/>
+					<p:ajax event="change" listener="#{registroColaboradorController.obtenerCiudadChange}" process="@this" update="somCiudad"/>
+				</p:selectOneMenu>
+	
+				<h:outputText value="#{i18n['label.ciudad']}:&#160;" />
+				<p:selectOneMenu id="somCiudad" value="#{registroColaboradorController.ciudad}" required="true" requiredMessage="#{i18n['label.ciudad']}&#160;#{i18n['label.requerido']}">
+					<f:selectItem itemLabel="--Seleccione--" itemValue=""/>
+					<f:selectItems value="#{registroColaboradorController.catalogoCiudad}"/>
+				</p:selectOneMenu>
+						
+				<h:outputText value="#{i18n['label.nombres']}:&#160;" styleClass="descripcionBlack3"/>
+				<p:inputText required="true" value="#{registroColaboradorDataManager.user.usuNombres}"/>
+				
+				<h:outputText value="#{i18n['label.apellidos']}:&#160;" styleClass="descripcionBlack3"/>
+				<p:inputText required="true" value="#{registroColaboradorDataManager.user.usuApellidos}"/>
+							
+				<h:outputText value="#{i18n['label.correo.electronico']}:&#160;" styleClass="descripcionBlack3"/>
+				<p:inputText required="true" value="#{registroColaboradorDataManager.user.usuLogin}">
+					<f:validateLength minimum="3"/>
+					<f:validator validatorId="com.corvustec.web.validator.EmailValidator"/>
+					<p:ajax process="@this" listener="#{registroColaboradorController.verificarMail}" event="blur"/>
+				</p:inputText>
+				
+				<h:outputText value="#{i18n['label.password']}:&#160;" styleClass="descripcionBlack3"/>
+				<p:password value="#{registroColaboradorDataManager.user.usuClave}" feedback="true" match="pwdConfirm" required="#{userDataManager.required}" weakLabel="Débil" goodLabel="Buena" strongLabel="Fuerte" promptLabel="Por favor ingrese una contraseña" validatorMessage="Las contraseñas no coinciden"/>
+				
+				<h:outputText value="#{i18n['label.password.confirm']}:&#160;" styleClass="descripcionBlack3"/>
+				<p:password id="pwdConfirm" value="#{registroColaboradorDataManager.user.usuClave}" required="#{userDataManager.required}" feedback="true" weakLabel="Débil" goodLabel="Buena" strongLabel="Fuerte" promptLabel="Por favor ingrese una contraseña"/>
+	
+				<f:facet name="footer">
+				<h:panelGroup style="display:block; text-align:center">
+	               <p:commandButton value="#{i18n['label.registro']}" actionListener="#{registroColaboradorController.registrar}" process="datos"/>
+	            </h:panelGroup>
+	            </f:facet>
+			</h:panelGrid>
+			
+		</td>
+	
+	</tr>
+	
+	</table>
+	
+	
+		
+			
+	</ui:define>
+
+      
+</ui:composition>
