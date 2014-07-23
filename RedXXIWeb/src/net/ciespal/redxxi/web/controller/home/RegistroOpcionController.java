@@ -45,7 +45,9 @@ public class RegistroOpcionController implements Serializable{
 			if(registroOpcionDataManager.getOpcion()==0)
 				JsfUtil.redirect(JsfUtil.getContextPath()+"/public/home/registroDefensor.xhtml");
 			else if(registroOpcionDataManager.getOpcion()==1)
-				JsfUtil.redirect(JsfUtil.getContextPath()+"/");
+				JsfUtil.redirect(JsfUtil.getContextPath()+"/public/home/registroColaborador.xhtml");
+			else if(registroOpcionDataManager.getOpcion()==2)
+				JsfUtil.redirect(JsfUtil.getContextPath()+"/public/home/registroSuscriptor.xhtml");
 		} catch (IOException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}	
