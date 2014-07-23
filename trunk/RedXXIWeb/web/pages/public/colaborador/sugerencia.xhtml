@@ -1,9 +1,51 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" 
+      template="/WEB-INF/template/public2.xhtml">
 
-	<ui:composition template="">
-	</ui:composition>
-</html>
+
+	<ui:define name="menu">
+		<ul id="navlist">
+		  <li id="home2"><a href="#{request.contextPath}/index.xhtml"></a></li>
+		  <li id="atenea"><a href="#{request.contextPath}/public/home/atenea.xhtml"></a></li>
+		  <li id="argos"><a href="#{request.contextPath}/public/home/argos.xhtml"></a></li>
+		  <li id="espejo"><a href="#{request.contextPath}/espejo.xhtml"></a></li>
+		  <li id="somos"><a href="#{request.contextPath}/quienesSomos.xhtml"></a></li>
+		  <li id="ingreso"><a href="#{request.contextPath}/ingreso.xhtml"></a></li>
+		  <li id="usuario"><a href="#{request.contextPath}/pages/home.xhtml"></a></li>
+		</ul>
+	</ui:define>
+
+
+	<ui:define name="center">
+
+		<p:growl autoUpdate="true"/>
+	
+		<h:panelGroup id="grpDatos">
+	
+		<table>
+				
+			<tr>
+				<td><h:outputText value="#{i18n['label.sugerencia']}:&#160;" /></td>
+				<td><p:inputTextarea id="txtComentario" autoResize="false" value="#{opinionDataManager.opinionDTO.opiComentario}" style="width:500px;heigth:350px;" required="true"/>
+				<p:tooltip id="toolTipFocus" for="txtComentario" showEvent="focus" hideEvent="blur">
+					<h:panelGroup>
+				        <h:outputText value="No se publicará comentario contrario" /><br />
+				        <h:outputText value="A la ética de esta plataforma" /><br />
+				    </h:panelGroup>
+				</p:tooltip>
+				</td>
+			</tr>
+			
+			<tr align="center">
+				<td colspan="2"><p:commandButton value="#{i18n['boton.enviar']}" actionListener="#{opinionController.save}" update="grpDatos"/></td>
+			</tr>
+			
+		</table>
+
+		</h:panelGroup>		
+	</ui:define>      
+</ui:composition> 
