@@ -54,6 +54,11 @@ public class UsuarioDTO implements Serializable {
 	@OneToMany(mappedBy="segUsuario",fetch=FetchType.EAGER)
 	private List<UsuarioPerfilDTO> segUsuarioPerfils;
 
+	//bi-directional many-to-one association to ComentarioDTO
+	@OneToMany(mappedBy="segUsuario")
+	private List<ComentarioDTO> segComentarios;
+
+	
 	public UsuarioDTO() {
 	}
 
@@ -143,6 +148,14 @@ public class UsuarioDTO implements Serializable {
 
 	public void setSegUsuarioPerfils(List<UsuarioPerfilDTO> segUsuarioPerfils) {
 		this.segUsuarioPerfils = segUsuarioPerfils;
+	}
+
+	public List<ComentarioDTO> getSegComentarios() {
+		return segComentarios;
+	}
+
+	public void setSegComentarios(List<ComentarioDTO> segComentarios) {
+		this.segComentarios = segComentarios;
 	}
 
 	public UsuarioPerfilDTO addSegUsuarioPerfil(UsuarioPerfilDTO segUsuarioPerfil) {
