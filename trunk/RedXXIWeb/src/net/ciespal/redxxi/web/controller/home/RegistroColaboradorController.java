@@ -13,25 +13,38 @@ import net.ciespal.redxxi.ejb.persistence.entities.security.UsuarioDTO;
 import net.ciespal.redxxi.ejb.persistence.vo.UsuarioVO;
 import net.ciespal.redxxi.web.commons.util.JsfUtil;
 import net.ciespal.redxxi.web.controller.SelectItemController;
-import net.ciespal.redxxi.web.datamanager.home.RegistroSuscriptorDataManager;
+import net.ciespal.redxxi.web.datamanager.home.RegistroColaboradorDataManager;
 
 import com.corvustec.commons.util.CorvustecException;
 
 @ViewScoped
-@ManagedBean (name = "registroSuscriptorController")
-public class RegistroSuscriptorController extends SelectItemController implements Serializable{
+@ManagedBean (name = "registroColaboradorController")
+public class RegistroColaboradorController extends SelectItemController implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
-	@ManagedProperty(value="#{registroSuscriptorDataManager}")
-	private RegistroSuscriptorDataManager registroSuscriptorDataManager;
+
+	@ManagedProperty(value="#{registroColaboradorDataManager}")
+	private RegistroColaboradorDataManager registroColaboradorDataManager;
 
 	@EJB
 	private AdministracionService administracionService;
+	
+	public RegistroColaboradorController() {
+	
+	}
+
+	public RegistroColaboradorDataManager getRegistroColaboradorDataManager() {
+		return registroColaboradorDataManager;
+	}
+
+	public void setRegistroColaboradorDataManager(
+			RegistroColaboradorDataManager registroColaboradorDataManager) {
+		this.registroColaboradorDataManager = registroColaboradorDataManager;
+	}
+	
 	
 	public void registrar()
 	{
@@ -40,12 +53,12 @@ public class RegistroSuscriptorController extends SelectItemController implement
 		try {
 			userVo=new UsuarioVO();
 			perfil=new PerfilDTO();
-			perfil.setPerCodigo(-2);
-			registroSuscriptorDataManager.getUser().setUsuTipo(2);
+			perfil.setPerCodigo(-3);
+			registroColaboradorDataManager.getUser().setUsuTipo(2);
 			userVo.setPerfil(perfil);
-			userVo.setUser(registroSuscriptorDataManager.getUser());
+			userVo.setUser(registroColaboradorDataManager.getUser());
 			administracionService.createOrUpdateUsuario(userVo);
-			registroSuscriptorDataManager.setUser(new UsuarioDTO());
+			registroColaboradorDataManager.setUser(new UsuarioDTO());
 			JsfUtil.addInfoMessage("Registrado Exitosamente");
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
@@ -53,16 +66,6 @@ public class RegistroSuscriptorController extends SelectItemController implement
 	}
 
 	
-	public RegistroSuscriptorDataManager getRegistroSuscriptorDataManager() {
-		return registroSuscriptorDataManager;
-	}
-
-
-	public void setRegistroSuscriptorDataManager(
-			RegistroSuscriptorDataManager registroSuscriptorDataManager) {
-		this.registroSuscriptorDataManager = registroSuscriptorDataManager;
-	}
-
 
 	public Boolean verificarMail()
 	{
@@ -70,7 +73,7 @@ public class RegistroSuscriptorController extends SelectItemController implement
 		Boolean existe = Boolean.TRUE;
 		try {
 			user=new UsuarioDTO();
-			user.setUsuLogin(registroSuscriptorDataManager.getUser().getUsuLogin());
+			user.setUsuLogin(registroColaboradorDataManager.getUser().getUsuLogin());
 			if(administracionService.readUser(user).size()>0)
 			{
 				JsfUtil.addErrorMessage("El correo ya está registrado");
@@ -100,4 +103,6 @@ public class RegistroSuscriptorController extends SelectItemController implement
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
+	
+	
 }
