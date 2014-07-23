@@ -62,6 +62,10 @@ public class LoginController {
 						def.setDefUsuario(usuario.getUsuCodigo());
 						JsfUtil.getExternalContext().getSessionMap().put("DefensorDTO", argosService.defensorRead(def).get(0));
 					}
+					else if(usuario.getSegUsuarioPerfils().get(0).getSegPerfil().getPerCodigo()==-3)
+					{
+						JsfUtil.redirect(JsfUtil.getContextPath()+"/pages/public/colaborador/sugerencia.xhtml");
+					}
 					else
 					{
 						JsfUtil.redirect(JsfUtil.getContextPath()+"/pages/home.xhtml");

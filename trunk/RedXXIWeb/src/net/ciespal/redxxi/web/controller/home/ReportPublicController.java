@@ -1,6 +1,7 @@
 package net.ciespal.redxxi.web.controller.home;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -20,9 +21,15 @@ import com.corvustec.commons.util.CorvustecException;
 
 @ViewScoped
 @ManagedBean(name = "reportPublicController")
-public class ReportPublicController {
+public class ReportPublicController implements Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+
 	@EJB
 	private AteneaService ateneaService;
 
