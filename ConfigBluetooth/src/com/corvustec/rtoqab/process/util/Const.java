@@ -40,6 +40,11 @@ public class Const {
 	
 	public static final String ANALITICA_KEY = "com.corvustec.rtoqab.path.analitica.jar";
 	
+	public static final String INTERVALO_VACIO_KEY = "com.corvustec.rtoqab.intervalo.vacio";
+	
+	public static final String PATH_NOTIFICACION_KEY = "com.corvustec.rtoqab.path.exe.notificacion";
+
+	
 	//SFTP
 	public static final String SERVIDOR_KEY = "com.corvustec.rtoqab.sftp.servidor";
 	
@@ -61,4 +66,5 @@ public class Const {
 	//Cambiar Clave
 	public static final String PASSWORD_KEY = "com.corvustec.rtoqab.config.password";
 	
+	public static final String USER_KEY = "com.corvustec.rtoqab.config.user";
 }
