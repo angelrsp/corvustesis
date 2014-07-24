@@ -6,9 +6,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JPasswordField;
+
+import com.corvustec.rtoqab.process.util.Const;
+import com.corvustec.rtoqab.process.util.ReadConfiguration;
+import com.corvustec.rtoqab.process.view.util.MessageBox;
 
 public class Login {
 
@@ -24,6 +30,7 @@ public class Login {
 			public void run() {
 				try {
 					Login window = new Login();
+					
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -77,9 +84,17 @@ public class Login {
 	
 	private void btnEntrarActionPerformed(ActionEvent arg)
 	{
-		Principal principal=new Principal();
-		principal.setVisible(true);
-		principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setVisible(false);
+		String pass=new String(passwordField.getPassword());
+		if(ReadConfiguration.getInstance().readValue(Const.USER_KEY).equals(txtUsuario.getText())&&ReadConfiguration.getInstance().readValue(Const.PASSWORD_KEY).equals(pass))
+		{
+			Principal principal=new Principal();
+			principal.setVisible(true);
+			principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
+			frame.setVisible(false);
+		}
+		else
+		{
+			MessageBox.error("Usuario o Clave no válidos");
+		}
 	}
 }

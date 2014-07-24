@@ -77,6 +77,8 @@ public class Configuracion extends JInternalFrame {
 	private final String tiempoCenso=Const.TIEMPO_CENSO_KEY;
 	private final String aplicarIntervaslo=Const.APLICAR_INTERVALO_KEY;
 	private final String aplicarAutoencender=Const.APLICAR_AUTOENCENDER_KEY;
+	private JTextField txtIntervaloArchivo;
+	private JTextField txtExeNotificacion;
 	
 	
 	
@@ -91,7 +93,7 @@ public class Configuracion extends JInternalFrame {
 		setIconifiable(true);
 		setMaximizable(true);
 		setClosable(true);
-		setBounds(100, 100, 907, 510);
+		setBounds(100, 100, 907, 527);
 		getContentPane().setLayout(null);
 		
 		JButton btnGuardar = new JButton("Guardar");
@@ -100,11 +102,11 @@ public class Configuracion extends JInternalFrame {
 				btnGuardarActionPerformed(arg0);
 			}
 		});
-		btnGuardar.setBounds(400, 447, 89, 23);
+		btnGuardar.setBounds(400, 460, 89, 23);
 		getContentPane().add(btnGuardar);
 		
 		JPanel pnlRuta = new JPanel();
-		pnlRuta.setBounds(10, 11, 479, 184);
+		pnlRuta.setBounds(10, 11, 479, 220);
 		getContentPane().add(pnlRuta);
 		pnlRuta.setLayout(null);
 		pnlRuta.setBorder(new TitledBorder(null, "Ruta Archivos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -165,9 +167,18 @@ public class Configuracion extends JInternalFrame {
 		pnlRuta.add(txtArchivoAnalitica);
 		txtArchivoAnalitica.setColumns(10);
 		
+		JLabel lblRutaEjecutableNotificacin = new JLabel("Ruta ejecutable notificaci\u00F3n:");
+		lblRutaEjecutableNotificacin.setBounds(24, 181, 201, 14);
+		pnlRuta.add(lblRutaEjecutableNotificacin);
+		
+		txtExeNotificacion = new JTextField();
+		txtExeNotificacion.setBounds(235, 178, 229, 20);
+		pnlRuta.add(txtExeNotificacion);
+		txtExeNotificacion.setColumns(10);
+		
 		JPanel pnlProceso = new JPanel();
 		pnlProceso.setBorder(new TitledBorder(null, "Proceso", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlProceso.setBounds(10, 201, 479, 215);
+		pnlProceso.setBounds(10, 231, 479, 215);
 		getContentPane().add(pnlProceso);
 		pnlProceso.setLayout(null);
 		
@@ -232,13 +243,13 @@ public class Configuracion extends JInternalFrame {
 		
 		JPanel pnlServicio = new JPanel();
 		pnlServicio.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Tiempo (Servicio)", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlServicio.setBounds(488, 11, 393, 184);
+		pnlServicio.setBounds(488, 11, 393, 220);
 		getContentPane().add(pnlServicio);
 		pnlServicio.setLayout(null);
 		
 		txtHoraInicio = new JTextField();
 		txtHoraInicio.setColumns(10);
-		txtHoraInicio.setBounds(181, 30, 202, 20);
+		txtHoraInicio.setBounds(201, 30, 182, 20);
 		pnlServicio.add(txtHoraInicio);
 		
 		JLabel lblHoraInicio = new JLabel("Hora Inicio:");
@@ -247,7 +258,7 @@ public class Configuracion extends JInternalFrame {
 		
 		txtHoraFin = new JTextField();
 		txtHoraFin.setColumns(10);
-		txtHoraFin.setBounds(181, 54, 202, 20);
+		txtHoraFin.setBounds(201, 54, 182, 20);
 		pnlServicio.add(txtHoraFin);
 		
 		JLabel lblHoraFin = new JLabel("Hora Fin:");
@@ -260,13 +271,13 @@ public class Configuracion extends JInternalFrame {
 		
 		txtTiempoComprobacion = new JTextField();
 		txtTiempoComprobacion.setColumns(10);
-		txtTiempoComprobacion.setBounds(181, 80, 202, 20);
+		txtTiempoComprobacion.setBounds(201, 80, 182, 20);
 		pnlServicio.add(txtTiempoComprobacion);
 		
 		txtTiempoCenso = new JTextField();
 		txtTiempoCenso.setText("300");
 		txtTiempoCenso.setColumns(10);
-		txtTiempoCenso.setBounds(181, 133, 202, 20);
+		txtTiempoCenso.setBounds(201, 133, 182, 20);
 		pnlServicio.add(txtTiempoCenso);
 		
 		JLabel lblCensoseg = new JLabel("Censo (6-15 seg):");
@@ -274,13 +285,22 @@ public class Configuracion extends JInternalFrame {
 		pnlServicio.add(lblCensoseg);
 		
 		chbAplicarIntervalo = new JCheckBox("Aplicar Intervalo");
-		chbAplicarIntervalo.setBounds(181, 105, 202, 23);
+		chbAplicarIntervalo.setBounds(201, 107, 192, 23);
 		pnlServicio.add(chbAplicarIntervalo);
+		
+		JLabel lblIntervaloEsperaArchivo = new JLabel("Intervalo espera archivo (seg):");
+		lblIntervaloEsperaArchivo.setBounds(10, 170, 181, 14);
+		pnlServicio.add(lblIntervaloEsperaArchivo);
+		
+		txtIntervaloArchivo = new JTextField();
+		txtIntervaloArchivo.setBounds(201, 167, 76, 20);
+		pnlServicio.add(txtIntervaloArchivo);
+		txtIntervaloArchivo.setColumns(10);
 		
 		JPanel pnlBaliza = new JPanel();
 		pnlBaliza.setLayout(null);
 		pnlBaliza.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Balizas de Referencia", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlBaliza.setBounds(488, 206, 393, 210);
+		pnlBaliza.setBounds(488, 231, 393, 215);
 		getContentPane().add(pnlBaliza);
 		
 		JLabel lblBaliza = new JLabel("Baliza (mac):");
@@ -408,6 +428,10 @@ public class Configuracion extends JInternalFrame {
 			ReadConfiguration.getInstance().replaceValue(horaFin, txtHoraFin.getText());
 			ReadConfiguration.getInstance().replaceValue(tiempoMaximoArchivo, txtMaximoArchivo.getText());
 			ReadConfiguration.getInstance().replaceValue(tiempoCenso, txtTiempoCenso.getText());
+
+			ReadConfiguration.getInstance().replaceValue(Const.INTERVALO_VACIO_KEY, txtIntervaloArchivo.getText());
+			ReadConfiguration.getInstance().replaceValue(Const.PATH_NOTIFICACION_KEY, txtExeNotificacion.getText());
+
 			
 			if(chbAplicarIntervalo.isSelected())
 				ReadConfiguration.getInstance().replaceValue(aplicarIntervaslo, String.valueOf(1));
@@ -455,6 +479,9 @@ public class Configuracion extends JInternalFrame {
 			txtMaximoArchivo.setText(ReadConfiguration.getInstance().readValue(tiempoMaximoArchivo));
 			txtTiempoCenso.setText(ReadConfiguration.getInstance().readValue(tiempoCenso));
 			txtArchivoAnalitica.setText(ReadConfiguration.getInstance().readValue(analiticaKey));
+			
+			txtIntervaloArchivo.setText(ReadConfiguration.getInstance().readValue(Const.INTERVALO_VACIO_KEY));
+			txtExeNotificacion.setText(ReadConfiguration.getInstance().readValue(Const.PATH_NOTIFICACION_KEY));
 			
 			if(Integer.valueOf(ReadConfiguration.getInstance().readValue(aplicarIntervaslo))==1)
 				chbAplicarIntervalo.setSelected(true);
