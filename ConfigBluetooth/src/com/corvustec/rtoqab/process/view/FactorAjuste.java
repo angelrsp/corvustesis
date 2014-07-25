@@ -6,8 +6,6 @@ import static ch.lambdaj.Lambda.sumFrom;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,13 +22,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -41,16 +35,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-
-
-
-
 import com.corvustec.rtoqab.process.util.ConstRead;
 import com.corvustec.rtoqab.process.util.UtilApplication;
-import com.corvustec.rtoqab.process.view.util.MessageBox;
 import com.corvustec.rtoqad.process.dto.DataDTO;
 import com.corvustec.rtoqad.process.dto.IntervaloTiempoDTO;
+import javax.swing.JLabel;
 
 public class FactorAjuste extends JInternalFrame{
 
@@ -65,12 +54,12 @@ public class FactorAjuste extends JInternalFrame{
 
 	
 	private static final long serialVersionUID = 1L;
-	private JTextField txtDispositivo;
+	private JTextField txtIn;
 
-	private JList<String> lstDispositivo;
-
-	private DefaultListModel<String> defaultListModel;
+	private File file;
+	private JTextField txtOut;
 	
+	private String fileOutPath;
 	/**
 	 * Create the application.
 	 */
@@ -91,136 +80,72 @@ public class FactorAjuste extends JInternalFrame{
 		setBounds(100, 100, 535, 374);
 		getContentPane().setLayout(null);
 		
-		defaultListModel=new DefaultListModel<String>();
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(34, 39, 409, 255);
-		getContentPane().add(panel);
-		panel.setLayout(null);
-		
-		JLabel lblDispositivoConocido = new JLabel("Dispositivo Conocido:");
-		lblDispositivoConocido.setBounds(10, 22, 147, 14);
-		panel.add(lblDispositivoConocido);
-		
-		txtDispositivo = new JTextField();
-		txtDispositivo.setBounds(145, 19, 179, 20);
-		panel.add(txtDispositivo);
-		txtDispositivo.setColumns(10);
-		
-		JButton btnAgregar = new JButton("Agregar");
-		btnAgregar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				btnAgregardActionListener(arg0);
-			}
-		});
-		btnAgregar.setBounds(66, 81, 89, 23);
-		panel.add(btnAgregar);
-		
-		JButton btnReset = new JButton("Reset");
-		btnReset.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnResetActionPerformed(e);
-			}
-		});
-		btnReset.setBounds(165, 81, 89, 23);
-		panel.add(btnReset);
-		
-		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnEliminarActionPerformed(e);
-			}
-		});
-		btnEliminar.setBounds(264, 81, 89, 23);
-		panel.add(btnEliminar);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 125, 389, 113);
-		panel.add(scrollPane);
-		
-		lstDispositivo = new JList<String>();
-		lstDispositivo.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				lstDispositivoMouseListener(arg0);
-			}
-		});
-		scrollPane.setViewportView(lstDispositivo);
-		
 		JButton btnCorrer = new JButton("Correr");
 		btnCorrer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				btnCorrer(arg0);
 			}
 		});
-		btnCorrer.setBounds(198, 305, 89, 23);
+		btnCorrer.setBounds(203, 241, 89, 23);
 		getContentPane().add(btnCorrer);
-	}
-	
-	public void btnAgregardActionListener(ActionEvent event)
-	{
-		try{
-			if(StringUtils.isNotBlank(txtDispositivo.getText())&&StringUtils.isNotEmpty(txtDispositivo.getText())){
-				if(lstDispositivo.isSelectionEmpty()){
-					defaultListModel.addElement(txtDispositivo.getText());
-				}
-				else{
-					defaultListModel.set(lstDispositivo.getSelectedIndex(), txtDispositivo.getText());
-				}
-				lstDispositivo.setModel(defaultListModel);
-				txtDispositivo.setText(null);
+		
+		JButton btnSeleccionar = new JButton("Seleccionar...");
+		btnSeleccionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnSeleccionar(arg0);
 			}
-		}
-		catch(Exception e){
-			MessageBox.error(e.toString());
-		}
-	}
-	
-	private void btnEliminarActionPerformed(ActionEvent event)
-	{
-		defaultListModel.removeElement(lstDispositivo.getSelectedValue());
-		lstDispositivo.setModel(defaultListModel);
-	}
-
-	private void btnResetActionPerformed(ActionEvent event)
-	{
-		lstDispositivo.clearSelection();
-		txtDispositivo.setText(null);
-	}
-	
-	private void lstDispositivoMouseListener(MouseEvent event)
-	{
-		if(event.getClickCount()==2)
-		{
-			txtDispositivo.setText(lstDispositivo.getSelectedValue());
-		}
+		});
+		btnSeleccionar.setBounds(272, 78, 126, 23);
+		getContentPane().add(btnSeleccionar);
+		
+		txtIn = new JTextField();
+		txtIn.setEditable(false);
+		txtIn.setBounds(71, 79, 191, 20);
+		getContentPane().add(txtIn);
+		txtIn.setColumns(10);
+		
+		txtOut = new JTextField();
+		txtOut.setEditable(false);
+		txtOut.setBounds(71, 141, 327, 20);
+		getContentPane().add(txtOut);
+		txtOut.setColumns(10);
+		
+		JLabel lblArchivoEntrada = new JLabel("Archivo Entrada");
+		lblArchivoEntrada.setBounds(71, 54, 110, 14);
+		getContentPane().add(lblArchivoEntrada);
+		
+		JLabel lblArchivoSalida = new JLabel("Archivo Salida");
+		lblArchivoSalida.setBounds(71, 116, 89, 14);
+		getContentPane().add(lblArchivoSalida);
 	}
 
 	
 	private void btnCorrer(ActionEvent event)
 	{
-		//recolector
-		//
+		File fileOut=new File(fileOutPath);
 		
-		File file=new File("D:\\TiempoFila\\20140709Factor.txt");
-		if(file.exists())
-			file.delete();
+		if(fileOut.exists())
+			fileOut.delete();
 		
 		for(double i=0;i<=4;i+=0.05)
-		{
-			processOne("D:\\TiempoFila\\20140709.txt",i,"D:\\TiempoFila\\20140709Factor.txt");
-		}
-		
+			processOne(file,i,fileOut);
 	}
 	
+	private void btnSeleccionar(ActionEvent event)
+	{
+		JFileChooser fileChooser=new JFileChooser();
+		fileChooser.showOpenDialog(this);
+		file=fileChooser.getSelectedFile();
+		fileOutPath=file.getAbsolutePath().replace(file.getName(), "") + "factorAjuste.txt";
+		txtOut.setText(fileOutPath);
+		txtIn.setText(file.getAbsolutePath());
+	}
 	
 	@SuppressWarnings("unchecked")
-	private void processOne(String pathFile,double factorAjuste,String out)
+	private void processOne(File fileIn,double factorAjuste,File fileOut)
 	{
 		String codigoAgencia,fechaCorte;
 
-		File fileIn = null;		
-		File fileOut;
 		List<String> lines,linesOut = null;
 		String line[];
 
@@ -243,8 +168,8 @@ public class FactorAjuste extends JInternalFrame{
 		try{			
 			factorAjuste=UtilApplication.redondear(factorAjuste, 2);
 			logger.info("factorAjuste {}",factorAjuste);
-			fileIn=new File(pathFile);
-			fileOut=new File(out);
+			
+			
 			codigoAgencia=ConstRead.CODIGO_AGENCIA;
 
 			factorMaximo=Double.valueOf(ConstRead.FACTOR_MAXIMO);
@@ -1092,7 +1017,4 @@ public class FactorAjuste extends JInternalFrame{
 		}
 		return result;
 	}
-	
-
-	
 }
