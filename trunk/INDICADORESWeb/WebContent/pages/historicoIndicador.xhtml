@@ -49,7 +49,7 @@
 				
 				<p:dialog id="reporte" widgetVar="dlgValorReporte" modal="true" header="#{historicoIndicadorController.indicadorDTO.indNombreCorto}" closeOnEscape="true" width="950" height="500" resizable="false">
 				
-				<p:scrollPanel>
+				<p:scrollPanel style="width:930px;height:500px" mode="native">
 					<p:panel id="pnlValorReporte">
 					
 						<table>
@@ -104,9 +104,9 @@
 						<tr>
 							<td colspan="4" align="center"><p:commandButton value="Registro Valor Actual" type="button" onclick="PF('dlgValor').show();" disabled="#{historicoIndicadorController.disabledAddValue}"/> 
 							<p:commandButton value="Ver Descriptor" type="button" onclick="PF('dlgDescriptor').show();"/> 
-<!-- 						    <p:commandButton value="Imprimir" type="button" icon="ui-icon-print">   -->
-<!-- 						        <p:printer target="pnlValorReporte" />   -->
-<!-- 						    </p:commandButton>   -->
+						    <p:commandButton value="Imprimir" type="button" icon="ui-icon-print">  
+						        <p:printer target="sample" />  
+						    </p:commandButton>  
 							
 							
 							</td>						
@@ -122,7 +122,7 @@
 
 				<p:dialog id="reporte2" widgetVar="dlgValorReporteLogico" modal="true" header="#{historicoIndicadorController.indicadorDTO.indNombreCorto}" closeOnEscape="true" width="950" height="450" resizable="false">
 				
-				<p:scrollPanel>
+				<p:scrollPanel style="width:930px;height:420px" mode="native">
 					<p:panel id="pnlValorReporte2">
 					
 						<table>
@@ -171,9 +171,9 @@
 						<tr>
 							<td colspan="4" align="center"><p:commandButton value="Registro Valor Actual" type="button" onclick="PF('dlgValor').show();" disabled="#{historicoIndicadorController.disabledAddValue}"/> 
 							<p:commandButton value="Ver Descriptor" type="button" onclick="PF('dlgDescriptor').show();"/> 
-<!-- 						    <p:commandButton value="Imprimir" type="button" icon="ui-icon-print">   -->
-<!-- 						        <p:printer target="pnlValorReporte" />   -->
-<!-- 						    </p:commandButton>   -->
+						    <p:commandButton value="Imprimir" type="button" icon="ui-icon-print">  
+						        <p:printer target="contenido:pnlValorReporte2" />  
+						    </p:commandButton>  
 							
 							
 							</td>						
@@ -189,8 +189,8 @@
 
 				<p:dialog id="reporteSub" widgetVar="dlgValorReporteSub" modal="true" header="#{historicoIndicadorController.indicadorDTO.indNombreCorto}" closeOnEscape="true" width="950" height="500" resizable="false">
 				
-				<p:scrollPanel>
-					<p:panel id="pnlValorReporteSub">
+				<p:scrollPanel style="width:930px;height:500px" mode="native">
+					<p:panel id="pnlValorReporteSub" widgetVar="pnlValorReporteSub">
 					
 						<table>
 						<tr><td><h:outputText value="Indicador: #{historicoIndicadorController.indicadorDTO.indNombreCorto}" style="font-weight:bold" /></td></tr>	
@@ -198,54 +198,52 @@
 											
 						<div>
 							<p:lineChart id="lineChartSub" value="#{historicoIndicadorController.categoryModel}" legendPosition="ne"   
-				             	title="Historial" style="height:600px;margin-top:20px" xaxisLabel="" yaxisLabel="Valor" animate="true" xaxisAngle="70" /> 
+				             	title="Historial" style="height:600px;margin-top:20px" xaxisLabel="" yaxisLabel="Valor" animate="true" xaxisAngle="70" widgetVar="lineChartSub"/> 
 						</div>
 						
 						<br/>
 						
 						<div align="center">
 							<p:meterGaugeChart id="sampleDashSub" value="#{historicoIndicadorController.meterGaugeModel}" 
-								style="width:400px;height:250px" title="Ideal / Objetivo" label="%"/>  						
+								style="width:400px;height:250px" title="Ideal / Objetivo" label="%" widgetVar="sampleDashSub"/>  						
 						</div>
 						
-					<table width="100%">
-						<tr>
-							<td><h:outputLabel value="Valor Inicial:" style="font-weight:bold" /></td>
-							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorInicial}" /></td>
-							
-						</tr>
-						<tr>	
-							<td><h:outputLabel value="Valor Actual:" style="font-weight:bold"/></td>
-							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorActual}" /></td>
-							
-						</tr>
-						<tr>
-							<td><h:outputLabel value="Valor Objetivo:" style="font-weight:bold"/></td>
-							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorObjetivo}" /></td>
-
-							<td><h:outputLabel value="Brecha Objetivo:" style="font-weight:bold"/></td>
-							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorObjetivo - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>													
-						</tr>
-						<tr>
-							<td><h:outputLabel value="Valor Ideal:" style="font-weight:bold"/></td>
-							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal}" /></td>
-																			
-							<td><h:outputLabel value="Brecha Ideal:" style="font-weight:bold"/></td>
-							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>																									
-						</tr>							
 						
-						<tr>
-							<td colspan="4" align="center"><p:commandButton value="Registro Valor Actual" type="button" onclick="PF('dlgValor').show();" disabled="#{historicoIndicadorController.disabledAddValue}"/> 
-							<p:commandButton value="Ver Descriptor" type="button" onclick="PF('dlgDescriptor').show();"/> 
-<!-- 						    <p:commandButton value="Imprimir" type="button" icon="ui-icon-print">   -->
-<!-- 						        <p:printer target="pnlValorReporte" />   -->
-<!-- 						    </p:commandButton>   -->
+						<div class="container">
+						<table width="100%">
+							<tr>
+								<td><h:outputLabel value="Valor Inicial:" style="font-weight:bold" /></td>
+								<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorInicial}" /></td>
+								
+							</tr>
+							<tr>	
+								<td><h:outputLabel value="Valor Actual:" style="font-weight:bold"/></td>
+								<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorActual}" /></td>
+								
+							</tr>
+							<tr>
+								<td><h:outputLabel value="Valor Objetivo:" style="font-weight:bold"/></td>
+								<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorObjetivo}" /></td>
+	
+								<td><h:outputLabel value="Brecha Objetivo:" style="font-weight:bold"/></td>
+								<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorObjetivo - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>													
+							</tr>
+							<tr>
+								<td><h:outputLabel value="Valor Ideal:" style="font-weight:bold"/></td>
+								<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal}" /></td>
+																				
+								<td><h:outputLabel value="Brecha Ideal:" style="font-weight:bold"/></td>
+								<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>																									
+							</tr>							
 							
-							
-							</td>						
-						</tr>
-					</table>
-					
+							<tr>
+								<td colspan="4" align="center"><p:commandButton value="Registro Valor Actual" type="button" onclick="PF('dlgValor').show();" disabled="#{historicoIndicadorController.disabledAddValue}"/> 
+								<p:commandButton value="Ver Descriptor" type="button" onclick="PF('dlgDescriptor').show();"/> 
+								<p:commandButton type="button" value="Export" icon="ui-icon-extlink" onclick="exportChart()"/>							
+								</td>						
+							</tr>
+						</table>
+					</div>
 					</p:panel>
 					
 					
@@ -405,6 +403,12 @@
 					
 				</p:dialog>
 		
+		
+					<p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Chart as an Image" resizable="false">
+					    <p:outputPanel id="output" layout="block" style="width:500px;height:300px"/>
+					</p:dialog>
+		
+		
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
 		        	<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
 		        	<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
@@ -412,6 +416,17 @@
 		
 			
 			</h:form>		
+				
+<script type="text/javascript">
+function exportChart() {
+    //export image
+    $('#contenido\\:output').appendTo($(".container"));
+    //$('#contenido\\:output').append(PF('sampleDashSub').exportAsImage());
+    
+    //show the dialog
+    PF('dlg').show();
+}
+</script>				
 				
 		</ui:define>
 	</ui:composition>
