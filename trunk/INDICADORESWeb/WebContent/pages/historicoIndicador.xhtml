@@ -171,11 +171,7 @@
 						<tr>
 							<td colspan="4" align="center"><p:commandButton value="Registro Valor Actual" type="button" onclick="PF('dlgValor').show();" disabled="#{historicoIndicadorController.disabledAddValue}"/> 
 							<p:commandButton value="Ver Descriptor" type="button" onclick="PF('dlgDescriptor').show();"/> 
-						    <p:commandButton value="Imprimir" type="button" icon="ui-icon-print">  
-						        <p:printer target="contenido:pnlValorReporte2" />  
-						    </p:commandButton>  
-							
-							
+														
 							</td>						
 						</tr>
 					</table>
@@ -208,9 +204,7 @@
 								style="width:400px;height:250px" title="Ideal / Objetivo" label="%" widgetVar="sampleDashSub"/>  						
 						</div>
 						
-						
-						<div class="container">
-						<table width="100%">
+						<table id="contSub" width="100%">
 							<tr>
 								<td><h:outputLabel value="Valor Inicial:" style="font-weight:bold" /></td>
 								<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorInicial}" /></td>
@@ -235,7 +229,9 @@
 								<td><h:outputLabel value="Brecha Ideal:" style="font-weight:bold"/></td>
 								<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>																									
 							</tr>							
+						</table>
 							
+						<table width="100%">	
 							<tr>
 								<td colspan="4" align="center"><p:commandButton value="Registro Valor Actual" type="button" onclick="PF('dlgValor').show();" disabled="#{historicoIndicadorController.disabledAddValue}"/> 
 								<p:commandButton value="Ver Descriptor" type="button" onclick="PF('dlgDescriptor').show();"/> 
@@ -243,7 +239,6 @@
 								</td>						
 							</tr>
 						</table>
-					</div>
 					</p:panel>
 					
 					
@@ -405,6 +400,10 @@
 		
 		
 					<p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Chart as an Image" resizable="false">
+						<p:commandButton value="Imprimir" type="button" icon="ui-icon-print">  
+					        <p:printer target="output" />  
+					    </p:commandButton>  
+					
 					    <p:outputPanel id="output" layout="block" style="width:500px;height:300px"/>
 					</p:dialog>
 		
@@ -420,11 +419,32 @@
 <script type="text/javascript">
 function exportChart() {
     //export image
-    $('#contenido\\:output').appendTo($(".container"));
-    //$('#contenido\\:output').append(PF('sampleDashSub').exportAsImage());
+        
+    var print = window.open('', 'Imprimir', 'left=0,top=0,border=0,status=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,resizable=yes');    
+        
+    $('#contenido\\:output').append(PF('lineChartSub').exportAsImage());
+    $('#contenido\\:output').append(PF('sampleDashSub').exportAsImage());
+
+    $('#contenido\\:output').append('<table>');
+
     
+	$('#contSub tr td').each(function(){
+		$('#contenido\\:output').append('<tr><td>');	
+		
+	    $('#contenido\\:output').append($(this).text());
+	    
+	    $('#contenido\\:output').append('</td></tr>');
+	        
+	});
+	
+	$('#contenido\\:output').append('</table>');
+	
+	print.window.document.writeln(document.getElementById("contenido:output").innerHTML);
+	print.document.close();
+	print.print();
+	//imprimir.close();
     //show the dialog
-    PF('dlg').show();
+    //PF('dlg').show();
 }
 </script>				
 				
