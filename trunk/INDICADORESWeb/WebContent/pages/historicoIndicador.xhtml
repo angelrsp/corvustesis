@@ -399,9 +399,9 @@
 					
 				</p:dialog>
 		
-				<p:outputPanel id="outpie" layout="block" style="width:500px;height:300px"/>
-				<p:outputPanel id="outline" layout="block" style="width:500px;height:300px"/>
-				<p:outputPanel id="outsampledush" layout="block" style="width:500px;height:300px"/>
+				<p:outputPanel id="outpie" layout="block" />
+				<p:outputPanel id="outline" layout="block" />
+				<p:outputPanel id="outsampledush" layout="block"/>
 		
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
 		        	<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
@@ -438,6 +438,11 @@ function exportChart() {
 	print.document.close();
 	print.print();
 	print.close();
+
+
+    $('#contenido\\:outpie').empty();
+    $('#contenido\\:outline').empty();
+    $('#contenido\\:outsampledush').empty();	
 	
 }
 
@@ -475,6 +480,10 @@ function printSuper() {
 	print.document.close();
 	print.print();
 	print.close();
+
+    $('#contenido\\:outpie').empty();
+    $('#contenido\\:outline').empty();
+    $('#contenido\\:outsampledush').empty();	
 	
 }
 
@@ -501,7 +510,11 @@ function printLogical() {
 	print.document.close();
 	print.print();
 	print.close();
-	
+
+    $('#contenido\\:outpie').empty();
+    $('#contenido\\:outline').empty();
+    $('#contenido\\:outsampledush').empty();	
+
 }
 
 </script>				
