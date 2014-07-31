@@ -235,7 +235,7 @@
 							<tr>
 								<td colspan="4" align="center"><p:commandButton value="Registro Valor Actual" type="button" onclick="PF('dlgValor').show();" disabled="#{historicoIndicadorController.disabledAddValue}"/> 
 								<p:commandButton value="Ver Descriptor" type="button" onclick="PF('dlgDescriptor').show();"/> 
-								<p:commandButton type="button" value="Export" icon="ui-icon-extlink" onclick="exportChart()"/>							
+								<p:commandButton type="button" value="Imprimir" icon="ui-icon-print" onclick="exportChart()"/>							
 								</td>						
 							</tr>
 						</table>
@@ -398,15 +398,8 @@
 					
 				</p:dialog>
 		
-		
-					<p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="Chart as an Image" resizable="false">
-						<p:commandButton value="Imprimir" type="button" icon="ui-icon-print">  
-					        <p:printer target="output" />  
-					    </p:commandButton>  
-					
-					    <p:outputPanel id="output" layout="block" style="width:500px;height:300px"/>
-					</p:dialog>
-		
+				<p:outputPanel id="outline" layout="block" style="width:500px;height:300px"/>
+				<p:outputPanel id="outsampledush" layout="block" style="width:500px;height:300px"/>
 		
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
 		        	<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
@@ -421,30 +414,29 @@ function exportChart() {
     //export image
         
     var print = window.open('', 'Imprimir', 'left=0,top=0,border=0,status=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,resizable=yes');    
-        
-    $('#contenido\\:output').append(PF('lineChartSub').exportAsImage());
-    $('#contenido\\:output').append(PF('sampleDashSub').exportAsImage());
-
-    $('#contenido\\:output').append('<table>');
-
     
-	$('#contSub tr td').each(function(){
-		$('#contenido\\:output').append('<tr><td>');	
-		
-	    $('#contenido\\:output').append($(this).text());
-	    
-	    $('#contenido\\:output').append('</td></tr>');
-	        
-	});
+    $('#contenido\\:outline').empty().append(PF('lineChartSub').exportAsImage());
+   
+    $('#contenido\\:outsampledush').empty().append(PF('sampleDashSub').exportAsImage());	
+
+    print.window.document.writeln('<div align="center">');
+	print.window.document.writeln(document.getElementById("contenido:outline").innerHTML);
+	print.window.document.writeln('</div>');
+
+    print.window.document.writeln('<div align="center">');
+	print.window.document.writeln(document.getElementById("contenido:outsampledush").innerHTML);
+	print.window.document.writeln('</div>');
+
+	print.window.document.writeln('<div align="center">');
+	print.window.document.writeln('<table>');
+	print.window.document.writeln(document.getElementById("contSub").innerHTML);
+	print.window.document.writeln('</table>');
+	print.window.document.writeln('</div>');
 	
-	$('#contenido\\:output').append('</table>');
-	
-	print.window.document.writeln(document.getElementById("contenido:output").innerHTML);
 	print.document.close();
 	print.print();
-	//imprimir.close();
-    //show the dialog
-    //PF('dlg').show();
+	print.close();
+	
 }
 </script>				
 				
