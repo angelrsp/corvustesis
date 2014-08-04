@@ -86,18 +86,18 @@
 						<h:outputText value="#{rep.rleDi}" />
 					</p:column>
 
-				<p:column style="width:10%" headerText="#{i18n['label.contactos']}">  
+				<p:column headerText="#{i18n['label.contactos']}" width="60">  
 	                <p:commandButton actionListener="#{representanteLegalController.cargarContacto(rep)}" oncomplete="PF('dlgContacto').show()" icon="ui-icon-contact" 
 	                	update=":contenido:pnlContactos" process="repList" title="#{i18n['label.ver.mas']}">    
 	    	        </p:commandButton>  
 		        </p:column>
 
 
-				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:column headerText="#{i18n['boton.editar']}" width="35" style="text-align: center">
 					<p:commandButton actionListener="#{representanteLegalController.editRepresentante(rep)}" icon="ui-icon-pencil" process=":contenido:repList" update=":contenido:pnlDatos"/>
 				</p:column>
 				
-				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:column headerText="#{i18n['boton.eliminar']}" width="40" style="text-align: center">
 					<p:commandButton actionListener="#{representanteLegalController.deleteRepresentante(rep)}" icon="ui-icon-close" process=":contenido:repList" update=":contenido:growl,:contenido:pnlDatos">
 						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
 					</p:commandButton>

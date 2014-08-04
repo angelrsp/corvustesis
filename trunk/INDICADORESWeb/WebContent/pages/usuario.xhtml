@@ -86,11 +86,11 @@
 					<h:outputText value="#{usu.indUsuarioPerfils.get(0).indPerfil.perDescripcion}" />
 				</p:column>
 
-				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:column headerText="#{i18n['boton.editar']}" width="35" style="text-align: center">
 					<p:commandButton actionListener="#{usuarioController.editUser(usu)}" icon="ui-icon-pencil" process=":contenido:tblUsuario" update=":contenido:pnlUsuarios"/>
 				</p:column>
 				
-				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:column headerText="#{i18n['boton.eliminar']}" width="40" style="text-align: center">
 					<p:commandButton actionListener="#{usuarioController.deleteUser(usu)}" icon="ui-icon-close" process=":contenido:tblUsuario" update=":contenido:pnlUsuarios">
 						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
 					</p:commandButton>

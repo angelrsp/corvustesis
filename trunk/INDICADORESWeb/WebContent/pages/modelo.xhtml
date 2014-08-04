@@ -45,11 +45,11 @@
 				<h:outputText value="#{mode.modVersion}" />
 			</p:column>
 			
-			<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+			<p:column headerText="#{i18n['boton.editar']}" width="35" style="text-align: center">
 				<p:commandButton actionListener="#{modeloController.edit(mode)}" icon="ui-icon-pencil" process=":contenido:tblModelo" update=":contenido:pnlModelo"/>
 			</p:column>
 			
-			<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+			<p:column headerText="#{i18n['boton.eliminar']}" width="40" style="text-align: center">
 				<p:commandButton actionListener="#{modeloController.delete(mode)}" icon="ui-icon-close" process=":contenido:tblModelo" update=":contenido:pnlModelo,:contenido:growl">
 					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
 				</p:commandButton>

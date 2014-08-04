@@ -94,17 +94,17 @@
 							<p:graphicImage value="#{ies.iesPathImagen}" height="50"/>
 						</p:column>
 
-						<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+						<p:column headerText="#{i18n['boton.editar']}" width="35" style="text-align: center">
 							<p:commandButton actionListener="#{iesController.editIes(ies)}" icon="ui-icon-pencil" process=":contenido:tblIes" update=":contenido:pnlDatos"/>
 						</p:column>
 						
-						<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+						<p:column headerText="#{i18n['boton.eliminar']}" width="40" style="text-align: center">
 							<p:commandButton actionListener="#{iesController.deleteIes(ies)}" icon="ui-icon-close" process=":contenido:tblIes" update=":contenido:pnlDatos,:contenido:growl">
 								 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
 							</p:commandButton>
 						</p:column>
 
-						<p:column style="width:10%" headerText="#{i18n['label.representante.legal']}">  
+						<p:column headerText="#{i18n['label.representante.legal']}" width="100">  
 			                <p:commandButton actionListener="#{iesController.obtenerRegistroLista(ies)}" oncomplete="PF('dlgRepresentante').show()" icon="ui-icon-person" 
 			                	update=":contenido:pnlRepresentante" process="tblIes" title="#{i18n['label.ver.mas']}">    
 			    	        </p:commandButton>  
