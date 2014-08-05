@@ -119,7 +119,7 @@
 				</p:dialog>				
 				
 
-				<p:dialog id="reporte2" widgetVar="dlgValorReporteLogico" modal="true" header="#{historicoIndicadorController.indicadorDTO.indNombreCorto}" closeOnEscape="true" width="950" height="450" resizable="false">
+				<p:dialog id="reporte2" widgetVar="dlgValorReporteLogico" modal="true" header="#{historicoIndicadorController.indicadorDTO.indNombreCorto}" closeOnEscape="true" width="950" height="440" resizable="false">
 				
 				<p:scrollPanel style="width:930px;height:420px" mode="native">
 					<p:panel id="pnlValorReporte2">
@@ -138,7 +138,7 @@
 					<table id="contLogical" width="100%">
 					
 						<tr>
-							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorActual=='100'||historicoIndicadorController.indicadorDTO.indValorActual=='100.0'?'Comple':'No Comple'}" /></td>							
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorActual=='100'||historicoIndicadorController.indicadorDTO.indValorActual=='100.0'?'Cumple':historicoIndicadorController.indicadorDTO.indValorActual=='1'||historicoIndicadorController.indicadorDTO.indValorActual=='1.0'?'No Cumple':'Cumple Parcialmente'}" /></td>							
 							<td></td>							
 						</tr>
 					
@@ -156,15 +156,11 @@
 							<td><h:outputLabel value="Valor Objetivo:" style="font-weight:bold"/></td>
 							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorObjetivo}" /></td>
 
-							<td><h:outputLabel value="Brecha Objetivo:" style="font-weight:bold"/></td>
-							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorObjetivo - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>													
 						</tr>
 						<tr>
 							<td><h:outputLabel value="Valor Ideal:" style="font-weight:bold"/></td>
 							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal}" /></td>
 																			
-							<td><h:outputLabel value="Brecha Ideal:" style="font-weight:bold"/></td>
-							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorIdeal - historicoIndicadorController.indicadorDTO.indValorActual}" /></td>																									
 						</tr>							
 					</table>
 											
@@ -295,13 +291,13 @@
 							<h:outputText value="#{his.hinObservacion}" />
 						</p:column>
 					
-						<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+						<p:column headerText="#{i18n['boton.eliminar']}" width="45" style="text-align: center">
 							<p:commandButton actionListener="#{historicoIndicadorController.deleteHistoricoIndicador(his)}" icon="ui-icon-close" process="tblValor" update=":contenido:pnlValor,:contenido:growl,:contenido:pnlValorReporte,:contenido:sampleDash,:contenido:pnlValorReporte2,:contenido:pnlValorReporteSub">
 								 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
 							</p:commandButton>
 						</p:column>		
 											
-						<p:column style="width:8%" headerText="#{i18n['label.evidencia']}">  
+						<p:column headerText="#{i18n['label.evidencia']}" width="70">  
 			                <p:commandButton actionListener="#{historicoIndicadorController.buscarEvidencias(his)}" oncomplete="PF('dlgEvidencia').show()" icon="ui-icon-document" 
 			                	update=":contenido:pnlEvidencia,:contenido:growl" process="tblValor" title="#{i18n['label.evidencia']}">    
 			    	        </p:commandButton>  
@@ -377,7 +373,7 @@
 				</p:dialog>
 					
 					
-				<p:dialog id="dlgDescriptor" widgetVar="dlgDescriptor" modal="true" header="Descriptor" closeOnEscape="true" resizable="false">
+				<p:dialog id="dlgDescriptor" widgetVar="dlgDescriptor" modal="true" header="Descriptor" closeOnEscape="true" resizable="false" width="500">
 			
 					<p:panel id="pnlDescriptor" styleClass="tabla">
 						

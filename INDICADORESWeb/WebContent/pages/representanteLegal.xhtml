@@ -109,7 +109,7 @@
 				
 				
 	
-				<p:dialog id="dlgContacto" widgetVar="dlgContacto" modal="true" header="Contactos">
+				<p:dialog id="dlgContacto" widgetVar="dlgContacto" modal="true" header="Contactos" width="600">
 				
 					<p:panel id="pnlContactos" styleClass="tabla">
 																
@@ -149,11 +149,11 @@
 							<h:outputText value="#{con.conValor}" />
 						</p:column>
 
-				<p:column headerText="#{i18n['boton.editar']}" width="15" style="text-align: center">
+				<p:column headerText="#{i18n['boton.editar']}" width="35" style="text-align: center">
 					<p:commandButton actionListener="#{representanteLegalController.editContacto(con)}" icon="ui-icon-pencil" process=":contenido:tblContacto" update=":contenido:pnlContactos"/>
 				</p:column>
 				
-				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center">
+				<p:column headerText="#{i18n['boton.eliminar']}" width="40" style="text-align: center">
 					<p:commandButton actionListener="#{representanteLegalController.deleteContacto(con)}" icon="ui-icon-close" process=":contenido:tblContacto" update=":contenido:growl,:contenido:pnlContactos">
 						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
 					</p:commandButton>
