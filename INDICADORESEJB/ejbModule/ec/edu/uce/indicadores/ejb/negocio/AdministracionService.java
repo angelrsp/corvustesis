@@ -30,9 +30,6 @@ public interface AdministracionService {
 
 	void deleteUsuario(UsuarioDTO user) throws IndicadoresException;
 
-	void createAcceso(List<String> option, Object perfil,
-			List<IndicadorDTO> indicadorList) throws IndicadoresException;
-
 	Boolean existsPermisoIndicador(IndicadorDTO indicador, PerfilDTO perfil)
 			throws IndicadoresException;
 
@@ -40,5 +37,9 @@ public interface AdministracionService {
 			throws IndicadoresException;
 
 	void deletePerfil(PerfilDTO perfil) throws IndicadoresException;
+
+	void createAcceso(List<String> option, Object perfil,
+			List<IndicadorDTO> indicadorList, Object modelo, Object ies)
+			throws IndicadoresException;
 
 }

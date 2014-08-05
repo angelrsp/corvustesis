@@ -42,13 +42,26 @@ public class PermisoIndicadorDAOImpl extends AbstractFacadeImpl<PermisoIndicador
 	}
 
 	@Override
+	public void remove4(Object perfil,Object modelo,Object ies)
+	{
+		Query query;
+		query=entityManager.createQuery("delete from PermisoIndicadorDTO per where per.indPerfil.perCodigo=:codigo and per.peiModelo=:modelo and per.peiModelo=:ies");
+		query.setParameter("codigo", Integer.parseInt(perfil.toString()));
+		query.setParameter("modelo", Integer.parseInt(modelo.toString()));
+		query.setParameter("ies", Integer.parseInt(ies.toString()));
+		query.executeUpdate();
+	}
+
+	
+	
+	@Override
 	public Boolean existe(IndicadorDTO indicador,PerfilDTO perfil)
 	{
 		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
 		CriteriaQuery<PermisoIndicadorDTO> cq=cb.createQuery(PermisoIndicadorDTO.class);
 		Root<PermisoIndicadorDTO> from= cq.from(PermisoIndicadorDTO.class);
 		
-		cq.where(cb.and(cb.equal(from.get("peiIndicador"), indicador.getIndCodigo()),cb.equal(from.get("indPerfil").get("perCodigo"), perfil.getPerCodigo())));
+		cq.where(cb.and(cb.equal(from.get("peiModelo"), indicador.getIndModeloBean().getModCodigo()), cb.equal(from.get("peiIes"), indicador.getIndy().getIesCodigo()),cb.equal(from.get("peiIndicador"), indicador.getIndCodigo()),cb.equal(from.get("indPerfil").get("perCodigo"), perfil.getPerCodigo())));
 		
 		List<PermisoIndicadorDTO> list=entityManager.createQuery(cq).getResultList();	
 		if(list.isEmpty())

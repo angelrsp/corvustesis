@@ -23,6 +23,12 @@ public class PermisoIndicadorDTO implements Serializable {
 
 	@Column(name="pei_indicador")
 	private Integer peiIndicador;
+	
+	@Column(name="pei_ies")
+	private Integer peiIes;
+
+	@Column(name="pei_modelo")
+	private Integer peiModelo;
 
 	@ManyToOne
 	@JoinColumn(name="pei_perfil")
@@ -54,6 +60,22 @@ public class PermisoIndicadorDTO implements Serializable {
 
 	public void setIndPerfil(PerfilDTO indPerfil) {
 		this.indPerfil = indPerfil;
+	}
+
+	public Integer getPeiIes() {
+		return peiIes;
+	}
+
+	public void setPeiIes(Integer peiIes) {
+		this.peiIes = peiIes;
+	}
+
+	public Integer getPeiModelo() {
+		return peiModelo;
+	}
+
+	public void setPeiModelo(Integer peiModelo) {
+		this.peiModelo = peiModelo;
 	}
 
 }
