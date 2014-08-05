@@ -93,6 +93,7 @@ public class HistoricoIndicadorController extends SelectItemController implement
 	{
 		user=(UsuarioDTO) JsfUtil.getObject("UsuarioDTO");
 		perfil=user.getIndUsuarioPerfils().get(0).getIndPerfil();
+		
 		disabled=true;
 		indicadorDTO=new IndicadorDTO();
 		modelo=indicadorDataManager.getModelo();

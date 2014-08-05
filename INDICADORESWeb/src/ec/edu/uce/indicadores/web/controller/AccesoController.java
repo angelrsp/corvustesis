@@ -240,7 +240,7 @@ public class AccesoController extends SelectItemController implements Serializab
 			for(TreeNode node : selectedNodes) {  
 				listIndicador.add((IndicadorDTO) node.getData());
             }  
-			administracionService.createAcceso(opcionSelect, pefilSelect,listIndicador);
+			administracionService.createAcceso(opcionSelect, pefilSelect,listIndicador,modelo,ies);
 			readAcceso();
 		} catch (IndicadoresException e) {
 			JsfUtil.addErrorMessage(e.toString());
