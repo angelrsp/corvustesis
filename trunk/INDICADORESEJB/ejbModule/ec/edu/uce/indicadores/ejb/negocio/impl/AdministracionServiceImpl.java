@@ -70,7 +70,7 @@ public class AdministracionServiceImpl implements AdministracionService{
 	
 	
 	@Override
-	public void createAcceso(List<String> option,Object perfil,List<IndicadorDTO> indicadorList) throws IndicadoresException
+	public void createAcceso(List<String> option,Object perfil,List<IndicadorDTO> indicadorList,Object modelo,Object ies) throws IndicadoresException
 	{
 		log.info("createAcceso");
 		AccesoDTO acc;
@@ -86,12 +86,14 @@ public class AdministracionServiceImpl implements AdministracionService{
 				acc.setIndPerfil(new PerfilDTO(Integer.valueOf(perfil.toString())));
 				factoryDAO.getAccesoDAOImpl().create(acc);
 			}
-			factoryDAO.getPermisoIndicadorDAOImpl().remove2(new PerfilDTO(Integer.valueOf(perfil.toString())));
+			factoryDAO.getPermisoIndicadorDAOImpl().remove4(perfil,modelo,ies);
 			for(IndicadorDTO ind:indicadorList)
 			{
 				perInd=new PermisoIndicadorDTO();
 				perInd.setIndPerfil(new PerfilDTO(Integer.valueOf(perfil.toString())));
 				perInd.setPeiIndicador(ind.getIndCodigo());
+				perInd.setPeiIes(ind.getIndy().getIesCodigo());
+				perInd.setPeiModelo(ind.getIndModeloBean().getModCodigo());
 				factoryDAO.getPermisoIndicadorDAOImpl().create(perInd);
 			}
 			
@@ -166,7 +168,6 @@ public class AdministracionServiceImpl implements AdministracionService{
 		try {
 			factoryDAO.getUsuarioDAOImpl().remove2(user);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			throw new IndicadoresException(e);
 		}
 	}

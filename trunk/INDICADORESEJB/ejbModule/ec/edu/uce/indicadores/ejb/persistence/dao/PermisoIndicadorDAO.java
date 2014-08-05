@@ -12,4 +12,6 @@ public interface PermisoIndicadorDAO extends AbstractFacade<PermisoIndicadorDTO>
 
 	Boolean existe(IndicadorDTO indicador, PerfilDTO perfil);
 
+	void remove4(Object perfil, Object modelo, Object ies);
+
 }
