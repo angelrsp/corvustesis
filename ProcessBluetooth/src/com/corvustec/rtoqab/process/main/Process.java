@@ -795,6 +795,10 @@ public class Process {
 			UtilApplication.moverArchivo(fileIn, pathProcesado+fileIn.getName());
 			
 			writeBitacora("Proceso Exitoso Fecha: "+fechaCorte+" Agencia "+codigoAgencia);
+			fileOut.setWritable(false);
+			fileOut.setExecutable(false);
+			fileOut.setReadOnly();
+			logger.info(String.valueOf(fileOut.canWrite()));
 			
 		} catch (IOException e) {
 			UtilApplication.moverArchivo(fileIn, pathNoProcesado+fileIn.getName());

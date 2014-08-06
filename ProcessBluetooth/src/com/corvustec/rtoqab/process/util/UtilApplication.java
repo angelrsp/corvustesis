@@ -97,6 +97,9 @@ public class UtilApplication {
 			if(fdest.exists())
 				fdest.delete();
 			FileUtils.moveFile(fileOrigen, fdest);
+			fdest.setWritable(false);
+			fdest.setReadOnly();
+			logger.info(String.valueOf(fdest.canWrite()));
 		} catch (Exception e) {
 			logger.info("Error al mover el archivo {}", e.getCause().toString());
 		}
