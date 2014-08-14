@@ -127,7 +127,7 @@ public class FactorAjuste extends JInternalFrame{
 		if(fileOut.exists())
 			fileOut.delete();
 		
-		for(double i=0;i<=4;i+=0.05)
+		for(double i=0;i<=20;i+=0.05)
 			processOne(file,i,fileOut);
 	}
 	
