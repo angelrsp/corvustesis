@@ -140,7 +140,7 @@ public class Process {
 			//vacio el arreglo
 			lines=null;
 			
-			//pbtengo las balizas
+			//obtengo las balizas
 			baliza.addAll((List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
 				@Override
 				public boolean evaluate(Object arg0) {
@@ -180,8 +180,8 @@ public class Process {
 			varianza=0.0;
 			
 			dataListDistinct = getDistinct(dataList);
-			
-			logger.info("Se encontraron "+dataListDistinct.size());
+						
+			logger.info("Se encontraron total dispositivos censados: "+dataListDistinct.size());
 			
 			for(final DataDTO dat:dataListDistinct)
 			{				
@@ -208,7 +208,7 @@ public class Process {
 			dataListDistinct=null;
 			
 			/*
-			 * Se descartan las señales menores entre la media y desv. estandar por un factor.
+			 * Se descartan las señales menores entre la media y desv. estandar de las balizas por un factor.
 			 */
 			for(final DataDTO dat:dataMax)
 			{
@@ -228,6 +228,9 @@ public class Process {
 				}
 			}	 			
 			dataMax=null;
+			
+			logger.info("Se descartan las seniales menores entre la media y desv. estandar de las balizas quedan: "+getDistinct(dataList).size());
+			
 			
 			//Todavia es el Paso 1
 			List<IntervaloTiempoDTO> intervaloSegundo;
@@ -278,7 +281,7 @@ public class Process {
 						
 			dataListDistinct=getDistinct(dataList);
 
-			logger.info("Se encontraron "+dataListDistinct.size());
+			logger.info("Datos con intervalos de tiempo se encontraron: "+dataListDistinct.size());
 			
 			//Encuentro promedio por intervalos
 			for(final DataDTO dato:dataListDistinct)
@@ -296,7 +299,7 @@ public class Process {
 				
 				temp2=getDistinctByNumeroIntervalo(temp);
 
-				//Sorting
+				//Sorting (ordenar)
 				Collections.sort(temp2, new Comparator<DataDTO>() {
 			        @Override
 			        public int compare(DataDTO  dato1, DataDTO  dato2){
@@ -330,9 +333,13 @@ public class Process {
 
 			dataList=temp4;
 			
+			logger.info("Datos con intervalos de tiempo se encontraron: "+dataList.size());
+			
 			dataListDistinct=getDistinct(dataList);
 			
-			//Suavizar la curso con limites
+			logger.info("Dispositivos con intervalos de tiempo se encontraron: "+dataListDistinct.size());
+			
+			//Suavizar la curva con limites
 			temp2=new ArrayList<DataDTO>();
 			
 			for(final DataDTO dato:dataListDistinct)
@@ -383,7 +390,7 @@ public class Process {
 			dataList=temp2;
 
 			
-			//Obtengo la media de las balizas en grupo para cada intervalo
+			//Obtengo la media de las balizas en grupo para cada intervalo de tiempo
 			baliza=(List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
 				@Override
 				public boolean evaluate(Object arg0) {
@@ -505,6 +512,8 @@ public class Process {
 			
 			dataList=temp2;
 			
+			
+			//Paso a analizar
 			temp3=new ArrayList<DataDTO>();
 			//Diferencia de tiempos
 			for(final DataDTO dato:dataListDistinct)
@@ -659,7 +668,7 @@ public class Process {
 
 			//parametrizable.
 			limiteSuperiorDia=diaAvg+desviacion*factorPromedioDia;
-			limiteInferiorDia=diaAvg-desviacion*factorPromedioDia;
+			limiteInferiorDia=diaAvg-desviacion;
 
 			logger.info("Avg: "+diaAvg);
 			logger.info("Des: "+desviacion);
