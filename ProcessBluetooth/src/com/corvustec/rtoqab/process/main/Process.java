@@ -93,7 +93,7 @@ public class Process {
 		
 		int balizaSum,index;
 		double balizaAvg,balizaAvgDia;
-		double varianza= 0.0,desviacion = 0.0,rango=0.0,balizaSumDbl,balizaAvgDbl,limiteSuperior,limiteInferior,limiteSuperiorDia,limiteInferiorDia,limiteSuperiorInt,limiteInferiorInt;
+		double varianza= 0.0,desviacionBaliza = 0.0,desviacion = 0.0,rango=0.0,balizaSumDbl,balizaAvgDbl,limiteSuperior,limiteInferior,limiteSuperiorDia,limiteInferiorDia,limiteSuperiorInt,limiteInferiorInt;
 		
 		double diaSum,diaAvg;
 		
@@ -124,6 +124,8 @@ public class Process {
 			line=lines.get(0).split("\\|");
 			fechaCorte=getFechaCorte(line[0]);
 			fileOut=new File(Const.PATH_FINAL+fileIn.getName());
+			if(fileOut.exists())
+				fileOut.delete();
 			writer=new FileWriter(fileOut);
 			
 			//Establezo los datos en la lista de objetos
@@ -175,7 +177,7 @@ public class Process {
 			}
 			
 			varianza=varianza/baliza.size();
-			desviacion=Math.sqrt(varianza);
+			desviacionBaliza=Math.sqrt(varianza);
 			
 			varianza=0.0;
 			
@@ -213,7 +215,7 @@ public class Process {
 			for(final DataDTO dat:dataMax)
 			{
 				//El numero 1 debe ser dinamico (pendiente por analizar) Factor del maximo
-				if(dat.getRssi()<(balizaAvg-(desviacion*factorMaximo)))
+				if(dat.getRssi()<(balizaAvg-(desviacionBaliza*factorMaximo)))
 				{
 					dataList.removeAll(CollectionUtils.select(dataList, new Predicate() {
 						@Override
@@ -324,7 +326,7 @@ public class Process {
 					{
 						datoTemp=temp3.get(0);
 						balizaSum=sumFrom(temp3).getRssi();
-						balizaAvg=balizaSum/temp3.size();
+						balizaAvg=Double.valueOf(balizaSum)/Double.valueOf(temp3.size());
 						datoTemp.setMedia(balizaAvg);
 						temp4.add(datoTemp);
 					}
@@ -378,9 +380,9 @@ public class Process {
 					
 						datoTemp=(DataDTO) BeanUtils.cloneBean(dat);
 					
-					if(!(dat.getMedia()>=limiteInferior&&dat.getMedia()<=limiteSuperior))
+					if(dat.getMedia()<limiteInferior)
 						if((index-1)>=0&&(index+1)<temp.size())
-							datoTemp.setMedia((temp.get(index-1).getMedia()+dat.getMedia()+temp.get(index+1).getMedia())/3);
+							datoTemp.setMedia((temp.get(index-1).getMedia()+dat.getMedia()+temp.get(index+1).getMedia())/3);///Si es que el valor no esta dentro de los limites tomo el los valores vecinos y divido para trees 
 
 					index=index+1;
 					temp2.add(datoTemp);
@@ -423,8 +425,20 @@ public class Process {
 				if(temp2.size()>0)
 				{
 					balizaSum=sumFrom(temp2).getRssi();
-					balizaAvg=balizaSum/(temp2.size());
-					temp2.get(0).setMedia(balizaAvg-(desviacion*factorAjuste));//Factor de ajuste
+					balizaAvg=Double.valueOf(balizaSum)/Double.valueOf(temp2.size());
+					
+					//la desviacion es del dia no del intervalo
+					varianza=0.0;
+					
+					for(DataDTO dat:temp2)
+					{
+					   rango = Math.pow(dat.getMedia()-balizaAvg,2);
+					   varianza = varianza + rango;				
+					}
+					varianza=varianza/(temp2.size());
+					desviacionBaliza=Math.sqrt(varianza);
+					
+					temp2.get(0).setMedia(balizaAvg-(desviacionBaliza*factorAjuste));//Factor de ajuste
 										
 					temp3.add(temp2.get(0));
 				}
@@ -435,7 +449,7 @@ public class Process {
 			temp3=new ArrayList<DataDTO>();
 			
 			
-			//Comparcion con balizas
+			//Comparacion con balizas
 			for(final DataDTO dato:dataList)
 			{
 				temp2=(List<DataDTO>) CollectionUtils.select(baliza, new Predicate() {
@@ -452,14 +466,14 @@ public class Process {
 				datoTemp=dato;
 				if(temp2.size()>0)
 				{
-					if(dato.getMedia()<temp2.get(0).getMedia())
+					if(dato.getMedia()<temp2.get(0).getMedia())//recordar que las señales rssi son negativas
 						datoTemp.setEstado(0);
 					else
 						datoTemp.setEstado(1);					
 				}
 				else
 				{
-					if(dato.getMedia()<balizaAvgDia)
+					if(dato.getMedia()<balizaAvgDia-(desviacionBaliza*factorAjuste))
 						datoTemp.setEstado(0);
 					else
 						datoTemp.setEstado(1);
@@ -512,7 +526,7 @@ public class Process {
 			
 			dataList=temp2;
 			
-			
+						
 			//Paso a analizar
 			temp3=new ArrayList<DataDTO>();
 			//Diferencia de tiempos
@@ -565,6 +579,18 @@ public class Process {
 			
 			
 			temp=new ArrayList<DataDTO>();
+			//Quito balizas de referencia
+			dataList.removeAll((List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
+				@Override
+				public boolean evaluate(Object arg0) {
+                 DataDTO dat= (DataDTO)arg0;
+                 if(Arrays.asList(balizas).contains(dat.getMac()))
+                	 return true;
+                 else
+                	 return false;
+				}
+			}));
+
 			
 			for(DataDTO dat:dataList)
 			{
@@ -600,7 +626,7 @@ public class Process {
 				{
 					if(temp.get(0).getTiempoFila()!=null)
 					{
-						if(temp.get(0).getTiempoFila()<1||temp.get(0).getTiempoFila()>60)//1 y 55 deben ser parametrizables
+						if(temp.get(0).getTiempoFila()<0.3||temp.get(0).getTiempoFila()>60)//1 y 55 deben ser parametrizables
 						{
 							dataList.remove(temp.get(0));
 						}
@@ -628,7 +654,7 @@ public class Process {
 				{
 					if(temp.get(0).getTiempoAgencia()!=null)
 					{
-						if(temp.get(0).getTiempoAgencia()<2||temp.get(0).getTiempoAgencia()>80)//1 y 55 deben ser parametrizables
+						if(temp.get(0).getTiempoAgencia()<=(temp.get(0).getTiempoFila()+10))//1 y 80 deben ser parametrizables 
 						{
 							dataList.remove(temp.get(0));
 						}
@@ -668,12 +694,12 @@ public class Process {
 
 			//parametrizable.
 			limiteSuperiorDia=diaAvg+desviacion*factorPromedioDia;
-			limiteInferiorDia=diaAvg-desviacion;
+			limiteInferiorDia=diaAvg-desviacion*factorPromedioDia;
 
-			logger.info("Avg: "+diaAvg);
-			logger.info("Des: "+desviacion);
-			logger.info("Sup: "+limiteSuperiorDia);
-			logger.info("Inf: "+limiteInferiorDia);
+			logger.info("Avg Dia: "+diaAvg);
+			logger.info("Des Dia: "+desviacion);
+			logger.info("Sup Dia: "+limiteSuperiorDia);
+			logger.info("Inf Dia: "+limiteInferiorDia);
 			
 			///Aplico rangos de 15 min....
 			intervaloMinuto=generateMinute();
@@ -720,6 +746,7 @@ public class Process {
 			
 			temp2=new ArrayList<DataDTO>();
 			
+			//Lista por intervalos
 			for(final DataDTO inter:dataListDistinct)
 			{
 				temp=(List<DataDTO>) CollectionUtils.select(dataList, new Predicate() {
@@ -732,7 +759,6 @@ public class Process {
                     	 return false;
 					}
 				});
-				
 				
 				if(temp.size()>=3)
 				{
@@ -750,28 +776,27 @@ public class Process {
 					varianza=varianza/temp.size();
 					desviacion=Math.sqrt(varianza);
 
-					//parametrizable.
+					//parametrizable. limites en intervalos
 					limiteSuperiorInt=balizaAvg+(desviacion*factorIntervaloTiempo3);
 					limiteInferiorInt=balizaAvg-(desviacion*factorIntervaloTiempo3);
 					
 					
-					
 					for(DataDTO d:temp)
 					{
-						if(d.getTiempoFila()>=limiteInferiorInt&&d.getTiempoFila()<=limiteSuperiorInt)
+						if(d.getTiempoFila()<=limiteSuperiorInt)
 							temp2.add(d);
 					}
 				}
 				if(temp.size()==2)
 				{
-					if(temp.get(0).getTiempoFila()>=limiteInferiorDia&&temp.get(0).getTiempoFila()<=limiteSuperiorDia)
+					if(temp.get(0).getTiempoFila()<=limiteSuperiorDia)
 						temp2.add(temp.get(0));
-					if(temp.get(1).getTiempoFila()>=limiteInferiorDia&&temp.get(1).getTiempoFila()<=limiteSuperiorDia)
+					if(temp.get(1).getTiempoFila()<=limiteSuperiorDia)
 						temp2.add(temp.get(1));
 				}
 				if(temp.size()==1)
 				{
-					if(temp.get(0).getTiempoFila()>=limiteInferiorDia&&temp.get(0).getTiempoFila()<=limiteSuperiorDia)
+					if(temp.get(0).getTiempoFila()<=limiteSuperiorDia)
 						temp2.add(temp.get(0));
 				}
 			}
@@ -791,11 +816,11 @@ public class Process {
 //				sb.append(dat.getIntervaloMinutoDesde()+"|");
 //				sb.append(dat.getIntervaloMinutoHasta()+"|");
 				sb.append(dat.getNumeroIntervaloMinuto()+"|");
-				sb.append(dat.getTiempoFila().toString().replace('.', ',')+"|");
-				sb.append(dat.getTiempoAgencia().toString().replace('.', ',')+"\n");
+				sb.append((dat.getTiempoFila()!=null?dat.getTiempoFila().toString().replace('.', ','):"")+"|");
+				sb.append((dat.getTiempoFila()!=null?dat.getTiempoAgencia().toString().replace('.', ','):"")+"|");
 //				sb.append(dat.getRssi()+"|");				
 //				sb.append(dat.getEstado()+"|");
-//				sb.append(dat.getMedia()+"\n");
+				sb.append(dat.getMedia()+"\n");
 				writer.write(sb.toString());
 				sb=new StringBuilder();
 			}
