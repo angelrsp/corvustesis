@@ -253,10 +253,18 @@ public class IndicadorController extends SelectItemController implements Seriali
 	}
 	
 	public void onNodeSelect() {
-		IndicadorDTO ind=(IndicadorDTO) selectedNode.getData();
-		setIndicadorDTO(ind);
-		setPredecesor(ind.getIndIndicador().getIndCodigo());
-		setTipoIndicador(ind.getIndTipo());
+		//try {
+			IndicadorDTO ind=(IndicadorDTO) selectedNode.getData();
+			setIndicadorDTO(ind);
+			if(ind.getIndIndicador()!=null)
+				setPredecesor(ind.getIndIndicador().getIndCodigo());
+			else
+				setPredecesor(0);	
+			setTipoIndicador(ind.getIndTipo());			
+//		} catch (Exception e) {
+//			JsfUtil.addErrorMessage(e.toString());
+//		}
+		
 	}
 	
 }
