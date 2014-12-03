@@ -1,5 +1,6 @@
 package ec.edu.uce.silsag.ejb.persistence.entities;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.Serializable;
 
@@ -380,6 +381,8 @@ public class CandidatoListDTO implements Serializable {
 	}
 
 	public InputStream getCanFotoStream() {
+		if(this.getCanFoto()!=null)
+			canFotoStream=new ByteArrayInputStream(this.getCanFoto());
 		return canFotoStream;
 	}
 
