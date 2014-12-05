@@ -14,5 +14,20 @@
 		<class>ec.edu.uce.besg.ejb.persistence.entity.security.RegistroLoginDTO</class>
 		<class>ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO</class>
 		<class>ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioPerfilDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.AvisoDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.CandidatoDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ContactoDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.EmpresaDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ExperienciaDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.HabilidadDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ImagenCandidatoDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ImagenEmpresaDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.PostulacionDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ReferenciaDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.TipoHabilidadDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ControlDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.PreguntaDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.RespuestaDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ResultadoDTO</class>
 	</persistence-unit>
 </persistence>
