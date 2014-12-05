@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/template/empresa.xhtml">
+		<ui:define name="contenido">
+			<fieldset>
+				<p:growl id="growl" showDetail="false" />
+					<p:panel id="pnlContactos" styleClass="tabla"
+						header="#{i18n['besg.contacto.titulo.pantalla.registrar']}">
+						<p:accordionPanel activeIndex="null">
+						<p:tab title="#{i18n['boton.agregar']}">  
+						
+						<table id="tblDatos" class="tabla">
+							<tr>
+								<td><h:outputLabel value="#{i18n['besg.contacto.empresa']}:&#160;" /></td>
+								<td><p:inputText value="#{datosEmpresaController.contacto.conNombres}" /></td>
+							</tr>
+							<tr>
+								<td><h:outputLabel value="#{i18n['besg.contacto.nombres']}:&#160;" /></td>
+								<td><p:inputText value="#{datosEmpresaController.contacto.conNombres}" requiredMessage="#{i18n['besg.contacto.nombres']}&#160;#{i18n['label.requerido']}" required="true" /></td>
+							</tr>
+							<tr>	
+								<td><h:outputLabel value="#{i18n['besg.contacto.apellidos']}:&#160;" /></td>
+								<td><p:inputText value="#{datosEmpresaController.contacto.conApellidos}" requiredMessage="#{i18n['besg.contacto.apellidos']}&#160;#{i18n['label.requerido']}" required="true"/></td>
+							</tr>
+						
+						<tr>
+							<td><h:outputLabel value="#{i18n['besg.contacto.telefono']}:&#160;" /></td>
+							<td><p:inputText value="#{datosEmpresaController.contacto.conTelefono}" requiredMessage="#{i18n['besg.contacto.telefono']}&#160;#{i18n['label.requerido']}" required="true"/></td>
+						</tr>	
+						<tr>
+							<td><h:outputLabel value="#{i18n['besg.contacto.mail']}:&#160;" /></td>
+							<td><p:inputText value="#{datosEmpresaController.contacto.conMail}" requiredMessage="#{i18n['besg.contacto.mail']}&#160;#{i18n['label.requerido']}" required="true"/></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['besg.contacto.cargo']}:&#160;" /></td>
+							<td><p:inputText value="#{datosEmpresaController.contacto.conMail}" requiredMessage="#{i18n['besg.contacto.mail']}&#160;#{i18n['label.requerido']}" required="true"/></td>
+						</tr>
+	
+						<tr>
+							<td colspan="4" align="center"><p:commandButton
+									value="#{i18n['boton.agregar']}"
+									process=":contenido:pnlContactos"
+									update=":contenido:pnlContactos, :contenido:growl" 
+									actionListener="#{datosEmpresaController.agregarContactos}"/>
+							</td>
+						</tr>
+						
+						</table>
+						
+						</p:tab>
+						</p:accordionPanel>
+					
+					<p:dataTable value="#{datosEmpresaController.contactos}" var="con" emptyMessage="#{i18n['table.vacio']}">
+					
+						<p:column headerText="#{i18n['label.nombres']}">
+							<h:outputText value="#{con.conNombres}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.apellidos']}">
+							<h:outputText value="#{con.conApellidos}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.telefono']}">
+							<h:outputText value="#{con.conTelefono}" />
+						</p:column>
+
+						<p:column headerText="#{i18n['label.email']}">
+							<h:outputText value="#{con.conMail}" />
+						</p:column>
+											
+					</p:dataTable>
+					
+				</p:panel>
+				
+				</fieldset>
+				
+		</ui:define>
+	</ui:composition>
+
+</body>
+</html>
