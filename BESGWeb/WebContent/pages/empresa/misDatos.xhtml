@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/template/empresa.xhtml">
+		<ui:define name="contenido">
+			<fieldset>
+				<p:growl id="growl" showDetail="false" />
+				<p:panel id="pnlDatos" styleClass="tabla"
+					header="#{i18n['besg.empresa.titulo.pantalla.misdatos']}">
+					<table id="tblDatos" class="tabla">
+						<tr>
+							<td><h:outputLabel
+									value="#{i18n['besg.empresa.razon.social']}:&#160;" /></td>
+							<td><p:inputText required="true"
+									requiredMessage="#{i18n['besg.empresa.razon.social']}&#160;#{i18n['label.requerido']}" value="#{datosEmpresaController.empresa.empRazonSocial}"/></td>
+							<td><h:outputLabel
+									value="#{i18n['besg.empresa.nombre.comercial']}:&#160;" /></td>
+							<td><p:inputText required="true"
+									requiredMessage="#{i18n['besg.empresa.nombre.comercial']}&#160;#{i18n['label.requerido']}"
+									value="#{datosEmpresaController.empresa.empNombreComercial}"
+									 /></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['besg.empresa.ruc']}:&#160;" /></td>
+							<td><p:inputText required="true"
+									requiredMessage="#{i18n['besg.empresa.ruc']}&#160;#{i18n['label.requerido']}" value="#{datosEmpresaController.empresa.empRuc}" onkeypress="return isNumberKey(event);"/></td>
+							<td><h:outputLabel value="#{i18n['besg.empresa.sector']}:&#160;" /></td>
+							<td><p:selectOneMenu value="#{datosEmpresaController.tipoEmpresa}">
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"
+										itemValue="" />
+									<f:selectItems value="#{datosEmpresaController.catalogoTipoEmpresa}"></f:selectItems>	
+								</p:selectOneMenu></td>
+						</tr>
+						<tr>		
+							<td><h:outputLabel value="#{i18n['besg.empresa.web']}:&#160;" /></td>
+							<td colspan="3"><p:inputText style="width : 90%;" value="#{datosEmpresaController.empresa.empWeb}" /></td>
+						</tr>
+						<tr>		
+							<td><h:outputLabel value="#{i18n['besg.empresa.ubicacion']}:&#160;" /></td>
+							<td colspan="3"><p:inputText style="width : 90%;" value="#{datosEmpresaController.empresa.empWeb}" /></td>
+						</tr>
+						<tr>
+							<td colspan="4" align="center"><p:commandButton
+									value="#{i18n['boton.actualizar']}"
+									process="pnlDatos" actionListener="#{datosEmpresaController.actualizar}"
+									update="pnlDatos, growl" />
+							</td>
+						</tr>
+					</table>
+				</p:panel>
+			</fieldset>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
