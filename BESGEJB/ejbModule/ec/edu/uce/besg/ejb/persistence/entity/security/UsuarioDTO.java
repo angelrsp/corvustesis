@@ -16,7 +16,7 @@ public class UsuarioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SEG_USUARIO_USUCODIGO_GENERATOR", sequenceName="SEG_USUARIO_PERFIL_UPE_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="SEG_USUARIO_USUCODIGO_GENERATOR", sequenceName="SEG_USUARIO_USU_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEG_USUARIO_USUCODIGO_GENERATOR")
 	@Column(name="usu_codigo")
 	private Integer usuCodigo;
@@ -46,6 +46,10 @@ public class UsuarioDTO implements Serializable {
 	@OneToMany(mappedBy="segUsuario")
 	private List<HistorialPasswordDTO> segHistorialPasswords;
 
+	//bi-directional many-to-one association to LogDTO
+	@OneToMany(mappedBy="segUsuario")
+	private List<LogDTO> segLogs;
+
 	//bi-directional many-to-one association to RegistroLoginDTO
 	@OneToMany(mappedBy="segUsuario")
 	private List<RegistroLoginDTO> segRegistroLogins;
@@ -53,10 +57,6 @@ public class UsuarioDTO implements Serializable {
 	//bi-directional many-to-one association to UsuarioPerfilDTO
 	@OneToMany(mappedBy="segUsuario")
 	private List<UsuarioPerfilDTO> segUsuarioPerfils;
-
-	//bi-directional many-to-one association to LogDTO
-	@OneToMany(mappedBy="segUsuario")
-	private List<LogDTO> segLogs;
 
 	public UsuarioDTO() {
 	}
@@ -147,6 +147,28 @@ public class UsuarioDTO implements Serializable {
 		return segHistorialPassword;
 	}
 
+	public List<LogDTO> getSegLogs() {
+		return this.segLogs;
+	}
+
+	public void setSegLogs(List<LogDTO> segLogs) {
+		this.segLogs = segLogs;
+	}
+
+	public LogDTO addSegLog(LogDTO segLog) {
+		getSegLogs().add(segLog);
+		segLog.setSegUsuario(this);
+
+		return segLog;
+	}
+
+	public LogDTO removeSegLog(LogDTO segLog) {
+		getSegLogs().remove(segLog);
+		segLog.setSegUsuario(null);
+
+		return segLog;
+	}
+
 	public List<RegistroLoginDTO> getSegRegistroLogins() {
 		return this.segRegistroLogins;
 	}
@@ -189,28 +211,6 @@ public class UsuarioDTO implements Serializable {
 		segUsuarioPerfil.setSegUsuario(null);
 
 		return segUsuarioPerfil;
-	}
-
-	public List<LogDTO> getSegLogs() {
-		return this.segLogs;
-	}
-
-	public void setSegLogs(List<LogDTO> segLogs) {
-		this.segLogs = segLogs;
-	}
-
-	public LogDTO addSegLog(LogDTO segLog) {
-		getSegLogs().add(segLog);
-		segLog.setSegUsuario(this);
-
-		return segLog;
-	}
-
-	public LogDTO removeSegLog(LogDTO segLog) {
-		getSegLogs().remove(segLog);
-		segLog.setSegUsuario(null);
-
-		return segLog;
 	}
 
 }
