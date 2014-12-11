@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<body>
+	<ui:composition template="/template/publico.xhtml">
+		<ui:define name="contenido">
+		
+<h:form id="contenido">		
+			<fieldset>
+				<p:growl id="growl" showDetail="false" autoUpdate="true"/>
+				
+				<p:panel id="pnlRegistroCandidato" styleClass="tabla">
+					<table id="tblRegistroCandidato" class="tabla">
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.tipo.documento']}:&#160;"/> </td>
+								<td>
+									<p:selectOneMenu required="true" requiredMessage="#{i18n['label.tipo.documento']}:&#160;#{i18n['label.requerido']}" value="#{registroCandidatoController.tipoDocumento}">
+										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
+										<f:selectItems value="#{registroCandidatoController.catalogoTipoDocumento}"></f:selectItems>
+									</p:selectOneMenu>
+								</td>
+							<td><h:outputLabel value="#{i18n['label.ci.pasaporte']}:&#160;" /> </td>
+							<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.ci.pasaporte']}&#160;#{i18n['label.requerido']}"
+									value="#{registroCandidatoController.candidatoRegistro.canIdentificacion}" onkeypress="return isNumberKey(event);" maxlength="15"/></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.apellido.paterno']}:&#160;" /> </td>
+							<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.apellido.paterno']}&#160;#{i18n['label.requerido']}"
+									value="#{registroCandidatoController.candidatoRegistro.canApellidoPaterno}"/></td>
+							<td><h:outputLabel value="#{i18n['label.apellido.materno']}:&#160;" /> </td>
+							<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.apellido.materno']}&#160;#{i18n['label.requerido']}"
+									value="#{registroCandidatoController.candidatoRegistro.canApellidoMaterno}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.nombre.primero']}:&#160;" /> </td>
+							<td><p:inputText required="true"
+									requiredMessage="#{i18n['label.nombre.primero']}&#160;#{i18n['label.requerido']}"
+									value="#{registroCandidatoController.candidatoRegistro.canPrimerNombre}"/></td>
+							<td><h:outputLabel value="#{i18n['label.nombre.Segundo']}:&#160;" /> </td>
+							<td><p:inputText value="#{registroCandidatoController.candidatoRegistro.canSegundoNombre}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.email']}:&#160;" /> </td>
+							<td colspan="3"><p:inputText style="width : 90%;" required="true"
+									requiredMessage="#{i18n['label.contrasenia']}&#160;#{i18n['label.requerido']}"
+									value="#{registroCandidatoController.usuarioRegistro.usuMail}">
+ 									<f:validator validatorId="ec.edu.uce.silsag.web.util.validator.EmailValidator"></f:validator>
+									</p:inputText></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="#{i18n['label.contrasenia.ingresar']}:&#160;" /> </td>
+							<td><p:password required="true"
+									requiredMessage="#{i18n['label.contrasenia.ingresar']}&#160;#{i18n['label.requerido']}"
+									value="#{registroCandidatoController.usuarioRegistro.usuPassword}" feedback="true"/></td>
+							<td><h:outputLabel value="#{i18n['label.contrasenia.confirmar']}:&#160;" /> </td>
+							<td><p:password required="true"
+									requiredMessage="#{i18n['label.contrasenia.confirmar']}&#160;#{i18n['label.requerido']}"
+									value="#{registroCandidatoController.usuarioRegistro.npUsuPassword2}" feedback="true"/></td>
+						</tr>
+						<tr  align="center">
+							<td colspan="3">
+								<p:commandButton value="#{i18n['boton.registrarse']}" 
+									process="pnlRegistroCandidato" update="pnlRegistroCandidato"
+									actionListener="#{registroCandidatoController.registroCandidato}"/> 
+							<p:commandButton value="#{i18n['boton.atras']}"
+									process="@this" immediate="true"
+									actionListener="#{registroCandidatoController.atras}" /></td>									
+						</tr>
+					</table>
+				</p:panel>
+			</fieldset>
+			
+</h:form>			
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
