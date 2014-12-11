@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<ui:include src="/template/head.xhtml" />
+</h:head>
+<body>
+
+<div align="center">
+	<div style="width: 995px; box-shadow: 0 0 20px #2E2D32;">
+	<ui:include src="/template/header.xhtml" />
+		<div id="menu">
+			<h:form id="menu">
+				<p:menubar id="menuPublico"
+					style="margin-left:auto; margin-right:auto;text-align: center; width:96%;">
+					<p:menuitem value="Inicio" url="/" />
+					<p:submenu label="Empresa">
+						<p:menuitem style="font-weight: bold; width:180px;" value="Mis Datos"
+							url="/pages/empresa/misDatos.xhtml" />
+						<p:menuitem style="font-weight: bold; width:180px;" value="Contactos" url="/pages/empresa/contactos.xhtml" />
+					</p:submenu>
+				</p:menubar>
+
+			</h:form>
+
+			<p:spacer height="10"></p:spacer>
+
+			<div id="content" align="left" style="width: 950px;">
+				<h:form id="contenido">
+					<ui:insert name="contenido"></ui:insert>
+					<p:spacer height="10"></p:spacer>
+				</h:form>
+			</div>
+		</div>
+	</div>
+	
+	<ui:include src="/template/footer.xhtml" />
+</div>
+</body>
+</html>

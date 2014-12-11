@@ -8,9 +8,10 @@
 <h:head></h:head>
 <body>
 
-	<ui:composition template="/template/empresa.xhtml">
+	<ui:composition template="/template/plataformaEmpresa.xhtml">
 		<ui:define name="contenido">
 			<fieldset>
+			
 				<p:growl id="growl" showDetail="false" />
 					<p:panel id="pnlContactos" styleClass="tabla"
 						header="#{i18n['besg.contacto.titulo.pantalla.registrar']}">
@@ -20,36 +21,41 @@
 						<table id="tblDatos" class="tabla">
 							<tr>
 								<td><h:outputLabel value="#{i18n['besg.contacto.empresa']}:&#160;" /></td>
-								<td><p:inputText value="#{datosEmpresaController.contacto.conNombres}" /></td>
+								<td><p:inputText value="#{contactoController.contactoDataManager.empresa.empNombreComercial}" disabled="true" /></td>
 							</tr>
 							<tr>
 								<td><h:outputLabel value="#{i18n['besg.contacto.nombres']}:&#160;" /></td>
-								<td><p:inputText value="#{datosEmpresaController.contacto.conNombres}" requiredMessage="#{i18n['besg.contacto.nombres']}&#160;#{i18n['label.requerido']}" required="true" /></td>
+								<td><p:inputText value="#{contactoDataManager.contactoInsertar.conNombres}" requiredMessage="#{i18n['besg.contacto.nombres']}&#160;#{i18n['label.requerido']}" required="true" /></td>
 							</tr>
 							<tr>	
 								<td><h:outputLabel value="#{i18n['besg.contacto.apellidos']}:&#160;" /></td>
-								<td><p:inputText value="#{datosEmpresaController.contacto.conApellidos}" requiredMessage="#{i18n['besg.contacto.apellidos']}&#160;#{i18n['label.requerido']}" required="true"/></td>
+								<td><p:inputText value="#{contactoDataManager.contactoInsertar.conApellidos}" requiredMessage="#{i18n['besg.contacto.apellidos']}&#160;#{i18n['label.requerido']}" required="true"/></td>
 							</tr>
 						
 						<tr>
 							<td><h:outputLabel value="#{i18n['besg.contacto.telefono']}:&#160;" /></td>
-							<td><p:inputText value="#{datosEmpresaController.contacto.conTelefono}" requiredMessage="#{i18n['besg.contacto.telefono']}&#160;#{i18n['label.requerido']}" required="true"/></td>
+							<td><p:inputText value="#{contactoDataManager.contactoInsertar.conTelefono}" requiredMessage="#{i18n['besg.contacto.telefono']}&#160;#{i18n['label.requerido']}" required="true"/></td>
+							
 						</tr>	
 						<tr>
 							<td><h:outputLabel value="#{i18n['besg.contacto.mail']}:&#160;" /></td>
-							<td><p:inputText value="#{datosEmpresaController.contacto.conMail}" requiredMessage="#{i18n['besg.contacto.mail']}&#160;#{i18n['label.requerido']}" required="true"/></td>
-						</tr>
-						<tr>
-							<td><h:outputLabel value="#{i18n['besg.contacto.cargo']}:&#160;" /></td>
-							<td><p:inputText value="#{datosEmpresaController.contacto.conMail}" requiredMessage="#{i18n['besg.contacto.mail']}&#160;#{i18n['label.requerido']}" required="true"/></td>
+							<td><p:inputText value="#{contactoDataManager.contactoInsertar.conMail}" requiredMessage="#{i18n['besg.contacto.mail']}&#160;#{i18n['label.requerido']}" required="true"/></td>
 						</tr>
 	
+						<tr>
+							<td><h:outputLabel value="#{i18n['besg.contacto.cargo']}" /></td>
+							<td><p:selectOneMenu value="#{contactoDataManager.cargo}">
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"/>
+									<f:selectItems value="#{contactoDataManager.cargoLists}" var="cargo" itemLabel="#{cargo.catDescripcion}" itemValue="#{cargo.catCodigo}"></f:selectItems>	
+								</p:selectOneMenu>
+								</td>
+						</tr>
 						<tr>
 							<td colspan="4" align="center"><p:commandButton
 									value="#{i18n['boton.agregar']}"
 									process=":contenido:pnlContactos"
 									update=":contenido:pnlContactos, :contenido:growl" 
-									actionListener="#{datosEmpresaController.agregarContactos}"/>
+									actionListener="#{contactoController.registrarContacto}"/>
 							</td>
 						</tr>
 						
@@ -58,7 +64,7 @@
 						</p:tab>
 						</p:accordionPanel>
 					
-					<p:dataTable value="#{datosEmpresaController.contactos}" var="con" emptyMessage="#{i18n['table.vacio']}">
+					<p:dataTable value="#{contactoDataManager.contactoDTOs}" var="con" emptyMessage="#{i18n['table.vacio']}">
 					
 						<p:column headerText="#{i18n['label.nombres']}">
 							<h:outputText value="#{con.conNombres}" />
@@ -74,6 +80,16 @@
 
 						<p:column headerText="#{i18n['label.email']}">
 							<h:outputText value="#{con.conMail}" />
+						</p:column>
+						<p:column headerText="Opciones" styleClass="centered" width="10%">
+							<h:panelGroup>
+								<p:commandLink styleClass="no-decor"
+										title="Editar"
+										actionListener="#{contactoController.cargarDatosContacto(con)}"
+										process="@this" update=":contenido:pnlContactos, :contenido:growl">
+										<h:graphicImage value="/images/edit.png" alt="editar" />
+								</p:commandLink>
+							</h:panelGroup>
 						</p:column>
 											
 					</p:dataTable>
