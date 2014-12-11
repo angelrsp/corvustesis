@@ -29,5 +29,6 @@
 		<class>ec.edu.uce.besg.ejb.entity.PreguntaDTO</class>
 		<class>ec.edu.uce.besg.ejb.entity.RespuestaDTO</class>
 		<class>ec.edu.uce.besg.ejb.entity.ResultadoDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ContactoListDTO</class>
 	</persistence-unit>
 </persistence>

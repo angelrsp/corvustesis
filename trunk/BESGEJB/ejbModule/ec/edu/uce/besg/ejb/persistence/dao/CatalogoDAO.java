@@ -6,6 +6,6 @@ import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 
 public interface CatalogoDAO extends AbstractFacade<CatalogoDTO>{
 
-	List<CatalogoDTO> getByAnd(CatalogoDTO objeto) throws SecurityException;
+	List<CatalogoDTO> getAll(CatalogoDTO catalogo);
 
 }

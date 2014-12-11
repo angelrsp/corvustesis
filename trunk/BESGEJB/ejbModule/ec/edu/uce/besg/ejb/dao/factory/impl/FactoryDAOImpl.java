@@ -17,7 +17,7 @@ import ec.edu.uce.besg.ejb.persistence.dao.impl.UsuarioDAOImpl;
 @Stateless
 public class FactoryDAOImpl implements FactoryDAO {
 
-	@PersistenceContext(unitName = "silsaePU")
+	@PersistenceContext(unitName = "besgPU")
 	private EntityManager entityManager;
 
 	private UsuarioDAO usuarioDAO;
