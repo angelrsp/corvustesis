@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<ui:include src="/WEB-INF/template/head.xhtml" />
+</h:head>
+
+<body>
+
+	<div class="selector">
+		<h:form id="index">
+			<div align="center">
+				<div style="width: 995px;">
+					<table width="99%">
+						<tr>
+							<td><h:graphicImage value="/resources/img/uce_logo.jpg"
+									height="40" /></td>
+							<td align="right"><p:commandButton id="btnEmpresa"
+									value="Empresas"
+									actionListener="#{indexController.redirectLoginEmpresa}" /> <p:commandButton
+									id="btnCandidato" value="Candidatos"
+									actionListener="#{indexController.redirectLoginCandidato}" /></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<hr />
+
+			<div align="center">
+
+				<div style="width: 995px; box-shadow: 0 0 1px #2E2D32;">
+
+					<ui:insert name="content" />
+
+				</div>
+			</div>
+		</h:form>
+	</div>
+
+</body>
+
+
+
+</html>

@@ -1,55 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
-
-<h:head>
-	<title>Universidad Central del Ecuador - Trabajo Empleo</title>
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/style.css" />	
-</h:head>
-
-<body>
-
-<div class="selector">
-	<div style="width: 995px;" align="center">
-		<table width="99%">
-			<tr align="left">
-				<td><h:graphicImage
-						value="/resources/img/uce_logo.jpg" height="40" /></td>
-			</tr>
-		</table>
-	</div>
-	<hr/>
-	<div align="center">
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/public.xhtml">
 	
-		<div style="width: 995px; box-shadow: 0 0 1px #2E2D32;">
-
-			<h:form id="index">
 	
-				<table>
-					<tr>
-						<td colspan="2"><p:commandButton id="btnEmpresa"
-								value="Empresa"
-								actionListener="#{indexController.redirectLoginEmpresa}" /> <p:commandButton
-								id="btnCandidato" value="Candidato"
-								actionListener="#{indexController.redirectLoginCandidato}" /></td>
-					</tr>
-					<tr>
-						<td align="center"><p:commandButton id="btnUsuario"
-								value="Usuario"
-								actionListener="#{indexController.redirectLoginUsuario}" /></td>
-					</tr>
-				</table>
-
-			</h:form>
-
-		</div>
-	</div>
-
-</div>
-
-</body>
-
-</html>
+	<ui:define name="content">
+		<h3>hola</h3>
+	</ui:define>
+	
+	
+</ui:composition>
