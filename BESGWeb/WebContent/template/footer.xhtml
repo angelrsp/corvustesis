@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+<ui:composition>
+
+<p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>  
+              
+<p:dialog modal="true" widgetVar="statusDialog" header="Cargando..."   
+        draggable="false" closable="false">  
+    <p:graphicImage value="/images/ajaxloadingbar.gif" />  
+</p:dialog>
+
+	<p:spacer height="10"></p:spacer>
+	<footer id="footer" role="contentinfo"
+		style="background-color:#C0CCDA;width: 990px;"> 
+		Copyright © 2014 Universidad Central del Ecuador. Todos los derechos
+		reservados. <br /> Ciudadela Universitaria Av. América (593)252-1500
+		/290-4799 Quito-Ecuador <br />
+	 </footer>
+</ui:composition>
+</body>
+</html>
