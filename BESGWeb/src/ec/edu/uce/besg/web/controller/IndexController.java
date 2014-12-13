@@ -42,4 +42,8 @@ public class IndexController implements Serializable {
 	public void redirectBienEmpresa(ActionEvent actionEvent) throws IOException {
 		JsfUtil.redirect("pages/empresa/bienvenido.xhtml");
     }
+	
+	public void redirectBienCandidato(ActionEvent actionEvent) throws IOException {
+		JsfUtil.redirect("pages/candidato/bienvenido.xhtml");
+    }
 }
