@@ -9,7 +9,7 @@
 <h:head></h:head>
 <body>
 
-	<ui:composition template="/template/candidato.xhtml">
+	<ui:composition template="/WEB-INF/template/plataformaCandidato.xhtml">
 		<ui:define name="contenido">
 
 <h:form id="contenido">
@@ -23,26 +23,26 @@
 							<td><h:outputLabel value="#{i18n['label.contrasenia.actual']}:&#160;" /> </td>
 							<td><p:password required="true"
 									requiredMessage="#{i18n['label.contrasenia.ingresar']}&#160;#{i18n['label.requerido']}"
-									value="#{actualizarClaveController.usuario.usuPassword}"/></td>
+									/></td>
 						</tr>
 					
 						<tr>
 							<td><h:outputLabel value="#{i18n['label.contrasenia.ingresar']}:&#160;" /> </td>
 							<td><p:password required="true" feedback="true"
 									requiredMessage="#{i18n['label.contrasenia.ingresar']}&#160;#{i18n['label.requerido']}"
-									value="#{actualizarClaveController.usuario.npUsuPassword}"/></td>
+									/></td>
 						</tr>
 						<tr>			
 							<td><h:outputLabel value="#{i18n['label.contrasenia.confirmar']}:&#160;" /> </td>
 							<td><p:password required="true" feedback="true"
 									requiredMessage="#{i18n['label.contrasenia.confirmar']}&#160;#{i18n['label.requerido']}"
-									value="#{actualizarClaveController.usuario.npUsuPassword2}"/></td>
+									/></td>
 						</tr>
 						
 						
 						<tr>
 							<td>
-								<p:commandButton actionListener="#{actualizarClaveController.actualizar}" value="#{i18n['boton.actualizar']}" update="growl" icon="ui-icon-disk"/> </td>
+								<p:commandButton  value="#{i18n['boton.actualizar']}" update="growl" icon="ui-icon-disk"/> </td>
 						</tr>					
 					</table>
 					
