@@ -5,13 +5,21 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.CandidatoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CatalogoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ContactoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.EmpresaDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.ExperienciaDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.HabilidadDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.ReferenciaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.UsuarioDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.CandidatoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.CatalogoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.ContactoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.EmpresaDAOImpl;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.ExperienciaDAOImpl;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.HabilidadDAOImpl;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.ReferenciaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.UsuarioDAOImpl;
 
 @Stateless
@@ -22,22 +30,20 @@ public class FactoryDAOImpl implements FactoryDAO {
 
 	private UsuarioDAO usuarioDAO;
 	private CatalogoDAO catalogoDAO;
-	/*private CandidatoDAO candidatoDAO;
-	private AvisoDAO avisoDAO;
-	private PerfilDAO perfilDAO;
-	private CatalogoDAO catalogoDAO;
-	private EstudioDAO estudioDAO;
+	private CandidatoDAO candidatoDAO;
+	//private AvisoDAO avisoDAO;
+	//private PerfilDAO perfilDAO;
+	private HabilidadDAO habilidadDAO;
 	private ExperienciaDAO experienciaDAO;
 	private ReferenciaDAO referenciaDAO;
-	private EmpresaDAO empresaDAO;
-	private PostulacionDAO postulacionDAO;
-	private ResultadoDAO resultadoDAO;
-	private PreguntaDAO preguntaDAO;
-	private RespuestaDAO respuestaDAO;
-	private CursoDAO cursoDAO;
-	private AdicionalDAO adicionalDAO;
-	private ParametroDAO parametroDAO;
-*/
+	//private PostulacionDAO postulacionDAO;
+	//private ResultadoDAO resultadoDAO;
+	//private PreguntaDAO preguntaDAO;
+	//private RespuestaDAO respuestaDAO;
+	//private CursoDAO cursoDAO;
+	//private AdicionalDAO adicionalDAO;
+	//private ParametroDAO parametroDAO;
+
 		private ContactoDAO contactoDAO;
 		private EmpresaDAO empresaDAO;
 	
@@ -49,7 +55,7 @@ public class FactoryDAOImpl implements FactoryDAO {
 		return usuarioDAO;
 	}
 
-	/*@Override
+	@Override
 	public CandidatoDAO getCandidatoDAOImpl() {
 		if (candidatoDAO == null) {
 			candidatoDAO = new CandidatoDAOImpl(entityManager);
@@ -57,7 +63,7 @@ public class FactoryDAOImpl implements FactoryDAO {
 		return candidatoDAO;
 	}
 
-	@Override
+	/*@Override
 	public AvisoDAO getAvisoDAOImpl() {
 		if (avisoDAO == null) {
 			avisoDAO = new AvisoDAOImpl(entityManager);
@@ -71,8 +77,8 @@ public class FactoryDAOImpl implements FactoryDAO {
 			perfilDAO = new PerfilDAOImpl(entityManager);
 		}
 		return perfilDAO;
-	}
-*/
+	}*/
+
 	@Override
 	public CatalogoDAO getCatalogoDAOImpl() {
 		if (catalogoDAO == null) {
@@ -80,13 +86,13 @@ public class FactoryDAOImpl implements FactoryDAO {
 		}
 		return catalogoDAO;
 	}
-/*
+
 	@Override
-	public EstudioDAO getEstudioDAOImpl() {
-		if (estudioDAO == null) {
-			estudioDAO = new EstudioDAOImpl(entityManager);
+	public HabilidadDAO getHabilidadDAOImpl() {
+		if (habilidadDAO == null) {
+			habilidadDAO = new HabilidadDAOImpl(entityManager);
 		}
-		return estudioDAO;
+		return habilidadDAO;
 	}
 
 	@Override
@@ -104,7 +110,8 @@ public class FactoryDAOImpl implements FactoryDAO {
 		}
 		return referenciaDAO;
 	}
-*/
+	
+
 	@Override
 	public EmpresaDAO getEmpresaDAOImpl() {
 		if (empresaDAO == null) {

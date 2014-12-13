@@ -36,4 +36,5 @@ public interface ServicioEmpresa {
 
 	CatalogoDTO obtenerCatalogoId(int id) throws SecurityException;
 
+	
 }
