@@ -30,7 +30,8 @@ public class CatalogoDAOImpl extends AbstractFacadeImpl<CatalogoDTO> implements 
 			else
 				query.setParameter("codigo", 0);
 			
-			return list=query.getResultList(); 
+			list=query.getResultList();
+			return  list;
 	}		
 	}
 

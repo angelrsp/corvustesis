@@ -5,18 +5,16 @@ import java.util.List;
 import javax.ejb.Local;
 
 import ec.edu.uce.besg.ejb.entity.CandidatoDTO;
-import ec.edu.uce.besg.ejb.entity.CandidatoListDTO;
 import ec.edu.uce.besg.ejb.entity.ExperienciaDTO;
 import ec.edu.uce.besg.ejb.entity.HabilidadDTO;
+import ec.edu.uce.besg.ejb.entity.HabilidadListDTO;
 import ec.edu.uce.besg.ejb.entity.ReferenciaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 
 @Local
 public interface ServicioCandidato {
 
 	CandidatoDTO registrarCandidato(CandidatoDTO candidatoDTO)
-			throws SecurityException;
-
-	List<CandidatoListDTO> obtenerCandidato(CandidatoListDTO candidatoListDTO)
 			throws SecurityException;
 
 	void agregarHabilidad(HabilidadDTO habilidad) throws SecurityException;
@@ -32,6 +30,15 @@ public interface ServicioCandidato {
 	void agregarReferencia(ReferenciaDTO referencia) throws SecurityException;
 
 	void eliminarReferencia(ReferenciaDTO referencia) throws SecurityException;
+
+	List<CatalogoDTO> obtenerCatalogo(CatalogoDTO catalogo)
+			throws SecurityException;
+
+	List<CandidatoDTO> obtenerCandidato(CandidatoDTO candidatoDTO)
+			throws SecurityException;
+
+	List<HabilidadListDTO> obtenerHabilidad(HabilidadListDTO habilidad)
+			throws SecurityException;
 
 
 }

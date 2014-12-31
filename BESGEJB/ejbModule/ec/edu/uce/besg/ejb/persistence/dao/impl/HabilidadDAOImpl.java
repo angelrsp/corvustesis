@@ -13,6 +13,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import ec.edu.uce.besg.ejb.entity.HabilidadDTO;
+import ec.edu.uce.besg.ejb.entity.HabilidadListDTO;
 import ec.edu.uce.besg.ejb.persistence.dao.HabilidadDAO;
 
 public class HabilidadDAOImpl extends AbstractFacadeImpl<HabilidadDTO> implements HabilidadDAO{
@@ -26,12 +27,12 @@ public class HabilidadDAOImpl extends AbstractFacadeImpl<HabilidadDTO> implement
 	}
 	
 	@Override
-	public List<HabilidadDTO> getByAnd(HabilidadDTO objeto) throws SecurityException
+	public List<HabilidadListDTO> getByAnd(HabilidadListDTO objeto) throws SecurityException
 	{
 		CriteriaBuilder cb;
-		CriteriaQuery<HabilidadDTO> cq;
-		Root<HabilidadDTO> from;
-		List<HabilidadDTO> list;
+		CriteriaQuery<HabilidadListDTO> cq;
+		Root<HabilidadListDTO> from;
+		List<HabilidadListDTO> list;
 		Predicate predicate;
 		List<Predicate> predicateList = null;
 		String fieldName;
@@ -40,8 +41,8 @@ public class HabilidadDAOImpl extends AbstractFacadeImpl<HabilidadDTO> implement
 		Field[] fields;
 		try{
 			cb=entityManager.getCriteriaBuilder();
-			cq=cb.createQuery(HabilidadDTO.class);
-			from= cq.from(HabilidadDTO.class);
+			cq=cb.createQuery(HabilidadListDTO.class);
+			from= cq.from(HabilidadListDTO.class);
 			predicateList=new ArrayList<Predicate>();
 			fields = objeto.getClass().getDeclaredFields();
 	        for(Field f : fields){
@@ -61,7 +62,7 @@ public class HabilidadDAOImpl extends AbstractFacadeImpl<HabilidadDTO> implement
 	
 	        if(!predicateList.isEmpty())
 	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
-			TypedQuery<HabilidadDTO> tq=entityManager.createQuery(cq);
+			TypedQuery<HabilidadListDTO> tq=entityManager.createQuery(cq);
 			list=tq.getResultList();
 			return list;
 		}catch(Exception e){

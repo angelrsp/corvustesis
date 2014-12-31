@@ -51,8 +51,13 @@ public class HabilidadListDTO implements Serializable {
 	@Column(name="can_usuario")
 	private Integer canUsuario;
 
+	private String especialidad;
+
 	@Column(name="hab_candidato")
 	private Integer habCandidato;
+
+	@Column(name="hab_carrera")
+	private String habCarrera;
 
 	@Id
 	@Column(name="hab_codigo")
@@ -64,14 +69,36 @@ public class HabilidadListDTO implements Serializable {
 	@Column(name="hab_entidad")
 	private String habEntidad;
 
+	@Column(name="hab_especialidad")
+	private Integer habEspecialidad;
+
 	@Column(name="hab_fecha_fin")
 	private Timestamp habFechaFin;
 
 	@Column(name="hab_fecha_inicio")
 	private Timestamp habFechaInicio;
 
+	@Column(name="hab_nivel")
+	private Integer habNivel;
+
+	@Column(name="hab_pais")
+	private Integer habPais;
+
+	@Column(name="hab_registro")
+	private String habRegistro;
+
 	@Column(name="hab_tipo")
 	private Integer habTipo;
+
+	private String nivel;
+
+	private String pais;
+
+	@Column(name="tha_codigo")
+	private Integer thaCodigo;
+
+	@Column(name="tha_descripcion")
+	private String thaDescripcion;
 
 	public HabilidadListDTO() {
 	}
@@ -172,12 +199,28 @@ public class HabilidadListDTO implements Serializable {
 		this.canUsuario = canUsuario;
 	}
 
+	public String getEspecialidad() {
+		return this.especialidad;
+	}
+
+	public void setEspecialidad(String especialidad) {
+		this.especialidad = especialidad;
+	}
+
 	public Integer getHabCandidato() {
 		return this.habCandidato;
 	}
 
 	public void setHabCandidato(Integer habCandidato) {
 		this.habCandidato = habCandidato;
+	}
+
+	public String getHabCarrera() {
+		return this.habCarrera;
+	}
+
+	public void setHabCarrera(String habCarrera) {
+		this.habCarrera = habCarrera;
 	}
 
 	public Integer getHabCodigo() {
@@ -204,6 +247,14 @@ public class HabilidadListDTO implements Serializable {
 		this.habEntidad = habEntidad;
 	}
 
+	public Integer getHabEspecialidad() {
+		return this.habEspecialidad;
+	}
+
+	public void setHabEspecialidad(Integer habEspecialidad) {
+		this.habEspecialidad = habEspecialidad;
+	}
+
 	public Timestamp getHabFechaFin() {
 		return this.habFechaFin;
 	}
@@ -220,12 +271,68 @@ public class HabilidadListDTO implements Serializable {
 		this.habFechaInicio = habFechaInicio;
 	}
 
+	public Integer getHabNivel() {
+		return this.habNivel;
+	}
+
+	public void setHabNivel(Integer habNivel) {
+		this.habNivel = habNivel;
+	}
+
+	public Integer getHabPais() {
+		return this.habPais;
+	}
+
+	public void setHabPais(Integer habPais) {
+		this.habPais = habPais;
+	}
+
+	public String getHabRegistro() {
+		return this.habRegistro;
+	}
+
+	public void setHabRegistro(String habRegistro) {
+		this.habRegistro = habRegistro;
+	}
+
 	public Integer getHabTipo() {
 		return this.habTipo;
 	}
 
 	public void setHabTipo(Integer habTipo) {
 		this.habTipo = habTipo;
+	}
+
+	public String getNivel() {
+		return this.nivel;
+	}
+
+	public void setNivel(String nivel) {
+		this.nivel = nivel;
+	}
+
+	public String getPais() {
+		return this.pais;
+	}
+
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+
+	public Integer getThaCodigo() {
+		return this.thaCodigo;
+	}
+
+	public void setThaCodigo(Integer thaCodigo) {
+		this.thaCodigo = thaCodigo;
+	}
+
+	public String getThaDescripcion() {
+		return this.thaDescripcion;
+	}
+
+	public void setThaDescripcion(String thaDescripcion) {
+		this.thaDescripcion = thaDescripcion;
 	}
 
 }

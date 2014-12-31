@@ -1,27 +1,18 @@
 package ec.edu.uce.besg.ejb.service.impl;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
-import ec.edu.uce.besg.ejb.entity.AvisoDTO;
 import ec.edu.uce.besg.ejb.entity.CandidatoDTO;
-import ec.edu.uce.besg.ejb.entity.CandidatoListDTO;
 import ec.edu.uce.besg.ejb.entity.ExperienciaDTO;
 import ec.edu.uce.besg.ejb.entity.HabilidadDTO;
-import ec.edu.uce.besg.ejb.entity.PostulacionDTO;
-import ec.edu.uce.besg.ejb.entity.PreguntaDTO;
+import ec.edu.uce.besg.ejb.entity.HabilidadListDTO;
 import ec.edu.uce.besg.ejb.entity.ReferenciaDTO;
-import ec.edu.uce.besg.ejb.entity.RespuestaDTO;
-import ec.edu.uce.besg.ejb.entity.ResultadoDTO;
-import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 import ec.edu.uce.besg.ejb.service.ServicioCandidato;
-import ec.edu.uce.besg.ejb.service.ServicioEmpresa;
 
 @Stateless
 public class ServicioCandidatoImpl implements ServicioCandidato {
@@ -40,7 +31,7 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 			//UsuarioDTO user = candidatoDTO.getCanUsuario();
 			//user.setBemPerfil(factoryDAO.getPerfilDAOImpl().find(1));
 			//candidatoDTO.setBemUsuario(user);
-			if(factoryDAO.getCandidatoDAOImpl().getByIdentificacion(candidatoDTO))
+			if(factoryDAO.getCandidatoDAOImpl().getByAnd(candidatoDTO).get(0) != null)
 				throw new SecurityException("El número de identificación ingresado ya existe en el sistema");
 			else
 			{
@@ -57,15 +48,37 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 	}
 
 	@Override
-	public List<CandidatoListDTO> obtenerCandidato(CandidatoListDTO candidatoListDTO)throws SecurityException {
+	public List<CandidatoDTO> obtenerCandidato(CandidatoDTO candidatoDTO)throws SecurityException {
 		//log.info("obtenerCandidato");
 		try {
-			return factoryDAO.getCandidatoDAOImpl().getByAnd(candidatoListDTO);
+			return factoryDAO.getCandidatoDAOImpl().getByAnd(candidatoDTO);
 		} catch (Exception e) {
 			//log.info("Error al registrar el Candidato {}", e.toString());
 			throw new SecurityException(e);
 		}
 
+	}
+	
+	@Override
+	public List<CatalogoDTO> obtenerCatalogo(CatalogoDTO catalogo) throws SecurityException
+	{
+		try {
+			return factoryDAO.getCatalogoDAOImpl().getAll(catalogo);
+		} catch (Exception e) {
+			//log.info("Error al registrar Aviso {}", e.toString());
+			throw new SecurityException("Error al obtener catalogo");
+		}				
+	}
+	
+	@Override
+	public List<HabilidadListDTO> obtenerHabilidad(HabilidadListDTO habilidad) throws SecurityException
+	{
+		try {
+			return factoryDAO.getHabilidadDAOImpl().getByAnd(habilidad);
+		} catch (Exception e) {
+			//log.info("Error al registrar Aviso {}", e.toString());
+			throw new SecurityException("Error al obtener catalogo");
+		}				
 	}
 	
 	/*@Override
@@ -102,7 +115,7 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 			factoryDAO.getCandidatoDAOImpl().edit(can);
 		} catch (Exception e) {
 			//log.info("Error al registrar el Candidato {}", e.toString());
-			throw new SecurityException("Error al registrar el Candidato");
+			throw new SecurityException("Error al registrar la Habilidad");
 		}
 	}
 	
