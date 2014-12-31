@@ -23,6 +23,21 @@ public class HabilidadDTO implements Serializable {
 
 	@Column(name="hab_descripcion")
 	private String habDescripcion;
+	
+	@Column(name="hab_nivel")
+	private Integer habNivel;
+	
+	@Column(name="hab_especialidad")
+	private Integer habEspecialidad;
+	
+	@Column(name="hab_carrera")
+	private String habCarrera;
+	
+	@Column(name="hab_pais")
+	private Integer habPais;
+	
+	@Column(name="hab_registro")
+	private String habRegistro;
 
 	@Column(name="hab_entidad")
 	private String habEntidad;
@@ -100,6 +115,46 @@ public class HabilidadDTO implements Serializable {
 
 	public void setBemTipoHabilidad(TipoHabilidadDTO bemTipoHabilidad) {
 		this.bemTipoHabilidad = bemTipoHabilidad;
+	}
+
+	public Integer getHabNivel() {
+		return habNivel;
+	}
+
+	public void setHabNivel(Integer habNivel) {
+		this.habNivel = habNivel;
+	}
+
+	public Integer getHabEspecialidad() {
+		return habEspecialidad;
+	}
+
+	public void setHabEspecialidad(Integer habEspecialidad) {
+		this.habEspecialidad = habEspecialidad;
+	}
+
+	public String getHabCarrera() {
+		return habCarrera;
+	}
+
+	public void setHabCarrera(String habCarrera) {
+		this.habCarrera = habCarrera;
+	}
+
+	public Integer getHabPais() {
+		return habPais;
+	}
+
+	public void setHabPais(Integer habPais) {
+		this.habPais = habPais;
+	}
+
+	public String getHabRegistro() {
+		return habRegistro;
+	}
+
+	public void setHabRegistro(String habRegistro) {
+		this.habRegistro = habRegistro;
 	}
 
 }

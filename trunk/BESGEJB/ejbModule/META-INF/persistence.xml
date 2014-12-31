@@ -32,7 +32,7 @@
 		<class>ec.edu.uce.besg.ejb.entity.ContactoListDTO</class>
 		<class>ec.edu.uce.besg.ejb.entity.CandidatoListDTO</class>
 		<class>ec.edu.uce.besg.ejb.entity.ExperienciaListDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.HabilidadListDTO</class>
 		<class>ec.edu.uce.besg.ejb.entity.ReferenciaListDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.HabilidadListDTO</class>
 	</persistence-unit>
 </persistence>
