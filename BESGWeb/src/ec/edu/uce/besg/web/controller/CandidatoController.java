@@ -1,11 +1,24 @@
 package ec.edu.uce.besg.web.controller;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import org.apache.commons.collections.CollectionUtils;
+
+import ec.edu.uce.besg.ejb.entity.CandidatoDTO;
+import ec.edu.uce.besg.ejb.entity.HabilidadDTO;
+import ec.edu.uce.besg.ejb.entity.HabilidadListDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
+import ec.edu.uce.besg.ejb.service.ServicioCandidato;
+import ec.edu.uce.besg.ejb.util.JsfUtil;
+import ec.edu.uce.besg.ejb.util.SeguridadesException;
 import ec.edu.uce.besg.web.datamanager.CandidatoDataManager;
 
 @ViewScoped
@@ -19,6 +32,9 @@ public class CandidatoController implements Serializable {
 	@ManagedProperty(value="#{candidatoDataManager}")
 	private CandidatoDataManager candidatoDataManager;
 	
+	@EJB
+	private ServicioCandidato servicioCandidato;
+	
 	public CandidatoDataManager getCandidatoDataManager() {
 		return candidatoDataManager;
 	}
@@ -26,42 +42,175 @@ public class CandidatoController implements Serializable {
 		this.candidatoDataManager = candidatoDataManager;
 	}
 	
-	/*public List<EstudioListDTO> getListEstudio() {
+	@PostConstruct
+	private void init()
+	{
+		buscarEstadoCivil();
+		buscarSexo();
+		buscarTipoDocumento();
+		readCandidato();
+		buscarPais();
+		buscarNivelEstudio();
+	}
+	
+	
+	
+	public void actualizar()
+	{
+		CandidatoDTO candidato;
+		//UsuarioDTO user;
 		try {
-			this.listEstudio=candidatosService.obtenerEstudio(getCandidato());
-		} catch (SilsagException e) {
+			//user=new UsuarioDTO();
+			candidato=new CandidatoDTO();
+			//candidato.setCanUsuario(user.getUsuCodigo());
+			candidato.setCanFechaNacimiento(new Timestamp(candidatoDataManager.getFechaNac().getTime()));
+			//candidato.setCanFoto(uploadedFile.getContents());
+			candidato.setCanEstadoCivil(candidatoDataManager.getCodigoEstadoCivil());
+			candidato.setCanSexo(candidatoDataManager.getCodigoSexo());
+			servicioCandidato.registrarCandidato(candidato);
+			JsfUtil.addInfoMessage("Datos Actualizados Exitosamente");
+		} catch (Exception e) {
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
-		return this.listEstudio;
 	}
 	
-	public List<ExperienciaListDTO> getExperienciaList() {
+	public void buscarEstadoCivil() {
+		List<CatalogoDTO> listaCatalogo = null;
 		try {
-			this.experienciaList=candidatosService.obtenerExperiencia(candidato);
-		} catch (SilsagException e) {
+			CatalogoDTO cat = new CatalogoDTO();
+			cat.setCatCodigo(28);
+			listaCatalogo = this.servicioCandidato.obtenerCatalogo(cat);
+			if (CollectionUtils.isEmpty(listaCatalogo) && listaCatalogo.size() == 0) {
+				JsfUtil.addWarningMessage("Busqueda vacia");
+			} else {
+				this.candidatoDataManager.setEstadoCivilListDTOs(listaCatalogo);
+			}
+		} catch (SecurityException e) {
+			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+	
+	public void buscarTipoDocumento() {
+		List<CatalogoDTO> listaCatalogo = null;
+		try {
+			CatalogoDTO cat = new CatalogoDTO();
+			cat.setCatCodigo(25);
+			listaCatalogo = this.servicioCandidato.obtenerCatalogo(cat);
+			if (CollectionUtils.isEmpty(listaCatalogo) && listaCatalogo.size() == 0) {
+				JsfUtil.addWarningMessage("Busqueda vacia");
+			} else {
+				this.candidatoDataManager.setTipoDocumentoListDTOs(listaCatalogo);
+			}
+		} catch (SecurityException e) {
+			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
+	public void buscarSexo() {
+		List<CatalogoDTO> listaCatalogo = null;
+		try {
+			CatalogoDTO cat = new CatalogoDTO();
+			cat.setCatCodigo(32);
+			listaCatalogo = this.servicioCandidato.obtenerCatalogo(cat);
+			if (CollectionUtils.isEmpty(listaCatalogo) && listaCatalogo.size() == 0) {
+				JsfUtil.addWarningMessage("Busqueda vacia");
+			} else {
+				this.candidatoDataManager.setGeneroListDTOs(listaCatalogo);
+			}
+		} catch (SecurityException e) {
+			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+	
+	private void readCandidato()
+	{
+		List<CandidatoDTO> listaCandidatos=null;
+		try {
+			//ojo se manda de parametro new candidatoDto pero deberia mandar el usuario logeada
+			listaCandidatos = this.servicioCandidato.obtenerCandidato(new CandidatoDTO());
+			if (CollectionUtils.isEmpty(listaCandidatos) && listaCandidatos.size()==0) {
+				JsfUtil.addInfoMessage("Busqueda vacia");
+			} else {
+				this.candidatoDataManager.setCandidatoInsertar(listaCandidatos.get(0));
+				buscarEstadoCivil();
+				this.candidatoDataManager.setCodigoEstadoCivil(listaCandidatos.get(0).getCanEstadoCivil());
+				buscarSexo();
+				this.candidatoDataManager.setCodigoSexo(listaCandidatos.get(0).getCanSexo());
+				buscarTipoDocumento();
+				this.candidatoDataManager.setCodigotipo(listaCandidatos.get(0).getCanTipoIdentificacion());
+			}
+		} catch (SecurityException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
-		return this.experienciaList;
 	}
 	
-	public List<ReferenciaDTO> getListReferencia() throws SilsagException {
-		listReferencia=candidatosService.obtenerReferencia(candidato);
-		return listReferencia;
+	public void buscarNivelEstudio() {
+		List<CatalogoDTO> listaCatalogo = null;
+		try {
+			CatalogoDTO cat = new CatalogoDTO();
+			cat.setCatCodigo(21);
+			listaCatalogo = this.servicioCandidato.obtenerCatalogo(cat);
+			if (CollectionUtils.isEmpty(listaCatalogo) && listaCatalogo.size() == 0) {
+				JsfUtil.addWarningMessage("Busqueda vacia");
+			} else {
+				this.candidatoDataManager.setNivEstListDTOs(listaCatalogo);
+			}
+		} catch (SecurityException e) {
+			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+	
+	public void buscarEspecialidad() {
+		List<CatalogoDTO> listaCatalogo = null;
+		try {
+			CatalogoDTO cat = new CatalogoDTO();
+			cat.setCatCodigo(candidatoDataManager.getCodigoNivEst());
+			listaCatalogo = this.servicioCandidato.obtenerCatalogo(cat);
+			if (CollectionUtils.isEmpty(listaCatalogo) && listaCatalogo.size() == 0) {
+				JsfUtil.addWarningMessage("Busqueda vacia");
+			} else {
+				this.candidatoDataManager.setNivEstListDTOs(listaCatalogo);
+			}
+		} catch (SecurityException e) {
+			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
+	public void buscarPais() {
+		List<CatalogoDTO> listaCatalogo = null;
+		try {
+			CatalogoDTO cat = new CatalogoDTO();
+			cat.setCatCodigo(4);
+			listaCatalogo = this.servicioCandidato.obtenerCatalogo(cat);
+			if (CollectionUtils.isEmpty(listaCatalogo) && listaCatalogo.size() == 0) {
+				JsfUtil.addWarningMessage("Busqueda vacia");
+			} else {
+				this.candidatoDataManager.setPaisListDTOs(listaCatalogo);
+			}
+		} catch (SecurityException e) {
+			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
 	}
 	
 	public void agregarEstudio()
 	{
 		try {
-			if(Integer.valueOf(nivelEstudio.toString())!=0)
+			if(candidatoDataManager.getCodigoNivEst()!=0)
 			{	
-				getEstudio().setBemCandidato(getCandidato());
-				getEstudio().setEstNivel(Integer.valueOf(nivelEstudio.toString()));
-				getEstudio().setEstPais(pais!=null?Integer.valueOf(pais.toString()):null);
-				getEstudio().setEstEspecialidad(especialidad!=null?Integer.valueOf(especialidad.toString()):null);
-				getEstudio().setEstFechaInicio(new Timestamp(getFechaInicioEstudio().getTime()));
-				getEstudio().setEstFechaFin(new Timestamp(getFechaFinEstudio().getTime()));
-				candidatosService.agregarEstudio(getEstudio());
-				getListEstudio();
+				candidatoDataManager.getEstudioInsertar().setBemCandidato(candidatoDataManager.getCandidatoInsertar());
+				candidatoDataManager.getEstudioInsertar().setHabNivel(candidatoDataManager.getCodigoNivEst());
+				candidatoDataManager.getEstudioInsertar().setHabEspecialidad(candidatoDataManager.getCodigoEspecialidad());
+				candidatoDataManager.getEstudioInsertar().setHabPais(candidatoDataManager.getCodigoPais());
+				candidatoDataManager.getEstudioInsertar().setHabFechaFin(new Timestamp(candidatoDataManager.getFechaFin().getTime()));
+				candidatoDataManager.getEstudioInsertar().setHabFechaInicio(new Timestamp(candidatoDataManager.getFechaInicio().getTime()));
+				servicioCandidato.agregarHabilidad(candidatoDataManager.getEstudioInsertar());
+				buscarEstudio();
 				resetEstudio();
 				JsfUtil.addInfoMessage("Agregado Exitosamente");
 			}
@@ -74,6 +223,208 @@ public class CandidatoController implements Serializable {
 		}
 	}
 	
+	public void onRowDelEstudio(HabilidadListDTO est)
+	{
+		HabilidadDTO habilidadDTO;
+		CandidatoDTO candidatoDTO;
+		try {
+			candidatoDTO=new CandidatoDTO();
+			habilidadDTO=new HabilidadDTO();
+			habilidadDTO.setHabCodigo(est.getHabCodigo());
+			candidatoDTO.setCanCodigo(est.getCanCodigo());
+			habilidadDTO.setHabEspecialidad(est.getHabEspecialidad());
+			habilidadDTO.setHabNivel(est.getHabNivel());
+			habilidadDTO.setHabPais(est.getHabPais());
+			habilidadDTO.setBemCandidato(candidatoDTO);
+			servicioCandidato.eliminarHabilidad(habilidadDTO);
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (SecurityException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+	
+	private void resetEstudio()
+	{
+		candidatoDataManager.setEstudioInsertar(new HabilidadDTO());
+		candidatoDataManager.setCodigoEspecialidad(0);
+		candidatoDataManager.setCodigoNivEst(0);
+		candidatoDataManager.setCodigoPais(0);
+		candidatoDataManager.setCodigotipo(0);
+	}
+	
+	public void buscarEstudio() {
+		List<HabilidadListDTO> listaHabilidad = null;
+		try {
+			listaHabilidad = this.servicioCandidato.obtenerHabilidad(new HabilidadListDTO());
+			if (CollectionUtils.isEmpty(listaHabilidad) && listaHabilidad.size() == 0) {
+				JsfUtil.addWarningMessage("Busqueda vacia");
+			} else {
+				this.candidatoDataManager.setEstudioDtos(listaHabilidad);
+			}
+		} catch (SecurityException e) {
+			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	} 
+
+	
+	/*public void agregarExperiencia()
+	{
+		try {
+			 getExperiencia().setBemCandidato(getCandidato());
+			 getExperiencia().setExpFechaInicio(new Timestamp(fechaInicioExp.getTime()));
+			 getExperiencia().setExpFechaFin(new Timestamp(fechaFinExp.getTime()));
+			 getExperiencia().setExpTipoEmpresa(Integer.valueOf(getTipoEmpresa().toString()));
+			 candidatosService.agregarExperiencia(getExperiencia());
+			 setExperiencia(new ExperienciaDTO());
+			 getExperienciaList();
+			 JsfUtil.addInfoMessage("Agregado Exitosamente");
+		} catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
+	public void onRowDelExperiencia(ExperienciaListDTO exp)
+	{
+		try {
+			setExperiencia(new ExperienciaDTO());
+			getExperiencia().setExpCodigo(exp.getExpCodigo());
+			candidatosService.eliminarExperiencia(getExperiencia());
+			setExperiencia(new ExperienciaDTO());
+			getExperienciaList();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+	
+	public void agregarReferencia()
+	{
+		try{
+			getReferencia().setBemCandidato(getCandidato());
+			candidatosService.agregarReferencia(getReferencia());
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
+			getListReferencia();
+			setReferencia(new ReferenciaDTO());	
+		} catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
+	public void onRowDelReferencia(ReferenciaDTO ref)
+	{
+		try {
+			candidatosService.eliminarReferencia(ref);
+			getListReferencia();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+		
+	
+	public void agregarCurso()
+	{
+		try {
+			getCurso().setBemCandidato(getCandidato());
+			getCurso().setCurFechaInicio(new Timestamp(getFechaInicioCurso().getTime()));
+			getCurso().setCurFechaFin(new Timestamp(getFechaFinCurso().getTime()));
+			candidatosService.agregarCurso(getCurso());
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
+			getCursoList();
+			setCurso(new CursoDTO());
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
+	public void onRowDelCurso(CursoDTO cur)
+	{
+		try {
+			candidatosService.eliminarCurso(cur);
+			getCursoList();
+			setCurso(new CursoDTO());
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+	
+	public void agregarAdicional()
+	{
+		try {
+			getAdicional().setBemCandidato(getCandidato());
+			candidatosService.agregarAdicional(getAdicional());
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
+			getAdicionalList();
+			setAdicional(new AdicionalDTO());
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
+	public void onRowDelAdicional(AdicionalDTO adi)
+	{
+		try {
+			candidatosService.eliminarAdicional(adi);
+			getAdicionalList();
+			setAdicional(new AdicionalDTO());
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
+	
+	public void actualizar()
+	{
+		try {
+			//candidato.setBemUsuario(user);
+			candidato.setCanFechaNacimiento(new Timestamp(fechaNacimiento.getTime()));
+			//candidato.setCanFoto(uploadedFile.getContents());
+			candidato.setCanEstadoCivil(Integer.valueOf(estadoCivil.toString()));
+			candidato.setCanSexo(Integer.valueOf(genero.toString()));
+			candidato.setCanFechaUltima(new Timestamp(new Date().getTime()));
+			candidatosService.actualizarCandidato(candidato);
+			JsfUtil.addInfoMessage("Datos Actualizados Exitosamente");
+		} catch (Exception e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+	
+	public void handleFileUpload(FileUploadEvent event) {  
+		//logger.info("Entro imagen");      
+		candidatoDataManager.getCandidatoInsertar().setCanFoto(event.getFile().getContents());
+	    JsfUtil.addInfoMessage("Succesful"+ event.getFile().getFileName() + " is uploaded.");
+	    try {
+			candidatosService.actualizarCandidato(getCandidato());
+		} catch (SilsagException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+	
+	public void handleFileUploadEstudio(FileUploadEvent event) {        
+		
+		getEstudio().setEstArchivo(event.getFile().getContents());
+	    JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
+	}
+	
+
 	
 	public void descargarEstudio(EstudioListDTO est)
 	{
@@ -93,7 +444,7 @@ public class CandidatoController implements Serializable {
 	public void handleFileUploadCurso(FileUploadEvent event) {        
 		getCurso().setCurArchivo(event.getFile().getContents());
 	    JsfUtil.addInfoMessage("Archivo "+ event.getFile().getFileName() + " esta en memoria.");
-	}	
+	}/*	
 	
 	public void descargarCurso(CursoDTO cur)
 	{
@@ -154,9 +505,5 @@ public class CandidatoController implements Serializable {
 		else
 			JsfUtil.addErrorMessage("No existe archivo");
 	}
-	
-	*/
-	
-	
-
+*/	
 }
