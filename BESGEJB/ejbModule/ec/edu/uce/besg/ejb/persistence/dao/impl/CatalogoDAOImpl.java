@@ -2,8 +2,8 @@ package ec.edu.uce.besg.ejb.persistence.dao.impl;
 
 import java.util.List;
 
-import javax.persistence.Query;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import ec.edu.uce.besg.ejb.persistence.dao.CatalogoDAO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
@@ -18,7 +18,7 @@ public class CatalogoDAOImpl extends AbstractFacadeImpl<CatalogoDTO> implements 
 		super(entityManager);
 	}
 	
-	@SuppressWarnings({ "unchecked", "unused" })
+	@SuppressWarnings({ "unchecked" })
 	@Override 
 	public List<CatalogoDTO> getAll(CatalogoDTO catalogo) 
 	{ 
