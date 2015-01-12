@@ -82,6 +82,7 @@ public class IndicadorDTO implements Serializable {
 	private ModeloDTO indModeloBean;
 
 	public IndicadorDTO() {
+		//this.indIndicador=new IndicadorDTO();
 	}
 
 	public Integer getIndCodigo() {
