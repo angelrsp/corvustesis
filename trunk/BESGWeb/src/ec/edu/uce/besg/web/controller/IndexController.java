@@ -28,8 +28,14 @@ public class IndexController implements Serializable {
 	}
 
 	public void redirectLoginEmpresa(ActionEvent actionEvent) throws IOException {
-		JsfUtil.redirect("loginEmpresa.xhtml");
+		JsfUtil.redirect("public/loginEmpresa.xhtml");
     }
+
+	public void redirectRegistroEmpresa(ActionEvent actionEvent) throws IOException {
+		JsfUtil.redirect("public/registroEmpresa.xhtml");
+    }
+
+	
 	
 	public void redirectLoginUsuario(ActionEvent actionEvent) throws IOException {
 		JsfUtil.redirect("loginUsuario.xhtml");
@@ -39,7 +45,7 @@ public class IndexController implements Serializable {
 		JsfUtil.redirect("loginCandidato.xhtml");
     }
 
-	public void redirectBienEmpresa(ActionEvent actionEvent) throws IOException {
+	public void redirectEmpresa(ActionEvent actionEvent) throws IOException {
 		JsfUtil.redirect("pages/empresa/bienvenido.xhtml");
     }
 	
