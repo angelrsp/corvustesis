@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
+import ec.edu.uce.besg.common.util.UtilEncryption;
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
 import ec.edu.uce.besg.ejb.entity.ContactoDTO;
 import ec.edu.uce.besg.ejb.entity.ContactoListDTO;
@@ -55,6 +56,7 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 				return factoryDAO.getEmpresaDAOImpl().edit(empresa.getEmpresaDTO());
 			else
 			{
+				empresa.getUsuarioDTO().setUsuPassword(UtilEncryption.getInstancia().encriptar(empresa.getUsuarioDTO().getUsuPassword()));
 				usuarioDTO= factoryDAO.getUsuarioDAOImpl().create(empresa.getUsuarioDTO());
 				
 				empresa.getEmpresaDTO().setSegUsuario(usuarioDTO);

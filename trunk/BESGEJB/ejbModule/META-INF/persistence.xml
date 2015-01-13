@@ -34,5 +34,8 @@
 		<class>ec.edu.uce.besg.ejb.entity.ExperienciaListDTO</class>
 		<class>ec.edu.uce.besg.ejb.entity.ReferenciaListDTO</class>
 		<class>ec.edu.uce.besg.ejb.entity.HabilidadListDTO</class>
+		<properties>
+			<property name="hibernate.show_sql" value="true"/>
+		</properties>
 	</persistence-unit>
 </persistence>

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
 import ec.edu.uce.besg.ejb.entity.CandidatoDTO;
 import ec.edu.uce.besg.ejb.entity.ExperienciaDTO;
@@ -25,14 +26,14 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 	
 	
 	@Override
-	public CandidatoDTO registrarCandidato(CandidatoDTO candidatoDTO)throws SecurityException {
+	public CandidatoDTO registrarCandidato(CandidatoDTO candidatoDTO)throws CorvustecException {
 		//log.info("registrarCandidato");
 		try {
 			//UsuarioDTO user = candidatoDTO.getCanUsuario();
 			//user.setBemPerfil(factoryDAO.getPerfilDAOImpl().find(1));
 			//candidatoDTO.setBemUsuario(user);
 			if(factoryDAO.getCandidatoDAOImpl().getByAnd(candidatoDTO).get(0) != null)
-				throw new SecurityException("El número de identificación ingresado ya existe en el sistema");
+				throw new CorvustecException("El número de identificación ingresado ya existe en el sistema");
 			else
 			{
 				if(candidatoDTO.getCanCodigo()!=null)
@@ -42,42 +43,42 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 			}	
 		} catch (Exception e) {
 			//log.info("Error al registrar el Candidato {}", e.toString());
-			throw new SecurityException(e);
+			throw new CorvustecException(e);
 		}
 
 	}
 
 	@Override
-	public List<CandidatoDTO> obtenerCandidato(CandidatoDTO candidatoDTO)throws SecurityException {
+	public List<CandidatoDTO> obtenerCandidato(CandidatoDTO candidatoDTO)throws CorvustecException {
 		//log.info("obtenerCandidato");
 		try {
 			return factoryDAO.getCandidatoDAOImpl().getByAnd(candidatoDTO);
 		} catch (Exception e) {
 			//log.info("Error al registrar el Candidato {}", e.toString());
-			throw new SecurityException(e);
+			throw new CorvustecException(e);
 		}
 
 	}
 	
 	@Override
-	public List<CatalogoDTO> obtenerCatalogo(CatalogoDTO catalogo) throws SecurityException
+	public List<CatalogoDTO> obtenerCatalogo(CatalogoDTO catalogo) throws CorvustecException
 	{
 		try {
 			return factoryDAO.getCatalogoDAOImpl().getAll(catalogo);
 		} catch (Exception e) {
 			//log.info("Error al registrar Aviso {}", e.toString());
-			throw new SecurityException("Error al obtener catalogo");
+			throw new CorvustecException("Error al obtener catalogo");
 		}				
 	}
 	
 	@Override
-	public List<HabilidadListDTO> obtenerHabilidad(HabilidadListDTO habilidad) throws SecurityException
+	public List<HabilidadListDTO> obtenerHabilidad(HabilidadListDTO habilidad) throws CorvustecException
 	{
 		try {
 			return factoryDAO.getHabilidadDAOImpl().getByAnd(habilidad);
 		} catch (Exception e) {
 			//log.info("Error al registrar Aviso {}", e.toString());
-			throw new SecurityException("Error al obtener catalogo");
+			throw new CorvustecException("Error al obtener catalogo");
 		}				
 	}
 	
@@ -104,7 +105,7 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 	
 	
 	@Override
-	public void agregarHabilidad(HabilidadDTO habilidad) throws SecurityException {
+	public void agregarHabilidad(HabilidadDTO habilidad) throws CorvustecException {
 		//log.info("agregarHabilidad");
 		try {
 			factoryDAO.getHabilidadDAOImpl().create(habilidad);
@@ -115,12 +116,12 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 			factoryDAO.getCandidatoDAOImpl().edit(can);
 		} catch (Exception e) {
 			//log.info("Error al registrar el Candidato {}", e.toString());
-			throw new SecurityException("Error al registrar la Habilidad");
+			throw new CorvustecException("Error al registrar la Habilidad");
 		}
 	}
 	
 	@Override
-	public void eliminarHabilidad(HabilidadDTO habilidad) throws SecurityException {
+	public void eliminarHabilidad(HabilidadDTO habilidad) throws CorvustecException {
 		//log.info("eliminarEstudio");
 
 		try {
@@ -138,56 +139,56 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 			factoryDAO.getCandidatoDAOImpl().edit(can);
 		} catch (Exception e) {
 			//log.info("Error al eliminarEstudio {}", e.toString());
-			throw new SecurityException("Error al eliminarHabilidad");
+			throw new CorvustecException("Error al eliminarHabilidad");
 		}
 	}
 	
 	@Override
-	public void agregarExperiencia(ExperienciaDTO experiencia) throws SecurityException {
+	public void agregarExperiencia(ExperienciaDTO experiencia) throws CorvustecException {
 		//log.info("agregarExperiencia");
 
 		try {
 			factoryDAO.getExperienciaDAOImpl().create(experiencia);
 		} catch (Exception e) {
 			//log.info("Error al registrar el Candidato {}", e.toString());
-			throw new SecurityException("Error al agregarExperiencia");
+			throw new CorvustecException("Error al agregarExperiencia");
 		}
 	}
 	
 	@Override
-	public void eliminarExperiencia(ExperienciaDTO experiencia) throws SecurityException {
+	public void eliminarExperiencia(ExperienciaDTO experiencia) throws CorvustecException {
 		//log.info("eliminarExperiencia");
 
 		try {
 			factoryDAO.getExperienciaDAOImpl().remove(experiencia);
 		} catch (Exception e) {
 			//log.info("Error al registrar el Candidato {}", e.toString());
-			throw new SecurityException("Error al eliminarExperiencia");
+			throw new CorvustecException("Error al eliminarExperiencia");
 		}
 	}
 
 	
 	@Override
-	public void agregarReferencia(ReferenciaDTO referencia) throws SecurityException {
+	public void agregarReferencia(ReferenciaDTO referencia) throws CorvustecException {
 		//log.info("agregarHerramientas");
 
 		try {
 			factoryDAO.getReferenciaDAOImpl().create(referencia);
 		} catch (Exception e) {
 			//log.info("Error al registrar el Candidato {}", e.toString());
-			throw new SecurityException("Error al agregarReferencia");
+			throw new CorvustecException("Error al agregarReferencia");
 		}
 	}
 	
 	@Override
-	public void eliminarReferencia(ReferenciaDTO referencia) throws SecurityException {
+	public void eliminarReferencia(ReferenciaDTO referencia) throws CorvustecException {
 		//log.info("eliminarReferencia");
 
 		try {
 			factoryDAO.getReferenciaDAOImpl().remove(referencia);
 		} catch (Exception e) {
 			//log.info("Error al registrar el Candidato {}", e.toString());
-			throw new SecurityException("Error al eliminarReferencia");
+			throw new CorvustecException("Error al eliminarReferencia");
 		}
 	}
 	/*
