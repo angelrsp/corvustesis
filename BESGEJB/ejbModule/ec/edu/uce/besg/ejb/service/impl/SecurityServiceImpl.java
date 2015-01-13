@@ -8,4 +8,9 @@ import ec.edu.uce.besg.ejb.service.SecurityService;
 public class SecurityServiceImpl implements SecurityService {
 
 	
+	public void loginEmpresa()
+	{
+		
+	}
+	
 }

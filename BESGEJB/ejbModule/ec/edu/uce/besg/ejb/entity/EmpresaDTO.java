@@ -1,7 +1,11 @@
 package ec.edu.uce.besg.ejb.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
+
 import java.util.List;
 
 
@@ -36,12 +40,15 @@ public class EmpresaDTO implements Serializable {
 	@Column(name="emp_ubicacion")
 	private Integer empUbicacion;
 
-	@Column(name="emp_usuario")
-	private Integer empUsuario;
-
 	@Column(name="emp_web")
 	private String empWeb;
 
+	
+	//bi-directional many-to-one association to CandidatoDTO
+	@ManyToOne
+	@JoinColumn(name="emp_usuario")
+	private UsuarioDTO segUsuario;
+	
 	//bi-directional many-to-one association to AvisoDTO
 	@OneToMany(mappedBy="bemEmpresa")
 	private List<AvisoDTO> bemAvisos;
@@ -105,14 +112,6 @@ public class EmpresaDTO implements Serializable {
 		this.empUbicacion = empUbicacion;
 	}
 
-	public Integer getEmpUsuario() {
-		return this.empUsuario;
-	}
-
-	public void setEmpUsuario(Integer empUsuario) {
-		this.empUsuario = empUsuario;
-	}
-
 	public String getEmpWeb() {
 		return this.empWeb;
 	}
@@ -151,6 +150,15 @@ public class EmpresaDTO implements Serializable {
 		this.bemContactos = bemContactos;
 	}
 
+	public UsuarioDTO getSegUsuario() {
+		return segUsuario;
+	}
+
+	public void setSegUsuario(UsuarioDTO segUsuario) {
+		this.segUsuario = segUsuario;
+	}
+	
+	
 	public ContactoDTO addBemContacto(ContactoDTO bemContacto) {
 		getBemContactos().add(bemContacto);
 		bemContacto.setBemEmpresa(this);
