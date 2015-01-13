@@ -28,6 +28,7 @@ public class EmpresaController implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@ManagedProperty(value="#{empresaDataManager}")
 	private EmpresaDataManager empresaDataManager;
 

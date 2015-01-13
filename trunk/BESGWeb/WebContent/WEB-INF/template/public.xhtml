@@ -11,19 +11,34 @@
 
 <body>
 
+<f:view transient="true">
+
 	<div class="selector">
 		<h:form id="index">
+			
+			<p:growl id="pnlMessages" autoUpdate="true" closable="true"/>
+			
 			<div align="center">
 				<div style="width: 995px;">
 					<table width="99%">
 						<tr>
 							<td><h:graphicImage value="/resources/img/uce_logo.jpg"
 									height="40" /></td>
-							<td align="right"><p:commandButton id="btnEmpresa"
-									value="Empresas"
-									actionListener="#{indexController.redirectLoginEmpresa}" /> <p:commandButton
-									id="btnCandidato" value="Candidatos"
-									actionListener="#{indexController.redirectLoginCandidato}" /></td>
+							<td align="right">
+								<p:commandButton id="btnEmpresa" value="Empresas" type="button" />
+																		
+								<p:overlayPanel for="btnEmpresa" showEffect="blind" hideEffect="explode" showEvent="mouseover" hideEvent="mousedown"
+                    				 showCloseIcon="true" dismissable="false">
+									<table width="99%">
+										<tr>
+											<td><a href="#{request.contextPath}/public/loginEmpresa.xhtml">Ingreso</a></td>
+											<td><a href="#{request.contextPath}/public/registroEmpresa.xhtml">Registro</a></td>
+										</tr>
+									</table>	
+							    </p:overlayPanel>									
+										
+								<p:commandButton id="btnCandidato" value="Candidatos" actionListener="#{indexController.redirectLoginCandidato}" />
+							</td>
 						</tr>
 					</table>
 				</div>
@@ -41,6 +56,8 @@
 			</div>
 		</h:form>
 	</div>
+
+</f:view>
 
 </body>
 
