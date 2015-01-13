@@ -5,11 +5,15 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
 import ec.edu.uce.besg.ejb.entity.ContactoDTO;
 import ec.edu.uce.besg.ejb.entity.ContactoListDTO;
 import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 import ec.edu.uce.besg.ejb.service.ServicioEmpresa;
 import ec.edu.uce.besg.ejb.util.SeguridadesException;
 import ec.edu.uce.besg.ejb.vo.EmpresaVO;
@@ -17,7 +21,8 @@ import ec.edu.uce.besg.ejb.vo.EmpresaVO;
 
 @Stateless
 public class ServicioEmpresaImpl implements ServicioEmpresa{
-	//private static final Logger log = LoggerFactory.getLogger(ServicioEmpresaImpl.class);
+	
+	private static final Logger logger = LoggerFactory.getLogger(ServicioEmpresaImpl.class);
 	
 	@EJB
 	private FactoryDAO factoryDAO;
@@ -26,7 +31,7 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 	@Override
 	public EmpresaDTO registrarActualizarEmpresa(EmpresaVO empresa)
 			throws SeguridadesException {
-		//UsuarioDTO user;
+		UsuarioDTO usuarioDTO;
 		//CatalogoDTO sector;
 		//List<UsuarioDTO> listUsuario;
 		try{
@@ -47,13 +52,16 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 			empresa.getEmpresaDTO().setEmpUsuario(user.getUsuCodigo());*/
 			//empresa.setEmpActiva(false);
 			if(empresa.getEmpresaDTO().getEmpCodigo()!=null)
-			{
 				return factoryDAO.getEmpresaDAOImpl().edit(empresa.getEmpresaDTO());
-			}
 			else
+			{
+				usuarioDTO= factoryDAO.getUsuarioDAOImpl().create(empresa.getUsuarioDTO());
+				
+				empresa.getEmpresaDTO().setSegUsuario(usuarioDTO);
 				return factoryDAO.getEmpresaDAOImpl().create(empresa.getEmpresaDTO());
+			}
 		} catch (Exception e) {
-			//log.info("Error al registrar Empresa {}", e.toString());
+			logger.info("Error al registrar Empresa {}", e.toString());
 			throw new SeguridadesException("Error al registrar Empresa");
 		}
 	}
@@ -64,7 +72,7 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 		try {
 			return factoryDAO.getEmpresaDAOImpl().edit(empresa);
 		} catch (Exception e) {
-			//log.info("Error al registrar Empresa {}", e.toString());
+			logger.info("Error al registrar Empresa {}", e.toString());
 			throw new SeguridadesException("Error al registrar Empresa");
 		}
 	}
@@ -124,7 +132,7 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 		try {
 			return factoryDAO.getEmpresaDAOImpl().getByAnd(empresa);
 		} catch (Exception e) {
-			//log.info("Error al registrar Aviso {}", e.toString());
+			logger.info("Error al registrar Aviso {}", e.toString());
 			throw new SecurityException("Error al obtener empresa");
 		}				
 	}
@@ -135,7 +143,7 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 		try {
 			return factoryDAO.getContactoDAOImpl().getByAnd(contacto);
 		} catch (Exception e) {
-			//log.info("Error al registrar Aviso {}", e.toString());
+			logger.info("Error al registrar Aviso {}", e.toString());
 			throw new SecurityException("Error al buscar contactos");
 		}				
 	}
@@ -148,7 +156,7 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 		try {
 			listCatalogo = factoryDAO.getCatalogoDAOImpl().getAll(catalogoDTO);
 		} catch (Exception e) {
-			//slf4jLogger.info("Error al buscarCatalogo {}", e.getMessage());
+			logger.info("Error al buscarCatalogo {}", e.getMessage());
 			throw new SeguridadesException("No se pudo buscarCatalogo de la base de datos");
 		}
 		
@@ -162,9 +170,12 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 			CatalogoDTO catalogoEncontrado=factoryDAO.getCatalogoDAOImpl().find(id);
 			return catalogoEncontrado;
 		} catch (Exception e) {
-			//log.info("Error al registrar Aviso {}", e.toString());
+			logger.info("Error al registrar Aviso {}", e.toString());
 			throw new SecurityException("Error al obtener el catalogo");
 		}				
 	}
+	
+	
+	
 	
 }

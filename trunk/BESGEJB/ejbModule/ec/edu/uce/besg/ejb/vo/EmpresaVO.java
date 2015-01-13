@@ -6,7 +6,9 @@ import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 
 public class EmpresaVO implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
+	
 	private UsuarioDTO usuarioDTO;
 	private EmpresaDTO empresaDTO;
 	

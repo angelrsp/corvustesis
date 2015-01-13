@@ -1,7 +1,11 @@
 package ec.edu.uce.besg.ejb.persistence.entity.security;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
+
 import java.util.List;
 
 
@@ -57,6 +61,11 @@ public class UsuarioDTO implements Serializable {
 	//bi-directional many-to-one association to UsuarioPerfilDTO
 	@OneToMany(mappedBy="segUsuario")
 	private List<UsuarioPerfilDTO> segUsuarioPerfils;
+	
+	//bi-directional many-to-one association to RegistroLoginDTOs
+	@OneToMany(mappedBy="segUsuario")
+	private List<EmpresaDTO> bemEmpresas;
+
 
 	public UsuarioDTO() {
 	}
@@ -131,6 +140,14 @@ public class UsuarioDTO implements Serializable {
 
 	public void setSegHistorialPasswords(List<HistorialPasswordDTO> segHistorialPasswords) {
 		this.segHistorialPasswords = segHistorialPasswords;
+	}
+
+	public List<EmpresaDTO> getBemEmpresas() {
+		return bemEmpresas;
+	}
+
+	public void setBemEmpresas(List<EmpresaDTO> bemEmpresas) {
+		this.bemEmpresas = bemEmpresas;
 	}
 
 	public HistorialPasswordDTO addSegHistorialPassword(HistorialPasswordDTO segHistorialPassword) {
