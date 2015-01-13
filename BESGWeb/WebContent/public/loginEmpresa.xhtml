@@ -15,18 +15,18 @@
 			<table>
 				<tr>
 					<td><h:outputText value="Usuario" /></td>
-					<td><p:inputText placeholder="Usuario o correo electrónio "/></td>
+					<td><p:inputText placeholder="Usuario o correo electrónio" value="#{loginEmpresaDataManager.usuarioDTO.usuLogin}"/></td>
 				</tr>
 
 				<tr>
 					<td><h:outputText value="Contraseña" /></td>
-					<td><p:password id="password" /></td>
+					<td><p:password value="#{loginEmpresaDataManager.usuarioDTO.usuPassword}" /></td>
 				</tr>
 
 				<tr>
 					<td colspan="2" align="center"><p:commandButton
 							value="Ingresar"
-							actionListener="#{indexController.redirectBienEmpresa}" /></td>
+							actionListener="#{loginEmpresa.intro}" /></td>
 				</tr>
 			</table>
 			
