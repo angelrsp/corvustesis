@@ -1,18 +1,18 @@
-package ec.edu.uce.besg.ejb.util;
+package ec.edu.uce.besg.common.util;
 
 /**
  * Clase para administrar exepciones en la aplicaci&oacute;n
  * @author 
  *
  */
-public class SeguridadesException extends Exception {
+public class CorvustecException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Constructor vacio
 	 */
-	public SeguridadesException(){
+	public CorvustecException(){
 		super();
 	}
 	
@@ -20,7 +20,7 @@ public class SeguridadesException extends Exception {
 	 * 
 	 * @param mensaje
 	 */
-	public SeguridadesException(String mensaje){
+	public CorvustecException(String mensaje){
 		super(mensaje);
 	}
 	
@@ -28,7 +28,7 @@ public class SeguridadesException extends Exception {
 	 * 
 	 * @param causa
 	 */
-	public SeguridadesException(Throwable causa){
+	public CorvustecException(Throwable causa){
 		super(causa);
 	}
 	
@@ -37,7 +37,7 @@ public class SeguridadesException extends Exception {
 	 * @param mensaje
 	 * @param causa
 	 */
-	public SeguridadesException(String mensaje, Throwable causa){
+	public CorvustecException(String mensaje, Throwable causa){
 		super(mensaje, causa);
 	}
 
