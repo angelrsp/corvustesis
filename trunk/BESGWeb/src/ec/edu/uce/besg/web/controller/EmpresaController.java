@@ -12,10 +12,10 @@ import javax.faces.bean.ViewScoped;
 import org.apache.commons.collections.CollectionUtils;
 import org.primefaces.context.RequestContext;
 
+import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 import ec.edu.uce.besg.ejb.service.ServicioEmpresa;
-import ec.edu.uce.besg.ejb.util.SeguridadesException;
 import ec.edu.uce.besg.ejb.vo.EmpresaVO;
 import ec.edu.uce.besg.web.datamanager.EmpresaDataManager;
 import ec.edu.uce.besg.web.util.JsfUtil;
@@ -121,7 +121,7 @@ public class EmpresaController implements Serializable{
 			} else {
 				this.empresaDataManager.setSecCatalogoDTOs(listaCatalogo);
 			}
-		} catch (SeguridadesException e) {
+		} catch (CorvustecException e) {
 			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
@@ -141,7 +141,7 @@ public class EmpresaController implements Serializable{
 				this.empresaDataManager
 						.setPaiCatalogoDTOs(listaCatalogo);
 			}
-		} catch (SeguridadesException e) {
+		} catch (CorvustecException e) {
 			JsfUtil.addWarningMessage(e.getMessage());
 		}
 
@@ -161,7 +161,7 @@ public class EmpresaController implements Serializable{
 				this.empresaDataManager
 						.setProCatalogoDTOs(listaCatalogo);
 			}
-		} catch (SeguridadesException e) {
+		} catch (CorvustecException e) {
 			JsfUtil.addWarningMessage(e.getMessage());
 		}
 	}
@@ -180,7 +180,7 @@ public class EmpresaController implements Serializable{
 				this.empresaDataManager
 				.setCiuCatalogoDTOs(listaCatalogo);
 			}
-		} catch (SeguridadesException e) {
+		} catch (CorvustecException e) {
 			//slf4jLogger.info("Error al buscarCiudad {} ", e);
 			JsfUtil.addWarningMessage(e.getMessage());
 		}
@@ -205,7 +205,7 @@ public class EmpresaController implements Serializable{
 				empresaDataManager.setCodigoCiudad(catalogoDTO.getCatCodigo());
 				this.empresaDataManager.setCodigoSector(listaEmpresas.get(0).getEmpSector());
 			}
-		} catch (SecurityException e) {
+		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}

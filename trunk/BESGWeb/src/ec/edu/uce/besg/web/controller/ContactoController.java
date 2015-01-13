@@ -11,12 +11,12 @@ import javax.faces.bean.ViewScoped;
 
 import org.apache.commons.collections.CollectionUtils;
 
+import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.entity.ContactoDTO;
 import ec.edu.uce.besg.ejb.entity.ContactoListDTO;
 import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 import ec.edu.uce.besg.ejb.service.ServicioEmpresa;
-import ec.edu.uce.besg.ejb.util.SeguridadesException;
 import ec.edu.uce.besg.web.datamanager.ContactoDataManager;
 import ec.edu.uce.besg.web.util.JsfUtil;
 
@@ -58,7 +58,7 @@ public class ContactoController implements Serializable {
 				JsfUtil.addInfoMessage("Guardado Exitosamente");
 				readContacto();
 			}
-		} catch (SecurityException e) {
+		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}	
@@ -75,7 +75,7 @@ public class ContactoController implements Serializable {
 			} else {
 				this.contactoDataManager.setEmpresa(listaEmpresas.get(0));
 			}
-		} catch (SecurityException e) {
+		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
@@ -90,7 +90,7 @@ public class ContactoController implements Serializable {
 			} else {
 				this.contactoDataManager.setContactoDTOs(listaContactos);
 			}
-		} catch (SecurityException e) {
+		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
@@ -102,7 +102,7 @@ public class ContactoController implements Serializable {
 			contactoDataManager.setContactoInsertar(contactoEncontrado);
 			//contactoDataManager.setCargo(contactoEncontrado.getConCargo());
 			readEmpresa();
-		} catch (SecurityException e) {
+		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
@@ -118,7 +118,7 @@ public class ContactoController implements Serializable {
 			} else {
 				this.contactoDataManager.setCargoLists(listaCatalogo);
 			}
-		} catch (SeguridadesException e) {
+		} catch (CorvustecException e) {
 			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
 			JsfUtil.addErrorMessage(e.getMessage());
 		}

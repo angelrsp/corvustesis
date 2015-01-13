@@ -12,6 +12,8 @@ import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 
+import ec.edu.uce.besg.common.util.UtilApplication;
+
 public class JsfUtil {
 
 	public static SelectItem[] getSelectItems(List<?> entities,
@@ -45,23 +47,20 @@ public class JsfUtil {
 	}
 
 	public static void addErrorMessage(String msg) {
-		FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg);
-		FacesContext.getCurrentInstance().addMessage(null, facesMsg);
+		
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, null));		
 	}
 
 	public static void addInfoMessage(String msg) {
-		FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg);
-		FacesContext.getCurrentInstance().addMessage("successInfo", facesMsg);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null));		
 	}
 
 	public static void addWarningMessage(String msg) {
-		FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_WARN, msg, msg);
-		FacesContext.getCurrentInstance().addMessage("successInfo", facesMsg);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, msg, null));
 	}
 
 	public static void addFatalMessage(String msg) {
-		FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_FATAL, msg, msg);
-		FacesContext.getCurrentInstance().addMessage("successInfo", facesMsg);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, msg, null));		
 	}
 
 	
@@ -76,7 +75,7 @@ public class JsfUtil {
 
 	public static void redirect(String url) throws IOException
 	{
-		FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+		FacesContext.getCurrentInstance().getExternalContext().redirect(UtilApplication.appendStringBuilder("/",FacesContext.getCurrentInstance().getExternalContext().getContextName(),"/"+url).toString());
 	}
 	
 	public static void putObject(String key,Object value)

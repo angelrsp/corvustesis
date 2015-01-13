@@ -17,8 +17,8 @@ import ec.edu.uce.besg.ejb.entity.HabilidadDTO;
 import ec.edu.uce.besg.ejb.entity.HabilidadListDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 import ec.edu.uce.besg.ejb.service.ServicioCandidato;
-import ec.edu.uce.besg.ejb.util.JsfUtil;
 import ec.edu.uce.besg.web.datamanager.CandidatoDataManager;
+import ec.edu.uce.besg.web.util.JsfUtil;
 
 @ViewScoped
 @ManagedBean(name = "candidatoController")

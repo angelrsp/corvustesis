@@ -8,9 +8,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import ec.edu.uce.besg.ejb.service.ServicioEmpresa;
-import ec.edu.uce.besg.ejb.util.JsfUtil;
 import ec.edu.uce.besg.ejb.vo.EmpresaVO;
 import ec.edu.uce.besg.web.datamanager.RegistroEmpresaDataManager;
+import ec.edu.uce.besg.web.util.JsfUtil;
 
 @ViewScoped
 @ManagedBean(name = "registroEmpresaController")
@@ -29,8 +29,21 @@ public class RegistroEmpresaController implements Serializable{
 	
 	@EJB
 	private ServicioEmpresa servicioEmpresa;
+
+	public RegistroEmpresaController () {
+		
+	}
 	
-	
+	public RegistroEmpresaDataManager getRegistroEmpresaDataManager() {
+		return registroEmpresaDataManager;
+	}
+
+	public void setRegistroEmpresaDataManager(
+			RegistroEmpresaDataManager registroEmpresaDataManager) {
+		this.registroEmpresaDataManager = registroEmpresaDataManager;
+	}
+
+
 	public void registrar()
 	{
 		EmpresaVO empresa;
@@ -40,7 +53,7 @@ public class RegistroEmpresaController implements Serializable{
 			empresa.setUsuarioDTO(registroEmpresaDataManager.getUsuarioDTO());
 			servicioEmpresa.registrarActualizarEmpresa(empresa);
 			JsfUtil.addInfoMessage("Registro Exitoso");
-			JsfUtil.redirect("/pages/empresa/inicio.xhtml");
+			JsfUtil.redirect("pages/empresa/inicio.xhtml");
 		} catch (Exception e) {
 			JsfUtil.addInfoMessage(e.toString());
 		}
