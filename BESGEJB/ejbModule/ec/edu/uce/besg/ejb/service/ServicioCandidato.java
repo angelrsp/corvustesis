@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.entity.CandidatoDTO;
 import ec.edu.uce.besg.ejb.entity.ExperienciaDTO;
 import ec.edu.uce.besg.ejb.entity.HabilidadDTO;
@@ -15,30 +16,30 @@ import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 public interface ServicioCandidato {
 
 	CandidatoDTO registrarCandidato(CandidatoDTO candidatoDTO)
-			throws SecurityException;
+			throws CorvustecException;
 
-	void agregarHabilidad(HabilidadDTO habilidad) throws SecurityException;
+	void agregarHabilidad(HabilidadDTO habilidad) throws CorvustecException;
 
-	void eliminarHabilidad(HabilidadDTO habilidad) throws SecurityException;
+	void eliminarHabilidad(HabilidadDTO habilidad) throws CorvustecException;
 
 	void agregarExperiencia(ExperienciaDTO experiencia)
-			throws SecurityException;
+			throws CorvustecException;
 
 	void eliminarExperiencia(ExperienciaDTO experiencia)
-			throws SecurityException;
+			throws CorvustecException;
 
-	void agregarReferencia(ReferenciaDTO referencia) throws SecurityException;
+	void agregarReferencia(ReferenciaDTO referencia) throws CorvustecException;
 
-	void eliminarReferencia(ReferenciaDTO referencia) throws SecurityException;
+	void eliminarReferencia(ReferenciaDTO referencia) throws CorvustecException;
 
 	List<CatalogoDTO> obtenerCatalogo(CatalogoDTO catalogo)
-			throws SecurityException;
+			throws CorvustecException;
 
 	List<CandidatoDTO> obtenerCandidato(CandidatoDTO candidatoDTO)
-			throws SecurityException;
+			throws CorvustecException;
 
 	List<HabilidadListDTO> obtenerHabilidad(HabilidadListDTO habilidad)
-			throws SecurityException;
+			throws CorvustecException;
 
 
 }
