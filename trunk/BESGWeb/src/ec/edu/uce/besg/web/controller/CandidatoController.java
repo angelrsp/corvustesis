@@ -12,6 +12,7 @@ import javax.faces.bean.ViewScoped;
 
 import org.apache.commons.collections.CollectionUtils;
 
+import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.entity.CandidatoDTO;
 import ec.edu.uce.besg.ejb.entity.HabilidadDTO;
 import ec.edu.uce.besg.ejb.entity.HabilidadListDTO;
@@ -84,7 +85,7 @@ public class CandidatoController implements Serializable {
 			} else {
 				this.candidatoDataManager.setEstadoCivilListDTOs(listaCatalogo);
 			}
-		} catch (SecurityException e) {
+		} catch (CorvustecException e) {
 			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
@@ -101,7 +102,7 @@ public class CandidatoController implements Serializable {
 			} else {
 				this.candidatoDataManager.setTipoDocumentoListDTOs(listaCatalogo);
 			}
-		} catch (SecurityException e) {
+		} catch (CorvustecException e) {
 			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
@@ -118,7 +119,7 @@ public class CandidatoController implements Serializable {
 			} else {
 				this.candidatoDataManager.setGeneroListDTOs(listaCatalogo);
 			}
-		} catch (SecurityException e) {
+		} catch (CorvustecException e) {
 			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
@@ -141,7 +142,7 @@ public class CandidatoController implements Serializable {
 				buscarTipoDocumento();
 				this.candidatoDataManager.setCodigotipo(listaCandidatos.get(0).getCanTipoIdentificacion());
 			}
-		} catch (SecurityException e) {
+		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
@@ -157,7 +158,7 @@ public class CandidatoController implements Serializable {
 			} else {
 				this.candidatoDataManager.setNivEstListDTOs(listaCatalogo);
 			}
-		} catch (SecurityException e) {
+		} catch (CorvustecException e) {
 			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
@@ -174,7 +175,7 @@ public class CandidatoController implements Serializable {
 			} else {
 				this.candidatoDataManager.setNivEstListDTOs(listaCatalogo);
 			}
-		} catch (SecurityException e) {
+		} catch (CorvustecException e) {
 			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
@@ -191,7 +192,7 @@ public class CandidatoController implements Serializable {
 			} else {
 				this.candidatoDataManager.setPaisListDTOs(listaCatalogo);
 			}
-		} catch (SecurityException e) {
+		} catch (CorvustecException e) {
 			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
@@ -237,7 +238,7 @@ public class CandidatoController implements Serializable {
 			habilidadDTO.setBemCandidato(candidatoDTO);
 			servicioCandidato.eliminarHabilidad(habilidadDTO);
 			JsfUtil.addInfoMessage("Eliminado Exitosamente");
-		} catch (SecurityException e) {
+		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
 		catch (Exception e) {
@@ -263,7 +264,7 @@ public class CandidatoController implements Serializable {
 			} else {
 				this.candidatoDataManager.setEstudioDtos(listaHabilidad);
 			}
-		} catch (SecurityException e) {
+		} catch (CorvustecException e) {
 			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
 			JsfUtil.addErrorMessage(e.getMessage());
 		}

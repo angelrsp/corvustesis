@@ -55,7 +55,7 @@ public class RegistroEmpresaController implements Serializable{
 			JsfUtil.addInfoMessage("Registro Exitoso");
 			JsfUtil.redirect("pages/empresa/inicio.xhtml");
 		} catch (Exception e) {
-			JsfUtil.addInfoMessage(e.toString());
+			JsfUtil.addErrorMessage(e.toString());
 		}
 		finally{
 			empresa=null;
