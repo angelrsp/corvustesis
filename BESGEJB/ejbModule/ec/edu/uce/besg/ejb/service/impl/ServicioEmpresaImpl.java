@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
 import ec.edu.uce.besg.ejb.entity.ContactoDTO;
 import ec.edu.uce.besg.ejb.entity.ContactoListDTO;
@@ -15,7 +16,6 @@ import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 import ec.edu.uce.besg.ejb.service.ServicioEmpresa;
-import ec.edu.uce.besg.ejb.util.SeguridadesException;
 import ec.edu.uce.besg.ejb.vo.EmpresaVO;
 
 
@@ -30,7 +30,7 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 	
 	@Override
 	public EmpresaDTO registrarActualizarEmpresa(EmpresaVO empresa)
-			throws SeguridadesException {
+			throws CorvustecException {
 		UsuarioDTO usuarioDTO;
 		//CatalogoDTO sector;
 		//List<UsuarioDTO> listUsuario;
@@ -62,18 +62,18 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 			}
 		} catch (Exception e) {
 			logger.info("Error al registrar Empresa {}", e.toString());
-			throw new SeguridadesException("Error al registrar Empresa");
+			throw new CorvustecException("Error al registrar Empresa");
 		}
 	}
 	
 	
 	@Override
-	public EmpresaDTO actualizarEmpresa(EmpresaDTO empresa)throws SeguridadesException {
+	public EmpresaDTO actualizarEmpresa(EmpresaDTO empresa)throws CorvustecException {
 		try {
 			return factoryDAO.getEmpresaDAOImpl().edit(empresa);
 		} catch (Exception e) {
 			logger.info("Error al registrar Empresa {}", e.toString());
-			throw new SeguridadesException("Error al registrar Empresa");
+			throw new CorvustecException("Error al registrar Empresa");
 		}
 	}
 	
@@ -100,7 +100,7 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 	}
 	*/
 	@Override
-	public ContactoDTO agregarContacto(ContactoDTO contacto) throws SecurityException
+	public ContactoDTO agregarContacto(ContactoDTO contacto) throws CorvustecException
 	{
 		try {
 			if(contacto.getConCodigo()!=null)
@@ -110,19 +110,19 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 			
 			} catch (Exception e) {
 			//log.info("Error al registrar Aviso {}", e.toString());
-			throw new SecurityException("Error al registrar Aviso");
+			throw new CorvustecException("Error al registrar Aviso");
 		}		
 	}
 	
 	@Override
-	public ContactoDTO obtenerContactos(ContactoListDTO contacto) throws SecurityException
+	public ContactoDTO obtenerContactos(ContactoListDTO contacto) throws CorvustecException
 	{
 		try {
 			ContactoDTO contactoEncontrado=factoryDAO.getContactoDAOImpl().find(contacto.getConCodigo());
 			return contactoEncontrado;
 		} catch (Exception e) {
 			//log.info("Error al registrar Aviso {}", e.toString());
-			throw new SecurityException("Error al obtener el contacto");
+			throw new CorvustecException("Error al obtener el contacto");
 		}				
 	}
 	
@@ -138,40 +138,40 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 	}
 	
 	@Override
-	public List<ContactoListDTO> buscarContacto(ContactoListDTO contacto) throws SecurityException
+	public List<ContactoListDTO> buscarContacto(ContactoListDTO contacto) throws CorvustecException
 	{
 		try {
 			return factoryDAO.getContactoDAOImpl().getByAnd(contacto);
 		} catch (Exception e) {
 			logger.info("Error al registrar Aviso {}", e.toString());
-			throw new SecurityException("Error al buscar contactos");
+			throw new CorvustecException("Error al buscar contactos");
 		}				
 	}
 	
 	
 	@Override
-	public List<CatalogoDTO> buscarCatalogo(CatalogoDTO catalogoDTO) throws SeguridadesException {
+	public List<CatalogoDTO> buscarCatalogo(CatalogoDTO catalogoDTO) throws CorvustecException {
 		//slf4jLogger.info("buscarCatalogo");
 		List<CatalogoDTO> listCatalogo = null;
 		try {
 			listCatalogo = factoryDAO.getCatalogoDAOImpl().getAll(catalogoDTO);
 		} catch (Exception e) {
 			logger.info("Error al buscarCatalogo {}", e.getMessage());
-			throw new SeguridadesException("No se pudo buscarCatalogo de la base de datos");
+			throw new CorvustecException("No se pudo buscarCatalogo de la base de datos");
 		}
 		
 		return listCatalogo;
 	}
 	
 	@Override
-	public CatalogoDTO obtenerCatalogoId(int id) throws SecurityException
+	public CatalogoDTO obtenerCatalogoId(int id) throws CorvustecException
 	{
 		try {
 			CatalogoDTO catalogoEncontrado=factoryDAO.getCatalogoDAOImpl().find(id);
 			return catalogoEncontrado;
 		} catch (Exception e) {
 			logger.info("Error al registrar Aviso {}", e.toString());
-			throw new SecurityException("Error al obtener el catalogo");
+			throw new CorvustecException("Error al obtener el catalogo");
 		}				
 	}
 	

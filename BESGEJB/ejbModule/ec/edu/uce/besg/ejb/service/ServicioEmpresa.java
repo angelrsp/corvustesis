@@ -4,37 +4,37 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.entity.ContactoDTO;
 import ec.edu.uce.besg.ejb.entity.ContactoListDTO;
 import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
-import ec.edu.uce.besg.ejb.util.SeguridadesException;
 import ec.edu.uce.besg.ejb.vo.EmpresaVO;
 
 @Local
 public interface ServicioEmpresa {
 
 	EmpresaDTO actualizarEmpresa(EmpresaDTO empresa)
-			throws SeguridadesException;
+			throws CorvustecException;
 
-	ContactoDTO agregarContacto(ContactoDTO contacto) throws SecurityException;
+	ContactoDTO agregarContacto(ContactoDTO contacto) throws CorvustecException;
 
 	EmpresaDTO registrarActualizarEmpresa(EmpresaVO empresa)
-			throws SeguridadesException;
+			throws CorvustecException;
 
 	List<CatalogoDTO> buscarCatalogo(CatalogoDTO catalogoDTO)
-			throws SeguridadesException;
+			throws CorvustecException;
 
 	List<EmpresaDTO> obtenerEmpresa(EmpresaDTO empresa)
-			throws SecurityException;
+			throws CorvustecException;
 
 	ContactoDTO obtenerContactos(ContactoListDTO contacto)
-			throws SecurityException;
+			throws CorvustecException;
 
 	List<ContactoListDTO> buscarContacto(ContactoListDTO contacto)
-			throws SecurityException;
+			throws CorvustecException;
 
-	CatalogoDTO obtenerCatalogoId(int id) throws SecurityException;
+	CatalogoDTO obtenerCatalogoId(int id) throws CorvustecException;
 
 	
 }
