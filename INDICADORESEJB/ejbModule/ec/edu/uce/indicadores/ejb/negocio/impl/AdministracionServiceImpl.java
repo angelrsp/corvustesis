@@ -178,8 +178,10 @@ public class AdministracionServiceImpl implements AdministracionService{
 	{
 		log.info("createPerfil");
 		try{
-			if(factoryDAO.getPerfilDAOImpl().getByName(perfil)!=null)
+			perfil.setPerDescripcion(perfil.getPerDescripcion().toUpperCase());
+			if(factoryDAO.getPerfilDAOImpl().getByName(perfil)==null)
 			{
+				
 				if(perfil.getPerCodigo()!=null)
 					return factoryDAO.getPerfilDAOImpl().edit(perfil);
 				else
