@@ -15,6 +15,7 @@ import org.primefaces.context.RequestContext;
 import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 import ec.edu.uce.besg.ejb.service.ServicioEmpresa;
 import ec.edu.uce.besg.ejb.vo.EmpresaVO;
 import ec.edu.uce.besg.web.datamanager.EmpresaDataManager;
@@ -189,21 +190,23 @@ public class EmpresaController implements Serializable{
 	private void readEmpresa()
 	{
 		List<EmpresaDTO> listaEmpresas=null;
-		CatalogoDTO catalogoDTO;
+		EmpresaDTO empresaDTO;
 		try {
-			//ojo se manda de parametro new empresadto pero deberia mandar la empresa logeada
-			listaEmpresas = this.servicioEmpresa.obtenerEmpresa(new EmpresaDTO());
+			empresaDTO=new EmpresaDTO();
+			empresaDTO.setSegUsuario((UsuarioDTO)JsfUtil.getObject("UsuarioEmpresa"));
+			
+			listaEmpresas = this.servicioEmpresa.obtenerEmpresa(empresaDTO);
 			if (CollectionUtils.isEmpty(listaEmpresas) && listaEmpresas.size()==0) {
 				JsfUtil.addInfoMessage("Busqueda vacia");
 			} else {
 				this.empresaDataManager.setEmpresaInsertar(listaEmpresas.get(0));
-				catalogoDTO=servicioEmpresa.obtenerCatalogoId(this.empresaDataManager.getEmpresaInsertar().getEmpUbicacion());
-				empresaDataManager.setCodigoPais(catalogoDTO.getSegCatalogo().getSegCatalogo().getCatCodigo());
-				buscarProvincia();
-				empresaDataManager.setCodigoProvincia(catalogoDTO.getSegCatalogo().getCatCodigo());
-				buscarCiudad();
-				empresaDataManager.setCodigoCiudad(catalogoDTO.getCatCodigo());
-				this.empresaDataManager.setCodigoSector(listaEmpresas.get(0).getEmpSector());
+//				catalogoDTO=servicioEmpresa.obtenerCatalogoId(this.empresaDataManager.getEmpresaInsertar().getEmpUbicacion());
+//				empresaDataManager.setCodigoPais(catalogoDTO.getSegCatalogo().getSegCatalogo().getCatCodigo());
+//				buscarProvincia();
+//				empresaDataManager.setCodigoProvincia(catalogoDTO.getSegCatalogo().getCatCodigo());
+//				buscarCiudad();
+//				empresaDataManager.setCodigoCiudad(catalogoDTO.getCatCodigo());
+//				this.empresaDataManager.setCodigoSector(listaEmpresas.get(0).getEmpSector());
 			}
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());

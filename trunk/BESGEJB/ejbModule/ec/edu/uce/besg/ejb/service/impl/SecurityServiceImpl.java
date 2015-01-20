@@ -27,9 +27,7 @@ public class SecurityServiceImpl implements SecurityService {
 			usuarioDTO.setUsuPassword(UtilEncryption.getInstancia().encriptar(usuarioDTO.getUsuPassword()));
 			userList= factoryDAO.getUsuarioDAOImpl().getByAndJoinEntity(usuarioDTO);
 			if(!userList.isEmpty())
-			{
 				return userList.get(0);
-			}
 			else
 				return null;
 			

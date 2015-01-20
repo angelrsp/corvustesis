@@ -12,6 +12,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.dao.EmpresaDAO;
 
@@ -19,6 +23,8 @@ import ec.edu.uce.besg.ejb.persistence.dao.EmpresaDAO;
 
 public class EmpresaDAOImpl extends AbstractFacadeImpl<EmpresaDTO> implements EmpresaDAO {
 
+	private static final Logger logger = LoggerFactory.getLogger(UsuarioDAOImpl.class);
+	
 	public EmpresaDAOImpl() {
 		super();
 	}
@@ -28,7 +34,7 @@ public class EmpresaDAOImpl extends AbstractFacadeImpl<EmpresaDTO> implements Em
 	}
 	
 	@Override
-	public List<EmpresaDTO> getByAnd(EmpresaDTO empresaDTO) throws SecurityException
+	public List<EmpresaDTO> getByAnd(EmpresaDTO empresaDTO) throws CorvustecException
 	{
 		CriteriaBuilder cb;
 		CriteriaQuery<EmpresaDTO> cq;
@@ -55,8 +61,8 @@ public class EmpresaDAOImpl extends AbstractFacadeImpl<EmpresaDTO> implements Em
 				    value = getter.invoke(empresaDTO, new Object[0]);
 				    if(value!=null && value!="")
 				    {
-				    		predicate=cb.equal(from.get(fieldName), value);
-				    		predicateList.add(predicate);
+			    		predicate=cb.equal(from.get(fieldName), value);
+			    		predicateList.add(predicate);
 				    }
 				}
 	        }
@@ -67,11 +73,13 @@ public class EmpresaDAOImpl extends AbstractFacadeImpl<EmpresaDTO> implements Em
 			list=tq.getResultList();
 			return list;
 		}catch(Exception e){
-			//logger.info(e.toString());
-			throw new SecurityException(e);
+			logger.info(e.toString());
+			throw new CorvustecException(e);
 		}finally{
 			predicate=null;
 			predicateList=null;
 		}		
 	}
+	
+	
 }
