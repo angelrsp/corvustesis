@@ -20,14 +20,16 @@ private static final long serialVersionUID = 1L;
 	private ContactoDTO contactoInsertar;
 	private EmpresaDTO empresa;
 	private List<ContactoListDTO> contactoDTOs;
+	
 	private int cargo;
-	private List<CatalogoDTO> cargoLists;
+	
+	private List<CatalogoDTO> cargoCatalogoList;
 
 	public ContactoDataManager() {
 		contactoInsertar=new ContactoDTO();
 		contactoDTOs=new ArrayList<ContactoListDTO>();
 		empresa=new EmpresaDTO();
-		cargoLists=new ArrayList<CatalogoDTO>();
+		cargoCatalogoList=new ArrayList<CatalogoDTO>();
 	}
 
 	public ContactoDTO getContactoInsertar() {
@@ -62,14 +64,12 @@ private static final long serialVersionUID = 1L;
 		this.cargo = cargo;
 	}
 
-	public List<CatalogoDTO> getCargoLists() {
-		return cargoLists;
+	public List<CatalogoDTO> getCargoCatalogoList() {
+		return cargoCatalogoList;
 	}
 
-	public void setCargoLists(List<CatalogoDTO> cargoLists) {
-		this.cargoLists = cargoLists;
+	public void setCargoCatalogoList(List<CatalogoDTO> cargoCatalogoList) {
+		this.cargoCatalogoList = cargoCatalogoList;
 	}
-
-	
 
 }

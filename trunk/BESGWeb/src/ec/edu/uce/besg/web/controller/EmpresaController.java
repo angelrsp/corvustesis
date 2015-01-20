@@ -14,8 +14,8 @@ import org.primefaces.context.RequestContext;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
-import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
+import ec.edu.uce.besg.ejb.service.ServicioCatalogo;
 import ec.edu.uce.besg.ejb.service.ServicioEmpresa;
 import ec.edu.uce.besg.ejb.vo.EmpresaVO;
 import ec.edu.uce.besg.web.datamanager.EmpresaDataManager;
@@ -45,6 +45,9 @@ public class EmpresaController implements Serializable{
 	@EJB
 	private ServicioEmpresa servicioEmpresa;
 
+	@EJB
+	private ServicioCatalogo servicioCatalogo;
+	
 	public EmpresaController() {
 	
 	}
@@ -52,8 +55,8 @@ public class EmpresaController implements Serializable{
 	@PostConstruct
 	private void init()
 	{
-		buscarSector();
-		buscarPais();
+		readSector();
+		readPais();
 		readEmpresa();
 	}
 	
@@ -69,14 +72,14 @@ public class EmpresaController implements Serializable{
 			}
 			*/
 			//empresa.getEmpresaDTO().setEmpUsuario(empresaDataManager.getUsuarioDTO().getUsuCodigo());
-			empresa.setEmpresaDTO(empresaDataManager.getEmpresaInsertar());
+			empresa.setEmpresaDTO(empresaDataManager.getEmpresaDTO());
 			empresa.getEmpresaDTO().setEmpSector(empresaDataManager.getCodigoSector());
 			empresa.getEmpresaDTO().setEmpUbicacion(empresaDataManager.getCodigoCiudad());
 			
 			servicioEmpresa.registrarActualizarEmpresa(empresa);
 			RequestContext.getCurrentInstance().execute("mensajeDialog.show()");
 			JsfUtil.addInfoMessage("Su registro esta en proceso de aprobación. Recibirá una notificación de autorización al correo electrónico de registro");
-			empresaDataManager.setEmpresaInsertar(new EmpresaDTO());
+			empresaDataManager.setEmpresaDTO(new EmpresaDTO());
 			empresaDataManager.setCodigoCiudad(0);
 			empresaDataManager.setCodigoPais(0);
 			empresaDataManager.setCodigoProvincia(0);
@@ -111,79 +114,19 @@ public class EmpresaController implements Serializable{
 		}
 	}*/
 	
-	public void buscarSector() {
-		List<CatalogoDTO> listaCatalogo = null;
+	public void readSector() {
 		try {
-			CatalogoDTO cat = new CatalogoDTO();
-			cat.setCatCodigo(1);
-			listaCatalogo = this.servicioEmpresa.buscarCatalogo(cat);
-			if (CollectionUtils.isEmpty(listaCatalogo) && listaCatalogo.size() == 0) {
-				JsfUtil.addWarningMessage("Busqueda vacia");
-			} else {
-				this.empresaDataManager.setSecCatalogoDTOs(listaCatalogo);
-			}
+			this.empresaDataManager.setSectorCatalogoList(servicioCatalogo.readSector());
 		} catch (CorvustecException e) {
-			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
 	}
 	
-	public void buscarPais() {
-		//slf4jLogger.info("buscarCatalogo");
-		List<CatalogoDTO> listaCatalogo = null;
+	public void readPais() {
 		try {
-			CatalogoDTO cat = new CatalogoDTO();
-			cat.setCatCodigo(4);
-			listaCatalogo = this.servicioEmpresa.buscarCatalogo(cat);
-			if (CollectionUtils.isEmpty(listaCatalogo)
-					&& listaCatalogo.size() == 0) {
-				JsfUtil.addWarningMessage("Busqueda vacia");
-			} else {
-				this.empresaDataManager
-						.setPaiCatalogoDTOs(listaCatalogo);
-			}
+			this.empresaDataManager.setPaisCatalogoList(servicioCatalogo.readPais());
 		} catch (CorvustecException e) {
-			JsfUtil.addWarningMessage(e.getMessage());
-		}
-
-	}
-
-	public void buscarProvincia() {
-		//slf4jLogger.info("buscarCanton");
-		List<CatalogoDTO> listaCatalogo = null;
-		try {
-			CatalogoDTO cat = new CatalogoDTO();
-			cat.setCatCodigo(empresaDataManager.getCodigoPais());
-			listaCatalogo = this.servicioEmpresa.buscarCatalogo(cat);
-			if (CollectionUtils.isEmpty(listaCatalogo)
-					&& listaCatalogo.size() == 0) {
-				JsfUtil.addWarningMessage("Busqueda vacia");
-			} else {
-				this.empresaDataManager
-						.setProCatalogoDTOs(listaCatalogo);
-			}
-		} catch (CorvustecException e) {
-			JsfUtil.addWarningMessage(e.getMessage());
-		}
-	}
-
-	public void buscarCiudad() {
-		//slf4jLogger.info("buscarParroquia");
-		List<CatalogoDTO> listaCatalogo = null;
-		try {
-			CatalogoDTO cat = new CatalogoDTO();
-			cat.setCatCodigo(empresaDataManager.getCodigoProvincia());
-			listaCatalogo = this.servicioEmpresa.buscarCatalogo(cat);
-			if (CollectionUtils.isEmpty(listaCatalogo)
-					&& listaCatalogo.size() == 0) {
-				JsfUtil.addWarningMessage("Busqueda vacia");
-			} else {
-				this.empresaDataManager
-				.setCiuCatalogoDTOs(listaCatalogo);
-			}
-		} catch (CorvustecException e) {
-			//slf4jLogger.info("Error al buscarCiudad {} ", e);
-			JsfUtil.addWarningMessage(e.getMessage());
+			JsfUtil.addErrorMessage(e.getMessage());
 		}
 	}
 	
@@ -199,7 +142,7 @@ public class EmpresaController implements Serializable{
 			if (CollectionUtils.isEmpty(listaEmpresas) && listaEmpresas.size()==0) {
 				JsfUtil.addInfoMessage("Busqueda vacia");
 			} else {
-				this.empresaDataManager.setEmpresaInsertar(listaEmpresas.get(0));
+				this.empresaDataManager.setEmpresaDTO(listaEmpresas.get(0));
 //				catalogoDTO=servicioEmpresa.obtenerCatalogoId(this.empresaDataManager.getEmpresaInsertar().getEmpUbicacion());
 //				empresaDataManager.setCodigoPais(catalogoDTO.getSegCatalogo().getSegCatalogo().getCatCodigo());
 //				buscarProvincia();

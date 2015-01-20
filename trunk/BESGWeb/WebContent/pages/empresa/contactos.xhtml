@@ -46,7 +46,7 @@
 							<td><h:outputLabel value="#{i18n['besg.contacto.cargo']}" /></td>
 							<td><p:selectOneMenu value="#{contactoDataManager.cargo}">
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"/>
-									<f:selectItems value="#{contactoDataManager.cargoLists}" var="cargo" itemLabel="#{cargo.catDescripcion}" itemValue="#{cargo.catCodigo}"></f:selectItems>	
+									<f:selectItems value="#{contactoDataManager.cargoCatalogoList}" var="cargo" itemLabel="#{cargo.catDescripcion}" itemValue="#{cargo.catCodigo}"></f:selectItems>	
 								</p:selectOneMenu>
 								</td>
 						</tr>
