@@ -16,4 +16,12 @@ public interface ServicioCatalogo {
 
 	List<CatalogoDTO> readCargo() throws CorvustecException;
 
+	List<CatalogoDTO> readEstadoCivil() throws CorvustecException;
+
+	List<CatalogoDTO> readTipoDocumento() throws CorvustecException;
+
+	List<CatalogoDTO> readSexo() throws CorvustecException;
+
+	List<CatalogoDTO> readNivelEstudio() throws CorvustecException;
+
 }
