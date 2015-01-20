@@ -10,7 +10,6 @@ import ec.edu.uce.besg.ejb.entity.ExperienciaDTO;
 import ec.edu.uce.besg.ejb.entity.HabilidadDTO;
 import ec.edu.uce.besg.ejb.entity.HabilidadListDTO;
 import ec.edu.uce.besg.ejb.entity.ReferenciaDTO;
-import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 
 @Local
 public interface ServicioCandidato {
@@ -31,9 +30,6 @@ public interface ServicioCandidato {
 	void agregarReferencia(ReferenciaDTO referencia) throws CorvustecException;
 
 	void eliminarReferencia(ReferenciaDTO referencia) throws CorvustecException;
-
-	List<CatalogoDTO> obtenerCatalogo(CatalogoDTO catalogo)
-			throws CorvustecException;
 
 	List<CandidatoDTO> obtenerCandidato(CandidatoDTO candidatoDTO)
 			throws CorvustecException;

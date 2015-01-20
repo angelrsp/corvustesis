@@ -151,19 +151,6 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 	}
 	
 	
-	@Override
-	public List<CatalogoDTO> buscarCatalogo(CatalogoDTO catalogoDTO) throws CorvustecException {
-		//slf4jLogger.info("buscarCatalogo");
-		List<CatalogoDTO> listCatalogo = null;
-		try {
-			listCatalogo = factoryDAO.getCatalogoDAOImpl().getAll(catalogoDTO);
-		} catch (Exception e) {
-			logger.info("Error al buscarCatalogo {}", e.getMessage());
-			throw new CorvustecException("No se pudo buscarCatalogo de la base de datos");
-		}
-		
-		return listCatalogo;
-	}
 	
 	@Override
 	public CatalogoDTO obtenerCatalogoId(int id) throws CorvustecException

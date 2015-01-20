@@ -5,6 +5,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.common.util.UtilEncryption;
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
@@ -14,7 +17,8 @@ import ec.edu.uce.besg.ejb.service.SecurityService;
 @Stateless
 public class SecurityServiceImpl implements SecurityService {
 
-	
+	private static final Logger logger = LoggerFactory.getLogger(ServicioEmpresaImpl.class);
+
 	@EJB
 	private FactoryDAO factoryDAO;
 
@@ -32,6 +36,7 @@ public class SecurityServiceImpl implements SecurityService {
 				return null;
 			
 		} catch (Exception e) {
+			logger.info(e.toString());
 			throw new CorvustecException(e);
 		}
 		finally{
