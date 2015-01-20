@@ -9,7 +9,7 @@
 <h:head></h:head>
 <body>
 
-	<ui:composition template="/template/candidato.xhtml">
+	<ui:composition template="/WEB-INF/template/candidato.xhtml">
 		<ui:define name="contenido">
 		
  			<h:form id="contenido" enctype="multipart/form-data">
@@ -60,7 +60,7 @@
 							<td><p:inputText required="true"
 									requiredMessage="#{i18n['label.nombre.primero']}&#160;#{i18n['label.requerido']}"
 									value="#{datosCandidatoController.candidato.canPrimerNombre}"/></td>
-							<td><h:outputLabel value="#{i18n['label.nombre.Segundo']}:&#160;" /> </td>
+							<td><h:outputLabel value="#{i18n['label.nombre.segundo']}:&#160;" /> </td>
 							<td><p:inputText value="#{datosCandidatoController.candidato.canSegundoNombre}" /></td>
 						</tr>
 						<tr>
@@ -469,7 +469,7 @@
 						<tr>
 							<td><h:outputText value="#{i18n['label.email']}:&#160;" /></td>
 							<td><p:inputText value="#{datosCandidatoController.referencia.refMail}" required="true" requiredMessage="#{i18n['label.email']}:&#160;#{i18n['label.requerido']}">
-								<f:validator validatorId="emailValidator"></f:validator>
+<!-- 								<f:validator validatorId="emailValidator"></f:validator> -->
 								</p:inputText></td>
 						</tr>
 						

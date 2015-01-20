@@ -10,33 +10,74 @@
 </h:head>
 <body>
 
-<div align="center">
-	<div style="width: 995px; box-shadow: 0 0 20px #2E2D32;">
-		<div id="menu">
-			<h:form id="menu">
-				<p:menubar id="menuCandidato"
-					style="margin-left:auto; margin-right:auto;text-align: center; width:96%;">
-					<p:menuitem value="Inicio" url="/" />
-					<p:submenu label="Candidato">
-						<p:menuitem style="font-weight: bold; width:180px;" value="Cambiar Contraseña"
-							url="/pages/candidato/actualizarClave.xhtml" />
-						<p:menuitem style="font-weight: bold; width:180px;" value="Hoja de Vida" url="/pages/candidato/hojaVida.xhtml" />
-					</p:submenu>
-				</p:menubar>
-			</h:form>
+<div>
+		<h:form id="contenido">
+			
+		<p:growl id="pnlMessages" autoUpdate="true" closable="true"/>
+			
+		<div id="menu" align="center">
+		
+			<div style="width: 995px;">
+				<table width="99%">
+					<tr>
+						<td><h:graphicImage value="/resources/img/uce_logo.jpg"
+								height="40" /></td>
+						<td align="right">
+							<p:menubar id="menuPublico" style="width:30%">
+								<p:menuitem value="Inicio" url="/" />
+								<p:submenu label="Personal">
+									<p:menuitem value="Cambiar Contraseña" url="/pages/candidato/misDatos.xhtml" />
+									<p:menuitem value="Hoja de Vida" url="/pages/candidato/dato.xhtml" />
+									<p:menuitem value="Hoja de Vida" url="/pages/candidato/hojaVida.xhtml" />
+								</p:submenu>
+								<p:submenu label="Empleos">
+									<p:menuitem value="Avisos" url="/pages/empresa/aviso.xhtml" />
+									<p:menuitem value="Postulaciones" url="/pages/empresa/postulacion.xhtml" />
+									<p:menuitem value="Buscar Hojas de Vida" url="/pages/empresa/postulacion.xhtml" />
+								</p:submenu>								
+								<p:menuitem value="Salir" url="#" />
+							</p:menubar>																
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			<hr />
+			
+		</div>
 
-			<p:spacer height="10"></p:spacer>
 
-			<div id="content" align="left" style="width: 950px;">
-				<h:form id="contenido">
-					<ui:insert name="contenido"></ui:insert>
-					<p:spacer height="10"></p:spacer>
-				</h:form>
+
+
+
+		<div id="content" align="center">
+
+			<div style="width: 995px; box-shadow: 0 0 1px #2E2D32;">
+
+				<ui:insert name="contenido" />
+
 			</div>
 		</div>
-	</div>
+		
+	</h:form>
+		
+	<div align="center">
+		<ui:include src="/WEB-INF/template/footer.xhtml" />
+	</div>	
 	
-	<ui:include src="/WEB-INF/template/footer.xhtml" />
 </div>
+
+<script type="text/javascript">
+var num = 50; //number of pixels before modifying styles
+
+$(window).bind('scroll', function () {
+    if ($(window).scrollTop() > num) {
+        $('.menu').addClass('fixed');
+    } else {
+        $('.menu').removeClass('fixed');
+    }
+});
+</script>
+
 </body>
 </html>

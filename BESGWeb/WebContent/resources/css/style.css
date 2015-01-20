@@ -30,3 +30,18 @@ textarea {
   left: 0;
   width: 100%;
 }
+
+
+.menu {
+    background:#345;
+    color:#FFF;
+    height:2em;
+    padding:.5em;
+    position:absolute;
+    top:50px;
+    width:100%;
+}
+.fixed {
+    position:fixed;
+    top:0;
+}

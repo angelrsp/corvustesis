@@ -21,33 +21,43 @@ public class CandidatoDataManager implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private CandidatoDTO candidatoInsertar;
+	
+	
 	private List<CandidatoDTO> candidatoDTOs;
-	private List<CatalogoDTO> tipoDocumentoListDTOs;
-	private List<CatalogoDTO> estadoCivilListDTOs;
-	private List<CatalogoDTO> generoListDTOs;
-	private List<CatalogoDTO> nivEstListDTOs;
+	
+	private List<CatalogoDTO> tipoDocumentoCatalogoList;
+	private List<CatalogoDTO> estadoCivilCatalogoList;
+	private List<CatalogoDTO> sexoCatalogoList;
+	private List<CatalogoDTO> nivelEstudioCatalogoList;
+	private List<CatalogoDTO> paisCatalogoList;
+	
 	private List<CatalogoDTO> especialidadListDTOs;
 	private List<CatalogoDTO> especialidadCuartoListDTOs;
 	private List<CatalogoDTO> especialidadTerceroListDTOs;
-	private List<CatalogoDTO> paisListDTOs;
+	
+	
+	
 	private List<HabilidadListDTO> estudioDtos;
 	private List<HabilidadListDTO> cursosDTOs;
-	
-
 
 	private int codigotipo;
-	private Date fechaNac;
 	private int codigoEstadoCivil;
 	private int codigoSexo;
+	
+	private Date fechaNac;
+	
 	private HabilidadDTO estudioInsertar;
 	private HabilidadDTO cursoInsertar;
 	private CandidatoListDTO candidatoListDTO;
+	
 	private int codigoNivEst;
 	private int codigoEspecialidad;
 	private int codigoEspTercero;
 	private int codigoEspCuarto;
 	private int codigoPais;
+	
 	private Date fechaInicio;
 	private Date fechaFin;
 
@@ -55,13 +65,14 @@ public class CandidatoDataManager implements Serializable {
 	
 	public CandidatoDataManager() {
 		candidatoInsertar=new CandidatoDTO();
-		tipoDocumentoListDTOs=new ArrayList<CatalogoDTO>();
-		estadoCivilListDTOs=new ArrayList<CatalogoDTO>();
-		generoListDTOs=new ArrayList<CatalogoDTO>();
+		
+		tipoDocumentoCatalogoList=new ArrayList<CatalogoDTO>();
+		estadoCivilCatalogoList=new ArrayList<CatalogoDTO>();
+		sexoCatalogoList=new ArrayList<CatalogoDTO>();
 		candidatoListDTO=new CandidatoListDTO();
-		nivEstListDTOs=new ArrayList<CatalogoDTO>();
+		nivelEstudioCatalogoList=new ArrayList<CatalogoDTO>();
 		especialidadListDTOs=new ArrayList<CatalogoDTO>();
-		paisListDTOs=new ArrayList<CatalogoDTO>();
+		paisCatalogoList=new ArrayList<CatalogoDTO>();
 		candidatoDTOs=new ArrayList<CandidatoDTO>();
 		cursosDTOs=new ArrayList<HabilidadListDTO>();
 		estudioDtos=new ArrayList<HabilidadListDTO>();
@@ -109,32 +120,6 @@ public class CandidatoDataManager implements Serializable {
 		this.candidatoInsertar = candidatoInsertar;
 	}
 
-	
-	public List<CatalogoDTO> getTipoDocumentoListDTOs() {
-		return tipoDocumentoListDTOs;
-	}
-
-	public void setTipoDocumentoListDTOs(List<CatalogoDTO> tipoDocumentoListDTOs) {
-		this.tipoDocumentoListDTOs = tipoDocumentoListDTOs;
-	}
-
-	public List<CatalogoDTO> getEstadoCivilListDTOs() {
-		return estadoCivilListDTOs;
-	}
-
-	public void setEstadoCivilListDTOs(List<CatalogoDTO> estadoCivilListDTOs) {
-		this.estadoCivilListDTOs = estadoCivilListDTOs;
-	}
-
-	public List<CatalogoDTO> getGeneroListDTOs() {
-		return generoListDTOs;
-	}
-
-	public void setGeneroListDTOs(List<CatalogoDTO> generoListDTOs) {
-		this.generoListDTOs = generoListDTOs;
-	}
-
-
 	public Date getFechaNac() {
 		return fechaNac;
 	}
@@ -151,14 +136,6 @@ public class CandidatoDataManager implements Serializable {
 		this.candidatoListDTO = candidatoListDTO;
 	}
 	
-	public List<CatalogoDTO> getNivEstListDTOs() {
-		return nivEstListDTOs;
-	}
-
-	public void setNivEstListDTOs(List<CatalogoDTO> nivEstListDTOs) {
-		this.nivEstListDTOs = nivEstListDTOs;
-	}
-
 	public List<CatalogoDTO> getEspecialidadListDTOs() {
 		return especialidadListDTOs;
 	}
@@ -217,14 +194,6 @@ public class CandidatoDataManager implements Serializable {
 		this.codigoPais = codigoPais;
 	}
 
-	public List<CatalogoDTO> getPaisListDTOs() {
-		return paisListDTOs;
-	}
-
-	public void setPaisListDTOs(List<CatalogoDTO> paisListDTOs) {
-		this.paisListDTOs = paisListDTOs;
-	}
-
 	public Date getFechaInicio() {
 		return fechaInicio;
 	}
@@ -279,6 +248,48 @@ public class CandidatoDataManager implements Serializable {
 
 	public void setEstudioDtos(List<HabilidadListDTO> estudioDtos) {
 		this.estudioDtos = estudioDtos;
+	}
+
+	public List<CatalogoDTO> getEstadoCivilCatalogoList() {
+		return estadoCivilCatalogoList;
+	}
+
+	public void setEstadoCivilCatalogoList(List<CatalogoDTO> estadoCivilCatalogoList) {
+		this.estadoCivilCatalogoList = estadoCivilCatalogoList;
+	}
+
+	public List<CatalogoDTO> getTipoDocumentoCatalogoList() {
+		return tipoDocumentoCatalogoList;
+	}
+
+	public void setTipoDocumentoCatalogoList(
+			List<CatalogoDTO> tipoDocumentoCatalogoList) {
+		this.tipoDocumentoCatalogoList = tipoDocumentoCatalogoList;
+	}
+
+	public List<CatalogoDTO> getSexoCatalogoList() {
+		return sexoCatalogoList;
+	}
+
+	public void setSexoCatalogoList(List<CatalogoDTO> sexoCatalogoList) {
+		this.sexoCatalogoList = sexoCatalogoList;
+	}
+
+	public List<CatalogoDTO> getNivelEstudioCatalogoList() {
+		return nivelEstudioCatalogoList;
+	}
+
+	public void setNivelEstudioCatalogoList(
+			List<CatalogoDTO> nivelEstudioCatalogoList) {
+		this.nivelEstudioCatalogoList = nivelEstudioCatalogoList;
+	}
+
+	public List<CatalogoDTO> getPaisCatalogoList() {
+		return paisCatalogoList;
+	}
+
+	public void setPaisCatalogoList(List<CatalogoDTO> paisCatalogoList) {
+		this.paisCatalogoList = paisCatalogoList;
 	}
 
 }
