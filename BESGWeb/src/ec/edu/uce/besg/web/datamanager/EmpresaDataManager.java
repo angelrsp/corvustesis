@@ -14,55 +14,31 @@ import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 @ViewScoped
 @ManagedBean(name = "empresaDataManager")
 public class EmpresaDataManager implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	
-	private EmpresaDTO empresaInsertar;
-	private EmpresaDTO empresaBuscar;
-	private List<EmpresaDTO> empresaDTOs;
+	private EmpresaDTO empresaDTO;
 	private UsuarioDTO usuarioDTO;
+	
 	private int codigoSector;
 	private int codigoPais;
 	private int codigoProvincia;
 	private int codigoCiudad;
-	private List<CatalogoDTO> secCatalogoDTOs;
-	private List<CatalogoDTO> proCatalogoDTOs;
-	private List<CatalogoDTO> ciuCatalogoDTOs;
-	private List<CatalogoDTO> paiCatalogoDTOs;
+	
+	private List<CatalogoDTO> sectorCatalogoList;
+	private List<CatalogoDTO> provinciaCatalogoList;
+	private List<CatalogoDTO> ciudadCatalogoList;
+	private List<CatalogoDTO> paisCatalogoList;
 
 	public EmpresaDataManager() {
-		empresaInsertar=new EmpresaDTO();
-		empresaBuscar=new EmpresaDTO();
-		empresaDTOs=new ArrayList<EmpresaDTO>();
+		empresaDTO=new EmpresaDTO();
 		usuarioDTO=new UsuarioDTO();
-		secCatalogoDTOs=new ArrayList<CatalogoDTO>();
-		proCatalogoDTOs=new ArrayList<CatalogoDTO>();
-		ciuCatalogoDTOs=new ArrayList<CatalogoDTO>();
-		paiCatalogoDTOs=new ArrayList<CatalogoDTO>();
+		sectorCatalogoList=new ArrayList<CatalogoDTO>();
+		provinciaCatalogoList=new ArrayList<CatalogoDTO>();
+		ciudadCatalogoList=new ArrayList<CatalogoDTO>();
+		paisCatalogoList=new ArrayList<CatalogoDTO>();
 	}
 
-	public EmpresaDTO getEmpresaInsertar() {
-		return empresaInsertar;
-	}
-
-	public void setEmpresaInsertar(EmpresaDTO empresaInsertar) {
-		this.empresaInsertar = empresaInsertar;
-	}
-
-	public EmpresaDTO getEmpresaBuscar() {
-		return empresaBuscar;
-	}
-
-	public void setEmpresaBuscar(EmpresaDTO empresaBuscar) {
-		this.empresaBuscar = empresaBuscar;
-	}
-
-	public List<EmpresaDTO> getEmpresaDTOs() {
-		return empresaDTOs;
-	}
-
-	public void setEmpresaDTOs(List<EmpresaDTO> empresaDTOs) {
-		this.empresaDTOs = empresaDTOs;
-	}
 
 	public UsuarioDTO getUsuarioDTO() {
 		return usuarioDTO;
@@ -104,37 +80,48 @@ public class EmpresaDataManager implements Serializable {
 		this.codigoCiudad = codigoCiudad;
 	}
 
-	public List<CatalogoDTO> getSecCatalogoDTOs() {
-		return secCatalogoDTOs;
+	public List<CatalogoDTO> getSectorCatalogoList() {
+		return sectorCatalogoList;
 	}
 
-	public void setSecCatalogoDTOs(List<CatalogoDTO> secCatalogoDTOs) {
-		this.secCatalogoDTOs = secCatalogoDTOs;
+	public void setSectorCatalogoList(List<CatalogoDTO> sectorCatalogoList) {
+		this.sectorCatalogoList = sectorCatalogoList;
 	}
 
-	public List<CatalogoDTO> getProCatalogoDTOs() {
-		return proCatalogoDTOs;
+	public List<CatalogoDTO> getProvinciaCatalogoList() {
+		return provinciaCatalogoList;
 	}
 
-	public void setProCatalogoDTOs(List<CatalogoDTO> proCatalogoDTOs) {
-		this.proCatalogoDTOs = proCatalogoDTOs;
+	public void setProvinciaCatalogoList(List<CatalogoDTO> provinciaCatalogoList) {
+		this.provinciaCatalogoList = provinciaCatalogoList;
 	}
 
-	public List<CatalogoDTO> getCiuCatalogoDTOs() {
-		return ciuCatalogoDTOs;
+	public List<CatalogoDTO> getCiudadCatalogoList() {
+		return ciudadCatalogoList;
 	}
 
-	public void setCiuCatalogoDTOs(List<CatalogoDTO> ciuCatalogoDTOs) {
-		this.ciuCatalogoDTOs = ciuCatalogoDTOs;
+	public void setCiudadCatalogoList(List<CatalogoDTO> ciudadCatalogoList) {
+		this.ciudadCatalogoList = ciudadCatalogoList;
 	}
 
-	public List<CatalogoDTO> getPaiCatalogoDTOs() {
-		return paiCatalogoDTOs;
+	public List<CatalogoDTO> getPaisCatalogoList() {
+		return paisCatalogoList;
 	}
 
-	public void setPaiCatalogoDTOs(List<CatalogoDTO> paiCatalogoDTOs) {
-		this.paiCatalogoDTOs = paiCatalogoDTOs;
+	public void setPaisCatalogoList(List<CatalogoDTO> paisCatalogoList) {
+		this.paisCatalogoList = paisCatalogoList;
 	}
+
+
+	public EmpresaDTO getEmpresaDTO() {
+		return empresaDTO;
+	}
+
+
+	public void setEmpresaDTO(EmpresaDTO empresaDTO) {
+		this.empresaDTO = empresaDTO;
+	}
+
 
 	
 }

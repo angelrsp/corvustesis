@@ -15,7 +15,7 @@ import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.entity.ContactoDTO;
 import ec.edu.uce.besg.ejb.entity.ContactoListDTO;
 import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
-import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
+import ec.edu.uce.besg.ejb.service.ServicioCatalogo;
 import ec.edu.uce.besg.ejb.service.ServicioEmpresa;
 import ec.edu.uce.besg.web.datamanager.ContactoDataManager;
 import ec.edu.uce.besg.web.util.JsfUtil;
@@ -37,6 +37,10 @@ public class ContactoController implements Serializable {
 	
 	@EJB
 	private ServicioEmpresa servicioEmpresa;
+	
+	@EJB
+	private ServicioCatalogo servicioCatalogo;
+	
 	
 	@PostConstruct
 	private void init()
@@ -108,18 +112,9 @@ public class ContactoController implements Serializable {
 	}
 	
 	public void buscarCargo() {
-		List<CatalogoDTO> listaCatalogo = null;
 		try {
-			CatalogoDTO cat = new CatalogoDTO();
-			cat.setCatCodigo(17);
-			listaCatalogo = this.servicioEmpresa.buscarCatalogo(cat);
-			if (CollectionUtils.isEmpty(listaCatalogo) && listaCatalogo.size() == 0) {
-				JsfUtil.addWarningMessage("Busqueda vacia");
-			} else {
-				this.contactoDataManager.setCargoLists(listaCatalogo);
-			}
+			this.contactoDataManager.setCargoCatalogoList(servicioCatalogo.readCargo());
 		} catch (CorvustecException e) {
-			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
 	}
