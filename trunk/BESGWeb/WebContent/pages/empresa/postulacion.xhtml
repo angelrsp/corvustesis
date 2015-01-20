@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/empresa.xhtml">
+
+	<ui:define name="contenido">
+
+		<p:panel header="Postulaciones">
+		
+			<p:dataTable emptyMessage="#{i18n['table.vacio']}">
+			
+				<p:column headerText="Puesto">
+					
+				</p:column>
+	
+				<p:column headerText="Remuneracion">
+	
+				</p:column>
+	
+				<p:column headerText="Fecha de Caducidad">
+					
+				</p:column>
+	
+				<p:column headerText="Vacantes">
+					
+				</p:column>
+
+				<p:column headerText="Candidato">
+					
+				</p:column>
+
+				<p:column headerText="Aceptar" styleClass="centered" width="10%">
+				
+				</p:column>
+
+				<p:column headerText="Ver Curriculum " styleClass="centered" width="10%">
+				
+				</p:column>
+				
+			</p:dataTable>
+		
+		</p:panel>
+
+	</ui:define>
+	
+</ui:composition>	

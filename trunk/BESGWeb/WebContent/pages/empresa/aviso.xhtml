@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/empresa.xhtml">
+
+	<ui:define name="contenido">
+	
+		<p:panel header="Aviso">
+
+			<p:accordionPanel activeIndex="null">
+				<p:tab title="#{i18n['boton.agregar']}">
+					<table>
+						<tr>
+							<td><h:outputLabel value="Puesto:&#160;" /></td>
+							<td><p:selectOneMenu>
+									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"/>
+								</p:selectOneMenu>
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="Remuneración:&#160;" /></td>
+							<td><p:inputText/></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="Descripcion:&#160;" /></td>
+							<td><p:inputText/></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="Fecha Caducidad:&#160;" /></td>
+							<td><p:calendar showOn="button"></p:calendar></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="Vacantes:&#160;" /></td>
+							<td><p:inputText/></td>
+						</tr>																																																												
+					</table>
+				</p:tab>
+			</p:accordionPanel>	
+		</p:panel>
+
+		<p:dataTable emptyMessage="#{i18n['table.vacio']}">
+		
+			<p:column headerText="Puesto">
+				
+			</p:column>
+
+			<p:column headerText="Remuneracion">
+
+			</p:column>
+
+			<p:column headerText="Fecha de Caducidad">
+				
+			</p:column>
+
+			<p:column headerText="Vacantes">
+				
+			</p:column>
+			<p:column headerText="Opciones" styleClass="centered" width="10%">
+			</p:column>
+		</p:dataTable>
+
+
+	
+	</ui:define>
+
+</ui:composition>

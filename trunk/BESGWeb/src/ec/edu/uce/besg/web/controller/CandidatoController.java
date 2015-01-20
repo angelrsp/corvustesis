@@ -16,8 +16,8 @@ import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.entity.CandidatoDTO;
 import ec.edu.uce.besg.ejb.entity.HabilidadDTO;
 import ec.edu.uce.besg.ejb.entity.HabilidadListDTO;
-import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 import ec.edu.uce.besg.ejb.service.ServicioCandidato;
+import ec.edu.uce.besg.ejb.service.ServicioCatalogo;
 import ec.edu.uce.besg.web.datamanager.CandidatoDataManager;
 import ec.edu.uce.besg.web.util.JsfUtil;
 
@@ -29,11 +29,18 @@ public class CandidatoController implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	
 	@ManagedProperty(value="#{candidatoDataManager}")
 	private CandidatoDataManager candidatoDataManager;
 	
+	
 	@EJB
 	private ServicioCandidato servicioCandidato;
+
+	@EJB
+	private ServicioCatalogo servicioCatalogo;
+	
 	
 	public CandidatoDataManager getCandidatoDataManager() {
 		return candidatoDataManager;
@@ -41,6 +48,7 @@ public class CandidatoController implements Serializable {
 	public void setCandidatoDataManager(CandidatoDataManager candidatoDataManager) {
 		this.candidatoDataManager = candidatoDataManager;
 	}
+	
 	
 	@PostConstruct
 	private void init()
@@ -75,55 +83,46 @@ public class CandidatoController implements Serializable {
 	}
 	
 	public void buscarEstadoCivil() {
-		List<CatalogoDTO> listaCatalogo = null;
 		try {
-			CatalogoDTO cat = new CatalogoDTO();
-			cat.setCatCodigo(28);
-			listaCatalogo = this.servicioCandidato.obtenerCatalogo(cat);
-			if (CollectionUtils.isEmpty(listaCatalogo) && listaCatalogo.size() == 0) {
-				JsfUtil.addWarningMessage("Busqueda vacia");
-			} else {
-				this.candidatoDataManager.setEstadoCivilListDTOs(listaCatalogo);
-			}
+			this.candidatoDataManager.setEstadoCivilCatalogoList(servicioCatalogo.readEstadoCivil());
 		} catch (CorvustecException e) {
-			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
 	}
 	
 	public void buscarTipoDocumento() {
-		List<CatalogoDTO> listaCatalogo = null;
 		try {
-			CatalogoDTO cat = new CatalogoDTO();
-			cat.setCatCodigo(25);
-			listaCatalogo = this.servicioCandidato.obtenerCatalogo(cat);
-			if (CollectionUtils.isEmpty(listaCatalogo) && listaCatalogo.size() == 0) {
-				JsfUtil.addWarningMessage("Busqueda vacia");
-			} else {
-				this.candidatoDataManager.setTipoDocumentoListDTOs(listaCatalogo);
-			}
+			this.candidatoDataManager.setTipoDocumentoCatalogoList(servicioCatalogo.readTipoDocumento());
 		} catch (CorvustecException e) {
-			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
 	}
 
 	public void buscarSexo() {
-		List<CatalogoDTO> listaCatalogo = null;
 		try {
-			CatalogoDTO cat = new CatalogoDTO();
-			cat.setCatCodigo(32);
-			listaCatalogo = this.servicioCandidato.obtenerCatalogo(cat);
-			if (CollectionUtils.isEmpty(listaCatalogo) && listaCatalogo.size() == 0) {
-				JsfUtil.addWarningMessage("Busqueda vacia");
-			} else {
-				this.candidatoDataManager.setGeneroListDTOs(listaCatalogo);
-			}
+			this.candidatoDataManager.setSexoCatalogoList(servicioCatalogo.readSexo());
 		} catch (CorvustecException e) {
-			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
 	}
+	
+	
+	public void buscarNivelEstudio() {
+		try {
+			this.candidatoDataManager.setNivelEstudioCatalogoList(servicioCatalogo.readNivelEstudio());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+	
+	public void buscarPais() {
+		try{
+			this.candidatoDataManager.setPaisCatalogoList(servicioCatalogo.readPais());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
 	
 	private void readCandidato()
 	{
@@ -146,58 +145,7 @@ public class CandidatoController implements Serializable {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 	}
-	
-	public void buscarNivelEstudio() {
-		List<CatalogoDTO> listaCatalogo = null;
-		try {
-			CatalogoDTO cat = new CatalogoDTO();
-			cat.setCatCodigo(21);
-			listaCatalogo = this.servicioCandidato.obtenerCatalogo(cat);
-			if (CollectionUtils.isEmpty(listaCatalogo) && listaCatalogo.size() == 0) {
-				JsfUtil.addWarningMessage("Busqueda vacia");
-			} else {
-				this.candidatoDataManager.setNivEstListDTOs(listaCatalogo);
-			}
-		} catch (CorvustecException e) {
-			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
-			JsfUtil.addErrorMessage(e.getMessage());
-		}
-	}
-	
-	public void buscarEspecialidad() {
-		List<CatalogoDTO> listaCatalogo = null;
-		try {
-			CatalogoDTO cat = new CatalogoDTO();
-			cat.setCatCodigo(candidatoDataManager.getCodigoNivEst());
-			listaCatalogo = this.servicioCandidato.obtenerCatalogo(cat);
-			if (CollectionUtils.isEmpty(listaCatalogo) && listaCatalogo.size() == 0) {
-				JsfUtil.addWarningMessage("Busqueda vacia");
-			} else {
-				this.candidatoDataManager.setNivEstListDTOs(listaCatalogo);
-			}
-		} catch (CorvustecException e) {
-			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
-			JsfUtil.addErrorMessage(e.getMessage());
-		}
-	}
 
-	public void buscarPais() {
-		List<CatalogoDTO> listaCatalogo = null;
-		try {
-			CatalogoDTO cat = new CatalogoDTO();
-			cat.setCatCodigo(4);
-			listaCatalogo = this.servicioCandidato.obtenerCatalogo(cat);
-			if (CollectionUtils.isEmpty(listaCatalogo) && listaCatalogo.size() == 0) {
-				JsfUtil.addWarningMessage("Busqueda vacia");
-			} else {
-				this.candidatoDataManager.setPaisListDTOs(listaCatalogo);
-			}
-		} catch (CorvustecException e) {
-			//slf4jLogger.info("Error al buscarCatalogo {} ", e);
-			JsfUtil.addErrorMessage(e.getMessage());
-		}
-	}
-	
 	public void agregarEstudio()
 	{
 		try {

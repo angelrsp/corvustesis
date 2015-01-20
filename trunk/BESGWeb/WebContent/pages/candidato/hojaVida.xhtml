@@ -10,14 +10,13 @@
 <body>
 
 	<ui:composition template="/WEB-INF/template/candidato.xhtml">
+		
 		<ui:define name="contenido">
 		
- 			<h:form id="contenido" enctype="multipart/form-data">
-			  
 				<p:panel header="Subir Foto">
 			  
-        	     <p:fileUpload  mode="advanced" dragDropSupport="false"  
-                  update="growl,foto" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" />			
+<!--         	     <p:fileUpload  mode="advanced" dragDropSupport="false"   -->
+<!--                   update="growl,foto" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" />			 -->
 		
 				</p:panel>
 				
@@ -37,7 +36,7 @@
 								<td>
 									<p:selectOneMenu required="true" requiredMessage="#{i18n['label.tipo.documento']}:&#160;#{i18n['label.requerido']}" value="#{candidatoDataManager.codigotipo}">
 										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
-										<f:selectItems value="#{candidatoController.candidatoDataManager.tipoDocumentoListDTOs}" var="tipo"   itemLabel="#{tipo.catDescripcion}"    itemValue="#{tipo.catCodigo}"  ></f:selectItems>
+										<f:selectItems value="#{candidatoController.candidatoDataManager.tipoDocumentoCatalogoList}" var="tipo" itemLabel="#{tipo.catDescripcion}" itemValue="#{tipo.catCodigo}"></f:selectItems>
 									</p:selectOneMenu>
 								</td>
 							<td><h:outputLabel value="#{i18n['label.ci.pasaporte']}:&#160;" /> </td>
@@ -67,13 +66,13 @@
 							<td><h:outputLabel value="#{i18n['label.estado.civil']}:&#160;" /> </td>
 							<td>	<p:selectOneMenu value="#{candidatoDataManager.codigoEstadoCivil}" required="true" requiredMessage="#{i18n['label.estado.civil']}:&#160;#{i18n['label.requerido']}">
 										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
-										<f:selectItems value="#{candidatoDataManager.estadoCivilListDTOs}" var="estciv"   itemLabel="#{estciv.catDescripcion}"    itemValue="#{estciv.catCodigo}" />										
+										<f:selectItems value="#{candidatoDataManager.estadoCivilCatalogoList}" var="estciv"   itemLabel="#{estciv.catDescripcion}"    itemValue="#{estciv.catCodigo}" />										
 									</p:selectOneMenu></td>
 									
 							<td><h:outputLabel value="#{i18n['label.genero']}:&#160;" /> </td>
 							<td>	<p:selectOneMenu value="#{candidatoDataManager.codigoSexo}" required="true" requiredMessage="#{i18n['label.genero']}:&#160;#{i18n['label.requerido']}">
 										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
-										<f:selectItems value="#{candidatoDataManager.generoListDTOs}" var="sexo"   itemLabel="#{sexo.catDescripcion}"    itemValue="#{sexo.catCodigo}" />										
+										<f:selectItems value="#{candidatoDataManager.sexoCatalogoList}" var="sexo"   itemLabel="#{sexo.catDescripcion}"    itemValue="#{sexo.catCodigo}" />										
 									</p:selectOneMenu></td>
 						</tr>
 
@@ -103,8 +102,8 @@
 									value="#{i18n['label.nivel.estudio']}:&#160;" /></td>
 							<td><p:selectOneMenu value="#{candidatoDataManager.codigoNivEst}" required="true" requiredMessage="#{i18n['label.nivel.estudio']}:&#160;#{i18n['label.requerido']}" >
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="0" />
-									<f:selectItems value="#{candidatoController.candidatoDataManager.nivEstListDTOs}"  var="nivEst"  itemLabel="#{nivEst.catDescripcion}" itemValue="#{nivEst.catCodigo}"></f:selectItems>
-									<p:ajax listener="#{candidatoController.buscarEspecialidad}" process="@this" update="somEspecialidad"/>
+<!-- 									<f:selectItems value="#{candidatoController.candidatoDataManager.nivEstListD}"  var="nivEst"  itemLabel="#{nivEst.catDescripcion}" itemValue="#{nivEst.catCodigo}"></f:selectItems> -->
+<!-- 									<p:ajax listener="#{candidatoController.buscarEspecialidad}" process="@this" update="somEspecialidad"/> -->
 								</p:selectOneMenu></td>
 						
 								
@@ -112,26 +111,26 @@
 							<td><p:selectOneMenu id="somEspecialidad" 
 									requiredMessage="#{i18n['label.especialidad']}:&#160;#{i18n['label.requerido']}" value="#{candidatoDataManager.codigoEspecialidad}">
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="" />
-									<f:selectItems value="#{(candidatoDataManager.codigoNivEst.toString()=='23')?candidatoDataManager.codigoEspTercero:candidatoDataManager.codigoEspCuarto}"></f:selectItems>
+<!-- 									<f:selectItems value="#{(candidatoDataManager.codigoNivEst.toString()=='23')?candidatoDataManager.codigoEspTercero:candidatoDataManager.codigoEspCuarto}"></f:selectItems> -->
 																			
 								</p:selectOneMenu>							
 							</td>	
 						</tr>
 						<tr>	
 							<td><h:outputLabel value="#{i18n['label.carrera']}:&#160;" /></td>
-							<td><p:inputText id="carrera" value="#{candidatoDataManager.estudioInsertar.habCarrera}" disabled="#{candidatoDataManager.codigoNivEst.toString()!='24'}"></p:inputText></td>								
+							<td><p:inputText id="carrera" value="#{candidatoDataManager.estudioInsertar.habCarrera}"></p:inputText></td>								
 							<td><h:outputLabel value="#{i18n['label.establecimiento']}:&#160;" /></td>
-							<td><p:inputText id="establecimiento" value="#{candidatoDataManager.estudioInsertar.habEntidad}" disabled="#{candidatoDataManager.codigoNivEst.toString()!='24'}"></p:inputText></td>
+							<td><p:inputText id="establecimiento" value="#{candidatoDataManager.estudioInsertar.habEntidad}"></p:inputText></td>
 					</tr>	
 						<tr>	
 							<td><h:outputLabel value="#{i18n['label.pais']}:&#160;" /></td>
-							<td><p:selectOneMenu id="pais" required="#{candidatoDataManager.codigoNivEst.toString()=='24'}" disabled="#{candidatoDataManager.codigoNivEst.toString()!='24'}"
+							<td><p:selectOneMenu id="pais"
 									requiredMessage="#{i18n['label.pais']}:&#160;#{i18n['label.requerido']}" value="#{candidatoDataManager.codigoPais}">
 									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue="" />
-									<f:selectItems value="#{candidatoDataManager.paisListDTOs}" var="pais" itemLabel="#{pais.catDescripcion}" itemValue="#{pais.catCodigo}"></f:selectItems>	
+									<f:selectItems value="#{candidatoDataManager.paisCatalogoList}" var="pais" itemLabel="#{pais.catDescripcion}" itemValue="#{pais.catCodigo}"></f:selectItems>	
 								</p:selectOneMenu></td>
 							<td><h:outputLabel value="#{i18n['label.registro.senecyt']}:&#160;" /></td>
-							<td><p:inputText id="registro" value="#{candidatoDataManager.estudioInsertar.habRegistro}" disabled="#{candidatoDataManager.codigoNivEst.toString()=='22'||candidatoDataManager.codigoNivEst.toString()=='0'}" /></td>						
+							<td><p:inputText id="registro" value="#{candidatoDataManager.estudioInsertar.habRegistro}" /></td>						
 						</tr>
 						
 					  	<tr>
@@ -478,7 +477,6 @@
 
 				</p:panel> 
 -->
-				</h:form>
 			</ui:define>
 	</ui:composition>
 </body>
