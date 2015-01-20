@@ -5,6 +5,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
 import ec.edu.uce.besg.ejb.entity.CandidatoDTO;
@@ -12,14 +15,13 @@ import ec.edu.uce.besg.ejb.entity.ExperienciaDTO;
 import ec.edu.uce.besg.ejb.entity.HabilidadDTO;
 import ec.edu.uce.besg.ejb.entity.HabilidadListDTO;
 import ec.edu.uce.besg.ejb.entity.ReferenciaDTO;
-import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 import ec.edu.uce.besg.ejb.service.ServicioCandidato;
 
 @Stateless
 public class ServicioCandidatoImpl implements ServicioCandidato {
 	
-	//private static final Logger log = LoggerFactory
-		//	.getLogger(ServicioCandidatoImpl.class);
+
+	private static final Logger logger = LoggerFactory.getLogger(ServicioEmpresaImpl.class);
 	
 	@EJB
 	private FactoryDAO factoryDAO;
@@ -42,7 +44,7 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 					return factoryDAO.getCandidatoDAOImpl().create(candidatoDTO);
 			}	
 		} catch (Exception e) {
-			//log.info("Error al registrar el Candidato {}", e.toString());
+			logger.info("Error al registrar el Candidato {}", e.toString());
 			throw new CorvustecException(e);
 		}
 
@@ -58,17 +60,6 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 			throw new CorvustecException(e);
 		}
 
-	}
-	
-	@Override
-	public List<CatalogoDTO> obtenerCatalogo(CatalogoDTO catalogo) throws CorvustecException
-	{
-		try {
-			return factoryDAO.getCatalogoDAOImpl().getAll(catalogo);
-		} catch (Exception e) {
-			//log.info("Error al registrar Aviso {}", e.toString());
-			throw new CorvustecException("Error al obtener catalogo");
-		}				
 	}
 	
 	@Override

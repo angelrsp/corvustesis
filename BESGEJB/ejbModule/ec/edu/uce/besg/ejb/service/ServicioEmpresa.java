@@ -22,9 +22,6 @@ public interface ServicioEmpresa {
 	EmpresaDTO registrarActualizarEmpresa(EmpresaVO empresa)
 			throws CorvustecException;
 
-	List<CatalogoDTO> buscarCatalogo(CatalogoDTO catalogoDTO)
-			throws CorvustecException;
-
 	List<EmpresaDTO> obtenerEmpresa(EmpresaDTO empresa)
 			throws CorvustecException;
 
