@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
+import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 import ec.edu.uce.besg.ejb.service.SecurityService;
 import ec.edu.uce.besg.web.datamanager.LoginEmpresaDataManager;
 import ec.edu.uce.besg.web.util.JsfUtil;
@@ -45,9 +46,14 @@ public class LoginEmpresaController implements Serializable{
 
 	public void intro()
 	{
+		UsuarioDTO usuarioDTO;
 		try {
-			 if(securityService.loginEmpresa(loginEmpresaDataManager.getUsuarioDTO()) !=null)
-				 JsfUtil.redirect("pages/empresa/inicio.xhtml");	 
+			usuarioDTO=securityService.loginEmpresa(loginEmpresaDataManager.getUsuarioDTO());
+			 if(usuarioDTO !=null)
+			 {
+				 JsfUtil.putObject("UsuarioEmpresa", usuarioDTO);
+				 JsfUtil.redirect("pages/empresa/inicio.xhtml");	 				 
+			 }
 			 else
 			 {
 				 JsfUtil.addErrorMessage("Usuario o contraseña incorrectos");
