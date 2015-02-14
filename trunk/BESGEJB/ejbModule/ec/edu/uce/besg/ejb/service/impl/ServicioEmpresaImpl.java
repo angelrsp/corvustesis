@@ -1,5 +1,7 @@
 package ec.edu.uce.besg.ejb.service.impl;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -15,6 +17,7 @@ import ec.edu.uce.besg.ejb.entity.ContactoDTO;
 import ec.edu.uce.besg.ejb.entity.ContactoListDTO;
 import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.security.HistorialPasswordDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 import ec.edu.uce.besg.ejb.service.ServicioEmpresa;
 import ec.edu.uce.besg.ejb.vo.EmpresaVO;
@@ -30,34 +33,23 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 	
 	
 	@Override
-	public EmpresaDTO registrarActualizarEmpresa(EmpresaVO empresa)
-			throws CorvustecException {
+	public EmpresaDTO registrarActualizarEmpresa(EmpresaVO empresa)	throws CorvustecException {
 		UsuarioDTO usuarioDTO;
-		//CatalogoDTO sector;
-		//List<UsuarioDTO> listUsuario;
+		HistorialPasswordDTO historialPasswordDTO;
 		try{
-			/*listUsuario=new ArrayList<UsuarioDTO>();
-			user=empresa.getUsuarioDTO();
-			if(user.getUsuCodigo()!=null)
-			{
-				user=factoryDAO.getUsuarioDAOImpl().edit(user);
-			}
-			else
-				{
-				listUsuario=factoryDAO.getUsuarioDAOImpl().getByAnd(user);
-				if(listUsuario.size()<=0)
-					user=factoryDAO.getUsuarioDAOImpl().create(user);
-				else
-					user=listUsuario.get(0);
-				}
-			empresa.getEmpresaDTO().setEmpUsuario(user.getUsuCodigo());*/
-			//empresa.setEmpActiva(false);
 			if(empresa.getEmpresaDTO().getEmpCodigo()!=null)
-				return factoryDAO.getEmpresaDAOImpl().edit(empresa.getEmpresaDTO());
+				return factoryDAO.getEmpresaDAOImpl().update(empresa.getEmpresaDTO());
 			else
 			{
+				historialPasswordDTO=new HistorialPasswordDTO();
 				empresa.getUsuarioDTO().setUsuPassword(UtilEncryption.getInstancia().encriptar(empresa.getUsuarioDTO().getUsuPassword()));
 				usuarioDTO= factoryDAO.getUsuarioDAOImpl().create(empresa.getUsuarioDTO());
+				
+				historialPasswordDTO.setSegUsuario(usuarioDTO);
+				historialPasswordDTO.setHpaFecha(new Timestamp(new Date().getTime()));
+				historialPasswordDTO.setHpaPassword(UtilEncryption.getInstancia().encriptar(empresa.getUsuarioDTO().getUsuPassword()));
+				
+				factoryDAO.getHistorialPasswordDAOImpl().create(historialPasswordDTO);
 				
 				empresa.getEmpresaDTO().setSegUsuario(usuarioDTO);
 				return factoryDAO.getEmpresaDAOImpl().create(empresa.getEmpresaDTO());
@@ -66,13 +58,17 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 			logger.info("Error al registrar Empresa {}", e.toString());
 			throw new CorvustecException("Error al registrar Empresa");
 		}
+		finally{
+			usuarioDTO=null;
+			historialPasswordDTO=null;
+		}
 	}
 	
 	
 	@Override
 	public EmpresaDTO actualizarEmpresa(EmpresaDTO empresa)throws CorvustecException {
 		try {
-			return factoryDAO.getEmpresaDAOImpl().edit(empresa);
+			return factoryDAO.getEmpresaDAOImpl().update(empresa);
 		} catch (Exception e) {
 			logger.info("Error al registrar Empresa {}", e.toString());
 			throw new CorvustecException("Error al registrar Empresa");
@@ -106,7 +102,7 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 	{
 		try {
 			if(contacto.getConCodigo()!=null)
-				return factoryDAO.getContactoDAOImpl().edit(contacto);
+				return factoryDAO.getContactoDAOImpl().update(contacto);
 			else
 				return factoryDAO.getContactoDAOImpl().create(contacto);
 			

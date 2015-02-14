@@ -33,7 +33,7 @@ public abstract class AbstractFacadeImpl<T> implements AbstractFacade<T>{
 		return entity;
 	}
 
-	public T edit(T entity) {
+	public T update(T entity) {
 		entityManager.merge(entity);
 		return entity;
 	}

@@ -60,8 +60,8 @@ public class UsuarioDAOImpl extends AbstractFacadeImpl<UsuarioDTO> implements Us
 				    value = getter.invoke(objeto, new Object[0]);
 				    if(value!=null && value!="")
 				    {
-				    		predicate=cb.equal(from.get(fieldName), value);
-				    		predicateList.add(predicate);
+			    		predicate=cb.equal(from.get(fieldName), value);
+			    		predicateList.add(predicate);
 				    }
 				}
 	        }
@@ -112,8 +112,8 @@ public class UsuarioDAOImpl extends AbstractFacadeImpl<UsuarioDTO> implements Us
 				    value = getter.invoke(objeto, new Object[0]);
 				    if(value!=null && value!="")
 				    {
-				    		predicate=cb.equal(from.get(fieldName), value);
-				    		predicateList.add(predicate);
+			    		predicate=cb.equal(from.get(fieldName), value);
+			    		predicateList.add(predicate);
 				    }
 				}
 	        }
