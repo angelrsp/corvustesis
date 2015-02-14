@@ -11,6 +11,7 @@ import ec.edu.uce.besg.ejb.persistence.dao.ContactoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.EmpresaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ExperienciaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HabilidadDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.HistorialPasswordDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ReferenciaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.UsuarioDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.CandidatoDAOImpl;
@@ -19,6 +20,7 @@ import ec.edu.uce.besg.ejb.persistence.dao.impl.ContactoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.EmpresaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.ExperienciaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.HabilidadDAOImpl;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.HistorialPasswordDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.ReferenciaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.UsuarioDAOImpl;
 
@@ -46,6 +48,8 @@ public class FactoryDAOImpl implements FactoryDAO {
 
 		private ContactoDAO contactoDAO;
 		private EmpresaDAO empresaDAO;
+		
+		private HistorialPasswordDAO historialPasswordDAO;
 	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -127,6 +131,15 @@ public class FactoryDAOImpl implements FactoryDAO {
 		}
 		return contactoDAO;
 	}
+
+	@Override
+	public HistorialPasswordDAO getHistorialPasswordDAOImpl() {
+		if (historialPasswordDAO == null) {
+			historialPasswordDAO = new HistorialPasswordDAOImpl(entityManager);
+		}
+		return historialPasswordDAO;
+	}
+
 	
 	/*
 	@Override

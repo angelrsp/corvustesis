@@ -4,7 +4,7 @@ public interface AbstractFacade<T> {
 	
 	T create(T entity);
 	
-	T edit(T entity);
+	T update(T entity);
 	
 	void remove(T entity);
 	

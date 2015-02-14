@@ -39,7 +39,7 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 			else
 			{
 				if(candidatoDTO.getCanCodigo()!=null)
-					return factoryDAO.getCandidatoDAOImpl().edit(candidatoDTO);
+					return factoryDAO.getCandidatoDAOImpl().update(candidatoDTO);
 				else
 					return factoryDAO.getCandidatoDAOImpl().create(candidatoDTO);
 			}	
@@ -104,7 +104,7 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 		//	Integer es=factoryDAO.getEstudioDAOImpl().getMax(can);
 			//can.setCanMaxEstudio(es);
 			//can.setCanFechaUltima(new Timestamp(new Date().getTime()));
-			factoryDAO.getCandidatoDAOImpl().edit(can);
+			factoryDAO.getCandidatoDAOImpl().update(can);
 		} catch (Exception e) {
 			//log.info("Error al registrar el Candidato {}", e.toString());
 			throw new CorvustecException("Error al registrar la Habilidad");
@@ -127,7 +127,7 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 			{
 				can.setCanMaxEstudio(null);
 			}*/
-			factoryDAO.getCandidatoDAOImpl().edit(can);
+			factoryDAO.getCandidatoDAOImpl().update(can);
 		} catch (Exception e) {
 			//log.info("Error al eliminarEstudio {}", e.toString());
 			throw new CorvustecException("Error al eliminarHabilidad");

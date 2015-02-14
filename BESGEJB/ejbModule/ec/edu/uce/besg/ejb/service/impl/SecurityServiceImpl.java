@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.common.util.UtilEncryption;
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
+import ec.edu.uce.besg.ejb.persistence.entity.security.HistorialPasswordDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 import ec.edu.uce.besg.ejb.service.SecurityService;
 
@@ -42,6 +43,40 @@ public class SecurityServiceImpl implements SecurityService {
 		finally{
 			userList=null;
 			usuarioDTO=null;
+		}
+	}
+	
+	
+	public UsuarioDTO cambiarContrasenaEmpresa(UsuarioDTO usuarioDTO) throws CorvustecException
+	{
+		HistorialPasswordDTO historialPasswordDTO = null;
+		UsuarioDTO usuarioDTO2;
+		List<HistorialPasswordDTO> historialPasswordList;
+		try {
+			usuarioDTO2=new UsuarioDTO();
+			historialPasswordDTO=new HistorialPasswordDTO();
+			
+			usuarioDTO2.setUsuCodigo(usuarioDTO.getUsuCodigo());
+			
+			historialPasswordDTO.setHpaPassword(usuarioDTO.getUsuPassword());
+			historialPasswordDTO.setSegUsuario(usuarioDTO2);
+			
+			historialPasswordList= factoryDAO.getHistorialPasswordDAOImpl().getByAnd(historialPasswordDTO);
+			
+			if(historialPasswordList.size()>0)
+			{
+				factoryDAO.getUsuarioDAOImpl().update(usuarioDTO);
+				factoryDAO.getHistorialPasswordDAOImpl().create(historialPasswordDTO);
+			}
+			return usuarioDTO;
+		} catch (Exception e) {
+			logger.info(e.toString());
+			throw new CorvustecException(e);
+		}
+		finally{
+			historialPasswordDTO=null;
+			usuarioDTO2=null;
+			historialPasswordList=null;
 		}
 	}
 	
