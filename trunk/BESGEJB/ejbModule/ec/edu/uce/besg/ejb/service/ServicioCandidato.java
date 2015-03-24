@@ -10,12 +10,10 @@ import ec.edu.uce.besg.ejb.entity.ExperienciaDTO;
 import ec.edu.uce.besg.ejb.entity.HabilidadDTO;
 import ec.edu.uce.besg.ejb.entity.HabilidadListDTO;
 import ec.edu.uce.besg.ejb.entity.ReferenciaDTO;
+import ec.edu.uce.besg.ejb.vo.CandidatoVO;
 
 @Local
 public interface ServicioCandidato {
-
-	CandidatoDTO registrarCandidato(CandidatoDTO candidatoDTO)
-			throws CorvustecException;
 
 	void agregarHabilidad(HabilidadDTO habilidad) throws CorvustecException;
 
@@ -35,6 +33,9 @@ public interface ServicioCandidato {
 			throws CorvustecException;
 
 	List<HabilidadListDTO> obtenerHabilidad(HabilidadListDTO habilidad)
+			throws CorvustecException;
+
+	CandidatoDTO registrarCandidato(CandidatoVO candidatoVO)
 			throws CorvustecException;
 
 
