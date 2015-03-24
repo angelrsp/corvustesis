@@ -14,26 +14,26 @@
 		<class>ec.edu.uce.besg.ejb.persistence.entity.security.RegistroLoginDTO</class>
 		<class>ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO</class>
 		<class>ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioPerfilDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.AvisoDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.CandidatoDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.ContactoDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.EmpresaDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.ExperienciaDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.HabilidadDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.ImagenCandidatoDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.ImagenEmpresaDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.PostulacionDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.ReferenciaDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.TipoHabilidadDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.ControlDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.PreguntaDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.RespuestaDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.ResultadoDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.ContactoListDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.CandidatoListDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.ExperienciaListDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.ReferenciaListDTO</class>
-		<class>ec.edu.uce.besg.ejb.entity.HabilidadListDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.AvisoDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.CandidatoDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.ContactoDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.EmpresaDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.ExperienciaDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.HabilidadDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.ImagenCandidatoDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.ImagenEmpresaDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.PostulacionDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.ReferenciaDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.TipoHabilidadDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.ControlDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.PreguntaDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.RespuestaDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.ResultadoDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.ContactoListDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.CandidatoListDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.ExperienciaListDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.ReferenciaListDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.HabilidadListDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>

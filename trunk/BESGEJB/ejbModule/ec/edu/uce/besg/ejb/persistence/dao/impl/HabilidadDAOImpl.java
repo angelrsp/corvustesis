@@ -12,9 +12,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import ec.edu.uce.besg.ejb.entity.HabilidadDTO;
-import ec.edu.uce.besg.ejb.entity.HabilidadListDTO;
 import ec.edu.uce.besg.ejb.persistence.dao.HabilidadDAO;
+import ec.edu.uce.besg.ejb.persistence.entity.HabilidadDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.HabilidadListDTO;
 
 public class HabilidadDAOImpl extends AbstractFacadeImpl<HabilidadDTO> implements HabilidadDAO{
 

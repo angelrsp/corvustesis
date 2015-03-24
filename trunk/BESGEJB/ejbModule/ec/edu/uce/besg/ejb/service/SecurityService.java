@@ -10,4 +10,6 @@ public interface SecurityService {
 
 	UsuarioDTO loginEmpresa(UsuarioDTO usuarioDTO) throws CorvustecException;
 
+	UsuarioDTO loginCandidato(UsuarioDTO usuarioDTO) throws CorvustecException;
+
 }

@@ -47,6 +47,30 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 	
 	
+	@Override
+	public UsuarioDTO loginCandidato(UsuarioDTO usuarioDTO) throws CorvustecException
+	{
+		List<UsuarioDTO> userList;
+		try {
+			usuarioDTO.setUsuPassword(UtilEncryption.getInstancia().encriptar(usuarioDTO.getUsuPassword()));
+			userList= factoryDAO.getUsuarioDAOImpl().getByAndJoinEntity(usuarioDTO);
+			if(!userList.isEmpty())
+				return userList.get(0);
+			else
+				return null;
+			
+		} catch (Exception e) {
+			logger.info(e.toString());
+			throw new CorvustecException(e);
+		}
+		finally{
+			userList=null;
+			usuarioDTO=null;
+		}
+	}
+
+	
+	
 	public UsuarioDTO cambiarContrasenaEmpresa(UsuarioDTO usuarioDTO) throws CorvustecException
 	{
 		HistorialPasswordDTO historialPasswordDTO = null;

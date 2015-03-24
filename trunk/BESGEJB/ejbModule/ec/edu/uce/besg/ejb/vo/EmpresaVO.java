@@ -2,7 +2,7 @@ package ec.edu.uce.besg.ejb.vo;
 
 import java.io.Serializable;
 
-import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 
 public class EmpresaVO implements Serializable{

@@ -8,42 +8,52 @@ import javax.ejb.Stateless;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ec.edu.uce.besg.common.util.ConstApplication;
+import ec.edu.uce.besg.common.util.Const;
 import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
-import ec.edu.uce.besg.ejb.service.ServicioCatalogo;
+import ec.edu.uce.besg.ejb.service.CatalogoService;
 
 @Stateless
-public class ServicioCatalogoImpl implements ServicioCatalogo{
+public class CatalogoServiceImpl implements CatalogoService{
 
-	private static final Logger logger = LoggerFactory.getLogger(ServicioCatalogoImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(CatalogoServiceImpl.class);
 	
 	@EJB
 	private FactoryDAO factoryDAO;
 
-	private List<CatalogoDTO> readCatalogo(CatalogoDTO catalogoDTO) throws CorvustecException
+	private List<CatalogoDTO> readCatalogo(Integer code) throws CorvustecException
 	{
-		CatalogoDTO catalogoChild;
+		CatalogoDTO fatherDTO;
+		CatalogoDTO catalogoDTO;
+		List<CatalogoDTO> catalogoList;
 		try {
-			catalogoChild=new CatalogoDTO();
-			catalogoChild.setSegCatalogo(catalogoDTO);			
-			return factoryDAO.getCatalogoDAOImpl().getByAnd(catalogoChild);
-		} catch (Exception e) {
-			logger.info("Error al obtener sector {}", e.toString());
-			throw new CorvustecException("Error al obtener sector");
-		}				
-	}
+			fatherDTO=new CatalogoDTO();
+			catalogoDTO=new CatalogoDTO();
+			
+			fatherDTO.setCatCodigo(code);
+			
+			catalogoDTO.setSegCatalogo(fatherDTO);
+			
+			catalogoList= factoryDAO.getCatalogoDAOImpl().getByAnd(catalogoDTO);
 
+			return catalogoList;
+			
+		} catch (Exception e) {
+			throw new CorvustecException(e);
+		}
+		finally{
+			catalogoDTO=null;
+			fatherDTO=null;
+			catalogoList=null;
+		}		
+	}
 		
 	@Override
 	public List<CatalogoDTO> readSector() throws CorvustecException
 	{
-		CatalogoDTO catalogoDTO;
 		try {
-			catalogoDTO=new CatalogoDTO();
-			catalogoDTO.setCatCodigo(ConstApplication.SECTOR);
-			return readCatalogo(catalogoDTO);
+			return readCatalogo(Const.SECTOR);
 		} catch (Exception e) {
 			logger.info("Error al obtener sector {}", e.toString());
 			throw new CorvustecException("Error al obtener sector");
@@ -53,11 +63,8 @@ public class ServicioCatalogoImpl implements ServicioCatalogo{
 	@Override
 	public List<CatalogoDTO> readPais() throws CorvustecException
 	{
-		CatalogoDTO catalogoDTO;
 		try {
-			catalogoDTO=new CatalogoDTO();
-			catalogoDTO.setCatCodigo(ConstApplication.PAIS);
-			return readCatalogo(catalogoDTO);
+			return readCatalogo(Const.PAIS);
 		} catch (Exception e) {
 			logger.info("Error al obtener sector {}", e.toString());
 			throw new CorvustecException("Error al obtener sector");
@@ -67,11 +74,8 @@ public class ServicioCatalogoImpl implements ServicioCatalogo{
 	@Override
 	public List<CatalogoDTO> readCargo() throws CorvustecException
 	{
-		CatalogoDTO catalogoDTO;
 		try {
-			catalogoDTO=new CatalogoDTO();
-			catalogoDTO.setCatCodigo(ConstApplication.CARGO);
-			return readCatalogo(catalogoDTO);
+			return readCatalogo(Const.CARGO);
 		} catch (Exception e) {
 			logger.info("Error al obtener sector {}", e.toString());
 			throw new CorvustecException("Error al obtener sector");
@@ -81,11 +85,8 @@ public class ServicioCatalogoImpl implements ServicioCatalogo{
 	@Override
 	public List<CatalogoDTO> readEstadoCivil() throws CorvustecException
 	{
-		CatalogoDTO catalogoDTO;
 		try {
-			catalogoDTO=new CatalogoDTO();
-			catalogoDTO.setCatCodigo(ConstApplication.ESTADO_CIVIL);
-			return readCatalogo(catalogoDTO);
+			return readCatalogo(Const.ESTADO_CIVIL);
 		} catch (Exception e) {
 			logger.info("Error al obtener sector {}", e.toString());
 			throw new CorvustecException("Error al obtener sector");
@@ -93,13 +94,10 @@ public class ServicioCatalogoImpl implements ServicioCatalogo{
 	}
 
 	@Override
-	public List<CatalogoDTO> readTipoDocumento() throws CorvustecException
+	public List<CatalogoDTO> readIdentificationType() throws CorvustecException
 	{
-		CatalogoDTO catalogoDTO;
 		try {
-			catalogoDTO=new CatalogoDTO();
-			catalogoDTO.setCatCodigo(ConstApplication.TIPO_DOCUMENTO);
-			return readCatalogo(catalogoDTO);
+			return readCatalogo(Const.TIPO_IDENTIFICACION);
 		} catch (Exception e) {
 			logger.info("Error al obtener sector {}", e.toString());
 			throw new CorvustecException("Error al obtener sector");
@@ -109,11 +107,8 @@ public class ServicioCatalogoImpl implements ServicioCatalogo{
 	@Override
 	public List<CatalogoDTO> readSexo() throws CorvustecException
 	{
-		CatalogoDTO catalogoDTO;
 		try {
-			catalogoDTO=new CatalogoDTO();
-			catalogoDTO.setCatCodigo(ConstApplication.SEXO);
-			return readCatalogo(catalogoDTO);
+			return readCatalogo(Const.SEXO);
 		} catch (Exception e) {
 			logger.info("Error al obtener sector {}", e.toString());
 			throw new CorvustecException("Error al obtener sector");
@@ -124,11 +119,8 @@ public class ServicioCatalogoImpl implements ServicioCatalogo{
 	@Override
 	public List<CatalogoDTO> readNivelEstudio() throws CorvustecException
 	{
-		CatalogoDTO catalogoDTO;
 		try {
-			catalogoDTO=new CatalogoDTO();
-			catalogoDTO.setCatCodigo(ConstApplication.NIVEL_ESTUDIO);
-			return readCatalogo(catalogoDTO);
+			return readCatalogo(Const.NIVEL_ESTUDIO);
 		} catch (Exception e) {
 			logger.info("Error al obtener sector {}", e.toString());
 			throw new CorvustecException("Error al obtener sector");

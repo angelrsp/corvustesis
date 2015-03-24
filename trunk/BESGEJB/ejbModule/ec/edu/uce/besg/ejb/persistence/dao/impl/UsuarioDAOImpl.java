@@ -132,4 +132,54 @@ public class UsuarioDAOImpl extends AbstractFacadeImpl<UsuarioDTO> implements Us
 		}		
 	}
 	
+	@Override
+	public List<UsuarioDTO> getByAndJoinCandidato(UsuarioDTO objeto) throws CorvustecException
+	{
+		CriteriaBuilder cb;
+		CriteriaQuery<UsuarioDTO> cq;
+		Root<UsuarioDTO> from;
+		List<UsuarioDTO> list;
+		Predicate predicate;
+		List<Predicate> predicateList = null;
+		String fieldName;
+		Method getter;
+		Object value;
+		Field[] fields;
+		try{
+			cb=entityManager.getCriteriaBuilder();
+			cq=cb.createQuery(UsuarioDTO.class);
+			
+			from= cq.from(UsuarioDTO.class);
+			from.join("bemEmpresas",JoinType.INNER);
+			
+			predicateList=new ArrayList<Predicate>();
+			fields = objeto.getClass().getDeclaredFields();
+	        for(Field f : fields){
+	            fieldName = f.getName();
+				if(!fieldName.equals("serialVersionUID"))
+				{
+				    getter = objeto.getClass().getMethod("get" + String.valueOf(fieldName.charAt(0)).toUpperCase() +
+				            fieldName.substring(1));
+				    value = getter.invoke(objeto, new Object[0]);
+				    if(value!=null && value!="")
+				    {
+			    		predicate=cb.equal(from.get(fieldName), value);
+			    		predicateList.add(predicate);
+				    }
+				}
+	        }
+	
+	        if(!predicateList.isEmpty())
+	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
+			TypedQuery<UsuarioDTO> tq=entityManager.createQuery(cq);
+			list=tq.getResultList();
+			return list;
+		}catch(Exception e){
+			logger.info(e.toString());
+			throw new CorvustecException(e);
+		}finally{
+			predicate=null;
+			predicateList=null;
+		}		
+	}
 }

@@ -16,8 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
-import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.dao.EmpresaDAO;
+import ec.edu.uce.besg.ejb.persistence.entity.EmpresaDTO;
 
 
 
