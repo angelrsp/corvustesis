@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+		<persistence-unit name="besgPU" transaction-type="JTA">
+		<jta-data-source>java:/postgresqlBesgDS</jta-data-source>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.security.AccesoDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.security.ComponenteDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.security.ComponenteMenuDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.security.HistorialPasswordDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.security.LogDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.security.MenuDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.security.ParametroDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.security.PerfilDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.security.RegistroLoginDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioPerfilDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.AvisoDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.CandidatoDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ContactoDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.EmpresaDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ExperienciaDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.HabilidadDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ImagenCandidatoDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ImagenEmpresaDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.PostulacionDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ReferenciaDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.TipoHabilidadDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ControlDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.PreguntaDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.RespuestaDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ResultadoDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ContactoListDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.CandidatoListDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ExperienciaListDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.ReferenciaListDTO</class>
+		<class>ec.edu.uce.besg.ejb.entity.HabilidadListDTO</class>
+		<properties>
+			<property name="hibernate.show_sql" value="true"/>
+		</properties>
+	</persistence-unit>
+</persistence>

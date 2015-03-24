@@ -1,5 +1,7 @@
 package ec.edu.uce.besg.ejb.service.impl;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -9,13 +11,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
+import ec.edu.uce.besg.common.util.UtilEncryption;
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
 import ec.edu.uce.besg.ejb.entity.CandidatoDTO;
 import ec.edu.uce.besg.ejb.entity.ExperienciaDTO;
 import ec.edu.uce.besg.ejb.entity.HabilidadDTO;
 import ec.edu.uce.besg.ejb.entity.HabilidadListDTO;
 import ec.edu.uce.besg.ejb.entity.ReferenciaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.security.HistorialPasswordDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 import ec.edu.uce.besg.ejb.service.ServicioCandidato;
+import ec.edu.uce.besg.ejb.vo.CandidatoVO;
 
 @Stateless
 public class ServicioCandidatoImpl implements ServicioCandidato {
@@ -28,26 +34,35 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 	
 	
 	@Override
-	public CandidatoDTO registrarCandidato(CandidatoDTO candidatoDTO)throws CorvustecException {
-		//log.info("registrarCandidato");
-		try {
-			//UsuarioDTO user = candidatoDTO.getCanUsuario();
-			//user.setBemPerfil(factoryDAO.getPerfilDAOImpl().find(1));
-			//candidatoDTO.setBemUsuario(user);
-			if(factoryDAO.getCandidatoDAOImpl().getByAnd(candidatoDTO).get(0) != null)
-				throw new CorvustecException("El número de identificación ingresado ya existe en el sistema");
+	public CandidatoDTO registrarCandidato(CandidatoVO candidatoVO)throws CorvustecException {
+		UsuarioDTO usuarioDTO;
+		HistorialPasswordDTO historialPasswordDTO;
+		try{
+			if(candidatoVO.getCandidatoDTO().getCanCodigo()!=null)
+				return factoryDAO.getCandidatoDAOImpl().update(candidatoVO.getCandidatoDTO());
 			else
 			{
-				if(candidatoDTO.getCanCodigo()!=null)
-					return factoryDAO.getCandidatoDAOImpl().update(candidatoDTO);
-				else
-					return factoryDAO.getCandidatoDAOImpl().create(candidatoDTO);
-			}	
+				historialPasswordDTO=new HistorialPasswordDTO();
+				candidatoVO.getUsuarioDTO().setUsuPassword(UtilEncryption.getInstancia().encriptar(candidatoVO.getUsuarioDTO().getUsuPassword()));
+				usuarioDTO= factoryDAO.getUsuarioDAOImpl().create(candidatoVO.getUsuarioDTO());
+				
+				historialPasswordDTO.setSegUsuario(usuarioDTO);
+				historialPasswordDTO.setHpaFecha(new Timestamp(new Date().getTime()));
+				historialPasswordDTO.setHpaPassword(UtilEncryption.getInstancia().encriptar(candidatoVO.getUsuarioDTO().getUsuPassword()));
+				
+				factoryDAO.getHistorialPasswordDAOImpl().create(historialPasswordDTO);
+				
+				candidatoVO.getCandidatoDTO().setCanUsuario(usuarioDTO.getUsuCodigo());
+				return factoryDAO.getCandidatoDAOImpl().create(candidatoVO.getCandidatoDTO());
+			}
 		} catch (Exception e) {
-			logger.info("Error al registrar el Candidato {}", e.toString());
-			throw new CorvustecException(e);
+			logger.info("Error al registrar Empresa {}", e.toString());
+			throw new CorvustecException("Error al registrar Empresa");
 		}
-
+		finally{
+			usuarioDTO=null;
+			historialPasswordDTO=null;
+		}
 	}
 
 	@Override
