@@ -6,24 +6,32 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<ui:include src="/WEB-INF/template/head.xhtml" />
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/stylePublic.css" />
+ 	 
+ 	<style>
+  		body {font-size: 10pt;font-weight:normal;
+    		background: url('#{request.contextPath}/resources/img/fondo001.jpg') no-repeat center center fixed;
+        	background-size: cover;
+        	-moz-background-size: cover;
+        	-webkit-background-size: cover;
+        	-o-background-size: cover;"}
+	</style>
+ 	 
+	<script type="text/javascript" src="#{request.contextPath}/resources/js/images.js"/>	
 </h:head>
 
 <body>
 
 <!-- <f:view transient="true"> -->
 
-	<div class="selector">
 		<h:form id="index">
 			
-			<p:growl id="pnlMessages" autoUpdate="true" closable="true"/>
+			<p:growl autoUpdate="true" />  
 			
 			<div align="center">
 				<div style="width: 995px;">
 					<table width="99%">
 						<tr>
-							<td><h:graphicImage value="/resources/img/uce_logo.jpg"
-									height="40" /></td>
 							<td align="right">
 								<p:commandButton id="btnEmpresa" value="Empresas" type="button" />
 																		
@@ -44,7 +52,7 @@
 									<table width="99%">
 										<tr>
 											<td><a href="#{request.contextPath}/public/loginCandidato.xhtml">Ingreso</a></td>
-											<td><a href="#{request.contextPath}/public/registroCandiato.xhtml">Registro</a></td>
+											<td><a href="#{request.contextPath}/public/registroCandidato.xhtml">Registro</a></td>
 										</tr>
 									</table>	
 							    </p:overlayPanel>																	
@@ -56,20 +64,22 @@
 				</div>
 			</div>
 
-			<hr />
-
 			<div align="center">
 
-				<div style="width: 995px; box-shadow: 0 0 1px #2E2D32;">
+				<div style="width: 995px;">
 
 					<ui:insert name="content" />
 
 				</div>
 			</div>
 		</h:form>
-	</div>
 
 <!-- </f:view> -->
+
+   <div id="footer" align="right">
+        ddd
+    </div>
+
 
 </body>
 

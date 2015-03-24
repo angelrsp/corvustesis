@@ -9,48 +9,45 @@
 	
 	<ui:define name="content">
 		
-		<p:panel header="Registro Empresa">
+		<p:spacer height="80"/>
 		
-			<p:panel>
+		<p:panel id="pnlRegistro" header="Registro Empresa" style="width: 500px;">
 			
-				<table>
-					<tr>
-						<td><h:outputText value="Usuario:" /></td>
-						<td><p:inputText value="#{registroEmpresaDataManager.usuarioDTO.usuLogin}"/></td>
-					</tr>
-					
-					<tr>
-						<td><h:outputText value="Contraseña:" /></td>
-						<td><p:password value="#{registroEmpresaDataManager.usuarioDTO.usuPassword}"/></td>
-					</tr>					
+			<table>
+				<tr> 
+					<td><h:outputText value="Usuario:" for="user" /></td>
+					<td><p:inputText id="user" value="#{registroEmpresaDataManager.usuarioDTO.usuLogin}" required="true" label="Usuario"/></td>
+				</tr>
+				
+				<tr>
+					<td><h:outputText value="Contraseña:" for="password"/></td>
+					<td><p:password id="password" value="#{registroEmpresaDataManager.usuarioDTO.usuPassword}" required="true" label="Contraseña"/></td>
+				</tr>					
 
-					<tr>
-						<td colspan="2"><p:separator /></td>
-					</tr>					
+				<tr>
+					<td colspan="2"><p:separator /></td>
+				</tr>					
 
-					<tr>
-						<td><h:outputText value="Razon Social:" /></td>
-						<td><p:inputText value="#{registroEmpresaDataManager.empresaDTO.empRazonSocial}"/></td>
-					</tr>
+				<tr>
+					<td><h:outputText value="Razon Social:" /></td>
+					<td><p:inputText value="#{registroEmpresaDataManager.empresaDTO.empRazonSocial}" required="true"/></td>
+				</tr>
 
-					<tr>
-						<td><h:outputText value="RUC:" /></td>
-						<td><p:inputText value="#{registroEmpresaDataManager.empresaDTO.empRuc}"/></td>
-					</tr>
-					
-					<tr>
-						<td><h:outputText value="Correo Electrónico:" /></td>
-						<td><p:inputText value="#{registroEmpresaDataManager.usuarioDTO.usuMail}"/></td>
-					</tr>
-										
-					<tr align="center">
-						<td colspan="2"><p:commandButton value="Registrar" actionListener="#{registroEmpresaController.registrar}"/></td>
-					</tr>					
-										
-				</table>
-
-			</p:panel>
-			
+				<tr>
+					<td><h:outputText value="RUC:" /></td>
+					<td><p:inputText value="#{registroEmpresaDataManager.empresaDTO.empRuc}" required="true"/></td>
+				</tr>
+				
+				<tr>
+					<td><h:outputText value="Correo Electrónico:" /></td>
+					<td><p:inputText value="#{registroEmpresaDataManager.usuarioDTO.usuMail}" required="true"/></td>
+				</tr>
+									
+				<tr align="center">
+					<td colspan="2"><p:commandButton value="Registrar" actionListener="#{registroEmpresaController.registrar}" update="pnlRegistro"/></td>
+				</tr>					
+									
+			</table>
 		
 		</p:panel>
 		
