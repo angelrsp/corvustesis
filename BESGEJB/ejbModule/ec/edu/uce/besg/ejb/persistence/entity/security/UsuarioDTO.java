@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.EmpresaDTO;
 
 import java.util.List;
 

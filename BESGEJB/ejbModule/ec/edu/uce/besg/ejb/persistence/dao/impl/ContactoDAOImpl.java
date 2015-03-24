@@ -12,9 +12,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import ec.edu.uce.besg.ejb.entity.ContactoDTO;
-import ec.edu.uce.besg.ejb.entity.ContactoListDTO;
 import ec.edu.uce.besg.ejb.persistence.dao.ContactoDAO;
+import ec.edu.uce.besg.ejb.persistence.entity.ContactoDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.ContactoListDTO;
 
 public class ContactoDAOImpl extends AbstractFacadeImpl<ContactoDTO> implements ContactoDAO{
 

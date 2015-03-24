@@ -8,7 +8,7 @@ import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 
 @Local
-public interface ServicioCatalogo {
+public interface CatalogoService {
 
 	List<CatalogoDTO> readSector() throws CorvustecException;
 
@@ -18,7 +18,7 @@ public interface ServicioCatalogo {
 
 	List<CatalogoDTO> readEstadoCivil() throws CorvustecException;
 
-	List<CatalogoDTO> readTipoDocumento() throws CorvustecException;
+	List<CatalogoDTO> readIdentificationType() throws CorvustecException;
 
 	List<CatalogoDTO> readSexo() throws CorvustecException;
 

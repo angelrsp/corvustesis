@@ -5,9 +5,9 @@ import java.util.List;
 import javax.ejb.Local;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
-import ec.edu.uce.besg.ejb.entity.ContactoDTO;
-import ec.edu.uce.besg.ejb.entity.ContactoListDTO;
-import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.ContactoDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.ContactoListDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 import ec.edu.uce.besg.ejb.vo.EmpresaVO;
 

@@ -1,4 +1,4 @@
-package ec.edu.uce.besg.ejb.entity;
+package ec.edu.uce.besg.ejb.persistence.entity;
 
 import java.io.Serializable;
 

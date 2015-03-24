@@ -12,8 +12,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import ec.edu.uce.besg.ejb.entity.ReferenciaDTO;
 import ec.edu.uce.besg.ejb.persistence.dao.ReferenciaDAO;
+import ec.edu.uce.besg.ejb.persistence.entity.ReferenciaDTO;
 
 public class ReferenciaDAOImpl extends AbstractFacadeImpl<ReferenciaDTO> implements ReferenciaDAO{
 

@@ -5,11 +5,11 @@ import java.util.List;
 import javax.ejb.Local;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
-import ec.edu.uce.besg.ejb.entity.CandidatoDTO;
-import ec.edu.uce.besg.ejb.entity.ExperienciaDTO;
-import ec.edu.uce.besg.ejb.entity.HabilidadDTO;
-import ec.edu.uce.besg.ejb.entity.HabilidadListDTO;
-import ec.edu.uce.besg.ejb.entity.ReferenciaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.CandidatoDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.ExperienciaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.HabilidadDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.HabilidadListDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.ReferenciaDTO;
 import ec.edu.uce.besg.ejb.vo.CandidatoVO;
 
 @Local

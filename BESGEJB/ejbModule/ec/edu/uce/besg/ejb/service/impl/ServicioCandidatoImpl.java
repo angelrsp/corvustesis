@@ -13,11 +13,11 @@ import org.slf4j.LoggerFactory;
 import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.common.util.UtilEncryption;
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
-import ec.edu.uce.besg.ejb.entity.CandidatoDTO;
-import ec.edu.uce.besg.ejb.entity.ExperienciaDTO;
-import ec.edu.uce.besg.ejb.entity.HabilidadDTO;
-import ec.edu.uce.besg.ejb.entity.HabilidadListDTO;
-import ec.edu.uce.besg.ejb.entity.ReferenciaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.CandidatoDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.ExperienciaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.HabilidadDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.HabilidadListDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.ReferenciaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.HistorialPasswordDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 import ec.edu.uce.besg.ejb.service.ServicioCandidato;
@@ -56,8 +56,8 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 				return factoryDAO.getCandidatoDAOImpl().create(candidatoVO.getCandidatoDTO());
 			}
 		} catch (Exception e) {
-			logger.info("Error al registrar Empresa {}", e.toString());
-			throw new CorvustecException("Error al registrar Empresa");
+			logger.info("Error al registrar Candidato {}", e.toString());
+			throw new CorvustecException("Error al registrar Candidato");
 		}
 		finally{
 			usuarioDTO=null;

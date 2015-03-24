@@ -12,8 +12,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import ec.edu.uce.besg.ejb.entity.ExperienciaDTO;
 import ec.edu.uce.besg.ejb.persistence.dao.ExperienciaDAO;
+import ec.edu.uce.besg.ejb.persistence.entity.ExperienciaDTO;
 
 public class ExperienciaDAOImpl extends AbstractFacadeImpl<ExperienciaDTO> implements ExperienciaDAO {
 
