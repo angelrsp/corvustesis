@@ -8,19 +8,19 @@
 
 	<ui:define name="content">
 	
-		<p:panel id="pnlLogin" header="Iniciar Sesión">
+		<p:spacer height="80"/>
+	
+		<p:panel id="pnlLogin" header="Iniciar Sesión" style="width: 500px;">
 			
 			<p:focus context="pnlLogin" />
 			
 			<table>
 				<tr>
-					<td><h:outputText value="Usuario" /></td>
-					<td><p:inputText placeholder="Usuario o correo electrónio" value="#{loginEmpresaDataManager.usuarioDTO.usuLogin}"/></td>
+					<td><p:inputText placeholder="Usuario o Correo Electrónico" value="#{loginEmpresaDataManager.usuarioDTO.usuLogin}" style="width: 230px;"/></td>
 				</tr>
 
 				<tr>
-					<td><h:outputText value="Contraseña" /></td>
-					<td><p:password value="#{loginEmpresaDataManager.usuarioDTO.usuPassword}" /></td>
+					<td><p:password placeholder="Contraseña" value="#{loginEmpresaDataManager.usuarioDTO.usuPassword}" style="width: 230px;"/></td>
 				</tr>
 
 				<tr>

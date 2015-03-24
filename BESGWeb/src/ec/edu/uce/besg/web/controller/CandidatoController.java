@@ -75,7 +75,7 @@ public class CandidatoController implements Serializable {
 			//candidato.setCanFoto(uploadedFile.getContents());
 			candidato.setCanEstadoCivil(candidatoDataManager.getCodigoEstadoCivil());
 			candidato.setCanSexo(candidatoDataManager.getCodigoSexo());
-			servicioCandidato.registrarCandidato(candidato);
+			//servicioCandidato.registrarCandidato(candidato);
 			JsfUtil.addInfoMessage("Datos Actualizados Exitosamente");
 		} catch (Exception e) {
 			JsfUtil.addErrorMessage(e.getMessage());
