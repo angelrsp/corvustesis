@@ -12,10 +12,10 @@ import javax.faces.bean.ViewScoped;
 import org.apache.commons.collections.CollectionUtils;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
-import ec.edu.uce.besg.ejb.entity.ContactoDTO;
-import ec.edu.uce.besg.ejb.entity.ContactoListDTO;
-import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
-import ec.edu.uce.besg.ejb.service.ServicioCatalogo;
+import ec.edu.uce.besg.ejb.persistence.entity.ContactoDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.ContactoListDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.EmpresaDTO;
+import ec.edu.uce.besg.ejb.service.CatalogoService;
 import ec.edu.uce.besg.ejb.service.ServicioEmpresa;
 import ec.edu.uce.besg.web.datamanager.ContactoDataManager;
 import ec.edu.uce.besg.web.util.JsfUtil;
@@ -39,7 +39,7 @@ public class ContactoController implements Serializable {
 	private ServicioEmpresa servicioEmpresa;
 	
 	@EJB
-	private ServicioCatalogo servicioCatalogo;
+	private CatalogoService servicioCatalogo;
 	
 	
 	@PostConstruct

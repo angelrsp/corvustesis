@@ -8,10 +8,10 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import ec.edu.uce.besg.ejb.entity.CandidatoDTO;
-import ec.edu.uce.besg.ejb.entity.CandidatoListDTO;
-import ec.edu.uce.besg.ejb.entity.HabilidadDTO;
-import ec.edu.uce.besg.ejb.entity.HabilidadListDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.CandidatoDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.CandidatoListDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.HabilidadDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.HabilidadListDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 
 @ViewScoped

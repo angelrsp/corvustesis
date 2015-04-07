@@ -48,7 +48,7 @@ public class LoginEmpresaController implements Serializable{
 	{
 		UsuarioDTO usuarioDTO;
 		try {
-			usuarioDTO=securityService.loginEmpresa(loginEmpresaDataManager.getUsuarioDTO());
+			usuarioDTO=securityService.authenticateEmpresa(loginEmpresaDataManager.getUsuarioDTO());
 			 if(usuarioDTO !=null)
 			 {
 				 JsfUtil.putObject("UsuarioEmpresa", usuarioDTO);

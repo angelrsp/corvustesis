@@ -7,7 +7,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 

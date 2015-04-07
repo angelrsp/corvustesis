@@ -11,17 +11,17 @@
 		
 		<p:spacer height="80"/>
 		
-		<p:panel id="pnlRegistro" header="Registro Candidato" style="width: 500px;">
+		<p:panel id="pnlRegistro" style="width: 500px;">
 		
 			<table>
 				<tr>
-					<td><h:outputText value="Usuario:" /></td>
-					<td><p:inputText placeholder="Correo Electrónico" value="#{registroCandidatoDataManager.usuarioDTO.usuLogin}"/></td>
+					<td><h:outputText value="Usuario:" for="user" /></td>
+					<td><p:inputText id="user" placeholder="Correo Electrónico" value="#{registroCandidatoDataManager.usuarioDTO.usuLogin}" style="width: 230px;" required="true" label="Usuario"/></td>
 				</tr>
 				
 				<tr>
 					<td><h:outputText value="Contraseña:" /></td>
-					<td><p:password placeholder="Contraseña" value="#{registroCandidatoDataManager.usuarioDTO.usuPassword}"/></td>
+					<td><p:password id="password" placeholder="Contraseña" value="#{registroCandidatoDataManager.usuarioDTO.usuPassword}" style="width: 230px;" required="true" label="Contraseña"/></td>
 				</tr>					
 
 				<tr>
@@ -30,21 +30,38 @@
 
 				<tr>
 					<td><h:outputText value="Nombres:" /></td>
-					<td><p:inputText placeholder="Nombres" value="#{registroCandidatoDataManager.candidatoDTO.canNombres}"/></td>
+					<td><p:inputText id="name" placeholder="Nombres" value="#{registroCandidatoDataManager.candidatoDTO.canNombres}" style="width: 230px;" required="true" label="Nombres"/></td>
 				</tr>
 
 				<tr>
-					<td><h:outputText value="Apellidos:" /></td>
-					<td><p:inputText placeholder="Apellidos" value="#{registroCandidatoDataManager.candidatoDTO.canApellidos}"/></td>
+					<td><h:outputText value="Apellidos:" for="lastName" /></td>
+					<td><p:inputText id="lastName" placeholder="Apellidos" value="#{registroCandidatoDataManager.candidatoDTO.canApellidos}" style="width: 230px;" required="true" label="Apellidos"/></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="Tipo de Identificación:" for="somIdentificationType"/></td>
+					<td><p:selectOneMenu id="somIdentificationType" value="#{registroCandidatoDataManager.identificationTypeCode}" required="true" label="Tipo de Identificación">
+							<f:selectItem itemLabel="--Seleccione--"/>
+							<f:selectItems value="#{registroCandidatoController.registroCandidatoDataManager.identificationTypeList}" var="tdo" itemValue="#{tdo.catCodigo}" itemLabel="#{tdo.catDescripcion}"/>
+						</p:selectOneMenu>
+					 </td>
 				</tr>
 				
 				<tr>
-					<td><h:outputText value="Identificación:" /></td>
-					<td><p:inputText placeholder="Identificación" value="#{registroCandidatoDataManager.candidatoDTO.canIdentificacion}"/></td>
+					<td><h:outputText value="Identificación:" for="identification" /></td>
+					<td><p:inputText id="identification" placeholder="Identificación" value="#{registroCandidatoDataManager.candidatoDTO.canIdentificacion}" style="width: 230px;" required="true" label="Identificación"/></td>
+				</tr>
+				
+				<p:spacer height="10"/>
+				
+				<tr>
+					<td>
+						<p:spacer height="20"/>
+					</td>
 				</tr>
 									
 				<tr align="center">
-					<td colspan="2"><p:commandButton value="Registrar" actionListener="#{registroEmpresaController.registrar}" update="pnlRegistro"/></td>
+					<td colspan="2"><p:commandButton value="Registrar" actionListener="#{registroCandidatoController.registrar}" update="pnlRegistro"/></td>
 				</tr>					
 									
 			</table>

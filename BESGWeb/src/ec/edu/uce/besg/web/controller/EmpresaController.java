@@ -13,9 +13,9 @@ import org.apache.commons.collections.CollectionUtils;
 import org.primefaces.context.RequestContext;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
-import ec.edu.uce.besg.ejb.entity.EmpresaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
-import ec.edu.uce.besg.ejb.service.ServicioCatalogo;
+import ec.edu.uce.besg.ejb.service.CatalogoService;
 import ec.edu.uce.besg.ejb.service.ServicioEmpresa;
 import ec.edu.uce.besg.ejb.vo.EmpresaVO;
 import ec.edu.uce.besg.web.datamanager.EmpresaDataManager;
@@ -46,7 +46,7 @@ public class EmpresaController implements Serializable{
 	private ServicioEmpresa servicioEmpresa;
 
 	@EJB
-	private ServicioCatalogo servicioCatalogo;
+	private CatalogoService servicioCatalogo;
 	
 	public EmpresaController() {
 	
