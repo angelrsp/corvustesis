@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import ec.edu.uce.besg.ejb.persistence.entity.CandidatoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.EmpresaDTO;
 
 import java.util.List;
@@ -65,6 +66,10 @@ public class UsuarioDTO implements Serializable {
 	//bi-directional many-to-one association to RegistroLoginDTOs
 	@OneToMany(mappedBy="segUsuario")
 	private List<EmpresaDTO> bemEmpresas;
+
+	//bi-directional many-to-one association to RegistroLoginDTOs
+	@OneToMany(mappedBy="segUsuario")
+	private List<CandidatoDTO> bemCandidatos;
 
 
 	public UsuarioDTO() {
@@ -228,6 +233,14 @@ public class UsuarioDTO implements Serializable {
 		segUsuarioPerfil.setSegUsuario(null);
 
 		return segUsuarioPerfil;
+	}
+
+	public List<CandidatoDTO> getBemCandidatos() {
+		return bemCandidatos;
+	}
+
+	public void setBemCandidatos(List<CandidatoDTO> bemCandidatos) {
+		this.bemCandidatos = bemCandidatos;
 	}
 
 }

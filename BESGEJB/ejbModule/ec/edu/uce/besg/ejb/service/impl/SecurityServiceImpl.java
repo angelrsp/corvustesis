@@ -25,7 +25,7 @@ public class SecurityServiceImpl implements SecurityService {
 
 	
 	@Override
-	public UsuarioDTO loginEmpresa(UsuarioDTO usuarioDTO) throws CorvustecException
+	public UsuarioDTO authenticateEmpresa(UsuarioDTO usuarioDTO) throws CorvustecException
 	{
 		List<UsuarioDTO> userList;
 		try {
@@ -48,24 +48,21 @@ public class SecurityServiceImpl implements SecurityService {
 	
 	
 	@Override
-	public UsuarioDTO loginCandidato(UsuarioDTO usuarioDTO) throws CorvustecException
+	public UsuarioDTO authenticateCandidato(UsuarioDTO usuarioDTO) throws CorvustecException
 	{
-		List<UsuarioDTO> userList;
+		List<UsuarioDTO> usuarioList;
 		try {
 			usuarioDTO.setUsuPassword(UtilEncryption.getInstancia().encriptar(usuarioDTO.getUsuPassword()));
-			userList= factoryDAO.getUsuarioDAOImpl().getByAndJoinEntity(usuarioDTO);
-			if(!userList.isEmpty())
-				return userList.get(0);
+			usuarioList=factoryDAO.getUsuarioDAOImpl().getByAnd(usuarioDTO);
+			if(usuarioList.size()==1)
+				return usuarioList.get(0);
 			else
-				return null;
-			
+				throw new CorvustecException("Los datos ingresados son incorrectos");
 		} catch (Exception e) {
-			logger.info(e.toString());
 			throw new CorvustecException(e);
 		}
 		finally{
-			userList=null;
-			usuarioDTO=null;
+			usuarioDTO=null;	
 		}
 	}
 

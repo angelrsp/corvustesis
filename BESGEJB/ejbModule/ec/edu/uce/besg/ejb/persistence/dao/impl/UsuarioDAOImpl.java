@@ -150,7 +150,7 @@ public class UsuarioDAOImpl extends AbstractFacadeImpl<UsuarioDTO> implements Us
 			cq=cb.createQuery(UsuarioDTO.class);
 			
 			from= cq.from(UsuarioDTO.class);
-			from.join("bemEmpresas",JoinType.INNER);
+			from.join("bemCandidatos",JoinType.INNER);
 			
 			predicateList=new ArrayList<Predicate>();
 			fields = objeto.getClass().getDeclaredFields();

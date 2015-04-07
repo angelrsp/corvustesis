@@ -8,8 +8,8 @@ import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 @Local
 public interface SecurityService {
 
-	UsuarioDTO loginEmpresa(UsuarioDTO usuarioDTO) throws CorvustecException;
+	UsuarioDTO authenticateEmpresa(UsuarioDTO usuarioDTO) throws CorvustecException;
 
-	UsuarioDTO loginCandidato(UsuarioDTO usuarioDTO) throws CorvustecException;
+	UsuarioDTO authenticateCandidato(UsuarioDTO usuarioDTO) throws CorvustecException;
 
 }

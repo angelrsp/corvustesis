@@ -1,7 +1,11 @@
 package ec.edu.uce.besg.ejb.persistence.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -52,9 +56,10 @@ public class CandidatoDTO implements Serializable {
 	@Column(name="can_tipo_identificacion")
 	private Integer canTipoIdentificacion;
 
-	@Column(name="can_usuario")
-	private Integer canUsuario;
-
+	@ManyToOne
+	@JoinColumn(name="can_usuario")
+	private UsuarioDTO segUsuario;
+	
 	//bi-directional many-to-one association to ExperienciaDTO
 	@OneToMany(mappedBy="bemCandidato")
 	private List<ExperienciaDTO> bemExperiencias;
@@ -130,6 +135,14 @@ public class CandidatoDTO implements Serializable {
 		this.canIdentificacion = canIdentificacion;
 	}
 
+	public UsuarioDTO getSegUsuario() {
+		return segUsuario;
+	}
+
+	public void setSegUsuario(UsuarioDTO segUsuario) {
+		this.segUsuario = segUsuario;
+	}
+
 	public String getCanLugarNacimiento() {
 		return this.canLugarNacimiento;
 	}
@@ -168,14 +181,6 @@ public class CandidatoDTO implements Serializable {
 
 	public void setCanTipoIdentificacion(Integer canTipoIdentificacion) {
 		this.canTipoIdentificacion = canTipoIdentificacion;
-	}
-
-	public Integer getCanUsuario() {
-		return this.canUsuario;
-	}
-
-	public void setCanUsuario(Integer canUsuario) {
-		this.canUsuario = canUsuario;
 	}
 
 	public List<ExperienciaDTO> getBemExperiencias() {

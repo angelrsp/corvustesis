@@ -44,6 +44,7 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 			{
 				historialPasswordDTO=new HistorialPasswordDTO();
 				candidatoVO.getUsuarioDTO().setUsuPassword(UtilEncryption.getInstancia().encriptar(candidatoVO.getUsuarioDTO().getUsuPassword()));
+				candidatoVO.getUsuarioDTO().setUsuMail(candidatoVO.getUsuarioDTO().getUsuLogin());
 				usuarioDTO= factoryDAO.getUsuarioDAOImpl().create(candidatoVO.getUsuarioDTO());
 				
 				historialPasswordDTO.setSegUsuario(usuarioDTO);
@@ -52,7 +53,7 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 				
 				factoryDAO.getHistorialPasswordDAOImpl().create(historialPasswordDTO);
 				
-				candidatoVO.getCandidatoDTO().setCanUsuario(usuarioDTO.getUsuCodigo());
+				candidatoVO.getCandidatoDTO().setSegUsuario(usuarioDTO);
 				return factoryDAO.getCandidatoDAOImpl().create(candidatoVO.getCandidatoDTO());
 			}
 		} catch (Exception e) {
