@@ -8,26 +8,28 @@
 
 	<ui:define name="content">
 	
-		<p:panel id="pnlLogin">
-		<p:focus context="pnlLogin"/>
-		<table>
-			<tr>
-				<td><h:outputText value="Usuario"/></td>
-				<td><p:inputText id="txtUser" /></td>
-			</tr>
+		<p:spacer height="80"/>
+		
+		<p:panel id="pnlLogin" style="width: 400px;">
+		
+			<p:focus context="pnlLogin"/>
 			
-			<tr>
-				<td><h:outputText value="Contraseña" /></td>
-				<td><p:password id="password"/></td>
-			</tr>
-	
-			<tr>
-				<td colspan="2" align="center">
-					<p:commandButton value="Ingresar" actionListener="#{indexController.redirectBienCandidato}" />
-				</td>	
-			</tr>
-		</table>
-	</p:panel>
+			<table>
+				<tr>
+					<td><p:inputText placeholder="Correo Electrónico" id="txtUser" required="true" style="width: 230px;" label="Correo Electrónico" value="#{loginCandidatoDataManager.usuarioDTO.usuLogin}"/></td>
+				</tr>
+				
+				<tr>
+					<td><p:password placeholder="Contraseña" id="password" required="true" style="width: 230px;" label="Contraseña" value="#{loginCandidatoDataManager.usuarioDTO.usuPassword}"/></td>
+				</tr>
+		
+				<tr>
+					<td colspan="2" align="center">
+						<p:commandButton value="Ingresar" actionListener="#{loginCandidatoController.authenticate}" update="pnlLogin"/>
+					</td>	
+				</tr>
+			</table>
+		</p:panel>
 		
 		
 	</ui:define>

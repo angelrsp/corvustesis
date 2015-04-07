@@ -13,11 +13,11 @@ import javax.faces.bean.ViewScoped;
 import org.apache.commons.collections.CollectionUtils;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
-import ec.edu.uce.besg.ejb.entity.CandidatoDTO;
-import ec.edu.uce.besg.ejb.entity.HabilidadDTO;
-import ec.edu.uce.besg.ejb.entity.HabilidadListDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.CandidatoDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.HabilidadDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.HabilidadListDTO;
 import ec.edu.uce.besg.ejb.service.ServicioCandidato;
-import ec.edu.uce.besg.ejb.service.ServicioCatalogo;
+import ec.edu.uce.besg.ejb.service.CatalogoService;
 import ec.edu.uce.besg.web.datamanager.CandidatoDataManager;
 import ec.edu.uce.besg.web.util.JsfUtil;
 
@@ -39,7 +39,7 @@ public class CandidatoController implements Serializable {
 	private ServicioCandidato servicioCandidato;
 
 	@EJB
-	private ServicioCatalogo servicioCatalogo;
+	private CatalogoService servicioCatalogo;
 	
 	
 	public CandidatoDataManager getCandidatoDataManager() {
@@ -92,7 +92,7 @@ public class CandidatoController implements Serializable {
 	
 	public void buscarTipoDocumento() {
 		try {
-			this.candidatoDataManager.setTipoDocumentoCatalogoList(servicioCatalogo.readTipoDocumento());
+			this.candidatoDataManager.setTipoDocumentoCatalogoList(servicioCatalogo.readIdentificationType());
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
