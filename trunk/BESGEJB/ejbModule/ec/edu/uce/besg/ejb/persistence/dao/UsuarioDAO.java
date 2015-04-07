@@ -12,4 +12,7 @@ public interface UsuarioDAO extends AbstractFacade<UsuarioDTO>{
 	List<UsuarioDTO> getByAndJoinEntity(UsuarioDTO objeto)
 			throws CorvustecException;
 
+	List<UsuarioDTO> getByAndJoinCandidato(UsuarioDTO objeto)
+			throws CorvustecException;
+
 }
