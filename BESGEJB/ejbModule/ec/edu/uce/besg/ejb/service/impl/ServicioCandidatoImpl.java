@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
-import ec.edu.uce.besg.common.util.UtilEncryption;
+import ec.edu.uce.besg.common.util.EncryptionUtility;
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
 import ec.edu.uce.besg.ejb.persistence.entity.CandidatoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.ExperienciaDTO;
@@ -43,13 +43,13 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 			else
 			{
 				historialPasswordDTO=new HistorialPasswordDTO();
-				candidatoVO.getUsuarioDTO().setUsuPassword(UtilEncryption.getInstancia().encriptar(candidatoVO.getUsuarioDTO().getUsuPassword()));
+				candidatoVO.getUsuarioDTO().setUsuPassword(EncryptionUtility.getInstance().encriptar(candidatoVO.getUsuarioDTO().getUsuPassword()));
 				candidatoVO.getUsuarioDTO().setUsuMail(candidatoVO.getUsuarioDTO().getUsuLogin());
 				usuarioDTO= factoryDAO.getUsuarioDAOImpl().create(candidatoVO.getUsuarioDTO());
 				
 				historialPasswordDTO.setSegUsuario(usuarioDTO);
 				historialPasswordDTO.setHpaFecha(new Timestamp(new Date().getTime()));
-				historialPasswordDTO.setHpaPassword(UtilEncryption.getInstancia().encriptar(candidatoVO.getUsuarioDTO().getUsuPassword()));
+				historialPasswordDTO.setHpaPassword(EncryptionUtility.getInstance().encriptar(candidatoVO.getUsuarioDTO().getUsuPassword()));
 				
 				factoryDAO.getHistorialPasswordDAOImpl().create(historialPasswordDTO);
 				

@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
-import ec.edu.uce.besg.common.util.UtilEncryption;
+import ec.edu.uce.besg.common.util.EncryptionUtility;
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
 import ec.edu.uce.besg.ejb.persistence.entity.ContactoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.ContactoListDTO;
@@ -42,12 +42,12 @@ public class ServicioEmpresaImpl implements ServicioEmpresa{
 			else
 			{
 				historialPasswordDTO=new HistorialPasswordDTO();
-				empresa.getUsuarioDTO().setUsuPassword(UtilEncryption.getInstancia().encriptar(empresa.getUsuarioDTO().getUsuPassword()));
+				empresa.getUsuarioDTO().setUsuPassword(EncryptionUtility.getInstance().encriptar(empresa.getUsuarioDTO().getUsuPassword()));
 				usuarioDTO= factoryDAO.getUsuarioDAOImpl().create(empresa.getUsuarioDTO());
 				
 				historialPasswordDTO.setSegUsuario(usuarioDTO);
 				historialPasswordDTO.setHpaFecha(new Timestamp(new Date().getTime()));
-				historialPasswordDTO.setHpaPassword(UtilEncryption.getInstancia().encriptar(empresa.getUsuarioDTO().getUsuPassword()));
+				historialPasswordDTO.setHpaPassword(EncryptionUtility.getInstance().encriptar(empresa.getUsuarioDTO().getUsuPassword()));
 				
 				factoryDAO.getHistorialPasswordDAOImpl().create(historialPasswordDTO);
 				

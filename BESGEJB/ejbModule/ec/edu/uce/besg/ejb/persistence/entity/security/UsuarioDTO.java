@@ -47,6 +47,9 @@ public class UsuarioDTO implements Serializable {
 	@Column(name="usu_telefono")
 	private String usuTelefono;
 
+	@Column(name="usu_facultad")
+	private Integer usuFacultad;
+	
 	//bi-directional many-to-one association to HistorialPasswordDTO
 	@OneToMany(mappedBy="segUsuario")
 	private List<HistorialPasswordDTO> segHistorialPasswords;
@@ -137,6 +140,14 @@ public class UsuarioDTO implements Serializable {
 
 	public void setUsuTelefono(String usuTelefono) {
 		this.usuTelefono = usuTelefono;
+	}
+
+	public Integer getUsuFacultad() {
+		return usuFacultad;
+	}
+
+	public void setUsuFacultad(Integer usuFacultad) {
+		this.usuFacultad = usuFacultad;
 	}
 
 	public List<HistorialPasswordDTO> getSegHistorialPasswords() {

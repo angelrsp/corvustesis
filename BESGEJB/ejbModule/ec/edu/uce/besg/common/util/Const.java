@@ -25,7 +25,11 @@ public final class Const {
 	
 	public static final Integer NIVEL_ESTUDIO = 21;
 	
+	public static final Integer FACULTADES = 45;
+	
 	//Codigos de Catalogo;
 	public static final Integer CEDULA = 26;
+	
+	public static final Integer INGENIERIA = 46;
 	
 }

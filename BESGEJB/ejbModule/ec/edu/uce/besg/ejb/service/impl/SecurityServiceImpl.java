@@ -9,7 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
-import ec.edu.uce.besg.common.util.UtilEncryption;
+import ec.edu.uce.besg.common.util.EncryptionUtility;
+import ec.edu.uce.besg.common.util.dto.PasswordDTO;
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.HistorialPasswordDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
@@ -29,7 +30,7 @@ public class SecurityServiceImpl implements SecurityService {
 	{
 		List<UsuarioDTO> userList;
 		try {
-			usuarioDTO.setUsuPassword(UtilEncryption.getInstancia().encriptar(usuarioDTO.getUsuPassword()));
+			usuarioDTO.setUsuPassword(EncryptionUtility.getInstance().encriptar(usuarioDTO.getUsuPassword()));
 			userList= factoryDAO.getUsuarioDAOImpl().getByAndJoinEntity(usuarioDTO);
 			if(!userList.isEmpty())
 				return userList.get(0);
@@ -52,7 +53,7 @@ public class SecurityServiceImpl implements SecurityService {
 	{
 		List<UsuarioDTO> usuarioList;
 		try {
-			usuarioDTO.setUsuPassword(UtilEncryption.getInstancia().encriptar(usuarioDTO.getUsuPassword()));
+			usuarioDTO.setUsuPassword(EncryptionUtility.getInstance().encriptar(usuarioDTO.getUsuPassword()));
 			usuarioList=factoryDAO.getUsuarioDAOImpl().getByAnd(usuarioDTO);
 			if(usuarioList.size()==1)
 				return usuarioList.get(0);
@@ -66,6 +67,23 @@ public class SecurityServiceImpl implements SecurityService {
 		}
 	}
 
+	@Override
+	public void changePassword(PasswordDTO passwordDTO) throws CorvustecException
+	{
+		try {
+			if(!EncryptionUtility.getInstance().encriptar(passwordDTO.getActualPassword()).equals(passwordDTO.getUsuarioDTO().getUsuPassword()))
+			{
+				throw new CorvustecException("La constraseña ingresada con coincide con la cotraseña actual");
+			}
+			else
+			{
+				passwordDTO.getUsuarioDTO().setUsuPassword(passwordDTO.getNuevoPassword());
+				factoryDAO.getUsuarioDAOImpl().update(passwordDTO.getUsuarioDTO());	
+			}
+		} catch (Exception e) {
+			throw new CorvustecException(e);
+		}
+	}
 	
 	
 	public UsuarioDTO cambiarContrasenaEmpresa(UsuarioDTO usuarioDTO) throws CorvustecException

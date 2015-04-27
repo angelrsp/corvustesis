@@ -127,5 +127,14 @@ public class CatalogoServiceImpl implements CatalogoService{
 		}				
 	}
 
-	
+	@Override
+	public List<CatalogoDTO> readFacultad() throws CorvustecException
+	{
+		try {
+			return readCatalogo(Const.FACULTADES);
+		} catch (Exception e) {
+			logger.info("Error al obtener sector {}", e.toString());
+			throw new CorvustecException("Error al obtener sector");
+		}				
+	}
 }

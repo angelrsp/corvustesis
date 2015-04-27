@@ -24,4 +24,6 @@ public interface CatalogoService {
 
 	List<CatalogoDTO> readNivelEstudio() throws CorvustecException;
 
+	List<CatalogoDTO> readFacultad() throws CorvustecException;
+
 }
