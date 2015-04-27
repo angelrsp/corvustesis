@@ -34,6 +34,10 @@
 						<tr>
 						
 							<td align="left">
+							</td>
+						
+							<td align="right">
+
 								<p:commandButton id="btnEmpresa" value="Empresas" type="button" />
 																		
 								<p:overlayPanel for="btnEmpresa" showEffect="blind" hideEffect="explode" showEvent="mouseover" hideEvent="mousedown"
@@ -42,21 +46,6 @@
 										<tr>
 											<td><a href="#{request.contextPath}/public/loginEmpresa.xhtml">Ingreso</a></td>
 											<td><a href="#{request.contextPath}/public/registroEmpresa.xhtml">Registro</a></td>
-										</tr>
-									</table>	
-							    </p:overlayPanel>																	
-							</td>
-						
-							<td align="right">
-										
-								<p:commandButton id="btnCandidato" value="Candidatos" type="button" />
-								
-								<p:overlayPanel for="btnCandidato" showEffect="blind" hideEffect="explode" showEvent="mouseover" hideEvent="mousedown"
-                    				 showCloseIcon="true" dismissable="false">
-									<table width="99%">
-										<tr>
-											<td><a href="#{request.contextPath}/public/loginCandidato.xhtml">Ingreso</a></td>
-											<td><a href="#{request.contextPath}/public/registroCandidato.xhtml">Registro</a></td>
 										</tr>
 									</table>	
 							    </p:overlayPanel>																	
@@ -78,10 +67,6 @@
 		</h:form>
 
 <!-- </f:view> -->
-
-   <div id="footer" align="right">
-        ddd
-    </div>
 
 
 </body>

@@ -45,3 +45,10 @@ textarea {
     position:fixed;
     top:0;
 }
+
+ #footer {
+	   position:absolute;
+	   bottom:0;
+	   width:99%;
+	   height:30px;            /* Altura del footer */
+}
