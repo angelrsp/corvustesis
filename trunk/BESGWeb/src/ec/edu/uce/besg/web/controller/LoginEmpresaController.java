@@ -51,13 +51,12 @@ public class LoginEmpresaController implements Serializable{
 			usuarioDTO=securityService.authenticateEmpresa(loginEmpresaDataManager.getUsuarioDTO());
 			 if(usuarioDTO !=null)
 			 {
-				 JsfUtil.putObject("UsuarioEmpresa", usuarioDTO);
+				 JsfUtil.putObject("UsuarioDTO", usuarioDTO);
 				 JsfUtil.redirect("pages/empresa/inicio.xhtml");	 				 
 			 }
 			 else
-			 {
 				 JsfUtil.addErrorMessage("Usuario o contraseña incorrectos");
-			 }
+			 
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		} catch (IOException e) {

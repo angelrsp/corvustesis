@@ -30,10 +30,17 @@ public class RegistroCandidatoDataManager implements Serializable{
 	private Integer identificationTypeCode;
 	private List<CatalogoDTO> identificationTypeList;
 	
+	private List<CatalogoDTO> facultadesList;
+	private Integer facultadCode;
+
+	
 	public RegistroCandidatoDataManager() {
 		usuarioDTO=new UsuarioDTO();
 		candidatoDTO=new CandidatoDTO();
 		identificationTypeList=new ArrayList<CatalogoDTO>();
+		facultadesList=new ArrayList<CatalogoDTO>();
+		
+		facultadCode=Const.INGENIERIA;
 	}
 	
 	@PostConstruct
@@ -75,7 +82,20 @@ public class RegistroCandidatoDataManager implements Serializable{
 		this.identificationTypeCode = identificationTypeCode;
 	}
 	
-	
-	
+	public List<CatalogoDTO> getFacultadesList() {
+		return facultadesList;
+	}
+
+	public void setFacultadesList(List<CatalogoDTO> facultadesList) {
+		this.facultadesList = facultadesList;
+	}
+
+	public Integer getFacultadCode() {
+		return facultadCode;
+	}
+
+	public void setFacultadCode(Integer facultadCode) {
+		this.facultadCode = facultadCode;
+	}
 	
 }
