@@ -26,11 +26,11 @@ import org.apache.commons.codec.binary.Base64;
  * @author
  *
  */
-public class UtilEncryption {
+public class EncryptionUtility {
 	
 	private static final String claveEncriptar = "frase_para_encriptacion_clave_usuarios";
 	
-	private static final UtilEncryption INSTANCIA = new UtilEncryption();
+	private static final EncryptionUtility INSTANCIA = new EncryptionUtility();
 	
 	private static Cipher ecipher;
 	private static Cipher dcipher;
@@ -38,13 +38,13 @@ public class UtilEncryption {
 	/**
 	 * Constructor privado
 	 */
-	private UtilEncryption() {}
+	private EncryptionUtility() {}
 	
 	/**
 	 * Devolvemos la instancia de la clase
 	 * @return INSTANCIA
 	 */
-	public static UtilEncryption getInstancia(){
+	public static EncryptionUtility getInstance(){
 		encriptarConClave(claveEncriptar);
 		return INSTANCIA;
 	}
