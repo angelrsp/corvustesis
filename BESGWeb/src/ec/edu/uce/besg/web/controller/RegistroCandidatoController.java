@@ -51,6 +51,7 @@ public class RegistroCandidatoController implements Serializable{
 	private void init()
 	{
 		readDocumentType();
+		readFacultad();
 	}
 	
 	private void readDocumentType()
@@ -62,6 +63,16 @@ public class RegistroCandidatoController implements Serializable{
 		}
 		
 	}
+		
+	private void readFacultad()
+	{
+		try {
+			registroCandidatoDataManager.setFacultadesList(catalogoService.readFacultad());
+		} catch (Exception e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
+	
 	
 	public void registrar()
 	{
@@ -71,6 +82,7 @@ public class RegistroCandidatoController implements Serializable{
 			registroCandidatoDataManager.getCandidatoDTO().setCanTipoIdentificacion(registroCandidatoDataManager.getIdentificationTypeCode());
 			candidato.setCandidatoDTO(registroCandidatoDataManager.getCandidatoDTO());
 			candidato.setUsuarioDTO(registroCandidatoDataManager.getUsuarioDTO());
+			candidato.getUsuarioDTO().setUsuFacultad(registroCandidatoDataManager.getFacultadCode());
 			servicioCandidato.registrarCandidato(candidato);
 			JsfUtil.addInfoMessage("Registro Exitoso");
 			JsfUtil.redirect("pages/candidato/inicio.xhtml");

@@ -40,18 +40,19 @@ public class LoginCandidatoController implements Serializable{
 		this.loginCandidatoDataManager = loginCandidatoDataManager;
 	}
 
-
 	public void authenticate()
 	{
 		UsuarioDTO usuarioDTO=null;
 		try {
 			usuarioDTO=securityService.authenticateCandidato(loginCandidatoDataManager.getUsuarioDTO());
 			if(usuarioDTO!=null)
+			{
+				JsfUtil.putObject("UsuarioDTO", usuarioDTO);
 				JsfUtil.redirect("pages/candidato/inicio.xhtml");
+			}
 		} catch (Exception e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
-
 	}
 	
 }

@@ -23,23 +23,27 @@ import ec.edu.uce.besg.web.util.JsfUtil;
 @ViewScoped
 @ManagedBean(name = "contactoController")
 public class ContactoController implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
-	
-	@ManagedProperty(value="#{contactoDataManager}")
-	private ContactoDataManager contactoDataManager;
-	
-	public ContactoDataManager getContactoDataManager() {
-		return contactoDataManager;
-	}
-	public void setContactoDataManager(ContactoDataManager contactoDataManager) {
-		this.contactoDataManager = contactoDataManager;
-	}
-	
+
 	@EJB
 	private ServicioEmpresa servicioEmpresa;
 	
 	@EJB
 	private CatalogoService servicioCatalogo;
+	
+
+	@ManagedProperty(value="#{contactoDataManager}")
+	private ContactoDataManager contactoDataManager;
+	
+	
+	public ContactoDataManager getContactoDataManager() {
+		return contactoDataManager;
+	}
+	
+	public void setContactoDataManager(ContactoDataManager contactoDataManager) {
+		this.contactoDataManager = contactoDataManager;
+	}
 	
 	
 	@PostConstruct

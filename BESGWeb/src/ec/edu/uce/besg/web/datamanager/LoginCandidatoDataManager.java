@@ -19,8 +19,10 @@ public class LoginCandidatoDataManager implements Serializable{
 	
 	private UsuarioDTO usuarioDTO;
 	
+	
 	public LoginCandidatoDataManager() {
 		usuarioDTO=new UsuarioDTO();
+		
 	}
 
 	public UsuarioDTO getUsuarioDTO() {
@@ -30,5 +32,6 @@ public class LoginCandidatoDataManager implements Serializable{
 	public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
 		this.usuarioDTO = usuarioDTO;
 	}
+
 	
 }
