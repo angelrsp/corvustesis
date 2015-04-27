@@ -9,6 +9,75 @@
 	
 	<ui:define name="content">
 		
+		<p:spacer height="30"/>
+				
+		<p:panel id="pnlLogin" style="width: 300px;">		
+			<p:focus context="pnlLogin"/>
+			
+			<table>
+				<tr>
+					<td><p:inputText placeholder="Correo Electrónico" id="txtUser" required="true" style="width: 250px;" label="Correo Electrónico" value="#{loginCandidatoDataManager.usuarioDTO.usuLogin}"/></td>
+				</tr>
+				
+				<tr>
+					<td><p:password placeholder="Contraseña" id="password" required="true" style="width: 250px;" label="Contraseña" value="#{loginCandidatoDataManager.usuarioDTO.usuPassword}"/></td>
+				</tr>
+		
+				<tr>
+					<td colspan="2" align="center">
+						<p:commandButton value="Ingresar" actionListener="#{loginCandidatoController.authenticate}" update="pnlLogin" process="pnlLogin"/>
+					</td>	
+				</tr>
+				<tr align="center">
+					<td colspan="2">
+						<a href="password.xhtml">¿Olvidó su Contraseña?</a>
+					</td>					
+				</tr>									
+			</table>
+		</p:panel>
+		
+		<p:spacer height="20"/>
+		
+		<p:panel id="pnlRegistro" style="width: 400px;">
+		
+			<table>
+			
+				<tr align="center">
+					<td>¿Eres Nuevo? Registrate</td>
+				</tr>
+
+				<tr>
+					<td><p:selectOneMenu value="#{registroCandidatoDataManager.facultadCode}">
+						<f:selectItems value="#{registroCandidatoController.registroCandidatoDataManager.facultadesList}" var="fac" itemValue="#{fac.catCodigo}" itemLabel="#{fac.catDescripcion}"/>
+					</p:selectOneMenu></td>
+				</tr>			
+			
+				<tr>
+					<td><p:inputText placeholder="Correo Electrónico" value="#{registroCandidatoDataManager.usuarioDTO.usuLogin}" style="width: 325px;" required="true" label="Usuario"/></td>
+				</tr>
+				
+				<tr>
+					<td><p:inputText placeholder="Nombres" value="#{registroCandidatoDataManager.candidatoDTO.canNombres}" style="width: 325px;" required="true" label="Nombres"/></td>
+				</tr>
+
+				<tr>
+					<td><p:inputText placeholder="Apellidos" value="#{registroCandidatoDataManager.candidatoDTO.canApellidos}" style="width: 325px;" required="true" label="Apellidos"/></td>
+				</tr>
+				
+				<tr>
+					<td><p:inputText placeholder="Identificación" value="#{registroCandidatoDataManager.candidatoDTO.canIdentificacion}" style="width: 325px;" required="true" label="Identificación"/></td>
+				</tr>
+								
+				<tr align="center">
+					<td colspan="2"><p:commandButton value="Registrar" actionListener="#{registroCandidatoController.registrar}" update="pnlRegistro" process="pnlRegistro"/></td>
+				</tr>					
+									
+			</table>
+		
+		</p:panel>
+		
+		
+		
 	</ui:define>
 	
 	
