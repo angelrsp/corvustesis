@@ -13,79 +13,68 @@
 		
 		<p:panel header="Subir Foto">
 	  
-<!--         	     <p:fileUpload  mode="advanced" dragDropSupport="false"   -->
-<!--                   update="growl,foto" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar" />			 -->
-
+   	     	<p:fileUpload  mode="advanced" dragDropSupport="false"
+            	update="foto" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{fileUploadView.handleFileUpload}"/>			
 		</p:panel>
-				
-								
-				
-				<p:panel id="pnlDatos" styleClass="tabla"
-					header="#{i18n['label.titulo.pantalla.dato.candidato']}">
-					<table>
-						<tr>
-							<td><h:outputLabel value="#{i18n['label.foto']}:&#160;" /> </td>
-							<td colspan="3"><p:graphicImage id="foto" value="#{imagenCandidatoController.image}" height="150" cache="false" /></td>	
-						</tr>					
-						<tr>
-							<td><h:outputLabel value="#{i18n['label.tipo.documento']}:&#160;" /> </td>
-								<td>
-									<p:selectOneMenu required="true" requiredMessage="#{i18n['label.tipo.documento']}:&#160;#{i18n['label.requerido']}" value="#{candidatoDataManager.codigotipo}">
-										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
-										<f:selectItems value="#{candidatoController.candidatoDataManager.tipoDocumentoCatalogoList}" var="tipo" itemLabel="#{tipo.catDescripcion}" itemValue="#{tipo.catCodigo}"></f:selectItems>
-									</p:selectOneMenu>
-								</td>
-							<td><h:outputLabel value="#{i18n['label.ci.pasaporte']}:&#160;" /> </td>
-							<td><p:inputText required="true"
-									requiredMessage="#{i18n['label.ci.pasaporte']}&#160;#{i18n['label.requerido']}"
-									value="#{candidatoDataManager.candidatoListDTO.canIdentificacion}" onkeypress="return isNumberKey(event);"/></td>
-						</tr>
-						<tr>
-							<td><h:outputLabel value="#{i18n['label.apellidos']}:&#160;" /> </td>
-							<td><p:inputText required="true"
-									requiredMessage="#{i18n['label.apellidos']}&#160;#{i18n['label.requerido']}"
-									value="#{candidatoDataManager.candidatoListDTO.canApellidos}"/></td>
-							<td><h:outputLabel value="#{i18n['label.nombres']}:&#160;" /> </td>
-							<td><p:inputText required="true"
-									requiredMessage="#{i18n['label.nombres']}&#160;#{i18n['label.requerido']}"
-									value="#{candidatoDataManager.candidatoListDTO.canNombres}"/></td>		
-						</tr>
-						<tr>
-							<td><h:outputLabel value="#{i18n['label.email']}:&#160;" /> </td>
-							<td colspan="3"><p:inputText style="width : 90%;" required="true"
-									requiredMessage="#{i18n['label.contrasenia']}&#160;#{i18n['label.requerido']}"
-									/></td>
-									
-						</tr>
+		
+		<p:panel id="pnlDatos" styleClass="tabla"
+			header="#{i18n['label.titulo.pantalla.dato.candidato']}">
+			<table>
+				<tr>
+					<td><h:outputLabel value="#{i18n['label.foto']}:&#160;" /> </td>
+					<td colspan="3"><p:graphicImage id="foto" value="#{imagenCandidatoController.image}" height="150" cache="false" /></td>	
+				</tr>
+				<tr>
+					<td><h:outputLabel value="Tipo de Documento:" for="somDocumentType" /> </td>
+					<td>
+						<p:selectOneMenu id="somDocumentType" required="true" value="#{candidatoDataManager.codigotipo}" label="Tipo de Documento" style="width:260px;">
+							<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"/>
+							<f:selectItems value="#{hojaVidaController.hojaVidaDataManager.tipoDocumentoList}" var="tip" itemLabel="#{tip.catDescripcion}" itemValue="#{tip.catCodigo}"/>
+						</p:selectOneMenu>
+					</td>
+						
+					<td><h:outputLabel value="Identificación:" for="iptIdentificacion"/> </td>
+					<td><p:inputText id="iptIdentificacion" required="true" label="Identificación" style="width:260px;"
+							value="#{hojaVidaDataManager.candidatoDTO.canIdentificacion}" onkeypress="return isNumberKey(event);"/></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel value="Apellidos:" /> </td>
+					<td><p:inputText required="true" label="Apellidos" style="width:250px;"
+							value="#{hojaVidaDataManager.candidatoDTO.canApellidos}"/></td>
+					<td><h:outputLabel value="Nombres:" /> </td>
+					<td><p:inputText required="true" label="Nombres" style="width:260px;"
+							value="#{candidatoDataManager.candidatoListDTO.canNombres}"/></td>		
+				</tr>
+				<tr>
+					<td><h:outputLabel value="E-Mail:" /> </td>
+					<td colspan="3"><p:inputText style="width: 624px;" required="true" label="E-Mail" value="#{hojaVidaDataManager.usuarioDTO.usuMail}"/></td>
+				</tr>
 
-						<tr>
-							<td><h:outputLabel value="#{i18n['label.estado.civil']}:&#160;" /> </td>
-							<td>	<p:selectOneMenu value="#{candidatoDataManager.codigoEstadoCivil}" required="true" requiredMessage="#{i18n['label.estado.civil']}:&#160;#{i18n['label.requerido']}">
-										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
-										<f:selectItems value="#{candidatoDataManager.estadoCivilCatalogoList}" var="estciv"   itemLabel="#{estciv.catDescripcion}"    itemValue="#{estciv.catCodigo}" />										
-									</p:selectOneMenu></td>
-									
-							<td><h:outputLabel value="#{i18n['label.genero']}:&#160;" /> </td>
-							<td>	<p:selectOneMenu value="#{candidatoDataManager.codigoSexo}" required="true" requiredMessage="#{i18n['label.genero']}:&#160;#{i18n['label.requerido']}">
-										<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" itemValue=""/>
-										<f:selectItems value="#{candidatoDataManager.sexoCatalogoList}" var="sexo"   itemLabel="#{sexo.catDescripcion}"    itemValue="#{sexo.catCodigo}" />										
-									</p:selectOneMenu></td>
-						</tr>
-
-						<tr>
-							<td><h:outputLabel value="#{i18n['label.fecha.nacimiento']}:&#160;" /> </td>
-							<td><p:calendar value="#{candidatoDataManager.fechaNac}" navigator="true" requiredMessage="#{i18n['label.fecha.nacimiento']}:&#160;#{i18n['label.requerido']}" pattern="#{i18n['pattern.fecha']}" required="true"  placeholder="AAAA/MM/DD"></p:calendar></td>
+				<tr>
+					<td><h:outputLabel value="Estado Civil:" /> </td>
+					<td><p:selectOneMenu value="#{hojaVidaDataManager.estadoCivilCode}" required="true" label="Estado Civil" style="width:260px;">
+							<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"/>
+							<f:selectItems value="#{hojaVidaDataManager.estadoCivilList}" var="est" itemLabel="#{est.catDescripcion}" itemValue="#{est.catCodigo}" />										
+						</p:selectOneMenu></td>
 							
-							<td><h:outputLabel value="#{i18n['label.lugar.nacimiento']}:&#160;" /> </td>
-							<td><p:inputText value="#{candidatoDataManager.candidatoListDTO.canLugarNacimiento}" requiredMessage="#{i18n['label.lugar.nacimiento']}:&#160;#{i18n['label.requerido']}" required="true"></p:inputText></td>
-						</tr>
+					<td><h:outputLabel value="Género:" /> </td>
+					<td><p:selectOneMenu value="#{hojaVidaDataManager.generoCode}" required="true" label="Género" style="width:260px;">
+							<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" />
+							<f:selectItems value="#{hojaVidaDataManager.generoList}" var="sex" itemLabel="#{sex.catDescripcion}" itemValue="#{sex.catCodigo}" />										
+						</p:selectOneMenu></td>
+				</tr>
 
-						<tr>
-							<td colspan="4" align="center">
-								<p:commandButton actionListener="#{candidatoController.actualizar}" value="#{i18n['boton.actualizar']}" process="pnlDatos" update="growl,pnlDatos" /> </td>
-						</tr>
-					</table>
-				</p:panel>
+				<tr>
+					<td><h:outputLabel value="Fecha de Nacimiento:" /> </td>
+					<td><p:calendar value="#{candidatoDataManager.fechaNac}" label="Fecha de Nacimiento" navigator="true" pattern="#{i18n['pattern.fecha']}" required="true" placeholder="AAAA/MM/DD" style="width:250px;"/></td>					
+				</tr>
+
+				<tr>
+					<td colspan="4" align="center">
+						<p:commandButton actionListener="#{candidatoController.actualizar}" value="#{i18n['boton.actualizar']}" process="pnlDatos" update="pnlDatos" /> </td>
+				</tr>
+			</table>
+		</p:panel>
 
 			
 				<p:panel id="pnlEstudios" styleClass="tabla"
@@ -139,7 +128,8 @@
 					  	</tr>
 					   	<!--  
 					  	<tr align="center">
-							<td colspan="4"><p:commandButton value="#{i18n['boton.agregar']}" process="pnlEstudios" update="pnlEstudios,growl" actionListener="#{candidatoController.agregarEstudio}"></p:commandButton></td>					  	
+							<td colspan="4">
+							<p:commandButton value="#{i18n['boton.agregar']}" process="pnlEstudios" update="pnlEstudios" actionListener="#{candidatoController.agregarEstudio}"></p:commandButton></td>					  	
 					  	</tr>
 					  	-->
 					</table>
@@ -177,7 +167,7 @@
 											
 						<p:column headerText="#{i18n['label.eliminar']}" width="15">
 							<p:commandButton actionListener="#{candidatoController.onRowDelEstudio(est)}" icon="ui-icon-close" 
-								immediate="true" onclick="if(!confirm('Eliminar?')) return false;" update=":contenido:tblEstudio,:contenido:growl"  process=":contenido:tblEstudio">
+								immediate="true" onclick="if(!confirm('Eliminar?')) return false;" update=":contenido:tblEstudio"  process=":contenido:tblEstudio">
 							</p:commandButton>
 						</p:column>
 					</p:dataTable>
@@ -466,7 +456,7 @@
 
 						<p:column headerText="#{i18n['label.eliminar']}" width="15">
 							<p:commandButton actionListener="#{candidatoController.onRowDelReferencia(ref)}" icon="ui-icon-close" immediate="true" onclick="if(!confirm('Eliminar?')) return false;"
-							process=":contenido:tblReferencia" update=":contenido:tblReferencia,:contenido:growl"></p:commandButton>
+							process=":contenido:tblReferencia" update=":contenido:tblReferencia"></p:commandButton>
 						</p:column>
 						
 					</p:dataTable> 					
