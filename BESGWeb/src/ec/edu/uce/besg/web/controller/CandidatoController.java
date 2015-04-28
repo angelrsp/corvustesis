@@ -100,7 +100,7 @@ public class CandidatoController implements Serializable {
 
 	public void buscarSexo() {
 		try {
-			this.candidatoDataManager.setSexoCatalogoList(servicioCatalogo.readSexo());
+			this.candidatoDataManager.setSexoCatalogoList(servicioCatalogo.readSex());
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
