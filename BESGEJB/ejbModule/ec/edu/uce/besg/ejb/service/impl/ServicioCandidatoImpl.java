@@ -54,6 +54,8 @@ public class ServicioCandidatoImpl implements ServicioCandidato {
 				factoryDAO.getHistorialPasswordDAOImpl().create(historialPasswordDTO);
 				
 				candidatoVO.getCandidatoDTO().setSegUsuario(usuarioDTO);
+				candidatoVO.getUsuarioDTO().setUsuMail(candidatoVO.getUsuarioDTO().getUsuLogin());
+				
 				return factoryDAO.getCandidatoDAOImpl().create(candidatoVO.getCandidatoDTO());
 			}
 		} catch (Exception e) {

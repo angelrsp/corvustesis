@@ -105,7 +105,7 @@ public class CatalogoServiceImpl implements CatalogoService{
 	}
 
 	@Override
-	public List<CatalogoDTO> readSexo() throws CorvustecException
+	public List<CatalogoDTO> readSex() throws CorvustecException
 	{
 		try {
 			return readCatalogo(Const.SEXO);

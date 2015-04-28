@@ -77,7 +77,7 @@ public class SecurityServiceImpl implements SecurityService {
 			}
 			else
 			{
-				passwordDTO.getUsuarioDTO().setUsuPassword(passwordDTO.getNuevoPassword());
+				passwordDTO.getUsuarioDTO().setUsuPassword(EncryptionUtility.getInstance().encriptar(passwordDTO.getNuevoPassword()));
 				factoryDAO.getUsuarioDAOImpl().update(passwordDTO.getUsuarioDTO());	
 			}
 		} catch (Exception e) {

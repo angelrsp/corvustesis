@@ -20,7 +20,7 @@ public interface CatalogoService {
 
 	List<CatalogoDTO> readIdentificationType() throws CorvustecException;
 
-	List<CatalogoDTO> readSexo() throws CorvustecException;
+	List<CatalogoDTO> readSex() throws CorvustecException;
 
 	List<CatalogoDTO> readNivelEstudio() throws CorvustecException;
 
