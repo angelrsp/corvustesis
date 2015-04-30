@@ -8,8 +8,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import ec.edu.uce.besg.ejb.persistence.entity.CandidatoDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.HabilidadDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.view.HabilidadViewDTO;
 
 
 
@@ -23,27 +25,43 @@ public class HojaVidaDataManager implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private List<CatalogoDTO> tipoDocumentoList;
-	private Integer tipoDocumentoCode;
 	
 	private List<CatalogoDTO> estadoCivilList;
-	private Integer estadoCivilCode;
 	
 	private CandidatoDTO candidatoDTO;
 	private UsuarioDTO usuarioDTO;
 
 	private List<CatalogoDTO> generoList;
-	private Integer generoCode;
  
+	private List<CatalogoDTO> nivelEstudioList;
+	private Integer nivelEstudioCode;
+	
+	private List<CatalogoDTO> paisList;
+	
+	private HabilidadDTO formacionAcademicaDTO;
+	private List<HabilidadViewDTO> formacionAcademicaList;
+	
+	private HabilidadDTO cursoDTO;
+	private List<HabilidadViewDTO> cursoList;
+	
 	
 	public HojaVidaDataManager() {
 		tipoDocumentoList=new ArrayList<CatalogoDTO>();
 		estadoCivilList=new ArrayList<CatalogoDTO>();
 		generoList=new ArrayList<CatalogoDTO>();
+		paisList=new ArrayList<CatalogoDTO>();
+		
 		
 		candidatoDTO=new CandidatoDTO();
 		usuarioDTO=new UsuarioDTO();
 		
+		nivelEstudioList=new ArrayList<CatalogoDTO>();
 		
+		formacionAcademicaDTO=new HabilidadDTO();
+		formacionAcademicaList=new ArrayList<HabilidadViewDTO>();
+		
+		cursoDTO=new HabilidadDTO();
+		cursoList=new ArrayList<HabilidadViewDTO>();
 	}
 
 	public List<CatalogoDTO> getTipoDocumentoList() {
@@ -52,14 +70,6 @@ public class HojaVidaDataManager implements Serializable{
 
 	public void setTipoDocumentoList(List<CatalogoDTO> tipoDocumentoList) {
 		this.tipoDocumentoList = tipoDocumentoList;
-	}
-
-	public Integer getTipoDocumentoCode() {
-		return tipoDocumentoCode;
-	}
-
-	public void setTipoDocumentoCode(Integer tipoDocumentoCode) {
-		this.tipoDocumentoCode = tipoDocumentoCode;
 	}
 
 	public CandidatoDTO getCandidatoDTO() {
@@ -86,14 +96,6 @@ public class HojaVidaDataManager implements Serializable{
 		this.estadoCivilList = estadoCivilList;
 	}
 
-	public Integer getEstadoCivilCode() {
-		return estadoCivilCode;
-	}
-
-	public void setEstadoCivilCode(Integer estadoCivilCode) {
-		this.estadoCivilCode = estadoCivilCode;
-	}
-
 	public List<CatalogoDTO> getGeneroList() {
 		return generoList;
 	}
@@ -102,11 +104,60 @@ public class HojaVidaDataManager implements Serializable{
 		this.generoList = generoList;
 	}
 
-	public Integer getGeneroCode() {
-		return generoCode;
+	public List<CatalogoDTO> getNivelEstudioList() {
+		return nivelEstudioList;
 	}
 
-	public void setGeneroCode(Integer generoCode) {
-		this.generoCode = generoCode;
+	public void setNivelEstudioList(List<CatalogoDTO> nivelEstudioList) {
+		this.nivelEstudioList = nivelEstudioList;
+	}
+
+	public Integer getNivelEstudioCode() {
+		return nivelEstudioCode;
+	}
+
+	public void setNivelEstudioCode(Integer nivelEstudioCode) {
+		this.nivelEstudioCode = nivelEstudioCode;
+	}
+
+	public List<CatalogoDTO> getPaisList() {
+		return paisList;
+	}
+
+	public void setPaisList(List<CatalogoDTO> paisList) {
+		this.paisList = paisList;
+	}
+
+	public HabilidadDTO getFormacionAcademicaDTO() {
+		return formacionAcademicaDTO;
+	}
+
+	public void setFormacionAcademicaDTO(HabilidadDTO formacionAcademicaDTO) {
+		this.formacionAcademicaDTO = formacionAcademicaDTO;
+	}
+
+	public List<HabilidadViewDTO> getFormacionAcademicaList() {
+		return formacionAcademicaList;
+	}
+
+	public void setFormacionAcademicaList(
+			List<HabilidadViewDTO> formacionAcademicaList) {
+		this.formacionAcademicaList = formacionAcademicaList;
+	}
+
+	public HabilidadDTO getCursoDTO() {
+		return cursoDTO;
+	}
+
+	public void setCursoDTO(HabilidadDTO cursoDTO) {
+		this.cursoDTO = cursoDTO;
+	}
+
+	public List<HabilidadViewDTO> getCursoList() {
+		return cursoList;
+	}
+
+	public void setCursoList(List<HabilidadViewDTO> cursoList) {
+		this.cursoList = cursoList;
 	}
 }

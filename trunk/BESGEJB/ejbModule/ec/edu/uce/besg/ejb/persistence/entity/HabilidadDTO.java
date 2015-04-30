@@ -1,8 +1,20 @@
 package ec.edu.uce.besg.ejb.persistence.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -43,10 +55,12 @@ public class HabilidadDTO implements Serializable {
 	private String habEntidad;
 
 	@Column(name="hab_fecha_fin")
-	private Timestamp habFechaFin;
+	@Temporal(TemporalType.DATE)
+	private Date habFechaFin;
 
 	@Column(name="hab_fecha_inicio")
-	private Timestamp habFechaInicio;
+	@Temporal(TemporalType.DATE)
+	private Date habFechaInicio;
 
 	//bi-directional many-to-one association to CandidatoDTO
 	@ManyToOne
@@ -85,19 +99,19 @@ public class HabilidadDTO implements Serializable {
 		this.habEntidad = habEntidad;
 	}
 
-	public Timestamp getHabFechaFin() {
+	public Date getHabFechaFin() {
 		return this.habFechaFin;
 	}
 
-	public void setHabFechaFin(Timestamp habFechaFin) {
+	public void setHabFechaFin(Date habFechaFin) {
 		this.habFechaFin = habFechaFin;
 	}
 
-	public Timestamp getHabFechaInicio() {
+	public Date getHabFechaInicio() {
 		return this.habFechaInicio;
 	}
 
-	public void setHabFechaInicio(Timestamp habFechaInicio) {
+	public void setHabFechaInicio(Date habFechaInicio) {
 		this.habFechaInicio = habFechaInicio;
 	}
 

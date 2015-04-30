@@ -10,17 +10,19 @@
 	<ui:define name="content">
 		
 		<p:spacer height="30"/>
+			
+		<h:form>		
+		<p:panel id="pnlLogin" style="width: 400px;">		
 				
-		<p:panel id="pnlLogin" style="width: 300px;">		
 			<p:focus context="pnlLogin"/>
 			
 			<table>
 				<tr>
-					<td><p:inputText placeholder="Correo Electrónico" id="txtUser" required="true" style="width: 250px;" label="Correo Electrónico" value="#{loginCandidatoDataManager.usuarioDTO.usuLogin}"/></td>
+					<td><p:inputText placeholder="Correo Electrónico" id="txtUser" required="true" style="width: 350px;" label="Correo Electrónico" value="#{loginCandidatoDataManager.usuarioDTO.usuLogin}"/></td>
 				</tr>
 				
 				<tr>
-					<td><p:password placeholder="Contraseña" id="password" required="true" style="width: 250px;" label="Contraseña" value="#{loginCandidatoDataManager.usuarioDTO.usuPassword}"/></td>
+					<td><p:password placeholder="Contraseña" id="password" required="true" style="width: 350px;" label="Contraseña" value="#{loginCandidatoDataManager.usuarioDTO.usuPassword}"/></td>
 				</tr>
 		
 				<tr>
@@ -34,12 +36,14 @@
 					</td>					
 				</tr>									
 			</table>
+			
 		</p:panel>
-		
+		</h:form>
 		<p:spacer height="20"/>
 		
+		<h:form>
 		<p:panel id="pnlRegistro" style="width: 400px;">
-		
+			
 			<table>
 			
 				<tr align="center">
@@ -75,7 +79,7 @@
 			</table>
 		
 		</p:panel>
-		
+		</h:form>
 		
 		
 	</ui:define>

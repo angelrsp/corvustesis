@@ -19,7 +19,7 @@ import ec.edu.uce.besg.ejb.service.SecurityService;
 @Stateless
 public class SecurityServiceImpl implements SecurityService {
 
-	private static final Logger logger = LoggerFactory.getLogger(ServicioEmpresaImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(EmpresaServiceImpl.class);
 
 	@EJB
 	private FactoryDAO factoryDAO;

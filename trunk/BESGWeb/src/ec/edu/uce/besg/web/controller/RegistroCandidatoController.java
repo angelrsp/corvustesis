@@ -7,10 +7,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 import ec.edu.uce.besg.ejb.service.CatalogoService;
-import ec.edu.uce.besg.ejb.service.ServicioCandidato;
+import ec.edu.uce.besg.ejb.service.CandidatoService;
 import ec.edu.uce.besg.ejb.vo.CandidatoVO;
 import ec.edu.uce.besg.web.datamanager.RegistroCandidatoDataManager;
 import ec.edu.uce.besg.web.util.JsfUtil;
@@ -26,7 +25,7 @@ public class RegistroCandidatoController implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@EJB
-	private ServicioCandidato servicioCandidato;
+	private CandidatoService servicioCandidato;
 	
 	@EJB
 	private CatalogoService catalogoService;
@@ -53,7 +52,7 @@ public class RegistroCandidatoController implements Serializable{
 	{
 		readDocumentType();
 		readFacultad();
-		FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		//FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 	}
 	
 	private void readDocumentType()

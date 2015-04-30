@@ -16,7 +16,7 @@ import ec.edu.uce.besg.ejb.persistence.entity.ContactoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.ContactoListDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.service.CatalogoService;
-import ec.edu.uce.besg.ejb.service.ServicioEmpresa;
+import ec.edu.uce.besg.ejb.service.EmpresaService;
 import ec.edu.uce.besg.web.datamanager.ContactoDataManager;
 import ec.edu.uce.besg.web.util.JsfUtil;
 
@@ -27,7 +27,7 @@ public class ContactoController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	private ServicioEmpresa servicioEmpresa;
+	private EmpresaService servicioEmpresa;
 	
 	@EJB
 	private CatalogoService servicioCatalogo;

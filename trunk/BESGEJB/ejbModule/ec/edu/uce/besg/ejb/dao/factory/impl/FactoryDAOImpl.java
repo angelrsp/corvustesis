@@ -11,6 +11,7 @@ import ec.edu.uce.besg.ejb.persistence.dao.ContactoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.EmpresaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ExperienciaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HabilidadDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.HabilidadViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HistorialPasswordDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ReferenciaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.UsuarioDAO;
@@ -20,6 +21,7 @@ import ec.edu.uce.besg.ejb.persistence.dao.impl.ContactoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.EmpresaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.ExperienciaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.HabilidadDAOImpl;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.HabilidadViewDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.HistorialPasswordDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.ReferenciaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.UsuarioDAOImpl;
@@ -33,23 +35,15 @@ public class FactoryDAOImpl implements FactoryDAO {
 	private UsuarioDAO usuarioDAO;
 	private CatalogoDAO catalogoDAO;
 	private CandidatoDAO candidatoDAO;
-	//private AvisoDAO avisoDAO;
-	//private PerfilDAO perfilDAO;
 	private HabilidadDAO habilidadDAO;
+	private HabilidadViewDAO habilidadViewDAO;
 	private ExperienciaDAO experienciaDAO;
 	private ReferenciaDAO referenciaDAO;
-	//private PostulacionDAO postulacionDAO;
-	//private ResultadoDAO resultadoDAO;
-	//private PreguntaDAO preguntaDAO;
-	//private RespuestaDAO respuestaDAO;
-	//private CursoDAO cursoDAO;
-	//private AdicionalDAO adicionalDAO;
-	//private ParametroDAO parametroDAO;
 
-		private ContactoDAO contactoDAO;
-		private EmpresaDAO empresaDAO;
-		
-		private HistorialPasswordDAO historialPasswordDAO;
+	private ContactoDAO contactoDAO;
+	private EmpresaDAO empresaDAO;
+	
+	private HistorialPasswordDAO historialPasswordDAO;
 	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -66,23 +60,7 @@ public class FactoryDAOImpl implements FactoryDAO {
 		}
 		return candidatoDAO;
 	}
-
-	/*@Override
-	public AvisoDAO getAvisoDAOImpl() {
-		if (avisoDAO == null) {
-			avisoDAO = new AvisoDAOImpl(entityManager);
-		}
-		return avisoDAO;
-	}
-
-	@Override
-	public PerfilDAO getPerfilDAOImpl() {
-		if (perfilDAO == null) {
-			perfilDAO = new PerfilDAOImpl(entityManager);
-		}
-		return perfilDAO;
-	}*/
-
+	
 	@Override
 	public CatalogoDAO getCatalogoDAOImpl() {
 		if (catalogoDAO == null) {
@@ -140,63 +118,14 @@ public class FactoryDAOImpl implements FactoryDAO {
 		return historialPasswordDAO;
 	}
 
-	
-	/*
+
 	@Override
-	public PostulacionDAO getPostulacionDAOImpl() {
-		if (postulacionDAO == null) {
-			postulacionDAO = new PostulacionDAOImpl(entityManager);
+	public HabilidadViewDAO getHabilidadViewDAOImpl() {
+		if (habilidadViewDAO == null) {
+			habilidadViewDAO = new HabilidadViewDAOImpl(entityManager);
 		}
-		return postulacionDAO;
+		return habilidadViewDAO;
 	}
 
 	
-	
-	@Override
-	public ResultadoDAO getResultadoDAOImpl() {
-		if (resultadoDAO == null) {
-			resultadoDAO = new ResultadoDAOImpl(entityManager);
-		}
-		return resultadoDAO;
-	}
-	
-	@Override
-	public PreguntaDAO getPreguntaDAOImpl() {
-		if (preguntaDAO == null) {
-			preguntaDAO = new PreguntaDAOImpl(entityManager);
-		}
-		return preguntaDAO;
-	}
-	
-	@Override
-	public RespuestaDAO getRespuestaDAOImpl() {
-		if (respuestaDAO == null) {
-			respuestaDAO = new RespuestaDAOImpl(entityManager);
-		}
-		return respuestaDAO;
-	}
-
-	@Override
-	public CursoDAO getCursoDAOImpl() {
-		if (cursoDAO == null) {
-			cursoDAO = new CursoDAOImpl(entityManager);
-		}
-		return cursoDAO;
-	}
-	
-	@Override
-	public AdicionalDAO getAdicionalDAOImpl() {
-		if (adicionalDAO == null) {
-			adicionalDAO = new AdicionalDAOImpl(entityManager);
-		}
-		return adicionalDAO;
-	}
-	
-	@Override
-	public ParametroDAO getParametroDAOImpl() {
-		if (parametroDAO == null) {
-			parametroDAO = new ParametroDAOImpl(entityManager);
-		}
-		return parametroDAO;
-	}*/
 }

@@ -8,6 +8,7 @@ import ec.edu.uce.besg.ejb.persistence.dao.ContactoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.EmpresaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ExperienciaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HabilidadDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.HabilidadViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HistorialPasswordDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ReferenciaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.UsuarioDAO;
@@ -32,4 +33,6 @@ public interface FactoryDAO {
 	CandidatoDAO getCandidatoDAOImpl();
 
 	HistorialPasswordDAO getHistorialPasswordDAOImpl();
+
+	HabilidadViewDAO getHabilidadViewDAOImpl();
 }

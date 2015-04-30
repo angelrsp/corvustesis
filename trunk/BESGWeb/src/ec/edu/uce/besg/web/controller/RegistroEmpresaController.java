@@ -7,7 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import ec.edu.uce.besg.ejb.service.ServicioEmpresa;
+import ec.edu.uce.besg.ejb.service.EmpresaService;
 import ec.edu.uce.besg.ejb.vo.EmpresaVO;
 import ec.edu.uce.besg.web.datamanager.RegistroEmpresaDataManager;
 import ec.edu.uce.besg.web.util.JsfUtil;
@@ -28,7 +28,7 @@ public class RegistroEmpresaController implements Serializable{
 
 	
 	@EJB
-	private ServicioEmpresa servicioEmpresa;
+	private EmpresaService servicioEmpresa;
 
 	public RegistroEmpresaController () {
 		

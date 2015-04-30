@@ -16,7 +16,7 @@ import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.persistence.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 import ec.edu.uce.besg.ejb.service.CatalogoService;
-import ec.edu.uce.besg.ejb.service.ServicioEmpresa;
+import ec.edu.uce.besg.ejb.service.EmpresaService;
 import ec.edu.uce.besg.ejb.vo.EmpresaVO;
 import ec.edu.uce.besg.web.datamanager.EmpresaDataManager;
 import ec.edu.uce.besg.web.util.JsfUtil;
@@ -43,7 +43,7 @@ public class EmpresaController implements Serializable{
 	}
 
 	@EJB
-	private ServicioEmpresa servicioEmpresa;
+	private EmpresaService servicioEmpresa;
 
 	@EJB
 	private CatalogoService servicioCatalogo;

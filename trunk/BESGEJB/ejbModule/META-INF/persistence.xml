@@ -17,9 +17,9 @@
 		<class>ec.edu.uce.besg.ejb.persistence.entity.AvisoDTO</class>
 		<class>ec.edu.uce.besg.ejb.persistence.entity.CandidatoDTO</class>
 		<class>ec.edu.uce.besg.ejb.persistence.entity.ContactoDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.HabilidadDTO</class>
 		<class>ec.edu.uce.besg.ejb.persistence.entity.EmpresaDTO</class>
 		<class>ec.edu.uce.besg.ejb.persistence.entity.ExperienciaDTO</class>
-		<class>ec.edu.uce.besg.ejb.persistence.entity.HabilidadDTO</class>
 		<class>ec.edu.uce.besg.ejb.persistence.entity.ImagenCandidatoDTO</class>
 		<class>ec.edu.uce.besg.ejb.persistence.entity.ImagenEmpresaDTO</class>
 		<class>ec.edu.uce.besg.ejb.persistence.entity.PostulacionDTO</class>
@@ -33,7 +33,7 @@
 		<class>ec.edu.uce.besg.ejb.persistence.entity.CandidatoListDTO</class>
 		<class>ec.edu.uce.besg.ejb.persistence.entity.ExperienciaListDTO</class>
 		<class>ec.edu.uce.besg.ejb.persistence.entity.ReferenciaListDTO</class>
-		<class>ec.edu.uce.besg.ejb.persistence.entity.HabilidadListDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.view.HabilidadViewDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>

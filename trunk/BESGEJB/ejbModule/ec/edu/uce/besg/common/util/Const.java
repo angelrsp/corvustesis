@@ -32,4 +32,9 @@ public final class Const {
 	
 	public static final Integer INGENIERIA = 46;
 	
+	//Tipo de Habilidad
+	public static final Integer FORMACION_ACADEMICA = 1;
+	
+	public static final Integer CURSO = 2;
+	
 }
