@@ -1,4 +1,4 @@
-package ec.edu.uce.besg.ejb.persistence.entity;
+package ec.edu.uce.besg.ejb.persistence.entity.view;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -6,13 +6,13 @@ import java.sql.Timestamp;
 
 
 /**
- * The persistent class for the view_bem_habilidad database table.
+ * The persistent class for the bem_habilidad_view database table.
  * 
  */
 @Entity
-@Table(name="view_bem_habilidad")
-@NamedQuery(name="HabilidadListDTO.findAll", query="SELECT h FROM HabilidadListDTO h")
-public class HabilidadListDTO implements Serializable {
+@Table(name="bem_habilidad_view")
+@NamedQuery(name="HabilidadViewDTO.findAll", query="SELECT h FROM HabilidadViewDTO h")
+public class HabilidadViewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="can_apellidos")
@@ -50,8 +50,6 @@ public class HabilidadListDTO implements Serializable {
 
 	@Column(name="can_usuario")
 	private Integer canUsuario;
-
-	private String especialidad;
 
 	@Column(name="hab_candidato")
 	private Integer habCandidato;
@@ -94,13 +92,7 @@ public class HabilidadListDTO implements Serializable {
 
 	private String pais;
 
-	@Column(name="tha_codigo")
-	private Integer thaCodigo;
-
-	@Column(name="tha_descripcion")
-	private String thaDescripcion;
-
-	public HabilidadListDTO() {
+	public HabilidadViewDTO() {
 	}
 
 	public String getCanApellidos() {
@@ -197,14 +189,6 @@ public class HabilidadListDTO implements Serializable {
 
 	public void setCanUsuario(Integer canUsuario) {
 		this.canUsuario = canUsuario;
-	}
-
-	public String getEspecialidad() {
-		return this.especialidad;
-	}
-
-	public void setEspecialidad(String especialidad) {
-		this.especialidad = especialidad;
 	}
 
 	public Integer getHabCandidato() {
@@ -317,22 +301,6 @@ public class HabilidadListDTO implements Serializable {
 
 	public void setPais(String pais) {
 		this.pais = pais;
-	}
-
-	public Integer getThaCodigo() {
-		return this.thaCodigo;
-	}
-
-	public void setThaCodigo(Integer thaCodigo) {
-		this.thaCodigo = thaCodigo;
-	}
-
-	public String getThaDescripcion() {
-		return this.thaDescripcion;
-	}
-
-	public void setThaDescripcion(String thaDescripcion) {
-		this.thaDescripcion = thaDescripcion;
 	}
 
 }

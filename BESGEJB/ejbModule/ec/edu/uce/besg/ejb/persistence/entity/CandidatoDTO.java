@@ -1,13 +1,24 @@
 package ec.edu.uce.besg.ejb.persistence.entity;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
-
-import java.sql.Timestamp;
-import java.util.List;
 
 
 /**
@@ -36,7 +47,8 @@ public class CandidatoDTO implements Serializable {
 	private Integer canEstadoEstudio;
 
 	@Column(name="can_fecha_nacimiento")
-	private Timestamp canFechaNacimiento;
+	@Temporal(TemporalType.DATE)
+	private Date canFechaNacimiento;
 
 	@Column(name="can_identificacion")
 	private String canIdentificacion;
@@ -119,11 +131,11 @@ public class CandidatoDTO implements Serializable {
 		this.canEstadoEstudio = canEstadoEstudio;
 	}
 
-	public Timestamp getCanFechaNacimiento() {
+	public Date getCanFechaNacimiento() {
 		return this.canFechaNacimiento;
 	}
 
-	public void setCanFechaNacimiento(Timestamp canFechaNacimiento) {
+	public void setCanFechaNacimiento(Date canFechaNacimiento) {
 		this.canFechaNacimiento = canFechaNacimiento;
 	}
 

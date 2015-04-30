@@ -19,14 +19,14 @@ import ec.edu.uce.besg.ejb.persistence.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.HistorialPasswordDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
-import ec.edu.uce.besg.ejb.service.ServicioEmpresa;
+import ec.edu.uce.besg.ejb.service.EmpresaService;
 import ec.edu.uce.besg.ejb.vo.EmpresaVO;
 
 
 @Stateless
-public class ServicioEmpresaImpl implements ServicioEmpresa{
+public class EmpresaServiceImpl implements EmpresaService{
 	
-	private static final Logger logger = LoggerFactory.getLogger(ServicioEmpresaImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(EmpresaServiceImpl.class);
 	
 	@EJB
 	private FactoryDAO factoryDAO;

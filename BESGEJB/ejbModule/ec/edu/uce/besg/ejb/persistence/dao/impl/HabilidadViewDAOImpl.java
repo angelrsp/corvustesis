@@ -15,41 +15,40 @@ import javax.persistence.criteria.Root;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ec.edu.uce.besg.ejb.persistence.dao.HabilidadDAO;
-import ec.edu.uce.besg.ejb.persistence.entity.HabilidadDTO;
+import ec.edu.uce.besg.ejb.persistence.dao.HabilidadViewDAO;
+import ec.edu.uce.besg.ejb.persistence.entity.view.HabilidadViewDTO;
 
-public class HabilidadDAOImpl extends AbstractFacadeImpl<HabilidadDTO> implements HabilidadDAO{
+public class HabilidadViewDAOImpl extends AbstractFacadeImpl<HabilidadViewDTO> implements HabilidadViewDAO{
 
-	private static final Logger slf4jLogger = LoggerFactory.getLogger(HabilidadDAOImpl.class);
-	
-	public HabilidadDAOImpl() {
+	private static final Logger slf4jLogger = LoggerFactory.getLogger(HabilidadViewDAOImpl.class);
+
+	public HabilidadViewDAOImpl() {
 		super();
 	}
 
-	public HabilidadDAOImpl(EntityManager entityManager) {
+
+	public HabilidadViewDAOImpl(EntityManager entityManager) {
 		super(entityManager);
 	}
 	
-	
-	
 	@Override
-	public List<HabilidadDTO> getByAnd(HabilidadDTO objeto) throws SecurityException
+	public List<HabilidadViewDTO> getByAnd(HabilidadViewDTO objeto) throws SecurityException
 	{
 		CriteriaBuilder cb;
-		CriteriaQuery<HabilidadDTO> cq;
-		Root<HabilidadDTO> from;
-		List<HabilidadDTO> list;
+		CriteriaQuery<HabilidadViewDTO> cq;
+		Root<HabilidadViewDTO> from;
+		List<HabilidadViewDTO> list;
 		Predicate predicate;
 		List<Predicate> predicateList = null;
 		String fieldName;
 		Method getter;
 		Object value;
 		Field[] fields;
-		TypedQuery<HabilidadDTO> typedQuery;
+		TypedQuery<HabilidadViewDTO> typedQuery;
 		try{
 			cb=entityManager.getCriteriaBuilder();
-			cq=cb.createQuery(HabilidadDTO.class);
-			from= cq.from(HabilidadDTO.class);
+			cq=cb.createQuery(HabilidadViewDTO.class);
+			from= cq.from(HabilidadViewDTO.class);
 			predicateList=new ArrayList<Predicate>();
 			fields = objeto.getClass().getDeclaredFields();
 	        for(Field f : fields){
@@ -88,7 +87,6 @@ public class HabilidadDAOImpl extends AbstractFacadeImpl<HabilidadDTO> implement
              fields=null;		
         }		
 	}
+
 	
 }
-
-

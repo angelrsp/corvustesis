@@ -12,7 +12,7 @@ import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 import ec.edu.uce.besg.ejb.vo.EmpresaVO;
 
 @Local
-public interface ServicioEmpresa {
+public interface EmpresaService {
 
 	EmpresaDTO actualizarEmpresa(EmpresaDTO empresa)
 			throws CorvustecException;
