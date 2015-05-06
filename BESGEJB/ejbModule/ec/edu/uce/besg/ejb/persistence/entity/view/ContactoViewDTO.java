@@ -1,18 +1,21 @@
-package ec.edu.uce.besg.ejb.persistence.entity;
+package ec.edu.uce.besg.ejb.persistence.entity.view;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
 
 /**
- * The persistent class for the view_bem_contacto database table.
+ * The persistent class for the bem_contacto_view database table.
  * 
  */
 @Entity
-@Table(name="view_bem_contacto")
-@NamedQuery(name="ContactoListDTO.findAll", query="SELECT c FROM ContactoListDTO c")
-public class ContactoListDTO implements Serializable {
+@Table(name="bem_contacto_view")
+@NamedQuery(name="ContactoViewDTO.findAll", query="SELECT c FROM ContactoViewDTO c")
+public class ContactoViewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Column(name="cat_cargo")
+	private String catCargo;
 
 	@Column(name="con_apellidos")
 	private String conApellidos;
@@ -24,7 +27,6 @@ public class ContactoListDTO implements Serializable {
 	@Column(name="con_codigo")
 	private Integer conCodigo;
 
-	
 	@Column(name="con_empresa")
 	private Integer conEmpresa;
 
@@ -61,7 +63,15 @@ public class ContactoListDTO implements Serializable {
 	@Column(name="emp_web")
 	private String empWeb;
 
-	public ContactoListDTO() {
+	public ContactoViewDTO() {
+	}
+
+	public String getCatCargo() {
+		return this.catCargo;
+	}
+
+	public void setCatCargo(String catCargo) {
+		this.catCargo = catCargo;
 	}
 
 	public String getConApellidos() {
