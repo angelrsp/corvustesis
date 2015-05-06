@@ -14,11 +14,11 @@ import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.common.util.EncryptionUtility;
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
 import ec.edu.uce.besg.ejb.persistence.entity.ContactoDTO;
-import ec.edu.uce.besg.ejb.persistence.entity.ContactoListDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.HistorialPasswordDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.view.ContactoViewDTO;
 import ec.edu.uce.besg.ejb.service.EmpresaService;
 import ec.edu.uce.besg.ejb.vo.EmpresaVO;
 
@@ -125,7 +125,7 @@ public class EmpresaServiceImpl implements EmpresaService{
 	}
 	
 	@Override
-	public ContactoDTO obtenerContactos(ContactoListDTO contacto) throws CorvustecException
+	public ContactoDTO obtenerContactos(ContactoViewDTO contacto) throws CorvustecException
 	{
 		try {
 			ContactoDTO contactoEncontrado=factoryDAO.getContactoDAOImpl().find(contacto.getConCodigo());
@@ -164,7 +164,7 @@ public class EmpresaServiceImpl implements EmpresaService{
 	}
 	
 	@Override
-	public List<ContactoListDTO> buscarContacto(ContactoListDTO contacto) throws CorvustecException
+	public List<ContactoViewDTO> buscarContacto(ContactoViewDTO contacto) throws CorvustecException
 	{
 		try {
 			return factoryDAO.getContactoDAOImpl().getByAnd(contacto);

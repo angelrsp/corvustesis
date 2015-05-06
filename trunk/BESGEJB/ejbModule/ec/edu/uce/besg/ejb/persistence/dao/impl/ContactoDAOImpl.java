@@ -14,7 +14,7 @@ import javax.persistence.criteria.Root;
 
 import ec.edu.uce.besg.ejb.persistence.dao.ContactoDAO;
 import ec.edu.uce.besg.ejb.persistence.entity.ContactoDTO;
-import ec.edu.uce.besg.ejb.persistence.entity.ContactoListDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.view.ContactoViewDTO;
 
 public class ContactoDAOImpl extends AbstractFacadeImpl<ContactoDTO> implements ContactoDAO{
 
@@ -27,12 +27,12 @@ public class ContactoDAOImpl extends AbstractFacadeImpl<ContactoDTO> implements 
 	}
 	
 	@Override
-	public List<ContactoListDTO> getByAnd(ContactoListDTO objeto) throws SecurityException
+	public List<ContactoViewDTO> getByAnd(ContactoViewDTO objeto) throws SecurityException
 	{
 		CriteriaBuilder cb;
-		CriteriaQuery<ContactoListDTO> cq;
-		Root<ContactoListDTO> from;
-		List<ContactoListDTO> list;
+		CriteriaQuery<ContactoViewDTO> cq;
+		Root<ContactoViewDTO> from;
+		List<ContactoViewDTO> list;
 		Predicate predicate;
 		List<Predicate> predicateList = null;
 		String fieldName;
@@ -41,8 +41,8 @@ public class ContactoDAOImpl extends AbstractFacadeImpl<ContactoDTO> implements 
 		Field[] fields;
 		try{
 			cb=entityManager.getCriteriaBuilder();
-			cq=cb.createQuery(ContactoListDTO.class);
-			from= cq.from(ContactoListDTO.class);
+			cq=cb.createQuery(ContactoViewDTO.class);
+			from= cq.from(ContactoViewDTO.class);
 			predicateList=new ArrayList<Predicate>();
 			fields = objeto.getClass().getDeclaredFields();
 	        for(Field f : fields){
@@ -62,7 +62,7 @@ public class ContactoDAOImpl extends AbstractFacadeImpl<ContactoDTO> implements 
 	
 	        if(!predicateList.isEmpty())
 	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
-			TypedQuery<ContactoListDTO> tq=entityManager.createQuery(cq);
+			TypedQuery<ContactoViewDTO> tq=entityManager.createQuery(cq);
 			list=tq.getResultList();
 			return list;
 		}catch(Exception e){
