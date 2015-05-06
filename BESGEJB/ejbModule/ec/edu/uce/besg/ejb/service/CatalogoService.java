@@ -26,4 +26,11 @@ public interface CatalogoService {
 
 	List<CatalogoDTO> readFacultad() throws CorvustecException;
 
+	List<CatalogoDTO> readProvincia(Integer paisCode) throws CorvustecException;
+
+	List<CatalogoDTO> readCiudad(Integer provinciaCode)
+			throws CorvustecException;
+
+	List<CatalogoDTO> readCatalogo(Integer code) throws CorvustecException;
+
 }

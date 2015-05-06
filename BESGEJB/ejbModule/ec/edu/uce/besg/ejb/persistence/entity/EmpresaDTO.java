@@ -37,8 +37,14 @@ public class EmpresaDTO implements Serializable {
 	@Column(name="emp_sector")
 	private Integer empSector;
 
-	@Column(name="emp_ubicacion")
-	private Integer empUbicacion;
+	@Column(name="emp_ciudad")
+	private Integer empCiudad;
+
+	@Column(name="emp_provincia")
+	private Integer empProvincia;
+
+	@Column(name="emp_pais")
+	private Integer empPais;
 
 	@Column(name="emp_web")
 	private String empWeb;
@@ -104,14 +110,6 @@ public class EmpresaDTO implements Serializable {
 		this.empSector = empSector;
 	}
 
-	public Integer getEmpUbicacion() {
-		return this.empUbicacion;
-	}
-
-	public void setEmpUbicacion(Integer empUbicacion) {
-		this.empUbicacion = empUbicacion;
-	}
-
 	public String getEmpWeb() {
 		return this.empWeb;
 	}
@@ -159,6 +157,30 @@ public class EmpresaDTO implements Serializable {
 	}
 	
 	
+	public Integer getEmpCiudad() {
+		return empCiudad;
+	}
+
+	public void setEmpCiudad(Integer empCiudad) {
+		this.empCiudad = empCiudad;
+	}
+
+	public Integer getEmpProvincia() {
+		return empProvincia;
+	}
+
+	public void setEmpProvincia(Integer empProvincia) {
+		this.empProvincia = empProvincia;
+	}
+
+	public Integer getEmpPais() {
+		return empPais;
+	}
+
+	public void setEmpPais(Integer empPais) {
+		this.empPais = empPais;
+	}
+
 	public ContactoDTO addBemContacto(ContactoDTO bemContacto) {
 		getBemContactos().add(bemContacto);
 		bemContacto.setBemEmpresa(this);

@@ -19,24 +19,24 @@ public class EmpresaDataManager implements Serializable {
 	
 	private EmpresaDTO empresaDTO;
 	private UsuarioDTO usuarioDTO;
+		
+	private List<CatalogoDTO> sectorList;
 	
-	private int codigoSector;
-	private int codigoPais;
-	private int codigoProvincia;
-	private int codigoCiudad;
+	private List<CatalogoDTO> paisList;
 	
-	private List<CatalogoDTO> sectorCatalogoList;
-	private List<CatalogoDTO> provinciaCatalogoList;
-	private List<CatalogoDTO> ciudadCatalogoList;
-	private List<CatalogoDTO> paisCatalogoList;
+	private List<CatalogoDTO> provinciaList;
+	
+	private List<CatalogoDTO> ciudadList;
+	
 
 	public EmpresaDataManager() {
 		empresaDTO=new EmpresaDTO();
 		usuarioDTO=new UsuarioDTO();
-		sectorCatalogoList=new ArrayList<CatalogoDTO>();
-		provinciaCatalogoList=new ArrayList<CatalogoDTO>();
-		ciudadCatalogoList=new ArrayList<CatalogoDTO>();
-		paisCatalogoList=new ArrayList<CatalogoDTO>();
+		
+		sectorList=new ArrayList<CatalogoDTO>();
+		paisList=new ArrayList<CatalogoDTO>();
+		provinciaList=new ArrayList<CatalogoDTO>();
+		ciudadList=new ArrayList<CatalogoDTO>();
 	}
 
 
@@ -48,80 +48,50 @@ public class EmpresaDataManager implements Serializable {
 		this.usuarioDTO = usuarioDTO;
 	}
 
-	public int getCodigoSector() {
-		return codigoSector;
-	}
-
-	public void setCodigoSector(int codigoSector) {
-		this.codigoSector = codigoSector;
-	}
-
-	public int getCodigoPais() {
-		return codigoPais;
-	}
-
-	public void setCodigoPais(int codigoPais) {
-		this.codigoPais = codigoPais;
-	}
-
-	public int getCodigoProvincia() {
-		return codigoProvincia;
-	}
-
-	public void setCodigoProvincia(int codigoProvincia) {
-		this.codigoProvincia = codigoProvincia;
-	}
-
-	public int getCodigoCiudad() {
-		return codigoCiudad;
-	}
-
-	public void setCodigoCiudad(int codigoCiudad) {
-		this.codigoCiudad = codigoCiudad;
-	}
-
-	public List<CatalogoDTO> getSectorCatalogoList() {
-		return sectorCatalogoList;
-	}
-
-	public void setSectorCatalogoList(List<CatalogoDTO> sectorCatalogoList) {
-		this.sectorCatalogoList = sectorCatalogoList;
-	}
-
-	public List<CatalogoDTO> getProvinciaCatalogoList() {
-		return provinciaCatalogoList;
-	}
-
-	public void setProvinciaCatalogoList(List<CatalogoDTO> provinciaCatalogoList) {
-		this.provinciaCatalogoList = provinciaCatalogoList;
-	}
-
-	public List<CatalogoDTO> getCiudadCatalogoList() {
-		return ciudadCatalogoList;
-	}
-
-	public void setCiudadCatalogoList(List<CatalogoDTO> ciudadCatalogoList) {
-		this.ciudadCatalogoList = ciudadCatalogoList;
-	}
-
-	public List<CatalogoDTO> getPaisCatalogoList() {
-		return paisCatalogoList;
-	}
-
-	public void setPaisCatalogoList(List<CatalogoDTO> paisCatalogoList) {
-		this.paisCatalogoList = paisCatalogoList;
-	}
-
-
 	public EmpresaDTO getEmpresaDTO() {
 		return empresaDTO;
 	}
-
 
 	public void setEmpresaDTO(EmpresaDTO empresaDTO) {
 		this.empresaDTO = empresaDTO;
 	}
 
 
-	
+	public List<CatalogoDTO> getSectorList() {
+		return sectorList;
+	}
+
+
+	public void setSectorList(List<CatalogoDTO> sectorList) {
+		this.sectorList = sectorList;
+	}
+
+
+	public List<CatalogoDTO> getPaisList() {
+		return paisList;
+	}
+
+
+	public void setPaisList(List<CatalogoDTO> paisList) {
+		this.paisList = paisList;
+	}
+
+	public List<CatalogoDTO> getProvinciaList() {
+		return provinciaList;
+	}
+
+
+	public void setProvinciaList(List<CatalogoDTO> provinciaList) {
+		this.provinciaList = provinciaList;
+	}
+
+	public List<CatalogoDTO> getCiudadList() {
+		return ciudadList;
+	}
+
+
+	public void setCiudadList(List<CatalogoDTO> ciudadList) {
+		this.ciudadList = ciudadList;
+	}
+
 }

@@ -74,6 +74,18 @@ public class EmpresaServiceImpl implements EmpresaService{
 			throw new CorvustecException("Error al registrar Empresa");
 		}
 	}
+
+	@Override
+	public EmpresaDTO updateEmpresa(EmpresaDTO empresa)throws CorvustecException {
+		try {
+			return factoryDAO.getEmpresaDAOImpl().update(empresa);
+		} catch (Exception e) {
+			logger.info("Error al registrar Empresa {}", e.toString());
+			throw new CorvustecException("Error al registrar Empresa");
+		}
+	}
+
+	
 	
 	/*@Override
 	public AvisoDTO registrarAviso(AvisoDTO aviso) throws SilsagException
@@ -121,6 +133,22 @@ public class EmpresaServiceImpl implements EmpresaService{
 		} catch (Exception e) {
 			//log.info("Error al registrar Aviso {}", e.toString());
 			throw new CorvustecException("Error al obtener el contacto");
+		}				
+	}
+	
+	@Override
+	public EmpresaDTO readEmpresa(EmpresaDTO empresa) throws CorvustecException
+	{
+		List<EmpresaDTO> empresaList;
+		try {
+			empresaList = factoryDAO.getEmpresaDAOImpl().getByAnd(empresa);
+			if(empresaList.isEmpty())
+				return new EmpresaDTO();
+			else
+				return empresaList.get(0);	
+		} catch (Exception e) {
+			logger.info("Error al readEmpresa {}", e.toString());
+			throw new CorvustecException("Error al readEmpresa " +e.toString());
 		}				
 	}
 	

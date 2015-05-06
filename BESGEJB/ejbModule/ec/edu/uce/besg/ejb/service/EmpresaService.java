@@ -33,5 +33,9 @@ public interface EmpresaService {
 
 	CatalogoDTO obtenerCatalogoId(int id) throws CorvustecException;
 
+	EmpresaDTO readEmpresa(EmpresaDTO empresa) throws CorvustecException;
+
+	EmpresaDTO updateEmpresa(EmpresaDTO empresa) throws CorvustecException;
+
 	
 }
