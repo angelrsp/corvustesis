@@ -1,7 +1,6 @@
 package ec.edu.uce.besg.web.controller;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -9,12 +8,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import org.apache.commons.collections.CollectionUtils;
-
 import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.persistence.entity.ContactoDTO;
-import ec.edu.uce.besg.ejb.persistence.entity.ContactoListDTO;
-import ec.edu.uce.besg.ejb.persistence.entity.EmpresaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.view.ContactoViewDTO;
 import ec.edu.uce.besg.ejb.service.CatalogoService;
 import ec.edu.uce.besg.ejb.service.EmpresaService;
 import ec.edu.uce.besg.web.datamanager.ContactoDataManager;
@@ -27,15 +24,18 @@ public class ContactoController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	private EmpresaService servicioEmpresa;
+	private EmpresaService empresaService;
 	
 	@EJB
-	private CatalogoService servicioCatalogo;
+	private CatalogoService catalogoService;
 	
 
 	@ManagedProperty(value="#{contactoDataManager}")
 	private ContactoDataManager contactoDataManager;
 	
+	public ContactoController() {
+	
+	}
 	
 	public ContactoDataManager getContactoDataManager() {
 		return contactoDataManager;
@@ -52,37 +52,16 @@ public class ContactoController implements Serializable {
 		readEmpresa();
 		buscarCargo();
 		readContacto();
-		//read();
+		
 	}
 	
-	public void registrarContacto()
-	{
-		try {
-			contactoDataManager.getContactoInsertar().setBemEmpresa(contactoDataManager.getEmpresa());
-			contactoDataManager.getContactoInsertar().setConCargo(contactoDataManager.getCargo());
-			ContactoDTO contactoNuevo = this.servicioEmpresa.agregarContacto(contactoDataManager.getContactoInsertar());
-			if (contactoNuevo != null) {
-				contactoDataManager.setContactoInsertar(new ContactoDTO());
-				JsfUtil.addInfoMessage("Guardado Exitosamente");
-				readContacto();
-			}
-		} catch (CorvustecException e) {
-			JsfUtil.addErrorMessage(e.toString());
-		}
-	}	
 	
 	
 	private void readEmpresa()
 	{
-		List<EmpresaDTO> listaEmpresas=null;
 		try {
-			//ojo se manda de parametro new empresadto pero deberia mandar la empresa logeada
-			listaEmpresas = this.servicioEmpresa.obtenerEmpresa(new EmpresaDTO());
-			if (CollectionUtils.isEmpty(listaEmpresas) && listaEmpresas.size()==0) {
-				JsfUtil.addInfoMessage("Busqueda vacia");
-			} else {
-				this.contactoDataManager.setEmpresa(listaEmpresas.get(0));
-			}
+			contactoDataManager.getEmpresaDTO().setSegUsuario((UsuarioDTO)JsfUtil.getObject("UsuarioDTO"));
+			contactoDataManager.setEmpresaDTO(empresaService.readEmpresa(contactoDataManager.getEmpresaDTO()));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
@@ -90,38 +69,52 @@ public class ContactoController implements Serializable {
 	
 	private void readContacto()
 	{
-		List<ContactoListDTO> listaContactos=null;
+		ContactoViewDTO contactoList;
 		try {
-			listaContactos = this.servicioEmpresa.buscarContacto(new ContactoListDTO());
-			if (CollectionUtils.isEmpty(listaContactos) && listaContactos.size()==0) {
-				JsfUtil.addInfoMessage("Busqueda vacia");
-			} else {
-				this.contactoDataManager.setContactoDTOs(listaContactos);
-			}
+			contactoList=new ContactoViewDTO();
+			contactoList.setEmpCodigo(contactoDataManager.getEmpresaDTO().getEmpCodigo());
+			contactoDataManager.setContactoList(empresaService.buscarContacto(contactoList));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
+		}
+		finally{
+			contactoList=null;
 		}
 	}
 	
 	
-	public void cargarDatosContacto (ContactoListDTO contacto) {
+	public void cargarDatosContacto (ContactoViewDTO contacto) {
 		try {
-			ContactoDTO contactoEncontrado=servicioEmpresa.obtenerContactos(contacto);
-			contactoDataManager.setContactoInsertar(contactoEncontrado);
-			//contactoDataManager.setCargo(contactoEncontrado.getConCargo());
-			readEmpresa();
+			contactoDataManager.setContactoDTO(empresaService.obtenerContactos(contacto));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
+		}
+		finally{
+			contacto=null;
 		}
 	}
 	
 	public void buscarCargo() {
 		try {
-			this.contactoDataManager.setCargoCatalogoList(servicioCatalogo.readCargo());
+			this.contactoDataManager.setCargoCatalogoList(catalogoService.readCargo());
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
 	}
 	
+	
+	public void onClickSave()
+	{
+		try {
+			contactoDataManager.getContactoDTO().setBemEmpresa(contactoDataManager.getEmpresaDTO());
+			empresaService.agregarContacto(contactoDataManager.getContactoDTO());
+			JsfUtil.addInfoMessage("Guardado Exitosamente");
+			readContacto();
+			contactoDataManager.setContactoDTO(new ContactoDTO());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}	
+
 	
 }

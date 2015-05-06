@@ -8,53 +8,32 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import ec.edu.uce.besg.ejb.persistence.entity.ContactoDTO;
-import ec.edu.uce.besg.ejb.persistence.entity.ContactoListDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.EmpresaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.CatalogoDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.view.ContactoViewDTO;
 
 @ViewScoped
 @ManagedBean(name = "contactoDataManager")
 public class ContactoDataManager implements Serializable {
-private static final long serialVersionUID = 1L;
+
 	
-	private ContactoDTO contactoInsertar;
-	private EmpresaDTO empresa;
-	private List<ContactoListDTO> contactoDTOs;
+	private static final long serialVersionUID = 1L;
+	
+	private ContactoDTO contactoDTO;
+	private EmpresaDTO empresaDTO;
+	private List<ContactoViewDTO> contactoList;
 	
 	private int cargo;
 	
 	private List<CatalogoDTO> cargoCatalogoList;
 
 	public ContactoDataManager() {
-		contactoInsertar=new ContactoDTO();
-		contactoDTOs=new ArrayList<ContactoListDTO>();
-		empresa=new EmpresaDTO();
+		contactoDTO=new ContactoDTO();
+		contactoList=new ArrayList<ContactoViewDTO>();
+		empresaDTO=new EmpresaDTO();
 		cargoCatalogoList=new ArrayList<CatalogoDTO>();
 	}
 
-	public ContactoDTO getContactoInsertar() {
-		return contactoInsertar;
-	}
-
-	public void setContactoInsertar(ContactoDTO contactoInsertar) {
-		this.contactoInsertar = contactoInsertar;
-	}
-
-	public EmpresaDTO getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(EmpresaDTO empresa) {
-		this.empresa = empresa;
-	}
-
-	public List<ContactoListDTO> getContactoDTOs() {
-		return contactoDTOs;
-	}
-
-	public void setContactoDTOs(List<ContactoListDTO> contactoDTOs) {
-		this.contactoDTOs = contactoDTOs;
-	}
 
 	public int getCargo() {
 		return cargo;
@@ -70,6 +49,34 @@ private static final long serialVersionUID = 1L;
 
 	public void setCargoCatalogoList(List<CatalogoDTO> cargoCatalogoList) {
 		this.cargoCatalogoList = cargoCatalogoList;
+	}
+
+	public EmpresaDTO getEmpresaDTO() {
+		return empresaDTO;
+	}
+
+	public void setEmpresaDTO(EmpresaDTO empresaDTO) {
+		this.empresaDTO = empresaDTO;
+	}
+
+
+	public ContactoDTO getContactoDTO() {
+		return contactoDTO;
+	}
+
+
+	public void setContactoDTO(ContactoDTO contactoDTO) {
+		this.contactoDTO = contactoDTO;
+	}
+
+
+	public List<ContactoViewDTO> getContactoList() {
+		return contactoList;
+	}
+
+
+	public void setContactoList(List<ContactoViewDTO> contactoList) {
+		this.contactoList = contactoList;
 	}
 
 }
