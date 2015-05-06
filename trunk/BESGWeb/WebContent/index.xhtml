@@ -24,7 +24,13 @@
 				<tr>
 					<td><p:password placeholder="Contraseña" id="password" required="true" style="width: 350px;" label="Contraseña" value="#{loginCandidatoDataManager.usuarioDTO.usuPassword}"/></td>
 				</tr>
-		
+
+				<tr>
+					<td>
+						<p:spacer height="5"/>
+					</td>
+				</tr>
+				
 				<tr>
 					<td colspan="2" align="center">
 						<p:commandButton value="Ingresar" actionListener="#{loginCandidatoController.authenticate}" update="pnlLogin" process="pnlLogin"/>
@@ -71,6 +77,12 @@
 				<tr>
 					<td><p:inputText placeholder="Identificación" value="#{registroCandidatoDataManager.candidatoDTO.canIdentificacion}" style="width: 325px;" required="true" label="Identificación"/></td>
 				</tr>
+					
+				<tr>
+					<td>
+						<p:spacer height="5"/>
+					</td>
+				</tr>					
 								
 				<tr align="center">
 					<td colspan="2"><p:commandButton value="Registrar" actionListener="#{registroCandidatoController.registrar}" update="pnlRegistro" process="pnlRegistro"/></td>

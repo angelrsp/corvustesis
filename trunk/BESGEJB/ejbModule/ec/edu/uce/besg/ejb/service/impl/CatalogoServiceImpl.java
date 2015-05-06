@@ -22,7 +22,8 @@ public class CatalogoServiceImpl implements CatalogoService{
 	@EJB
 	private FactoryDAO factoryDAO;
 
-	private List<CatalogoDTO> readCatalogo(Integer code) throws CorvustecException
+	@Override
+	public List<CatalogoDTO> readCatalogo(Integer code) throws CorvustecException
 	{
 		CatalogoDTO fatherDTO;
 		CatalogoDTO catalogoDTO;
@@ -65,6 +66,28 @@ public class CatalogoServiceImpl implements CatalogoService{
 	{
 		try {
 			return readCatalogo(Const.PAIS);
+		} catch (Exception e) {
+			logger.info("Error al obtener sector {}", e.toString());
+			throw new CorvustecException("Error al obtener sector");
+		}				
+	}
+	
+	@Override
+	public List<CatalogoDTO> readProvincia(Integer paisCode) throws CorvustecException
+	{
+		try {
+			return readCatalogo(paisCode);
+		} catch (Exception e) {
+			logger.info("Error al obtener sector {}", e.toString());
+			throw new CorvustecException("Error al obtener sector");
+		}				
+	}
+	
+	@Override
+	public List<CatalogoDTO> readCiudad(Integer provinciaCode) throws CorvustecException
+	{
+		try {
+			return readCatalogo(provinciaCode);
 		} catch (Exception e) {
 			logger.info("Error al obtener sector {}", e.toString());
 			throw new CorvustecException("Error al obtener sector");

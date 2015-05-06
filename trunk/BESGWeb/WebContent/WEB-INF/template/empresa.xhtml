@@ -9,24 +9,26 @@
 	<ui:include src="/WEB-INF/template/head.xhtml" />
 </h:head>
 <body>
-
-
-<div id="page">
-		<h:form id="contenido">
+<div>
+	<h:form id="contenido">
 			
-		<p:growl id="pnlMessages" autoUpdate="true" closable="true" showDetail="true"/>
+		<p:growl id="pnlMessages" autoUpdate="true" closable="true"/>
 			
-		<div id="header" align="center">
-
+		<div align="center" style="position: fixed; top: 0; background-color: #FFFFFF; margin-top: -8px;margin-left: -8px;margin-right: -8px; width: 100%;box-shadow: 0 0 1px #2E2D32;overflow:visible !important;z-index:40 !important;">
+		
+		<div style="height: 7px;"></div>
+		
+			<div style="width: 1020px;">
 				<table width="99%">
 					<tr>
 						<td><h:graphicImage value="/resources/img/uce_logo.jpg"
 								height="40" /></td>
 						<td align="right">
+						
 							<p:menubar id="menuPublico" style="width:30%">
 								<p:menuitem value="Inicio" url="/" />
 								<p:submenu label="Empresa">
-									<p:menuitem value="Cambiar Contraseña" url="/pages/empresa/cambiarPasswordEmpresa.xhtml" />
+									<p:menuitem value="Cambiar Contraseña" url="/pages/empresa/changePassword.xhtml" />
 									<p:menuitem value="Mis Datos" url="/pages/empresa/misDatos.xhtml" />
 									<p:menuitem value="Contactos" url="/pages/empresa/contactos.xhtml" />
 								</p:submenu>
@@ -41,24 +43,32 @@
 					</tr>
 				</table>
 
+			</div>
+			
 		</div>
 
-		<hr />
+		<div style="height: 45px;"></div>
 
-		<div align="center">
+		<div id="content" align="center">
 
-			<div style="width: 995px; box-shadow: 0 0 1px #2E2D32;">
+			<div style="width: 1020px; box-shadow: 0 0 1px #2E2D32;">
 
 				<ui:insert name="contenido" />
 
 			</div>
 		</div>
-	</h:form>
 		
-	<div align="center">
-		<ui:include src="/WEB-INF/template/footer.xhtml" />
-	</div>	
+	</h:form>		
+
 </div>
+
+<p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>  
+              
+<p:dialog modal="true" widgetVar="statusDialog" header="Cargando..."   
+        draggable="false" closable="false">  
+    <p:graphicImage value="/resources/img/ajaxloadingbar.gif" />  
+</p:dialog>
+
 
 </body>
 </html>

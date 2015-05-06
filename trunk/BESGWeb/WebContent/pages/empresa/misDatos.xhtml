@@ -1,84 +1,92 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets" 
-	xmlns:p="http://primefaces.org/ui">
-
-<h:head></h:head>
-<body>
-	<ui:composition template="/WEB-INF/template/empresa.xhtml">
-		<ui:define name="contenido">
-			<fieldset>
-			<h:form id="contenido">
-			<p:growl id="growl" showDetail="false" sticky="true" />
-				<p:panel id="pnlDatos" styleClass="tabla"
-					header="Mis Datos">
-					<table id="tblDatos" class="tabla">
-						<tr>
-							<td><h:outputLabel
-									value="#{i18n['besg.empresa.razon.social']}&#160;" /></td>
-							<td><p:inputText required="true"
-									 value="#{empresaController.empresaDataManager.empresaDTO.empRazonSocial}" /></td>
-
-							<td><h:outputLabel
-									value="#{i18n['besg.empresa.nombre.comercial']} &#160;"  /></td>
-							<td><p:inputText required="true" 
-									requiredMessage="#{i18n['besg.empresa.nombre.comercial']};#{i18n['label.requerido']}"
-									value="#{empresaDataManager.empresaDTO.empNombreComercial}"/></td>
-						</tr>
-						<tr>
-							<td><h:outputLabel value="#{i18n['besg.empresa.ruc']} &#160;" /></td>
-							<td><p:inputText required="true"
-									requiredMessage="#{i18n['besg.empresa.ruc']};#{i18n['label.requerido']}" value="#{empresaDataManager.empresaDTO.empRuc}" onkeypress="return isNumberKey(event);"
-									/></td>
-							<td><h:outputLabel value="#{i18n['besg.empresa.web']} &#160;" /></td>
-							<td><p:inputText style="width : 90%;" value="#{empresaDataManager.empresaDTO.empWeb}" /></td>
-						</tr>
-						<tr>
-							<td><h:outputLabel value="#{i18n['besg.empresa.sector']}" /></td>
-							<td><p:selectOneMenu value="#{empresaDataManager.codigoSector}">
-									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"/>
-									<f:selectItems value="#{empresaDataManager.sectorCatalogoList}" var="sector" itemLabel="#{sector.catDescripcion}" itemValue="#{sector.catCodigo}"></f:selectItems>	
-								</p:selectOneMenu>
-							</td>
-							
-							<td><h:outputLabel value="#{i18n['besg.empresa.pais']}" id="pais"/></td>
-							<td><p:selectOneMenu value="#{empresaDataManager.codigoPais}">
-									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"/>
-									<f:selectItems value="#{empresaDataManager.paisCatalogoList}" var="pais" itemLabel="#{pais.catDescripcion}" itemValue="#{pais.catCodigo}"></f:selectItems>	
-<!-- 									<p:ajax listener="#{empresaController.buscarProvincia}" process="@this" update="provincia"/> -->
-								</p:selectOneMenu>
-							</td>	
-						</tr>
-						<tr>
-							<td><h:outputLabel value="#{i18n['besg.empresa.provincia']}"  /></td>
-							<td><p:selectOneMenu value="#{empresaDataManager.codigoProvincia}" id="provincia">
-									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"/>
-									<f:selectItems value="#{empresaDataManager.provinciaCatalogoList}" var="prov" itemLabel="#{prov.catDescripcion}" itemValue="#{prov.catCodigo}"></f:selectItems>	
-<!-- 									<p:ajax listener="#{empresaController.buscarCiudad}" process="@this" update="ciudad"/> -->
-								</p:selectOneMenu>
-							</td>
-							<td><h:outputLabel value="#{i18n['besg.empresa.ciudad']}" /></td>
-							<td><p:selectOneMenu value="#{empresaDataManager.codigoCiudad}" id="ciudad">
-									<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"/>
-									<f:selectItems value="#{empresaDataManager.ciudadCatalogoList}" var="ciudad" itemLabel="#{ciudad.catDescripcion}" itemValue="#{ciudad.catCodigo}"></f:selectItems>	
-								</p:selectOneMenu>
-							</td>
-						</tr>
-						<tr align="center">
-							<td colspan="4"><p:commandButton
-									value="#{i18n['boton.actualizar']}"
-									process="pnlDatos" actionListener="#{empresaController.registroEmpresa}"
-									update="pnlDatos, growl" />
-							</td>
-						</tr>
-					</table>
-				</p:panel>
-				</h:form>
-			</fieldset>
-		</ui:define>
-		</ui:composition>
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/empresa.xhtml">
+	
+	
+	<ui:define name="contenido">
+			
+		<p:panel id="pnlDatos" styleClass="tabla" header="Mis Datos">
+				
+			<p:spacer height="5"/>
+				
+			<table id="tblDatos" class="tabla">
+				<tr>
+					<td><h:outputLabel value="#{i18n['besg.empresa.razon.social']}:" /></td>
+					<td><p:inputText style="width: 400px;" required="true" value="#{empresaController.empresaDataManager.empresaDTO.empRazonSocial}" label="#{i18n['besg.empresa.razon.social']}"/></td>
+				</tr>
+				
+				<tr>
+					<td><h:outputLabel value="#{i18n['besg.empresa.nombre.comercial']}:"  /></td>
+					<td><p:inputText style="width: 400px;" required="true" label="#{i18n['besg.empresa.nombre.comercial']}" value="#{empresaDataManager.empresaDTO.empNombreComercial}"/></td>
+				</tr>
+				
+				<tr>
+					<td><h:outputLabel value="#{i18n['besg.empresa.ruc']} &#160;" /></td>
+					<td><p:inputText required="true" label="#{i18n['besg.empresa.ruc']}" value="#{empresaDataManager.empresaDTO.empRuc}" onkeypress="return isNumberKey(event);"/></td>
+				</tr>
+				
+				<tr>
+					<td><h:outputLabel value="#{i18n['besg.empresa.web']} &#160;" /></td>
+					<td><p:inputText style="width: 400px;" value="#{empresaDataManager.empresaDTO.empWeb}" /></td>
+				</tr>
+				
+				<tr>
+					<td><h:outputLabel value="#{i18n['besg.empresa.sector']}:" /></td>
+					<td><p:selectOneMenu value="#{empresaDataManager.empresaDTO.empSector}" required="true" label="#{i18n['besg.empresa.sector']}">
+							<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"/>
+							<f:selectItems value="#{empresaDataManager.sectorList}" var="sector" itemLabel="#{sector.catDescripcion}" itemValue="#{sector.catCodigo}"></f:selectItems>	
+						</p:selectOneMenu>
+					</td>
+				</tr>
+				
+				<tr>	
+					<td><h:outputLabel value="#{i18n['besg.empresa.pais']}" id="pais"/></td>
+					<td><p:selectOneMenu value="#{empresaDataManager.empresaDTO.empPais}">
+							<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"/>
+							<f:selectItems value="#{empresaDataManager.paisList}" var="pais" itemLabel="#{pais.catDescripcion}" itemValue="#{pais.catCodigo}"/>	
+							<p:ajax listener="#{empresaController.readProvincia}" process="@this" update="provincia"/>
+						</p:selectOneMenu>
+					</td>	
+				</tr>
+				<tr>
+					<td><h:outputLabel value="#{i18n['besg.empresa.provincia']}"  /></td>
+					<td><p:selectOneMenu value="#{empresaDataManager.empresaDTO.empProvincia}" id="provincia">
+							<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"/>
+							<f:selectItems value="#{empresaDataManager.provinciaList}" var="prov" itemLabel="#{prov.catDescripcion}" itemValue="#{prov.catCodigo}"></f:selectItems>	
+							<p:ajax listener="#{empresaController.readCiudad}" process="@this" update="ciudad"/>
+						</p:selectOneMenu>
+					</td>
+				</tr>
+				
+				<tr>
+					<td><h:outputLabel value="#{i18n['besg.empresa.ciudad']}:" /></td>
+					<td><p:selectOneMenu value="#{empresaDataManager.empresaDTO.empCiudad}" id="ciudad" required="true" label="#{i18n['besg.empresa.ciudad']}">
+							<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"/>
+							<f:selectItems value="#{empresaDataManager.ciudadList}" var="ciudad" itemLabel="#{ciudad.catDescripcion}" itemValue="#{ciudad.catCodigo}"></f:selectItems>	
+						</p:selectOneMenu>
+					</td>
+				</tr>
+				
+				<tr>
+					<td><p:spacer height="5"/></td>
+				</tr>						
+					
+				<tr align="center">
+					<td colspan="4">
+						<p:commandButton value="#{i18n['boton.actualizar']}" process="pnlDatos" actionListener="#{empresaController.onClickUpdate}"
+							update="pnlDatos" />
+					</td>
+				</tr>
+				
+			</table>
+			
+		</p:panel>
+	
+	</ui:define>
+	
+</ui:composition>
 		
-</body>
-</html>

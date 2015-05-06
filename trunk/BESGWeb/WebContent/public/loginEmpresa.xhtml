@@ -13,7 +13,7 @@
 		<p:panel id="pnlLogin" header="Iniciar Sesión" style="width: 500px;">
 			
 			<p:focus context="pnlLogin" />
-			
+			<p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
 			<table>
 				<tr>
 					<td><p:inputText placeholder="Usuario o Correo Electrónico" value="#{loginEmpresaDataManager.usuarioDTO.usuLogin}" style="width: 230px;"/></td>
@@ -29,7 +29,7 @@
 							actionListener="#{loginEmpresaController.intro}" /></td>
 				</tr>
 			</table>
-			<p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+			
 		</p:panel>
 		
 		
