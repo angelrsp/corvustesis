@@ -160,4 +160,6 @@ public class CatalogoServiceImpl implements CatalogoService{
 			throw new CorvustecException("Error al obtener sector");
 		}				
 	}
+	
+	
 }

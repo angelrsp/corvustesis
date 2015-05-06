@@ -2,6 +2,8 @@ package ec.edu.uce.besg.ejb.dao.factory;
 
 import javax.ejb.Local;
 
+import ec.edu.uce.besg.ejb.persistence.dao.AvisoDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.AvisoViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CandidatoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CatalogoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ContactoDAO;
@@ -35,4 +37,8 @@ public interface FactoryDAO {
 	HistorialPasswordDAO getHistorialPasswordDAOImpl();
 
 	HabilidadViewDAO getHabilidadViewDAOImpl();
+
+	AvisoDAO getAvisoDAOImpl();
+
+	AvisoViewDAO getAvisoViewDAOImpl();
 }

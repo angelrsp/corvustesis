@@ -5,6 +5,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.AvisoDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.AvisoViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CandidatoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CatalogoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ContactoDAO;
@@ -15,6 +17,8 @@ import ec.edu.uce.besg.ejb.persistence.dao.HabilidadViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HistorialPasswordDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ReferenciaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.UsuarioDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.AvisoDAOImpl;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.AvisoViewDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.CandidatoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.CatalogoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.ContactoDAOImpl;
@@ -44,6 +48,8 @@ public class FactoryDAOImpl implements FactoryDAO {
 	private EmpresaDAO empresaDAO;
 	
 	private HistorialPasswordDAO historialPasswordDAO;
+	private AvisoDAO avisoDAO;
+	private AvisoViewDAO avisoViewDAO;
 	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -127,5 +133,20 @@ public class FactoryDAOImpl implements FactoryDAO {
 		return habilidadViewDAO;
 	}
 
-	
+	@Override
+	public AvisoDAO getAvisoDAOImpl() {
+		if (avisoDAO == null) {
+			avisoDAO = new AvisoDAOImpl(entityManager);
+		}
+		return avisoDAO;
+	}
+
+	@Override
+	public AvisoViewDAO getAvisoViewDAOImpl() {
+		if (avisoViewDAO == null) {
+			avisoViewDAO = new AvisoViewDAOImpl(entityManager);
+		}
+		return avisoViewDAO;
+	}
+
 }
