@@ -10,7 +10,6 @@ import javax.faces.bean.ViewScoped;
 import ec.edu.uce.besg.ejb.persistence.entity.CandidatoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.PostulacionDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.view.AvisoPostulacionViewDTO;
-import ec.edu.uce.besg.ejb.persistence.entity.view.AvisoViewDTO;
 
 @ViewScoped
 @ManagedBean(name = "verOfertasDataManager")
@@ -27,15 +26,11 @@ public class VerOfertasDataManager implements Serializable{
 	private CandidatoDTO candidatoDTO;
 	private List<AvisoPostulacionViewDTO> avisoPostulacionViewList;
 	
-	private List<AvisoViewDTO> avisoViewList;
-	
-	
 	public VerOfertasDataManager() {
 		
 		postulacionDTO=new PostulacionDTO();
 		candidatoDTO=new CandidatoDTO();
 		avisoPostulacionViewList=new ArrayList<AvisoPostulacionViewDTO>();
-		avisoViewList=new ArrayList<AvisoViewDTO>();
 	}
 
 	public PostulacionDTO getPostulacionDTO() {
@@ -61,14 +56,6 @@ public class VerOfertasDataManager implements Serializable{
 	public void setAvisoPostulacionViewList(
 			List<AvisoPostulacionViewDTO> avisoPostulacionViewList) {
 		this.avisoPostulacionViewList = avisoPostulacionViewList;
-	}
-
-	public List<AvisoViewDTO> getAvisoViewList() {
-		return avisoViewList;
-	}
-
-	public void setAvisoViewList(List<AvisoViewDTO> avisoViewList) {
-		this.avisoViewList = avisoViewList;
 	}
 
 }
