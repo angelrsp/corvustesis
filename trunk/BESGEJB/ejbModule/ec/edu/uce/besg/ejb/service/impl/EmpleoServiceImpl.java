@@ -14,6 +14,7 @@ import ec.edu.uce.besg.ejb.persistence.entity.AvisoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.PostulacionDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.view.AvisoPostulacionViewDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.view.AvisoViewDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.view.CandidatoPostulacionViewDTO;
 import ec.edu.uce.besg.ejb.service.EmpleoService;
 
 @Stateless
@@ -104,8 +105,23 @@ public class EmpleoServiceImpl implements EmpleoService{
 		}
 		finally{
 			avisoPostulacionViewDTO=null;
+		}			
+	}
+	
+	@Override
+	public List<CandidatoPostulacionViewDTO> readCandidatoPostulacion(CandidatoPostulacionViewDTO candidatoPostulacionViewDTO) throws CorvustecException
+	{
+		try {
+			return factoryDAO.getCandidatoPostulacionViewDAOImpl().getByAnd(candidatoPostulacionViewDTO);
+		} catch (Exception e) {
+			logger.info("Error al registrar createOrUpdateAviso {}", e.toString());
+			throw new CorvustecException("Error al registrar createOrUpdateAviso "+e.toString());
+		}
+		finally{
+			candidatoPostulacionViewDTO=null;
 		}
 			
 	}
+
 
 }

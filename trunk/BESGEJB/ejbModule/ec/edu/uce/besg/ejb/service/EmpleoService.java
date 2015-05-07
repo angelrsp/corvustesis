@@ -9,6 +9,7 @@ import ec.edu.uce.besg.ejb.persistence.entity.AvisoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.PostulacionDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.view.AvisoPostulacionViewDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.view.AvisoViewDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.view.CandidatoPostulacionViewDTO;
 
 @Local
 public interface EmpleoService {
@@ -25,6 +26,10 @@ public interface EmpleoService {
 
 	List<AvisoPostulacionViewDTO> readAvisoPostulacion(
 			AvisoPostulacionViewDTO avisoPostulacionViewDTO)
+			throws CorvustecException;
+
+	List<CandidatoPostulacionViewDTO> readCandidatoPostulacion(
+			CandidatoPostulacionViewDTO candidatoPostulacionViewDTO)
 			throws CorvustecException;
 
 	
