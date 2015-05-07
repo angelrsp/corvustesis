@@ -9,6 +9,7 @@ import ec.edu.uce.besg.ejb.persistence.dao.AvisoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.AvisoPostulacionViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.AvisoViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CandidatoDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.CandidatoPostulacionViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CatalogoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ContactoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.EmpresaDAO;
@@ -23,6 +24,7 @@ import ec.edu.uce.besg.ejb.persistence.dao.impl.AvisoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.AvisoPostulacionViewDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.AvisoViewDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.CandidatoDAOImpl;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.CandidatoPostulacionViewDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.CatalogoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.ContactoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.EmpresaDAOImpl;
@@ -56,6 +58,7 @@ public class FactoryDAOImpl implements FactoryDAO {
 	private AvisoViewDAO avisoViewDAO;
 	private AvisoPostulacionViewDAO avisoPostulacionViewDAO;
 	private PostulacionDAO postulacionDAO;
+	private CandidatoPostulacionViewDAO candidatoPostulacionViewDAO;
 	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -169,6 +172,14 @@ public class FactoryDAOImpl implements FactoryDAO {
 			avisoPostulacionViewDAO = new AvisoPostulacionViewDAOImpl(entityManager);
 		}
 		return avisoPostulacionViewDAO;
+	}
+
+	@Override
+	public CandidatoPostulacionViewDAO getCandidatoPostulacionViewDAOImpl() {
+		if (candidatoPostulacionViewDAO == null) {
+			candidatoPostulacionViewDAO = new CandidatoPostulacionViewDAOImpl(entityManager);
+		}
+		return candidatoPostulacionViewDAO;
 	}
 
 }

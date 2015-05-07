@@ -6,6 +6,7 @@ import ec.edu.uce.besg.ejb.persistence.dao.AvisoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.AvisoPostulacionViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.AvisoViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CandidatoDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.CandidatoPostulacionViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CatalogoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ContactoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.EmpresaDAO;
@@ -47,4 +48,6 @@ public interface FactoryDAO {
 	PostulacionDAO getPostulacionDAOImpl();
 
 	AvisoPostulacionViewDAO getAvisoPostulacionViewDAOImpl();
+
+	CandidatoPostulacionViewDAO getCandidatoPostulacionViewDAOImpl();
 }
