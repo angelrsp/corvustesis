@@ -13,7 +13,6 @@ import ec.edu.uce.besg.ejb.persistence.entity.AvisoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.PostulacionDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.view.AvisoPostulacionViewDTO;
-import ec.edu.uce.besg.ejb.persistence.entity.view.AvisoViewDTO;
 import ec.edu.uce.besg.ejb.service.CandidatoService;
 import ec.edu.uce.besg.ejb.service.EmpleoService;
 import ec.edu.uce.besg.web.datamanager.VerOfertasDataManager;
@@ -68,9 +67,11 @@ public class VerOfertasController implements Serializable {
 	
 	private void readOferta()
 	{
+		AvisoPostulacionViewDTO avisoPostulacionViewDTO;
 		try {
+			avisoPostulacionViewDTO=new AvisoPostulacionViewDTO();
+			avisoPostulacionViewDTO.setPosCandidato(verOfertasDataManager.getCandidatoDTO().getCanCodigo());
 			verOfertasDataManager.setAvisoPostulacionViewList(empleoService.readAvisoPostulacion(new AvisoPostulacionViewDTO()));
-			verOfertasDataManager.setAvisoViewList(empleoService.readAviso(new AvisoViewDTO()));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}

@@ -10,24 +10,24 @@
 
 	<ui:define name="contenido">
 				
-		<p:dataGrid value="#{misPostulacionesController.postulacionList}"
+		<p:dataGrid value="#{misPostulacionesController.misPostulacionesDataManager.candidatoPostulacionViewList}"
 			var="pos" columns="1" emptyMessage="#{i18n['table.vacio']}">
 			
-			<p:panel header="#{pos.bemAviso.bemEmpresa.empNombreComercial}">
+			<p:panel header="#{pos.empNombreComercial}">
 				
 				<h:panelGrid columns="2">
 				
 					<h:outputText value="#{i18n['label.remuneracion']}:&#160;" />
-					<h:outputText value="#{pos.bemAviso.aviRemuneracion}" />
+					<h:outputText value="#{pos.aviRemuneracion}" />
 					
 					<h:outputText value="#{i18n['label.puesto']}:&#160;" />
-					<h:outputText value="#{pos.bemAviso.aviPuesto}" />
+					<h:outputText value="#{pos.catPuesto}" />
 					
 					<h:outputText value="#{i18n['label.descripcion']}:&#160;" />
-					<h:outputText value="#{pos.bemAviso.aviDescripcion}" />
+					<h:outputText value="#{pos.aviDescripcion}" />
 	
 					<h:outputText value="#{i18n['label.vacantes']}:&#160;" />
-					<h:outputText value="#{pos.bemAviso.aviVacantes}" />
+					<h:outputText value="#{pos.aviVacantes}" />
 	
 					<h:outputText value="#{i18n['label.aceptado']}:&#160;" />
 					<h:outputText value="#{pos.posAceptado==true?'Aceptado':'No Aceptado'}" />
