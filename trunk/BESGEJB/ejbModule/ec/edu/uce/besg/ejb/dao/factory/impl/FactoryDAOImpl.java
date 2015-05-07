@@ -6,6 +6,7 @@ import javax.persistence.PersistenceContext;
 
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.AvisoDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.AvisoPostulacionViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.AvisoViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CandidatoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CatalogoDAO;
@@ -15,9 +16,11 @@ import ec.edu.uce.besg.ejb.persistence.dao.ExperienciaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HabilidadDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HabilidadViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HistorialPasswordDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.PostulacionDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ReferenciaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.UsuarioDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.AvisoDAOImpl;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.AvisoPostulacionViewDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.AvisoViewDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.CandidatoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.CatalogoDAOImpl;
@@ -27,6 +30,7 @@ import ec.edu.uce.besg.ejb.persistence.dao.impl.ExperienciaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.HabilidadDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.HabilidadViewDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.HistorialPasswordDAOImpl;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.PostulacionDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.ReferenciaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.UsuarioDAOImpl;
 
@@ -50,6 +54,8 @@ public class FactoryDAOImpl implements FactoryDAO {
 	private HistorialPasswordDAO historialPasswordDAO;
 	private AvisoDAO avisoDAO;
 	private AvisoViewDAO avisoViewDAO;
+	private AvisoPostulacionViewDAO avisoPostulacionViewDAO;
+	private PostulacionDAO postulacionDAO;
 	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -147,6 +153,22 @@ public class FactoryDAOImpl implements FactoryDAO {
 			avisoViewDAO = new AvisoViewDAOImpl(entityManager);
 		}
 		return avisoViewDAO;
+	}
+
+	@Override
+	public PostulacionDAO getPostulacionDAOImpl() {
+		if (postulacionDAO == null) {
+			postulacionDAO = new PostulacionDAOImpl(entityManager);
+		}
+		return postulacionDAO;
+	}
+
+	@Override
+	public AvisoPostulacionViewDAO getAvisoPostulacionViewDAOImpl() {
+		if (avisoPostulacionViewDAO == null) {
+			avisoPostulacionViewDAO = new AvisoPostulacionViewDAOImpl(entityManager);
+		}
+		return avisoPostulacionViewDAO;
 	}
 
 }

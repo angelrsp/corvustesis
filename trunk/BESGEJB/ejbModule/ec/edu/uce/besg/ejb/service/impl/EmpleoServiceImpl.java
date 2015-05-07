@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
 import ec.edu.uce.besg.ejb.persistence.entity.AvisoDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.PostulacionDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.view.AvisoPostulacionViewDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.view.AvisoViewDTO;
 import ec.edu.uce.besg.ejb.service.EmpleoService;
 
@@ -47,7 +49,7 @@ public class EmpleoServiceImpl implements EmpleoService{
 	public List<AvisoViewDTO> readAviso(AvisoViewDTO avisoViewDTO) throws CorvustecException
 	{
 		try {
-				return factoryDAO.getAvisoViewDAOImpl().getByAnd(avisoViewDTO);
+			return factoryDAO.getAvisoViewDAOImpl().getByAnd(avisoViewDTO);
 		} catch (Exception e) {
 			logger.info("Error al registrar createOrUpdateAviso {}", e.toString());
 			throw new CorvustecException("Error al registrar createOrUpdateAviso "+e.toString());
@@ -73,5 +75,37 @@ public class EmpleoServiceImpl implements EmpleoService{
 			
 	}
 
+	@Override
+	public PostulacionDTO createOrUpdatePosulacion(PostulacionDTO postulacionDTO) throws CorvustecException
+	{
+		try {
+			if(postulacionDTO.getPosCodigo()!=null)
+				return factoryDAO.getPostulacionDAOImpl().update(postulacionDTO);
+			else
+				return factoryDAO.getPostulacionDAOImpl().create(postulacionDTO);
+		} catch (Exception e) {
+			logger.info("Error al registrar createOrUpdateAviso {}", e.toString());
+			throw new CorvustecException("Error al registrar createOrUpdateAviso "+e.toString());
+		}
+		finally{
+			postulacionDTO=null;
+		}
+			
+	}
 	
+	@Override
+	public List<AvisoPostulacionViewDTO> readAvisoPostulacion(AvisoPostulacionViewDTO avisoPostulacionViewDTO) throws CorvustecException
+	{
+		try {
+			return factoryDAO.getAvisoPostulacionViewDAOImpl().getByAnd(avisoPostulacionViewDTO);
+		} catch (Exception e) {
+			logger.info("Error al registrar createOrUpdateAviso {}", e.toString());
+			throw new CorvustecException("Error al registrar createOrUpdateAviso "+e.toString());
+		}
+		finally{
+			avisoPostulacionViewDTO=null;
+		}
+			
+	}
+
 }

@@ -6,6 +6,8 @@ import javax.ejb.Local;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.persistence.entity.AvisoDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.PostulacionDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.view.AvisoPostulacionViewDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.view.AvisoViewDTO;
 
 @Local
@@ -17,6 +19,13 @@ public interface EmpleoService {
 			throws CorvustecException;
 
 	AvisoDTO findAviso(Object object) throws CorvustecException;
+
+	PostulacionDTO createOrUpdatePosulacion(PostulacionDTO postulacionDTO)
+			throws CorvustecException;
+
+	List<AvisoPostulacionViewDTO> readAvisoPostulacion(
+			AvisoPostulacionViewDTO avisoPostulacionViewDTO)
+			throws CorvustecException;
 
 	
 }
