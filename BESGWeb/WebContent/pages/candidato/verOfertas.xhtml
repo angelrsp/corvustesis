@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	template="/WEB-INF/template/candidato.xhtml">
+
+
+	<ui:define name="contenido">
+			
+		<p:dataGrid id="dgOfertas" value="#{verOfertasController.verOfertasDataManager.avisoPostulacionViewList}" 
+			var="avi" columns="1" emptyMessage="#{i18n['table.vacio']}">
+			
+			<p:panel header="Empresa: #{avi.empNombreComercial}">
+			
+			<h:panelGrid columns="2">
+			
+				<h:outputText value="#{i18n['label.remuneracion']}:&#160;" />
+				<h:outputText value="#{avi.aviRemuneracion}" />
+				
+				<h:outputText value="#{i18n['label.puesto']}:&#160;" />
+				<h:outputText value="#{avi.aviPuesto}" />
+				
+				<h:outputText value="#{i18n['label.descripcion']}:&#160;" />
+				<h:outputText value="#{avi.aviDescripcion}" />
+	
+				<h:outputText value="#{i18n['label.vacantes']}:&#160;" />
+				<h:outputText value="#{avi.aviVacantes}" />
+	
+				<h:outputText value="#{i18n['label.fecha.caducidad']}:&#160;" />
+				<h:outputText value="#{fn:substring(avi.aviFechaCaducidad,0,10)}" />
+				
+				<p:commandButton disabled="#{avi.posCandidato!=null}"
+					value="#{i18n['boton.postularse']}" onclick="if(!confirm('Esta seguro(a) que desea postularse?')) return false;" 
+					actionListener="#{verOfertasController.onClickPustularse(avi)}" process="dgOfertas" update="dgOfertas"/>
+				
+			</h:panelGrid>	
+			
+			</p:panel>
+		</p:dataGrid>
+		
+	</ui:define>
+</ui:composition>
+
