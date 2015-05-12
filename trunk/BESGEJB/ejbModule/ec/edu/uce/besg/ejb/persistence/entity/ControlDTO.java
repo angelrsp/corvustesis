@@ -26,7 +26,7 @@ public class ControlDTO implements Serializable {
 
 	//bi-directional many-to-one association to RespuestaDTO
 	@OneToMany(mappedBy="cueControl")
-	private List<RespuestaDTO> cueRespuestas;
+	private List<PreguntaDTO> cuePreguntas;
 
 	public ControlDTO() {
 	}
@@ -47,26 +47,13 @@ public class ControlDTO implements Serializable {
 		this.conDescripcion = conDescripcion;
 	}
 
-	public List<RespuestaDTO> getCueRespuestas() {
-		return this.cueRespuestas;
+	public List<PreguntaDTO> getCuePreguntas() {
+		return cuePreguntas;
 	}
 
-	public void setCueRespuestas(List<RespuestaDTO> cueRespuestas) {
-		this.cueRespuestas = cueRespuestas;
+	public void setCuePreguntas(List<PreguntaDTO> cuePreguntas) {
+		this.cuePreguntas = cuePreguntas;
 	}
 
-	public RespuestaDTO addCueRespuesta(RespuestaDTO cueRespuesta) {
-		getCueRespuestas().add(cueRespuesta);
-		cueRespuesta.setCueControl(this);
-
-		return cueRespuesta;
-	}
-
-	public RespuestaDTO removeCueRespuesta(RespuestaDTO cueRespuesta) {
-		getCueRespuestas().remove(cueRespuesta);
-		cueRespuesta.setCueControl(null);
-
-		return cueRespuesta;
-	}
 
 }

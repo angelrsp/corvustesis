@@ -1,7 +1,9 @@
 package ec.edu.uce.besg.ejb.persistence.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -24,9 +26,19 @@ public class PreguntaDTO implements Serializable {
 	@Column(name="pre_descripcion")
 	private String preDescripcion;
 
-	@Column(name="pre_control")
-	private Integer preControl;
-	
+	@Column(name="pre_orden")
+	private Integer preOrden;
+
+	//bi-directional many-to-one association to ControlDTO
+	@ManyToOne
+	@JoinColumn(name="pre_control")
+	private ControlDTO cueControl;
+
+	//bi-directional many-to-one association to ControlDTO
+	@ManyToOne
+	@JoinColumn(name="pre_categoria")
+	private CategoriaDTO cueCategoria;
+
 	//bi-directional many-to-one association to RespuestaDTO
 	@OneToMany(mappedBy="cuePregunta")
 	private List<RespuestaDTO> cueRespuestas;
@@ -54,12 +66,28 @@ public class PreguntaDTO implements Serializable {
 		return this.cueRespuestas;
 	}
 
-	public Integer getPreControl() {
-		return preControl;
+	public ControlDTO getCueControl() {
+		return cueControl;
 	}
 
-	public void setPreControl(Integer preControl) {
-		this.preControl = preControl;
+	public void setCueControl(ControlDTO cueControl) {
+		this.cueControl = cueControl;
+	}
+
+	public CategoriaDTO getCueCategoria() {
+		return cueCategoria;
+	}
+
+	public Integer getPreOrden() {
+		return preOrden;
+	}
+
+	public void setPreOrden(Integer preOrden) {
+		this.preOrden = preOrden;
+	}
+
+	public void setCueCategoria(CategoriaDTO cueCategoria) {
+		this.cueCategoria = cueCategoria;
 	}
 
 	public void setCueRespuestas(List<RespuestaDTO> cueRespuestas) {

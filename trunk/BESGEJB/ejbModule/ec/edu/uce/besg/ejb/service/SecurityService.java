@@ -15,4 +15,7 @@ public interface SecurityService {
 
 	void changePassword(PasswordDTO passwordDTO) throws CorvustecException;
 
+	UsuarioDTO authenticateUser(UsuarioDTO usuarioDTO)
+			throws CorvustecException;
+
 }

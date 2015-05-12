@@ -11,9 +11,11 @@ import ec.edu.uce.besg.ejb.persistence.dao.AvisoViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CandidatoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CandidatoPostulacionViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CatalogoDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.CategoriaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ContactoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CuestionarioViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.EmpresaDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.EncuestaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ExperienciaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HabilidadDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HabilidadViewDAO;
@@ -29,9 +31,11 @@ import ec.edu.uce.besg.ejb.persistence.dao.impl.AvisoViewDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.CandidatoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.CandidatoPostulacionViewDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.CatalogoDAOImpl;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.CategoriaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.ContactoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.CuestionarioViewDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.EmpresaDAOImpl;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.EncuestaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.ExperienciaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.HabilidadDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.HabilidadViewDAOImpl;
@@ -69,6 +73,8 @@ public class FactoryDAOImpl implements FactoryDAO {
 	private CuestionarioViewDAO cuestionarioViewDAO;
 	private PreguntaDAO preguntaDAO;
 	private RespuestaDAO respuestaDAO;
+	private EncuestaDAO encuestaDAO;
+	private CategoriaDAO categoriaDAO;
 	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -210,13 +216,29 @@ public class FactoryDAOImpl implements FactoryDAO {
 		return preguntaDAO;
 	}
 
-	
 	@Override
 	public RespuestaDAO getRespuestaDAOImpl() {
 		if (respuestaDAO == null) {
 			respuestaDAO = new RespuestaDAOImpl(entityManager);
 		}
 		return respuestaDAO;
+	}
+
+	
+	@Override
+	public EncuestaDAO getEncuestaDAOImpl() {
+		if (encuestaDAO == null) {
+			encuestaDAO = new EncuestaDAOImpl(entityManager);
+		}
+		return encuestaDAO;
+	}
+
+	@Override
+	public CategoriaDAO getCategoriaDAOImpl() {
+		if (categoriaDAO == null) {
+			categoriaDAO = new CategoriaDAOImpl(entityManager);
+		}
+		return categoriaDAO;
 	}
 
 }

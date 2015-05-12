@@ -67,6 +67,27 @@ public class SecurityServiceImpl implements SecurityService {
 		}
 	}
 
+	
+	@Override
+	public UsuarioDTO authenticateUser(UsuarioDTO usuarioDTO) throws CorvustecException
+	{
+		List<UsuarioDTO> usuarioList;
+		try {
+			usuarioDTO.setUsuPassword(EncryptionUtility.getInstance().encriptar(usuarioDTO.getUsuPassword()));
+			usuarioList=factoryDAO.getUsuarioDAOImpl().getByAnd(usuarioDTO);
+			if(usuarioList.size()==1)
+				return usuarioList.get(0);
+			else
+				throw new CorvustecException("Los datos ingresados son incorrectos");
+		} catch (Exception e) {
+			throw new CorvustecException(e);
+		}
+		finally{
+			usuarioDTO=null;	
+		}
+	}
+
+	
 	@Override
 	public void changePassword(PasswordDTO passwordDTO) throws CorvustecException
 	{
