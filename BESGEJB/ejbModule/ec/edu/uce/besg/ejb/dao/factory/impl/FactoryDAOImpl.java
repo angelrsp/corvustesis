@@ -12,13 +12,16 @@ import ec.edu.uce.besg.ejb.persistence.dao.CandidatoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CandidatoPostulacionViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CatalogoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ContactoDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.CuestionarioViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.EmpresaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ExperienciaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HabilidadDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HabilidadViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HistorialPasswordDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.PostulacionDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.PreguntaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ReferenciaDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.RespuestaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.UsuarioDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.AvisoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.AvisoPostulacionViewDAOImpl;
@@ -27,13 +30,16 @@ import ec.edu.uce.besg.ejb.persistence.dao.impl.CandidatoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.CandidatoPostulacionViewDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.CatalogoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.ContactoDAOImpl;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.CuestionarioViewDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.EmpresaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.ExperienciaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.HabilidadDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.HabilidadViewDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.HistorialPasswordDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.PostulacionDAOImpl;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.PreguntaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.ReferenciaDAOImpl;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.RespuestaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.UsuarioDAOImpl;
 
 @Stateless
@@ -59,6 +65,10 @@ public class FactoryDAOImpl implements FactoryDAO {
 	private AvisoPostulacionViewDAO avisoPostulacionViewDAO;
 	private PostulacionDAO postulacionDAO;
 	private CandidatoPostulacionViewDAO candidatoPostulacionViewDAO;
+	
+	private CuestionarioViewDAO cuestionarioViewDAO;
+	private PreguntaDAO preguntaDAO;
+	private RespuestaDAO respuestaDAO;
 	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -180,6 +190,33 @@ public class FactoryDAOImpl implements FactoryDAO {
 			candidatoPostulacionViewDAO = new CandidatoPostulacionViewDAOImpl(entityManager);
 		}
 		return candidatoPostulacionViewDAO;
+	}
+
+	
+	@Override
+	public CuestionarioViewDAO getCuestionarioViewDAOImpl() {
+		if (cuestionarioViewDAO == null) {
+			cuestionarioViewDAO = new CuestionarioViewDAOImpl(entityManager);
+		}
+		return cuestionarioViewDAO;
+	}
+
+	
+	@Override
+	public PreguntaDAO getPreguntaDAOImpl() {
+		if (preguntaDAO == null) {
+			preguntaDAO = new PreguntaDAOImpl(entityManager);
+		}
+		return preguntaDAO;
+	}
+
+	
+	@Override
+	public RespuestaDAO getRespuestaDAOImpl() {
+		if (respuestaDAO == null) {
+			respuestaDAO = new RespuestaDAOImpl(entityManager);
+		}
+		return respuestaDAO;
 	}
 
 }

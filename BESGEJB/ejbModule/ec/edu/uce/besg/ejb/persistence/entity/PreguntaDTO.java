@@ -24,6 +24,9 @@ public class PreguntaDTO implements Serializable {
 	@Column(name="pre_descripcion")
 	private String preDescripcion;
 
+	@Column(name="pre_control")
+	private Integer preControl;
+	
 	//bi-directional many-to-one association to RespuestaDTO
 	@OneToMany(mappedBy="cuePregunta")
 	private List<RespuestaDTO> cueRespuestas;
@@ -49,6 +52,14 @@ public class PreguntaDTO implements Serializable {
 
 	public List<RespuestaDTO> getCueRespuestas() {
 		return this.cueRespuestas;
+	}
+
+	public Integer getPreControl() {
+		return preControl;
+	}
+
+	public void setPreControl(Integer preControl) {
+		this.preControl = preControl;
 	}
 
 	public void setCueRespuestas(List<RespuestaDTO> cueRespuestas) {

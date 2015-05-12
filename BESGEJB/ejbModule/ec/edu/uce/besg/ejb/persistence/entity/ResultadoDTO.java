@@ -1,6 +1,7 @@
 package ec.edu.uce.besg.ejb.persistence.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -20,6 +21,9 @@ public class ResultadoDTO implements Serializable {
 	@Column(name="rsu_codigo")
 	private Integer rsuCodigo;
 
+	@Column(name="res_valor")
+	private String resValor;
+	
 	//bi-directional many-to-one association to CandidatoDTO
 	@ManyToOne
 	@JoinColumn(name="rsu_candidato")
@@ -55,6 +59,14 @@ public class ResultadoDTO implements Serializable {
 
 	public void setCueRespuesta(RespuestaDTO cueRespuesta) {
 		this.cueRespuesta = cueRespuesta;
+	}
+
+	public String getResValor() {
+		return resValor;
+	}
+
+	public void setResValor(String resValor) {
+		this.resValor = resValor;
 	}
 
 }
