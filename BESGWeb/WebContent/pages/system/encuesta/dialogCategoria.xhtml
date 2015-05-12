@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<p:dialog widgetVar="dlgCategoria" width="900" minHeight="40" modal="true" appendTo="@(body)">
+	
+	<h:form id="frmCategoria">
+	
+		<p:panel id="pnlCategoria">
+			<table>
+				<tr>
+					<td><h:outputText value="Nombre:" /></td>
+					<td><h:inputTextarea style="width: 300px;" value="#{createEncuestaDataManager.categoriaDTO.catDescripcion}" /></td>
+				</tr>
+				
+				<tr>
+					<td><h:outputText value="Orden:" /></td>
+					<td><h:inputText value="#{createEncuestaDataManager.categoriaDTO.catOrden}" /></td>
+				</tr>
+				
+				<tr align="center">
+					<td colspan="4"><p:commandButton value="Guardar" actionListener="#{createEncuestaController.onClickSaveCategoria}" update="pnlCategoria"/> </td>
+				</tr>				
+			</table>
+		
+			<p:dataTable id="tblCategoria" value="#{createEncuestaDataManager.categoriaList}" var="cat">
+			
+				<p:column headerText="Nombre">
+			        <h:outputText value="#{cat.catDescripcion}" />
+			    </p:column>		
+
+				<p:column headerText="Nombre">
+			        <h:outputText value="#{cat.catOrden}" />
+			    </p:column>		
+
+			
+				<p:column width="35">
+			        <p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{createEncuestaController.onClickEditCategoria(cat)}" process="@this" update=":frmCategoria:pnlCategoria"/>
+			    </p:column>		
+
+				<p:column width="35">
+			        <p:commandButton title="Preguntas" icon="ui-icon-document" actionListener="#{createEncuestaController.onClickViewPreguntas(cat)}" update=":frmPreguntas:tblPreguntas"/>
+			    </p:column>		
+			
+			</p:dataTable>		
+		</p:panel>
+	
+	</h:form>
+	</p:dialog>
+	
+</ui:composition>

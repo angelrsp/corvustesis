@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/admin.xhtml">
+
+	<ui:define name="contenido">
+	
+	<h:form id="content">
+	
+		<p:panel id="pnlEncuesta">
+		
+			<table>
+				<tr>
+					<td><h:outputText value="Nombre:" /></td>
+					<td><h:inputText value="#{createEncuestaDataManager.encuestaDTO.encDescripcion}" /></td>
+					
+					<td><h:outputText value="Habilitado:" /></td>
+					<td><p:inputSwitch value="#{createEncuestaDataManager.encuestaDTO.encHabilitado}"/></td>
+				</tr>
+				<tr align="center">
+					<td colspan="4"><p:commandButton value="Guardar" actionListener="#{createEncuestaController.onClickSave}" update="pnlEncuesta"/> </td>
+				</tr>				
+			</table>
+		
+			<p:dataTable value="#{createEncuestaController.createEncuestaDataManager.encuestaList}" var="enc">
+			
+				<p:column headerText="Nombre">
+			        <h:outputText value="#{enc.encDescripcion}" />
+			    </p:column>		
+			
+				<p:column headerText="Habilitado">
+			        <h:outputText value="#{enc.encHabilitado?'Si':'No'}" />
+			    </p:column>		
+
+				<p:column width="35">
+			        <p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{createEncuestaController.onClickEdit(enc)}" update=":content:pnlEncuesta"/>
+			    </p:column>		
+
+				<p:column width="35">
+			        <p:commandButton title="Categorias" icon="ui-icon-document" actionListener="#{createEncuestaController.onClickViewCategoria(enc)}" update=":frmCategoria:tblCategoria"/>
+			    </p:column>		
+			
+			</p:dataTable>
+		
+		
+		</p:panel>
+	
+	
+	</h:form>
+	
+	<ui:include src="/pages/system/encuesta/dialogCategoria.xhtml" />
+	<ui:include src="/pages/system/encuesta/dialogPreguntas.xhtml" />
+	<ui:include src="/pages/system/encuesta/dialogRespuesta.xhtml" />
+	
+	</ui:define>
+
+</ui:composition>

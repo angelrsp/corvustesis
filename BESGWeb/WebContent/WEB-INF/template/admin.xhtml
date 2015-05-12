@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<ui:include src="/WEB-INF/template/head.xhtml" />
+</h:head>
+<body>
+
+<div>
+	
+			
+		<p:growl id="pnlMessages" autoUpdate="true" closable="true"/>
+			
+		<div align="center" style="position: fixed; top: 0; background-color: #FFFFFF; margin-top: -8px;margin-left: -8px;margin-right: -8px; width: 100%;box-shadow: 0 0 1px #2E2D32;overflow:visible !important;z-index:40 !important;">
+		
+		<div style="height: 7px;"></div>
+		
+		<h:form id="contenido">
+			<div style="width: 1020px;">
+				<table width="99%">
+					<tr>
+						<td><h:graphicImage value="/resources/img/uce_logo.jpg"
+								height="40" /></td>
+						<td align="right">
+							<p:menubar id="menuPublico" style="width:30%">
+								<p:submenu label="Sistema">
+									<p:menuitem value="Encuesta" url="/pages/system/encuesta/createEncuesta.xhtml" />
+								</p:submenu>								
+								<p:menuitem value="Salir" url="#" />
+							</p:menubar>																
+						</td>
+					</tr>
+				</table>
+			</div>
+		</h:form>	
+			
+		</div>
+
+		<div style="height: 50px;"></div>
+
+		<div id="content" align="center">
+
+			<div style="width: 1020px; box-shadow: 0 0 1px #2E2D32;">
+
+				<ui:insert name="contenido" />
+
+			</div>
+		</div>
+		
+	
+			
+</div>
+
+<p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>  
+              
+<p:dialog modal="true" widgetVar="statusDialog" header="Cargando..."   
+        draggable="false" closable="false">  
+    <p:graphicImage value="/resources/img/ajaxloadingbar.gif" />  
+</p:dialog>
+
+</body>
+</html>

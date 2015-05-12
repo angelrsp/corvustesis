@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<p:dialog widgetVar="dlgRespuesta" width="900" minHeight="40" modal="true" appendTo="@(body)">
+	
+	<h:form id="frmRespuesta">
+	
+		<p:panel id="pnlRespuesta">
+			<table>
+				<tr>
+					<td><h:outputText value="Nombre:" /></td>
+					<td><h:inputTextarea style="width: 300px;" value="#{createEncuestaDataManager.categoriaDTO.catDescripcion}" /></td>
+				</tr>
+				<tr align="center">
+					<td colspan="4"><p:commandButton value="Guardar" actionListener="#{createEncuestaController.onClickSaveRespuesta}" update="pnlRespuesta"/> </td>
+				</tr>				
+			</table>
+		
+			<p:dataTable id="tblRespuesta" value="#{createEncuestaDataManager.respuestaList}" var="res">
+			
+				<p:column headerText="Nombre">
+			        <h:outputText value="#{res.resDescripcion}" />
+			    </p:column>		
+			
+				<p:column width="35">
+			        <p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{createEncuestaController.onClickEditRespuesta(enc)}" process="@this"/>
+			    </p:column>		
+			
+			</p:dataTable>		
+		</p:panel>
+	
+	</h:form>
+	</p:dialog>
+	
+</ui:composition>
