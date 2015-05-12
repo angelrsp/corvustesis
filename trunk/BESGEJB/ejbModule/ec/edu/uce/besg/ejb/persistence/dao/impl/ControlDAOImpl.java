@@ -16,41 +16,44 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
-import ec.edu.uce.besg.ejb.persistence.dao.CategoriaDAO;
-import ec.edu.uce.besg.ejb.persistence.entity.CategoriaDTO;
+import ec.edu.uce.besg.ejb.persistence.dao.ControlDAO;
+import ec.edu.uce.besg.ejb.persistence.entity.ControlDTO;
 
-public class CategoriaDAOImpl extends AbstractFacadeImpl<CategoriaDTO> implements CategoriaDAO {
+public class ControlDAOImpl extends AbstractFacadeImpl<ControlDTO> implements ControlDAO{
 
 	private static final Logger slf4jLogger = LoggerFactory.getLogger(CategoriaDAOImpl.class);
 	
-	public CategoriaDAOImpl() {
+	
+	
+	public ControlDAOImpl() {
 		super();
 	}
 
-	public CategoriaDAOImpl(EntityManager entityManager) {
+	public ControlDAOImpl(EntityManager entityManager) {
 		super(entityManager);
 	}
 
-	
-	
+
+
+
 	@Override
-	public List<CategoriaDTO> getByAnd(CategoriaDTO objetoDTO) throws CorvustecException
+	public List<ControlDTO> getByAnd(ControlDTO objetoDTO) throws CorvustecException
 	{
 		CriteriaBuilder cb;
-		CriteriaQuery<CategoriaDTO> cq;
-		Root<CategoriaDTO> from;
-		List<CategoriaDTO> list;
+		CriteriaQuery<ControlDTO> cq;
+		Root<ControlDTO> from;
+		List<ControlDTO> list;
 		Predicate predicate;
 		List<Predicate> predicateList = null;
 		String fieldName;
 		Method getter;
 		Object value;
 		Field[] fields;
-		TypedQuery<CategoriaDTO> typedQuery;
+		TypedQuery<ControlDTO> typedQuery;
 		try{
 			cb=entityManager.getCriteriaBuilder();
-			cq=cb.createQuery(CategoriaDTO.class);
-			from= cq.from(CategoriaDTO.class);
+			cq=cb.createQuery(ControlDTO.class);
+			from= cq.from(ControlDTO.class);
 			predicateList=new ArrayList<Predicate>();
 			fields = objetoDTO.getClass().getDeclaredFields();
 	        for(Field f : fields){
@@ -70,8 +73,6 @@ public class CategoriaDAOImpl extends AbstractFacadeImpl<CategoriaDTO> implement
 	
 	        if(!predicateList.isEmpty())
 	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));
-	        
-	        cq.orderBy(cb.asc(from.get("catOrden")));
 	        
 			typedQuery=entityManager.createQuery(cq);
 			list=typedQuery.getResultList();

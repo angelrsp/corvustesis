@@ -61,14 +61,17 @@ public class PreguntaDAOImpl extends AbstractFacadeImpl<PreguntaDTO> implements 
 				    value = getter.invoke(objetoDTO, new Object[0]);
 				    if(value!=null && value!="")
 				    {
-				    		predicate=cb.equal(from.get(fieldName), value);
-				    		predicateList.add(predicate);
+			    		predicate=cb.equal(from.get(fieldName), value);
+			    		predicateList.add(predicate);
 				    }
 				}
 	        }
 	
 	        if(!predicateList.isEmpty())
-	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
+	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));
+	        
+	        cq.orderBy(cb.asc(from.get("preOrden")));
+	        
 			typedQuery=entityManager.createQuery(cq);
 			list=typedQuery.getResultList();
 			return list;
