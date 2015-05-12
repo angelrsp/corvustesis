@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Local;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
+import ec.edu.uce.besg.ejb.persistence.entity.CategoriaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.EncuestaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.PreguntaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.RespuestaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.view.CuestionarioViewDTO;
@@ -19,6 +21,24 @@ public interface CuestionarioService {
 			throws CorvustecException;
 
 	List<RespuestaDTO> readRespuesta(RespuestaDTO respuestaDTO)
+			throws CorvustecException;
+
+	EncuestaDTO createOrUpdateEncuesta(EncuestaDTO encuestaDTO)
+			throws CorvustecException;
+
+	List<EncuestaDTO> readEncuesta(EncuestaDTO encuestaDTO)
+			throws CorvustecException;
+
+	List<CategoriaDTO> readCategoria(CategoriaDTO categoriaDTO)
+			throws CorvustecException;
+
+	CategoriaDTO createOrUpdateCategoria(CategoriaDTO categoriaDTO)
+			throws CorvustecException;
+
+	PreguntaDTO createOrUpdatePregunta(PreguntaDTO preguntaDTO)
+			throws CorvustecException;
+
+	RespuestaDTO createOrUpdateRespuesta(RespuestaDTO respuestaDTO)
 			throws CorvustecException;
 
 }

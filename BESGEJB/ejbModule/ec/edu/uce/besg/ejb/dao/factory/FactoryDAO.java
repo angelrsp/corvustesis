@@ -8,9 +8,11 @@ import ec.edu.uce.besg.ejb.persistence.dao.AvisoViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CandidatoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CandidatoPostulacionViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CatalogoDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.CategoriaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ContactoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CuestionarioViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.EmpresaDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.EncuestaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ExperienciaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HabilidadDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HabilidadViewDAO;
@@ -59,4 +61,8 @@ public interface FactoryDAO {
 	PreguntaDAO getPreguntaDAOImpl();
 
 	RespuestaDAO getRespuestaDAOImpl();
+
+	EncuestaDAO getEncuestaDAOImpl();
+
+	CategoriaDAO getCategoriaDAOImpl();
 }

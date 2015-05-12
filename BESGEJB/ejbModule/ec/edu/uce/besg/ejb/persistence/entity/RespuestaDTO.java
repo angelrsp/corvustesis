@@ -24,10 +24,6 @@ public class RespuestaDTO implements Serializable {
 	@Column(name="res_descripcion")
 	private String resDescripcion;
 
-	//bi-directional many-to-one association to ControlDTO
-	@ManyToOne
-	@JoinColumn(name="res_control")
-	private ControlDTO cueControl;
 
 	//bi-directional many-to-one association to PreguntaDTO
 	@ManyToOne
@@ -55,14 +51,6 @@ public class RespuestaDTO implements Serializable {
 
 	public void setResDescripcion(String resDescripcion) {
 		this.resDescripcion = resDescripcion;
-	}
-
-	public ControlDTO getCueControl() {
-		return this.cueControl;
-	}
-
-	public void setCueControl(ControlDTO cueControl) {
-		this.cueControl = cueControl;
 	}
 
 	public PreguntaDTO getCuePregunta() {

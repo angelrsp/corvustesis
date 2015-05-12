@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
+import ec.edu.uce.besg.ejb.persistence.entity.CategoriaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.EncuestaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.PreguntaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.RespuestaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.view.CuestionarioViewDTO;
@@ -38,6 +40,23 @@ public class CuestionarioServiceImpl implements CuestionarioService{
 	}
 	
 	@Override
+	public PreguntaDTO createOrUpdatePregunta(PreguntaDTO preguntaDTO) throws CorvustecException
+	{
+		try {
+			if(preguntaDTO.getPreCodigo()!=null)
+				return factoryDAO.getPreguntaDAOImpl().update(preguntaDTO);
+			else
+				return factoryDAO.getPreguntaDAOImpl().create(preguntaDTO);
+		} catch (Exception e) {
+			logger.info("Error al registrar Candidato {}", e.toString());
+			throw new CorvustecException("Error al registrar Candidato");
+		}
+		finally{
+			
+		}
+	}
+	
+	@Override
 	public List<PreguntaDTO> readPregunta(PreguntaDTO preguntaDTO) throws CorvustecException
 	{
 		try {
@@ -51,6 +70,22 @@ public class CuestionarioServiceImpl implements CuestionarioService{
 		}		
 	}
 	
+	@Override
+	public RespuestaDTO createOrUpdateRespuesta(RespuestaDTO respuestaDTO) throws CorvustecException
+	{
+		try {
+			if(respuestaDTO.getResCodigo()!=null)
+				return factoryDAO.getRespuestaDAOImpl().update(respuestaDTO);
+			else
+				return factoryDAO.getRespuestaDAOImpl().create(respuestaDTO);
+		} catch (Exception e) {
+			logger.info("Error al registrar Candidato {}", e.toString());
+			throw new CorvustecException("Error al registrar Candidato");
+		}
+		finally{
+			
+		}
+	}
 	
 	@Override
 	public List<RespuestaDTO> readRespuesta(RespuestaDTO respuestaDTO) throws CorvustecException
@@ -65,4 +100,68 @@ public class CuestionarioServiceImpl implements CuestionarioService{
 			
 		}		
 	}
+	
+	
+	@Override
+	public EncuestaDTO createOrUpdateEncuesta(EncuestaDTO encuestaDTO) throws CorvustecException
+	{
+		try {
+			if(encuestaDTO.getEncCodigo()!=null)
+				return factoryDAO.getEncuestaDAOImpl().update(encuestaDTO);
+			else
+				return factoryDAO.getEncuestaDAOImpl().create(encuestaDTO);
+		} catch (Exception e) {
+			logger.info("Error al registrar Candidato {}", e.toString());
+			throw new CorvustecException("Error al registrar Candidato");
+		}
+		finally{
+			
+		}
+	}
+	
+	@Override
+	public List<EncuestaDTO> readEncuesta(EncuestaDTO encuestaDTO) throws CorvustecException
+	{
+		try {
+			return factoryDAO.getEncuestaDAOImpl().getByAnd(encuestaDTO);
+		} catch (Exception e) {
+			logger.info("Error al readCuestionario {}", e.toString());
+			throw new CorvustecException("Error al registrar readCuestionario "+e.toString());
+		}
+		finally{
+			
+		}		
+	}
+
+	@Override
+	public CategoriaDTO createOrUpdateCategoria(CategoriaDTO categoriaDTO) throws CorvustecException
+	{
+		try {
+			if(categoriaDTO.getCatCodigo()!=null)
+				return factoryDAO.getCategoriaDAOImpl().update(categoriaDTO);
+			else
+				return factoryDAO.getCategoriaDAOImpl().create(categoriaDTO);
+		} catch (Exception e) {
+			logger.info("Error al registrar Candidato {}", e.toString());
+			throw new CorvustecException("Error al registrar Candidato");
+		}
+		finally{
+			
+		}
+	}
+	
+	@Override
+	public List<CategoriaDTO> readCategoria(CategoriaDTO categoriaDTO) throws CorvustecException
+	{
+		try {
+			return factoryDAO.getCategoriaDAOImpl().getByAnd(categoriaDTO);
+		} catch (Exception e) {
+			logger.info("Error al readCuestionario {}", e.toString());
+			throw new CorvustecException("Error al registrar readCuestionario "+e.toString());
+		}
+		finally{
+			
+		}		
+	}
+	
 }
