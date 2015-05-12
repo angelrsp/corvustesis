@@ -37,6 +37,7 @@
 		<class>ec.edu.uce.besg.ejb.persistence.entity.view.AvisoViewDTO</class>
 		<class>ec.edu.uce.besg.ejb.persistence.entity.view.AvisoPostulacionViewDTO</class>
 		<class>ec.edu.uce.besg.ejb.persistence.entity.view.CandidatoPostulacionViewDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.view.CuestionarioViewDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>

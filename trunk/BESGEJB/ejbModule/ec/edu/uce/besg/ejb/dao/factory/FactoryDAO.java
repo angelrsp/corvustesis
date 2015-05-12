@@ -9,13 +9,16 @@ import ec.edu.uce.besg.ejb.persistence.dao.CandidatoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CandidatoPostulacionViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CatalogoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ContactoDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.CuestionarioViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.EmpresaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ExperienciaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HabilidadDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HabilidadViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.HistorialPasswordDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.PostulacionDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.PreguntaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ReferenciaDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.RespuestaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.UsuarioDAO;
 
 @Local
@@ -50,4 +53,10 @@ public interface FactoryDAO {
 	AvisoPostulacionViewDAO getAvisoPostulacionViewDAOImpl();
 
 	CandidatoPostulacionViewDAO getCandidatoPostulacionViewDAOImpl();
+
+	CuestionarioViewDAO getCuestionarioViewDAOImpl();
+
+	PreguntaDAO getPreguntaDAOImpl();
+
+	RespuestaDAO getRespuestaDAOImpl();
 }
