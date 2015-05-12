@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.dao.factory.FactoryDAO;
 import ec.edu.uce.besg.ejb.persistence.entity.CategoriaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.ControlDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.EncuestaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.PreguntaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.RespuestaDTO;
@@ -155,6 +156,20 @@ public class CuestionarioServiceImpl implements CuestionarioService{
 	{
 		try {
 			return factoryDAO.getCategoriaDAOImpl().getByAnd(categoriaDTO);
+		} catch (Exception e) {
+			logger.info("Error al readCuestionario {}", e.toString());
+			throw new CorvustecException("Error al registrar readCuestionario "+e.toString());
+		}
+		finally{
+			
+		}		
+	}
+	
+	@Override
+	public List<ControlDTO> readControl(ControlDTO controlDTO) throws CorvustecException
+	{
+		try {
+			return factoryDAO.getControlDAOImpl().getByAnd(controlDTO);
 		} catch (Exception e) {
 			logger.info("Error al readCuestionario {}", e.toString());
 			throw new CorvustecException("Error al registrar readCuestionario "+e.toString());

@@ -13,6 +13,7 @@ import ec.edu.uce.besg.ejb.persistence.dao.CandidatoPostulacionViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CatalogoDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CategoriaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ContactoDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.ControlDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.CuestionarioViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.EmpresaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.EncuestaDAO;
@@ -33,6 +34,7 @@ import ec.edu.uce.besg.ejb.persistence.dao.impl.CandidatoPostulacionViewDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.CatalogoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.CategoriaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.ContactoDAOImpl;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.ControlDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.CuestionarioViewDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.EmpresaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.EncuestaDAOImpl;
@@ -75,6 +77,7 @@ public class FactoryDAOImpl implements FactoryDAO {
 	private RespuestaDAO respuestaDAO;
 	private EncuestaDAO encuestaDAO;
 	private CategoriaDAO categoriaDAO;
+	private ControlDAO controlDAO;
 	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -239,6 +242,15 @@ public class FactoryDAOImpl implements FactoryDAO {
 			categoriaDAO = new CategoriaDAOImpl(entityManager);
 		}
 		return categoriaDAO;
+	}
+
+	
+	@Override
+	public ControlDAO getControlDAOImpl() {
+		if (controlDAO == null) {
+			controlDAO = new ControlDAOImpl(entityManager);
+		}
+		return controlDAO;
 	}
 
 }
