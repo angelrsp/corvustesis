@@ -87,7 +87,7 @@ public class EncuestaController implements Serializable{
 					txtArea = new HtmlInputTextarea();
 					
 					
-					if(preguntaDTO.getPreControl().equals(2))
+					if(preguntaDTO.getCueControl().getConCodigo().equals(2))
 					{
 						label.setValue(preguntaDTO.getPreDescripcion());
 						
@@ -108,7 +108,7 @@ public class EncuestaController implements Serializable{
 						    htmlPanelGrid.getChildren().add(txtArea);
 						}
 					}
-					else if(preguntaDTO.getPreControl().equals(4))
+					else if(preguntaDTO.getCueControl().getConCodigo().equals(4))
 					{
 						label.setValue(preguntaDTO.getPreDescripcion());
 						
@@ -141,6 +141,7 @@ public class EncuestaController implements Serializable{
 					}
 				    
 				    numero=numero+1;
+				    
 				}
 			} catch (Exception e) {
 				JsfUtil.addErrorMessage(e.toString());

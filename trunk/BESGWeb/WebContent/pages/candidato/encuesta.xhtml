@@ -10,14 +10,34 @@
 	<ui:define name="contenido">
 
 		<h:form id="contenido">
+
+			<p:panel>
+
+				<table>
+					<tr align="center">
+						<td><h:graphicImage value="/resources/img/uce_logo.jpg" width="120" height="110" /></td>
+					</tr>
+
+					<tr align="center">
+						<td>La Universidad Central del Ecuador esta actualizando la Base de datos de los Egresados y Graduados que proporcione información y permita readecuar los perfiles profesionales para mejorar la formación académica</td>
+					</tr>
+
+					<tr align="center">
+						<td style="font-weight: bold;">Toda la información que usted proporcione, es confidencial y será utilizada solo con fines de mejoramiento institucional. Se agradece contestarlo con veracidad</td>
+					</tr>
+					
+				</table>
+
+
+				<h:panelGrid binding="#{encuestaController.htmlPanelGrid}"></h:panelGrid>
+
+				<p:spacer height="30"/>
+				
+				<p:commandButton value="Guardar" actionListener="#{encuestaController.onClickSave}"/>			
 			
-			<div align="center">
-<!-- 				 <f:event type="postAddToView" listener="#{encuestaController.populateForm}" /> -->
-			</div>
+			</p:panel>	
 			
-			<h:panelGrid binding="#{encuestaController.htmlPanelGrid}"></h:panelGrid>
 			
-			<p:commandButton value="Guardar" actionListener="#{encuestaController.onClickSave}"/>
 			
 		</h:form>
 			
