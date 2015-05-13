@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
-	<p:dialog widgetVar="dlgRespuesta" width="900" minHeight="40" modal="true" appendTo="@(body)">
+	<p:dialog widgetVar="dlgRespuesta" width="900" minHeight="40" modal="true" appendTo="@(body)" header="Respuestas">
 	
 	<h:form id="frmRespuesta">
 	
@@ -13,7 +13,7 @@
 			<table>
 				<tr>
 					<td><h:outputText value="Nombre:" /></td>
-					<td><h:inputTextarea style="width: 300px;" value="#{createEncuestaDataManager.categoriaDTO.catDescripcion}" /></td>
+					<td><h:inputTextarea style="width: 300px;" value="#{createEncuestaDataManager.respuestaDTO.resDescripcion}" /></td>
 				</tr>
 				<tr align="center">
 					<td colspan="4"><p:commandButton value="Guardar" actionListener="#{createEncuestaController.onClickSaveRespuesta}" update="pnlRespuesta"/> </td>
