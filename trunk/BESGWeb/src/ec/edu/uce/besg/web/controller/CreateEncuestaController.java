@@ -12,6 +12,7 @@ import org.primefaces.context.RequestContext;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.persistence.entity.CategoriaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.ControlDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.EncuestaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.PreguntaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.RespuestaDTO;
@@ -53,6 +54,7 @@ public class CreateEncuestaController implements Serializable {
 	private void init()
 	{
 		readEncuesta();
+		readControl();
 	}
 	
 	private void readEncuesta()
@@ -100,6 +102,14 @@ public class CreateEncuestaController implements Serializable {
 		}
 	}
 
+	private void readControl()
+	{
+		try {
+			createEncuestaDataManager.setControlList(cuestionarioService.readControl(new ControlDTO()));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
 	
 	public void onClickSave()
 	{
@@ -154,8 +164,13 @@ public class CreateEncuestaController implements Serializable {
 	
 	public void onClickSavePregunta()
 	{
+		ControlDTO controlDTO;
 		try {
+			controlDTO=new ControlDTO();
+			controlDTO.setConCodigo(createEncuestaDataManager.getControlCode());
+			createEncuestaDataManager.getPreguntaDTO().setCueControl(controlDTO);
 			createEncuestaDataManager.getCategoriaDTO().setCueEncuesta(createEncuestaDataManager.getEncuestaDTO());
+			createEncuestaDataManager.getPreguntaDTO().setCueCategoria(createEncuestaDataManager.getCategoriaDTO());
 			cuestionarioService.createOrUpdatePregunta(createEncuestaDataManager.getPreguntaDTO());
 			readPregunta();
 			createEncuestaDataManager.setPreguntaDTO(new PreguntaDTO());

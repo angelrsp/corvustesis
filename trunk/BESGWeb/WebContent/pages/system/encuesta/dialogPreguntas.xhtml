@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
-	<p:dialog widgetVar="dlgPreguntas" width="900" minHeight="40" modal="true" appendTo="@(body)">
+	<p:dialog widgetVar="dlgPreguntas" width="900" minHeight="40" modal="true" appendTo="@(body)" header="Preguntas">
 	
 	<h:form id="frmPreguntas">
 	
@@ -13,16 +13,26 @@
 			<table>
 				<tr>
 					<td><h:outputText value="Nombre:" /></td>
-					<td><h:inputTextarea style="width: 300px;" value="#{createEncuestaDataManager.categoriaDTO.catDescripcion}" /></td>
+					<td><h:inputTextarea style="width: 300px;" value="#{createEncuestaDataManager.preguntaDTO.preDescripcion}" /></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="Orden:" /></td>
+					<td><h:inputText value="#{createEncuestaDataManager.preguntaDTO.preOrden}" /></td>
 				</tr>
 				
 				<tr>
 					<td><h:outputText value="Control:" /></td>
-					<td><h:inputTextarea style="width: 300px;" value="#{createEncuestaDataManager.categoriaDTO.catDescripcion}" /></td>
+					<td>
+						<p:selectOneMenu value="#{createEncuestaDataManager.controlCode}">
+							<f:selectItem itemLabel="--Seleccione--"/>
+							<f:selectItems value="#{createEncuestaDataManager.controlList}" var="con" itemValue="#{con.conCodigo}" itemLabel="#{con.conDescripcion}"/>
+						</p:selectOneMenu>
+					</td>
 				</tr>
 				
 				<tr align="center">
-					<td colspan="4"><p:commandButton value="Guardar" actionListener="#{createEncuestaController.onClickSaveCategoria}" update="pnlPreguntas"/> </td>
+					<td colspan="4"><p:commandButton value="Guardar" actionListener="#{createEncuestaController.onClickSavePregunta}" update="pnlPreguntas"/> </td>
 				</tr>				
 			</table>
 		
@@ -31,6 +41,16 @@
 				<p:column headerText="Nombre">
 			        <h:outputText value="#{pre.preDescripcion}" />
 			    </p:column>		
+
+				<p:column headerText="Orden">
+			        <h:outputText value="#{pre.preOrden}" />
+			    </p:column>		
+
+				<p:column headerText="Control">
+			        <h:outputText value="#{pre.cueControl.conDescripcion}" />
+			    </p:column>		
+
+
 			
 				<p:column width="35">
 			        <p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{createEncuestaController.onClickEditPregunta(pre)}" process="@this" update=":frmPreguntas:pnlPreguntas"/>

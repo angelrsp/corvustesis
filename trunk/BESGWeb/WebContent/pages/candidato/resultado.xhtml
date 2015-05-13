@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	template="/WEB-INF/template/candidato.xhtml">
+
+
+	<ui:define name="contenido">
+
+	<p:panel id="pnlContenido">
+		<table>
+			<tr>
+				<td><h:outputText value="Encuesta:" /></td>
+				<td><p:selectOneMenu>
+					<f:selectItem itemLabel="--Seleccione--"/>
+					<f:selectItems value="#{resultadoController.resultadoDataManager.encuestaList}" var="res" itemLabel="#{res.encDescripcion}" itemValue="#{res.encCodigo}"/>
+					</p:selectOneMenu></td>
+			</tr>
+
+			<tr>
+				<td colspan="2"><p:commandButton value="Buscar" update="pnlContenido" actionListener="#{resultadoController.readResultado}"/></td>
+			</tr>
+
+			
+		</table>
+	
+		<p:dataTable value="#{resultadoDataManager.resultadoViewList}" var="res">
+
+			<p:column headerText="Categoria">
+				<h:outputText value="#{res.catDescripcion}" />
+			</p:column>
+		
+			<p:column headerText="Pregunta">
+				<h:outputText value="#{res.preDescripcion}" />
+			</p:column>
+
+			<p:column headerText="Resultado">
+				<h:outputText value="#{res.rsuValorInt!=null?res.resDescripcion:res.rsuValorString}" />
+			</p:column>
+
+		
+		</p:dataTable>
+	
+	</p:panel>		
+		
+	</ui:define>
+</ui:composition>
+

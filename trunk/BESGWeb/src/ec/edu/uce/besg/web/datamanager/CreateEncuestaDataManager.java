@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import ec.edu.uce.besg.ejb.persistence.entity.CategoriaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.ControlDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.EncuestaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.PreguntaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.RespuestaDTO;
@@ -33,6 +34,9 @@ public class CreateEncuestaDataManager implements Serializable {
 	private RespuestaDTO respuestaDTO;
 	private List<RespuestaDTO> respuestaList;
 
+	private List<ControlDTO> controlList;
+	
+	private Integer controlCode;
 	
 	public CreateEncuestaDataManager() {
 		encuestaDTO=new EncuestaDTO();
@@ -46,6 +50,8 @@ public class CreateEncuestaDataManager implements Serializable {
 		
 		respuestaDTO=new RespuestaDTO();
 		respuestaList=new ArrayList<RespuestaDTO>();
+		
+		controlList=new ArrayList<ControlDTO>();
 	}
 
 
@@ -126,6 +132,26 @@ public class CreateEncuestaDataManager implements Serializable {
 
 	public void setRespuestaList(List<RespuestaDTO> respuestaList) {
 		this.respuestaList = respuestaList;
+	}
+
+
+	public List<ControlDTO> getControlList() {
+		return controlList;
+	}
+
+
+	public void setControlList(List<ControlDTO> controlList) {
+		this.controlList = controlList;
+	}
+
+
+	public Integer getControlCode() {
+		return controlCode;
+	}
+
+
+	public void setControlCode(Integer controlCode) {
+		this.controlCode = controlCode;
 	}
 	
 	
