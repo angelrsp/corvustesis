@@ -25,6 +25,8 @@ import ec.edu.uce.besg.ejb.persistence.dao.PostulacionDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.PreguntaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ReferenciaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.RespuestaDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.ResultadoDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.ResultadoViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.UsuarioDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.AvisoDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.AvisoPostulacionViewDAOImpl;
@@ -46,6 +48,8 @@ import ec.edu.uce.besg.ejb.persistence.dao.impl.PostulacionDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.PreguntaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.ReferenciaDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.RespuestaDAOImpl;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.ResultadoDAOImpl;
+import ec.edu.uce.besg.ejb.persistence.dao.impl.ResultadoViewDAOImpl;
 import ec.edu.uce.besg.ejb.persistence.dao.impl.UsuarioDAOImpl;
 
 @Stateless
@@ -74,10 +78,12 @@ public class FactoryDAOImpl implements FactoryDAO {
 	
 	private CuestionarioViewDAO cuestionarioViewDAO;
 	private PreguntaDAO preguntaDAO;
-	private RespuestaDAO respuestaDAO;
 	private EncuestaDAO encuestaDAO;
 	private CategoriaDAO categoriaDAO;
 	private ControlDAO controlDAO;
+	private RespuestaDAO respuestaDAO;
+	private ResultadoDAO resultadoDAO;
+	private ResultadoViewDAO resultadoViewDAO;
 	
 	@Override
 	public UsuarioDAO getUsuarioDAOImpl() {
@@ -252,5 +258,24 @@ public class FactoryDAOImpl implements FactoryDAO {
 		}
 		return controlDAO;
 	}
+
+	
+	@Override
+	public ResultadoDAO getResultadoDAOImpl() {
+		if (resultadoDAO == null) {
+			resultadoDAO = new ResultadoDAOImpl(entityManager);
+		}
+		return resultadoDAO;
+	}
+
+	
+	@Override
+	public ResultadoViewDAO getResultadoViewDAOImpl() {
+		if (resultadoViewDAO == null) {
+			resultadoViewDAO = new ResultadoViewDAOImpl(entityManager);
+		}
+		return resultadoViewDAO;
+	}
+
 
 }

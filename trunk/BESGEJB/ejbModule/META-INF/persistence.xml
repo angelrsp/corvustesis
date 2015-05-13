@@ -40,6 +40,7 @@
 		<class>ec.edu.uce.besg.ejb.persistence.entity.view.CuestionarioViewDTO</class>
 		<class>ec.edu.uce.besg.ejb.persistence.entity.CategoriaDTO</class>
 		<class>ec.edu.uce.besg.ejb.persistence.entity.EncuestaDTO</class>
+		<class>ec.edu.uce.besg.ejb.persistence.entity.view.ResultadoViewDTO</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>

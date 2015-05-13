@@ -10,7 +10,9 @@ import ec.edu.uce.besg.ejb.persistence.entity.ControlDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.EncuestaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.PreguntaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.RespuestaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.ResultadoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.view.CuestionarioViewDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.view.ResultadoViewDTO;
 
 @Local
 public interface CuestionarioService {
@@ -43,6 +45,12 @@ public interface CuestionarioService {
 			throws CorvustecException;
 
 	List<ControlDTO> readControl(ControlDTO controlDTO)
+			throws CorvustecException;
+
+	void createOrUpdateResultado(List<ResultadoDTO> resultadoList)
+			throws CorvustecException;
+
+	List<ResultadoViewDTO> readResultadoView(ResultadoViewDTO resultadoViewDTO)
 			throws CorvustecException;
 
 }

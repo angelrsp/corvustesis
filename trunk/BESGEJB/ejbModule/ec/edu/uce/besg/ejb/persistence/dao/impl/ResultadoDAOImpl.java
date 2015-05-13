@@ -15,48 +15,50 @@ import javax.persistence.criteria.Root;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ec.edu.uce.besg.ejb.persistence.dao.ReferenciaDAO;
-import ec.edu.uce.besg.ejb.persistence.entity.ReferenciaDTO;
+import ec.edu.uce.besg.ejb.persistence.dao.ResultadoDAO;
+import ec.edu.uce.besg.ejb.persistence.entity.ResultadoDTO;
 
-public class ReferenciaDAOImpl extends AbstractFacadeImpl<ReferenciaDTO> implements ReferenciaDAO{
+public class ResultadoDAOImpl extends AbstractFacadeImpl<ResultadoDTO> implements ResultadoDAO {
 
 	
-	private static final Logger logger = LoggerFactory.getLogger(ReferenciaDAOImpl.class);
+	private static final Logger slf4jLogger = LoggerFactory.getLogger(ResultadoDAOImpl.class);
 	
-	public ReferenciaDAOImpl() {
+	public ResultadoDAOImpl() {
 		super();
 	}
 
-	public ReferenciaDAOImpl(EntityManager entityManager) {
+	public ResultadoDAOImpl(EntityManager entityManager) {
 		super(entityManager);
 	}
+
 	
 	@Override
-	public List<ReferenciaDTO> getByAnd(ReferenciaDTO objeto) throws SecurityException
+	public List<ResultadoDTO> getByAnd(ResultadoDTO objetoDTO) throws SecurityException
 	{
 		CriteriaBuilder cb;
-		CriteriaQuery<ReferenciaDTO> cq;
-		Root<ReferenciaDTO> from;
-		List<ReferenciaDTO> list;
+		CriteriaQuery<ResultadoDTO> cq;
+		Root<ResultadoDTO> from;
+		List<ResultadoDTO> list;
 		Predicate predicate;
 		List<Predicate> predicateList = null;
 		String fieldName;
 		Method getter;
 		Object value;
 		Field[] fields;
+		TypedQuery<ResultadoDTO> typedQuery;
 		try{
 			cb=entityManager.getCriteriaBuilder();
-			cq=cb.createQuery(ReferenciaDTO.class);
-			from= cq.from(ReferenciaDTO.class);
+			cq=cb.createQuery(ResultadoDTO.class);
+			from= cq.from(ResultadoDTO.class);
 			predicateList=new ArrayList<Predicate>();
-			fields = objeto.getClass().getDeclaredFields();
+			fields = objetoDTO.getClass().getDeclaredFields();
 	        for(Field f : fields){
 	            fieldName = f.getName();
 				if(!fieldName.equals("serialVersionUID"))
 				{
-				    getter = objeto.getClass().getMethod("get" + String.valueOf(fieldName.charAt(0)).toUpperCase() +
+				    getter = objetoDTO.getClass().getMethod("get" + String.valueOf(fieldName.charAt(0)).toUpperCase() +
 				            fieldName.substring(1));
-				    value = getter.invoke(objeto, new Object[0]);
+				    value = getter.invoke(objetoDTO, new Object[0]);
 				    if(value!=null && value!="")
 				    {
 				    		predicate=cb.equal(from.get(fieldName), value);
@@ -67,17 +69,25 @@ public class ReferenciaDAOImpl extends AbstractFacadeImpl<ReferenciaDTO> impleme
 	
 	        if(!predicateList.isEmpty())
 	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
-			TypedQuery<ReferenciaDTO> tq=entityManager.createQuery(cq);
-			list=tq.getResultList();
+			typedQuery=entityManager.createQuery(cq);
+			list=typedQuery.getResultList();
 			return list;
 		}catch(Exception e){
-			logger.info(e.toString());
+			slf4jLogger.info(e.toString());
 			throw new SecurityException(e);
 		}finally{
-			predicate=null;
-			predicateList=null;
-		}		
+			 predicate=null;
+             predicateList=null;
+             cb=null;
+             cq=null;
+             typedQuery=null;
+             from=null;
+             fieldName=null;
+             getter=null;
+             value=null;
+             fields=null;		
+        }		
 	}
 	
-
+	
 }
