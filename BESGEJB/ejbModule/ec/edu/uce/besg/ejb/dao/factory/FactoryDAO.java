@@ -22,6 +22,8 @@ import ec.edu.uce.besg.ejb.persistence.dao.PostulacionDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.PreguntaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.ReferenciaDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.RespuestaDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.ResultadoDAO;
+import ec.edu.uce.besg.ejb.persistence.dao.ResultadoViewDAO;
 import ec.edu.uce.besg.ejb.persistence.dao.UsuarioDAO;
 
 @Local
@@ -68,4 +70,8 @@ public interface FactoryDAO {
 	CategoriaDAO getCategoriaDAOImpl();
 
 	ControlDAO getControlDAOImpl();
+
+	ResultadoDAO getResultadoDAOImpl();
+
+	ResultadoViewDAO getResultadoViewDAOImpl();
 }

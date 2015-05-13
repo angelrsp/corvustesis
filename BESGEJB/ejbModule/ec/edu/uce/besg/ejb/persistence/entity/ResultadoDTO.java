@@ -21,8 +21,12 @@ public class ResultadoDTO implements Serializable {
 	@Column(name="rsu_codigo")
 	private Integer rsuCodigo;
 
-	@Column(name="res_valor")
-	private String resValor;
+	@Column(name="rsu_valor_string")
+	private String resValorString;
+
+	@Column(name="rsu_valor_int")
+	private Integer resValorInt;
+
 	
 	//bi-directional many-to-one association to CandidatoDTO
 	@ManyToOne
@@ -61,12 +65,20 @@ public class ResultadoDTO implements Serializable {
 		this.cueRespuesta = cueRespuesta;
 	}
 
-	public String getResValor() {
-		return resValor;
+	public String getResValorString() {
+		return resValorString;
 	}
 
-	public void setResValor(String resValor) {
-		this.resValor = resValor;
+	public void setResValorString(String resValorString) {
+		this.resValorString = resValorString;
+	}
+
+	public Integer getResValorInt() {
+		return resValorInt;
+	}
+
+	public void setResValorInt(Integer resValorInt) {
+		this.resValorInt = resValorInt;
 	}
 
 }

@@ -30,9 +30,6 @@ public class CuestionarioViewDTO implements Serializable {
 	@Column(name="res_codigo")
 	private Integer resCodigo;
 
-	@Column(name="res_control")
-	private Integer resControl;
-
 	@Column(name="res_descripcion")
 	private String resDescripcion;
 
@@ -80,14 +77,6 @@ public class CuestionarioViewDTO implements Serializable {
 
 	public void setResCodigo(Integer resCodigo) {
 		this.resCodigo = resCodigo;
-	}
-
-	public Integer getResControl() {
-		return this.resControl;
-	}
-
-	public void setResControl(Integer resControl) {
-		this.resControl = resControl;
 	}
 
 	public String getResDescripcion() {

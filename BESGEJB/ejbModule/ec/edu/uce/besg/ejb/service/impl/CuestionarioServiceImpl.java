@@ -15,7 +15,9 @@ import ec.edu.uce.besg.ejb.persistence.entity.ControlDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.EncuestaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.PreguntaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.RespuestaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.ResultadoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.view.CuestionarioViewDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.view.ResultadoViewDTO;
 import ec.edu.uce.besg.ejb.service.CuestionarioService;
 
 @Stateless
@@ -176,7 +178,44 @@ public class CuestionarioServiceImpl implements CuestionarioService{
 		}
 		finally{
 			
-		}		
+		}
 	}
+	
+
+	@Override
+	public void createOrUpdateResultado(List<ResultadoDTO> resultadoList) throws CorvustecException
+	{
+		try {
+			for(ResultadoDTO resultadoDTO:resultadoList)
+			{
+				if(resultadoDTO.getResValorString()!=null)
+					factoryDAO.getResultadoDAOImpl().create(resultadoDTO);
+				else if(resultadoDTO.getResValorInt()!=null)
+					factoryDAO.getResultadoDAOImpl().create(resultadoDTO);
+			}
+		} catch (Exception e) {
+			logger.info("Error al registrar Candidato {}", e.toString());
+			throw new CorvustecException("Error al registrar Candidato");
+		}
+		finally{
+			
+		}
+	}
+
+	
+	@Override
+	public List<ResultadoViewDTO> readResultadoView(ResultadoViewDTO resultadoViewDTO) throws CorvustecException
+	{
+		try {
+			return factoryDAO.getResultadoViewDAOImpl().getByAnd(resultadoViewDTO);
+		} catch (Exception e) {
+			logger.info("Error al registrar Candidato {}", e.toString());
+			throw new CorvustecException("Error al registrar Candidato");
+		}
+		finally{
+			
+		}
+	}
+
 	
 }
