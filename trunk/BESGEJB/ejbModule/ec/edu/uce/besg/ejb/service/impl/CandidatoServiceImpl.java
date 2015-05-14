@@ -114,9 +114,23 @@ public class CandidatoServiceImpl implements CandidatoService {
 		}
 		finally{
 			habilidadDTO=null;
-		}
-			
+		}			
 	}
+
+	@Override
+	public void removeHabilidad(HabilidadDTO habilidadDTO) throws CorvustecException
+	{
+		try {
+			factoryDAO.getHabilidadDAOImpl().remove(habilidadDTO);
+		} catch (Exception e) {
+			logger.info("Error al registrar Candidato {}", e.toString());
+			throw new CorvustecException("Error al registrar Candidato");
+		}
+		finally{
+			habilidadDTO=null;
+		}			
+	}
+
 	
 	@Override
 	public List<HabilidadViewDTO> readHabilidadView(HabilidadViewDTO habilidadViewDTO) throws CorvustecException

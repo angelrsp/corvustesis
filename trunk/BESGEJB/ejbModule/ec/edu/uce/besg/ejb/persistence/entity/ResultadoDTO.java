@@ -1,6 +1,7 @@
 package ec.edu.uce.besg.ejb.persistence.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -26,6 +27,10 @@ public class ResultadoDTO implements Serializable {
 
 	@Column(name="rsu_valor_int")
 	private Integer resValorInt;
+
+	@Column(name="rsu_valor_date")
+	@Temporal(TemporalType.DATE)
+	private Date resValorDate;
 
 	
 	//bi-directional many-to-one association to CandidatoDTO
@@ -79,6 +84,14 @@ public class ResultadoDTO implements Serializable {
 
 	public void setResValorInt(Integer resValorInt) {
 		this.resValorInt = resValorInt;
+	}
+
+	public Date getResValorDate() {
+		return resValorDate;
+	}
+
+	public void setResValorDate(Date resValorDate) {
+		this.resValorDate = resValorDate;
 	}
 
 }

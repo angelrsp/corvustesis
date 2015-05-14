@@ -28,5 +28,7 @@ public interface CandidatoService {
 	List<HabilidadViewDTO> readHabilidadView(HabilidadViewDTO habilidadViewDTO)
 			throws CorvustecException;
 
+	void removeHabilidad(HabilidadDTO habilidadDTO) throws CorvustecException;
+
 
 }

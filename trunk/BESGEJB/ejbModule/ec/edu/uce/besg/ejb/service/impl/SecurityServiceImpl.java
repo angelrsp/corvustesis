@@ -140,4 +140,34 @@ public class SecurityServiceImpl implements SecurityService {
 		}
 	}
 	
+	@Override
+	public void recoverPassword(UsuarioDTO usuarioDTO) throws CorvustecException
+	{
+//		List<UsuarioDTO> usuarioList;
+//		UsuarioDTO usuarioDTO2;
+		try {
+//			usuarioList=factoryDAO.getUsuarioDAOImpl().getByAnd(usuarioDTO);
+//			if(!usuarioList.isEmpty())
+//			{
+//				usuarioDTO=usuarioList.get(0);
+//				usuarioDTO.setUsuPassword(RandomUtility.getInstance().getRandomString2());
+//				
+//				usuarioDTO2=(UsuarioDTO)BeanUtils.cloneBean(usuarioDTO);
+//				
+//				mailService.sendRecovery(usuarioDTO2);
+//				
+//				usuarioDTO.setUsuPassword(EncryptionUtility.getInstance().encriptar(usuarioDTO.getUsuPassword()));
+//				usuarioDTO.setUsuTemporalPass(true);
+//				
+//				factoryDAO.getUsuarioDAOImpl().update(usuarioDTO);	
+//			}
+//			else
+//				throw new Exception("Identificacion no encontrada");
+			
+		} catch (Exception e) {
+			logger.info(e.toString());
+			throw new CorvustecException(e);
+		}		
+	}
+	
 }

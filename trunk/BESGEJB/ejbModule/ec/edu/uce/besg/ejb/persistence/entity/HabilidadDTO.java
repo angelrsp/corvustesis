@@ -62,6 +62,9 @@ public class HabilidadDTO implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date habFechaInicio;
 
+	@Column(name="hab_idioma")
+	private Integer habIdioma;
+	
 	//bi-directional many-to-one association to CandidatoDTO
 	@ManyToOne
 	@JoinColumn(name="hab_candidato")
@@ -169,6 +172,14 @@ public class HabilidadDTO implements Serializable {
 
 	public void setHabRegistro(String habRegistro) {
 		this.habRegistro = habRegistro;
+	}
+
+	public Integer getHabIdioma() {
+		return habIdioma;
+	}
+
+	public void setHabIdioma(Integer habIdioma) {
+		this.habIdioma = habIdioma;
 	}
 
 }

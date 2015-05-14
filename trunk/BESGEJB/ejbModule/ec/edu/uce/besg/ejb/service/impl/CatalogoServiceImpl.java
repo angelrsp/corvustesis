@@ -160,6 +160,28 @@ public class CatalogoServiceImpl implements CatalogoService{
 			throw new CorvustecException("Error al obtener sector");
 		}				
 	}
-	
+
+	@Override
+	public List<CatalogoDTO> readIdioma() throws CorvustecException
+	{
+		try {
+			return readCatalogo(Const.IDIOMA_CATALOGO);
+		} catch (Exception e) {
+			logger.info("Error al obtener sector {}", e.toString());
+			throw new CorvustecException("Error al obtener sector");
+		}				
+	}
+
+	@Override
+	public List<CatalogoDTO> readNivelIdioma() throws CorvustecException
+	{
+		try {
+			return readCatalogo(Const.NIVEL_IDIOMA);
+		} catch (Exception e) {
+			logger.info("Error al obtener sector {}", e.toString());
+			throw new CorvustecException("Error al obtener sector");
+		}				
+	}
+
 	
 }
