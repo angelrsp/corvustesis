@@ -1,8 +1,12 @@
 package ec.edu.uce.besg.web.util;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -10,6 +14,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import ec.edu.uce.besg.common.util.UtilApplication;
@@ -102,5 +107,59 @@ public class JsfUtil {
 	          getSession(false);
 	 }
 
-	
+	 public static String getRandomName(String extension)
+		{
+			return UUID.randomUUID().toString()+"."+extension;	
+		}
+	 
+	 public static String saveToDiskUpdload(byte[] bytefile,String fileName)
+		{
+			String pathDir,pathFile = null;
+			String[] split;
+			File f;
+			try {
+				split= fileName.split("\\.");
+				fileName=JsfUtil.getRandomName(split[split.length-1]);
+				
+//				pathDir=getRealPath()+"\\images\\tmp\\upload\\";
+				
+				String pathRetalivaImagenes=File.separator+"images"+File.separator+"tmp"+File.separator+"upload"+File.separator;
+				
+				pathDir=getRealPath()+pathRetalivaImagenes;
+				
+				pathFile=pathDir+File.separator+fileName;
+				
+				f= new File(pathFile);
+				if(f.exists())
+					f.delete();
+				
+				f= new File(pathDir);
+				if(!f.exists())
+					f.mkdirs();
+				FileOutputStream fos=new FileOutputStream(pathFile);
+				fos.write(bytefile);
+				fos.close();
+				if(fileName.split("\\.")[1].equals("pdf")){
+//					pathFile="\\images\\tmp\\upload\\"+fileName;
+					pathFile=pathRetalivaImagenes+fileName;
+				} else{
+//					pathFile="\\images\\tmp\\upload\\"+fileName;
+					pathFile=pathRetalivaImagenes+fileName;
+				}
+				pathFile=pathFile.replace('\\', '/');
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return pathFile;
+		}
+		
+	 public static String getRealPath()
+		{
+			ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance()
+					.getExternalContext().getContext();
+			String deploymentDirectoryPath = ctx.getRealPath("/");
+			return deploymentDirectoryPath;
+		}
 }

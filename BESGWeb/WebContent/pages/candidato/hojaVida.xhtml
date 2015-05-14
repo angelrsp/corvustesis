@@ -12,21 +12,21 @@
 		<p:panel header="Subir Foto">
 	  
    	     	<p:fileUpload  mode="advanced" dragDropSupport="false"
-            	update="foto" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{fileUploadView.handleFileUpload}"/>			
+            	update="foto" sizeLimit="1000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{hojaVidaController.handleFileUpload}" auto="true" process="@this" label="Seleccione"/>			
 		</p:panel>
 		
 		<p:panel id="pnlDatos" styleClass="tabla" header="#{i18n['label.titulo.pantalla.dato.candidato']}">
 			<table>
 				<tr>
 					<td><h:outputLabel value="#{i18n['label.foto']}:&#160;" /> </td>
-					<td colspan="3"><p:graphicImage id="foto" value="#{imagenCandidatoController.image}" height="150" cache="false" /></td>	
+					<td colspan="3"><p:graphicImage id="foto" value="#{hojaVidaController.hojaVidaDataManager.candidatoDTO.canFoto}" height="150" cache="false" /></td>	
 				</tr>
 				<tr>
 					<td><h:outputLabel value="Tipo de Documento:" for="somDocumentType" /> </td>
 					<td>
 						<p:selectOneMenu id="somDocumentType" required="true" value="#{hojaVidaDataManager.candidatoDTO.canTipoIdentificacion}" label="Tipo de Documento" style="width:260px;">
 							<f:selectItem itemLabel="#{i18n['combo.seleccionar']}"/>
-							<f:selectItems value="#{hojaVidaController.hojaVidaDataManager.tipoDocumentoList}" var="tip" itemLabel="#{tip.catDescripcion}" itemValue="#{tip.catCodigo}"/>
+							<f:selectItems value="#{hojaVidaDataManager.tipoDocumentoList}" var="tip" itemLabel="#{tip.catDescripcion}" itemValue="#{tip.catCodigo}"/>
 						</p:selectOneMenu>
 					</td>
 						
@@ -149,7 +149,7 @@
 				</p:column>
 									
 				<p:column width="30">
-					<p:commandButton actionListener="#{candidatoController.onRowDelEstudio(est)}" icon="ui-icon-close" title="Eliminar" 
+					<p:commandButton actionListener="#{hojaVidaController.onRowDeleteEstudio(for)}" icon="ui-icon-close" title="Eliminar" 
 						immediate="true" onclick="if(!confirm('Eliminar?')) return false;" update=":contenido:tblEstudio"  process=":contenido:tblEstudio">
 					</p:commandButton>
 				</p:column>
@@ -221,7 +221,7 @@
 			
 				<p:column width="30">
 					<p:commandButton icon="ui-icon-close" title="Eliminar"
-						immediate="true" onclick="if(!confirm('Eliminar?')) return false;" update=":contenido:tblCurso" process=":contenido:tblCurso"/>
+						immediate="true" onclick="if(!confirm('Eliminar?')) return false;" update=":contenido:tblCurso" process=":contenido:tblCurso" actionListener="#{hojaVidaController.onRowDeleteCurso(cur)}"/>
 				</p:column>
 			
 			
@@ -229,32 +229,29 @@
 			
 		</p:panel>
 
-		<p:panel id="pnlIdioma" styleClass="tabla"
-			header="#{i18n['label.titulo.pantalla.dato.conocimiento.adicional']}">
+
+		<p:panel id="pnlIdioma" styleClass="tabla" header="Idioma">
 			<p:accordionPanel activeIndex="null">
 				<p:tab title="#{i18n['boton.agregar']}">
 				
 				<table>
 				  	<tr>
 				  	
-			  			<td><h:outputLabel value="#{i18n['label.nombre']}:&#160;" /></td>
-						<td><p:inputText value="#{candidatoController.adicional.proNombre}" requiredMessage="#{i18n['label.nombre']}:&#160;#{i18n['label.requerido']}" required="true"></p:inputText></td>
+						<td><h:outputLabel value="Idioma:" /></td>
+						<td><p:selectOneMenu value="#{hojaVidaDataManager.idiomaDTO.habIdioma}" required="true" label="Nivel de Estudio" style="width:250px;">
+								<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" />
+								<f:selectItems value="#{hojaVidaDataManager.idiomaCatalogoList}" var="idi"  itemLabel="#{idi.catDescripcion}" itemValue="#{idi.catCodigo}"/>
+							</p:selectOneMenu></td>
 
-			  			<td><h:outputLabel value="#{i18n['label.descripcion']}:&#160;" /></td>
-						<td><p:inputTextarea value="#{candidatoController.adicional.proDescripcion}" requiredMessage="#{i18n['label.descripcion']}:&#160;#{i18n['label.requerido']}" required="true" autoResize="false" maxlength="255"/></td>					  											
-											  			
+						<td><h:outputLabel value="Nivel:" /></td>
+						<td><p:selectOneMenu value="#{hojaVidaDataManager.idiomaDTO.habNivel}" required="true" label="Nivel" style="width:250px;">
+								<f:selectItem itemLabel="#{i18n['combo.seleccionar']}" />
+								<f:selectItems value="#{hojaVidaDataManager.nivelIdiomaList}" var="nivIdi"  itemLabel="#{nivIdi.catDescripcion}" itemValue="#{nivIdi.catCodigo}"/>
+							</p:selectOneMenu></td>				  	
 				  	</tr>
-				  	
-				  	<tr>
-					  	<td colspan="3">
-							 <p:fileUpload fileUploadListener="#{candidatoController.handleFileUploadAdicional}" mode="advanced" dragDropSupport="false"  
-                 					 update="growlEst" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar"/>
-                 				<p:growl id="growlEst" />	 						  	
-					  	</td>
-				  	</tr>						  								  								  	
-				  	
+				  					  	
 				  	<tr align="center">
-				  		<td colspan="4"><p:commandButton value="#{i18n['boton.agregar']}" process=":contenido:pnlAdicional" update=":contenido:pnlAdicional" actionListener="#{candidatoController.agregarAdicional}"></p:commandButton></td>
+				  		<td colspan="4"><p:commandButton value="#{i18n['boton.agregar']}" process=":contenido:pnlIdioma" update=":contenido:pnlIdioma" actionListener="#{hojaVidaController.onClickSaveIdioma}"/></td>
 				  	</tr>						  	
 				</table>
 				  
@@ -263,24 +260,72 @@
 
 			<p:spacer height="5"/>
 			
-			<p:dataTable id="tblAdicional" value="#{candidatoController.adicionalList}" var="adi" emptyMessage="#{i18n['table.campo.obligatorio']}">
+			<p:dataTable id="tblIdioma" value="#{hojaVidaDataManager.idiomaList}" var="idi" emptyMessage="#{i18n['table.campo.obligatorio']}">
+
+				<p:column headerText="Idioma">
+					<h:outputText value="#{idi.idioma}" />
+				</p:column>
 			
-				<p:column headerText="#{i18n['label.nombre']}">
-					<h:outputText value="#{adi.proNombre}" />
+				<p:column headerText="Nivel">
+					<h:outputText value="#{idi.nivel}" />
 				</p:column>
 
-				<p:column headerText="#{i18n['label.descripcion']}">
-					<h:outputText value="#{adi.proDescripcion}" />
-				</p:column>
-									
-				<p:column headerText="#{i18n['label.descargar']}" width="15">
-					<p:commandButton actionListener="#{candidatoController.descargarAdicional(adi)}" icon="ui-icon-arrowthick-1-s" ajax="false" 
-						immediate="true" update=":contenido:growl" disabled="#{adi.adiArchivo==null}">
+												
+				<p:column width="35">
+					<p:commandButton actionListener="#{hojaVidaController.onRowDeleteIdioma(idi)}" icon="ui-icon-close" 
+						immediate="true" onclick="if(!confirm('Eliminar?')) return false;" update=":contenido:tblIdioma" process=":contenido:tblIdioma">
 					</p:commandButton>
 				</p:column>
 			
-				<p:column headerText="#{i18n['label.eliminar']}" width="15">
-					<p:commandButton actionListener="#{candidatoController.onRowDelAdicional(adi)}" icon="ui-icon-close" 
+			</p:dataTable>
+
+		</p:panel>
+
+
+
+		<p:panel id="pnlAdicional" styleClass="tabla" header="#{i18n['label.titulo.pantalla.dato.conocimiento.adicional']}">
+			<p:accordionPanel activeIndex="null">
+				<p:tab title="#{i18n['boton.agregar']}">
+				
+				<table>
+				  	<tr>
+			  			<td><h:outputLabel value="#{i18n['label.descripcion']}:&#160;" /></td>
+						<td><p:inputTextarea value="#{hojaVidaDataManager.adicionalDTO.habDescripcion}" label="#{i18n['label.descripcion']}" required="true"/></td>					  											
+											  			
+				  	</tr>
+				  	
+<!-- 				  	<tr> -->
+<!-- 					  	<td colspan="3"> -->
+<!-- 							 <p:fileUpload fileUploadListener="#{candidatoController.handleFileUploadAdicional}" mode="advanced" dragDropSupport="false"   -->
+<!--                  					 update="growlEst" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar"/> -->
+<!--                  				<p:growl id="growlEst" />	 						  	 -->
+<!-- 					  	</td> -->
+<!-- 				  	</tr>						  								  								  	 -->
+				  	
+				  	<tr align="center">
+				  		<td colspan="4"><p:commandButton value="#{i18n['boton.agregar']}" process=":contenido:pnlAdicional" update=":contenido:pnlAdicional" actionListener="#{hojaVidaController.onClickSaveAdicional}"/></td>
+				  	</tr>						  	
+				</table>
+				  
+				</p:tab>				
+			</p:accordionPanel>
+
+			<p:spacer height="5"/>
+			
+			<p:dataTable id="tblAdicional" value="#{hojaVidaDataManager.adicionalList}" var="adi" emptyMessage="#{i18n['table.campo.obligatorio']}">
+			
+				<p:column headerText="#{i18n['label.descripcion']}">
+					<h:outputText value="#{adi.habDescripcion}" />
+				</p:column>
+									
+<!-- 				<p:column headerText="#{i18n['label.descargar']}" width="15"> -->
+<!-- 					<p:commandButton actionListener="#{candidatoController.descargarAdicional(adi)}" icon="ui-icon-arrowthick-1-s" ajax="false"  -->
+<!-- 						immediate="true" update=":contenido:growl" disabled="#{adi.adiArchivo==null}"> -->
+<!-- 					</p:commandButton> -->
+<!-- 				</p:column> -->
+			
+				<p:column width="35">
+					<p:commandButton actionListener="#{hojaVidaController.onRowDeleteAdicional(adi)}" icon="ui-icon-close" 
 						immediate="true" onclick="if(!confirm('Eliminar?')) return false;" update=":contenido:tblAdicional" process=":contenido:tblAdicional">
 					</p:commandButton>
 				</p:column>
@@ -291,66 +336,7 @@
 		</p:panel>
 
   
-		<p:panel id="pnlAdicional" styleClass="tabla"
-			header="#{i18n['label.titulo.pantalla.dato.conocimiento.adicional']}">
-			<p:accordionPanel activeIndex="null">
-				<p:tab title="#{i18n['boton.agregar']}">
-				
-				<table>
-				  	<tr>
-				  	
-			  			<td><h:outputLabel value="#{i18n['label.nombre']}:&#160;" /></td>
-						<td><p:inputText value="#{candidatoController.adicional.proNombre}" requiredMessage="#{i18n['label.nombre']}:&#160;#{i18n['label.requerido']}" required="true"></p:inputText></td>
 
-			  			<td><h:outputLabel value="#{i18n['label.descripcion']}:&#160;" /></td>
-						<td><p:inputTextarea value="#{candidatoController.adicional.proDescripcion}" requiredMessage="#{i18n['label.descripcion']}:&#160;#{i18n['label.requerido']}" required="true" autoResize="false" maxlength="255"/></td>					  											
-											  			
-				  	</tr>
-				  	
-				  	<tr>
-					  	<td colspan="3">
-							 <p:fileUpload fileUploadListener="#{candidatoController.handleFileUploadAdicional}" mode="advanced" dragDropSupport="false"  
-                 					 update="growlEst" sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(pdf)$/" label="Seleccionar..." uploadLabel="Subir" cancelLabel="Cancelar"/>
-                 				<p:growl id="growlEst" />	 						  	
-					  	</td>
-				  	</tr>						  								  								  	
-				  	
-				  	<tr align="center">
-				  		<td colspan="4"><p:commandButton value="#{i18n['boton.agregar']}" process=":contenido:pnlAdicional" update=":contenido:pnlAdicional" actionListener="#{candidatoController.agregarAdicional}"></p:commandButton></td>
-				  	</tr>						  	
-				</table>
-				  
-				</p:tab>				
-			</p:accordionPanel>
-
-			<p:spacer height="5"/>
-			
-			<p:dataTable id="tblAdicional" value="#{candidatoController.adicionalList}" var="adi" emptyMessage="#{i18n['table.campo.obligatorio']}">
-			
-				<p:column headerText="#{i18n['label.nombre']}">
-					<h:outputText value="#{adi.proNombre}" />
-				</p:column>
-
-				<p:column headerText="#{i18n['label.descripcion']}">
-					<h:outputText value="#{adi.proDescripcion}" />
-				</p:column>
-									
-				<p:column headerText="#{i18n['label.descargar']}" width="15">
-					<p:commandButton actionListener="#{candidatoController.descargarAdicional(adi)}" icon="ui-icon-arrowthick-1-s" ajax="false" 
-						immediate="true" update=":contenido:growl" disabled="#{adi.adiArchivo==null}">
-					</p:commandButton>
-				</p:column>
-			
-				<p:column headerText="#{i18n['label.eliminar']}" width="15">
-					<p:commandButton actionListener="#{candidatoController.onRowDelAdicional(adi)}" icon="ui-icon-close" 
-						immediate="true" onclick="if(!confirm('Eliminar?')) return false;" update=":contenido:tblAdicional" process=":contenido:tblAdicional">
-					</p:commandButton>
-				</p:column>
-			
-			</p:dataTable>
-
-
-		</p:panel>
 
 <!--
 				<p:panel id="pnlExperiencia" styleClass="tabla"

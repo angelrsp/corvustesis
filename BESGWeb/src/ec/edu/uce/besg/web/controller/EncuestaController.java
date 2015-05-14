@@ -2,6 +2,7 @@ package ec.edu.uce.besg.web.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -19,9 +20,13 @@ import javax.faces.component.UISelectItems;
 import javax.faces.component.html.HtmlInputTextarea;
 import javax.faces.component.html.HtmlOutputText;
 import javax.faces.component.html.HtmlPanelGrid;
+import javax.faces.component.html.HtmlSelectManyCheckbox;
 import javax.faces.component.html.HtmlSelectOneRadio;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+
+import org.primefaces.component.calendar.Calendar;
+import org.primefaces.component.inputtextarea.InputTextarea;
 
 import ec.edu.uce.besg.common.util.ApplicationUtility;
 import ec.edu.uce.besg.common.util.CorvustecException;
@@ -73,8 +78,11 @@ public class EncuestaController implements Serializable{
 	public HtmlPanelGrid getHtmlPanelGrid() {
 		if(htmlPanelGrid==null)
 		{
-			UIOutput label;
-		    UIInput txtArea;
+			HtmlOutputText label;
+		    InputTextarea txtArea;
+		    Calendar calendar;
+		    HtmlSelectOneRadio htmlSelectOneRadio;
+		    HtmlSelectManyCheckbox htmlSelectManyCheckbox;
 		    
 			ResultadoDTO resultadoDTO;
 			RespuestaDTO respuesta;
@@ -82,7 +90,6 @@ public class EncuestaController implements Serializable{
 			Integer numero,index = null;
 			String expresion;
 			
-			HtmlSelectOneRadio htmlSelectOneRadio;
 			EncuestaDTO encuesta;
 			CategoriaDTO categoria;
 			PreguntaDTO pregunta;
@@ -108,6 +115,7 @@ public class EncuestaController implements Serializable{
 					    
 					    label=new HtmlOutputText();
 					    label.setValue(categoriaDTO.getCatDescripcion());
+					    label.setStyle("font-weight:bold;font-size:12pt;");
 					    
 					    
 					    htmlPanelGrid.getChildren().add(label);
@@ -120,7 +128,8 @@ public class EncuestaController implements Serializable{
 						for(PreguntaDTO preguntaDTO:cuestionarioService.readPregunta(pregunta))
 						{
 							label=new HtmlOutputText();
-							txtArea = new HtmlInputTextarea();
+							txtArea = new InputTextarea();
+							txtArea.setAutoResize(false);
 							
 							
 							if(preguntaDTO.getCueControl().getConCodigo().equals(2))
@@ -157,8 +166,6 @@ public class EncuestaController implements Serializable{
 								respuesta=new RespuestaDTO();
 								respuesta.setCuePregunta(preguntaDTO);
 								
-								
-								
 								for(RespuestaDTO respuestaDTO:cuestionarioService.readRespuesta(respuesta))
 								{
 									if(!primero)
@@ -190,6 +197,69 @@ public class EncuestaController implements Serializable{
 								htmlPanelGrid.getChildren().add(label);
 								htmlPanelGrid.getChildren().add(htmlSelectOneRadio);
 							}
+							else if(preguntaDTO.getCueControl().getConCodigo().equals(6))
+							{
+								
+								label.setValue(preguntaDTO.getPreDescripcion());
+								
+								respuesta=new RespuestaDTO();
+								respuesta.setCuePregunta(preguntaDTO);
+								
+								for(RespuestaDTO respuestaDTO:cuestionarioService.readRespuesta(respuesta))
+								{
+									calendar=new Calendar();
+									resultadoDTO=new ResultadoDTO();
+									resultadoDTO.setCueRespuesta(respuestaDTO);
+									resultadoDTO.setBemCandidato(encuestaDataManager.getCandidatoDTO());
+									encuestaDataManager.getResultadoList().add(resultadoDTO);
+																		
+									calendar.setId("respuesta"+numero.toString()); // Must be unique!
+									expresion=ApplicationUtility.getInstance().appendStringBuilder("#{encuestaDataManager.resultadoList["+numero+"].resValorDate}").toString();
+								    calendar.setValueExpression("value", createValueExpressionDate(expresion, Date.class));
+								    calendar.setRequired(true);
+								    calendar.setPattern("yyyy-MM-dd");
+
+								    htmlPanelGrid.getChildren().add(label);	    
+								    htmlPanelGrid.getChildren().add(calendar);
+								}
+							}
+							
+							else if(preguntaDTO.getCueControl().getConCodigo().equals(7))
+							{
+								label.setValue(preguntaDTO.getPreDescripcion());
+								
+								htmlSelectManyCheckbox=new HtmlSelectManyCheckbox();
+								
+								ArrayList<SelectItem> checkBoxList = new ArrayList<SelectItem>();
+								
+								respuesta=new RespuestaDTO();
+								respuesta.setCuePregunta(preguntaDTO);
+								
+								for(RespuestaDTO respuestaDTO:cuestionarioService.readRespuesta(respuesta))
+								{
+									resultadoDTO=new ResultadoDTO();
+									resultadoDTO.setCueRespuesta(respuestaDTO);
+									resultadoDTO.setBemCandidato(encuestaDataManager.getCandidatoDTO());
+									encuestaDataManager.getResultadoList().add(resultadoDTO);										
+									
+									checkBoxList.add(new SelectItem(respuestaDTO.getResCodigo(),respuestaDTO.getResDescripcion()));
+								}
+								primero=Boolean.FALSE;
+																
+								UISelectItems checkBoxs = new UISelectItems();
+								checkBoxs.setValue(checkBoxList);
+								// Add radioButton options.
+								htmlSelectManyCheckbox.getChildren().add(checkBoxs);
+								expresion=ApplicationUtility.getInstance().appendStringBuilder("#{encuestaDataManager.resultadoList["+numero+"].resValorInt}").toString();
+
+								htmlSelectManyCheckbox.setValueExpression("value", createValueExpression(expresion, String.class));
+								htmlSelectManyCheckbox.setLayout("pageDirection");
+								
+								
+								htmlPanelGrid.getChildren().add(label);
+								htmlPanelGrid.getChildren().add(htmlSelectManyCheckbox);
+							}
+							
 						    numero=numero+1;
 						}
 					}
@@ -216,6 +286,13 @@ public class EncuestaController implements Serializable{
 	private ValueExpression createValueExpression(String binding, Class<String> clazz) {
         final ValueExpression ve = getExpressionFactory()
                 .createValueExpression(getELContext(), binding, String.class);
+
+        return ve;
+    }
+	
+	private ValueExpression createValueExpressionDate(String binding, Class<Date> clazz) {
+        final ValueExpression ve = getExpressionFactory()
+                .createValueExpression(getELContext(), binding, Date.class);
 
         return ve;
     }

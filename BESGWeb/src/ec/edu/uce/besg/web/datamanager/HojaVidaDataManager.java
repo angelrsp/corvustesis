@@ -43,7 +43,19 @@ public class HojaVidaDataManager implements Serializable{
 	
 	private HabilidadDTO cursoDTO;
 	private List<HabilidadViewDTO> cursoList;
-	
+
+	private HabilidadDTO adicionalDTO;
+	private List<HabilidadViewDTO> adicionalList;
+
+	private HabilidadDTO idiomaDTO;
+	private List<HabilidadViewDTO> idiomaList;
+
+	private List<CatalogoDTO> nivelIdiomaList;
+	private Integer nivelIdiomaCode;
+
+	private List<CatalogoDTO> idiomaCatalogoList;
+	private Integer idiomaCode;
+
 	
 	public HojaVidaDataManager() {
 		tipoDocumentoList=new ArrayList<CatalogoDTO>();
@@ -62,6 +74,17 @@ public class HojaVidaDataManager implements Serializable{
 		
 		cursoDTO=new HabilidadDTO();
 		cursoList=new ArrayList<HabilidadViewDTO>();
+		
+		adicionalDTO=new HabilidadDTO();
+		adicionalList=new ArrayList<HabilidadViewDTO>();
+		
+		idiomaDTO=new HabilidadDTO();
+		idiomaList=new ArrayList<HabilidadViewDTO>();
+		
+		nivelIdiomaList=new ArrayList<CatalogoDTO>();
+
+		idiomaCatalogoList=new ArrayList<CatalogoDTO>();
+
 	}
 
 	public List<CatalogoDTO> getTipoDocumentoList() {
@@ -159,5 +182,69 @@ public class HojaVidaDataManager implements Serializable{
 
 	public void setCursoList(List<HabilidadViewDTO> cursoList) {
 		this.cursoList = cursoList;
+	}
+
+	public HabilidadDTO getAdicionalDTO() {
+		return adicionalDTO;
+	}
+
+	public void setAdicionalDTO(HabilidadDTO adicionalDTO) {
+		this.adicionalDTO = adicionalDTO;
+	}
+
+	public List<HabilidadViewDTO> getAdicionalList() {
+		return adicionalList;
+	}
+
+	public void setAdicionalList(List<HabilidadViewDTO> adicionalList) {
+		this.adicionalList = adicionalList;
+	}
+
+	public HabilidadDTO getIdiomaDTO() {
+		return idiomaDTO;
+	}
+
+	public void setIdiomaDTO(HabilidadDTO idiomaDTO) {
+		this.idiomaDTO = idiomaDTO;
+	}
+
+	public List<HabilidadViewDTO> getIdiomaList() {
+		return idiomaList;
+	}
+
+	public void setIdiomaList(List<HabilidadViewDTO> idiomaList) {
+		this.idiomaList = idiomaList;
+	}
+
+	public List<CatalogoDTO> getNivelIdiomaList() {
+		return nivelIdiomaList;
+	}
+
+	public void setNivelIdiomaList(List<CatalogoDTO> nivelIdiomaList) {
+		this.nivelIdiomaList = nivelIdiomaList;
+	}
+
+	public Integer getNivelIdiomaCode() {
+		return nivelIdiomaCode;
+	}
+
+	public void setNivelIdiomaCode(Integer nivelIdiomaCode) {
+		this.nivelIdiomaCode = nivelIdiomaCode;
+	}
+
+	public List<CatalogoDTO> getIdiomaCatalogoList() {
+		return idiomaCatalogoList;
+	}
+
+	public void setIdiomaCatalogoList(List<CatalogoDTO> idiomaCatalogoList) {
+		this.idiomaCatalogoList = idiomaCatalogoList;
+	}
+
+	public Integer getIdiomaCode() {
+		return idiomaCode;
+	}
+
+	public void setIdiomaCode(Integer idiomaCode) {
+		this.idiomaCode = idiomaCode;
 	}
 }
