@@ -12,6 +12,7 @@ import org.primefaces.event.FileUploadEvent;
 
 import ec.edu.uce.besg.common.util.Const;
 import ec.edu.uce.besg.common.util.CorvustecException;
+import ec.edu.uce.besg.ejb.persistence.entity.HabilidadDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.TipoHabilidadDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.view.HabilidadViewDTO;
@@ -65,6 +66,10 @@ public class HojaVidaController implements Serializable{
 		readPais();
 		readFormacionAcademica();
 		readCurso();
+		readAdicional();
+		readIdioma();
+		readIdiomaCatalogo();
+		readNivelIdioma();
 	}
 	
 	private void readCandidato()
@@ -117,6 +122,23 @@ public class HojaVidaController implements Serializable{
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
 	}
+
+	private void readIdiomaCatalogo() {
+		try {
+			hojaVidaDataManager.setIdiomaCatalogoList(catalogoService.readIdioma());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
+	private void readNivelIdioma() {
+		try {
+			hojaVidaDataManager.setNivelIdiomaList(catalogoService.readNivelIdioma());
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
 	
 	private void readFormacionAcademica()
 	{
@@ -143,10 +165,37 @@ public class HojaVidaController implements Serializable{
 			JsfUtil.addErrorMessage(e.getMessage());
 		}
 	}
+	
+	private void readAdicional()
+	{
+		HabilidadViewDTO habilidadViewDTO;
+		try {
+			habilidadViewDTO=new HabilidadViewDTO();
+			habilidadViewDTO.setHabTipo(Const.ADICIONAL);
+			habilidadViewDTO.setCanCodigo(hojaVidaDataManager.getCandidatoDTO().getCanCodigo());
+			hojaVidaDataManager.setAdicionalList(candidatoService.readHabilidadView(habilidadViewDTO));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
+	private void readIdioma()
+	{
+		HabilidadViewDTO habilidadViewDTO;
+		try {
+			habilidadViewDTO=new HabilidadViewDTO();
+			habilidadViewDTO.setHabTipo(Const.IDIOMA);
+			habilidadViewDTO.setCanCodigo(hojaVidaDataManager.getCandidatoDTO().getCanCodigo());
+			hojaVidaDataManager.setIdiomaList(candidatoService.readHabilidadView(habilidadViewDTO));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
 
 	
 	public void handleFileUpload(FileUploadEvent event) {
-		
+		hojaVidaDataManager.getCandidatoDTO().setCanFoto(JsfUtil.saveToDiskUpdload(event.getFile().getContents(), JsfUtil.getRandomName(event.getFile().getFileName().split("\\.")[1])));
+		hojaVidaDataManager.getCandidatoDTO().setCanFotoByte(event.getFile().getContents());
     }
 	
 	
@@ -185,6 +234,42 @@ public class HojaVidaController implements Serializable{
 			tipoHabilidadDTO=null;
 		}
 	}
+	
+	public void onClickSaveIdioma()
+	{
+		TipoHabilidadDTO tipoHabilidadDTO;
+		try {
+			tipoHabilidadDTO=new TipoHabilidadDTO();
+			tipoHabilidadDTO.setThaCodigo(Const.IDIOMA);
+			hojaVidaDataManager.getIdiomaDTO().setBemTipoHabilidad(tipoHabilidadDTO);		
+			hojaVidaDataManager.getIdiomaDTO().setBemCandidato(hojaVidaDataManager.getCandidatoDTO());
+			candidatoService.createOrUpdateHabilidad(hojaVidaDataManager.getIdiomaDTO());
+			readIdioma();
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		finally{
+			tipoHabilidadDTO=null;
+		}
+	}
+
+	public void onClickSaveAdicional()
+	{
+		TipoHabilidadDTO tipoHabilidadDTO;
+		try {
+			tipoHabilidadDTO=new TipoHabilidadDTO();
+			tipoHabilidadDTO.setThaCodigo(Const.ADICIONAL);
+			hojaVidaDataManager.getAdicionalDTO().setBemTipoHabilidad(tipoHabilidadDTO);		
+			hojaVidaDataManager.getAdicionalDTO().setBemCandidato(hojaVidaDataManager.getCandidatoDTO());
+			candidatoService.createOrUpdateHabilidad(hojaVidaDataManager.getAdicionalDTO());
+			readAdicional();
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+		finally{
+			tipoHabilidadDTO=null;
+		}
+	}
 
 
 	public void onClickUpdate()
@@ -197,6 +282,62 @@ public class HojaVidaController implements Serializable{
 		}
 	}
 
+	public void onRowDeleteEstudio(HabilidadViewDTO habilidadViewDTO)
+	{
+		HabilidadDTO habilidadDTO;
+		try {
+			habilidadDTO=new HabilidadDTO();
+			habilidadDTO.setHabCodigo(habilidadViewDTO.getHabCodigo());
+			candidatoService.removeHabilidad(habilidadDTO);
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+			readFormacionAcademica();
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
 	
+	public void onRowDeleteCurso(HabilidadViewDTO habilidadViewDTO)
+	{
+		HabilidadDTO habilidadDTO;
+		try {
+			habilidadDTO=new HabilidadDTO();
+			habilidadDTO.setHabCodigo(habilidadViewDTO.getHabCodigo());
+			candidatoService.removeHabilidad(habilidadDTO);
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+			readCurso();
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
+	public void onRowDeleteAdicional(HabilidadViewDTO habilidadViewDTO)
+	{
+		HabilidadDTO habilidadDTO;
+		try {
+			habilidadDTO=new HabilidadDTO();
+			habilidadDTO.setHabCodigo(habilidadViewDTO.getHabCodigo());
+			candidatoService.removeHabilidad(habilidadDTO);
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+			readAdicional();
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
+	
+	public void onRowDeleteIdioma(HabilidadViewDTO habilidadViewDTO)
+	{
+		HabilidadDTO habilidadDTO;
+		try {
+			habilidadDTO=new HabilidadDTO();
+			habilidadDTO.setHabCodigo(habilidadViewDTO.getHabCodigo());
+			candidatoService.removeHabilidad(habilidadDTO);
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+			readIdioma();
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
 	
 }
