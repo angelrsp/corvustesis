@@ -17,6 +17,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 
@@ -64,7 +65,16 @@ public class CandidatoDTO implements Serializable {
 
 	@Column(name="can_sexo")
 	private Integer canSexo;
+	
+	@Column(name="can_foto_byte")
+	private byte[] canFotoByte;
 
+	@Column(name="can_foto")
+	private String canFoto;
+
+	@Transient
+	private Boolean canFotoVerificar;
+	
 	@Column(name="can_tipo_identificacion")
 	private Integer canTipoIdentificacion;
 
@@ -155,6 +165,15 @@ public class CandidatoDTO implements Serializable {
 		this.segUsuario = segUsuario;
 	}
 
+	public Boolean getCanFotoVerificar() {
+		//ApplicationUtility.saveToDisk(this.canFotoByte, this.canFoto);
+		return canFotoVerificar;
+	}
+
+	public void setCanFotoVerificar(Boolean canFotoVerificar) {
+		this.canFotoVerificar = canFotoVerificar;
+	}
+
 	public String getCanLugarNacimiento() {
 		return this.canLugarNacimiento;
 	}
@@ -185,6 +204,22 @@ public class CandidatoDTO implements Serializable {
 
 	public void setCanSexo(Integer canSexo) {
 		this.canSexo = canSexo;
+	}
+
+	public byte[] getCanFotoByte() {
+		return canFotoByte;
+	}
+
+	public void setCanFotoByte(byte[] canFotoByte) {
+		this.canFotoByte = canFotoByte;
+	}
+
+	public String getCanFoto() {
+		return canFoto;
+	}
+
+	public void setCanFoto(String canFoto) {
+		this.canFoto = canFoto;
 	}
 
 	public Integer getCanTipoIdentificacion() {

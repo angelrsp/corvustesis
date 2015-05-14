@@ -91,6 +91,8 @@ public class HabilidadViewDTO implements Serializable {
 	private String nivel;
 
 	private String pais;
+	
+	private String idioma;
 
 	public HabilidadViewDTO() {
 	}
@@ -301,6 +303,14 @@ public class HabilidadViewDTO implements Serializable {
 
 	public void setPais(String pais) {
 		this.pais = pais;
+	}
+
+	public String getIdioma() {
+		return idioma;
+	}
+
+	public void setIdioma(String idioma) {
+		this.idioma = idioma;
 	}
 
 }

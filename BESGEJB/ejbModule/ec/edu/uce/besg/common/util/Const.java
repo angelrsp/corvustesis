@@ -27,6 +27,10 @@ public final class Const {
 	
 	public static final Integer FACULTADES = 45;
 	
+	public static final Integer IDIOMA_CATALOGO = 49;
+	
+	public static final Integer NIVEL_IDIOMA = 54;
+	
 	//Codigos de Catalogo;
 	public static final Integer CEDULA = 26;
 	
@@ -36,5 +40,10 @@ public final class Const {
 	public static final Integer FORMACION_ACADEMICA = 1;
 	
 	public static final Integer CURSO = 2;
+	
+	public static final Integer IDIOMA = 3;
+	
+	public static final Integer ADICIONAL = 4;
+	
 	
 }

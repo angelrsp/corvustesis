@@ -18,4 +18,6 @@ public interface SecurityService {
 	UsuarioDTO authenticateUser(UsuarioDTO usuarioDTO)
 			throws CorvustecException;
 
+	void recoverPassword(UsuarioDTO usuarioDTO) throws CorvustecException;
+
 }

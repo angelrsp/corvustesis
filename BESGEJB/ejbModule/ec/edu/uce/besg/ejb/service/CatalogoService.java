@@ -33,4 +33,8 @@ public interface CatalogoService {
 
 	List<CatalogoDTO> readCatalogo(Integer code) throws CorvustecException;
 
+	List<CatalogoDTO> readIdioma() throws CorvustecException;
+
+	List<CatalogoDTO> readNivelIdioma() throws CorvustecException;
+
 }
