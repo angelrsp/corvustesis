@@ -2,6 +2,7 @@ package ec.edu.uce.besg.ejb.persistence.entity.view;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -59,6 +60,10 @@ public class ResultadoViewDTO implements Serializable {
 
 	@Column(name="rsu_respuesta")
 	private Integer rsuRespuesta;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="rsu_valor_date")
+	private Date rsuValorDate;
 
 	@Column(name="rsu_valor_int")
 	private Integer rsuValorInt;
@@ -187,6 +192,14 @@ public class ResultadoViewDTO implements Serializable {
 
 	public void setRsuRespuesta(Integer rsuRespuesta) {
 		this.rsuRespuesta = rsuRespuesta;
+	}
+
+	public Date getRsuValorDate() {
+		return this.rsuValorDate;
+	}
+
+	public void setRsuValorDate(Date rsuValorDate) {
+		this.rsuValorDate = rsuValorDate;
 	}
 
 	public Integer getRsuValorInt() {

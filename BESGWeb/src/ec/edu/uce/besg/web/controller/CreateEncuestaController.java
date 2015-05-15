@@ -123,19 +123,6 @@ public class CreateEncuestaController implements Serializable {
 		}
 	}
 	
-	public void onClickEdit(EncuestaDTO encuestaDTO)
-	{
-		
-	}
-	
-	public void onClickViewCategoria(EncuestaDTO encuestaDTO)
-	{
-		createEncuestaDataManager.setEncuestaDTO(encuestaDTO);
-		readCategoria();
-		RequestContext.getCurrentInstance().execute("PF('dlgCategoria').show();");
-	}
-
-	
 	public void onClickSaveCategoria()
 	{
 		try {
@@ -147,19 +134,6 @@ public class CreateEncuestaController implements Serializable {
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
-	}
-	
-	public void onClickEditCategoria(CategoriaDTO categoriaDTO)
-	{
-		
-	}
-
-
-	public void onClickViewPreguntas(CategoriaDTO categoriaDTO)
-	{
-		createEncuestaDataManager.setCategoriaDTO(categoriaDTO);
-		readPregunta();
-		RequestContext.getCurrentInstance().execute("PF('dlgPreguntas').show();");
 	}
 	
 	public void onClickSavePregunta()
@@ -180,18 +154,6 @@ public class CreateEncuestaController implements Serializable {
 		}
 	}
 	
-	public void onClickEditPregunta(PreguntaDTO preguntaDTO)
-	{
-		
-	}
-
-	public void onClickViewRespuesta(PreguntaDTO preguntaDTO)
-	{
-		createEncuestaDataManager.setPreguntaDTO(preguntaDTO);
-		readRespuesta();
-		RequestContext.getCurrentInstance().execute("PF('dlgRespuesta').show();");
-	}
-	
 	public void onClickSaveRespuesta()
 	{
 		try {
@@ -205,9 +167,66 @@ public class CreateEncuestaController implements Serializable {
 		}
 	}
 	
+	
+	public void onClickEdit(EncuestaDTO encuestaDTO)
+	{
+		createEncuestaDataManager.setEncuestaDTO(encuestaDTO);
+	}
+	
+	public void onClickEditCategoria(CategoriaDTO categoriaDTO)
+	{
+		createEncuestaDataManager.setCategoriaDTO(categoriaDTO);
+	}
+	
+	public void onClickEditPregunta(PreguntaDTO preguntaDTO)
+	{
+		createEncuestaDataManager.setPreguntaDTO(preguntaDTO);
+		createEncuestaDataManager.setControlCode(preguntaDTO.getCueControl().getConCodigo());
+	}
+
 	public void onClickEditRespuesta(RespuestaDTO respuestaDTO)
 	{
-		
+		createEncuestaDataManager.setRespuestaDTO(respuestaDTO);
 	}
+	
+	
+	public void onClickViewCategoria(EncuestaDTO encuestaDTO)
+	{
+		createEncuestaDataManager.setEncuestaDTO(encuestaDTO);
+		readCategoria();
+		RequestContext.getCurrentInstance().execute("PF('dlgCategoria').show();");
+	}
+	
+	public void onClickViewRespuesta(PreguntaDTO preguntaDTO)
+	{
+		createEncuestaDataManager.setPreguntaDTO(preguntaDTO);
+		readRespuesta();
+		RequestContext.getCurrentInstance().execute("PF('dlgRespuesta').show();");
+	}
+	
+	public void onClickViewPreguntas(CategoriaDTO categoriaDTO)
+	{
+		createEncuestaDataManager.setCategoriaDTO(categoriaDTO);
+		readPregunta();
+		RequestContext.getCurrentInstance().execute("PF('dlgPreguntas').show();");
+	}
+	
+	
+	public void onCloseCategoria()
+	{
+		createEncuestaDataManager.setEncuestaDTO(new EncuestaDTO());
+	}
+	
+	public void onClosePregunta()
+	{
+		createEncuestaDataManager.setCategoriaDTO(new CategoriaDTO());
+	}
+
+	public void onCloseRespuesta()
+	{
+		createEncuestaDataManager.setPreguntaDTO(new PreguntaDTO());
+	}
+
+	
 }
 

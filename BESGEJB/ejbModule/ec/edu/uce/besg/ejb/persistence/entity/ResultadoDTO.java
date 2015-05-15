@@ -32,6 +32,8 @@ public class ResultadoDTO implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date resValorDate;
 
+	@Transient
+	private String[] resArrayString;
 	
 	//bi-directional many-to-one association to CandidatoDTO
 	@ManyToOne
@@ -92,6 +94,14 @@ public class ResultadoDTO implements Serializable {
 
 	public void setResValorDate(Date resValorDate) {
 		this.resValorDate = resValorDate;
+	}
+
+	public String[] getResArrayString() {
+		return resArrayString;
+	}
+
+	public void setResArrayString(String[] resArrayString) {
+		this.resArrayString = resArrayString;
 	}
 
 }

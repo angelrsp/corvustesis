@@ -38,7 +38,7 @@
 			</p:column>
 
 			<p:column headerText="Resultado">
-				<h:outputText value="#{res.rsuValorInt!=null?res.resDescripcion:res.rsuValorString}" />
+				<h:outputText value="#{res.rsuValorInt!=null?res.resDescripcion:res.rsuValorDate!=null?res.rsuValorDate:res.rsuValorString}" />
 			</p:column>
 
 		

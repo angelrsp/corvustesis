@@ -6,6 +6,8 @@
 
 
 	<p:dialog widgetVar="dlgRespuesta" width="900" minHeight="40" modal="true" appendTo="@(body)" header="Respuestas">
+
+	<p:ajax event="close" listener="#{createEncuestaController.onCloseRespuesta}"/>
 	
 	<h:form id="frmRespuesta">
 	
@@ -27,7 +29,7 @@
 			    </p:column>		
 			
 				<p:column width="35">
-			        <p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{createEncuestaController.onClickEditRespuesta(enc)}" process="@this"/>
+			        <p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{createEncuestaController.onClickEditRespuesta(res)}" process="@this" update=":frmRespuesta:pnlRespuesta"/>
 			    </p:column>		
 			
 			</p:dataTable>		
