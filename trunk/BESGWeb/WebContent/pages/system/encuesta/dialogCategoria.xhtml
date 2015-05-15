@@ -7,6 +7,8 @@
 
 	<p:dialog widgetVar="dlgCategoria" width="900" minHeight="40" modal="true" appendTo="@(body)" header="Categoría">
 	
+	<p:ajax event="close" listener="#{createEncuestaController.onCloseCategoria}"/>
+	
 	<h:form id="frmCategoria">
 	
 		<p:panel id="pnlCategoria">

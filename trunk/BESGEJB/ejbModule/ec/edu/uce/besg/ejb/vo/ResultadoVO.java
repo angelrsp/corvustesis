@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import ec.edu.uce.besg.ejb.persistence.entity.CandidatoDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.PreguntaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.RespuestaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.ResultadoDTO;
 
 public class ResultadoVO implements Serializable{
@@ -14,11 +17,18 @@ public class ResultadoVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private List<ResultadoDTO> resultadoList;
-	private List<Integer> codeRadioList;
+	private String[] checkBoxCode;
+	private PreguntaDTO preguntaDTO;
+	private ResultadoDTO resultadoDTO;
+	private CandidatoDTO candidatoDTO;
+	private RespuestaDTO respuestaDTO;
 			
 	public ResultadoVO() {
 		resultadoList=new ArrayList<ResultadoDTO>();
-		codeRadioList=new ArrayList<Integer>();
+		preguntaDTO=new PreguntaDTO();
+		resultadoDTO=new ResultadoDTO();
+		candidatoDTO=new CandidatoDTO();
+		respuestaDTO=new RespuestaDTO();
 	}
 
 	public List<ResultadoDTO> getResultadoList() {
@@ -29,14 +39,46 @@ public class ResultadoVO implements Serializable{
 		this.resultadoList = resultadoList;
 	}
 
-	public List<Integer> getCodeRadioList() {
-		return codeRadioList;
+	public String[] getCheckBoxCode() {
+		return checkBoxCode;
 	}
 
-	public void setCodeRadioList(List<Integer> codeRadioList) {
-		this.codeRadioList = codeRadioList;
+	public void setCheckBoxCode(String[] checkBoxCode) {
+		this.checkBoxCode = checkBoxCode;
 	}
-	
+
+	public PreguntaDTO getPreguntaDTO() {
+		return preguntaDTO;
+	}
+
+	public void setPreguntaDTO(PreguntaDTO preguntaDTO) {
+		this.preguntaDTO = preguntaDTO;
+	}
+
+	public ResultadoDTO getResultadoDTO() {
+		return resultadoDTO;
+	}
+
+	public void setResultadoDTO(ResultadoDTO resultadoDTO) {
+		this.resultadoDTO = resultadoDTO;
+	}
+
+	public CandidatoDTO getCandidatoDTO() {
+		return candidatoDTO;
+	}
+
+	public void setCandidatoDTO(CandidatoDTO candidatoDTO) {
+		this.candidatoDTO = candidatoDTO;
+	}
+
+	public RespuestaDTO getRespuestaDTO() {
+		return respuestaDTO;
+	}
+
+	public void setRespuestaDTO(RespuestaDTO respuestaDTO) {
+		this.respuestaDTO = respuestaDTO;
+	}
+
 	
 	
 }

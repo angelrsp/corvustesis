@@ -192,6 +192,19 @@ public class CuestionarioServiceImpl implements CuestionarioService{
 					factoryDAO.getResultadoDAOImpl().create(resultadoDTO);
 				else if(resultadoDTO.getResValorInt()!=null)
 					factoryDAO.getResultadoDAOImpl().create(resultadoDTO);
+				else if(resultadoDTO.getResValorDate()!=null)
+					factoryDAO.getResultadoDAOImpl().create(resultadoDTO);
+				else if(resultadoDTO.getResArrayString()!=null)
+				{
+					for(int i=0;i<resultadoDTO.getResArrayString().length;i++)
+					{
+						if(resultadoDTO.getResArrayString()[i]!=null)
+						{
+							resultadoDTO.setResValorInt(Integer.valueOf(resultadoDTO.getResArrayString()[i]));
+							factoryDAO.getResultadoDAOImpl().create(resultadoDTO);
+						}
+					}
+				}
 			}
 		} catch (Exception e) {
 			logger.info("Error al registrar Candidato {}", e.toString());

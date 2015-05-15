@@ -17,6 +17,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIInput;
 import javax.faces.component.UIOutput;
 import javax.faces.component.UISelectItems;
+import javax.faces.component.html.HtmlInputText;
 import javax.faces.component.html.HtmlInputTextarea;
 import javax.faces.component.html.HtmlOutputText;
 import javax.faces.component.html.HtmlPanelGrid;
@@ -26,6 +27,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import org.primefaces.component.calendar.Calendar;
+import org.primefaces.component.inputtext.InputText;
 import org.primefaces.component.inputtextarea.InputTextarea;
 
 import ec.edu.uce.besg.common.util.ApplicationUtility;
@@ -38,6 +40,7 @@ import ec.edu.uce.besg.ejb.persistence.entity.ResultadoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 import ec.edu.uce.besg.ejb.service.CandidatoService;
 import ec.edu.uce.besg.ejb.service.CuestionarioService;
+import ec.edu.uce.besg.ejb.vo.ResultadoVO;
 import ec.edu.uce.besg.web.datamanager.EncuestaDataManager;
 import ec.edu.uce.besg.web.util.JsfUtil;
 
@@ -80,6 +83,7 @@ public class EncuestaController implements Serializable{
 		{
 			HtmlOutputText label;
 		    InputTextarea txtArea;
+		    InputText txt;
 		    Calendar calendar;
 		    HtmlSelectOneRadio htmlSelectOneRadio;
 		    HtmlSelectManyCheckbox htmlSelectManyCheckbox;
@@ -117,7 +121,6 @@ public class EncuestaController implements Serializable{
 					    label.setValue(categoriaDTO.getCatDescripcion());
 					    label.setStyle("font-weight:bold;font-size:12pt;");
 					    
-					    
 					    htmlPanelGrid.getChildren().add(label);
 					    
 					    label=new HtmlOutputText();
@@ -127,20 +130,21 @@ public class EncuestaController implements Serializable{
 					    
 						for(PreguntaDTO preguntaDTO:cuestionarioService.readPregunta(pregunta))
 						{
+
 							label=new HtmlOutputText();
-							txtArea = new InputTextarea();
-							txtArea.setAutoResize(false);
+							label.setValue(preguntaDTO.getPreDescripcion());
+							htmlPanelGrid.getChildren().add(label);	
 							
-							
-							if(preguntaDTO.getCueControl().getConCodigo().equals(2))
+							if(preguntaDTO.getCueControl().getConCodigo().equals(3))
 							{
-								label.setValue(preguntaDTO.getPreDescripcion());
-								
 								respuesta=new RespuestaDTO();
 								respuesta.setCuePregunta(preguntaDTO);
 								
 								for(RespuestaDTO respuestaDTO:cuestionarioService.readRespuesta(respuesta))
 								{
+									txtArea = new InputTextarea();
+									txtArea.setAutoResize(false);
+									
 									resultadoDTO=new ResultadoDTO();
 									resultadoDTO.setCueRespuesta(respuestaDTO);
 									resultadoDTO.setBemCandidato(encuestaDataManager.getCandidatoDTO());
@@ -150,15 +154,39 @@ public class EncuestaController implements Serializable{
 									expresion=ApplicationUtility.getInstance().appendStringBuilder("#{encuestaDataManager.resultadoList["+numero+"].resValorString}").toString();
 								    txtArea.setValueExpression("value", createValueExpression(expresion, String.class));
 								    txtArea.setRequired(true);
-
-								    htmlPanelGrid.getChildren().add(label);	    
+								        
 								    htmlPanelGrid.getChildren().add(txtArea);
 								}
+								numero=numero+1;
 							}
+							//textbox
+							else if(preguntaDTO.getCueControl().getConCodigo().equals(2))
+							{
+								respuesta=new RespuestaDTO();
+								respuesta.setCuePregunta(preguntaDTO);
+								
+								for(RespuestaDTO respuestaDTO:cuestionarioService.readRespuesta(respuesta))
+								{
+									txt = new InputText();
+									
+									resultadoDTO=new ResultadoDTO();
+									resultadoDTO.setCueRespuesta(respuestaDTO);
+									resultadoDTO.setBemCandidato(encuestaDataManager.getCandidatoDTO());
+									encuestaDataManager.getResultadoList().add(resultadoDTO);
+									
+									txt.setId("respuesta"+numero.toString()); // Must be unique!
+									expresion=ApplicationUtility.getInstance().appendStringBuilder("#{encuestaDataManager.resultadoList["+numero+"].resValorString}").toString();
+								    txt.setValueExpression("value", createValueExpression(expresion, String.class));
+								    txt.setRequired(true);
+
+								    htmlPanelGrid.getChildren().add(label);	    
+								    htmlPanelGrid.getChildren().add(txt);
+								}
+								numero=numero+1;
+							}
+							//Radio
 							else if(preguntaDTO.getCueControl().getConCodigo().equals(4))
 							{
-								label.setValue(preguntaDTO.getPreDescripcion());
-								
 								htmlSelectOneRadio=new HtmlSelectOneRadio();
 								
 								ArrayList<SelectItem> radioBtnOptionsList = new ArrayList<SelectItem>();
@@ -196,12 +224,12 @@ public class EncuestaController implements Serializable{
 								
 								htmlPanelGrid.getChildren().add(label);
 								htmlPanelGrid.getChildren().add(htmlSelectOneRadio);
+								
+								numero=numero+1;
 							}
+							//calendario
 							else if(preguntaDTO.getCueControl().getConCodigo().equals(6))
 							{
-								
-								label.setValue(preguntaDTO.getPreDescripcion());
-								
 								respuesta=new RespuestaDTO();
 								respuesta.setCuePregunta(preguntaDTO);
 								
@@ -218,10 +246,13 @@ public class EncuestaController implements Serializable{
 								    calendar.setValueExpression("value", createValueExpressionDate(expresion, Date.class));
 								    calendar.setRequired(true);
 								    calendar.setPattern("yyyy-MM-dd");
+								    calendar.setNavigator(true);
 
 								    htmlPanelGrid.getChildren().add(label);	    
 								    htmlPanelGrid.getChildren().add(calendar);
 								}
+								
+								numero=numero+1;
 							}
 							
 							else if(preguntaDTO.getCueControl().getConCodigo().equals(7))
@@ -229,19 +260,26 @@ public class EncuestaController implements Serializable{
 								label.setValue(preguntaDTO.getPreDescripcion());
 								
 								htmlSelectManyCheckbox=new HtmlSelectManyCheckbox();
+								htmlSelectManyCheckbox.setRequired(true);
 								
 								ArrayList<SelectItem> checkBoxList = new ArrayList<SelectItem>();
 								
 								respuesta=new RespuestaDTO();
 								respuesta.setCuePregunta(preguntaDTO);
 								
-								for(RespuestaDTO respuestaDTO:cuestionarioService.readRespuesta(respuesta))
+								List<RespuestaDTO> respuestaTmpList=cuestionarioService.readRespuesta(respuesta);
+								
+								for(RespuestaDTO respuestaDTO:respuestaTmpList)
 								{
-									resultadoDTO=new ResultadoDTO();
-									resultadoDTO.setCueRespuesta(respuestaDTO);
-									resultadoDTO.setBemCandidato(encuestaDataManager.getCandidatoDTO());
-									encuestaDataManager.getResultadoList().add(resultadoDTO);										
-									
+									if(!primero)
+									{
+										primero=Boolean.TRUE;
+										resultadoDTO=new ResultadoDTO();
+										resultadoDTO.setCueRespuesta(respuestaDTO);
+										resultadoDTO.setBemCandidato(encuestaDataManager.getCandidatoDTO());
+										resultadoDTO.setResArrayString(new String[respuestaTmpList.size()]);
+										encuestaDataManager.getResultadoList().add(resultadoDTO);
+									}
 									checkBoxList.add(new SelectItem(respuestaDTO.getResCodigo(),respuestaDTO.getResDescripcion()));
 								}
 								primero=Boolean.FALSE;
@@ -250,17 +288,17 @@ public class EncuestaController implements Serializable{
 								checkBoxs.setValue(checkBoxList);
 								// Add radioButton options.
 								htmlSelectManyCheckbox.getChildren().add(checkBoxs);
-								expresion=ApplicationUtility.getInstance().appendStringBuilder("#{encuestaDataManager.resultadoList["+numero+"].resValorInt}").toString();
+								expresion=ApplicationUtility.getInstance().appendStringBuilder("#{encuestaDataManager.resultadoList["+numero+"].resArrayString}").toString();
 
-								htmlSelectManyCheckbox.setValueExpression("value", createValueExpression(expresion, String.class));
+								htmlSelectManyCheckbox.setValueExpression("value", createValueExpressionStringArray(expresion, String[].class));
 								htmlSelectManyCheckbox.setLayout("pageDirection");
 								
 								
 								htmlPanelGrid.getChildren().add(label);
 								htmlPanelGrid.getChildren().add(htmlSelectManyCheckbox);
+								
+								numero=numero+1;
 							}
-							
-						    numero=numero+1;
 						}
 					}
 				}
@@ -293,6 +331,13 @@ public class EncuestaController implements Serializable{
 	private ValueExpression createValueExpressionDate(String binding, Class<Date> clazz) {
         final ValueExpression ve = getExpressionFactory()
                 .createValueExpression(getELContext(), binding, Date.class);
+
+        return ve;
+    }
+	
+	private ValueExpression createValueExpressionStringArray(String binding, Class<String[]> clazz) {
+        final ValueExpression ve = getExpressionFactory()
+                .createValueExpression(getELContext(), binding, String[].class);
 
         return ve;
     }

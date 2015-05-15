@@ -54,5 +54,5 @@ public class EncuestaDataManager implements Serializable{
 	public void setCandidatoDTO(CandidatoDTO candidatoDTO) {
 		this.candidatoDTO = candidatoDTO;
 	}
-	
+
 }

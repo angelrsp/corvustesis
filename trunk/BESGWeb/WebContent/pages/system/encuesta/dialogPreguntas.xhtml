@@ -5,9 +5,13 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
-	<p:dialog widgetVar="dlgPreguntas" width="900" minHeight="40" modal="true" appendTo="@(body)" header="Preguntas">
+	<p:dialog widgetVar="dlgPreguntas" width="900" modal="true" appendTo="@(body)" header="Preguntas">
+
+	<p:ajax event="close" listener="#{createEncuestaController.onClosePregunta}"/>
 	
 	<h:form id="frmPreguntas">
+	
+	<p:scrollPanel mode="native" style="height:500px">
 	
 		<p:panel id="pnlPreguntas">
 			<table>
@@ -50,8 +54,6 @@
 			        <h:outputText value="#{pre.cueControl.conDescripcion}" />
 			    </p:column>		
 
-
-			
 				<p:column width="35">
 			        <p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{createEncuestaController.onClickEditPregunta(pre)}" process="@this" update=":frmPreguntas:pnlPreguntas"/>
 			    </p:column>		
@@ -62,6 +64,7 @@
 			
 			</p:dataTable>		
 		</p:panel>
+	</p:scrollPanel>
 	
 	</h:form>
 	</p:dialog>
