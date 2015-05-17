@@ -54,7 +54,7 @@ public class SecurityServiceImpl implements SecurityService {
 		List<UsuarioDTO> usuarioList;
 		try {
 			usuarioDTO.setUsuPassword(EncryptionUtility.getInstance().encriptar(usuarioDTO.getUsuPassword()));
-			usuarioList=factoryDAO.getUsuarioDAOImpl().getByAnd(usuarioDTO);
+			usuarioList=factoryDAO.getUsuarioDAOImpl().getByAndJoinCandidato(usuarioDTO);
 			if(usuarioList.size()==1)
 				return usuarioList.get(0);
 			else

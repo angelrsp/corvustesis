@@ -45,6 +45,9 @@ public class ResultadoViewDTO implements Serializable {
 	@Column(name="res_codigo")
 	private Integer resCodigo;
 
+	@Column(name="res_orden")
+	private Integer resOrden;
+
 	@Column(name="res_descripcion")
 	private String resDescripcion;
 
@@ -54,6 +57,13 @@ public class ResultadoViewDTO implements Serializable {
 	@Column(name="rsu_candidato")
 	private Integer rsuCandidato;
 
+	@Column(name="can_nombres")
+	private String canNombres;
+
+	@Column(name="can_apellidos")
+	private String canApellidos;
+
+	
 	@Id
 	@Column(name="rsu_codigo")
 	private Integer rsuCodigo;
@@ -70,10 +80,20 @@ public class ResultadoViewDTO implements Serializable {
 
 	@Column(name="rsu_valor_string")
 	private String rsuValorString;
+	
+	@Transient
+	private Long count;
 
 	public ResultadoViewDTO() {
 	}
 
+	public ResultadoViewDTO(String resDescripcion,Integer resOrden,Long count) {
+		this.resOrden=resOrden;
+		this.resDescripcion=resDescripcion;
+		this.count=count;
+	}
+	
+	
 	public Integer getCatCodigo() {
 		return this.catCodigo;
 	}
@@ -216,6 +236,38 @@ public class ResultadoViewDTO implements Serializable {
 
 	public void setRsuValorString(String rsuValorString) {
 		this.rsuValorString = rsuValorString;
+	}
+
+	public Long getCount() {
+		return count;
+	}
+
+	public void setCount(Long count) {
+		this.count = count;
+	}
+
+	public String getCanNombres() {
+		return canNombres;
+	}
+
+	public void setCanNombres(String canNombres) {
+		this.canNombres = canNombres;
+	}
+
+	public String getCanApellidos() {
+		return canApellidos;
+	}
+
+	public void setCanApellidos(String canApellidos) {
+		this.canApellidos = canApellidos;
+	}
+
+	public Integer getResOrden() {
+		return resOrden;
+	}
+
+	public void setResOrden(Integer resOrden) {
+		this.resOrden = resOrden;
 	}
 
 }
