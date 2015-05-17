@@ -26,6 +26,11 @@
 				</tr>
 				
 				<tr>
+					<td><h:outputText value="Requerido:" /></td>
+					<td><p:inputSwitch value="#{createEncuestaDataManager.preguntaDTO.preRequerido}"/></td>
+				</tr>
+				
+				<tr>
 					<td><h:outputText value="Control:" /></td>
 					<td>
 						<p:selectOneMenu value="#{createEncuestaDataManager.controlCode}">
@@ -48,6 +53,10 @@
 
 				<p:column headerText="Orden">
 			        <h:outputText value="#{pre.preOrden}" />
+			    </p:column>		
+
+				<p:column headerText="Requerido">
+			        <h:outputText value="#{pre.preRequerido?'Si':'No'}" />
 			    </p:column>		
 
 				<p:column headerText="Control">

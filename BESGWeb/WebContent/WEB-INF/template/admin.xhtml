@@ -29,8 +29,14 @@
 							<p:menubar id="menuPublico" style="width:30%">
 								<p:submenu label="Sistema">
 									<p:menuitem value="Encuesta" url="/pages/system/encuesta/createEncuesta.xhtml" />
+									 <p:submenu label="Reporte">
+					                    <p:menuitem value="Resultados" url="/pages/system/encuesta/report/respuesta.xhtml" />
+						            </p:submenu>
 								</p:submenu>								
-								<p:menuitem value="Salir" url="#" />
+								
+								<f:facet name="options">
+						            <p:commandButton actionListener="#{indexController.logout}" value="Salir" icon="ui-icon-extlink" />
+						        </f:facet>
 							</p:menubar>																
 						</td>
 					</tr>
@@ -50,8 +56,6 @@
 
 			</div>
 		</div>
-		
-	
 			
 </div>
 

@@ -41,7 +41,9 @@
 									<p:menuitem value="Resultado" url="/pages/candidato/resultado.xhtml" />
 								</p:submenu>								
 																
-								<p:menuitem value="Salir" url="#" />
+								<f:facet name="options">
+						            <p:commandButton actionListener="#{indexController.logout}" value="Salir" icon="ui-icon-extlink" immediate="true" process="@this"/>
+						        </f:facet>
 							</p:menubar>																
 						</td>
 					</tr>

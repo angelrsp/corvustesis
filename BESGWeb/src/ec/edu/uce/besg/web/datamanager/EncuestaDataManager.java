@@ -25,6 +25,8 @@ public class EncuestaDataManager implements Serializable{
 	private UsuarioDTO usuarioDTO;
 	private CandidatoDTO candidatoDTO;
 	
+	private Boolean disableSave=Boolean.TRUE;
+	
 	public EncuestaDataManager() {
 		resultadoList=new ArrayList<ResultadoDTO>();
 		usuarioDTO=new UsuarioDTO();
@@ -53,6 +55,14 @@ public class EncuestaDataManager implements Serializable{
 
 	public void setCandidatoDTO(CandidatoDTO candidatoDTO) {
 		this.candidatoDTO = candidatoDTO;
+	}
+
+	public Boolean getDisableSave() {
+		return disableSave;
+	}
+
+	public void setDisableSave(Boolean disableSave) {
+		this.disableSave = disableSave;
 	}
 
 }

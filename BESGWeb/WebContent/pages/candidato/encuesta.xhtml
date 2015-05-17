@@ -11,7 +11,7 @@
 
 		<h:form id="contenido">
 
-			<p:panel>
+			<p:panel id="pnlPreguntas">
 
 				<table>
 					<tr align="center">
@@ -28,12 +28,13 @@
 					
 				</table>
 
+				<p:spacer height="20"/>
 
-				<h:panelGrid binding="#{encuestaController.htmlPanelGrid}"></h:panelGrid>
+				<p:panelGrid binding="#{encuestaController.panelGrid}"></p:panelGrid>
 
 				<p:spacer height="30"/>
 				
-				<p:commandButton value="Guardar" actionListener="#{encuestaController.onClickSave}"/>			
+				<p:commandButton value="Guardar" actionListener="#{encuestaController.onClickSave}" disabled="#{encuestaDataManager.disableSave}" update="pnlPreguntas"/>			
 			
 			</p:panel>	
 			

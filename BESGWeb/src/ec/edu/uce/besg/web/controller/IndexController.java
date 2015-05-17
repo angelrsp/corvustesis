@@ -6,6 +6,7 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import ec.edu.uce.besg.web.util.*;
@@ -51,5 +52,14 @@ public class IndexController implements Serializable {
 	
 	public void redirectBienCandidato(ActionEvent actionEvent) throws IOException {
 		JsfUtil.redirect("pages/candidato/bienvenido.xhtml");
+    }
+	
+	public void logout() {
+        try {
+        	FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+			JsfUtil.redirect("index.xhtml");
+		} catch (IOException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
     }
 }
