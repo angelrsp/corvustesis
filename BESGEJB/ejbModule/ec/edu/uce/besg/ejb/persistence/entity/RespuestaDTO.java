@@ -24,7 +24,9 @@ public class RespuestaDTO implements Serializable {
 	@Column(name="res_descripcion")
 	private String resDescripcion;
 
-
+	@Column(name="res_orden")
+	private Integer resOrden;
+	
 	//bi-directional many-to-one association to PreguntaDTO
 	@ManyToOne
 	@JoinColumn(name="res_pregunta")
@@ -51,6 +53,14 @@ public class RespuestaDTO implements Serializable {
 
 	public void setResDescripcion(String resDescripcion) {
 		this.resDescripcion = resDescripcion;
+	}
+
+	public Integer getResOrden() {
+		return resOrden;
+	}
+
+	public void setResOrden(Integer resOrden) {
+		this.resOrden = resOrden;
 	}
 
 	public PreguntaDTO getCuePregunta() {

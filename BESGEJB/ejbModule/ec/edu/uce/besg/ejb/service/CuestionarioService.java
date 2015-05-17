@@ -53,4 +53,9 @@ public interface CuestionarioService {
 	List<ResultadoViewDTO> readResultadoView(ResultadoViewDTO resultadoViewDTO)
 			throws CorvustecException;
 
+	List<ResultadoViewDTO> readResultadoCountView(
+			ResultadoViewDTO resultadoViewDTO) throws CorvustecException;
+
+	PreguntaDTO readPregunta(Object id) throws CorvustecException;
+
 }

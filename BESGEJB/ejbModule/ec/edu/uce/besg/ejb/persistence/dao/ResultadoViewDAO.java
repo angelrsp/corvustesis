@@ -9,6 +9,9 @@ public interface ResultadoViewDAO extends AbstractFacade<ResultadoViewDTO> {
 	List<ResultadoViewDTO> getByAnd(ResultadoViewDTO objetoDTO)
 			throws SecurityException;
 
+	List<ResultadoViewDTO> getCount(ResultadoViewDTO objetoDTO)
+			throws SecurityException;
+
 	
 	
 	

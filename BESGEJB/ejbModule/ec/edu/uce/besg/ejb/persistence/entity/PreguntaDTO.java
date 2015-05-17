@@ -29,6 +29,9 @@ public class PreguntaDTO implements Serializable {
 	@Column(name="pre_orden")
 	private Integer preOrden;
 
+	@Column(name="pre_requerido")
+	private Boolean preRequerido;
+	
 	//bi-directional many-to-one association to ControlDTO
 	@ManyToOne
 	@JoinColumn(name="pre_control")
@@ -84,6 +87,14 @@ public class PreguntaDTO implements Serializable {
 
 	public void setPreOrden(Integer preOrden) {
 		this.preOrden = preOrden;
+	}
+
+	public Boolean getPreRequerido() {
+		return preRequerido;
+	}
+
+	public void setPreRequerido(Boolean preRequerido) {
+		this.preRequerido = preRequerido;
 	}
 
 	public void setCueCategoria(CategoriaDTO cueCategoria) {

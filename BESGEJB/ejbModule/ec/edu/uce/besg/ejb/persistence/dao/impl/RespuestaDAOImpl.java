@@ -68,6 +68,9 @@ public class RespuestaDAOImpl extends AbstractFacadeImpl<RespuestaDTO> implement
 	
 	        if(!predicateList.isEmpty())
 	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
+	        
+	        cq.orderBy(cb.asc(from.get("resOrden")));
+	        
 			typedQuery=entityManager.createQuery(cq);
 			list=typedQuery.getResultList();
 			return list;

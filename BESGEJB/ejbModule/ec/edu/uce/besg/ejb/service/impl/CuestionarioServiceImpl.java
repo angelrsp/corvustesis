@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -72,6 +73,21 @@ public class CuestionarioServiceImpl implements CuestionarioService{
 			
 		}		
 	}
+
+	@Override
+	public PreguntaDTO readPregunta(Object id) throws CorvustecException
+	{
+		try {
+			return factoryDAO.getPreguntaDAOImpl().find(id);
+		} catch (Exception e) {
+			logger.info("Error al readCuestionario {}", e.toString());
+			throw new CorvustecException("Error al registrar readCuestionario "+e.toString());
+		}
+		finally{
+			
+		}		
+	}
+
 	
 	@Override
 	public RespuestaDTO createOrUpdateRespuesta(RespuestaDTO respuestaDTO) throws CorvustecException
@@ -185,13 +201,25 @@ public class CuestionarioServiceImpl implements CuestionarioService{
 	@Override
 	public void createOrUpdateResultado(List<ResultadoDTO> resultadoList) throws CorvustecException
 	{
+		ResultadoDTO resultado;
+		RespuestaDTO respuestaDTO;
 		try {
 			for(ResultadoDTO resultadoDTO:resultadoList)
 			{
 				if(resultadoDTO.getResValorString()!=null)
 					factoryDAO.getResultadoDAOImpl().create(resultadoDTO);
 				else if(resultadoDTO.getResValorInt()!=null)
-					factoryDAO.getResultadoDAOImpl().create(resultadoDTO);
+				{
+					if(resultadoDTO.getResValorInt()!=0)
+					{
+						respuestaDTO=new RespuestaDTO();
+						resultado=(ResultadoDTO)BeanUtils.cloneBean(resultadoDTO);
+						resultado.setRsuCodigo(null);
+						respuestaDTO.setResCodigo(resultadoDTO.getResValorInt());
+						resultado.setCueRespuesta(respuestaDTO);
+						factoryDAO.getResultadoDAOImpl().create(resultado);						
+					}
+				}
 				else if(resultadoDTO.getResValorDate()!=null)
 					factoryDAO.getResultadoDAOImpl().create(resultadoDTO);
 				else if(resultadoDTO.getResArrayString()!=null)
@@ -200,8 +228,13 @@ public class CuestionarioServiceImpl implements CuestionarioService{
 					{
 						if(resultadoDTO.getResArrayString()[i]!=null)
 						{
-							resultadoDTO.setResValorInt(Integer.valueOf(resultadoDTO.getResArrayString()[i]));
-							factoryDAO.getResultadoDAOImpl().create(resultadoDTO);
+							respuestaDTO=new RespuestaDTO();
+							resultado=(ResultadoDTO)BeanUtils.cloneBean(resultadoDTO);
+							resultado.setRsuCodigo(null);
+							resultado.setResValorInt(Integer.valueOf(resultadoDTO.getResArrayString()[i]));
+							respuestaDTO.setResCodigo(Integer.valueOf(resultadoDTO.getResArrayString()[i]));
+							resultado.setCueRespuesta(respuestaDTO);
+							factoryDAO.getResultadoDAOImpl().create(resultado);
 						}
 					}
 				}
@@ -221,6 +254,21 @@ public class CuestionarioServiceImpl implements CuestionarioService{
 	{
 		try {
 			return factoryDAO.getResultadoViewDAOImpl().getByAnd(resultadoViewDTO);
+		} catch (Exception e) {
+			logger.info("Error al registrar Candidato {}", e.toString());
+			throw new CorvustecException("Error al registrar Candidato");
+		}
+		finally{
+			
+		}
+	}
+
+
+	@Override
+	public List<ResultadoViewDTO> readResultadoCountView(ResultadoViewDTO resultadoViewDTO) throws CorvustecException
+	{
+		try {
+			return factoryDAO.getResultadoViewDAOImpl().getCount(resultadoViewDTO);
 		} catch (Exception e) {
 			logger.info("Error al registrar Candidato {}", e.toString());
 			throw new CorvustecException("Error al registrar Candidato");
