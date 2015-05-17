@@ -17,6 +17,10 @@
 					<td><h:outputText value="Nombre:" /></td>
 					<td><h:inputTextarea style="width: 300px;" value="#{createEncuestaDataManager.respuestaDTO.resDescripcion}" /></td>
 				</tr>
+				<tr>
+					<td><h:outputText value="Orden:" /></td>
+					<td><h:inputText value="#{createEncuestaDataManager.respuestaDTO.resOrden}" /></td>
+				</tr>				
 				<tr align="center">
 					<td colspan="4"><p:commandButton value="Guardar" actionListener="#{createEncuestaController.onClickSaveRespuesta}" update="pnlRespuesta"/> </td>
 				</tr>				
@@ -26,6 +30,10 @@
 			
 				<p:column headerText="Nombre">
 			        <h:outputText value="#{res.resDescripcion}" />
+			    </p:column>		
+
+				<p:column headerText="Orden">
+			        <h:outputText value="#{res.resOrden}" />
 			    </p:column>		
 			
 				<p:column width="35">

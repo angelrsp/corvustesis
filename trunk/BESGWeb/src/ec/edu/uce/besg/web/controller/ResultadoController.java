@@ -10,7 +10,9 @@ import javax.faces.bean.ViewScoped;
 
 import ec.edu.uce.besg.common.util.CorvustecException;
 import ec.edu.uce.besg.ejb.persistence.entity.EncuestaDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.view.ResultadoViewDTO;
+import ec.edu.uce.besg.ejb.service.CandidatoService;
 import ec.edu.uce.besg.ejb.service.CuestionarioService;
 import ec.edu.uce.besg.web.datamanager.ResultadoDataManager;
 import ec.edu.uce.besg.web.util.JsfUtil;
@@ -26,6 +28,10 @@ public class ResultadoController implements Serializable{
 
 	@EJB
 	private CuestionarioService cuestionarioService;
+
+	@EJB
+	private CandidatoService candidatoService;
+
 	
 	@ManagedProperty(value="#{resultadoDataManager}")
 	private ResultadoDataManager resultadoDataManager;
@@ -46,6 +52,7 @@ public class ResultadoController implements Serializable{
 	@PostConstruct
 	private void init()
 	{
+		readCandidato();
 		readEncuesta();
 	}
 	
@@ -59,12 +66,25 @@ public class ResultadoController implements Serializable{
 	}
 	
 
+	private void readCandidato()
+	{
+		try {
+			resultadoDataManager.setUsuarioDTO((UsuarioDTO)JsfUtil.getObject("UsuarioDTO"));
+			resultadoDataManager.getCandidatoDTO().setSegUsuario((UsuarioDTO)JsfUtil.getObject("UsuarioDTO"));
+			resultadoDataManager.setCandidatoDTO(candidatoService.readCandidato(resultadoDataManager.getCandidatoDTO()));
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.getMessage());
+		}
+	}
+
+	
 	public void readResultado()
 	{
 		ResultadoViewDTO resultadoViewDTO;
 		try {
 			resultadoViewDTO=new ResultadoViewDTO();
 			resultadoViewDTO.setCatEncuesta(resultadoDataManager.getEncuestaCode());
+			resultadoViewDTO.setRsuCandidato(resultadoDataManager.getCandidatoDTO().getCanCodigo());
 			resultadoDataManager.setResultadoViewList(cuestionarioService.readResultadoView(resultadoViewDTO));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.getMessage());

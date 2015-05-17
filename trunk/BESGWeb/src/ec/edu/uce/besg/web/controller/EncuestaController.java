@@ -14,11 +14,7 @@ import javax.faces.application.Application;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIInput;
-import javax.faces.component.UIOutput;
 import javax.faces.component.UISelectItems;
-import javax.faces.component.html.HtmlInputText;
-import javax.faces.component.html.HtmlInputTextarea;
 import javax.faces.component.html.HtmlOutputText;
 import javax.faces.component.html.HtmlPanelGrid;
 import javax.faces.component.html.HtmlSelectManyCheckbox;
@@ -29,6 +25,8 @@ import javax.faces.model.SelectItem;
 import org.primefaces.component.calendar.Calendar;
 import org.primefaces.component.inputtext.InputText;
 import org.primefaces.component.inputtextarea.InputTextarea;
+import org.primefaces.component.panel.Panel;
+import org.primefaces.component.panelgrid.PanelGrid;
 
 import ec.edu.uce.besg.common.util.ApplicationUtility;
 import ec.edu.uce.besg.common.util.CorvustecException;
@@ -38,9 +36,9 @@ import ec.edu.uce.besg.ejb.persistence.entity.PreguntaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.RespuestaDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.ResultadoDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
+import ec.edu.uce.besg.ejb.persistence.entity.view.ResultadoViewDTO;
 import ec.edu.uce.besg.ejb.service.CandidatoService;
 import ec.edu.uce.besg.ejb.service.CuestionarioService;
-import ec.edu.uce.besg.ejb.vo.ResultadoVO;
 import ec.edu.uce.besg.web.datamanager.EncuestaDataManager;
 import ec.edu.uce.besg.web.util.JsfUtil;
 
@@ -64,7 +62,7 @@ public class EncuestaController implements Serializable{
 	private EncuestaDataManager encuestaDataManager;
 
 	
-	private HtmlPanelGrid htmlPanelGrid;
+	private PanelGrid panelGrid;
 	
 	public EncuestaController() {
 	
@@ -78,8 +76,9 @@ public class EncuestaController implements Serializable{
 		this.cuestionarioService = cuestionarioService;
 	}
 
-	public HtmlPanelGrid getHtmlPanelGrid() {
-		if(htmlPanelGrid==null)
+	public PanelGrid getPanelGrid() {
+
+		if(panelGrid==null)
 		{
 			HtmlOutputText label;
 		    InputTextarea txtArea;
@@ -98,208 +97,248 @@ public class EncuestaController implements Serializable{
 			CategoriaDTO categoria;
 			PreguntaDTO pregunta;
 			Boolean primero=Boolean.FALSE;
+			ResultadoViewDTO resultadoViewDTO;
 			try {
-				htmlPanelGrid=new HtmlPanelGrid();
-			    htmlPanelGrid.setColumns(2);
-			    htmlPanelGrid.setStyleClass("pnlGrid");
+				panelGrid=new PanelGrid();
+				panelGrid.setColumns(2);
+				//panelGrid.setStyleClass("pnlGrid");
 			    
 			    encuesta=new EncuestaDTO();
 			    encuesta.setEncHabilitado(true);
 			    
 			    for(EncuestaDTO encuestaDTO:cuestionarioService.readEncuesta(encuesta))
 			    {
-			    	numero=0;
-			    	categoria=new CategoriaDTO();
-			    	categoria.setCueEncuesta(encuestaDTO);
-			    	
-			    	for(CategoriaDTO categoriaDTO:cuestionarioService.readCategoria(categoria))
+			    	resultadoViewDTO=new ResultadoViewDTO();
+			    	resultadoViewDTO.setCatEncuesta(encuestaDTO.getEncCodigo());
+			    	resultadoViewDTO.setRsuCandidato(encuestaDataManager.getCandidatoDTO().getCanCodigo());
+			    	if(cuestionarioService.readResultadoView(resultadoViewDTO).isEmpty())
 			    	{
-					    pregunta=new PreguntaDTO();
-					    pregunta.setCueCategoria(categoriaDTO);
-					    
-					    label=new HtmlOutputText();
-					    label.setValue(categoriaDTO.getCatDescripcion());
-					    label.setStyle("font-weight:bold;font-size:12pt;");
-					    
-					    htmlPanelGrid.getChildren().add(label);
-					    
-					    label=new HtmlOutputText();
-					    label.setValue("");
-					    
-					    htmlPanelGrid.getChildren().add(label);
-					    
-						for(PreguntaDTO preguntaDTO:cuestionarioService.readPregunta(pregunta))
-						{
+			    		encuestaDataManager.setDisableSave(false);
+			    		
+				    	numero=0;
+				    	categoria=new CategoriaDTO();
+				    	categoria.setCueEncuesta(encuestaDTO);
+				    	
+				    	for(CategoriaDTO categoriaDTO:cuestionarioService.readCategoria(categoria))
+				    	{
+						    pregunta=new PreguntaDTO();
+						    pregunta.setCueCategoria(categoriaDTO);
+						    
+						    label=new HtmlOutputText();
+						    label.setValue(categoriaDTO.getCatDescripcion());
+						    label.setStyle("font-weight:bold;font-size:10pt;");
+						    
+						    panelGrid.getChildren().add(label);
+						    
+						    label=new HtmlOutputText();
+						    label.setValue("");
+						    
+						    panelGrid.getChildren().add(label);
+						    
+							for(PreguntaDTO preguntaDTO:cuestionarioService.readPregunta(pregunta))
+							{
 
-							label=new HtmlOutputText();
-							label.setValue(preguntaDTO.getPreDescripcion());
-							htmlPanelGrid.getChildren().add(label);	
-							
-							if(preguntaDTO.getCueControl().getConCodigo().equals(3))
-							{
-								respuesta=new RespuestaDTO();
-								respuesta.setCuePregunta(preguntaDTO);
-								
-								for(RespuestaDTO respuestaDTO:cuestionarioService.readRespuesta(respuesta))
-								{
-									txtArea = new InputTextarea();
-									txtArea.setAutoResize(false);
-									
-									resultadoDTO=new ResultadoDTO();
-									resultadoDTO.setCueRespuesta(respuestaDTO);
-									resultadoDTO.setBemCandidato(encuestaDataManager.getCandidatoDTO());
-									encuestaDataManager.getResultadoList().add(resultadoDTO);
-									
-									txtArea.setId("respuesta"+numero.toString()); // Must be unique!
-									expresion=ApplicationUtility.getInstance().appendStringBuilder("#{encuestaDataManager.resultadoList["+numero+"].resValorString}").toString();
-								    txtArea.setValueExpression("value", createValueExpression(expresion, String.class));
-								    txtArea.setRequired(true);
-								        
-								    htmlPanelGrid.getChildren().add(txtArea);
-								}
-								numero=numero+1;
-							}
-							//textbox
-							else if(preguntaDTO.getCueControl().getConCodigo().equals(2))
-							{
-								respuesta=new RespuestaDTO();
-								respuesta.setCuePregunta(preguntaDTO);
-								
-								for(RespuestaDTO respuestaDTO:cuestionarioService.readRespuesta(respuesta))
-								{
-									txt = new InputText();
-									
-									resultadoDTO=new ResultadoDTO();
-									resultadoDTO.setCueRespuesta(respuestaDTO);
-									resultadoDTO.setBemCandidato(encuestaDataManager.getCandidatoDTO());
-									encuestaDataManager.getResultadoList().add(resultadoDTO);
-									
-									txt.setId("respuesta"+numero.toString()); // Must be unique!
-									expresion=ApplicationUtility.getInstance().appendStringBuilder("#{encuestaDataManager.resultadoList["+numero+"].resValorString}").toString();
-								    txt.setValueExpression("value", createValueExpression(expresion, String.class));
-								    txt.setRequired(true);
-
-								    htmlPanelGrid.getChildren().add(label);	    
-								    htmlPanelGrid.getChildren().add(txt);
-								}
-								numero=numero+1;
-							}
-							//Radio
-							else if(preguntaDTO.getCueControl().getConCodigo().equals(4))
-							{
-								htmlSelectOneRadio=new HtmlSelectOneRadio();
-								
-								ArrayList<SelectItem> radioBtnOptionsList = new ArrayList<SelectItem>();
-								
-								respuesta=new RespuestaDTO();
-								respuesta.setCuePregunta(preguntaDTO);
-								
-								for(RespuestaDTO respuestaDTO:cuestionarioService.readRespuesta(respuesta))
-								{
-									if(!primero)
-									{
-										index=respuestaDTO.getResCodigo();
-										primero=Boolean.TRUE;
-										resultadoDTO=new ResultadoDTO();
-										resultadoDTO.setCueRespuesta(respuestaDTO);
-										resultadoDTO.setBemCandidato(encuestaDataManager.getCandidatoDTO());
-										encuestaDataManager.getResultadoList().add(resultadoDTO);										
-									}									
-									radioBtnOptionsList.add(new SelectItem(respuestaDTO.getResCodigo(),respuestaDTO.getResDescripcion()));
-								}
-								primero=Boolean.FALSE;
-								
-								if(index!=null)
-									htmlSelectOneRadio.setValue(new Integer(index));
-								
-								UISelectItems radioBtnOptions = new UISelectItems();
-								radioBtnOptions.setValue(radioBtnOptionsList);
-								// Add radioButton options.
-								htmlSelectOneRadio.getChildren().add(radioBtnOptions);
-								expresion=ApplicationUtility.getInstance().appendStringBuilder("#{encuestaDataManager.resultadoList["+numero+"].resValorInt}").toString();
-
-								htmlSelectOneRadio.setValueExpression("value", createValueExpression(expresion, String.class));
-								htmlSelectOneRadio.setLayout("pageDirection");
-								
-								
-								htmlPanelGrid.getChildren().add(label);
-								htmlPanelGrid.getChildren().add(htmlSelectOneRadio);
-								
-								numero=numero+1;
-							}
-							//calendario
-							else if(preguntaDTO.getCueControl().getConCodigo().equals(6))
-							{
-								respuesta=new RespuestaDTO();
-								respuesta.setCuePregunta(preguntaDTO);
-								
-								for(RespuestaDTO respuestaDTO:cuestionarioService.readRespuesta(respuesta))
-								{
-									calendar=new Calendar();
-									resultadoDTO=new ResultadoDTO();
-									resultadoDTO.setCueRespuesta(respuestaDTO);
-									resultadoDTO.setBemCandidato(encuestaDataManager.getCandidatoDTO());
-									encuestaDataManager.getResultadoList().add(resultadoDTO);
-																		
-									calendar.setId("respuesta"+numero.toString()); // Must be unique!
-									expresion=ApplicationUtility.getInstance().appendStringBuilder("#{encuestaDataManager.resultadoList["+numero+"].resValorDate}").toString();
-								    calendar.setValueExpression("value", createValueExpressionDate(expresion, Date.class));
-								    calendar.setRequired(true);
-								    calendar.setPattern("yyyy-MM-dd");
-								    calendar.setNavigator(true);
-
-								    htmlPanelGrid.getChildren().add(label);	    
-								    htmlPanelGrid.getChildren().add(calendar);
-								}
-								
-								numero=numero+1;
-							}
-							
-							else if(preguntaDTO.getCueControl().getConCodigo().equals(7))
-							{
+								label=new HtmlOutputText();
 								label.setValue(preguntaDTO.getPreDescripcion());
+								panelGrid.getChildren().add(label);	
 								
-								htmlSelectManyCheckbox=new HtmlSelectManyCheckbox();
-								htmlSelectManyCheckbox.setRequired(true);
-								
-								ArrayList<SelectItem> checkBoxList = new ArrayList<SelectItem>();
-								
-								respuesta=new RespuestaDTO();
-								respuesta.setCuePregunta(preguntaDTO);
-								
-								List<RespuestaDTO> respuestaTmpList=cuestionarioService.readRespuesta(respuesta);
-								
-								for(RespuestaDTO respuestaDTO:respuestaTmpList)
+								if(preguntaDTO.getCueControl().getConCodigo().equals(3))
 								{
-									if(!primero)
+									respuesta=new RespuestaDTO();
+									respuesta.setCuePregunta(preguntaDTO);
+									
+									for(RespuestaDTO respuestaDTO:cuestionarioService.readRespuesta(respuesta))
 									{
-										primero=Boolean.TRUE;
+										txtArea = new InputTextarea();
+										txtArea.setAutoResize(false);
+										
 										resultadoDTO=new ResultadoDTO();
 										resultadoDTO.setCueRespuesta(respuestaDTO);
 										resultadoDTO.setBemCandidato(encuestaDataManager.getCandidatoDTO());
-										resultadoDTO.setResArrayString(new String[respuestaTmpList.size()]);
 										encuestaDataManager.getResultadoList().add(resultadoDTO);
+										
+										txtArea.setId("respuesta"+numero.toString()); // Must be unique!
+										expresion=ApplicationUtility.getInstance().appendStringBuilder("#{encuestaDataManager.resultadoList["+numero+"].resValorString}").toString();
+									    txtArea.setValueExpression("value", createValueExpression(expresion, String.class));
+									    
+									    if(preguntaDTO.getPreRequerido())
+									    {
+									    	txtArea.setRequired(preguntaDTO.getPreRequerido());
+									    	txtArea.setLabel(preguntaDTO.getPreDescripcion());
+									    }
+									    	
+									        
+									    panelGrid.getChildren().add(txtArea);
 									}
-									checkBoxList.add(new SelectItem(respuestaDTO.getResCodigo(),respuestaDTO.getResDescripcion()));
+									numero=numero+1;
 								}
-								primero=Boolean.FALSE;
-																
-								UISelectItems checkBoxs = new UISelectItems();
-								checkBoxs.setValue(checkBoxList);
-								// Add radioButton options.
-								htmlSelectManyCheckbox.getChildren().add(checkBoxs);
-								expresion=ApplicationUtility.getInstance().appendStringBuilder("#{encuestaDataManager.resultadoList["+numero+"].resArrayString}").toString();
+								//textbox
+								else if(preguntaDTO.getCueControl().getConCodigo().equals(2))
+								{
+									respuesta=new RespuestaDTO();
+									respuesta.setCuePregunta(preguntaDTO);
+									
+									for(RespuestaDTO respuestaDTO:cuestionarioService.readRespuesta(respuesta))
+									{
+										txt = new InputText();
+										
+										resultadoDTO=new ResultadoDTO();
+										resultadoDTO.setCueRespuesta(respuestaDTO);
+										resultadoDTO.setBemCandidato(encuestaDataManager.getCandidatoDTO());
+										encuestaDataManager.getResultadoList().add(resultadoDTO);
+										
+										txt.setId("respuesta"+numero.toString()); // Must be unique!
+										expresion=ApplicationUtility.getInstance().appendStringBuilder("#{encuestaDataManager.resultadoList["+numero+"].resValorString}").toString();
+									    txt.setValueExpression("value", createValueExpression(expresion, String.class));
+									    
+									    if(preguntaDTO.getPreRequerido())
+									    {
+									    	txt.setRequired(preguntaDTO.getPreRequerido());
+									    	txt.setLabel(preguntaDTO.getPreDescripcion());
+									    }
 
-								htmlSelectManyCheckbox.setValueExpression("value", createValueExpressionStringArray(expresion, String[].class));
-								htmlSelectManyCheckbox.setLayout("pageDirection");
+									    panelGrid.getChildren().add(label);	    
+									    panelGrid.getChildren().add(txt);
+									}
+									numero=numero+1;
+								}
+								//Radio
+								else if(preguntaDTO.getCueControl().getConCodigo().equals(4))
+								{
+									htmlSelectOneRadio=new HtmlSelectOneRadio();
+									
+									ArrayList<SelectItem> radioBtnOptionsList = new ArrayList<SelectItem>();
+									
+									respuesta=new RespuestaDTO();
+									respuesta.setCuePregunta(preguntaDTO);
+									
+									for(RespuestaDTO respuestaDTO:cuestionarioService.readRespuesta(respuesta))
+									{
+										if(!primero)
+										{
+											index=respuestaDTO.getResCodigo();
+											primero=Boolean.TRUE;
+											resultadoDTO=new ResultadoDTO();
+											resultadoDTO.setCueRespuesta(respuestaDTO);
+											resultadoDTO.setBemCandidato(encuestaDataManager.getCandidatoDTO());
+											encuestaDataManager.getResultadoList().add(resultadoDTO);										
+										}									
+										radioBtnOptionsList.add(new SelectItem(respuestaDTO.getResCodigo(),respuestaDTO.getResDescripcion()));
+									}
+									primero=Boolean.FALSE;
+									
+									if(index!=null)
+									{
+										if(preguntaDTO.getPreRequerido())
+										{
+											htmlSelectOneRadio.setValue(new Integer(index));
+											htmlSelectOneRadio.setRequired(preguntaDTO.getPreRequerido());
+											htmlSelectOneRadio.setLabel(preguntaDTO.getPreDescripcion());
+										}
+									}
+										
+									
+									UISelectItems radioBtnOptions = new UISelectItems();
+									radioBtnOptions.setValue(radioBtnOptionsList);
+									// Add radioButton options.
+									htmlSelectOneRadio.getChildren().add(radioBtnOptions);
+									expresion=ApplicationUtility.getInstance().appendStringBuilder("#{encuestaDataManager.resultadoList["+numero+"].resValorInt}").toString();
+
+									htmlSelectOneRadio.setValueExpression("value", createValueExpression(expresion, String.class));
+									htmlSelectOneRadio.setLayout("pageDirection");
+									
+									
+									panelGrid.getChildren().add(label);
+									panelGrid.getChildren().add(htmlSelectOneRadio);
+									
+									numero=numero+1;
+								}
+								//calendario
+								else if(preguntaDTO.getCueControl().getConCodigo().equals(6))
+								{
+									respuesta=new RespuestaDTO();
+									respuesta.setCuePregunta(preguntaDTO);
+									
+									for(RespuestaDTO respuestaDTO:cuestionarioService.readRespuesta(respuesta))
+									{
+										calendar=new Calendar();
+										resultadoDTO=new ResultadoDTO();
+										resultadoDTO.setCueRespuesta(respuestaDTO);
+										resultadoDTO.setBemCandidato(encuestaDataManager.getCandidatoDTO());
+										encuestaDataManager.getResultadoList().add(resultadoDTO);
+																			
+										calendar.setId("respuesta"+numero.toString()); // Must be unique!
+										expresion=ApplicationUtility.getInstance().appendStringBuilder("#{encuestaDataManager.resultadoList["+numero+"].resValorDate}").toString();
+									    calendar.setValueExpression("value", createValueExpressionDate(expresion, Date.class));
+									    
+									    if(preguntaDTO.getPreRequerido())
+									    {
+									    	calendar.setRequired(preguntaDTO.getPreRequerido());
+									    	calendar.setLabel(preguntaDTO.getPreDescripcion());
+									    }
+									    	
+									    calendar.setPattern("yyyy-MM-dd");
+									    calendar.setNavigator(true);
+
+									    panelGrid.getChildren().add(label);	    
+									    panelGrid.getChildren().add(calendar);
+									}
+									
+									numero=numero+1;
+								}
 								
-								
-								htmlPanelGrid.getChildren().add(label);
-								htmlPanelGrid.getChildren().add(htmlSelectManyCheckbox);
-								
-								numero=numero+1;
+								else if(preguntaDTO.getCueControl().getConCodigo().equals(7))
+								{
+									label.setValue(preguntaDTO.getPreDescripcion());
+									
+									htmlSelectManyCheckbox=new HtmlSelectManyCheckbox();
+									
+									if(preguntaDTO.getPreRequerido())
+									{
+										htmlSelectManyCheckbox.setRequired(preguntaDTO.getPreRequerido());
+										htmlSelectManyCheckbox.setLabel(preguntaDTO.getPreDescripcion());
+									}
+										
+									
+									ArrayList<SelectItem> checkBoxList = new ArrayList<SelectItem>();
+									
+									respuesta=new RespuestaDTO();
+									respuesta.setCuePregunta(preguntaDTO);
+									
+									List<RespuestaDTO> respuestaTmpList=cuestionarioService.readRespuesta(respuesta);
+									
+									for(RespuestaDTO respuestaDTO:respuestaTmpList)
+									{
+										if(!primero)
+										{
+											primero=Boolean.TRUE;
+											resultadoDTO=new ResultadoDTO();
+											resultadoDTO.setCueRespuesta(respuestaDTO);
+											resultadoDTO.setBemCandidato(encuestaDataManager.getCandidatoDTO());
+											resultadoDTO.setResArrayString(new String[respuestaTmpList.size()]);
+											encuestaDataManager.getResultadoList().add(resultadoDTO);
+										}
+										checkBoxList.add(new SelectItem(respuestaDTO.getResCodigo(),respuestaDTO.getResDescripcion()));
+									}
+									primero=Boolean.FALSE;
+																	
+									UISelectItems checkBoxs = new UISelectItems();
+									checkBoxs.setValue(checkBoxList);
+									// Add radioButton options.
+									htmlSelectManyCheckbox.getChildren().add(checkBoxs);
+									expresion=ApplicationUtility.getInstance().appendStringBuilder("#{encuestaDataManager.resultadoList["+numero+"].resArrayString}").toString();
+
+									htmlSelectManyCheckbox.setValueExpression("value", createValueExpressionStringArray(expresion, String[].class));
+									htmlSelectManyCheckbox.setLayout("pageDirection");
+									
+									
+									panelGrid.getChildren().add(label);
+									panelGrid.getChildren().add(htmlSelectManyCheckbox);
+									
+									numero=numero+1;
+								}
 							}
-						}
+				    	}
 					}
 				}
 			} catch (Exception e) {
@@ -307,10 +346,10 @@ public class EncuestaController implements Serializable{
 			}
 			
 		}
-		return htmlPanelGrid;
+		return panelGrid;
 	}
-	public void setHtmlPanelGrid(HtmlPanelGrid htmlPanelGrid) {
-		this.htmlPanelGrid = htmlPanelGrid;
+	public void setPanelGrid(PanelGrid panelGrid) {
+		this.panelGrid = panelGrid;
 	}
 
 	public EncuestaDataManager getEncuestaDataManager() {
@@ -379,6 +418,7 @@ public class EncuestaController implements Serializable{
     		res= encuestaDataManager.getResultadoList();
 			cuestionarioService.createOrUpdateResultado(res);
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
+			encuestaDataManager.setDisableSave(Boolean.TRUE);
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.getMessage());
 		}

@@ -15,37 +15,102 @@
 			<table>
 				<tr>
 					<td><h:outputText value="Encuesta:" /></td>
-					<td><p:selectOneMenu>
+					<td><p:selectOneMenu value="#{reporteRespuestaDataManager.encuestaDTO.encCodigo}">
+						<p:ajax event="change" listener="#{reporteRespuestaController.readCategoria}" update="somCategoria"/>
 						<f:selectItem itemLabel="--Seleccione--"/>
 						<f:selectItems value="#{reporteRespuestaController.reporteRespuestaDataManager.encuestaList}" var="res" itemLabel="#{res.encDescripcion}" itemValue="#{res.encCodigo}"/>
 						</p:selectOneMenu></td>
 				</tr>
+
+				<tr>
+					<td><h:outputText value="Categoria:" /></td>
+					<td><p:selectOneMenu id="somCategoria" value="#{reporteRespuestaDataManager.categoriaDTO.catCodigo}">
+						<p:ajax event="change" listener="#{reporteRespuestaController.readPregunta}" update="somPregunta"/>
+						<f:selectItem itemLabel="--Seleccione--"/>
+						<f:selectItems value="#{reporteRespuestaDataManager.categoriaList}" var="cat" itemLabel="#{cat.catDescripcion}" itemValue="#{cat.catCodigo}"/>
+						</p:selectOneMenu></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="Pregunta:" /></td>
+					<td><p:selectOneMenu id="somPregunta" value="#{reporteRespuestaDataManager.preguntaDTO.preCodigo}" required="true" label="Pregunta">
+						<f:selectItem itemLabel="--Seleccione--"/>
+						<f:selectItems value="#{reporteRespuestaDataManager.preguntaList}" var="pre" itemLabel="#{pre.preDescripcion}" itemValue="#{pre.preCodigo}"/>
+						</p:selectOneMenu></td>
+				</tr>
+
 				<tr align="center">
-					<td colspan="4"><p:commandButton value="Buscar" actionListener="#{reporteRespuestaController.readResultado}" update="pnlEncuesta"/> </td>
+					<td colspan="4"><p:commandButton value="Buscar" update="pnlEncuesta,:frmDialog:lblPregunta" actionListener="#{reporteRespuestaController.readResultado}"/> </td>
 				</tr>				
 			</table>
 		
-			<p:dataTable value="#{reporteRespuestaDataManager.encuestaList}" var="enc">
+			<p:spacer height="10"/>
+		
+			<p:panel visible="#{reporteRespuestaDataManager.visibleDataTable}">
+				
+				<h:outputText value="#{reporteRespuestaDataManager.preguntaDTO.preDescripcion}" />
+							
+				<p:dataTable value="#{reporteRespuestaDataManager.resultadoViewList}" var="rep">
+
+					<p:column headerText="Apellidos">
+						<h:outputText value="#{rep.canApellidos}" />
+					</p:column>
+
+					<p:column headerText="Nombres">
+						<h:outputText value="#{rep.canNombres}" />
+					</p:column>
+					
+					<p:column headerText="Respuesta">
+						<h:outputText value="#{rep.rsuValorString!=null?rep.rsuValorString:rep.rsuValorDate}" />
+					</p:column>
+				
+				</p:dataTable>
+						
+			</p:panel>
 			
-				<p:column headerText="Categoria">
-					<h:outputText value="#{res.catDescripcion}" />
-				</p:column>
-			
-				<p:column headerText="Pregunta">
-					<h:outputText value="#{res.preDescripcion}" />
-				</p:column>
+			<p:panel visible="#{reporteRespuestaDataManager.visibleCharts}">
+				<p:panel>
 	
-				<p:column headerText="Resultado">
-					<h:outputText value="#{res.rsuValorInt!=null?res.resDescripcion:res.rsuValorString}" />
-				</p:column>
+					<h:outputText value="#{reporteRespuestaDataManager.preguntaDTO.preDescripcion}" />
+					
+					<p:chart type="bar" model="#{reporteRespuestaController.barChartModel}" style="height:300px" widgetVar="chart1"/>				
+							
+				</p:panel>
+	
+				<p:panel>
+	
+					<h:outputText value="#{reporteRespuestaDataManager.preguntaDTO.preDescripcion}" />
+					
+					<p:chart type="pie" model="#{reporteRespuestaController.pieChartModel}" style="width:500px;height:400px" widgetVar="chart2"/>				
+							
+				</p:panel>
+				<p:commandButton type="button" value="Export" icon="ui-icon-extlink" onclick="exportChart()"/>
+			</p:panel>
 			
-			</p:dataTable>
-		
-		
 		</p:panel>
 	
-	
 	</h:form>
+	
+	<p:dialog widgetVar="dlg" showEffect="fade" modal="true" resizable="false" width="900">
+		<h:form id="frmDialog">
+			<h:outputText id="lblPregunta" value="#{reporteRespuestaDataManager.preguntaDTO.preDescripcion}" />
+		</h:form>	
+	    <p:outputPanel id="output1" layout="block" style="width:99%;height:300px"/>
+	    <p:outputPanel id="output2" layout="block" style="width:99%;height:300px"/>
+	</p:dialog>
+
+	
+	<script type="text/javascript">
+	function exportChart() {
+	    //export image
+	    $('#output1').empty().append(PF('chart1').exportAsImage());
+	    $('#output2').empty().append(PF('chart2').exportAsImage());
+		 
+	    //show the dialog
+	    PF('dlg').show();
+	}
+	</script>
+	
 		
 	</ui:define>
 
