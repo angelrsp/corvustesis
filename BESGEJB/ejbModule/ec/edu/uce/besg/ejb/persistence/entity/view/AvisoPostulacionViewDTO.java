@@ -1,9 +1,16 @@
 package ec.edu.uce.besg.ejb.persistence.entity.view;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -27,7 +34,8 @@ public class AvisoPostulacionViewDTO implements Serializable {
 	private Integer aviEmpresa;
 
 	@Column(name="avi_fecha_caducidad")
-	private Timestamp aviFechaCaducidad;
+	@Temporal(TemporalType.DATE)
+	private Date aviFechaCaducidad;
 
 	@Column(name="avi_puesto")
 	private Integer aviPuesto;
@@ -110,11 +118,11 @@ public class AvisoPostulacionViewDTO implements Serializable {
 		this.aviEmpresa = aviEmpresa;
 	}
 
-	public Timestamp getAviFechaCaducidad() {
+	public Date getAviFechaCaducidad() {
 		return this.aviFechaCaducidad;
 	}
 
-	public void setAviFechaCaducidad(Timestamp aviFechaCaducidad) {
+	public void setAviFechaCaducidad(Date aviFechaCaducidad) {
 		this.aviFechaCaducidad = aviFechaCaducidad;
 	}
 
