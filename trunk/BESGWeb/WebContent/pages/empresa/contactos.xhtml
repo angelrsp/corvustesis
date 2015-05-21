@@ -74,18 +74,23 @@
 					<h:outputText value="#{con.catCargo}" />
 				</p:column>
 
-				<p:column headerText="#{i18n['label.telefono']}">
+				<p:column headerText="#{i18n['label.telefono']}" width="80">
 					<h:outputText value="#{con.conTelefono}" />
 				</p:column>
 
 				<p:column headerText="#{i18n['label.email']}">
 					<h:outputText value="#{con.conMail}" />
 				</p:column>
-				<p:column styleClass="centered" width="33">
+				<p:column styleClass="centered" width="25">
 					<h:panelGroup>
 						<p:commandButton icon="ui-icon-pencil" title="Editar" actionListener="#{contactoController.cargarDatosContacto(con)}" process="@this" update=":contenido:pnlContactos"/>
 					</h:panelGroup>
 				</p:column>
+				<p:column styleClass="centered" width="25">
+					<p:commandButton actionListener="#{contactoController.onRowDelete(con)}" icon="ui-icon-close" 
+						immediate="true" onclick="if(!confirm('Eliminar?')) return false;" process="@this" update=":contenido:pnlContactos">
+					</p:commandButton>
+				</p:column>				
 			</p:dataTable>
 			
 		</p:panel>

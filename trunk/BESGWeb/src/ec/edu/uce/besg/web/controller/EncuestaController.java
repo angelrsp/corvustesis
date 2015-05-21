@@ -16,7 +16,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UISelectItems;
 import javax.faces.component.html.HtmlOutputText;
-import javax.faces.component.html.HtmlPanelGrid;
 import javax.faces.component.html.HtmlSelectManyCheckbox;
 import javax.faces.component.html.HtmlSelectOneRadio;
 import javax.faces.context.FacesContext;
@@ -25,7 +24,6 @@ import javax.faces.model.SelectItem;
 import org.primefaces.component.calendar.Calendar;
 import org.primefaces.component.inputtext.InputText;
 import org.primefaces.component.inputtextarea.InputTextarea;
-import org.primefaces.component.panel.Panel;
 import org.primefaces.component.panelgrid.PanelGrid;
 
 import ec.edu.uce.besg.common.util.ApplicationUtility;

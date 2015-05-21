@@ -116,5 +116,19 @@ public class ContactoController implements Serializable {
 		}
 	}	
 
+	public void onRowDelete(ContactoViewDTO contactoViewDTO)
+	{
+		ContactoDTO contactoDTO;
+		try {
+			contactoDTO=new ContactoDTO();
+			contactoDTO.setConCodigo(contactoViewDTO.getConCodigo());
+			empresaService.removeContacto(contactoDTO);
+			readContacto();
+			JsfUtil.addInfoMessage("Eliminado Exitosamente");
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}	
+
 	
 }

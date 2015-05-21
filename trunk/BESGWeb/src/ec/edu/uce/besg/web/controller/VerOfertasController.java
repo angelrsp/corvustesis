@@ -71,7 +71,7 @@ public class VerOfertasController implements Serializable {
 		try {
 			avisoPostulacionViewDTO=new AvisoPostulacionViewDTO();
 			avisoPostulacionViewDTO.setPosCandidato(verOfertasDataManager.getCandidatoDTO().getCanCodigo());
-			verOfertasDataManager.setAvisoPostulacionViewList(empleoService.readAvisoPostulacion(new AvisoPostulacionViewDTO()));
+			verOfertasDataManager.setAvisoPostulacionViewList(empleoService.readAvisoPostulacionToday(new AvisoPostulacionViewDTO()));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
