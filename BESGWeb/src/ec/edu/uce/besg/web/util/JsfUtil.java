@@ -52,12 +52,12 @@ public class JsfUtil {
 	}
 
 	public static void addErrorMessage(String msg) {
-//		String[] msgs=msg.split(":");
-//        if(msgs.length>0)
-//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, msgs[1], null));
-//        else
-//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, msgs[0], null));
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, null));
+		String[] msgs=msg.split(":");
+        if(msgs.length>0)
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, msgs[1], null));
+        else
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, msgs[0], null));
+			//FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, null));
         }
 
 	public static void addInfoMessage(String msg) {
@@ -86,6 +86,12 @@ public class JsfUtil {
 	{
 		FacesContext.getCurrentInstance().getExternalContext().redirect(UtilApplication.appendStringBuilder("/",FacesContext.getCurrentInstance().getExternalContext().getContextName(),"/"+url).toString());
 	}
+	
+	public static void redirect2(String url) throws IOException
+	{
+		FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+	}
+
 	
 	public static void putObject(String key,Object value)
 	{

@@ -51,7 +51,7 @@ public class LoginCandidatoController implements Serializable{
 				JsfUtil.redirect("pages/candidato/inicio.xhtml");
 			}
 		} catch (Exception e) {
-			JsfUtil.addErrorMessage(e.toString());
+			JsfUtil.addErrorMessage(e.getMessage());
 		}
 	}
 	

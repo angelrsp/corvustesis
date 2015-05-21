@@ -36,8 +36,11 @@
 									<p:menuitem value="Avisos" url="/pages/empresa/aviso.xhtml" />
 									<p:menuitem value="Postulaciones" url="/pages/empresa/postulacion.xhtml" />
 									<p:menuitem value="Buscar Hojas de Vida" url="/pages/empresa/postulacion.xhtml" />
-								</p:submenu>								
-								<p:menuitem value="Salir" url="#" />
+								</p:submenu>			
+													
+								<f:facet name="options">
+						            <p:commandButton actionListener="#{indexController.logout}" value="Salir" icon="ui-icon-extlink" immediate="true" process="@this"/>
+						        </f:facet>
 							</p:menubar>																
 						</td>
 					</tr>

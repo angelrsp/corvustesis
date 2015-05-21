@@ -47,30 +47,22 @@
 				<tr align="center">
 					<td>¿Nueva Empresa? Registrase</td>
 				</tr>
-			
-				<tr> 
-					<td><p:inputText style="width: 350px;" placeholder="Usuario" value="#{registroEmpresaDataManager.usuarioDTO.usuLogin}" required="true" label="Usuario"/></td>
-				</tr>
-				
-				<tr>
-					<td><p:password style="width: 350px;" placeholder="Contraseña" id="password" value="#{registroEmpresaDataManager.usuarioDTO.usuPassword}" required="true" label="Contraseña"/></td>
-				</tr>					
-
-				<tr>
-					<td colspan="2"><p:separator /></td>
-				</tr>					
-
-				<tr>
-					<td><p:inputText style="width: 350px;" placeholder="Razón Social" value="#{registroEmpresaDataManager.empresaDTO.empRazonSocial}" required="true"/></td>
-				</tr>
 
 				<tr>
 					<td><p:inputText placeholder="RUC" value="#{registroEmpresaDataManager.empresaDTO.empRuc}" required="true"/></td>
 				</tr>
+			
+				<tr>
+					<td><p:inputText style="width: 350px;" placeholder="Razón Social" value="#{registroEmpresaDataManager.empresaDTO.empRazonSocial}" required="true"/></td>
+				</tr>
 				
 				<tr>
-					<td><p:inputText style="width: 350px;" placeholder="Correo Electrónico" value="#{registroEmpresaDataManager.usuarioDTO.usuMail}" required="true"/></td>
+					<td><p:inputText style="width: 350px;" placeholder="Correo Electrónico" value="#{registroEmpresaDataManager.usuarioDTO.usuLogin}" required="true"/></td>
 				</tr>
+									
+				<tr>
+					<td><p:password style="width: 350px;" placeholder="Contraseña" id="password" value="#{registroEmpresaDataManager.usuarioDTO.usuPassword}" required="true" label="Contraseña"/></td>
+				</tr>														
 									
 				<tr align="center">
 					<td colspan="2"><p:commandButton value="Registrar" actionListener="#{registroEmpresaController.registrar}" update="pnlRegistro"/></td>

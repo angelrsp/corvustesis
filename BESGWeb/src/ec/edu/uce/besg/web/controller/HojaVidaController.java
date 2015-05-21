@@ -18,6 +18,7 @@ import ec.edu.uce.besg.ejb.persistence.entity.security.UsuarioDTO;
 import ec.edu.uce.besg.ejb.persistence.entity.view.HabilidadViewDTO;
 import ec.edu.uce.besg.ejb.service.CandidatoService;
 import ec.edu.uce.besg.ejb.service.CatalogoService;
+import ec.edu.uce.besg.ejb.service.CuestionarioService;
 import ec.edu.uce.besg.web.datamanager.HojaVidaDataManager;
 import ec.edu.uce.besg.web.util.JsfUtil;
 
@@ -32,6 +33,9 @@ public class HojaVidaController implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@EJB
+	private CuestionarioService cuestionarioService;
+	
+	@EJB
 	private CatalogoService catalogoService;
 
 	@EJB
@@ -43,7 +47,7 @@ public class HojaVidaController implements Serializable{
 	
 	
 	public HojaVidaController() {
-	
+		//verificarEncuesta();	
 	}
 
 	
