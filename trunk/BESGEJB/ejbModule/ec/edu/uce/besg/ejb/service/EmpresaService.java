@@ -37,5 +37,7 @@ public interface EmpresaService {
 
 	EmpresaDTO updateEmpresa(EmpresaDTO empresa) throws CorvustecException;
 
+	void removeContacto(ContactoDTO contactoDTO) throws CorvustecException;
+
 	
 }

@@ -9,5 +9,8 @@ public interface AvisoPostulacionViewDAO extends AbstractFacade<AvisoPostulacion
 	List<AvisoPostulacionViewDTO> getByAnd(AvisoPostulacionViewDTO objeto)
 			throws SecurityException;
 
+	List<AvisoPostulacionViewDTO> getByAndToday(AvisoPostulacionViewDTO objeto)
+			throws SecurityException;
+
 	
 }

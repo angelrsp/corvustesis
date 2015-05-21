@@ -125,6 +125,16 @@ public class EmpresaServiceImpl implements EmpresaService{
 	}
 	
 	@Override
+	public void removeContacto(ContactoDTO contactoDTO) throws CorvustecException
+	{
+		try {
+			factoryDAO.getContactoDAOImpl().remove(contactoDTO);
+		} catch (Exception e) {
+			throw new CorvustecException("Error al registrar Aviso");
+		}		
+	}
+	
+	@Override
 	public ContactoDTO obtenerContactos(ContactoViewDTO contacto) throws CorvustecException
 	{
 		try {

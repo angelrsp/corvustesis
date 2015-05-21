@@ -35,7 +35,7 @@ public class SecurityServiceImpl implements SecurityService {
 			if(!userList.isEmpty())
 				return userList.get(0);
 			else
-				return null;
+				throw new CorvustecException("Usuario o contraseña incorrectos");
 			
 		} catch (Exception e) {
 			logger.info(e.toString());

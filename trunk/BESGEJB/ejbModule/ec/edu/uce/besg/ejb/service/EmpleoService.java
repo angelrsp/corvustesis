@@ -32,5 +32,9 @@ public interface EmpleoService {
 			CandidatoPostulacionViewDTO candidatoPostulacionViewDTO)
 			throws CorvustecException;
 
+	List<AvisoPostulacionViewDTO> readAvisoPostulacionToday(
+			AvisoPostulacionViewDTO avisoPostulacionViewDTO)
+			throws CorvustecException;
+
 	
 }

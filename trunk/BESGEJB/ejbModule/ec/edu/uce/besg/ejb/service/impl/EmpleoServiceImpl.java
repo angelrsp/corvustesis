@@ -105,8 +105,23 @@ public class EmpleoServiceImpl implements EmpleoService{
 		}
 		finally{
 			avisoPostulacionViewDTO=null;
-		}			
+		}
 	}
+
+	@Override
+	public List<AvisoPostulacionViewDTO> readAvisoPostulacionToday(AvisoPostulacionViewDTO avisoPostulacionViewDTO) throws CorvustecException
+	{
+		try {
+			return factoryDAO.getAvisoPostulacionViewDAOImpl().getByAndToday(avisoPostulacionViewDTO);
+		} catch (Exception e) {
+			logger.info("Error al registrar createOrUpdateAviso {}", e.toString());
+			throw new CorvustecException("Error al registrar createOrUpdateAviso "+e.toString());
+		}
+		finally{
+			avisoPostulacionViewDTO=null;
+		}
+	}
+
 	
 	@Override
 	public List<CandidatoPostulacionViewDTO> readCandidatoPostulacion(CandidatoPostulacionViewDTO candidatoPostulacionViewDTO) throws CorvustecException
