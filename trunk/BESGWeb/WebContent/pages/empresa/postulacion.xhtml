@@ -10,35 +10,35 @@
 
 		<p:panel header="Postulaciones">
 		
-			<p:dataTable emptyMessage="#{i18n['table.vacio']}">
+			<p:dataTable emptyMessage="#{i18n['table.vacio']}" value="#{postulacionController.postulacionDataManager.candidatoPostulacionViewList}" var="pos">
 			
 				<p:column headerText="Puesto">
-					
+					<h:outputText value="#{pos.catPuesto}" />
 				</p:column>
 	
 				<p:column headerText="Remuneracion">
-	
+					<h:outputText value="#{pos.aviRemuneracion}" />
 				</p:column>
 	
 				<p:column headerText="Fecha de Caducidad">
-					
+					<h:outputText value="#{pos.aviFechaCaducidad}" />
 				</p:column>
 	
 				<p:column headerText="Vacantes">
-					
+					<h:outputText value="#{pos.aviVacantes}" />
 				</p:column>
 
 				<p:column headerText="Candidato">
-					
+					<h:outputText value="#{pos.canApellidos} #{pos.canNombres}" />
 				</p:column>
 
-				<p:column headerText="Aceptar" styleClass="centered" width="10%">
+<!-- 				<p:column headerText="Aceptar" styleClass="centered" width="10%"> -->
 				
-				</p:column>
+<!-- 				</p:column> -->
 
-				<p:column headerText="Ver Curriculum " styleClass="centered" width="10%">
+<!-- 				<p:column headerText="Ver Curriculum " styleClass="centered" width="10%"> -->
 				
-				</p:column>
+<!-- 				</p:column> -->
 				
 			</p:dataTable>
 		
