@@ -7,50 +7,81 @@
 
 	<p:dialog widgetVar="dlgCategoria" width="900" minHeight="40" modal="true" appendTo="@(body)" header="Categoría">
 	
-	<p:ajax event="close" listener="#{createEncuestaController.onCloseCategoria}"/>
+	<p:ajax event="close" listener="#{adminEncuestaController.onCloseCategoria}"/>
 	
 	<h:form id="frmCategoria">
 	
 		<p:panel id="pnlCategoria">
-			<table>
+		    <table>
+		    <tr>
+		    
+		    <td>
+		    <table>
+		        <tr>
+					<td><h:outputText value="Encuesta:" /></td>
+					<td><h:outputText style="FONT-SIZE: small; FONT-FAMILY: 'Arial'; COLOR:#990019;" value="#{adminEncuestaDataManager.encuestaDTO.encDescripcion}" /></td>
+				
+				</tr>
 				<tr>
 					<td><h:outputText value="Nombre:" /></td>
-					<td><h:inputTextarea style="width: 300px;" value="#{createEncuestaDataManager.categoriaDTO.catDescripcion}" /></td>
-				</tr>
+					<td><h:inputTextarea style="width: 300px;" value="#{adminEncuestaDataManager.categoriaDTO.catDescripcion}" /></td>
 				
+				</tr>
+			
 				<tr>
 					<td><h:outputText value="Orden:" /></td>
-					<td><h:inputText value="#{createEncuestaDataManager.categoriaDTO.catOrden}" /></td>
+					<td><h:inputText value="#{adminEncuestaDataManager.categoriaDTO.catOrden}" /></td>
 				</tr>
 				
+				
 				<tr align="center">
-					<td colspan="4"><p:commandButton value="Guardar" actionListener="#{createEncuestaController.onClickSaveCategoria}" update="pnlCategoria"/> </td>
+					<td colspan="4"><p:commandButton value="Guardar" actionListener="#{adminEncuestaController.onClickSaveCategoria}" update="pnlCategoria"/> </td>
 				</tr>				
 			</table>
-		
-			<p:dataTable id="tblCategoria" value="#{createEncuestaDataManager.categoriaList}" var="cat">
+		    </td>
+		    
+		    <td width="250px"></td>
+		    <td>
+		    <table>
+		    <tr>
+		    <td  align="right">
+									<img src="#{request.contextPath}/resources/img/logo003.jpg" height="120" width="110"/>
+									 </td>
+		    </tr>
+		    </table>
+		    </td>
+		    
+		    </tr>
+		    </table>
 			
-				<p:column headerText="Nombre">
+		
+			<p:dataTable id="tblCategoria" value="#{adminEncuestaDataManager.categoriaList}" var="cat">
+			
+				<p:column headerText="NOMBRE" width="500">
 			        <h:outputText value="#{cat.catDescripcion}" />
 			    </p:column>		
 
-				<p:column headerText="Nombre">
+				<p:column headerText="ORDEN" width="50">
 			        <h:outputText value="#{cat.catOrden}" />
 			    </p:column>		
 
 			
-				<p:column width="35">
-			        <p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{createEncuestaController.onClickEditCategoria(cat)}" process="@this" update=":frmCategoria:pnlCategoria"/>
+				<p:column width="35" headerText="EDITAR" >
+			        <p:commandButton title="EDITAR" icon="ui-icon-pencil" actionListener="#{adminEncuestaController.onClickEditCategoria(cat)}" process="@this" update=":frmCategoria:pnlCategoria"/>
 			    </p:column>		
 
-				<p:column width="35">
-			        <p:commandButton title="Preguntas" icon="ui-icon-document" actionListener="#{createEncuestaController.onClickViewPreguntas(cat)}" update=":frmPreguntas:tblPreguntas"/>
+				<p:column width="58" headerText="PREGUNTAS">
+			        <p:commandButton title="Preguntas" icon="ui-icon-document" actionListener="#{adminEncuestaController.onClickViewPreguntas(cat)}" update=":frmPreguntas:pnlPreguntas"/>
 			    </p:column>		
-			
+			    
+			    <p:column width="45" headerText="ELIMINAR">
+			        <p:commandButton title="Eliminar" icon="ui-icon-trash" actionListener="#{adminEncuestaController.onClickEditCategoria(cat)}" process="@this" update=":frmCategoria:pnlCategoria"/>
+			    </p:column>	
+			    
 			</p:dataTable>		
 		</p:panel>
 	
 	</h:form>
 	</p:dialog>
-	
+	<ui:include src="/pages/system/encuesta/dialogNuevaCategoria.xhtml" />
 </ui:composition>
