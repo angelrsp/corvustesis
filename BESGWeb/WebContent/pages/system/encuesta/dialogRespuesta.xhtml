@@ -7,26 +7,58 @@
 
 	<p:dialog widgetVar="dlgRespuesta" width="900" minHeight="40" modal="true" appendTo="@(body)" header="Respuestas">
 
-	<p:ajax event="close" listener="#{createEncuestaController.onCloseRespuesta}"/>
+	<p:ajax event="close" listener="#{adminEncuestaController.onCloseRespuesta}"/>
 	
 	<h:form id="frmRespuesta">
 	
 		<p:panel id="pnlRespuesta">
-			<table>
+		
+		<table>
+		    <tr>
+		    <td>
+		   <table>
+		         <tr>
+					<td><h:outputText value="Encuesta:" /></td>
+					<td><h:outputText style="FONT-SIZE: small; FONT-FAMILY: 'Arial'; COLOR:#990019;" value="#{adminEncuestaDataManager.encuestaDTO.encDescripcion}" /></td>
+				
+				</tr>
+				<tr>
+					<td><h:outputText value="Categoría :" /></td>
+					<td><h:outputText style="FONT-SIZE: small; FONT-FAMILY: 'Arial'; COLOR:#990019;" value="#{adminEncuestaDataManager.categoriaDTO.catDescripcion}" /></td>
+				
+				</tr>
+				
+				<tr>
+					<td><h:outputText value="Pregunta :" /></td>
+				    <td>
+				    <p:scrollPanel mode="native" style="width:301px;">
+				    <h:inputTextarea disabled="true" style="width: 300px; FONT-SIZE: small; FONT-FAMILY: 'Arial'; COLOR:#990019;" value="#{adminEncuestaDataManager.preguntaDTO.preDescripcion}" />
+				    </p:scrollPanel>
+				    </td>
+				
+				</tr>
 				<tr>
 					<td><h:outputText value="Nombre:" /></td>
-					<td><h:inputTextarea style="width: 300px;" value="#{createEncuestaDataManager.respuestaDTO.resDescripcion}" /></td>
+					<td><h:inputTextarea style="width: 300px;" value="#{adminEncuestaDataManager.respuestaDTO.resDescripcion}" /></td>
 				</tr>
 				<tr>
 					<td><h:outputText value="Orden:" /></td>
-					<td><h:inputText value="#{createEncuestaDataManager.respuestaDTO.resOrden}" /></td>
+					<td><h:inputText value="#{adminEncuestaDataManager.respuestaDTO.resOrden}" /></td>
 				</tr>				
 				<tr align="center">
-					<td colspan="4"><p:commandButton value="Guardar" actionListener="#{createEncuestaController.onClickSaveRespuesta}" update="pnlRespuesta"/> </td>
+					<td colspan="4"><p:commandButton value="Guardar" actionListener="#{adminEncuestaController.onClickSaveRespuesta}" update="pnlRespuesta"/> </td>
 				</tr>				
 			</table>
+		    </td>
+		    <td width="300px"></td>
+		    <td  align="right">
+									<img src="#{request.contextPath}/resources/img/logo003.jpg" height="120" width="110"/>
+									 </td>
+		    </tr>
+		    </table>
+			
 		
-			<p:dataTable id="tblRespuesta" value="#{createEncuestaDataManager.respuestaList}" var="res">
+			<p:dataTable id="tblRespuesta" value="#{adminEncuestaDataManager.respuestaList}" var="res">
 			
 				<p:column headerText="Nombre">
 			        <h:outputText value="#{res.resDescripcion}" />
@@ -37,7 +69,7 @@
 			    </p:column>		
 			
 				<p:column width="35">
-			        <p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{createEncuestaController.onClickEditRespuesta(res)}" process="@this" update=":frmRespuesta:pnlRespuesta"/>
+			        <p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{adminEncuestaController.onClickEditRespuesta(res)}" process="@this" update=":frmRespuesta:pnlRespuesta"/>
 			    </p:column>		
 			
 			</p:dataTable>		
