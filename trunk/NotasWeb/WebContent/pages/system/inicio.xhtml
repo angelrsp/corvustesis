@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/admin.xhtml">
+	 
+	<ui:define name="contenido">
+		<p:panel>
+			<table>
+			     <tr>
+					<td>
+						<img src="#{request.contextPath}/resources/img/logoUce.jpg" height="60" width="175"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h:outputText value="Bienvenido Sistema al Sistema de Notas" />
+					</td>
+				</tr>
+			</table>
+		</p:panel>
+	</ui:define>	 
+	 
+</ui:composition>
