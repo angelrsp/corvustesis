@@ -1,0 +1,16 @@
+@CHARSET "ISO-8859-1";
+html {
+        
+}
+
+body{
+    font-size: 10pt;font-weight:normal;
+}
+
+
+ #footer {
+	   position:absolute;
+	   bottom:0;
+	   width:99%;
+	   height:20px;            /* Altura del footer */
+}
