@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/admin.xhtml">
+
+
+	<ui:define name="contenido">
+		<h:form id="formMateria">
+			<p:panel id="pnlMateria" header="Registrar Materia" toggleable="true"
+				closable="false" toggleSpeed="500" closeSpeed="500"
+				widgetVar="panel" style="margin-bottom:20px">
+				<p:panel id="pnlRegistro" style="width: 500px;">
+
+					<table>
+						
+						<tr>
+							<td><h:outputText value="Nombre:" /></td>
+							<td><p:inputText id="txtNombreMateria" /></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Descripción:" /></td>
+							<td><p:inputText id="txtDescripcionMateria" /></td>
+						</tr>
+						<tr>
+							<td colspan="2"><p:commandButton value="Registrar"
+									icon="ui-icon-arrow-1-s"
+									/></td>
+						</tr>
+
+					</table>
+
+				</p:panel>
+			</p:panel>
+		</h:form>
+		<h:form id="formListaMaterias">
+			<p:panel id="pnlListaMaterias" header="Lista Materias">
+				<table>
+					<tr>
+
+						<td colspan="2" align="right"><p:inputText
+								id="txtBuscarMateria"
+								value="Nombre Curso"
+								style="width: 300px;" /></td>
+
+						<td><p:commandButton icon="ui-icon-search"
+								
+								/></td>
+
+
+					</tr>
+					<tr>
+						<td colspan="2"><p:dataTable id="tblDetalle"
+								>
+								<p:column headerText="Materia">
+									<h:outputText  />
+								</p:column>
+
+								<p:column headerText="Descripción">
+									<h:outputText />
+								</p:column>
+								
+								<p:column headerText="EDITAR" width="55">
+									
+								</p:column>
+
+
+
+
+
+
+
+							</p:dataTable></td>
+					</tr>
+
+				</table>
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

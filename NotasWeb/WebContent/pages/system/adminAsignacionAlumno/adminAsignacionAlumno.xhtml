@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/admin.xhtml">
+
+
+	<ui:define name="contenido">
+		<h:form>
+
+			<div align="center">
+
+				<div style="width: 1000px;" align="left">
+
+					<p:panel>
+					
+						<p:panel id="pnlFactura" header="Factura">
+						
+							<table>
+								<tr>
+									<td><h:outputText value="Establecimiento:" /></td>
+									<td><p:selectOneMenu value="#{facturacionDataManager.establecimientoDTO.estCodigo}">
+										<f:selectItem itemLabel="--Seleccione--"/>
+										<f:selectItems value="#{facturacionController.facturacionDataManager.establecimientoList}" var="est" itemValue="#{est.estCodigo}" itemLabel="#{est.estReferencia}"/>
+										<p:ajax event="change" listener="#{facturacionController.readPuntoEmision}" update="somPuntoEmision" process="@this"/>
+									 	</p:selectOneMenu></td>
+		
+									<td><h:outputText value="Punto Emisión:" /></td>
+									<td><p:selectOneMenu id="somPuntoEmision" required="true" value="#{facturacionDataManager.puntoEmisionDTO.pemCodigo}">
+										<f:selectItem itemLabel="--Seleccione--"/>
+										<f:selectItems value="#{facturacionDataManager.puntoEmisionList}" var="pun" itemValue="#{pun.pemCodigo}" itemLabel="#{pun.pemReferencia}"/>
+									 	</p:selectOneMenu></td>
+		
+									<td><h:outputText value="Secuencia:" /></td>
+									<td><p:inputText id="txtSecuencia" value="#{facturacionDataManager.secuencia}" readonly="true"/> </td>
+								</tr>
+						
+								<tr>
+									<td><h:outputText value="Identificacion:" /></td>
+									<td><p:autoComplete value="#{facturacionDataManager.clienteDTO}" completeMethod="#{facturacionController.readCliente}" 
+									 	var="cli" itemLabel="#{cli.cliIdentificacion}" itemValue="#{cli}" converter="clienteConvert" forceSelection="false">
+									 	<p:ajax event="itemSelect" listener="#{facturacionController.onItemSelectIdentification}" process="@this" update="txtCliente,txtDireccion"/>
+									 </p:autoComplete>
+									 </td>
+		
+									<td><h:outputText value="Cliente:"/></td>
+									<td><p:inputText id="txtCliente" value="#{facturacionDataManager.clienteDTO.cliRazonSocial}" readonly="true" style="width: 300px;"/></td>
+									
+									<td><h:outputText value="Dirección:" /></td>
+									<td colspan="3"><p:inputTextarea id="txtDireccion"  value="#{facturacionDataManager.clienteDTO.cliDireccion}" readonly="true" style="width: 250px;"/></td>
+								</tr>
+	
+								<tr>
+									<td><h:outputText value="Fecha:" /></td>
+									<td colspan="2"><p:clock pattern="yyyy-MM-dd HH:mm:ss" mode="server"/></td>
+								</tr>
+		
+								<tr align="center">
+									<td colspan="6">
+										<table>
+											<tr>
+												<td><p:commandButton value="Nuevo" icon="ui-icon-document" process="@this" update="pnlFactura,pnlDetalle,tblDetalle" immediate="true" actionListener="#{facturacionController.onClickNew}"/></td>
+												<td><p:commandButton value="Guardar" icon="ui-icon-disk" actionListener="#{facturacionController.onClickSave}" update="pnlDetalle,pnlFactura" disabled="#{facturacionDataManager.disabled}"/></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+							
+						</p:panel>
+					
+						<p:panel id="pnlDetalle" header="Detalle">
+						
+							<table>
+								<tr>
+									<td><h:outputText value="Descripción:" /></td>
+									<td><p:autoComplete value="#{facturacionDataManager.articuloDTO}" completeMethod="#{facturacionController.readArticulo}" 
+									 		var="art" itemLabel="#{art.artNombre}" itemValue="#{art}" converter="articuloConvert" forceSelection="true">
+									 		<p:ajax event="itemSelect" listener="#{facturacionController.onItemSelectArticulo}" process="@this" update="pnlDetalle"/>
+									 	</p:autoComplete>
+									</td>
+		
+									<td><h:outputText value="Código Principal:" /></td>
+									<td><p:inputText readonly="true" value="#{facturacionDataManager.articuloDTO.artReferenciaPrincipal}" required="true" label="Código Principal"/></td>
+									
+									<td><h:outputText value="Código Auxiliar:"/></td>
+									<td><p:inputText readonly="true" value="#{facturacionDataManager.articuloDTO.artReferenciaSecundaria}" required="true" label="Código Auxiliar"/></td>
+									
+									<td><h:outputText value="Precio:"/></td>
+									<td><p:inputText readonly="true" value="#{facturacionDataManager.articuloDTO.artPrecio}" required="true" label="Precio"/></td>									
+								</tr>
+								<tr>
+		
+									<td><h:outputText value="Cantidad:" /></td>
+									<td><p:inputText value="#{facturacionDataManager.detalleNormalDTO.dnoCantidad}">
+											<p:ajax event="blur" listener="#{facturacionController.calcularTotalArticulo}" update="pnlDetalle" />
+										</p:inputText> </td>
+		
+									<td><h:outputText value="Descuento:"/></td>
+									<td><p:inputText value="#{facturacionDataManager.detalleNormalDTO.dnoDescuento}" required="true" label="Descuento">
+											<p:ajax event="blur" listener="#{facturacionController.calcularTotalArticulo}" update="pnlDetalle"/>
+										</p:inputText>
+									</td>									
+									
+									<td><h:outputText value="Total:" /></td>
+									<td><p:inputText readonly="true" value="#{facturacionDataManager.detalleNormalDTO.dnoPrecioTotalSinImpuesto}" required="true"/></td>
+									
+									<td><h:outputText value="Iva:" /></td>
+									<td><p:selectOneMenu value="#{facturacionDataManager.tarifaIvaCode}">
+											<f:selectItem itemLabel="--Seleccione--"/>
+											<f:selectItems value="#{facturacionController.facturacionDataManager.tarifaIvaList}" var="tiv" itemLabel="#{tiv.catDescripcion}" itemValue="#{tiv.catReferencia}"/>
+										</p:selectOneMenu></td>																																																						
+								</tr>
+		
+								<tr align="center">
+									<td colspan="8">
+										<table>
+											<tr>
+												<td><p:commandButton value="Añadir" icon="ui-icon-arrow-1-s" actionListener="#{facturacionController.addDetail}" update="tblDetalle,pnlDetalle" process="pnlDetalle" disabled="#{facturacionDataManager.disabled}"/></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+							
+						</p:panel>
+					
+						<p:dataTable id="tblDetalle" value="#{facturacionDataManager.detalleNormalList}" var="dno">
+							<p:column headerText="Código Principal">
+						        <h:outputText value="#{dno.felArticulo.artReferenciaPrincipal}" />
+						    </p:column>
+						    
+							<p:column headerText="Código Auxiliar">
+						        <h:outputText value="#{dno.felArticulo.artReferenciaSecundaria}" />
+						    </p:column>		
+	
+							<p:column headerText="Descripcion">
+						        <h:outputText value="#{dno.felArticulo.artNombre}" />
+						    </p:column>		
+	
+							<p:column headerText="Cantidad">
+						        <h:outputText value="#{dno.dnoCantidad}" />
+						    </p:column>		
+	
+							<p:column headerText="Valor Unitario">
+						        <h:outputText value="#{dno.felArticulo.artPrecio}" />
+						    </p:column>		
+	
+							<p:column headerText="Descuento">
+						        <h:outputText value="#{dno.dnoDescuento}" />
+						    </p:column>		
+	
+							<p:column headerText="Total">
+						        <h:outputText value="#{dno.dnoPrecioTotalSinImpuesto}" />
+						    </p:column>
+	
+							<p:column width="30">
+						        <p:commandButton icon="ui-icon-close" process="@this" actionListener="#{facturacionController.removeItem(dno)}" update="tblDetalle"/>
+						    </p:column>		
+	
+					        <p:columnGroup type="footer">
+					            <p:row>
+					                <p:column colspan="6" style="text-align:right" footerText="Subtotal 12%:" />
+					                <p:column footerText="#{facturacionDataManager.subtotal12}" />
+					            </p:row>
+					            <p:row>
+					                <p:column colspan="6" style="text-align:right" footerText="Subtotal 0%:" />
+					                <p:column footerText="#{facturacionDataManager.subtotal0}" />
+					            </p:row>
+					            <p:row>
+					                <p:column colspan="6" style="text-align:right" footerText="Subtotal No Objeto de IVA:" />
+					                <p:column footerText="#{facturacionDataManager.subtotalNoObjeto}" />
+					            </p:row>
+					            <p:row>
+					                <p:column colspan="6" style="text-align:right" footerText="Subtotal de Excento IVA:" />
+					                <p:column footerText="#{facturacionDataManager.subtotalExcento}" />
+					            </p:row>
+					            <p:row>
+					                <p:column colspan="6" style="text-align:right" footerText="Subtotal Sin Impuestos:" />
+					                <p:column footerText="#{facturacionDataManager.subtotalSinImpuestos}" />
+					            </p:row>
+	 						            <p:row>
+					                <p:column colspan="6" style="text-align:right" footerText="Total Descuento:" />
+					                <p:column footerText="#{facturacionDataManager.totalDescuento}" />
+					            </p:row>						            						            						            						            						            						            						            						            						            
+					            <p:row>
+					                <p:column colspan="6" style="text-align:right" footerText="Iva 12%:" />
+					                <p:column footerText="#{facturacionDataManager.iva12}" />
+					            </p:row>
+					           	<p:row>
+					                <p:column colspan="6" style="text-align:right" footerText="Total:" />
+					                <p:column footerText="#{facturacionDataManager.total}" />
+					            </p:row>						            						            						            
+					            						            						            						           
+					        </p:columnGroup>
+						    							    							
+						</p:dataTable>
+				
+					</p:panel>
+				
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>
