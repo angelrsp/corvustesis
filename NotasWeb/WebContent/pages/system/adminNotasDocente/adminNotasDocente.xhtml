@@ -8,8 +8,8 @@
 
 
 	<ui:define name="contenido">
-		<h:form id="formAsignacion">
-			<p:panel id="pnlAsignacion" header="Registrar Asignación" toggleable="true"
+		<h:form id="formNotasDocente">
+			<p:panel id="pnlNotasDocente" header="Seleccionar Curso" toggleable="true"
 				closable="false" toggleSpeed="500" closeSpeed="500"
 				widgetVar="panel" style="margin-bottom:20px">
 				<p:panel id="pnlRegistro" style="width: 500px;">
@@ -39,27 +39,18 @@
 									<f:selectItem itemLabel="Primero" itemValue="primero" />
 								</p:selectOneMenu></td>
 						</tr>
-                        
-                        <tr>
-							<td><h:outputText value="Docente:" for="docente" /></td>
-							<td><p:selectOneMenu id="docente" required="true"
-									label="Docente">
-									<f:selectItem itemLabel="--Seleccione--" />
-									<f:selectItem itemLabel="Juán Pérez" itemValue="Juán Pérez" />
-								</p:selectOneMenu></td>
-						</tr>
 						 <tr>
 							<td><h:outputText value="Materia:" for="Materia" /></td>
 							<td><p:selectOneMenu id="materia" required="true"
-									label="Docente">
+									label="Materia">
 									<f:selectItem itemLabel="--Seleccione--" />
 									<f:selectItem itemLabel="Análisis Matemático" itemValue="Análisis Matemático" />
 								</p:selectOneMenu></td>
 						</tr>
 						
 						<tr>
-							<td colspan="2"><p:commandButton value="Registrar"
-									icon="ui-icon-arrow-1-s"
+							<td colspan="2"><p:commandButton value="Buscar Estudiantes"
+									icon="ui-icon-search"
 									/></td>
 						</tr>
 
@@ -68,48 +59,50 @@
 				</p:panel>
 			</p:panel>
 		</h:form>
-		<h:form id="formListaCursos">
-			<p:panel id="pnlListaCursos" header="Lista Cursos">
+		<h:form id="formEstudiantes">
+			<p:panel id="pnlListaEstudiantes" header="Lista Estudintes">
 				<table>
 					<tr>
-
-						<td colspan="2" align="right"><p:inputText
-								id="txtBuscarCurso"
-								value="Nombre Curso"
-								style="width: 300px;" /></td>
-
-						<td><p:commandButton icon="ui-icon-search"
-								placeholder="Identificación"
-								/></td>
-
-
-					</tr>
-					<tr>
-						<td colspan="2"><p:dataTable id="tblDetalle"
-								>
-								<p:column headerText="Curso">
-									<h:outputText  />
-								</p:column>
-
-								<p:column headerText="Nombre">
-								
-									<h:outputText />
-								</p:column>
-
-								<p:column headerText="Descripción">
-									<h:outputText value="#{usu.usuarioDTO.usuApellidos}" />
-								</p:column>
-								<p:column headerText="EDITAR" width="55">
-									
-								</p:column>
-
-
-
-
-
-
-
-							</p:dataTable></td>
+						<td colspan="2">   <p:dataTable id="cars1" var="car" value="#{dtEditView.cars1}" editable="true" style="margin-bottom:20px">
+       <f:facet name="header">
+           Row Editing
+       </f:facet>
+ 
+       <p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}"  />
+       <p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}"  />
+ 
+       <p:column headerText="Nombres">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{car.nombres}" /></f:facet>
+               <f:facet name="input"><p:inputText id="modelInput" value="#{car.nombres}" style="width:100%"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+ 
+       <p:column headerText="Apellidos">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{car.apellidos}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{car.apellidos}" style="width:100%" label="Year"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+ 
+       <p:column headerText="Nota Trabajo">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{car.notaTrabajo}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{car.notaTrabajo}" style="width:100%" label="Year"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+ 
+       <p:column headerText="Nota Trabajo">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{car.notaPromedio}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{car.notaPromedio}" style="width:100%" label="Year"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+ 
+       <p:column style="width:32px">
+           <p:rowEditor />
+       </p:column>
+   </p:dataTable></td>
 					</tr>
 
 				</table>
