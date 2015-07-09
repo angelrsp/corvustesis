@@ -10,65 +10,62 @@
 </h:head>
 <body>
 
-<div>
-	
+<div align="center" style="position: fixed; top: 0; background-color: #FFFFFF; margin-top: -8px;margin-left: -8px;margin-right: -8px; width: 100%;box-shadow: 0 0 1px #2E2D32; overflow: visible; z-index: 40 !important;">
+		<div style="width: 65%;">
 			
-		<p:growl id="pnlMessages" autoUpdate="true" closable="true"/>
+			<div  style="height: 6px;"></div>
 			
-		<div align="center" style="position: fixed; top: 0; background-color: #FFFFFF; margin-top: -8px;margin-left: -8px;margin-right: -8px; width: 100%;box-shadow: 0 0 1px #2E2D32;overflow:visible !important;z-index:40 !important;">
-		
-		<div style="height: 7px;"></div>
-		
-		<h:form id="contenido">
-			<div style="width: 1020px;">
-				<table width="99%">
+			<table width="99%">
 				<tr>
-				
-				<td>
-				<div style=" background-color: #94BFDE; border-top-right-radius: 1em;" >
-				<h:graphicImage value="/resources/img/logo003.jpg"
-								height="40" />
-				</div>
-				</td>
-				
-				</tr>
-					<tr>
-						
-						<td align="right">
-							<p:menubar  id="menuPublico" style="width:100%;">
-								
-									<p:menuitem style="FONT-FAMILY: 'Arial'; COLOR:#94BFDE; font-weight: bold;"  value="Administrar Docentes" url="/pages/administrador/docente/adminDocente.xhtml" />
-									<p:menuitem disabled="true" style="FONT-FAMILY: 'Arial'; COLOR:#94BFDE; font-weight: bold;"  value=" | "/>
-									<p:menuitem style="FONT-FAMILY: 'Arial'; COLOR:#94BFDE; font-weight: bold;"  value="Administrar Encuestas" url="/pages/system/encuesta/adminEncuesta.xhtml" />
-									<p:menuitem disabled="true" style="FONT-FAMILY: 'Arial'; COLOR:#94BFDE; font-weight: bold;"  value=" | "/>
-					                <p:menuitem style="FONT-FAMILY: 'Arial'; COLOR:#94BFDE; font-weight: bold;"  value="Perfil" url="/pages/administrador/perfilAdministrador.xhtml" />
-						            
+	      		<td><img src="#{request.contextPath}/resources/img/logoUce.jpg" height="60" width="175"/></td>
+	     		
+	     		<td align="right">
+	     		<h:form id="menu">
+							<p:menubar style="width:99%; align:center;">
+							       <p:submenu label="Sistema"  style="FONT-FAMILY: 'Arial'; COLOR:#94BFDE; font-weight: bold;">
+							         <p:menuitem style="FONT-FAMILY: 'Arial'; COLOR:#94BFDE; font-weight: bold;"  value="Administrar Cursos" url="/pages/system/adminCurso/adminCurso.xhtml" />
+									 <p:menuitem style="FONT-FAMILY: 'Arial'; COLOR:#94BFDE; font-weight: bold;"  value="Usuarios" url="/pages/system/Usuario/adminUsuario.xhtml" />
+									 <p:menuitem style="FONT-FAMILY: 'Arial'; COLOR:#94BFDE; font-weight: bold;"  value="Catálogos" url="/pages/system/Catalogo/adminCatalogo.xhtml" /> 
+							       </p:submenu>
+							         <p:menuitem disabled="true" style="FONT-FAMILY: 'Arial'; COLOR:#94BFDE; font-weight: bold;"  value=" | "/>
+							       <p:submenu label="Encuesta" style="FONT-FAMILY: 'Arial'; COLOR:#94BFDE; font-weight: bold;">
+							         <p:menuitem style="FONT-FAMILY: 'Arial'; COLOR:#94BFDE; font-weight: bold;"  value="Administrar Encuestas" url="/pages/system/encuesta/adminEncuesta.xhtml" />
+									 <p:menuitem style="FONT-FAMILY: 'Arial'; COLOR:#94BFDE; font-weight: bold;"  value="Asignación Encuestas" url="/pages/system/encuesta/asignarEncuesta/asignarEncuesta.xhtml" />
+					                 <p:menuitem style="FONT-FAMILY: 'Arial'; COLOR:#94BFDE; font-weight: bold;"  value="Reportes" url="/pages/system/encuesta/report/reporteEncuesta.xhtml" />     
+								   </p:submenu>
+								   <p:menuitem disabled="true" style="FONT-FAMILY: 'Arial'; COLOR:#94BFDE; font-weight: bold;"  value=" | "/>
+					                <p:menuitem style="FONT-FAMILY: 'Arial'; COLOR:#94BFDE; font-weight: bold;"  value="Inicio" url="/pages/inicio.xhtml" />     
 																
 								
 								<f:facet name="options">
-						            <p:commandButton actionListener="#{loginController.logout}" value="Cerrar Sesión" icon="ui-icon-extlink" />
+						            <p:commandButton value="Cerrar Sesión"  icon="ui-icon-extlink" />
 						        </f:facet>
 							</p:menubar>																
-						</td>
-					</tr>
-				</table>
-			</div>
-		</h:form>	
+						</h:form>
+						</td>   
+						  		
+     		</tr>
+     	</table>   
+   	</div>
+  </div>
 			
-		</div>
+		
+ <p:growl id="growl" autoUpdate="true" />  
+		<div style="height: 60px;"></div>
+        
+		<div style="width: 1010px; height: 1000px;
+		             border-top-right-radius: 5px 5px; border-top-left-radius: 5px 5px;
+		             border-bottom-left-radius: 5px 5px; border-bottom-right-radius: 5px 5px;
+		              top: 2;  margin-top: -8px;margin-left:
+		              -8px;margin-right: -8px; width: 100%;box-shadow: 0 0 1px #2E2D32; overflow: visible; z-index: 40 !important;" align="center">
 
-		<div style="height: 90px;"></div>
-
-		<div id="content" align="center">
-
-			<div style="width: 1020px; box-shadow: 0 0 1px #2E2D32;">
+			<div style="width: 1010px; box-shadow: 0 0 1px #2E2D32;">
 
 				<ui:insert name="contenido" />
 
 			</div>
 		</div>
-			
-</div>
+	
 
 <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>  
               

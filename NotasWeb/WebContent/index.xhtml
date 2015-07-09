@@ -13,66 +13,47 @@
 <body>
 
 <h:form id="formLogin">
+<p:spacer height="200" />
+
+<p:growl id="msg" showDetail="true" life="3000" />
 <div align="center">
-		<div style="width: 350px;" align="left">
-		 <br></br>
-		 <br></br>
-		 <br></br>
-		 <br></br>
-		 <div style="width: 340px;" align="right">
-		 
-		 <h:form >
-      
-    <p:commandLink id="ajax" actionListener="#{buttonView.buttonAction}" >
-        <h:outputText style="font-size: 12px; color: #555555;" value="Ir a Empresa" />
-    </p:commandLink>
-</h:form></div>
-		 <br></br>
-		 <br></br>
-		 <br></br>
-		 <br></br>
-		 
-		<p:fieldset legend="Ingreso al Sistema" style="margin-bottom:20px">
-		<div align="center">
-		<h:panelGrid columns="1" cellpadding="2">
-			<p:panel id="panellogo">
-			<img src="#{request.contextPath}/resources/img/loginLogo.jpg" height="120" width="340"/>
-			</p:panel>
-			
-			</h:panelGrid>
-								<h:panelGrid columns="2" cellpadding="2">
-		<p:growl autoUpdate="true" showDetail="false"/>
-		   
-			<p:panel id="panel">
-				<p:focus context="panel"/>
-				<table>
-					<tr>
-						<td><p:inputText id="Usuario" placeholder="Usuario" required="true" style="width: 300px;"  /></td>
-					</tr>
-					<tr>
-						<td><p:password id="Constraseña" placeholder="Contraseña" required="true" style="width: 300px;" /></td>
-					</tr>	
-					<tr>
-						<td>
-							<p:spacer height="10" />
-						</td>
-					</tr>
-					<tr align="center">
-						<td colspan="2">
-							<p:commandButton value="Ingresar"  icon="ui-icon-unlocked"/>
-						</td>
-					</tr>									<tr align="center">
+
+            <p:panel header="Login" style="width: 360px;">
+ 
+                <h:panelGrid id="loginPanel" columns="2">
+ 
+                    <h:outputText value="Username" />
+ 
+                    <p:inputText id="username" ></p:inputText>
+ 
+                    <p:spacer></p:spacer>
+ 
+                    <p:message for="username" ></p:message>
+ 
+                    <h:outputText value="Password" />
+ 
+                    <p:password id="password"   feedback="false"></p:password>
+ 
+                    <p:spacer></p:spacer>
+ 
+                    <p:message for="password"></p:message>
+ 
+                    <p:spacer></p:spacer>
+ 
+                    <p:commandButton  value="Login"  actionListener="#{loginController.authenticate}" ajax="true"></p:commandButton>
+                   
+                </h:panelGrid>
+             
+            </p:panel>
+            <p:spacer height="40" />
+             <table>
+   									<tr align="center">
 						<td colspan="2" align="right"> 
 							<a href=""> <i><b>¿Olvidó su Contraseña?</b></i></a> 
 						</td>					
- 					</tr>					
-				</table>
-			</p:panel>
-			</h:panelGrid>
-			</div>
-			</p:fieldset>
-		</div>
-	</div>
+ 					</tr>
+                   </table>
+</div>
 </h:form>
 </body>
 
