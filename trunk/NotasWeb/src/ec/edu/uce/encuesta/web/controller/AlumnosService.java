@@ -70,7 +70,7 @@ public class AlumnosService {
     
      
     public String getRandomSoldState() {
-        return (Math.random() > 0.5) ? "Pasa": "No pasa";
+        return (Math.random() > 0.5) ? "8": "6";
     }
  
     public List<String> getColors() {

@@ -8,6 +8,7 @@ public class Alumno {
 	private String notaPrueba;
 	private String notaExamen;
 	private String notaPromedio;
+	private String text;
 	
 	Alumno(String nombres,
 	 String apellidos,
@@ -20,9 +21,12 @@ public class Alumno {
 		this.apellidos=nombres;
 		this.notaTrabajo=notaTrabajo;
 		this.notaPrueba=notaPrueba;
-		this.nombres=notaExamen;
+		this.notaExamen=notaExamen;
 		this.notaPromedio= notaPromedio;
 	}
+	
+	Alumno(){
+			}
 	public String getNombres() {
 		return nombres;
 	}
@@ -59,5 +63,14 @@ public class Alumno {
 	public void setNotaPromedio(String notaPromedio) {
 		this.notaPromedio = notaPromedio;
 	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+	
 	
 }

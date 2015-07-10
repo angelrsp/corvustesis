@@ -22,6 +22,8 @@ public class NotasView implements Serializable {
      
 	 private List<Alumno> cars1;
 	    private List<Alumno> cars2;
+	    private String myText;
+	    private Boolean edit;
 	         
 	    @ManagedProperty("#{carService}")
 	    private AlumnosService service;
@@ -30,6 +32,7 @@ public class NotasView implements Serializable {
 	    public void init() {
 	        cars1 = service.createAlumnos(10);
 	        cars2 = service.createAlumnos(10);
+	        edit=false;
 	    }
 	 
 	    public List<Alumno> getCars1() {
@@ -71,6 +74,36 @@ public class NotasView implements Serializable {
 	            FacesContext.getCurrentInstance().addMessage(null, msg);
 	        }
 	    }
+	    
+	    public void addTextAction(){
+	    	   Alumno myClassObj =new Alumno();
+	    	   if(!myText.isEmpty()){
+	    	   myClassObj.setText(myText);
+	    	   }
+	    	   else{
+	    	   myClassObj.setText(null);
+	    	   }
+	    	}
+
+		public String getMyText() {
+			return myText;
+		}
+
+		public void setMyText(String myText) {
+			this.myText = myText;
+		}
+
+		public Boolean getEdit() {
+			return edit;
+		}
+
+		public void setEdit(Boolean edit) {
+			this.edit = edit;
+		}
+	    
+	   public void editar() {
+			edit = true;
+		}
 }
 
 
