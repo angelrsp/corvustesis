@@ -6,80 +6,51 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/template/admin.xhtml">
 
-
 	<ui:define name="contenido">
-		<h:form id="formMateria">
-			<p:panel id="pnlMateria" header="Registrar Materia" toggleable="true"
-				closable="false" toggleSpeed="500" closeSpeed="500"
-				widgetVar="panel" style="margin-bottom:20px">
-				<p:panel id="pnlRegistro" style="width: 500px;">
+		
+		<h:form id="frmMateria">
+		
+		  <div class="Responsive50 Container40Center" style="margin: 0 auto;">
+	
+			<p:panel id="pnlMateria" header="Registrar Materia">
+			
+				<div class="Table" style="text-align: center;">
+				
+					<div class="Row">
+					
+						<div class="Table">
+										
+							<div class="Row">
+								<div class="Cell"><h:outputText value="Descripción:" /></div>
+								<div class="Cell"><p:inputText id="txtDescripcionMateria" value="#{materiaDataManager.materiaDTO.matDescripcion}" rendered="true" requiredMessage="Se requiere Descripción"/></div>
+						    </div>	
+						</div>
+					</div>
+					<div style="height: 5px;"></div>
 
-					<table>
-						
-						<tr>
-							<td><h:outputText value="Nombre:" /></td>
-							<td><p:inputText id="txtNombreMateria" /></td>
-						</tr>
-						<tr>
-							<td><h:outputText value="Descripción:" /></td>
-							<td><p:inputText id="txtDescripcionMateria" /></td>
-						</tr>
-						<tr>
-							<td colspan="2"><p:commandButton value="Registrar"
-									icon="ui-icon-arrow-1-s"
-									/></td>
-						</tr>
-
-					</table>
-
-				</p:panel>
+					<div class="Row">
+						<div class="Cell" style="text-align: center;">
+							<p:commandButton value="Nuevo" icon="ui-icon-document" actionListener="#{materiaController.clear}" update="pnlMateria" process="@this" immediate="true" />
+							<p:commandButton value="Registrar" icon="ui-icon-disk" actionListener="#{materiaController.onClickSave}" update="pnlMateria,:frmMateria:pnlListaMaterias" />
+						</div>
+					</div>	
+				</div>
 			</p:panel>
-		</h:form>
-		<h:form id="formListaMaterias">
-			<p:panel id="pnlListaMaterias" header="Lista Materias">
-				<table>
-					<tr>
+          </div>  
+            <p:panel id="pnlListaMaterias" header="Lista Materias">  
+				<p:dataTable id="tblDetalle" value="#{materiaDataManager.materiaList}" var="mat"  reflow="true">
+					<p:column headerText="Materia">
+						<h:outputText value="#{mat.matDescripcion}"/>
+					</p:column>
 
-						<td colspan="2" align="right"><p:inputText
-								id="txtBuscarMateria"
-								value="Nombre Curso"
-								style="width: 300px;" /></td>
-
-						<td><p:commandButton icon="ui-icon-search"
-								
-								/></td>
-
-
-					</tr>
-					<tr>
-						<td colspan="2"><p:dataTable id="tblDetalle"
-								>
-								<p:column headerText="Materia">
-									<h:outputText  />
-								</p:column>
-
-								<p:column headerText="Descripción">
-									<h:outputText />
-								</p:column>
-								
-								<p:column headerText="EDITAR" width="55">
-									
-								</p:column>
-
-
-
-
-
-
-
-							</p:dataTable></td>
-					</tr>
-
-				</table>
-
+					<p:column width="55">
+					<p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{materiaController.onClickEdit(mat)}"
+					 process="@this" update=":frmMateria:pnlMateria" />
+				</p:column>
+				</p:dataTable>
+			
 			</p:panel>
+			
 		</h:form>
 	</ui:define>
-
-
 </ui:composition>

@@ -20,6 +20,7 @@ import ec.edu.uce.notas.ejb.persistence.dao.EvidenciaDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.HistorialPasswordDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.HistoricoIndicadorDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.IndicadorDAO;
+import ec.edu.uce.notas.ejb.persistence.dao.MateriaDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.MenuDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.MenuViewDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.ModeloDAO;
@@ -42,6 +43,7 @@ import ec.edu.uce.notas.ejb.persistence.dao.impl.EvidenciaDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.HistorialPasswordDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.HistoricoIndicadorDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.IndicadorDAOImpl;
+import ec.edu.uce.notas.ejb.persistence.dao.impl.MateriaDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.MenuDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.MenuViewDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.ModeloDAOImpl;
@@ -77,6 +79,7 @@ public class FactoryDAOImpl implements FactoryDAO {
 	private AlumnoDAO alumnoDAO;
 	private AlumnoViewDAO alumnoViewDAO;
 	private CursoDAO cursoDAO;
+	private MateriaDAO materiaDAO;
 	
 	private ModeloDAO modeloDAO;
 	private IndicadorDAO indicadorDAO;
@@ -260,5 +263,13 @@ public class FactoryDAOImpl implements FactoryDAO {
 			cursoDAO = new CursoDAOImpl(entityManager);
 		}
 		return cursoDAO;
+	}
+	
+	@Override
+	public MateriaDAO getMateriaDAOImpl() {
+		if (materiaDAO == null) {
+			materiaDAO = new MateriaDAOImpl(entityManager);
+		}
+		return materiaDAO;
 	}
 }
