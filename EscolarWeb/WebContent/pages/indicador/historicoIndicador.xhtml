@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jstl/core"
+	template="/WEB-INF/template/admin.xhtml">
+
+	<ui:define name="contenido">
+
+		<h:form id="contenido" enctype="multipart/form-data">
+			
+			<p:growl id="growl" showDetail="false" />
+			
+			<p:panel id="pnlDatos" styleClass="tabla" header="Indicador">
+					
+				<table>
+					<tr>
+						<td><h:outputLabel value="Modelo:" /> </td>
+						<td><p:selectOneMenu required="true" value="#{historicoIndicadorController.modelo}" label="Modelo">
+								<f:selectItem itemLabel="--Seleccione--"/>
+								<f:selectItems value="#{historicoIndicadorController.modeloList}"></f:selectItems>
+								<p:ajax event="change" process="@this" update="tree" listener="#{historicoIndicadorController.obtenerArbol}"></p:ajax>
+						</p:selectOneMenu></td>
+					</tr>
+				</table>
+				
+				<p:tree value="#{historicoIndicadorController.rootNode}" var="node" id="tree" selectionMode="single" selection="#{historicoIndicadorController.selectedNode}" style="width:99%; text-align:left;">
+					<p:ajax event="select" listener="#{historicoIndicadorController.onNodeSelect}" update=":contenido:pnlValorReporte2,:contenido:pnlValor"/>  
+			        <p:treeNode id="treeNode">  
+			            <h:outputText value="#{node.indNombre}"/>  
+			        </p:treeNode>  
+			    </p:tree> 
+				
+			</p:panel>
+
+
+			<p:dialog id="reporte2" widgetVar="dlgValorReporteLogico" modal="true" header="#{historicoIndicadorController.indicadorDTO.indNombre}" closeOnEscape="true" width="950" height="440" resizable="false">
+				
+				<p:scrollPanel style="width:930px;height:420px" mode="native">
+					<p:panel id="pnlValorReporte2">
+					
+						<table>
+							<tr>
+								<td><h:outputText value="Indicador: #{historicoIndicadorController.indicadorDTO.indNombre}" style="font-weight:bold" /></td>
+							</tr>	
+						</table>
+											
+						<br/>
+						
+						<div align="center">
+ 							<p:chart type="metergauge" model="#{historicoIndicadorController.meterGaugeModel}" style="width:400px;height:250px"/>
+						</div>
+						
+					<table id="contLogical" width="100%">
+						<tr>
+							<td>
+								<h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorActual>historicoIndicadorController.indicadorDTO.indMinimo?'Cumple':'No Cumple'}" />
+							</td>
+							<td></td>							
+						</tr>
+					
+						<tr>
+							<td><h:outputLabel value="Valor Inicial:" style="font-weight:bold" /></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorInicial}" /></td>
+							
+						</tr>
+						<tr>	
+							<td><h:outputLabel value="Valor Actual:" style="font-weight:bold"/></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indValorActual}" /></td>
+							
+						</tr>
+						<tr>
+							<td><h:outputLabel value="Valor Minimo:" style="font-weight:bold"/></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indMinimo}" /></td>
+
+						</tr>
+						<tr>
+							<td><h:outputLabel value="Valor Maximo:" style="font-weight:bold"/></td>
+							<td><h:outputLabel value="#{historicoIndicadorController.indicadorDTO.indMaximo}" /></td>
+																			
+						</tr>							
+					</table>
+											
+					<table width="100%">	
+						<tr>
+							<td colspan="4" align="center"><p:commandButton value="Registro Valor Actual" type="button" onclick="PF('dlgValor').show();" disabled="#{historicoIndicadorController.disabledAddValue}"/> 
+<!-- 								<p:commandButton value="Ver Descriptor" type="button" onclick="PF('dlgDescriptor').show();"/>  -->
+							</td>						
+						</tr>
+					</table>
+					
+					</p:panel>					
+					
+				</p:scrollPanel>	
+			</p:dialog>			
+			
+			<p:dialog id="dlgValor" widgetVar="dlgValor" modal="true" header="Valores" closeOnEscape="true" resizable="false"  width="800" height="450">
+				
+				<p:panel id="pnlValor" styleClass="tabla">
+				
+					<table>
+					<tr><td><h:outputText value="Indicador: #{historicoIndicadorController.indicadorDTO.indNombre}" style="font-weight:bold" /></td></tr>	
+					</table>
+	
+					<p:spacer height="2"/>
+									
+					<table>
+						<tr>
+							<td><h:outputLabel value="Valor:" /> </td>
+							<td><p:inputText required="true" value="#{historicoIndicadorController.historicoIndicadorDTO.hinValor}" onkeypress="return isDecimalKey(event)"/></td>
+						</tr>	
+						<tr>
+							<td colspan="2" align="center">
+								<p:commandButton actionListener="#{historicoIndicadorController.agregarValor}" value="Agregar" process="pnlValor" update="pnlValor,:contenido:pnlValorReporte2"/> </td>
+						</tr>
+						
+					</table>
+					
+					
+					<p:dataTable id="tblValor" value="#{historicoIndicadorController.historicoIndicadorList}" var="his">
+					
+						<p:column headerText="Valor">
+							<h:outputText value="#{his.hinValor}" />
+						</p:column>
+	
+						<p:column headerText="Fecha">
+							<h:outputText value="#{his.hinFecha}" />
+						</p:column>
+					
+						<p:column headerText="Observación">
+							<h:outputText value="#{his.hinObservacion}" />
+						</p:column>
+					
+						<p:column width="45" style="text-align: center">
+							<p:commandButton title="Eliminar" actionListener="#{historicoIndicadorController.deleteHistoricoIndicador(his)}" icon="ui-icon-close" process="tblValor" update=":contenido:pnlValor">
+								 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+							</p:commandButton>
+						</p:column>		
+											
+<!-- 						<p:column headerText="#{i18n['label.evidencia']}" width="70">   -->
+<!-- 			                <p:commandButton actionListener="#{historicoIndicadorController.buscarEvidencias(his)}" oncomplete="PF('dlgEvidencia').show()" icon="ui-icon-document"  -->
+<!-- 			                	update=":contenido:pnlEvidencia,:contenido:growl" process="tblValor" title="#{i18n['label.evidencia']}">     -->
+<!-- 			    	        </p:commandButton>   -->
+<!-- 				        </p:column>  					 -->
+										
+					</p:dataTable>
+										
+					
+				</p:panel>
+	
+			</p:dialog>				
+				
+		</h:form>
+				
+	</ui:define>
+</ui:composition>

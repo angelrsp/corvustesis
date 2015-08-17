@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/admin.xhtml">
+
+
+	<ui:define name="contenido">
+	
+		<h:form id="frmAlumno">
+			<p:panel id="pnlAlumno" header="Alumno">
+			
+				<p:panel id="pnlRegistro" style="width: 500px;">
+
+					<table>
+						<tr>
+							<td><h:outputText value="Identificación:" for="identification" /></td>
+							<td><p:inputText id="identification" value="#{alumnoDataManager.usuarioDTO.usuIdentificacion}" required="true"/></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Apellidos:" /></td>
+							<td><p:inputText id="txtApellidos" required="true" value="#{alumnoDataManager.usuarioDTO.usuApellidos}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Nombres:" /></td>
+							<td><p:inputText id="txtNombres" value="#{alumnoDataManager.usuarioDTO.usuNombres}" required="true"/></td>
+						</tr>
+						<tr>
+							<td colspan="2"><p:commandButton value="Registrar"	icon="ui-icon-disk" actionListener="#{alumnoController.onClickSave}" process="pnlRegistro" update="pnlRegistro,tblDetalle"/></td>
+						</tr>
+
+					</table>
+
+				</p:panel>
+			
+				<p:dataTable id="tblDetalle" value="#{alumnoDataManager.alumnoViewList}" var="alu">
+
+					<p:column headerText="Identificación">
+						<h:outputText value="#{alu.usuIdentificacion}" />
+					</p:column>
+
+					<p:column headerText="Apellidos">
+						<h:outputText value="#{alu.usuApellidos}"/>
+					</p:column>
+
+					<p:column headerText="Nombres">
+						<h:outputText  value="#{alu.usuNombres}"/>
+					</p:column>
+	
+					<p:column width="55">
+						<p:commandButton title="Editar" icon="ui-icon-pencil"/>
+					</p:column>
+	
+				</p:dataTable>
+				
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

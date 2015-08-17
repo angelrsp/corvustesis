@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/admin.xhtml">
+
+	<ui:define name="contenido">
+		
+		<h:form id="frmDocente">
+		
+			<p:panel id="pnlCurso" header="Docentes">
+			
+				<p:panel id="pnlRegistro" style="width: 500px;">
+					<table>
+						<tr>
+							<td><h:outputText value="Identificación:" for="identification" /></td>
+							<td><p:inputText id="identification" required="true" value="#{docenteDataManger.usuarioDTO.usuIdentificacion}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Apellidos:" /></td>
+							<td><p:inputText id="txtApellidos" 	required="true" value="#{docenteDataManger.usuarioDTO.usuApellidos}"/></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Nombres:" /></td>
+							<td><p:inputText id="txtNombres" required="true" value="#{docenteDataManger.usuarioDTO.usuNombres}"/></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p:commandButton value="Guardar" actionListener="#{docenteController.onClickSave}" icon="ui-icon-disk" process="pnlRegistro" update="pnlRegistro,tblDetalle"/>
+								<p:commandButton value="Cancelar" actionListener="#{docenteController.onClickCancel}" icon="ui-icon-cancel" immediate="true" process="@this" update="pnlRegistro"/>
+							</td>
+						</tr>
+					</table>
+				</p:panel>
+				
+			
+			<p:panel id="pnlListaDocentes">
+				<p:dataTable id="tblDetalle" value="#{docenteController.docenteDataManger.docenteViewList}" var="doc">
+					<p:column headerText="Identificación">
+						<h:outputText value="#{doc.usuIdentificacion}" />
+					</p:column>
+
+					<p:column headerText="Apellidos">
+						<h:outputText  value="#{doc.usuApellidos}"/>
+					</p:column>
+	
+					<p:column headerText="Apellido">
+						<h:outputText value="#{doc.usuNombres}"/>
+					</p:column>
+	
+					<p:column width="55">
+						<p:commandButton value="#{docenteController.onClickEdit(doc)}" icon="ui-icon-pencil" immediate="true" process="@this" update="frmDocente:pnlCurso"/>
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+			
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

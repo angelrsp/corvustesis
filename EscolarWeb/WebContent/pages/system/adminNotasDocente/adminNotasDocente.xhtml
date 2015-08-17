@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/admin.xhtml">
+
+
+	<ui:define name="contenido">
+		<h:form id="formNotasDocente">
+			<p:panel id="pnlNotasDocente" header="Seleccionar Curso" toggleable="true"
+				closable="false" toggleSpeed="500" closeSpeed="500"
+				widgetVar="panel" style="margin-bottom:20px">
+				<p:panel id="pnlRegistro" style="width: 500px;">
+
+					<table>
+						<tr>
+							<td><h:outputText value="Periodo Lectivo:" for="periodoLectivo" /></td>
+							<td><p:selectOneMenu id="periodoLectivo" required="true"
+									label="Año Lectivo">
+									<f:selectItem itemLabel="--Seleccione--" />
+									<f:selectItem itemLabel="Sept 2015 Jul 2016" itemValue="Sept 2015 Jul 2016" />
+								</p:selectOneMenu></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Curso:" for="curso" /></td>
+							<td><p:selectOneMenu id="curso" required="true"
+									label="Curso">
+									<f:selectItem itemLabel="--Seleccione--" />
+									<f:selectItem itemLabel="Primero" itemValue="primero" />
+								</p:selectOneMenu></td>
+						</tr>
+						<tr>
+							<td><h:outputText value="Paralelo:" for="paralelo" /></td>
+							<td><p:selectOneMenu id="paralelo" required="true"
+									label="Curso">
+									<f:selectItem itemLabel="--Seleccione--" />
+									<f:selectItem itemLabel="Primero" itemValue="primero" />
+								</p:selectOneMenu></td>
+						</tr>
+						 <tr>
+							<td><h:outputText value="Materia:" for="Materia" /></td>
+							<td><p:selectOneMenu id="materia" required="true"
+									label="Materia">
+									<f:selectItem itemLabel="--Seleccione--" />
+									<f:selectItem itemLabel="Análisis Matemático" itemValue="Análisis Matemático" />
+								</p:selectOneMenu></td>
+						</tr>
+						
+						<tr>
+							<td colspan="2"><p:commandButton value="Buscar Estudiantes"
+									icon="ui-icon-search"
+									/></td>
+						</tr>
+
+					</table>
+
+				</p:panel>
+			</p:panel>
+		</h:form>
+		<h:form id="formEstudiantes">
+			<p:panel id="pnlListaEstudiantes" header="Lista Estudintes">
+				<table>
+					<tr>
+						<td colspan="2">   <p:dataTable id="cars1" var="car" value="#{dtEditView.cars1}" editable="true" style="margin-bottom:20px">
+ 
+       <p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}"  />
+       <p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}"  />
+       <p:column style="width:16px">
+            <p:rowToggler  />
+        </p:column>
+       <p:column headerText="Nombres">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{car.nombres}" /></f:facet>
+               <f:facet name="input"><p:inputText id="modelInput" value="#{car.nombres}" style="width:100%"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+ 
+       <p:column headerText="Apellidos">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{car.apellidos}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{car.apellidos}" style="width:100%" label="Year"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+ 
+  <p:rowExpansion >
+            <p:panelGrid  columns="5" columnClasses="label,value" style="width:800px">
+             <p:dataTable id="cars2" var="car" value="#{dtEditView.cars1.get(0)}" editable="true" style="margin-bottom:20px">
+ 
+       <p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}"  />
+       <p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}"  />
+       <p:column headerText="Nota Trabajo">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{car.notaTrabajo}" /></f:facet>
+               <f:facet name="input"><p:inputText id="modelInput" value="#{car.notaTrabajo}" style="width:100%"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+ 
+       <p:column headerText="Nota Prueba">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{car.notaPrueba}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{car.notaPrueba}" style="width:100%" label="Year"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+       <p:column headerText="Nota Examen">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{car.notaExamen}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{car.notaExamen}" style="width:100%" label="Year"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+        <p:column headerText="Nota Promedio">
+               <h:outputText value="#{car.notaPromedio}" />
+       </p:column>
+       <p:column style="width:32px">
+           <p:rowEditor />
+       </p:column>
+       </p:dataTable>
+            </p:panelGrid>
+        </p:rowExpansion>
+ 
+       
+ 
+       
+   </p:dataTable></td>
+					</tr>
+
+				</table>
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

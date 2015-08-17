@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/admin.xhtml">
+
+<ui:define name="contenido">
+		
+<h:form id="contenido">		
+		<p:growl id="growl"></p:growl>
+		
+		<p:panel id="pnlModelo" header="Modelo">
+		
+		<table>
+			<tr>
+				<td><h:outputLabel value="Descripción:" /></td>
+				<td><p:inputText value="#{modeloController.modeloDTO.modDescripcion}" required="true" disabled="false"/>
+				</td>
+			</tr>
+		
+			<tr>
+				<td colspan="4" align="center"><p:commandButton actionListener="#{modeloController.agregarModelo}" value="Guardar" process="pnlModelo" update="pnlModelo,growl" icon="ui-icon-disk"/> 
+				<p:commandButton value="Cancelar" actionListener="#{modeloController.cancel}" process="@this" update="pnlModelo,growl" icon="ui-icon-cancel"/></td>
+			</tr>
+		
+		</table>
+		
+		<p:spacer height="5"/>
+		
+		<p:dataTable id="tblModelo" value="#{modeloController.modeloList}" var="mode">
+		
+			<p:column headerText="Descripción">
+				<h:outputText value="#{mode.modDescripcion}" />
+			</p:column>
+			
+			<p:column headerText="#{i18n['boton.editar']}" width="35" style="text-align: center">
+				<p:commandButton actionListener="#{modeloController.edit(mode)}" icon="ui-icon-pencil" process=":contenido:tblModelo" update=":contenido:pnlModelo"/>
+			</p:column>
+			
+			<p:column headerText="#{i18n['boton.eliminar']}" width="40" style="text-align: center">
+				<p:commandButton actionListener="#{modeloController.delete(mode)}" icon="ui-icon-close" process=":contenido:tblModelo" update=":contenido:pnlModelo,:contenido:growl">
+					 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" /> 
+				</p:commandButton>
+			</p:column>
+		
+		
+		</p:dataTable>
+		
+		
+		</p:panel>
+		
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
+	        	<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+	        	<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+    		</p:confirmDialog>  
+		
+		
+</h:form>		
+		</ui:define>
+	</ui:composition>
