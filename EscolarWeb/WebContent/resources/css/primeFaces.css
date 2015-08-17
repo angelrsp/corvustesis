@@ -1,0 +1,327 @@
+.ui-menu .ui-menu-parent .ui-menu-child{
+    background:none;
+    /*background-color: #E0DEDE;*/
+    background-color: #b3b1b1;
+    /*color: #FFFFFF !important*/
+}
+
+.ui-spinner-button{
+    visibility: hidden;
+}
+
+
+.ui-spinner-input{
+    text-align:left !important;
+}
+
+.ui-spinner{
+    width: 90%;
+}
+
+.ui-menuitem-text{
+    text-align:left !important;
+}
+
+
+
+.ui-menu{background:none !important;}
+
+
+
+
+.ui-dialog .ui-dialog-content{
+    background-image: url(../../resources/images/general/grad.jpg)  !important;
+    background-repeat: repeat-x  !important;
+}
+
+.ui-menu a.ui-state-default:link, .ui-menu a.ui-state-default:visited, .ui-menu a.ui-state-default:hover, .ui-menu a.ui-state-default:active, .ui-menu a.ui-state-hover:link, .ui-menu a.ui-state-hover:visited, .ui-menu a.ui-state-hover:hover, .ui-menu a.ui-state-hover:active, .ui-menu a.ui-state-active:link, .ui-menu a.ui-state-active:visited, .ui-menu a.ui-state-active:hover, .ui-menu a.ui-state-active:active {
+    background-color: #3B96D2 !important;
+}
+
+.ui-menuitem-link {background:none !important; color:#FFFFFF !important}
+
+.ui-menuitem-link a:hover lu:hover li:hover {color:black !important}
+
+.wijmo-wijmenu-lis{
+    background:blue !important; color:red !important
+}
+
+.ui-menu ui-state-default a.ui-state-default:hover, .ui-menuitem-link a.ui-state-default:link{
+    background-color: #3B96D2 !important;
+
+    /*  background-color: #B9E9FF !important;*/
+}
+
+/*.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited{
+    color:#FFFFFF !important
+}*/
+.ui-widget {
+    font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
+    font-size: 10px;
+}
+
+.ui-menu .ui-menu-parent .ui-menu-child {
+    /*display: table-row;*/
+    padding: 0.3em;
+    width: 250px;
+    line-height: 14px;
+}
+
+.ui-widget-header {
+    background: none !important ;
+    color: #000000;
+}
+
+
+/*.ui-paginator-top{
+    background-image: url("/SeleccionPersonalWeb/javax.faces.resource/images/");
+    background-color: white;
+    border: 0px solid white;
+}
+
+.ui-paginator-bottom{
+    background-image: url("/SeleccionPersonalWeb/javax.faces.resource/images/");
+    background-color: white;
+    border: 0px solid white;
+}*/
+
+
+.ui-menu {
+    border: 0px solid white;
+    /*background: url(../resources/images/pixelGris3.png) repeat;*/
+    padding: 0.1em;
+    position: absolute;
+    width: 900px;
+    height: 28px;
+    /*top: 72px;*/
+}
+
+/* theme arbol */
+.nodeContent
+{ margin-left:20px;}
+
+.documentStyle
+{background: url(../../resources/images/folders/doc.png) no-repeat; padding-left: 20px;}
+
+.ygtvtn
+{background:url(../../resources/images/folders/tn.gif) 0 0 no-repeat; width:17px;height:22px;}
+
+.ygtvtm
+{background:url(../../resources/images/folders/tm.gif) 0 0 no-repeat; width:34px;height:22px;cursor:pointer}
+
+.ygtvtmh
+{background:url(../../resources/images/folders/tmh.gif) 0 0 no-repeat; width:34px; height:22px;cursor:pointer}
+
+.ygtvtp
+{background:url(../../resources/images/folders/tp.gif) 0 0 no-repeat; width:34px; height:22px;cursor:pointer}
+
+.ygtvtph
+{ background: url(../../resources/images/folders/tph.gif) 0 0 no-repeat; width:34px; height:22px;cursor:pointer }
+
+.ygtvln
+{ background: url(../../resources/images/folders/ln.gif) 0 0 no-repeat; width:17px; height:22px; }
+
+.ygtvlm
+{ background: url(../../resources/images/folders/lm.gif) 0 0 no-repeat; width:34px; height:22px;cursor:pointer }
+
+.ygtvlmh
+{ background: url(../../resources/images/folders/lmh.gif) 0 0 no-repeat; width:34px; height:22px;cursor:pointer }
+
+.ygtvlp
+{ background: url(../../resources/images/folders/lp.gif) 0 0 no-repeat; width:34px; height:22px; cursor:pointer }
+
+.ygtvlph
+{ background: url(../../resources/images/folders/lph.gif) 0 0 no-repeat; width:34px; height:22px; cursor:pointer }
+
+.ui-panel-titlebar{
+    background:none !important;
+    background-image: url("../../resources/images/general/bg_header_pnl.jpg") !important;
+}
+
+/*.ui-corner-all {
+    border-radius: 0px 0px 0px 0px !important;
+}*/
+
+.ui-tabs .ui-tabs-nav{
+    background: none !important
+}
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a {
+    cursor: text;
+    color: #FFFFFF !important;
+}
+
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a {
+    cursor: pointer;
+    color: #FFFFFF !important;
+}
+
+.ui-tabs .ui-tabs-nav li {
+    background : none !important;
+    background-color: #b3b1b1 !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    /*border-bottom: 0 none !important;*/
+    float: left;
+    list-style: none outside none;
+    margin: 0 0.2em 1px 0;
+    padding: 0;
+    position: relative;
+    top: 1px;
+    white-space: nowrap;
+}
+
+.ui-tabs .ui-tabs-nav li:hover {
+
+    background-color: #3B96D2 !important;
+    color: #ffffff !important;
+}
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected {
+    background: none !important;
+    background-color: #3B96D2 !important;
+    color: yellow !important
+}
+
+.ui-datatable .ui-paginator-top {
+    border: none !important;
+}
+
+.ui-paginator-first, .ui-paginator-prev, .ui-paginator-next, .ui-paginator-last, .ui-paginator-page{
+    width: 22px;
+    height: 22px;
+    background:none !important;
+    border: 2px solid #000000 !important;
+    margin:auto !important
+        /*background-color: red !important*/
+}
+
+.ui-paginator-page{
+    *padding: 10px 5px !important;
+}
+
+.ui-paginator-first:hover, .ui-paginator-prev:hover, .ui-paginator-next:hover, .ui-paginator-last:hover, .ui-paginator-page:hover{
+    border: 2px solid #3B96D2 !important;
+}
+
+.ui-paginator-next .ui-icon, .ui-paginator-prev .ui-icon, .ui-paginator-first .ui-icon, .ui-paginator-last .ui-icon{
+    width: 22px !important;
+    height: 22px !important;
+}
+
+
+.ui-icon-seek-first {
+    background: none !important;
+    background-image: url("../../resources/images/formularios/btn_inicio.jpg") !important;
+    background-repeat: no-repeat !important;
+}
+
+.ui-icon-seek-next {
+    background: none !important;
+    background-image: url("../../resources/images/formularios/btn_adelante.jpg") !important;
+    background-repeat: no-repeat !important;
+}
+
+.ui-icon-seek-prev {
+    background: none !important;
+    background-image: url("../../resources/images/formularios/btn_atras.jpg") !important;
+    background-repeat: no-repeat !important;
+
+}
+
+.ui-icon-seek-end {
+    background: none !important;
+    background-image: url("../../resources/images/formularios/btn_fin.jpg") !important;
+    background-repeat: no-repeat !important;
+}
+
+#yui-pg0-0-pages span{
+    font-size:12px;
+    text-align: center;
+    color: #000000;
+    font-weight: bold;
+}
+
+#yui-pg0-0-pages a {
+    margin-left:5px !important;
+    font-size:12px;
+    text-align: center;
+    color: #000000;
+    font-weight: bold;
+    opacity:0.4 !important;
+}
+
+.ui-paginator-current-page{
+    margin-left:5px !important;
+}
+
+.ui-datatable-odd {
+    background: none !important;
+    background-color: #F2F2F2 !important;
+}
+
+.ui-state-highlight{
+    background: none !important;
+    background-color: #FBEC88 !important;
+}
+
+
+.ui-inputNum
+{
+    width:90%;
+    box-sizing:border-box; 
+    -webkit-box-sizing:border-box; 
+    -moz-box-sizing: border-box;
+}
+
+.horizontal {
+    display: inline;
+    float : left;
+    width: 100px;
+    padding: 0px 0px;
+}
+.ui-datalist-data {
+    overflow:auto;
+}
+
+.CONVO_3  , .CONVO_3 .fc-event-skin, .CONVO_3 a{
+    background-color:  deepskyblue;
+}
+.VERIFI_3,.VERIFI_3 .fc-event-skin,.VERIFI_3 a {
+    background-color: turquoise;
+}
+
+.APELAC_3,.APELAC_3 .fc-event-skin,.APELAC_3 a {
+    background-color: olive;
+}
+
+.RESAPEVERI_3,.RESAPEVERI_3 .fc-event-skin,.RESAPEVERI_3 a  {
+    background-color: salmon;
+}
+
+.REGLUG_3,.REGLUG_3 .fc-event-skin,.REGLUG_3 a {
+    background-color: tomato;
+}
+
+.APCAPRU_3,.APCAPRU_3 .fc-event-skin,.APCAPRU_3 a {
+    background-color: darkseagreen;
+}
+
+.RESTRICAL_3, .RESTRICAL_3 .fc-event-skin,.RESTRICAL_3 a {
+    background-color: coral;
+}
+
+.TOMAENT_3, .TOMAENT_3 .fc-event-skin,.TOMAENT_3 a {
+    background-color: orange;
+}
+
+.AFIREMPPUF_3, .AFIREMPPUF_3 .fc-event-skin,.AFIREMPPUF_3 a {
+    background-color: #3b95d1;
+}
+
+.EMIACTA_3, .EMIACTA_3 .fc-event-skin,.EMIACTA_3 a {
+    background-color:  #b3b1b1;
+}
+
+

@@ -1,0 +1,98 @@
+@CHARSET "ISO-8859-1";
+
+body{
+    font-size: 9pt;font-weight:normal;
+}
+
+.ui-layout-north {
+     z-index:20 !important;
+     overflow:visible !important;;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+    overflow:visible !important;
+}
+
+.formulario {
+        border-collapse: collapse;
+        width: 100%;
+}
+
+textarea {
+        resize: none;
+        width: 100%;
+}
+
+.selector
+{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+
+.menu {
+    background:#345;
+    color:#FFF;
+    height:2em;
+    padding:.5em;
+    position:absolute;
+    top:50px;
+    width:100%;
+}
+.fixed {
+    position:fixed;
+    top:0;
+}
+
+
+.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding-top: 1px;
+  background-color: #ffffff;
+}
+
+.content {
+	width: 1000px;
+	padding-top: 70px;
+	padding-bottom: 30px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+.Table {
+	display: table;
+	width: 100%;
+}
+
+.Title {
+	display: table-caption;
+	text-align: center;
+	font-weight: bold;
+	font-size: larger;
+}
+
+.Heading {
+	display: table-row;
+	font-weight: bold;
+	text-align: center;
+}
+
+.Row {
+	display: table-row;
+	width: 100%;
+}
+
+.Cell {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: left;
+	padding:1px;
+	
+}
