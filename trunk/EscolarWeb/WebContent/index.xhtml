@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <META NAME="AUTHOR" CONTENT="SIITH" />
+        <META NAME="REPLY-TO" CONTENT="indicadores@gmail.com" />
+        <LINK REV="made" href="mailto:indicadores@gmail.com" />
+        <META NAME="Resource-type" CONTENT="Document"/>
+        <META NAME="Revisit-after" CONTENT="7 days"/>
+        <META NAME="robots" content="ALL"/>
+        <META NAME="DESCRIPTION" CONTENT="Sistema de Indicadores" />
+        <link REL="shortcut icon" href="#{request.contextPath}/resources/images/favicon.ico" />
+        <link href="#{request.contextPath}/resources/css/cssLayout.css" rel="stylesheet" type="text/css"/>
+        <link href="#{request.contextPath}/resources/css/primeFaces.css" rel="stylesheet" type="text/css"/>
+        <title>Indicadores Formación, Aprendizaje y crecimiento</title>
+    </h:head>
+    <h:body onload="PF('sessionTimeOutDialog').show();">
+
+        <div id="main" class="container">
+            <div id="floating_bar">
+                <h:graphicImage library="images/general" name="company_logo.png" alt="Indicadores Formación, Aprendizaje y crecimiento" />
+            </div>
+            <div id="header">
+                <div id="section_tag" class="clearfix">
+
+                    <h:graphicImage library="images/general" name="logo-plans.gif" alt="Sisitema de Indicadores Formación, Aprendizaje y crecimiento" />
+
+                    <p>Sistema de Indicadores Formación, Aprendizaje y crecimiento</p>
+                </div>
+            </div>
+            <div id="content">
+                <div id="login_bar" class="clearfix"> </div>
+                <div id="nav">
+                    <p class="instrucciones">Estimado usuario, si usted desea acceder a este sistema, ingrese su clave y contraseña.</p>
+                </div>
+                <div class="form_column_middle">
+                    <div >
+                        <p  align="left">
+                            <h:graphicImage  library="images" name="talento3.png" alt="Siith"/>
+                        </p>
+
+                    </div>
+                </div>
+                <div class="form_column_middle">
+                    <center>
+                        <p:messages globalOnly="true" id="msgs"/>
+                        <h:panelGrid columns="3" id="panelBase"  style="width: 100%">
+                            <h:form id="loginForm" styleClass="clearfix">
+                                <h:panelGrid  columns="1" style="text-align: center;">
+                                    <br />
+                                    <h:panelGrid  columns="1" styleClass="borderGray" >
+                                        <h:panelGrid columns="2">
+                                            <h:outputLabel value="Usuario: " styleClass="label"/>
+                                            <p:inputText value="#{indexDataManager.credencialDTO.user}" styleClass="txt" style="font-size: 12px;"/>
+                                            <h:outputLabel value="Clave: " styleClass="label"/>
+                                            <p:password feedback="true" value="#{indexDataManager.credencialDTO.pass}"
+
+                                                        promptLabel="Ingrese su clave"
+                                                        weakLabel="Seguridad baja" goodLabel="Seguridad buena" strongLabel="Seguridad fuerte" styleClass="txt" style="font-size: 12px;"/>
+                                            <h:outputText/>
+                                            <h:panelGrid columns="2">
+                                                <p:commandButton styleClass="btn_form" value="Ingresar" action="#{indexController.onClickLogin}" ajax="false"/>
+                                            </h:panelGrid>
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                            </h:form>
+                        </h:panelGrid>
+                    </center>
+                </div>
+                <br/>
+                <div class="warning">
+                    <p>Este sistema funciona correctamente en Mozilla Firefox versión 20 o superior y Google Chrome 20 o superior.</p>
+                    <h:graphicImage library="images/form" name="ico_chrome.jpg" alt="Chrome" height="21px" width="53px" /> 
+                    <h:graphicImage library="images/form" name="firefox_icon.jpg" alt="Firefox" /> 
+                </div>
+
+            </div>
+            <div id="content_bottom"></div>
+            <div id="footer" class="clearfix">
+                <center>
+                    <strong style="font-size: 10px; text-align: right; ">
+                        © COPYRIGHT 2015 - <a style="text-decoration: none; color: black;"
+                                              href="http://www.trabajo.gob.ec/">SISTEMA DE INDICADORES</a>
+                    </strong>
+                </center>
+            </div>
+        </div>
+    </h:body>
+</html>
