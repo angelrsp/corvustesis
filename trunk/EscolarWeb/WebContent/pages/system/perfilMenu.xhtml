@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/admin.xhtml">
+
+	<ui:define name="contenido">
+	
+		<h:form>
+	
+			<div class="Responsive50 Container40Center" style="margin: 0 auto;">
+			
+				<p:panel id="pnlDato" header="Acceso">
+	
+					<div class="Table">
+						<div class="Row">
+							<div class="Cell"><h:outputText value="Perfil:" /></div>
+							<div class="Cell">
+								<p:selectOneMenu value="#{perfilMenuDataManager.perfilCode}">
+									<f:selectItem itemLabel="--Seleccione--"/>
+									<f:selectItems value="#{perfilMenuController.perfilMenuDataManager.perfilList}" var="per" itemValue="#{per.perCodigo}" itemLabel="#{per.perDescripcion}"/>
+									<p:ajax listener="#{perfilMenuController.accesoRead}" update="pojoPickList" event="change" process="@this"/>
+								</p:selectOneMenu>
+							</div>
+						</div>
+						
+						<div class="Row">
+							<div class="Cell"><h:outputText value="Menú:" /></div>
+							<div class="Cell">
+								<p:selectOneMenu value="#{perfilMenuDataManager.menuCode}">
+									<f:selectItem itemLabel="--Seleccione--"/>
+									<f:selectItems value="#{perfilMenuDataManager.menuList}" var="men" itemValue="#{men.menCodigo}" itemLabel="#{men.menDescripcion}" />
+									<p:ajax listener="#{perfilMenuController.accesoRead}" update="pojoPickList" event="change" process="@this"/>
+								</p:selectOneMenu>
+							</div>
+						</div>
+					</div>
+	
+					<div style="height: 10px;"></div>
+	
+				   <p:pickList id="pojoPickList" value="#{perfilMenuDataManager.dualListModel}" var="acc" effect="bounce"
+		                itemValue="#{acc.codigo}" itemLabel="#{acc.descripcion}" showSourceControls="true" showTargetControls="true"
+		                showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" converter="#{acc}" responsive="true">
+				 
+				        <f:facet name="sourceCaption">Control</f:facet>
+				        <f:facet name="targetCaption">Asignado</f:facet>
+				 
+				        <p:ajax event="transfer" listener="#{perfilMenuController.onTransfer}" />
+				 
+				        <p:column style="width:10%">
+                    		<h:outputText styleClass="ui-theme ui-theme-#{theme.name}" />
+                		</p:column>
+
+		                <p:column style="width:90%;">
+		                    <h:outputText value="#{acc.descripcion}" />
+		                </p:column>
+				 
+				    </p:pickList>			
+	
+	
+				</p:panel>
+				
+			</div>
+	
+			
+			
+		</h:form>
+		
+	</ui:define>
+
+</ui:composition>		

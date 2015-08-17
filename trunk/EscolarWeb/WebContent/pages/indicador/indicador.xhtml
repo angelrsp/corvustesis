@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/admin.xhtml">
+
+	<ui:define name="contenido">
+
+	<h:form id="contenido">
+			
+		<p:growl id="growl" showDetail="false" />
+		<p:panel id="pnlDatos" styleClass="tabla" header="Indicador">
+					
+			<table>
+				<tr>
+					<td><h:outputLabel value="Modelo:" /> </td>
+					<td>
+						<p:selectOneMenu required="true" requiredMessage="#{i18n['label.modelo']}:&#160;#{i18n['label.requerido']}" value="#{indicadorController.modelo}">
+							<f:selectItem itemLabel="--Seleccione--"/>
+							<f:selectItems value="#{indicadorController.modeloList}"></f:selectItems>
+							<p:ajax event="change" process="@this" update="tree,growl" listener="#{indicadorController.obtenerArbol}" immediate="true"></p:ajax>
+							<p:ajax event="change" process="@this" update="predecesor,tree,growl" listener="#{indicadorController.obtenerArbol}" immediate="true"></p:ajax>											
+						</p:selectOneMenu>
+					</td>
+				</tr>
+
+				<tr>
+					<td><h:outputLabel value="Nombre:" /> </td>
+					<td><p:inputTextarea required="true" value="#{indicadorController.indicadorDTO.indNombre}"/></td>
+				</tr>
+
+				<tr>
+					<td><h:outputLabel value="Orden:" /> </td>
+					<td><p:inputText required="true" value="#{indicadorController.indicadorDTO.indOrden}"/></td>
+				</tr>
+
+				<tr>
+					<td><h:outputLabel value="Valor Mínimo:" /> </td>
+					<td><p:inputText required="true"
+								value="#{indicadorController.indicadorDTO.indMinimo}" onkeypress="return isDecimalKey(event);"/>
+								<p:button id="helpMinimo" style="width: 15px; height: 15px" icon="ui-icon-help" onclick="return false;"/>
+								<p:tooltip for="helpMinimo" value="Ayuda" showEffect="fade" hideEffect="fade" />  																											
+					</td>
+				</tr>
+
+				<tr>
+					<td><h:outputLabel value="Valor Máximo:" /> </td>
+					<td><p:inputText required="true"
+								value="#{indicadorController.indicadorDTO.indMaximo}" onkeypress="return isDecimalKey(event);"/>
+								<p:button id="helpMaximo" style="width: 15px; height: 15px" icon="ui-icon-help" onclick="return false;"/>
+								<p:tooltip for="helpMaximo" value="Ayuda" showEffect="fade" hideEffect="fade" />  																											
+					</td>
+				</tr>
+
+				<tr>
+					<td><h:outputLabel value="Predecesor" /> </td>
+						<td><p:selectOneMenu id="predecesor" requiredMessage="#{i18n['label.predecesor']}:&#160;#{i18n['label.requerido']}" value="#{indicadorController.predecesor}">
+								<f:selectItem itemLabel="--Seleccione--"/>
+								<f:selectItems value="#{indicadorController.indicadorList}" var="in" itemLabel="#{in.indNombre}" itemValue="#{in.indCodigo}"></f:selectItems>
+						</p:selectOneMenu></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<p:commandButton actionListener="#{indicadorController.agregarIndicador}" value="Guardar" process="pnlDatos" update="tree,pnlDatos,growl" icon="ui-icon-disk"/>
+						<p:commandButton actionListener="#{indicadorController.delete}" value="Eliminar" process="@this" update="tree,pnlDatos,growl" icon="ui-icon-close"/>
+						<p:commandButton actionListener="#{indicadorController.cancel}" value="Cancelar" process="@this" update="tree,pnlDatos,growl" icon="ui-icon-cancel"/> 
+						</td>
+				</tr>
+				
+			</table>	
+
+			<p:tree value="#{indicadorController.rootNode}" var="node" id="tree" selection="#{indicadorController.selectedNode}" selectionMode="single" style="width:99%;text-align:left;">
+				<p:ajax event="select" listener="#{indicadorController.onNodeSelect}" update=":contenido:growl,:contenido:pnlDatos"/>  
+		        <p:treeNode id="treeNode">  
+		            <h:outputText value="#{node.indNombre}"/>
+		        </p:treeNode>  
+		    </p:tree>  
+					
+		</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

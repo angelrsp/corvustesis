@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/admin.xhtml">
+
+	<ui:define name="contenido">
+	
+		<h:form id="frmUsuario">
+
+		<div class="Responsive50 Container40Center" style="margin: 0 auto;">
+	
+			<p:panel id="pnlUsuario" header="Registrar Usuario">
+			
+				<div class="Table" style="text-align: center;">
+				
+					<div class="Row">
+					
+						<div class="Table">
+										
+							<div class="Row">
+								<div class="Cell"><h:outputText value="Identificación:" for="user" /></div>
+								<div class="Cell"><p:inputText id="user" placeholder="Identificación" required="true" value="#{usuarioDataManager.usuarioDTO.usuIdentificacion}" /></div>
+							</div>
+	
+							<div class="Row">
+								<div class="Cell"><h:outputText value="Contraseña:" for="password" /></div>
+								<div class="Cell"><p:password id="password" label="Contraseña" value="#{usuarioDataManager.password}" required="#{usuarioDataManager.passRequired}" /></div>
+							</div>
+	
+							<div class="Row">
+								<div class="Cell"><h:outputText value="Correo Electrónico:" /></div>
+								<div class="Cell"><p:inputText required="true" value="#{usuarioDataManager.usuarioDTO.usuMail}" /></div>
+							</div>					
+	
+							<div class="Row">
+								<div class="Cell"><h:outputText value="Apellidos:" /></div>
+								<div class="Cell"><p:inputText id="txtApellidos" required="true" value="#{usuarioDataManager.usuarioDTO.usuApellidos}" /></div>
+							</div>					
+	
+							<div class="Row">
+								<div class="Cell"><h:outputText value="Nombres:" /></div>
+								<div class="Cell"><p:inputText id="txtNombres" value="#{usuarioDataManager.usuarioDTO.usuNombres}" required="true" label="Nombres"/></div>
+							</div>					
+	
+							<div class="Row">
+								<div class="Cell"><h:outputText value="Perfil:" for="somPerfil" /></div>
+								<div class="Cell">
+									<p:selectOneMenu id="somPerfil" value="#{usuarioDataManager.perfilDTO.perCodigo}" required="true" label="Perfil">
+										<f:selectItem itemLabel="--Seleccione--" />
+										<f:selectItems value="#{usuarioController.usuarioDataManager.perfilList}" var="per" itemValue="#{per.perCodigo}" itemLabel="#{per.perDescripcion}" />
+									</p:selectOneMenu>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div style="height: 5px;"></div>
+
+					<div class="Row">
+						<div class="Cell" style="text-align: center;">
+							<p:commandButton value="Nuevo" icon="ui-icon-document" actionListener="#{usuarioController.onClickNew}" update="pnlUsuario" process="@this" immediate="true" />
+							<p:commandButton value="Registrar" icon="ui-icon-disk" actionListener="#{usuarioController.onClickSave}" update="pnlUsuario,:frmUsuario:pnlListaUsuarios" />
+						</div>
+					</div>					
+					
+				</div>
+	
+			</p:panel>
+		
+		</div>
+		
+		<p:panel id="pnlListaUsuarios" header="Lista Usuarios">
+				
+			<p:dataTable id="tblDetalle" value="#{usuarioDataManager.usuarioList}" var="usu" reflow="true">
+			
+				<p:column headerText="Identificación">
+					<h:outputText value="#{usu.usuIdentificacion}"/>
+				</p:column>
+
+				<p:column headerText="Nombres">
+					<h:outputText value="#{usu.usuNombres}"/>
+				</p:column>
+
+				<p:column headerText="Apellidos">
+					<h:outputText value="#{usu.usuApellidos}"/>
+				</p:column>
+				
+				<p:column width="55">
+					<p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{usuarioController.onClickEdit(usu)}"
+					 process="@this" update=":frmUsuario:pnlUsuario" />
+				</p:column>
+
+			</p:dataTable>
+
+		</p:panel>
+
+		</h:form>
+		
+	</ui:define>
+	
+</ui:composition>		

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/admin.xhtml">
+
+	<ui:define name="contenido">
+	
+		<h:form id="contenido">
+	
+			<div class="Responsive50 Container40Center" style="margin: 0 auto;">
+	
+				<p:panel id="pnlDato" header="Componente">
+	
+					<div class="Table">
+					
+						<div class="Row">
+							<div class="Table">
+								<div class="Row">
+									<div class="Cell"><h:outputText value="Descripcion:" /></div>
+									<div class="Cell"><p:inputText value="#{componenteDataManager.componente.comDescripcion}" required="true"/></div>
+								</div>
+							</div>
+						</div>	
+
+						<div style="height: 5px;"></div>
+								
+						<div class="Row">
+							<p:commandButton value="Guardar" process="pnlDato" update="pnlDato,tblComponente" actionListener="#{componenteController.save}" icon="ui-icon-disk"/>
+							<p:commandButton value="Cancelar" process="@this" update="pnlDato" actionListener="#{componenteController.cancel}" icon="ui-icon-cancel"/>
+						</div>
+						
+					</div>
+		
+				</p:panel>
+				
+			</div>	
+			
+			<div style="height: 10px;"></div>
+				
+			<p:dataTable id="tblComponente" value="#{componenteController.componenteDataManager.componenteList}" var="com" reflow="true" paginator="true">
+
+				<p:column headerText="Descripción">
+					<h:outputText value="#{com.comDescripcion}"/>
+				</p:column>					
+			
+				<p:column width="55">
+					<p:commandButton actionListener="#{componenteController.edit(com)}" icon="ui-icon-pencil" process=":contenido:tblComponente" update=":contenido:pnlDato"/>
+				</p:column>
+				
+<!-- 				<p:column headerText="#{i18n['boton.eliminar']}" width="15" style="text-align: center"> -->
+<!-- 					<p:commandButton actionListener="#{ubicacionController.deleteCiudad(ciu)}" icon="ui-icon-close" process=":contenido:tblCiudad" update=":contenido:pnlCiudad,:contenido:growl"> -->
+<!-- 						 <p:confirm header="Confirmación" message="Desea Eliminar?" icon="ui-icon-alert" />  -->
+<!-- 					</p:commandButton> -->
+<!-- 				</p:column> -->
+			
+						
+			</p:dataTable>
+		
+		
+		</h:form>
+
+	</ui:define>
+</ui:composition>	
