@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition>
+
+        <h:form>
+            <p:idleMonitor onactive="PF('sessionTimeOutIdleDialog').show();" timeout="#{indexController.tiempoSession * 10000}"/>
+            <p:confirmDialog header="Sesión Caducada" widgetVar="sessionTimeOutIdleDialog"
+                       closable="false" width="400" visible="false">
+
+                <h:outputText value="Su Sesión ha caducado favor pulse sobre el botón para acceder nuevamente a la aplicación" />
+                <p:commandButton oncomplete="PF('sessionTimeOutIdleDialog').hide();"   id="confirmBackToLogin"  value="Acceder nuevamente a la aplicación"
+                       onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsf';" />
+            </p:confirmDialog>
+        </h:form>
+    </ui:composition>
+</html>
