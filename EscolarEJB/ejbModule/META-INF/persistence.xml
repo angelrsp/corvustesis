@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="notasPU">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:/postgreSQLEscolarDS</jta-data-source>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.EvidenciaDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.HistoricoIndicadorDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.IndicadorDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.ModeloDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.AlumnoDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.CursoDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.CursoAlumnoDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.DocenteDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.NotaDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.TipoNotaDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.AccesoDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.CatalogoDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.ComponenteDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.ComponenteMenuDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.EmpresaDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.HistoryPasswordDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.MenuDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.ModuloDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.ParametroDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.PerfilDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.UsuarioDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.UsuarioPerfilDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.view.DocenteViewDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.view.AccesoViewDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.view.ComponenteMenuViewDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.view.MenuViewDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.view.UsuarioViewDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.view.AlumnoViewDTO</class>
+		<properties>
+            <property name="hibernate.show_sql" value="true"/>
+        </properties>
+	</persistence-unit>
+		
+</persistence>
