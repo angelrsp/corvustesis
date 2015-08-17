@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <ui:composition>
+
+        <!--div id="cabecera"-->
+        <div id="header" style="display:table">
+                <div id="section_tag" class="clearfix">
+                
+                    <h:graphicImage library="images/general" name="logo-plans.gif" alt="Indicadores Formación, Aprendizaje y crecimiento" />
+ 
+                    <p>Indicadores Formación, Aprendizaje y crecimiento</p>
+                </div>
+	    <div id="content_header">
+
+		<div id="login_bar" class="clearfix">
+		    <div id="login_info">
+  		        <h:panelGrid columns="4" width="100%">
+			    <h:outputLabel value="Nombre: " for="txt_usuNombre" style="color:black"/>
+                            <h:outputText id="txt_usuNombre" value="#{indexDataManager.usuarioDTO.usuNombres} #{indexDataManager.usuarioDTO.usuApellidos}" />
+		            <h:outputLabel value="Dirección: " for="txt_inst" style="color:black"/>
+			    <h:outputText id="txt_inst" value="Unidad de Análisis de Talento Humano" />
+			</h:panelGrid>
+		    </div>
+                </div>
+		<div id="log_options">
+                    <h:form>
+                        <h:panelGrid columns="3" width="100%">
+                            <p:commandLink action="#{indexController.onClickLogout}"
+                                           value="Cerrar sesión" ajax="false"/>
+                        </h:panelGrid>
+                    </h:form>
+      		</div>
+            </div>
+         </div>
+    </ui:composition>
+</html>

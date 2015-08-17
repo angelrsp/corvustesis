@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition >
+        <div id="menu">
+            <h:form>
+                <h:panelGrid  columns="2">
+                    <p:spacer width="10px"/>
+                    <h:panelGroup>
+                        <p:menubar model="#{dinamicMenuController.menuModel}">
+                        </p:menubar>
+                    </h:panelGroup>
+                </h:panelGrid>
+            </h:form>
+        </div>
+    </ui:composition>
+</html>

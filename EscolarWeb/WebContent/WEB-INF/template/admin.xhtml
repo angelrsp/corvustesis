@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" >
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <META NAME="Resource-type" CONTENT="Document"/>
+        <META NAME="Revisit-after" CONTENT="7 days"/>
+        <META NAME="robots" content="ALL"/>
+        <link REL="shortcut icon" href="#{request.contextPath}/resources/images/favicon.ico" />
+        <link href="#{request.contextPath}/resources/css/cssLayout.css" rel="stylesheet" type="text/css"/>
+        <link href="#{request.contextPath}/resources/css/primeFaces.css" rel="stylesheet" type="text/css"/>
+        <link href="#{request.contextPath}/resources/css/style.css" rel="stylesheet" type="text/css"/>
+        <title>Sistema de Indicadores Formación, Aprendizaje y crecimiento</title>
+
+        <script>
+
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-62626418-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </h:head>
+    <h:body>
+        <div id="main" class="container">
+            <div id="floating_bar">
+                <h:graphicImage library="images/general" name="company_logo.png" alt="Sistema de Indicadores Formación, Aprendizaje y crecimiento" />
+            </div>
+            <ui:insert name="header">
+                <ui:include src="/WEB-INF/template/header.xhtml" id=""/>
+            </ui:insert>
+            <div id="nav">
+                <ui:insert name="top">
+                    <ui:include src="/WEB-INF/template/menu.xhtml"/>
+                </ui:insert>
+            </div>
+            <div class="clearfix form_container">                
+                    <p:messages globalOnly="true" id="msgs"/>
+                    <p:growl id="msgsGrowl"/>
+                    <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>
+                    <p:dialog modal="true" widgetVar="statusDialog" header="Espere" resizable="false"
+                              draggable="false" closable="false">  
+                        <p:graphicImage id="graphClient"  value="/img/ajax.gif" />  
+         
+                    </p:dialog>
+                    
+<!--                     <ui:include src="timeOut.xhtml"/> -->
+<!--                         <ui:insert name="popUp"> -->
+<!--                     </ui:insert> -->
+
+                    <div id="panelBase">
+                        <ui:insert name="contenido" />
+                    </div>
+            </div>
+
+            <div id="content_bottom"></div>
+            <div id="footer" class="clearfix">
+                <center>
+                    <strong style="font-size: 10px; text-align: right; ">
+                        © COPYRIGHT 2015 - <a style="text-decoration: none; color: black;"
+                                              href="http://www.seguimiento.com/">SEGUIMIENTO DE INDICADORES DE INSTRUCCION FORMAL</a>
+                    </strong>
+                </center>
+            </div>
+        </div>
+    </h:body>
+    <script>
+    </script>
+</html>
