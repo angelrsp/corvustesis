@@ -14,6 +14,7 @@ import ec.edu.uce.notas.ejb.dao.factory.FactoryDAO;
 import ec.edu.uce.notas.ejb.persistence.entity.AlumnoDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.CursoDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.DocenteDTO;
+import ec.edu.uce.notas.ejb.persistence.entity.MateriaDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.UsuarioDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.view.AlumnoViewDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.view.DocenteViewDTO;
@@ -155,6 +156,27 @@ public class AcademicoServiceImpl implements AcademicoService {
 	{
 		try {
 			return factoryDAO.getCursoDAOImpl().getByAnd(cursoDTO);
+		} catch (CorvustecException e) {
+			throw new CorvustecException(e);
+		}
+	}
+
+	
+	/*Materia*/
+	@Override
+	public MateriaDTO createOrUpdateMateria(MateriaDTO materiaDTO) throws CorvustecException
+	{
+		if(materiaDTO.getMatCodigo()!=null)
+			return factoryDAO.getMateriaDAOImpl().update(materiaDTO);
+		else
+			return factoryDAO.getMateriaDAOImpl().create(materiaDTO);
+	}
+	
+	@Override
+	public List<MateriaDTO> readMateria(MateriaDTO materiaDTO) throws CorvustecException
+	{
+		try {
+			return factoryDAO.getMateriaDAOImpl().getByAnd(materiaDTO);
 		} catch (CorvustecException e) {
 			throw new CorvustecException(e);
 		}
