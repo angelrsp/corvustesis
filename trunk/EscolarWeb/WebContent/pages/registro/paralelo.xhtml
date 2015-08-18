@@ -8,11 +8,11 @@
 
 	<ui:define name="contenido">
 		
-		<h:form id="frmPeriodo">
+		<h:form id="frmParalelo">
 		
 		  <div class="Responsive50 Container40Center" style="margin: 0 auto;">
 	
-			<p:panel id="pnlPeriodo" header="Registrar Periodo">
+			<p:panel id="pnlParalelo" header="Registrar Paralelo">
 			
 				<div class="Table" style="text-align: center;">
 				
@@ -22,7 +22,7 @@
 										
 							<div class="Row">
 								<div class="Cell"><h:outputText value="Descripción:" /></div>
-								<div class="Cell"><p:inputText id="txtDescripcionPeriodo" value="#{periodoController.periodoDataManager.periodoDTO.perDescripcion}" required="true" requiredMessage="Se requiere Descripción"/></div>
+								<div class="Cell"><p:inputText id="txtDescripcionParalelo" value="#{paraleloController.paraleloDataManager.paraleloDTO.perDescripcion}" required="true" requiredMessage="Se requiere Descripción"/></div>
 						    </div>	
 						</div>
 					</div>
@@ -30,22 +30,22 @@
 
 					<div class="Row">
 						<div class="Cell" style="text-align: center;">
-							<p:commandButton value="Nuevo" icon="ui-icon-document" actionListener="#{periodoController.clear}" update="pnlPeriodo"  />
-							<p:commandButton value="Registrar" icon="ui-icon-disk" actionListener="#{periodoController.onClickSave}" process="@this, txtDescripcionPeriodo" update="pnlPeriodo,:frmPeriodo:pnlListaPeriodos, msgsGrowl" />
+							<p:commandButton value="Nuevo" icon="ui-icon-document" actionListener="#{paraleloController.clear}" update="pnlParalelo"  />
+							<p:commandButton value="Registrar" icon="ui-icon-disk" actionListener="#{paraleloController.onClickSave}" process="@this, txtDescripcionParalelo" update="pnlParalelo,:frmParalelo:pnlListaParalelos, msgsGrowl" />
 					    </div>
 					</div>	
 				</div>
 			</p:panel>
           </div>  
-            <p:panel id="pnlListaPeriodos" header="Lista Periodos">  
-				<p:dataTable id="tblDetalle" value="#{periodoDataManager.periodoList}" var="pro"  reflow="true">
-					<p:column headerText="Periodo">
+            <p:panel id="pnlListaParalelos" header="Lista Paralelos">  
+				<p:dataTable id="tblDetalle" value="#{paraleloDataManager.paraleloList}" var="pro"  reflow="true">
+					<p:column headerText="Paralelo">
 						<h:outputText value="#{pro.perDescripcion}"/>
 					</p:column>
 
 					<p:column width="55">
-					<p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{periodoController.onClickEdit(pro)}"
-					 process="@this" update=":frmPeriodo:pnlPeriodo" />
+					<p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{paraleloController.onClickEdit(pro)}"
+					 process="@this" update=":frmParalelo:pnlParalelo" />
 				</p:column>
 				</p:dataTable>
 			

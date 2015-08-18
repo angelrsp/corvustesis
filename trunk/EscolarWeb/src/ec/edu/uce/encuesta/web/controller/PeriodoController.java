@@ -12,13 +12,13 @@ import com.corvustec.notas.common.util.CorvustecException;
 import com.corvustec.notas.web.util.JsfUtil;
 
 
-import ec.edu.uce.notas.ejb.persistence.entity.MateriaDTO;
+import ec.edu.uce.notas.ejb.persistence.entity.PeriodoDTO;
 import ec.edu.uce.notas.ejb.service.AcademicoService;
-import ec.edu.uce.notas.web.datamanager.MateriaDataManager;
+import ec.edu.uce.notas.web.datamanager.PeriodoDataManager;
 
 @ViewScoped
-@ManagedBean(name = "materiaController")
-public class MateriaController implements Serializable{
+@ManagedBean(name = "periodoController")
+public class PeriodoController implements Serializable{
 
 	/**
 	 * 
@@ -28,11 +28,11 @@ public class MateriaController implements Serializable{
 	@EJB
 	private AcademicoService academicoService;
 	
-	@ManagedProperty(value="#{materiaDataManager}")
-	private MateriaDataManager materiaDataManager;
+	@ManagedProperty(value="#{periodoDataManager}")
+	private PeriodoDataManager periodoDataManager;
 
 
-	public MateriaController() {
+	public PeriodoController() {
 	
 	}
 	
@@ -46,27 +46,27 @@ public class MateriaController implements Serializable{
 
 
 
-	public MateriaDataManager getMateriaDataManager() {
-		return materiaDataManager;
+	public PeriodoDataManager getPeriodoDataManager() {
+		return periodoDataManager;
 	}
 
 
 
-	public void setMateriaDataManager(MateriaDataManager materiaDataManager) {
-		this.materiaDataManager = materiaDataManager;
+	public void setPeriodoDataManager(PeriodoDataManager periodoDataManager) {
+		this.periodoDataManager = periodoDataManager;
 	}
 
 
 
 	public void clear()
 	{
-		materiaDataManager.setMateriaDTO(new MateriaDTO());
+		periodoDataManager.setPeriodoDTO(new PeriodoDTO());
 	}
 	
 	public void onClickSave()
 	{
 		try {
-			academicoService.createOrUpdateMateria(materiaDataManager.getMateriaDTO());
+			academicoService.createOrUpdatePeriodo(periodoDataManager.getPeriodoDTO());
 			read();
 			clear();
 			JsfUtil.addInfoMessage("Guardado Exitosamente");
@@ -78,16 +78,16 @@ public class MateriaController implements Serializable{
 	private void read()
 	{
 		try {
-			materiaDataManager.setMateriaList(academicoService.readMateria(new MateriaDTO()));
+			periodoDataManager.setPeriodoList(academicoService.readPeriodo(new PeriodoDTO()));
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
 		}
 		
 	}
 
-	public void onClickEdit(MateriaDTO materiaDTO)
+	public void onClickEdit(PeriodoDTO periodoDTO)
 	{
-		materiaDataManager.setMateriaDTO(materiaDTO);
+		periodoDataManager.setPeriodoDTO(periodoDTO);
 	}
 	
 	public void onClickCancel()
