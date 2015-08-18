@@ -15,7 +15,7 @@ public class AccesoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SEG_ACCESO_ACCCODIGO_GENERATOR", sequenceName="SEG_ACCESO_ACC_CODIGO_SEQ")
+	@SequenceGenerator(name="SEG_ACCESO_ACCCODIGO_GENERATOR", sequenceName="SEG_ACCESO_ACC_CODIGO_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEG_ACCESO_ACCCODIGO_GENERATOR")
 	@Column(name="acc_codigo")
 	private Integer accCodigo;

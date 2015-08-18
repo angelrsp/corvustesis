@@ -16,7 +16,7 @@ public class EmpresaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SEG_EMPRESA_EMPCODIGO_GENERATOR", sequenceName="SEG_EMPRESA_EMP_CODIGO_SEQ")
+	@SequenceGenerator(name="SEG_EMPRESA_EMPCODIGO_GENERATOR", sequenceName="SEG_EMPRESA_EMP_CODIGO_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEG_EMPRESA_EMPCODIGO_GENERATOR")
 	@Column(name="emp_codigo")
 	private Integer empCodigo;

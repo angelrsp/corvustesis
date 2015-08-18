@@ -22,7 +22,7 @@
 										
 							<div class="Row">
 								<div class="Cell"><h:outputText value="Descripción:" /></div>
-								<div class="Cell"><p:inputText id="txtDescripcionParalelo" value="#{paraleloController.paraleloDataManager.paraleloDTO.perDescripcion}" required="true" requiredMessage="Se requiere Descripción"/></div>
+								<div class="Cell"><p:inputText id="txtDescripcionParalelo" value="#{paraleloController.paraleloDataManager.paraleloDTO.parDescripcion}" required="true" requiredMessage="Se requiere Descripción"/></div>
 						    </div>	
 						</div>
 					</div>
@@ -38,13 +38,13 @@
 			</p:panel>
           </div>  
             <p:panel id="pnlListaParalelos" header="Lista Paralelos">  
-				<p:dataTable id="tblDetalle" value="#{paraleloDataManager.paraleloList}" var="pro"  reflow="true">
+				<p:dataTable id="tblDetalle" value="#{paraleloDataManager.paraleloList}" var="par"  reflow="true">
 					<p:column headerText="Paralelo">
-						<h:outputText value="#{pro.perDescripcion}"/>
+						<h:outputText value="#{par.parDescripcion}"/>
 					</p:column>
 
 					<p:column width="55">
-					<p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{paraleloController.onClickEdit(pro)}"
+					<p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{paraleloController.onClickEdit(par)}"
 					 process="@this" update=":frmParalelo:pnlParalelo" />
 				</p:column>
 				</p:dataTable>

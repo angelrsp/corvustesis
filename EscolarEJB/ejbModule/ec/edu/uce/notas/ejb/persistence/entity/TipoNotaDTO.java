@@ -16,7 +16,7 @@ public class TipoNotaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="NOT_TIPO_NOTA_TNOCODIGO_GENERATOR", sequenceName="NOT_TIPO_NOTA_TNO_CODIGO_SEQ")
+	@SequenceGenerator(name="NOT_TIPO_NOTA_TNOCODIGO_GENERATOR", sequenceName="NOT_TIPO_NOTA_TNO_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="NOT_TIPO_NOTA_TNOCODIGO_GENERATOR")
 	@Column(name="tno_codigo")
 	private Integer tnoCodigo;

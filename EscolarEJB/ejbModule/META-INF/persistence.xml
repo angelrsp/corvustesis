@@ -10,6 +10,7 @@
 		<class>ec.edu.uce.notas.ejb.persistence.entity.AlumnoDTO</class>
 		<class>ec.edu.uce.notas.ejb.persistence.entity.CursoDTO</class>
 		<class>ec.edu.uce.notas.ejb.persistence.entity.CursoAlumnoDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.CursoParaleloDTO</class>
 		<class>ec.edu.uce.notas.ejb.persistence.entity.DocenteDTO</class>
 		<class>ec.edu.uce.notas.ejb.persistence.entity.NotaDTO</class>
 		<class>ec.edu.uce.notas.ejb.persistence.entity.TipoNotaDTO</class>
@@ -22,6 +23,7 @@
 		<class>ec.edu.uce.notas.ejb.persistence.entity.MenuDTO</class>
 		<class>ec.edu.uce.notas.ejb.persistence.entity.ModuloDTO</class>
 		<class>ec.edu.uce.notas.ejb.persistence.entity.MateriaDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.MateriaDocenteDTO</class>
 		<class>ec.edu.uce.notas.ejb.persistence.entity.ParaleloDTO</class>
 		<class>ec.edu.uce.notas.ejb.persistence.entity.ParametroDTO</class>
 		<class>ec.edu.uce.notas.ejb.persistence.entity.PerfilDTO</class>

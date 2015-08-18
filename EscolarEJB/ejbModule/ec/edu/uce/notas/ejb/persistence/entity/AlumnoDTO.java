@@ -16,7 +16,7 @@ public class AlumnoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="NOT_ALUMNO_ALUCODIGO_GENERATOR", sequenceName="NOT_ALUMNO_ALU_CODIGO_SEQ")
+	@SequenceGenerator(name="NOT_ALUMNO_ALUCODIGO_GENERATOR", sequenceName="NOT_ALUMNO_ALU_CODIGO_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="NOT_ALUMNO_ALUCODIGO_GENERATOR")
 	@Column(name="alu_codigo")
 	private Integer aluCodigo;
