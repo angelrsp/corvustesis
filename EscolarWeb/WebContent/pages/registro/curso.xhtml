@@ -8,47 +8,49 @@
 
 	<ui:define name="contenido">
 		
-		<h:form id="frmCurso">
-		
-		
-			<p:panel header="Curso">
+		<h:form id="frmcurso">
+		 
+		  <div class="Responsive50 Container40Center" style="margin: 0 auto;">
+	
+			<p:panel id="pnlcurso" header="Registrar curso">
 			
-				<p:panel id="pnlCurso" style="width: 500px;">
-
-					<table>
-						<tr>
-							<td><h:outputText value="Descripción:" /></td>
-							<td><p:inputText id="txtDescripcionCurso" value="#{cursoDataManager.cursoDTO.curDescripcion}"/></td>
-						</tr>	
-						<tr>
-							<td colspan="2"><p:commandButton value="Registrar" icon="ui-icon-disk" actionListener="#{cursoController.onClickSave}" process="pnlCurso,tblDetalle" update="pnlCurso"/></td>
-						</tr>
-					</table>
-				</p:panel>
-
-				<p:dataTable id="tblDetalle" value="#{cursoDataManager.cursoList}" var="cur">
-					<p:column headerText="Curso">
-						<h:outputText  />
-					</p:column>
-
-					<p:column headerText="Nombre">
-						<h:outputText />
-					</p:column>
-
-					<p:column headerText="Descripción">
-						<h:outputText value="#{usu.usuarioDTO.usuApellidos}" />
-					</p:column>
+				<div class="Table" style="text-align: center;">
+				
+					<div class="Row">
 					
-					<p:column width="55">
-						
+						<div class="Table">
+										
+							<div class="Row">
+								<div class="Cell"><h:outputText value="Descripción:" /></div>
+								<div class="Cell"><p:inputText id="txtDescripcioncurso" value="#{cursoController.cursoDataManager.cursoDTO.curDescripcion}" required="true" requiredMessage="Se requiere Descripción"/></div>
+						    </div>	
+						</div>
+					</div>
+					<div style="height: 5px;"></div>
+
+					<div class="Row">
+						<div class="Cell" style="text-align: center;">
+							<p:commandButton value="Nuevo" icon="ui-icon-document" actionListener="#{cursoController.onClickCancel}" update="pnlcurso"  />
+							<p:commandButton value="Registrar" icon="ui-icon-disk" actionListener="#{cursoController.onClickSave}" process="@this, txtDescripcioncurso" update="pnlcurso,:frmcurso:pnlListacursos, msgsGrowl" />
+						</div>
+					</div>	
+				</div>
+			</p:panel>
+          </div>  
+            <p:panel id="pnlListacursos" header="Lista cursos">  
+				<p:dataTable id="tblDetalle" value="#{cursoDataManager.cursoList}" var="cur"  reflow="true">
+					<p:column headerText="curso">
+						<h:outputText value="#{cur.curDescripcion}"/>
 					</p:column>
 
+					<p:column width="55">
+					<p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{cursoController.onClicEdit(cur)}"
+					 process="@this" update=":frmcurso:pnlcurso" />
+				</p:column>
 				</p:dataTable>
 			
 			</p:panel>
 			
 		</h:form>
 	</ui:define>
-
-
 </ui:composition>

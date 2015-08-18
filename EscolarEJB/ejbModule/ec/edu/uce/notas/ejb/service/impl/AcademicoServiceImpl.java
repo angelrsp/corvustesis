@@ -15,6 +15,8 @@ import ec.edu.uce.notas.ejb.persistence.entity.AlumnoDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.CursoDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.DocenteDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.MateriaDTO;
+import ec.edu.uce.notas.ejb.persistence.entity.ParaleloDTO;
+import ec.edu.uce.notas.ejb.persistence.entity.PeriodoDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.UsuarioDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.view.AlumnoViewDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.view.DocenteViewDTO;
@@ -181,5 +183,43 @@ public class AcademicoServiceImpl implements AcademicoService {
 			throw new CorvustecException(e);
 		}
 	}
-
+	/*Periodo*/
+	@Override
+	public PeriodoDTO createOrUpdatePeriodo(PeriodoDTO periodoDTO) throws CorvustecException
+	{
+		if(periodoDTO.getPerCodigo()!=null)
+			return factoryDAO.getPeriodoDAOImpl().update(periodoDTO);
+		else
+			return factoryDAO.getPeriodoDAOImpl().create(periodoDTO);
+	}
+	
+	@Override
+	public List<PeriodoDTO> readPeriodo(PeriodoDTO periodoDTO) throws CorvustecException
+	{
+		try {
+			return factoryDAO.getPeriodoDAOImpl().getByAnd(periodoDTO);
+		} catch (CorvustecException e) {
+			throw new CorvustecException(e);
+		}
+	}
+	
+	/*Paralelo*/
+	@Override
+	public ParaleloDTO createOrUpdateParalelo(ParaleloDTO paraleloDTO) throws CorvustecException
+	{
+		if(paraleloDTO.getParCodigo()!=null)
+			return factoryDAO.getParaleloDAOImpl().update(paraleloDTO);
+		else
+			return factoryDAO.getParaleloDAOImpl().create(paraleloDTO);
+	}
+	
+	@Override
+	public List<ParaleloDTO> readParalelo(ParaleloDTO paraleloDTO) throws CorvustecException
+	{
+		try {
+			return factoryDAO.getParaleloDAOImpl().getByAnd(paraleloDTO);
+		} catch (CorvustecException e) {
+			throw new CorvustecException(e);
+		}
+	}
 }

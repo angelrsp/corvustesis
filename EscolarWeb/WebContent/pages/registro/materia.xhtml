@@ -9,7 +9,7 @@
 	<ui:define name="contenido">
 		
 		<h:form id="frmMateria">
-		
+		 
 		  <div class="Responsive50 Container40Center" style="margin: 0 auto;">
 	
 			<p:panel id="pnlMateria" header="Registrar Materia">
@@ -22,7 +22,7 @@
 										
 							<div class="Row">
 								<div class="Cell"><h:outputText value="Descripción:" /></div>
-								<div class="Cell"><p:inputText id="txtDescripcionMateria" value="#{materiaDataManager.materiaDTO.matDescripcion}" rendered="true" requiredMessage="Se requiere Descripción"/></div>
+								<div class="Cell"><p:inputText id="txtDescripcionMateria" value="#{materiaController.materiaDataManager.materiaDTO.matDescripcion}" required="true" requiredMessage="Se requiere Descripción"/></div>
 						    </div>	
 						</div>
 					</div>
@@ -30,8 +30,8 @@
 
 					<div class="Row">
 						<div class="Cell" style="text-align: center;">
-							<p:commandButton value="Nuevo" icon="ui-icon-document" actionListener="#{materiaController.clear}" update="pnlMateria" process="@this" immediate="true" />
-							<p:commandButton value="Registrar" icon="ui-icon-disk" actionListener="#{materiaController.onClickSave}" update="pnlMateria,:frmMateria:pnlListaMaterias" />
+							<p:commandButton value="Nuevo" icon="ui-icon-document" actionListener="#{materiaController.clear}" update="pnlMateria"  />
+							<p:commandButton value="Registrar" icon="ui-icon-disk" actionListener="#{materiaController.onClickSave}" process="@this, txtDescripcionMateria" update="pnlMateria,:frmMateria:pnlListaMaterias, msgsGrowl" />
 						</div>
 					</div>	
 				</div>

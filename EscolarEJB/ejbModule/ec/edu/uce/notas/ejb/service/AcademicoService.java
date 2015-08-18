@@ -8,6 +8,8 @@ import com.corvustec.notas.common.util.CorvustecException;
 
 import ec.edu.uce.notas.ejb.persistence.entity.CursoDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.MateriaDTO;
+import ec.edu.uce.notas.ejb.persistence.entity.ParaleloDTO;
+import ec.edu.uce.notas.ejb.persistence.entity.PeriodoDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.view.AlumnoViewDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.view.DocenteViewDTO;
 import ec.edu.uce.notas.ejb.persistence.vo.AlumnoVO;
@@ -33,5 +35,13 @@ public interface AcademicoService {
 	MateriaDTO createOrUpdateMateria(MateriaDTO materiaDTO) throws CorvustecException;
 
 	List<MateriaDTO> readMateria(MateriaDTO materiaDTO) throws CorvustecException;
+	
+	PeriodoDTO createOrUpdatePeriodo(PeriodoDTO periodoDTO) throws CorvustecException;
+
+	List<PeriodoDTO> readPeriodo(PeriodoDTO periodoDTO) throws CorvustecException;
+	
+	ParaleloDTO createOrUpdateParalelo(ParaleloDTO paraleloDTO) throws CorvustecException;
+
+	List<ParaleloDTO> readParalelo(ParaleloDTO paraleloDTO) throws CorvustecException;
 
 }

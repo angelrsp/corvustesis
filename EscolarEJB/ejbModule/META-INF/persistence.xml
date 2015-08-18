@@ -22,8 +22,10 @@
 		<class>ec.edu.uce.notas.ejb.persistence.entity.MenuDTO</class>
 		<class>ec.edu.uce.notas.ejb.persistence.entity.ModuloDTO</class>
 		<class>ec.edu.uce.notas.ejb.persistence.entity.MateriaDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.ParaleloDTO</class>
 		<class>ec.edu.uce.notas.ejb.persistence.entity.ParametroDTO</class>
 		<class>ec.edu.uce.notas.ejb.persistence.entity.PerfilDTO</class>
+		<class>ec.edu.uce.notas.ejb.persistence.entity.PeriodoDTO</class>
 		<class>ec.edu.uce.notas.ejb.persistence.entity.UsuarioDTO</class>
 		<class>ec.edu.uce.notas.ejb.persistence.entity.UsuarioPerfilDTO</class>
 		<class>ec.edu.uce.notas.ejb.persistence.entity.view.DocenteViewDTO</class>
