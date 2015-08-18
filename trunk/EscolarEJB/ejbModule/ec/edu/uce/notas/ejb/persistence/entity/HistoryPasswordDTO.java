@@ -16,7 +16,7 @@ public class HistoryPasswordDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SEG_HISTORY_PASSWORD_HPACODIGO_GENERATOR", sequenceName="SEG_HISTORY_PASSWORD_HPA_CODIGO_SEQ")
+	@SequenceGenerator(name="SEG_HISTORY_PASSWORD_HPACODIGO_GENERATOR", sequenceName="SEG_HISTORY_PASSWORD_HPA_CODIGO_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEG_HISTORY_PASSWORD_HPACODIGO_GENERATOR")
 	@Column(name="hpa_codigo")
 	private Integer hpaCodigo;

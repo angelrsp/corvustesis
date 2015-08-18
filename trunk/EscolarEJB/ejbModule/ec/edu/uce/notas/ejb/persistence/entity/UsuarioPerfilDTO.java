@@ -15,7 +15,7 @@ public class UsuarioPerfilDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SEG_USUARIO_PERFIL_UPECODIGO_GENERATOR", sequenceName="SEG_USUARIO_PERFIL_UPE_CODIGO_SEQ")
+	@SequenceGenerator(name="SEG_USUARIO_PERFIL_UPECODIGO_GENERATOR", sequenceName="SEG_USUARIO_PERFIL_UPE_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEG_USUARIO_PERFIL_UPECODIGO_GENERATOR")
 	@Column(name="upe_codigo")
 	private Integer upeCodigo;

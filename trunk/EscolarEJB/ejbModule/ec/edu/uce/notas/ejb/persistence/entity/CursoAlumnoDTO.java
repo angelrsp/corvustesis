@@ -1,9 +1,8 @@
 package ec.edu.uce.notas.ejb.persistence.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
 
+import javax.persistence.*;
 
 /**
  * The persistent class for the not_curso_alumno database table.
@@ -16,9 +15,9 @@ public class CursoAlumnoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="NOT_CURSO_ALUMNO_CALCODIGO_GENERATOR", sequenceName="NOT_CURSO_ALUMNO_CAL_CODIGO_SEQ")
+	@SequenceGenerator(name="NOT_CURSO_ALUMNO_CALCODIGO_GENERATOR", sequenceName="NOT_CURSO_ALUMNO_CAL_CODIGO_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="NOT_CURSO_ALUMNO_CALCODIGO_GENERATOR")
-	@Column(name="cal_codigo")
+    @Column(name="cal_codigo")
 	private Integer calCodigo;
 
 	//bi-directional many-to-one association to AlumnoDTO
@@ -26,23 +25,15 @@ public class CursoAlumnoDTO implements Serializable {
 	@JoinColumn(name="cal_alumno")
 	private AlumnoDTO notAlumno;
 
-	//bi-directional many-to-one association to CursoDTO
+	//bi-directional many-to-one association to CursoParaleloDTO
 	@ManyToOne
-	@JoinColumn(name="cal_curso")
-	private CursoDTO notCurso;
-	
-	@ManyToOne
-	@JoinColumn(name="cal_materia")
-	private MateriaDTO notMateria;
+	@JoinColumn(name="cal_curso_docente")
+	private CursoParaleloDTO notCursoParalelo;
 
-	//bi-directional many-to-one association to DocenteDTO
+	//bi-directional many-to-one association to MateriaDocenteDTO
 	@ManyToOne
-	@JoinColumn(name="cal_docente")
-	private DocenteDTO notDocente;
-
-	//bi-directional many-to-one association to NotaDTO
-	@OneToMany(mappedBy="notCursoAlumnoBean")
-	private List<NotaDTO> notNotas;
+	@JoinColumn(name="cal_curso_paralelo")
+	private MateriaDocenteDTO notMateriaDocente;
 
 	public CursoAlumnoDTO() {
 	}
@@ -63,52 +54,23 @@ public class CursoAlumnoDTO implements Serializable {
 		this.notAlumno = notAlumno;
 	}
 
-	public CursoDTO getNotCurso() {
-		return this.notCurso;
+	public CursoParaleloDTO getNotCursoParalelo() {
+		return this.notCursoParalelo;
 	}
 
-	public void setNotCurso(CursoDTO notCurso) {
-		this.notCurso = notCurso;
+	public void setNotCursoParalelo(CursoParaleloDTO notCursoParalelo) {
+		this.notCursoParalelo = notCursoParalelo;
 	}
 
-	public DocenteDTO getNotDocente() {
-		return this.notDocente;
+	public MateriaDocenteDTO getNotMateriaDocente() {
+		return this.notMateriaDocente;
 	}
 
-	public void setNotDocente(DocenteDTO notDocente) {
-		this.notDocente = notDocente;
+	public void setNotMateriaDocente(MateriaDocenteDTO notMateriaDocente) {
+		this.notMateriaDocente = notMateriaDocente;
 	}
 
-	public List<NotaDTO> getNotNotas() {
-		return this.notNotas;
-	}
-
-	public void setNotNotas(List<NotaDTO> notNotas) {
-		this.notNotas = notNotas;
-	}
-
-	public NotaDTO addNotNota(NotaDTO notNota) {
-		getNotNotas().add(notNota);
-		notNota.setNotCursoAlumnoBean(this);
-
-		return notNota;
-	}
-
-	public NotaDTO removeNotNota(NotaDTO notNota) {
-		getNotNotas().remove(notNota);
-		notNota.setNotCursoAlumnoBean(null);
-
-		return notNota;
-	}
-
-	public MateriaDTO getNotMateria() {
-		return notMateria;
-	}
-
-	public void setNotMateria(MateriaDTO notMateria) {
-		this.notMateria = notMateria;
-	}
-
+ 
 	
-	
+
 }

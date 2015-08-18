@@ -16,7 +16,7 @@ public class NotaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="NOT_NOTA_NOTCODIGO_GENERATOR", sequenceName="NOT_NOTA_NOT_CODIGO_SEQ")
+	@SequenceGenerator(name="NOT_NOTA_NOTCODIGO_GENERATOR", sequenceName="NOT_NOTA_NOT_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="NOT_NOTA_NOTCODIGO_GENERATOR")
 	@Column(name="not_codigo")
 	private Integer notCodigo;

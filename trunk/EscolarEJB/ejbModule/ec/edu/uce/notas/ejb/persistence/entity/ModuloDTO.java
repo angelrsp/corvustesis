@@ -16,7 +16,7 @@ public class ModuloDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SEG_MODULO_MODCODIGO_GENERATOR", sequenceName="SEG_MODULO_MOD_CODIGO_SEQ")
+	@SequenceGenerator(name="SEG_MODULO_MODCODIGO_GENERATOR", sequenceName="SEG_MODULO_MOD_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEG_MODULO_MODCODIGO_GENERATOR")
 	@Column(name="mod_codigo")
 	private Integer modCodigo;
