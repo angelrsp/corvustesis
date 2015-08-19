@@ -14,6 +14,7 @@ import ec.edu.uce.notas.ejb.persistence.dao.ComponenteDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.ComponenteMenuDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.ComponenteMenuViewDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.CursoDAO;
+import ec.edu.uce.notas.ejb.persistence.dao.CursoParaleloDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.DocenteDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.DocenteViewDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.EvidenciaDAO;
@@ -39,6 +40,7 @@ import ec.edu.uce.notas.ejb.persistence.dao.impl.ComponenteDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.ComponenteMenuDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.ComponenteMenuViewDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.CursoDAOImpl;
+import ec.edu.uce.notas.ejb.persistence.dao.impl.CursoParaleloDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.DocenteDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.DocenteViewDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.EvidenciaDAOImpl;
@@ -86,6 +88,7 @@ public class FactoryDAOImpl implements FactoryDAO {
 	private MateriaDAO materiaDAO;
 	private PeriodoDAO periodoDAO;
 	private ParaleloDAO paraleloDAO;
+	private CursoParaleloDAO cursoParaleloDAO;
 	
 	private ModeloDAO modeloDAO;
 	private IndicadorDAO indicadorDAO;
@@ -294,5 +297,13 @@ public class FactoryDAOImpl implements FactoryDAO {
 			paraleloDAO = new ParaleloDAOImpl(entityManager);
 		}
 		return paraleloDAO;
+	}
+	
+	@Override
+	public CursoParaleloDAO getCursoParaleloDAOImpl() {
+		if (cursoParaleloDAO == null) {
+			cursoParaleloDAO = new CursoParaleloDAOImpl(entityManager);
+		}
+		return cursoParaleloDAO;
 	}
 }

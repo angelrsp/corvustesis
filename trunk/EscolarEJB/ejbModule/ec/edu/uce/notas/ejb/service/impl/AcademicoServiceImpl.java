@@ -13,6 +13,7 @@ import com.corvustec.notas.common.util.CorvustecException;
 import ec.edu.uce.notas.ejb.dao.factory.FactoryDAO;
 import ec.edu.uce.notas.ejb.persistence.entity.AlumnoDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.CursoDTO;
+import ec.edu.uce.notas.ejb.persistence.entity.CursoParaleloDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.DocenteDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.MateriaDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.ParaleloDTO;
@@ -218,6 +219,26 @@ public class AcademicoServiceImpl implements AcademicoService {
 	{
 		try {
 			return factoryDAO.getParaleloDAOImpl().getByAnd(paraleloDTO);
+		} catch (CorvustecException e) {
+			throw new CorvustecException(e);
+		}
+	}
+	
+	/*CursoParalelo*/
+	@Override
+	public CursoParaleloDTO createOrUpdateCursoParalelo(CursoParaleloDTO cursoCursoParaleloDTO) throws CorvustecException
+	{
+		if(cursoCursoParaleloDTO.getCpaCodigo()!=null)
+			return factoryDAO.getCursoParaleloDAOImpl().update(cursoCursoParaleloDTO);
+		else
+			return factoryDAO.getCursoParaleloDAOImpl().create(cursoCursoParaleloDTO);
+	}
+	
+	@Override
+	public List<CursoParaleloDTO> readCursoParalelo(CursoParaleloDTO cursoCursoParaleloDTO) throws CorvustecException
+	{
+		try {
+			return factoryDAO.getCursoParaleloDAOImpl().getByAnd(cursoCursoParaleloDTO);
 		} catch (CorvustecException e) {
 			throw new CorvustecException(e);
 		}
