@@ -48,7 +48,7 @@
                 </ui:insert>
             </div>
             <div class="clearfix form_container">                
-                    <p:messages globalOnly="true" id="msgs"/>
+                    <p:messages globalOnly="true" redisplay="true" id="msgs"/>
                     <p:growl id="msgsGrowl"/>
                     <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>
                     <p:dialog modal="true" widgetVar="statusDialog" header="Espere" resizable="false"

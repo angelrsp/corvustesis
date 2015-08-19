@@ -11,6 +11,7 @@ import ec.edu.uce.notas.ejb.persistence.dao.ComponenteDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.ComponenteMenuDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.ComponenteMenuViewDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.CursoDAO;
+import ec.edu.uce.notas.ejb.persistence.dao.CursoParaleloDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.DocenteDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.DocenteViewDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.EvidenciaDAO;
@@ -80,6 +81,8 @@ public interface FactoryDAO {
 	PeriodoDAO getPeriodoDAOImpl();
 	
 	ParaleloDAO getParaleloDAOImpl();
+	
+	CursoParaleloDAO getCursoParaleloDAOImpl();
 
 	
 }

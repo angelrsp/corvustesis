@@ -31,7 +31,7 @@
 					<div class="Row">
 						<div class="Cell" style="text-align: center;">
 							<p:commandButton value="Nuevo" icon="ui-icon-document" actionListener="#{materiaController.clear}" update="pnlMateria"  />
-							<p:commandButton value="Registrar" icon="ui-icon-disk" actionListener="#{materiaController.onClickSave}" process="@this, txtDescripcionMateria" update="pnlMateria,:frmMateria:pnlListaMaterias, msgsGrowl" />
+							<p:commandButton value="Registrar" icon="ui-icon-disk" actionListener="#{materiaController.onClickSave}" process="@this, txtDescripcionMateria" update="pnlMateria,:frmMateria:pnlListaMaterias, msgsGrowl, msgs" />
 						</div>
 					</div>	
 				</div>

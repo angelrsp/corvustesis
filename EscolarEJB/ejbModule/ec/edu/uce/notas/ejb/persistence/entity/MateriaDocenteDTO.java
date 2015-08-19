@@ -1,7 +1,9 @@
 package ec.edu.uce.notas.ejb.persistence.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -39,6 +41,11 @@ public class MateriaDocenteDTO implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="mad_periodo")
 	private PeriodoDTO notPeriodo;
+	
+	//bi-directional many-to-one association to MateriaDDTO
+	@ManyToOne
+	@JoinColumn(name="cal_curso_paralelo")
+	private CursoParaleloDTO notCursoParalelo;
 
 	public MateriaDocenteDTO() {
 	}
@@ -97,4 +104,14 @@ public class MateriaDocenteDTO implements Serializable {
 		this.notPeriodo = notPeriodo;
 	}
 
+	public CursoParaleloDTO getNotCursoParalelo() {
+		return notCursoParalelo;
+	}
+
+	public void setNotCursoParalelo(CursoParaleloDTO notCursoParalelo) {
+		this.notCursoParalelo = notCursoParalelo;
+	}
+   
+	
+	
 }

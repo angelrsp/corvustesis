@@ -1,7 +1,9 @@
 package ec.edu.uce.notas.ejb.persistence.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -24,16 +26,33 @@ public class CursoParaleloDTO implements Serializable {
 	//bi-directional many-to-one association to CursoAlumnoDTO
 	@OneToMany(mappedBy="notCursoParalelo")
 	private List<CursoAlumnoDTO> notCursoAlumnos;
+	
+	//bi-directional many-to-one association to MateriaDocenteDTO
+	@OneToMany(mappedBy="notCursoParalelo")
+	private List<MateriaDocenteDTO> notMateriaDocentes;
 
+	
+	@Column(name="cpa_curso")
+	private Integer cpaCurso;
+
+	
+	@Column(name="cpa_paralelo")
+	private Integer cpaParalelo;
+	
+	
 	//bi-directional many-to-one association to CursoDTO
-	@ManyToOne
-	@JoinColumn(name="cpa_curso")
-	private CursoDTO notCurso;
-
-	//bi-directional many-to-one association to ParaleloDTO
-	@ManyToOne
-	@JoinColumn(name="cpa_paralelo")
-	private ParaleloDTO notParalelo;
+		@ManyToOne(fetch = FetchType.LAZY)
+		@JoinColumns({
+				    @JoinColumn(name="cpa_curso", referencedColumnName="cur_codigo", unique=false, nullable=true, insertable=false, updatable=false)
+					})
+		private CursoDTO notCurso;
+				
+		//bi-directional many-to-one association to ParaleloDTO
+		@ManyToOne
+		@JoinColumns({
+					@JoinColumn(name="cpa_paralelo", referencedColumnName="par_codigo", unique=false, nullable=true, insertable=false, updatable=false)
+					})
+		private ParaleloDTO notParalelo;
 
 	public CursoParaleloDTO() {
 	}
@@ -84,4 +103,52 @@ public class CursoParaleloDTO implements Serializable {
 		this.notParalelo = notParalelo;
 	}
 
+	public Integer getCpaCurso() {
+		return cpaCurso;
+	}
+
+	public void setCpaCurso(Integer cpaCurso) {
+		this.cpaCurso = cpaCurso;
+	}
+
+	public Integer getCpaParalelo() {
+		return cpaParalelo;
+	}
+
+	public void setCpaParalelo(Integer cpaParalelo) {
+		this.cpaParalelo = cpaParalelo;
+	}
+
+	
+	
+	public List<MateriaDocenteDTO> getNotMateriaDocentes() {
+		return notMateriaDocentes;
+	}
+
+	public void setNotMateriaDocentes(List<MateriaDocenteDTO> notMateriaDocentes) {
+		this.notMateriaDocentes = notMateriaDocentes;
+	}
+
+	public List<MateriaDocenteDTO> getMatMateriaDocentes() {
+		return this.notMateriaDocentes;
+	}
+
+	public void setMatMateriaDocentes(List<MateriaDocenteDTO> notMateriaDocentes) {
+		this.notMateriaDocentes = notMateriaDocentes;
+	}
+
+	public MateriaDocenteDTO addNotMateriaDocente(MateriaDocenteDTO notMateriaDocente) {
+		getNotMateriaDocentes().add(notMateriaDocente);
+		notMateriaDocente.setNotCursoParalelo(this);
+
+		return notMateriaDocente;
+	}
+
+	public MateriaDocenteDTO removeNotMateriaDocente(MateriaDocenteDTO notMateriaDocente) {
+		getNotMateriaDocentes().remove(notMateriaDocente);
+		notMateriaDocente.setNotCursoParalelo(null);
+
+		return notMateriaDocente;
+	}
+	
 }
