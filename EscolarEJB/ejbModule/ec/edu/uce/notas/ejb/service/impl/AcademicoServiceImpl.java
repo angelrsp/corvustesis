@@ -12,10 +12,12 @@ import com.corvustec.notas.common.util.CorvustecException;
 
 import ec.edu.uce.notas.ejb.dao.factory.FactoryDAO;
 import ec.edu.uce.notas.ejb.persistence.entity.AlumnoDTO;
+import ec.edu.uce.notas.ejb.persistence.entity.CursoAlumnoDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.CursoDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.CursoParaleloDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.DocenteDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.MateriaDTO;
+import ec.edu.uce.notas.ejb.persistence.entity.MateriaDocenteDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.ParaleloDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.PeriodoDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.UsuarioDTO;
@@ -144,6 +146,22 @@ public class AcademicoServiceImpl implements AcademicoService {
 		}
 	}
 
+	
+	@Override
+	public List<AlumnoViewDTO> readAutocompleteAlumnoView(AlumnoViewDTO alumnoViewDTO) throws CorvustecException
+	{
+		try{
+			return factoryDAO.getAlumnoViewDAOImpl().getAutocomplete(alumnoViewDTO);
+		}
+		catch(Exception e)
+		{
+			throw new CorvustecException("Error al readAlumnoView");
+		}
+		finally{
+			alumnoViewDTO=null;
+		}		
+	}
+	
 	/*Curso*/
 	@Override
 	public CursoDTO createOrUpdateCurso(CursoDTO cursoDTO) throws CorvustecException
@@ -239,6 +257,46 @@ public class AcademicoServiceImpl implements AcademicoService {
 	{
 		try {
 			return factoryDAO.getCursoParaleloDAOImpl().getByAnd(cursoCursoParaleloDTO);
+		} catch (CorvustecException e) {
+			throw new CorvustecException(e);
+		}
+	}
+	
+	/*MateriaDocente*/
+	@Override
+	public MateriaDocenteDTO createOrUpdateMateriaDocente(MateriaDocenteDTO cursoMateriaDocenteDTO) throws CorvustecException
+	{
+		if(cursoMateriaDocenteDTO.getMadCodigo()!=null)
+			return factoryDAO.getMateriaDocenteDAOImpl().update(cursoMateriaDocenteDTO);
+		else
+			return factoryDAO.getMateriaDocenteDAOImpl().create(cursoMateriaDocenteDTO);
+	}
+	
+	@Override
+	public List<MateriaDocenteDTO> readMateriaDocente(MateriaDocenteDTO cursoMateriaDocenteDTO) throws CorvustecException
+	{
+		try {
+			return factoryDAO.getMateriaDocenteDAOImpl().getByAnd(cursoMateriaDocenteDTO);
+		} catch (CorvustecException e) {
+			throw new CorvustecException(e);
+		}
+	}
+	
+	/*CursoAlumno*/
+	@Override
+	public CursoAlumnoDTO createOrUpdateCursoAlumno(CursoAlumnoDTO cursoAlumnoDTO) throws CorvustecException
+	{
+		if(cursoAlumnoDTO.getCalCodigo()!=null)
+			return factoryDAO.getCursoAlumnoDAOImpl().update(cursoAlumnoDTO);
+		else
+			return factoryDAO.getCursoAlumnoDAOImpl().create(cursoAlumnoDTO);
+	}
+	
+	@Override
+	public List<CursoAlumnoDTO> readCursoAlumno(CursoAlumnoDTO cursoAlumnoDTO) throws CorvustecException
+	{
+		try {
+			return factoryDAO.getCursoAlumnoDAOImpl().getByAnd(cursoAlumnoDTO);
 		} catch (CorvustecException e) {
 			throw new CorvustecException(e);
 		}

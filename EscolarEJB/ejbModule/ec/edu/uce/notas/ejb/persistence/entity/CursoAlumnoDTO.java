@@ -27,13 +27,17 @@ public class CursoAlumnoDTO implements Serializable {
 
 	//bi-directional many-to-one association to CursoParaleloDTO
 	@ManyToOne
-	@JoinColumn(name="cal_curso_docente")
+	@JoinColumn(name="cal_curso_paralelo")
 	private CursoParaleloDTO notCursoParalelo;
 
 	//bi-directional many-to-one association to MateriaDocenteDTO
 	@ManyToOne
-	@JoinColumn(name="cal_curso_paralelo")
+	@JoinColumn(name="cal_curso_docente")
 	private MateriaDocenteDTO notMateriaDocente;
+	
+	@ManyToOne
+	@JoinColumn(name="cal_periodo")
+	private PeriodoDTO notPeriodo;
 
 	public CursoAlumnoDTO() {
 	}
@@ -68,6 +72,14 @@ public class CursoAlumnoDTO implements Serializable {
 
 	public void setNotMateriaDocente(MateriaDocenteDTO notMateriaDocente) {
 		this.notMateriaDocente = notMateriaDocente;
+	}
+
+	public PeriodoDTO getNotPeriodo() {
+		return notPeriodo;
+	}
+
+	public void setNotPeriodo(PeriodoDTO notPeriodo) {
+		this.notPeriodo = notPeriodo;
 	}
 
  

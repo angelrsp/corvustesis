@@ -6,9 +6,11 @@ import javax.ejb.Local;
 
 import com.corvustec.notas.common.util.CorvustecException;
 
+import ec.edu.uce.notas.ejb.persistence.entity.CursoAlumnoDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.CursoDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.CursoParaleloDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.MateriaDTO;
+import ec.edu.uce.notas.ejb.persistence.entity.MateriaDocenteDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.ParaleloDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.PeriodoDTO;
 import ec.edu.uce.notas.ejb.persistence.entity.view.AlumnoViewDTO;
@@ -48,5 +50,14 @@ public interface AcademicoService {
 	CursoParaleloDTO createOrUpdateCursoParalelo(CursoParaleloDTO cursoParaleloDTO) throws CorvustecException;
 
 	List<CursoParaleloDTO> readCursoParalelo(CursoParaleloDTO cursoParaleloDTO) throws CorvustecException;
+	
+	MateriaDocenteDTO createOrUpdateMateriaDocente(MateriaDocenteDTO cursoParaleloDTO) throws CorvustecException;
 
+	List<MateriaDocenteDTO> readMateriaDocente(MateriaDocenteDTO cursoParaleloDTO) throws CorvustecException;
+
+	CursoAlumnoDTO createOrUpdateCursoAlumno(CursoAlumnoDTO cursoAlumnoDTO) throws CorvustecException;
+
+	List<CursoAlumnoDTO> readCursoAlumno(CursoAlumnoDTO cursoAlumnoDTO) throws CorvustecException;
+	
+	List<AlumnoViewDTO> readAutocompleteAlumnoView(AlumnoViewDTO alumnoViewDTO) throws CorvustecException;
 }

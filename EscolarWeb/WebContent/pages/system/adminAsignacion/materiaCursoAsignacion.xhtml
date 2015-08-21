@@ -23,9 +23,9 @@
 							<div class="Row">
 								<div class="Cell"><h:outputText value="Periodo Lectivo:" for="somPeriodo" /></div>
 								<div class="Cell">
-									<p:selectOneMenu id="somPeriodo" value="#{asignacionDataManager.periodoDTO.perCodigo}" required="true" requiredMessage="Se requiere Periodo" label="Periodo">
+									<p:selectOneMenu id="somPeriodo" value="#{materiaCursoDataManager.materiaCurso.periodoDTO.perCodigo}" required="true" requiredMessage="Se requiere Periodo" label="Periodo">
 										<f:selectItem itemLabel="--Seleccione--" />
-										<f:selectItems value="#{asignacionController.asignacionDataManager.periodoList}" var="per" itemValue="#{per.perCodigo}" itemLabel="#{per.perDescripcion}" />
+										<f:selectItems value="#{materiaCursoController.materiaCursoDataManager.periodoList}" var="per" itemValue="#{per.perCodigo}" itemLabel="#{per.perDescripcion}" />
 									</p:selectOneMenu>
 								</div>
 							 </div>	
@@ -33,9 +33,10 @@
 							 <div class="Row">
 								<div class="Cell"><h:outputText value="Curso:" for="somCurso" /></div>
 								<div class="Cell">
-									<p:selectOneMenu id="somCurso" value="#{asignacionDataManager.cursoDTO.curCodigo}" required="true" requiredMessage="Se requiere Curso" label="Curso">
+									<p:selectOneMenu id="somCurso" value="#{materiaCursoDataManager.materiaCurso.cursoDTO.curCodigo}" required="true" requiredMessage="Se requiere Curso" label="Curso">
 										<f:selectItem itemLabel="--Seleccione--" />
-										<f:selectItems value="#{asignacionController.asignacionDataManager.cursoList}" var="cur" itemValue="#{cur.curCodigo}" itemLabel="#{cur.curDescripcion}" />
+										<f:selectItems value="#{materiaCursoController.materiaCursoDataManager.cursoList}" var="cur" itemValue="#{cur.curCodigo}" itemLabel="#{cur.curDescripcion}" />
+									    <p:ajax event="change" listener="#{materiaCursoController.readParalelo}" update="somParalelo" process="@this"/>
 									</p:selectOneMenu>
 								</div>
 							 </div>
@@ -43,9 +44,9 @@
 							 <div class="Row">
 								<div class="Cell"><h:outputText value="Paralelo:" for="somParalelo" /></div>
 								<div class="Cell">
-									<p:selectOneMenu id="somParalelo" value="#{asignacionDataManager.paraleloDTO.parCodigo}" required="true" requiredMessage="Se requiere Paralelo" label="Paralelo">
+									<p:selectOneMenu id="somParalelo" value="#{materiaCursoDataManager.materiaCurso.paraleloDTO.parCodigo}" required="true" requiredMessage="Se requiere Paralelo" label="Paralelo">
 										<f:selectItem itemLabel="--Seleccione--" />
-										<f:selectItems value="#{asignacionController.asignacionDataManager.paraleloList}" var="par" itemValue="#{par.parCodigo}" itemLabel="#{par.parDescripcion}" />
+										<f:selectItems value="#{materiaCursoController.materiaCursoDataManager.paraleloList}" var="par" itemValue="#{par.parCodigo}" itemLabel="#{par.parDescripcion}" />
 									</p:selectOneMenu>
 								</div>
 							 </div>	
@@ -53,9 +54,9 @@
 							 <div class="Row">
 								<div class="Cell"><h:outputText value="Docente:" for="somDocente" /></div>
 								<div class="Cell">
-									<p:selectOneMenu id="somDocente" value="#{asignacionDataManager.docenteDTO.perCodigo}" required="true" requiredMessage="Se requiere Docente" label="Docente">
+									<p:selectOneMenu id="somDocente" value="#{materiaCursoDataManager.materiaCurso.docenteViewDTO.docCodigo}" required="true" requiredMessage="Se requiere Docente" label="Docente">
 										<f:selectItem itemLabel="--Seleccione--" />
-										<f:selectItems value="#{asignacionController.asignacionDataManager.docenteList}" var="doc" itemValue="#{doc.docCodigo}" itemLabel="#{doc.docDescripcion}" />
+										<f:selectItems value="#{materiaCursoController.materiaCursoDataManager.docenteList}" var="doc" itemValue="#{doc.docCodigo}" itemLabel="#{doc.usuApellidos} #{doc.usuNombres}" />
 									</p:selectOneMenu>
 								</div>
 							 </div>
@@ -63,9 +64,9 @@
 							 <div class="Row">
 								<div class="Cell"><h:outputText value="Materia:" for="somMateria" /></div>
 								<div class="Cell">
-									<p:selectOneMenu id="somMateria" value="#{asignacionDataManager.materiaDTO.matCodigo}" required="true" requiredMessage="Se requiere Materia" label="Materia">
+									<p:selectOneMenu id="somMateria" value="#{materiaCursoDataManager.materiaCurso.materiaDTO.matCodigo}" required="true" requiredMessage="Se requiere Materia" label="Materia">
 										<f:selectItem itemLabel="--Seleccione--" />
-										<f:selectItems value="#{asignacionController.asignacionDataManager.materiaList}" var="mat" itemValue="#{mat.matCodigo}" itemLabel="#{mat.matDescripcion}" />
+										<f:selectItems value="#{materiaCursoController.materiaCursoDataManager.materiaList}" var="mat" itemValue="#{mat.matCodigo}" itemLabel="#{mat.matDescripcion}" />
 									</p:selectOneMenu>
 								</div>
 							 </div>
@@ -76,21 +77,37 @@
 
 					<div class="Row">
 						<div class="Cell" style="text-align: center;">
-							<p:commandButton value="Nuevo" icon="ui-icon-document" actionListener="#{asignacionController.clear}" update="pnlAsignacion"  />
-							<p:commandButton value="Registrar" icon="ui-icon-disk" actionListener="#{asignacionController.onClickSave}"  update="pnlAsignacion,:frmAsignacion:pnlListaAsignacions, msgsGrowl" />
+							<p:commandButton value="Nuevo" icon="ui-icon-document" actionListener="#{materiaCursoController.onClickCancel}" process="@this" update="pnlAsignacion"  />
+							<p:commandButton value="Registrar" icon="ui-icon-disk" actionListener="#{materiaCursoController.save}"  update="pnlAsignacion,:frmAsignacion:pnlListaAsignacions, msgsGrowl" />
 						</div>
 					</div>	
 				</div>
 			</p:panel>
           </div>  
             <p:panel id="pnlListaAsignacions" header="Lista Asignacions">  
-				<p:dataTable id="tblDetalle" value="#{asignacionDataManager.asignacionList}" var="mat"  reflow="true">
-					<p:column headerText="Asignacion">
-						<h:outputText value="#{mat.matDescripcion}"/>
+				<p:dataTable id="tblDetalle" value="#{materiaCursoDataManager.materiaCursoList}" var="maC"  reflow="true">
+					<p:column headerText="Periodo" >
+						<h:outputText value="#{maC.periodoDTO.perDescripcion}" />
 					</p:column>
-
+					
+					<p:column headerText="Curso" >
+						<h:outputText value="#{maC.cursoDTO.curDescripcion}" />
+					</p:column>
+					
+					<p:column headerText="Paralelo" >
+						<h:outputText value="#{maC.paraleloDTO.parDescripcion}" />
+					</p:column>
+                    
+                    <p:column headerText="Docente" >
+						<h:outputText value="#{maC.docenteViewDTO.usuApellidos} #{maC.docenteViewDTO.usuNombres}" />
+					</p:column>
+					
+					<p:column headerText="Materia" >
+						<h:outputText  value="#{maC.materiaDTO.matDescripcion}" />
+					</p:column>
+					
 					<p:column width="55">
-					<p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{asignacionController.onClickEdit(mat)}"
+					<p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{materiaCursoController.onClickEdit(maC)}"
 					 process="@this" update=":frmAsignacion:pnlAsignacion" />
 				</p:column>
 				</p:dataTable>

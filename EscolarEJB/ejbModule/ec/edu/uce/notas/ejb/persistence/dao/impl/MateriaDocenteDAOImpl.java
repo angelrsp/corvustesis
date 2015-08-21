@@ -17,40 +17,40 @@ import org.slf4j.LoggerFactory;
 
 import com.corvustec.notas.common.util.CorvustecException;
 
-import ec.edu.uce.notas.ejb.persistence.dao.AlumnoViewDAO;
-import ec.edu.uce.notas.ejb.persistence.entity.view.AlumnoViewDTO;
+import ec.edu.uce.notas.ejb.persistence.dao.MateriaDocenteDAO;
+import ec.edu.uce.notas.ejb.persistence.entity.MateriaDocenteDTO;
 
-public class AlumnoViewDAOImpl extends AbstractFacadeImpl<AlumnoViewDTO> implements AlumnoViewDAO {
+public class MateriaDocenteDAOImpl extends AbstractFacadeImpl<MateriaDocenteDTO> implements MateriaDocenteDAO {
 
-	private static final Logger slf4jLogger = LoggerFactory.getLogger(AlumnoViewDAOImpl.class);
+	private static final Logger slf4jLogger = LoggerFactory.getLogger(MateriaDocenteDAOImpl.class);
 	
-	public AlumnoViewDAOImpl() {
+	public MateriaDocenteDAOImpl() {
 		super();
 	}
 
-	public AlumnoViewDAOImpl(EntityManager entityManager) {
+	public MateriaDocenteDAOImpl(EntityManager entityManager) {
 		super(entityManager);
 	}
 
 	@Override
-	public List<AlumnoViewDTO> getByAnd(AlumnoViewDTO objectDTO) throws CorvustecException
+	public List<MateriaDocenteDTO> getByAnd(MateriaDocenteDTO objectDTO) throws CorvustecException
 	{
 		CriteriaBuilder cb;
-        CriteriaQuery<AlumnoViewDTO> cq;
-        Root<AlumnoViewDTO> from;
-        List<AlumnoViewDTO> list;
+        CriteriaQuery<MateriaDocenteDTO> cq;
+        Root<MateriaDocenteDTO> from;
+        List<MateriaDocenteDTO> list;
         Predicate predicate;
         List<Predicate> predicateList = null;
         String fieldName;
         Method getter;
         Object value;
         Field[] fields;
-        TypedQuery<AlumnoViewDTO> typedQuery;
+        TypedQuery<MateriaDocenteDTO> typedQuery;
         try{
             cb=entityManager.getCriteriaBuilder();
-            cq=cb.createQuery(AlumnoViewDTO.class);
+            cq=cb.createQuery(MateriaDocenteDTO.class);
            
-            from= cq.from(AlumnoViewDTO.class);
+            from= cq.from(MateriaDocenteDTO.class);
            
             predicateList=new ArrayList<Predicate>();
            
@@ -97,60 +97,5 @@ public class AlumnoViewDAOImpl extends AbstractFacadeImpl<AlumnoViewDTO> impleme
              fields=null;
         }       
 	}
-	@Override
-	public List<AlumnoViewDTO> getAutocomplete(AlumnoViewDTO objetoDTO) throws CorvustecException
-	{
-		CriteriaBuilder cb;
-		CriteriaQuery<AlumnoViewDTO> cq;
-		Root<AlumnoViewDTO> from;
-		List<AlumnoViewDTO> list;
-		Predicate predicate;
-		List<Predicate> predicateList = null;
-		String fieldName;
-		Method getter;
-		Object value;
-		Field[] fields;
-		try{
-			cb=entityManager.getCriteriaBuilder();
-			cq=cb.createQuery(AlumnoViewDTO.class);
-			
-			from= cq.from(AlumnoViewDTO.class);
-			
-			predicateList=new ArrayList<Predicate>();
-			
-			fields = objetoDTO.getClass().getDeclaredFields();
-
-	        for(Field f : fields){
-	            fieldName = f.getName();
-				if(!fieldName.equals("serialVersionUID"))
-				{
-				    getter = objetoDTO.getClass().getMethod("get" + String.valueOf(fieldName.charAt(0)).toUpperCase() +
-				            fieldName.substring(1));
-				    
-				    value = getter.invoke(objetoDTO, new Object[0]);
-				
-				    if(value!=null)
-				    {
-				    	predicate=cb.like(from.<String>get(fieldName), "%"+value.toString()+"%");
-				    	predicateList.add(predicate);                	
-				    }
-				}
-	        }
-	        	
-	        if(!predicateList.isEmpty())
-	        	cq.where(cb.and(predicateList.toArray(new Predicate[0])));		
-			
-			TypedQuery<AlumnoViewDTO> tq=entityManager.createQuery(cq).setMaxResults(50);
-			list=tq.getResultList();
-			
-			return list;
-			
-		}catch(Exception e){
-			slf4jLogger.info(e.toString());
-			throw new CorvustecException(e);
-		}finally{
-			predicate=null;
-			predicateList=null;
-		}		
-	}
+	
 }

@@ -13,6 +13,7 @@ import ec.edu.uce.notas.ejb.persistence.dao.CatalogoDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.ComponenteDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.ComponenteMenuDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.ComponenteMenuViewDAO;
+import ec.edu.uce.notas.ejb.persistence.dao.CursoAlumnoDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.CursoDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.CursoParaleloDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.DocenteDAO;
@@ -22,6 +23,7 @@ import ec.edu.uce.notas.ejb.persistence.dao.HistorialPasswordDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.HistoricoIndicadorDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.IndicadorDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.MateriaDAO;
+import ec.edu.uce.notas.ejb.persistence.dao.MateriaDocenteDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.MenuDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.MenuViewDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.ModeloDAO;
@@ -39,6 +41,7 @@ import ec.edu.uce.notas.ejb.persistence.dao.impl.CatalogoDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.ComponenteDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.ComponenteMenuDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.ComponenteMenuViewDAOImpl;
+import ec.edu.uce.notas.ejb.persistence.dao.impl.CursoAlumnoDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.CursoDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.CursoParaleloDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.DocenteDAOImpl;
@@ -48,6 +51,7 @@ import ec.edu.uce.notas.ejb.persistence.dao.impl.HistorialPasswordDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.HistoricoIndicadorDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.IndicadorDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.MateriaDAOImpl;
+import ec.edu.uce.notas.ejb.persistence.dao.impl.MateriaDocenteDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.MenuDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.MenuViewDAOImpl;
 import ec.edu.uce.notas.ejb.persistence.dao.impl.ModeloDAOImpl;
@@ -89,6 +93,8 @@ public class FactoryDAOImpl implements FactoryDAO {
 	private PeriodoDAO periodoDAO;
 	private ParaleloDAO paraleloDAO;
 	private CursoParaleloDAO cursoParaleloDAO;
+	private MateriaDocenteDAO materiaDocenteDAO;
+	private CursoAlumnoDAO cursoAlumnoDAO;
 	
 	private ModeloDAO modeloDAO;
 	private IndicadorDAO indicadorDAO;
@@ -305,5 +311,21 @@ public class FactoryDAOImpl implements FactoryDAO {
 			cursoParaleloDAO = new CursoParaleloDAOImpl(entityManager);
 		}
 		return cursoParaleloDAO;
+	}
+	
+	@Override
+	public MateriaDocenteDAO getMateriaDocenteDAOImpl() {
+		if (materiaDocenteDAO == null) {
+			materiaDocenteDAO = new MateriaDocenteDAOImpl(entityManager);
+		}
+		return materiaDocenteDAO;
+	}
+	
+	@Override
+	public CursoAlumnoDAO getCursoAlumnoDAOImpl() {
+		if (cursoAlumnoDAO == null) {
+			cursoAlumnoDAO = new CursoAlumnoDAOImpl(entityManager);
+		}
+		return cursoAlumnoDAO;
 	}
 }
