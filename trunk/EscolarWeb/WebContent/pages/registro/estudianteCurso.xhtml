@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/admin.xhtml">
+
+	<ui:define name="contenido">
+		
+		<h:form id="frmAsignacion">
+		 
+		  <div class="Responsive50 Container40Center" style="margin: 0 auto;">
+	
+			<p:panel id="pnlAsignacion" header="Registrar Asignación">
+			
+				<div class="Table" style="text-align: center;">
+				
+					<div class="Row">
+					
+						<div class="Table">
+										
+							<div class="Row">
+								<div class="Cell"><h:outputText value="Periodo Lectivo:" for="somPeriodo" /></div>
+								<div class="Cell">
+									<p:selectOneMenu id="somPeriodo" value="#{estudianteCursoDataManager.estudianteCurso.periodoDTO.perCodigo}" required="true" requiredMessage="Se requiere Periodo" label="Periodo">
+										<f:selectItem itemLabel="--Seleccione--" />
+										<f:selectItems value="#{estudianteCursoController.estudianteCursoDataManager.periodoList}" var="per" itemValue="#{per.perCodigo}" itemLabel="#{per.perDescripcion}" />
+									</p:selectOneMenu>
+								</div>
+							 </div>	
+							 
+							 <div class="Row">
+								<div class="Cell"><h:outputText value="Curso:" for="somCurso" /></div>
+								<div class="Cell">
+									<p:selectOneMenu id="somCurso" value="#{estudianteCursoDataManager.estudianteCurso.cursoDTO.curCodigo}" required="true" requiredMessage="Se requiere Curso" label="Curso">
+										<f:selectItem itemLabel="--Seleccione--" />
+										<f:selectItems value="#{estudianteCursoController.estudianteCursoDataManager.cursoList}" var="cur" itemValue="#{cur.curCodigo}" itemLabel="#{cur.curDescripcion}" />
+									    <p:ajax event="change" listener="#{estudianteCursoController.readParalelo}" update="somParalelo" process="@this"/>
+									</p:selectOneMenu>
+								</div>
+							 </div>
+							 
+							 <div class="Row">
+								<div class="Cell"><h:outputText value="Paralelo:" for="somParalelo" /></div>
+								<div class="Cell">
+									<p:selectOneMenu id="somParalelo" value="#{estudianteCursoDataManager.estudianteCurso.paraleloDTO.parCodigo}" required="true" requiredMessage="Se requiere Paralelo" label="Paralelo">
+										<f:selectItem itemLabel="--Seleccione--" />
+										<f:selectItems value="#{estudianteCursoController.estudianteCursoDataManager.paraleloList}" var="par" itemValue="#{par.parCodigo}" itemLabel="#{par.parDescripcion}" />
+									</p:selectOneMenu>
+								</div>
+							 </div>	
+							 
+							 <div class="Row">
+								<div class="Cell"><h:outputText value=" Cédula Alumno:" /></div>
+								<div class="Cell">
+									<p:autoComplete value="#{estudianteCursoDataManager.estudianteCurso.alumnoViewDTO}" completeMethod="#{estudianteCursoController.readAlumno}" 
+									 	var="alu" itemLabel="#{alu.usuIdentificacion}" itemValue="#{alu}" converter="alumnoConvert" forceSelection="false">
+									 	<p:ajax event="itemSelect" listener="#{estudianteCursoController.onItemSelectIdentification}" process="@this" update="estudiante"/>
+									 </p:autoComplete>
+								</div>
+							 </div>
+							 
+							 <div class="Row">
+								<div class="Cell"><h:outputText value="Alumno:" /></div>
+								<div class="Cell">
+								 <h:outputText id="estudiante" value="#{estudianteCursoDataManager.estudianteCurso.alumnoViewDTO.usuApellidos} #{estudianteCursoDataManager.estudianteCurso.alumnoViewDTO.usuNombres}" />
+								</div>
+							 </div>
+							 
+						</div>
+					</div>
+					<div style="height: 5px;"></div>
+
+					<div class="Row">
+						<div class="Cell" style="text-align: center;">
+							<p:commandButton value="Nuevo" icon="ui-icon-document" actionListener="#{estudianteCursoController.onClickCancel}" process="@this" update="pnlAsignacion"  />
+							<p:commandButton value="Registrar" icon="ui-icon-disk" actionListener="#{estudianteCursoController.save}"  update="pnlAsignacion,:frmAsignacion:pnlListaAsignacions, msgsGrowl" />
+						</div>
+					</div>	
+				</div>
+			</p:panel>
+          </div>  
+            <p:panel id="pnlListaAsignacions" header="Lista Asignacions">  
+				<p:dataTable id="tblDetalle" value="#{estudianteCursoDataManager.estudianteCursoList}" var="maC"  reflow="true">
+					<p:column headerText="Periodo" >
+						<h:outputText value="#{maC.periodoDTO.perDescripcion}" />
+					</p:column>
+					
+					<p:column headerText="Curso" >
+						<h:outputText value="#{maC.cursoDTO.curDescripcion}" />
+					</p:column>
+					
+					<p:column headerText="Paralelo" >
+						<h:outputText value="#{maC.paraleloDTO.parDescripcion}" />
+					</p:column>
+                    
+                    <p:column headerText="Alumno" >
+						<h:outputText value="#{maC.alumnoViewDTO.usuApellidos} #{maC.alumnoViewDTO.usuNombres}" />
+					</p:column>
+					
+					<p:column width="55">
+					<p:commandButton title="Editar" icon="ui-icon-pencil" actionListener="#{estudianteCursoController.onClickEdit(maC)}"
+					 process="@this" update=":frmAsignacion:pnlAsignacion" />
+				</p:column>
+				</p:dataTable>
+			
+			</p:panel>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -11,4 +11,7 @@ public interface AlumnoViewDAO {
 	List<AlumnoViewDTO> getByAnd(AlumnoViewDTO objectDTO)
 			throws CorvustecException;
 
+	List<AlumnoViewDTO> getAutocomplete(AlumnoViewDTO objetoDTO)
+			throws CorvustecException;
+
 }

@@ -10,6 +10,7 @@ import ec.edu.uce.notas.ejb.persistence.dao.CatalogoDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.ComponenteDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.ComponenteMenuDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.ComponenteMenuViewDAO;
+import ec.edu.uce.notas.ejb.persistence.dao.CursoAlumnoDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.CursoDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.CursoParaleloDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.DocenteDAO;
@@ -19,6 +20,7 @@ import ec.edu.uce.notas.ejb.persistence.dao.HistorialPasswordDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.HistoricoIndicadorDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.IndicadorDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.MateriaDAO;
+import ec.edu.uce.notas.ejb.persistence.dao.MateriaDocenteDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.MenuDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.MenuViewDAO;
 import ec.edu.uce.notas.ejb.persistence.dao.ModeloDAO;
@@ -83,6 +85,10 @@ public interface FactoryDAO {
 	ParaleloDAO getParaleloDAOImpl();
 	
 	CursoParaleloDAO getCursoParaleloDAOImpl();
+	
+	MateriaDocenteDAO getMateriaDocenteDAOImpl();
+	
+	CursoAlumnoDAO getCursoAlumnoDAOImpl();
 
 	
 }

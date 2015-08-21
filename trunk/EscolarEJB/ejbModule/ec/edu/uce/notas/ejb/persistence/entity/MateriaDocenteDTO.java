@@ -18,7 +18,7 @@ public class MateriaDocenteDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="NOT_MATERIA_DOCENTE_MADCODIGO_GENERATOR", sequenceName="IND_MATERIA_DOCENTE_MAD_CODIGO_SEQ",allocationSize=1)
+	@SequenceGenerator(name="NOT_MATERIA_DOCENTE_MADCODIGO_GENERATOR", sequenceName="NOT_MATERIA_DOCENTE_MAD_CODIGO_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="NOT_MATERIA_DOCENTE_MADCODIGO_GENERATOR")
 	@Column(name="mad_codigo")
 	private Integer madCodigo;
@@ -44,7 +44,7 @@ public class MateriaDocenteDTO implements Serializable {
 	
 	//bi-directional many-to-one association to MateriaDDTO
 	@ManyToOne
-	@JoinColumn(name="cal_curso_paralelo")
+	@JoinColumn(name="mad_curso")
 	private CursoParaleloDTO notCursoParalelo;
 
 	public MateriaDocenteDTO() {
