@@ -32,6 +32,7 @@ public class EstudianteCursoDataManager implements Serializable{
 	private List<AlumnoViewDTO> estudianteList;
 	private List<MateriaDTO> materiaList;
 	private boolean isSave=false;
+	private boolean isNewEstudianteCurso=true;
 	
 	public EstudianteCursoDataManager() {
 		estudianteCurso=new AlumnoVO();
@@ -135,6 +136,20 @@ public class EstudianteCursoDataManager implements Serializable{
 
 	public void setEstudianteList(List<AlumnoViewDTO> estudianteList) {
 		this.estudianteList = estudianteList;
+	}
+
+
+
+
+	public boolean getIsNewEstudianteCurso() {
+		return isNewEstudianteCurso;
+	}
+
+
+
+
+	public void setIsNewEstudianteCurso(boolean isNewEstudianteCurso) {
+		this.isNewEstudianteCurso = isNewEstudianteCurso;
 	}
 
 	
