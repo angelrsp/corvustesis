@@ -54,7 +54,7 @@
 							 <div class="Row">
 								<div class="Cell"><h:outputText value=" Cédula Alumno:" /></div>
 								<div class="Cell">
-									<p:autoComplete value="#{estudianteCursoDataManager.estudianteCurso.alumnoViewDTO}" completeMethod="#{estudianteCursoController.readAlumno}" 
+									<p:autoComplete id="cedula" value="#{estudianteCursoDataManager.estudianteCurso.alumnoViewDTO}" required="true" requiredMessage="Se requiere Alumno" completeMethod="#{estudianteCursoController.readAlumno}" 
 									 	var="alu" itemLabel="#{alu.usuIdentificacion}" itemValue="#{alu}" converter="alumnoConvert" forceSelection="false">
 									 	<p:ajax event="itemSelect" listener="#{estudianteCursoController.onItemSelectIdentification}" process="@this" update="estudiante"/>
 									 </p:autoComplete>
@@ -76,6 +76,8 @@
 						<div class="Cell" style="text-align: center;">
 							<p:commandButton value="Nuevo" icon="ui-icon-document" actionListener="#{estudianteCursoController.onClickCancel}" process="@this" update="pnlAsignacion"  />
 							<p:commandButton value="Registrar" icon="ui-icon-disk" actionListener="#{estudianteCursoController.save}"  update="pnlAsignacion,:frmAsignacion:pnlListaAsignacions, msgsGrowl" />
+						    <p:commandButton value="Buscar por Cédula" icon="ui-icon-document" actionListener="#{estudianteCursoController.readIdentificacion}" process="@this, cedula" update="pnlAsignacion,:frmAsignacion:pnlListaAsignacions, msgsGrowl"  />
+							
 						</div>
 					</div>	
 				</div>
