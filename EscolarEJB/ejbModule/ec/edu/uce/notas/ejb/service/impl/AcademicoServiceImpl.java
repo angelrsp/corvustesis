@@ -162,6 +162,16 @@ public class AcademicoServiceImpl implements AcademicoService {
 		}		
 	}
 	
+	@Override
+	public List<AlumnoDTO> readAlumno(AlumnoDTO AlumnoDTO) throws CorvustecException
+	{
+		try {
+			return factoryDAO.getAlumnoDAOImpl().getByAnd(AlumnoDTO);
+		} catch (CorvustecException e) {
+			throw new CorvustecException(e);
+		}
+	}
+	
 	/*Curso*/
 	@Override
 	public CursoDTO createOrUpdateCurso(CursoDTO cursoDTO) throws CorvustecException
