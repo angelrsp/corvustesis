@@ -99,6 +99,7 @@ public class EstudianteCursoController implements Serializable{
 	private void readPeriodo()
 	{
 		try {
+
 			estudianteCursoDataManager.setPeriodoList(academicoService.readPeriodo(new PeriodoDTO()));
 			
 		} catch (CorvustecException e) {
@@ -167,7 +168,6 @@ public class EstudianteCursoController implements Serializable{
 	{
 		try {
 			validarRegistro(estudianteCursoDataManager.getEstudianteCurso());
-			estudianteCursoDataManager.setIsSave(true);
 			if(estudianteCursoDataManager.getIsSave()){
 			CursoAlumnoDTO estC= new CursoAlumnoDTO();
 			if(estudianteCursoDataManager.getEstudianteCurso().getCursoAlumnoDTO().getCalCodigo()!=null)
@@ -179,11 +179,14 @@ public class EstudianteCursoController implements Serializable{
 			//curso
 			estC.setNotCursoParalelo(academicoService.readCursoParalelo(curPar).get(0));
 			AlumnoDTO alu= new AlumnoDTO();
-			alu.setAluCodigo(estudianteCursoDataManager.getEstudianteCurso().getAlumnoViewDTO().getAluCodigo());
+			if(estudianteCursoDataManager.getEstudianteCurso().getAlumnoViewDTO()==null)
+				alu.setAluCodigo(estudianteCursoDataManager.getEstudianteCurso().getAlumnoDTO().getAluCodigo());
+			else   alu.setAluCodigo(estudianteCursoDataManager.getEstudianteCurso().getAlumnoViewDTO().getAluCodigo());
 			estC.setNotAlumno(alu);
 			academicoService.createOrUpdateCursoAlumno(estC);
 			JsfUtil.addInfoMessage("Registrado Correctamete.");
 			read();
+			clear();
 			}
 		} catch (CorvustecException e) {
 			JsfUtil.addErrorMessage(e.toString());
@@ -193,33 +196,44 @@ public class EstudianteCursoController implements Serializable{
 	
 	private void validarRegistro(AlumnoVO estCur)
 	{
-		/**
+		
 		 
 			try {
 				CursoAlumnoDTO cuA= new CursoAlumnoDTO();
-				cuA.setNotPeriodo(cuA.getNotPeriodo());
-				cuA.setNotMateria(cuA.getMateriaDTO());
-				if(!academicoService.readCursoAlumno(cuA).isEmpty()) {
-					 JsfUtil.addWarningMessage("Registro existente en el Periodo Seleccionado.");
-			    	 return;
-				}
-				CursoParaleloDTO curPar= new CursoParaleloDTO();
-				curPar.setCpaCurso(cuA.getCursoDTO().getCurCodigo());
-				curPar.setCpaParalelo(cuA.getParaleloDTO().getParCodigo());
-				cuA= new CursoAlumnoDTO();
+				cuA.setNotPeriodo(estCur.getPeriodoDTO());
+				AlumnoDTO alu=new AlumnoDTO();
+				if(estCur.getAlumnoViewDTO()==null)
+					alu.setAluCodigo(estCur.getAlumnoDTO().getAluCodigo());
+				else
+				alu.setAluCodigo(estCur.getAlumnoViewDTO().getAluCodigo());
+				cuA.setNotAlumno(alu);
+				CursoParaleloDTO curPar=new CursoParaleloDTO();
+				curPar.setCpaCurso(estCur.getCursoDTO().getCurCodigo());
+				curPar.setCpaParalelo(estCur.getParaleloDTO().getParCodigo());
 				cuA.setNotCursoParalelo(academicoService.readCursoParalelo(curPar).get(0));
-				cuA.setNotMateria(cuA.getMateriaDTO());
 				if(!academicoService.readCursoAlumno(cuA).isEmpty()) {
-					 JsfUtil.addWarningMessage("Registro existente en el Curso Paralelo.");
+					 JsfUtil.addWarningMessage("Registro existente en el Curso Paralelo del Periodo.");
 			    	 return;
 				}
-				materiaCursoDataManager.setIsSave(true);
+				cuA= new CursoAlumnoDTO();
+				cuA.setNotPeriodo(estCur.getPeriodoDTO());
+				alu=new AlumnoDTO();
+				if(estCur.getAlumnoViewDTO()==null)
+					alu.setAluCodigo(estCur.getAlumnoDTO().getAluCodigo());
+				else
+				alu.setAluCodigo(estCur.getAlumnoViewDTO().getAluCodigo());
+				cuA.setNotAlumno(alu);
+				if(estCur.getCursoAlumnoDTO().getCalCodigo()==null && !academicoService.readCursoAlumno(cuA).isEmpty()){
+					 JsfUtil.addWarningMessage("Registro existente busque y edite el alumno en cuesti\u00F3n.");
+			    	 return;
+				}
+					
+				estudianteCursoDataManager.setIsSave(true);
 			} catch (CorvustecException e) {
 				JsfUtil.addErrorMessage(e.toString());
 			}
 		
-		* 
-		 */
+		
 	
 	}
 	
@@ -239,9 +253,60 @@ public class EstudianteCursoController implements Serializable{
 	public void onClickEdit(AlumnoVO estudiante)
 	{
 		estudianteCursoDataManager.setEstudianteCurso(estudiante);
+		estudianteCursoDataManager.getEstudianteCurso().getAlumnoDTO().setAluCodigo(estudianteCursoDataManager.getEstudianteCurso().getAlumnoViewDTO().getAluCodigo());
 		readParalelo();
 		estudianteCursoDataManager.setIsSave(false);
 	}
 
+	
+	//opciones de busqueda
+	public void readIdentificacion()
+	{
+		List<AlumnoVO> estCurList;
+		List<AlumnoViewDTO> estList;
+		try {
+			estCurList=new ArrayList<AlumnoVO>();
+			if(estudianteCursoDataManager.getEstudianteCurso().getAlumnoViewDTO().getUsuIdentificacion().length()!=10){
+				JsfUtil.addWarningMessage("C\u00E9dula de estudiante no existente.");
+	    	 return;
+			}
+			CursoAlumnoDTO curA=new CursoAlumnoDTO();
+			AlumnoViewDTO alu=new AlumnoViewDTO();
+			alu.setUsuIdentificacion(estudianteCursoDataManager.getEstudianteCurso().getAlumnoViewDTO().getUsuIdentificacion());
+			estList=academicoService.readAlumnoView(alu);
+			if(estList.isEmpty()){
+				JsfUtil.addWarningMessage("C\u00E9dula de estudiante no existente.");
+		    	 return;
+		   }else{
+			   AlumnoDTO al=new AlumnoDTO();
+			   al.setAluCodigo(estList.get(0).getAluCodigo());
+			   curA.setNotAlumno(academicoService.readAlumno(al).get(0));
+			   for (CursoAlumnoDTO estCu : academicoService.readCursoAlumno(curA)) {
+				   AlumnoVO estCurs= new AlumnoVO();
+				   estCurs.setPeriodoDTO(estCu.getNotPeriodo());
+				   CursoDTO cur=new CursoDTO();
+				   cur.setCurCodigo(estCu.getNotCursoParalelo().getCpaCurso());
+				   estCurs.setCursoDTO(academicoService.readCurso(cur).get(0));
+				   ParaleloDTO par=new ParaleloDTO();
+				   par.setParCodigo(estCu.getNotCursoParalelo().getCpaParalelo());
+				   estCurs.setParaleloDTO(academicoService.readParalelo(par).get(0));
+				   AlumnoViewDTO aluV= new AlumnoViewDTO();
+				   aluV.setAluCodigo(estCu.getNotAlumno().getAluCodigo());
+				   estCurs.setAlumnoViewDTO(academicoService.readAlumnoView(aluV).get(0));
+				   estCurs.setCursoAlumnoDTO(estCu);
+				   estCurList.add(estCurs);
+			}
+			estudianteCursoDataManager.setEstudianteCursoList(estCurList);
+		   }
+			   
+			
+			
+			
+			
+			
+		} catch (CorvustecException e) {
+			JsfUtil.addErrorMessage(e.toString());
+		}
+	}
 	
 }
